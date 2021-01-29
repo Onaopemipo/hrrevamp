@@ -1,0 +1,58 @@
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr >
+              <th *ngIf="showCheckBox"></th>
+              <th scope="col" *ngFor="let col of tableColum;">{{col.title}}</th>
+              <th *ngIf="showActions"></th>
+            </tr>
+        </thead>
+          <tbody>
+            <ng-container *ngIf="!loading">
+            <tr *ngFor="let data of tableData;let i = index">
+              <td *ngIf="showCheckBox">
+                <div style="padding: 10px;">
+                  <nb-checkbox></nb-checkbox> 
+                </div>
+            </td>
+              <td *ngFor="let col of tableColum">
+                {{data[col.name]}}
+              </td>
+              <td *ngIf="showActions">
+                <ng-template #card>
+                  <div class="row" >
+                    <div class="col-sm-12" >
+                      <nb-list>
+                        <nb-list-item *ngFor="let act of actions" >
+                          {{ act.label }}
+                        </nb-list-item>
+                      </nb-list> 
+                    </div>
+                  </div>                  
+                </ng-template>
+                <button nbButton status="primary" [nbPopover]="card" >Actions 
+                  &nbsp;<nb-icon  icon="arrow-ios-downward-outline"></nb-icon>
+                </button>
+
+              </td>
+            </tr>
+
+</ng-container>
+
+
+<tr *ngIf="tableData.length == 0 && !loading">
+  <td colspan="5">no record found</td>
+</tr>
+            <tr *ngIf="loading">
+              <td colspan="5">
+                <nb-card [nbSpinner]="true" nbSpinnerSize="medium" nbSpinnerStatus="primary">
+                  <nb-card-body>
+                    Loading... 
+                  </nb-card-body>
+                </nb-card>
+              </td>
+          </tr>
+          </tbody>
+    </table>
+  </div>

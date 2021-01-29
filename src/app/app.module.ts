@@ -30,8 +30,24 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbTreeGridModule,
+  NbTabsetModule,
+  NbTooltipModule,
+  NbPopoverModule,
+  NbAlertModule,
+  NbSearchModule, 
+  NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbProgressBarModule,
+  NbSpinnerModule,
+  NbListModule,
+  
 } from '@nebular/theme';
 
+
+import { CKEditorModule } from 'ng2-ckeditor';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 //Services
 import { CountryserviceService } from './_services/countryservice.service';
 import { AuthService } from './_services/auth.service';
@@ -42,10 +58,13 @@ import { JwtInterceptor } from './_services/jwt.interceptor';
 //Components
 import { ComponentsheaderComponent } from './components/componentsheader/componentsheader.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TableheaderComponent } from './components/tableheader/tableheader.component';
+import { TablecomponentComponent } from './components/tablecomponent/tablecomponent.component';
 
 @NgModule({
-  declarations: [AppComponent,ComponentsheaderComponent, DashboardComponent],
+  declarations: [AppComponent,ComponentsheaderComponent, DashboardComponent, TableheaderComponent, TablecomponentComponent],
   imports: [
+    NbTreeGridModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -70,6 +89,19 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbRadioModule,
     NbSelectModule,
     NbUserModule,
+    Ng2SmartTableModule,
+    NbTabsetModule,
+    NbTooltipModule,
+    NbPopoverModule,
+    CKEditorModule,
+    NbAlertModule,
+    NbSearchModule,
+    NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbProgressBarModule,
+    NbSpinnerModule,
+    NbListModule
   ],
   bootstrap: [AppComponent],
   providers: [
