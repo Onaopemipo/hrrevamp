@@ -44,7 +44,7 @@ import {
   NbListModule,
   
 } from '@nebular/theme';
-
+import { ComponentsModule } from 'app/components/components.module';
 
 import { CKEditorModule } from 'ng2-ckeditor';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -56,13 +56,11 @@ import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
 //Components
-import { ComponentsheaderComponent } from './components/componentsheader/componentsheader.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { TableheaderComponent } from './components/tableheader/tableheader.component';
-import { TablecomponentComponent } from './components/tablecomponent/tablecomponent.component';
+
 
 @NgModule({
-  declarations: [AppComponent,ComponentsheaderComponent, DashboardComponent, TableheaderComponent, TablecomponentComponent],
+  declarations: [AppComponent, DashboardComponent,],
   imports: [
     NbTreeGridModule,
     BrowserModule,
@@ -101,7 +99,8 @@ import { TablecomponentComponent } from './components/tablecomponent/tablecompon
   NbCalendarRangeModule,
   NbProgressBarModule,
     NbSpinnerModule,
-    NbListModule
+    NbListModule,
+    ComponentsModule
   ],
   bootstrap: [AppComponent],
   providers: [
