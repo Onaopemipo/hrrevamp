@@ -40,36 +40,44 @@ import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
 //Components
-import { ComponentsheaderComponent } from './components/componentsheader/componentsheader.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SideModalComponent } from './components/side-modal/side-modal.component';
+import { RequestsAndComplaintsModule } from './modules/requests-and-complaints/requests-and-complaints.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
-  declarations: [AppComponent,ComponentsheaderComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    SideModalComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
-    NbDatepickerModule.forRoot(),
-    NbDialogModule.forRoot(),
-    NbWindowModule.forRoot(),
-    NbToastrModule.forRoot(),
-    NbChatModule.forRoot({
-      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
-    }),
+    // NbSidebarModule.forRoot(),
+    // NbMenuModule.forRoot(),
+    // NbDatepickerModule.forRoot(),
+    // NbDialogModule.forRoot(),
+    // NbWindowModule.forRoot(),
+    // NbToastrModule.forRoot(),
+    // NbChatModule.forRoot({
+    //   messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    // }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    NbActionsModule,
-    NbButtonModule,
-    NbCardModule,
-    NbCheckboxModule,
-   NbIconModule,
-    NbInputModule,
-    NbRadioModule,
-    NbSelectModule,
-    NbUserModule,
+    // NbActionsModule,
+    // NbButtonModule,
+    // NbCardModule,
+    // NbCheckboxModule,
+    // NbIconModule,
+    // NbInputModule,
+    // NbRadioModule,
+    // NbSelectModule,
+    // NbUserModule,
+    ComponentsModule,
+    RequestsAndComplaintsModule,
   ],
   bootstrap: [AppComponent],
   providers: [

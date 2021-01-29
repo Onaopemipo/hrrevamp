@@ -11,7 +11,11 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component:DashboardComponent
-    }
+    },
+    { 
+      path: 'complaints',
+      loadChildren: () => import('../../modules/requests-and-complaints/requests-and-complaints.module').then( m => m.RequestsAndComplaintsModule )
+    },
   ],
 }];
 

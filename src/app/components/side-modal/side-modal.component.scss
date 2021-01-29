@@ -1,0 +1,39 @@
+.my-modal{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ff01;
+    display: flex;
+    transition-property: visibility;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    transition-delay: 2s;
+}
+
+.modal-p{
+    transition: display 5s 5s;
+}
+
+.hide-modal{
+    visibility: hidden;
+}
+
+.show-modal{
+    visibility: visible;
+    transition-property: visibility;
+    transition-duration: 0s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+}
+
+.hide-modal > .modal-p{
+    width: 0px;
+}
+.show-modal > .modal-p{
+    width: 30vw;
+}
+.modal-p{
+    transition: width 2s;
+}
