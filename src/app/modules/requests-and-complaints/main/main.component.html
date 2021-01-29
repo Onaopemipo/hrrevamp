@@ -1,0 +1,68 @@
+<ngx-componentsheader [pageName]="pagetitle" [requiredButton]="rbutton">
+</ngx-componentsheader>
+
+<div class="tab-container">
+    <div class="active">Requests</div>
+    <div>Complaints</div>
+</div>
+
+<div style="background-color: #ffffff;">
+    <div class="row" style="height: 70vh;">
+        <div class="col-sm-3" style="border-right: 1px solid #CCCCCC;    padding-right: 0px;" style="height: 100%;">
+            <div class="section-header">
+                All requests <span style="background: rgba(72, 71, 224, 0.08); border-radius: 8px; padding: 6px 12px; margin-left: 20px; color: #4847E0;">{{complaints.length}}</span>
+            </div>
+            <div class="complain-items" style="overflow: scroll; height: calc(100% - 80px);">
+                <div class="complain-item" *ngFor="let complaint of complaints" [class]="{active: selectedComplaint === complaint}" (click)="changeSelectedComplaint(complaint)">
+                    <img [src]="complaint.complainerImageSrc" style="height: 50px; width: 50px; border-radius: 50%;">
+                    <div class="complaint-detail-section">
+                        <span class="complainer-name">{{complaint.complainerName}}</span>
+                        <div class="complaint-title">{{complaint.title | maxStringLength:30}}</div>
+                        <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div>
+                        <ngx-status></ngx-status>
+                    </div>
+                    <div>{{complaint.time | date}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 page-body" style="height: 100%; overflow: scroll">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div style="display: flex;">
+                        <img [src]="selectedComplaint.complainerImageSrc" style="height: 50px; width: 50px; border-radius: 50%;">
+                        <div style="padding-left: 10px;">
+                            <div>{{selectedComplaint.complainerName}}</div>
+                            <div class="complainer-name">{{selectedComplaint.complainerEmail}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div>#{{selectedComplaint.referenceNo}}</div>
+                    <div class="complainer-name">Ref No</div>
+                </div>
+                <div class="col-sm-4">
+                    <div></div>
+                    <div class="complainer-name" style="text-align: right;">
+                        <span>{{selectedComplaint.time | date:"HH:mm"}}</span>
+                        <span style="margin-left: 20px;">{{selectedComplaint.time | date:"MMM dd, yyyy"}}</span>
+                    </div>
+                </div>
+            </div>
+            <h5>{{selectedComplaint.title}}</h5>
+            <div>{{selectedComplaint.description}}</div>
+            <div class="actions">
+                <a (click)="replyComplaint()">Reply</a>
+                <a (click)="approveComplaint()">Approve</a>
+                <a (click)="rejectComplaint()">Decline</a>
+                <a (click)="approveComplaint()">Reply</a>
+                <a (click)="rejectComplaint()">Mark as resolved</a>
+                <a (click)="approveComplaint()">Unresolved</a>
+            </div>
+            <div class="reply-form">
+                <ngx-wysisyg-input></ngx-wysisyg-input>
+                <button nbButton status="primary" > Send </button>
+                <button outline nbButton status="primary" > Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>

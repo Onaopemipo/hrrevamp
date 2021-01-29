@@ -10,11 +10,19 @@ export class DashboardComponent implements OnInit {
   rbutton = [
     { name: 'New Plan',icon: '',outline: true },
     { name: 'Add New',icon: 'plus',outline: false },
-   
   ]
+  show_modal = false
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openModal(){
+    this.show_modal = true
+  }
+
+  closeModal(){
+    this.show_modal = false
   }
 
 }
