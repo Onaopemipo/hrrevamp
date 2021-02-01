@@ -7,17 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideModalComponent implements OnInit {
 
-  show_modal = false
+  show_modal = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  openModal(){
-    this.show_modal = true
+  openModal() {
+    this.show_modal = true;
   }
 
-  closeModal(){
-    this.show_modal = false
+  closeModal() {
+    this.show_modal = false;
   }
 }

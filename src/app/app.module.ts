@@ -19,13 +19,11 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
-} from '@nebular/theme';
-import {
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
- NbIconModule,
+  NbIconModule,
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
@@ -35,34 +33,31 @@ import {
   NbTooltipModule,
   NbPopoverModule,
   NbAlertModule,
-  NbSearchModule, 
+  NbSearchModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
-  
+
 } from '@nebular/theme';
 
 
 import { CKEditorModule } from 'ng2-ckeditor';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-//Services
+// Services
 import { CountryserviceService } from './_services/countryservice.service';
 import { AuthService } from './_services/auth.service';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
-//Components
-import { ComponentsheaderComponent } from './components/componentsheader/componentsheader.component';
+// Components
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { TableheaderComponent } from './components/tableheader/tableheader.component';
-import { TablecomponentComponent } from './components/tablecomponent/tablecomponent.component';
 
 @NgModule({
-  declarations: [AppComponent,ComponentsheaderComponent, DashboardComponent, TableheaderComponent, TablecomponentComponent],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
     NbTreeGridModule,
     BrowserModule,
@@ -78,13 +73,33 @@ import { TablecomponentComponent } from './components/tablecomponent/tablecompon
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    // CoreModule.forRoot(),
+    ThemeModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     NbActionsModule,
     NbButtonModule,
     NbCardModule,
     NbCheckboxModule,
-   NbIconModule,
+    NbIconModule,
     NbInputModule,
     NbRadioModule,
     NbSelectModule,
@@ -97,11 +112,11 @@ import { TablecomponentComponent } from './components/tablecomponent/tablecompon
     NbAlertModule,
     NbSearchModule,
     NbCalendarKitModule,
-  NbCalendarModule,
-  NbCalendarRangeModule,
-  NbProgressBarModule,
+    NbCalendarModule,
+    NbCalendarRangeModule,
+    NbProgressBarModule,
     NbSpinnerModule,
-    NbListModule
+    NbListModule,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -110,7 +125,7 @@ import { TablecomponentComponent } from './components/tablecomponent/tablecompon
     AuthGuardService,
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  ]
+  ],
 })
 export class AppModule {
 }
