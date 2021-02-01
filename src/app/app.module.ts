@@ -60,7 +60,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent,],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
     NbTreeGridModule,
     BrowserModule,
