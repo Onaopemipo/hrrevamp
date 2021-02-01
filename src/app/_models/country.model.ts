@@ -36,7 +36,6 @@ export class Country {
   callingCodes: any;
   alpha2Code: String;
   flag: string;
-  
 }
 
 export interface Countries {

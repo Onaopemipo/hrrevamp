@@ -8,7 +8,7 @@ export const stringConstant = {
 
     STAGING: 'staging',
 
-    LOCAL_SMATT: "local_smatt",
+    LOCAL_SMATT: 'local_smatt',
 
     PRODUCTIONmain: 'productionmain',
 
@@ -18,6 +18,6 @@ export const stringConstant = {
 
     STAGINGmain: 'stagingmain',
 
-    LOCAL_SMATTmain: "local_smattmain"
+    LOCAL_SMATTmain: 'local_smattmain',
 
 };
