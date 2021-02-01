@@ -19,13 +19,11 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
-} from '@nebular/theme';
-import {
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
- NbIconModule,
+  NbIconModule,
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
@@ -35,29 +33,28 @@ import {
   NbTooltipModule,
   NbPopoverModule,
   NbAlertModule,
-  NbSearchModule, 
+  NbSearchModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
-  
+
 } from '@nebular/theme';
-import { ComponentsModule } from 'app/components/components.module';
+
 
 import { CKEditorModule } from 'ng2-ckeditor';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-//Services
+// Services
 import { CountryserviceService } from './_services/countryservice.service';
 import { AuthService } from './_services/auth.service';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
-//Components
+// Components
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
@@ -76,13 +73,33 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    // CoreModule.forRoot(),
+    ThemeModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     NbActionsModule,
     NbButtonModule,
     NbCardModule,
     NbCheckboxModule,
-   NbIconModule,
+    NbIconModule,
     NbInputModule,
     NbRadioModule,
     NbSelectModule,
@@ -95,12 +112,11 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbAlertModule,
     NbSearchModule,
     NbCalendarKitModule,
-  NbCalendarModule,
-  NbCalendarRangeModule,
-  NbProgressBarModule,
+    NbCalendarModule,
+    NbCalendarRangeModule,
+    NbProgressBarModule,
     NbSpinnerModule,
     NbListModule,
-    ComponentsModule
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -109,7 +125,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     AuthGuardService,
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  ]
+  ],
 })
 export class AppModule {
 }

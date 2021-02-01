@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
 import { CoreModule } from '../@core/core.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
@@ -17,6 +18,7 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbInputModule,
+  NbFormFieldModule,
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
@@ -25,28 +27,22 @@ import {
   NbTooltipModule,
   NbPopoverModule,
   NbAlertModule,
-  NbSearchModule, 
+  NbSearchModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
-  NbFormFieldModule,
 } from '@nebular/theme';
-import { FormsModule as ngFormsModule } from '@angular/forms';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 import { StatusComponent } from './status/status.component';
 import { DatePipesPipe } from './pipes/date-pipes.pipe';
 import { MaxStringLengthPipe } from './pipes/max-string-length.pipe';
 import { WysisygInputComponent } from './wysisyg-input/wysisyg-input.component';
 import { FormsModule } from '@angular/forms';
-
-//Componet
-import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
-import { TableheaderComponent } from './tableheader/tableheader.component';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
-
+import { TableheaderComponent } from './tableheader/tableheader.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +52,7 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
     MaxStringLengthPipe,
     WysisygInputComponent,
     TableheaderComponent,
-    TablecomponentComponent
+    TablecomponentComponent,
   ],
   imports: [
     FormsModule,
@@ -72,6 +68,15 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
     }),
     // CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
     NbActionsModule,
     NbButtonModule,
     NbCardModule,
@@ -87,16 +92,14 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
     NbTooltipModule,
     NbPopoverModule,
     NbAlertModule,
-    NbSearchModule, 
+    NbSearchModule,
     NbCalendarKitModule,
     NbCalendarModule,
     NbCalendarRangeModule,
     NbProgressBarModule,
     NbSpinnerModule,
     NbListModule,
-    Ng2SmartTableModule,
-    ngFormsModule,
-    NbFormFieldModule
+    NbFormFieldModule,
   ],
   providers: [
     // MaxStringLengthPipe
@@ -105,9 +108,6 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
     ComponentsheaderComponent,
     StatusComponent,
     NbButtonModule,
-    // DatePipesPipe,
-    // CKEditorComponent,
-    // CKEditorModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
   ],

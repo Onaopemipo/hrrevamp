@@ -7,18 +7,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class WysisygInputComponent implements OnInit {
 
-  @Input() set value(val: string){
+  @Input() set value(val: string) {
     this.model = val;
   }
-  @Output() valueChange = new EventEmitter<string>()
-  model = ''
+  @Output() valueChange = new EventEmitter<string>();
+  model = '';
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onChange(){
-    this.valueChange.emit(this.model)
+  onChange() {
+    this.valueChange.emit(this.model);
   }
 
 }

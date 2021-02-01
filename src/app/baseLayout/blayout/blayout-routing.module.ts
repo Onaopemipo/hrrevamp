@@ -10,11 +10,12 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component:DashboardComponent
+      component: DashboardComponent,
     },
-    { 
+    {
       path: 'complaints',
-      loadChildren: () => import('../../modules/requests-and-complaints/requests-and-complaints.module').then( m => m.RequestsAndComplaintsModule )
+      loadChildren: () => import('../../modules/requests-and-complaints/requests-and-complaints.module')
+        .then(m => m.RequestsAndComplaintsModule),
     },
   ],
 }];
@@ -23,5 +24,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BlayoutRoutingModule  {
+export class BlayoutRoutingModule {
 }

@@ -1,16 +1,16 @@
-import { Component, EventEmitter, OnInit, Output,Input,Directive,ViewChildren,QueryList,TemplateRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
 
 
 
-export interface TableColumn{
-  name: string,
-  title: string,
-  template?: TemplateRef<any>,
-  type?: string,
-  colors?: {}
+export interface TableColumn {
+  name: string;
+  title: string;
+  template?: TemplateRef<any>;
+  type?: string;
+  colors?: {};
 }
 
-export enum ActionsType{
+export enum ActionsType {
   multipleIconActionType = 2,
   buttonActionType = 1,
   none = 3
@@ -28,6 +28,7 @@ export interface SortEvent {
 }
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: 'th[sortable]',
   host: {
     '[class.asc]': 'direction === "asc"',
@@ -35,6 +36,7 @@ export interface SortEvent {
     '(click)': 'rotate()'
   }
 })
+// tslint:disable-next-line: directive-class-suffix
 export class NgbdSortableHeader {
   @Input() sortable: any = '';
   @Input() direction: SortDirection = '';
@@ -45,9 +47,9 @@ export class NgbdSortableHeader {
     this.sort.emit({column: this.sortable, direction: this.direction});
   }
 }
-interface TableActionEvent{
-  name: string,
-  data: object,
+interface TableActionEvent {
+  name: string;
+  data: object;
 }
 @Component({
   selector: 'ngx-tablecomponent',
@@ -61,12 +63,12 @@ export class TablecomponentComponent implements OnInit {
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: Array<object>;
-  @Output() actionClick = new EventEmitter<TableActionEvent>()
+  @Output() actionClick = new EventEmitter<TableActionEvent>();
 
   tableData = [];
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   constructor() { }
-  
+
   onSort({column, direction}: SortEvent) {
 
     // resetting other headers
