@@ -33,27 +33,27 @@ import {
   NbTooltipModule,
   NbPopoverModule,
   NbAlertModule,
-  NbSearchModule, 
+  NbSearchModule,
   NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
-  
+
 } from '@nebular/theme';
 
 
 import { CKEditorModule } from 'ng2-ckeditor';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-//Services
+// Services
 import { CountryserviceService } from './_services/countryservice.service';
 import { AuthService } from './_services/auth.service';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
-//Components
+// Components
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
@@ -99,7 +99,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbButtonModule,
     NbCardModule,
     NbCheckboxModule,
-   NbIconModule,
+    NbIconModule,
     NbInputModule,
     NbRadioModule,
     NbSelectModule,
@@ -112,11 +112,11 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbAlertModule,
     NbSearchModule,
     NbCalendarKitModule,
-  NbCalendarModule,
-  NbCalendarRangeModule,
-  NbProgressBarModule,
+    NbCalendarModule,
+    NbCalendarRangeModule,
+    NbProgressBarModule,
     NbSpinnerModule,
-    NbListModule
+    NbListModule,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -125,7 +125,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     AuthGuardService,
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  ]
+  ],
 })
 export class AppModule {
 }

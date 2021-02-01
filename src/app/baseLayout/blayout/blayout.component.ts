@@ -3,7 +3,7 @@ import { MENU_ITEMS } from './pages-menu';
 @Component({
   selector: 'ngx-blayout',
   templateUrl: './blayout.component.html',
-  styleUrls: ['./blayout.component.scss']
+  styleUrls: ['./blayout.component.scss'],
 })
 export class BlayoutComponent implements OnInit {
   menu = MENU_ITEMS;
