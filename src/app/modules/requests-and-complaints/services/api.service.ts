@@ -11,7 +11,7 @@ export class ApiService {
   constructor() { }
 
   getComplaints(page: number) {
-    const subject = new Subject<IComplaint[]>()
+    const subject = new Subject<IComplaint[]>();
     window.setTimeout(() => {
       subject.next(IComplaintFactory.buildList(10));
       subject.complete();
