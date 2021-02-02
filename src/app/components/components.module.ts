@@ -43,6 +43,7 @@ import { WysisygInputComponent } from './wysisyg-input/wysisyg-input.component';
 import { FormsModule } from '@angular/forms';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from './tableheader/tableheader.component';
+import { SideModalComponent } from './side-modal/side-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
+    SideModalComponent,
   ],
   imports: [
     FormsModule,
@@ -110,6 +112,7 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
     NbButtonModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
+    SideModalComponent,
   ],
 })
 export class ComponentsModule { }

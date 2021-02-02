@@ -1,3 +1,7 @@
+.center{
+    display: flex; flex-direction: column; justify-content: center;
+}
+
 .my-modal{
     position: absolute;
     top: 0px;
@@ -36,4 +40,17 @@
 }
 .modal-p{
     transition: width 2s;
+}
+
+.header{
+    background-color: #F5F5FA;
+    padding: 20px;
+}
+
+.modal-p > *{
+    padding: 20px;
+}
+
+.actions button{
+    margin: 20px;
 }
