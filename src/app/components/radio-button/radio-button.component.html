@@ -1,0 +1,13 @@
+<div class="col-sm-4">
+  <div class="container form-check" *ngFor="let item of items" (click)="clicked(item)">
+    <input class="form-check-input" type="radio" name="category" [value]="item" [checked]="item == selected">
+    <span class="checkmark"></span>
+    <div style="padding: 2px"></div>
+    <label class="form-check-label" style="font-size: 15px;">
+      {{item}}
+    </label>
+
+  </div>
+</div>
+
+

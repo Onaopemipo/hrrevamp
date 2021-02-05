@@ -72,7 +72,6 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
@@ -102,6 +101,7 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     NbSpinnerModule,
     NbListModule,
     NbFormFieldModule,
+    NbDatepickerModule,
   ],
   providers: [
     // MaxStringLengthPipe
