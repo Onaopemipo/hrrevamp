@@ -40,6 +40,7 @@ import {
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
+  NbLayoutModule
 
 } from '@nebular/theme';
 
@@ -99,6 +100,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbProgressBarModule,
     NbSpinnerModule,
     NbListModule,
+    NbLayoutModule,
   ],
   bootstrap: [AppComponent],
   providers: [

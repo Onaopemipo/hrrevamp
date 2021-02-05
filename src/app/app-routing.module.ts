@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   {
+    path: 'onboarding',
+    loadChildren: () => import('./modules/tenantonboarding/tenantonboarding.module').then(m => m.TenantonboardingModule),
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
