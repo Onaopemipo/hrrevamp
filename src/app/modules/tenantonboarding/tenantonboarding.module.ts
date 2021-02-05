@@ -16,7 +16,7 @@ import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from '../../@theme/theme.module';
 
 @NgModule({
-  declarations: [TenantonboardingComponent,OnboardingsetupComponent],
+  declarations: [TenantonboardingComponent, OnboardingsetupComponent],
   imports: [
     CommonModule,
     TenantonboardingRoutingModule,

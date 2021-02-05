@@ -73,7 +73,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbToastrModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
-    }),  
+    }),
     // CoreModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

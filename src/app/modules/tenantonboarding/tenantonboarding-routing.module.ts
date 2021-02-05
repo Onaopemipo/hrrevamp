@@ -6,13 +6,13 @@ import { OnboardingsetupComponent } from './onboardingsetup/onboardingsetup.comp
 const routes: Routes = [
   {
     path: '',
-    component:TenantonboardingComponent,
+    component: TenantonboardingComponent,
     children: [
       {
         path: 'accountsetup',
         component: OnboardingsetupComponent,
       },
-    
+
       {
         path: '',
         redirectTo: 'accountsetup',
@@ -22,7 +22,7 @@ const routes: Routes = [
         path: '**',
         component: OnboardingsetupComponent,
       },
-     
+
     ],
   },
 ];

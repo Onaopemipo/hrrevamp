@@ -7,7 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 const routes: Routes = [
   {
     path: '',
-    component:AuthComponent,
+    component: AuthComponent,
     children: [
       {
         path: 'login',
@@ -17,7 +17,7 @@ const routes: Routes = [
         path: 'signup',
         component: SignupComponent,
       },
- 
+
       {
         path: '',
         redirectTo: 'login',
@@ -27,7 +27,7 @@ const routes: Routes = [
         path: '**',
         component: LoginComponent,
       },
-     
+
     ],
   },
 ];
