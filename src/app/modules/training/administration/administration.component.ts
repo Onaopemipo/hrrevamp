@@ -11,47 +11,46 @@ export class AdministrationComponent implements OnInit {
   constructor() { }
   actions: TopAction[] = [
     {name: 'create', label: 'Create New', icon: 'plus'}
-  ]
+  ];
 
   welcome: boolean = true;
   newTraining: boolean = false;
-  vendorWindow:boolean = false;
+  vendorWindow: boolean = false;
   trainingType: boolean = true;
-  newTrainingType:boolean = false;
-  trainingCategory:boolean = true;
+  newTrainingType: boolean = false;
+  trainingCategory: boolean = true;
   category = 'Internal';
 
   TrainingTypeData = '';
   TrainingVendorData = 'AAAA';
 
-  addVendor="Add New Vendor"
-  addType="Add Training Type"
+  addVendor = 'Add New Vendor';
+  addType = 'Add Training Type';
 
   ngOnInit(): void {
-    console.log('I am here');
   }
 
   get pagetitle() {
     return 'Training Administration';
   }
 
-  addTraining(){
+  addTraining() {
     this.newTraining = true;
-    this.welcome = false
+    this.welcome = false;
   }
 
-  uploadVendor(){
+  uploadVendor() {
     this.vendorWindow = true;
     this.newTraining = false;
     this.welcome = false;
   }
 
-  addNewTraining(){
+  addNewTraining() {
     this.newTrainingType = true;
     this.trainingType = false;
   }
 
-  changed(data){
+  changed(data) {
 
   }
 }

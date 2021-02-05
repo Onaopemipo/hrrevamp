@@ -8,23 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
   pagetitle = 'Dashboard';
   rbutton = [
-    { name: 'create_new',label:'Create New',icon: '',outline: true },
+    { name: 'create_new', label: 'Create New', icon: '', outline: true },
     { name: 'add_new', label: 'Add New', icon: 'plus', outline: false },
-   
-
-  ]
-  show_modal = false
+  ];
+  show_modal = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  openModal(){
-    this.show_modal = true
+  openModal() {
+    this.show_modal = true;
   }
 
-  closeModal(){
-    this.show_modal = false
+  closeModal() {
+    this.show_modal = false;
   }
 
 }

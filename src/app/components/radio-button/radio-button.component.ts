@@ -10,8 +10,8 @@ export class RadioButtonComponent implements OnInit {
   // @Input()
   // @Output() changed = new EventEmitter<string>();
   @Input() items: string[] = [];
-  selected = ''
-  @Input() set value(val){
+  selected = '';
+  @Input() set value(val) {
     this.selected = val;
   }
 
@@ -24,7 +24,7 @@ export class RadioButtonComponent implements OnInit {
 
   clicked(item) {
     this.valueChange.emit(item);
-    this.selected = item
+    this.selected = item;
   }
 
 }
