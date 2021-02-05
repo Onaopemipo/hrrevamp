@@ -43,8 +43,6 @@ import { WysisygInputComponent } from './wysisyg-input/wysisyg-input.component';
 import { FormsModule } from '@angular/forms';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from './tableheader/tableheader.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { RadioButtonComponent } from './radio-button/radio-button.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +53,6 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
-    FileUploadComponent,
-    RadioButtonComponent,
-
   ],
   imports: [
     FormsModule,
@@ -115,11 +110,6 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     NbButtonModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
-    FileUploadComponent,
-    RadioButtonComponent,
-    TableheaderComponent,
-    TablecomponentComponent,
-    NbDatepickerModule,
   ],
 })
 export class ComponentsModule { }
