@@ -17,6 +17,11 @@ const routes: Routes = [{
       loadChildren: () => import('../../modules/requests-and-complaints/requests-and-complaints.module')
         .then(m => m.RequestsAndComplaintsModule),
     },
+    {
+      path: 'communications',
+      loadChildren: () => import('../../modules/communication/communication.module')
+        .then(m => m.CommunicationModule)
+    }
   ],
 }];
 
