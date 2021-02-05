@@ -113,6 +113,8 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     MaxStringLengthPipe,
     WysisygInputComponent,
     SideModalComponent,
+    TablecomponentComponent,
+    NbTabsetModule,
   ],
 })
 export class ComponentsModule { }
