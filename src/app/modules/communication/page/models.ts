@@ -1,5 +1,5 @@
 export interface IEmail {
-    id: number,
+    id: number;
     subject: string;
     recipient: string;
     cc_recipient: string;

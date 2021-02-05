@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { IEmail } from './page/models';
-import IEmailFactory from './page/factory'
+import IEmailFactory from './page/factory';
 
 
 @Injectable({
@@ -9,7 +9,6 @@ import IEmailFactory from './page/factory'
 })
 export class ApiService {
   fetch_emails(emailType, page) {
-    globalThis.aaa = IEmailFactory;
     const subject = new Subject<IEmail[]>();
     window.setTimeout(() => {
       subject.next(IEmailFactory.buildList(10));
