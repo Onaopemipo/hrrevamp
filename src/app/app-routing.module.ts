@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./baseLayout/blayout/blayout.module').then(m => m.BlayoutModule),
+    loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule),
   },
 
   { path: '', redirectTo: 'auth', pathMatch: 'full' },

@@ -12,7 +12,7 @@ import listPlugin from '@fullcalendar/list';
 import { SelfServiceComponent } from './self-service.component';
 import {NbPopoverModule} from '@nebular/theme';
 import { ModalformComponent } from './modalform/modalform.component';
-
+import { ThemeModule } from '../../@theme/theme.module';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -27,7 +27,8 @@ FullCalendarModule.registerPlugins([
       SelfServiceRoutingModule,
       NbStepperModule,
       FullCalendarModule,
-      NbPopoverModule
+      NbPopoverModule,
+      ThemeModule
     ],
     providers: [
     ]

@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { BlayoutComponent } from './blayout.component';
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -10,7 +10,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: DashboardComponent,
+   
     },
     {
       path: 'complaints',
