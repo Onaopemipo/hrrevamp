@@ -10,6 +10,13 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbInputModule,
+  NbTabsetModule,
+  NbActionsModule,
+  NbDatepickerModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbUserModule,
+  NbPopoverModule
 } from '@nebular/theme';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'app/components/components.module';
@@ -28,7 +35,14 @@ import { ThemeModule } from '../../@theme/theme.module';
     NbCheckboxModule,
     NbInputModule,
     NbIconModule,
-    ComponentsModule
+    ComponentsModule,
+    NbActionsModule,
+    NbDatepickerModule,
+    NbRadioModule,
+    NbSelectModule,
+    NbUserModule,
+    NbTabsetModule,
+    NbPopoverModule
   ]
 })
 export class TenantonboardingModule { }
