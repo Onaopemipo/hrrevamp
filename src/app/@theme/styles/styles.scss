@@ -71,7 +71,7 @@ h1{
   opacity: 1;
 }
 
-.placeholder{
+.form-control::placeholder{
   color: #95A8B8;
 }
 
@@ -101,4 +101,36 @@ h1{
 
 .side-modal-actions > div > button{
   margin-right: 20px;
+}
+
+.linear-form .form-group{
+  display: flex;
+}
+
+.linear-form .form-group > label{
+  width: 40%;
+}
+.linear-form .form-group > .form-control{
+  width: unset;
+  flex: auto;
+}
+
+.form-control[type='checkbox']{
+  width: fit-content;
+      /* width: 0px; */
+  flex: unset !important;
+}
+
+.main-page-container{
+  background-color: white; padding: 30px
+}
+
+@media screen and (max-width: 992px) {
+  .linear-form .form-group {
+    flex-direction: column;
+  }
+
+  .linear-form .form-group > label{
+    width: 100%;
+  }
 }
