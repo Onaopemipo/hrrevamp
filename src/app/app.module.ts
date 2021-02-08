@@ -57,11 +57,11 @@ import { RequestsAndComplaintsModule } from './modules/requests-and-complaints/r
 import { ComponentsModule } from './components/components.module';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
-import { FullCalendarModule } from '@fullcalendar/angular'; 
-import dayGridPlugin from '@fullcalendar/daygrid'; 
-import interactionPlugin from '@fullcalendar/interaction'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-FullCalendarModule.registerPlugins([ 
+FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
   listPlugin

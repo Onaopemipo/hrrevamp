@@ -9,7 +9,7 @@ import { ModalformComponent } from '../modalform/modalform.component';
 })
 export class EmployeeeventsComponent implements OnInit {
   @ViewChild(NbPopoverDirective) popOver: NbPopoverDirective;
-  formcomponent = ModalformComponent
+  formcomponent = ModalformComponent;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -31,8 +31,8 @@ export class EmployeeeventsComponent implements OnInit {
       { title: 'event 2', date: '2020-08-11' },
     ],
     dateClick: (date) => {
-      console.log(date)
-      date.dayEl.style.backgroundColor = 'green'
+      console.log(date);
+      date.dayEl.style.backgroundColor = 'green';
       console.log(this.popOver);
       this.popOver.show();
     }
@@ -42,7 +42,7 @@ export class EmployeeeventsComponent implements OnInit {
 
   ngOnInit(): void {
   }
- onClick(){
-   console.log('hello')
+ onClick() {
+   console.log('hello');
  }
 }

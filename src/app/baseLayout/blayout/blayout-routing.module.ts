@@ -21,7 +21,7 @@ const routes: Routes = [{
       path: 'training',
       loadChildren: () => import('../../modules/training/training.module').then(m => m.TrainingModule)
     },
-    { 
+    {
       path: 'self-service',
       loadChildren: () => import('../../modules/self-service/self-service.module').then( m => m.SelfServiceModule )
     },
