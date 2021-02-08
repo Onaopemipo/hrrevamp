@@ -1,0 +1,32 @@
+<ng-container #flowBasic="flow" [flowConfig]="{ target: '/' }"></ng-container>
+
+
+<div class="file is-medium drop"flow-init     
+    flowDrop
+    [flow]="flowBasic.flowJs"
+    (drop)="onDropFileceived(flowBasic)"
+    (dragover)="onDragOver($event)"
+    style="width: 100%;"
+  >
+  <label class="file-label filebutton" style="width: 100%;">
+    <!-- <input class="file-input" type="file" class="inputfile" name="resume" /> -->
+    <span class="file-cta" (change)="filereceived(flowBasic)"
+      type="file"
+      flowButton
+      [flow]="flowBasic.flowJs"
+      type="button"
+      style="width: auto"
+      class="btn waves-effect m-b-5 buttonbackground dashboardbtn">
+      <span class="file-icon">
+        <i class="fas fa-paperclip" style="color: #4847e0; padding: 10px"></i>
+      </span>
+      <span class="file-label"> Browse file or drag and drop here </span>
+    </span>
+  </label>
+</div>
+
+<div *ngFor="let transfer of files; let i = index" style="color: blue; display: flex;">
+  <nb-icon nbPrefix icon="checkmark-outline" pack="eva"></nb-icon>
+  <div style="flex: auto;">{{transfer.name}}</div>
+  <span style="color: red;" (click)="removeFile(flowBasic, transfer)">Remove</span>
+</div>

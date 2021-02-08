@@ -4,6 +4,8 @@ import { ComponentsheaderComponent } from './componentsheader/componentsheader.c
 import { CoreModule } from '../@core/core.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
+import Flow from '@flowjs/flow.js';
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -43,6 +45,10 @@ import { WysisygInputComponent } from './wysisyg-input/wysisyg-input.component';
 import { FormsModule } from '@angular/forms';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from './tableheader/tableheader.component';
+import { SideModalComponent } from './side-modal/side-modal.component';
+import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 @NgModule({
   declarations: [
@@ -53,6 +59,9 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
+    SideModalComponent,
+    EmployeeMasterSearchComponent,
+    FileUploadComponent,
   ],
   imports: [
     FormsModule,
@@ -70,7 +79,6 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
@@ -100,9 +108,15 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
     NbSpinnerModule,
     NbListModule,
     NbFormFieldModule,
+    NbDatepickerModule,
+    NgxFlowModule,
   ],
   providers: [
     // MaxStringLengthPipe
+    {
+      provide: FlowInjectionToken,
+      useValue: Flow,
+    }
   ],
   exports: [
     ComponentsheaderComponent,
@@ -110,6 +124,11 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
     NbButtonModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
+    SideModalComponent,
+    TablecomponentComponent,
+    NbTabsetModule,
+    EmployeeMasterSearchComponent,
+    FileUploadComponent,
   ],
 })
 export class ComponentsModule { }
