@@ -1,0 +1,191 @@
+<div class="container">
+   <div class="row">
+
+    <div class="col-md-12">
+        <div style="padding: 15px;"></div>
+        <ngx-componentsheader [pageName]="title"></ngx-componentsheader>
+        <div style="padding: 15px;"></div>
+        <div ></div>
+        <div class="row" >
+            <div class="col-md-8" style="margin: 5px;"  [ngSwitch]="selectedPanel">
+                <!--Company Panel ////////////////////////////////-->
+                <div class="fmContainer" *ngSwitchCase="'companyPanel'">
+                    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+                   <p>Input Company’s Information in the fields below</p>
+                   </div>
+                   <div style="display: flex; padding-top: 2rem;">
+                       <div class="circular--portrait">
+                           <img src="{{src}}" alt="" title="" itemprop="image">
+                       </div>
+                       <div style="display:flex;align-items: center;padding:2rem">
+                           <span>
+                           <a href="javascript:void(0)">Add Company Logo</a>
+                           <p>Maximum size allowed is 600kb of PNG,JPEG,JPG</p>
+                           </span>
+                       </div>
+                   </div>
+
+                   <div style="padding-top:3rem;">
+                    <form>
+                        <div class="form-group row">
+                          <label for="inputEmail1" class="label col-sm-4 col-form-label">Company RC-Number</label>
+                          <div class="col-sm-8">
+                            <input type="text" nbInput fullWidth  placeholder="Company RC-Number">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Company Email</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth  placeholder="Company Email">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Phone Number</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth  placeholder="Phone Number">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Domain Name</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth  placeholder="Domain Name">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Auditor Email</label>
+                            <div class="col-sm-8">
+                              <input type="email" nbInput fullWidth  placeholder="Auditor Email">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Administrator Email</label>
+                            <div class="col-sm-8">
+                              <input type="email" nbInput fullWidth  placeholder="Administrator Email">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Max Employee Count</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth  placeholder="Max Employee Count">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">Company Address</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth  placeholder="Company Address">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label">About Company</label>
+                            <div class="col-sm-8">
+                                <textarea rows="5" nbInput fullWidth   placeholder="Text Area"></textarea>
+                            </div>
+                          </div>
+                     
+                        <div class="form-group row">
+                          <div class="offset-sm-4 col-sm-8">
+                            <button type="submit" nbButton status="primary" (click)="proceedtosubcription()">Proceed</button>
+                          </div>
+                        </div>
+                      </form>
+                   </div>
+               
+
+
+                   </div>
+
+
+
+<!--Subscription Panel ////////////////////////////////-->
+<div class="fmContainer" *ngSwitchCase="'subscriptionPanel'">
+    <div >
+   <p>Select your preferred package</p>
+   </div>
+<div style="padding-top:.5rem;">
+    <nb-tabset>
+        <nb-tab tabTitle="Smartace Basic">
+        <div style="padding-top:1.5rem">
+
+        <div style="padding: 1rem; box-shadow: 0px 3px 6px #CCCCCC33;
+        border: 0.5px solid #CCCCCC;
+        border-radius: 4px;
+        opacity: 1;">
+            <h5>SmartAce Basic Online Plan A</h5>
+            <p>Maximum Employee: 10</p>
+            <p>Minimal Access To The System Modules</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>#3,000</h2>
+                </div>
+                <div class="col-md-4">
+                    <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtosubcription()">Subscribe</button>
+                </div>
+            </div>
+           
+        </div>
+
+        </div>
+        </nb-tab>
+        <nb-tab tabTitle="Smartace Lite">
+          <span>Content #2</span>
+        </nb-tab>
+ 
+      </nb-tabset>
+</div>
+   </div>
+
+
+   <!--Module Panel ////////////////////////////////-->
+<div class="fmContainer" *ngSwitchCase="'modulesPanel'">
+    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+   <p>Select the modules you want to grant your users access to.</p>
+   </div>
+</div>
+
+            </div>
+            <div class="col-md-3" style="margin: 5px;">
+                <div class="fmContainer">
+                    <div style="padding-bottom: 10px;">
+                        <p>Account Setup</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 " style="display: flex;flex-direction: column;">
+                            <div style="display:flex;padding-bottom: 35px;" >
+                                <div [ngClass]="{'q-connector': selectedPanel == 'companyPanel','q-connector-inactive': selectedPanel != 'companyPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                            
+                                </div>
+                                  <div (click)="gotoPanel('companyPanel','Set up your account')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                                  Company Information
+                                  </div>
+                            </div>
+
+                            <div style="display:flex;padding-bottom: 35px;" >
+                                <div [ngClass]="{'q-connector': selectedPanel == 'subscriptionPanel','q-connector-inactive': selectedPanel != 'subscriptionPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                               
+                                </div>
+                                  <div  (click)="gotoPanel('subscriptionPanel','Choose Package')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                                 Subscription
+                                  </div>
+                            </div>
+                            <div style="display:flex;padding-bottom: 35px;" >
+                                <div [ngClass]="{'last-q-connector': selectedPanel == 'modulesPanel','last-q-connector-inactive': selectedPanel != 'modulesPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                               
+                                </div>
+                                  <div (click)="gotoPanel('modulesPanel','Activated Module')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                                Module Selection
+                                  </div>
+                            </div>
+                         
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+       
+      
+    </div>
+   
+   </div>
+</div>

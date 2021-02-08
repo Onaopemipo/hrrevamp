@@ -10,6 +10,8 @@ export class DashboardComponent implements OnInit {
   rbutton = [
     { name: 'create_new', label: 'Create New', icon: '', outline: true },
     { name: 'add_new', label: 'Add New', icon: 'plus', outline: false },
+
+
   ];
   show_modal = false;
   constructor() { }
