@@ -13,23 +13,23 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeFile(event: FlowDirective, mFile: Transfer){
+  removeFile(event: FlowDirective, mFile: Transfer) {
     this.files = this.files.filter(file => file.name !== mFile.name);
     event.cancelFile(mFile);
   }
 
   files: Transfer[];
-  onDropFileceived(event: FlowDirective){
+  onDropFileceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
     });
   }
-  filereceived(event: FlowDirective){
+  filereceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
     });
   }
-  onDragOver(event){
+  onDragOver(event) {
     event.stopPropagation();
     event.preventDefault();
   }
