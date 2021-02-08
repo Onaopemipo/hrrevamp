@@ -10,5 +10,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'CAREERS',
     group: true,
   },
- 
+
 ];

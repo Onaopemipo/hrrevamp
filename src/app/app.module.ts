@@ -19,27 +19,39 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
-} from '@nebular/theme';
-import {
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
- NbIconModule,
+  NbIconModule,
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
-  NbUserModule
+  NbTabsetModule,
+  NbTooltipModule,
+  NbPopoverModule,
+  NbAlertModule,
+  NbSearchModule,
+  NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbProgressBarModule,
+  NbSpinnerModule,
+  NbListModule,
+
 } from '@nebular/theme';
 
-//Services
+
+import { CKEditorModule } from 'ng2-ckeditor';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+// Services
 import { CountryserviceService } from './_services/countryservice.service';
 import { AuthService } from './_services/auth.service';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
-//Components
+// Components
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { RequestsAndComplaintsModule } from './modules/requests-and-complaints/requests-and-complaints.module';
 import { ComponentsModule } from './components/components.module';
@@ -56,10 +68,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-  ],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -75,19 +84,41 @@ FullCalendarModule.registerPlugins([
     // NbChatModule.forRoot({
     //   messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     // }),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    // CoreModule.forRoot(),
+    ThemeModule.forRoot(),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    // NbActionsModule,
-    // NbButtonModule,
-    // NbCardModule,
-    // NbCheckboxModule,
-    // NbIconModule,
-    // NbInputModule,
-    // NbRadioModule,
-    // NbSelectModule,
-    // NbUserModule,
-    ComponentsModule,
-    RequestsAndComplaintsModule,
+    NbDatepickerModule.forRoot(),
+    NbActionsModule,
+    NbButtonModule,
+    NbCardModule,
+    NbCheckboxModule,
+    NbIconModule,
+    NbInputModule,
+    NbRadioModule,
+    NbSelectModule,
+    Ng2SmartTableModule,
+    NbTabsetModule,
+    NbTooltipModule,
+    NbPopoverModule,
+    CKEditorModule,
+    NbAlertModule,
+    NbSearchModule,
+    NbCalendarKitModule,
+    NbCalendarModule,
+    NbCalendarRangeModule,
+    NbProgressBarModule,
+    NbSpinnerModule,
+    NbListModule,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -96,7 +127,7 @@ FullCalendarModule.registerPlugins([
     AuthGuardService,
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  ]
+  ],
 })
 export class AppModule {
 }

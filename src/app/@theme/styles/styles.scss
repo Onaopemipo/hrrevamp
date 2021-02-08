@@ -43,3 +43,73 @@ nb-layout-footer{
   background-color: #4847E01A !important;
   border-top: 3px solid #4847E0;
 }
+.black{
+  color: #080730;
+}
+.grey{
+  color: #343840;
+}
+.stroke{
+  color: rgba(204, 204, 204, 0.3);
+}
+.round-image{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #4847E01A
+}
+.grey-2{
+  color: #6C757D;;
+}
+.grey-3{
+  color: #95A8B8
+}
+.small {
+  text-align: left;
+  font: normal normal normal 12px/22px Rubik;
+  letter-spacing: 0px;
+  color: #130019;
+  opacity: 1;
+}
+
+h1{
+  text-align: left;
+  font-size: 24px;
+  line-height: 28px;
+  font-family: Rubik;
+  letter-spacing: 0px;
+  color: #080730;
+  opacity: 1;
+}
+
+.placeholder{
+  color: #95A8B8;
+}
+
+.form-group > label{
+  text-align: left;
+  font: 16px/22px Rubik;
+  letter-spacing: 0px;
+  color: #080730;
+  opacity: 1;
+}
+
+.form-instruction{
+  text-align: left;
+  font: normal normal normal 16px/22px Rubik;
+  letter-spacing: 0px;
+  color: #080730;
+  opacity: 1;
+}
+
+.page-long-text{
+  text-align: center;
+  font: normal normal 300 16px/28px Rubik;
+  letter-spacing: 0px;
+  color: #130019;
+  opacity: 1;
+}
+
+.side-modal-actions > div > button{
+  margin-right: 20px;
+}

@@ -18,15 +18,32 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbInputModule,
+  NbFormFieldModule,
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbTreeGridModule,
+  NbTabsetModule,
+  NbTooltipModule,
+  NbPopoverModule,
+  NbAlertModule,
+  NbSearchModule,
+  NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbProgressBarModule,
+  NbSpinnerModule,
+  NbListModule,
 } from '@nebular/theme';
+
 import { StatusComponent } from './status/status.component';
 import { DatePipesPipe } from './pipes/date-pipes.pipe';
 import { MaxStringLengthPipe } from './pipes/max-string-length.pipe';
 import { WysisygInputComponent } from './wysisyg-input/wysisyg-input.component';
 import { FormsModule } from '@angular/forms';
+import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
+import { TableheaderComponent } from './tableheader/tableheader.component';
+import { SideModalComponent } from './side-modal/side-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +51,10 @@ import { FormsModule } from '@angular/forms';
     StatusComponent,
     DatePipesPipe,
     MaxStringLengthPipe,
-    WysisygInputComponent
+    WysisygInputComponent,
+    TableheaderComponent,
+    TablecomponentComponent,
+    SideModalComponent,
   ],
   imports: [
     FormsModule,
@@ -50,6 +70,14 @@ import { FormsModule } from '@angular/forms';
     }),
     // CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
     NbActionsModule,
     NbButtonModule,
     NbCardModule,
@@ -60,6 +88,20 @@ import { FormsModule } from '@angular/forms';
     NbSelectModule,
     NbUserModule,
     CKEditorModule,
+    NbTreeGridModule,
+    NbTabsetModule,
+    NbTooltipModule,
+    NbPopoverModule,
+    NbAlertModule,
+    NbSearchModule,
+    NbCalendarKitModule,
+    NbCalendarModule,
+    NbCalendarRangeModule,
+    NbProgressBarModule,
+    NbSpinnerModule,
+    NbListModule,
+    NbFormFieldModule,
+    NbDatepickerModule,
   ],
   providers: [
     // MaxStringLengthPipe
@@ -68,11 +110,11 @@ import { FormsModule } from '@angular/forms';
     ComponentsheaderComponent,
     StatusComponent,
     NbButtonModule,
-    // DatePipesPipe,
-    // CKEditorComponent,
-    // CKEditorModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
+    SideModalComponent,
+    TablecomponentComponent,
+    NbTabsetModule,
   ],
 })
 export class ComponentsModule { }
