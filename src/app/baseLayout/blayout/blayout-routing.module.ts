@@ -22,10 +22,14 @@ const routes: Routes = [{
       loadChildren: () => import('../../modules/training/training.module').then(m => m.TrainingModule)
     },
     {
+      path: 'self-service',
+      loadChildren: () => import('../../modules/self-service/self-service.module').then( m => m.SelfServiceModule )
+    },
+    {
       path: 'communications',
       loadChildren: () => import('../../modules/communication/communication.module')
         .then(m => m.CommunicationModule)
-    }
+    },
   ],
 }];
 
