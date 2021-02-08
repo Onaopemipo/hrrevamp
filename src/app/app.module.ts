@@ -29,7 +29,7 @@ import {
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
-  NbUserModule,
+  NbUserModule
 } from '@nebular/theme';
 
 //Services
@@ -41,21 +41,31 @@ import { JwtInterceptor } from './_services/jwt.interceptor';
 
 //Components
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { SideModalComponent } from './components/side-modal/side-modal.component';
 import { RequestsAndComplaintsModule } from './modules/requests-and-complaints/requests-and-complaints.module';
 import { ComponentsModule } from './components/components.module';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+
+import { FullCalendarModule } from '@fullcalendar/angular'; 
+import dayGridPlugin from '@fullcalendar/daygrid'; 
+import interactionPlugin from '@fullcalendar/interaction'; 
+import listPlugin from '@fullcalendar/list';
+FullCalendarModule.registerPlugins([ 
+  dayGridPlugin,
+  interactionPlugin,
+  listPlugin
+]);
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SideModalComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FullCalendarModule ,
     // NbSidebarModule.forRoot(),
     // NbMenuModule.forRoot(),
     // NbDatepickerModule.forRoot(),

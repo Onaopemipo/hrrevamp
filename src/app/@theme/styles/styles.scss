@@ -32,3 +32,14 @@
   @include nb-overrides();
 };
 
+
+nb-layout-footer{
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #4847E01A !important;
+  border-top: 3px solid #4847E0;
+}

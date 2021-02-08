@@ -16,6 +16,10 @@ const routes: Routes = [{
       path: 'complaints',
       loadChildren: () => import('../../modules/requests-and-complaints/requests-and-complaints.module').then( m => m.RequestsAndComplaintsModule )
     },
+    { 
+      path: 'self-service',
+      loadChildren: () => import('../../modules/self-service/self-service.module').then( m => m.SelfServiceModule )
+    },
   ],
 }];
 
