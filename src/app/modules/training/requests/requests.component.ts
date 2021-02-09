@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestsComponent implements OnInit {
 
+  myRequestHeader = 'There is no request at the moment';
+  myRequestDesc = 'Check back later';
+  requestData: string = 'wdd';
+  welcome: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
