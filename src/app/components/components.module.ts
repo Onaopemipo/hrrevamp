@@ -51,7 +51,6 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 @NgModule({
@@ -65,7 +64,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     TablecomponentComponent,
 
     FileUploadComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
@@ -132,7 +131,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbButtonModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
-
+    SideModalComponent,
     FullCalendarComponent,
     TableheaderComponent,
     TablecomponentComponent,
