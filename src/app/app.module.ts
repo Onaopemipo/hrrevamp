@@ -14,10 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRoutingModule } from './app-routing.module';
-import interactionPlugin from '@fullcalendar/interaction';
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -34,8 +31,6 @@ import {
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
-  NbUserModule,
-  NbTreeGridModule,
   NbTabsetModule,
   NbTooltipModule,
   NbPopoverModule,
@@ -47,6 +42,7 @@ import {
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
+  NbLayoutModule
 
 } from '@nebular/theme';
 
@@ -65,17 +61,34 @@ import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
-// Components
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  listPlugin
+]);
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent],
   imports: [
-    NbTreeGridModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FullCalendarModule ,
+    // NbSidebarModule.forRoot(),
+    // NbMenuModule.forRoot(),
+    // NbDatepickerModule.forRoot(),
+    // NbDialogModule.forRoot(),
+    // NbWindowModule.forRoot(),
+    // NbToastrModule.forRoot(),
+    // NbChatModule.forRoot({
+    //   messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    // }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -98,7 +111,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbInputModule,
     NbRadioModule,
     NbSelectModule,
-    NbUserModule,
     Ng2SmartTableModule,
     NbTabsetModule,
     NbTooltipModule,
@@ -112,6 +124,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     NbProgressBarModule,
     NbSpinnerModule,
     NbListModule,
+    NbLayoutModule,
   ],
   bootstrap: [AppComponent],
   providers: [
