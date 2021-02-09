@@ -4,6 +4,8 @@ import { ComponentsheaderComponent } from './componentsheader/componentsheader.c
 import { CoreModule } from '../@core/core.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
+import Flow from '@flowjs/flow.js';
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -44,6 +46,9 @@ import { FormsModule } from '@angular/forms';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
+import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,8 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     TableheaderComponent,
     TablecomponentComponent,
     SideModalComponent,
+    EmployeeMasterSearchComponent,
+    FileUploadComponent,
   ],
   imports: [
     FormsModule,
@@ -102,9 +109,14 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     NbListModule,
     NbFormFieldModule,
     NbDatepickerModule,
+    NgxFlowModule,
   ],
   providers: [
     // MaxStringLengthPipe
+    {
+      provide: FlowInjectionToken,
+      useValue: Flow,
+    }
   ],
   exports: [
     ComponentsheaderComponent,
@@ -115,6 +127,8 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     SideModalComponent,
     TablecomponentComponent,
     NbTabsetModule,
+    EmployeeMasterSearchComponent,
+    FileUploadComponent,
   ],
 })
 export class ComponentsModule { }

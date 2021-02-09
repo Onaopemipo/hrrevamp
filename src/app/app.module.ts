@@ -38,6 +38,7 @@ import {
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
+  NbLayoutModule
 
 } from '@nebular/theme';
 
@@ -51,11 +52,6 @@ import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
-// Components
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { RequestsAndComplaintsModule } from './modules/requests-and-complaints/requests-and-complaints.module';
-import { ComponentsModule } from './components/components.module';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -69,7 +65,11 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [AppComponent, DashboardComponent, EmpoComponent],
+=======
+  declarations: [AppComponent],
+>>>>>>> f455750f277f3d96378001b866be4349e9e11ea2
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -120,6 +120,7 @@ FullCalendarModule.registerPlugins([
     NbProgressBarModule,
     NbSpinnerModule,
     NbListModule,
+    NbLayoutModule,
   ],
   bootstrap: [AppComponent],
   providers: [

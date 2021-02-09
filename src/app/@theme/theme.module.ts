@@ -33,6 +33,8 @@ import {
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  SingleColumnLayoutComponent,
+  SingleColumnHeaderLayoutComponent
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -61,6 +63,8 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  SingleColumnLayoutComponent,
+  SingleColumnHeaderLayoutComponent
 ];
 const PIPES = [
   CapitalizePipe,
