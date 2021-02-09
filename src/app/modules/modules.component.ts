@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MENU_ITEMS } from './pages-menu';
 @Component({
-  selector: 'ngx-blayout',
-  templateUrl: './blayout.component.html',
-  styleUrls: ['./blayout.component.scss'],
+  selector: 'ngx-modules',
+  templateUrl: './modules.component.html',
 })
-export class BlayoutComponent implements OnInit {
+export class ModulesComponent implements OnInit {
   menu = MENU_ITEMS;
   constructor() { }
 
