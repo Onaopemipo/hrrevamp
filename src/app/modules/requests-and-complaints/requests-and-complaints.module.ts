@@ -4,15 +4,23 @@ import { MainComponent } from './main/main.component';
 import { RequestsAndComplaintsRoutingModule } from './requests-and-complaints-routing.module';
 import { ApiService } from './services/api.service';
 import { ComponentsModule } from 'app/components/components.module';
+import { NbInfiniteListDirective, NbListModule, NbSelectModule, NbTabsetModule } from '@nebular/theme';
+import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
+import { SelectInputComponent } from './components/select-input/select-input.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [MainComponent],
+  declarations: [MainComponent, ComplaintDetailComponent, SelectInputComponent],
   imports: [
     CommonModule,
     ComponentsModule,
-    RequestsAndComplaintsRoutingModule
+    RequestsAndComplaintsRoutingModule,
+    NbTabsetModule,
+    NbListModule,
+    NbSelectModule,
+    FormsModule,
   ],
   providers: [
     ApiService

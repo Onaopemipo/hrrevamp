@@ -21,6 +21,11 @@ const routes: Routes = [{
       path: 'training',
       loadChildren: () => import('../../modules/training/training.module').then(m => m.TrainingModule)
     },
+    {
+      path: 'communications',
+      loadChildren: () => import('../../modules/communication/communication.module')
+        .then(m => m.CommunicationModule)
+    }
   ],
 }];
 

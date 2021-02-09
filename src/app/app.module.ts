@@ -1,8 +1,12 @@
+
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+// import { interactionPlugin } from '@fullcalendar/angular';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -10,7 +14,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRoutingModule } from './app-routing.module';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -42,6 +49,11 @@ import {
   NbListModule,
 
 } from '@nebular/theme';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 
 import { CKEditorModule } from 'ng2-ckeditor';

@@ -1,1 +1,13 @@
-<p>requests works!</p>
+<div class="container" style="background-color: #ffffff; height: 1000px;"> <!-- <ngx-default-content></ngx-default-content> -->
+<div *ngIf="welcome && requestData ==''" id="home" class="container tab-pane active"><br>
+
+  <ngx-default-content pageHeader={{myRequestHeader}} pageDescription="{{myRequestDesc}}"></ngx-default-content>
+</div>
+
+<div *ngIf="welcome && requestData !=''" id="home" class="container tab-pane active"><br>
+
+  <ngx-tableheader></ngx-tableheader>
+  <ngx-tablecomponent></ngx-tablecomponent>
+
+</div>
+</div>

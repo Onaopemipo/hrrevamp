@@ -5,17 +5,23 @@
   <nb-tabset>
     <nb-tab tabTitle="List View">
     <div *ngIf="welcome && TrainingPlanData ==''" id="home" class="container tab-pane active"><br>
-      <div class="center">
-        <h5 style="text-align: center;">You have not setup any training plan</h5>
-        <p style="text-align: center;">Click on the button to start your setup</p>
-
-        <div class="col text-center">
-          <button type="submit" class="btn my-button btn-md" (click)="addTrainingPlan()">Setup Training Plan</button>
-        </div>
-      </div>
+      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
       </div>
 
       <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+        <div>
+          <nb-tabset>
+            <nb-tab tabTitle="Pending">
+              Pending
+            </nb-tab>
+            <nb-tab tabTitle="Approved">
+              Approved
+            </nb-tab>
+            <nb-tab tabTitle="Declined">
+              Declined
+            </nb-tab>
+           </nb-tabset>
+        </div>
         <ngx-tableheader></ngx-tableheader>
         <ngx-tablecomponent></ngx-tablecomponent>
 
@@ -37,7 +43,9 @@
         <div class="form-group row mydiv">
           <label for="contactPerson" class="col-sm-3 col-form-label mylabel">Date</label>
           <div class="col-sm-4">
-            <input [nbDatepicker]="rangepicker"> <nb-rangepicker #rangepicker></nb-rangepicker>
+            <!-- <input [nbDatepicker]="rangepicker"> <nb-rangepicker #rangepicker></nb-rangepicker>
+            in -->
+            <input type="date" class="date-div" name="" id="" placeholder="From" style="border-radius: 5px; border: 1px solid #CBCBCD;"><span style="padding-right: 5px;"></span><input class="date-div" type="date" name="" id="" placeholder="To">
           </div>
         </div>
 
@@ -56,7 +64,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="Beneficiary" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <label for="Beneficiary" class="col-sm-3 col-form-label" style="font-weight: bold;">Beneficiary</label>
           <div class="col-sm-4">
               <button type="submit" class="btn cancel-button" style="padding: 5px 20px;">
                 <span class="file-cta">
@@ -66,6 +74,7 @@
                 </span>
                 Add Beneficiary
             </button>
+            <ngx-add-beneficiary></ngx-add-beneficiary>
 
           </div>
 
@@ -88,19 +97,14 @@
 <!-- Calendar View -->
     <nb-tab tabTitle="Calendar View">
       <div *ngIf="welcome && TrainingPlanData ==''" id="home" class="container tab-pane active"><br>
-        <div class="center">
-          <h5 style="text-align: center;">You have not setup any training plan</h5>
-          <p style="text-align: center;">Click on the button to start your setup</p>
-
-          <div class="col text-center">
-            <button type="submit" class="btn my-button btn-md" (click)="addTrainingPlan()">Setup Training Plan</button>
-          </div>
-        </div>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
         </div>
 
-      <div *ngIf="calendarWindow && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent></ngx-tablecomponent>
+      <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+
+        <!-- Calendar not working yet please fix up -->
+        <full-calendar [options]="calendarOptions"></full-calendar>
+
       </div>
     </nb-tab>
   </nb-tabset>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'ngx-side-modal',
@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideModalComponent implements OnInit {
 
+  @Input() set show(val: boolean) {
+    this.show_modal = val;
+  }
+  @Output() showChange = new EventEmitter<boolean>();
+
+  center = false;
   show_modal = false;
   constructor() { }
 
@@ -19,5 +25,6 @@ export class SideModalComponent implements OnInit {
 
   closeModal() {
     this.show_modal = false;
+    this.showChange.emit(this.show_modal);
   }
 }

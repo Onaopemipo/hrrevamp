@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
+import { NbLayoutModule, NbMenuModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { BlayoutRoutingModule } from './blayout-routing.module';
     BlayoutRoutingModule,
     ThemeModule,
     NbMenuModule,
+    NbLayoutModule,
     CommonModule
   ]
 })
