@@ -16,6 +16,19 @@
       </div>
 
       <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+        <div>
+          <nb-tabset>
+            <nb-tab tabTitle="Pending">
+              Pending
+            </nb-tab>
+            <nb-tab tabTitle="Approved">
+              Approved
+            </nb-tab>
+            <nb-tab tabTitle="Declined">
+              Declined
+            </nb-tab>
+           </nb-tabset>
+        </div>
         <ngx-tableheader></ngx-tableheader>
         <ngx-tablecomponent></ngx-tablecomponent>
 
@@ -98,9 +111,12 @@
         </div>
         </div>
 
-      <div *ngIf="calendarWindow && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent></ngx-tablecomponent>
+      <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+        <!-- <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent></ngx-tablecomponent> -->
+        <!-- <full-calendar></full-calendar> -->
+        <full-calendar [options]="calendarOptions"></full-calendar>
+        <h1>Helloooooooooo</h1>
       </div>
     </nb-tab>
   </nb-tabset>

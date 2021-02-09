@@ -1,3 +1,7 @@
+
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
@@ -54,9 +58,13 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
+
+    FileUploadComponent,
+    RadioButtonComponent
     SideModalComponent,
   ],
   imports: [
+    FullCalendarModule,
     FormsModule,
     CommonModule,
     NbSidebarModule.forRoot(),
@@ -112,9 +120,12 @@ import { SideModalComponent } from './side-modal/side-modal.component';
     NbButtonModule,
     MaxStringLengthPipe,
     WysisygInputComponent,
-    SideModalComponent,
+
+    FullCalendarComponent,
+    TableheaderComponent,
     TablecomponentComponent,
-    NbTabsetModule,
+    FileUploadComponent,
+    RadioButtonComponent,
   ],
 })
 export class ComponentsModule { }

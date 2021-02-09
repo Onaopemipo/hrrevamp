@@ -1,5 +1,6 @@
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/angular';
 
 @Component({
   selector: 'ngx-plans',
@@ -11,6 +12,9 @@ export class PlansComponent implements OnInit {
   actions: TopAction[] = [
     {name: 'create', label: 'Create New', icon: 'plus'}
   ];
+
+  calendarOptions: CalendarOptions = {
+  initialView: 'dayGridMonth' };
 
   welcome: boolean = true;
   newTrainingWindow: boolean = false;
@@ -35,7 +39,7 @@ export class PlansComponent implements OnInit {
   }
 
   addTrainingPlan() {
-    this.calendarWindow = true;
+    this.newTrainingWindow = true;
     this.welcome = false;
   }
 
