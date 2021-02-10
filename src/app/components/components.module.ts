@@ -1,3 +1,7 @@
+
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
@@ -47,7 +51,6 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 @NgModule({
@@ -59,11 +62,15 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
+
+    FileUploadComponent,
+    RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
   ],
   imports: [
+    FullCalendarModule,
     FormsModule,
     CommonModule,
     NbSidebarModule.forRoot(),
@@ -125,7 +132,11 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     MaxStringLengthPipe,
     WysisygInputComponent,
     SideModalComponent,
+    FullCalendarComponent,
+    TableheaderComponent,
     TablecomponentComponent,
+    FileUploadComponent,
+    RadioButtonComponent,
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
