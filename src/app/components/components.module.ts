@@ -1,3 +1,7 @@
+
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
@@ -47,7 +51,6 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { DateRangeComponent } from './date-range/date-range.component';
 
@@ -60,12 +63,16 @@ import { DateRangeComponent } from './date-range/date-range.component';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
+
+    FileUploadComponent,
+    RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
     DateRangeComponent,
   ],
   imports: [
+    FullCalendarModule,
     FormsModule,
     CommonModule,
     NbSidebarModule.forRoot(),
@@ -127,7 +134,11 @@ import { DateRangeComponent } from './date-range/date-range.component';
     MaxStringLengthPipe,
     WysisygInputComponent,
     SideModalComponent,
+    FullCalendarComponent,
+    TableheaderComponent,
     TablecomponentComponent,
+    FileUploadComponent,
+    RadioButtonComponent,
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
