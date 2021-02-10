@@ -131,6 +131,7 @@ import { DateRangeComponent } from './date-range/date-range.component';
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    NbIconModule,
   ],
 })
 export class ComponentsModule { }

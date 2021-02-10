@@ -18,7 +18,6 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
     ThemeModule,
     NbMenuModule,
     NbLayoutModule,
-    
   ]
 })
 export class ModulesModule { }

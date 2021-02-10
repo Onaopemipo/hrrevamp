@@ -1,0 +1,89 @@
+<ngx-componentsheader
+  pageName="Budget Setup"
+  [requiredButton]="[]"
+></ngx-componentsheader>
+<div class="main-page-container">
+    <div class="form-instruction">Set up your overall budget</div>
+  <div class="row">
+    <div class="col-sm-6 linear-form">
+      <div class="form-group">
+        <label>Username</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Host</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Port</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Default mail address</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>SSL</label>
+        <input class="form-control" type="checkbox" />
+      </div>
+      <div class="form-group">
+        <label>Files</label>
+        <ngx-file-upload class="form-control"></ngx-file-upload>
+      </div>
+      <div class="form-group">
+        <label>Allow sending of mails</label>
+        <input type="checkbox" />
+      </div>
+      <div class="form-group" style="margin-top: 20px">
+        <label></label>
+        <button nbButton status="primary">Save and Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-instruction">Add a budget item</div>
+  <div class="row">
+    <div class="col-sm-6 linear-form">
+      <div class="form-group">
+        <label>Budget Item</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Budget Code</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Total Budget Amount</label>
+        <input class="form-control" />
+      </div>
+    </div>
+  </div>
+      <hr/>
+      <div class="row">
+      <div class="col-sm-6 linear-form">
+      <div class="form-group">
+        <label>Department</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Allocated amount</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label></label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group" style="margin-top: 20px">
+        <label></label>
+        <div>
+            <button nbButton status="primary" outline>Cancel</button>
+            <button nbButton status="primary" outline>Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

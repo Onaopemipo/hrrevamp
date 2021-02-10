@@ -29,6 +29,11 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/communication/communication.module')
         .then(m => m.CommunicationModule)
     },
+    {
+      path: 'disbursement',
+      loadChildren: () => import('../modules/disbursement/disbursement.module')
+        .then(m => m.DisbursementModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ],
