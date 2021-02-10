@@ -57,7 +57,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import { EmpoComponent } from './self-service/empo/empo.component';
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -65,11 +65,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [AppComponent, DashboardComponent, EmpoComponent],
-=======
   declarations: [AppComponent],
->>>>>>> f455750f277f3d96378001b866be4349e9e11ea2
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
