@@ -1,14 +1,8 @@
 import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
+import { ColumnTypes, TableColumn, TableData } from './models';
 
 
-
-export interface TableColumn {
-  name: string;
-  title: string;
-  template?: TemplateRef<any>;
-  type?: string;
-  colors?: {};
-}
+const NUMBER_OF_ITEMS_PER_PAGE = 10;
 
 export enum ActionsType {
   multipleIconActionType = 2,
@@ -58,19 +52,38 @@ interface TableActionEvent {
 })
 export class TablecomponentComponent implements OnInit {
   @Input() loading = false;
-  @Input() tableColum = [];
-  @Input() userData = [];
+  @Input() tableColum: TableColumn[] = [];
+  @Input() userData: [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: Array<object>;
   @Output() actionClick = new EventEmitter<TableActionEvent>();
-
+  pageData = [];
   tableData = [];
+  _currentPage = 1;
+  paginatioShowingPages = [1, 2, 3, 4, 5, 6];
+  get totalNoOfPages() {
+    return Math.ceil(this.totalItems / 10);
+  }
+  @Input() totalItems = 1000;
+  @Output() pageChange = new EventEmitter<number>();
+  @Input() set currentPage(val: number) {
+    this._currentPage = val;
+    // TODO: Generate pagination items
+    // if (this.totalNoOfPages < 3) {
+    //   this.paginatioShowingPages = [0, 1, 2, 3, 4];
+    // } else {}
+    this.paginatioShowingPages = [1, 2, 3, 4, 5, 6];
+  }
+  get currentPage() {
+    return this._currentPage;
+  }
+  COLUMN_TYPES = ColumnTypes;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
   constructor() { }
 
   onSort({column, direction}: SortEvent) {
-
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {
@@ -88,12 +101,17 @@ export class TablecomponentComponent implements OnInit {
       });
     }
   }
+
   ngOnInit(): void {
     this.tableData = this.userData;
 
     setTimeout(() => {
       this.loading = false;
     }, 3000);
+  }
+
+  pageClicked(pageNo: number) {
+    this.pageChange.emit(pageNo);
   }
 
 }

@@ -49,6 +49,7 @@ import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+import { DateRangeComponent } from './date-range/date-range.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    DateRangeComponent,
   ],
   imports: [
     FormsModule,
