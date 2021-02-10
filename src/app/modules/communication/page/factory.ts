@@ -12,6 +12,7 @@ export default Factory.define<IEmail>(({ sequence }) => ({
     status_id: 1,
     id: 1,
     date_sent: fakerStatic.date.past(),
+    content: fakerStatic.lorem.paragraphs(4)
 }));
 
 // console.log(IEmailFactory)

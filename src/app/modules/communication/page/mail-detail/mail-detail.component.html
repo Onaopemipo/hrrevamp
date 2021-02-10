@@ -1,0 +1,51 @@
+
+<div class="main-page-container">
+    <div style="display: flex;">
+        <div style="flex: auto;">
+            <h5>{{ email.subject }}</h5>
+        </div>
+        <div style="display: flex; padding: 1rem 0rem;">
+            <button nbButton style="background-color: transparent;border:1px solid #b6b3b3" >
+                Export as
+            </button>
+            <div style="padding-left: 2rem; display: flex; align-items: center;">
+                <nb-icon icon="printer-outline" status="primary" style="font-size: 35px; margin-right: 0.5rem;"></nb-icon>
+                <span>Print</span>
+            </div>
+        </div>
+        
+    </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div style="display: flex">
+        <img
+          [src]="email.senderImageSrc"
+          style="height: 50px; width: 50px; border-radius: 50%"
+        />
+        <div style="padding-left: 10px">
+          <div>{{ email.senderName }}</div>
+          <div class="complainer-name">
+            {{ email.senderMail }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      <div></div>
+      <div class="complainer-name" style="text-align: right">
+        <span>{{ email.date_sent | date: "HH:mm" }}</span>
+        <span style="margin-left: 20px">{{
+            email.date_sent | date: "MMM dd, yyyy"
+        }}</span>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex;">
+      <div style="flex: auto;"></div>
+        <div style="max-width: 60%;" class="header6-normal">{{ email.content }}</div>
+        <div style="flex: auto;"></div>
+  </div>
+
+</div>
