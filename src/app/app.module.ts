@@ -1,8 +1,12 @@
+
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+// import { interactionPlugin } from '@fullcalendar/angular';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -41,6 +45,11 @@ import {
   NbLayoutModule
 
 } from '@nebular/theme';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 
 import { CKEditorModule } from 'ng2-ckeditor';

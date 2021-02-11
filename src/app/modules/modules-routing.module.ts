@@ -29,6 +29,11 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/communication/communication.module')
         .then(m => m.CommunicationModule)
     },
+    {
+      path: 'leave',
+      loadChildren: () => import('../modules/leave/leave.module')
+        .then(m => m.LeaveModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ],

@@ -11,14 +11,14 @@ import { ThemeModule } from '../@theme/theme.module';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [ModulesComponent,DashboardComponent],
+  declarations: [ModulesComponent, DashboardComponent],
   imports: [
     CommonModule,
     ModulesRoutingModule,
     ThemeModule,
     NbMenuModule,
     NbLayoutModule,
-    
+
   ]
 })
 export class ModulesModule { }

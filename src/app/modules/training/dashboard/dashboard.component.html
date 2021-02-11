@@ -1,1 +1,115 @@
-<p>dashboard works!</p>
+<ngx-componentsheader pageName='Training Dashboard'></ngx-componentsheader>
+<div class="container">
+  <!-- <div class="row">
+    <div class="col my-analytics-div">
+
+      <div class="flex-child">
+        <img src="../../../../assets/icons/department.jpg" alt="">
+      </div>
+      <div class="flex-child">
+        <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Request</span></div>
+        <div class="value"><span style="font-size: 25px; font-weight: 700;">123</span></div>
+      </div>
+    </div>
+    <div class="col my-analytics-div">
+
+      <div class="flex-child">
+        <img src="../../../../assets/icons/ActiveTraining.png" alt="">
+      </div>
+      <div class="flex-child">
+        <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Active training plans</span></div>
+        <div class="value"><span style="font-size: 25px; font-weight: 700;">123</span></div>
+      </div>
+    </div>
+
+    <div class="col my-analytics-div">
+
+      <div class="flex-child">
+        <img src="../../../../assets/icons/vendors.png" alt="">
+      </div>
+      <div class="flex-child">
+        <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Vendors</span></div>
+        <div class="value"><span style="font-size: 25px; font-weight: 700;">45</span></div>
+      </div>
+    </div>
+
+    <div class="col my-analytics-div">
+
+      <div class="flex-child">
+        <img src="../../../../assets/icons/trainingbudget.png" alt="">
+      </div>
+      <div class="flex-child">
+        <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Training Budget</span></div>
+        <div class="value"><span style="font-size: 25px; font-weight: 700;">567</span></div>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+<div class="row" style="background-color: transparent;">
+  <div class="col my-analytics-div">
+
+    <div class="flex-child">
+      <img src="../../../../assets/icons/department.jpg" alt="">
+    </div>
+    <div class="flex-child">
+      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Requests</span></div>
+      <div class="value"><span style="font-size: 25px; font-weight: 700;">123</span></div>
+    </div>
+  </div>
+  <div class="col my-analytics-div">
+
+    <div class="flex-child">
+      <img src="../../../../assets/icons/ActiveTraining.png" alt="">
+    </div>
+    <div class="flex-child">
+      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Active Training Plans</span></div>
+      <div class="value"><span style="font-size: 25px; font-weight: 700;">567</span></div>
+    </div>
+  </div>
+  <div class="col my-analytics-div">
+
+    <div class="flex-child">
+      <img src="../../../../assets/icons/vendors.png" alt="">
+    </div>
+    <div class="flex-child">
+      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Vendors</span></div>
+      <div class="value"><span style="font-size: 25px; font-weight: 700;">45</span></div>
+    </div>
+  </div>
+  <div class="col my-analytics-div">
+
+    <div class="flex-child">
+      <img src="../../../../assets/icons/trainingbudget.png" alt="">
+    </div>
+    <div class="flex-child">
+      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Training Budget</span></div>
+      <div class="value"><span style="font-size: 25px; font-weight: 700;">N540K</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Pie Chart here -->
+<div class="container">
+  <!-- <ngx-echarts-pie></ngx-echarts-pie> -->
+
+</div>
+
+<!-- Bar Chart here -->
+
+<div class="container">
+<!-- <ngx-echarts-bar></ngx-echarts-bar> -->
+</div>
+
+<!-- Training Reports -->
+<div class="container">
+
+  <div *ngIf="trainingReport == ''">
+    <ngx-default-content pageHeader="You do not have any contents"></ngx-default-content>
+  </div>
+  <div *ngIf="trainingReport != ''">
+    <ngx-tableheader></ngx-tableheader>
+  </div>
+
+</div>
+

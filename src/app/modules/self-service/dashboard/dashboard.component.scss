@@ -40,8 +40,11 @@ h6{
 .quick-actions > div{
     flex: auto;
     margin-right: 30px;
+    
 }
-
+.quick-actions> div.card {
+width: 100%;
+}
 // .top-actions > div{
 //     width: 50vw;
 // }
@@ -49,33 +52,37 @@ h6{
 .q-connector {
     position: relative;
     &::before{
-        content: '';
-        width: 1.19rem;
-        height: 1.19rem;
-        background: #4847E033 0% 0% no-repeat padding-box;
-        border: 1px solid #4847E0;
-        opacity: 1;
-        border-radius: 50%;
-        display: block;
+        content: url(../../../../assets/icons/tick-small.jpg);    
     }
     &::after {
-      margin:18px;
-      border-width: 0 0 0 2px;
-      top: 40%;
+      margin:10px 2px 10px 12px;
+      border-width: 2px;
+      left: 40%;
     }
 
     &::after {
-      content: '';
-      left: -12px;
-      border-color: #4847E0;
-      border-style: dashed;
-      width: 9px;
-      height: calc(50% + 20px);
+      content: ''; 
+      border-top: 1px #4847E0 solid;
+      width: 100%;
+      left: 0px;
       position: absolute;
     }
 
-
   }
+
+.last-q-connector{
+  &::after {
+    margin:10px 2px 10px 12px;
+    border-width: 0px;
+    left: 0%;
+  }
+  &::after {
+    content: ''; 
+    border-top: 1px #4847E0 solid;
+    width: 0px;
+    position: absolute;
+  }
+}
 
 
 /* width */
@@ -119,9 +126,23 @@ h6{
   }
 
   .zee {
-    height: 400px; overflow: scroll; padding-bottom: 10px;margin-top: -1000px;
+    overflow: scroll;
+    padding-bottom: 10px;
+    flex: auto;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    margin-top: 30px;
+    height: 50vh;
   }
 
   .date-circle{
     height: 50px;
+  }
+  .circle{
+    background-color: #4847E0;
+    
+    color: white !important;
+    height: 2.5rem;
+    width: 2.5rem;
+    text-align: center;
   }

@@ -8,18 +8,18 @@ import { Component, OnInit } from '@angular/core';
 export class OnboardingsetupComponent implements OnInit {
   title: string = 'Set up your account';
   src: string = 'assets/icons/camera.jpg';
-  selectedPanel: string = "companyPanel";
+  selectedPanel: string = 'companyPanel';
 
 
 
   constructor() { }
-  gotoPanel(paneltitle,wizardtitle) {
+  gotoPanel(paneltitle, wizardtitle) {
     this.title = wizardtitle;
     this.selectedPanel = paneltitle;
   }
   proceedtosubcription() {
-    this.title = "Choose Package";
-    this.selectedPanel = "subscriptionPanel";
+    this.title = 'Choose Package';
+    this.selectedPanel = 'subscriptionPanel';
   }
 
   ngOnInit(): void {

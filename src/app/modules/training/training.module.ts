@@ -1,3 +1,5 @@
+import { AddBeneficiaryComponent } from './../../components/add-beneficiary/add-beneficiary.component';
+import { FileUploadComponent } from './../../components/file-upload/file-upload.component';
 import { TrainingRoutingModule } from './training-routing.module';
 import { ComponentsModule } from 'app/components/components.module';
 import { NgModule } from '@angular/core';
@@ -36,6 +38,7 @@ import {
   NbSpinnerModule,
   NbListModule,
 
+
 } from '@nebular/theme';
 
 @NgModule({
@@ -45,6 +48,7 @@ import {
     ComponentsModule,
     TrainingRoutingModule,
     NbTabsetModule,
+    NbDatepickerModule,
   ]
 })
 export class TrainingModule { }
