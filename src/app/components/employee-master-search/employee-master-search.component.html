@@ -1,0 +1,47 @@
+<p>employee-master-search works!</p>
+
+<div>
+    <button (click)="showMasterSearchModal()">Show</button>
+</div>
+
+<ngx-side-modal [(show)]="showModal">
+    <div modal-header>{{selectionHeader}}</div>
+    <div modal-body>
+        <nb-form-field>
+            <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+            <input type="text" nbInput class="form-control">
+        </nb-form-field>
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <label>Department</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label>Branch</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label>Unit</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label>Level</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label>Gender</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+</ngx-side-modal>

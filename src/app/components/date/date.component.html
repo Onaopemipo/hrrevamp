@@ -1,0 +1,9 @@
+<div class="input-group mb-3" style="    flex-wrap: nowrap;">
+  <input [nbDatepicker]="datepicker" type="text" class="form-control" placeholder="DD/MM/YYYY" aria-label="Recipient's username" aria-describedby="basic-addon2" style="width: unset;">
+  <div class="">
+    <button class="btn btn-outline-secondary" (click)="show()" type="button" style="min-width: 0px !important;">
+        <nb-icon icon="calendar-outline"></nb-icon>
+    </button>
+  </div>
+</div>
+<nb-datepicker #datepicker></nb-datepicker>

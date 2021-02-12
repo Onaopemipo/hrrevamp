@@ -1,0 +1,26 @@
+table{
+    border: 1px solid #F5F5FA;
+}
+thead{
+    border: 1px solid #F5F5FA !important;
+    background-color: #F5F5FA;
+}
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}
+td, th{
+    text-align: left;
+}
+
+.paginator{
+
+}
+
+.paginator > span{
+    padding: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
 // themes - our custom or/and out of the box themes
 @import 'themes';
 
@@ -20,7 +20,6 @@
 
 // install the framework and custom global styles
 @include nb-install() {
-
   // framework global styles
   @include nb-theme-global();
   @include nb-auth-global();
@@ -32,3 +31,277 @@
   @include nb-overrides();
 };
 
+
+nb-layout-footer{
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #4847E01A !important;
+  border-top: 3px solid #4847E0;
+}
+.black{
+  color: #080730;
+}
+.grey{
+  color: #343840;
+}
+.stroke{
+  color: rgba(204, 204, 204, 0.3);
+}
+.round-image{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #4847E01A
+}
+.grey-2{
+  color: #6C757D;;
+}
+.grey-3{
+  color: #95A8B8
+}
+.small {
+  text-align: left;
+  font: normal normal normal 12px/22px Rubik;
+  letter-spacing: 0px;
+  color: #130019;
+  opacity: 1;
+}
+
+h1{
+  text-align: left;
+  font-size: 24px;
+  line-height: 28px;
+  font-family: 'Rubik';
+  letter-spacing: 0px;
+  color: #080730;
+  opacity: 1;
+}
+
+.form-control::placeholder{
+  color: #95A8B8;
+}
+
+.form-group > label{
+  text-align: left;
+  font: 16px/22px Rubik;
+  letter-spacing: 0px;
+  color: #080730;
+  opacity: 1;
+}
+
+.form-instruction{
+  text-align: left;
+  font: normal normal normal 16px/22px Rubik;
+  letter-spacing: 0px;
+  color: #080730;
+  opacity: 1;
+}
+
+.page-long-text{
+  text-align: center;
+  font: normal normal 300 16px/28px Rubik;
+  letter-spacing: 0px;
+  color: #130019;
+  opacity: 1;
+}
+
+.side-modal-actions > div > button{
+  margin-right: 20px;
+}
+
+.linear-form .form-group{
+  display: flex;
+}
+
+.linear-form .form-group > label{
+  width: 40%;
+}
+.linear-form .form-group > .form-control{
+  width: unset;
+  flex: auto;
+}
+
+.form-control[type='checkbox']{
+  width: fit-content;
+      /* width: 0px; */
+  flex: unset !important;
+}
+
+.main-page-container{
+  background-color: white;
+  padding: 30px;
+  height: 100%;
+}
+
+.header6-normal{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: normal !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #343A40;
+opacity: 1;
+}
+.header6-medium{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #080730 !important;
+opacity: 1 !important;
+}
+
+.header6-bold{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px !important;
+color: #080730 !important;
+opacity: 1 !important;
+}
+
+.header5-normal{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: normal !important;
+  font-size: 22px !important;
+  line-height: 24px !important;
+  font-family: 'Rubik', sans-serif !important;
+
+letter-spacing: 0px !important;
+color: #343A40 !important;
+opacity: 1 !important;
+}
+.header5-medium{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: 500 !important;
+  font-size: 22px !important;
+  line-height: 24px !important;
+  font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #080730;
+opacity: 1;
+}
+.header5-bold{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: bold !important;
+  font-size: 22px !important;
+  line-height: 24px !important;
+  font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #080730;
+opacity: 1;
+}
+
+.header4-normal{
+font-style: normal !important;
+font-variant:normal !important;
+font-weight: normal !important;
+font-size: 24px !important;
+line-height: 28px !important;
+font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #080730;
+opacity: 1;
+}
+.header4-medium{
+font-style: normal !important;
+font-variant:normal !important;
+font-weight: 500 !important;
+font-size: 24px !important;
+line-height: 28px !important;
+font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #080730;
+opacity: 1;
+}
+.header4-bold{
+font-style: normal !important;
+font-variant:normal !important;
+font-weight: bold !important;
+font-size: 24px !important;
+line-height: 28px !important;
+font-family: 'Rubik', sans-serif !important;
+letter-spacing: 0px;
+color: #080730;
+opacity: 1;
+}
+
+.p-normal{
+font-style: normal !important;
+font-variant:normal !important;
+font-weight: normal !important;
+font-size: 14px !important;
+line-height: 17px !important;
+font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color: #343A40  !important;
+opacity: 1;
+}
+
+.p-300{
+  font-style: normal !important;
+font-variant:normal !important;
+font-weight: 300 !important;
+font-size: 16px !important;
+line-height: 28px !important;
+font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color: #130019  !important;
+opacity: 1;
+}
+
+.listsubheader{
+  font-style: normal !important;
+font-variant:normal !important;
+font-weight: normal !important;
+font-size: 16px !important;
+line-height: 22px !important;
+font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color: #080730 !important;
+opacity: 1;
+}
+.smalltext{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  line-height: 22px !important;
+  font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color: #130019;
+opacity: 1;
+}
+button{
+  text-transform: none !important;
+  min-width: 144px !important;
+}
+
+@media screen and (max-width: 992px) {
+  .linear-form .form-group {
+    flex-direction: column;
+  }
+
+  .linear-form .form-group > label{
+    width: 100%;
+  }
+}
+
+.tabset {
+  margin-bottom: 2rem !important;
+}

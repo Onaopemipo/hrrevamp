@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import IComplaintFactory from '../data/factories/complaint.factory'
+import { of, Subject } from 'rxjs';
+import IComplaintFactory from '../data/factories/complaint.factory';
+import { IComplaint } from '../main/models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,12 @@ export class ApiService {
 
   constructor() { }
 
-  getComplaints(){
-    return of(IComplaintFactory.buildList(10))
+  getComplaints(page: number) {
+    const subject = new Subject<IComplaint[]>();
+    window.setTimeout(() => {
+      subject.next(IComplaintFactory.buildList(10));
+      subject.complete();
+    }, 3000);
+    return subject;
   }
 }

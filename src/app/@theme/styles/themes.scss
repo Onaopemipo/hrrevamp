@@ -3,6 +3,7 @@
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
 
+
 $nb-themes: nb-register-theme((
   layout-padding-top: 2.25rem,
 
@@ -126,5 +127,13 @@ slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
 //Modifiable
 header-background-color: #4847E0,
 header-text-color: #ffffff,
-link-text-decoration: none
+link-text-decoration: none,
+
+//tabset
+tabset-tab-text-transform: none,
+tabset-tab-padding: 1rem 2rem 1rem 0rem,
+tabset-content-padding: 0px,
+
+//Side Menu
+menu-item-divider-style: none
 ),smartace, default)

@@ -1,0 +1,115 @@
+<ngx-componentsheader actions="actions" [pageName]="pagetitle"></ngx-componentsheader>
+
+<div style="padding: 10px;"></div>
+<div class="container" style="background-color: #ffffff; height: 1000px;">
+  <nb-tabset>
+    <nb-tab tabTitle="List View">
+    <div *ngIf="welcome && TrainingPlanData ==''" id="home" class="container tab-pane active"><br>
+      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
+      </div>
+
+      <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+        <div>
+          <nb-tabset>
+            <nb-tab tabTitle="Pending">
+              Pending
+            </nb-tab>
+            <nb-tab tabTitle="Approved">
+              Approved
+            </nb-tab>
+            <nb-tab tabTitle="Declined">
+              Declined
+            </nb-tab>
+           </nb-tabset>
+        </div>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent></ngx-tablecomponent>
+
+      </div>
+
+  <div *ngIf="newTrainingWindow" class="container" style="background-color: white; height: 800px;">
+      <form>
+        <div class="form-group row mydiv">
+          <label for="Training Type" class="col-sm-3 col-form-label mylabel">Training Type</label>
+          <div class="col-sm-4">
+              <select class="custom-select" required>
+                <option value="">Select </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+          </div>
+        </div>
+        <div class="form-group row mydiv">
+          <label for="contactPerson" class="col-sm-3 col-form-label mylabel">Date</label>
+          <div class="col-sm-4">
+            <!-- <input [nbDatepicker]="rangepicker"> <nb-rangepicker #rangepicker></nb-rangepicker>
+            in -->
+            <input type="text" class="date-div" name="" id="" placeholder="From" style="border-radius: 5px; border: 1px solid #CBCBCD;" onfocus="(this.type='date')"><span style="padding-right: 5px;"></span><input class="date-div" type="date" name="" id="" placeholder="To">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
+          <div class="col-sm-8">
+            <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Attachment" class="col-sm-3 col-form-label mylabel">Attachment</label>
+          <div class="col-sm-4">
+            <ngx-file-upload></ngx-file-upload>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="Beneficiary" class="col-sm-3 col-form-label" style="font-weight: bold;">Beneficiary</label>
+          <div class="col-sm-4">
+              <button type="submit" class="btn cancel-button" style="padding: 5px 20px;">
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
+                  </span>
+                </span>
+                Add Beneficiary
+            </button>
+            <ngx-employee-master-search></ngx-employee-master-search>
+
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <div class="col-sm-4">
+            <button type="submit" class="btn my-button" style="padding: 7px 20px;">Assign</button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+  </nb-tab>
+
+
+<!-- Calendar View -->
+    <nb-tab tabTitle="Calendar View">
+      <div *ngIf="welcome && TrainingPlanData ==''" id="home" class="container tab-pane active"><br>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
+        </div>
+
+      <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+
+        <!-- Calendar not working yet please fix up -->
+        <full-calendar [options]="calendarOptions"></full-calendar>
+
+      </div>
+    </nb-tab>
+  </nb-tabset>
+</div>
+
+
+
+

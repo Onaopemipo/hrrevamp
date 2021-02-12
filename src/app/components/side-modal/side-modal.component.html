@@ -1,5 +1,20 @@
 <div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal}" class="my-modal">
-    <div style="flex: auto" (click)="openModal()">ddddddddddd</div>    
-    <div style="flex: auto" (click)="closeModal()">dfffffff</div>
-    <div style="background-color: white;" class="modal-p"></div>
+    <!-- <div style="flex: auto"></div>     -->
+    <div style="flex: auto" (click)="closeModal()"></div>
+    <!-- <div > -->
+        <div style="background-color: white;overflow: scroll;"  class="modal-p" [class]="{center: center}">
+            <div style="height: 75px;" class="header-space"></div>
+            <div class="header">
+                <ng-content select='[modal-header]'>
+                </ng-content>
+            </div>
+            <div class="body">
+                <ng-content select='[modal-body]'></ng-content>
+            </div>
+            <div class="actions side-modal-actions">
+                <ng-content select='[modal-actions]'></ng-content>
+            </div>
+        </div>
+    <!-- </div> -->
+    <div style="flex: auto" (click)="closeModal()" *ngIf="center"></div>
 </div>

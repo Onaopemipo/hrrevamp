@@ -1,68 +1,74 @@
-<ngx-componentsheader [pageName]="pagetitle" [requiredButton]="rbutton">
+<ngx-componentsheader [pageName]="pagetitle" [requiredButton]="rbutton" (buttonClick)="pageActionClicked($event)">
 </ngx-componentsheader>
 
-<div class="tab-container">
-    <div class="active">Requests</div>
-    <div>Complaints</div>
-</div>
+
+<nb-tabset (changeTab)="selectTab($event)">
+ <nb-tab tabTitle="Requests" [tabId]="TABS.REQUEST">
+   <!-- Tab content 1 -->
+ </nb-tab>
+ <nb-tab tabTitle="Complaints" [tabId]="TABS.COMPLAINT">
+   <!-- Tab content 2 -->
+ </nb-tab>
+</nb-tabset>
 
 <div style="background-color: #ffffff;">
     <div class="row" style="height: 70vh;">
-        <div class="col-sm-3" style="border-right: 1px solid #CCCCCC;    padding-right: 0px;" style="height: 100%;">
+        <div class="col-sm-3" style="border-right: 1px solid #CCCCCC;    padding-right: 0px; height: 100%;">
             <div class="section-header">
-                All requests <span style="background: rgba(72, 71, 224, 0.08); border-radius: 8px; padding: 6px 12px; margin-left: 20px; color: #4847E0;">{{complaints.length}}</span>
+                <span *ngIf="selectedTab === TABS.REQUEST">All requests</span> <span *ngIf="selectedTab === TABS.COMPLAINT">All complaints</span> <span style="background: rgba(72, 71, 224, 0.08); border-radius: 8px; padding: 6px 12px; margin-left: 20px; color: #4847E0;">{{complaints.length}}</span>
             </div>
-            <div class="complain-items" style="overflow: scroll; height: calc(100% - 80px);">
-                <div class="complain-item" *ngFor="let complaint of complaints" [class]="{active: selectedComplaint === complaint}" (click)="changeSelectedComplaint(complaint)">
-                    <img [src]="complaint.complainerImageSrc" style="height: 50px; width: 50px; border-radius: 50%;">
-                    <div class="complaint-detail-section">
-                        <span class="complainer-name">{{complaint.complainerName}}</span>
-                        <div class="complaint-title">{{complaint.title | maxStringLength:30}}</div>
-                        <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div>
-                        <ngx-status></ngx-status>
+            <div class="complain-items" style="overflow: scroll; height: calc(100% - 80px);" nbInfiniteList [threshold]="3000" (bottomThreshold)="loadNext()">
+                <div *ngIf="loading" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                </div>
+                <ng-template [ngIf]="!loading">
+                    <div class="complain-item" *ngFor="let complaint of complaints" [class]="{active: selectedComplaint === complaint}" (click)="changeSelectedComplaint(complaint)">
+                        <img [src]="complaint.complainerImageSrc" style="height: 50px; width: 50px; border-radius: 50%;">
+                        <div class="complaint-detail-section">
+                            <span class="complainer-name">{{complaint.complainerName}}</span>
+                            <div class="complaint-title">{{complaint.title | maxStringLength:30}}</div>
+                            <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div>
+                            <ngx-status [data]="complaint"></ngx-status>
+                        </div>
+                        <div>{{complaint.time | date}}</div>
                     </div>
-                    <div>{{complaint.time | date}}</div>
+                </ng-template>
+                <div *ngIf="loadingNext" style="display: flex; justify-content: center; padding-top: 5px;">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-9 page-body" style="height: 100%; overflow: scroll">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div style="display: flex;">
-                        <img [src]="selectedComplaint.complainerImageSrc" style="height: 50px; width: 50px; border-radius: 50%;">
-                        <div style="padding-left: 10px;">
-                            <div>{{selectedComplaint.complainerName}}</div>
-                            <div class="complainer-name">{{selectedComplaint.complainerEmail}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div>#{{selectedComplaint.referenceNo}}</div>
-                    <div class="complainer-name">Ref No</div>
-                </div>
-                <div class="col-sm-4">
-                    <div></div>
-                    <div class="complainer-name" style="text-align: right;">
-                        <span>{{selectedComplaint.time | date:"HH:mm"}}</span>
-                        <span style="margin-left: 20px;">{{selectedComplaint.time | date:"MMM dd, yyyy"}}</span>
-                    </div>
-                </div>
-            </div>
-            <h5>{{selectedComplaint.title}}</h5>
-            <div>{{selectedComplaint.description}}</div>
-            <div class="actions">
-                <a (click)="replyComplaint()">Reply</a>
-                <a (click)="approveComplaint()">Approve</a>
-                <a (click)="rejectComplaint()">Decline</a>
-                <a (click)="approveComplaint()">Reply</a>
-                <a (click)="rejectComplaint()">Mark as resolved</a>
-                <a (click)="approveComplaint()">Unresolved</a>
-            </div>
-            <div class="reply-form">
-                <ngx-wysisyg-input></ngx-wysisyg-input>
-                <button nbButton status="primary" > Send </button>
-                <button outline nbButton status="primary" > Cancel </button>
-            </div>
+        <div class="col-sm-9" style="height: 100%; overflow: scroll">
+            <ngx-complaint-detail [value]="selectedComplaint"></ngx-complaint-detail>
         </div>
     </div>
 </div>
+<ngx-side-modal [(show)]="showCreateModal">
+    <div modal-header>Create New</div>
+    <div modal-body>
+        <div class="form-group">
+            <label>Type</label>
+            <select [(ngModel)]="newComplaint.type" class="form-control">
+                <option value="5">Complaint</option>
+                <option value="6">Request</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Reciepent</label>
+            <input class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <ngx-wysisyg-input></ngx-wysisyg-input>
+        </div>
+    </div>
+    <div modal-actions>
+        <button nbButton status="primary">Submit</button>
+        <button nbButton outline status="primary">Discard</button>
+        <button>Attach</button>
+    </div>
+</ngx-side-modal>

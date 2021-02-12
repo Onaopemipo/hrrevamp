@@ -1,0 +1,72 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th *ngIf="showCheckBox"></th>
+        <th scope="col" *ngFor="let col of tableColum">{{ col.title }}</th>
+        <th *ngIf="showActions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="loading">
+        <td colspan="1000">Loading......</td>
+      </tr>
+      <ng-container *ngIf="!loading">
+        <tr *ngFor="let data of userData; let i = index">
+          <td *ngIf="showCheckBox">
+            <div style="padding: 10px">
+              <nb-checkbox></nb-checkbox>
+            </div>
+          </td>
+          <td *ngFor="let col of tableColum">
+            <span *ngIf="col.type === COLUMN_TYPES.Text">{{ data[col.name] }}</span>
+            <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
+            <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
+          </td>
+          <td *ngIf="showActions">
+            <ng-template #card>
+              <div class="row">
+                <div class="col-sm-12">
+                  <nb-list>
+                    <nb-list-item *ngFor="let act of actions">
+                      {{ act.label }}
+                    </nb-list-item>
+                  </nb-list>
+                </div>
+              </div>
+            </ng-template>
+            <button nbButton status="primary" [nbPopover]="card">
+              Actions &nbsp;<nb-icon
+                icon="arrow-ios-downward-outline"
+              ></nb-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <tr *ngIf="userData.length == 0 && !loading">
+        <td colspan="10000">no record found</td>
+      </tr>
+      <tr *ngIf="loading">
+        <td colspan="5">
+          <nb-card
+            [nbSpinner]="true"
+            nbSpinnerSize="medium"
+            nbSpinnerStatus="primary"
+          >
+            <nb-card-body> Loading... </nb-card-body>
+          </nb-card>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="display: flex;">
+  <div style="flex: auto;">Showing 1 - 10 of 1000</div>
+  <div class="paginator">
+    <span>Prev</span>
+    <span (click)="pageClicked(page)" *ngFor="let page of paginatioShowingPages">{{page}}</span>
+    <span>Next</span>
+  </div>
+</div>

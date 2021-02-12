@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
         <span>Copyright</span>
         © {{currentYr}} SmartAce
     </a>
- 
   `,
 })
 export class FooterComponent {

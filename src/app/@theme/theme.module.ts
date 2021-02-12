@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   NbActionsModule,
   NbLayoutModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbSearchModule,
   NbSidebarModule,
   NbUserModule,
@@ -33,6 +33,8 @@ import {
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  SingleColumnLayoutComponent,
+  SingleColumnHeaderLayoutComponent
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -41,7 +43,7 @@ import { DARK_THEME } from './styles/theme.dark';
 
 const NB_MODULES = [
   NbLayoutModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbUserModule,
   NbActionsModule,
   NbSearchModule,
@@ -61,6 +63,8 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  SingleColumnLayoutComponent,
+  SingleColumnHeaderLayoutComponent
 ];
 const PIPES = [
   CapitalizePipe,

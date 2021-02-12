@@ -1,0 +1,19 @@
+<ngx-componentsheader
+  pageName="Disbursement Requests"
+  [requiredButton]="[]"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="All Requests" [tabId]="TABS.ALL_REQUESTS">
+    </nb-tab>
+    <nb-tab tabTitle="Disbursed" [tabId]="TABS.DISBURSED">
+    </nb-tab>
+    <nb-tab tabTitle="Pending" [tabId]="TABS.PENDING">
+    </nb-tab>
+    <nb-tab tabTitle="Failed" [tabId]="TABS.FAILED">
+    </nb-tab>
+  </nb-tabset>
+
+  <ngx-tableheader></ngx-tableheader>
+  <ngx-tablecomponent [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
+</div>

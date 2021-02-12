@@ -1,0 +1,40 @@
+<ngx-componentsheader
+  pageName="Templates"
+  [requiredButton]="rbutton"
+  (buttonClick)="pageActionClicked($event)"
+>
+</ngx-componentsheader>
+<div class="row">
+  <div
+    *ngFor="let n of [1, 2, 2, 3, 3, 5, 4, 44, 5, 6]"
+    class="col-md-3 col-sm-4"
+  >
+    <div class="card black" style="padding: 30px; margin: 30px; background-color: white">
+      <nb-icon icon="file-text-outline"></nb-icon>
+      <div style="padding: 5px;">Deployment</div>
+    </div>
+  </div>
+</div>
+
+
+<ngx-side-modal [(show)]="showCreateModal">
+    <div modal-header>New Template</div>
+    <div modal-body>
+        <div class="form-group">
+            <label>Template</label>
+            <input class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Subject</label>
+            <input class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Email Body</label>
+            <ngx-wysisyg-input></ngx-wysisyg-input>
+        </div>
+    </div>
+    <div modal-actions>
+        <button nbButton status="primary">Create Template</button>
+        <button nbButton outline status="primary">Discard</button>
+    </div>
+</ngx-side-modal>

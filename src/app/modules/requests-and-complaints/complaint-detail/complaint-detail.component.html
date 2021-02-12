@@ -1,0 +1,49 @@
+<ng-template [ngIf]="selectedComplaint">
+  <div class="row">
+    <div class="col-sm-4">
+      <div style="display: flex">
+        <img
+          [src]="selectedComplaint.complainerImageSrc"
+          style="height: 50px; width: 50px; border-radius: 50%"
+        />
+        <div style="padding-left: 10px">
+          <div>{{ selectedComplaint.complainerName }}</div>
+          <div class="complainer-name">
+            {{ selectedComplaint.complainerEmail }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div>#{{ selectedComplaint.referenceNo }}</div>
+      <div class="complainer-name">Ref No</div>
+    </div>
+    <div class="col-sm-4">
+      <div></div>
+      <div class="complainer-name" style="text-align: right">
+        <span>{{ selectedComplaint.time | date: "HH:mm" }}</span>
+        <span style="margin-left: 20px">{{
+          selectedComplaint.time | date: "MMM dd, yyyy"
+        }}</span>
+      </div>
+    </div>
+  </div>
+  <h5>{{ selectedComplaint.title }}</h5>
+  <div>{{ selectedComplaint.description }}</div>
+  <div class="actions">
+    <a (click)="replyComplaint()">Reply</a>
+    <a (click)="approveComplaint()">Approve</a>
+    <a (click)="rejectComplaint()">Decline</a>
+    <a (click)="approveComplaint()">Reply</a>
+    <a (click)="rejectComplaint()">Mark as resolved</a>
+    <a (click)="approveComplaint()">Unresolved</a>
+  </div>
+  <div class="reply-form">
+    <ngx-wysisyg-input></ngx-wysisyg-input>
+    <div style="display: flex">
+      <button nbButton status="primary">Send</button>
+      <div class="space-2"></div>
+      <button outline nbButton status="primary">Cancel</button>
+    </div>
+  </div>
+</ng-template>

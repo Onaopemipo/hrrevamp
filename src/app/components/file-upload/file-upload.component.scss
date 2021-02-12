@@ -1,0 +1,33 @@
+:host{
+	height: unset;
+}
+
+.drop{
+	width: 100%;
+	cursor: pointer;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+  z-index: -1;
+  position: absolute;
+}
+
+input{
+	display: none;
+}
+
+.filebutton {
+  left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+padding: 5px;
+background: rgba(72, 71, 224, 0.05);
+border: 1px dashed rgba(0, 59, 119, 0.2);
+box-sizing: border-box;
+border-radius: 4px;
+}
