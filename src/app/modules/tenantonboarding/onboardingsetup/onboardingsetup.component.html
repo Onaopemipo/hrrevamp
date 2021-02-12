@@ -1,7 +1,23 @@
 <div class="container">
    <div class="row">
+    <div class="col-md-12" *ngIf="beginSetup" style="margin-top:10rem;background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 25px #9E9EA61A;
+    border-radius: 4px;display: flex;align-items: center;text-align: center;flex-direction: column;width: 100%;padding:10rem">
+<div style="flex-direction: row;justify-content: space-between;">
+<img src="assets/icons/fire-cracker.jpg" style="width: 3rem;"> &nbsp;
+<span class="header4-bold">Welcome Onboard! Let’s help setup your account</span>
+</div>
+<div>
+  <p class="p-300">
+    Our system help balance creativity, usability and technology to ensure that the solution engages you and enable you to easily explore, optimize your process, evaluate and grow your company
+  </p>
+</div>
+<div style="align-items: center;">
+  <button type="button" style="text-transform: none;min-width: 144px;"  nbButton status="primary" (click)="startSetup()">Begin Setup</button>
+</div>
 
-    <div class="col-md-12">
+    </div>
+    <div class="col-md-12" *ngIf="!beginSetup">
         <div style="padding: 15px;"></div>
         <ngx-componentsheader [pageName]="title"></ngx-componentsheader>
         <div style="padding: 15px;"></div>
@@ -112,13 +128,13 @@
         opacity: 1;">
             <h6 class="header6-medium">SmartAce Basic Online Plan A</h6>
             <p class="p-normal">Maximum Employee: 10</p>
-            <p class="p-normal"><nb-icon icon="info" status="primary"></nb-icon>&nbsp;Minimal Access To The System Modules</p>
+            <p class="p-normal"><nb-icon icon="info" status="primary" style="cursor: pointer !important;" (click)="showSubscribedModule()"></nb-icon>&nbsp;Minimal Access To The System Modules</p>
             <div class="row">
                 <div class="col-md-8">
                     <h5 class="header6-bold">#3,000</h5>
                 </div>
                 <div class="col-md-4">
-                    <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtosubcription()">Subscribe</button>
+                    <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling()">Subscribe</button>
                 </div>
             </div>
            
@@ -127,19 +143,153 @@
         </div>
         </nb-tab>
         <nb-tab tabTitle="Smartace Lite">
-          <span>Content #2</span>
+          <div style="padding-top:1.5rem">
+
+            <div style="padding: 1rem; box-shadow: 0px 3px 6px #CCCCCC33;
+            border: 0.5px solid #CCCCCC;
+            border-radius: 4px;
+            opacity: 1;">
+                <h6 class="header6-medium">SmartAce Lite Online Plan A</h6>
+                <p class="p-normal">Maximum Employee: 10</p>
+                <p class="p-normal"><nb-icon icon="info" status="primary" style="cursor: pointer !important;" (click)="showSubscribedModule()"></nb-icon>&nbsp;Minimal Access To The System Modules</p>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="header6-bold">#3,000</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling()">Subscribe</button>
+                    </div>
+                </div>
+               
+            </div>
+    
+            </div>
         </nb-tab>
  
       </nb-tabset>
 </div>
    </div>
 
+      <!--Billing Panel ////////////////////////////////-->
+<div class="fmContainer" *ngSwitchCase="'billingPanel'">
+  <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+ <p class="listsubheader">Your current subscription details are below</p>
+ </div>
+ <div class="noteClass" style="display: flex; margin-top: 2rem;background: rgb(72,71,224,10%) 0% 0% no-repeat padding-box;">
+  <div style="width: 100%;color: #080730;padding:1rem;"><small><b>Note:</b> &nbsp;You can always upgrade your current plan to higher ones of your choice as the case may be</small></div>
+</div>
+<div style="padding-top:3rem;">
+<div class="row">
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="label listsubheader">Subscription Type</label>
+    <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Subscription Type">
+  </div>
+</div>
+<div class="col-sm-6"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="label listsubheader">Billing Type</label>
+        <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Billing Type">
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="label listsubheader">Next Billing Date</label>
+        <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Next Billing Date">
+      </div>
+    </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="label listsubheader">Amount</label>
+            <app-amount-input></app-amount-input>
+          
+          </div>
+        </div>
+        <div class="col-sm-6"></div>
+          </div>
+          <div class="row">          
+            <div class="col-sm-12">
+              <button  angular4-paystack
+              [email]="'test@test.com'"
+              [amount]="500 * 100"
+              [ref]="reference"
+              (paymentInit)="paymentInit()"
+              (close)="paymentCancel()"
+              (callback)="paymentDone()"
+              [channels]="['bank','card'] "
+              style="width: 144px;" type="submit" nbButton status="primary" (click)="proceedtomodules()">Pay</button>
+            </div>
+         </div>
+</div>
+</div>
 
    <!--Module Panel ////////////////////////////////-->
 <div class="fmContainer" *ngSwitchCase="'modulesPanel'">
     <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
-   <p>Select the modules you want to grant your users access to.</p>
+   <p class="listsubheader">Select the modules you want to grant your users access to.</p>
    </div>
+   <div style="padding-top:2rem;">
+    <nb-checkbox [value]="true">Select all</nb-checkbox>
+    <div style="padding-top:1.5rem;">
+      <div class="row">
+        <div class="col-xxxl-4 col-md-4" >
+          <nb-card>
+           <div style="padding: 10px;display: flex;">
+          <div style="display: flex;flex-direction: column;flex: auto;">
+            <img src="assets/icons/PayrollModule.jpg" style="width:3rem;">
+            <span class="smalltext">Payroll Module</span>
+          </div>
+          <div style="justify-content: end;">
+            <nb-icon icon="checkmark-circle-2" status="primary" ></nb-icon>
+          </div>
+          </div>
+          </nb-card>
+        </div>
+
+        <div class="col-xxxl-4 col-md-4" >
+          <nb-card>
+           <div style="padding: 10px;display: flex;">
+          <div style="display: flex;flex-direction: column;flex: auto;">
+            <img src="assets/icons/PayrollModule.jpg" style="width:3rem;">
+            <span class="smalltext">Payroll Module</span>
+          </div>
+          <div style="justify-content: end;">
+            <nb-icon icon="checkmark-circle-2" status="primary" ></nb-icon>
+          </div>
+          </div>
+          </nb-card>
+        </div>
+
+        <div class="col-xxxl-4 col-md-4" >
+          <nb-card>
+           <div style="padding: 10px;display: flex;">
+          <div style="display: flex;flex-direction: column;flex: auto;">
+            <img src="assets/icons/PayrollModule.jpg" style="width:3rem;">
+            <span class="smalltext">Payroll Module</span>
+          </div>
+          <div style="justify-content: end;">
+            <nb-icon icon="checkmark-circle-2" status="primary" ></nb-icon>
+          </div>
+          </div>
+          </nb-card>
+        </div>
+    
+      </div>
+      <div style="padding-top:1.5rem;">
+      <div class="row">    
+        <div class="col-sm-12">
+            <button style="text-transform: none !important;width: 144px;" type="button" (click)="openSuccessalert()" nbButton status="primary" >Proceed</button>
+        </div>
+    </div>
+    </div>
+    </div>
+
+  </div>
 </div>
 
             </div>
@@ -160,7 +310,7 @@
                             </div>
 
                             <div style="display:flex;padding-bottom: 35px;" >
-                                <div [ngClass]="{'q-connector': selectedPanel == 'subscriptionPanel','q-connector-inactive': selectedPanel != 'subscriptionPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                                <div [ngClass]="selectedPanel == 'subscriptionPanel'?'q-connector':(selectedPanel == 'billingPanel'? 'q-connector':'q-connector-inactive')"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
                                
                                 </div>
                                   <div  (click)="gotoPanel('subscriptionPanel','Choose Package')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
@@ -172,7 +322,8 @@
                                
                                 </div>
                                   <div (click)="gotoPanel('modulesPanel','Activated Module')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
-                                Module Selection
+                                Module Selection 
+                                
                                   </div>
                             </div>
                          
@@ -189,3 +340,31 @@
    
    </div>
 </div>
+
+<ngx-side-modal [(show)]="showModulesModal" [position]="modalPosition">
+  <div modal-header>Modules</div>
+  <div modal-body>
+    <div style="display: flex;flex-direction: column; width: 100%;">
+      <div class="p-normal" style="display: flex;padding: 10px;">
+        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
+        <div style="padding: 1.5px 0 0 20px;">Employee Management</div>
+      </div>
+      <div class="p-normal" style="display: flex;padding: 10px;">
+        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
+        <div style="padding: 1.5px 0 0 20px;">Leave Management</div>
+      </div>
+      <div class="p-normal" style="display: flex;padding: 10px;">
+        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
+        <div style="padding: 1.5px 0 0 20px;">Query Management</div>
+      </div>
+      <div class="p-normal" style="display: flex;padding: 10px;">
+        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
+        <div style="padding: 1.5px 0 0 20px;">Expense Management</div>
+      </div>
+    </div>
+  </div>
+  <div modal-actions>
+  
+  </div>
+</ngx-side-modal>
+

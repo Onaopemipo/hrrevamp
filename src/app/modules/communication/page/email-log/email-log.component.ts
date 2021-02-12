@@ -55,7 +55,7 @@ export class EmailLogComponent implements OnInit {
   }
 
   showCreateModel = false;
-  pageActionClicked(actionName) {
+  pageActionClicked(page) {
     this.showCreateModel = true;
   }
 

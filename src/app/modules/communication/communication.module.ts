@@ -8,6 +8,9 @@ import { SettingsComponent } from './page/settings/settings.component';
 import { ApiService } from './api.service';
 import { MailDetailComponent } from './page/mail-detail/mail-detail.component';
 
+import {
+  NbIconModule,
+} from '@nebular/theme';
 
 
 @NgModule({
@@ -16,6 +19,7 @@ import { MailDetailComponent } from './page/mail-detail/mail-detail.component';
     CommonModule,
     ComponentsModule,
     CommunicationRoutingModule,
+    NbIconModule
   ],
   providers: [
     ApiService
