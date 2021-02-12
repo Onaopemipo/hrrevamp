@@ -25,7 +25,8 @@ import { ApplicantsDashboardComponent } from './applicants-dashboard/applicants-
 
 
 @NgModule({
-  declarations: [RecruitmentComponent, ApplicantssigninComponent, ApplicantssignupComponent, PasswordResetComponent, NewPasswordComponent, ApplicantsDashboardComponent],
+  declarations: [RecruitmentComponent, ApplicantssigninComponent, ApplicantssignupComponent,
+    PasswordResetComponent, NewPasswordComponent, ApplicantsDashboardComponent],
   imports: [
     ThemeModule,
     CommonModule,

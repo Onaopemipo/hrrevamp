@@ -13,12 +13,12 @@ export class EmailOTPVerifyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  changeOption(){
+  changeOption() {
     this.verifyOption = !this.verifyOption;
   }
 
-  resendOtp(){
-    console.log("A new OTP has been sent")
+  resendOtp() {
+    // console.log('A new OTP has been sent');
   }
 
 }
