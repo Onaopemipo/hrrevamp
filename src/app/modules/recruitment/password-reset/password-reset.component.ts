@@ -12,7 +12,7 @@ export class PasswordResetComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  resetOption(){
-  this.resetType = !this.resetType
+  resetOption() {
+  this.resetType = !this.resetType;
   }
 }
