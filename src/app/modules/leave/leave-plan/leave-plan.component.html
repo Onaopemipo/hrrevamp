@@ -1,0 +1,35 @@
+<p>leave-plan works!</p>
+<ngx-componentsheader pageName='Leave Plan' [requiredButton]="topActionButtons"></ngx-componentsheader>
+
+<nb-tabset>
+    <nb-tab tabTitle="AAA"></nb-tab>
+    <nb-tab tabTitle="BBB"></nb-tab>
+    <nb-tab tabTitle="CCC"></nb-tab>
+</nb-tabset>
+<ngx-tableheader></ngx-tableheader>
+<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+{{hel}}
+<select [(ngModel)]="selectedOption">
+    <option value="1">First Name</option>
+    <option value="2">Last Name</option>
+</select>
+<div class="form-group" *ngIf="showFirstName">
+    Firstname
+    <input [(ngModel)]="value">
+</div>
+<div class="form-group" *ngIf="!showFirstName">
+    lastname
+    <input [(ngModel)]="value">
+</div>
+<button (click)="onClick()">Submit</button>
+{{b}}
+<div class="form-group">
+    Firstname
+    <input [(ngModel)]="firstName">
+</div>
+<div class="form-group">
+    lastname
+    <input [(ngModel)]="lastName">
+</div>
+
+{{fullName}}
