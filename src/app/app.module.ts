@@ -15,11 +15,12 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DecimalPipe } from '@angular/common';
 import {
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
@@ -42,7 +43,8 @@ import {
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
-  NbLayoutModule
+  NbLayoutModule,
+  
 
 } from '@nebular/theme';
 
@@ -61,11 +63,16 @@ import { AuthGuardService } from './_services/auth-guard.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
+import { InputvalidationService } from './_services/inputvalidation.service';
+
+
+
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -90,7 +97,7 @@ FullCalendarModule.registerPlugins([
     //   messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     // }),
     NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
+    // NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
@@ -125,6 +132,7 @@ FullCalendarModule.registerPlugins([
     NbSpinnerModule,
     NbListModule,
     NbLayoutModule,
+    NgxChartsModule,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -133,6 +141,9 @@ FullCalendarModule.registerPlugins([
     AuthGuardService,
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    InputvalidationService,
+    
+    DecimalPipe
   ],
 })
 export class AppModule {

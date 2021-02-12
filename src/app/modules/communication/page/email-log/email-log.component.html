@@ -1,4 +1,9 @@
-<ngx-componentsheader pageName="Email Log" [requiredButton]="rbutton" (buttonClick)="pageActionClicked($event)">
+<ngx-componentsheader pageName="Email Log" >
+    <div headerButton>
+        <button (click)="pageActionClicked()"   nbButton status="primary" >
+            <nb-icon  icon="plus"></nb-icon>&nbsp;Create new
+        </button>
+    </div>
 </ngx-componentsheader>
 <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="DRAFT" [tabId]="TABS.DRAFT">

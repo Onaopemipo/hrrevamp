@@ -17,7 +17,7 @@ const routes: Routes = [
         component: EmployeeeventsComponent
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
+      { path: '**', redirectTo: 'dashboard' },
     ]
   },
 

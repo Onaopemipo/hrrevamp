@@ -6,7 +6,13 @@ import { CommunicationRoutingModule } from './communication-routing.module';
 import { TemplatesComponent } from './page/templates/templates.component';
 import { SettingsComponent } from './page/settings/settings.component';
 import { ApiService } from './api.service';
-
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbIconModule,
+  NbInputModule,
+} from '@nebular/theme';
 
 
 @NgModule({
@@ -15,6 +21,7 @@ import { ApiService } from './api.service';
     CommonModule,
     ComponentsModule,
     CommunicationRoutingModule,
+    NbIconModule
   ],
   providers: [
     ApiService

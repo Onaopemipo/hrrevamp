@@ -1,7 +1,3 @@
-
-import { RadioButtonComponent } from './radio-button/radio-button.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
@@ -10,11 +6,14 @@ import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
 import Flow from '@flowjs/flow.js';
 
+import { DecimalPipe } from '@angular/common';
+
+
 import {
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
@@ -40,6 +39,8 @@ import {
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
+  ɵa,
+  NbMenuService,
 } from '@nebular/theme';
 
 import { StatusComponent } from './status/status.component';
@@ -51,7 +52,11 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+import { StatusCardComponent } from './status-card/status-card.component';
+import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
 
 @NgModule({
   declarations: [
@@ -62,19 +67,19 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
-
-    FileUploadComponent,
-    RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    AmountInputComponent,
+    StatusCardComponent,
+    MyMenuComponent,
+    MyMenuItemComponent,
   ],
   imports: [
-    FullCalendarModule,
     FormsModule,
     CommonModule,
     NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
+    // NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
@@ -85,7 +90,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     // CoreModule.forRoot(),
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
+    // NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
@@ -117,13 +122,17 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbFormFieldModule,
     NbDatepickerModule,
     NgxFlowModule,
+    // NbMenuModule,
   ],
   providers: [
     // MaxStringLengthPipe
     {
       provide: FlowInjectionToken,
       useValue: Flow,
-    }
+    },
+    DecimalPipe,
+    ɵa,
+    NbMenuService,
   ],
   exports: [
     ComponentsheaderComponent,
@@ -132,14 +141,15 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     MaxStringLengthPipe,
     WysisygInputComponent,
     SideModalComponent,
-    FullCalendarComponent,
-    TableheaderComponent,
     TablecomponentComponent,
-    FileUploadComponent,
-    RadioButtonComponent,
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    AmountInputComponent,
+    StatusCardComponent,
+    MyMenuComponent,
+    MyMenuItemComponent,
+    // NbMenuModule,
   ],
 })
 export class ComponentsModule { }
