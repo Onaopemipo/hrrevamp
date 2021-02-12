@@ -1,0 +1,8 @@
+<div class="center">
+  <h5 style="text-align: center;">{{pageHeader}}</h5>
+  <p style="text-align: center;">{{pageDescription}}</p>
+
+  <div *ngIf="buttonValue" class="col text-center">
+    <button type="submit" class="btn my-button btn-md" (click)="buttonClick.emit()">{{buttonValue}}</button>
+  </div>
+</div>
