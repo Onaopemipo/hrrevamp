@@ -18,11 +18,13 @@ const routes: Routes = [{
     },
     {
       path: 'training',
-      loadChildren: () => import('../modules/training/training.module').then(m => m.TrainingModule)
+      loadChildren: () => import('../modules/training/training.module')
+      .then(m => m.TrainingModule)
     },
     {
       path: 'self-service',
-      loadChildren: () => import('../modules/self-service/self-service.module').then( m => m.SelfServiceModule )
+      loadChildren: () => import('../modules/self-service/self-service.module')
+      .then( m => m.SelfServiceModule )
     },
     {
       path: 'communications',
@@ -34,6 +36,12 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/leave/leave.module')
         .then(m => m.LeaveModule)
     },
+
+    // {
+    //   path: 'recruitment',
+    //   loadChildren: () => import('../modules/recruitment/recruitment.module')
+    //   .then(m => m.RecruitmentModule)
+    // },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

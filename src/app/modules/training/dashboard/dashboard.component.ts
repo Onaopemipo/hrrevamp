@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-trainingReport: string = '';
+trainingReport: string = 'ee';
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
 
 }
