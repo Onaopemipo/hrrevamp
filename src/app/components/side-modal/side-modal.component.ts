@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./side-modal.component.scss']
 })
 export class SideModalComponent implements OnInit {
-
+  @Input() position = "";
   @Input() set show(val: boolean) {
     this.show_modal = val;
   }
