@@ -1,0 +1,77 @@
+  <section *ngIf="verifyOption" id="cover" class="min-vh-100">
+    <div id="cover-caption">
+        <div class="container">
+            <!-- <div class="row text-white"> -->
+                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                  <div style="display: flexbox; flex-direction: row; align-items: center;">
+                    <span class="header-label">Verify your account</span>
+                    <span class="subheader-label">A verification code was sent to tboy****@gmail.com. Enter the code to continue.</span>
+                  </div>
+                  <div style="padding: 15px;"></div>
+                    <div class="px-2">
+                      <form>
+                        <div class="form-group">
+                          <!-- <label for="password">Enter 6 Digit Password</label> -->
+                          <div class="passcode-wrapper">
+                            <input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                            <input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                            <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                            <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+                            <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(5)">
+                            <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <button type="button" routerLink="/passwordreset" nbButton fullWidth status="primary">Continue</button>
+                <div style="padding: 5px;"></div>
+                <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a href="javascript:void(0)" (click)="resendOtp()" style="font-weight: 700;">Resend OTP in 20s</a></p>
+                <div style="padding: 5px;"></div>
+                <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a href="javascript:void(0)" (click)="changeOption()" style="font-weight: 700;">Use my phone number instead</a></p>
+              </div>
+              </div>
+                <!-- </div> -->
+            </div>
+        <!-- </div>
+    </div> -->
+</section>
+
+
+<section *ngIf="verifyOption == false" id="cover" class="min-vh-100">
+  <div id="cover-caption">
+      <div class="container">
+          <!-- <div class="row text-white"> -->
+              <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                <div style="display: flexbox; flex-direction: row; align-items: center;">
+                  <span class="header-label">Verify your account</span>
+                  <span class="subheader-label">A verification code was sent to 0805647****</span>
+                   <span class="subheader-label">Enter the code to continue.</span>
+                </div>
+                <div style="padding: 15px;"></div>
+                  <div class="px-2">
+                    <form>
+                      <div class="form-group">
+                        <!-- <label for="password">Enter 6 Digit Password</label> -->
+                        <div class="passcode-wrapper">
+                          <input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                          <input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                          <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                          <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+                          <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(5)">
+                          <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <button type="button" routerLink="/passwordreset" nbButton fullWidth status="primary">Continue</button>
+              <div style="padding: 5px;"></div>
+              <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a href="javascript:void(0)" (click)="resendOtp()" style="font-weight: 700;">Resend OTP in 20s</a></p>
+              <div style="padding: 5px;"></div>
+              <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a href="javascript:void(0)" (click)="changeOption()" style="font-weight: 700;">Use my email instead</a></p>
+            </div>
+            </div>
+              <!-- </div> -->
+          </div>
+      <!-- </div>
+  </div> -->
+</section>

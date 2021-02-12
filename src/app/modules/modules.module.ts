@@ -10,6 +10,7 @@ import { ThemeModule } from '../@theme/theme.module';
 
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 
+
 @NgModule({
   declarations: [ModulesComponent, DashboardComponent],
   imports: [

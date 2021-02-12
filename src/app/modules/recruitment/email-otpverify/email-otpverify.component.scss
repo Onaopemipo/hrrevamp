@@ -1,0 +1,144 @@
+// Container-fluid Styling only Begin ===
+// .container-fluid {
+// 	.row {
+// 		align-items: center;
+// 		width: 100vw;
+// 		height: 100vh;
+// 	}
+// }
+// Container-fluid Styling only End =====
+.mycontainer {
+
+}
+
+.verify {
+
+}
+
+// =====
+// Passcode-wrapper Styling only Begin ==
+.passcode-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: auto;
+	margin: 0 auto;
+	input {
+		width: 50px;
+		height: 50px;
+		padding: 0;
+		margin-right: 5px;
+		text-align: center;
+		border: 1px solid gray;
+		border-radius: 5px;
+		&:last-child {
+			margin-right: 0;
+		}
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			appearance: none;
+			margin: 0;
+		}
+		&:focus,
+		&.focus {
+			border-color: green;
+			outline: none;
+			box-shadow: none;
+		}
+	}
+}
+
+.limiter {
+  width: 100%;
+  margin: 0 auto
+}
+
+.header-label {
+display: block;
+font-size: 32px;
+font-weight: 700;
+color: #080730;
+line-height: 38px;
+text-align: center;
+}
+
+.subheader-label {
+display: block;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+color: #343A40;
+}
+
+.container-login {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1
+}
+
+nb-checkbox {
+  margin-bottom: 1rem;
+}
+
+.form-inline [fullWidth] {
+  flex: 1;
+}
+
+.form-inline > * {
+  margin: 0 1.5rem 1.5rem 0;
+}
+
+nb-card.inline-form-card nb-card-body {
+  padding-bottom: 0;
+}
+
+label{
+  color: #080730 !important;
+  font-size: 1rem !important;
+  font-style: normal !important;
+
+}
+
+// Passcode-wrapper Styling only End ====
+
+#cover {
+  background-size: cover;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#cover-caption {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* only used for background overlay not needed for centering */
+form:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  // background-color: rgba(0,0,0,0.3);
+  z-index: -1;
+  border-radius: 10px;
+}

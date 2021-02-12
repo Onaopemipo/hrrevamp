@@ -1,3 +1,5 @@
+import { NgxEchartsModule } from 'ngx-echarts';
+import { DefaultContentComponent } from './default-content/default-content.component';
 
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -9,6 +11,9 @@ import { CoreModule } from '../@core/core.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
 import Flow from '@flowjs/flow.js';
+// import { EchartsPieComponent } from '../../../src/app/pages/dashboard/';
+// import { EchartsBarComponent } from './echarts/echarts-bar.component';
+
 
 import {
   NbChatModule,
@@ -52,6 +57,8 @@ import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   declarations: [
@@ -62,12 +69,12 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
-
     FileUploadComponent,
     RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    DefaultContentComponent
   ],
   imports: [
     FullCalendarModule,
@@ -117,6 +124,11 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbFormFieldModule,
     NbDatepickerModule,
     NgxFlowModule,
+    NgxEchartsModule,
+    NbIconModule,
+    NbFormFieldModule,
+    NbCardModule
+    // NgxChartsModule
   ],
   providers: [
     // MaxStringLengthPipe
@@ -140,6 +152,11 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    DefaultContentComponent,
+    CommonModule,
+    FormsModule,
+    NbCardModule,
+    NgxEchartsModule
   ],
 })
 export class ComponentsModule { }
