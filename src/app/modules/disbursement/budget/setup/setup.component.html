@@ -3,49 +3,30 @@
   [requiredButton]="[]"
 ></ngx-componentsheader>
 <div class="main-page-container">
-    <div class="form-instruction">Set up your overall budget</div>
+  <div class="my-form">
+<ng-template [ngIf]="page === 1">
+    <h4>Set up your overall budget</h4>
   <div class="row">
     <div class="col-sm-6 linear-form">
       <div class="form-group">
-        <label>Username</label>
-        <input class="form-control" />
+        <label>Financial Year</label>
+        
       </div>
       <div class="form-group">
-        <label>Host</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Port</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Default mail address</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>SSL</label>
-        <input class="form-control" type="checkbox" />
-      </div>
-      <div class="form-group">
-        <label>Files</label>
-        <ngx-file-upload class="form-control"></ngx-file-upload>
-      </div>
-      <div class="form-group">
-        <label>Allow sending of mails</label>
-        <input type="checkbox" />
+        <label>Total amount</label>
+        
       </div>
       <div class="form-group" style="margin-top: 20px">
         <label></label>
-        <button nbButton status="primary">Save and Continue</button>
+        <button nbButton status="primary" (click)="gotoBudgetItems()">Save and Continue</button>
       </div>
     </div>
   </div>
+</ng-template>
+  <ng-template [ngIf]="page === 2">
 
-  <div class="form-instruction">Add a budget item</div>
+
+  <h4>Add a budget item</h4>
   <div class="row">
     <div class="col-sm-6 linear-form">
       <div class="form-group">
@@ -80,10 +61,21 @@
       <div class="form-group" style="margin-top: 20px">
         <label></label>
         <div>
-            <button nbButton status="primary" outline>Cancel</button>
-            <button nbButton status="primary" outline>Save</button>
+            <button nbButton status="primary" class="border-none" outline>
+              <nb-icon icon="plus-outline"></nb-icon>
+              Add department
+            </button>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top: 20px">
+        <label></label>
+        <div>
+            <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
+            <button nbButton status="primary">Save</button>
         </div>
       </div>
     </div>
+  </div>
+  </ng-template>
   </div>
 </div>

@@ -53,6 +53,7 @@ import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { DateRangeComponent } from './date-range/date-range.component';
+import { DefaultContentComponent } from './default-content/default-content.component';
 
 @NgModule({
   declarations: [
@@ -63,13 +64,13 @@ import { DateRangeComponent } from './date-range/date-range.component';
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
-
     FileUploadComponent,
     RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
     DateRangeComponent,
+    DefaultContentComponent,
   ],
   imports: [
     FullCalendarModule,
@@ -143,6 +144,7 @@ import { DateRangeComponent } from './date-range/date-range.component';
     EmployeeMasterSearchComponent,
     FileUploadComponent,
     NbIconModule,
+    DefaultContentComponent,
   ],
 })
 export class ComponentsModule { }

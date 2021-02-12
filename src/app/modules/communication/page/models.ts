@@ -1,4 +1,5 @@
-import { IStatus } from "app/components/status/models";
+import { IStatus, MyColor } from "app/components/status/models";
+import { TABS } from "./email-log/email-log.component";
 
 export interface IEmail {
     id: number;
@@ -49,11 +50,16 @@ export class Email implements IStatus {
         return 'https://via.placeholder.com/300.png/09f/fff%20C/O%20https://placeholder.com/';
     }
 
-    getStatusLabel(){
-        return 'In progress';
+    getStatusLabel() {
+        if (this.iObj.status_id === TABS.DRAFT) return 'Drafted';
+        if (this.iObj.status_id === TABS.SENT) return 'Sent';
+        if (this.iObj.status_id === TABS.TRASH) return 'Trashed';
     }
 
-    getStatusColor(){
-        return 'blue';
+    getStatusColor() {
+        if (this.iObj.status_id === 1) return new MyColor(242, 153, 74);
+        if (this.iObj.status_id === 2) return new MyColor(0, 153, 74);
+        if (this.iObj.status_id === 3) return new MyColor(242, 0, 74);
+        return new MyColor(242, 0, 74);
     }
 }

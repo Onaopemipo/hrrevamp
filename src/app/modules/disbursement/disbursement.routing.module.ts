@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BudgetListComponent } from './budget/budget-list/budget-list.component';
 import { SetupComponent } from './budget/setup/setup.component';
 import { DisbursementComponent } from './disbursement.component';
+import { CreateDisbursementComponent } from './disbursement/create-disbursement/create-disbursement.component';
+import { DisbursementHistoryComponent } from './disbursement/disbursement-history/disbursement-history.component';
+import { DisbursementrequestsComponent } from './disbursement/disbursementrequests/disbursementrequests.component';
 // import { SelfServiceComponent } from './self-service.component';
 const routes: Routes = [
   {
@@ -9,15 +13,25 @@ const routes: Routes = [
     component: DisbursementComponent,
     children: [
       {
-        path: 'budget-setup',
+        path: 'budget',
+        component: BudgetListComponent,
+      },
+      {
+        path: 'budget/setup',
         component: SetupComponent,
       },
-    //   {
-    //     path: 'employeeevents',
-    //     component: EmployeeeventsComponent
-    //   },
-    //   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
+      {
+        path: 'disbursement/create',
+        component: CreateDisbursementComponent,
+      },
+      {
+        path: 'disbursement/requests',
+        component: DisbursementrequestsComponent,
+      },
+      {
+        path: 'disbursement/history',
+        component: DisbursementHistoryComponent,
+      },
     ]
   },
 

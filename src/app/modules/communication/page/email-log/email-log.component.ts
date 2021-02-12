@@ -7,7 +7,7 @@ enum TOP_ACTIONS {
   createNew
 }
 
-enum TABS {
+export enum TABS {
   SENT, TRASH, DRAFT
 }
 
@@ -61,7 +61,7 @@ export class EmailLogComponent implements OnInit {
 
   selectedTab = TABS.DRAFT;
   selectTab(tab) {
-    this.selectedTab = tab;
+    this.selectedTab = tab.tabId;
     this.loadData();
   }
 

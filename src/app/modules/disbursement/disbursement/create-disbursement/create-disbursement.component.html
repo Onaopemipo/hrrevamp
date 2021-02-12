@@ -1,0 +1,132 @@
+<ngx-componentsheader
+  pageName="Budget Setup"
+  [requiredButton]="[]"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="Single Disbursement" [tabId]="TABS.SINGLE">
+      <!-- Tab content 1 -->
+      <div class="my-form">
+        <div class="row">
+          <div class="col-sm-6 linear-form">
+            <div class="form-group">
+              <label>Channel</label>
+              <select
+                class="form-control"
+                placeholder="Select Channel"
+              ></select>
+            </div>
+            <div class="form-group">
+              <label>Disburse for</label>
+              <ngx-radio-button
+                [items]="['Budget Item', 'Project']"
+              ></ngx-radio-button>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Budget Item</label>
+              <select class="form-control" placeholder="Select"></select>
+            </div>
+            <div class="form-group">
+              <label>Recipient</label>
+              <ngx-radio-button
+                [items]="['New account', 'Existing Beneficiary', 'Employee']"
+              ></ngx-radio-button>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Beneficiary</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Select Employee</label>
+              <ngx-employee-master-search></ngx-employee-master-search>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Bank Name</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Account Number</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Account Name</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Amount</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Scheduled Date</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Description/purpose</label>
+              <textarea></textarea>
+            </div>
+            <div>
+              <label></label>
+              <!-- <inline-checkbox-group></inline-checkbox-group> -->
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Frequency</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Start Date</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>End Date</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 20px">
+          <label></label>
+          <div>
+            <button nbButton status="primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </nb-tab>
+    <nb-tab tabTitle="Bulk Disbursement" [tabId]="TABS.BULK">
+      <!-- Tab content 2 -->
+      <div class="my-form">
+        <div class="row">
+          <div class="col-sm-6 linear-form">
+            <div class="form-group">
+              <label>Channel</label>
+              <select
+                class="form-control"
+                placeholder="Select Channel"
+              ></select>
+            </div>
+            <div class="form-group">
+              <label>Beneficiary list</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Scheduled Date</label>
+              <select class="form-control" placeholder="Select Bank"></select>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label>Description/purpose</label>
+              <textarea></textarea>
+            </div>
+            <div>
+              <label></label>
+              <!-- <inline-checkbox-group></inline-checkbox-group> -->
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label></label>
+              <div>
+                <button nbButton status="primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-tab>
+  </nb-tabset>
+</div>

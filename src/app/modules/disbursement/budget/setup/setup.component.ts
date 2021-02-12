@@ -12,4 +12,10 @@ export class SetupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  page = 1;
+
+  gotoBudgetItems(){
+    this.page = 2;
+  }
+
 }
