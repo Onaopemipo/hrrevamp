@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IStatus } from './models';
 
 @Component({
   selector: 'ngx-status',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
+  @Input() data: IStatus;
 
   constructor() { }
 

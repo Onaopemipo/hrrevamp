@@ -11,3 +11,16 @@ th{
 td{
     text-align: center;
 }
+td, th{
+    text-align: left;
+}
+
+.paginator{
+
+}
+
+.paginator > span{
+    padding: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}

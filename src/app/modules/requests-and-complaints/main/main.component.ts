@@ -62,6 +62,8 @@ export class MainComponent implements OnInit {
     }
     if (this.pageNo === 1 ) {
       this.loading = true;
+      this.complaints = [];
+      this.selectedComplaint = null;
     }
     observable.subscribe(data => {
       if (this.pageNo === 1) {
@@ -80,11 +82,12 @@ export class MainComponent implements OnInit {
   selectTab(tab: NbTabComponent) {
     this.selectedTab = tab.tabId;
     this.pageNo = 1;
-    if (this.selectedTab === TABS.REQUEST) {
-      this.loadRequests();
-    } else {
-      this.loadComplaints();
-    }
+    this.loadData();
+    // if (this.selectedTab === TABS.REQUEST) {
+    //   this.loadRequests();
+    // } else {
+    //   this.loadComplaints();
+    // }
   }
 
   get pagetitle() {

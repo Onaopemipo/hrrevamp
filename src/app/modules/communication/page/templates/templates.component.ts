@@ -16,7 +16,7 @@ export class TemplatesComponent implements OnInit {
   }
 
   rbutton = [
-    { name: TOP_ACTIONS.createNew, label: 'Create new', icon: 'plus', outline: false },
+    { name: TOP_ACTIONS.createNew, label: 'Create template', icon: 'plus', outline: false },
     // { name: 'Add New',icon: 'plus',outline: false },
   ];
 

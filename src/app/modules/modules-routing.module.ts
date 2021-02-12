@@ -32,6 +32,11 @@ const routes: Routes = [{
         .then(m => m.CommunicationModule)
     },
     {
+      path: 'disbursement',
+      loadChildren: () => import('../modules/disbursement/disbursement.module')
+        .then(m => m.DisbursementModule)
+    },
+    {
       path: 'leave',
       loadChildren: () => import('../modules/leave/leave.module')
         .then(m => m.LeaveModule)

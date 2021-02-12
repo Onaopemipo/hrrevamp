@@ -1,3 +1,14 @@
+import { S } from "@angular/cdk/keycodes";
+import { formatPercent } from "@angular/common";
+import { IStatus, MyColor } from "app/components/status/models";
+
+enum STATUS {
+    RESOLVED, IN_PROGRESS, UN_RESOLVED, CANCELLED, APPROVED, PENDING, DECLINED
+}
+
+export const STATUS_LIST = [STATUS.APPROVED, STATUS.CANCELLED, STATUS.DECLINED,
+    STATUS.IN_PROGRESS, STATUS.PENDING, STATUS.RESOLVED, STATUS.UN_RESOLVED];
+
 export interface IComplaint {
     id: number;
     title: string;
@@ -9,7 +20,7 @@ export interface IComplaint {
     referenceNo: number;
 }
 
-export class Complaint {
+export class Complaint implements IStatus{
     private iComplaint: IComplaint;
     constructor(iComplaint: IComplaint) {
         this.iComplaint = iComplaint;
@@ -44,5 +55,13 @@ export class Complaint {
 
     get status() {
         return this.iComplaint.status;
+    }
+
+    getStatusColor() {
+        return new MyColor(242, 153, 74);
+    }
+
+    getStatusLabel() {
+        return 'In progress';
     }
 }
