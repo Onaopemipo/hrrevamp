@@ -8,18 +8,7 @@ import  * as Chart from 'chart.js'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  pagetitle = 'Dashboard';
-  rbutton = [
-    { name: 'create_new', label: 'Create New', icon: '', outline: true },
-    { name: 'add_new', label: 'Add New', icon: 'plus', outline: false },
-
-
-  ];
   show_modal = false;
-
-
-
-
   single = [
     {
       name: 'Germany',
@@ -33,6 +22,14 @@ export class DashboardComponent implements OnInit {
       name: 'France',
       value: 7200000,
     },
+    {
+      name: 'Canada',
+      value: 820000,
+    },
+    {
+      name: 'Nigeria',
+      value: 7300000,
+    },
   ];
   colorScheme: any;
   barcolorScheme: any;
@@ -43,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   multi: any[];
 
-  view: any[] = [450, 250];
+  
 
   // options
   showXAxis = true;
@@ -51,12 +48,21 @@ export class DashboardComponent implements OnInit {
   gradient = false;
   showLegend = false;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Location';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
-showGridLines = true;
-barPadding = 130;
-  
+  yAxisLabel = 'Employee Count';
+  showGridLines = true;
+
+  //barChat
+  barPadding = 60;
+  view: any[] = [600, 300];
+
+
+  //for doughnot
+  doughnut = true;
+  showLabels = true;
+  explodeSlices = false;
+  doughView = [700, 280]
  
   constructor(private theme: NbThemeService) { 
     this.colorScheme = {
@@ -124,24 +130,6 @@ barPadding = 130;
       ],
     };
  
-
-    var myPieChart = new Chart(this.ctx.nativeElement, {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: [5, 6, 10],
-          backgroundColor: ['#2CD8C5', '#2E9CDA', '#FF90A4'],
-        }],
-        labels: [
-            'Red',
-            'Yellow',
-            'Blue'
-        ]
-    },
-      options: {
-        cutoutPercentage: 80
-    }
-  });
   }
   ngOnInit(): void {
   

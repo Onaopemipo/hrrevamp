@@ -82,8 +82,29 @@
         <nb-card>
   
             <nb-card-body>
-              <div style="display: flex;justify-content: center;height: 18rem;width: 100%;padding-top:30px">
-                <canvas width="100%"  #pieChart></canvas>
+        <div style="display: flex;flex-direction: row;">
+<div style="flex:auto">
+<span class="header6-bold">Distribution by Location</span>
+</div>
+<div>
+  <nb-select selected="1">
+    <nb-option value="1">This year</nb-option>
+    <nb-option value="2">Option 2</nb-option>
+  </nb-select>
+</div>
+        </div>
+              <div #doughContainer style="height: 100%;">
+                <ngx-charts-pie-chart
+                [view]="[doughContainer.offsetWidth, 300]"
+                [scheme]="colorScheme"
+                [results]="single"
+                [legend]="showLegend"
+                [explodeSlices]="explodeSlices"
+                [labels]="showLabels"
+                [doughnut]="doughnut"
+                [gradient]="gradient"
+                >
+                </ngx-charts-pie-chart>
               </div>
            
             </nb-card-body>
@@ -92,9 +113,21 @@
     <div class="col-xxxl-6 col-md-6" >
         <nb-card>         
             <nb-card-body>
-<div style="height: 18rem;width: 100%;">
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto">
+                <span class="header6-bold">Distribution by Department</span>
+                </div>
+                <div>
+                  <nb-select selected="1">
+                    <nb-option value="1">This year</nb-option>
+                    <nb-option value="2">Option 2</nb-option>
+                  </nb-select>
+                </div>
+                        </div>
+<div style="height: 18.75rem;width: 100%;">
   <div echarts [options]="options" class="echart" style="height: 100%;"></div>
 </div>
+
                
             </nb-card-body>
           </nb-card>
@@ -107,22 +140,36 @@
         <nb-card>
   
             <nb-card-body>
-              <ngx-charts-bar-vertical 
-              [view]="view" 
-              [scheme]="barcolorScheme" 
-              [results]="single" 
-              [gradient]="gradient"
-              [xAxis]="showXAxis" 
-              [yAxis]="showYAxis" 
-              [legend]="showLegend" 
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel" 
-              [xAxisLabel]="xAxisLabel" 
-              [yAxisLabel]="yAxisLabel"
-              [showGridLines]="showGridLines"
-              [barPadding]="barPadding"
-          >
-            </ngx-charts-bar-vertical>
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto">
+                <span class="header6-bold">Distribution by Location</span>
+                </div>
+                <div>
+                  <nb-select selected="1">
+                    <nb-option value="1">This year</nb-option>
+                    <nb-option value="2">Option 2</nb-option>
+                  </nb-select>
+                </div>
+                        </div>
+              <div #barContainer style="height: 100%;">
+                <ngx-charts-bar-vertical 
+                [view]="[barContainer.offsetWidth, 300]" 
+                [scheme]="barcolorScheme" 
+                [results]="single" 
+                [gradient]="gradient"
+                [xAxis]="showXAxis" 
+                [yAxis]="showYAxis" 
+                [legend]="showLegend" 
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel" 
+                [xAxisLabel]="xAxisLabel" 
+                [yAxisLabel]="yAxisLabel"
+                [showGridLines]="showGridLines"
+                [barPadding]="barPadding"
+            >
+              </ngx-charts-bar-vertical>
+              </div>
+            
            
             </nb-card-body>
           </nb-card>

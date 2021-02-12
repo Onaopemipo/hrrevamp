@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ModulesRoutingModule } from './modules-routing.module';
 import { ModulesComponent } from './modules.component';
 
-import { NbLayoutModule ,NbCardModule,NbIconModule } from '@nebular/theme';
+import { NbLayoutModule ,NbCardModule,NbIconModule, NbSelectModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 
@@ -26,6 +26,7 @@ import { ComponentsModule } from 'app/components/components.module';
     NgxChartsModule,
     NgxEchartsModule,
     NbIconModule,
+    NbSelectModule
   ]
 })
 export class ModulesModule { }

@@ -60,7 +60,6 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { StatusCardComponent } from './status-card/status-card.component';
@@ -171,7 +170,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CommonModule,
     FormsModule,
     NbCardModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    TableheaderComponent
   ],
 })
 export class ComponentsModule { }
