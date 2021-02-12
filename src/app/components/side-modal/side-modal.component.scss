@@ -1,5 +1,12 @@
 .center{
     display: flex; flex-direction: column; justify-content: center;
+    height: max-content;
+    align-self: center;
+    padding: 0px;
+}
+
+.center>.header-space{
+    display: none;
 }
 
 .my-modal{

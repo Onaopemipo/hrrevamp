@@ -6,17 +6,15 @@ import { CommunicationRoutingModule } from './communication-routing.module';
 import { TemplatesComponent } from './page/templates/templates.component';
 import { SettingsComponent } from './page/settings/settings.component';
 import { ApiService } from './api.service';
+import { MailDetailComponent } from './page/mail-detail/mail-detail.component';
+
 import {
-  NbButtonModule,
-  NbCardModule,
-  NbCheckboxModule,
   NbIconModule,
-  NbInputModule,
 } from '@nebular/theme';
 
 
 @NgModule({
-  declarations: [EmailLogComponent, TemplatesComponent, SettingsComponent],
+  declarations: [EmailLogComponent, TemplatesComponent, SettingsComponent, MailDetailComponent],
   imports: [
     CommonModule,
     ComponentsModule,

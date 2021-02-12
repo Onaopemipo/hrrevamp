@@ -49,6 +49,7 @@ import {
   NbListModule,
   ɵa,
   NbMenuService,
+  NbDatepickerDirective,
 } from '@nebular/theme';
 
 import { StatusComponent } from './status/status.component';
@@ -62,8 +63,10 @@ import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+import { DateRangeComponent } from './date-range/date-range.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
+import { DateComponent } from './date/date.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
@@ -81,10 +84,16 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    DateRangeComponent,
+    DefaultContentComponent,
+    SideModalComponent,
+    EmployeeMasterSearchComponent,
+    FileUploadComponent,
     AmountInputComponent,
     StatusCardComponent,
     MyMenuComponent,
     MyMenuItemComponent,
+    DateComponent,
     DefaultContentComponent
   ],
   imports: [
@@ -149,6 +158,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DecimalPipe,
     ɵa,
     NbMenuService,
+    NbDatepickerDirective,
   ],
   exports: [
     ComponentsheaderComponent,
@@ -161,10 +171,17 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    NbIconModule,
+    DefaultContentComponent,
     AmountInputComponent,
     StatusCardComponent,
     MyMenuComponent,
     MyMenuItemComponent,
+    RadioButtonComponent,
+    TableheaderComponent,
+    AmountInputComponent,
+    DateRangeComponent,
+    DateComponent,
     // NbMenuModule,
     DefaultContentComponent,
     CommonModule,
