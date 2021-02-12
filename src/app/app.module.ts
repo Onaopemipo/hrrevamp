@@ -133,6 +133,7 @@ FullCalendarModule.registerPlugins([
     NbListModule,
     NbLayoutModule,
     NgxChartsModule,
+    NbDatepickerModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -1,3 +1,9 @@
+import { NgxEchartsModule } from 'ngx-echarts';
+import { DefaultContentComponent } from './default-content/default-content.component';
+
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
@@ -5,6 +11,8 @@ import { CoreModule } from '../@core/core.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
 import Flow from '@flowjs/flow.js';
+// import { EchartsPieComponent } from '../../../src/app/pages/dashboard/';
+// import { EchartsBarComponent } from './echarts/echarts-bar.component';
 
 import { DecimalPipe } from '@angular/common';
 
@@ -53,15 +61,14 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { DateRangeComponent } from './date-range/date-range.component';
-import { DefaultContentComponent } from './default-content/default-content.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
-import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { DateComponent } from './date/date.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   declarations: [
@@ -87,6 +94,7 @@ import { DateComponent } from './date/date.component';
     MyMenuComponent,
     MyMenuItemComponent,
     DateComponent,
+    DefaultContentComponent
   ],
   imports: [
     FormsModule,
@@ -135,7 +143,11 @@ import { DateComponent } from './date/date.component';
     NbFormFieldModule,
     NbDatepickerModule,
     NgxFlowModule,
-    // NbMenuModule,
+    NgxEchartsModule,
+    NbIconModule,
+    NbFormFieldModule,
+    NbCardModule
+    // NgxChartsModule
   ],
   providers: [
     // MaxStringLengthPipe
@@ -171,6 +183,11 @@ import { DateComponent } from './date/date.component';
     DateRangeComponent,
     DateComponent,
     // NbMenuModule,
+    DefaultContentComponent,
+    CommonModule,
+    FormsModule,
+    NbCardModule,
+    NgxEchartsModule
   ],
 })
 export class ComponentsModule { }

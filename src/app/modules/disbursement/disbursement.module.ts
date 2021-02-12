@@ -8,6 +8,8 @@ import { BudgetListComponent } from './budget/budget-list/budget-list.component'
 import { CreateDisbursementComponent } from './disbursement/create-disbursement/create-disbursement.component';
 import { DisbursementrequestsComponent } from './disbursement/disbursementrequests/disbursementrequests.component';
 import { DisbursementHistoryComponent } from './disbursement/disbursement-history/disbursement-history.component';
+import { ThemeModule } from 'app/@theme/theme.module';
+import { NbDatepickerModule } from '@nebular/theme';
 
 
 
@@ -24,6 +26,8 @@ import { DisbursementHistoryComponent } from './disbursement/disbursement-histor
     CommonModule,
     ComponentsModule,
     DisbursmentRoutingModule,
+    ThemeModule,
+    NbDatepickerModule,
   ]
 })
 export class DisbursementModule { }

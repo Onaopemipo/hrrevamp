@@ -4,18 +4,32 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
   {
     path: 'onboarding',
-    loadChildren: () => import('./modules/tenantonboarding/tenantonboarding.module').then(m => m.TenantonboardingModule),
+    loadChildren: () => import('./modules/tenantonboarding/tenantonboarding.module')
+    .then(m => m.TenantonboardingModule),
   },
   {
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
+
+  {
+    path: 'recruitment',
+      loadChildren: () => import('./modules/recruitment/recruitment.module')
+      .then(m => m.RecruitmentModule)
+  },
+
+  {
+    path: 'accountverify',
+    loadChildren: () => import('./modules/recruitment/account-verify/accountverify.module')
+    .then(m => m.AccountVerifyModule)
+  },
+
   {
     path: '',
     loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule),
   },
 
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth' },
 ];
 

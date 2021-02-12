@@ -13,6 +13,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ComponentsModule } from 'app/components/components.module';
 
+
 @NgModule({
   declarations: [ModulesComponent,DashboardComponent],
   imports: [
