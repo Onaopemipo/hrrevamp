@@ -41,6 +41,7 @@ import {
   NbListModule,
   ɵa,
   NbMenuService,
+  NbDatepickerDirective,
 } from '@nebular/theme';
 
 import { StatusComponent } from './status/status.component';
@@ -60,6 +61,7 @@ import { DefaultContentComponent } from './default-content/default-content.compo
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { DateComponent } from './date/date.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     StatusCardComponent,
     MyMenuComponent,
     MyMenuItemComponent,
+    DateComponent,
   ],
   imports: [
     FormsModule,
@@ -143,6 +146,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     DecimalPipe,
     ɵa,
     NbMenuService,
+    NbDatepickerDirective,
   ],
   exports: [
     ComponentsheaderComponent,
@@ -164,6 +168,8 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     RadioButtonComponent,
     TableheaderComponent,
     AmountInputComponent,
+    DateRangeComponent,
+    DateComponent,
     // NbMenuModule,
   ],
 })

@@ -12,7 +12,9 @@ export class SideModalComponent implements OnInit {
   }
   @Output() showChange = new EventEmitter<boolean>();
 
-  center = false;
+  get center() {
+    return this.position === 'Center';
+  }
   show_modal = false;
   constructor() { }
 
