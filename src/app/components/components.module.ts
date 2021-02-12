@@ -1,3 +1,9 @@
+import { NgxEchartsModule } from 'ngx-echarts';
+import { DefaultContentComponent } from './default-content/default-content.component';
+
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsheaderComponent } from './componentsheader/componentsheader.component';
@@ -5,6 +11,8 @@ import { CoreModule } from '../@core/core.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CKEditorComponent, CKEditorModule } from 'ckeditor4-angular';
 import Flow from '@flowjs/flow.js';
+// import { EchartsPieComponent } from '../../../src/app/pages/dashboard/';
+// import { EchartsBarComponent } from './echarts/echarts-bar.component';
 
 import { DecimalPipe } from '@angular/common';
 
@@ -57,6 +65,8 @@ import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   declarations: [
@@ -67,6 +77,8 @@ import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.componen
     WysisygInputComponent,
     TableheaderComponent,
     TablecomponentComponent,
+    FileUploadComponent,
+    RadioButtonComponent,
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
@@ -74,6 +86,7 @@ import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.componen
     StatusCardComponent,
     MyMenuComponent,
     MyMenuItemComponent,
+    DefaultContentComponent
   ],
   imports: [
     FormsModule,
@@ -122,7 +135,11 @@ import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.componen
     NbFormFieldModule,
     NbDatepickerModule,
     NgxFlowModule,
-    // NbMenuModule,
+    NgxEchartsModule,
+    NbIconModule,
+    NbFormFieldModule,
+    NbCardModule
+    // NgxChartsModule
   ],
   providers: [
     // MaxStringLengthPipe
@@ -150,6 +167,11 @@ import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.componen
     MyMenuComponent,
     MyMenuItemComponent,
     // NbMenuModule,
+    DefaultContentComponent,
+    CommonModule,
+    FormsModule,
+    NbCardModule,
+    NgxEchartsModule
   ],
 })
 export class ComponentsModule { }
