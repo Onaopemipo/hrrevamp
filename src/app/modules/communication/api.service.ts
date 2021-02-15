@@ -11,7 +11,8 @@ export class ApiService {
   fetch_emails(emailType, page) {
     const subject = new Subject<IEmail[]>();
     window.setTimeout(() => {
-      subject.next(IEmailFactory.buildList(10));
+      console.log(emailType);
+      subject.next(IEmailFactory.buildList(10, {status_id: emailType}));
       subject.complete();
     }, 3000);
     return subject;

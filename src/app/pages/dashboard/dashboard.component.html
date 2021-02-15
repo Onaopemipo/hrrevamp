@@ -1,2 +1,185 @@
-<p>dashboard works!</p>
-<button (click)="openModal()">Open</button>
+<div class="row">
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/department.jpg" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          No of employees
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">20,345</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/department.jpg" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          Due for retirement
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">3,245</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/department.jpg" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          Due for promotion
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">589</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/department.jpg" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          Due for confirmation
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">6,675</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xxxl-6 col-md-6" >
+        <nb-card>
+  
+            <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+<div style="flex:auto">
+<span class="header6-bold">Distribution by Location</span>
+</div>
+<div>
+  <nb-select selected="1">
+    <nb-option value="1">This year</nb-option>
+    <nb-option value="2">Option 2</nb-option>
+  </nb-select>
+</div>
+        </div>
+              <div #doughContainer style="height: 100%;">
+                <ngx-charts-pie-chart
+                [view]="[doughContainer.offsetWidth, 300]"
+                [scheme]="colorScheme"
+                [results]="single"
+                [legend]="showLegend"
+                [explodeSlices]="explodeSlices"
+                [labels]="showLabels"
+                [doughnut]="doughnut"
+                [gradient]="gradient"
+                >
+                </ngx-charts-pie-chart>
+              </div>
+           
+            </nb-card-body>
+          </nb-card>
+    </div>
+    <div class="col-xxxl-6 col-md-6" >
+        <nb-card>         
+            <nb-card-body>
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto">
+                <span class="header6-bold">Distribution by Department</span>
+                </div>
+                <div>
+                  <nb-select selected="1">
+                    <nb-option value="1">This year</nb-option>
+                    <nb-option value="2">Option 2</nb-option>
+                  </nb-select>
+                </div>
+                        </div>
+<div style="height: 18.75rem;width: 100%;">
+  <div echarts [options]="options" class="echart" style="height: 100%;"></div>
+</div>
+
+               
+            </nb-card-body>
+          </nb-card>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xxxl-6 col-md-6" >
+        <nb-card>
+  
+            <nb-card-body>
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto">
+                <span class="header6-bold">Distribution by Location</span>
+                </div>
+                <div>
+                  <nb-select selected="1">
+                    <nb-option value="1">This year</nb-option>
+                    <nb-option value="2">Option 2</nb-option>
+                  </nb-select>
+                </div>
+                        </div>
+              <div #barContainer style="height: 100%;">
+                <ngx-charts-bar-vertical 
+                [view]="[barContainer.offsetWidth, 300]" 
+                [scheme]="barcolorScheme" 
+                [results]="single" 
+                [gradient]="gradient"
+                [xAxis]="showXAxis" 
+                [yAxis]="showYAxis" 
+                [legend]="showLegend" 
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel" 
+                [xAxisLabel]="xAxisLabel" 
+                [yAxisLabel]="yAxisLabel"
+                [showGridLines]="showGridLines"
+                [barPadding]="barPadding"
+            >
+              </ngx-charts-bar-vertical>
+              </div>
+            
+           
+            </nb-card-body>
+          </nb-card>
+    </div>
+    <div class="col-xxxl-6 col-md-6" >
+        <nb-card>         
+            <nb-card-body>
+               
+            </nb-card-body>
+          </nb-card>
+    </div>
+
+  </div>

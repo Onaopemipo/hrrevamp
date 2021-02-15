@@ -30,7 +30,7 @@
                             <span class="complainer-name">{{complaint.complainerName}}</span>
                             <div class="complaint-title">{{complaint.title | maxStringLength:30}}</div>
                             <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div>
-                            <ngx-status></ngx-status>
+                            <ngx-status [data]="complaint"></ngx-status>
                         </div>
                         <div>{{complaint.time | date}}</div>
                     </div>

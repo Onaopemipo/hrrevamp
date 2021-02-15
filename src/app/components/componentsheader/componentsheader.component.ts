@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
   styleUrls: ['./componentsheader.component.scss'],
 })
 export class ComponentsheaderComponent implements OnInit {
-  @Output() buttonClick = new EventEmitter<any>();
+  @Output() buttonClick = new EventEmitter<string>();
 
   @Input() pageName: string = 'Page Name';
   @Input() requiredButton = [];

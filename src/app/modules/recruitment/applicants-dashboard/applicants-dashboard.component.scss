@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  padding: 20px;
+}
+.flex-child {
+  flex: 1;
+  // background: rgba(72, 71, 224, 0.04);
+  border-radius: 4px;
+  margin-right: 2%;
+  width: 20%;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+  padding: 20px;
+  background: rgba(72, 71, 224, 0.04);
+}
+
+.flex-child:last-child {
+  background: rgba(72, 71, 224, 0.04);
+  border-radius: 4px;
+  width: 100%;
+}
+
+
+.profile {
+  // background: rgba(72, 71, 224, 0.04);
+  padding: 20px;
+  height: 30px;
+}
+
+.text-wrap:first-child {
+  width: 80%;
+  float: left;
+}
+
+.text-wrap:last-child {
+  width: 5%;
+  float: right;
+}

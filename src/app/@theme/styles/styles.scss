@@ -20,7 +20,6 @@
 
 // install the framework and custom global styles
 @include nb-install() {
-
   // framework global styles
   @include nb-theme-global();
   @include nb-auth-global();
@@ -133,7 +132,9 @@ h1{
 }
 
 .main-page-container{
-  background-color: white; padding: 30px
+  background-color: white;
+  padding: 30px;
+  height: 100%;
 }
 
 .header6-normal{
@@ -246,9 +247,21 @@ font-variant:normal !important;
 font-weight: normal !important;
 font-size: 14px !important;
 line-height: 17px !important;
-font-family: 'Rubik',sans-serif;
+font-family: 'Rubik',sans-serif !important;
 letter-spacing: 0px;
-color: #343A40;
+color: #343A40  !important;
+opacity: 1;
+}
+
+.p-300{
+  font-style: normal !important;
+font-variant:normal !important;
+font-weight: 300 !important;
+font-size: 16px !important;
+line-height: 28px !important;
+font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color: #130019  !important;
 opacity: 1;
 }
 
@@ -258,10 +271,25 @@ font-variant:normal !important;
 font-weight: normal !important;
 font-size: 16px !important;
 line-height: 22px !important;
-font-family: 'Rubik',sans-serif;
+font-family: 'Rubik',sans-serif !important;
 letter-spacing: 0px;
-color: #080730;
+color: #080730 !important;
 opacity: 1;
+}
+.smalltext{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  line-height: 22px !important;
+  font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color: #130019;
+opacity: 1;
+}
+button{
+  text-transform: none !important;
+  min-width: 144px !important;
 }
 
 @media screen and (max-width: 992px) {
@@ -272,4 +300,8 @@ opacity: 1;
   .linear-form .form-group > label{
     width: 100%;
   }
+}
+
+.tabset {
+  margin-bottom: 2rem !important;
 }

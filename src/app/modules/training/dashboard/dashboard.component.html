@@ -91,7 +91,16 @@
 
 <!-- Pie Chart here -->
 <div class="container">
-  <!-- <ngx-echarts-pie></ngx-echarts-pie> -->
+  <!-- <<div echarts [options]="options" class="echart"></div> -->
+  <div class="col-lg-6">
+    <!-- <nb-card>
+      <nb-card-header>Bar</nb-card-header>
+      <nb-card-body>
+        <chart type="pie" [data]="data" [options]="options"></chart>
+      </nb-card-body>
+    </nb-card> -->
+    <ngx-default-content pageHeader="Pie Charts"></ngx-default-content>
+  </div>
 
 </div>
 
@@ -99,6 +108,7 @@
 
 <div class="container">
 <!-- <ngx-echarts-bar></ngx-echarts-bar> -->
+<ngx-default-content pageHeader="Bar Charts"></ngx-default-content>
 </div>
 
 <!-- Training Reports -->
@@ -107,7 +117,11 @@
   <div *ngIf="trainingReport == ''">
     <ngx-default-content pageHeader="You do not have any contents"></ngx-default-content>
   </div>
-  <div *ngIf="trainingReport != ''">
+
+
+    <ngx-componentsheader pageName="Training Report"></ngx-componentsheader>
+    <!-- <ngx-tablecomponent></ngx-tablecomponent> -->
+    <div *ngIf="trainingReport != ''">
     <ngx-tableheader></ngx-tableheader>
   </div>
 
