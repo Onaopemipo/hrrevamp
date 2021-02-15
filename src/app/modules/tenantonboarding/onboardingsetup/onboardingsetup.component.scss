@@ -153,3 +153,21 @@ nb-tabset ul li a {
   text-transform: none;
   padding: 1rem 2rem 1rem 0rem;
 }
+
+.noteClass{
+  &::before{
+    content: '';
+    border-width: 0 0px 0 0px;
+    border-color: #4847E0;
+    background-color: #4847E0;
+    border-style: solid;
+    height:calc(9%);
+    width: 9px;
+    position: absolute;
+  }
+}
+
+button{
+  text-transform: none;
+  min-width: 144px;
+}

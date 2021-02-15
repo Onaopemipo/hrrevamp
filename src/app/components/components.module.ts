@@ -14,12 +14,14 @@ import Flow from '@flowjs/flow.js';
 // import { EchartsPieComponent } from '../../../src/app/pages/dashboard/';
 // import { EchartsBarComponent } from './echarts/echarts-bar.component';
 
+import { DecimalPipe } from '@angular/common';
+
 
 import {
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
@@ -45,6 +47,9 @@ import {
   NbProgressBarModule,
   NbSpinnerModule,
   NbListModule,
+  ɵa,
+  NbMenuService,
+  NbDatepickerDirective,
 } from '@nebular/theme';
 
 import { StatusComponent } from './status/status.component';
@@ -56,7 +61,12 @@ import { TablecomponentComponent } from './tablecomponent/tablecomponent.compone
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
 import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
+import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+import { DateRangeComponent } from './date-range/date-range.component';
+import { StatusCardComponent } from './status-card/status-card.component';
+import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
+import { DateComponent } from './date/date.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
@@ -74,14 +84,23 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     SideModalComponent,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    DateRangeComponent,
+    DefaultContentComponent,
+    SideModalComponent,
+    EmployeeMasterSearchComponent,
+    FileUploadComponent,
+    AmountInputComponent,
+    StatusCardComponent,
+    MyMenuComponent,
+    MyMenuItemComponent,
+    DateComponent,
     DefaultContentComponent
   ],
   imports: [
-    FullCalendarModule,
     FormsModule,
     CommonModule,
     NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
+    // NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
@@ -92,7 +111,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     // CoreModule.forRoot(),
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
+    // NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
@@ -135,7 +154,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     {
       provide: FlowInjectionToken,
       useValue: Flow,
-    }
+    },
+    DecimalPipe,
+    ɵa,
+    NbMenuService,
+    NbDatepickerDirective,
   ],
   exports: [
     ComponentsheaderComponent,
@@ -144,19 +167,28 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MaxStringLengthPipe,
     WysisygInputComponent,
     SideModalComponent,
-    FullCalendarComponent,
-    TableheaderComponent,
     TablecomponentComponent,
-    FileUploadComponent,
-    RadioButtonComponent,
     NbTabsetModule,
     EmployeeMasterSearchComponent,
     FileUploadComponent,
+    NbIconModule,
+    DefaultContentComponent,
+    AmountInputComponent,
+    StatusCardComponent,
+    MyMenuComponent,
+    MyMenuItemComponent,
+    RadioButtonComponent,
+    TableheaderComponent,
+    AmountInputComponent,
+    DateRangeComponent,
+    DateComponent,
+    // NbMenuModule,
     DefaultContentComponent,
     CommonModule,
     FormsModule,
     NbCardModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    TableheaderComponent
   ],
 })
 export class ComponentsModule { }

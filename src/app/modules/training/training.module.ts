@@ -12,7 +12,7 @@ import {
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,

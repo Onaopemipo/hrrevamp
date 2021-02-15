@@ -31,6 +31,16 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/communication/communication.module')
         .then(m => m.CommunicationModule)
     },
+    {
+      path: 'disbursement',
+      loadChildren: () => import('../modules/disbursement/disbursement.module')
+        .then(m => m.DisbursementModule)
+    },
+    {
+      path: 'leave',
+      loadChildren: () => import('../modules/leave/leave.module')
+        .then(m => m.LeaveModule)
+    },
 
     // {
     //   path: 'recruitment',
@@ -39,6 +49,7 @@ const routes: Routes = [{
     // },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '**', redirectTo: 'dashboard' },
   ],
 }];
 

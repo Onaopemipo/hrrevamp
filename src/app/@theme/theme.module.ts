@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   NbActionsModule,
   NbLayoutModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbSearchModule,
   NbSidebarModule,
   NbUserModule,
@@ -43,7 +43,7 @@ import { DARK_THEME } from './styles/theme.dark';
 
 const NB_MODULES = [
   NbLayoutModule,
-  NbMenuModule,
+  // NbMenuModule,
   NbUserModule,
   NbActionsModule,
   NbSearchModule,

@@ -1,0 +1,19 @@
+<ngx-componentsheader
+  pageName="Disbursement Requests"
+  [requiredButton]="[]"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="Single" [tabId]="TABS.SINGLE">
+    </nb-tab>
+    <nb-tab tabTitle="Bulk" [tabId]="TABS.BULK">
+    </nb-tab>
+    <nb-tab tabTitle="Recurring" [tabId]="TABS.RECURRING">
+    </nb-tab>
+    <nb-tab tabTitle="Payslip" [tabId]="TABS.PAYSLIP">
+    </nb-tab>
+  </nb-tabset>
+
+  <ngx-tableheader></ngx-tableheader>
+  <ngx-tablecomponent [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
+</div>

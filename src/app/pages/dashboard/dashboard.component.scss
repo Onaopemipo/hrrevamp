@@ -1,0 +1,152 @@
+:host{
+    height: 93%;
+    overflow: scroll;
+    // margin-bottom: 30px;
+}
+
+h6{
+    margin: 0px;
+    line-height: 15px;
+}
+
+.dashboard-header{
+    height: 250px;
+    margin: 25px;
+    margin-bottom: -90px;
+    font-size: xx-large;
+    color: white;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-weight: bold;
+    // margin-left: -58px;
+    // margin-right: -60px;
+}
+
+.card-container > div{
+    padding: 5px;
+}
+.card-container > div > .card{
+    margin: 36px;
+    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.quick-actions{
+    display: flex;
+    width: 400vw;
+}
+
+.quick-actions > div{
+    flex: auto;
+    margin-right: 30px;
+    
+}
+.quick-actions> div.card {
+width: 100%;
+}
+// .top-actions > div{
+//     width: 50vw;
+// }
+
+.q-connector {
+    position: relative;
+    &::before{
+        content: url(/../../../../assets/icons/tick-small.jpg);    
+    }
+    &::after {
+      margin:10px 2px 10px 12px;
+      border-width: 2px;
+      left: 40%;
+    }
+
+    &::after {
+      content: ''; 
+      border-top: 1px #4847E0 solid;
+      width: 100%;
+      left: 0px;
+      position: absolute;
+    }
+
+  }
+
+.last-q-connector{
+  &::after {
+    margin:10px 2px 10px 12px;
+    border-width: 0px;
+    left: 0%;
+  }
+  &::after {
+    content: ''; 
+    border-top: 1px #4847E0 solid;
+    width: 0px;
+    position: absolute;
+  }
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 1px;
+    height: 2px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .opaq {
+  color: #86828D;
+  }
+  .spa >div {
+    flex: auto;
+    margin-right: 10px;
+    width: 70px;
+    padding-left: 40px;
+  }
+ 
+  .time{
+    color: #86828D;
+    margin-right: 25px;
+  }
+
+  .paid{
+    height: 400px; overflow: scroll; padding-bottom: 10px;
+  }
+
+  .zee {
+    overflow: scroll;
+    padding-bottom: 10px;
+    flex: auto;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    margin-top: 30px;
+    height: 50vh;
+  }
+
+  .date-circle{
+    height: 50px;
+  }
+  .circle{
+    background-color: #4847E0;
+    
+    color: white !important;
+    height: 2.5rem;
+    width: 2.5rem;
+    text-align: center;
+  }
+
+  .circle h6{
+      color:#fff
+  }

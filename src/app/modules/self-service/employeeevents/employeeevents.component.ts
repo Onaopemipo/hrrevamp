@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { NbPopoverComponent, NbPopoverDirective } from '@nebular/theme';
+import { MENU_ITEMS } from 'app/modules/pages-menu';
 import { ModalformComponent } from '../modalform/modalform.component';
 @Component({
   selector: 'ngx-employeeevents',
@@ -8,6 +9,8 @@ import { ModalformComponent } from '../modalform/modalform.component';
   styleUrls: ['./employeeevents.component.scss']
 })
 export class EmployeeeventsComponent implements OnInit {
+  menu = MENU_ITEMS;
+  link = '/todo'
   @ViewChild(NbPopoverDirective) popOver: NbPopoverDirective;
   formcomponent = ModalformComponent;
   calendarOptions: CalendarOptions = {
