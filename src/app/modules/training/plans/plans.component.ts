@@ -35,7 +35,7 @@ export class PlansComponent implements OnInit {
   trainingCategory: boolean = true;
   category = 'Internal';
 
-  TrainingPlanData = '';
+  TrainingPlanData = 'cdd';
   // TrainingPlanq = '';
 
   addVendor = 'Add New Vendor';
