@@ -22,7 +22,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'applicantdashboard',
+        path: 'applicantsdashboard',
         component: ApplicantsDashboardComponent
       },
 
