@@ -8,11 +8,11 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
   {
     path: '',
-    component: AdministrationComponent,
+    component: DashboardComponent,
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'administration',
+    component: AdministrationComponent
   },
 
   {
@@ -25,8 +25,6 @@ export const routes: Routes = [
     component: RequestsComponent
   },
 
-  // { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  // { path: '**', redirectTo: 'auth' },
 ];
 
 const config: ExtraOptions = {
