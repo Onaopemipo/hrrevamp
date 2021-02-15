@@ -125,7 +125,7 @@
                 </div>
                         </div>
 <div style="height: 18.75rem;width: 100%;">
-  <div echarts [options]="options" class="echart" style="height: 100%;"></div>
+  <div echarts [options]="customizePieOption" class="echart" style="height: 100%;"></div>
 </div>
 
                
@@ -206,9 +206,7 @@
                               <div class="card-body" *ngFor="let i of [0,1,2,3,4,5,6,7,8]">
                                   <h4 class="card-title" style="font-size: small;">Workshop</h4>
                                   <p class="card-text" style="color: #F2994A;">Managing employeed</p>
-                                  <p class="card-text">11am - 12pm</p>
-  
-  
+                                  <p class="card-text">11am - 12pm</p>   
                               </div>
                           </div>
                       </div>
@@ -233,9 +231,445 @@
                 <nb-option value="2">Option 2</nb-option>
               </nb-select>
             </div>
-                    </div>
+          </div>
+          <div style="height: 18.75rem;width: 100%;">
+            <div echarts [options]="customizedlineoptions" class="echart" style="height: 100%;"></div>
+          </div>
+
           </nb-card-body>
       </nb-card>
   
       </div>
       </div>
+
+      <div class="row">
+        <div class="col-xxxl-6 col-md-6" >
+          <nb-card>         
+            <nb-card-body>
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto;">
+               <div style="display: flex;">
+                <div style="padding: 5px 15px 0 0;">
+                  <span  class="header6-bold">Requests & Complaints</span>
+                </div>
+                <div class="cbadge" >4</div>
+               </div>
+                </div>
+                <div>
+                  <span class="a-normal" style="cursor: pointer;">View all</span>
+                    </div>
+              </div>
+
+              <div style="padding-top:1rem ;">
+                <div style="display: flex;flex-direction: row; padding-top: .8rem;padding-bottom: 1rem;">
+                  <div style="flex:auto;">
+                    <div style="display: flex;flex-direction: column;">
+                      <span class="p-300" style="color: #080730 !important;">Employee Information request</span>
+                      <span class="smalltext">Tosin Lasisi</span>
+                      </div>
+                  </div>
+                    <div >
+            <span class="smalltext">3 hours ago.</span>
+                    </div>
+                    </div>
+
+                    <div style="display: flex;flex-direction: row; padding-top: .8rem;padding-bottom: 1rem;">
+                      <div style="flex:auto;">
+                        <div style="display: flex;flex-direction: column;">
+                          <span class="p-300" style="color: #080730 !important;">Employee Information request</span>
+                          <span class="smalltext">Tosin Lasisi</span>
+                          </div>
+                      </div>
+                        <div >
+                <span class="smalltext">3 hours ago.</span>
+                        </div>
+                        </div>
+
+                        <div style="display: flex;flex-direction: row; padding-top: .8rem;padding-bottom: 1rem;">
+                          <div style="flex:auto;">
+                            <div style="display: flex;flex-direction: column;">
+                              <span class="p-300" style="color: #080730 !important;">Employee Information request</span>
+                              <span class="smalltext">Tosin Lasisi</span>
+                              </div>
+                          </div>
+                            <div >
+                    <span class="smalltext">3 hours ago.</span>
+                            </div>
+                            </div>
+
+
+                            <div style="display: flex;flex-direction: row; padding-top: .8rem;padding-bottom: 1rem;">
+                              <div style="flex:auto;">
+                                <div style="display: flex;flex-direction: column;">
+                                  <span class="p-300" style="color: #080730 !important;">Employee Information request</span>
+                                  <span class="smalltext">Tosin Lasisi</span>
+                                  </div>
+                              </div>
+                                <div >
+                        <span class="smalltext">3 hours ago.</span>
+                                </div>
+                                </div>
+
+                                <div style="display: flex;flex-direction: row; padding-top: .8rem; padding-bottom: 1rem;">
+                                  <div style="flex:auto;">
+                                    <div style="display: flex;flex-direction: column;">
+                                      <span class="p-300" style="color: #080730 !important;">Employee Information request</span>
+                                      <span class="smalltext">Tosin Lasisi</span>
+                                      </div>
+                                  </div>
+                                    <div >
+                            <span class="smalltext">3 hours ago.</span>
+                                    </div>
+                                    </div>
+              </div>
+       
+    
+              </nb-card-body>
+          </nb-card>
+      
+          </div>
+
+          <div class="col-xxxl-6 col-md-6" >
+            <nb-card>         
+              <nb-card-body>
+                <div style="display: flex;flex-direction: row;">
+                  <div style="flex:auto">
+                  <span class="header6-bold">Upcoming Birthdays</span>
+                  </div>
+                  <div>
+                    <span class="a-normal" style="cursor: pointer;">View all</span>
+                      </div>
+              
+                </div>
+
+
+                <div style="padding-top:1rem ;">
+                  <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                    <div style="flex:auto;">
+                     <div style="display: flex;flex-direction: row;">
+                      <div style="padding-right:5px;">
+                        <div class="circular-avatar">
+                          <img src="{{src}}" alt="" title="" itemprop="image">
+                      </div>
+                      </div>
+                      <div style="display: flex;flex-direction: column;padding: 5px;">
+                        <span class="p-300" style="color: #080730 !important;">Terri Apala</span>
+                        <span class="smalltext">Marketing</span>
+                        </div>
+                     </div>
+                    </div>
+                      <div >
+              <span class="smalltext">16th December</span>
+                      </div>
+                      </div>
+
+                      <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                        <div style="flex:auto;">
+                         <div style="display: flex;flex-direction: row;">
+                          <div style="padding-right:5px;">
+                            <div class="circular-avatar">
+                              <img src="{{src}}" alt="" title="" itemprop="image">
+                          </div>
+                          </div>
+                          <div style="display: flex;flex-direction: column;padding: 5px;">
+                            <span class="p-300" style="color: #080730 !important;">Nonye Biko</span>
+                            <span class="smalltext">Marketing</span>
+                            </div>
+                         </div>
+                        </div>
+                          <div >
+                  <span class="smalltext">16th December</span>
+                          </div>
+                          </div>
+
+
+                          
+                      <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                        <div style="flex:auto;">
+                         <div style="display: flex;flex-direction: row;">
+                          <div style="padding-right:5px;">
+                            <div class="circular-avatar">
+                              <img src="{{src}}" alt="" title="" itemprop="image">
+                          </div>
+                          </div>
+                          <div style="display: flex;flex-direction: column;padding: 5px;">
+                            <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                            <span class="smalltext">Marketing</span>
+                            </div>
+                         </div>
+                        </div>
+                          <div >
+                  <span class="smalltext">16th December</span>
+                          </div>
+                          </div>
+
+
+                          <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                            <div style="flex:auto;">
+                             <div style="display: flex;flex-direction: row;">
+                              <div style="padding-right:5px;">
+                                <div class="circular-avatar">
+                                  <img src="{{src}}" alt="" title="" itemprop="image">
+                              </div>
+                              </div>
+                              <div style="display: flex;flex-direction: column;padding: 5px;">
+                                <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                                <span class="smalltext">Marketing</span>
+                                </div>
+                             </div>
+                            </div>
+                              <div >
+                      <span class="smalltext">16th December</span>
+                              </div>
+                              </div>
+
+                              <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                                <div style="flex:auto;">
+                                 <div style="display: flex;flex-direction: row;">
+                                  <div style="padding-right:5px;">
+                                    <div class="circular-avatar">
+                                      <img src="{{src}}" alt="" title="" itemprop="image">
+                                  </div>
+                                  </div>
+                                  <div style="display: flex;flex-direction: column;padding: 5px;">
+                                    <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                                    <span class="smalltext">Marketing</span>
+                                    </div>
+                                 </div>
+                                </div>
+                                  <div >
+                          <span class="smalltext">16th December</span>
+                                  </div>
+                                  </div>
+                </div>
+                </nb-card-body>
+            </nb-card>  
+
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-xxxl-6 col-md-6" >
+              <nb-card>         
+                <nb-card-body>
+                  <div style="display: flex;flex-direction: row;">
+                    <div style="flex:auto">
+                    <span class="header6-bold">Upcoming Leave</span>
+                    </div>
+                    <div>
+                      <span class="a-normal" style="cursor: pointer;">View all</span>
+                        </div>
+                  </div>
+            
+                  <div style="padding-top:1rem ;">
+                    <div style="display: flex;justify-content: space-between; padding-top: 1rem;">
+                      <div >
+                       <div style="display: flex;flex-direction: row;">
+                        <div style="padding-right:5px;">
+                          <div class="circular-avatar">
+                            <img src="{{src}}" alt="" title="" itemprop="image">
+                        </div>
+                        </div>
+                        <div style="display: flex;flex-direction: column;padding: 5px;">
+                          <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                          <span class="smalltext">Marketing</span>
+                          </div>
+                       </div>
+                      </div>
+                      <div style="padding: 5px;">
+                        <span class="p-300" style="color: #080730 !important;">Terriboy@gmail.com</span>
+                      </div>
+                        <div >
+                 <div style="display: flex;flex-direction: column;">
+                          <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                          <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                          </div>
+                        </div>
+                        </div>
+
+
+                        <div style="display: flex;justify-content: space-between; padding-top: 1rem;">
+                          <div >
+                           <div style="display: flex;flex-direction: row;">
+                            <div style="padding-right:5px;">
+                              <div class="circular-avatar">
+                                <img src="{{src}}" alt="" title="" itemprop="image">
+                            </div>
+                            </div>
+                            <div style="display: flex;flex-direction: column;padding: 5px;">
+                              <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                              <span class="smalltext">Marketing</span>
+                              </div>
+                           </div>
+                          </div>
+                          <div style="padding: 5px;">
+                            <span class="p-300" style="color: #080730 !important;">Terriboy@gmail.com</span>
+                          </div>
+                            <div >
+                     <div style="display: flex;flex-direction: column;">
+                              <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                              <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                              </div>
+                            </div>
+                            </div>
+
+                            <div style="display: flex;justify-content: space-between; padding-top: 1rem;">
+                              <div >
+                               <div style="display: flex;flex-direction: row;">
+                                <div style="padding-right:5px;">
+                                  <div class="circular-avatar">
+                                    <img src="{{src}}" alt="" title="" itemprop="image">
+                                </div>
+                                </div>
+                                <div style="display: flex;flex-direction: column;padding: 5px;">
+                                  <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                                  <span class="smalltext">Marketing</span>
+                                  </div>
+                               </div>
+                              </div>
+                              <div style="padding: 5px;">
+                                <span class="p-300" style="color: #080730 !important;">Terriboy@gmail.com</span>
+                              </div>
+                                <div >
+                         <div style="display: flex;flex-direction: column;">
+                                  <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                                  <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                                  </div>
+                                </div>
+                                </div>
+
+
+                                <div style="display: flex;justify-content: space-between; padding-top: 1rem;">
+                                  <div >
+                                   <div style="display: flex;flex-direction: row;">
+                                    <div style="padding-right:5px;">
+                                      <div class="circular-avatar">
+                                        <img src="{{src}}" alt="" title="" itemprop="image">
+                                    </div>
+                                    </div>
+                                    <div style="display: flex;flex-direction: column;padding: 5px;">
+                                      <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                                      <span class="smalltext">Marketing</span>
+                                      </div>
+                                   </div>
+                                  </div>
+                                  <div style="padding: 5px;">
+                                    <span class="p-300" style="color: #080730 !important;">Terriboy@gmail.com</span>
+                                  </div>
+                                    <div >
+                             <div style="display: flex;flex-direction: column;">
+                                      <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                                      <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                                      </div>
+                                    </div>
+                                    </div>
+
+                                    <div style="display: flex;justify-content: space-between; padding-top: 1rem;">
+                                      <div >
+                                       <div style="display: flex;flex-direction: row;">
+                                        <div style="padding-right:5px;">
+                                          <div class="circular-avatar">
+                                            <img src="{{src}}" alt="" title="" itemprop="image">
+                                        </div>
+                                        </div>
+                                        <div style="display: flex;flex-direction: column;padding: 5px;">
+                                          <span class="p-300" style="color: #080730 !important;">Starboy Obi</span>
+                                          <span class="smalltext">Marketing</span>
+                                          </div>
+                                       </div>
+                                      </div>
+                                      <div style="padding: 5px;">
+                                        <span class="p-300" style="color: #080730 !important;">Terriboy@gmail.com</span>
+                                      </div>
+                                        <div >
+                                 <div style="display: flex;flex-direction: column;">
+                                          <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                                          <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                                          </div>
+                                        </div>
+                                        </div>
+                  </div>
+                  </nb-card-body>
+              </nb-card>
+          
+              </div>
+    
+              <div class="col-xxxl-6 col-md-6" >
+                <nb-card>         
+                  <nb-card-body>
+                    <div style="display: flex;flex-direction: row;">
+                      <div style="flex:auto">
+                      <span class="header6-bold">Announcements</span>
+                      </div>
+                      <div>
+                        <span class="a-normal" style="cursor: pointer;">View all</span>
+                          </div>
+                  
+                    </div>
+             
+                    <div style="padding-top:1rem ;height: 26rem;width: 100%;">
+                      <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                        <div style="flex:auto;">
+                          <div style="display: flex;flex-direction: column;">
+                            <span class="p-300" style="color: #080730 !important;">This is an announcement</span>
+                            <span class="smalltext" style="display: flex;flex-basis: 20px;flex-wrap: wrap;width: 80%;">This is simply dummy text of the printing and typesetting industry. </span>
+                            <span class="a-small-normal" style="cursor: pointer;">Read more</span>
+                            </div>
+                         
+                        </div>
+                     
+                          <div >
+                          <div style="display: flex;flex-direction: column;">
+                            <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                            <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                            </div>
+                          </div>
+                          </div>
+
+
+
+                          <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                            <div style="flex:auto;">
+                              <div style="display: flex;flex-direction: column;">
+                                <span class="p-300" style="color: #080730 !important;">This is an announcement</span>
+                                <span class="smalltext" style="display: flex;flex-basis: 20px;flex-wrap: wrap;width: 80%;">This is simply dummy text of the printing and typesetting industry. </span>
+                                <span class="a-small-normal" style="cursor: pointer;">Read more</span>
+                                </div>
+                             
+                            </div>
+                         
+                              <div >
+                              <div style="display: flex;flex-direction: column;">
+                                <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                                <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                                </div>
+                              </div>
+                              </div>
+
+                              <div style="display: flex;flex-direction: row; padding-top: 1rem;">
+                                <div style="flex:auto;">
+                                  <div style="display: flex;flex-direction: column;">
+                                    <span class="p-300" style="color: #080730 !important;">This is an announcement</span>
+                                    <span class="smalltext" style="display: flex;flex-basis: 20px;flex-wrap: wrap;width: 80%;">This is simply dummy text of the printing and typesetting industry. </span>
+                                    <span class="a-small-normal" style="cursor: pointer;">Read more</span>
+                                    </div>
+                                 
+                                </div>
+                             
+                                  <div >
+                                  <div style="display: flex;flex-direction: column;">
+                                    <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
+                                    <span class="smalltext" style="text-align: center;">Dec 2020</span>
+                                    </div>
+                                  </div>
+                                  </div>
+
+
+                    </div>
+
+                
+                    </nb-card-body>
+                </nb-card>  
+    
+              </div>
+              </div>
+    
