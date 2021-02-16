@@ -53,7 +53,7 @@ interface TableActionEvent {
 export class TablecomponentComponent implements OnInit {
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
-  @Input() userData: [];
+  @Input() userData: []=[];
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: Array<object>;

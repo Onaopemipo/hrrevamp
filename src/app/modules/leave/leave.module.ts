@@ -4,7 +4,7 @@ import { ComponentsModule } from 'app/components/components.module';
 import { LeaveRoutingModule } from './leave.routing.module';
 import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { FormsModule } from '@angular/forms';
-
+import { NbCheckboxModule} from '@nebular/theme'
 
 @NgModule({
   declarations: [LeavePlanComponent,],
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ComponentsModule, LeaveRoutingModule,
     FormsModule,
+    NbCheckboxModule
   ]
 })
 export class LeaveModule { }

@@ -146,7 +146,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxEchartsModule,
     NbIconModule,
     NbFormFieldModule,
-    NbCardModule
+    NbCardModule,
+    NbInputModule,
     // NgxChartsModule
   ],
   providers: [
@@ -188,7 +189,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FormsModule,
     NbCardModule,
     NgxEchartsModule,
-    TableheaderComponent
+    TableheaderComponent,
+    NbInputModule,
   ],
 })
 export class ComponentsModule { }
