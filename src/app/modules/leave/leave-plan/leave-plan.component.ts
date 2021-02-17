@@ -15,34 +15,34 @@ export class LeavePlanComponent implements OnInit {
   topActionButtons = [
     {name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Apply For Leave', 'icon': 'plus', outline: true},
     {name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false},
-  ]
+  ];
   tableColumns = [
     {name: 'a', title: 'Number'},
     {name: 'b', title: 'Name'},
     {name: 'c', title: 'Department'},
     {name: 'd', title: 'Designation'},
-  ]
-  get showFirstName(){
+  ];
+  get showFirstName() {
     return this.selectedOption === '1';
   }
   constructor() { }
 
   ngOnInit(): void {
   }
-  selectedOption = '1'
+  selectedOption = '1';
   b = 'mmm';
-  value = 'aaaa'
+  value = 'aaaa';
 
-  modal(buttion){
-    if(buttion === TOP_ACTIONS.APPLY_FOR_LEAVE){
+  modal(buttion) {
+    if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
       this.showAddPlanModal = true;
     }
-    if(buttion === TOP_ACTIONS.ADD_PLAN){
-     this.showLeavePlanModal = true
+    if (buttion === TOP_ACTIONS.ADD_PLAN) {
+     this.showLeavePlanModal = true;
     }
   }
   showAddPlanModal = false;
-  showLeavePlanModal= false
+  showLeavePlanModal = false;
 
 
   checked = false;

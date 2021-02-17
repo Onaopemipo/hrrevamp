@@ -7,7 +7,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home',
     link: '/dashboard',
     home: true,
-    
+
   },
   {
     title: 'Employee Self Service',

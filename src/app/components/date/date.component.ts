@@ -16,7 +16,7 @@ export class DateComponent implements OnInit {
   }
 
   show() {
-    console.log(this.datePicker)
+    console.log(this.datePicker);
     window.globalThis.ccc = this.datePicker;
     window.setTimeout(() => {
       this.datePicker.picker.show();

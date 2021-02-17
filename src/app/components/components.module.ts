@@ -68,6 +68,8 @@ import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
 import { DateComponent } from './date/date.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CalenderComponent } from './calender/calender.component';
+
 
 
 @NgModule({
@@ -94,7 +96,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MyMenuComponent,
     MyMenuItemComponent,
     DateComponent,
-    DefaultContentComponent
+    DefaultContentComponent,
+    CalenderComponent,
+  
   ],
   imports: [
     FormsModule,
@@ -191,6 +195,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxEchartsModule,
     TableheaderComponent,
     NbInputModule,
+    CalenderComponent
   ],
 })
 export class ComponentsModule { }

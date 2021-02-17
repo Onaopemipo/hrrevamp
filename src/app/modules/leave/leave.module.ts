@@ -4,15 +4,20 @@ import { ComponentsModule } from 'app/components/components.module';
 import { LeaveRoutingModule } from './leave.routing.module';
 import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { FormsModule } from '@angular/forms';
-import { NbCheckboxModule} from '@nebular/theme'
+import { NbCheckboxModule} from '@nebular/theme';
+import { LeavetypeComponent } from './leavetype/leavetype.component';
+import { LeavehistoryComponent } from './leavehistory/leavehistory.component'
 
 @NgModule({
-  declarations: [LeavePlanComponent,],
+  declarations: [LeavePlanComponent, LeavetypeComponent,LeavehistoryComponent],
   imports: [
     CommonModule,
-    ComponentsModule, LeaveRoutingModule,
+    ComponentsModule, 
+    LeaveRoutingModule,
     FormsModule,
-    NbCheckboxModule
+    NbCheckboxModule ,
+  
+  
   ]
 })
 export class LeaveModule { }

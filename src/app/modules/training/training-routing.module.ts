@@ -24,7 +24,7 @@ export const routes: Routes = [
     path: 'requests',
     component: RequestsComponent
   },
-  
+
   {
     path: 'administration',
     component: AdministrationComponent

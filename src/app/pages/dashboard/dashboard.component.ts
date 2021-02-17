@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import  * as Chart from 'chart.js'
+import  * as Chart from 'chart.js';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   multi: any[];
 
-  
+
 
   // options
   showXAxis = true;
@@ -53,18 +53,18 @@ export class DashboardComponent implements OnInit {
   yAxisLabel = 'Employee Count';
   showGridLines = true;
 
-  //barChat
+  // barChat
   barPadding = 60;
   view: any[] = [600, 300];
 
 
-  //for doughnot
+  // for doughnot
   doughnut = true;
   showLabels = true;
   explodeSlices = false;
-  doughView = [700, 280]
- 
-  constructor(private theme: NbThemeService) { 
+  doughView = [700, 280];
+
+  constructor(private theme: NbThemeService) {
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
@@ -129,10 +129,10 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
- 
+
   }
   ngOnInit(): void {
-  
+
   }
 
   openModal() {

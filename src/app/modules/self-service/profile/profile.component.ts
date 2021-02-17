@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     { name: 'nn', title: 'Salary Scale', type: ColumnTypes.Text},
     { name: 'nn', title: 'President Appointment', type: ColumnTypes.Text},
     { name: 'nn', title: 'Contract Status', type: ColumnTypes.Text},
-  ]
+  ];
 
   tableColumnia: TableColumn[] = [
     { name: 'nn', title: 'S/N', type: ColumnTypes.Text},
@@ -28,11 +28,11 @@ export class ProfileComponent implements OnInit {
     { name: 'nn', title: 'TITLE', type: ColumnTypes.Text},
     { name: 'nn', title: 'CATEGORY', type: ColumnTypes.Text},
     { name: 'nn', title: 'STATUS', type: ColumnTypes.Text},
-  ]
+  ];
 
 
   ngOnInit(): void {
-    
+
   }
 
 }

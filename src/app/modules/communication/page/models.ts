@@ -1,5 +1,5 @@
-import { IStatus, MyColor } from "app/components/status/models";
-import { TABS } from "./email-log/email-log.component";
+import { IStatus, MyColor } from 'app/components/status/models';
+import { TABS } from './email-log/email-log.component';
 
 export interface IEmail {
     id: number;
