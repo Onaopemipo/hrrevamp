@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NbMenuComponent, NbMenuItem, NbMenuItemComponent, NbToggleStates, ɵa } from '@nebular/theme';
 
 @Component({
-  selector: '[nbMenuItemy]',
+  selector: '[nbMenuItem]',
   templateUrl: './menu-item.html',
   animations: [
     trigger('toggle', [
@@ -41,6 +41,11 @@ export class MyMenuComponent extends NbMenuComponent{
     }
   }
 
+  onItemClick(item: NbMenuItem) {
+    this.router.navigate([item.link])
+    //console.log(item);
+  }
+ 
   // ngOnInit(): void {
   // }
 

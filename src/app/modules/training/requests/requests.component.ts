@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./requests.component.scss']
 })
 export class RequestsComponent implements OnInit {
-
+  pageTitle = "Training Requests";
   myRequestHeader = 'There is no request at the moment';
   myRequestDesc = 'Check back later';
   requestData: string = 'wdd';

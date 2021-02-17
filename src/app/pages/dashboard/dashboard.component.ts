@@ -363,6 +363,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+    //this.themeSubscription.unsubscribe();
   }
 }
