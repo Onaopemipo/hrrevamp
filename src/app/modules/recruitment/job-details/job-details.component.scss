@@ -1,0 +1,90 @@
+.header {
+  background: url(../../../../assets/images/jobdetails.jpg);
+  height: 354px;
+  position: relative;
+  top: 20%;
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+}
+
+// .job-panel {
+//   z-index: 0;
+// }
+
+.icon {
+  font-size: 12px;
+  padding-right: 10px;
+}
+
+.title {
+  font-family: Rubik;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  margin-top: 100px;
+}
+
+.sub-title {
+  font-family: Rubik;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: left;
+
+
+}
+
+p {
+  font-size: 12px;
+  text-justify: distribute;
+  font-weight: 400;
+}
+
+// .container {
+//   display: flex;
+// }
+
+// .job-details {
+//   flex: 1;
+//   margin-right: 20px;
+// }
+
+.my-button {
+  color: #ffffff;
+  text-transform: capitalize;
+  background: #4847E0;
+  border-radius: 4px;
+}
+
+// .job-title {
+//   position: static;
+// width: 417px;
+// height: 41px;
+// left: 0px;
+// top: calc(50% - 41px/2 - 14px);
+
+// font-family: Rubik;
+// font-style: normal;
+// font-weight: bold;
+// font-size: 32px;
+// line-height: 128%;
+// /* identical to box height, or 41px */
+
+// display: flex;
+// align-items: center;
+
+// /* black */
+
+// color: #080730;
+
+// /* Inside Auto Layout */
+
+// flex: none;
+// order: 0;
+// flex-grow: 0;
+// margin: 8px 0px;
+
+// }
