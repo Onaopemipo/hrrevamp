@@ -1,4 +1,4 @@
-<ngx-componentsheader actions="actions" [pageName]="pagetitle"></ngx-componentsheader>
+<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newTraining', label:'New Training Plan', icon: 'plus'}]"></ngx-componentsheader>
 
 <div style="padding: 10px;"></div>
 <div class="container" style="background-color: #ffffff; height: 1000px;">
@@ -102,10 +102,9 @@
 
       <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
 
-        <!-- Calendar not working yet please fix up -->
         <full-calendar [options]="calendarOptions"></full-calendar>
 
-      </div>
+       </div>
     </nb-tab>
   </nb-tabset>
 </div>

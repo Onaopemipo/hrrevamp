@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantsDashboardComponent implements OnInit {
 
+  pageTitle: string = 'Recent Listings';
   constructor() { }
 
   ngOnInit(): void {
