@@ -4,49 +4,67 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Home',
-    icon: 'home',
+    icon: '/assets/icons/home.jpg',
     link: '/dashboard',
-    home: true,
 
+    
   },
-  {
-    title: 'Employee Self Service',
-    link: '/self-service',
-    icon: 'layout-outline',
-  },
+ 
   {
     title: 'CORE HR',
     group: true,
   },
   {
+    title: 'Employee Self Service',
+    icon: '/assets/icons/EmployeeManagement.jpg',
+    children: [
+      {
+        title: 'Self Service Dashboard',
+        link: '/self-service',
+      },
+      {
+        title: 'Employee Events',
+        link: '/self-service/employeeevents',
+      },
+      {
+        title: 'My Profile',
+        link: '/myprofile',
+      },
+      {
+        title: 'My Leave',
+        link: '/myleave',
+      },
+    ],
+  },
+  {
     title: 'Employee Management',
-    link: '/',
-    icon: 'edit-2-outline',
+    link: '/self-service',
+    icon: '/assets/icons/EmployeeManagement.jpg',
   },
   {
     title: 'Leave Management',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/LeaveManagement.jpg',
   },
   {
     title: 'Performance Management',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/PerformanceAppraisals.jpg',
   },
   {
     title: 'Disciplinary Management',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/DisciplinaryManagement.jpg',
   },
   {
     title: 'Onboarding',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Onboarding.jpg',
   },
   {
     title: 'Time and Attendance',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/TimeandAttendance.jpg',
   },
   {
     title: 'CAREERS',
@@ -55,32 +73,49 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Recruitment',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/recruitment.jpg',
   },
   {
     title: 'Career Succession',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/EmployeeManagement.jpg',
   },
   {
     title: 'Training',
-    link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Training.jpg',
+    children: [
+      {
+        title: 'Training Dashboard',
+        link: '/training/',
+      },
+      {
+        title: 'Training Plans',
+        link: '/training/plans',
+      },
+      {
+        title: 'Training Requests',
+        link: '/training/requests',
+      },
+      {
+        title: 'Training Administration',
+        link: '/training/administration',
+      },
+    ],
   },
   {
     title: 'Exit and Retirement',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/ExitandRetirement.jpg',
   },
   {
     title: 'Talent Management',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/TalentManagement.jpg',
   },
   {
     title: 'Manpower',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Manpower.jpg',
   },
   {
     title: 'MESSAGING',
@@ -88,13 +123,28 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Communications',
-    link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Communications.jpg',
+    children: [
+      {
+        title: 'Email Log',
+        link: '/communications',
+      },
+      {
+        title: 'Email Template',
+        link: '/communications/templates',
+      },
+      {
+        title: 'Email Settings',
+        link: '/communications/settings',
+      },
+    
+    ],
+
   },
   {
     title: 'Request & Complaints',
-    link: '/',
-    icon: 'edit-2-outline',
+    link: '/complaints',
+    icon: '/assets/icons/RequestComplaints.jpg',
   },
   {
     title: 'OPERATIONS',
@@ -103,27 +153,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Payroll',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Payroll.jpg',
   },
   {
     title: 'Expenses',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Expenses.jpg',
   },
   {
     title: 'Loan & Disbursement',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/LoanDisbursement.jpg',
   },
   {
     title: 'Disbursement',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/Disbursement.jpg',
   },
   {
     title: 'Benefit Administration',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/BenefitAdministration.jpg',
   },
   {
     title: 'ACCOUNT & SETTINGS',
@@ -132,7 +182,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Settings',
     link: '/',
-    icon: 'edit-2-outline',
+    icon: '/assets/icons/settings.jpg',
   },
 
 ];

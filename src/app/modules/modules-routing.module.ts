@@ -41,6 +41,12 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/leave/leave.module')
         .then(m => m.LeaveModule)
     },
+    {
+      path: 'employeemodule',
+      loadChildren: () => import('../modules/employeemodule/employeemodule.module')
+        .then(m => m.EmployeemoduleModule)
+
+    },
 
     // {
     //   path: 'recruitment',
