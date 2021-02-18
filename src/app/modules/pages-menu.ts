@@ -38,13 +38,31 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Employee Management',
-    link: '/self-service',
     icon: '/assets/icons/EmployeeManagement.jpg',
+    children: [
+      {
+        title: 'Employee Onboarding',
+        link: '/employeemodule',
+      },
+    ]
   },
   {
     title: 'Leave Management',
-    link: '/',
     icon: '/assets/icons/LeaveManagement.jpg',
+    children: [
+      {
+        title: 'Leave Plan',
+        link: '/leave',
+      },
+      {
+        title: 'Leave Type',
+        link: '/leave/type',
+      },
+      {
+        title: 'Leave History',
+        link: '/leave/history',
+      },
+    ]
   },
   {
     title: 'Performance Management',
