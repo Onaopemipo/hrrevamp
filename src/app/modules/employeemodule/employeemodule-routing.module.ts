@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
+import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
 const routes: Routes = [
   {
     path: '',
-    component: HiringchecklistComponent
+    component: EmployeeonboardingdashboardComponent
 }
 ];
 
