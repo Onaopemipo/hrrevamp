@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [LeavePlanComponent,],
+  declarations: [LeavePlanComponent, ],
   imports: [
     CommonModule,
     ComponentsModule, LeaveRoutingModule,

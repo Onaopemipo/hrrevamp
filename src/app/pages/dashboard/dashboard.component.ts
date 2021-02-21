@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
 
   multi: any[];
 
-  
+
 
   // options
   showXAxis = true;
@@ -58,19 +58,19 @@ export class DashboardComponent implements OnInit {
   yAxisLabel = 'Employee Count';
   showGridLines = true;
 
-  //barChat
+  // barChat
   barPadding = 60;
   view: any[] = [600, 300];
 
 
-  //for doughnot
+  // for doughnot
   doughnut = true;
   showLabels = true;
   explodeSlices = false;
-  doughView = [700, 280]
+  doughView = [700, 280];
 
 
-  //Events
+  // Events
   weekdays: Date[] = [];
   today = new Date();
   days_of_week = [
@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
   ];
   customizePieOption: any = {};
   customizedlineoptions: any = {};
-  constructor(private theme: NbThemeService) { 
+  constructor(private theme: NbThemeService) {
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
                   {value: 40, name: 'Finance'},
                   {value: 32, name: 'HR'},
                   {value: 28, name: 'Engineering'},
-                 
+
               ]
           }
       ]
@@ -151,9 +151,9 @@ export class DashboardComponent implements OnInit {
       bottom: 50,
     },
     xAxis: [
- 
+
       {
-        
+
         type: 'category',
         axisTick: {
           alignWithLabel: true,
@@ -164,7 +164,7 @@ export class DashboardComponent implements OnInit {
             color: '#343A40',
           },
         },
-    
+
         axisLabel: {
           textStyle: {
             color: '#343A40',
@@ -189,7 +189,7 @@ export class DashboardComponent implements OnInit {
           '2016',
           '2017',
           '2018',
-      
+
         ],
       },
       {
@@ -203,7 +203,7 @@ export class DashboardComponent implements OnInit {
             color: '#E9EBF1',
           },
         },
-     
+
         axisLabel: {
           textStyle: {
             color: '#343A40',
@@ -274,7 +274,7 @@ export class DashboardComponent implements OnInit {
         smooth: true,
         data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7],
         showSymbol: false,
-  
+
       },
       {
         name: 'Current Growth',
@@ -282,7 +282,7 @@ export class DashboardComponent implements OnInit {
         smooth: true,
         data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4],
         showSymbol: false,
-    
+
       },
     ],
   };
@@ -338,10 +338,10 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
- 
+
   }
   ngOnInit(): void {
-  //Events
+  // Events
   const today = this.today;
   const day_of_week = today.getDay();
   const start_of_week = Number(today) - day_of_week * no_of_ms_in_a_day;

@@ -18,7 +18,7 @@ export class CreateDisbursementComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectTab(tab: TABS){
+  selectTab(tab: TABS) {
     this.selectedTab = tab;
   }
 

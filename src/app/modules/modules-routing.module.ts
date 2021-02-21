@@ -42,11 +42,11 @@ const routes: Routes = [{
         .then(m => m.LeaveModule)
     },
 
-    // {
-    //   path: 'recruitment',
-    //   loadChildren: () => import('../modules/recruitment/recruitment.module')
-    //   .then(m => m.RecruitmentModule)
-    // },
+    {
+      path: 'interviewers',
+      loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
+      .then(m => m.InterviewerdashboardModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

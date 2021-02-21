@@ -29,6 +29,7 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule),
   },
 
+
    { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth' },
 ];

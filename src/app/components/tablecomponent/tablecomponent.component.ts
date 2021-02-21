@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
-import { ColumnTypes, TableColumn, TableData } from './models';
+import { ColumnTypes, TableColumn, TableData, TableAction } from './models';
 
 
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
@@ -53,10 +53,10 @@ interface TableActionEvent {
 export class TablecomponentComponent implements OnInit {
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
-  @Input() userData: [];
+  @Input() userData: [] = [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
-  @Input() actions: Array<object>;
+  @Input() actions: TableAction[];
   @Output() actionClick = new EventEmitter<TableActionEvent>();
   pageData = [];
   tableData = [];

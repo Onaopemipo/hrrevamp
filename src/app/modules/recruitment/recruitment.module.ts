@@ -5,10 +5,12 @@ import { ComponentsModule } from 'app/components/components.module';
 
 import {
   NbButtonModule,
+  NbCardComponent,
   NbCardModule,
   NbCheckboxModule,
   NbIconModule,
   NbInputModule,
+  NbMenuModule,
 } from '@nebular/theme';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
@@ -19,24 +21,29 @@ import { NewPasswordComponent } from './passwordReset/new-password/new-password.
 import { ApplicantssigninComponent } from './applicantssignin/applicantssignin.component';
 import { ApplicantssignupComponent } from './applicantssignup/applicantssignup.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
+import { ApplicantSelectionComponent } from './applicant-selection/applicant-selection.component';
+import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 
 
 
 
 @NgModule({
   declarations: [RecruitmentComponent, ApplicantsDashboardComponent, PasswordResetComponent, NewPasswordComponent,
-    ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent],
+    ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent, ApplicantProfileComponent,
+     ApplicantSelectionComponent, InterviewerdashboardComponent],
   imports: [
     ThemeModule,
     CommonModule,
     NbButtonModule,
-    NbCardModule,
     ngFormsModule,
     NbCheckboxModule,
     NbInputModule,
     NbIconModule,
     ComponentsModule,
     RecruitmentRoutingModule,
+    NbCardModule,
+    NbMenuModule
   ]
 })
 export class RecruitmentModule { }
