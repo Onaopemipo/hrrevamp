@@ -44,10 +44,9 @@ import {
   NbSpinnerModule,
   NbListModule,
   NbLayoutModule,
-  
+
 
 } from '@nebular/theme';
-
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
@@ -143,8 +142,9 @@ FullCalendarModule.registerPlugins([
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     InputvalidationService,
-    
-    DecimalPipe
+
+    DecimalPipe,
+
   ],
 })
 export class AppModule {

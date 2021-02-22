@@ -1,4 +1,4 @@
-import { TemplateRef } from "@angular/core";
+import { TemplateRef } from '@angular/core';
 
 export interface TableData {
     page: number;
@@ -12,7 +12,7 @@ export enum ColumnTypes {
 export interface TableColumn {
     name: string;
     title: string;
-    type: ColumnTypes;
+    type?: ColumnTypes;
     template?: TemplateRef<any>;
     colors?: {};
 }

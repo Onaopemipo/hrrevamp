@@ -65,7 +65,7 @@ export class EmailLogComponent implements OnInit {
     this.loadData();
   }
 
-  loadNewPage(pageNo: number){
+  loadNewPage(pageNo: number) {
     this.currentPage  = pageNo;
     this.loadData();
   }

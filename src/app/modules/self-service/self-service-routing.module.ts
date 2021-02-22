@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeeventsComponent } from './employeeevents/employeeevents.component';
 import { SelfServiceComponent } from './self-service.component';
+import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   {
     path: '',
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
     component: DashboardComponent,
+      },
+      {
+        path: 'profile',
+    component: ProfileComponent,
       },
       {
         path: 'employeeevents',

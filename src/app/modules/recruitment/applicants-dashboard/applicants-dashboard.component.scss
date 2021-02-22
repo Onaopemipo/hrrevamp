@@ -23,13 +23,6 @@
   width: 100%;
 }
 
-
-.profile {
-  // background: rgba(72, 71, 224, 0.04);
-  padding: 20px;
-  height: 30px;
-}
-
 .text-wrap:first-child {
   width: 80%;
   float: left;
@@ -39,3 +32,90 @@
   width: 5%;
   float: right;
 }
+
+
+.jobs {
+  display: flex;
+
+}
+
+.job-items {
+  flex: 1;
+  background:#fff;
+  border-radius: 4px;
+  margin-right: 2%;
+  padding: 20px;
+}
+
+.job-items:last-child {
+  flex: 1;
+  background:#fff;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.title {
+  font-family: Rubik;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+// .listing-filter {
+//   display:flex;
+//   flex-direction:row;
+//   justify-content: space-around;
+// }
+
+// .listing {
+//   display:flex;
+//   flex-direction:column;
+// }
+
+.title {
+  font-family: Rubik;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+.my-button {
+  color: #ffffff;
+  text-transform: capitalize;
+  background: #4847E0;
+  border-radius: 4px;
+}
+
+  .main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    padding-top: 10px;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+

@@ -13,6 +13,7 @@ import { SelfServiceComponent } from './self-service.component';
 import {NbPopoverModule} from '@nebular/theme';
 import { ModalformComponent } from './modalform/modalform.component';
 import { ThemeModule } from '../../@theme/theme.module';
+import { ProfileComponent } from './profile/profile.component';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -20,7 +21,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-    declarations: [DashboardComponent, EmployeeeventsComponent, SelfServiceComponent, ModalformComponent],
+    declarations: [DashboardComponent, EmployeeeventsComponent, SelfServiceComponent, ModalformComponent, ProfileComponent],
     imports: [
       CommonModule,
       ComponentsModule,
@@ -28,7 +29,7 @@ FullCalendarModule.registerPlugins([
       NbStepperModule,
       FullCalendarModule,
       NbPopoverModule,
-      ThemeModule
+      ThemeModule,
     ],
     providers: [
     ]

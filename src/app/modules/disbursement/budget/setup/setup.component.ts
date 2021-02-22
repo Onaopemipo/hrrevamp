@@ -14,7 +14,7 @@ export class SetupComponent implements OnInit {
 
   page = 1;
 
-  gotoBudgetItems(){
+  gotoBudgetItems() {
     this.page = 2;
   }
 

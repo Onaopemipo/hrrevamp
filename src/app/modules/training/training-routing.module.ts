@@ -11,8 +11,8 @@ export const routes: Routes = [
     component: DashboardComponent,
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'administration',
+    component: AdministrationComponent
   },
 
   {
@@ -24,14 +24,12 @@ export const routes: Routes = [
     path: 'requests',
     component: RequestsComponent
   },
-  
+
   {
     path: 'administration',
     component: AdministrationComponent
   },
 
-  // { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  // { path: '**', redirectTo: 'auth' },
 ];
 
 const config: ExtraOptions = {
