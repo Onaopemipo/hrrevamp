@@ -1,3 +1,5 @@
+import { JobDetailsComponent } from './job-details/job-details.component';
+import { ApplicantsDashboardComponent } from './applicants-dashboard/applicants-dashboard.component';
 import { ApplicantssignupComponent } from './applicantssignup/applicantssignup.component';
 import { RecruitmentComponent } from '../recruitment/recruitment.component';
 import { ComponentsModule } from 'app/components/components.module';
@@ -23,6 +25,17 @@ export const routes: Routes = [
         redirectTo: 'applicantssignin',
         pathMatch: 'full',
       },
+
+      // {
+      //   path: 'applicantsdashboard',
+      //   component: ApplicantsDashboardComponent
+      // },
+
+      {
+        path: 'jobdetails',
+        component: JobDetailsComponent
+      },
+
       {
         path: '**',
         component: ApplicantssigninComponent,

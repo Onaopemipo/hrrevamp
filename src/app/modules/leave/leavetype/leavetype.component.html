@@ -1,0 +1,69 @@
+<p>leavetype works!</p>
+<ngx-componentsheader [pageName]='LeaveType' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<ngx-tableheader></ngx-tableheader>
+<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+
+
+<ngx-side-modal [(show)]='showLeaveTypeModal' style="width: 500px; height: 1000px;">
+    <div modal-header>Add Leave Type</div>
+    <div modal-body>
+        <form action="">
+
+
+            <div class="form-group">
+                <label for="Leave Name" style="font-size: small;font-weight: bold;">Leave Name:</label>
+                <input type="text" class="form-control" placeholder="Enter Leave Name" id="Leave Name">
+            </div>
+
+            <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Minimum Number Of Days:</label>
+                <input type="number" class="form-control" placeholder="Enter Minimum Number Of Days" id="Minimum Number Of Days">
+            </div>
+
+            <div class="form-group">
+                <label for="Maximum Number Of Days" style="font-size: small;font-weight: bold;">Maximum Number Of Days:</label>
+                <input type="number" class="form-control" placeholder="Enter  Maximum Number Of Days" id="Maximum Number Of Days">
+            </div>
+            <div class="form-group">
+                <label for="Max Number Of Application In A Year" style="font-size: small;font-weight: bold;">Max Number Of Application In A Year:</label>
+                <input type="number" class="form-control" placeholder="Enter Start Date" id="Max Number Of Application In A Year">
+            </div>
+            <div class="form-group">
+                <label for="Maximum Number of Count" style="font-size: small;font-weight: bold;">Maximum Number of Count:</label>
+                <input class="form-control" placeholder="Maximum Number of Count" id="Maximum Number of Count">
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="Allow Gender" style="font-size: small;font-weight: bold;">Max Number Of Application In A Year:</label>
+                <input type="text" class="form-control" placeholder="Allow Gender" id="Allow Gender">
+            </div>
+            <!--
+                   
+                <div class="d-flex-column"></div><nb-checkbox (checkedChange)="toggle($event)">
+                    <span>Allow rollover</span>
+                </nb-checkbox>
+              </div>-->
+            <!--<label>Checked:</label> {{ checked }}-->
+
+
+        </form>
+    </div>
+
+
+
+    <div modal-actions class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
+
+        <button nbButton status="primary" class="d-flex column">Submit</button>
+        <button nbButton outline status="primary" class="d-flex column"
+            style="background-color: white;">Discard</button>
+        <button class="d-flex column Attach">
+            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
+            Attach</button>
+    </div>
+    <div style="margin-top: 10px;"></div>
+</ngx-side-modal>

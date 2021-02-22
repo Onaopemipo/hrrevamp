@@ -27,7 +27,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { environment } from 'app/environment';
 
 @NgModule({
-  declarations: [TenantonboardingComponent, OnboardingsetupComponent,alertmodalComponent],
+  declarations: [TenantonboardingComponent, OnboardingsetupComponent, alertmodalComponent],
   imports: [
     CommonModule,
     TenantonboardingRoutingModule,
@@ -50,6 +50,6 @@ import { environment } from 'app/environment';
     NbDialogModule,
     Angular4PaystackModule.forRoot(environment.paystackToken)
   ],
-  providers:[AlertserviceService]
+  providers: [AlertserviceService]
 })
 export class TenantonboardingModule { }

@@ -1,4 +1,4 @@
-import { Injectable,Component, OnInit } from '@angular/core';
+import { Injectable, Component, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { NbDialogRef } from '@nebular/theme';
 import { Observable, Subject } from 'rxjs';
@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ngx-alertModalComponent',
-  template: ` 
+  template: `
   <nb-card>
   <nb-card-body>
    <div style="display:flex;flex-direction: column;padding:5rem;align-items:center; text-align:center">
@@ -24,14 +24,14 @@ import { Observable, Subject } from 'rxjs';
    <div style="padding:10px">
    <button nbButton type="button" status="primary" (click)="submit()">{{alertButtonMessage}}</button>
    </div>
-  
+
    </div>
   </nb-card-body>
 
 </nb-card>
   `,
 })
-export class alertmodalComponent implements OnInit { 
+export class alertmodalComponent implements OnInit {
   alertType: string = '';
   alertMessage: string = '';
   alertButtonMessage: string = '';
@@ -46,8 +46,8 @@ export class alertmodalComponent implements OnInit {
 
   ngOnInit(): void {
     this.alertType = this.alertController.alertType;
-    this.alertMessage= this.alertController.alertMessage;
-    this.alertButtonMessage= this.alertController.alertButtonMessage; 
+    this.alertMessage = this.alertController.alertMessage;
+    this.alertButtonMessage = this.alertController.alertButtonMessage;
   }
 }
 
@@ -66,14 +66,14 @@ export class AlertserviceService {
     this.alertType = alertType;
     this.alertMessage = alertMessage;
     this.alertButtonMessage = alertButtonMessage;
-    var newSubjectResponse = new Subject();
+    const newSubjectResponse = new Subject();
     this.dialogService.open(alertmodalComponent,
       {
         hasBackdrop: false,
         closeOnEsc: false
       })
-      .onClose.subscribe(name => { newSubjectResponse.next(name) });
-    
+      .onClose.subscribe(name => { newSubjectResponse.next(name); });
+
     return newSubjectResponse;
   }
 }

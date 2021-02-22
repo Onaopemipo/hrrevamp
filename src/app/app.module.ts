@@ -44,7 +44,7 @@ import {
   NbSpinnerModule,
   NbListModule,
   NbLayoutModule,
-  
+
 
 } from '@nebular/theme';
 
@@ -143,7 +143,7 @@ FullCalendarModule.registerPlugins([
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     InputvalidationService,
-    
+
     DecimalPipe
   ],
 })

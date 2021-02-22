@@ -1,0 +1,19 @@
+.circular--portrait {
+    position: relative;
+    width: 8.75rem;
+    height: 8.75rem;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 0.5px solid #4847E0;
+  }
+
+  .circular--portrait img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .fmContainer{
+    padding: 4rem;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+  }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NbMenuComponent, NbMenuItem, NbMenuItemComponent, NbToggleStates, ɵa } from '@nebular/theme';
 
 @Component({
-  selector: '[nbMenuItemy]',
+  selector: '[nbMenuItem]',
   templateUrl: './menu-item.html',
   animations: [
     trigger('toggle', [
@@ -14,7 +14,7 @@ import { NbMenuComponent, NbMenuItem, NbMenuItemComponent, NbToggleStates, ɵa }
     ]),
   ],
 })
-export class MyMenuItemComponent extends NbMenuItemComponent{
+export class MyMenuItemComponent extends NbMenuItemComponent {
 
 }
 
@@ -23,7 +23,7 @@ export class MyMenuItemComponent extends NbMenuItemComponent{
   templateUrl: './my-menu.component.html',
   styleUrls: ['../../../../node_modules/@nebular/theme/components/menu/menu.component.css']
 })
-export class MyMenuComponent extends NbMenuComponent{
+export class MyMenuComponent extends NbMenuComponent {
   // a: ɵa
   menuItem: NbMenuItem;
   @Input() items: NbMenuItem[];
@@ -33,14 +33,19 @@ export class MyMenuComponent extends NbMenuComponent{
       this.menuItem = {
         title: 'main',
         children: this.items
-      }
-    }, 2000)
+      };
+    }, 2000);
     this.menuItem = {
       title: 'main',
       children: this.items
-    }
+    };
   }
 
+  onItemClick(item: NbMenuItem) {
+    this.router.navigate([item.link])
+    //console.log(item);
+  }
+ 
   // ngOnInit(): void {
   // }
 

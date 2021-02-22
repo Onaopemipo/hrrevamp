@@ -67,9 +67,10 @@ import { DateRangeComponent } from './date-range/date-range.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
 import { DateComponent } from './date/date.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MainBaseComponent } from './main-base/main-base.component';
 import { CalComponent } from './cal/cal.component';
+import { CalenderComponent } from './calender/calender.component';
+
 
 
 @NgModule({
@@ -97,8 +98,13 @@ import { CalComponent } from './cal/cal.component';
     MyMenuItemComponent,
     DateComponent,
     DefaultContentComponent,
+<<<<<<< HEAD
     MainBaseComponent,
     CalComponent
+=======
+    CalenderComponent,
+  
+>>>>>>> 5df2080dd86e079e51c1fdd57f96c2abe8ad5bdd
   ],
   imports: [
     FormsModule,
@@ -150,7 +156,8 @@ import { CalComponent } from './cal/cal.component';
     NgxEchartsModule,
     NbIconModule,
     NbFormFieldModule,
-    NbCardModule
+    NbCardModule,
+    NbInputModule,
     // NgxChartsModule
   ],
   providers: [
@@ -186,7 +193,7 @@ import { CalComponent } from './cal/cal.component';
     AmountInputComponent,
     DateRangeComponent,
     DateComponent,
-    // NbMenuModule,
+    //NbMenuModule,
     DefaultContentComponent,
     CommonModule,
     FormsModule,
@@ -195,6 +202,8 @@ import { CalComponent } from './cal/cal.component';
     TableheaderComponent,
     DatePipesPipe,
     CalComponent,
+    NbInputModule,
+    CalenderComponent,
   ],
 })
 export class ComponentsModule { }

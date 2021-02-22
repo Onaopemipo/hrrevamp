@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestsComponent implements OnInit {
 
+  pageTitle: string = 'Training Request';
+  myButton: string = 'New Training';
   myRequestHeader = 'There is no request at the moment';
   myRequestDesc = 'Check back later';
   requestData: string = 'wdd';

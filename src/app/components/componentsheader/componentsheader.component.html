@@ -8,11 +8,11 @@
             </ng-content>
         </div>
     <div style="float: right; padding: 5px;" *ngFor="let btn of requiredButton; let i = index">
-        <button   [outline]='btn.outline' (click)="buttonClick.emit(btn.name)"   nbButton status="primary" >
+        <button   [outline]='btn.outline' (click)="buttonClick.emit(btn.name)" nbButton status="primary" >
             <nb-icon *ngIf="btn.icon" icon="{{btn.icon}}"></nb-icon>&nbsp;{{btn.label}}
         </button>
     </div>
-        
+
     </div>
     </div>
 

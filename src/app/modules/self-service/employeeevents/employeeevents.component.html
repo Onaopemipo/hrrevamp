@@ -1,7 +1,10 @@
-<div style="width: 100%;">
-    <button #fffff class="bg-primary mb-5 text-white" style="float: right;  margin-left: -300px; padding: 10px;">Events</button>
-    <button nbButton  [nbPopover]="formcomponent" [class]="{'mb-5': true, 'text-white': link == 'i'}"></button>
-    <full-calendar [options]="calendarOptions" style="margin-top: 50px;"></full-calendar>
-    <a [nbPopover]='link'>here</a>
-</div>
 
+ <div style="padding-top:10px"> <h6 class="header4-bold">{{Events}}</h6></div>
+<nb-card>
+    <nb-card-body style="height: 43vh;">
+        <div style="width: 100%; position: relative;">
+            <button nbButton [nbPopover]="formcomponent" style="position: absolute; top: 50%; left: 50%;;"></button>
+            <full-calendar [options]="calendarOptions" style="margin-top: 50px;"></full-calendar>
+        </div>
+    </nb-card-body>
+</nb-card>

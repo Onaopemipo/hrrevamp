@@ -1,6 +1,6 @@
-import { S } from "@angular/cdk/keycodes";
-import { formatPercent } from "@angular/common";
-import { IStatus, MyColor } from "app/components/status/models";
+import { S } from '@angular/cdk/keycodes';
+import { formatPercent } from '@angular/common';
+import { IStatus, MyColor } from 'app/components/status/models';
 
 enum STATUS {
     RESOLVED, IN_PROGRESS, UN_RESOLVED, CANCELLED, APPROVED, PENDING, DECLINED
@@ -20,7 +20,7 @@ export interface IComplaint {
     referenceNo: number;
 }
 
-export class Complaint implements IStatus{
+export class Complaint implements IStatus {
     private iComplaint: IComplaint;
     constructor(iComplaint: IComplaint) {
         this.iComplaint = iComplaint;
