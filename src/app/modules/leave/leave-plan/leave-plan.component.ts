@@ -12,15 +12,21 @@ enum TOP_ACTIONS {
 })
 export class LeavePlanComponent implements OnInit {
 
+  get hel() {
+    return 'me';
+  }
+  set hello(val: string) {
+    alert(val);
+  }
   topActionButtons = [
-    {name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Apply For Leave', 'icon': 'plus', outline: true},
-    {name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false},
+    { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Apply For Leave', 'icon': 'plus', outline: true },
+    { name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false },
   ];
   tableColumns = [
-    {name: 'a', title: 'Number'},
-    {name: 'b', title: 'Name'},
-    {name: 'c', title: 'Department'},
-    {name: 'd', title: 'Designation'},
+    { name: 'a', title: 'Number' },
+    { name: 'b', title: 'Name' },
+    { name: 'c', title: 'Department' },
+    { name: 'd', title: 'Designation' },
   ];
   get showFirstName() {
     return this.selectedOption === '1';
@@ -29,6 +35,8 @@ export class LeavePlanComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  showAddPlanModal = false;
+  showLeavePlanModal = false;
   selectedOption = '1';
   b = 'mmm';
   value = 'aaaa';
@@ -38,11 +46,20 @@ export class LeavePlanComponent implements OnInit {
       this.showAddPlanModal = true;
     }
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
-     this.showLeavePlanModal = true;
+      this.showLeavePlanModal = true;
     }
   }
-  showAddPlanModal = false;
-  showLeavePlanModal = false;
+  onClick() {
+    this.hello = this.value;
+    this.b = this.hello;
+  }
+  firstName = 'a';
+
+  // lastName = 'b'
+  get fullName() {
+    return this.firstName + ' ' ;
+  }
+ 
 
 
   checked = false;
@@ -50,5 +67,13 @@ export class LeavePlanComponent implements OnInit {
   toggle(checked: boolean) {
     this.checked = checked;
   }
-}
-
+        set lastName(val: string) {
+      if (val.length === 5) {
+        if (val === 'bbbbb')
+          alert('You can continue');
+        else
+          alert('Password validation failed');
+      }
+    }
+  }
+  

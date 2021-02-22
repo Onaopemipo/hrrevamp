@@ -1,8 +1,8 @@
 <ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newVendor', label:'New Vendor', icon: 'plus'}]"></ngx-componentsheader>
 <div style="padding: 10px;"></div>
 
-<ngx-componentsheader  actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newType', label:'New Training Type', icon: 'plus'}]"></ngx-componentsheader>
-<div style="padding: 10px;"></div>
+<!-- <ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newType', label:'New Training Type', icon: 'plus'}]"></ngx-componentsheader>
+<div style="padding: 10px;"></div> -->
 
 <div class="container" style="background-color: #ffffff; height: auto;">
   <nb-tabset>
@@ -20,7 +20,7 @@
 
       <div *ngIf="welcome && TrainingVendorData !=''" id="home" class="container tab-pane active"><br>
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent></ngx-tablecomponent>
+        <ngx-tablecomponent [tableColum]="myVendorTable"></ngx-tablecomponent>
 
       </div>
 
@@ -145,7 +145,7 @@
 
       <div *ngIf="trainingType && TrainingTypeData !=''" id="home" class="container tab-pane active"><br>
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent></ngx-tablecomponent>
+        <ngx-tablecomponent  [tableColum]="myTable"></ngx-tablecomponent>
       </div>
 
 

@@ -17,3 +17,8 @@ export interface TableColumn {
     colors?: {};
 }
 
+export interface TableAction {
+  label: string;
+  name: string;
+}
+
