@@ -1,7 +1,12 @@
+import { NbTabComponent } from '@nebular/theme';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
+import { TAB } from '@angular/cdk/keycodes';
 
+enum TABS {
+  vendors = 'vendor', types = 'type'
+}
 @Component({
   selector: 'ngx-administration',
   templateUrl: './administration.component.html',
@@ -68,5 +73,19 @@ export class AdministrationComponent implements OnInit {
 
   changed(data) {
 
+  }
+
+
+  TABS = TABS;
+  selectedTab = TABS.vendors
+
+  tabSelected(tab: NbTabComponent){
+    const b: any = tab.tabId
+    console.log(tab);
+    this.selectedTab = b;
+  }
+
+  get rButton(){
+    return [{name:'newVendor', label: this.selectedTab == TABS.vendors ? 'New Vendor' : 'New Type', icon: 'plus'}]
   }
 }

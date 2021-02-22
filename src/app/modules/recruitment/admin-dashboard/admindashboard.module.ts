@@ -7,11 +7,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule } from '@nebular/theme';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { JobsComponent } from './jobs/jobs.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, JobsComponent],
   imports: [
     CommonModule,
     AdminDashboardRoutingModule,

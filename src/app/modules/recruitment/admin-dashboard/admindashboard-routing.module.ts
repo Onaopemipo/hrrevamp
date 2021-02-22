@@ -1,3 +1,4 @@
+import { JobsComponent } from './jobs/jobs.component';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -11,7 +12,13 @@ export const routes: Routes = [
       {
         path: '',
         component: DashboardComponent
-      }]
+      },
+
+      {
+        path: 'jobs',
+        component: JobsComponent
+      }
+    ]
     }
 ]
 
