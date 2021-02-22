@@ -34,6 +34,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Leave',
         link: '/myleave',
       },
+      {
+        title: 'Exit Process',
+        link: '/employeemodule/exitrequest',
+      },
     ],
   },
   {
@@ -41,13 +45,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/EmployeeManagement.jpg',
     children: [
       {
-        title: 'Employee Onboarding',
+        title: 'Onboarding Dashboard',
         link: '/employeemodule',
       },
       {
         title: 'Onboarding Employees',
         link: '/employeemodule/allemployees',
       },
+      {
+        title: 'Exit Management',
+        link: '/employeemodule/exitmanagement',
+      },
+    
       
     ]
   },
@@ -180,8 +189,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Expenses',
-    link: '/',
     icon: '/assets/icons/Expenses.jpg',
+    children: [
+      {
+        title: 'Expense Management',
+        link:'/expenses/'
+      },
+      {
+        title: 'Expense Type',
+        link:'/expenses/type'
+      },
+      {
+        title: 'Expense Request',
+        link:'/expenses/request'
+      },
+      {
+        title: 'Expense Report',
+        link:'/expenses/request'
+      }
+
+    ]
   },
   {
     title: 'Loan & Disbursement',
