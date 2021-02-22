@@ -98,13 +98,9 @@ import { CalenderComponent } from './calender/calender.component';
     MyMenuItemComponent,
     DateComponent,
     DefaultContentComponent,
-<<<<<<< HEAD
     MainBaseComponent,
-    CalComponent
-=======
+    CalComponent,
     CalenderComponent,
-  
->>>>>>> 5df2080dd86e079e51c1fdd57f96c2abe8ad5bdd
   ],
   imports: [
     FormsModule,
