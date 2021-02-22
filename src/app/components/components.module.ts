@@ -67,7 +67,8 @@ import { DateRangeComponent } from './date-range/date-range.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
 import { DateComponent } from './date/date.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MainBaseComponent } from './main-base/main-base.component';
+import { CalComponent } from './cal/cal.component';
 import { CalenderComponent } from './calender/calender.component';
 
 
@@ -97,8 +98,13 @@ import { CalenderComponent } from './calender/calender.component';
     MyMenuItemComponent,
     DateComponent,
     DefaultContentComponent,
+<<<<<<< HEAD
+    MainBaseComponent,
+    CalComponent
+=======
     CalenderComponent,
   
+>>>>>>> 5df2080dd86e079e51c1fdd57f96c2abe8ad5bdd
   ],
   imports: [
     FormsModule,
@@ -194,8 +200,10 @@ import { CalenderComponent } from './calender/calender.component';
     NbCardModule,
     NgxEchartsModule,
     TableheaderComponent,
+    DatePipesPipe,
+    CalComponent,
     NbInputModule,
-    CalenderComponent
+    CalenderComponent,
   ],
 })
 export class ComponentsModule { }

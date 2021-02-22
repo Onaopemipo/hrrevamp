@@ -70,3 +70,12 @@
 	border-radius: 50%;
 	background: white;
 }
+
+
+.my-checkbox{
+  width: 20px; height: 20px; padding: 2px; background-color: #eee; display: flex; border-radius: 50%;
+}
+.selected{
+  padding: 4px;
+  background-color: #4847E0 !important;
+}
