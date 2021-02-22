@@ -7,9 +7,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/home.jpg',
     link: '/dashboard',
 
-    
+
   },
- 
+
   {
     title: 'CORE HR',
     group: true,
@@ -48,7 +48,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Onboarding Employees',
         link: '/employeemodule/allemployees',
       },
-      
+
     ]
   },
   {
@@ -160,7 +160,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Email Settings',
         link: '/communications/settings',
       },
-    
+
     ],
 
   },
@@ -208,7 +208,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Request',
         link: '/disbursement/disbursement/requests',
       },
-    
+
 
     ]
   },

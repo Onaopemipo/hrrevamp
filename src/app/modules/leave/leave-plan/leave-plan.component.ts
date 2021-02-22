@@ -59,7 +59,7 @@ export class LeavePlanComponent implements OnInit {
   get fullName() {
     return this.firstName + ' ' ;
   }
- 
+
 
 
   checked = false;
@@ -76,4 +76,4 @@ export class LeavePlanComponent implements OnInit {
       }
     }
   }
-  
+

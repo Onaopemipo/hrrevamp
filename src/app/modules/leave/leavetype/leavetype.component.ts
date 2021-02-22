@@ -1,8 +1,8 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 
 enum TOP_ACTIONS {
   ADD_LEAVE_TYPE,
-  
+
 }
 
 @Component({
@@ -12,11 +12,11 @@ enum TOP_ACTIONS {
 })
 
 export class LeavetypeComponent implements OnInit {
-  LeaveType : string = 'Leave-Type';
-  
+  LeaveType: string = 'Leave-Type';
+
   topActionButtons = [
     {name: TOP_ACTIONS.ADD_LEAVE_TYPE, label: 'Add Leave Type', 'icon': 'plus', outline: false},
-   
+
   ];
 
 
@@ -34,11 +34,11 @@ export class LeavetypeComponent implements OnInit {
 
   modal(buttion) {
     if (buttion === TOP_ACTIONS.ADD_LEAVE_TYPE) {
-     this.showLeaveTypeModal = true
-     
+     this.showLeaveTypeModal = true;
+
     }
-    
+
   }
 
-  showLeaveTypeModal = false
+  showLeaveTypeModal = false;
 }

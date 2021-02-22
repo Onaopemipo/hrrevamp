@@ -77,15 +77,15 @@ export class AdministrationComponent implements OnInit {
 
 
   TABS = TABS;
-  selectedTab = TABS.vendors
+  selectedTab = TABS.vendors;
 
-  tabSelected(tab: NbTabComponent){
-    const b: any = tab.tabId
+  tabSelected(tab: NbTabComponent) {
+    const b: any = tab.tabId;
     console.log(tab);
     this.selectedTab = b;
   }
 
-  get rButton(){
-    return [{name:'newVendor', label: this.selectedTab == TABS.vendors ? 'New Vendor' : 'New Type', icon: 'plus'}]
+  get rButton() {
+    return [{name: 'newVendor', label: this.selectedTab == TABS.vendors ? 'New Vendor' : 'New Type', icon: 'plus'}];
   }
 }
