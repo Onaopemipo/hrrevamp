@@ -1,0 +1,179 @@
+<ngx-componentsheader pageName='Exit Management' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
+
+<nb-card style="margin-top: 20px;">
+  <nb-card-body>
+
+    <nb-card-header>Involuntary exit</nb-card-header>
+    <div style="margin-top: 10px;margin-bottom: 10px;">
+      <nb-card-body>Let's commence exit process with smart ace</nb-card-body>
+    </div>
+
+
+  </nb-card-body>
+
+  <!--    <div class="main-page-container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Reason For Termination</label>
+            <input class="form-control" placeholder="Enter Reason For Termination" />
+          </div>
+          <div class="form-group">
+            <label>Sub-Reason</label>
+            <input class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label>Source of Initiation</label>
+            <input class="form-control" placeholder="Enter Source of Initiation" />
+          </div>
+          <div class="form-group">
+            <label>Date of Exit</label>
+            <input class="form-control" placeholder="Enter Date of Exit" />
+          </div>
+
+
+          <hr style="margin-top: 15px;">
+          <nb-card-body>
+            <div style="border: 15px;" class="form-group">
+              <label for="" style="margin-left: -5px;">Upload Affected Employee</label>
+              <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
+                <nb-radio value="1">Bulk Upload</nb-radio>
+                <nb-radio value="2">Individual Upload</nb-radio>
+
+              </nb-radio-group>
+
+            </div>
+
+
+            <div class="form-group">
+              <label>Upload Employee Csv File</label>
+              <ngx-file-upload class="form-control"></ngx-file-upload>
+            </div>
+
+            <hr>
+
+            <div class="form-group row">
+              <div class="col-md-4" style="display: flex;align-items:center">
+                <label for=""  >Upload Unsupporting Document</label>
+              </div>
+              <div class="col-md-8 col-xxl-8 ">
+                <div style="display: flex;flex-direction: row;">
+                  <div>
+                    <ngx-file-upload class="form-control"></ngx-file-upload>
+                  </div>
+                  <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
+                   Not More than 1 mb
+                  </div>
+                </div>
+                
+               
+              </div>
+
+            </div>
+          </nb-card-body>
+
+
+          <div class="form-group">
+            <label>Allow sending of mails</label>
+            <input type="checkbox" />
+          </div>
+          <div class="form-group" style="margin-top: 20px">
+            <label></label>
+            <button nbButton status="primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  <div class="container" style="margin-top: 3rem;">
+    <nb-card-body>
+      <form>
+        <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For Termination</label>
+          <div class="col-sm-8">
+            <input type="text" nbInput fullWidth placeholder="Company Enter Reason For Termination">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Sub-Reason</label>
+          <div class="col-sm-8">
+            <input type="text" nbInput fullWidth placeholder="Enter Sub-Reason">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Source of initiation</label>
+          <div class="col-sm-8">
+            <input type="text" nbInput fullWidth placeholder="Enter Source of initiation">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Exit</label>
+          <div class="col-sm-8">
+            <input type="text" nbInput fullWidth placeholder="Enter Date of Exit">
+          </div>
+        </div>
+        <hr>
+        <div class="form-group row" style="margin-top: 15px;">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Upload Affected Employee</label>
+          <div class="col-sm-8">
+            <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
+              <nb-radio value="1">Bulk Upload</nb-radio>
+              <nb-radio value="2">Individual Upload</nb-radio>
+
+            </nb-radio-group>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-4" style="display: flex;align-items:center">
+            <label for="">Upload Unsupporting Document</label>
+          </div>
+          <div class="col-md-8 col-xxl-8 ">
+            <div style="display: flex;flex-direction: row;">
+              <div>
+                <ngx-file-upload class="form-control"></ngx-file-upload>
+              </div>
+              <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
+                <img  style="height: 20px; margin-right: 10px;" src="assets/icons/download.jpg" alt=""><span style="color: blue;">Download file</span>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <br>
+
+        <div class="form-group row">
+          <div class="col-md-4" style="display: flex;align-items:center">
+            <label for="">Upload Unsupporting Document</label>
+          </div>
+          <div class="col-md-8 col-xxl-8 ">
+            <div style="display: flex;flex-direction: row;">
+              <div>
+                <ngx-file-upload class="form-control"></ngx-file-upload>
+              </div>
+              <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
+                Not More than 1 mb
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Additional comment</label>
+          <div class="col-sm-8">
+
+            <textarea rows="5" nbInput fullWidth placeholder="Enter Additional comment here"></textarea>
+          </div>
+
+        </div>
+      </form>
+
+    </nb-card-body>
+  </div>
+</nb-card>

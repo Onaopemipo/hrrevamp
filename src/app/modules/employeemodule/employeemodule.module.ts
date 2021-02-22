@@ -23,10 +23,13 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { EmployeemoduleRoutingModule } from './employeemodule-routing.module';
 import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
 import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
+import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
+import { ManagementexistComponent } from './managementexist/managementexist.component';
+import { ExistrequestComponent } from './existrequest/existrequest.component';
 
 
 @NgModule({
-  declarations: [HiringchecklistComponent, EmployeeonboardingdashboardComponent],
+  declarations: [HiringchecklistComponent, EmployeeonboardingdashboardComponent, EmploymentexitmanagementComponent, ManagementexistComponent, ExistrequestComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,
