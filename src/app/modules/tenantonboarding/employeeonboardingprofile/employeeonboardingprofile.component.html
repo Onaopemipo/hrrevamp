@@ -1,0 +1,489 @@
+
+<div class="container" >
+    <div style="padding:2rem ;">
+
+
+        <ngx-componentsheader [pageName]="title" >   
+        </ngx-componentsheader>
+        
+        <div class="row">
+        <div class="col-md-4 col-xxl-4">
+        <nb-card>
+        <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
+            <div class="fmContainer">
+                <div style="padding-bottom: 0;">
+    <div style="display: flex;align-items: center;justify-content: center;">
+    <div class="employee-avatar">
+    <img src="assets/icons/camera.jpg"> 
+    </div>
+    </div>
+    
+                    <div style="text-align: center; padding: 10px;">
+                        <p class="header6-medium" style="margin-bottom: 1rem !important;">Hiring Checklist</p>
+                        <p style="color: #95A8B8 !important;">User Interface Designer</p>
+                    </div>
+                 
+                </div>
+        
+        
+            </div>
+        </nb-card-body>
+        <div  style.height="{{(scase.offsetHeight < 402)?402 : scase.offsetHeight }}px" >
+            <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of hiringChecklist; let i = index">
+        
+                <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
+                <div style="padding-left: 1rem;"><nb-icon icon="checkmark-circle-2" status="{{hiringlist.status == 'Active'? 'primary': 'none'}}"></nb-icon></div>
+                <div style="padding-left: 0.625rem;"><span [ngClass]="{'listtextActive': hiringlist.status == 'Active','listtextInactive': hiringlist.status != 'Active'}" >{{hiringlist.label}} </span> </div>
+                </div>
+                
+          </div>
+        </div>
+        
+        </nb-card>
+        </div>
+        <div class="col-md-8 col-xxl-8">
+        <nb-card>
+        <nb-card-body>
+            <div #scase [ngSwitch]="selectedCase">
+                   <!--Personal Info-->
+            <div class="fmContainer" *ngSwitchCase="'personal_Info'">
+                <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                    <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                    <div>
+                        <nb-select selected="1" status="primary">
+                          <nb-option value="1">Actions</nb-option>
+                          <nb-option value="2">Option 2</nb-option>
+                        </nb-select>
+                      </div>
+                </div>
+        
+                <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                    <p class="smalltext">Input required Information in the fields below</p>
+                    </div>
+                    <div style="padding-top:1rem;">
+                        <form>
+                            <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">First Name</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="First Name">
+                                </div>
+                              </div>                       
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Last Name">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Phone Number">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Date of Birth">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Marital Status">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Gender">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Address">
+                                </div>
+                              </div>
+        <div style="padding-top: 1rem;"></div>
+                              <p class="header6-medium">Educational Information</p>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Field of Study</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Field of Study">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Degree</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Degree">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Completion</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Date of Completion">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">CGPA</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="CGPA">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Institution</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Institution">
+                                </div>
+                              </div>
+                              <div style="padding-top: 1rem;"></div>
+                              <p class="header6-medium">Next of Kin</p>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Full Name</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Full Name">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Relationship</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Relationship">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Phone Number">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Address">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="offset-sm-4 col-sm-8">
+                                  <button type="submit" nbButton status="primary" >Update Changes</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+            </div>
+        
+            <!--Work Info-->
+        
+            <div class="fmContainer" *ngSwitchCase="'work_Info'">
+                <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                    <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                    <div>
+                        <nb-select selected="1" status="primary">
+                          <nb-option value="1">Actions</nb-option>
+                          <nb-option value="2">Option 2</nb-option>
+                        </nb-select>
+                      </div>
+                </div>
+        
+                <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                    <p class="smalltext">Input required Information in the fields below</p>
+                    </div>
+                    <div style="padding-top:3rem;">
+                        <form>
+                            <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Hire Date">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of joining</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Date of joining">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Salary per annum</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Salary per annum">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Designation">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Employee type</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Employee type">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Department">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reporting Manager</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Reporting Manager">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Location</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Location">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="offset-sm-4 col-sm-8">
+                                  <button type="submit" nbButton status="primary" >Update Changes</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+            </div>
+        
+             <!--Payment-->
+             <div class="fmContainer" *ngSwitchCase="'payment_Info'">
+                <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                    <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                    <div>
+                        <nb-select selected="1" status="primary">
+                          <nb-option value="1">Actions</nb-option>
+                          <nb-option value="2">Option 2</nb-option>
+                        </nb-select>
+                      </div>
+                </div>
+        
+        
+                <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                    <p class="smalltext">Input required Information in the fields below</p>
+                    </div>
+                    <div style="padding-top:3rem;">
+                        <form>
+                            <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Bank Name</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Bank Name">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Name</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Account Name">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Number</label>
+                                <div class="col-sm-8">
+                                  <input type="tel" nbInput fullWidth  placeholder="Account Number">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Type</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Account Type">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="offset-sm-4 col-sm-8">
+                                  <button type="submit" nbButton status="primary" >Update Changes</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+            </div>
+              <!--Medical Info-->
+              <div class="fmContainer" *ngSwitchCase="'medical_Info'">
+                <div style="padding-bottom: 5px;">
+                    <p class="header6-medium">{{selectedPanel.label}}</p>
+                </div>
+        
+                <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                    <p class="smalltext">Input required Information in the fields below</p>
+                    </div>
+                    <div style="padding-top:3rem;">
+                        <form>
+                            <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Genotype</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Genotype">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Blood Group</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Blood Group">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Any pre-existing injury?</label>
+                                <div class="col-sm-8">
+                                    <nb-radio-group [(value)]="radioGroupValue">
+                                        <nb-radio
+                                          [value]="'This is value 1'">
+                                         Yes
+                                        </nb-radio>
+                                        <nb-radio
+                                          [value]="'This is value 2'">
+                                          No
+                                        </nb-radio>
+                                    
+                                      </nb-radio-group>
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Please State it</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Please State it">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <div class="offset-sm-4 col-sm-8">
+                                  <button type="submit" nbButton status="primary" >Update Changes</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+            </div>
+            <!--Tax-->
+           
+        
+               <div class="fmContainer" *ngSwitchCase="'tax_Info'">
+                <div style="padding-bottom: 5px;">
+                    <p class="header6-medium">{{selectedPanel.label}}</p>
+                </div>
+        
+                <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                    <p class="smalltext">Input required Information in the fields below</p>
+                    </div>
+                    <div style="padding-top:3rem;">
+                        <form>
+                            <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Tax ID</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Tax ID">
+                                </div>
+                              </div>
+        
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Are you Nigerian?</label>
+                                <div class="col-sm-8">
+                                    <nb-radio-group [(value)]="radioGroupValue">
+                                        <nb-radio
+                                          [value]="'This is value 1'">
+                                         Yes
+                                        </nb-radio>
+                                        <nb-radio
+                                          [value]="'This is value 2'">
+                                          No
+                                        </nb-radio>
+                                    
+                                      </nb-radio-group>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Passport Number</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Passport Number">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Passport Expiry Date</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Passport Expiry Date">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Country</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Country">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Visa Type</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Visa Type">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Visa Expiry Date</label>
+                                <div class="col-sm-8">
+                                  <input type="text" nbInput fullWidth  placeholder="Visa Expiry Date">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="offset-sm-4 col-sm-8">
+                                  <button type="submit" nbButton status="primary" >Update Changes</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+            </div>
+        
+                <!--Document-->
+                <div class="fmContainer" *ngSwitchCase="'document_Info'">
+                    <div style="padding-bottom: 5px;">
+                        <p class="header6-medium">{{selectedPanel.label}}</p>
+                    </div>
+        
+                    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                        <p class="smalltext">Input required Information in the fields below</p>
+                        </div>
+                        <div style="padding-top:3rem;">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader" style="display: flex;align-items: center;">NYSC Certificate</label>
+                                    <div class="col-sm-5">
+                            <ngx-file-upload></ngx-file-upload>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader" style="display: flex;align-items: center;">Birth Certificate</label>
+                                    <div class="col-sm-5">
+                            <ngx-file-upload></ngx-file-upload>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader" style="display: flex;align-items: center;">Driver’s License</label>
+                                    <div class="col-sm-5">
+                            <ngx-file-upload></ngx-file-upload>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader" style="display: flex;align-items: center;">Additional Document</label>
+                                    <div class="col-sm-5">
+                            <ngx-file-upload></ngx-file-upload>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <div class="offset-sm-4 col-sm-8">
+                                      <button type="submit" nbButton status="primary" >Update Changes</button>
+                                    </div>
+                                  </div>
+                            </form>
+                        </div>
+                </div>
+        </div>
+        </nb-card-body>
+        </nb-card>
+        </div>
+        </div>
+        
+    </div>
+  
+</div>

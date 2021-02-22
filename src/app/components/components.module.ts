@@ -50,7 +50,9 @@ import {
   ɵa,
   NbMenuService,
   NbDatepickerDirective,
+  NbDialogRef
 } from '@nebular/theme';
+
 
 import { StatusComponent } from './status/status.component';
 import { DatePipesPipe } from './pipes/date-pipes.pipe';
@@ -69,6 +71,8 @@ import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.componen
 import { DateComponent } from './date/date.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalenderComponent } from './calender/calender.component';
+import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
+
 
 
 
@@ -98,6 +102,8 @@ import { CalenderComponent } from './calender/calender.component';
     DateComponent,
     DefaultContentComponent,
     CalenderComponent,
+    
+    BulkUploadComponent
   
   ],
   imports: [
@@ -152,6 +158,7 @@ import { CalenderComponent } from './calender/calender.component';
     NbFormFieldModule,
     NbCardModule,
     NbInputModule,
+    
     // NgxChartsModule
   ],
   providers: [
@@ -164,6 +171,7 @@ import { CalenderComponent } from './calender/calender.component';
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
+    
   ],
   exports: [
     ComponentsheaderComponent,
@@ -195,7 +203,8 @@ import { CalenderComponent } from './calender/calender.component';
     NgxEchartsModule,
     TableheaderComponent,
     NbInputModule,
-    CalenderComponent
+    CalenderComponent,
+    BulkUploadComponent
   ],
 })
 export class ComponentsModule { }
