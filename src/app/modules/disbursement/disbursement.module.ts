@@ -10,6 +10,7 @@ import { DisbursementrequestsComponent } from './disbursement/disbursementreques
 import { DisbursementHistoryComponent } from './disbursement/disbursement-history/disbursement-history.component';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { NbDatepickerModule } from '@nebular/theme';
+import { OverallBudgetComponent } from './overall-budget/overall-budget.component';
 
 
 
@@ -21,6 +22,7 @@ import { NbDatepickerModule } from '@nebular/theme';
     SetupComponent,
     BudgetListComponent,
     CreateDisbursementComponent,
+    OverallBudgetComponent,
   ],
   imports: [
     CommonModule,
