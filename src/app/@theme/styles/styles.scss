@@ -298,6 +298,19 @@ letter-spacing: 0px;
 color: #130019;
 opacity: 1;
 }
+
+.coloredsmalltext{
+  font-style: normal !important;
+  font-variant:normal !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  line-height: 22px !important;
+  font-family: 'Rubik',sans-serif !important;
+letter-spacing: 0px;
+color:  #4847E0;
+opacity: 1;
+}
+
 .a-normal{
   font-family:'Rubik',sans-serif !important;
 font-style: normal !important;
@@ -347,6 +360,61 @@ button{
 .circular-avatar img {
   width: 100%;
   height: 100%;
+}
+
+.employee-avatar {
+  position: relative;
+  width: 7.9375rem;
+  height: 7.9375rem;
+  overflow: hidden;
+  border-radius: 50%;
+  // border: 0.5px solid #4847E0;
+}
+
+.employee-avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.listtextInactive{
+font-family:'Rubik',sans-serif !important;
+font-style: normal !important;
+font-weight: normal !important;
+font-variant:normal !important;
+font-size: 16px !important;
+line-height: 22px !important;
+letter-spacing: 0px;
+color: #86828D !important;
+opacity: 1;
+}
+.listtextActive{
+  font-family:'Rubik',sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant:normal !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  letter-spacing: 0px;
+  color: #4847E0 !important;
+  opacity: 1;
+  }
+.wizardlistactive{
+  position: relative;
+  &::before{
+  content: '';
+  height: 2.5rem;
+  border: 3px solid #4847E0;   
+  display: block;
+  }
+}
+.wizardlistinactive{
+  position: relative;
+  &::before{
+  content: '';
+  height: 2.5rem;
+  border: 3px solid inherit;   
+  display: block;
+  }
 }
 @media screen and (max-width: 992px) {
   .linear-form .form-group {

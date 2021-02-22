@@ -44,6 +44,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Employee Onboarding',
         link: '/employeemodule',
       },
+      {
+        title: 'Employees',
+        link: '/employeemodule/allemployees',
+      },
+      
     ]
   },
   {

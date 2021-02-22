@@ -1,32 +1,264 @@
-<div class="row">
-    <div class="col-md-8 col-xxl-8">
-  <nb-card>
-      <nb-card-body>
-        <div>
-            <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
-                <div style="flex: auto; display: flex;padding-top: 15px;">
-                    <p style="color: #4847E0 !important;" class="listsubheader">Work Experience</p>
+<div class="container">
+
+    <div class="row">
+     <div class="col-md-12">
+         <div style="padding: 15px;"></div>
+         <ngx-componentsheader [pageName]="title"></ngx-componentsheader>
+         <div style="padding: 15px;"></div>
+         <div ></div>
+         <div class="row" >
+             <div class="col-md-8" style="margin: 5px;"  [ngSwitch]="selectedPanel">
+                 <!--Personal Information Panel ////////////////////////////////-->
+                 <div class="fmContainer" *ngSwitchCase="'personalInfoPanel'">
+                     <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+                    <p class="listsubheader"> {{subtitle}}</p>
+                    <p class="listsubheader">Input required Information in the fields below</p>
+                    </div>
+                 
+                    <div style="padding-top:3rem;">
+                     <form>
+                         <div class="form-group row">
+                           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">First Name</label>
+                           <div class="col-sm-8">
+                             <input type="text" nbInput fullWidth  placeholder="First Name">
+                           </div>
+                         </div>
+                         <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
+                             <div class="col-sm-8">
+                               <input type="text" nbInput fullWidth  placeholder="Last Name">
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                             <div class="col-sm-8">
+                               <input type="text" nbInput fullWidth  placeholder="Phone Number">
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
+                             <div class="col-sm-8">
+                               <input type="text" nbInput fullWidth  placeholder="Date of Birth">
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Email Address</label>
+                             <div class="col-sm-8">
+                               <input type="email" nbInput fullWidth  placeholder="Email Address">
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
+                             <div class="col-sm-8">
+                               <input type="email" nbInput fullWidth  placeholder="Gender">
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
+                             <div class="col-sm-8">
+                                <textarea rows="5" nbInput fullWidth   placeholder="Address"></textarea>        
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">State</label>
+                             <div class="col-sm-8">
+                               <input type="text" nbInput fullWidth  placeholder="State">
+                             </div>
+                           </div>
+                           <div class="form-group row">
+                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Country</label>
+                             <div class="col-sm-8">
+                                 <textarea rows="5" nbInput fullWidth   placeholder="Country"></textarea>
+                             </div>
+                           </div>
+                      
+                         <div class="form-group row">
+                           <div class="offset-sm-4 col-sm-8">
+                             <button type="submit" nbButton status="primary" (click)="proceedtoworkInfo()">Proceed</button>
+                           </div>
+                         </div>
+                       </form>
+                    </div>
+                
+ 
+ 
+                    </div>
+ 
+    <!--Work Information Panel ////////////////////////////////-->
+    <div class="fmContainer" *ngSwitchCase="'workInfoPanel'">
+        <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+       <p class="listsubheader"> {{subtitle}}</p>
+       <p class="listsubheader">Input required Information in the fields below</p>
+       </div>
+    
+       <div style="padding-top:3rem;">
+        <form>
+            <div class="form-group row">
+              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
+              <div class="col-sm-8">
+                <input type="text" nbInput fullWidth  placeholder="Hire Date">
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of joining</label>
+                <div class="col-sm-8">
+                  <input type="text" nbInput fullWidth  placeholder="Date of joining">
                 </div>
-                <button outline='true'  nbButton status="primary" style="min-width: unset !important;">
-                    <nb-icon icon="plus"></nb-icon>&nbsp;Add
-                </button>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Salary per annum</label>
+                <div class="col-sm-8">
+                  <input type="text" nbInput fullWidth  placeholder="Salary per annum">
                 </div>
-        </div>
-      </nb-card-body>
-  </nb-card>
-    </div>
-    <div class="col-md-4 col-xxl-4">
-        <nb-card>
-            <nb-card-body>
-                <div>
-                    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
-                        <div style="flex: auto; display: flex;padding-top: 15px;">
-                            <p style="color: #4847E0 !important;" class="listsubheader">Evaluation Score</p>
-                        </div>
-                  
-                        </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
+                <div class="col-sm-8">
+                  <input type="text" nbInput fullWidth  placeholder="Designation">
                 </div>
-            </nb-card-body>
-        </nb-card>
-    </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Employee type</label>
+                <div class="col-sm-8">
+                  <input type="email" nbInput fullWidth  placeholder="Employee type">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
+                <div class="col-sm-8">
+                  <input type="email" nbInput fullWidth  placeholder="Department">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reporting Manager</label>
+                <div class="col-sm-8">
+                   <input rows="5" nbInput fullWidth   placeholder="Reporting Manager">       
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Location</label>
+                <div class="col-sm-8">
+                  <input type="text" nbInput fullWidth  placeholder="Location">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Offer Letter</label>
+                <div class="col-sm-8">
+                    <input rows="5" nbInput fullWidth   placeholder="Offer Letter">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Offer Expires on</label>
+                <div class="col-sm-8">
+                    <input rows="5" nbInput fullWidth   placeholder="Offer Expires on">
+                </div>
+              </div>
+            <div class="form-group row">
+              <div class="offset-sm-4 col-sm-8">
+                <button type="submit" nbButton status="primary" (click)="proceedtoofferLetter()">Proceed</button>
+              </div>
+            </div>
+          </form>
+       </div>
+   
+
+
+       </div>
+ 
+    <!--Offer Letter Panel ////////////////////////////////-->
+    <div *ngSwitchCase="'offerletterPanel'">
+        <div class="fmContainer" >
+<div style="display: flex; flex-direction: row;">
+<div style="border:  0.800000011920929px solid #CED4DA; padding: 10px;display: flex;align-items: center; border-radius: 5px;">
+<img src="assets/icons/smartaceLogo.png" style="width:10.8125rem">
 </div>
+<div style="display: flex;align-items: center;padding-left:10px;">
+    <span class="a-normal" style="cursor: pointer;">Change Logo</span>
+</div>
+</div>
+
+<div [innerHTML]="sanitizewysiwyg">
+</div>
+        </div>
+<div style="background-color:#EDF1F7 ;padding: 20px;"></div>
+        <div class="fmContainer" >
+            <div style="padding-bottom: 10px;">              
+                <p class="listsubheader">Email Message</p>
+            </div>
+
+            <form>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Recipient Address</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth  placeholder="Recipient Address">
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Subject</label>
+                    <div class="col-sm-8">
+                      <input type="text" nbInput fullWidth  placeholder="Subject">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Body</label>
+                    <div class="col-sm-9">
+                        <ngx-wysisyg-input  [(value)]="messageBody"></ngx-wysisyg-input>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-3 col-sm-8">
+                      <button type="submit" nbButton status="primary" (click)="proceedtoofferLetter()">Send Offer</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+    
+             </div>
+             <div class="col-md-3" style="margin: 5px;">
+                 <div class="fmContainer" style="padding:4rem 2rem 4rem 2rem;">
+                     <div style="padding-bottom: 10px;">
+                         <p class="header6-medium">Account Setup</p>
+                     </div>
+                     <div class="row">
+                         <div class="col-md-12 " style="display: flex;flex-direction: column;">
+                             <div style="display:flex;padding-bottom: 35px;" >
+                                 <div [ngClass]="{'q-connector': selectedPanel == 'personalInfoPanel','q-connector-inactive': selectedPanel != 'personalInfoPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                             
+                                 </div>
+                                   <div (click)="gotoPanel('personalInfoPanel','Personal Information')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                                   Personal Information
+                                   </div>
+                             </div>
+ 
+                             <div style="display:flex;padding-bottom: 35px;" >
+                                 <div [ngClass]="{'q-connector': selectedPanel == 'workInfoPanel','q-connector-inactive': selectedPanel != 'workInfoPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                                
+                                 </div>
+                                   <div  (click)="gotoPanel('workInfoPanel','Work Information')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                                  Work Information
+                                   </div>
+                             </div>
+                             <div style="display:flex;padding-bottom: 35px;" >
+                                 <div [ngClass]="{'last-q-connector': selectedPanel == 'offerletterPanel','last-q-connector-inactive': selectedPanel != 'offerletterPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+                                
+                                 </div>
+                                   <div (click)="gotoPanel('offerletterPanel','Offer Letter')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                                Offer Letter
+                                 
+                                   </div>
+                             </div>
+                          
+                         </div>
+                     </div>
+                     
+                 </div>
+             </div>
+         </div>
+         
+        
+       
+     </div>
+    
+    </div>
+ </div>

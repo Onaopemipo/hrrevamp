@@ -1,1 +1,238 @@
-<p>employeeonboardingdashboard works!</p>
+<ngx-componentsheader [pageName]="title" >
+
+<div headerButton>
+  <div class="row">
+    <div class="col-md-6 col-xxl-6">
+      <button   outline='false' (click)="pageActionClicked('new_employee')" nbButton status="primary" >
+        <nb-icon  icon="plus"></nb-icon>&nbsp;New Employee
+    </button>
+    </div>
+    <div class="col-md-6 col-xxl-6">
+      <ngx-bulk-upload [btnoutline]="true" (buttonClick)="getuploadedfiles($event)" ></ngx-bulk-upload>
+    </div>
+  </div>
+
+</div>
+
+</ngx-componentsheader>
+<div style="padding: 5px;"></div>
+<div class="row">
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/department.jpg" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          Total Employees
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">20</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/department.jpg" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          In Progress
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">30</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/vendors.png" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+          Onboarded
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">21</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+    <div class="col-xxxl-3 col-md-3" >
+      <nb-card>
+        <div style="padding: 10px;display: flex; flex-direction: row;">
+       <div style="display: flex;align-items: center;">
+         <img src="assets/icons/trainingbudget.png" style="width:3rem;">
+       </div>
+       <div style="flex-direction: column; padding-left: 10px;">
+        <div style="padding:5px">
+        <span class="smalltext">
+         Overdue
+        </span>
+        </div>
+        <div style="padding:5px">
+          <span class="header5-bold">62</span>
+        </div>
+       </div>
+       </div>
+       </nb-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xxxl-6 col-md-6" >
+        <nb-card>
+  
+            <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+<div style="flex:auto">
+<span class="header6-bold">Activities</span>
+</div>
+<div>
+    <span class="a-normal" style="cursor: pointer;">View all</span>
+</div>
+        </div>
+        <div style="padding-top:.5rem ;">
+            <div style="display: flex;flex-direction: row; padding-top: .6rem;padding-bottom: .5rem;">
+            <div >
+                <div class="circlebgn">
+                    <span>HR</span>
+                </div>
+            </div>            
+              <div style="padding-left: 10px;">
+                <div style="display: flex;flex-direction: column;">
+                  <span class="listsubheader" style="color: #080730 !important;">HR Manager requested submission of offer letter</span>
+                  <span class="smalltext">12th January, 2021</span>
+                </div>
+              </div>
+             </div>
+
+             <div style="display: flex;flex-direction: row; padding-top: .6rem;padding-bottom: .5rem;">
+                <div >
+                    <div class="circlebgn">
+                        <span>HR</span>
+                    </div>
+                </div>            
+                  <div style="padding-left: 10px;">
+                    <div style="display: flex;flex-direction: column;">
+                      <span class="listsubheader" style="color: #080730 !important;">HR Manager requested submission of offer letter</span>
+                      <span class="smalltext">12th January, 2021</span>
+                    </div>
+                  </div>
+                 </div>
+
+                 <div style="display: flex;flex-direction: row; padding-top: .6rem;padding-bottom: .5rem;">
+                    <div >
+                        <div class="circlebgn">
+                            <span>HR</span>
+                        </div>
+                    </div>            
+                      <div style="padding-left: 10px;">
+                        <div style="display: flex;flex-direction: column;">
+                          <span class="listsubheader" style="color: #080730 !important;">HR Manager requested submission of offer letter</span>
+                          <span class="smalltext">12th January, 2021</span>
+                        </div>
+                      </div>
+                     </div>
+
+                     <div style="display: flex;flex-direction: row; padding-top: .6rem;padding-bottom: .5rem;">
+                        <div >
+                            <div class="circlebgn">
+                                <span>HR</span>
+                            </div>
+                        </div>            
+                          <div style="padding-left: 10px;">
+                            <div style="display: flex;flex-direction: column;">
+                              <span class="listsubheader" style="color: #080730 !important;">HR Manager requested submission of offer letter</span>
+                              <span class="smalltext">12th January, 2021</span>
+                            </div>
+                          </div>
+                         </div>
+
+                         <div style="display: flex;flex-direction: row; padding-top: .6rem;padding-bottom: .5rem;">
+                            <div >
+                                <div class="circlebgn">
+                                    <span>HR</span>
+                                </div>
+                            </div>            
+                              <div style="padding-left: 10px;">
+                                <div style="display: flex;flex-direction: column;">
+                                  <span class="listsubheader" style="color: #080730 !important;">HR Manager requested submission of offer letter</span>
+                                  <span class="smalltext">12th January, 2021</span>
+                                </div>
+                              </div>
+                             </div>
+
+
+
+
+
+        </div>
+           
+            </nb-card-body>
+          </nb-card>
+    </div>
+    <div class="col-xxxl-6 col-md-6" >
+        <nb-card>         
+            <nb-card-body>
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto">
+                <span class="header6-bold">Onboarded by Department</span>
+                </div>
+                <div>
+                  <nb-select selected="1">
+                    <nb-option value="1">This year</nb-option>
+                    <nb-option value="2">Option 2</nb-option>
+                  </nb-select>
+                </div>
+                        </div>
+<div style="height: 18.75rem;width: 100%;">
+  <div echarts [options]="customizePieOption" class="echart" style="height: 100%;"></div>
+</div>
+
+               
+            </nb-card-body>
+          </nb-card>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xxxl-12 col-md-12" >
+      <nb-card>         
+        <nb-card-body>
+          <div style="display: flex;flex-direction: row;">
+            <div style="flex:auto">
+            <span class="header6-bold">Employee Retention Graph</span>
+            </div>
+            <div>
+              <nb-select selected="1">
+                <nb-option value="1">Yearly</nb-option>
+                <nb-option value="2">Weekly</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div style="height: 18.75rem;width: 100%;">
+            <div echarts [options]="lineOption" class="echart" style="height: 100%;"></div>
+          </div>
+
+          </nb-card-body>
+      </nb-card>
+  
+      </div>
+      </div>
