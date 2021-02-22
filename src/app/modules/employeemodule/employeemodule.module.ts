@@ -27,6 +27,9 @@ import { OnboardingemployeesComponent } from './onboardingemployees/onboardingem
 import { EmployeemoduleComponent } from './employeemodule.component';
 import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
 
+import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
+import { ManagementexistComponent } from './managementexist/managementexist.component';
+import { ExistrequestComponent } from './existrequest/existrequest.component';
 
 
 
@@ -35,7 +38,10 @@ import { EmployeepersonalinformationComponent } from './employeepersonalinformat
     EmployeeonboardingdashboardComponent,
     OnboardingemployeesComponent,
     EmployeemoduleComponent,
-    EmployeepersonalinformationComponent
+    EmployeepersonalinformationComponent,
+    EmploymentexitmanagementComponent,
+    ManagementexistComponent,
+    ExistrequestComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +61,8 @@ import { EmployeepersonalinformationComponent } from './employeepersonalinformat
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,    
+    NbDialogModule,  
+    
   ],
 
 })

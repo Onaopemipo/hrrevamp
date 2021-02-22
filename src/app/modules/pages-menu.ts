@@ -45,7 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/employeemodule',
       },
       {
-        title: 'Employees',
+        title: 'Onboarding Employees',
         link: '/employeemodule/allemployees',
       },
       
@@ -190,8 +190,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Disbursement',
-    link: '/',
     icon: '/assets/icons/Disbursement.jpg',
+    children: [
+      {
+        title: 'Analytics',
+        link: '/disbursement',
+      },
+      {
+        title: 'Budget',
+        link: '/disbursement/budget',
+      },
+      {
+        title: 'History',
+        link: '/disbursement/disbursement/history',
+      },
+      {
+        title: 'Request',
+        link: '/disbursement/disbursement/requests',
+      },
+    
+
+    ]
   },
   {
     title: 'Benefit Administration',

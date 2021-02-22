@@ -4,6 +4,9 @@ import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.comp
 import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
 import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
 import { EmployeemoduleComponent } from './employeemodule.component';
+import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
+import { ManagementexistComponent } from './managementexist/managementexist.component';
+import { ExistrequestComponent } from './existrequest/existrequest.component';
 const routes: Routes = [
   {
   path: '',
@@ -21,6 +24,18 @@ const routes: Routes = [
   {
     path: 'allemployees',
     component: OnboardingemployeesComponent
+      },
+      {
+        path: 'exitmanagement',
+        component: EmploymentexitmanagementComponent
+      },
+      {
+        path: 'exitform',
+        component: ManagementexistComponent
+      },
+      {
+        path: 'exitrequest',
+        component: ExistrequestComponent
       },
       {
         path: '',

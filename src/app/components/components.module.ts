@@ -102,10 +102,8 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     MyMenuItemComponent,
     DateComponent,
     DefaultContentComponent,
-<<<<<<< HEAD
     MainBaseComponent,
-    CalComponent
-=======
+    CalComponent,
     CalenderComponent,
     
     BulkUploadComponent
