@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { CalendarOptions } from '@fullcalendar/angular';
 
@@ -367,9 +367,9 @@ export class DashboardComponent implements OnInit {
       this.show_modal = false;
     }
 
-  ngOnDestroy(): void {
-      this.themeSubscription.unsubscribe();
-    }
+  // ngOnDestroy(): void {
+  //     this.themeSubscription.unsubscribe();
+  //   }
 
 
 

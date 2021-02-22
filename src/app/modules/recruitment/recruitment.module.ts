@@ -24,14 +24,18 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
 import { ApplicantSelectionComponent } from './applicant-selection/applicant-selection.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 
 
 @NgModule({
-  declarations: [RecruitmentComponent, ApplicantsDashboardComponent, PasswordResetComponent, NewPasswordComponent,
+  declarations: [
+    RecruitmentComponent,
+    ApplicantsDashboardComponent,
+    PasswordResetComponent, NewPasswordComponent,
     ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent, ApplicantProfileComponent,
-     ApplicantSelectionComponent, InterviewerdashboardComponent],
+     ApplicantSelectionComponent, InterviewerdashboardComponent, AdminDashboardComponent],
   imports: [
     ThemeModule,
     CommonModule,

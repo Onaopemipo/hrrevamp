@@ -48,6 +48,12 @@ const routes: Routes = [{
       .then(m => m.InterviewerdashboardModule)
     },
 
+    {
+      path: 'recruitmentadmin',
+      loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
+      .then(m => m.AdminDashboardModule)
+    },
+
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },
   ],

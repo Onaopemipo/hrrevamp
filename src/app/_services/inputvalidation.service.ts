@@ -9,16 +9,16 @@ export class InputvalidationService {
   constructor(
     private dPipe: DecimalPipe) { }
   getCurrency(amount: number) {
-    let divamnt = (amount / 100);
+    const divamnt = (amount / 100);
   //  console.log(amount)
     this.amountChanged.next(this.dPipe.transform(divamnt, '.2'));
     return this.dPipe.transform(divamnt, '.2');
   }
 
   async validate(event, fieldelement) {
-    let inputentry =  event.target.value;
+    const inputentry =  event.target.value;
 
-    let reg = new RegExp('^[-,-.0-9]+$');
+    const reg = new RegExp('^[-,-.0-9]+$');
     // console.log(reg.test(inputentry));
     if (inputentry && reg.test(inputentry) ) {
       this.invalidAccount = false;
@@ -34,8 +34,8 @@ export class InputvalidationService {
 
         }
         if (fieldelement == 'amount' ) {
-          let amt = inputentry.replace(/,/g, '');
-          let newamt = amt.replace('.', '');
+          const amt = inputentry.replace(/,/g, '');
+          const newamt = amt.replace('.', '');
           event.target.value = this.getCurrency(newamt);
 
           return true;
