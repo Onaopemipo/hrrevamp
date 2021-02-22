@@ -50,7 +50,9 @@ import {
   ɵa,
   NbMenuService,
   NbDatepickerDirective,
+  NbDialogRef
 } from '@nebular/theme';
+
 
 import { StatusComponent } from './status/status.component';
 import { DatePipesPipe } from './pipes/date-pipes.pipe';
@@ -67,7 +69,12 @@ import { DateRangeComponent } from './date-range/date-range.component';
 import { StatusCardComponent } from './status-card/status-card.component';
 import { MyMenuComponent, MyMenuItemComponent } from './my-menu/my-menu.component';
 import { DateComponent } from './date/date.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MainBaseComponent } from './main-base/main-base.component';
+import { CalComponent } from './cal/cal.component';
+import { CalenderComponent } from './calender/calender.component';
+import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
+
+
 
 
 @NgModule({
@@ -94,7 +101,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MyMenuComponent,
     MyMenuItemComponent,
     DateComponent,
-    DefaultContentComponent
+    DefaultContentComponent,
+    MainBaseComponent,
+    CalComponent,
+    CalenderComponent,
+    
+    BulkUploadComponent
+  
   ],
   imports: [
     FormsModule,
@@ -146,7 +159,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxEchartsModule,
     NbIconModule,
     NbFormFieldModule,
-    NbCardModule
+    NbCardModule,
+    NbInputModule,
+    
     // NgxChartsModule
   ],
   providers: [
@@ -159,6 +174,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
+    
   ],
   exports: [
     ComponentsheaderComponent,
@@ -182,13 +198,18 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AmountInputComponent,
     DateRangeComponent,
     DateComponent,
-    // NbMenuModule,
+    //NbMenuModule,
     DefaultContentComponent,
     CommonModule,
     FormsModule,
     NbCardModule,
     NgxEchartsModule,
-    TableheaderComponent
+    TableheaderComponent,
+    DatePipesPipe,
+    CalComponent,
+    NbInputModule,
+    CalenderComponent,
+    BulkUploadComponent
   ],
 })
 export class ComponentsModule { }

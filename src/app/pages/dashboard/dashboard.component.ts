@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import  * as Chart from 'chart.js';
 
 
 
@@ -363,6 +364,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+    //this.themeSubscription.unsubscribe();
   }
 }

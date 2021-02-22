@@ -47,7 +47,6 @@ import {
 
 
 } from '@nebular/theme';
-
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin

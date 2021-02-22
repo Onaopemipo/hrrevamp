@@ -1,0 +1,63 @@
+<ngx-componentsheader
+  pageName="Expense Type"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="Projects" [tabId]="TABS.PROJECTS"> </nb-tab
+    ><nb-tab tabTitle="Types" [tabId]="TABS.TYPES"> </nb-tab>
+  </nb-tabset>
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  ><ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="let's set up your expenses"
+    pageDescription="Continue to add an expense type"
+    buttonValue="Add expense type"
+    (buttonClick)="createNewClicked()"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [userData]="tableData"
+    [loading]="loading"
+    (pageChange)="loadNewPage($event)"
+  ></ngx-tablecomponent>
+</div>
+<ngx-side-modal [(show)]="showModal">
+  <div modal-header>Add project</div>
+  <div modal-body>
+    <div class="my-form">
+      <h4><span>Add Manually</span> <span>Upload excel document</span></h4>
+
+      <div class="form-group">
+        <label>Budget code<span style="font-weight: 300">optional</span></label>
+        <input class="form-control" placeholder="1" />
+      </div>
+
+      <div class="form-group">
+        <label>Name</label>
+        <ngx-date></ngx-date>
+      </div>
+
+      <div class="form-group">
+        <label>Sub-type<span style="font-weight: 300">optional</span></label>
+        <ngx-date></ngx-date>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <ngx-wysisyg-input></ngx-wysisyg-input>
+      </div>
+
+      <div class="form-group">
+        <label>Expense type list</label>
+        <ngx-file-upload></ngx-file-upload>
+      </div>
+    </div>
+  </div>
+  <div modal-actions>
+    <button nbButton status="primary">save</button>
+  </div>
+</ngx-side-modal>

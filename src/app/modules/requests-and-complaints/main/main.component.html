@@ -32,7 +32,10 @@
                             <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div>
                             <ngx-status [data]="complaint"></ngx-status>
                         </div>
-                        <div>{{complaint.time | date}}</div>
+                        <div style="flex-direction: column; display: flex; align-items: flex-end;">
+                            {{complaint.time | datePipes}}
+                            <div style="height: 0.5rem; width: 0.5rem; border-radius: 50%; margin-top: 1rem;" class="bg-primary"></div>
+                        </div>
                     </div>
                 </ng-template>
                 <div *ngIf="loadingNext" style="display: flex; justify-content: center; padding-top: 5px;">

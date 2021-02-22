@@ -1,0 +1,15 @@
+.container {
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  
+  .text {
+    position: absolute;
+    z-index: 1;
+  }
+  
+  mat-progress-bar {
+    position: absolute;
+  }

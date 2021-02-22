@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { NbPopoverComponent, NbPopoverDirective } from '@nebular/theme';
 import { MENU_ITEMS } from 'app/modules/pages-menu';
@@ -9,6 +9,7 @@ import { ModalformComponent } from '../modalform/modalform.component';
   styleUrls: ['./employeeevents.component.scss']
 })
 export class EmployeeeventsComponent implements OnInit {
+  @Input() Events: string = 'Events';
   menu = MENU_ITEMS;
   link = '/todo';
   @ViewChild(NbPopoverDirective) popOver: NbPopoverDirective;
@@ -20,6 +21,7 @@ export class EmployeeeventsComponent implements OnInit {
       center: 'title',
       right: 'dayGridMonth,listWeek'
     },
+
     dayMaxEvents: true, // allow "more" link when too many events
     events: [
       { title: 'event 1', date: '2020-08-12' },
@@ -34,7 +36,6 @@ export class EmployeeeventsComponent implements OnInit {
       { title: 'event 2', date: '2020-08-11' },
     ],
     dateClick: (date) => {
-      date.dayEl.style.backgroundColor = 'green';
       this.popOver.show();
     }
   };

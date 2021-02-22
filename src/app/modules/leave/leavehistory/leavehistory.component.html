@@ -1,0 +1,127 @@
+<ngx-componentsheader pageName='LeaveHistory' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<ngx-tableheader></ngx-tableheader>
+<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+
+
+
+
+<ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px;">
+    <div modal-header>Apply For Leave</div>
+    <div modal-body>
+        <form action="">
+
+
+            <div class="form-group">
+                <label for="Title" style="font-size: small;font-weight: bold;">Employee Number:</label>
+                <input type="text" class="form-control" placeholder="Enter Phone Number" id="Title">
+            </div>
+            <div class="form-group">
+                <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee Name:</label>
+                <input type="number" class="form-control" placeholder="Enter Employee Name" id="Employee Name">
+            </div>
+
+            <div class="form-group">
+                <label for="Leave Year" style="font-size: small;font-weight: bold;">Leave Year:</label>
+                <input type="number" class="form-control" placeholder="Enter Leave Year" id="Leave Year">
+            </div>
+
+            <div class="form-group">
+                <label for="Leave Type" style="font-size: small;font-weight: bold;">Leave Type:</label>
+                <input type="number" class="form-control" placeholder="Enter Leave Type" id="Leave Type">
+            </div>
+            <div class="form-group">
+                <label for="Start Date" style="font-size: small;font-weight: bold;">Start Date:</label>
+                <input type="number" class="form-control" placeholder="Enter Start Date" id="Start Date">
+            </div>
+            <div class="form-group">
+                <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
+                <input type="number" class="form-control" placeholder="Enter Number of Days" id="Number of Days">
+            </div>
+            <div class="form-group">
+                <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Contact Info On
+                    Leave:</label>
+                <input type="number" class="form-control" placeholder="Enter Contact-info" id="Contact Info">
+            </div>
+            <div class="form-group">
+                <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Contact Info On
+                    Leave:</label>
+                <input type="number" class="form-control" placeholder="Enter Contact-info" id="Contact Info">
+            </div>
+
+
+
+        </form>
+    </div>
+
+    <div modal-actions class="d-flex mb-5">
+        <button nbButton status="primary" class="d-flex column">Submit</button>
+        <button nbButton outline status="primary" class="d-flex column">Discard</button>
+        <button class="d-flex column Attach">
+            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
+            Attach</button>
+
+    </div>
+    <div style="margin-top: 15px;"></div>
+</ngx-side-modal>
+
+
+<ngx-side-modal [(show)]='showLeavePlanModal' style="width: 500px; height: 1000px;">
+    <div modal-header>Add New Leave Plan</div>
+    <div modal-body>
+        <form action="">
+
+
+            <div class="form-group">
+                <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee Name:</label>
+                <input type="text" class="form-control" placeholder="Enter Employee Name" id="Employee Name">
+            </div>
+
+            <div class="form-group">
+                <label for="Start Date" style="font-size: small;font-weight: bold;">Start Date:</label>
+                <input type="number" class="form-control" placeholder="Enter Leave Year" id="Start Date">
+            </div>
+
+            <div class="form-group">
+                <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
+                <input type="number" class="form-control" placeholder="Enter Number Of Days" id="Number of Days">
+            </div>
+            <div class="form-group">
+                <label for="End Date" style="font-size: small;font-weight: bold;">End Date:</label>
+                <input type="number" class="form-control" placeholder="Enter Start Date" id="End Date">
+            </div>
+            <div class="form-group">
+                <label for="Comment" style="font-size: small;font-weight: bold;">Number of Days:</label>
+                <textarea class="form-control" placeholder="Enter Comment" id="Comment">Comment</textarea>
+            </div>
+
+   <div class="d-flex-column">
+                <nb-checkbox (checkedChange)="toggle($event)">
+                    <span>Allow rollover</span>
+                </nb-checkbox>
+
+            </div>
+
+
+          <!--<label>Checked:</label> //{{ checked }}
+-->  
+          
+
+        </form>
+    </div>
+
+
+
+    <div modal-actions class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
+
+        <button nbButton status="primary" class="d-flex column">Submit</button>
+        <button nbButton outline status="primary" class="d-flex column"
+            style="background-color: white;">Discard</button>
+        <button class="d-flex column Attach">
+            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
+            Attach</button>
+    </div>
+    <div style="margin-top: 10px;"></div>
+</ngx-side-modal>

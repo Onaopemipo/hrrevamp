@@ -1,22 +1,30 @@
 <div class="container">
-   <div class="row">
-    <div class="col-md-12" *ngIf="beginSetup" style="margin-top:10rem;background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 25px #9E9EA61A;
-    border-radius: 4px;display: flex;align-items: center;text-align: center;flex-direction: column;width: 100%;padding:10rem">
-<div style="flex-direction: row;justify-content: space-between;">
-<img src="assets/icons/fire-cracker.jpg" style="width: 3rem;"> &nbsp;
-<span class="header4-bold">Welcome Onboard! Let’s help setup your account</span>
-</div>
-<div>
-  <p class="p-300">
-    Our system help balance creativity, usability and technology to ensure that the solution engages you and enable you to easily explore, optimize your process, evaluate and grow your company
-  </p>
-</div>
-<div style="align-items: center;">
-  <button type="button" style="text-transform: none;min-width: 144px;"  nbButton status="primary" (click)="startSetup()">Begin Setup</button>
-</div>
+   <div class="row" *ngIf="beginSetup">
+    <div class="col-md-12"  >
+      <div style="display: flex;align-items: center;margin-top: 5rem;">
+        <div style="background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 25px #9E9EA61A;
+        border-radius: 4px;display: flex;align-items: center;text-align: center;flex-direction: column;width: 100%;padding:6rem">
+    <div style="flex-direction: row;justify-content: space-between;">
+      <img src="assets/icons/fire-cracker.jpg" style="width: 3rem;"> &nbsp;
+      <span class="header4-bold">Welcome Onboard! Let’s help setup your account</span>
+      </div>
+      <div>
+        <p class="p-300">
+          Our system help balance creativity, usability and technology to ensure that the solution engages you and enable you to easily explore, optimize your process, evaluate and grow your company
+        </p>
+      </div>
+      <div style="align-items: center;">
+        <button type="button" style="text-transform: none;min-width: 144px;"  nbButton status="primary" (click)="startSetup()">Begin Setup</button>
+      </div>
+        </div>
+      </div>
+ 
+
 
     </div>
+   </div>
+   <div class="row">
     <div class="col-md-12" *ngIf="!beginSetup">
         <div style="padding: 15px;"></div>
         <ngx-componentsheader [pageName]="title"></ngx-componentsheader>

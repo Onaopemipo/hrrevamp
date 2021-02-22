@@ -4,14 +4,16 @@
   (buttonClick)="pageActionClicked($event)"
 >
 </ngx-componentsheader>
-<div class="row">
+<div class="row" style="margin-left: -25px; margin-right: -25px;">
   <div
     *ngFor="let n of [1, 2, 2, 3, 3, 5, 4, 44, 5, 6]"
     class="col-md-3 col-sm-4"
   >
-    <div class="card black" style="padding: 30px; margin: 30px; background-color: white">
-      <nb-icon icon="file-text-outline"></nb-icon>
-      <div style="padding: 5px;">Deployment</div>
+    <div class="card black" style="padding: 30px; margin: 10px; background-color: white">
+      <div class="control" style="background-color: #3AF28614; width: max-content; padding: 10px; border-radius: 1px;">
+        <nb-icon icon="file-text-outline"status='success'></nb-icon>
+      </div>
+      <div style="padding: 5px;" class="header6-medium">Deployment</div>
     </div>
   </div>
 </div>
