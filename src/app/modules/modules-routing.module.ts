@@ -41,6 +41,11 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/leave/leave.module')
         .then(m => m.LeaveModule)
     },
+    {
+      path: 'expenses',
+      loadChildren: () => import('../modules/expense/expense.module')
+        .then(m => m.ExpenseModule)
+    },
 
     // {
     //   path: 'recruitment',
