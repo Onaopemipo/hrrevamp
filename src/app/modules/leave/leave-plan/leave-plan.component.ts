@@ -12,6 +12,12 @@ enum TOP_ACTIONS {
 })
 export class LeavePlanComponent implements OnInit {
 
+  get hel() {
+    return 'me';
+  }
+  set hello(val: string) {
+    alert(val);
+  }
   topActionButtons = [
     {name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Apply For Leave', 'icon': 'plus', outline: true},
     {name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false},
@@ -40,6 +46,15 @@ export class LeavePlanComponent implements OnInit {
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
      this.showLeavePlanModal = true;
     }
+  value = 'aaaa';
+  onClick() {
+    this.hello = this.value;
+    this.b = this.hello;
+  }
+  firstName = 'a';
+  // lastName = 'b'
+  get fullName() {
+    return this.firstName + ' ' + this.lastName;
   }
   showAddPlanModal = false;
   showLeavePlanModal = false;
@@ -49,6 +64,13 @@ export class LeavePlanComponent implements OnInit {
 
   toggle(checked: boolean) {
     this.checked = checked;
+  set lastName(val: string) {
+    if (val.length === 5) {
+      if (val === 'bbbbb')
+      alert('You can continue');
+      else
+      alert('Password validation failed');
+    }
   }
 }
 

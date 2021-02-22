@@ -53,11 +53,17 @@ const routes: Routes = [{
 
     },
 
-    // {
-    //   path: 'recruitment',
-    //   loadChildren: () => import('../modules/recruitment/recruitment.module')
-    //   .then(m => m.RecruitmentModule)
-    // },
+    {
+      path: 'interviewers',
+      loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
+      .then(m => m.InterviewerdashboardModule)
+    },
+
+    {
+      path: 'recruitmentadmin',
+      loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
+      .then(m => m.AdminDashboardModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

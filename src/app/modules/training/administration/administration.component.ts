@@ -1,3 +1,4 @@
+import { TableColumn } from './../../../components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -26,6 +27,21 @@ export class AdministrationComponent implements OnInit {
 
   addVendor = 'Add New Vendor';
   addType = 'Add Training Type';
+
+  myVendorTable: TableColumn [] = [
+    {name: 'name', title: 'Name'},
+    {name: 'email', title: 'Email'},
+    {name: 'phone', title: 'Phone'},
+    {name: 'website', title: 'Specialization'},
+    {name: 'startDate', title: 'Start Date'},
+    {name: 'endDate', title: 'End Date'} ];
+
+  myTable: TableColumn [] = [
+    {name: 'title', title: 'Title'},
+    {name: 'vendor', title: 'Vendor'},
+    {name: 'category', title: 'Category'},
+    {name: 'cost', title: 'Cost/Head'},
+    {name: 'trainees', title: 'Trainess'}];
 
   ngOnInit(): void {
   }

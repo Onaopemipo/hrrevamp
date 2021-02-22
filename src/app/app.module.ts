@@ -143,8 +143,7 @@ FullCalendarModule.registerPlugins([
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     InputvalidationService,
 
-    DecimalPipe,
-
+    DecimalPipe
   ],
 })
 export class AppModule {
