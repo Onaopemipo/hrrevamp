@@ -26,10 +26,13 @@ import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashbo
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
+import { RetirementComponent } from './retirement/retirement.component';
+import { RetirementformComponent } from './retirementform/retirementform.component';
+import { ExitwarningComponent } from './exitwarning/exitwarning.component';
 
 
 @NgModule({
-  declarations: [HiringchecklistComponent, EmployeeonboardingdashboardComponent, EmploymentexitmanagementComponent, ManagementexistComponent, ExistrequestComponent],
+  declarations: [HiringchecklistComponent, EmployeeonboardingdashboardComponent, EmploymentexitmanagementComponent, ManagementexistComponent, ExistrequestComponent, RetirementComponent, RetirementformComponent, ExitwarningComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,

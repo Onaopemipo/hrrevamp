@@ -5,6 +5,9 @@ import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashbo
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
+import { RetirementComponent } from './retirement/retirement.component';
+import { RetirementformComponent } from './retirementform/retirementform.component';
+import { ExitwarningComponent } from './exitwarning/exitwarning.component';
 
 const routes: Routes = [
   {
@@ -22,7 +25,23 @@ const routes: Routes = [
 {
 path : 'exitrequest',
 component : ExistrequestComponent
-}
+},
+{
+  path : 'retirement',
+  component : RetirementComponent
+  },
+  
+  {
+    path : 'retirementform',
+    component : RetirementformComponent
+    },
+
+    {
+      path : 'exitwarning',
+      component : ExitwarningComponent
+      },
+      
+    
 
 ];
 
