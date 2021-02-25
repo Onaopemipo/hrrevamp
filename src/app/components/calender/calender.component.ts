@@ -3,7 +3,13 @@ import { Calendar} from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
 //import  timeGridPlugin  from '@fullcalendar/timegrid'
 import  listGridPlugin  from '@fullcalendar/list'
+class MySring{
+  a: String
 
+  constructor(a: string){
+    this.a = a;
+  }
+}
 @Component({
   selector: 'ngx-calender',
   templateUrl: './calender.component.html',
