@@ -7,6 +7,14 @@ import { EmployeemoduleComponent } from './employeemodule.component';
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
+import { RetirementComponent } from './retirement/retirement.component';
+import { RetirementformComponent } from './retirementform/retirementform.component';
+import { ExitwarningComponent } from './exitwarning/exitwarning.component';
+import { ComfirmationComponent } from './comfirmation/comfirmation.component';
+import { EmployeeviewComponent } from './employeeview/employeeview.component';
+import { PromotionComponent } from './promotion/promotion.component';
+import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component';
+
 const routes: Routes = [
   {
   path: '',
@@ -16,38 +24,63 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: EmployeeonboardingdashboardComponent
+},
+{
+  path: 'exitmanagement',
+  component: EmploymentexitmanagementComponent
+},
+{
+  path: 'exitform',
+  component: ManagementexistComponent
+},
+{
+path : 'exitrequest',
+component : ExistrequestComponent
+},
+{
+  path : 'retirement',
+  component : RetirementComponent
   },
+  
   {
-    path: 'employeeonboarding',
-    component: HiringchecklistComponent
-  },
-  {
-    path: 'allemployees',
-    component: OnboardingemployeesComponent
+    path : 'retirementform',
+    component : RetirementformComponent
+    },
+
+    {
+      path : 'exitwarning',
+      component : ExitwarningComponent
       },
+      
       {
-        path: 'exitmanagement',
-        component: EmploymentexitmanagementComponent
-      },
-      {
-        path: 'exitform',
-        component: ManagementexistComponent
-      },
-      {
-        path: 'exitrequest',
-        component: ExistrequestComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: '**',
-        component: EmployeeonboardingdashboardComponent,
-      },
-  ],
-}
+        path : 'comfirmation',
+        component : ComfirmationComponent
+        },
+        
+        {
+          path : 'employeeview',
+          component : EmployeeviewComponent
+          },
+
+          {
+            path : 'comfirmation',
+            component : ComfirmationComponent
+            },
+            
+            {
+              path : 'promotion',
+              component : PromotionComponent
+              },
+              
+              {
+                path : 'promotioninfo',
+                component : PromotioninfoComponent
+                },
+                
+              
+            
+          
+
 ];
 
 @NgModule({
