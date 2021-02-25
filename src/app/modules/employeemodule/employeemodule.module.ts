@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, } from '@angular/common';
 
 import {
   NbButtonModule,
@@ -23,6 +23,10 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { EmployeemoduleRoutingModule } from './employeemodule-routing.module';
 import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
 import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
+import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
+import { EmployeemoduleComponent } from './employeemodule.component';
+import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
+
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
@@ -35,13 +39,29 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component';
 
 
+
 @NgModule({
-  declarations: [HiringchecklistComponent, EmployeeonboardingdashboardComponent, EmploymentexitmanagementComponent, ManagementexistComponent, ExistrequestComponent, RetirementComponent, RetirementformComponent, ExitwarningComponent, ComfirmationComponent, EmployeeviewComponent, PromotionComponent, PromotioninfoComponent],
+  declarations:
+    [
+    HiringchecklistComponent,
+    EmployeeonboardingdashboardComponent,
+    EmploymentexitmanagementComponent,
+    ManagementexistComponent,
+    ExistrequestComponent,
+    RetirementComponent,
+    RetirementformComponent,
+    ExitwarningComponent,
+    ComfirmationComponent,
+    EmployeeviewComponent,
+    PromotionComponent,
+    PromotioninfoComponent,
+    OnboardingemployeesComponent,
+    EmployeemoduleComponent,
+    EmployeepersonalinformationComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,
     ThemeModule,
-    CommonModule,
     ngFormsModule,
     NbButtonModule,
     NbCardModule,
@@ -56,7 +76,9 @@ import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component'
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,
-  ]
+    NbDialogModule,  
+    
+  ],
+
 })
 export class EmployeemoduleModule { }

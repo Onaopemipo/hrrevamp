@@ -2,69 +2,153 @@
 <div class="container">
 </div>
 
-<div class="row" style="background-color: transparent;">
-  <div class="col my-analytics-div">
-
-    <div class="flex-child">
-      <img src="../../../../assets/icons/department.jpg" alt="">
-    </div>
-    <div class="flex-child">
-      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Requests</span></div>
-      <div class="value"><span style="font-size: 25px; font-weight: 700;">123</span></div>
-    </div>
+<div class="row">
+  <div class="col-xxxl-3 col-md-3" >
+    <nb-card>
+      <div style="padding: 10px;display: flex; flex-direction: row;">
+     <div style="display: flex;align-items: center;">
+       <img src="assets/icons/department.jpg" style="width:3rem;">
+     </div>
+     <div style="flex-direction: column; padding-left: 10px;">
+      <div style="padding:5px">
+      <span class="smalltext">
+        Requests
+      </span>
+      </div>
+      <div style="padding:5px">
+        <span class="header5-bold">123</span>
+      </div>
+     </div>
+     </div>
+     </nb-card>
   </div>
-  <div class="col my-analytics-div">
-
-    <div class="flex-child">
-      <img src="../../../../assets/icons/ActiveTraining.png" alt="">
-    </div>
-    <div class="flex-child">
-      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Active Training Plans</span></div>
-      <div class="value"><span style="font-size: 25px; font-weight: 700;">567</span></div>
-    </div>
+  <div class="col-xxxl-3 col-md-3" >
+    <nb-card>
+      <div style="padding: 10px;display: flex; flex-direction: row;">
+     <div style="display: flex;align-items: center;">
+       <img src="assets/icons/ActiveTraining.png" style="width:3rem;">
+     </div>
+     <div style="flex-direction: column; padding-left: 10px;">
+      <div style="padding:5px">
+      <span class="smalltext">
+        Active Training
+      </span>
+      </div>
+      <div style="padding:5px">
+        <span class="header5-bold">567</span>
+      </div>
+     </div>
+     </div>
+     </nb-card>
   </div>
-  <div class="col my-analytics-div">
-
-    <div class="flex-child">
-      <img src="../../../../assets/icons/vendors.png" alt="">
-    </div>
-    <div class="flex-child">
-      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Vendors</span></div>
-      <div class="value"><span style="font-size: 25px; font-weight: 700;">45</span></div>
-    </div>
+  <div class="col-xxxl-3 col-md-3" >
+    <nb-card>
+      <div style="padding: 10px;display: flex; flex-direction: row;">
+     <div style="display: flex;align-items: center;">
+       <img src="assets/icons/vendors.png" style="width:3rem;">
+     </div>
+     <div style="flex-direction: column; padding-left: 10px;">
+      <div style="padding:5px">
+      <span class="smalltext">
+        Vendors
+      </span>
+      </div>
+      <div style="padding:5px">
+        <span class="header5-bold">45</span>
+      </div>
+     </div>
+     </div>
+     </nb-card>
   </div>
-  <div class="col my-analytics-div">
-
-    <div class="flex-child">
-      <img src="../../../../assets/icons/trainingbudget.png" alt="">
-    </div>
-    <div class="flex-child">
-      <div class="title" style="padding-bottom: 20px;"><span style="font-size: 20px; font-weight: 400;">Training Budget</span></div>
-      <div class="value"><span style="font-size: 25px; font-weight: 700;">N540K</span></div>
-    </div>
+  <div class="col-xxxl-3 col-md-3" >
+    <nb-card>
+      <div style="padding: 10px;display: flex; flex-direction: row;">
+     <div style="display: flex;align-items: center;">
+       <img src="assets/icons/trainingbudget.png" style="width:3rem;">
+     </div>
+     <div style="flex-direction: column; padding-left: 10px;">
+      <div style="padding:5px">
+      <span class="smalltext">
+        Training Budget
+      </span>
+      </div>
+      <div style="padding:5px">
+        <span class="header5-bold">N540k</span>
+      </div>
+     </div>
+     </div>
+     </nb-card>
   </div>
 </div>
 
-<!-- Pie Chart here -->
-<div class="container">
-  <!-- <<div echarts [options]="options" class="echart"></div> -->
-  <div class="col-lg-6">
-    <!-- <nb-card>
-      <nb-card-header>Bar</nb-card-header>
-      <nb-card-body>
-        <chart type="pie" [data]="data" [options]="options"></chart>
-      </nb-card-body>
-    </nb-card> -->
-    <ngx-default-content pageHeader="Pie Charts"></ngx-default-content>
+<!-- Bar Chart is here -->
+  <div class="container">
+    <!-- <ngx-echarts-bar></ngx-echarts-bar> -->
+    <!-- <ngx-default-content pageHeader="Bar Charts"></ngx-default-content> -->
+    <div class="row" >
+    <div class="col-xxxl-6 col-md-6" >
+      <nb-card>
+          <nb-card-body>
+            <div style="display: flex;flex-direction: row;">
+              <div style="flex:auto">
+              <span class="header6-bold">Distribution by Department</span>
+              </div>
+              <div>
+                <nb-select selected="1">
+                  <nb-option value="1">This year</nb-option>
+                  <nb-option value="2">Option 2</nb-option>
+                </nb-select>
+              </div>
+              </div>
+              <div style="height: 18.75rem;width: 100%;">
+                <div echarts [options]="customizePieOption" class="echart" style="height: 100%;"></div>
+              </div>
+          </nb-card-body>
+        </nb-card>
   </div>
 
+
+  <!-- Pie Chart is here -->
+  <div class="col-xxxl-12 col-md-12" >
+    <nb-card>
+
+        <nb-card-body>
+          <div style="display: flex;flex-direction: row;">
+            <div style="flex:auto">
+            <span class="header6-bold">Distribution by Location</span>
+            </div>
+            <div>
+              <nb-select selected="1">
+                <nb-option value="1">This year</nb-option>
+                <nb-option value="2">Option 2</nb-option>
+              </nb-select>
+            </div>
+                    </div>
+          <div #barContainer style="height: 100%;">
+            <ngx-charts-bar-vertical
+            [view]="[barContainer.offsetWidth, 300]"
+            [scheme]="barcolorScheme"
+            [results]="single"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
+            [barPadding]="barPadding"
+        >
+          </ngx-charts-bar-vertical>
+          </div>
+
+
+        </nb-card-body>
+      </nb-card>
 </div>
 
-<!-- Bar Chart here -->
-
-<div class="container">
-<!-- <ngx-echarts-bar></ngx-echarts-bar> -->
-<ngx-default-content pageHeader="Bar Charts"></ngx-default-content>
+</div>
 </div>
 
 <!-- Training Reports -->

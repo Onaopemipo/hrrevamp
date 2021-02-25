@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row" *ngIf="beginSetup">
+     <div class="col-md-12"  >
+       <div style="display: flex;align-items: center;margin-top: 5rem;">
+         <div style="background: #FFFFFF 0% 0% no-repeat padding-box;
+         box-shadow: 0px 3px 25px #9E9EA61A;
+         border-radius: 4px;display: flex;align-items: center;text-align: center;flex-direction: column;width: 100%;padding:6rem">
+     <div style="flex-direction: row;justify-content: space-between;">
+       <img src="assets/icons/fire-cracker.jpg" style="width: 3rem;"> &nbsp;
+       <span class="header4-bold">Welcome Onboard, Sherif Sorunke! We are glad to have you here.</span>
+       </div>
+       <div>
+         <p class="p-300">
+            You have been offered the position of User Interface and User Experience Designer, Click to view offer letter.
+         </p>
+       </div>
+       <div style="align-items: center;">
+         <button type="button" style="text-transform: none;min-width: 144px;"  nbButton status="primary" (click)="viewoffer()">View Offer Letter</button>
+       </div>
+         </div>
+       </div>
+  
+ 
+ 
+     </div>
+    </div>
+    <div *ngIf="!beginSetup" style="margin-top: 1rem;">
+        <div class="row" >
+            <div class="col-md-12"  >
+                <nb-card>
+                    <nb-card-body>
+    <div style="display: flex;flex-direction: row;">
+<div style="display:flex;flex: auto;align-items: center;">
+    <img src="assets/icons/smartaceLogo.png" style="width:10.625rem">
+</div>
+<div style="display: flex;flex-direction: row;">
+<div style="display: flex;align-items: center;padding: 5px;">
+    <nb-icon icon="download" status="primary"></nb-icon>&nbsp; <span>Download PDF</span>
+</div>
+<div style="padding: 5px;">
+    <button type="submit" nbButton status="primary" >Accept Offer</button>
+</div>
+<div style="padding: 5px;">
+    <button outline="true" type="submit" nbButton status="primary">Decline</button>
+</div>
+</div>
+    </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+
+        <div class="row" >
+            <div class="col-md-12"  >
+                <nb-card>
+                    <nb-card-body>
+    <span class="header6-bold">Note:</span>
+    <p class="p-300">
+        By signing and finalising this contract, I hereby agree to and accept employment with the Company on the terms and conditions set forth in this offer letter.
+    </p>
+
+    <div style="display: flex;flex-direction: row;">
+        <div style="padding: 5px;">
+            <button type="submit" nbButton status="primary" >Accept Offer</button>
+        </div>
+        <div style="padding: 5px;">
+            <button outline="true" type="submit" nbButton status="primary">Decline</button>
+        </div>
+    </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+    </div>
+
+    </div>

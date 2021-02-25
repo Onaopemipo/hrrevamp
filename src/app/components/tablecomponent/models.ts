@@ -12,8 +12,13 @@ export enum ColumnTypes {
 export interface TableColumn {
     name: string;
     title: string;
-    type: ColumnTypes;
+    type?: ColumnTypes;
     template?: TemplateRef<any>;
     colors?: {};
+}
+
+export interface TableAction {
+  label: string;
+  name: string;
 }
 

@@ -1,0 +1,21 @@
+.budget-item-department{
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.budget-item-department > div{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+.budget-item > div{
+    margin: 0.5rem;
+}
+
+button{
+    min-width: unset !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

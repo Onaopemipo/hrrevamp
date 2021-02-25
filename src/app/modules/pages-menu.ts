@@ -34,6 +34,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Leave',
         link: '/myleave',
       },
+      {
+        title: 'Exit Process',
+        link: '/employeemodule/exitrequest',
+      },
     ],
   },
   {
@@ -41,8 +45,28 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/EmployeeManagement.jpg',
     children: [
       {
-        title: 'Employee Onboarding',
+        title: 'Onboarding Dashboard',
         link: '/employeemodule',
+      },
+      {
+        title: 'Onboarding Employees',
+        link: '/employeemodule/allemployees',
+      },
+      {
+        title: 'Exit Management',
+        link: '/employeemodule/exitmanagement',
+      },
+      {
+        title: 'Retirements',
+        link: '/employeemodule/retirement',
+      },
+      {
+        title: 'Confirmation',
+        link: '/employeemodule/comfirmation',
+      },
+      {
+        title: 'Promotion',
+        link: '/employeemodule/promotion',
       },
     ]
   },
@@ -175,8 +199,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Expenses',
-    link: '/',
     icon: '/assets/icons/Expenses.jpg',
+    children: [
+      {
+        title: 'Expense Management',
+        link:'/expenses/'
+      },
+      {
+        title: 'Expense Type',
+        link:'/expenses/type'
+      },
+      {
+        title: 'Expense Request',
+        link:'/expenses/request'
+      },
+      {
+        title: 'Expense Report',
+        link:'/expenses/request'
+      }
+
+    ]
   },
   {
     title: 'Loan & Disbursement',
@@ -185,8 +227,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Disbursement',
-    link: '/',
     icon: '/assets/icons/Disbursement.jpg',
+    children: [
+      {
+        title: 'Analytics',
+        link: '/disbursement',
+      },
+      {
+        title: 'Budget',
+        link: '/disbursement/budget',
+      },
+      {
+        title: 'History',
+        link: '/disbursement/disbursement/history',
+      },
+      {
+        title: 'Request',
+        link: '/disbursement/disbursement/requests',
+      },
+    
+
+    ]
   },
   {
     title: 'Benefit Administration',

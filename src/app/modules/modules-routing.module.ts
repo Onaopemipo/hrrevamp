@@ -42,17 +42,28 @@ const routes: Routes = [{
         .then(m => m.LeaveModule)
     },
     {
+      path: 'expenses',
+      loadChildren: () => import('../modules/expense/expense.module')
+        .then(m => m.ExpenseModule)
+    },
+    {
       path: 'employeemodule',
       loadChildren: () => import('../modules/employeemodule/employeemodule.module')
         .then(m => m.EmployeemoduleModule)
 
     },
 
-    // {
-    //   path: 'recruitment',
-    //   loadChildren: () => import('../modules/recruitment/recruitment.module')
-    //   .then(m => m.RecruitmentModule)
-    // },
+    {
+      path: 'interviewers',
+      loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
+      .then(m => m.InterviewerdashboardModule)
+    },
+
+    {
+      path: 'recruitmentadmin',
+      loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
+      .then(m => m.AdminDashboardModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

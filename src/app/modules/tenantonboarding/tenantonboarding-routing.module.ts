@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TenantonboardingComponent } from './tenantonboarding.component';
 import { OnboardingsetupComponent } from './onboardingsetup/onboardingsetup.component';
-
+import { EmployeeofferComponent } from '../employeemodule/employeeoffer/employeeoffer.component';
+import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/employeeonboardingprofile.component';
 const routes: Routes = [
   {
     path: '',
@@ -11,6 +12,14 @@ const routes: Routes = [
       {
         path: 'accountsetup',
         component: OnboardingsetupComponent,
+      },
+      {
+        path: 'myoffer',
+        component: EmployeeofferComponent,
+      },
+      {
+        path: 'employeeonboardingprofile',
+        component: EmployeeonboardingprofileComponent,
       },
 
       {

@@ -6,12 +6,17 @@ import { DisbursementComponent } from './disbursement.component';
 import { CreateDisbursementComponent } from './disbursement/create-disbursement/create-disbursement.component';
 import { DisbursementHistoryComponent } from './disbursement/disbursement-history/disbursement-history.component';
 import { DisbursementrequestsComponent } from './disbursement/disbursementrequests/disbursementrequests.component';
+import { OverallBudgetComponent } from './overall-budget/overall-budget.component';
 // import { SelfServiceComponent } from './self-service.component';
 const routes: Routes = [
   {
     path: '',
     component: DisbursementComponent,
     children: [
+      {
+        path: '',
+        component: OverallBudgetComponent,
+      },
       {
         path: 'budget',
         component: BudgetListComponent,
