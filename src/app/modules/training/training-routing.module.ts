@@ -29,6 +29,15 @@ export const routes: Routes = [
     path: 'administration',
     component: AdministrationComponent
   },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    component: DashboardComponent,
+  },
 
 ];
 

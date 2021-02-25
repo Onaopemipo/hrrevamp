@@ -58,11 +58,15 @@ const routes: Routes = [{
       loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
       .then(m => m.InterviewerdashboardModule)
     },
-
     {
       path: 'recruitmentadmin',
       loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
       .then(m => m.AdminDashboardModule)
+    },
+    {
+      path: 'timeandattendance',
+      loadChildren: () => import('./timeandattendance/timeandattendance.module')
+      .then(m => m.TimeandattendanceModule)
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { title } from 'process';
 
 export const MENU_ITEMS: NbMenuItem[] = [
 
@@ -41,7 +42,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/EmployeeManagement.jpg',
     children: [
       {
-        title: 'Employee Onboarding',
+        title: 'Onboarding Analytics',
         link: '/employeemodule',
       },
       {
@@ -86,8 +87,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Time and Attendance',
-    link: '/',
     icon: '/assets/icons/TimeandAttendance.jpg',
+    children: [
+      {
+        title: 'Analytics',
+        link:'/timeandattendance'
+      },
+      {
+        title: 'Projects',
+        link:''
+      },
+      {
+        title: 'Shift',
+        link:''
+      }
+    ]
   },
   {
     title: 'CAREERS',
@@ -180,8 +194,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Expenses',
-    link: '/',
     icon: '/assets/icons/Expenses.jpg',
+    children: [
+      {
+        title: 'Expense Management',
+        link: '/expenses'
+      },
+      {
+        title: 'Expense Type',
+        link: '/expenses/type'
+      },
+      {
+        title: 'Expense Request',
+        link: '/expenses/request'
+      }
+    ]
   },
   {
     title: 'Loan & Disbursement',

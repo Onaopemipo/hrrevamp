@@ -7,6 +7,7 @@ import { EmployeemoduleComponent } from './employeemodule.component';
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
+import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
 const routes: Routes = [
   {
   path: '',
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'exitrequest',
         component: ExistrequestComponent
+      },
+      {
+        path: 'employeeprofile',
+        component: EmployeepersonalinformationComponent
       },
       {
         path: '',
