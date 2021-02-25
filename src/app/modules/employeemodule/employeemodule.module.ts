@@ -41,7 +41,23 @@ import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component'
 
 
 @NgModule({
-  declarations: [HiringchecklistComponent, EmployeeonboardingdashboardComponent, EmploymentexitmanagementComponent, ManagementexistComponent, ExistrequestComponent, RetirementComponent, RetirementformComponent, ExitwarningComponent, ComfirmationComponent, EmployeeviewComponent, PromotionComponent, PromotioninfoComponent],
+  declarations:
+    [
+    HiringchecklistComponent,
+    EmployeeonboardingdashboardComponent,
+    EmploymentexitmanagementComponent,
+    ManagementexistComponent,
+    ExistrequestComponent,
+    RetirementComponent,
+    RetirementformComponent,
+    ExitwarningComponent,
+    ComfirmationComponent,
+    EmployeeviewComponent,
+    PromotionComponent,
+    PromotioninfoComponent,
+    OnboardingemployeesComponent,
+    EmployeemoduleComponent,
+    EmployeepersonalinformationComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,

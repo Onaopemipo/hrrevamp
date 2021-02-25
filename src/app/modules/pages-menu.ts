@@ -56,8 +56,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Exit Management',
         link: '/employeemodule/exitmanagement',
       },
-    
-      
+      {
+        title: 'Retirements',
+        link: '/employeemodule/retirement',
+      },
+      {
+        title: 'Confirmation',
+        link: '/employeemodule/comfirmation',
+      },
+      {
+        title: 'Promotion',
+        link: '/employeemodule/promotion',
+      },
     ]
   },
   {
