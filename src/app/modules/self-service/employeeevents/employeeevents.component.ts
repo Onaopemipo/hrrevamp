@@ -46,4 +46,9 @@ export class EmployeeeventsComponent implements OnInit {
   }
  onClick() {
  }
+ showPopover(){
+   alert(666)
+   console.log(this)
+   this.popOver.show();
+ }
 }
