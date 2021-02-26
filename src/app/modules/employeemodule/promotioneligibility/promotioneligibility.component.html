@@ -1,0 +1,73 @@
+<ngx-componentsheader pageName='Promotion Eligibility List' [requiredButton]="topActionButtons"
+    (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
+
+
+
+
+
+
+<nb-card style="margin-top: 15px;">
+    <nb-card-body>
+
+        <nb-tabset>
+            <nb-tab tabTitle="Open">
+
+            </nb-tab>
+            <nb-tab tabTitle="Close">
+
+            </nb-tab>
+
+        </nb-tabset>
+        <ngx-tableheader></ngx-tableheader>
+
+        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+
+
+
+
+
+
+    </nb-card-body>
+
+
+    <ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px;">
+        <div modal-header>Apply Eligibility Status</div>
+        <div modal-body>
+            <form action="">
+
+
+                <div class="form-group">
+                    <label for="Name" style="font-size: small;font-weight: bold;">Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" id="Name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="Leave Year" style="font-size: small;font-weight: bold;">Approval workflow:</label>
+                    <label for="" style="font-size: small; font-weight: lighter;">Ensure you created the workflow with category as PROMOTIONS </label>
+                    <input type="number" class="form-control" placeholder="Enter Leave Year" id="Leave Year">
+                </div>
+
+                <div class="form-group">
+                    <label for="Comment" style="font-size: small;font-weight: bold;">Comment:</label>
+                    <textarea name="" id="" cols="20" rows="10" type="number" class="form-control"
+                        placeholder="Enter Comment" id="Employee Name" style="height: 10rem;"></textarea>
+                </div>
+
+               
+
+
+
+            </form>
+        </div>
+
+        <div modal-actions class="d-flex mb-5" style="margin-top: 7rem;">
+            <button nbButton status="primary" class="d-flex column">Submit</button>
+            <button nbButton outline status="primary" class="d-flex column" style="background-color: #fff;">Discard</button>
+            
+        </div>
+        <div style="margin-top: 15px;"></div>
+    </ngx-side-modal>
+
+</nb-card>
