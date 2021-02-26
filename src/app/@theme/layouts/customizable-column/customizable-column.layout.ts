@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-one-column-layout',
-  styleUrls: ['./one-column.layout.scss'],
+  selector: 'ngx-customizable-column-layout',
+  styleUrls: ['./customizable-column.layout.scss'],
   template: `
     <nb-layout windowMode>
     <nb-layout-header fixed>
-    <ngx-header></ngx-header>
+    <ngx-customizableheader></ngx-customizableheader>
    </nb-layout-header>
 
       <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
-        <ng-content select="nb-menu"></ng-content>
+        <ng-content select="Customizedmenu"></ng-content>
       </nb-sidebar>
 
       <nb-layout-column>
@@ -24,4 +24,4 @@ import { Component } from '@angular/core';
     </nb-layout>
   `,
 })
-export class OneColumnLayoutComponent {}
+export class CustomizablecolumnComponent {}
