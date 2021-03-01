@@ -1,3 +1,5 @@
+import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
+import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { ApplicantsDashboardComponent } from './applicants-dashboard/applicants-dashboard.component';
 import { ApplicantssignupComponent } from './applicantssignup/applicantssignup.component';
@@ -26,16 +28,15 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
 
-      // {
-      //   path: 'applicantsdashboard',
-      //   component: ApplicantsDashboardComponent
-      // },
+      {
+        path: 'applicantprofile',
+        component: ApplicantProfileComponent
+      },
 
       {
         path: 'jobdetails',
         component: JobDetailsComponent
       },
-
       {
         path: '**',
         component: ApplicantssigninComponent,

@@ -1,3 +1,4 @@
+import { TableColumn } from 'app/components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
@@ -40,6 +41,17 @@ export class PlansComponent implements OnInit {
 
   addVendor = 'Add New Vendor';
   addType = 'Add Training Type';
+
+
+  myTable: TableColumn [] = [
+  {name: 'trainingType', title: 'Type'},
+  {name: 'specialiazation', title: 'Specialiazation'},
+  {name: 'vendor', title: 'Vendor'},
+  {name: 'budget', title: 'Budget'},
+  {name: 'startDate', title: 'Start Date'},
+  {name: 'endDate', title: 'End Date'},
+  {name: 'status', title: 'Status'},
+];
 
   ngOnInit(): void {
 

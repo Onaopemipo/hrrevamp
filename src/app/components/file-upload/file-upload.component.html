@@ -28,5 +28,5 @@
 <div *ngFor="let transfer of files; let i = index" style="color: blue; display: flex;">
   <nb-icon nbPrefix icon="checkmark-outline" pack="eva"></nb-icon>
   <div style="flex: auto;">{{transfer.name}}</div>
-  <span style="color: red;" (click)="removeFile(flowBasic, transfer)">Remove</span>
+  <span class="smalltext"  style="color: red !important; cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
 </div>

@@ -25,9 +25,11 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from '../../@theme/theme.module';
 import { environment } from 'app/environment';
+import { EmployeeofferComponent } from '../employeemodule/employeeoffer/employeeoffer.component';
+import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/employeeonboardingprofile.component';
 
 @NgModule({
-  declarations: [TenantonboardingComponent, OnboardingsetupComponent, alertmodalComponent],
+  declarations: [TenantonboardingComponent, OnboardingsetupComponent, alertmodalComponent,EmployeeofferComponent, EmployeeonboardingprofileComponent],
   imports: [
     CommonModule,
     TenantonboardingRoutingModule,

@@ -57,11 +57,22 @@ const routes: Routes = [{
         .then(m => m.BenefitModule)
     },
 
-    // {
-    //   path: 'recruitment',
-    //   loadChildren: () => import('../modules/recruitment/recruitment.module')
-    //   .then(m => m.RecruitmentModule)
-    // },
+    {
+      path: 'interviewers',
+      loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
+      .then(m => m.InterviewerdashboardModule)
+    },
+
+    {
+      path: 'recruitmentadmin',
+      loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
+      .then(m => m.AdminDashboardModule)
+    },
+    {
+      path: 'timeandattendance',
+      loadChildren: () => import('./time-and-attendance/time-and-attendance.module')
+      .then(m => m.TimeAndAttendanceModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },
