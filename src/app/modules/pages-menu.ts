@@ -105,8 +105,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Time and Attendance',
-    link: '/',
     icon: '/assets/icons/TimeandAttendance.jpg',
+    children: [
+      {
+        title: 'Analytics',
+        link: '/timeandattendance',
+      },
+    ]
   },
   {
     title: 'CAREERS',

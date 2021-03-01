@@ -21,6 +21,7 @@ import {
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
+  CustomizableheaderComponent
 } from './components';
 import {
   CapitalizePipe,
@@ -34,7 +35,8 @@ import {
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   SingleColumnLayoutComponent,
-  SingleColumnHeaderLayoutComponent
+  SingleColumnHeaderLayoutComponent,
+  CustomizablecolumnComponent
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -60,11 +62,13 @@ const COMPONENTS = [
   FooterComponent,
   SearchInputComponent,
   TinyMCEComponent,
+  CustomizableheaderComponent,
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   SingleColumnLayoutComponent,
-  SingleColumnHeaderLayoutComponent
+  SingleColumnHeaderLayoutComponent,
+  CustomizablecolumnComponent
 ];
 const PIPES = [
   CapitalizePipe,
