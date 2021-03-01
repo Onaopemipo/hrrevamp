@@ -1,28 +1,26 @@
-<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="rButton">
+<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="rButton" (buttonClick)="addTraining()">
 </ngx-componentsheader>
-<div style="padding: 10px;"></div>
-<!-- <ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newType', label:'New Training Type', icon: 'plus'}]"></ngx-componentsheader>
-<div style="padding: 10px;"></div> -->
+<div style="padding: 5px;"></div>
 
-<div class="container" style="background-color: #ffffff; height: auto;">
+<div class="container" style="background-color: #ffffff;">
   <nb-tabset (changeTab)="tabSelected($event)">
     <nb-tab tabTitle="Vendors" [tabId]="TABS.vendors">
-    <div *ngIf="welcome && TrainingVendorData ==''" id="home" class="container tab-pane"><br>
-      <div class="center">
-        <h5 style="text-align: center;">You have not setup any training vendor</h5>
-        <p style="text-align: center;">Click on the button to start your setup</p>
+          <div *ngIf="welcome && TrainingVendorData ==''" style="min-height: 80vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+            <div>
+              <h5>You have not setup any training vendor</h5>
+              <p style="text-align: center;">Click on the button to start your setup</p>
 
-        <div class="col text-center">
-          <button type="submit" class="btn my-button btn-md" (click)="addTraining()">Add Training Vendor</button>
-        </div>
-      </div>
-      </div>
+              <div class="text-center">
+                <button type="submit" class="btn my-button btn-md" (click)="addTraining()">Add Training Vendor</button>
+              </div>
+            </div>
+            </div>
 
-      <div *ngIf="welcome && TrainingVendorData !=''" id="home" class="container tab-pane active"><br>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent [tableColum]="myVendorTable"></ngx-tablecomponent>
+    <div *ngIf="welcome && TrainingVendorData !=''" id="home" class="container tab-pane active"><br>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [tableColum]="myVendorTable"></ngx-tablecomponent>
 
-      </div>
+    </div>
 
   <div *ngIf="newTraining" class="container" style="background-color: white; height: 800px;">
     <div style="padding: 20px 0px 5px 0px;">
@@ -55,6 +53,13 @@
           <label for="email" class="col-sm-3 col-form-label mylabel">Email</label>
           <div class="col-sm-4">
             <input type="email" class="form-control" id="email" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="vendorTag" class="col-sm-3 col-form-label mylabel">Vendor Tag</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="vendorName" placeholder="Vendor Tag">
           </div>
         </div>
 
@@ -94,9 +99,9 @@
             <!-- Upload Vendor with Excel -->
 
     <div *ngIf="vendorWindow" class="container" style="background-color: white; height: auto;">
-      <div style="padding: 20px 0px 5px 0px;">
-        <span style="font-size: 15px; font-weight: bold;">Upload Vendor List</span>
-      </div>
+    <div style="padding: 20px 0px 5px 0px;">
+    <span style="font-size: 15px; font-weight: bold;">Upload Vendor List</span>
+    </div>
 
         <br>
         <form>
@@ -124,147 +129,117 @@
 
       </div>
     </nb-tab>
-
 <!-- Training Types -->
 
+<nb-tab tabTitle="Types" [tabId]="TABS.types">
+  <div *ngIf="trainingType && TrainingTypeData==''"  style="min-height: 80vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+    <div class="center">
+      <h5 style="text-align: center;">You have not setup any training type</h5>
+      <p style="text-align: center;">Click on the button to start your set up</p>
+
+      <div class="text-center">
+        <button type="submit" class="btn my-button btn-md" (click)="addTraining()">Add Training Type</button>
+      </div>
+    </div>
+  </div>
+
+<nb-card *ngIf="trainingType && TrainingTypeData !=''" id="home" class="container tab-pane active"><br>
+  <nb-card-body>
+    <ngx-tableheader></ngx-tableheader>
+  <ngx-tablecomponent  [tableColum]="myTable"></ngx-tablecomponent>
+  </nb-card-body>
+</nb-card>
 
 
+<nb-card *ngIf="newTrainingType" class="container" style="background-color: white; height: 800px;">
+  <nb-card-body>
+    <form>
+      <div class="form-group row mydiv">
+        <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="vendorName" placeholder="Enter Text">
+        </div>
+      </div>
+      <div class="form-group row mydiv">
+        <label for="Specialization" class="col-sm-3 col-form-label mylabel">Specialization</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="contactPerson" placeholder="Specialization">
+        </div>
+      </div>
 
-    <nb-tab tabTitle="Types" [tabId]="TABS.types">
-      <div *ngIf="trainingType && TrainingTypeData==''" id="home" class="container tab-pane active" style="background-color: white; height: auto;"><br>
-        <div class="center">
-          <h5 style="text-align: center;">You have not setup any training type</h5>
-          <p style="text-align: center;">Click on the button to start your set up</p>
-
-          <div class="col text-center">
-            <button type="submit" class="btn my-button btn-md" (click)="addNewTraining()">Add Training Type</button>
+        <div class="form-group row mydiv">
+          <label for="phone" class="col-sm-3 col-form-label mylabel">Category</label>
+          <div class="col-sm-4">
+            <nb-radio-group style="display:flex; flex-direction: row; justify-content: flex-start;">
+              <nb-radio value="1">Internal</nb-radio>
+              <nb-radio value="2">External</nb-radio>
+            </nb-radio-group>
           </div>
         </div>
-      </div>
 
-
-      <div *ngIf="trainingType && TrainingTypeData !=''" id="home" class="container tab-pane active"><br>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="myTable"></ngx-tablecomponent>
-      </div>
-
-
-
-      <div *ngIf="newTrainingType" class="container" style="background-color: white; height: 800px;">
-        <!-- <div style="padding: 20px 0px 5px 0px;">
-          <span style="font-size: 15px; font-weight: bold;">Add Vendor Manually</span>
-        </div> -->
-
-          <br>
-          <form>
-            <div class="form-group row mydiv">
-              <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="vendorName" placeholder="Enter Text">
-              </div>
-            </div>
-            <div class="form-group row mydiv">
-              <label for="Specialization" class="col-sm-3 col-form-label mylabel">Specialization</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="contactPerson" placeholder="Specialization">
-              </div>
-            </div>
-
-            <div class="form-group row mydiv">
-              <label for="phone" class="col-sm-3 col-form-label mylabel">Category</label>
-              <ngx-radio-button [items]="['Internal', 'External']" [(value)]="category"></ngx-radio-button>
-            </div>
-
-            <div *ngIf="category =='External'" class="form-group row mydiv">
-              <label for="website" class="col-sm-3 col-form-label mylabel">Vendor</label>
-              <div class="col-sm-4">
-                <select class="custom-select" required>
-                  <option value="">Select </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group row mydiv">
-              <label for="cost" class="col-sm-3 col-form-label mylabel">Cost per head</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" name="costPerHead" id="cost" placeholder="Enter Amount">
-              </div>
-            </div>
-
-            <div class="form-group row mydiv">
-              <label for="training" class="col-sm-3 col-form-label mylabel">No of Trainees</label>
-              <div class="col-sm-4">
-                <input type="number" class="form-control" name="noOfTrainees" id="trainees" placeholder="Enter Text">
-            </div>
-            </div>
-
-            <div class="form-group row mydiv">
-              <label for="amount" class="col-sm-3 col-form-label mylabel">Overall budget cost (optional)</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="amount" placeholder="Enter Amount">
-              </div>
-            </div>
-
-            <div *ngIf="category =='Internal'" class="form-group row mydiv">
-              <label for="website" class="col-sm-3 col-form-label mylabel">Content</label>
-              <div class="col-sm-4">
-                <ngx-file-upload></ngx-file-upload>
-              </div>
-            </div>
-
-            <div *ngIf="category =='Internal'" class="form-group row mydiv">
-              <label for="resourceperson" class="col-sm-3 col-form-label mylabel">Resource Person</label>
-              <div class="col-sm-4">
-                <select class="custom-select" name="resourcePerson" required>
-                  <option value="">Select </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-              <div class="col-sm-4">
-                <button type="submit" class="btn my-button" style="padding: 7px 20px;">Save</button>
-                <span style="padding: 8px;"></span>
-                <button type="submit" class="btn cancel-button" style="padding: 5px 20px;">Cancel</button>
-                <!-- <br>
-                <div style="padding: 10px 10px 10px 0px;"><span>
-                  <a (click)="uploadVendor()" class="mylink" style="cursor: pointer; color: #4847E0; text-decoration: underline;">Add Vendor through Excel</a></span></div> -->
-
-              </div>
-            </div>
-          </form>
-
+        <div *ngIf="category =='External'" class="form-group row mydiv">
+          <label for="website" class="col-sm-3 col-form-label mylabel">Vendor</label>
+          <div class="col-sm-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
         </div>
+
+        <div class="form-group row mydiv">
+          <label for="cost" class="col-sm-3 col-form-label mylabel">Cost per head</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="costPerHead" id="cost" placeholder="Enter Amount">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="training" class="col-sm-3 col-form-label mylabel">No of Trainees</label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control" name="noOfTrainees" id="trainees" placeholder="Enter Text">
+        </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="amount" class="col-sm-3 col-form-label mylabel">Overall budget cost (optional)</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="amount" placeholder="Enter Amount">
+          </div>
+        </div>
+
+        <div *ngIf="category =='Internal'" class="form-group row mydiv">
+          <label for="content" class="col-sm-3 col-form-label mylabel">Content</label>
+          <div class="col-sm-4">
+            <ngx-file-upload></ngx-file-upload>
+          </div>
+        </div>
+
+        <div *ngIf="category =='Internal'" class="form-group row mydiv">
+          <label for="resourceperson" class="col-sm-3 col-form-label mylabel">Resource Person</label>
+          <div class="col-sm-4">
+            <select class="custom-select" name="resourcePerson" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <div class="col-sm-4">
+            <button type="submit" class="btn my-button" style="padding: 7px 20px;">Save</button>
+            <span style="padding: 8px;"></span>
+            <button type="submit" class="btn cancel-button" style="padding: 5px 20px;">Cancel</button>
+          </div>
+        </div>
+      </form>
+  </nb-card-body>
+      </nb-card>
     </nb-tab>
   </nb-tabset>
 </div>
-  <!-- </nb-card-body>
-</nb-card> -->
-
-
-
-
-<!-- <div *ngIf="welcome" class="container" style="background-color: white; height: 1000px;"> -->
-<!--
-  <br>
-  <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#home">Vendors</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu1">Types</a>
-    </li>
-  </ul> -->
-
-<!-- Add New Training -->
-
-
-
-

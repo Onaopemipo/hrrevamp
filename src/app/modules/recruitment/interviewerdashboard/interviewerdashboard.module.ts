@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule } from '@nebular/theme';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxChartsModule, PieChartComponent } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ApplicantselectionComponent } from './applicantselection/applicantselection.component';
 import { JobdetailsComponent } from './jobdetails/jobdetails.component';

@@ -1,3 +1,4 @@
+import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
@@ -11,6 +12,14 @@ export class DashboardComponent implements OnInit {
   trainingReport: string = 'ee';
   src: string = 'assets/icons/camera.jpg';
   show_modal = false;
+  reportTable: TableColumn [] = [
+    {name: 'recipient', title: 'Recipient'},
+    {name: 'trainingName', title: 'Training Name'},
+    {name: 'trainingType', title: 'Training Type'},
+    {name: 'date', title: 'Training Date'},
+    {name: 'status', title: 'Status'}];
+
+
   single = [
     {
       name: 'HR',

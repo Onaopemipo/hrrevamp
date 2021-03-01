@@ -4,15 +4,18 @@ import { ComponentsModule } from '../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule } from '@nebular/theme';
+import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule } from '@nebular/theme';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { JobsComponent } from './jobs/jobs.component';
+import { ReportsComponent } from './reports/reports.component';
+import { SettingsComponent } from './settings/settings.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, JobsComponent],
+  declarations: [DashboardComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent],
   imports: [
     CommonModule,
     AdminDashboardRoutingModule,
@@ -25,7 +28,8 @@ import { JobsComponent } from './jobs/jobs.component';
     NbOptionModule,
     NbSelectModule,
     FullCalendarModule,
-    NbCalendarModule
+    NbCalendarModule,
+    NbRadioModule
   ]
 })
 export class AdminDashboardModule { }

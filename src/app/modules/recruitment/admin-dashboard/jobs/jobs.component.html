@@ -1,8 +1,262 @@
 <ngx-componentsheader pageName='Jobs'></ngx-componentsheader>
-<nb-card>
-  <nb-card-body>
-    <div class="container tab-pane active"><br>
-      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addNewJob()"></ngx-default-content>
-      </div>
-  </nb-card-body>
-</nb-card>
+
+<div *ngIf="!newJob && allJobs==''" style="background-color: #ffffff;">
+  <nb-card  style="min-height: 100vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+    <nb-card-body>
+      <div><br>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addNewJob()"></ngx-default-content>
+        </div>
+    </nb-card-body>
+  </nb-card>
+
+</div>
+
+<!-- Job Posting Form  -->
+<div *ngIf="newJob">
+  <nb-card>
+    <nb-card-body>
+      <h6>Job title and Department details</h6>
+      <form>
+        <div class="form-group row mydiv">
+          <label for="Title" class="col-sm-3 col-form-label mylabel">Job Title</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <h6>Location</h6>
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Region" class="col-sm-3 col-form-label mylabel">Region, City or Zip Code</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <h6>Description</h6>
+
+        <div class="form-group row mydiv">
+          <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
+          <div class="col-sm-8">
+            <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Descripion" class="col-sm-3 col-form-label mylabel">Job Requirements</label>
+          <div class="col-sm-8">
+            <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+          </div>
+        </div>
+
+        <h6>Employment Details</h6>
+
+        <div class="form-group row mydiv">
+          <label for="employmentType" class="col-sm-3 col-form-label mylabel">Employment Type</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <nb-radio-group style="display:flex; flex-direction: row; justify-content: flex-start;">
+              <nb-radio value="1">Full Time</nb-radio>
+              <nb-radio value="2">Contract</nb-radio>
+            </nb-radio-group>
+          </div>
+
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="availability" class="col-sm-3 col-form-label mylabel">Availability</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <nb-radio-group style="display:flex; flex-direction: row; justify-content: flex-start;">
+              <nb-radio value="1">Physical</nb-radio>
+              <nb-radio value="2">Remote</nb-radio>
+              <nb-radio value="3">Flexible</nb-radio>
+            </nb-radio-group>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Region" class="col-sm-3 col-form-label mylabel">Experience</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">Beginner</option>
+              <option value="2">Intermediate</option>
+              <option value="3">Master</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="minimumEducation" class="col-sm-3 col-form-label mylabel">Minimum Education</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <input type="text" class="form-control" placeholder="Minimum Education">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="maximumEducation" class="col-sm-3 col-form-label mylabel">Maximum Education</label>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <input type="text" class="form-control"  placeholder="Maximum Education">
+          </div>
+        </div>
+
+        <h6>Annual Salary</h6>
+
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Currency <span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+          <div class="col-sm-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">USD</option>
+              <option value="2">NG</option>
+              <option value="3">AUD</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+            <label for="currency" class="col-sm-3 col-form-label mylabel">Salary Range <span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+            <div class="col-sm-2">
+              <select class="custom-select" required>
+                <option value="">From </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+
+            <div class="col-sm-2">
+              <select class="custom-select" required>
+                <option value="">To </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+
+  <hr style="margin: 40px 0px;">
+
+          <div class="form-group row mydiv">
+            <label for="currency" class="col-sm-3 col-form-label mylabel">Post Validity</label>
+            <div class="col-sm-2">
+              <select class="custom-select" required>
+                <option value="">From </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+
+            <div class="col-sm-2">
+              <select class="custom-select" required>
+                <option value="">To </option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="Beneficiary" class="col-sm-3 col-form-label"  >Reviewers</label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn cancel-button" style="padding: 5px 20px;">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
+                    </span>
+                  </span>
+                  Add Reviewers
+              </button>
+              <ngx-employee-master-search></ngx-employee-master-search>
+
+            </div>
+
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Country" class="col-sm-3 col-form-label mylabel">Scorecard <span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+            <div class="col-sm-4">
+              <select class="custom-select" required>
+                <option value="">Select </option>
+                <option value="1">60%</option>
+                <option value="2">87%</option>
+                <option value="3">80%</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Country" class="col-sm-3 col-form-label mylabel">Quiz <span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+            <div class="col-4 col-md-4 col-sm-4">
+              <select class="custom-select" required>
+                <option type="button" class="select-button" value="">Select One</option>
+                <option type="button" class="select-button" value="">Select Two</option>
+                <option type="button" class="select-button" value="">Select Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+            <div class="col-sm-4">
+              <button nbButton status="primary">Post</button>
+              <span style="padding: 8px;"></span>
+              <button nbButton>Save Draft</button>
+            </div>
+          </div>
+        </form>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="allJobs !=''" style="background-color: #ffffff;">
+  <nb-tabset>
+    <nb-tab tabTitle="Posted Jobs">
+      <nb-card>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="postedJobsTable"></ngx-tablecomponent>
+      </nb-card>
+    </nb-tab>
+    <nb-tab tabTitle="Scheduled Postings">
+      <nb-card>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="scheduledJobsTable"></ngx-tablecomponent>
+      </nb-card>
+    </nb-tab>
+    <nb-tab tabTitle="Drafts">
+      <nb-card>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="draftedJobsTable"></ngx-tablecomponent>
+      </nb-card>
+    </nb-tab>
+   </nb-tabset>
+</div>

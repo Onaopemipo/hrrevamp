@@ -1,23 +1,23 @@
-<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newTraining', label:'New Training Plan', icon: 'plus'}]"></ngx-componentsheader>
+<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newTraining', label:'New Training Plan', icon: 'plus'}]" (buttonClick)="addTrainingPlan()"></ngx-componentsheader>
 
 <div style="padding: 10px;"></div>
 <div class="container" style="background-color: #ffffff; height: 1000px;">
   <nb-tabset>
     <nb-tab tabTitle="List View">
-    <div *ngIf="welcome && TrainingPlanData ==''" id="home" class="container tab-pane active"><br>
-      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
+    <div *ngIf="welcome && TrainingPlanData ==''" style="min-height: 80vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
       </div>
 
       <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
         <div>
-          <nb-tabset>
-            <nb-tab tabTitle="Pending">
+          <nb-tabset (changeTab)="tabSelected($event)">
+            <nb-tab tabTitle="Pending" [tabId]="TABS.pending">
               Pending
             </nb-tab>
-            <nb-tab tabTitle="Approved">
+            <nb-tab tabTitle="Approved" [tabId]="TABS.approved">
               Approved
             </nb-tab>
-            <nb-tab tabTitle="Declined">
+            <nb-tab tabTitle="Declined" [tabId]="TABS.declined">
               Declined
             </nb-tab>
            </nb-tabset>
@@ -96,11 +96,11 @@
 
 <!-- Calendar View -->
     <nb-tab tabTitle="Calendar View">
-      <div *ngIf="welcome && TrainingPlanData ==''" id="home" class="container tab-pane active"><br>
+      <div *ngIf="welcome && TrainingPlanData ==''" style="min-height: 80vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;"><br>
         <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}} (buttonClick)="addTrainingPlan($event)"></ngx-default-content>
         </div>
 
-      <div *ngIf="welcome && TrainingPlanData !=''" id="home" class="container tab-pane active"><br>
+      <div *ngIf="welcome && TrainingPlanData !=''">
 
         <full-calendar [options]="calendarOptions"></full-calendar>
 
@@ -108,7 +108,15 @@
     </nb-tab>
   </nb-tabset>
 </div>
-
+<ngx-side-modal [(show)]="showModal">
+  <div modal-header>SSS</div>
+  <div modal-body>
+    SSSeeee
+  </div>
+  <div modal-actions>
+    lllll
+  </div>
+</ngx-side-modal>
 
 
 

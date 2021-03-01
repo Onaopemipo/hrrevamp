@@ -28,7 +28,7 @@ export class AdministrationComponent implements OnInit {
   category = 'Internal';
 
   TrainingTypeData = '';
-  TrainingVendorData = 'AAAA';
+  TrainingVendorData = '';
 
   addVendor = 'Add New Vendor';
   addType = 'Add Training Type';
@@ -56,8 +56,18 @@ export class AdministrationComponent implements OnInit {
   }
 
   addTraining() {
-    this.newTraining = true;
-    this.welcome = false;
+    if(this.selectedTab == TABS.vendors)
+    {
+      console.log('Vendors');
+      this.newTraining = true;
+      this.welcome = false;
+    }
+    else {
+      console.log('Types')
+      this.newTrainingType = true;
+      this.trainingType = false;
+    }
+
   }
 
   uploadVendor() {
