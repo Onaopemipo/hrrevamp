@@ -17,6 +17,7 @@ import { TableheaderComponent } from 'app/components/tableheader/tableheader.com
 import { ComponentsheaderComponent } from 'app/components/componentsheader/componentsheader.component';
 
 
+
 @NgModule({
   declarations: [ModulesComponent, DashboardComponent],
   imports: [
