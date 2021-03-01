@@ -105,9 +105,7 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     MainBaseComponent,
     CalComponent,
     CalenderComponent,
-
-    BulkUploadComponent
-
+    BulkUploadComponent,
   ],
   imports: [
     FormsModule,
@@ -161,11 +159,8 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     NbFormFieldModule,
     NbCardModule,
     NbInputModule,
-
-    // NgxChartsModule
   ],
   providers: [
-    // MaxStringLengthPipe
     {
       provide: FlowInjectionToken,
       useValue: Flow,
@@ -174,7 +169,6 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
-
   ],
   exports: [
     ComponentsheaderComponent,
@@ -198,7 +192,6 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     AmountInputComponent,
     DateRangeComponent,
     DateComponent,
-    // NbMenuModule,
     DefaultContentComponent,
     CommonModule,
     FormsModule,

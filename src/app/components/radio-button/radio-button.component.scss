@@ -73,3 +73,10 @@
   padding: 4px;
   background-color: #4847E0 !important;
 }
+
+.horizontal{
+  display: flex;
+}
+.horizontal > *{
+  margin-right: 2rem;
+}

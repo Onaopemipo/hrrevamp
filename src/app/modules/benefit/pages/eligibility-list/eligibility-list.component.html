@@ -1,0 +1,27 @@
+<ngx-componentsheader
+  pageName="Benefit Eligibility List"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="Open" [tabId]="TABS.OPEN"> </nb-tab
+    ><nb-tab tabTitle="Closed" [tabId]="TABS.CLOSED"> </nb-tab>
+  </nb-tabset>
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  ><ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="let's set up your expenses"
+    pageDescription="Now, you can add your request"
+    buttonValue="Add expense request"
+    (buttonClick)="createNewClicked()"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [userData]="tableData"
+    [loading]="loading"
+    (pageChange)="loadNewPage($event)"
+  ></ngx-tablecomponent>
+</div>

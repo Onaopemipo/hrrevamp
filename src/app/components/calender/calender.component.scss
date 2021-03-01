@@ -1,0 +1,47 @@
+@import '../../../../node_modules/fullcalendar/main.css';
+
+:host ::ng-deep .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{
+    display: none;
+}
+
+:host ::ng-deep .fc .fc-daygrid-day-top {
+    flex-direction: row !important;
+}
+
+:host ::ng-deep .fc .fc-scrollgrid-sync-table{
+    height: 100% !important;
+}
+
+:host ::ng-deep .fc .fc-daygrid-body{
+    // height: 100% !important;
+}
+:host{
+    display: block;
+}
+
+:host ::ng-deep  .fc-daygrid-body .fc-daygrid-body-unbalanced{
+    height: 100% !important;
+}
+:host ::ng-deep  .fc .fc-media-screen .fc-direction-ltr .fc-theme-standard{
+    height: 100% !important;
+}
+:host ::ng-deep  .fc-view-harness .fc-view-harness-active{
+    height: 100% !important;
+}
+
+:host ::ng-deep .fc-toolbar {
+    height: 40px !important;
+}
+
+:host ::ng-deep div{
+    height: 100% !important;
+}
+
+:host ::ng-deep .fc-toolbar {
+    height: 40px !important;
+}
+
+:host ::ng-deep .fc-daygrid-body.fc-daygrid-body-unbalanced{
+    height: calc(100%-50px)!important;
+    overflow: hidden;
+}

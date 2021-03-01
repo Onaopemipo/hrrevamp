@@ -3,3 +3,4 @@ export * from './two-columns/two-columns.layout';
 export * from './three-columns/three-columns.layout';
 export * from './single-column/single-column.layout';
 export * from './single-column-header/single-column-header.layout';
+export * from './customizable-column/customizable-column.layout';

@@ -35,6 +35,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Leave',
         link: '/myleave',
       },
+      {
+        title: 'Exit Process',
+        link: '/employeemodule/exitrequest',
+      },
     ],
   },
   {
@@ -42,14 +46,29 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/EmployeeManagement.jpg',
     children: [
       {
-        title: 'Onboarding Analytics',
+        title: 'Onboarding Dashboard',
         link: '/employeemodule',
       },
       {
         title: 'Onboarding Employees',
         link: '/employeemodule/allemployees',
       },
-
+      {
+        title: 'Exit Management',
+        link: '/employeemodule/exitmanagement',
+      },
+      {
+        title: 'Retirements',
+        link: '/employeemodule/retirement',
+      },
+      {
+        title: 'Confirmation',
+        link: '/employeemodule/comfirmation',
+      },
+      {
+        title: 'Promotion',
+        link: '/employeemodule/promotion',
+      },
     ]
   },
   {
@@ -198,16 +217,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Expense Management',
-        link: '/expenses'
+        link:'/expenses/'
       },
       {
         title: 'Expense Type',
-        link: '/expenses/type'
+        link:'/expenses/type'
       },
       {
         title: 'Expense Request',
-        link: '/expenses/request'
+        link:'/expenses/request'
+      },
+      {
+        title: 'Expense Report',
+        link:'/expenses/request'
       }
+
     ]
   },
   {

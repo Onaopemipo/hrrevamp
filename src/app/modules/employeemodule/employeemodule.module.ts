@@ -30,19 +30,40 @@ import { EmployeepersonalinformationComponent } from './employeepersonalinformat
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
+import { RetirementComponent } from './retirement/retirement.component';
+import { RetirementformComponent } from './retirementform/retirementform.component';
+import { ExitwarningComponent } from './exitwarning/exitwarning.component';
+import { ComfirmationComponent } from './comfirmation/comfirmation.component';
+import { EmployeeviewComponent } from './employeeview/employeeview.component';
+import { PromotionComponent } from './promotion/promotion.component';
+import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component';
+import { PromotioneligibilityComponent } from './promotioneligibility/promotioneligibility.component';
+import { EligibilityxxComponent } from './eligibilityxx/eligibilityxx.component';
+import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothereligibilitylist.component';
 
 
 
 @NgModule({
-  declarations: [HiringchecklistComponent,
+  declarations:
+    [
+    HiringchecklistComponent,
     EmployeeonboardingdashboardComponent,
+    EmploymentexitmanagementComponent,
+    ManagementexistComponent,
+    ExistrequestComponent,
+    RetirementComponent,
+    RetirementformComponent,
+    ExitwarningComponent,
+    ComfirmationComponent,
+    EmployeeviewComponent,
+    PromotionComponent,
+    PromotioninfoComponent,
     OnboardingemployeesComponent,
     EmployeemoduleComponent,
     EmployeepersonalinformationComponent,
-    EmploymentexitmanagementComponent,
-    ManagementexistComponent,
-    ExistrequestComponent
-  ],
+    PromotioneligibilityComponent,
+    EligibilityxxComponent,
+    AnothereligibilitylistComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,
