@@ -4,6 +4,7 @@ import { ExpenseManagementComponent } from './expense-management/expense-managem
 import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { ExpenseRequestComponent } from './expense-request/expense-request.component';
 import { ExpenseComponent } from './expense/expense.component';
+import { ExpenseReportComponent } from './expense-report/expense-report.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'request',
         component: ExpenseRequestComponent,
+      },
+      {
+        path: 'report',
+        component: ExpenseReportComponent,
       },
     ],
   }

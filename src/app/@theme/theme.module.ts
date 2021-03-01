@@ -17,11 +17,12 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
 
 import {
+  CustomizableheaderComponent,
   FooterComponent,
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
-  CustomizableheaderComponent
+  // CustomizableheaderComponent
 } from './components';
 import {
   CapitalizePipe,

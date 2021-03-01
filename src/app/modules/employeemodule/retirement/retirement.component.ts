@@ -36,12 +36,12 @@ export class RetirementComponent implements OnInit {
   }
 
   modal(buttion) {
-    //if// (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
+    // (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
     //  this.showAddPlanModal = true;
   //  }
-  //  if (buttion === TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT) {
-    // this.router.navigateByUrl('/employeemodule/retirementform')
-   // }
+   if (buttion === TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT) {
+    this.router.navigateByUrl('/employeemodule/retirementform')
+    }
   }
 
 }
