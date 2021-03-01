@@ -91,15 +91,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Analytics',
-        link:'/timeandattendance'
+        link: '/timeandattendance'
       },
       {
         title: 'Projects',
-        link:''
+        link: ''
       },
       {
         title: 'Shift',
-        link:''
+        link: ''
       }
     ]
   },

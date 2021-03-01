@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  title: string = 'Time and Attendance'
+  title: string = 'Time and Attendance';
   constructor() { }
   pageActionClicked(event) {
-    
+
   }
   ngOnInit(): void {
   }

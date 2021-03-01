@@ -25,7 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TimeandattendanceComponent } from './timeandattendance.component';
 
 @NgModule({
-  declarations: [DashboardComponent,TimeandattendanceComponent],
+  declarations: [DashboardComponent, TimeandattendanceComponent],
   imports: [
     CommonModule,
     TimeandattendanceRoutingModule,
@@ -44,8 +44,8 @@ import { TimeandattendanceComponent } from './timeandattendance.component';
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,    
-    
+    NbDialogModule,
+
   ]
 })
 export class TimeandattendanceModule { }

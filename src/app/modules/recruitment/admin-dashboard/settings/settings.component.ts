@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
     {title: 'interviewed', value: false},
     {title: 'hired', value: false},
     {title: 'pending', value: false},
-  ]
+  ];
   createStage: boolean = true;
   createTemplate: boolean = true;
   selectedCase: string = 'Hiring Stages';
@@ -40,12 +40,12 @@ export class SettingsComponent implements OnInit {
     this.selectedCase = this.hiringChecklist[i].title;
   }
 
-  createNew(){
+  createNew() {
     this.createStage = !this.createStage;
     this.createTemplate = !this.createTemplate;
   }
 
-  toggleCard(panelTitle){
+  toggleCard(panelTitle) {
     this.cardClick = panelTitle;
     console.log(panelTitle);
 

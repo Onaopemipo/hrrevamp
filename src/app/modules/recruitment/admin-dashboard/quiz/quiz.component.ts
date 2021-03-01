@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizComponent implements OnInit {
 
-  pagetitle: string = 'Quiz'
+  pagetitle: string = 'Quiz';
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  addQuiz(){
+  addQuiz() {
 
   }
 

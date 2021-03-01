@@ -12,7 +12,7 @@ const routes: Routes = [
   {
   path: '',
   component: EmployeemoduleComponent,
-  children: 
+  children:
   [
   {
     path: 'dashboard',
