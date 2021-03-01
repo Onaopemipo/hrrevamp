@@ -1,0 +1,86 @@
+@import 'app/@theme/styles/themes.scss';
+
+.tab-item{
+    font: normal normal normal 16px/22px Rubik;
+    color: #86828D;
+    margin: 1rem;
+    align-items: center;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.tab-item:hover{
+    color: #4847E0;
+    border-left: 0.2rem solid #4847E0;
+    margin-left: 0.8rem;
+}
+
+.tab-item.active{
+    color: #4847E0;
+    border-left: 0.2rem solid #4847E0;
+    margin-left: 0.8rem;
+}
+
+.key-value-group > div{
+    font: normal normal normal 16px/22px Rubik;
+    color: #080730;
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.key-value-group > div>*:nth-child(1){
+    width: 30%;
+}
+.key-value-group > div>*:nth-child(2){
+    width: 70%;
+}
+
+.dependent-detail > div{
+    margin-bottom: 3rem;
+}
+
+.underlined-button{
+    text-decoration: underline;
+    font: normal normal normal 16px/22px Rubik;
+    color: #4847E0;
+    padding: 0px;
+    text-align: left;
+    width: fit-content;
+    min-width: unset !important;
+    border: none;
+    background: transparent;
+}
+
+.edit-button{
+    display: flex;
+    width: fit-content;
+    min-width: unset !important;
+    border: none;
+    background: transparent;
+}
+
+.vertical-line{
+    padding-right: 1rem; margin-right: 1rem; border-right: 1px solid black
+}
+
+.no-border-button{
+    background-color: nb-theme(color-primary-400);
+    min-width: unset;
+    border: none;
+    padding: 5px;
+    color: white;
+  }
+
+.linear-form > p{
+    font: normal normal normal 16px/22px Rubik;
+    color: #080730;
+    margin-bottom: 1rem;
+}
+
+.linear-form > h4{
+    text-align: left;
+    font: normal normal medium 18px/22px Rubik;
+    color: #11141A;
+    margin-bottom: 1rem;
+}

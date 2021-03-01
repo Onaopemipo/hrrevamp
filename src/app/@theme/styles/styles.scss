@@ -137,6 +137,13 @@ h1{
   height: 100%;
 }
 
+.multi-card-page > .card{
+  background-color: white;
+  padding: 40px;
+  height: 100%;
+  margin-bottom: 40px;
+}
+
 .header6-normal{
   font-style: normal !important;
   font-variant:normal !important;
@@ -371,4 +378,19 @@ button{
   line-height: 17px;
   letter-spacing: 0em;
   text-align: left;
+}
+
+
+.underlined-button{
+  text-decoration: underline;
+  font: normal normal normal 16px/22px Rubik;
+  color: #4847E0;
+  padding: 0px;
+  text-align: left;
+  width: fit-content;
+  min-width: unset !important;
+  border: none;
+  background: transparent;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
 }

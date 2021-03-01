@@ -1,4 +1,4 @@
-<div class="col-sm-4">
+<div [class]="{horizontal: horizontal}">
   <div class="container form-check" *ngFor="let item of items" (click)="clicked(item)">
     <!-- <div class="my-checkbox" [class]="{selected: item == selected}">
       <div style="flex: auto; background-color: white; border-radius: 50%;"></div>

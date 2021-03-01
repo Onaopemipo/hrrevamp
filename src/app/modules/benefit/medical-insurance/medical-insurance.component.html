@@ -1,48 +1,41 @@
 <ngx-componentsheader pageName='Medical Insurance Coverage'></ngx-componentsheader>
+<div class="multi-card-page" *ngFor="let a of [1,23,4,5,6,7]">
+    <div class="card">
+    <h4>Hygeia</h4>
 
-<div class="main-page-container">
-    <div>Hygeia</div>
-
+    <div class="key-value-group">
     <div>
         <label>Enrolment Type</label>
-        <div></div>
+        <div>Open</div>
     </div>
 
     <div>
         <label>Phone Number</label>
-        <div></div>
+        <div>+2347032935357</div>
     </div>
 
     <div>
         <label>Effective</label>
-        <div></div>
+        <div>02/21/2021-01/31/2022</div>
     </div>
 
     <div>
         <label>Renewal Window</label>
-        <div></div>
+        <div>02/21/2021-01/31/2022</div>
     </div>
 
     <div>
         <label>Waiting Period</label>
-        <div></div>
+        <div>02/21/2021-01/31/2022</div>
     </div>
 
     <div>
         <label>Benefit Summary</label>
-        <div></div>
+        <div>02/21/2021-01/31/2022</div>
+    </div>
     </div>
 
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Plan Name</th>
-                    <th> Plan Type</th>
-                    <th> Policy Numbers </th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+    <ngx-tablecomponent></ngx-tablecomponent>
+
+</div>
 </div>

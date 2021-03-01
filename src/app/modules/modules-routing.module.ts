@@ -50,7 +50,11 @@ const routes: Routes = [{
       path: 'employeemodule',
       loadChildren: () => import('../modules/employeemodule/employeemodule.module')
         .then(m => m.EmployeemoduleModule)
-
+    },
+    {
+      path: 'benefits',
+      loadChildren: () => import('../modules/benefit/benefit.module')
+        .then(m => m.BenefitModule)
     },
 
     // {

@@ -6,6 +6,11 @@ import { BenefitRoutingModule } from './benefit.routing.module';
 import { MedicalInsuranceComponent } from './medical-insurance/medical-insurance.component';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { EmployeeViewComponent } from './pages/employee-view/employee-view.component';
+import { CreateBenefitComponent } from './pages/create-benefit/create-benefit.component';
+import { BenefitViewComponent } from './pages/benefit-view/benefit-view.component';
+import { EligibilityListComponent } from './pages/eligibility-list/eligibility-list.component';
+import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
 
 
 
@@ -13,7 +18,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   declarations: [
     BenefitComponent,
     MedicalInsuranceComponent,
-    DashboardComponent
+    DashboardComponent,
+    EmployeeViewComponent,
+    CreateBenefitComponent,
+    BenefitViewComponent,
+    EligibilityListComponent,
+    ManageEmployeeComponent,
   ],
   imports: [
     CommonModule,

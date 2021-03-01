@@ -7,11 +7,18 @@ import { ExpenseRoutingModule } from './expense.routing.module';
 import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { ExpenseRequestComponent } from './expense-request/expense-request.component';
 import { ExpenseManagementComponent } from './expense-management/expense-management.component';
+import { ExpenseReportComponent } from './expense-report/expense-report.component';
 
 
 
 @NgModule({
-  declarations: [ExpenseComponent, ExpenseManagementComponent, ExpenseTypeComponent, ExpenseRequestComponent, ],
+  declarations: [
+    ExpenseComponent,
+    ExpenseManagementComponent,
+    ExpenseTypeComponent,
+    ExpenseRequestComponent,
+    ExpenseReportComponent,
+  ],
   imports: [
     CommonModule,
     ComponentsModule,
