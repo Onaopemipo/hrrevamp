@@ -37,6 +37,12 @@ export const routes: Routes = [
         path: 'jobdetails',
         component: JobDetailsComponent
       },
+
+      {
+        path: 'applicantsdashboard',
+        component: ApplicantsDashboardComponent
+      },
+
       {
         path: '**',
         component: ApplicantssigninComponent,

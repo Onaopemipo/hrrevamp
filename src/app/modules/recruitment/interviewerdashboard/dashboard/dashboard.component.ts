@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   options: any = {};
   myPieOptions: any = {};
 
-  applicants
+  applicants;
 
   // ngAfterViewInit() {
   //   this.themeSubscription = this.theme.getJsTheme().subscribe(config => {

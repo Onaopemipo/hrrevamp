@@ -36,7 +36,7 @@ export class JobsComponent implements OnInit {
     {name: 'department', title: 'Department'},
   ];
 
-  selectedOption
+  selectedOption;
   constructor() {
    }
 

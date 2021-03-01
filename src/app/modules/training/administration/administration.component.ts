@@ -56,14 +56,12 @@ export class AdministrationComponent implements OnInit {
   }
 
   addTraining() {
-    if(this.selectedTab == TABS.vendors)
-    {
+    if (this.selectedTab == TABS.vendors) {
       console.log('Vendors');
       this.newTraining = true;
       this.welcome = false;
-    }
-    else {
-      console.log('Types')
+    } else {
+      console.log('Types');
       this.newTrainingType = true;
       this.trainingType = false;
     }
