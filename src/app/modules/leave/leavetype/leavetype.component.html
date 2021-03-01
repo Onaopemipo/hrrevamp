@@ -1,11 +1,12 @@
-<p>leavetype works!</p>
+
 <ngx-componentsheader [pageName]='LeaveType' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 
 </ngx-componentsheader>
-
+<div id="calendar"></div>
 <ngx-tableheader></ngx-tableheader>
-<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
 
+
+<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
 
 <ngx-side-modal [(show)]='showLeaveTypeModal' style="width: 500px; height: 1000px;">
     <div modal-header>Add Leave Type</div>

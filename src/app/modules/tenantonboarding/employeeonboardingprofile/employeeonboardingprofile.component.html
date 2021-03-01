@@ -28,7 +28,7 @@
         
             </div>
         </nb-card-body>
-        <div  style.height="{{(scase.offsetHeight < 402)?402 : scase.offsetHeight }}px" >
+        <div  style.height="{{(scase.offsetHeight < 402)?380 : (scase.offsetHeight - 210) }}px" >
             <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of hiringChecklist; let i = index">
         
                 <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
