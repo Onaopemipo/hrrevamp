@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { title } from 'process';
 
 export const MENU_ITEMS: NbMenuItem[] = [
 
@@ -109,8 +110,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Analytics',
-        link: '/timeandattendance',
+        link:'/timeandattendance'
       },
+      {
+        title: 'Projects',
+        link:''
+      },
+      {
+        title: 'Shift',
+        link:''
+      }
     ]
   },
   {

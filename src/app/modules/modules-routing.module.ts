@@ -62,7 +62,6 @@ const routes: Routes = [{
       loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
       .then(m => m.InterviewerdashboardModule)
     },
-
     {
       path: 'recruitmentadmin',
       loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
