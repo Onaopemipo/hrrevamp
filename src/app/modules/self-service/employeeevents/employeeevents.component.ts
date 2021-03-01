@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { NbPopoverComponent, NbPopoverDirective } from '@nebular/theme';
 import { MENU_ITEMS } from 'app/modules/pages-menu';
 import { ModalformComponent } from '../modalform/modalform.component';
+import { CalenderComponent } from 'app/components/calender/calender.component';
 @Component({
   selector: 'ngx-employeeevents',
   templateUrl: './employeeevents.component.html',
   styleUrls: ['./employeeevents.component.scss']
 })
-export class EmployeeeventsComponent implements OnInit {
+export class EmployeeeventsComponent implements AfterViewInit {
+  @ViewChild(CalenderComponent) calendar: CalenderComponent;
   @Input() Events: string = 'Events';
   menu = MENU_ITEMS;
   link = '/todo';
@@ -45,5 +47,13 @@ export class EmployeeeventsComponent implements OnInit {
   ngOnInit(): void {
   }
  onClick() {
+ }
+ ngAfterViewInit(){
+   console.log(this.calendar);
+ }
+ showPopover(){
+   alert(666)
+   console.log(this)
+   this.popOver.show();
  }
 }
