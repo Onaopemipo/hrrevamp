@@ -25,10 +25,10 @@
     (pageChange)="loadNewPage($event)"
   ></ngx-tablecomponent>
 </div>
-<ngx-side-modal [(show)]="showModal">
+<ngx-side-modal [(show)]="showModal" [isPage]="true">
   <div modal-header>Add project</div>
   <div modal-body>
-    <div class="my-form">
+    <div class="my-form linear-form">
       <h4><span>Add Manually</span> <span>Upload excel document</span></h4>
 
       <div class="form-group">
