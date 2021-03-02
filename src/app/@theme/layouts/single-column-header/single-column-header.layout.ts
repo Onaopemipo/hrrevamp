@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   template: `
     <nb-layout>
     <nb-layout-header fixed>
-    <ngx-header></ngx-header>
+    <ngx-customizableheader [menuToggle] = "mtoggle">
+    </ngx-customizableheader>
      </nb-layout-header>
       <nb-layout-column style="padding: 0 !important;">
         <ng-content select="router-outlet"></ng-content>
@@ -14,4 +15,6 @@ import { Component } from '@angular/core';
     </nb-layout>
   `,
 })
-export class SingleColumnHeaderLayoutComponent {}
+export class SingleColumnHeaderLayoutComponent {
+  mtoggle = false;
+}

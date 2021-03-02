@@ -13,6 +13,8 @@ import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 export class BulkUploadComponent implements OnInit {
   @Output() buttonClick = new EventEmitter<Transfer[]>();
   @Input() btnoutline: string = '';
+  @Input() btnLabel: string = '';
+  @Input() icanName: string = '';
 
   constructor( private dialogService: NbDialogService) { }
 

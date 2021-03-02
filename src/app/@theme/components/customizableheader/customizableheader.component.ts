@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
   templateUrl: './customizableheader.component.html',
 })
 export class CustomizableheaderComponent implements OnInit, OnDestroy {
-
+  @Input() menuToggle: boolean = true;
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = true;
   user: any;
