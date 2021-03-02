@@ -1,5 +1,6 @@
 import { TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ngx-jobdetails',
@@ -15,9 +16,13 @@ export class JobdetailsComponent implements OnInit {
     {name: 'email', title: 'Email'},
     {name: 'role', title: 'Role'},
     {name: 'dateApplied', title: 'Date Applied'}];
-  constructor() { }
+  constructor(private navCtrl: Location) { }
 
   ngOnInit(): void {
+  }
+
+  goback(){
+    this.navCtrl.back();
   }
 
 }

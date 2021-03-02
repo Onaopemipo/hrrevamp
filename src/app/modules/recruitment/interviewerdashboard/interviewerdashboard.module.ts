@@ -9,11 +9,12 @@ import { NgxChartsModule, PieChartComponent } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ApplicantselectionComponent } from './applicantselection/applicantselection.component';
 import { JobdetailsComponent } from './jobdetails/jobdetails.component';
+import { EvaluationComponent } from './evaluation/evaluation.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, ApplicantselectionComponent, JobdetailsComponent],
+  declarations: [DashboardComponent, ApplicantselectionComponent, JobdetailsComponent, EvaluationComponent],
   imports: [
     CommonModule,
     InterviewerdashboardRoutingModule,

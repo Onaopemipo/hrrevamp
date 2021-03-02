@@ -8,6 +8,7 @@ import { ComponentsModule } from 'app/components/components.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ApplicantssigninComponent } from './applicantssignin/applicantssignin.component';
+import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,11 @@ export const routes: Routes = [
       {
         path: 'applicantsdashboard',
         component: ApplicantsDashboardComponent
+      },
+
+      {
+        path: 'applicantquiz',
+        component: ApplicantquizComponent
       },
 
       {

@@ -9,7 +9,7 @@
       </span>
       </div>
       <div style="padding: 20px;">
-        <button sty nbButton status="primary" (click)="createNew()" style="align-items: flex-start">Set Stages</button>
+        <button nbButton status="primary" (click)="createNew()" style="align-items: flex-start">Set Stages</button>
       </div>
 
     </div>
@@ -236,14 +236,37 @@
                   <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
                 </div>
               </nb-card-header>
+              <nb-card-body>
+                <nb-card class="cardTitle">
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    </div>
+                  </nb-card-header>
+                  <nb-card-body>
+                   <nb-card>
+                      <nb-card-header>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                          <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                        </div>
+                      </nb-card-header>
+
+                      <nb-card-header>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                          <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                        </div>
+                      </nb-card-header>
+
+                      <nb-card-header>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                          <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                        </div>
+                      </nb-card-header>
+                   </nb-card>
+                  </nb-card-body>
+                </nb-card>
+              </nb-card-body>
            </nb-card>
-              <nb-card class="cardTitle">
-                <nb-card-header>
-                  <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                  </div>
-                </nb-card-header>
-              </nb-card>
 
               <nb-card class="cardTitle">
                 <nb-card-header>
