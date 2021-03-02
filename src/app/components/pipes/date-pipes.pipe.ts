@@ -7,7 +7,7 @@ import { threadId } from 'worker_threads';
 export class DatePipesPipe implements PipeTransform {
 
   transform(value: Date, ...args: unknown[]): string {
-    //todo, this function needs update
+    // todo, this function needs update
     const today = new Date();
     if (value.getDate() === today.getDate()) {
       return `${value.getHours()}:${value.getMinutes()}`;

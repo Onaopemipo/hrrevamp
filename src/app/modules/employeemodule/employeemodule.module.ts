@@ -90,8 +90,8 @@ import { DeploymentapplicationComponent } from './deploymentapplication/deployme
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,  
-    
+    NbDialogModule,
+
   ],
 
 })

@@ -29,7 +29,7 @@ import { EmployeeofferComponent } from '../employeemodule/employeeoffer/employee
 import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/employeeonboardingprofile.component';
 
 @NgModule({
-  declarations: [TenantonboardingComponent, OnboardingsetupComponent, alertmodalComponent,EmployeeofferComponent, EmployeeonboardingprofileComponent],
+  declarations: [TenantonboardingComponent, OnboardingsetupComponent, alertmodalComponent, EmployeeofferComponent, EmployeeonboardingprofileComponent],
   imports: [
     CommonModule,
     TenantonboardingRoutingModule,

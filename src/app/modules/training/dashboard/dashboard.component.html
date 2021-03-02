@@ -1,6 +1,4 @@
 <ngx-componentsheader pageName='Training Dashboard'></ngx-componentsheader>
-<div class="container">
-</div>
 
 <div class="row">
   <div class="col-xxxl-3 col-md-3" >
@@ -82,7 +80,6 @@
 </div>
 
 <!-- Bar Chart is here -->
-  <div class="container">
     <!-- <ngx-echarts-bar></ngx-echarts-bar> -->
     <!-- <ngx-default-content pageHeader="Bar Charts"></ngx-default-content> -->
     <div class="row" >
@@ -115,7 +112,7 @@
         <nb-card-body>
           <div style="display: flex;flex-direction: row;">
             <div style="flex:auto">
-            <span class="header6-bold">Distribution by Location</span>
+            <span class="header6-bold">Specialization by Employees</span>
             </div>
             <div>
               <nb-select selected="1">
@@ -149,21 +146,22 @@
 </div>
 
 </div>
-</div>
 
 <!-- Training Reports -->
-<div class="container">
 
   <div *ngIf="trainingReport == ''">
     <ngx-default-content pageHeader="You do not have any contents"></ngx-default-content>
   </div>
 
-
-    <ngx-componentsheader pageName="Training Report"></ngx-componentsheader>
+<!--
+  <nb-card-body>
+    <ngx-tableheader></ngx-tableheader>
+    <ngx-tablecomponent  [tableColum]="reportTable"></ngx-tablecomponent>
+  </nb-card-body> -->
     <!-- <ngx-tablecomponent></ngx-tablecomponent> -->
     <div *ngIf="trainingReport != ''">
     <ngx-tableheader></ngx-tableheader>
+    <ngx-tablecomponent  [tableColum]="reportTable"></ngx-tablecomponent>
   </div>
 
-</div>
 

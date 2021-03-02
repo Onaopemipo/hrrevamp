@@ -12,10 +12,10 @@ enum TOP_ACTIONS {
   styleUrls: ['./employmentexitmanagement.component.scss']
 })
 export class EmploymentexitmanagementComponent implements OnInit {
-ExitManagement:string = 'Exit Management'
- 
+ExitManagement: string = 'Exit Management';
+
   topActionButtons = [
-    
+
     {name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: 'Initiate Voluntary Exit', 'icon': 'plus', outline: false},
   ];
 
@@ -34,16 +34,16 @@ ExitManagement:string = 'Exit Management'
   ) { }
 
   ngOnInit(): void {
-    
+
   }
 
 
   modal(buttion) {
-    //if// (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
+    // if// (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
     //  this.showAddPlanModal = true;
   //  }
     if (buttion === TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT) {
-     this.router.navigateByUrl('/employeemodule/exitform')
+     this.router.navigateByUrl('/employeemodule/exitform');
     }
   }
 

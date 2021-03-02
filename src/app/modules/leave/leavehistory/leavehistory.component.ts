@@ -12,7 +12,7 @@ enum TOP_ACTIONS {
   styleUrls: ['./leavehistory.component.scss']
 })
 export class LeavehistoryComponent implements OnInit {
-  LeaveHistory: string = 'Leave History'
+  LeaveHistory: string = 'Leave History';
   topActionButtons = [
     { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Apply For Leave', 'icon': 'plus', outline: true },
     { name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false },
@@ -46,10 +46,10 @@ export class LeavehistoryComponent implements OnInit {
   showLeavePlanModal = false;
 
 
-  //checked = false;
+  // checked = false;
 
   toggle(checked: boolean) {
-    //this.checked = checked;
+    // this.checked = checked;
     // }
   }
 }

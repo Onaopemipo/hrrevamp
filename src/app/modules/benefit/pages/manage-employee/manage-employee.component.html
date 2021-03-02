@@ -1,0 +1,27 @@
+<ngx-componentsheader
+  pageName="Manage Employee"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="Not Completed" [tabId]="TABS.NOT__COMPLETED"> </nb-tab
+    ><nb-tab tabTitle="Completed" [tabId]="TABS.COMPLETED"> </nb-tab>
+  </nb-tabset>
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  ><ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="let's set up your expenses"
+    pageDescription="Now, you can add your request"
+    buttonValue="Add expense request"
+    (buttonClick)="createNewClicked()"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [userData]="tableData"
+    [loading]="loading"
+    (pageChange)="loadNewPage($event)"
+  ></ngx-tablecomponent>
+</div>

@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { title } from 'process';
 
 export const MENU_ITEMS: NbMenuItem[] = [
 
@@ -7,9 +8,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/home.jpg',
     link: '/dashboard',
 
-    
+
   },
- 
+
   {
     title: 'CORE HR',
     group: true,
@@ -105,8 +106,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Time and Attendance',
-    link: '/',
     icon: '/assets/icons/TimeandAttendance.jpg',
+    children: [
+      {
+        title: 'Analytics',
+        link: '/timeandattendance'
+      },
+      {
+        title: 'Projects',
+        link: ''
+      },
+      {
+        title: 'Shift',
+        link: ''
+      }
+    ]
   },
   {
     title: 'CAREERS',
@@ -179,7 +193,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Email Settings',
         link: '/communications/settings',
       },
-    
+
     ],
 
   },
@@ -245,7 +259,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Request',
         link: '/disbursement/disbursement/requests',
       },
-    
+
 
     ]
   },

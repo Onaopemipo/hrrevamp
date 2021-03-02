@@ -12,11 +12,79 @@ export class DashboardComponent implements OnInit {
   trainingReport: string = 'ee';
   src: string = 'assets/icons/camera.jpg';
   show_modal = false;
-
+  data: any;
   colorScheme: any;
   barcolorScheme: any;
   themeSubscription: any;
   options: any = {};
+  myPieOptions: any = {};
+
+  applicants
+
+  // ngAfterViewInit() {
+  //   this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+
+  //     const colors = config.variables;
+  //     const echarts: any = config.variables.echarts;
+
+  //     this.options = {
+  //       backgroundColor: echarts.bg,
+  //       color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
+  //       tooltip: {
+  //         trigger: 'item',
+  //         formatter: '{a} <br/>{b} : {c} ({d}%)',
+  //       },
+  //       legend: {
+  //         orient: 'vertical',
+  //         left: 'left',
+  //         data: ['USA', 'Germany', 'France', 'Canada', 'Russia'],
+  //         textStyle: {
+  //           color: echarts.textColor,
+  //         },
+  //       },
+  //       series: [
+  //         {
+  //           name: 'Countries',
+  //           type: 'pie',
+  //           radius: '80%',
+  //           center: ['50%', '50%'],
+  //           data: [
+  //             { value: 335, name: 'Germany' },
+  //             { value: 310, name: 'France' },
+  //             { value: 234, name: 'Canada' },
+  //             { value: 135, name: 'Russia' },
+  //             { value: 1548, name: 'USA' },
+  //           ],
+  //           itemStyle: {
+  //             emphasis: {
+  //               shadowBlur: 10,
+  //               shadowOffsetX: 0,
+  //               shadowColor: echarts.itemHoverShadowColor,
+  //             },
+  //           },
+  //           label: {
+  //             normal: {
+  //               textStyle: {
+  //                 color: echarts.textColor,
+  //               },
+  //             },
+  //           },
+  //           labelLine: {
+  //             normal: {
+  //               lineStyle: {
+  //                 color: echarts.axisLineColor,
+  //               },
+  //             },
+  //           },
+  //         },
+  //       ],
+  //     };
+  //   });
+  // }
+
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
   single = [
     {
       name: 'Germany',
@@ -82,6 +150,41 @@ export class DashboardComponent implements OnInit {
   customizePieOption: any = {};
   customizedlineoptions: any = {};
   constructor(private theme: NbThemeService) {
+    // this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+
+    //   const colors: any = config.variables;
+    //   const chartjs: any = config.variables.chartjs;
+
+    //   this.data = {
+    //     labels: ['Download Sales', 'In-Store Sales', 'Mail Sales'],
+    //     datasets: [{
+    //       data: [300, 500, 100],
+    //       backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight],
+    //     }],
+    //   };
+
+    //   this.myPieOptions = {
+    //     maintainAspectRatio: false,
+    //     responsive: true,
+    //     scales: {
+    //       xAxes: [
+    //         {
+    //           display: false,
+    //         },
+    //       ],
+    //       yAxes: [
+    //         {
+    //           display: false,
+    //         },
+    //       ],
+    //     },
+    //     legend: {
+    //       labels: {
+    //         fontColor: chartjs.textColor,
+    //       },
+    //     },
+    //   };
+    // });
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
@@ -94,6 +197,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('pieChart') ctx: ElementRef;
   ngAfterViewInit() {
+
     this.customizePieOption = {
       color: [
 '#5655CA',
@@ -366,10 +470,6 @@ export class DashboardComponent implements OnInit {
     closeModal() {
       this.show_modal = false;
     }
-
-  // ngOnDestroy(): void {
-  //     this.themeSubscription.unsubscribe();
-  //   }
 
 
 

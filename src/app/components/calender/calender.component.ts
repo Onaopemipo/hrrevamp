@@ -10,6 +10,7 @@ class MySring{
     this.a = a;
   }
 }
+
 @Component({
   selector: 'ngx-calender',
   templateUrl: './calender.component.html',

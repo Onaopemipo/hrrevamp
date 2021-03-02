@@ -1,0 +1,375 @@
+<ngx-componentsheader
+  pageName="Employee View"
+  [requiredButton]="rButton"
+  (buttonClick)="topActionClicked()"
+></ngx-componentsheader>
+
+<div class="row">
+  <div class="col-sm-3">
+    <div
+      style="
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+      "
+    >
+      <div>
+        <img
+          style="height: 5rem; width: 5rem; border-radius: 50%"
+          src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+        />
+      </div>
+      <span style="font: normal normal medium 20px/24px Rubik; color: #11141a"
+        >PRO Direct+ 1500</span
+      >
+      <br />
+      <span style="font: normal normal normal 14px/17px Rubik; color: #95a8b8"
+        >HMO</span
+      >
+
+      <div style="margin-top: 50px">
+        <div style="display: flex; margin: -1rem" class="tab-item"  [class]="{active: selectedTab===1}" (click)="tabChanged(1)">
+          <img
+            src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+            style="
+              width: 3rem;
+              height: 3rem;
+              border-radius: 50%;
+              margin: 1rem; ;
+            "
+          />
+          <span class="tab-item-text">Basic Information</span>
+        </div>
+        <div style="display: flex; margin: -1rem" class="tab-item"  [class]="{active: selectedTab===2}" (click)="tabChanged(2)">
+          <img
+            src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+            style="
+              width: 3rem;
+              height: 3rem;
+              border-radius: 50%;
+              margin: 1rem; ;
+            "
+          />
+          <span class="tab-item-text">Subscribe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9 page-section">
+    <div class="main-page-container" *ngIf="selectedTab == 1">
+      <h4>Initiate New Benefit</h4>
+      <p>Let's help create a new benefit plan</p>
+      <div class="linear-form">
+        <hr />
+        <div class="form-group">
+          <label>Plan Name</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Policy Number</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Apply Policy Number to all Plans</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>HSA Compatible</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Plan State</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Available Out of State</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Use Employee Zip Code for Plan Availability</label>
+          <input class="form-control" />
+        </div>
+        <div class="form-group">
+          <label></label>
+          <div>
+            <button nbButton status="primary">Submit</button>
+            <button
+              outline
+              nbButton
+              status="primary"
+              style="background-color: transparent; margin-left: 2rem"
+            >
+              Go Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="multi-card-page" *ngIf="selectedTab == 3">
+      <div class="card">
+        <h4>Enrollment Summary</h4>
+        <ngx-tablecomponent [tableColum]="columns"></ngx-tablecomponent>
+      </div>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between">
+          <h4>Medical Insurance Coverage</h4>
+          <button class="edit-button">
+            <nb-icon icon="edit"></nb-icon>
+            Edit
+          </button>
+        </div>
+        <div>
+          <img
+            src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png"
+            style="width: 50px; height: auto"
+          />
+          <span>Hygeia</span>
+        </div>
+        <p>Basic HMO PYT14</p>
+        <div style="display: flex">
+          <span>Employee Only</span>
+          <div class="vertical-line"></div>
+          <span> Effective 22/11/2021 </span>
+        </div>
+        <button class="underlined-button">Hide details</button>
+        <div class="d-flex">
+          <h5>Dependents (1)</h5>
+          <button class="edit-button">
+            <nb-icon icon="edit"></nb-icon>
+            Edit
+          </button>
+        </div>
+        <p>Micheal Onasanya</p>
+        <div style="display: flex">
+          <span>Brother</span>
+          <div class="vertical-height"></div>
+          <span>NIN 1235676543GF</span>
+        </div>
+
+        <h5>Cost and Contribution</h5>
+        <ngx-tablecomponent></ngx-tablecomponent>
+        <div>
+          <button
+            nbButton
+            outline
+            status="primary"
+            style="border: none; width: unset"
+          >
+            <nb-icon icon="plus"></nb-icon>
+            <span>Add</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="main-page-container" *ngIf="selectedTab == 2">
+      <nb-tabset>
+        <nb-tab tabTitle="Bio">
+          <div class="linear-form">
+            <p>Input required Information in the fields below where needed.</p>
+            <div class="form-group">
+              <label>Nationality</label>
+              <ngx-radio-button
+                [items]="['Nigeria', 'Other Country']"
+              ></ngx-radio-button>
+            </div>
+            <div class="form-group">
+              <label>Sector where you work</label>
+              <input class="form-control" />
+            </div>
+            <hr />
+            <h4>Bio</h4>
+            <div class="form-group">
+              <label>First Name</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Marital Status</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Address</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>State of Origin</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>NIN</label>
+              <input class="form-control" />
+            </div>
+            <hr />
+            <h4>Bank Details</h4>
+            <div class="form-group">
+              <label>Bank Name</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Account Number</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>BVN</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Statement Option</label>
+              <input class="form-control" />
+            </div>
+            <hr />
+            <h4>Next of Kin</h4>
+            <div class="form-group">
+              <label>Full Name</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Relationship</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Address</label>
+              <input class="form-control" />
+            </div>
+            <div class="form-group">
+              <label></label>
+              <div>
+                <button nbButton status="primary">Submit</button>
+                <button
+                  outline
+                  nbButton
+                  status="primary"
+                  style="background-color: transparent; margin-left: 2rem"
+                >
+                  Go Back
+                </button>
+              </div>
+            </div>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Document Upload">
+          <div class="linear-form">
+            <p>
+              Upload required documents in the JPEG, PNG or PDF below where
+              needed.
+            </p>
+            <div class="form-group">
+              <label>Passport Photo</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+              <label>Birth Certificate</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+              <label>Passport Photo</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+              <label>Upload Signature</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+              <label>Proof of Identity</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+              <label>Proof of Address</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+              <label></label>
+              <div>
+                <button nbButton status="primary">Submit</button>
+                <button
+                  outline
+                  nbButton
+                  status="primary"
+                  style="background-color: transparent; margin-left: 2rem"
+                >
+                  Go Back
+                </button>
+              </div>
+            </div>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </div>
+  </div>
+
+  <ngx-side-modal>
+    <div modal-header>Add Benefit</div>
+    <div modal-body>
+      <div class="form-group">
+        <label>Select Benefit Type</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Add Description</label>
+        <textarea class="form-control"></textarea>
+      </div>
+    </div>
+    <div modal-actions>
+      <button nbButton status="primary">Submit</button>
+      <button nbButton outline style="background: transparent" status="primary">
+        Cancel
+      </button>
+    </div>
+  </ngx-side-modal>
+
+  <ngx-side-modal [(show)]="showModal">
+    <div modal-header>Add Dependency</div>
+    <div modal-body>
+      <div class="form-group">
+        <label>First Name</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Dependent Type</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>NIN</label>
+        <input class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Date Of Birth</label>
+        <ngx-date></ngx-date>
+      </div>
+    </div>
+    <div modal-actions>
+      <button nbButton status="primary">Submit</button>
+      <button nbButton outline style="background: transparent" status="primary">
+        Cancel
+      </button>
+    </div>
+  </ngx-side-modal>
+</div>

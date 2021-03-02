@@ -6,18 +6,18 @@ import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { FormsModule } from '@angular/forms';
 import { NbCheckboxModule} from '@nebular/theme';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
-import { LeavehistoryComponent } from './leavehistory/leavehistory.component'
+import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 
 @NgModule({
-  declarations: [LeavePlanComponent, LeavetypeComponent,LeavehistoryComponent],
+  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent],
   imports: [
     CommonModule,
-    ComponentsModule, 
+    ComponentsModule,
     LeaveRoutingModule,
     FormsModule,
     NbCheckboxModule ,
-  
-  
+
+
   ]
 })
 export class LeaveModule { }

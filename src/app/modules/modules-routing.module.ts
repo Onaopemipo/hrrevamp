@@ -50,7 +50,11 @@ const routes: Routes = [{
       path: 'employeemodule',
       loadChildren: () => import('../modules/employeemodule/employeemodule.module')
         .then(m => m.EmployeemoduleModule)
-
+    },
+    {
+      path: 'benefits',
+      loadChildren: () => import('../modules/benefit/benefit.module')
+        .then(m => m.BenefitModule)
     },
 
     {
@@ -58,11 +62,15 @@ const routes: Routes = [{
       loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
       .then(m => m.InterviewerdashboardModule)
     },
-
     {
       path: 'recruitmentadmin',
       loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
       .then(m => m.AdminDashboardModule)
+    },
+    {
+      path: 'timeandattendance',
+      loadChildren: () => import('./time-and-attendance/time-and-attendance.module')
+      .then(m => m.TimeAndAttendanceModule)
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

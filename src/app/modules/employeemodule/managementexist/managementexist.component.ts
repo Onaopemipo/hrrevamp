@@ -14,11 +14,11 @@ enum TOP_ACTIONS {
   styleUrls: ['./managementexist.component.scss']
 })
 export class ManagementexistComponent implements OnInit {
-ExitManagement:string = 'Exit Management'
-selectedOption :string = ''
+ExitManagement: string = 'Exit Management';
+selectedOption: string = '';
   topActionButtons = [
     {name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Cancel resignation', 'icon': 'plus', outline: true},
-    
+
   ];
 
   constructor(
@@ -30,8 +30,8 @@ selectedOption :string = ''
 
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
-      this.router.navigateByUrl('/employeemodule/exitmanagement')
+      this.router.navigateByUrl('/employeemodule/exitmanagement');
     }
-    
+
   }
 }

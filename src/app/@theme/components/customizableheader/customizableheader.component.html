@@ -1,0 +1,20 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a class="logo" href="#" (click)="navigateHome()">  <img
+      style="height: 1.5rem;"
+      src="https://smartace-bpm.azurewebsites.net/assets/images/ace.png"
+  /></a>
+
+  <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+    <nb-icon icon="menu-2-outline"></nb-icon>
+  </a>
+  </div>
+  <!-- <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
+    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
+    <nb-option  value="smartace"> smartace</nb-option>
+  </nb-select> -->
+</div>
+
+<div class="header-container">
+  <ng-content select="headerActions"></ng-content>
+</div>
