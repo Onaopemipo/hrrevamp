@@ -1,0 +1,89 @@
+.tab-container{
+    border-bottom:  1px solid #CCCCCC; display: flex;
+}
+
+.tab-container > *{
+    padding-bottom: 20px;
+    padding: 10px;
+}
+
+.tab-container>.active{
+    border-bottom: 3px solid #4847E0;
+}
+
+.section-header{
+    padding: 20px;
+    font-weight: 500;
+    font-size: 20px;
+    border-bottom: 1px solid #CCCCCC;
+
+}
+
+.complain-item{
+    display: flex;
+    cursor: pointer;
+    border-bottom: 1px solid #CCCCCC;
+    // padding: 20px;
+}
+
+.complain-item:hover{
+    background: #F5F5FA;
+}
+
+.complain-item.active{
+    background: #F5F5FA;
+    border-left: 2px solid #4847E0;
+}
+
+.complain-item > *{
+    margin: 10px;
+}
+.complainer-name{
+    color: #95A8B8;
+}
+.complaint-title{
+    color: #080730;
+    text-overflow: ellipsis;
+}
+.complaint-detail{
+    color: #6C757D;
+    text-overflow: ellipsis;
+}
+
+.complaint-detail-section > *{
+    margin: 3px;
+}
+
+.page-body{
+    padding: 20px;
+}
+.page-body > *{
+    padding: 20px;
+}
+
+.actions > *{
+    padding-right: 20px;
+    cursor: pointer;
+    color: #4847E0;
+}
+
+.space-2{
+    margin: 5px;
+}
+
+.spinner{
+    
+}
+
+div::-webkit-scrollbar {
+    width: 1px;
+  }
+   
+div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}

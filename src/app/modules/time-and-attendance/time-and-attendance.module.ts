@@ -18,12 +18,22 @@ import {
   NbSelectModule,
   NbUserModule,
   NbPopoverModule,
-  NbDialogModule
+  NbDialogModule,
+  NbListModule
 } from '@nebular/theme';
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from '../../@theme/theme.module';
+import { ProjectsComponent } from './projects/projects.component';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { ShiftsComponent } from './shifts/shifts.component';
+import { CreateshiftComponent } from './createshift/createshift.component';
+import { MyattendanceComponent } from './myattendance/myattendance.component';
+import { MyshiftsComponent } from './myshifts/myshifts.component';
+import { MyongoingshiftsComponent } from './myongoingshifts/myongoingshifts.component';
+import { MyprojectsComponent } from './myprojects/myprojects.component';
+import { ProjectsdetailsComponent } from './projectsdetails/projectsdetails.component';
 @NgModule({
-  declarations: [TimeAndAttendanceComponent, DashboardComponent],
+  declarations: [TimeAndAttendanceComponent, DashboardComponent, ProjectsComponent, AddTaskComponent, ShiftsComponent, CreateshiftComponent, MyattendanceComponent, MyshiftsComponent, MyongoingshiftsComponent, MyprojectsComponent, ProjectsdetailsComponent],
   imports: [
     CommonModule,
     TimeAndAttendanceRoutingModule,
@@ -41,7 +51,8 @@ import { ThemeModule } from '../../@theme/theme.module';
     NbPopoverModule,
     NbDialogModule,
     ComponentsModule,
-    ThemeModule
+    ThemeModule,
+    NbListModule
   ]
 })
 export class TimeAndAttendanceModule { }
