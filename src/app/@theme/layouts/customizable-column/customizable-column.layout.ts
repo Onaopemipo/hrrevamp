@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-customizable-column-layout',
@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
     <ngx-customizableheader></ngx-customizableheader>
    </nb-layout-header>
 
-      <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
-        <ng-content select="Customizedmenu"></ng-content>
+      <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive *ngIf="sideMenuToggle">
+        <ng-content select="[Customizedmenu]"></ng-content>
       </nb-sidebar>
 
       <nb-layout-column>
@@ -18,10 +18,13 @@ import { Component } from '@angular/core';
         <div style="margin-bottom: 61px;"></div>
       </nb-layout-column>
 
-      <nb-layout-footer fixed>
+      <nb-layout-footer fixed *ngIf="sideFooterToggle">
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
     </nb-layout>
   `,
 })
-export class CustomizablecolumnComponent {}
+export class CustomizablecolumnComponent {
+  @Input() sideMenuToggle: boolean = true;
+  @Input() sideFooterToggle: boolean = true;
+}
