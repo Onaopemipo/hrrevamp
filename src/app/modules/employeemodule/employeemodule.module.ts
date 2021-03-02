@@ -40,6 +40,10 @@ import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component'
 import { PromotioneligibilityComponent } from './promotioneligibility/promotioneligibility.component';
 import { EligibilityxxComponent } from './eligibilityxx/eligibilityxx.component';
 import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothereligibilitylist.component';
+import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanagement/employeedeploymentmanagement.component';
+import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
+import { ManagementviewComponent } from './managementview/managementview.component';
+import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
 
 
 
@@ -63,7 +67,11 @@ import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothe
     EmployeepersonalinformationComponent,
     PromotioneligibilityComponent,
     EligibilityxxComponent,
-    AnothereligibilitylistComponent],
+    AnothereligibilitylistComponent,
+    EmployeedeploymentmanagementComponent,
+    DeploymentviewComponent,
+    ManagementviewComponent,
+    DeploymentapplicationComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,

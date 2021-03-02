@@ -19,7 +19,7 @@ import { ComponentsheaderComponent } from 'app/components/componentsheader/compo
 
 
 @NgModule({
-  declarations: [ModulesComponent, DashboardComponent],
+  declarations: [ModulesComponent, DashboardComponent, ],
   imports: [
     CommonModule,
     ComponentsModule,
