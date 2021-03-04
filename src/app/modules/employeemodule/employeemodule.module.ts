@@ -44,6 +44,8 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
+import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 
 
 
@@ -71,7 +73,9 @@ import { DeploymentapplicationComponent } from './deploymentapplication/deployme
     EmployeedeploymentmanagementComponent,
     DeploymentviewComponent,
     ManagementviewComponent,
-    DeploymentapplicationComponent],
+    DeploymentapplicationComponent,
+    EmployeerecordsComponent,
+    EmployeerecordsviewComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,

@@ -22,7 +22,7 @@ export class GetTokenServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl =  "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -70,6 +70,7 @@ export class GetTokenServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                console.log(resultData200);
             result200 = MessageOutApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));

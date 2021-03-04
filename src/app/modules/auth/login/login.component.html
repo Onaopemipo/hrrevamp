@@ -15,24 +15,37 @@
                     <div style="padding: 10px;"></div>
                     <img src="assets/icons/smartaceLogo.png" style="width:10.6rem;height:1.6rem">
                    <div style="padding: 20px;"></div>
-                   <form>
+                   <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
+                   <div style="padding: 5px;" *ngIf="errorMsg"></div>
+                   <form name="loginForm" id="loginForm" #loginForm="ngForm">
                     <div class="form-group">
                       <label for="exampleInputEmail1" class="label">Email address</label>
-                      <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Email">
+                      <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Email" name="email" id="email" [(ngModel)]="userloginDto.email" #email="ngModel" [pattern]="emailPattern" required>
+                      <div *ngIf="email.invalid && (email.dirty || email.touched) " class="error">
+                        <div *ngIf="(email.errors.required || email.errors)">
+                          Valid email is required
+                        </div>
+                    </div>
                     </div>
                     <div style="padding: 5px;"></div>
                     <div class="form-group">
                       <label for="exampleInputPassword1" class="label">Password</label>
                       <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
-                        <input type="password" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" style="border: none;">
-                        <nb-icon  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;"></nb-icon>
+                        <input [type]="show ? 'text' : 'password'" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" id="password" name="password" #password="ngModel"  [(ngModel)]="userloginDto.password" required style="border: none;">
+                        <nb-icon  (click)="viewpassword()" *ngIf="!show"  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;cursor: pointer;"></nb-icon>
+                        <nb-icon  (click)="viewpassword()" *ngIf="show"  icon="eye-outline" style="font-size: 32px;color: #95A8B8;cursor: pointer;"></nb-icon>
                       </div>
-                      
+                      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+                        <div *ngIf="password.errors.required">
+                          Password is required
+                        </div>
+                    </div>
                     </div>
                     <p style="text-align: right;font-size: .8rem;color: #080730;font-weight: 700;"><a routerLink="/auth/signup">Forgot Password?</a></p>
                  
                   
-                    <button type="button" nbButton fullWidth status="primary">Submit</button>
+                    <button *ngIf="!btnprocessing" [disabled]="loginForm.invalid" (click)="loginUser()" type="button" nbButton fullWidth status="primary">Submit</button>
+                    <button *ngIf="btnprocessing" type="button" nbButton fullWidth status="primary">Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
                     <div style="padding: 5px;"></div>
                   </form>
                   <div style="padding: 5px;"></div>

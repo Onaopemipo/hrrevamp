@@ -75,7 +75,7 @@ import { CalenderComponent } from './calender/calender.component';
 import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
 
 
-
+import { alertmodalComponent } from '../_services/alertservice.service';
 
 @NgModule({
   declarations: [
@@ -106,6 +106,7 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     CalComponent,
     CalenderComponent,
     BulkUploadComponent,
+    alertmodalComponent
   ],
   imports: [
     FormsModule,
@@ -202,7 +203,8 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     CalComponent,
     NbInputModule,
     CalenderComponent,
-    BulkUploadComponent
+    BulkUploadComponent,
+    alertmodalComponent
   ],
 })
 export class ComponentsModule { }
