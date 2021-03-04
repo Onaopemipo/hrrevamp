@@ -45,6 +45,14 @@
 .show-modal > .modal-p{
     width: 30vw;
 }
+
+.show-modal > .modal-p.center{
+    width: max-content;
+    max-width: 70vw;
+    max-height: 70vh;
+    overflow: scroll;
+}
+
 .modal-p{
     transition: width 2s;
 }

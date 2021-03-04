@@ -44,6 +44,7 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { CardComponent } from './card/card.component';
 
 
 
@@ -71,7 +72,8 @@ import { DeploymentapplicationComponent } from './deploymentapplication/deployme
     EmployeedeploymentmanagementComponent,
     DeploymentviewComponent,
     ManagementviewComponent,
-    DeploymentapplicationComponent],
+    DeploymentapplicationComponent,
+    CardComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,

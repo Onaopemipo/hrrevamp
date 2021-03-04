@@ -50,7 +50,8 @@ import {
   ɵa,
   NbMenuService,
   NbDatepickerDirective,
-  NbDialogRef
+  NbDialogRef,
+  NbContextMenuModule
 } from '@nebular/theme';
 
 
@@ -62,7 +63,7 @@ import { FormsModule } from '@angular/forms';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
-import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
+import { EmployeeListComponent, EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { DateRangeComponent } from './date-range/date-range.component';
@@ -106,6 +107,7 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     CalComponent,
     CalenderComponent,
     BulkUploadComponent,
+    EmployeeListComponent,
   ],
   imports: [
     FormsModule,
@@ -159,6 +161,7 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     NbFormFieldModule,
     NbCardModule,
     NbInputModule,
+    NbContextMenuModule,
   ],
   providers: [
     {
@@ -202,7 +205,8 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     CalComponent,
     NbInputModule,
     CalenderComponent,
-    BulkUploadComponent
+    BulkUploadComponent,
+    EmployeeListComponent,
   ],
 })
 export class ComponentsModule { }

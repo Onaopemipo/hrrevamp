@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+  selectedOption: string = '';
+  showEditModal = false
   cardClick: string = '';
   cardTitle = [
     {title: 'applied', value: false},
@@ -56,7 +58,13 @@ export class SettingsComponent implements OnInit {
     //   }
     //   return this.cardTitle;
 
+   
     // }
+
+   
   }
 
+  showModal(){
+      this.showEditModal = true
+  }
 }
