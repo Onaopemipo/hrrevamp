@@ -12,7 +12,7 @@ export class ApplicantsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  myProfle(){
+  myProfle() {
 
   }
 }

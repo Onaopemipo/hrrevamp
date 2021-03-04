@@ -48,12 +48,12 @@ export class EmployeeeventsComponent implements AfterViewInit {
   }
  onClick() {
  }
- ngAfterViewInit(){
+ ngAfterViewInit() {
    console.log(this.calendar);
  }
- showPopover(){
-   alert(666)
-   console.log(this)
+ showPopover() {
+   alert(666);
+   console.log(this);
    this.popOver.show();
  }
 }

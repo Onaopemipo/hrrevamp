@@ -37,9 +37,9 @@ export class ProjectsdetailsComponent implements OnInit {
   selectedProjectTask?: modelprojectTask;
   constructor() { }
   maptask() {
-    this.projecttasks.forEach((value:modelprojectTask) => {
+    this.projecttasks.forEach((value: modelprojectTask) => {
       this.newprjTask.push(new Projecttasksclass(value));
-    })
+    });
     console.log(this.newprjTask);
     setTimeout(() => {
       this.loading = false;
@@ -47,8 +47,8 @@ export class ProjectsdetailsComponent implements OnInit {
 }
   ngOnInit(): void {
     this.maptask();
-   
- 
+
+
   }
   changeSelectedTask(task: modelprojectTask) {
     this.selectedProjectTask = task;

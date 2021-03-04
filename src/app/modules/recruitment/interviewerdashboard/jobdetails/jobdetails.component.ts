@@ -21,7 +21,7 @@ export class JobdetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goback(){
+  goback() {
     this.navCtrl.back();
   }
 

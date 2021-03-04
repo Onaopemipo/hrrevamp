@@ -54,23 +54,23 @@ export class SettingsComponent implements OnInit {
     console.log(panelTitle);
   }
 
-  toggleScoreCard(event){
+  toggleScoreCard(event) {
     this.scoreCardClick = !this.scoreCardClick;
   }
 
-  ggdg(tab: NbTabComponent){
-    console.log(tab)
+  ggdg(tab: NbTabComponent) {
+    console.log(tab);
   }
 
-  addStage(){
-
-  }
-
-  addTemplate(){
+  addStage() {
 
   }
 
-  addScorecard(){
+  addTemplate() {
+
+  }
+
+  addScorecard() {
 
   }
 

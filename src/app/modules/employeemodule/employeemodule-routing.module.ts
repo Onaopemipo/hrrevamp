@@ -57,7 +57,7 @@ const routes: Routes = [
           path: 'retirement',
           component: RetirementComponent
         },
-  
+
         {
           path: 'retirementform',
           component: RetirementformComponent
@@ -67,22 +67,22 @@ const routes: Routes = [
           path: 'exitwarning',
           component: ExitwarningComponent
         },
-      
+
         {
           path: 'comfirmation',
           component: ComfirmationComponent
         },
-        
+
         {
           path: 'confirmation/employeeview',
           component: EmployeeviewComponent
         },
-            
+
         {
           path: 'promotion',
           component: PromotionComponent
         },
-              
+
         {
           path: 'promotioninfo',
           component: PromotioninfoComponent
@@ -91,19 +91,19 @@ const routes: Routes = [
         {
           path: 'eligible',
           component: PromotioneligibilityComponent,
-        },       
-            
+        },
+
         {
           path: 'eligiblexx',
-          component:EligibilityxxComponent
-        },       
+          component: EligibilityxxComponent
+        },
 
         {
           path: 'eligiblelist',
-          component:AnothereligibilitylistComponent
-        },       
-          
-           
+          component: AnothereligibilitylistComponent
+        },
+
+
         {
           path: '',
           redirectTo: 'dashboard',
@@ -112,11 +112,11 @@ const routes: Routes = [
         {
           path: '**',
           component: EmployeeonboardingdashboardComponent,
-        },       
-              
-       
-            
-          
+        },
+
+
+
+
 
       ]
   }];

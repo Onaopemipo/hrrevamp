@@ -13,11 +13,11 @@ export class ApplicantquizComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  gotoNextQuestion(){
+  gotoNextQuestion() {
     this.nextQuestion = !this.nextQuestion;
   }
 
-  goback(){
+  goback() {
     this.navCtrl.back();
   }
 }

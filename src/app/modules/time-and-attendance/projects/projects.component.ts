@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProjectsComponent implements OnInit {
   title: string = 'Projects';
   rbutton = [
-    { name: 'new_project', label: 'New Project', icon: 'plus', outline: false }, 
-    
+    { name: 'new_project', label: 'New Project', icon: 'plus', outline: false },
+
   ];
   tableColumns = [
     { name: 'a', title: 'S/N' },
@@ -22,7 +22,7 @@ export class ProjectsComponent implements OnInit {
   showcreatenewProjectModal = false;
   constructor() { }
   modal(button) {
-    if (button == "new_project") {
+    if (button == 'new_project') {
       this.showcreatenewProjectModal = true;
     }
 

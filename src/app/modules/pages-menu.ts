@@ -217,19 +217,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Expense Management',
-        link:'/expenses/'
+        link: '/expenses/'
       },
       {
         title: 'Expense Type',
-        link:'/expenses/type'
+        link: '/expenses/type'
       },
       {
         title: 'Expense Request',
-        link:'/expenses/request'
+        link: '/expenses/request'
       },
       {
         title: 'Expense Report',
-        link:'/expenses/request'
+        link: '/expenses/request'
       }
 
     ]

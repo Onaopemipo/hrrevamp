@@ -15,11 +15,11 @@ enum TOP_ACTIONS {
 export class RetirementComponent implements OnInit {
 
   topActionButtons = [
-    
+
     {name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: 'Initiate Retirement', 'icon': 'plus', outline: false},
   ];
 
-  
+
   tableColumns = [
     { name: 'a', title: 'id' },
     { name: 'b', title: 'Full Name' },
@@ -40,7 +40,7 @@ export class RetirementComponent implements OnInit {
     //  this.showAddPlanModal = true;
   //  }
    if (buttion === TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT) {
-    this.router.navigateByUrl('/employeemodule/retirementform')
+    this.router.navigateByUrl('/employeemodule/retirementform');
     }
   }
 
