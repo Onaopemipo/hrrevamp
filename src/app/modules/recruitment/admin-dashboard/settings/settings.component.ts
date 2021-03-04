@@ -1,3 +1,4 @@
+import { NbTabComponent } from '@nebular/theme';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,7 +18,7 @@ export class SettingsComponent implements OnInit {
   ];
   createStage: boolean = true;
   createTemplate: boolean = true;
-  selectedCase: string = 'Hiring Stages';
+  selectedCase: string = '';
   selectedPanel: any = { title: 'Hiring_Stages', label: 'Hiring Stages', status: 'Active'};
   hiringChecklist = [
     { title: 'Hiring_Stages', label: 'Hiring Stages', status: 'Active' },
@@ -25,6 +26,9 @@ export class SettingsComponent implements OnInit {
     { title: 'Evaluation', label: 'Evaluation', status: 'Inactive' }
 
   ];
+
+  scoreCardClick: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -48,15 +52,26 @@ export class SettingsComponent implements OnInit {
   toggleCard(panelTitle) {
     this.cardClick = panelTitle;
     console.log(panelTitle);
+  }
 
-    // for (let index = 0; index < this.cardTitle.length; index++) {
-    //   const element = this.cardTitle[index];
-    //   if(element.title == panelTitle){
-    //     this.cardTitle[index].value = !this.cardTitle[index].value;
-    //   }
-    //   return this.cardTitle;
+  toggleScoreCard(event){
+    this.scoreCardClick = !this.scoreCardClick;
+  }
 
-    // }
+  ggdg(tab: NbTabComponent){
+    console.log(tab)
+  }
+
+  addStage(){
+
+  }
+
+  addTemplate(){
+
+  }
+
+  addScorecard(){
+
   }
 
 }

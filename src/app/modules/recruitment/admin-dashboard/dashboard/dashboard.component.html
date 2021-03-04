@@ -127,10 +127,26 @@
 
     <nb-card>
       <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+          <div style="flex:auto">
+          <span class="header6-bold">Open Job roles by Department</span>
+          </div>
+          <div>
+            <nb-select selected="1">
+              <nb-option value="1">This year</nb-option>
+              <nb-option value="2">Option 2</nb-option>
+            </nb-select>
+          </div>
+          </div>
+          <div style="height: 18.75rem;width: 100%;">
+            <div echarts [options]="optionsForPie" class="echart" style="height: 100%;"></div>
+          </div>
+
 
       </nb-card-body>
     </nb-card>
   </div>
+
   <div class="col-xxxl-6 col-md-6" >
     <nb-card>
 
@@ -234,7 +250,7 @@
       <nb-card-body>
         <div style="display: flex;flex-direction: row;">
           <div style="flex:auto">
-          <span class="header6-bold">Distribution by Department</span>
+          <span class="header6-bold">Distribution by Skillset</span>
           </div>
           <div>
             <nb-select selected="1">

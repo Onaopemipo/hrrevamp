@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   src: string = 'assets/icons/camera.jpg';
   show_modal = false;
   data: any;
+  optionsForPie: any;
   colorScheme: any;
   barcolorScheme: any;
   themeSubscription: any;
@@ -150,41 +151,6 @@ export class DashboardComponent implements OnInit {
   customizePieOption: any = {};
   customizedlineoptions: any = {};
   constructor(private theme: NbThemeService) {
-    // this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-
-    //   const colors: any = config.variables;
-    //   const chartjs: any = config.variables.chartjs;
-
-    //   this.data = {
-    //     labels: ['Download Sales', 'In-Store Sales', 'Mail Sales'],
-    //     datasets: [{
-    //       data: [300, 500, 100],
-    //       backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight],
-    //     }],
-    //   };
-
-    //   this.myPieOptions = {
-    //     maintainAspectRatio: false,
-    //     responsive: true,
-    //     scales: {
-    //       xAxes: [
-    //         {
-    //           display: false,
-    //         },
-    //       ],
-    //       yAxes: [
-    //         {
-    //           display: false,
-    //         },
-    //       ],
-    //     },
-    //     legend: {
-    //       labels: {
-    //         fontColor: chartjs.textColor,
-    //       },
-    //     },
-    //   };
-    // });
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
@@ -237,6 +203,58 @@ export class DashboardComponent implements OnInit {
           }
       ]
   };
+
+  this.optionsForPie = {
+    backgroundColor: '#fff',
+    color: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
+    tooltip: {
+      trigger: 'item',
+      formatter: '{a} <br/>{b} : {c} ({d}%)',
+    },
+    // legend: {
+    //   orient: 'vertical',
+    //   left: 'left',
+    //   data: ['USA', 'Germany', 'France', 'Canada', 'Russia'],
+    //   textStyle: {
+    //     color: '#343A40',
+    //   },
+    // },
+    series: [
+      {
+        name: 'Countries',
+        type: 'pie',
+        radius: '80%',
+        center: ['50%', '50%'],
+        data: [
+          { value: 335, name: 'Maketing' },
+          { value: 310, name: 'Finance' },
+          { value: 234, name: 'engineering' }
+        ],
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(153, 153, 153, 0.04)',
+          },
+        },
+        label: {
+          normal: {
+            textStyle: {
+              color: '#343A40',
+            },
+          },
+        },
+        labelLine: {
+          normal: {
+            lineStyle: {
+              color: '#E9EBF1',
+            },
+          },
+        },
+      },
+    ],
+  };
+
   this.customizedlineoptions = {
     backgroundColor: echarts.bg,
     color: ['#2F9CDA', '#764F7D'],

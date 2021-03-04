@@ -30,7 +30,7 @@ import { ApplicantSelectionComponent } from './applicant-selection/applicant-sel
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
-import { ApplicantsComponent } from './applicants/applicants.component';
+
 
 
 
@@ -38,10 +38,9 @@ import { ApplicantsComponent } from './applicants/applicants.component';
 @NgModule({
   declarations: [
     RecruitmentComponent,
-    ApplicantsDashboardComponent,
     PasswordResetComponent, NewPasswordComponent,
     ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent, ApplicantProfileComponent,
-     ApplicantSelectionComponent, InterviewerdashboardComponent, AdminDashboardComponent, ApplicantquizComponent, ApplicantsComponent],
+     ApplicantSelectionComponent, InterviewerdashboardComponent, AdminDashboardComponent, ApplicantquizComponent],
   imports: [
     ThemeModule,
     CommonModule,

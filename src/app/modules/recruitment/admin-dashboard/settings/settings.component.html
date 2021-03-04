@@ -1,4 +1,7 @@
-<ngx-componentsheader pageName='Settings'></ngx-componentsheader>
+<ngx-componentsheader pageName='Settings' *ngIf="selectedCase == ''"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='Hiring_Stages'" pageName='Settings' [requiredButton]="[{name:'newStage', label:'Add New Stage', icon: 'plus'}]" (buttonClick)="addStage()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='EmailSms_Templates'" pageName='Settings' [requiredButton]="[{name:'newTemplate', label:'Add New Template', icon: 'plus'}]" (buttonClick)="addTemplate()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="addScorecard()"></ngx-componentsheader>
 <div *ngIf="createStage && createTemplate" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  <div class="col-md-4">
     <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
       <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
@@ -172,7 +175,11 @@
               <nb-card class="cardTitle" (click)="toggleCard('offerletter')" #offerletter>
                 <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Offer letter</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    <span>Offer letter</span>
+                    <span class="actions">
+                      <a href="">Edit</a>
+                      <a style="padding: 10px; color:#EB5757;" href="">Delete</a>
+                    </span>
                   </div>
                 </nb-card-header>
                 <nb-card-body *ngIf="cardClick =='offerletter'">
@@ -229,144 +236,220 @@
 
           </div>
 
-          <div class="fmContainer" *ngSwitchCase="'Evaluation'">
-            <nb-card class="cardTitle">
+      <div class="fmContainer" *ngSwitchCase="'Evaluation'">
+        <nb-card class="scoreCardTitle" (click)="toggleScoreCard()">
+          <nb-card-header>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
+            </div>
+          </nb-card-header>
+          <nb-card-body *ngIf="scoreCardClick">
+            <nb-card class="focusAreaTitle">
               <nb-card-header>
                 <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                  <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
+                  <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
                 </div>
               </nb-card-header>
               <nb-card-body>
-                <nb-card class="cardTitle">
+                <nb-card>
                   <nb-card-header>
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                      <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
                     </div>
                   </nb-card-header>
-                  <nb-card-body>
-                   <nb-card>
-                      <nb-card-header>
-                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                          <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                        </div>
-                      </nb-card-header>
 
-                      <nb-card-header>
-                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                          <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                        </div>
-                      </nb-card-header>
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    </div>
+                  </nb-card-header>
 
-                      <nb-card-header>
-                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                          <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                        </div>
-                      </nb-card-header>
-                   </nb-card>
-                  </nb-card-body>
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    </div>
+                  </nb-card-header>
                 </nb-card>
               </nb-card-body>
-           </nb-card>
+            </nb-card>
+          </nb-card-body>
+        </nb-card>
 
-              <nb-card class="cardTitle">
-                <nb-card-header>
-                  <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Communication</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                  </div>
-                </nb-card-header>
-              </nb-card>
-
-              <nb-card class="cardTitle">
-                <nb-card-header>
-                  <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                  </div>
-                </nb-card-header>
-              </nb-card>
-
-              <nb-card class="cardTitle">
-                <nb-card-header>
-                  <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                  </div>
-                </nb-card-header>
-              </nb-card>
-
-              <nb-card>
+        <nb-card class="scoreCardTitle" (click)="toggleScoreCard($event)">
+          <nb-card-header>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
+            </div>
+          </nb-card-header>
+          <nb-card-body *ngIf="scoreCardClick">
+            <nb-card class="focusAreaTitle">
+              <nb-card-header>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                  <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                </div>
+              </nb-card-header>
               <nb-card-body>
-                <nb-card-body>
-                  <form>
-                    <div class="form-group row mydiv">
-                      <div class="col-sm-8 col-md-8 col-lg-8">
-                        <label for="Name" class="col-form-label mylabel">Core Focus Area</label>
-                        <input type="text" class="form-control" id="jobTitle" placeholder="Communication">
-                      </div>
+                <nb-card>
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
                     </div>
+                  </nb-card-header>
 
-                    <div class="form-group row mydiv">
-                      <div class="col-sm-8 col-md-8 col-lg-8">
-                        <label for="TotalWeight" class="col-form-label mylabel">Total Weight</label>
-                        <select class="custom-select" required>
-                          <option value="">Select </option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
-                      </div>
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
                     </div>
+                  </nb-card-header>
 
-                    <div class="form-group row mydiv">
-                      <div class="col-sm-8 col-md-8 col-lg-8">
-                        <label for="ScoringType" class="col-form-label mylabel">Scoring type</label>
-                        <select class="custom-select" required>
-                          <option value="">Select </option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
-                      </div>
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
                     </div>
-
-                    <h6>Questions</h6>
-
-                    <div class="form-group row mydiv">
-                      <div class="col-sm-8 col-md-8 col-lg-8">
-                        <label for="Name" class="col-form-label mylabel">Question 1</label>
-                        <input type="text" class="form-control" id="jobTitle" placeholder="Communication">
-                      </div>
-                    </div>
-
-                    <div class="form-group row mydiv">
-                      <div class="col-sm-8 col-md-8 col-lg-8">
-                        <label for="ScoringType" class="col-form-label mylabel">Weight</label>
-                        <select class="custom-select" required>
-                          <option value="">Select </option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group row mydiv">
-                      <div class="col-sm-8 col-md-8 col-lg-8">
-                        <button nbButton>
-                          <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
-                          Add Question</button>
-                      </div>
-                    </div>
-
-                      <div class="form-group row">
-                        <div class="col-sm-8">
-                          <button nbButton status="primary">Save</button>
-                          <span style="padding: 8px;"></span>
-                          <button nbButton>Discard</button>
-                        </div>
-                      </div>
-                    </form>
-                </nb-card-body>
+                  </nb-card-header>
+                </nb-card>
               </nb-card-body>
             </nb-card>
-          </div>
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card class="scoreCardTitle" (click)="toggleScoreCard()">
+          <nb-card-header>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+              <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
+            </div>
+          </nb-card-header>
+          <nb-card-body *ngIf="scoreCardClick">
+            <nb-card class="focusAreaTitle">
+              <nb-card-header>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                  <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                </div>
+              </nb-card-header>
+              <nb-card-body>
+                <nb-card>
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    </div>
+                  </nb-card-header>
+
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    </div>
+                  </nb-card-header>
+
+                  <nb-card-header>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                    </div>
+                  </nb-card-header>
+                </nb-card>
+              </nb-card-body>
+            </nb-card>
+          </nb-card-body>
+        </nb-card>
+
+          <!-- <nb-card class="cardTitle">
+            <nb-card-header>
+              <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <span>Communication</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+              </div>
+            </nb-card-header>
+          </nb-card>
+
+          <nb-card class="cardTitle">
+            <nb-card-header>
+              <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+              </div>
+            </nb-card-header>
+          </nb-card>
+
+          <nb-card class="cardTitle">
+            <nb-card-header>
+              <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+              </div>
+            </nb-card-header>
+          </nb-card> -->
+
+          <nb-card>
+          <nb-card-body>
+            <nb-card-body>
+              <form>
+                <div class="form-group row mydiv">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <label for="Name" class="col-form-label mylabel">Core Focus Area</label>
+                    <input type="text" class="form-control" id="jobTitle" placeholder="Communication">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <label for="TotalWeight" class="col-form-label mylabel">Total Weight</label>
+                    <select class="custom-select" required>
+                      <option value="">Select </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <label for="ScoringType" class="col-form-label mylabel">Scoring type</label>
+                    <select class="custom-select" required>
+                      <option value="">Select </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+
+                <h6>Questions</h6>
+
+                <div class="form-group row mydiv">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <label for="Name" class="col-form-label mylabel">Question 1</label>
+                    <input type="text" class="form-control" id="jobTitle" placeholder="Communication">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <label for="ScoringType" class="col-form-label mylabel">Weight</label>
+                    <select class="custom-select" required>
+                      <option value="">Select </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row mydiv">
+                  <div class="col-sm-8 col-md-8 col-lg-8">
+                    <button nbButton>
+                      <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
+                      Add Question</button>
+                  </div>
+                </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-8">
+                      <button nbButton status="primary">Save</button>
+                      <span style="padding: 8px;"></span>
+                      <button nbButton>Discard</button>
+                    </div>
+                  </div>
+                </form>
+            </nb-card-body>
+          </nb-card-body>
+        </nb-card>
+      </div>
         </div>
   </div>
 
