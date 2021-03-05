@@ -1,9 +1,9 @@
-<div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal}" class="my-modal" [style.display]="isPage ? 'none': 'flex'">
+<div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal}" class="my-modal">
     <!-- <div style="flex: auto"></div>     -->
     <div style="flex: auto" (click)="closeModal()"></div>
     <!-- <div > -->
         <div style="background-color: white;overflow: scroll;"  class="modal-p" [class]="{center: center}" #host>
-            <div style="height: 75px;" class="header-space"></div>
+            <div style="height: 75px;" class="header-space" *ngIf='!isPage'></div>
             <div class="header">
                 <ng-content select='[modal-header]'>
                 </ng-content>

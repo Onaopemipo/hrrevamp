@@ -57,6 +57,7 @@ export class TablecomponentComponent implements OnInit {
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: TableAction[];
+  @Input() table2 = false;
   @Output() actionClick = new EventEmitter<TableActionEvent>();
   pageData = [];
   tableData = [];

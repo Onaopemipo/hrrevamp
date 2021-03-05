@@ -92,6 +92,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Performance Management',
     link: '/',
     icon: '/assets/icons/PerformanceAppraisals.jpg',
+    children: [
+      {
+        title: 'Cycle',
+        link: '/performance/cycle'
+      },
+      {
+        title: 'Key Result Area',
+        link: '/performance/kra'
+      },
+    ]
   },
   {
     title: 'Disciplinary Management',
