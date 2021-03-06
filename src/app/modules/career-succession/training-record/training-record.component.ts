@@ -1,3 +1,4 @@
+import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainingRecordComponent implements OnInit {
 
+  ongoingTable: TableColumn [] = [
+    {name: 'name', title: 'Name'},
+    {name: 'id', title: 'ID'},
+    {name: 'department', title: 'Department'},
+    {name: 'unit', title: 'Unit'}
+  ];
+
+  yetToStartTable: TableColumn [] = [
+    {name: 'name', title: 'Name'},
+    {name: 'id', title: 'ID'},
+    {name: 'department', title: 'Department'},
+    {name: 'unit', title: 'Unit'}
+  ];
+
+  completedTable: TableColumn [] = [
+    {name: 'name', title: 'Name'},
+    {name: 'id', title: 'ID'},
+    {name: 'department', title: 'Department'},
+    {name: 'unit', title: 'Unit'}
+  ];
   constructor() { }
 
   ngOnInit(): void {

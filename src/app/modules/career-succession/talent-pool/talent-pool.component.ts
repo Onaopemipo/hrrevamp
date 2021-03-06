@@ -1,3 +1,4 @@
+import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TalentPoolComponent implements OnInit {
 
+  talentPoolTable: TableColumn [] = [
+    {name: 'name', title: 'Name'},
+    {name: 'position', title: 'Position'},
+    {name: 'experience', title: 'Experience'},
+    {name: 'qualification', title: 'Qualification'},
+    {name: 'certification', title: 'certification'},
+    {name: 'skills', title: 'Skills'},
+  ];
   constructor() { }
 
   ngOnInit(): void {

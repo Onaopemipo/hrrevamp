@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+  selectedOption: string = '';
+  showEditModal = false
   cardClick: string = '';
   cardTitle = [
     {title: 'applied', value: false},
@@ -44,9 +46,15 @@ export class SettingsComponent implements OnInit {
     this.selectedCase = this.hiringChecklist[i].title;
   }
 
-  createNew() {
+  createNewStage(){
     this.createStage = !this.createStage;
     this.createTemplate = !this.createTemplate;
+    // this.selectedCase = 'Hiring_Stages';
+  }
+  createNewTemplate() {
+    this.createStage = !this.createStage;
+    this.createTemplate = !this.createTemplate;
+    // this.selectedCase = 'EmailSms_Templates';
   }
 
   toggleCard(panelTitle) {
@@ -74,4 +82,7 @@ export class SettingsComponent implements OnInit {
 
   }
 
+  showModal(){
+      this.showEditModal = true
+  }
 }

@@ -19,6 +19,11 @@ import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.comp
 import { PromotioneligibilityComponent } from './promotioneligibility/promotioneligibility.component';
 import { EligibilityxxComponent } from './eligibilityxx/eligibilityxx.component';
 import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothereligibilitylist.component';
+import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanagement/employeedeploymentmanagement.component';
+import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
+import { ManagementviewComponent } from './managementview/managementview.component';
+import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { CardComponent } from './card/card.component';
 
 
 
@@ -100,9 +105,34 @@ const routes: Routes = [
 
         {
           path: 'eligiblelist',
-          component: AnothereligibilitylistComponent
+          component:AnothereligibilitylistComponent
         },
 
+        {
+          path: 'employeedeployment',
+          component:EmployeedeploymentmanagementComponent
+        },
+
+        {
+          path: 'managementview',
+          component:ManagementviewComponent
+        },
+
+        {
+          path: 'deploymentview',
+          component:DeploymentviewComponent
+        },
+
+        {
+          path: 'card',
+          component:CardComponent
+        },
+
+
+        {
+          path: 'deploymentapplication',
+          component:DeploymentapplicationComponent
+        },
 
         {
           path: '',
@@ -113,11 +143,6 @@ const routes: Routes = [
           path: '**',
           component: EmployeeonboardingdashboardComponent,
         },
-
-
-
-
-
       ]
   }];
 

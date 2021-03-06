@@ -156,6 +156,29 @@
   <!-- Candidates Tab -->
   <nb-tab tabTitle="Candidates">
     <ngx-tableheader></ngx-tableheader>
-    <ngx-tablecomponent [tableColum]="myApplicantTable"></ngx-tablecomponent>
+    <ngx-tablecomponent [tableColum]="myApplicantTable" [userData]='data' (actionClick)='tableActionClick($event)'></ngx-tablecomponent>
   </nb-tab>
  </nb-tabset>
+
+ 
+<ngx-side-modal [(show)]='showModal' style="width: 500px; height: 1000px;">
+  <div modal-header>Add Leave Type</div>
+  <div modal-body>
+     
+  </div>
+
+<h1>hello world</h1>
+
+</ngx-side-modal>
+
+
+<ngx-side-modal [(show)]='showCvModal' style="width: 500px; height: 1000px;">
+  <div modal-header>Add Leave Type</div>
+  <div modal-body>
+    <h1>hello world</h1>
+  </div>
+
+
+
+</ngx-side-modal>
+
