@@ -11,11 +11,11 @@ export class EligibilityxxComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
- toggle(checked: boolean){
-   if(checked){
-    alert('whats up')
+
+ toggle(checked: boolean) {
+   if (checked) {
+    alert('whats up');
    }
-  
+
  }
 }

@@ -73,6 +73,12 @@ const routes: Routes = [{
       .then(m => m.TimeAndAttendanceModule)
     },
 
+    {
+      path: 'career-succession',
+      loadChildren: () => import('./career-succession/career-succession.module')
+      .then(m => m.CareerSuccessionModule)
+    },
+
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },
   ],

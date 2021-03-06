@@ -1,3 +1,4 @@
+import { EvaluationComponent } from './evaluation/evaluation.component';
 import { JobdetailsComponent } from './jobdetails/jobdetails.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard.component';
 import { ApplicantselectionComponent } from '../interviewerdashboard/applicantselection/applicantselection.component';
@@ -19,6 +20,11 @@ export const routes: Routes = [
       {
         path: 'jobdetails',
         component: JobdetailsComponent
+      },
+
+      {
+        path: 'evaluation',
+        component: EvaluationComponent
       },
 
       {

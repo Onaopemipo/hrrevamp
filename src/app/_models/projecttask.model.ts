@@ -1,17 +1,17 @@
 import { IStatus, MyColor } from 'app/components/status/models';
-export interface modelprojectTask{
-  task_id: number,
-  task_name: string,
-  task_timestamp: Date,
-  task_status_id: number,
-  task_content: string
+export interface modelprojectTask {
+  task_id: number;
+  task_name: string;
+  task_timestamp: Date;
+  task_status_id: number;
+  task_content: string;
 }
 
 export enum taskstatus {
   INCOMPLETE, COMPLETE
 }
 
-export class Projecttasksclass implements IStatus{
+export class Projecttasksclass implements IStatus {
 
   pTaskObj: modelprojectTask;
 

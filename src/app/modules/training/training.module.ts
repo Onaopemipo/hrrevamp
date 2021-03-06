@@ -58,7 +58,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     NbSelectModule,
     NgxChartsModule,
     NgxEchartsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NbRadioModule
   ]
 })
 export class TrainingModule { }

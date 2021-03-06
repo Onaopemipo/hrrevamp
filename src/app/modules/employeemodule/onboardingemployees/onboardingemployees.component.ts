@@ -7,7 +7,7 @@ import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
   styleUrls: ['./onboardingemployees.component.scss']
 })
 export class OnboardingemployeesComponent implements OnInit {
-  title: string = "All Employees"
+  title: string = 'All Employees';
   columns: TableColumn[] = [
     {name: 'id', title: 'ID', type: ColumnTypes.Text},
     {name: 'name', title: 'Name', type: ColumnTypes.Text},

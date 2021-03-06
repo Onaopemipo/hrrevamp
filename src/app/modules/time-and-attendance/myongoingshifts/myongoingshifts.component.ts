@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myongoingshifts.component.scss']
 })
 export class MyongoingshiftsComponent implements OnInit {
-  title:string = 'Ongoing Shifts'
+  title: string = 'Ongoing Shifts';
   constructor() { }
 
   ngOnInit(): void {

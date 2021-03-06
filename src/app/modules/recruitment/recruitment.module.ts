@@ -10,7 +10,11 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbInputModule,
+  NbRadioModule,
   NbMenuModule,
+  NbRadioComponent,
+  NbRadioGroupComponent,
+  NbProgressBarModule,
 } from '@nebular/theme';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
@@ -25,6 +29,8 @@ import { ApplicantProfileComponent } from './applicant-profile/applicant-profile
 import { ApplicantSelectionComponent } from './applicant-selection/applicant-selection.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
+
 
 
 
@@ -32,10 +38,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 @NgModule({
   declarations: [
     RecruitmentComponent,
-    ApplicantsDashboardComponent,
     PasswordResetComponent, NewPasswordComponent,
     ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent, ApplicantProfileComponent,
-     ApplicantSelectionComponent, InterviewerdashboardComponent, AdminDashboardComponent],
+     ApplicantSelectionComponent, InterviewerdashboardComponent, AdminDashboardComponent, ApplicantquizComponent],
   imports: [
     ThemeModule,
     CommonModule,
@@ -47,7 +52,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     ComponentsModule,
     RecruitmentRoutingModule,
     NbCardModule,
-    NbMenuModule
+    NbMenuModule,
+    NbRadioModule,
+    NbProgressBarModule
   ]
 })
 export class RecruitmentModule { }

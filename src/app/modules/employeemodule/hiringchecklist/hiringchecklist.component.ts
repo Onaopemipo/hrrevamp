@@ -17,7 +17,7 @@ viewmessageBody: string = '';
 
   get sanitizewysiwyg() {
     this.viewmessageBody = this.sanitizer.sanitize(1, this.messageBody);
-    
+
     return this.viewmessageBody;
   }
   proceedtopersonalInfo() {

@@ -13,7 +13,7 @@ export class CalComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
-    let calendar = new Calendar(this.calendar.nativeElement, {});
+    const calendar = new Calendar(this.calendar.nativeElement, {});
     calendar.render();
   }
 

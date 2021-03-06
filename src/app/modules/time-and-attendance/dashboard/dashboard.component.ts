@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   rbutton = [
     { name: 'create_shift', label: 'Create Shift', icon: '', outline: true },
     { name: 'create_project', label: 'Create Project', icon: '', outline: false },
-    
+
   ];
   barcolorScheme: any;
   lineoptions: any = {};
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
    days_of_week = [
      'Mon', 'Tue', 'Wed', 'Thur', 'Fri'
   ];
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   }
   this.weekdays = days;
   }
-  ngAfterViewInit() { 
+  ngAfterViewInit() {
     this.lineoptions = {
       color: ['#9594F8', '#4847E0'],
       tooltip: {
@@ -50,13 +50,13 @@ export class DashboardComponent implements OnInit {
       xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug','Sep','Oct','Nov', 'Dec']
+          data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       },
       yAxis: {
           type: 'value'
       },
       series: [{
-          data: [420, 932, 901, 934, 1290, 1330, 1320,300,500,400,800, 500],
+          data: [420, 932, 901, 934, 1290, 1330, 1320, 300, 500, 400, 800, 500],
         type: 'line',
         smooth: true,
         areaStyle: {},

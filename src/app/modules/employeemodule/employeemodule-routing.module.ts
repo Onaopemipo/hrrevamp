@@ -23,6 +23,7 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { CardComponent } from './card/card.component';
 
 
 
@@ -61,7 +62,7 @@ const routes: Routes = [
           path: 'retirement',
           component: RetirementComponent
         },
-  
+
         {
           path: 'retirementform',
           component: RetirementformComponent
@@ -71,22 +72,22 @@ const routes: Routes = [
           path: 'exitwarning',
           component: ExitwarningComponent
         },
-      
+
         {
           path: 'comfirmation',
           component: ComfirmationComponent
         },
-        
+
         {
           path: 'confirmation/employeeview',
           component: EmployeeviewComponent
         },
-            
+
         {
           path: 'promotion',
           component: PromotionComponent
         },
-              
+
         {
           path: 'promotioninfo',
           component: PromotioninfoComponent
@@ -95,38 +96,44 @@ const routes: Routes = [
         {
           path: 'eligible',
           component: PromotioneligibilityComponent,
-        },       
-            
+        },
+
         {
           path: 'eligiblexx',
-          component:EligibilityxxComponent
-        },       
+          component: EligibilityxxComponent
+        },
 
         {
           path: 'eligiblelist',
           component:AnothereligibilitylistComponent
-        },       
-          
+        },
+
         {
           path: 'employeedeployment',
           component:EmployeedeploymentmanagementComponent
-        },       
+        },
 
         {
           path: 'managementview',
           component:ManagementviewComponent
-        },    
+        },
 
         {
           path: 'deploymentview',
           component:DeploymentviewComponent
         },
-        
+
+        {
+          path: 'card',
+          component:CardComponent
+        },
+
+
         {
           path: 'deploymentapplication',
           component:DeploymentapplicationComponent
-        },  
-           
+        },
+
         {
           path: '',
           redirectTo: 'dashboard',
@@ -135,14 +142,7 @@ const routes: Routes = [
         {
           path: '**',
           component: EmployeeonboardingdashboardComponent,
-        },       
-              
-
-
-       
-            
-          
-
+        },
       ]
   }];
 
