@@ -24,5 +24,5 @@ export class ExpenseReportComponent extends MainBaseComponent {
     { name: 'date', title: 'Approved Amount' },
     { name: 'date', title: 'Approval Status' },
     { name: 'date', title: 'Disbursement Status' }
-  ]
+  ];
 }

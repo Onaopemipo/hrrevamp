@@ -83,7 +83,7 @@
   </div>
 </div>
 
-
+<div class="row">
 <div class="col-xxxl-12 col-md-12" >
   <nb-card>
       <nb-card-body>
@@ -116,6 +116,152 @@
       >
         </ngx-charts-bar-vertical>
         </div>
+      </nb-card-body>
+    </nb-card>
+</div>
+</div>
+
+<div class="row">
+
+  <div class="col-xxxl-6 col-md-6" >
+
+    <nb-card>
+      <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+          <div style="flex:auto">
+          <span class="header6-bold">Open Job roles by Department</span>
+          </div>
+          <div>
+            <nb-select selected="1">
+              <nb-option value="1">This year</nb-option>
+              <nb-option value="2">Option 2</nb-option>
+            </nb-select>
+          </div>
+          </div>
+          <div style="height: 18.75rem;width: 100%;">
+            <div echarts [options]="optionsForPie" class="echart" style="height: 100%;"></div>
+          </div>
+
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="col-xxxl-6 col-md-6" >
+    <nb-card>
+
+        <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+<div style="flex:auto">
+<span class="header6-bold">Jobs per role</span>
+</div>
+<div>
+  <nb-select selected="1">
+    <nb-option value="1">This year</nb-option>
+    <nb-option value="2">Option 2</nb-option>
+  </nb-select>
+</div>
+        </div>
+              <div #doughContainer style="height: 100%;">
+                <ngx-charts-pie-chart
+                [view]="[doughContainer.offsetWidth, 300]"
+                [scheme]="colorScheme"
+                [results]="singlePie"
+                [legend]="showLegend"
+                [explodeSlices]="explodeSlices"
+                [labels]="showLabels"
+                [doughnut]="doughnut"
+                [gradient]="gradient"
+                >
+                </ngx-charts-pie-chart>
+              </div>
+
+            </nb-card-body>
+          </nb-card>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-xxxl-12 col-md-12" >
+    <nb-card>
+      <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+          <div style="flex:auto">
+          <span class="header6-bold">Recruitment over time</span>
+          </div>
+          <div>
+            <nb-select selected="1">
+              <nb-option value="1">Yearly</nb-option>
+              <nb-option value="2">Weekly</nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <div style="height: 18.75rem;width: 100%;">
+          <div echarts [options]="lineOption" class="echart" style="height: 100%;"></div>
+        </div>
+
+        </nb-card-body>
+    </nb-card>
+
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xxxl-12 col-md-12" >
+        <nb-card>
+            <nb-card-body>
+              <div style="display: flex;flex-direction: row;">
+                <div style="flex:auto">
+                <span class="header6-bold">Applicants distribution by age</span>
+                </div>
+                <div>
+                  <nb-select selected="1">
+                    <nb-option value="1">This year</nb-option>
+                    <nb-option value="2">Option 2</nb-option>
+                  </nb-select>
+                </div>
+                        </div>
+              <div #barContainer style="height: 100%;">
+                <ngx-charts-bar-vertical
+                [view]="[barContainer.offsetWidth, 300]"
+                [scheme]="barcolorSchemeOrange"
+                [results]="singleBar"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [showGridLines]="showGridLines"
+                [barPadding]="barPadding"
+            >
+              </ngx-charts-bar-vertical>
+              </div>
+            </nb-card-body>
+          </nb-card>
+      </div>
+      </div>
+
+
+<div class="col-xxxl-6 col-md-6" >
+  <nb-card>
+      <nb-card-body>
+        <div style="display: flex;flex-direction: row;">
+          <div style="flex:auto">
+          <span class="header6-bold">Distribution by Skillset</span>
+          </div>
+          <div>
+            <nb-select selected="1">
+              <nb-option value="1">This year</nb-option>
+              <nb-option value="2">Option 2</nb-option>
+            </nb-select>
+          </div>
+          </div>
+          <div style="height: 18.75rem;width: 100%;">
+            <div echarts [options]="customizePieOption" class="echart" style="height: 100%;"></div>
+          </div>
 
 
       </nb-card-body>

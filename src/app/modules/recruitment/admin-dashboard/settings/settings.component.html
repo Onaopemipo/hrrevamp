@@ -1,7 +1,8 @@
-<ngx-componentsheader pageName='Settings'></ngx-componentsheader>
-<div *ngIf="createStage && createTemplate" class="row"
-  style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
-  <div class="col-md-4">
+<ngx-componentsheader pageName='Settings' *ngIf="selectedCase == ''"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='Hiring_Stages'" pageName='Settings' [requiredButton]="[{name:'newStage', label:'Add New Stage', icon: 'plus'}]" (buttonClick)="addStage()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='EmailSms_Templates'qq" pageName='Settings' [requiredButton]="[{name:'newTemplate', label:'Add New Template', icon: 'plus'}]" (buttonClick)="addTemplate()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="addScorecard()"></ngx-componentsheader>
+<div *ngIf="createStage && createTemplate" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  <div class="col-md-4">
     <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
       <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
       <div style="padding: 20px;">
@@ -11,7 +12,7 @@
         </span>
       </div>
       <div style="padding: 20px;">
-        <button sty nbButton status="primary" (click)="createNew()" style="align-items: flex-start">Set Stages</button>
+        <button nbButton status="primary" (click)="createNew()" style="align-items: flex-start">Set Stages</button>
       </div>
 
     </div>

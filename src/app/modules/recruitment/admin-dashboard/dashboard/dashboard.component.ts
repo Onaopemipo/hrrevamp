@@ -14,14 +14,18 @@ export class DashboardComponent implements OnInit {
   show_modal = false;
   data: any;
   colorScheme: any;
+  optionsForPie: any;
   barcolorScheme: any;
   themeSubscription: any;
   options: any = {};
   myPieOptions: any = {};
+  barcolorSchemeOrange: any;
+  lineOption: any = {};
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
+
   single = [
     {
       name: 'Facebook',
@@ -70,54 +74,63 @@ export class DashboardComponent implements OnInit {
       value: 900,
     },
   ];
-  multi: any[] = [
+
+
+  singleBar = [
     {
-      name: 'Facebook',
+      name: 'Below 20',
       value: 800,
     },
     {
-      name: 'Twitter',
+      name: '21-25',
       value: 500,
     },
     {
-      name: 'LinkedIn',
+      name: '26-30',
       value: 720,
     },
     {
-      name: 'Newspaper',
+      name: '31-35',
       value: 820,
     },
 
     {
-      name: 'Magazine',
+      name: '36-40',
       value: 730,
     },
 
     {
-      name: 'Online Advert',
+      name: '41-45',
       value: 530,
     },
 
     {
-      name: 'Instagram',
+      name: '46-50',
       value: 430,
     },
 
     {
-      name: 'Channel 1',
+      name: 'Above 50',
       value: 300,
-    },
-
-    {
-      name: 'Blogs',
-      value: 530,
-    },
-
-    {
-      name: 'Other',
-      value: 900,
-    },
+    }
   ];
+
+  singlePie = [
+    {
+      name: 'Sales Officer',
+      value: 800,
+    },
+    {
+      name: 'Engineers',
+      value: 500,
+    },
+    {
+      name: 'Developers',
+      value: 720,
+    }
+  ];
+
+  multi: any[];
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -134,9 +147,9 @@ export class DashboardComponent implements OnInit {
   gradient = false;
   showLegend = false;
   showXAxisLabel = true;
-  xAxisLabel = 'Sources';
+  xAxisLabel = 'Age Range';
   showYAxisLabel = true;
-  yAxisLabel = 'Applicants';
+  yAxisLabel = 'No of applicants';
   showGridLines = true;
 
   // barChat
@@ -195,6 +208,7 @@ export class DashboardComponent implements OnInit {
     //     },
     //   };
     // });
+
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
@@ -202,6 +216,10 @@ export class DashboardComponent implements OnInit {
 
     this.barcolorScheme = {
       domain: ['#2E9CDA', '#2E9CDA', '#2E9CDA', '#2E9CDA', '#2E9CDA'],
+    };
+
+    this.barcolorSchemeOrange = {
+      domain: ['#F89266', '#F89266', '#F89266', '#F89266', '#F89266'],
     };
   }
 
@@ -247,6 +265,94 @@ export class DashboardComponent implements OnInit {
           }
       ]
   };
+
+  this.lineOption = {
+    color: ['#4847E0'],
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross'
+      },
+  },
+    xAxis: {
+      type: 'category',
+      splitLine: {
+        show: true
+    },
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    yAxis: {
+      type: 'value',
+      splitLine: {
+        show: true
+      },
+      axisLabel: {
+        formatter: '{value}'
+    },
+    axisPointer: {
+        snap: true
+    }
+    },
+    series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320, 350, 500, 1500, 2000, 1000],
+        type: 'line',
+      smooth: true,
+      showSymbol: false,
+    }]
+};
+
+this.optionsForPie = {
+  backgroundColor: '#fff',
+  color: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b} : {c} ({d}%)',
+  },
+  // legend: {
+  //   orient: 'vertical',
+  //   left: 'left',
+  //   data: ['USA', 'Germany', 'France', 'Canada', 'Russia'],
+  //   textStyle: {
+  //     color: '#343A40',
+  //   },
+  // },
+  series: [
+    {
+      name: 'Countries',
+      type: 'pie',
+      radius: '80%',
+      center: ['50%', '50%'],
+      data: [
+        { value: 335, name: 'Germany' },
+        { value: 310, name: 'France' },
+        { value: 234, name: 'Canada' },
+        { value: 135, name: 'Russia' },
+        { value: 1548, name: 'USA' },
+      ],
+      itemStyle: {
+        emphasis: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(153, 153, 153, 0.04)',
+        },
+      },
+      label: {
+        normal: {
+          textStyle: {
+            color: '#343A40',
+          },
+        },
+      },
+      labelLine: {
+        normal: {
+          lineStyle: {
+            color: '#E9EBF1',
+          },
+        },
+      },
+    },
+  ],
+};
   this.customizedlineoptions = {
     backgroundColor: echarts.bg,
     color: ['#2F9CDA', '#764F7D'],

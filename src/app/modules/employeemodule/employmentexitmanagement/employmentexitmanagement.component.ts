@@ -19,7 +19,7 @@ ExitManagement: string = 'Exit Management';
     {name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: 'Initiate Voluntary Exit', 'icon': 'plus', outline: false},
   ];
 
-  
+
   tableColumns = [
     { name: 'a', title: 'id' },
     { name: 'b', title: 'Full Name' },

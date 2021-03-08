@@ -55,7 +55,7 @@ tableActions: TableAction[] = [
     {name: 'department', title: 'Department'},
   ];
 
-  selectedOption
+  selectedOption;
   constructor() {
    }
 

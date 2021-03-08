@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comfirmation.component.scss']
 })
 export class ComfirmationComponent implements OnInit {
-  tableColumns =[
+  tableColumns = [
     { name: 'a', title: 'S/N' },
     { name: 'b', title: 'EMPLOYEE' },
     { name: 'c', title: 'STAFF NO' },
@@ -14,7 +14,7 @@ export class ComfirmationComponent implements OnInit {
     { name: 'e', title: 'PROBATION PERIOD' },
     { name: 'f', title: 'REQUESTED BY' },
     { name: 'g', title: 'REQUESTED STATUS' },
-  ]
+  ];
 
   constructor() { }
 

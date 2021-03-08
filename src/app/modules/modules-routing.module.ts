@@ -27,6 +27,11 @@ const routes: Routes = [{
       .then( m => m.SelfServiceModule )
     },
     {
+      path: 'payroll',
+      loadChildren: () => import('../modules/payroll/payroll.module')
+      .then( m => m.PayrollModule )
+    },
+    {
       path: 'communications',
       loadChildren: () => import('../modules/communication/communication.module')
         .then(m => m.CommunicationModule)

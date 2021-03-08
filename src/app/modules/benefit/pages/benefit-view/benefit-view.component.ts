@@ -30,7 +30,7 @@ export class BenefitViewComponent implements OnInit {
   }
 
   selectedTab = 1;
-  tabChanged(tab: number){
+  tabChanged(tab: number) {
     this.selectedTab = tab;
   }
 
