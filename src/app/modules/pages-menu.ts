@@ -29,7 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'My Profile',
-        link: '/myprofile',
+        link: '/employeemodule/viewemployeerecords',
       },
       {
         title: 'My Leave',

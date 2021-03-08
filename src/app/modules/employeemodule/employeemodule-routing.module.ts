@@ -27,6 +27,7 @@ import { EmployeepersonalinformationComponent } from './employeepersonalinformat
 
 import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
+import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 
 const routes: Routes = [
   {
@@ -138,6 +139,10 @@ const routes: Routes = [
           path: 'viewemployeerecords',
           component:EmployeerecordsviewComponent
         },  
+        {
+          path: 'employeebulkupload',
+          component: EmployeerbulkaddComponent
+        },
         {
           path: 'employeepersonalinformation',
              component:EmployeepersonalinformationComponent

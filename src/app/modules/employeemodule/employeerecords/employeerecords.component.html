@@ -1,1 +1,11 @@
-<p>employeerecords works!</p>
+<ngx-componentsheader pageName="Employee Record" [requiredButton]="rbutton" (buttonClick)="getbtnaction($event)">
+
+</ngx-componentsheader>
+
+<nb-card >
+    <nb-card-body>
+        <ngx-tableheader></ngx-tableheader>
+
+        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+        </nb-card-body>
+        </nb-card>
