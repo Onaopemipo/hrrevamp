@@ -4,7 +4,6 @@ import { TenantonboardingRoutingModule } from './tenantonboarding-routing.module
 import { TenantonboardingComponent } from './tenantonboarding.component';
 import { OnboardingsetupComponent } from './onboardingsetup/onboardingsetup.component';
 import { Angular4PaystackModule } from 'angular4-paystack';
-import { alertmodalComponent } from '../../_services/alertservice.service';
 import { AlertserviceService } from '../../_services/alertservice.service';
 import {
   NbButtonModule,
@@ -29,7 +28,7 @@ import { EmployeeofferComponent } from '../employeemodule/employeeoffer/employee
 import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/employeeonboardingprofile.component';
 
 @NgModule({
-  declarations: [TenantonboardingComponent, OnboardingsetupComponent, alertmodalComponent, EmployeeofferComponent, EmployeeonboardingprofileComponent],
+    declarations: [TenantonboardingComponent, OnboardingsetupComponent, EmployeeofferComponent, alertmodalComponent, EmployeeonboardingprofileComponent],
   imports: [
     CommonModule,
     TenantonboardingRoutingModule,

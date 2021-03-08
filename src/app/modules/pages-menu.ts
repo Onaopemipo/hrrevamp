@@ -29,7 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'My Profile',
-        link: '/myprofile',
+        link: '/employeemodule/viewemployeerecords',
       },
       {
         title: 'My Leave',
@@ -69,6 +69,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Promotion',
         link: '/employeemodule/promotion',
       },
+      {
+        title: 'Employee Records',
+        link: '/employeemodule/employeerecords',
+      },
+
     ]
   },
   {
@@ -244,8 +249,33 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Payroll',
-    link: '/',
     icon: '/assets/icons/Payroll.jpg',
+    children: [
+      {
+        title: 'Institution Management',
+        link:'/'
+      },
+      {
+        title: 'Pay Elements',
+        link:'/'
+      },
+      {
+        title: 'Pay Scale',
+        link:'/'
+      },
+      {
+        title: 'Quick Payroll',
+        link:'/'
+      },
+      {
+        title: 'Payroll Run Log',
+        link:'/'
+      },
+      {
+        title: 'Report',
+        link:'/'
+      },
+    ]
   },
   {
     title: 'Expenses',

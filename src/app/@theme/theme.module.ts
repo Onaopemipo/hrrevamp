@@ -12,6 +12,9 @@ import {
   NbSelectModule,
   NbIconModule,
   NbThemeModule,
+  NbPopoverModule,
+  NbListModule,
+  NbCardModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -22,6 +25,7 @@ import {
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
+  NgxUserlistCardComponent,
   // CustomizableheaderComponent
 } from './components';
 import {
@@ -57,9 +61,13 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbPopoverModule,
+  NbListModule,
+  NbCardModule
 ];
 const COMPONENTS = [
   HeaderComponent,
+  NgxUserlistCardComponent,
   FooterComponent,
   SearchInputComponent,
   TinyMCEComponent,

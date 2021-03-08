@@ -23,10 +23,12 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
 import { CardComponent } from './card/card.component';
 
-
-
+import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
+import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
+import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 
 const routes: Routes = [
   {
@@ -131,8 +133,27 @@ const routes: Routes = [
 
         {
           path: 'deploymentapplication',
-          component: DeploymentapplicationComponent
+          component:DeploymentapplicationComponent
+        },  
+
+        
+        {
+          path: 'employeerecords',
+          component:EmployeerecordsComponent
         },
+        
+        {
+          path: 'viewemployeerecords',
+          component:EmployeerecordsviewComponent
+        },  
+        {
+          path: 'employeebulkupload',
+          component: EmployeerbulkaddComponent
+        },
+        {
+          path: 'employeepersonalinformation',
+             component:EmployeepersonalinformationComponent
+           },
         {
           path: '',
           redirectTo: 'dashboard',

@@ -22,14 +22,14 @@ export class GetTokenServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
      * @param body (optional) 
      * @return Success
      */
-    getToken(body: UserLoginDTO | undefined): Observable<MessageOutApiResult> {
+    getToken(body: UserLoginDTO | undefined): Observable<VwUserObjApiResult> {
         let url_ = this.baseUrl + "/api/Account/GetToken/GetToken";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -52,14 +52,14 @@ export class GetTokenServiceProxy {
                 try {
                     return this.processGetToken(<any>response_);
                 } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                    return <Observable<VwUserObjApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+                return <Observable<VwUserObjApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetToken(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processGetToken(response: HttpResponseBase): Observable<VwUserObjApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -70,7 +70,7 @@ export class GetTokenServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
+            result200 = VwUserObjApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -95,7 +95,7 @@ export class GetTokenServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<MessageOutApiResult>(<any>null);
+        return _observableOf<VwUserObjApiResult>(<any>null);
     }
 }
 
@@ -107,7 +107,7 @@ export class ValidateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -190,7 +190,7 @@ export class ForgotPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -273,7 +273,7 @@ export class ResetPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -358,7 +358,7 @@ export class ConfirmEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -444,7 +444,7 @@ export class FetchActivityLogServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -545,7 +545,7 @@ export class AssetManagementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -3288,7 +3288,7 @@ export class DataServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -3600,7 +3600,7 @@ export class FetchEmailLogsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -3695,7 +3695,7 @@ export class FetchEmailLogByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -3781,7 +3781,7 @@ export class FetchEmailTemplateByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -3867,7 +3867,7 @@ export class UpdateEmailTemplateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -3953,7 +3953,7 @@ export class CreateEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -4039,7 +4039,7 @@ export class FetchEmployeesDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -4135,7 +4135,7 @@ export class FetchEmployeeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -4221,7 +4221,7 @@ export class FetchAllEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -4315,7 +4315,7 @@ export class FetchEmployeeContractByEmployeeIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -4401,7 +4401,7 @@ export class LeaveEntitlementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -4770,7 +4770,7 @@ export class LeaveHolidayDateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -5076,7 +5076,7 @@ export class PostServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -5310,7 +5310,7 @@ export class FetchLeavePlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -5416,7 +5416,7 @@ export class LeaveplaneEventServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -5500,14 +5500,14 @@ export class DeleteServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
      * this method is used to delete leave plan
      * @return Success
      */
-    leavePlanDelete(id: number): Observable<MessageOutApiResult> {
+    deleteDelete(id: number): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LeavePlan/Delete/delete/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -5523,11 +5523,11 @@ export class DeleteServiceProxy {
         };
 
         return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processleavePlanDelete(response_);
+            return this.processDeleteDelete(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processleavePlanDelete(<any>response_);
+                    return this.processDeleteDelete(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -5536,7 +5536,7 @@ export class DeleteServiceProxy {
         }));
     }
 
-    protected processleavePlanDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processDeleteDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5579,7 +5579,7 @@ export class DeleteServiceProxy {
      * this method is used to delete. leave request Id is required
      * @return Success
      */
-    leaveRequestDelete(id: number): Observable<MessageOutApiResult> {
+    LeaveRequestDelete(id: number): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LeaveRequest/Delete/delete/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -5595,11 +5595,11 @@ export class DeleteServiceProxy {
         };
 
         return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processleaveRequestDelete(response_);
+            return this.processLeaveRequestDelete(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processleaveRequestDelete(<any>response_);
+                    return this.processLeaveRequestDelete(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -5608,7 +5608,7 @@ export class DeleteServiceProxy {
         }));
     }
 
-    protected processleaveRequestDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processLeaveRequestDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5652,7 +5652,7 @@ export class DeleteServiceProxy {
      * @param idQuery (optional) 
      * @return Success
      */
-    leaveTypeDelete(idQuery: number | undefined, idPath: string): Observable<MessageOutApiResult> {
+    LeaveTypeDelete(idQuery: number | undefined, idPath: string): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LeaveType/Delete/delete/{id}?";
         if (idPath === undefined || idPath === null)
             throw new Error("The parameter 'idPath' must be defined.");
@@ -5672,11 +5672,11 @@ export class DeleteServiceProxy {
         };
 
         return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processleaveTypeDelete(response_);
+            return this.processLeaveTypeDelete(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processleaveTypeDelete(<any>response_);
+                    return this.processLeaveTypeDelete(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -5685,7 +5685,7 @@ export class DeleteServiceProxy {
         }));
     }
 
-    protected processleaveTypeDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processLeaveTypeDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5729,7 +5729,7 @@ export class DeleteServiceProxy {
      * @param idQuery (optional) 
      * @return Success
      */
-    leaveYearDelete(idQuery: number | undefined, idPath: string): Observable<MessageOutApiResult> {
+    LeaveYearDelete(idQuery: number | undefined, idPath: string): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LeaveYear/Delete/delete/{id}?";
         if (idPath === undefined || idPath === null)
             throw new Error("The parameter 'idPath' must be defined.");
@@ -5749,11 +5749,11 @@ export class DeleteServiceProxy {
         };
 
         return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processleaveYearDelete(response_);
+            return this.processLeaveYearDelete(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processleaveYearDelete(<any>response_);
+                    return this.processLeaveYearDelete(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -5762,7 +5762,7 @@ export class DeleteServiceProxy {
         }));
     }
 
-    protected processleaveYearDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processLeaveYearDelete(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5810,7 +5810,7 @@ export class AproveorRejectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -5897,7 +5897,7 @@ export class PostReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -5984,7 +5984,7 @@ export class CreateLeaveByAdminServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6070,7 +6070,7 @@ export class CreateLeaveByEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6156,7 +6156,7 @@ export class ModifyLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6243,7 +6243,7 @@ export class GetLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6412,7 +6412,7 @@ export class CancelLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6496,7 +6496,7 @@ export class GetLeaveTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6594,7 +6594,7 @@ export class DetailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -6602,7 +6602,7 @@ export class DetailServiceProxy {
      * @param idQuery (optional) 
      * @return Success
      */
-    leavetypedetailGet(idQuery: number | undefined, idPath: string): Observable<MessageOutApiResult> {
+    LeaveTypedetailGet(idQuery: number | undefined, idPath: string): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LeaveType/Detail/detail/{id}?";
         if (idPath === undefined || idPath === null)
             throw new Error("The parameter 'idPath' must be defined.");
@@ -6622,11 +6622,11 @@ export class DetailServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processleavetypeDetailGet(response_);
+            return this.processLeaveTypedetailGet(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processleavetypeDetailGet(<any>response_);
+                    return this.processLeaveTypedetailGet(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -6635,7 +6635,7 @@ export class DetailServiceProxy {
         }));
     }
 
-    protected processleavetypeDetailGet(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processLeaveTypedetailGet(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6760,7 +6760,7 @@ export class LeaveWorkFlowServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7061,7 +7061,7 @@ export class GetLeaveYearServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7156,7 +7156,7 @@ export class AddUpdateLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7314,7 +7314,7 @@ export class PostFullRepaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7399,7 +7399,7 @@ export class SimulatePaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7502,7 +7502,7 @@ export class GetLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7625,7 +7625,7 @@ export class GetLoanSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7708,7 +7708,7 @@ export class UpdateLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7793,7 +7793,7 @@ export class LoadRepaymentScheduleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -7883,7 +7883,7 @@ export class FetchLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8006,7 +8006,7 @@ export class GetLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8101,7 +8101,7 @@ export class ToggleLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8186,7 +8186,7 @@ export class GetLoanTypesByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8310,7 +8310,7 @@ export class FetchLoanTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8400,7 +8400,7 @@ export class FetchRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8481,7 +8481,7 @@ export class FetchAllRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8563,7 +8563,7 @@ export class FetchRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8650,7 +8650,7 @@ export class CreateRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8737,7 +8737,7 @@ export class FetchRolePermissionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8817,7 +8817,7 @@ export class FetchRolePermissionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8902,7 +8902,7 @@ export class RolePermissionMappingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -8980,6 +8980,188 @@ export class RolePermissionMappingServiceProxy {
 }
 
 @Injectable()
+export class FetchKPISectionsServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+    }
+
+    /**
+     * API for retrieving all KPI-Sections
+     * @param status (optional) 
+     * @param ratingType (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getKPISections(status: number | undefined, ratingType: number | undefined, pageSize: number | undefined): Observable<KPISectionDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Section/FetchKPISections/GetKPISections?";
+        if (status === null)
+            throw new Error("The parameter 'status' cannot be null.");
+        else if (status !== undefined)
+            url_ += "Status=" + encodeURIComponent("" + status) + "&";
+        if (ratingType === null)
+            throw new Error("The parameter 'ratingType' cannot be null.");
+        else if (ratingType !== undefined)
+            url_ += "RatingType=" + encodeURIComponent("" + ratingType) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetKPISections(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetKPISections(<any>response_);
+                } catch (e) {
+                    return <Observable<KPISectionDTOIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<KPISectionDTOIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetKPISections(response: HttpResponseBase): Observable<KPISectionDTOIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = KPISectionDTOIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<KPISectionDTOIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class CreateKPISectionServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+    }
+
+    /**
+     * API for add/updating KPI Section
+     * @param body (optional) 
+     * @return Success
+     */
+    createKPISection(body: KPISectionDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Section/CreateKPISection/CreateKPISection";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateKPISection(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateKPISection(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateKPISection(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class SetUpsServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -8987,7 +9169,7 @@ export class SetUpsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -10866,7 +11048,7 @@ export class CreateSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -10951,7 +11133,7 @@ export class FetchSubscriptionPlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11031,7 +11213,7 @@ export class FetchSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11116,7 +11298,7 @@ export class FetchSubscriptionPlanModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11201,7 +11383,7 @@ export class RegisterCompanyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11286,7 +11468,7 @@ export class FetchTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11367,7 +11549,7 @@ export class UpdateTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11451,7 +11633,7 @@ export class AddTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11535,7 +11717,7 @@ export class RegisterUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11620,7 +11802,7 @@ export class UpdateUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11705,7 +11887,7 @@ export class FetchAllUsersServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
     }
 
     /**
@@ -11836,128 +12018,6 @@ export class UserLoginDTO implements IUserLoginDTO {
 export interface IUserLoginDTO {
     email: string | undefined;
     password: string | undefined;
-}
-
-export class MessageOut implements IMessageOut {
-    message!: string | undefined;
-    isSuccessful!: boolean;
-    retId!: number;
-    redirectUrl!: string | undefined;
-    errors!: string[] | undefined;
-
-    constructor(data?: IMessageOut) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.message = _data["message"];
-            this.isSuccessful = _data["isSuccessful"];
-            this.retId = _data["retId"];
-            this.redirectUrl = _data["redirectUrl"];
-            if (Array.isArray(_data["errors"])) {
-                this.errors = [] as any;
-                for (let item of _data["errors"])
-                    this.errors!.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): MessageOut {
-        data = typeof data === 'object' ? data : {};
-        let result = new MessageOut();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["message"] = this.message;
-        data["isSuccessful"] = this.isSuccessful;
-        data["retId"] = this.retId;
-        data["redirectUrl"] = this.redirectUrl;
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item);
-        }
-        return data; 
-    }
-
-    clone(): MessageOut {
-        const json = this.toJSON();
-        let result = new MessageOut();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IMessageOut {
-    message: string | undefined;
-    isSuccessful: boolean;
-    retId: number;
-    redirectUrl: string | undefined;
-    errors: string[] | undefined;
-}
-
-export class MessageOutApiResult implements IMessageOutApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: MessageOut;
-    totalCount!: number;
-
-    constructor(data?: IMessageOutApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            this.result = _data["result"] ? MessageOut.fromJS(_data["result"]) : <any>undefined;
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): MessageOutApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new MessageOutApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data; 
-    }
-
-    clone(): MessageOutApiResult {
-        const json = this.toJSON();
-        let result = new MessageOutApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IMessageOutApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: MessageOut;
-    totalCount: number;
 }
 
 export class VwUserObj implements IVwUserObj {
@@ -12183,6 +12243,128 @@ export interface IVwUserObjApiResult {
     hasError: boolean;
     message: string | undefined;
     result: VwUserObj;
+    totalCount: number;
+}
+
+export class MessageOut implements IMessageOut {
+    message!: string | undefined;
+    isSuccessful!: boolean;
+    retId!: number;
+    redirectUrl!: string | undefined;
+    errors!: string[] | undefined;
+
+    constructor(data?: IMessageOut) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.message = _data["message"];
+            this.isSuccessful = _data["isSuccessful"];
+            this.retId = _data["retId"];
+            this.redirectUrl = _data["redirectUrl"];
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): MessageOut {
+        data = typeof data === 'object' ? data : {};
+        let result = new MessageOut();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["message"] = this.message;
+        data["isSuccessful"] = this.isSuccessful;
+        data["retId"] = this.retId;
+        data["redirectUrl"] = this.redirectUrl;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+
+    clone(): MessageOut {
+        const json = this.toJSON();
+        let result = new MessageOut();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMessageOut {
+    message: string | undefined;
+    isSuccessful: boolean;
+    retId: number;
+    redirectUrl: string | undefined;
+    errors: string[] | undefined;
+}
+
+export class MessageOutApiResult implements IMessageOutApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: MessageOut;
+    totalCount!: number;
+
+    constructor(data?: IMessageOutApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? MessageOut.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): MessageOutApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new MessageOutApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        return data; 
+    }
+
+    clone(): MessageOutApiResult {
+        const json = this.toJSON();
+        let result = new MessageOutApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMessageOutApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: MessageOut;
     totalCount: number;
 }
 
@@ -22395,6 +22577,180 @@ export class RolePermissionMappingDTO implements IRolePermissionMappingDTO {
 export interface IRolePermissionMappingDTO {
     roleId: number;
     permissionIds: number[];
+}
+
+export class KPISectionDTO implements IKPISectionDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    section_name!: string;
+    isMarkObtainable!: boolean;
+    maximum_score_obtainable!: number;
+    description!: string | undefined;
+    instructions!: string | undefined;
+    is_notified_employees!: boolean;
+    order!: number;
+    kpi_rating_type_id!: number;
+    weight!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IKPISectionDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.section_name = _data["section_name"];
+            this.isMarkObtainable = _data["isMarkObtainable"];
+            this.maximum_score_obtainable = _data["maximum_score_obtainable"];
+            this.description = _data["description"];
+            this.instructions = _data["instructions"];
+            this.is_notified_employees = _data["is_notified_employees"];
+            this.order = _data["order"];
+            this.kpi_rating_type_id = _data["kpi_rating_type_id"];
+            this.weight = _data["weight"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): KPISectionDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new KPISectionDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["section_name"] = this.section_name;
+        data["isMarkObtainable"] = this.isMarkObtainable;
+        data["maximum_score_obtainable"] = this.maximum_score_obtainable;
+        data["description"] = this.description;
+        data["instructions"] = this.instructions;
+        data["is_notified_employees"] = this.is_notified_employees;
+        data["order"] = this.order;
+        data["kpi_rating_type_id"] = this.kpi_rating_type_id;
+        data["weight"] = this.weight;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): KPISectionDTO {
+        const json = this.toJSON();
+        let result = new KPISectionDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IKPISectionDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    section_name: string;
+    isMarkObtainable: boolean;
+    maximum_score_obtainable: number;
+    description: string | undefined;
+    instructions: string | undefined;
+    is_notified_employees: boolean;
+    order: number;
+    kpi_rating_type_id: number;
+    weight: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class KPISectionDTOIListApiResult implements IKPISectionDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: KPISectionDTO[] | undefined;
+    totalCount!: number;
+
+    constructor(data?: IKPISectionDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(KPISectionDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): KPISectionDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new KPISectionDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data; 
+    }
+
+    clone(): KPISectionDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new KPISectionDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IKPISectionDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: KPISectionDTO[] | undefined;
+    totalCount: number;
 }
 
 export class SelectListGroup implements ISelectListGroup {

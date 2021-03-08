@@ -63,7 +63,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
 import { InputvalidationService } from './_services/inputvalidation.service';
-
+import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
 
 
 
@@ -143,7 +143,8 @@ FullCalendarModule.registerPlugins([
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     InputvalidationService,
 
-    DecimalPipe
+    DecimalPipe,
+    GetTokenServiceProxy,
   ],
 })
 export class AppModule {
