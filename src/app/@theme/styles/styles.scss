@@ -394,6 +394,10 @@ letter-spacing: 0px;
 color: #86828D !important;
 opacity: 1;
 }
+.taskdownloadbtn{
+  display: flex;
+  flex-direction: row;
+}
 .listtextActive{
   font-family:'Rubik',sans-serif !important;
   font-style: normal !important;

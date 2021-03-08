@@ -62,7 +62,6 @@ const routes: Routes = [{
       loadChildren: () => import('./recruitment/interviewerdashboard/interviewerdashboard.module')
       .then(m => m.InterviewerdashboardModule)
     },
-
     {
       path: 'recruitmentadmin',
       loadChildren: () => import('./recruitment/admin-dashboard/admindashboard.module')
@@ -82,6 +81,12 @@ const routes: Routes = [{
       path: 'performance',
       loadChildren: () => import('./performance/performance.module')
       .then(m => m.PerformanceModule)
+    },
+
+    {
+      path: 'career-succession',
+      loadChildren: () => import('./career-succession/career-succession.module')
+      .then(m => m.CareerSuccessionModule)
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

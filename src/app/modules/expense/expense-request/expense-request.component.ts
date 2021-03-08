@@ -16,7 +16,7 @@ enum TOP_ACTIONS { CREATE_NEW, }
 export class ExpenseRequestComponent extends MainBaseComponent {
   topActionButtons = [
     { name: 'CREATE_NEW', label: 'Create new', icon: 'plus', outline: false },
-  ]
+  ];
   TOP_ACTIONS = TOP_ACTIONS;
   TABS = TABS;
   selectedTab = TABS.ALL__REQUESTS;
@@ -26,5 +26,5 @@ export class ExpenseRequestComponent extends MainBaseComponent {
     { name: 'date', title: 'Project' },
     { name: 'date', title: 'Type' },
     { name: 'date', title: 'Amount' }
-  ]
+  ];
 }

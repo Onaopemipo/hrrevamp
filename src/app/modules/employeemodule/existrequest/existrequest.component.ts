@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./existrequest.component.scss']
 })
 export class ExistrequestComponent implements OnInit {
-  
 
-  selectedOption: string = ''
+
+  selectedOption: string = '';
 
   constructor() { }
 

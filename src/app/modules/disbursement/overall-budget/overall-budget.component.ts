@@ -17,7 +17,7 @@ export class OverallBudgetComponent implements OnInit {
     { name: 'h', outline: false, icon: 'plus', label: 'Add budget item'}
   ];
 
-  get totalBudget(){
+  get totalBudget() {
     return 300000;
   }
 

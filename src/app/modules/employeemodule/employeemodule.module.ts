@@ -37,6 +37,14 @@ import { ComfirmationComponent } from './comfirmation/comfirmation.component';
 import { EmployeeviewComponent } from './employeeview/employeeview.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component';
+import { PromotioneligibilityComponent } from './promotioneligibility/promotioneligibility.component';
+import { EligibilityxxComponent } from './eligibilityxx/eligibilityxx.component';
+import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothereligibilitylist.component';
+import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanagement/employeedeploymentmanagement.component';
+import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
+import { ManagementviewComponent } from './managementview/managementview.component';
+import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { CardComponent } from './card/card.component';
 
 
 
@@ -57,7 +65,15 @@ import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component'
     PromotioninfoComponent,
     OnboardingemployeesComponent,
     EmployeemoduleComponent,
-    EmployeepersonalinformationComponent],
+    EmployeepersonalinformationComponent,
+    PromotioneligibilityComponent,
+    EligibilityxxComponent,
+    AnothereligibilitylistComponent,
+    EmployeedeploymentmanagementComponent,
+    DeploymentviewComponent,
+    ManagementviewComponent,
+    DeploymentapplicationComponent,
+    CardComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,
@@ -76,8 +92,8 @@ import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component'
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,  
-    
+    NbDialogModule,
+
   ],
 
 })

@@ -1,0 +1,62 @@
+<!-- <ngx-customizable-column-layout>
+
+</ngx-customizable-column-layout> -->
+
+<ngx-componentsheader pageName='Aptitude Test'></ngx-componentsheader>
+
+  <nb-card style="background-color: #ffffff;">
+    <nb-card-body *ngIf="!nextQuestion">
+      <div class="row" style="display: flex; justify-content:space-around;">
+        <div class="col-lg-10">
+          <h6>1. What is the capital city of Nigeria?</h6>
+          <div>
+            <div style="display: flex; flex-direction:column">
+              <nb-radio-group style="display:flex; flex-direction: column; justify-content: flex-start;">
+                <nb-radio value="1"><span>A. Lagos</span></nb-radio>
+                <nb-radio value="2"><span>B. Abuja</span></nb-radio>
+                <nb-radio value="3"><span>C. Kano</span></nb-radio>
+                <nb-radio value="4"><span>D. Lokoja</span></nb-radio>
+                <nb-radio value="5"><span>E. Ibadan</span></nb-radio>
+              </nb-radio-group>
+            </div>
+            <div>
+              <button nbButton (click)="gotoNextQuestion()" status="primary" style="align-items: flex-start">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+
+    <nb-card-body *ngIf="nextQuestion">
+      <div class="row" style="display: flex; justify-content:space-around;">
+        <div class="col-lg-10">
+          <h6>2. There are 7 continents in the world?</h6>
+          <div>
+            <div style="display: flex; flex-direction:column">
+              <nb-radio-group style="display:flex; flex-direction: column; justify-content: flex-start;">
+                <nb-radio value="1"><span>A. True</span></nb-radio>
+                <nb-radio value="2"><span>B. False</span></nb-radio>
+              </nb-radio-group>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <button nbButton style="align-items: flex-start; margin-right: 20px;" (click)="goback()">Previous</button>
+              <button nbButton status="primary" style="align-items: flex-start">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+
+    <div class="row" style="justify-content: flex-end;">
+      <!-- <div class="col-md-8">
+
+      </div> -->
+      <div class="col-md-4">
+        <nb-card-footer>
+          <nb-progress-bar [value]="50" status="success" size="tiny" displayValue="50%"></nb-progress-bar>
+        </nb-card-footer>
+      </div>
+
+    </div>
+
+  </nb-card>

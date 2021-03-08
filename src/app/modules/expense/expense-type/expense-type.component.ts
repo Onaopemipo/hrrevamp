@@ -16,7 +16,7 @@ enum TOP_ACTIONS { CREATE_NEW, }
 export class ExpenseTypeComponent extends MainBaseComponent {
   topActionButtons = [
     { name: 'CREATE_NEW', label: 'Create new', icon: 'plus', outline: false },
-  ]
+  ];
   TOP_ACTIONS = TOP_ACTIONS;
   TABS = TABS;
   selectedTab = TABS.PROJECTS;

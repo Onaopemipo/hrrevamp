@@ -15,10 +15,14 @@ import { ComponentsModule } from 'app/components/components.module';
 import { TablecomponentComponent } from 'app/components/tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from 'app/components/tableheader/tableheader.component';
 import { ComponentsheaderComponent } from 'app/components/componentsheader/componentsheader.component';
+import { CareerSuccessionComponent } from './career-succession/career-succession.component';
+
+
+
 
 
 @NgModule({
-  declarations: [ModulesComponent, DashboardComponent],
+  declarations: [ModulesComponent, DashboardComponent, CareerSuccessionComponent],
   imports: [
     CommonModule,
     ComponentsModule,

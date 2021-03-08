@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./promotion.component.scss']
 })
 export class PromotionComponent implements OnInit {
-  tableColumns =[
+  tableColumns = [
     { name: 'a', title: 'S/N' },
     { name: 'b', title: 'EMPLOYEE' },
     { name: 'c', title: 'PREVIOUS ROLE' },
@@ -16,7 +16,7 @@ export class PromotionComponent implements OnInit {
     { name: 'g', title: 'LAST PROMOTION' },
     { name: 'h', title: 'SUBMITTED' },
     { name: 'K', title: 'STATUS' },
-  ]
+  ];
 
   constructor() { }
 

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
-import { LeavehistoryComponent } from './leavehistory/leavehistory.component'
+import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 
 
 

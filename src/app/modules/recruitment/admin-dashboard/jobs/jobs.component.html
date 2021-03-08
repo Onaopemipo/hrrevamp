@@ -1,0 +1,691 @@
+<ngx-componentsheader pageName='Jobs'></ngx-componentsheader>
+
+<div *ngIf="!newJob && allJobs==''" style="background-color: #ffffff;">
+  <nb-card
+    style="min-height: 100vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+    <nb-card-body>
+      <div><br>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
+          (buttonClick)="addNewJob()"></ngx-default-content>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+</div>
+
+<!-- Job Posting Form  -->
+<div *ngIf="newJob">
+  <nb-card>
+    <nb-card-body>
+      <h6>Job title and Department details</h6>
+      <form>
+        <div class="form-group row mydiv">
+          <label for="Title" class="col-sm-3 col-form-label mylabel">Job Title</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <h6>Location</h6>
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Region" class="col-sm-3 col-form-label mylabel">Region, City or Zip Code</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <h6>Description</h6>
+
+        <div class="form-group row mydiv">
+          <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
+          <div class="col-sm-8">
+            <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Descripion" class="col-sm-3 col-form-label mylabel">Job Requirements</label>
+          <div class="col-sm-8">
+            <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+          </div>
+        </div>
+
+        <h6>Employment Details</h6>
+
+        <div class="form-group row mydiv">
+          <label for="employmentType" class="col-sm-3 col-form-label mylabel">Employment Type</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <nb-radio-group style="display:flex; flex-direction: row; justify-content: flex-start;">
+              <nb-radio value="1">Full Time</nb-radio>
+              <nb-radio value="2">Contract</nb-radio>
+            </nb-radio-group>
+          </div>
+
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="availability" class="col-sm-3 col-form-label mylabel">Availability</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <nb-radio-group style="display:flex; flex-direction: row; justify-content: flex-start;">
+              <nb-radio value="1">Physical</nb-radio>
+              <nb-radio value="2">Remote</nb-radio>
+              <nb-radio value="3">Flexible</nb-radio>
+            </nb-radio-group>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Region" class="col-sm-3 col-form-label mylabel">Experience</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">Beginner</option>
+              <option value="2">Intermediate</option>
+              <option value="3">Master</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="minimumEducation" class="col-sm-3 col-form-label mylabel">Minimum Education</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input type="text" class="form-control" placeholder="Minimum Education">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="maximumEducation" class="col-sm-3 col-form-label mylabel">Maximum Education</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input type="text" class="form-control" placeholder="Maximum Education">
+          </div>
+        </div>
+
+        <h6>Annual Salary</h6>
+
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Currency <span
+              style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+          <div class="col-sm-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">USD</option>
+              <option value="2">NG</option>
+              <option value="3">AUD</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="currency" class="col-sm-3 col-form-label mylabel">Salary Range <span
+              style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+          <div class="col-sm-2">
+            <select class="custom-select" required>
+              <option value="">From </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+
+          <div class="col-sm-2">
+            <select class="custom-select" required>
+              <option value="">To </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <hr style="margin: 40px 0px;">
+
+        <div class="form-group row mydiv">
+          <label for="currency" class="col-sm-3 col-form-label mylabel">Post Validity</label>
+          <div class="col-sm-2">
+            <select class="custom-select" required>
+              <option value="">From </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+
+          <div class="col-sm-2">
+            <select class="custom-select" required>
+              <option value="">To </option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="Beneficiary" class="col-sm-3 col-form-label">Reviewers</label>
+          <div class="col-sm-4">
+            <button type="submit" (click)="showMasterSearchModal()" class="btn cancel-button"
+              style="padding: 5px 20px;">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
+                </span>
+              </span>
+              Add Reviewers
+            </button>
+            <ngx-employee-master-search></ngx-employee-master-search>
+
+          </div>
+
+        </div>
+
+
+        <!-- Add reviewrs modal -->
+
+
+        <ngx-side-modal [(show)]="showModal">
+          <div modal-header>{{selectionHeader}}</div>
+          <div modal-body>
+            <nb-form-field>
+              <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+              <input type="text" nbInput class="form-control">
+            </nb-form-field>
+            <div class="row">
+              <div class="col-sm-4 form-group">
+                <label>Department</label>
+                <select class="form-control">
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-sm-4 form-group">
+                <label>Branch</label>
+                <select class="form-control">
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-sm-4 form-group">
+                <label>Unit</label>
+                <select class="form-control">
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-sm-4 form-group">
+                <label>Level</label>
+                <select class="form-control">
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-sm-4 form-group">
+                <label>Gender</label>
+                <select class="form-control">
+                  <option></option>
+                </select>
+              </div>
+              <div class="col-sm-4 form-group">
+                <label style="visibility: hidden;">Gender</label>
+                <button nbButton status='primary' style="min-width: unset !important;">Search</button>
+              </div>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: flex-end; margin: 1rem 0rem">
+                <span style="color: #4847E0; cursor: pointer;">Select All</span>
+              </div>
+              <div style="border-top: 0.5px solid #CCCCCC;;">
+                <div *ngFor="let i of [1,2,3,4,5]"
+                  style="display: flex; align-items: center; border-bottom: 0.5px solid #CCCCCC; padding: 1rem;">
+                  <input type="checkbox" style="margin-right: 2rem;" />
+                  <div style="display: flex;">
+                    <img style="width: 3rem; height: 3rem; border-radius: 50%; margin-right: 1rem;"
+                      src="https://via.placeholder.com/300/09f.png/fff%20C/O%20https://placeholder.com/" />
+                    <div style="display: flex; justify-content: space-between; flex-direction: column;">
+                      <div style="font-family: Rubik;
+                                          font-style: normal;
+                                          font-weight: normal;
+                                          font-size: 16px;
+                                          line-height: 19px;
+                                          display: flex;">Sherrif Shorunke</div>
+                      <div style="font-family: Rubik;
+                                          font-style: normal;
+                                          font-weight: normal;
+                                          font-size: 14px;
+                                          display: flex;
+                                          color: #6C757D;">UX</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin: 1rem;">
+              <button nbButton status='primary' style="margin-right: 0.5rem;">Add Reviewer</button>
+              <button nbButton status='primary' outline style="background: transparent;">Cancel</button>
+            </div>
+          </div>
+        </ngx-side-modal>
+
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Scorecard <span
+              style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+          <div class="col-sm-4">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">60%</option>
+              <option value="2">87%</option>
+              <option value="3">80%</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Quiz <span
+              style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+          <div class="col-4 col-md-4 col-sm-4">
+            <select class="custom-select" required>
+              <option type="button" class="select-button" value="">Select One</option>
+              <option type="button" class="select-button" value="">Select Two</option>
+              <option type="button" class="select-button" value="">Select Three</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <div class="col-sm-6">
+            <button nbButton status="primary">Post</button>
+            <span style="padding: 8px;"></span>
+            <button nbButton>Save Draft</button>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="allJobs !=''" style="background-color: #ffffff;">
+  <nb-tabset>
+    <nb-tab tabTitle="Posted Jobs">
+      <nb-card>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent (actionClick)='actionClicked($event)' [actions]='tableActions' [userData]='data'
+          [tableColum]="postedJobsTable"></ngx-tablecomponent>
+      </nb-card>
+    </nb-tab>
+    <nb-tab tabTitle="Scheduled Postings">
+      <nb-card>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent [tableColum]="scheduledJobsTable"></ngx-tablecomponent>
+      </nb-card>
+    </nb-tab>
+    <nb-tab tabTitle="Drafts">
+      <nb-card>
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent [tableColum]="draftedJobsTable"></ngx-tablecomponent>
+      </nb-card>
+    </nb-tab>
+  </nb-tabset>
+
+
+</div>
+
+<ngx-side-modal [(show)]='showCvModal' style="width: auto;" position='Center'>
+  <div modal-header></div>
+
+
+  <div modal-body>
+
+    <div class="card">
+
+      <nb-card>
+
+        <div class="row human">
+          <div class="container">
+            <div>
+              <header style="font-weight: bold;">HUMAN RESOURCES MANAGER</header>
+            </div>
+            <div class="need">
+              <p>Products</p>
+              <p style="margin-left: 0.27rem;">.Nigeria</p>
+              <p style="margin-left: 0.27rem;">.Part Time</p>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </nb-card>
+
+
+      <!-- Work Experience -->
+
+      <div class="row">
+        <div class="col-md-8 col-xxl-8">
+          <nb-card>
+            <nb-card-body>
+              <div>
+                <div
+                  style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
+                  <div style="flex: auto; display: flex;padding-top: 15px;">
+                    <p style=" text-transform: uppercase; font-weight: bold;">Job Description
+                    </p>
+                  </div>
+
+
+
+                </div>
+              </div>
+              <span style="padding: 10px;"></span>
+
+              <div class="WorkExperience">
+
+                <div class="row">
+                  <div class="col-lg-8 way">
+                    <p>
+                      HT has been long established fact that a reader will be distracted by the readable
+                    </p>
+                    <p>
+                      content of page when looking at its layout. The point of using Lorem Ipsum is that
+                      <span>it has a more-or-less normal distribution of letters,</span>
+                    </p>
+                    <p>
+                      An oppose to using 'Content here, content here; making it look like readable a
+                      English
+                    </p>
+                    <p>
+                      Ht has been long established fact that a reader will be distracted by the readable
+                      <span>English</span>
+                    </p>
+                    <p>
+                      Ht has been long established fact that a reader will be distracted by the readable
+                      <span>English</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div>
+                <div
+                  style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
+                  <div style="flex: auto; display: flex;padding-top: 15px;">
+                    <p style=" text-transform: uppercase; font-weight: bold;">Job Description
+                    </p>
+                  </div>
+                  <!-- <button outline='true' nbButton status="primary" style="min-width: unset !important;">
+                                  <nb-icon icon="plus"></nb-icon>&nbsp;Add
+                                   class="listsubheader"
+                              </button> -->
+
+
+
+                </div>
+              </div>
+              <span style="padding: 10px;"></span>
+
+              <div class="WorkExperience">
+                <!--  <div style="display: flex;flex-direction: row;justify-self: center;">
+                              <div style="flex: auto;"><span class="employmentDate">Jan 2007 - Feb 2013</span></div>
+                              <div><a href="#">Edit</a><span style="padding:3px"></span><a href="#">Delete</a></div>
+                          </div>
+      -->
+
+                <div class="row">
+                  <div class="col-lg-8 way">
+
+                    <p>
+                      An oppose to using 'Content here, content here; making it look like readable a
+                      English
+                    </p>
+                    <p>
+                      An oppose to using 'Content here, content here;
+                    </p>
+
+                    <p>
+                      <span>
+                        An oppose to using 'Content here, content here;making it look like readable a
+                        English
+                      </span>
+
+                    </p>
+
+                    <p>
+                      <span>
+                        An oppose to using 'Content here, content here;making it look like readable a
+                        English
+                      </span>
+
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+
+
+
+        </div>
+
+
+        <!-- Evaluation Score Panel -->
+        <div class="col-md-4 col-xxl-4">
+          <div class="row">
+            <div class="col-md-12 col-xxl-12">
+              <nb-card>
+                <nb-card-body>
+                  <div>
+                    <div
+                      style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
+                      <div
+                        style="flex: auto; display: flex;padding-top: 15px; background-color: #4847E0; padding: 2rem;">
+                        <p style="color: white !important; text-transform: uppercase; font-size: large;"
+                          class="listsubheader">Job Summary</p>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                  <span style="padding: 20px;"></span>
+                  <div>
+                    <div
+                      style="display: flex; flex-direction: column; justify-content: center; padding: 20px; background: rgba(72, 71, 224, 0.04);">
+                      <!-- <div style="align-self: center; align-items: center; justify-content: center; padding: 20px;"> -->
+                      <div
+                        style="font-size: large; padding-top: 30px;  align-self: start; display: flex;flex-wrap: wrap;">
+                        <div>
+                          <i class="fas fa-boxes"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                          &#8358;250,000
+                        </div>
+                      </div>
+
+
+                      <div
+                        style="font-size: large; padding-top: 30px;  align-self: start; display: flex;flex-wrap: wrap;">
+                        <div>
+                          <img style="height: 25px;" src="assets/icons/officelocation.jpg" alt="">
+                        </div>
+                        <div style="margin-left: 1rem; font-weight: bold;">
+                          Lagos
+                        </div>
+                      </div>
+
+
+
+                      <div
+                        style="font-size: large; padding-top: 30px;  align-self: start; display: flex;flex-wrap: wrap;">
+                        <div>
+                          <img style="height: 25px;" src="assets/icons/NumberofShifts.jpg" alt="">
+                        </div>
+                        <div style="margin-left: 1rem; font-weight: bold;">
+                          3 Months ago
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12 col-xxl-12">
+              <nb-card-header>
+                <span>Reviewers</span>
+              </nb-card-header>
+              <div>
+                <div>
+                  <ngx-employee-list></ngx-employee-list>
+                  <!-- <button (click)="showMasterSearchModal()" class="underlined-button">Edit</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div style="margin-top: 2rem; font-size: larger;">
+            <nb-card-header>
+              <span style="font-weight: bold; padding: 1rem; margin-top: 2rem; font-size: larger;">ScoreCard</span>
+            </nb-card-header>
+
+
+          </div>
+
+
+          <button nbButton outline status="primary" class="d-flex column"
+            style="background-color: white; border: none; text-decoration: underline;">Product ScoreCard</button>
+
+
+          <div style="display: flex; justify-content: flex-end; margin: 1rem; margin-top: 14rem;">
+            <button nbButton status='primary' style="margin-right: 0.5rem;">Edit </button>
+            <button nbButton status='primary' outline style="background: transparent;">Close</button>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- Education Panel -->
+      <div class="col-md-8 col-xxl-8">
+
+      </div>
+
+      <!-- Document Panel -->
+      <div class="col-md-8 col-xxl-8">
+
+      </div>
+
+      <!-- References Panel -->
+
+      <div class="col-md-8 col-xxl-8">
+
+      </div>
+
+    </div>
+  </div>
+</ngx-side-modal>
+
+
+
+
+
+
+<ngx-side-modal [(show)]="showdeleteModal">
+  <div modal-header></div>
+  <div modal-body>
+    <nb-card>
+      <nb-card-body>
+        <div>
+          <div
+            style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
+            <div style="flex: auto; display: flex;padding-top: 15px;">
+              <p style=" text-transform: uppercase; font-weight: bold;">Delete Job Posting
+              </p>
+            </div>
+
+
+
+          </div>
+        </div>
+        <span style="padding: 10px;"></span>
+
+        <span></span>
+
+      <div>
+        <p>
+          Are you sure you want to delete this job posting? they will no longer be
+        </p>
+        <p>
+         accesible.
+        </p>
+
+      </div>
+
+
+      <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 8rem;">
+
+        <button nbButton status="primary" class="d-flex column" style="margin-left: -4rem;">Delete</button>
+        <button nbButton outline status="primary" class="d-flex column"
+            style="background-color: white; margin-left: 1.2rem;">Cancel</button>
+
+    </div>
+      </nb-card-body>
+
+
+    </nb-card>
+
+  </div>
+
+
+
+</ngx-side-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+<ngx-side-modal style="width: 500px;">
+  <div modal-header>
+
+  </div>
+
+</ngx-side-modal>

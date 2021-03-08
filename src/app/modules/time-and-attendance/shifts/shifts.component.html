@@ -1,0 +1,29 @@
+<ngx-componentsheader [pageName]="title" [requiredButton]="rbutton" (buttonClick)='modal($event)'></ngx-componentsheader>
+<nb-card >
+    <nb-card-body>
+
+        <nb-tabset>
+            <nb-tab tabTitle="Approved">
+                <ngx-tableheader></ngx-tableheader>
+
+                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+            </nb-tab>
+            <nb-tab tabTitle="Pending">
+                <ngx-tableheader></ngx-tableheader>
+
+                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+            </nb-tab>
+
+            <nb-tab tabTitle="Rejected">
+                <ngx-tableheader></ngx-tableheader>
+
+                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+            </nb-tab>
+        </nb-tabset>
+       
+    </nb-card-body>
+
+
+</nb-card>
+
+

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
-import { ColumnTypes, TableColumn, TableData, TableAction } from './models';
+import { ColumnTypes, TableColumn, TableData, TableAction, TableActionEvent } from './models';
 
 
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
@@ -41,23 +41,24 @@ export class NgbdSortableHeader {
     this.sort.emit({column: this.sortable, direction: this.direction});
   }
 }
-interface TableActionEvent {
-  name: string;
-  data: object;
-}
+
 @Component({
   selector: 'ngx-tablecomponent',
   templateUrl: './tablecomponent.component.html',
   styleUrls: ['./tablecomponent.component.scss']
 })
 export class TablecomponentComponent implements OnInit {
+  items = [
+    { title: 'Profile' },
+    { title: 'Logout' },
+  ];
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
   @Input() userData: [] = [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: TableAction[];
-  @Input() table2 = false;
+  // @Output() actionClicked = new EventEmitter<>();
   @Output() actionClick = new EventEmitter<TableActionEvent>();
   pageData = [];
   tableData = [];
@@ -83,6 +84,13 @@ export class TablecomponentComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   constructor() { }
+
+  customActionClicked(col, data){
+    this.actionClick.emit({
+      name: col.name,
+      data,
+    })
+  }
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers

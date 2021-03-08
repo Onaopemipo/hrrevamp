@@ -19,25 +19,34 @@
             </div>
           </td>
           <td *ngFor="let col of tableColum">
-            <span *ngIf="col.type === COLUMN_TYPES.Text">{{ data[col.name] }}</span>
+            <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === NULL">{{ data[col.name] }}</span>
             <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
             <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
+            <span *ngIf="col.type === COLUMN_TYPES.Link"> 
+              <button nbButton status='primary' outline style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;" (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
+            </span>
           </td>
           <td *ngIf="showActions">
             <ng-template #card>
               <div class="row">
                 <div class="col-sm-12">
                   <nb-list>
-                    <nb-list-item *ngFor="let act of actions">
+                    <nb-list-item *ngFor="let act of actions" (click)='customActionClicked(act, data)'>
                       {{ act.label }}
                     </nb-list-item>
                   </nb-list>
                 </div>
               </div>
             </ng-template>
-            <button nbButton status="primary" [nbPopover]="card">
-              Actions &nbsp;<nb-icon
-                icon="arrow-ios-downward-outline"
+            <button nbButton outline status="primary" [nbPopover]="card" 
+              style="
+                min-width: unset !important;
+                background: transparent;
+                border: none;
+                padding: 0px;
+              ">
+              <nb-icon
+                icon="activity-outline"
               ></nb-icon>
             </button>
           </td>

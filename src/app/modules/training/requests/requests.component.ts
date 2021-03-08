@@ -13,7 +13,7 @@ export class RequestsComponent implements OnInit {
   myButton: string = 'New Training';
   myRequestHeader = 'There is no request at the moment';
   myRequestDesc = 'Check back later';
-  requestData: string = 'wdd';
+  requestData: string = '';
   welcome: boolean = true;
 
   myTable: TableColumn [] = [

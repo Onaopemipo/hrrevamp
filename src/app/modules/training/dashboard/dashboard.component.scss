@@ -14,3 +14,9 @@
 .flex-child:first-child {
   margin-right: 5px;
 }
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+    }

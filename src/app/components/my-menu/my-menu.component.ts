@@ -42,10 +42,10 @@ export class MyMenuComponent extends NbMenuComponent {
   }
 
   onItemClick(item: NbMenuItem) {
-    this.router.navigate([item.link])
-    //console.log(item);
+    this.router.navigate([item.link]);
+    // console.log(item);
   }
- 
+
   // ngOnInit(): void {
   // }
 

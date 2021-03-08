@@ -11,10 +11,10 @@ export class EmployeeofferComponent implements OnInit {
   constructor(private router: Router) { }
   viewoffer() {
     this.beginSetup = false;
- 
+
   }
   acceptoffer() {
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
   ngOnInit(): void {
   }
