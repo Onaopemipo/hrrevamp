@@ -456,44 +456,7 @@
 
 </div>
 
-<ngx-componentsheader pageName='Settings'></ngx-componentsheader>
-<div *ngIf="createStage && createTemplate" class="row"
-  style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
-  <div class="col-md-4">
-    <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
-      <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
-      <div style="padding: 20px;">
-        <h6>Set Hiring Stages</h6>
-        <span>
-          Start by creating interview stages for prospective applicants.
-        </span>
-      </div>
-      <div style="padding: 20px;">
-        <button sty nbButton status="primary" (click)="createNew()" style="align-items: flex-start">Set Stages</button>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
-      <img src="assets/icons/template.jpg" style="margin: 20px; width:3rem;">
-      <div style="padding: 20px;">
-        <h6>Create Email Template</h6>
-        <span>
-          Create templates to make your hiring process faster.
-        </span>
-      </div>
-      <div style="padding: 20px;">
-        <button sty nbButton status="primary" (click)="createNew()" style="align-items: flex-start">Create
-          Templates</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
+<!-- Modal -->
 
 <ngx-side-modal [(show)]="showEditModal">
   <div modal-header>Edit Stage</div>
