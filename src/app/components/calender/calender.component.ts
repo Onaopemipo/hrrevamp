@@ -1,15 +1,16 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { Calendar} from '@fullcalendar/core'
-import dayGridPlugin from '@fullcalendar/daygrid'
-//import  timeGridPlugin  from '@fullcalendar/timegrid'
-import  listGridPlugin  from '@fullcalendar/list'
-class MySring{
-  a: String
+import { Calendar} from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+// import  timeGridPlugin  from '@fullcalendar/timegrid'
+import  listGridPlugin  from '@fullcalendar/list';
+class MySring {
+  a: String;
 
-  constructor(a: string){
+  constructor(a: string) {
     this.a = a;
   }
 }
+
 @Component({
   selector: 'ngx-calender',
   templateUrl: './calender.component.html',
@@ -23,11 +24,11 @@ export class CalenderComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     console.log(this);
     const $this = this;
-    var calendarEl = this.calendar.nativeElement;
-    var calendar = new Calendar(calendarEl, {
+    let calendarEl = this.calendar.nativeElement;
+    let calendar = new Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       dateClick: function(info) {
-        console.log(this)
+        console.log(this);
         $this.dateClick.emit();
       }
     });

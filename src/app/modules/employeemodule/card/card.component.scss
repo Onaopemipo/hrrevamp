@@ -1,0 +1,192 @@
+.special {
+    font-family: Rubik;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    color: #4847E0;
+    text-transform: capitalize;
+  
+  }
+  
+  .profileName {
+    font-family: Rubik;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    color: #080730, 100%;
+    letter-spacing: 0em;
+    text-align: left;
+  
+  }
+  
+  .WorkExperience {
+    padding-bottom: 20px;
+  }
+  
+  .evaluation-box {
+    left: 2px;
+  right: 0px;
+  top: 0px;
+  bottom: 3px;
+  Width: 353px;
+  Height: 263px;
+  background: rgba(72, 71, 224, 0.04);
+  border-radius: 4px;
+  }
+  
+  .experienceCompany {
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  
+  }
+  
+  .experienceTitle {
+    font-family: Rubik;
+    font-size: 18px;
+    font-style: italic;
+  }
+  
+  // .my-button {
+  //   // color: #4847E0, 100%;
+  //   text-transform: capitalize;
+  //   background: transparent;
+  //   border-radius: 1px;
+  //   border-color: #4847E0, 100%;
+  //   outline-color: #4847E0;
+  // }
+  
+  
+  .employmentDate {
+    color: #6C757D;
+    text-transform: uppercase;
+  }
+  
+  .q-connector {
+    position: relative;
+    &::before{
+        content: '';
+        width: 1.19rem;
+        height: 1.19rem;
+        background: #4847E033 0% 0% no-repeat padding-box;
+        border: 2px solid #4847E0;
+        opacity: 1;
+        border-radius: 50%;
+        display: block;
+    }
+    &::after {
+      margin:16px;
+      border-width: 0 0 0 2px;
+      top: 40%;
+    }
+  
+    &::after {
+      content: '';
+      left: -12px;
+      border-color: #4847E0;
+      border-style: dashed;
+      width: 9px;
+      height: calc(50% + 20px);
+      position: absolute;
+    }
+  
+  
+  }
+  
+  .q-connector-inactive {
+    position: relative;
+    &::before{
+        content: '';
+        width: 1.19rem;
+        height: 1.19rem;
+        background: #FFFFFF33 0% 0% no-repeat padding-box;
+        border: 2px solid #4847E0;
+        opacity: 1;
+        border-radius: 50%;
+        display: block;
+    }
+    &::after {
+      margin:16px;
+      border-width: 0 0 0 2px;
+      top: 39%;
+    }
+  
+    &::after {
+      content: '';
+      left: -12px;
+      border-color: #0a0a0a33;
+      border-style: dashed;
+      width: 9px;
+      height: calc(50% + 20px);
+      position: absolute;
+    }
+  
+  
+  }
+  
+  .last-q-connector{
+    position: relative;
+    &::before{
+        content: '';
+        width: 1.19rem;
+        height: 1.19rem;
+        background: #4847E033 0% 0% no-repeat padding-box;
+        border: 2px solid #4847E0;
+        opacity: 1;
+        border-radius: 50%;
+        display: block;
+    }
+  }
+  
+  .last-q-connector-inactive{
+  position: relative;
+  &::before{
+      content: '';
+      width: 1.19rem;
+      height: 1.19rem;
+      background: #FFFFFF33 0% 0% no-repeat padding-box;
+      border: 1px solid #4847E0;
+      opacity: 1;
+      border-radius: 50%;
+      display: block;
+  }
+  }
+  
+  .human{
+    margin: 0;
+    font-family:"Poppings",sans-serif;
+   background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    background-size: cover;
+    justify-content: center center;
+  }
+
+
+  .container{
+      padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .need{
+      display: flex;
+      flex-direction: row;
+      margin: 0.5rem;
+  }
+  .way p{
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      
+  }

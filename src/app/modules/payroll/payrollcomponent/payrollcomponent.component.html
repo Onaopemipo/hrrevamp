@@ -1,0 +1,54 @@
+<ngx-componentsheader pageName='Payroll Set-up' *ngIf="selectedCase == ''"></ngx-componentsheader>
+
+
+<div *ngIf="createStage && createTemplate" class="row"
+    style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+    <div class="col-md-4">
+        <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
+            <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
+            <div style="padding: 20px;">
+                <h6>Create a Payment Institution</h6>
+                <span>
+                    Click on the button to craete an Institution
+                </span>
+            </div>
+            <div style="padding: 20px;">
+                <button nbButton status="primary" (click)="createNew()" style="align-items: flex-start">continue</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
+            <img src="assets/icons/template.jpg" style="margin: 20px; width:3rem;">
+            <div style="padding: 20px;">
+                <h6>Set up a Pay Element</h6>
+                <span>
+                    Click on the button to create a new pay element.
+                </span>
+            </div>
+            <div style="padding: 20px;">
+                <button sty nbButton status="primary" (click)="createNew()" style="align-items: flex-start">continue</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
+            <img src="assets/icons/template.jpg" style="margin: 20px; width:3rem;">
+            <div style="padding: 20px;">
+                <h6>Set up a Pay Scale</h6>
+                <span>
+                    Click on the button to create a performance cycle.
+                </span>
+            </div>
+            <div style="padding: 20px;">
+                <button sty nbButton status="primary" (click)="createNew()" style="align-items: flex-start">
+                    continue</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>

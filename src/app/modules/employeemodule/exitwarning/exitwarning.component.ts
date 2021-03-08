@@ -12,7 +12,7 @@ export class ExitwarningComponent implements OnInit {
 
   ngOnInit(): void {
   }
-onClick(){
-this.router.navigateByUrl('/employeemodule/exitrequest')
+onClick() {
+this.router.navigateByUrl('/employeemodule/exitrequest');
 }
 }

@@ -17,7 +17,7 @@ export class BulkUploadComponent implements OnInit {
   @Input() icanName: string = '';
 
   constructor( private dialogService: NbDialogService) { }
-  
+
   openbulkUploadModal(dialog: TemplateRef<any>): Observable<any> {
     const newSubjectResponse = new Subject();
     this.dialogService.open(dialog,

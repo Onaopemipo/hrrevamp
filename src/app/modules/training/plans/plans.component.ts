@@ -2,7 +2,11 @@ import { TableColumn } from 'app/components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
+import { NbTabComponent } from '@nebular/theme';
 
+enum TABS {
+  pending = 'pending', approved = 'approved', declined = 'declined'
+}
 @Component({
   selector: 'ngx-plans',
   templateUrl: './plans.component.html',
@@ -36,7 +40,7 @@ export class PlansComponent implements OnInit {
   trainingCategory: boolean = true;
   category = 'Internal';
 
-  TrainingPlanData = 'cdd';
+  TrainingPlanData = '';
   // TrainingPlanq = '';
 
   addVendor = 'Add New Vendor';
@@ -62,8 +66,9 @@ export class PlansComponent implements OnInit {
   }
 
   addTrainingPlan() {
-    this.newTrainingWindow = true;
+    // this.newTrainingWindow = true;
     this.welcome = false;
+    this.showModal = true;
   }
 
   uploadVendor() {
@@ -75,10 +80,21 @@ export class PlansComponent implements OnInit {
   addNewTraining() {
     this.newTrainingType = true;
     this.trainingType = false;
+    this.showModal = true;
   }
 
   changed(data) {
 
+  }
+
+  TABS = TABS;
+  selectedTab = TABS.pending;
+  showModal = false;
+
+  tabSelected(tab: NbTabComponent) {
+    const b: any = tab.tabId;
+    console.log(tab);
+    this.selectedTab = b;
   }
 }
 

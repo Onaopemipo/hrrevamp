@@ -13,7 +13,7 @@ export class CreateshiftComponent implements OnInit {
     { name: 'c', title: 'Shift 2 (15:39:20 - 15:45:23)' },
     { name: 'd', title: 'Shift 3 (15:39:20 - 15:45:23)' },
     { name: 'e', title: 'Shift 4 (15:39:20 - 15:45:23)' },
-  
+
   ];
   setPeriodtableColumns = [
     { name: 'a', title: 'Name' },
@@ -21,7 +21,7 @@ export class CreateshiftComponent implements OnInit {
     { name: 'c', title: 'Clock-Out Time' },
     { name: 'd', title: 'Lateness Permit' },
     { name: 'e', title: 'Overtime' },
-  
+
   ];
   constructor() { }
 

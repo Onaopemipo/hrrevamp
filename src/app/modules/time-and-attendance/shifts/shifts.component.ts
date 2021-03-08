@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class ShiftsComponent implements OnInit {
   title: string = 'Shifts';
   rbutton = [
-    { name: 'new_shift', label: 'New Shift', icon: 'plus', outline: false }, 
-    
+    { name: 'new_shift', label: 'New Shift', icon: 'plus', outline: false },
+
   ];
   tableColumns = [
     { name: 'a', title: 'S/N' },
@@ -23,8 +23,8 @@ export class ShiftsComponent implements OnInit {
 
   constructor(private router: Router) { }
   modal(button) {
-    if (button == "new_shift") {
-    this.router.navigate(['timeandattendance/timeandattendance/createshifts'])
+    if (button == 'new_shift') {
+    this.router.navigate(['timeandattendance/timeandattendance/createshifts']);
     }
 
   }

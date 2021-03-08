@@ -1,7 +1,12 @@
+import { NbTabComponent } from '@nebular/theme';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
+import { TAB } from '@angular/cdk/keycodes';
 
+enum TABS {
+  vendors = 'vendor', types = 'type'
+}
 @Component({
   selector: 'ngx-administration',
   templateUrl: './administration.component.html',
@@ -23,7 +28,7 @@ export class AdministrationComponent implements OnInit {
   category = 'Internal';
 
   TrainingTypeData = '';
-  TrainingVendorData = 'AAAA';
+  TrainingVendorData = '';
 
   addVendor = 'Add New Vendor';
   addType = 'Add Training Type';
@@ -51,8 +56,16 @@ export class AdministrationComponent implements OnInit {
   }
 
   addTraining() {
-    this.newTraining = true;
-    this.welcome = false;
+    if (this.selectedTab == TABS.vendors) {
+      console.log('Vendors');
+      this.newTraining = true;
+      this.welcome = false;
+    } else {
+      console.log('Types');
+      this.newTrainingType = true;
+      this.trainingType = false;
+    }
+
   }
 
   uploadVendor() {
@@ -68,5 +81,19 @@ export class AdministrationComponent implements OnInit {
 
   changed(data) {
 
+  }
+
+
+  TABS = TABS;
+  selectedTab = TABS.vendors;
+
+  tabSelected(tab: NbTabComponent) {
+    const b: any = tab.tabId;
+    console.log(tab);
+    this.selectedTab = b;
+  }
+
+  get rButton() {
+    return [{name: 'newVendor', label: this.selectedTab == TABS.vendors ? 'New Vendor' : 'New Type', icon: 'plus'}];
   }
 }

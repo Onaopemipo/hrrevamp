@@ -16,7 +16,7 @@ export class MyattendanceComponent implements OnInit {
     { name: 'f', title: 'Clock Out Iime' },
     { name: 'e', title: 'Lateness' },
     { name: 'e', title: 'Overtime' },
-  
+
   ];
   constructor() { }
 
