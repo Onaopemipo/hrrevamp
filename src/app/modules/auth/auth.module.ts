@@ -11,9 +11,11 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbInputModule,
+  NbAlertModule
 } from '@nebular/theme';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
+import { AlertserviceService } from 'app/_services/alertservice.service';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { SignupComponent } from './signup/signup.component';
     NbCheckboxModule,
     NbInputModule,
     NbIconModule,
-    ComponentsModule
-  ]
+    ComponentsModule,
+    NbAlertModule
+  ],
+  providers: [AlertserviceService]
 })
 export class AuthModule { }

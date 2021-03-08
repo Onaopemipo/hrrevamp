@@ -5,6 +5,37 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthenticationService } from 'app/_services/authentication.service';
+
+@Component({
+  selector: 'ngx-user-listCard',
+  template: `
+    <nb-card class="popover-card">
+      <nb-card-body>
+      <nb-list>
+      <nb-list-item (click)="btnAction(userm.title)" *ngFor="let userm of userMenu" style="border-bottom: none !important;border-top: none !important; cursor:pointer">
+        {{ userm.title }}
+      </nb-list-item>
+    </nb-list>
+      </nb-card-body>
+    </nb-card>
+  `,
+  styles: [`
+    nb-card {
+      margin: 0;
+      min-width: 10px
+    }
+  `],
+})
+export class NgxUserlistCardComponent {
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  constructor(private AuthenService: AuthenticationService,) { }
+  btnAction(btnact) {
+    if (btnact == 'Log out') {
+      this.AuthenService.clearusers();
+    }
+  }
+}
 
 @Component({
   selector: 'ngx-header',
@@ -16,7 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = true;
   user: any;
-
+  cardComponent = NgxUserlistCardComponent;
   themes = [
     {
       value: 'default',
@@ -45,7 +76,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+    private breakpointService: NbMediaBreakpointsService,
+  
+    ) {
   }
 
   ngOnInit() {
@@ -70,6 +103,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe(themeName => this.currentTheme = themeName);
   }
+ 
 
   ngOnDestroy() {
     this.destroy$.next();

@@ -20,6 +20,9 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from '../../@theme/theme.module';
 
+import Flow from '@flowjs/flow.js';
+import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+
 import { EmployeemoduleRoutingModule } from './employeemodule-routing.module';
 import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
 import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
@@ -45,6 +48,9 @@ import { DeploymentviewComponent } from './deploymentview/deploymentview.compone
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
 import { CardComponent } from './card/card.component';
+import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
+import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
+import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 
 
 
@@ -73,6 +79,9 @@ import { CardComponent } from './card/card.component';
     DeploymentviewComponent,
     ManagementviewComponent,
     DeploymentapplicationComponent,
+    EmployeerecordsComponent,
+    EmployeerecordsviewComponent,
+    EmployeerbulkaddComponent,
     CardComponent],
   imports: [
     CommonModule,
@@ -92,9 +101,15 @@ import { CardComponent } from './card/card.component';
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,
-
+    NbDialogModule,  
+    NgxFlowModule
+    
   ],
-
+  providers: [
+    {
+      provide: FlowInjectionToken,
+      useValue: Flow,
+    },
+]
 })
 export class EmployeemoduleModule { }

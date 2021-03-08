@@ -27,6 +27,11 @@ const routes: Routes = [{
       .then( m => m.SelfServiceModule )
     },
     {
+      path: 'payroll',
+      loadChildren: () => import('../modules/payroll/payroll.module')
+      .then( m => m.PayrollModule )
+    },
+    {
       path: 'communications',
       loadChildren: () => import('../modules/communication/communication.module')
         .then(m => m.CommunicationModule)
@@ -71,6 +76,16 @@ const routes: Routes = [{
       path: 'timeandattendance',
       loadChildren: () => import('./time-and-attendance/time-and-attendance.module')
       .then(m => m.TimeAndAttendanceModule)
+    },
+    {
+      path: 'discipline',
+      loadChildren: () => import('./disciplinary-management/disciplinary-management.module')
+      .then(m => m.DisciplinaryManagementModule)
+    },
+    {
+      path: 'performance',
+      loadChildren: () => import('./performance/performance.module')
+      .then(m => m.PerformanceModule)
     },
 
     {

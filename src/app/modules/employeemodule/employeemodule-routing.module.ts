@@ -23,10 +23,12 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
+import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
 import { CardComponent } from './card/card.component';
 
-
-
+import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
+import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
+import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 
 const routes: Routes = [
   {
@@ -105,35 +107,53 @@ const routes: Routes = [
 
         {
           path: 'eligiblelist',
-          component:AnothereligibilitylistComponent
+          component: AnothereligibilitylistComponent
         },
 
         {
           path: 'employeedeployment',
-          component:EmployeedeploymentmanagementComponent
+          component: EmployeedeploymentmanagementComponent
         },
 
         {
           path: 'managementview',
-          component:ManagementviewComponent
+          component: ManagementviewComponent
         },
 
         {
           path: 'deploymentview',
-          component:DeploymentviewComponent
+          component: DeploymentviewComponent
         },
 
         {
           path: 'card',
-          component:CardComponent
+          component: CardComponent
         },
 
 
         {
           path: 'deploymentapplication',
           component:DeploymentapplicationComponent
-        },
+        },  
 
+        
+        {
+          path: 'employeerecords',
+          component:EmployeerecordsComponent
+        },
+        
+        {
+          path: 'viewemployeerecords',
+          component:EmployeerecordsviewComponent
+        },  
+        {
+          path: 'employeebulkupload',
+          component: EmployeerbulkaddComponent
+        },
+        {
+          path: 'employeepersonalinformation',
+             component:EmployeepersonalinformationComponent
+           },
         {
           path: '',
           redirectTo: 'dashboard',

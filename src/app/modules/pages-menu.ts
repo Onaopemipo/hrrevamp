@@ -29,7 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'My Profile',
-        link: '/myprofile',
+        link: '/employeemodule/viewemployeerecords',
       },
       {
         title: 'My Leave',
@@ -69,6 +69,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Promotion',
         link: '/employeemodule/promotion',
       },
+      {
+        title: 'Employee Records',
+        link: '/employeemodule/employeerecords',
+      },
+
     ]
   },
   {
@@ -93,11 +98,47 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Performance Management',
     link: '/',
     icon: '/assets/icons/PerformanceAppraisals.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: '/performance'
+      },
+      {
+        title: 'Cycle',
+        link: '/performance/cycle'
+      },
+      {
+        title: 'Key Result Area',
+        link: '/performance/kra'
+      },
+      {
+        title: 'Appraisal',
+        link: '/performance/appraisals'
+      },
+      {
+        title: 'Rating',
+        link: '/performance/rating'
+      },
+      {
+        title: 'Score Card',
+        link: '/performance/score-card'
+      },
+    ]
   },
   {
     title: 'Disciplinary Management',
     link: '/',
     icon: '/assets/icons/DisciplinaryManagement.jpg',
+    children: [
+      {
+        title: 'Settings',
+        link: '/discipline'
+      },
+      {
+        title: 'Log',
+        link: '/discipline/log'
+      },
+    ]
   },
   {
     title: 'Onboarding',
@@ -208,8 +249,33 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Payroll',
-    link: '/',
     icon: '/assets/icons/Payroll.jpg',
+    children: [
+      {
+        title: 'Institution Management',
+        link:'/'
+      },
+      {
+        title: 'Pay Elements',
+        link:'/'
+      },
+      {
+        title: 'Pay Scale',
+        link:'/'
+      },
+      {
+        title: 'Quick Payroll',
+        link:'/'
+      },
+      {
+        title: 'Payroll Run Log',
+        link:'/'
+      },
+      {
+        title: 'Report',
+        link:'/'
+      },
+    ]
   },
   {
     title: 'Expenses',

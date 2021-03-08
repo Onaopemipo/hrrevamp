@@ -1,0 +1,21 @@
+:host{
+    // margin-left: 1rem;
+    padding-top: 0;
+    display: block;
+    margin-top: -2rem;
+}
+:host > div{
+    height: auto !important;
+    margin-top: 2rem;
+}
+
+.create  h4{
+    display: none;
+}
+
+h4{
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2rem;
+}

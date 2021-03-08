@@ -1,0 +1,142 @@
+<div [class]="classes">
+    <div *ngIf="!createNew">
+        <div style="display: flex;">
+            <h4 style="flex: auto;">Interview Invite</h4>
+            <div>
+                <button nbButton status='primary' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="showDetail()">Edit</button>
+                <button  nbButton status='danger' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;">Delete</button>
+            </div>
+        </div>
+            <div class="linear-form" *ngIf="showDetails">
+                <div class="form-group">
+                    <label>Discipline Type</label>
+                    <select class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Body</label>
+                    <ngx-wysisyg-input></ngx-wysisyg-input>
+                </div>
+                <div class="form-group">
+                    <label>Default duration</label>
+                    <select class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Attachment</label>
+                    <ngx-file-upload></ngx-file-upload>
+                </div>
+                <div class="form-group">
+                    <label>Present Location</label>
+                    <select class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Proposed Grade</label>
+                    <select class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <div>
+                        <input type='checkbox'>
+                        <span style="margin-left: 1rem">Allow Comment</span>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div [class]="classes" *ngIf="showDetails">
+    <div>
+        <div style="display: flex;">
+            <h4 style="flex: auto;">Plan Information</h4>
+        </div>
+        <div class="linear-form">
+            <div class="form-group">
+                <label>Plan Reason</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>PIR Purpose</label>
+                <input class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Scoring scale</label>
+                <ngx-wysisyg-input></ngx-wysisyg-input>
+            </div>
+            <div class="form-group">
+                <label>Default duration</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Action Point</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <button nbButton outline style="border: none;" status='primary'>
+                    <nb-icon icon='plus'></nb-icon>
+                    Add
+                </button>
+            </div>
+            <div class="form-group">
+                <label>Start Date</label>
+                <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+                <label>End Date</label>
+                <ngx-file-upload></ngx-file-upload>
+            </div>
+            <div class="form-group">
+                <label>Review Frequency</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Goal</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Special Need</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Failed goal action</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <div>
+                    <button nbButton status='primary'>Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [class]="classes" *ngIf="showDetails">
+    <div>
+        <div style="display: flex;">
+            <h4 style="flex: auto;">Rules </h4>
+        </div>
+        <div class="linear-form">
+            <div class="form-group">
+                <label>Demotion</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <button nbButton outline status='primary' style="border: none;">
+                    <nb-icon icon='plus'></nb-icon>
+                    Add rule
+                </button>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <div>
+                    <button nbButton status='primary'>Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

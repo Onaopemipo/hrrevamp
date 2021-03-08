@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableColumn } from 'app/components/tablecomponent/models';
 
 @Component({
@@ -20,7 +21,9 @@ export class EmployeeViewComponent implements OnInit {
   ];
 
   showModal = false;
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -30,6 +33,9 @@ export class EmployeeViewComponent implements OnInit {
     this.selectedTab = tab;
   }
   topActionClicked() {
+    this.router.navigateByUrl('/benefit/add-benefit')
+  }
+  showAddModal(){
     this.showModal = true;
   }
 
