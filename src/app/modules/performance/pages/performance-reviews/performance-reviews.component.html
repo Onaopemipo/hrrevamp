@@ -1,0 +1,14 @@
+<ngx-componentsheader
+          pageName="Performance Review"
+          [requiredButton]="topActionButtons"
+          (buttonClick)="pageActionClicked($event)"
+        ></ngx-componentsheader><div class="main-page-container"><ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader><ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Cycle" pageDescription="Click on the button to create a performance cycle" buttonValue="Create Cycle" (buttonClick)="createNewClicked()">
+    </ngx-default-content>
+      <ngx-tablecomponent
+        *ngIf="!showEmpty"
+        [tableColum]="tableColumns"
+        [userData]="tableData"
+        [loading]="loading"
+        (pageChange)="loadNewPage($event)"
+      ></ngx-tablecomponent>
+    </div>

@@ -1,0 +1,108 @@
+<ngx-componentsheader pageName="Performance Review"></ngx-componentsheader>
+
+<div class="main-page-container">
+    <div>
+        <div class="row summary">
+            <div class="col-sm-4">
+                <div>Employee Name</div>
+                <div>kwame eugene</div>
+            </div>
+            <div class="col-sm-4">
+                <div>Department</div>
+                <div>kwame eugene</div>
+            </div>
+            <div class="col-sm-4">
+                <div>Position</div>
+                <div>kwame eugene</div>
+            </div>
+            <div class="col-sm-4">
+                <div>Reviewer Name</div>
+                <div>kwame eugene</div>
+            </div>
+            <div class="col-sm-4">
+                <div>Reviewer Title</div>
+                <div>kwame eugene</div>
+            </div>
+            <div class="col-sm-4">
+                <div>Last appraised date</div>
+                <div>kwame eugene</div>
+            </div>
+            <div class="col-sm-4">
+                <div>Period under review</div>
+                <div>kwame eugene</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #15157A30; margin-top: 2rem; margin-bottom: 2rem;">
+        <div style="font-weight: bold; padding: 0.5rem;">
+            Appraisal module deployment
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Employee Score</th>
+                    <th>Employee Comment</th>
+                    <th>Reviewer Score</th>
+                    <th>Reviewer Comment</th>
+                    <th>Average Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let a of [1,2,3,4,5]'>
+                    <td>System Design</td>
+                    <td>40</td>
+                    <td>Good</td>
+                    <td>40</td>
+                    <td>Good</td>
+                    <td>40</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: right;">
+                        Total
+                    </td>
+                    <td>40</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div>
+        <div class="linear-form">
+            <div class="form-group">
+                <label>Employee's Comment</label>
+                <input class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Reviewer's Comment</label>
+                <input class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Recommendations</label>
+                <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <div>
+                    <button nbButton status='primary' outline style="border: none;">
+                        <nb-icon icon='plus'></nb-icon>
+                        Add more
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <div>
+                    <button nbButton status='primary'>
+                        Submit
+                    </button>
+                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

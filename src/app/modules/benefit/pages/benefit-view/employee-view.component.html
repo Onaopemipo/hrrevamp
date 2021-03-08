@@ -72,23 +72,23 @@
         </div>
         <div class="form-group">
           <label>Apply Policy Number to all Plans</label>
-          <input class="form-control" />
+          <input class="form-control"  type="checkbox"/>
         </div>
         <div class="form-group">
           <label>HSA Compatible</label>
-          <input class="form-control" />
+          <input class="form-control"  type="checkbox"/>
         </div>
         <div class="form-group">
           <label>Plan State</label>
-          <input class="form-control" />
+          <button nbButton outline status='primary' class="underlined-button">View Benefit Summary</button>
         </div>
         <div class="form-group">
           <label>Available Out of State</label>
-          <input class="form-control" />
+          <input class="form-control"  type="checkbox"/>
         </div>
         <div class="form-group">
           <label>Use Employee Zip Code for Plan Availability</label>
-          <input class="form-control" />
+          <input class="form-control"  type="checkbox"/>
         </div>
         <div class="form-group">
           <label></label>
@@ -109,7 +109,7 @@
     <div class="multi-card-page" *ngIf="selectedTab == 3">
       <div class="card">
         <h4>Enrollment Summary</h4>
-        <ngx-tablecomponent [tableColum]="columns"></ngx-tablecomponent>
+        <ngx-tablecomponent [tableColum]="columns" [table2]='true'></ngx-tablecomponent>
       </div>
       <div class="card">
         <div style="display: flex; justify-content: space-between">
@@ -148,7 +148,7 @@
         </div>
 
         <h5>Cost and Contribution</h5>
-        <ngx-tablecomponent></ngx-tablecomponent>
+        <ngx-tablecomponent [table2]='true'></ngx-tablecomponent>
         <div>
           <button
             nbButton
