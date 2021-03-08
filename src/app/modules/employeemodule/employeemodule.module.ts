@@ -81,7 +81,7 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
     DeploymentapplicationComponent,
     EmployeerecordsComponent,
     EmployeerecordsviewComponent,
-    EmployeerbulkaddComponent],
+    EmployeerbulkaddComponent,
     CardComponent],
   imports: [
     CommonModule,
