@@ -32,7 +32,7 @@
     </div>
 
   <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
-    <div class="fmContainer" *ngSwitchCase="'Role_Details'" style="background-color: transparent;">
+    <div class="fmContainer" style="background-color: transparent;">
       <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
         <nb-card class="cardTitle" (click)="toggleCard('role_details')" #role_details>
             <nb-card-body>
@@ -189,18 +189,8 @@
 
     </div>
 
-    <div #scase [ngSwitch]="selectedCase">
-
-      <!-- <div class="fmContainer" *ngSwitchCase="'Cadre'">
-
-        <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;" >
-          <nb-card class="cardTitle" (click)="toggleCard('cadre')" #cadre>
-            <h1>Hello Boss</h1>
-          </nb-card>
-      </div>
-
-      </div> -->
-    </div>
+    <!-- <div #scase [ngSwitch]="selectedCase">
+    </div> -->
   </div>
 </div>
 
