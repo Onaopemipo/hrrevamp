@@ -94,6 +94,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: '/assets/icons/PerformanceAppraisals.jpg',
     children: [
       {
+        title: 'Dashboard',
+        link: '/performance'
+      },
+      {
         title: 'Cycle',
         link: '/performance/cycle'
       },
@@ -101,12 +105,34 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Key Result Area',
         link: '/performance/kra'
       },
+      {
+        title: 'Appraisal',
+        link: '/performance/appraisals'
+      },
+      {
+        title: 'Rating',
+        link: '/performance/rating'
+      },
+      {
+        title: 'Score Card',
+        link: '/performance/score-card'
+      },
     ]
   },
   {
     title: 'Disciplinary Management',
     link: '/',
     icon: '/assets/icons/DisciplinaryManagement.jpg',
+    children: [
+      {
+        title: 'Settings',
+        link: '/discipline'
+      },
+      {
+        title: 'Log',
+        link: '/discipline/log'
+      },
+    ]
   },
   {
     title: 'Onboarding',
