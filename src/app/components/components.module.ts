@@ -207,7 +207,7 @@ import { alertmodalComponent } from '../_services/alertservice.service';
     NbInputModule,
     CalenderComponent,
     BulkUploadComponent,
-    alertmodalComponent
+    alertmodalComponent,
     EmployeeListComponent,
   ],
 })
