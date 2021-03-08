@@ -159,17 +159,19 @@
           </div>
         </div>
         <div>
+          <div>
             <button nbButton outline status="primary" style="border: none;">
-                <nb-icon icon="plus"></nb-icon>
-                Add
-            </button>
+              <nb-icon icon="plus"></nb-icon>
+              Add
+          </button>
+          </div>
           </div>
       </div>
     </div>
     <div class="multi-card-page" *ngIf="selectedTab !== 1">
       <div class="card">
         <h4>Enrollment Summary</h4>
-        <ngx-tablecomponent [tableColum]="columns"></ngx-tablecomponent>
+        <ngx-tablecomponent [tableColum]="columns" [table2]='true'></ngx-tablecomponent>
       </div>
       <div class="card" *ngIf="selectedTab == 2">
         <div style="display: flex; justify-content: space-between;">
@@ -208,9 +210,9 @@
 
   
         <h5>Cost and Contribution</h5>
-        <ngx-tablecomponent></ngx-tablecomponent>
+        <ngx-tablecomponent [table2]='true'></ngx-tablecomponent>
         <div>
-          <button nbButton outline status='primary' style="border: none; width: unset;">
+          <button nbButton outline status='primary' style="border: none; width: unset;" (click)="showAddModal()">
             <nb-icon icon='plus'></nb-icon>
             <span>Add</span>
           </button>

@@ -77,6 +77,22 @@ const routes: Routes = [{
       loadChildren: () => import('./time-and-attendance/time-and-attendance.module')
       .then(m => m.TimeAndAttendanceModule)
     },
+    {
+      path: 'discipline',
+      loadChildren: () => import('./disciplinary-management/disciplinary-management.module')
+      .then(m => m.DisciplinaryManagementModule)
+    },
+    {
+      path: 'performance',
+      loadChildren: () => import('./performance/performance.module')
+      .then(m => m.PerformanceModule)
+    },
+
+    {
+      path: 'career-succession',
+      loadChildren: () => import('./career-succession/career-succession.module')
+      .then(m => m.CareerSuccessionModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

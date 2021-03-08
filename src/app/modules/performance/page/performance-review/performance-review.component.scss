@@ -1,0 +1,32 @@
+.summary>div>div:nth-child(1){
+    color: #343A40;
+}
+
+.summary>div>div:nth-child(2){
+    font-weight: bold;
+}
+
+.summary > div{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.summary {
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+}
+
+table{
+    width: 100%;
+}
+thead{
+    background-color: #4847E0;
+    color: white;
+}
+table, th, td, tr{
+    border: 1px solid #15157A30;
+    border-collapse: collapse;
+}
+th, td{
+    padding: 0.3rem;
+}
