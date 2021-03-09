@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { 
 
+  FetchLeavePlanServiceProxy, LeavePlanResource} from '../../../_services/service-proxies';
 enum TOP_ACTIONS {
   APPLY_FOR_LEAVE,
   ADD_PLAN
@@ -11,6 +13,15 @@ enum TOP_ACTIONS {
   styleUrls: ['./leave-plan.component.scss']
 })
 export class LeavePlanComponent implements OnInit {
+  filter = {
+    is_approved: 1,
+    year_id: 1,
+    empno: '0',
+    start_date: '',
+    end_date: '',
+    page_size: 20,
+    page_no: 1
+  }
 
   get hel() {
     return 'me';
@@ -31,10 +42,24 @@ export class LeavePlanComponent implements OnInit {
   get showFirstName() {
     return this.selectedOption === '1';
   }
-  constructor() { }
-
+  constructor(private FetchLeavePlanServiceProxy: FetchLeavePlanServiceProxy) { }
+  data: LeavePlanResource[] = [];
   ngOnInit(): void {
+    this.getleavePlan()
   }
+  getleavePlan(){
+    this.FetchLeavePlanServiceProxy.fetchleaveplans(this.filter.is_approved,
+      this.filter.year_id,
+      this.filter.empno,
+      this.filter.start_date,
+      this.filter.end_date,
+      this.filter.page_size,
+      this.filter.page_no
+    ).subscribe(data => {
+      this.data = data.result;
+    })
+  }
+
   showAddPlanModal = false;
   showLeavePlanModal = false;
   selectedOption = '1';
