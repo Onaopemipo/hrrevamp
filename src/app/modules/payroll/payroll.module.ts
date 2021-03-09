@@ -25,10 +25,11 @@ import { PayrollComponent } from './payroll.component';
 import { PayrollcomponentComponent } from './payrollcomponent/payrollcomponent.component';
 import { PaymentcreateComponent } from './paymentcreate/paymentcreate.component';
 import { InstitutionalmanagementComponent } from './institutionalmanagement/institutionalmanagement.component';
+import { PaymenysetupComponent } from './paymenysetup/paymenysetup.component';
 
 
 @NgModule({
-  declarations: [PayrollComponent, PayrollcomponentComponent, PaymentcreateComponent, InstitutionalmanagementComponent],
+  declarations: [PayrollComponent, PayrollcomponentComponent, PaymentcreateComponent, InstitutionalmanagementComponent, PaymenysetupComponent],
   imports: [
     ComponentsModule,
     CommonModule,
