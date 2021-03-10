@@ -4,11 +4,11 @@ import { ComponentsModule } from 'app/components/components.module';
 import { LeaveRoutingModule } from './leave.routing.module';
 import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { FormsModule } from '@angular/forms';
-import { NbCheckboxModule} from '@nebular/theme';
+import { NbCheckboxModule, NbDatepickerModule } from '@nebular/theme';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
-import { 
-  LeaveEntitlementServiceProxy, 
+import {
+  LeaveEntitlementServiceProxy,
   LeaveplaneEventServiceProxy,
   FetchLeavePlanServiceProxy} from '../../_services/service-proxies';
 
@@ -19,8 +19,8 @@ import {
     ComponentsModule,
     LeaveRoutingModule,
     FormsModule,
-    NbCheckboxModule ,
-
+    NbCheckboxModule,
+    NbDatepickerModule
 
   ],
   providers: [

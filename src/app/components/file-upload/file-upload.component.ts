@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 
 @Component({
@@ -8,6 +8,7 @@ import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 })
 export class FileUploadComponent implements OnInit {
 
+  @Input() inputText: string;
   constructor() { }
 
   ngOnInit(): void {

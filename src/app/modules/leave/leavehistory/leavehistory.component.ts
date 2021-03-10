@@ -1,3 +1,4 @@
+import { CreateLeaveByAdminServiceProxy, LeaveRequestPayload, PostServiceProxy, LeavePlanDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TOP_ACTIONS {
@@ -12,7 +13,7 @@ enum TOP_ACTIONS {
   styleUrls: ['./leavehistory.component.scss']
 })
 export class LeavehistoryComponent implements OnInit {
-  LeaveHistory: string = 'Leave History';
+
   topActionButtons = [
     { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Apply For Leave', 'icon': 'plus', outline: true },
     { name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false },
@@ -28,9 +29,18 @@ export class LeavehistoryComponent implements OnInit {
     { name: 'd', title: 'Days Remaining' },
   ];
 
+
+  LeaveHistory: string = 'Leave History';
+  leavePlanModel: LeavePlanDTO = new LeavePlanDTO().clone();
+  leaveRequestModel: LeaveRequestPayload = new LeaveRequestPayload().clone();
+  allPlans:{} = {};
+  thisDay: Date = new Date();
+
   constructor() { }
 
   ngOnInit(): void {
+    this.updateCalcs;
+    console.log(this.thisDay);
 
   }
 
@@ -46,11 +56,23 @@ export class LeavehistoryComponent implements OnInit {
   showLeavePlanModal = false;
 
 
-  // checked = false;
+  updateCalcs(event){
+    console.log(event);
+  }
 
   toggle(checked: boolean) {
     // this.checked = checked;
     // }
+  }
+
+  getHistory(){
+    // this.newLeave.createleavebyadmin()
+  }
+
+  createLeavePlan(){
+    // this.plan.createleaveplan(this.leavePlanModel)._subscribe(data => {
+    //   this.allPlans = data.result;
+    // })
   }
 }
 

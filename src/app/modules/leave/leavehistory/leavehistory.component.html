@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='LeaveHistory' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader pageName='Leave History' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 
 </ngx-componentsheader>
 
@@ -11,47 +11,58 @@
 <ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px;">
     <div modal-header>Apply For Leave</div>
     <div modal-body>
-        <form action="">
-
-
+        <form #myLeaveForm="ngForm" name="myLeaveForm">
             <div class="form-group">
                 <label for="Title" style="font-size: small;font-weight: bold;">Employee Number:</label>
-                <input type="text" class="form-control" placeholder="Enter Phone Number" id="Title">
-            </div>
-            <div class="form-group">
-                <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee Name:</label>
-                <input type="number" class="form-control" placeholder="Enter Employee Name" id="Employee Name">
-            </div>
+                <ngx-employee-master-search></ngx-employee-master-search>
+                <!-- <input type="text" class="form-control" placeholder="Enter Phone Number" name="employeeNum" #employeeNum="ngModel" [(ngModel)]="leaveRequestModel.employeeID" required> -->
+                <!-- <div *ngIf="employeeNum.invalid && (employeeNum.dirty || employeeNum.touched)" class="error">
+                  <div *ngIf="employeeNum.errors.required">Employee ID is required</div>
+              </div> -->
+              </div>
 
             <div class="form-group">
                 <label for="Leave Year" style="font-size: small;font-weight: bold;">Leave Year:</label>
-                <input type="number" class="form-control" placeholder="Enter Leave Year" id="Leave Year">
-            </div>
+                <input type="number" class="form-control" placeholder="Enter Leave Year" name="leaveYear" #leaveYear="ngModel" [(ngModel)]="leaveRequestModel.leaveYearID" required>
+                <div *ngIf="leaveYear.invalid && (leaveYear.dirty || leaveYear.touched)" class="error">
+                  <div *ngIf="leaveYear.errors.required">Leave year is required</div>
+              </div>
+              </div>
 
             <div class="form-group">
                 <label for="Leave Type" style="font-size: small;font-weight: bold;">Leave Type:</label>
-                <input type="number" class="form-control" placeholder="Enter Leave Type" id="Leave Type">
-            </div>
+                <input type="number" class="form-control" placeholder="Enter Leave Type" name="leaveType" #leaveType="ngModel" [(ngModel)]="leaveRequestModel.leaveTypeID" required>
+                <div *ngIf="leaveType.invalid && (leaveType.dirty || leaveYear.touched)" class="error">
+                  <div *ngIf="leaveType.errors.required">Leave type is required</div>
+              </div>
+              </div>
             <div class="form-group">
                 <label for="Start Date" style="font-size: small;font-weight: bold;">Start Date:</label>
-                <input type="number" class="form-control" placeholder="Enter Start Date" id="Start Date">
-            </div>
+                <input type="date" class="form-control" placeholder="Enter Start Date" [min]="thisDay" name="startDate" #startDate="ngModel" [(ngModel)]="leaveRequestModel.startDate" required>
+                <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="error">
+                  <div *ngIf="startDate.errors.required">Start date is required</div>
+              </div>
+              </div>
             <div class="form-group">
                 <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
-                <input type="number" class="form-control" placeholder="Enter Number of Days" id="Number of Days">
-            </div>
+                <input type="number" class="form-control" placeholder="Enter Number of Days" name="numDays" #numDays="ngModel" [(ngModel)]="leaveRequestModel.noOfDays" required>
+                <div *ngIf="numDays.invalid && (numDays.dirty || numDays.touched)" class="error">
+                  <div *ngIf="numDays.errors.required">Number of is required</div>
+              </div>
+              </div>
             <div class="form-group">
                 <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Contact Info On
                     Leave:</label>
-                <input type="number" class="form-control" placeholder="Enter Contact-info" id="Contact Info">
-            </div>
+                <input type="number" class="form-control" placeholder="Enter Contact-info" name="leaveContact" #leaveContact="ngModel" [(ngModel)]="leaveRequestModel.contactInfoOnLeave" required>
+                <div *ngIf="leaveContact.invalid && (leaveContact.dirty || leaveContact.touched)" class="error">
+                  <div *ngIf="leaveContact.errors.required">Contact on leave is required</div>
+                </div>
+              </div>
             <div class="form-group">
-                <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Contact Info On
-                    Leave:</label>
-                <input type="number" class="form-control" placeholder="Enter Contact-info" id="Contact Info">
-            </div>
-
-
+                <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Relief Office Staff ID:</label>
+                <!-- <input type="number" class="form-control" placeholder="Enter Contact-info" name="contactInfo" #contactInfo="ngModel" [(ngModel)]="leaveRequestModel.reliefOfficerId" required> -->
+                <ngx-employee-master-search></ngx-employee-master-search>
+              </div>
 
         </form>
     </div>
@@ -59,9 +70,7 @@
     <div modal-actions class="d-flex mb-5">
         <button nbButton status="primary" class="d-flex column">Submit</button>
         <button nbButton outline status="primary" class="d-flex column">Discard</button>
-        <button class="d-flex column Attach">
-            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
-            Attach</button>
+        <!--   -->
 
     </div>
     <div style="margin-top: 15px;"></div>
@@ -71,30 +80,42 @@
 <ngx-side-modal [(show)]='showLeavePlanModal' style="width: 500px; height: 1000px;">
     <div modal-header>Add New Leave Plan</div>
     <div modal-body>
-        <form action="">
-
-
+        <form #myPlanForm="ngForm" name="myPlanForm">
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee Name:</label>
-                <input type="text" class="form-control" placeholder="Enter Employee Name" id="Employee Name">
-            </div>
+                <!-- <input type="text" class="form-control" placeholder="Enter Employee Name" name="employeeName" #employeeName="ngModel" [(ngModel)]="leavePlanModel.employeeContractId"> -->
+                <ngx-employee-master-search></ngx-employee-master-search>
+              </div>
 
             <div class="form-group">
                 <label for="Start Date" style="font-size: small;font-weight: bold;">Start Date:</label>
-                <input type="number" class="form-control" placeholder="Enter Leave Year" id="Start Date">
-            </div>
+                <input type="date" (selectedChanged)="updateCalcs($event)"class="form-control" [min]="thisDay" placeholder="Enter Leave Year" name="startDate" #startDate="ngModel" [(ngModel)]="leavePlanModel.startDate" required>
+                <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="error">
+                  <div *ngIf="startDate.errors.required">Start date is required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <!-- <input [nbDatepicker]="datepicker"> -->
+                <nb-datepicker #datepicker></nb-datepicker>
+              </div>
+
+
 
             <div class="form-group">
                 <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
-                <input type="number" class="form-control" placeholder="Enter Number Of Days" id="Number of Days">
-            </div>
+                <input type="number" class="form-control" placeholder="Enter Number Of Days" name="numDays" #numDays="ngModel" [(ngModel)]="leavePlanModel.noOfDays" required>
+                <div *ngIf="numDays.invalid && (numDays.dirty || numDays.touched)" class="error">
+                  <div *ngIf="numDays.errors.required">Number of days is required</div>
+                </div>
+              </div>
             <div class="form-group">
                 <label for="End Date" style="font-size: small;font-weight: bold;">End Date:</label>
-                <input type="number" class="form-control" placeholder="Enter Start Date" id="End Date">
+                <input type="number" class="form-control" [disabled] placeholder="Enter Start Date"  name="endDate" #endDate="ngModel" [(ngModel)]="leavePlanModel.endDate" required>
             </div>
             <div class="form-group">
-                <label for="Comment" style="font-size: small;font-weight: bold;">Number of Days:</label>
-                <textarea class="form-control" placeholder="Enter Comment" id="Comment">Comment</textarea>
+                <label for="Comment" style="font-size: small;font-weight: bold;">Comment</label>
+                <textarea class="form-control" placeholder="Enter Comment" name="comment" #comment="ngModel" [(ngModel)]="leavePlanModel.comment"></textarea>
             </div>
 
    <div class="d-flex-column">
@@ -103,11 +124,6 @@
                 </nb-checkbox>
 
             </div>
-
-
-          <!--<label>Checked:</label> //{{ checked }}
--->  
-          
 
         </form>
     </div>
