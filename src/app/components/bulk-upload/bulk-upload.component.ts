@@ -22,7 +22,6 @@ export class BulkUploadComponent implements OnInit {
     const newSubjectResponse = new Subject();
     this.dialogService.open(dialog,
       {
-        hasBackdrop: false,
         closeOnEsc: false
       })
       .onClose.subscribe(name => { newSubjectResponse.next(name); });

@@ -30,6 +30,7 @@ import { Observable, Subject } from 'rxjs';
 
 </nb-card>
   `,
+  styleUrls: ['../components/alertModal.scss']
 })
 export class alertmodalComponent implements OnInit {
   alertType: string = '';
@@ -69,8 +70,7 @@ export class AlertserviceService {
     const newSubjectResponse = new Subject();
     this.dialogService.open(alertmodalComponent,
       {
-        hasBackdrop: false,
-        closeOnEsc: false
+       closeOnEsc: false
       })
       .onClose.subscribe(name => { newSubjectResponse.next(name); });
 
