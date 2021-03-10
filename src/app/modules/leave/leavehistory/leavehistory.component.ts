@@ -39,9 +39,9 @@ export class LeavehistoryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.updateCalcs;
+    // this.updateCalcs;
     console.log(this.thisDay);
-
+    window.globalThis.a = this;
   }
 
   modal(buttion) {

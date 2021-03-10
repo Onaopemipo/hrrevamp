@@ -1,3 +1,5 @@
+import { ThemeModule } from './../../@theme/theme.module';
+import { LeaveComponent } from './leave.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from 'app/components/components.module';
@@ -13,14 +15,15 @@ import {
   FetchLeavePlanServiceProxy} from '../../_services/service-proxies';
 
 @NgModule({
-  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent],
+  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent, LeaveComponent],
   imports: [
     CommonModule,
     ComponentsModule,
     LeaveRoutingModule,
     FormsModule,
     NbCheckboxModule,
-    NbDatepickerModule
+    NbDatepickerModule,
+    ThemeModule
 
   ],
   providers: [

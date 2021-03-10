@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NbDatepicker, NbDatepickerComponent, NbDatepickerDirective, NbPopoverDirective } from '@nebular/theme';
 
 @Component({
@@ -9,6 +9,27 @@ import { NbDatepicker, NbDatepickerComponent, NbDatepickerDirective, NbPopoverDi
 export class DateComponent implements OnInit {
   @ViewChild(NbDatepickerDirective) datePicker: NbDatepickerComponent<String>;
   // @ViewChild(NbPopoverDirective) popOver: NbPopoverDirective;
+
+
+  // Start of Philip Code in case you need to clear it
+  _dateItem = new Date();
+  @Input() min;
+  @Input() max;
+  set dateItem(val: Date){
+    this.valueChange.emit(val);
+    this._dateItem = val;
+  };
+  get dateItem() {
+    return this._dateItem;
+  }
+  selectedDate: Date;
+  @Input() set value(val) {
+    this._dateItem = val;
+  }
+
+  @Output() valueChange = new EventEmitter<Date>();
+
+  // End of Philp Code in case you need to clear it
 
   constructor() { }
 
@@ -21,6 +42,11 @@ export class DateComponent implements OnInit {
     window.setTimeout(() => {
       this.datePicker.picker.show();
     }, 200);
+  }
+
+  dateChanged(){
+    this.valueChange.emit(this.dateItem);
+    // console.log(this.dateItem)
   }
 
 }
