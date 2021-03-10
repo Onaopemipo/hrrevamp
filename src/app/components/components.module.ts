@@ -81,6 +81,7 @@ import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
 import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
 import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
+import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -179,6 +180,7 @@ import { LoadableButtonComponent } from './loadable-button/loadable-button.compo
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
+    FetchAllEmployeesServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,

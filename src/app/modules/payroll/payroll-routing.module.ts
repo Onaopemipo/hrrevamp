@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PayrollcomponentComponent } from './payrollcomponent/payrollcomponent.component';
 import { PaymentcreateComponent } from './paymentcreate/paymentcreate.component';
 import { InstitutionalmanagementComponent } from './institutionalmanagement/institutionalmanagement.component';
+import { PaymenysetupComponent } from './paymenysetup/paymenysetup.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,9 @@ const routes: Routes = [
 },
 {
   path: 'institutionalmanagement', component:InstitutionalmanagementComponent 
+},
+{
+  path: 'paymentsetup', component:PaymenysetupComponent
 }
 
 ];

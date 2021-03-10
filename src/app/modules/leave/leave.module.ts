@@ -7,6 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { NbCheckboxModule} from '@nebular/theme';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
+import { 
+  LeaveEntitlementServiceProxy, 
+  LeaveplaneEventServiceProxy,
+  FetchLeavePlanServiceProxy,
+  PostServiceProxy } from '../../_services/service-proxies';
 
 @NgModule({
   declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent],
@@ -18,6 +23,11 @@ import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
     NbCheckboxModule ,
 
 
-  ]
+  ],
+  providers: [
+    LeaveEntitlementServiceProxy,
+    LeaveplaneEventServiceProxy,
+    FetchLeavePlanServiceProxy,
+    PostServiceProxy ]
 })
 export class LeaveModule { }
