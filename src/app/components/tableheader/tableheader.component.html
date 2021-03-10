@@ -1,47 +1,80 @@
-<div style="padding:10px 0 5px;">
-
-    <div class="row">
-      <div class="col-md-12 col-lg-12 col-xxxl-12">
-        <nb-card>
-          <nb-card-body>
-            <nb-actions size="medium" fullWidth>
-              <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important;">
-                <nb-checkbox></nb-checkbox> 
-                <nb-icon icon="more-vertical" style="color: #d3d3eb;font-size: 25px;"></nb-icon>
-              </nb-action>
-              <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important;">
-                <nb-form-field style="padding:5px;min-width: 170px;">
-                  <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-                  <input type="text" placeholder="Search" nbInput>
-                </nb-form-field>
-              </nb-action>
-              <nb-action>
-                <span>Filter</span> &nbsp; &nbsp;
-                <button nbButton style="background-color: transparent;border:1px solid #b6b3b3" >
-                  All  &nbsp;<nb-icon  icon="options-2-outline"></nb-icon>
-                </button>            
-              </nb-action>
-              <nb-action>
-                <span>Sort by</span>&nbsp; &nbsp;
-                <button nbButton style="background-color: transparent;border:1px solid #b6b3b3" >
-                  Most recent  &nbsp;<nb-icon  icon="arrow-ios-downward-outline"></nb-icon>
-                </button>
-               
-              </nb-action>
-              <nb-action>
-                <button nbButton style="background-color: transparent;border:1px solid #b6b3b3" >
-                  Export as
-                </button>
-              </nb-action>
-              <nb-action>
-                <nb-icon icon="printer-outline" status="primary" style="font-size: 35px;"></nb-icon>
-                <span>Print</span>
-          
-              </nb-action>
-            </nb-actions>
-          </nb-card-body>
-        </nb-card>
+<div style="padding: 10px 0 5px">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xxxl-12">
+      <nb-card>
+        <nb-card-body>
+          <nb-actions size="medium" fullWidth>
+            <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important">
+              <nb-checkbox></nb-checkbox>
+              <nb-icon
+                icon="more-vertical"
+                style="color: #d3d3eb; font-size: 25px"
+              ></nb-icon>
+            </nb-action>
+            <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important">
+              <nb-form-field style="padding: 5px; min-width: 170px">
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" placeholder="Search" nbInput />
+              </nb-form-field>
+            </nb-action>
+            <nb-action>
+              <span>Filter</span> &nbsp; &nbsp;
+              <button
+                nbButton
+                style="background-color: transparent; border: 1px solid #b6b3b3"
+                (click)="changeFilter()"
+              >
+                <ng-template [ngIf]="!showFilter">
+                  All &nbsp;<nb-icon icon="options-2-outline"></nb-icon>
+                </ng-template>
+                <ng-template [ngIf]="showFilter">
+                  Filter &nbsp;<nb-icon icon="options-2-outline"></nb-icon>
+                </ng-template>
+              </button>
+            </nb-action>
+            <nb-action>
+              <span>Sort by</span>&nbsp; &nbsp;
+              <button
+                nbButton
+                style="background-color: transparent; border: 1px solid #b6b3b3"
+              >
+                Most recent &nbsp;<nb-icon
+                  icon="arrow-ios-downward-outline"
+                ></nb-icon>
+              </button>
+            </nb-action>
+            <nb-action>
+              <button
+                nbButton
+                style="background-color: transparent; border: 1px solid #b6b3b3"
+              >
+                Export as
+              </button>
+            </nb-action>
+            <nb-action>
+              <nb-icon
+                icon="printer-outline"
+                status="primary"
+                style="font-size: 35px"
+              ></nb-icon>
+              <span>Print</span>
+            </nb-action>
+          </nb-actions>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div *ngIf="showFilter">
+    <div class='row' *ngIf="filterFields.length > 0">
+      <div class="form-group col-sm-4" *ngFor="let field of filterFields">
+        <label>{{field.title}}</label>
+        <input (change)="fieldValueChanged($event, field.name)" class="form-control"/>
+      </div>
+      <div class="form-group col-sm-4">
+        <label></label>
+        <input nbButton status='primary' value='Submit' type='button' (click)="submitFilter()"/>
       </div>
     </div>
-    </div>
-    
+    <ng-content select='div'></ng-content>
+  </div>
+</div>

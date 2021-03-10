@@ -82,3 +82,16 @@ div::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
+
+.full-page{
+    position: absolute;
+    width: 100%;
+    display: block;
+    opacity: 1;
+    background-color: #edf1f7;
+}
+
+.full-page > .modal-p{
+    width: 100%;
+    //TODO fix issue
+}

@@ -59,6 +59,7 @@ export class TablecomponentComponent implements OnInit {
   @Input() showActions = true;
   @Input() actions: TableAction[];
   @Input() table2 = false;
+  @Input() showFilter = false;
   // @Output() actionClicked = new EventEmitter<>();
   @Output() actionClick = new EventEmitter<TableActionEvent>();
   pageData = [];
@@ -70,6 +71,7 @@ export class TablecomponentComponent implements OnInit {
   }
   @Input() totalItems = 1000;
   @Output() pageChange = new EventEmitter<number>();
+  @Output() filterChange = new EventEmitter<object>();
   @Input() set currentPage(val: number) {
     this._currentPage = val;
     // TODO: Generate pagination items
@@ -120,8 +122,16 @@ export class TablecomponentComponent implements OnInit {
     }, 3000);
   }
 
+  filter = {}
   pageClicked(pageNo: number) {
     this.pageChange.emit(pageNo);
+    this.filter = {...this.filter, ...{page: pageNo, } };
+    this.filterChange.emit(this.filter);
+  }
+
+  filterUpdated(filter){
+    this.filter = {...filter, ...{page: this.currentPage, } };
+    this.filterChange.emit(this.filter);
   }
 
 }
