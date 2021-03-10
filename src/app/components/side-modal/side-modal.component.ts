@@ -20,6 +20,7 @@ export class SideModalComponent implements OnInit {
     }
   }
   @Output() showChange = new EventEmitter<boolean>();
+  @Output() closed = new EventEmitter<boolean>();
 
   get center() {
     return this.position === 'Center';
@@ -66,6 +67,7 @@ export class SideModalComponent implements OnInit {
   closeModal() {
     this.show_modal = false;
     this.showChange.emit(this.show_modal);
+    this.closed.emit(true);
     // if (this.isPage) this.hidePage();
   }
 }
