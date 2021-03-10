@@ -77,6 +77,9 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
 
 
 import { alertmodalComponent } from '../_services/alertservice.service';
+import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
+import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
+import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +111,10 @@ import { alertmodalComponent } from '../_services/alertservice.service';
     CalenderComponent,
     BulkUploadComponent,
     EmployeeListComponent,
-    alertmodalComponent
+    alertmodalComponent,
+    ConfirmBoxComponent,
+    ConfirmBoxServiceComponent,
+    LoadableButtonComponent,
   ],
   imports: [
     FormsModule,
@@ -126,7 +132,7 @@ import { alertmodalComponent } from '../_services/alertservice.service';
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     // NbMenuModule.forRoot(),
-    NbDialogModule.forRoot(),
+    NbDialogModule.forChild(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
     NbChatModule.forRoot({
@@ -209,6 +215,10 @@ import { alertmodalComponent } from '../_services/alertservice.service';
     BulkUploadComponent,
     alertmodalComponent,
     EmployeeListComponent,
+    ConfirmBoxComponent,
+    NbDialogModule,
+    ConfirmBoxServiceComponent,
+    LoadableButtonComponent,
   ],
 })
 export class ComponentsModule { }
