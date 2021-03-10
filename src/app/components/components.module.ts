@@ -77,7 +77,7 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
 
 
 import { alertmodalComponent } from '../_services/alertservice.service';
-
+import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -173,6 +173,7 @@ import { alertmodalComponent } from '../_services/alertservice.service';
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
+    FetchAllEmployeesServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,
