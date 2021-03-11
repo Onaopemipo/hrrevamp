@@ -52,7 +52,7 @@ export class ApiService {
 
   fetchAllEmployees(filter: DepartmentFilter) {
     const subject = new Subject<ListResult<any>>();
-    this.setup.getAllDepartment(filter.page ? filter.page : 1, this.pageSize, 0, 0, 0, 0, 0, 0, 0).subscribe(data => {
+    this.setup.getAllDepartment(filter.page ? filter.page : 1, this.pageSize, 0, 0, 0, 0, 0, 0, 0,"","").subscribe(data => {
       subject.next({
         data: data.result.map(department => new MyDepartment(department)),
         length: data.totalCount,
