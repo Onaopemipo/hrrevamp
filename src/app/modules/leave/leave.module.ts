@@ -12,7 +12,8 @@ import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 import {
   LeaveEntitlementServiceProxy,
   LeaveplaneEventServiceProxy,
-  FetchLeavePlanServiceProxy} from '../../_services/service-proxies';
+  FetchLeavePlanServiceProxy,
+  PostServiceProxy } from '../../_services/service-proxies';
 
 @NgModule({
   declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent, LeaveComponent],
@@ -29,6 +30,7 @@ import {
   providers: [
     LeaveEntitlementServiceProxy,
     LeaveplaneEventServiceProxy,
-    FetchLeavePlanServiceProxy]
+    FetchLeavePlanServiceProxy,
+    PostServiceProxy ]
 })
 export class LeaveModule { }

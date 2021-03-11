@@ -44,6 +44,7 @@ import {
   NbSpinnerModule,
   NbListModule,
   NbLayoutModule,
+  NbDialogService,
 
 
 } from '@nebular/theme';
@@ -72,6 +73,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ConfirmBoxService } from './_services/confirm-box.service';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -145,6 +147,8 @@ FullCalendarModule.registerPlugins([
 
     DecimalPipe,
     GetTokenServiceProxy,
+    ConfirmBoxService,
+    NbDialogService,
   ],
 })
 export class AppModule {

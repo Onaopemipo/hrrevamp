@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { 
-
-  FetchLeavePlanServiceProxy, LeavePlanResource} from '../../../_services/service-proxies';
+import { FormGroup } from '@angular/forms';
+import {
+  GetLeaveTypesServiceProxy,
+  FetchLeavePlanServiceProxy, LeavePlanDTO, LeavePlanResource, MessageOutApiResult, 
+  PostServiceProxy,
+  LeaveYearDTOListApiResult
+} from '../../../_services/service-proxies';
 enum TOP_ACTIONS {
   APPLY_FOR_LEAVE,
   ADD_PLAN
@@ -13,6 +17,10 @@ enum TOP_ACTIONS {
   styleUrls: ['./leave-plan.component.scss']
 })
 export class LeavePlanComponent implements OnInit {
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+  leavePlan: FormGroup;
   filter = {
     is_approved: 1,
     year_id: 1,
@@ -23,9 +31,27 @@ export class LeavePlanComponent implements OnInit {
     page_no: 1
   }
 
-  get hel() {
-    return 'me';
+  believe = {
+    isAnnualLeave: true,
+    maxDays: 0,
+    isGradeDependent: '0',
+    start_date: '',
+    end_date: '',
+    page_size: 20,
+    page_no: 1
   }
+
+  
+
+  // believe = {
+  //   isAnnualLeave? : Boolea,n
+  //   maxDays : Number,
+  //   isGradeDependent : Boolean,
+  //   minDays : Number,
+
+  // }
+  leaveD = new LeavePlanDTO().clone();
+
   set hello(val: string) {
     alert(val);
   }
@@ -42,12 +68,28 @@ export class LeavePlanComponent implements OnInit {
   get showFirstName() {
     return this.selectedOption === '1';
   }
-  constructor(private FetchLeavePlanServiceProxy: FetchLeavePlanServiceProxy) { }
-  data: LeavePlanResource[] = [];
+  constructor(private FetchLeavePlanServiceProxy: FetchLeavePlanServiceProxy,
+    private PostServiceProxy: PostServiceProxy,
+    private GetLeaveTypesServiceProxy: GetLeaveTypesServiceProxy) { }
+  LeaveData: LeavePlanResource[] = [];
+
   ngOnInit(): void {
     this.getleavePlan()
   }
-  getleavePlan(){
+
+ createLeavePlan(){
+   this.PostServiceProxy.createleaveplan(this.leaveD).subscribe(resp=>{
+
+   });
+ }
+
+ getleavetypes(){
+this.GetLeaveTypesServiceProxy.getleavetypes
+ }
+
+
+
+  getleavePlan() {
     this.FetchLeavePlanServiceProxy.fetchleaveplans(this.filter.is_approved,
       this.filter.year_id,
       this.filter.empno,
@@ -56,9 +98,17 @@ export class LeavePlanComponent implements OnInit {
       this.filter.page_size,
       this.filter.page_no
     ).subscribe(data => {
-      this.data = data.result;
+      this.LeaveData = data.result;
     })
+
+
+
   }
+
+
+
+
+
 
   showAddPlanModal = false;
   showLeavePlanModal = false;
@@ -82,7 +132,7 @@ export class LeavePlanComponent implements OnInit {
 
   // lastName = 'b'
   get fullName() {
-    return this.firstName + ' ' ;
+    return this.firstName + ' ';
   }
 
 
@@ -92,13 +142,13 @@ export class LeavePlanComponent implements OnInit {
   toggle(checked: boolean) {
     this.checked = checked;
   }
-        set lastName(val: string) {
-      if (val.length === 5) {
-        if (val === 'bbbbb')
-          alert('You can continue');
-        else
-          alert('Password validation failed');
-      }
+  set lastName(val: string) {
+    if (val.length === 5) {
+      if (val === 'bbbbb')
+        alert('You can continue');
+      else
+        alert('Password validation failed');
     }
   }
+}
 

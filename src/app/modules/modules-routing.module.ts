@@ -93,6 +93,11 @@ const routes: Routes = [{
       loadChildren: () => import('./career-succession/career-succession.module')
       .then(m => m.CareerSuccessionModule)
     },
+    {
+      path: 'setup',
+      loadChildren: () => import('./module-settings/module-settings.module')
+      .then(m => m.ModuleSettingsModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

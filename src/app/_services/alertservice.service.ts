@@ -3,7 +3,11 @@ import { NbDialogService } from '@nebular/theme';
 import { NbDialogRef } from '@nebular/theme';
 import { Observable, Subject } from 'rxjs';
 
-
+enum ALERT_TYPES {
+  SUCCESS = 'success',
+  FAILED = 'danger',
+  COPIED = 'copied',
+}
 @Component({
   selector: 'ngx-alertModalComponent',
   template: `
@@ -14,9 +18,9 @@ import { Observable, Subject } from 'rxjs';
    <img src="assets/icons/failure.jpg" style="width:10rem" *ngIf="alertType == 'danger'">
    <img src="assets/icons/copied.jpg" style="width:10rem" *ngIf="alertType == 'copied'">
    <div style="padding:10px">
-   <span class="header4-bold" *ngIf="alertType == 'success'">Success!</span>
-   <span class="header4-bold" *ngIf="alertType == 'danger'">Failed!</span>
-   <span class="header4-bold" *ngIf="alertType == 'copied'">Copied!</span>
+   <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.SUCCESS">Success!</span>
+   <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.FAILED">Failed!</span>
+   <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.SUCCESS">Copied!</span>
    </div>
    <div style="padding:10px">
    <span class="listsubheader">{{alertMessage}}!</span>
@@ -30,8 +34,10 @@ import { Observable, Subject } from 'rxjs';
 
 </nb-card>
   `,
+  styleUrls: ['../components/alertModal.scss']
 })
 export class alertmodalComponent implements OnInit {
+  ALERT_TYPES = ALERT_TYPES;
   alertType: string = '';
   alertMessage: string = '';
   alertButtonMessage: string = '';
@@ -60,6 +66,7 @@ export class AlertserviceService {
   alertType: string = '';
   alertMessage: string = '';
   alertButtonMessage: string = '';
+  ALERT_TYPES = ALERT_TYPES;
   constructor(private dialogService: NbDialogService) { }
 
   openModalAlert(alertType, alertMessage, alertButtonMessage): Observable<any> {
@@ -69,8 +76,7 @@ export class AlertserviceService {
     const newSubjectResponse = new Subject();
     this.dialogService.open(alertmodalComponent,
       {
-        hasBackdrop: false,
-        closeOnEsc: false
+       closeOnEsc: false
       })
       .onClose.subscribe(name => { newSubjectResponse.next(name); });
 
