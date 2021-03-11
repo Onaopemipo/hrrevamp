@@ -74,7 +74,8 @@ export class DepartmentListComponent extends BaseComponent<MyDepartment, Departm
   }
 
   deleteData() {
-    return this.setup.deleteRecordDepartment(this.data.find(dept => this.editingData.id === dept.id).department);
+ 
+   return this.setup.delete_Department_Records(this.data.find(dept => this.editingData.id === dept.id).department);
   }
 
   public constructor(
