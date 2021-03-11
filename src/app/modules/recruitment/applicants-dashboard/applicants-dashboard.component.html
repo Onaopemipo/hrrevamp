@@ -1,14 +1,17 @@
 <!-- <div class="container"> -->
-  <div class="wrapper">
-    <div class="flex-child col-md-2 col-lg-2">
-      <h6>Add a keyword</h6>
-      <span>Create a keyword and never miss a posting</span>
-      <div style="padding: 5px;"></div>
-      <div class="form-group">
-        <input type="text" nbInput fullWidth id="keyword" placeholder="Enter Keyword">
+  <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div class="col-md-2 col-lg-2">
+      <div style="background-color: #4748E0 8%;">
+        <h6>Add a keyword</h6>
+        <span>Create a keyword and never miss a posting</span>
+        <div style="padding: 5px;"></div>
+        <div class="form-group">
+          <input type="text" nbInput fullWidth id="keyword" placeholder="Enter Keyword">
+        </div>
+        <div style="padding: 5px;"></div>
+        <button type="button" class="btn my-button">Add</button>
       </div>
-      <div style="padding: 5px;"></div>
-      <button type="button" class="btn my-button">Add</button>
+
       <div style="padding: 20px;"></div>
       <div class="employment-type">
         <h6>Type of Employment</h6>
@@ -57,18 +60,24 @@
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" >
             <label class="custom-control-label" >Banking</label>
+            <!-- <nb-checkbox (checkedChange)="toggle($event)" status="basic">Banking</nb-checkbox> -->
+
           </div>
           <div class="custom-control custom-checkbox">
+            <!-- <nb-checkbox (checkedChange)="toggle($event)">Oil & Gas</nb-checkbox> -->
             <input type="checkbox" class="custom-control-input" >
             <label class="custom-control-label" >Oil & Gas</label>
+
           </div>
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" >
             <label class="custom-control-label" >Technology</label>
+            <!-- <nb-checkbox (checkedChange)="toggle($event)">Technology</nb-checkbox> -->
           </div>
           <div class="custom-control custom-checkbox">
+            <!-- <nb-checkbox (checkedChange)="toggle($event)">Finance</nb-checkbox> -->
             <input type="checkbox" class="custom-control-input" >
-            <label class="custom-control-label" >Finannce</label>
+            <label class="custom-control-label" >Finance</label>
           </div>
         </div>
       </div>
@@ -77,9 +86,9 @@
 
     <!-- Main Contents -->
 
-    <div class="flex-child" style="overflow-y: scroll;">
-      <div>
-        <div class="">
+    <div class="col-lg-9" style="overflow-y: scroll;">
+      <div style="display: flex; flex-direction: row; padding: 20px; margin-bottom: 20px; justify-content: space-between; background: rgba(72, 71, 224, 0.08);">
+        <div class="col-md-9">
           <h6>Complete your profile</h6>
           <p>Fill in your details to make your application process faster.</p>
         </div>
@@ -98,9 +107,9 @@
       </div>
       </div>
 
-      <div class="listing-filter" style="display: inline-flex; flex-direction: row;">
+      <div class="listing-filter" style="display: flex; flex-direction: row; justify-content: space-between;">
         <!-- <ngx-componentsheader actions="actions" class="listing" style="justify-self: start;" [pageName] = "pageTitle"></ngx-componentsheader> -->
-        <div style="align-self: flex-start;"><span class="title" style="text-align: left;">Recent Listings</span></div>
+        <div style="align-self: flex-start;"><span class="title" style="text-align: left; font-size: 20px;">Recent Listings</span></div>
         <div class="listing" style="align-self: flex-end;">
           <form style="float: right; align-self: flex-end;">
             <label for="listing">Showing:</label>
@@ -112,8 +121,90 @@
           </form>
         </div>
       </div>
-      <div class="overflow-auto job-listing" style="padding-bottom: 20px;">
-        <div class="overflow-auto jobs">
+      <div style="padding-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="job-items">
+            <div class="title">Support Officer</div>
+            <div class="sub-title">Lagos, Nigeria</div>
+            <div style="padding: 10px;"></div>
+            <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+              experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+            </div>
+            <div>
+              <button class="btn" routerLink="[/jobdetails]" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+            </div>
+          </div>
+
+          <div class="job-items">
+              <div class="title">Support Officer</div>
+              <div class="sub-title">Lagos, Nigeria</div>
+              <div style="padding: 10px;"></div>
+              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+              </div>
+              <div>
+                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+              </div>
+            </div>
+
+            <div class="job-items">
+              <div class="title">Support Officer</div>
+              <div class="sub-title">Lagos, Nigeria</div>
+              <div style="padding: 10px;"></div>
+              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+              </div>
+              <div>
+                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="job-items">
+            <div class="title">Support Officer</div>
+            <div class="sub-title">Lagos, Nigeria</div>
+            <div style="padding: 10px;"></div>
+            <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+              experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+            </div>
+            <div>
+              <button class="btn" routerLink="[/jobdetails]" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+            </div>
+          </div>
+
+          <div class="job-items">
+              <div class="title">Support Officer</div>
+              <div class="sub-title">Lagos, Nigeria</div>
+              <div style="padding: 10px;"></div>
+              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+              </div>
+              <div>
+                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+              </div>
+            </div>
+
+            <div class="job-items">
+              <div class="title">Support Officer</div>
+              <div class="sub-title">Lagos, Nigeria</div>
+              <div style="padding: 10px;"></div>
+              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+              </div>
+              <div>
+                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
           <div class="job-items">
             <div class="title">Support Officer</div>
             <div class="sub-title">Lagos, Nigeria</div>
@@ -154,87 +245,6 @@
       </div>
 
 
-      <div class="overflow-auto job-listing" style="padding-bottom: 20px;">
-        <div class="overflow-auto jobs">
-          <div class="job-items">
-            <div class="title">Support Officer</div>
-            <div class="sub-title">Lagos, Nigeria</div>
-            <div style="padding: 10px;"></div>
-            <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
-              experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
-            </div>
-            <div>
-              <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
-            </div>
-          </div>
-
-          <div class="job-items">
-              <div class="title">Support Officer</div>
-              <div class="sub-title">Lagos, Nigeria</div>
-              <div style="padding: 10px;"></div>
-              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
-                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
-              </div>
-              <div>
-                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
-              </div>
-            </div>
-
-            <div class="job-items">
-              <div class="title">Support Officer</div>
-              <div class="sub-title">Lagos, Nigeria</div>
-              <div style="padding: 10px;"></div>
-              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
-                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
-              </div>
-              <div>
-                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
-              </div>
-            </div>
-
-        </div>
-      </div>
-
-      <div class="overflow-auto job-listing" style="padding-bottom: 20px;">
-        <div class="overflow-auto jobs">
-          <div class="job-items">
-            <div class="title">Support Officer</div>
-            <div class="sub-title">Lagos, Nigeria</div>
-            <div style="padding: 10px;"></div>
-            <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
-              experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
-            </div>
-            <div>
-              <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
-            </div>
-          </div>
-
-          <div class="job-items">
-              <div class="title">Support Officer</div>
-              <div class="sub-title">Lagos, Nigeria</div>
-              <div style="padding: 10px;"></div>
-              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
-                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
-              </div>
-              <div>
-                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
-              </div>
-            </div>
-
-            <div class="job-items">
-              <div class="title">Support Officer</div>
-              <div class="sub-title">Lagos, Nigeria</div>
-              <div style="padding: 10px;"></div>
-              <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
-                experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
-              </div>
-              <div>
-                <button class="btn" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
-              </div>
-            </div>
-
-        </div>
-      </div>
     </div>
   </div>
 <!-- </div> -->

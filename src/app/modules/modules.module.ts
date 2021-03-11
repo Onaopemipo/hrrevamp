@@ -20,7 +20,6 @@ import { CareerSuccessionComponent } from './career-succession/career-succession
 
 
 
-
 @NgModule({
   declarations: [ModulesComponent, DashboardComponent, CareerSuccessionComponent],
   imports: [

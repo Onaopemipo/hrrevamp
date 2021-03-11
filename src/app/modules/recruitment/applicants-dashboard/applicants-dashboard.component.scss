@@ -1,26 +1,22 @@
-.wrapper {
-  display: flex;
-  width: 100%;
-  padding: 20px;
-}
 .flex-child {
   flex: 1;
-  // background: rgba(72, 71, 224, 0.04);
   border-radius: 4px;
-  margin-right: 2%;
-  width: 20%;
-}
-
-.flex-child:first-child {
   margin-right: 20px;
   padding: 20px;
   background: rgba(72, 71, 224, 0.04);
 }
 
+// .flex-child:first-child {
+//   margin-right: 20px;
+//   padding: 20px;
+//   background: rgba(72, 71, 224, 0.04);
+// }
+
 .flex-child:last-child {
   background: rgba(72, 71, 224, 0.04);
   border-radius: 4px;
   width: 100%;
+  margin-right: 0px;
 }
 
 .text-wrap:first-child {
@@ -52,6 +48,7 @@
   background:#fff;
   border-radius: 4px;
   padding: 20px;
+  margin-right: 0%;
 }
 
 .title {
@@ -77,8 +74,7 @@
 // }
 
 .title {
-  font-family: Rubik;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: 36px;

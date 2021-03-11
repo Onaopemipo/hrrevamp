@@ -46,7 +46,6 @@ import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component'
     CommonModule,
     NbButtonModule,
     ngFormsModule,
-    NbCheckboxModule,
     NbInputModule,
     NbIconModule,
     ComponentsModule,
@@ -54,7 +53,8 @@ import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component'
     NbCardModule,
     NbMenuModule,
     NbRadioModule,
-    NbProgressBarModule
+    NbProgressBarModule,
+    NbCheckboxModule
   ]
 })
 export class RecruitmentModule { }
