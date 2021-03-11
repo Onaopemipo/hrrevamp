@@ -1,3 +1,4 @@
+import { GetLeaveTypesServiceProxy, GetLeaveYearServiceProxy } from './../../_services/service-proxies';
 import { ThemeModule } from './../../@theme/theme.module';
 import { LeaveComponent } from './leave.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { ComponentsModule } from 'app/components/components.module';
 import { LeaveRoutingModule } from './leave.routing.module';
 import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { FormsModule } from '@angular/forms';
-import { NbCheckboxModule, NbDatepickerModule } from '@nebular/theme';
+import { NbCheckboxModule, NbDatepickerModule, NbSelectModule } from '@nebular/theme';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 import {
@@ -24,13 +25,17 @@ import {
     FormsModule,
     NbCheckboxModule,
     NbDatepickerModule,
-    ThemeModule
+    ThemeModule,
+    NbSelectModule
 
   ],
   providers: [
     LeaveEntitlementServiceProxy,
     LeaveplaneEventServiceProxy,
     FetchLeavePlanServiceProxy,
-    PostServiceProxy ]
+    PostServiceProxy,
+    GetLeaveYearServiceProxy,
+    GetLeaveTypesServiceProxy
+   ]
 })
 export class LeaveModule { }

@@ -1,5 +1,6 @@
-import { CreateLeaveByAdminServiceProxy, LeaveRequestPayload, PostServiceProxy, LeavePlanDTO } from './../../../_services/service-proxies';
+import { CreateLeaveByAdminServiceProxy, LeaveRequestPayload, PostServiceProxy, LeavePlanDTO, LeaveYearDTO, GetLeaveYearServiceProxy, GetLeaveTypesServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { database } from 'faker';
 
 enum TOP_ACTIONS {
   APPLY_FOR_LEAVE,
@@ -35,13 +36,21 @@ export class LeavehistoryComponent implements OnInit {
   leaveRequestModel: LeaveRequestPayload = new LeaveRequestPayload().clone();
   allPlans:{} = {};
   thisDay: Date = new Date();
+  allLeaveYear;
+  allLeaveType;
+  startYearDate = new Date();
+  endYearDate = new Date();
+  startDate: Date = this.leavePlanModel.startDate;
 
-  constructor() { }
+  constructor(private leaveyear: GetLeaveYearServiceProxy, private leavetype: GetLeaveTypesServiceProxy) { }
 
   ngOnInit(): void {
     // this.updateCalcs;
-    console.log(this.thisDay);
+    console.log(this.allLeaveYear);
+    this.fetchLeaveYear();
+    this.fetchLeaveType();
     window.globalThis.a = this;
+    console.log(this.allLeaveType)
   }
 
   modal(buttion) {
@@ -73,6 +82,28 @@ export class LeavehistoryComponent implements OnInit {
     // this.plan.createleaveplan(this.leavePlanModel)._subscribe(data => {
     //   this.allPlans = data.result;
     // })
+  }
+
+  getEndDate(){
+
+  }
+
+  fetchLeaveYear(){
+    this.leaveyear.getleaveyear(this.startYearDate,'',this.endYearDate,0).subscribe(data => {
+      // if(!data.hasError){
+        this.allLeaveYear = data.result;
+        console.log(this.allLeaveYear);
+      // }
+    })
+  }
+
+  fetchLeaveType(){
+    this.leavetype.getleavetypes(true,0,false,0).subscribe(data => {
+      // if(!data.hasError){
+        this.allLeaveType = data.result;
+        console.log(this.allLeaveType);
+      // }
+    })
   }
 }
 

@@ -23,7 +23,11 @@
 
             <div class="form-group">
                 <label for="Leave Year" style="font-size: small;font-weight: bold;">Leave Year:</label>
-                <input type="number" class="form-control" placeholder="Enter Leave Year" name="leaveYear" #leaveYear="ngModel" [(ngModel)]="leaveRequestModel.leaveYearID" required>
+                <!-- <input type="number" class="form-control" placeholder="Enter Leave Year" name="leaveYear" #leaveYear="ngModel" [(ngModel)]="leaveRequestModel.leaveYearID" required> -->
+                <select placeholder="Enter Leave Year" name="leaveYear" #leaveYear="ngModel" [(ngModel)]="leaveRequestModel.leaveYearID" required>
+                  <!-- <option *ngFor="let year of allLeaveYear" [value]="year"></option> -->
+
+                </select>
                 <div *ngIf="leaveYear.invalid && (leaveYear.dirty || leaveYear.touched)" class="error">
                   <div *ngIf="leaveYear.errors.required">Leave year is required</div>
               </div>

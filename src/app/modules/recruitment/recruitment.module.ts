@@ -32,9 +32,6 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
 
 
-
-
-
 @NgModule({
   declarations: [
     RecruitmentComponent,
