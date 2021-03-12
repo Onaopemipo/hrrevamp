@@ -12,12 +12,20 @@ import { PageService } from './services/page.service';
 import { BaseComponent } from './base/base.component';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
+import { SalaryScaleComponent } from './pages/salary-scale/department-list.component';
+import { LocationListComponent } from './pages/location-list/location-list.component';
+import { PositionListComponent } from './pages/position-list/position-list.component';
+import { BenefitListComponent } from './pages/benefit-list/benefit-list.component';
 
 
 @NgModule({
   declarations: [
+    BenefitListComponent,
     DepartmentListComponent,
+    LocationListComponent,
     ModuleSettingsComponent,
+    PositionListComponent,
+    SalaryScaleComponent,
   ],
   imports: [
     CommonModule,

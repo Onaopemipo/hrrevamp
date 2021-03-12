@@ -21,7 +21,8 @@ const SUCCESS_MESSAGES = {
   templateUrl: './department-list.component.html',
   styleUrls: ['./department-list.component.scss']
 })
-export class DepartmentListComponent extends BaseComponent<MyDepartment, DepartmentFilter, VwDepartment> implements OnInit {
+export class SalaryScaleComponent extends BaseComponent<MyDepartment,
+  DepartmentFilter, VwDepartment> implements OnInit {
   topActionButtons = [
     { name: TOP_ACTIONS.ADD_DEPARTMENT, label: 'Add Department', icon: '', outline: false },
   ];
@@ -96,7 +97,7 @@ export class DepartmentListComponent extends BaseComponent<MyDepartment, Departm
     code: {
       presence: true,
       length: {
-        maxunym: 10,
+        maximun: 10,
         message: "must be less than 10 characters"
       }
     }

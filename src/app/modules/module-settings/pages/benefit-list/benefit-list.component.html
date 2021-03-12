@@ -1,14 +1,14 @@
 <ngx-componentsheader
-  pageName="Departments"
+  pageName="Benefits"
   [requiredButton]="topActionButtons"
   (buttonClick)="pageActionClicked($event)"
 ></ngx-componentsheader>
 <div class="main-page-container">
 <ngx-default-content
     *ngIf="showEmpty"
-    pageHeader="Create your first Department"
-    pageDescription="Click on the button to create a Department"
-    buttonValue="Create Department"
+    pageHeader="Create your first Benefit"
+    pageDescription="Click on the button to create a Benefit"
+    buttonValue="Create Location"
     (buttonClick)="createNewClicked()"
   >
   </ngx-default-content>
@@ -24,35 +24,53 @@
   ></ngx-tablecomponent>
 </div>
 <ngx-side-modal [(show)]="showModal" (closed)="clearEditingData()">
-  <div modal-header>Add New Department</div>
+  <div modal-header>Add New Benefit</div>
   <div modal-body>
     <div class="my-form">
       <div class="form-group">
-        <label>Department Name</label>
+        <label>Location Name</label>
         <div>
           <input
             class="form-control"
-            [(ngModel)]="editingData.department_name"
+            [(ngModel)]="editingData.location_name"
             placeholder="Name"
         />
-        <ng-template [ngIf]="errors['department_name']">
-          <span *ngFor="let error of errors['department_name']" class="error">{{error}}</span>
+        <ng-template [ngIf]="errors['location_name']">
+          <span *ngFor="let error of errors['location_name']" class="error">{{error}}</span>
         </ng-template>
         </div>
       </div>
+
       <div class="form-group">
-        <label>Department Code</label>
+        <label>State</label>
         <div>
-          <input
-          class="form-control"
-          [(ngModel)]="editingData.code"
-          placeholder="Code"
-        />
-          <ng-template [ngIf]="errors['code']">
-            <span *ngFor="let error of errors['code']" class="error">{{error}}</span>
-          </ng-template>
+          <select 
+            class="form-control"
+            [(ngModel)]="editingData.state_id"
+            placeholder="Select State">
+            <option></option>
+          </select>
+        <ng-template [ngIf]="errors['state_id']">
+          <span *ngFor="let error of errors['state_id']" class="error">{{error}}</span>
+        </ng-template>
         </div>
       </div>
+
+      <div class="form-group">
+        <label>Local Government</label>
+        <div>
+          <select 
+            class="form-control"
+            [(ngModel)]="editingData.lga_id"
+            placeholder="Select Local Government area">
+            <option></option>
+          </select>
+        <ng-template [ngIf]="errors['lga_id']">
+          <span *ngFor="let error of errors['lga_id']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
+      </div>
+
     </div>
   </div>
   <div modal-actions>

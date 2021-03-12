@@ -4,6 +4,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 // import { MainBaseComponent } from 'app/components/main-base/main-base.component';
 import { Observable } from 'rxjs';
+import * as validate from 'validate.js';
 import { ListResult } from '../services/api.service';
 
 enum TOP_ACTIONS {
@@ -51,7 +52,7 @@ export abstract class MainBaseComponent{
   }
 
   get showEmpty() {
-    return false;
+    return this.data.length === 0;
   }
 
   selectedTab: any = TABS.DRAFT;
@@ -72,6 +73,8 @@ export abstract class MainBaseComponent{
 export abstract class BaseComponent<D, F, E> extends MainBaseComponent implements OnInit {
 
   // protected abstract confirmBox: ConfirmBoxService;
+  errors = {};
+  validator = {};
   abstract filter: F;
   abstract data: D[];
   editingData = this.getNewEditingData();
@@ -98,6 +101,12 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
     this.loadData();
   }
   submitForm() {
+    const err = validate(this.editingData, this.validator);
+    if (err) {
+      this.errors = err;
+      return false;
+    }
+    this.errors = {};
     this.loading = true;
     this.saveData(this.editingData).subscribe(data => {
       this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,
@@ -120,6 +129,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
 
   clearEditingData() {
     this.editingData = this.getNewEditingData();
+    this.errors = {};
   }
 
   abstract deleteData(data: E): Observable<any>;
