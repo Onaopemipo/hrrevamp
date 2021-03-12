@@ -54,10 +54,11 @@ export class LoginComponent implements OnInit {
 
   openSuccessalert(message) {
     this.alertController.openModalAlert('success', message, 'Go to Dashboard')
-    .subscribe(data => {
-      if (data) {
+      .subscribe(data => {
         this.btnprocessing = false;
-      this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
+      if (data) {
+ 
       }
     });
 }

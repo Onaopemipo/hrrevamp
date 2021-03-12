@@ -51,9 +51,10 @@ export class OnboardingsetupComponent implements OnInit {
   }
   openSuccessalert() {
     this.alertController.openModalAlert('success', 'System Setup has been completed!', 'Go to Dashboard')
-    .subscribe(data => {
+      .subscribe(data => {
+        this.router.navigate(['/dashboard']);
       if (data) {
-      this.router.navigate(['/dashboard']);
+
       }
     });
 }
