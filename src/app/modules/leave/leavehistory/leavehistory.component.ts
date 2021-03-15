@@ -41,6 +41,7 @@ export class LeavehistoryComponent implements OnInit {
   startYearDate = new Date();
   endYearDate = new Date();
   startDate: Date = this.leavePlanModel.startDate;
+  endDate: Date;
 
   constructor(private leaveyear: GetLeaveYearServiceProxy, private leavetype: GetLeaveTypesServiceProxy) { }
 
@@ -51,6 +52,7 @@ export class LeavehistoryComponent implements OnInit {
     this.fetchLeaveType();
     window.globalThis.a = this;
     console.log(this.allLeaveType)
+    this.getEndDate();
   }
 
   modal(buttion) {
@@ -85,8 +87,19 @@ export class LeavehistoryComponent implements OnInit {
   }
 
   getEndDate(){
+    if(this.leavePlanModel.startDate && this.leavePlanModel.noOfDays){
+      this.leavePlanModel.endDate = new Date(this.leavePlanModel.startDate.getTime()+ this.leavePlanModel.noOfDays*24*60*60*1000);
+      // this.leavePlanModel.endDate = this.endDate;
+      console.log('Yo it is this date', this.leavePlanModel.endDate);
+    }
 
   }
+
+  // GetMy() => {
+  //   return new Date(${startDate.getFullYear()},
+  //     ${startDate.getMonth()},
+  //     ${startDate.getDate()} + ${days})
+  //  }
 
   fetchLeaveYear(){
     this.leaveyear.getleaveyear(this.startYearDate,'',this.endYearDate,0).subscribe(data => {

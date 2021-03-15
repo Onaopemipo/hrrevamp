@@ -1,5 +1,6 @@
 <ngx-componentsheader *ngIf="!newRole" pageName='Competency'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="newRole" pageName='Role Management'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newRole && selectedCase=='Role_Details'" [requiredButton]="[{name:'newRole', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newRole && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
 
 <div *ngIf="!newRole" style="background-color: #ffffff;">
   <nb-card style="min-height: 100vh; display: flex; flex-direction: row; align-content: center;
@@ -17,7 +18,7 @@
 <div *ngIf="newRole" class="row">
   <div class="col-lg-3 col-md-3 col-xxl-3">
     <nb-card>
-    <div  style.height="{{(scase.offsetHeight < 402)?402 : scase.offsetHeight }}px" >
+    <div>
         <div #linklist style="display: flex;flex-direction: column;" *ngFor="let rolelist of competencyChecklist; let i = index">
 
         <div (click)="selectPanel(rolelist,i)" [ngClass]="{'wizardlistactive': rolelist.status == 'Active','wizardlistinactive': rolelist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
@@ -34,11 +35,22 @@
   <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
     <div  class="fmContainer" style="background-color: transparent;">
       <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
-        <nb-card class="cardTitle" (click)="toggleCard('role_details')" #role_details>
+        <nb-card>
+        <nb-card-header>
+          <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <span>Applied</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+          </div>
+        </nb-card-header>
+        <nb-card-body *ngIf="cardClick=='applied'">
+          <h4>I am here</h4>
+        </nb-card-body>
+      </nb-card>
+
+        <nb-card>
             <nb-card-body>
-              <h6 *ngIf="myPanel=='Role'">Add a Role</h6>
-              <h6 *ngIf="myPanel=='Cadre'">Add a Role</h6>
               <form>
+                <span class="title" *ngIf="selectedCase=='Role_Details'">Add a Role</span>
+                <span class="title" *ngIf="selectedCase=='Cadre'">Add a Cadre</span>
                 <div class="form-group row mydiv">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
@@ -65,7 +77,7 @@
                   </div>
                 </div>
 
-                <h6>Unit/Division</h6>
+                <span class="title">Unit/Division</span>
                 <div class="form-group row mydiv">
                   <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
@@ -90,7 +102,7 @@
                   </div>
                 </div>
 
-                <h6>Qualification</h6>
+                <span class="title">Qualification</span>
 
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
@@ -113,7 +125,7 @@
                   </div>
                 </div>
 
-                <h6>Certifications</h6>
+                <span class="title">Certifications</span>
 
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
@@ -136,7 +148,7 @@
                   </div>
                 </div>
 
-                <h6>Skills</h6>
+                <span class="title">Skills</span>
 
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
@@ -159,7 +171,7 @@
                   </div>
                 </div>
 
-                <h6>Abilities</h6>
+                <span class="title">Abilities</span>
 
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>

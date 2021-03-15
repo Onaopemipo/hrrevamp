@@ -1,3 +1,5 @@
+import { PlanningComponent } from './planning/planning.component';
+import { RolesComponent } from './roles/roles.component';
 import { TrainingRecordComponent } from './training-record/training-record.component';
 import { ReportListComponent } from './report-list/report-list.component';
 import { TalentPoolComponent } from './talent-pool/talent-pool.component';
@@ -30,7 +32,18 @@ const routes: Routes = [
   {
     path: 'training-record',
     component: TrainingRecordComponent
-}
+  },
+
+  {
+      path: 'roles',
+      component: RolesComponent
+
+  },
+
+  {
+      path: 'planning',
+      component: PlanningComponent
+  },
 ];
 
 @NgModule({
