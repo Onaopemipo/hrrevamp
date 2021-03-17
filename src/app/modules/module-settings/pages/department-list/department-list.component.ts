@@ -77,7 +77,10 @@ export class DepartmentListComponent  implements OnInit {
  
   //  return this.setup.delete_Department_Records(this.data.find(dept => this.editingData.id === dept.id).department);
   // }
-
+  showEmpty: any = '';
+  showModal: boolean = false;
+  editingData: any = '';
+  loading: boolean = false;
   public constructor(
     private api: ApiService,
     private pageService: PageService,
@@ -86,7 +89,16 @@ export class DepartmentListComponent  implements OnInit {
   ) {
   //  super(confirmBox);
   }
-
+  submitForm() {
+    
+  }
+  pageActionClicked(event) {
+    
+  }
+  hideModal(){}
+  clearEditingData() {
+    
+  }
   ngOnInit() {
     
   }
