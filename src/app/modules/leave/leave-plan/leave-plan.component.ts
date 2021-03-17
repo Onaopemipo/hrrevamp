@@ -72,13 +72,15 @@ export class LeavePlanComponent implements OnInit {
     private PostServiceProxy: PostServiceProxy,
     private GetLeaveTypesServiceProxy: GetLeaveTypesServiceProxy) { }
   LeaveData: LeavePlanResource[] = [];
+  LeaveAdd: MessageOutApiResult[]=[]
 
   ngOnInit(): void {
     this.getleavePlan()
-  }
+  }g
 
  createLeavePlan(){
    this.PostServiceProxy.createleaveplan(this.leaveD).subscribe(resp=>{
+     this.LeaveAdd.push(resp)
 
    });
  }

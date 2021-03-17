@@ -22,4 +22,10 @@ export class PayrollcomponentComponent implements OnInit {
 this.router.navigateByUrl('/payroll/paymentcreate')
   }
 
+  setUp() {
+    this.router.navigateByUrl('/payroll/paymentsetup')
+  }
+  AddNew(){
+    this.router.navigateByUrl('/payroll/payscalesetup')
+  }
 }
