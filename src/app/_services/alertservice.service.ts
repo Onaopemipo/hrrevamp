@@ -26,7 +26,11 @@ enum ALERT_TYPES {
    <span class="listsubheader">{{alertMessage}}!</span>
    </div>
    <div style="padding:10px">
-   <button nbButton type="button" status="primary" (click)="submit()">{{alertButtonMessage}}</button>
+   <button nbButton type="button" (click)="submit()"
+   style="background-color: #4847E0;
+   border-color: #4847E0;
+   color: #ffffff;"
+   >{{alertButtonMessage}}</button>
    </div>
 
    </div>

@@ -82,7 +82,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Leave Plan',
-        link: '/leave',
+        link: '/leave/plan',
       },
       {
         title: 'Leave Type',
@@ -91,6 +91,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Leave History',
         link: '/leave/history',
+      },
+      {
+        title: 'Leave Year',
+        link: '/leave/leaveyear',
       },
     ]
   },

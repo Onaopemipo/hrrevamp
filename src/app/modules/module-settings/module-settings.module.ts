@@ -6,7 +6,7 @@ import { ModuleSettingsComponent } from './module-settings.component';
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { DepartmentListComponent } from './pages/department-list/department-list.component';
-import { SetUpsServiceProxy } from 'app/_services/service-proxies';
+import { GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
 import { ApiService } from './services/api.service';
 import { PageService } from './services/page.service';
 import { BaseComponent } from './base/base.component';
@@ -28,7 +28,7 @@ import { ConfirmBoxService } from 'app/_services/confirm-box.service';
   providers: [
     ApiService,
     PageService,
-    SetUpsServiceProxy,
+    GetAllDepartmentsServiceProxy,
     AlertserviceService,
     ConfirmBoxService,
   ]

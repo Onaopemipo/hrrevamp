@@ -2,6 +2,7 @@ import { LeaveTypeDTO } from './../../../_services/service-proxies';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit , Input} from '@angular/core';
 
+
 enum TOP_ACTIONS {
   ADD_LEAVE_TYPE,
 
@@ -15,7 +16,7 @@ enum TOP_ACTIONS {
 
 export class LeavetypeComponent implements OnInit {
 
-  LeaveType: string = 'Leave-Type';
+  LeaveType: string = 'Leave Type';
   myForm: FormGroup;
   inputText: string = 'Attach';
 
