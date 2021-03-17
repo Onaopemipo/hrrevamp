@@ -31,7 +31,7 @@
                       <div class="form-group">
                         <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
                         <input class="form-control" placeholder="Choose End Date" nbInput [nbDatepicker]="formpicker" name="yearEndDate" #yearEndDate="ngModel" [(ngModel)]="newleaveYear.yearEndDate" required readonly>
-                        <nb-datepicker [min]="newleaveYear.yearStartDate" [max]="dateService.addYear(this.newleaveYear.yearStartDate,2)"  #formpicker></nb-datepicker>
+                        <nb-datepicker [min]="newleaveYear.yearStartDate" [max]="dateService.addYear(this.newleaveYear.yearStartDate,1)"  #formpicker></nb-datepicker>
                            <div *ngIf="yearEndDate.invalid && (yearEndDate.dirty || yearEndDate.touched)" class="error">
                           <div *ngIf="yearEndDate.errors.required">End Date is required</div>
                       </div>
