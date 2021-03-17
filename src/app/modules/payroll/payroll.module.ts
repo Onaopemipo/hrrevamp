@@ -26,10 +26,23 @@ import { PayrollcomponentComponent } from './payrollcomponent/payrollcomponent.c
 import { PaymentcreateComponent } from './paymentcreate/paymentcreate.component';
 import { InstitutionalmanagementComponent } from './institutionalmanagement/institutionalmanagement.component';
 import { PaymenysetupComponent } from './paymenysetup/paymenysetup.component';
+import { PayelementComponent } from './payelement/payelement.component';
+import { EditpaymentformComponent } from './editpaymentform/editpaymentform.component';
+import { PayscalesetupComponent } from './payscalesetup/payscalesetup.component';
+import { PayscaletableComponent } from './payscaletable/payscaletable.component';
+import { ViewpayscaleComponent } from './viewpayscale/viewpayscale.component';
+import { QuickypayrollComponent } from './quickypayroll/quickypayroll.component';
+import { AssignpayscaleComponent } from './assignpayscale/assignpayscale.component';
+import { PayrollreportComponent } from './payrollreport/payrollreport.component';
+import { ReviewpayrollComponent } from './reviewpayroll/reviewpayroll.component';
+import { PayrollanalysisComponent } from './payrollanalysis/payrollanalysis.component';
+import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.component';
+import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
+import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
 
 
 @NgModule({
-  declarations: [PayrollComponent, PayrollcomponentComponent, PaymentcreateComponent, InstitutionalmanagementComponent, PaymenysetupComponent],
+  declarations: [PayrollComponent, PayrollcomponentComponent, PaymentcreateComponent, InstitutionalmanagementComponent, PaymenysetupComponent, PayelementComponent, EditpaymentformComponent, PayscalesetupComponent, PayscaletableComponent, ViewpayscaleComponent, QuickypayrollComponent, AssignpayscaleComponent, PayrollreportComponent, ReviewpayrollComponent, PayrollanalysisComponent, AnalysistestpayComponent, DetailsTestPayComponent, PayrollRunLogComponent],
   imports: [
     ComponentsModule,
     CommonModule,

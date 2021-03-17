@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paymenysetup.component.scss']
 })
 export class PaymenysetupComponent implements OnInit {
-
+selectedOption:string= ''
   constructor() { }
 
   ngOnInit(): void {
