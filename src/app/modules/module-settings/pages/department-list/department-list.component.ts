@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableAction, TableActionEvent, TableColumn } from 'app/components/tablecomponent/models';
-import { Department, MessageOutIListApiResult,} from 'app/_services/service-proxies';
 import { ApiService, DepartmentFilter, MyDepartment } from '../../services/api.service';
 import { PageService } from '../../services/page.service';
 import { BaseComponent } from '../../base/base.component';
@@ -89,21 +88,8 @@ export class DepartmentListComponent extends BaseComponent<MyDepartment,
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,
   ) {
-   super(confirmBox);
+    super(confirmBox);
   }
-  submitForm() {
-    return true;
-  }
-  // pageActionClicked(event) {
-    
-  // }
-  // hideModal(){}
-  // clearEditingData() {
-    
-  // }
-  // ngOnInit() {
-    
-  // }
 
   validator = {
     name: {
