@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
+import { IMessageOut, MessageOutApiResult } from 'app/_services/service-proxies';
 // import { MainBaseComponent } from 'app/components/main-base/main-base.component';
 import { Observable } from 'rxjs';
 import * as validate from 'validate.js';
@@ -83,9 +84,10 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
   }
 
   abstract getData(): Observable<ListResult<D>>;
-  abstract saveData(e: E): Observable<any>;
+  abstract saveData(e: E): Observable<IMessageOut>;
   abstract getNewEditingData(): E;
   abstract successMessage: string;
+  loadingSave = false;
   protected abstract alertService: AlertserviceService;
 
   loadData() {
@@ -108,16 +110,23 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
       return false;
     }
     this.errors = {};
-    this.loading = true;
+    this.loadingSave = true;
     this.saveData(this.editingData).subscribe(data => {
-      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,
-        this.successMessage, 'Ok').subscribe(data => {
-          this.reload();
-        });
+      this.loadingSave = false;
+      console.log(data)
+      if(data.isSuccessful){
+        this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,
+          this.successMessage, 'Ok').subscribe(data => {
+            this.reload();
+          });
+      } else {
+        this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED,
+          data.message, 'Ok').subscribe(data => {
+          });
+      }
     });
   }
   ngOnInit() {
-    console.log(33)
     this.loadData();
   }
   hideModal() {

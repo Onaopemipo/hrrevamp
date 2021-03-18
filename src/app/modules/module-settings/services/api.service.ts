@@ -14,19 +14,21 @@ export class MyDepartment implements IStatus{
   department: DepartmentDTO;
   name: string;
   code: string;
+  id: number;
 
 
   public constructor(department: DepartmentDTO = new DepartmentDTO()) {
     this.department = department;
     this.name = department.name;
     this.code = department.code;
+    this.id = department.id;
     window.globalThis.aaa = this;
   }
 
-  get id() {
-    console.log(1111);
-    return this.department.id;
-  }
+  // get id() {
+  //   console.log(1111);
+  //   return this.department.id;
+  // }
 
   getStatusColor() {
     return new MyColor(200, 100, 10);
