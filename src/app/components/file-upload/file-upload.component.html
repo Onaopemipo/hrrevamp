@@ -1,7 +1,7 @@
 <ng-container #flowBasic="flow" [flowConfig]="{ target: '/' }"></ng-container>
 
 
-<div class="file is-medium drop"flow-init     
+<div class="file is-medium drop"flow-init
     flowDrop
     [flow]="flowBasic.flowJs"
     (drop)="onDropFileceived(flowBasic)"
@@ -18,9 +18,10 @@
       style="width: auto"
       class="btn waves-effect m-b-5 buttonbackground dashboardbtn">
       <span class="file-icon">
-        <i class="fas fa-paperclip" style="color: #4847e0; padding: 10px"></i>
+        <i class="fas fa-paperclip" style="color: #4847e0; padding:10px"></i>
       </span>
-      <span class="file-label"> Browse file or drag and drop here </span>
+      <span *ngIf="inputText" class="file-label">{{inputText}}</span>
+      <span *ngIf="!inputText" class="file-label"> Browse file or drag and drop here </span>
     </span>
   </label>
 </div>

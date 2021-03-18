@@ -13,4 +13,8 @@ export class ApplicantsDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggle(event){
+
+  }
+
 }

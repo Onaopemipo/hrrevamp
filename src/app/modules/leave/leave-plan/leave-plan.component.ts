@@ -78,19 +78,19 @@ export class LeavePlanComponent implements OnInit {
   }
 
  createLeavePlan(){
-   this.PostServiceProxy.createleaveplan(this.leaveD).subscribe(resp=>{
+   this.PostServiceProxy.createLeavePlan(this.leaveD).subscribe(resp=>{
 
    });
  }
 
- getleavetypes(){
-this.GetLeaveTypesServiceProxy.getleavetypes
- }
+//  getleavetypes(){
+// this.GetLeaveTypesServiceProxy.getleavetypes
+//  }
 
 
 
   getleavePlan() {
-    this.FetchLeavePlanServiceProxy.fetchleaveplans(this.filter.is_approved,
+    this.FetchLeavePlanServiceProxy.fetchLeavePlans(this.filter.is_approved,
       this.filter.year_id,
       this.filter.empno,
       this.filter.start_date,

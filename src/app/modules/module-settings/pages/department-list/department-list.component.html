@@ -32,11 +32,11 @@
         <div>
           <input
             class="form-control"
-            [(ngModel)]="editingData.department_name"
+            [(ngModel)]="editingData.name"
             placeholder="Name"
         />
-        <ng-template [ngIf]="errors['department_name']">
-          <span *ngFor="let error of errors['department_name']" class="error">{{error}}</span>
+        <ng-template [ngIf]="errors['name']">
+          <span *ngFor="let error of errors['name']" class="error">{{error}}</span>
         </ng-template>
         </div>
       </div>

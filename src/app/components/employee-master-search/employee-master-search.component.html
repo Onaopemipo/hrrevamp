@@ -11,11 +11,13 @@
 <ngx-side-modal [(show)]="showModal">
     <div modal-header>{{selectionHeader}}</div>
     <div modal-body>
+        <div>
+        <form id="searchForm" name="searchForm" #searchForm="ngForm">
         <nb-form-field>
             <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-            <input #searchtText type="text" nbInput class="form-control" [(ngModel)]="filterObject.searchtText">
+            <input #searchtText type="text" id="searchtText" name="searchtText" nbInput class="form-control" [(ngModel)]="filterObject.searchtText" required>
         </nb-form-field>
-        <div class="row">
+        <div class="row" style="padding-top:10px">
             <div class="col-sm-4 form-group">
                 <label>Department</label>
                 <select class="form-control">
@@ -46,11 +48,12 @@
                     <option></option>
                 </select>
             </div>
-            <div class="col-sm-4 form-group">
-                <label style="visibility: hidden;">Gender</label>
-                <button *ngIf="!searchbtnclicked" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
+            <div class="col-sm-4 form-group" style="padding-top:26px">         
+                <button [disabled]="searchForm.invalid" *ngIf="!searchbtnclicked" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
                 <button *ngIf="searchbtnclicked" nbButton status='primary' style="min-width: unset !important;">Processing&nbsp;<i class="fa fa-spin fa-spinner"></i></button>
             </div>
+        </div>
+        </form>
         </div>
         <div>
             <div *ngIf="allowmultipleselection" style="display: flex; justify-content: flex-end; margin: 1rem 0rem">
