@@ -9,12 +9,16 @@ import { Location } from '@angular/common';
 })
 export class PlanningComponent implements OnInit {
   successionTable: TableColumn [] = [
-    {name: 'position', title: 'Position'},
+    {name: 'title', title: 'Title'},
     {name: 'employee', title: 'Employee'},
-    {name: 'department', title: 'Department'},
-    {name: 'unit', title: 'Unit/Division'},
-    {name: 'level', title: 'Level'}
+    {name: 'position', title: 'Position'},
+    {name: 'candidate', title: 'Candidate'},
+    {name: 'readiness', title: 'Readiness to Start'},
+    {name: 'purpose', title: 'Purpose'}
   ];
+
+  newPlan: boolean = false;
+
   constructor(private navCtrl: Location) { }
 
   ngOnInit(): void {
@@ -25,7 +29,7 @@ export class PlanningComponent implements OnInit {
     this.navCtrl.back();
   }
   addPlan(){
-
+    this.newPlan = !this.newPlan;
   }
 
 }

@@ -1,3 +1,6 @@
+import { GridboxComponent } from './gridbox/gridbox.component';
+import { TestpoolComponent } from './testpool/testpool.component';
+import { CompareCompetencyComponent } from './compare-competency/compare-competency.component';
 import { PlanningComponent } from './planning/planning.component';
 import { RolesComponent } from './roles/roles.component';
 import { TrainingRecordComponent } from './training-record/training-record.component';
@@ -44,6 +47,21 @@ const routes: Routes = [
       path: 'planning',
       component: PlanningComponent
   },
+
+  {
+    path: 'compare-competency',
+    component: CompareCompetencyComponent
+  },
+
+  {
+    path: 'test-pool',
+    component: TestpoolComponent
+
+  },
+  {
+    path: 'gridbox',
+    component: GridboxComponent
+  }
 ];
 
 @NgModule({
