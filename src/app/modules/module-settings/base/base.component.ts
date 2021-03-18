@@ -84,7 +84,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
   }
 
   abstract getData(): Observable<ListResult<D>>;
-  abstract saveData(e: E): Observable<IMessageOut>;
+  abstract saveData(e: E): Observable<any>;
   abstract getNewEditingData(): E;
   abstract successMessage: string;
   loadingSave = false;

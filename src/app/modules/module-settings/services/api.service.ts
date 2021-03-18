@@ -4,7 +4,11 @@ import { AddUpdateDepartmentServiceProxy, Department, GetDepartmentByIdServicePr
 import {  DepartmentDTO, GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
 import { Observable, Subject } from 'rxjs';
 
-const PAGE_SIZE = 20;
+export const DEFAULT_PAGE_SIZE = 20;
+
+export interface BaseFilter{
+  page?: number;
+}
 export interface ListResult<T> {
   data: T[];
   length: number;
@@ -42,28 +46,6 @@ export class MyDepartment implements IStatus{
   }
 }
 
-export class MyLocation implements IStatus {
-  public location: Location;
-  public constructor(location: Location) {
-    this.location = location;
-  }
-
-  get id() {
-    return 1;
-  }
-
-  getStatusColor() {
-    return new MyColor(11, 11, 11);
-  }
-
-  getStatusLabel() {
-    return 'Active';
-  }
-}
-
-// export class MyPosition {
-//   public position: 
-// }
 
 export interface DepartmentFilter {
   name?: string;
@@ -71,13 +53,7 @@ export interface DepartmentFilter {
   page?: number;
 }
 
-export interface LocationFilter {
-  name?: string;
-  code?: string;
-  page?: number;
-}
-
-abstract class CrudService<Filter, Create, Data> {
+export abstract class CrudService<Filter, Create, Data> {
   abstract list(filter: Filter): Observable<ListResult<Data>>;
   // abstract fetch(id: number);
   // abstract create(data: Create);
@@ -89,7 +65,7 @@ abstract class CrudService<Filter, Create, Data> {
   providedIn: 'root'
 })
 export class ApiService implements CrudService<DepartmentFilter, MyDepartment, MyDepartment>{
-  pageSize = PAGE_SIZE;
+  pageSize = DEFAULT_PAGE_SIZE;
 
   constructor(
     private getDepartmentService: GetDepartmentByIdServiceProxy,
