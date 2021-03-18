@@ -1,0 +1,57 @@
+
+<ngx-componentsheader [pageName]='LeaveYear' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<nb-card>
+    <nb-card-body>
+
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+        
+        <ngx-side-modal [(show)]='showLeaveYearModal' style="width: 500px; height: 1000px;">
+            <div modal-header>Add Leave Type</div>
+            <div modal-body>
+                <form #leavYearForm="ngForm" name="leavYearForm" id="leavYearForm">
+                    <div class="form-group">
+                        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Leave Year Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter Leave Year Name" name="yearName" #yearName="ngModel" [(ngModel)]="newleaveYear.yearName" required>
+                        <div *ngIf="yearName.invalid && (yearName.dirty || yearName.touched)" class="error">
+                          <div *ngIf="yearName.errors.required">Leave Year name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
+                        <input class="form-control" placeholder="Choose Start Date" nbInput [nbDatepicker]="startdatepicker" name="yearStartDate" #yearStartDate="ngModel" [(ngModel)]="newleaveYear.yearStartDate" required readonly>
+                        <nb-datepicker [min]="mindate" [max]="newleaveYear.yearEndDate" #startdatepicker></nb-datepicker>
+                           <div *ngIf="yearStartDate.invalid && (yearStartDate.dirty || yearStartDate.touched)" class="error">
+                          <div *ngIf="yearStartDate.errors.required">Start Date is required</div>
+                      </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
+                        <input class="form-control" placeholder="Choose End Date" nbInput [nbDatepicker]="formpicker" name="yearEndDate" #yearEndDate="ngModel" [(ngModel)]="newleaveYear.yearEndDate" required readonly>
+                        <nb-datepicker [min]="newleaveYear.yearStartDate" [max]="dateService.addYear(this.newleaveYear.yearStartDate,1)"  #formpicker></nb-datepicker>
+                           <div *ngIf="yearEndDate.invalid && (yearEndDate.dirty || yearEndDate.touched)" class="error">
+                          <div *ngIf="yearEndDate.errors.required">End Date is required</div>
+                      </div>
+                      </div>
+        
+                      <div class="form-group">
+                        <nb-checkbox status="primary"  name="isActiveYear" #isActiveYear="ngModel" [(ngModel)]="newleaveYear.isActiveYear">Active</nb-checkbox>
+                      </div>
+        
+                </form>
+            </div>
+            <div modal-actions class="d-flex" style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
+                <button *ngIf="!submitbtnPressed" [disabled]="leavYearForm.invalid" nbButton status="primary" class="d-flex column">Submit</button>
+                <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+                <button nbButton outline status="primary" (click)="showLeaveYearModal = false" class="d-flex column"
+                  style="background-color: white;">Discard</button>
+            </div>
+            <div style="margin-top: 10px;"></div>
+        </ngx-side-modal>
+        
+        
+    </nb-card-body>
+</nb-card>

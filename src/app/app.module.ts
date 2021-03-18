@@ -65,8 +65,8 @@ import { JwtInterceptor } from './_services/jwt.interceptor';
 
 import { InputvalidationService } from './_services/inputvalidation.service';
 import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
-
-
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { ComponentsModule } from 'app/components/components.module';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -135,6 +135,7 @@ FullCalendarModule.registerPlugins([
     NbLayoutModule,
     NgxChartsModule,
     NbDatepickerModule.forRoot(),
+    ComponentsModule
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -149,6 +150,7 @@ FullCalendarModule.registerPlugins([
     GetTokenServiceProxy,
     ConfirmBoxService,
     NbDialogService,
+    AlertserviceService
   ],
 })
 export class AppModule {

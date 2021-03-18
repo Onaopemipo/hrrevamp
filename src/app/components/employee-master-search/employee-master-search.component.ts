@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import {EmployeeDTO, FetchAllEmployeesServiceProxy} from '../../_services/service-proxies';
 @Component({
   selector: 'ngx-employee-list',
@@ -29,6 +30,7 @@ export class EmployeeListComponent {
   styleUrls: ['./employee-master-search.component.scss']
 })
 export class EmployeeMasterSearchComponent implements OnInit {
+  searchForm: FormGroup;
   selectedEmployees:EmployeeDTO[]=[];
   selectedEmployeeRecord :EmployeeDTO;
   emptyRecord: EmployeeDTO;
@@ -45,15 +47,15 @@ allEmployees:EmployeeDTO[]=[];
 @Input() allowmultipleselection: boolean = false;
 @Input() selectionHeader = 'Select Employees';
   constructor(private allemployeeServices: FetchAllEmployeesServiceProxy) { }
-get disableaddbtn(){
-  if(this.selectedEmployeeRecord){
+  
+  get disableaddbtn() {
+  if(this.selectedEmployeeRecord || this.selectedEmployees.length > 0){
     return true;
-  }
-  if(this.selectedEmployees.length > 0){
-    return true;
+  } else {
+    return false;
   }
  
-  return false;
+  
 }
   ngOnInit(): void {
   }
@@ -70,22 +72,27 @@ if(!data.hasError){
   })
 }
 updateSelectedEmployee(i){
-let employeContId = this.allEmployees[i].employeeContractId;
-let emploExistChk = this.selectedEmployees.find(e=> e.employeeContractId == employeContId);
-if(emploExistChk){
-  if(this.allowmultipleselection){
-    this.selectedEmployees.splice(i,1)
-  }else{
-    this.selectedEmployeeRecord = this.emptyRecord;
-  }  
-}else{
-  if(this.allowmultipleselection){
-    this.selectedEmployees.push(this.allEmployees[i]);
-  }else{
-    this.selectedEmployeeRecord = this.allEmployees[i];
-  }
+  let employeContId = this.allEmployees[i].employeeContractId;
   
-}
+  if (this.allowmultipleselection) {
+    let emploExistChk = this.selectedEmployees.find(e => e.employeeContractId == employeContId);
+    if (emploExistChk) {
+      this.selectedEmployees.splice(i, 1)
+      this.selectedEmployeeRecord = this.emptyRecord;
+    } else {
+      this.selectedEmployees.push(this.allEmployees[i]);
+      this.selectedEmployeeRecord = this.emptyRecord;
+    }
+  } else {
+    if (this.selectedEmployeeRecord) {
+      this.selectedEmployeeRecord = this.emptyRecord;
+      this.selectedEmployees = [];
+    }else{
+      this.selectedEmployeeRecord = this.allEmployees[i];
+      this.selectedEmployees = [];
+    }
+  }
+
 }
   showModal = false;
 okMasterSearch(){

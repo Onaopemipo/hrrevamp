@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { Department, SetUpsServiceProxy, VwDepartment } from 'app/_services/service-proxies';
+import {  DepartmentDTO, GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
 import { Subject } from 'rxjs';
 
 const PAGE_SIZE = 20;
@@ -10,8 +10,8 @@ export interface ListResult<T> {
 }
 
 export class MyDepartment implements IStatus{
-  department: Department;
-  public constructor(department: Department){
+  department: DepartmentDTO;
+  public constructor(department: DepartmentDTO){
     this.department = department;
   }
 
@@ -47,12 +47,12 @@ export class ApiService {
   pageSize = PAGE_SIZE;
 
   constructor(
-    private setup: SetUpsServiceProxy
+    private setup: GetAllDepartmentsServiceProxy
   ) { }
 
   fetchAllEmployees(filter: DepartmentFilter) {
     const subject = new Subject<ListResult<any>>();
-    this.setup.getAllDepartment(filter.page ? filter.page : 1, this.pageSize, 0, 0, 0, 0, 0, 0, 0).subscribe(data => {
+    this.setup.getAllDepartments(this.pageSize,filter.page ? filter.page : 1).subscribe(data => {
       subject.next({
         data: data.result.map(department => new MyDepartment(department)),
         length: data.totalCount,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableAction, TableActionEvent, TableColumn } from 'app/components/tablecomponent/models';
-import { Department, MessageOutIListApiResult, SetUpsServiceProxy, VwDepartment } from 'app/_services/service-proxies';
+import { Department, MessageOutIListApiResult,} from 'app/_services/service-proxies';
 import { ApiService, DepartmentFilter, MyDepartment } from '../../services/api.service';
 import { PageService } from '../../services/page.service';
 import { BaseComponent } from '../../base/base.component';
@@ -21,7 +21,7 @@ const SUCCESS_MESSAGES = {
   templateUrl: './department-list.component.html',
   styleUrls: ['./department-list.component.scss']
 })
-export class DepartmentListComponent extends BaseComponent<MyDepartment, DepartmentFilter, VwDepartment> implements OnInit {
+export class DepartmentListComponent  implements OnInit {
   topActionButtons = [
     { name: TOP_ACTIONS.ADD_DEPARTMENT, label: 'Add Department', icon: '', outline: false },
   ];
@@ -44,46 +44,62 @@ export class DepartmentListComponent extends BaseComponent<MyDepartment, Departm
   // editingData = new VwDepartment();
   filter = {};
 
-  getNewEditingData() { return new VwDepartment();}
+  //getNewEditingData() { return new VwDepartment();}
 
-  saveData(data: VwDepartment) {
-    if (this.editingData.id) {
-      this.successMessage = SUCCESS_MESSAGES.edit;
-    } else {
-      this.successMessage = SUCCESS_MESSAGES.create;
-    }
-    return this.setup.addandUpdateDepartment(this.editingData);
-  }
+  // saveData(data: VwDepartment) {
+  //   if (this.editingData.id) {
+  //     this.successMessage = SUCCESS_MESSAGES.edit;
+  //   } else {
+  //     this.successMessage = SUCCESS_MESSAGES.create;
+  //   }
+  //   return this.setup.addandUpdateDepartment(this.editingData);
+  // }
 
   getData() {
     return this.api.fetchAllEmployees(this.filter);
   }
 
-  tableActionClicked(event: TableActionEvent) {
-    const editingObject = this.getNewEditingData().toJSON();
-    const data: any = event.data;
-    const tempDepartment: MyDepartment = data;
-    this.editingData = { ...editingObject,
-      ...{department_name: tempDepartment.name, code: tempDepartment.code, id: tempDepartment.id} };
-    if (event.name === ACTIONS.EDIT) {
-      this.showModal = true;
-    }
-    if (event.name === ACTIONS.DELETE) {
-      this.deleteRow('Are you sure to delete this department?');
-    }
-  }
+  // tableActionClicked(event: TableActionEvent) {
+  //   const editingObject = this.getNewEditingData().toJSON();
+  //   const data: any = event.data;
+  //   const tempDepartment: MyDepartment = data;
+  //   this.editingData = { ...editingObject,
+  //     ...{department_name: tempDepartment.name, code: tempDepartment.code, id: tempDepartment.id} };
+  //   if (event.name === ACTIONS.EDIT) {
+  //     this.showModal = true;
+  //   }
+  //   if (event.name === ACTIONS.DELETE) {
+  //     this.deleteRow('Are you sure to delete this department?');
+  //   }
+  // }
 
-  deleteData() {
-    return this.setup.deleteRecordDepartment(this.data.find(dept => this.editingData.id === dept.id).department);
-  }
-
+  // deleteData() {
+ 
+  //  return this.setup.delete_Department_Records(this.data.find(dept => this.editingData.id === dept.id).department);
+  // }
+  showEmpty: any = '';
+  showModal: boolean = false;
+  editingData: any = '';
+  loading: boolean = false;
   public constructor(
     private api: ApiService,
-    private setup: SetUpsServiceProxy,
     private pageService: PageService,
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,
   ) {
-    super(confirmBox);
+  //  super(confirmBox);
+  }
+  submitForm() {
+    
+  }
+  pageActionClicked(event) {
+    
+  }
+  hideModal(){}
+  clearEditingData() {
+    
+  }
+  ngOnInit() {
+    
   }
 }

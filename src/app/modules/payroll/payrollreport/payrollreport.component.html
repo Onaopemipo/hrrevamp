@@ -1,0 +1,158 @@
+<ngx-componentsheader pageName='Report'>
+</ngx-componentsheader>
+
+
+
+<nb-card>
+    <nb-card-body>
+        <nb-tabset>
+            <nb-tab tabTitle="Bank Schedule">
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColumns" [actions]='tableActions'
+                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+
+
+                <br>
+
+            </nb-tab>
+            <nb-tab tabTitle="Earning">
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColumn" [actions]='tableActions'
+                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+            </nb-tab>
+
+            <nb-tab tabTitle="Deduction">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColum"
+                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+
+
+
+
+            </nb-tab>
+            <nb-tab tabTitle="All Element Sheet">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColu" [actions]='tableActions'
+                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+            </nb-tab>
+
+            <nb-tab tabTitle="Deduction Summary">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableCol"
+                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+
+
+
+
+            </nb-tab>
+            <nb-tab tabTitle="Payment Summary">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableCo"
+                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+            </nb-tab>
+
+            <nb-tab tabTitle="Tax Detail">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tableC"
+                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+            </nb-tab>
+
+            <nb-tab tabTitle="Pension Details">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="table"
+                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+
+
+
+
+
+            </nb-tab>
+
+            <nb-tab tabTitle="Payslip Analysis">
+
+                <nb-card-header>
+                    <ngx-tablecomponent [userData]='data' [tableColum]="tab" [actions]='tableActions'
+                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+                </nb-card-header>
+            </nb-tab>
+        </nb-tabset>
+
+
+    </nb-card-body>
+
+</nb-card>
+
+
+<!-- view modal -->
+
+<ngx-side-modal [(show)]="showViewModal">
+    <div modal-header>
+
+        <h6>Bank Schedule</h6>
+
+    </div>
+    <div modal-body>
+        <nb-card>
+
+            <nb-card-body>
+                <!-- <div>
+                    <div
+                        style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
+                        <div style="flex: auto; display: flex;padding-top: 15px;">
+                            <p style=" text-transform: uppercase; font-weight: bold;">Delete Pay Element
+                            </p>
+                        </div>
+
+
+
+                    </div>
+                </div> -->
+                <span style="padding: 10px;"></span>
+
+                <span></span>
+
+                <div class="row" *ngFor="let i of [0,1,2,3,4]">
+                    <div class="col-sm-5">
+                        <p>Abiodun</p>
+                    </div>
+                    <div class="col-sm-7">
+                        <P>Billionaire</P>
+                    </div>
+                </div>
+
+
+                <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 5rem;">
+
+                    <button nbButton status="primary" class="d-flex column" style="margin-left: -4rem;">Close</button>
+
+                </div>
+            </nb-card-body>
+
+
+        </nb-card>
+
+    </div>
+
+
+
+</ngx-side-modal>

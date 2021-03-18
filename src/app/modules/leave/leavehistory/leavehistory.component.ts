@@ -1,6 +1,15 @@
-import { CreateLeaveByAdminServiceProxy, LeaveRequestPayload, PostServiceProxy, LeavePlanDTO, LeaveYearDTO, GetLeaveYearServiceProxy, GetLeaveTypesServiceProxy } from './../../../_services/service-proxies';
+import {
+  CreateLeaveByAdminServiceProxy,
+  PostServiceProxy,
+  LeavePlanDTO,
+  LeaveYearDTO,
+  GetLeaveYearServiceProxy,
+  GetLeaveTypesServiceProxy,
+  GetLeaveYearsServiceProxy
+} from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { database } from 'faker';
+import { AlertserviceService } from 'app/_services/alertservice.service';
 
 enum TOP_ACTIONS {
   APPLY_FOR_LEAVE,
@@ -33,7 +42,7 @@ export class LeavehistoryComponent implements OnInit {
 
   LeaveHistory: string = 'Leave History';
   leavePlanModel: LeavePlanDTO = new LeavePlanDTO().clone();
-  leaveRequestModel: LeaveRequestPayload = new LeaveRequestPayload().clone();
+
   allPlans:{} = {};
   thisDay: Date = new Date();
   allLeaveYear;
@@ -41,14 +50,20 @@ export class LeavehistoryComponent implements OnInit {
   startYearDate = new Date();
   endYearDate = new Date();
   startDate: Date = this.leavePlanModel.startDate;
+<<<<<<< HEAD
   endDate: Date;
 
   constructor(private leaveyear: GetLeaveYearServiceProxy, private leavetype: GetLeaveTypesServiceProxy) { }
+=======
+  leaveRequestModel: any = ''
+  constructor(private leaveyear: GetLeaveYearsServiceProxy, private leavetype: GetLeaveTypesServiceProxy,
+  private alertService: AlertserviceService) { }
+>>>>>>> e21977e6038503eafab118f2f71ec57068c73954
 
   ngOnInit(): void {
     // this.updateCalcs;
-    console.log(this.allLeaveYear);
-    this.fetchLeaveYear();
+  //  console.log(this.allLeaveYear);
+   // this.fetchLeaveYear();
     this.fetchLeaveType();
     window.globalThis.a = this;
     console.log(this.allLeaveType)
@@ -58,6 +73,7 @@ export class LeavehistoryComponent implements OnInit {
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
       this.showAddPlanModal = true;
+      this.fetchLeaveYear()
     }
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
       this.showLeavePlanModal = true;
@@ -102,20 +118,24 @@ export class LeavehistoryComponent implements OnInit {
   //  }
 
   fetchLeaveYear(){
-    this.leaveyear.getleaveyear(this.startYearDate,'',this.endYearDate,0).subscribe(data => {
+    this.leaveyear.getLeaveYears(this.startYearDate,'',this.endYearDate,0).subscribe(data => {
       // if(!data.hasError){
         this.allLeaveYear = data.result;
         console.log(this.allLeaveYear);
       // }
+    }, error => {
+  console.log(error);
     })
   }
 
   fetchLeaveType(){
-    this.leavetype.getleavetypes(true,0,false,0).subscribe(data => {
+    this.leavetype.getLeaveTypes(true,0,false,0).subscribe(data => {
       // if(!data.hasError){
         this.allLeaveType = data.result;
-        console.log(this.allLeaveType);
+        console.log(data);
       // }
+    }, (error) => {
+      console.log(error)
     })
   }
 }
