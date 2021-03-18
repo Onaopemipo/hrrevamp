@@ -1,0 +1,141 @@
+<ngx-componentsheader pageName='Quick Payroll' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
+
+
+
+<nb-card style="margin-top: 3rem;">
+    <nb-card-body>
+
+
+        <form>
+            <div class="row">
+                <div class="col-sm-8">
+
+
+                    <div class="form-group row" style="margin-top: 15px;">
+                        <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Payroll
+                            Period</label>
+                        <div class="col-sm-8">
+                            <div style="flex-wrap: wrap; display: flex; flex-direction: row; ">
+                                <div>
+                                    <input type="text" nbInput fullWidth placeholder="Start Date">
+                                </div>
+                                <div style="display: flex; flex-direction: row; align-items: center;">
+                                    <p
+                                        style="margin-left: 1.2rem; align-items: center; padding-top: 0.2rem; font-weight: bold;">
+                                    </p>
+                                    <div style="margin-left: 1.2rem;">
+                                        <input type="text" nbInput fullWidth placeholder="End Date">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="Element Type" class="label col-sm-4 col-form-label listsubheader">Pay
+                            Frequency</label>
+                        <div class="col-sm-8">
+                            <select aria-placeholder="select" name="" id="" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Institution Name" class="label col-sm-4 col-form-label listsubheader">Payment channel</label>
+                        <div class="col-sm-8">
+                            <select name="" id="" class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <nb-card>
+                        <nb-card-body>
+                            <nb-card-header>
+                                <h6 style="font-weight: lighter;">Bank Balance</h6>
+                            </nb-card-header>
+                            <div class="money">
+                                <p>NGN</p>
+                                <p style="margin-left: 0.3rem;">39,000,920.00</p>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+
+
+
+
+            <ngx-componentsheader pageName='Select Employees' style="margin-top: -7rem;"></ngx-componentsheader>
+
+        </form>
+
+    </nb-card-body>
+
+
+
+    <ngx-tableheader></ngx-tableheader>
+    <ngx-tablecomponent [tableColum]="tableColumns"  (actionClick)="tableActionClicked($event)"[userData]='data' [tableColum]="tableColumns" [actions]='tableActions'>
+    </ngx-tablecomponent>
+    
+    <div class="form-group row" style="margin-top: 2rem; margin-bottom: 1rem;">
+        <label for="Account Number" class="label col-sm-4 col-form-label listsubheader"></label>
+        <div class="col-sm-8 d-flex">
+            <button nbButton status="primary" class="d-flex column">Run Payroll</button>
+           
+
+
+        </div>
+    </div>
+
+    
+<!-- view modal -->
+
+<ngx-side-modal [(show)]="showViewModal">
+    <div modal-header></div>
+    <div modal-body>
+        <nb-card>
+            <nb-card-header>
+                Note
+            </nb-card-header>
+            <nb-card-body>
+                <!-- <div>
+                    <div
+                        style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
+                        <div style="flex: auto; display: flex;padding-top: 15px;">
+                            <p style=" text-transform: uppercase; font-weight: bold;">Delete Pay Element
+                            </p>
+                        </div>
+
+
+
+                    </div>
+                </div> -->
+                <span style="padding: 10px;"></span>
+
+                <span></span>
+
+
+
+                <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 5rem;">
+
+                    <button nbButton status="primary" class="d-flex column" style="margin-left: -4rem;"> Continue Run Payroll</button>
+                    <button nbButton outline status="primary" class="d-flex column"
+                    style="background-color: white; margin-left: 2rem;">Resolve Issues</button>
+    
+                </div>
+            </nb-card-body>
+
+
+        </nb-card>
+
+    </div>
+
+
+
+</ngx-side-modal>
+</nb-card>
+

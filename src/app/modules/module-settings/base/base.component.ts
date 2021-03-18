@@ -90,6 +90,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
 
   loadData() {
     this.loading = true;
+    console.log(111)
     this.getData().subscribe(data => {
       this.data = data.data;
       this.tableData = this.data;
@@ -116,6 +117,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
     });
   }
   ngOnInit() {
+    console.log(33)
     this.loadData();
   }
   hideModal() {
