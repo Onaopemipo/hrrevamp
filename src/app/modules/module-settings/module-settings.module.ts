@@ -9,7 +9,7 @@ import { DepartmentListComponent } from './pages/department-list/department-list
 import { AddUpdateDepartmentServiceProxy, AddUpdateLocationServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, GetAllLocationsServiceProxy, GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy } from 'app/_services/service-proxies';
 import { ApiService } from './services/api.service';
 import { PageService } from './services/page.service';
-import { BaseComponent } from './base/base.component';
+// import { BaseComponent } from './base/base.component';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { LocationListComponent } from './pages/location-list/location-list.component';
@@ -22,6 +22,16 @@ import { SalaryGradesComponent } from './pages/salary-grades/salary-grades.compo
 import { SalaryGradeService } from './services/salary-grades.service';
 import { GradeStepComponent } from './pages/grade-step/grade-step.component';
 import { GradeStepService } from './services/salary-grade-step.service';
+import { EventsComponent } from './pages/events/events.component';
+import { EventService } from './services/events.service';
+import { GenericComponent } from './pages/generic/generic.component';
+import { RequestComponent } from './pages/request/request.component';
+import { SystemoptionComponent } from './pages/systemoption/systemoption.component';
+import { RequestService } from './services/Requestservice';
+import { GenericService } from './services/generic.service';
+import { SystemOptionService } from './services/systemoptionservice';
+
+
 // import { SalaryScaleComponent } from './pages/salary-scale/department-list.component';
 // import { LocationListComponent } from './pages/location-list/location-list.component';
 // import { PositionListComponent } from './pages/position-list/position-list.component';
@@ -40,6 +50,10 @@ import { GradeStepService } from './services/salary-grade-step.service';
     SalaryScaleComponent,
     SalaryGradesComponent,
     GradeStepComponent,
+    EventsComponent,
+    GenericComponent,
+    RequestComponent,
+    SystemoptionComponent,    
     // PositionListComponent,
     // SalaryScaleComponent,
   ],
@@ -65,6 +79,10 @@ import { GradeStepService } from './services/salary-grade-step.service';
     SalaryScaleService,
     SalaryGradeService,
     GradeStepService,
+    EventService,
+    RequestService,
+    GenericService,
+    SystemOptionService,
   ]
 })
 export class ModuleSettingsModule { }

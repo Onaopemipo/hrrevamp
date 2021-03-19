@@ -9,6 +9,12 @@ import { SalaryScaleComponent } from './pages/salary-scale/salary-scale.componen
 import { SalaryGradesComponent } from './pages/salary-grades/salary-grades.component';
 import { GradeStepComponent } from './pages/grade-step/grade-step.component';
 // import { PositionListComponent } from './pages/position-list/position-list.component';
+import { EventsComponent } from './pages/events/events.component';
+import { GenericComponent } from './pages/generic/generic.component';
+import { RequestComponent } from './pages/request/request.component';
+import { SystemoptionComponent } from './pages/systemoption/systemoption.component';
+import { system } from 'faker';
+
 
 const routes: Routes = [
   {
@@ -43,6 +49,30 @@ const routes: Routes = [
         path: 'salary-grade-step',
         component: GradeStepComponent,
       },
+      {
+        path: 'event',
+        component: EventsComponent,
+      },
+      {
+        path: 'generic',
+        component: GenericComponent,
+      },
+      {
+        path: 'systemoption',
+        component: SystemoptionComponent,
+      },
+      {
+        path: 'request',
+        component: RequestComponent,
+      },
+      // {
+      //   path: 'location',
+      //   component: LocationListComponent,
+      // },
+      // {
+      //   path: 'position',
+      //   component: PositionListComponent,
+      // },
     ]
   }
 ];
