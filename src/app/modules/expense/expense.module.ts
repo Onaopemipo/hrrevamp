@@ -8,6 +8,7 @@ import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { ExpenseRequestComponent } from './expense-request/expense-request.component';
 import { ExpenseManagementComponent } from './expense-management/expense-management.component';
 import { ExpenseReportComponent } from './expense-report/expense-report.component';
+import { ExpenseRequestService } from './services/expense-request.service';
 
 
 
@@ -18,6 +19,9 @@ import { ExpenseReportComponent } from './expense-report/expense-report.componen
     ExpenseTypeComponent,
     ExpenseRequestComponent,
     ExpenseReportComponent,
+  ],
+  providers: [
+    ExpenseRequestService,
   ],
   imports: [
     CommonModule,
