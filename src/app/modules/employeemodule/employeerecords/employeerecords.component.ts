@@ -46,6 +46,7 @@ export class EmployeerecordsComponent implements OnInit {
     }
   }
 
+
   ngOnInit(): void {
     console.log('We are here');
     this.getAllEmployees();

@@ -1,3 +1,4 @@
+import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpenseComponent } from './expense/expense.component';
@@ -8,6 +9,7 @@ import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { ExpenseRequestComponent } from './expense-request/expense-request.component';
 import { ExpenseManagementComponent } from './expense-management/expense-management.component';
 import { ExpenseReportComponent } from './expense-report/expense-report.component';
+import { AddUpdateExpenseProjectServiceProxy } from 'app/_services/service-proxies';
 
 
 
@@ -24,6 +26,14 @@ import { ExpenseReportComponent } from './expense-report/expense-report.componen
     ComponentsModule,
     ThemeModule,
     ExpenseRoutingModule,
-  ]
+  ],
+
+  providers: [
+    AddUpdateExpenseProjectServiceProxy,
+    GetExpenseProjectServiceProxy,
+    AddUpdateLoanTypeServiceProxy,
+    GetExpenseTypesServiceProxy,
+    GetExpenseProjectServiceProxy
+]
 })
 export class ExpenseModule { }

@@ -11,6 +11,11 @@ export class WysisygInputComponent implements OnInit {
     this.model = val;
   }
   @Output() valueChange = new EventEmitter<string>();
+
+  @Input() set ngModel(val: string) {
+    this.model = val;
+  }
+  @Output() ngModelChange = new EventEmitter<string>();
   model = '';
   constructor() { }
 
@@ -19,6 +24,7 @@ export class WysisygInputComponent implements OnInit {
 
   onChange() {
     this.valueChange.emit(this.model);
+    this.ngModelChange.emit(this.model);
   }
 
 }
