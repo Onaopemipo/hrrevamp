@@ -1,15 +1,12 @@
-import { Position } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { StateService } from 'app/@core/utils';
 import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { DataServiceProxy, LGA, State, StateIListApiResult } from 'app/_services/service-proxies';
+import { MyGradeStep, GradeStepFilter, GradeStepService } from '../../services/salary-grade-step.service';
 import { BaseComponent } from '../../base/base.component';
-import { LocationFilter, MyLocation } from '../../services/location.service';
-import { LocationService } from '../../services/location.service';
 import { PageService } from '../../services/page.service';
-import { MyPosition, PositionFilter, PositionService } from '../../services/position.service';
 
 enum TOP_ACTIONS { ADD, }
 enum ACTIONS { EDIT = '1', DELETE = '2' }
@@ -18,25 +15,26 @@ const SUCCESS_MESSAGES = {
   edit: 'Department Edited Successfully',
   delete: 'Department Deleted Successfully',
 };
-
 @Component({
-  selector: 'ngx-position-list',
-  templateUrl: './position-list.component.html',
-  styleUrls: ['./position-list.component.scss']
+  selector: 'ngx-grade-step',
+  templateUrl: './grade-step.component.html',
+  styleUrls: ['./grade-step.component.scss']
 })
-export class PositionListComponent extends BaseComponent<MyPosition,
-PositionFilter, MyPosition> implements OnInit {
+export class GradeStepComponent extends BaseComponent<MyGradeStep,
+GradeStepFilter, MyGradeStep> implements OnInit {
   topActionButtons = [
-    { name: TOP_ACTIONS.ADD, label: 'Add Position', icon: '', outline: false },
+    { name: TOP_ACTIONS.ADD, label: 'Add Salary Grade Step', icon: '', outline: false },
   ];
 
   // TOP_ACTIONS = TOP_ACTIONS;
 
   tableColumns = [
-    { name: 'location_name', title: 'Location Name' },
-    { name: 'state', title: 'State' },
-    { name: 'lga', title: 'LGA' },
-    { name: '', title: 'Status', type: ColumnTypes.Status },
+    { name: 'name', title: 'Name' },
+    { name: 'grade', title: 'Grade' },
+    { name: 'step_no', title: 'Step No' },
+    { name: 'lga', title: 'Promo. Min. Years' },
+    { name: 'lga', title: 'Next Grade Step' },
+    // { name: '', title: 'Status', type: ColumnTypes.Status },
   ];
 
   tableActions: TableAction[] = [
@@ -44,14 +42,14 @@ PositionFilter, MyPosition> implements OnInit {
     { name: ACTIONS.DELETE, label: 'Delete' },
   ];
 
-  data: MyPosition[] = [];
+  data: MyGradeStep[] = [];
   successMessage = SUCCESS_MESSAGES.edit;
   // editingData = new VwDepartment();
   filter = {};
 
-  getNewEditingData() { return new MyPosition(); }
+  getNewEditingData() { return new MyGradeStep(); }
 
-  saveData(data: MyPosition) {
+  saveData(data: MyGradeStep) {
     console.log(1000)
     if (this.editingData.id) {
       this.successMessage = SUCCESS_MESSAGES.edit;
@@ -67,7 +65,7 @@ PositionFilter, MyPosition> implements OnInit {
 
   tableActionClicked(event: TableActionEvent) {
     const temp: any = event.data;
-    this.editingData = new MyPosition(temp.department);
+    this.editingData = new MyGradeStep(temp);
     if (event.name === ACTIONS.EDIT) {
       this.showModal = true;
     }
@@ -82,7 +80,7 @@ PositionFilter, MyPosition> implements OnInit {
   }
 
   public constructor(
-    private api: PositionService,
+    private api: GradeStepService,
     private pageService: PageService,
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,

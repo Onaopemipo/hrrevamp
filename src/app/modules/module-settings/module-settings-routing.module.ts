@@ -4,6 +4,10 @@ import { ModuleSettingsComponent } from './module-settings.component';
 // import { BenefitListComponent } from './pages/benefit-list/benefit-list.component';
 import { DepartmentListComponent } from './pages/department-list/department-list.component';
 import { LocationListComponent } from './pages/location-list/location-list.component';
+import { PositionListComponent } from './pages/position-list/position-list.component';
+import { SalaryScaleComponent } from './pages/salary-scale/salary-scale.component';
+import { SalaryGradesComponent } from './pages/salary-grades/salary-grades.component';
+import { GradeStepComponent } from './pages/grade-step/grade-step.component';
 // import { PositionListComponent } from './pages/position-list/position-list.component';
 
 const routes: Routes = [
@@ -23,10 +27,22 @@ const routes: Routes = [
         path: 'location',
         component: LocationListComponent,
       },
-      // {
-      //   path: 'position',
-      //   component: PositionListComponent,
-      // },
+      {
+        path: 'position',
+        component: PositionListComponent,
+      },
+      {
+        path: 'salary-scale',
+        component: SalaryScaleComponent,
+      },
+      {
+        path: 'salary-grade',
+        component: SalaryGradesComponent,
+      },
+      {
+        path: 'salary-grade-step',
+        component: GradeStepComponent,
+      },
     ]
   }
 ];

@@ -17,6 +17,11 @@ import { PositionListComponent } from './pages/position-list/position-list.compo
 import { JobRoleComponent } from './pages/job-role/job-role.component';
 import { SalaryScaleComponent } from './pages/salary-scale/salary-scale.component';
 import { LocationService } from './services/location.service';
+import { SalaryScaleService } from './services/salary-scale.service';
+import { SalaryGradesComponent } from './pages/salary-grades/salary-grades.component';
+import { SalaryGradeService } from './services/salary-grades.service';
+import { GradeStepComponent } from './pages/grade-step/grade-step.component';
+import { GradeStepService } from './services/salary-grade-step.service';
 // import { SalaryScaleComponent } from './pages/salary-scale/department-list.component';
 // import { LocationListComponent } from './pages/location-list/location-list.component';
 // import { PositionListComponent } from './pages/position-list/position-list.component';
@@ -33,6 +38,8 @@ import { LocationService } from './services/location.service';
     PositionListComponent,
     JobRoleComponent,
     SalaryScaleComponent,
+    SalaryGradesComponent,
+    GradeStepComponent,
     // PositionListComponent,
     // SalaryScaleComponent,
   ],
@@ -55,6 +62,9 @@ import { LocationService } from './services/location.service';
     GetAllLocationsServiceProxy,
     GetLocationByIdServiceProxy,
     AddUpdateLocationServiceProxy,
+    SalaryScaleService,
+    SalaryGradeService,
+    GradeStepService,
   ]
 })
 export class ModuleSettingsModule { }

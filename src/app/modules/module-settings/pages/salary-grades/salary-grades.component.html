@@ -1,10 +1,10 @@
 <ngx-componentsheader
-  pageName="Salary Scales"
+  pageName="Salary Grades"
   [requiredButton]="topActionButtons"
   (buttonClick)="pageActionClicked($event)"
 ></ngx-componentsheader>
 <div class="main-page-container">
-  <ngx-default-content
+<ngx-default-content
     *ngIf="showEmpty"
     pageHeader="Create your first Salary Scale"
     pageDescription="Click on the button to create a Salary Scale"
@@ -34,48 +34,42 @@
             class="form-control"
             placeholder="Name"
             [(ngModel)]="editingData.name"
-          />
-          <ng-template [ngIf]="errors['name']">
-            <span *ngFor="let error of errors['name']" class="error">{{
-              error
-            }}</span>
-          </ng-template>
+        />
+        <ng-template [ngIf]="errors['name']">
+          <span *ngFor="let error of errors['name']" class="error">{{error}}</span>
+        </ng-template>
         </div>
-        <div class="form-group">
-          <label>Code</label>
-          <div>
-            <input
-              class="form-control"
-              placeholder="Name"
-              [(ngModel)]="editingData.code"
-            />
-            <ng-template [ngIf]="errors['code']">
-              <span *ngFor="let error of errors['code']" class="error">{{
-                error
-              }}</span>
-            </ng-template>
-          </div>
+      </div>
+      <div class="form-group">
+        <label>No of Leave Days</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            [(ngModel)]="editingData.noOfLeaveDays"
+        />
+        <ng-template [ngIf]="errors['noOfLeaveDays']">
+          <span *ngFor="let error of errors['noOfLeaveDays']" class="error">{{error}}</span>
+        </ng-template>
         </div>
-        <div class="form-group">
-          <label>Is Active</label>
-          <div>
-            <input
-              class="form-control"
-              type="checkbox"
-              [(ngModel)]="editingData.isActive"
-            />
-          </div>
+      </div>
+      <div class="form-group">
+        <label>Promotion Minimium Years</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            [(ngModel)]="editingData.promotion_min_years"
+        />
+        <ng-template [ngIf]="errors['promotion_min_years']">
+          <span *ngFor="let error of errors['promotion_min_years']" class="error">{{error}}</span>
+        </ng-template>
         </div>
       </div>
     </div>
   </div>
   <div modal-actions>
-    <ngx-loadable-button
-      (click)="submitForm()"
-      [loading]="loadingSave"
-      style="margin-right: 1rem"
-      >Save</ngx-loadable-button
-    >
+    <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
     <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
     <button nbButton status="primary" outline (click)="hideModal()">
       cancel

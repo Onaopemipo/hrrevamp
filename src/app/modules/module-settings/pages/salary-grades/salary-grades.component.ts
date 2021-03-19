@@ -1,57 +1,55 @@
-import { Position } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StateService } from 'app/@core/utils';
 import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { DataServiceProxy, LGA, State, StateIListApiResult } from 'app/_services/service-proxies';
 import { BaseComponent } from '../../base/base.component';
-import { LocationFilter, MyLocation } from '../../services/location.service';
-import { LocationService } from '../../services/location.service';
 import { PageService } from '../../services/page.service';
-import { MyPosition, PositionFilter, PositionService } from '../../services/position.service';
+import { MySalaryGrade, SalaryGradeFilter, SalaryGradeService } from '../../services/salary-grades.service';
 
 enum TOP_ACTIONS { ADD, }
-enum ACTIONS { EDIT = '1', DELETE = '2' }
+enum ACTIONS { EDIT = '1', DELETE = '2', STEPS = '3' }
 const SUCCESS_MESSAGES = {
   create: 'Department Created Successfully',
   edit: 'Department Edited Successfully',
   delete: 'Department Deleted Successfully',
 };
-
 @Component({
-  selector: 'ngx-position-list',
-  templateUrl: './position-list.component.html',
-  styleUrls: ['./position-list.component.scss']
+  selector: 'ngx-salary-grades',
+  templateUrl: './salary-grades.component.html',
+  styleUrls: ['./salary-grades.component.scss']
 })
-export class PositionListComponent extends BaseComponent<MyPosition,
-PositionFilter, MyPosition> implements OnInit {
+export class SalaryGradesComponent  extends BaseComponent<MySalaryGrade,
+SalaryGradeFilter, MySalaryGrade> implements OnInit {
   topActionButtons = [
-    { name: TOP_ACTIONS.ADD, label: 'Add Position', icon: '', outline: false },
+    { name: TOP_ACTIONS.ADD, label: 'Add Salary Grade', icon: '', outline: false },
   ];
 
   // TOP_ACTIONS = TOP_ACTIONS;
 
   tableColumns = [
-    { name: 'location_name', title: 'Location Name' },
-    { name: 'state', title: 'State' },
-    { name: 'lga', title: 'LGA' },
-    { name: '', title: 'Status', type: ColumnTypes.Status },
+    { name: 'name', title: 'Name' },
+    { name: 'noOfLeaveDays', title: 'No of Leave Days' },
+    { name: 'promotion_min_years', title: 'Promo. Min. Years' },
+    { name: 'no_of_steps', title: 'No of Steps'}
   ];
 
   tableActions: TableAction[] = [
     { name: ACTIONS.EDIT, label: 'Edit' },
     { name: ACTIONS.DELETE, label: 'Delete' },
+    { name: ACTIONS.STEPS, label: 'Steps'}
   ];
 
-  data: MyPosition[] = [];
+  data: MySalaryGrade[] = [];
   successMessage = SUCCESS_MESSAGES.edit;
   // editingData = new VwDepartment();
   filter = {};
 
-  getNewEditingData() { return new MyPosition(); }
+  getNewEditingData() { return new MySalaryGrade(); }
 
-  saveData(data: MyPosition) {
+  saveData(data: MySalaryGrade) {
     console.log(1000)
     if (this.editingData.id) {
       this.successMessage = SUCCESS_MESSAGES.edit;
@@ -67,12 +65,15 @@ PositionFilter, MyPosition> implements OnInit {
 
   tableActionClicked(event: TableActionEvent) {
     const temp: any = event.data;
-    this.editingData = new MyPosition(temp.department);
+    this.editingData = new MySalaryGrade(temp);
     if (event.name === ACTIONS.EDIT) {
       this.showModal = true;
     }
     if (event.name === ACTIONS.DELETE) {
       this.deleteRow('Are you sure to delete this department?');
+    }
+    if (event.name === ACTIONS.STEPS) {
+      this.router.navigateByUrl('/setup/salary-grade-step')
     }
   }
 
@@ -82,15 +83,36 @@ PositionFilter, MyPosition> implements OnInit {
   }
 
   public constructor(
-    private api: PositionService,
+    private api: SalaryGradeService,
     private pageService: PageService,
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,
     private dataService: DataServiceProxy,
+    private router: Router,
   ) {
     super(confirmBox);
   }
 
+  states: State[] = [];
+  lgas: LGA[] = [];
+  ngOnInit() {
+    super.ngOnInit();
+    this.dataService.getStates().subscribe(data => {
+      this.states = data.result;
+    });
+  }
+
+  updateLGAs(){
+  }
   validator = {
+    name: {
+      presence: true,
+    },
+    noOfLeaveDays: {
+      presence: true,
+    },
+    promotion_min_years: {
+      presence: true,
+    },
   };
 }
