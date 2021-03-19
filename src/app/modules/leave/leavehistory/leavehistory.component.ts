@@ -50,15 +50,11 @@ export class LeavehistoryComponent implements OnInit {
   startYearDate = new Date();
   endYearDate = new Date();
   startDate: Date = this.leavePlanModel.startDate;
-<<<<<<< HEAD
   endDate: Date;
 
-  constructor(private leaveyear: GetLeaveYearServiceProxy, private leavetype: GetLeaveTypesServiceProxy) { }
-=======
   leaveRequestModel: any = ''
   constructor(private leaveyear: GetLeaveYearsServiceProxy, private leavetype: GetLeaveTypesServiceProxy,
   private alertService: AlertserviceService) { }
->>>>>>> e21977e6038503eafab118f2f71ec57068c73954
 
   ngOnInit(): void {
     // this.updateCalcs;
