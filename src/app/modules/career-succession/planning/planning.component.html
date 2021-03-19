@@ -1,0 +1,87 @@
+<ngx-componentsheader *ngIf="!newPlan" [requiredButton]="[{name:'plan', label:'Create Plan'}]" (buttonClick)="addPlan()" pageName='Succession Plans'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newPlan" pageName='Create Succession Plan'></ngx-componentsheader>
+
+<div style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
+</div>
+
+<div *ngIf="!newPlan">
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent  [tableColum]="successionTable"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+  <div *ngIf="newPlan">
+    <nb-card>
+      <nb-card-body>
+        <h6>Job title and Department details</h6>
+        <form>
+          <div class="form-group row mydiv">
+            <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <input type="text" class="form-control" id="jobTitle" placeholder="Plan Title">
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Employee" class="col-sm-3 col-form-label mylabel">Employee</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <ngx-employee-master-search></ngx-employee-master-search>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Position" class="col-sm-3 col-form-label mylabel">Position</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <ngx-employee-master-search></ngx-employee-master-search>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Succession Candidate" class="col-sm-3 col-form-label mylabel">Succession Candidate</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <ngx-employee-master-search></ngx-employee-master-search>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Readiness" class="col-sm-3 col-form-label mylabel">Readiness to Start</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="custom-select" required>
+                <option value="">Select </option>
+                <option value="1">Stage One</option>
+                <option value="2">Stage Two</option>
+                <option value="3">Stage Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <label for="Purpose" class="col-sm-3 col-form-label mylabel">Purpose</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="custom-select" required>
+                <option value="">Select </option>
+                <option value="1">Stage One</option>
+                <option value="2">Stage Two</option>
+                <option value="3">Stage Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+            <div class="col-sm-6">
+              <button nbButton status="primary">Create Plan</button>
+              <span style="padding: 8px;"></span>
+              <button nbButton style="color: #4847E0;">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+
+

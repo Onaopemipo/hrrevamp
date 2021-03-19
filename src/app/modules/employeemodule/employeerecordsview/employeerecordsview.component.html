@@ -7,17 +7,17 @@
     <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
 
     </nb-card-body>
-    <div  style.height="{{(scase.offsetHeight < 702)?680 : (scase.offsetHeight - 210) }}px" >
+    <div>
         <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of hiringChecklist; let i = index">
-    
+
             <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
             <div style="padding-left: 1rem;"><nb-icon icon="checkmark-circle-2" status="{{hiringlist.status == 'Active'? 'primary': 'none'}}"></nb-icon></div>
             <div style="padding-left: 0.625rem;"><span [ngClass]="{'listtextActive': hiringlist.status == 'Active','listtextInactive': hiringlist.status != 'Active'}" >{{hiringlist.label}} </span> </div>
             </div>
-            
+
       </div>
     </div>
-    
+
     </nb-card>
     </div>
     <div class="col-md-8 col-xxl-8">
@@ -35,128 +35,152 @@
                     </nb-select>
                   </div>
             </div>
-    
+
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">Input required Information in the fields below</p>
                 </div>
                 <div style="padding-top:1rem;">
-                    <form>
+                    <form #newEmployeeForm="ngForm" name="newEmployeeForm">
                         <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">First Name</label>
+                            <label for="FirstName" class="label col-sm-4 col-form-label listsubheader">First Name</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="First Name">
-                            </div>
-                          </div>                       
-                          <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
-                            <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Last Name">
+                              <input type="text" nbInput fullWidth name="firstName" #firstName="ngModel"  [(ngModel)]="createNewEmployee.firstName" placeholder="First Name" required>
+                              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error">
+                                <div *ngIf="firstName.errors.required">First Name is required</div>
+                              </div>
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                            <label for="LastName" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Phone Number">
+                              <input type="text" nbInput fullWidth name="lastName" #lastName="ngModel"  [(ngModel)]="createNewEmployee.lastName"  placeholder="Last Name" required>
+                              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
+                                <div *ngIf="lastName.errors.required">Last Name is required</div>
+                              </div>
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
+                            <label for="PhoneNumber" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Date of Birth">
+                              <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.defaultMobile" placeholder="Phone Number" required>
+                              <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                                <div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="DOB" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
+                            <div class="col-sm-8">
+                              <!-- <input type="date" nbInput fullWidth name="dateOfBirth" #dateOfBirth="ngModel"  [(ngModel)]="createNewEmployee.dateOfBirth" placeholder="Date of Birth" required> -->
+                              <!-- <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)" class="error">
+                                <div *ngIf="dateOfBirth.errors.required">Date of Birth is required</div>
+                              </div> -->
+                              <ngx-date></ngx-date>
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
+                            <label for="MaritalStatus" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Marital Status">
+                              <select class="custom-select" name="maritalStatusId" #maritalStatusId="ngModel"  [(ngModel)]="createNewEmployee.maritalStatusId"  placeholder="Marital Status" required>
+                                <option [value]="status.option_value" *ngFor="let status of maritalStatusValues">{{status.option_text}}</option>
+                              </select>
+                              <div *ngIf="maritalStatusId.invalid && (maritalStatusId.dirty || maritalStatusId.touched)" class="error">
+                                <div *ngIf="maritalStatusId.errors.required">Marital Status is required</div>
+                              </div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Gender">
+                              <select class="custom-select" name="gender" #gender="ngModel"  [(ngModel)]="createNewEmployee.genderId" placeholder="Gender" required>
+                                <option *ngFor="let gen of genderValues" [value]="gen.option_value">{{gen.option_text}} </option>
+                              </select>
+                              <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="error">
+                                <div *ngIf="gender.errors.required">Gender is required</div>
+                              </div>
                             </div>
                           </div>
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
+                            <label for="employeeNumber" class="label col-sm-4 col-form-label listsubheader">Employee Number</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Address">
+                              <input type="text" nbInput fullWidth name="employeeNumber" #employeeNumber="ngModel"  [(ngModel)]="createNewEmployee.employeeNumber" placeholder="Employee Number">
                             </div>
                           </div>
-    <div style="padding-top: 1rem;"></div>
-                          <p class="header6-medium">Educational Information</p>
-    
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Field of Study</label>
+                            <label for="workEmail" class="label col-sm-4 col-form-label listsubheader">Work Email</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Field of Study">
+                              <input type="email" nbInput fullWidth name="workEmail" #workEmail="ngModel"  [(ngModel)]="createNewEmployee.workEmail"  placeholder="Work Email" required>
+                              <div *ngIf="workEmail.invalid && (workEmail.dirty || workEmail.touched)" class="error">
+                                <div *ngIf="workEmail.errors.required">Work Email is required</div>
+                              </div>
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Degree</label>
+                            <label for="Religion" class="label col-sm-4 col-form-label listsubheader">Religion</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Degree">
+                              <select class="custom-select" name="religion" #religion="ngModel"  [(ngModel)]="createNewEmployee.religionId" placeholder="Religion" required>
+                                <option *ngFor="let rel of religionValues" [value]="rel.option_value">{{rel.option_text}}</option>
+                              </select>
+                              <div *ngIf="religion.invalid && (religion.dirty || religion.touched)" class="error">
+                                <div *ngIf="religion.errors.required">Religion is required</div>
+                              </div>
                             </div>
                           </div>
-    
+
+
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Completion</label>
+                            <label for="Religion" class="label col-sm-4 col-form-label listsubheader">Employment Status</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Date of Completion">
+                              <select class="custom-select" name="employmentStatus" #employmentStatus="ngModel"  [(ngModel)]="createNewEmployee.employmentStatus" placeholder="Religion" required>
+                                <option *ngFor="let employment of employmentStatusValues" [value]="employment.option_value">{{employment.option_text}} </option>
+                              </select>
+                              <div *ngIf="employmentStatus.invalid && (employmentStatus.dirty || employmentStatus.touched)" class="error">
+                                <div *ngIf="employmentStatus.errors.required">Employment Status is required</div>
+                              </div>
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">CGPA</label>
+                            <label for="bvn" class="label col-sm-4 col-form-label listsubheader">BVN</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="CGPA">
+                              <input type="number" nbInput fullWidth min="10" max="10" name="bvn" #bvn="ngModel"  [(ngModel)]="createNewEmployee.bvn" placeholder="BVN">
+                              <div *ngIf="bvn.invalid && (bvn.dirty || bvn.touched)" class="error">
+                                <div *ngIf="bvn.errors.required">BVN is required</div>
+                              </div>
                             </div>
                           </div>
-    
+
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Institution</label>
+                            <label for="personalEmail" class="label col-sm-4 col-form-label listsubheader">Personal Email</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Institution">
+                              <input type="email" nbInput fullWidth name="personalEmail" #personalEmail="ngModel"  [(ngModel)]="createNewEmployee.userEmail"  placeholder="Personal Email" required>
+                              <div *ngIf="personalEmail.invalid && (personalEmail.dirty || personalEmail.touched)" class="error">
+                                <div *ngIf="personalEmail.errors.required">Personal Email is required</div>
+                              </div>
                             </div>
                           </div>
-                          <div style="padding-top: 1rem;"></div>
-                          <p class="header6-medium">Next of Kin</p>
+
+
                           <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Full Name</label>
-                            <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Full Name">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Relationship</label>
-                            <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Relationship">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
-                            <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Phone Number">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
-                            <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Address">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <div class="offset-sm-4 col-sm-8">
-                              <button type="submit" nbButton status="primary" >Update Changes</button>
+                            <label class="label col-sm-4 col-form-label listsubheader" style="font-weight: bold;"></label>
+                            <div class="col-sm-8 col-md-8 col-lg-8">
+                              <button nbButton status="primary" [disabled]="newEmployeeForm.invalid"  (click)="createEmployee()">Next</button>
+                              <span style="padding: 8px;"></span>
+                              <button nbButton style="color: #4847E0;">Go Back</button>
                             </div>
                           </div>
                     </form>
                 </div>
         </div>
-    
+
         <!--Work Info-->
-    
+
         <div class="fmContainer" *ngSwitchCase="'contract_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
@@ -167,7 +191,7 @@
                     </nb-select>
                   </div>
             </div>
-    
+
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">Input required Information in the fields below</p>
                 </div>
@@ -179,7 +203,7 @@
                               <input type="text" nbInput fullWidth  placeholder="Hire Date">
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of joining</label>
                             <div class="col-sm-8">
@@ -230,7 +254,7 @@
                     </form>
                 </div>
         </div>
-    
+
          <!--Payment-->
          <div class="fmContainer" *ngSwitchCase="'document_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
@@ -242,8 +266,8 @@
                     </nb-select>
                   </div>
             </div>
-    
-    
+
+
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">Input required Information in the fields below</p>
                 </div>
@@ -255,21 +279,21 @@
                               <input type="text" nbInput fullWidth  placeholder="Bank Name">
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Name</label>
                             <div class="col-sm-8">
                               <input type="text" nbInput fullWidth  placeholder="Account Name">
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Number</label>
                             <div class="col-sm-8">
                               <input type="tel" nbInput fullWidth  placeholder="Account Number">
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Type</label>
                             <div class="col-sm-8">
@@ -289,7 +313,7 @@
             <div style="padding-bottom: 5px;">
                 <p class="header6-medium">{{selectedPanel.label}}</p>
             </div>
-    
+
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">Input required Information in the fields below</p>
                 </div>
@@ -319,18 +343,18 @@
                                       [value]="'This is value 2'">
                                       No
                                     </nb-radio>
-                                
+
                                   </nb-radio-group>
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Please State it</label>
                             <div class="col-sm-8">
                               <input type="text" nbInput fullWidth  placeholder="Please State it">
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <div class="offset-sm-4 col-sm-8">
                               <button type="submit" nbButton status="primary" >Update Changes</button>
@@ -340,13 +364,13 @@
                 </div>
         </div>
         <!--Tax-->
-       
-    
+
+
            <div class="fmContainer" *ngSwitchCase="'bank_panel'">
             <div style="padding-bottom: 5px;">
                 <p class="header6-medium">{{selectedPanel.label}}</p>
             </div>
-    
+
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">Input required Information in the fields below</p>
                 </div>
@@ -358,7 +382,7 @@
                               <input type="text" nbInput fullWidth  placeholder="Tax ID">
                             </div>
                           </div>
-    
+
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Are you Nigerian?</label>
                             <div class="col-sm-8">
@@ -371,7 +395,7 @@
                                       [value]="'This is value 2'">
                                       No
                                     </nb-radio>
-                                
+
                                   </nb-radio-group>
                             </div>
                           </div>
@@ -413,13 +437,13 @@
                     </form>
                 </div>
         </div>
-    
+
             <!--Document-->
             <div class="fmContainer" *ngSwitchCase="'kin_panel'">
                 <div style="padding-bottom: 5px;">
                     <p class="header6-medium">{{selectedPanel.label}}</p>
                 </div>
-    
+
                 <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                     <p class="smalltext">Input required Information in the fields below</p>
                     </div>
@@ -471,7 +495,7 @@
                     <p class="header6-medium">{{selectedPanel.label}}</p>
                 </div>
             </div>
-            
+
                <!--History-->
                <div class="fmContainer" *ngSwitchCase="'History_panel'">
                 <div style="padding-bottom: 5px;">

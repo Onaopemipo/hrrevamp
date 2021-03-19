@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TalentPoolComponent implements OnInit {
 
+  talentPoolHeader: string = 'Create a Talent Pool';
+  talentPoolDescription: string = 'Click on the button to create your first pool';
+  myButton: string = 'Create Talent Pool';
+  newPool:boolean = false;
+  talentPool: string = '';
+
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
     {name: 'position', title: 'Position'},
@@ -19,6 +25,10 @@ export class TalentPoolComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addNewPool(){
+  this.newPool = !this.newPool;
   }
 
 }
