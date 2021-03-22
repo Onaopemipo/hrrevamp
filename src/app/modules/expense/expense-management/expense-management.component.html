@@ -28,48 +28,7 @@
 <ngx-side-modal [(show)]="showModal" [isPage]="true">
   <div modal-header>Add project</div>
   <div modal-body>
-    <form #newProject="ngForm" name="newProject">
-    <div class="my-form linear-form">
-      <h6>Add Manually</h6>
-
-      <div class="form-group row">
-        <label for="Name" class="col-sm-3">Name</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <input type="text" class="form-control" name="projectName" #projectName="ngModel" [(ngModel)]="allProjects.name" placeholder="Name">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Name" class="col-sm-3">Start Date</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-date [(value)]="allProjects.endDate" [max]="allProjects.endDate"></ngx-date>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Name" class="col-sm-3">End Date</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-date [(value)]="allProjects.endDate" [min]="allProjects.startDate"></ngx-date>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Name" class="col-sm-3 col-form-label">Description</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <!-- <ngx-wysisyg-input></ngx-wysisyg-input> -->
-          <ngx-wysisyg-input [(ngModel)]="allProjects.description" style="padding-left: -10px;"></ngx-wysisyg-input>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="Name" class="col-sm-3 col-form-label">Project list</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-file-upload></ngx-file-upload>
-        </div>
-      </div>
-
-    </div>
-  </form>
+    
   </div>
 
   <div modal-actions>
