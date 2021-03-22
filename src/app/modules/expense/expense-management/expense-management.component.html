@@ -19,7 +19,7 @@
   </ngx-default-content>
   <ngx-tablecomponent
     *ngIf="!showEmpty"
-    [tableColum]="tableColumns"
+    [tableColum]="_tableColumns"
     [userData]="tableData"
     [loading]="loading"
     (pageChange)="loadNewPage($event)"
@@ -42,21 +42,22 @@
       <div class="form-group row">
         <label for="Name" class="col-sm-3">Start Date</label>
         <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-date></ngx-date>
+          <ngx-date [(value)]="allProjects.endDate" [max]="allProjects.endDate"></ngx-date>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="Name" class="col-sm-3">End Date</label>
         <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-date></ngx-date>
+          <ngx-date [(value)]="allProjects.endDate" [min]="allProjects.startDate"></ngx-date>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="Name" class="col-sm-3 col-form-label">Description</label>
         <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-wysisyg-input [(ngModel)]="allProjects.description"></ngx-wysisyg-input>
+          <!-- <ngx-wysisyg-input></ngx-wysisyg-input> -->
+          <ngx-wysisyg-input [(ngModel)]="allProjects.description" style="padding-left: -10px;"></ngx-wysisyg-input>
         </div>
       </div>
 

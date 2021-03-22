@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ngx-wysisyg-input',
@@ -17,6 +18,8 @@ export class WysisygInputComponent implements OnInit {
   }
   @Output() ngModelChange = new EventEmitter<string>();
   model = '';
+
+  myForm = new FormControl();
   constructor() { }
 
   ngOnInit(): void {

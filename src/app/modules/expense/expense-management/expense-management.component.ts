@@ -1,3 +1,4 @@
+import { NbTabComponent } from '@nebular/theme';
 import { AddUpdateExpenseProjectServiceProxy, ExpenseProject, IExpenseProject, ExpenseProjectDto, MessageOut, AddUpdateLoanTypeServiceProxy, ExpenseTypeDto, FetchExpensesServiceProxy, GetExpenseProjectServiceProxy, ExpenseGroup, GetExpenseTypesServiceProxy, ExpenseType } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
@@ -14,18 +15,29 @@ enum TOP_ACTIONS { CREATE_NEW, }
 })
 export class ExpenseManagementComponent extends MainBaseComponent {
   topActionButtons = [
-    { name: 'CREATE_NEW', label: 'Create new', icon: 'plus', outline: false },
+    { name: 'CREATE_NEW', label: 'Add Project', icon: 'plus', outline: false },
   ];
   TOP_ACTIONS = TOP_ACTIONS;
   TABS = TABS;
   selectedTab = TABS.PROJECTS;
-  tableColumns = [
+  tableColumns = []
+  get _tableColumns(){
+    if(this.selectedTab === TABS.PROJECTS){
+      return  [
+        { name: 'date', title: 'REF ID' },
+        { name: 'date', title: 'Name' },
+        { name: 'date', title: 'Start Date' },
+        { name: 'date', title: 'End Date' },
+        { name: 'date', title: 'Status' }
+      ];
+    }
+    return [
     { name: 'date', title: 'REF ID' },
     { name: 'date', title: 'Name' },
-    { name: 'date', title: 'Start Date' },
-    { name: 'date', title: 'End Date' },
-    { name: 'date', title: 'Status' }
+    { name: 'date', title: 'Sub-Type' },
+    { name: 'date', title: 'Budget Code' }
   ];
+  }
 
   allProjects: ExpenseProjectDto = new ExpenseProjectDto().clone();
   myexpense: ExpenseTypeDto;
@@ -93,5 +105,10 @@ if(!data.hasError){
   console.log('Hey See here', this.myTypes)
 }
 })
+  }
+
+  selectTab(event: NbTabComponent){
+    super.selectTab(event);
+    this.topActionButtons[0].label = this.selectedTab === TABS.PROJECTS ? 'Add Project' : 'Add New Type'
   }
 }
