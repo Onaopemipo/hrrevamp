@@ -41,11 +41,11 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/disbursement/disbursement.module')
         .then(m => m.DisbursementModule)
     },
-    {
-      path: 'leave',
-      loadChildren: () => import('../modules/leave/leave.module')
-        .then(m => m.LeaveModule)
-    },
+    // {
+    //   path: 'leave',
+    //   loadChildren: () => import('../modules/leave/leave.module')
+    //     .then(m => m.LeaveModule)
+    // },
     {
       path: 'expenses',
       loadChildren: () => import('../modules/expense/expense.module')

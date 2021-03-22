@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
+import { AddUpdateDepartmentServiceProxy, Department, GetDepartmentByIdServiceProxy, Location, ManageDepartmentDTO, } from 'app/_services/service-proxies';
 import {  DepartmentDTO, GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
-const PAGE_SIZE = 20;
+export const DEFAULT_PAGE_SIZE = 20;
+
+export interface BaseFilter{
+  page?: number;
+}
 export interface ListResult<T> {
   data: T[];
   length: number;
@@ -11,48 +16,66 @@ export interface ListResult<T> {
 
 export class MyDepartment implements IStatus{
   department: DepartmentDTO;
-  public constructor(department: DepartmentDTO){
+  name: string;
+  code: string;
+  id: number;
+
+
+  public constructor(department: DepartmentDTO = new DepartmentDTO()) {
     this.department = department;
+    this.name = department.name;
+    this.code = department.code;
+    this.id = department.id;
+    window.globalThis.aaa = this;
   }
 
-  get name() {
-    return this.department.name;
-  }
-
-  get code() {
-    return this.department.code;
-  }
-
-  get id() {
-    return this.department.id;
-  }
+  // get id() {
+  //   console.log(1111);
+  //   return this.department.id;
+  // }
 
   getStatusColor() {
-    return new MyColor(200, 100, 10)
+    return new MyColor(200, 100, 10);
   }
-  getStatusLabel(){
+  getStatusLabel() {
     return 'Active';
   }
+
+  toManage() {
+    return new ManageDepartmentDTO();
+  }
 }
+
 
 export interface DepartmentFilter {
   name?: string;
   code?: string;
   page?: number;
 }
+
+export abstract class CrudService<Filter, Create, Data> {
+  abstract list(filter: Filter): Observable<ListResult<Data>>;
+  // abstract fetch(id: number);
+  // abstract create(data: Create);
+  // abstract update(id: number, data: Create);
+  // abstract delete(id: number);
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
-  pageSize = PAGE_SIZE;
+export class ApiService implements CrudService<DepartmentFilter, MyDepartment, MyDepartment>{
+  pageSize = DEFAULT_PAGE_SIZE;
 
   constructor(
-    private setup: GetAllDepartmentsServiceProxy
+    private getDepartmentService: GetDepartmentByIdServiceProxy,
+    private createDepartmentService: AddUpdateDepartmentServiceProxy,
+    private listDepartmentService: GetAllDepartmentsServiceProxy,
   ) { }
 
-  fetchAllEmployees(filter: DepartmentFilter) {
+  list(filter: DepartmentFilter) {
     const subject = new Subject<ListResult<any>>();
-    this.setup.getAllDepartments(this.pageSize,filter.page ? filter.page : 1).subscribe(data => {
+    this.listDepartmentService.getAllDepartments(this.pageSize, filter.page ? filter.page : 1).subscribe(data => {
       subject.next({
         data: data.result.map(department => new MyDepartment(department)),
         length: data.totalCount,
@@ -61,4 +84,20 @@ export class ApiService {
     });
     return subject.asObservable();
   }
+
+  create(data: MyDepartment) {
+    return this.createDepartmentService.addUpdateDepartment(new ManageDepartmentDTO(data));
+  }
+
+  init() {}
+  toJSON() {}
+
+  // fetch(id: number) {
+
+  // }
+
+  // delete(id: number) {
+  //   return 
+  // }
+
 }

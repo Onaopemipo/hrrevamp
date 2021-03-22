@@ -22,29 +22,38 @@
                     </div>
                     <div class="form-group">
                         <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
-                        <input class="form-control" placeholder="Choose Start Date" nbInput [nbDatepicker]="startdatepicker" name="yearStartDate" #yearStartDate="ngModel" [(ngModel)]="newleaveYear.yearStartDate" required readonly>
-                        <nb-datepicker [min]="mindate" [max]="newleaveYear.yearEndDate" #startdatepicker></nb-datepicker>
-                           <div *ngIf="yearStartDate.invalid && (yearStartDate.dirty || yearStartDate.touched)" class="error">
-                          <div *ngIf="yearStartDate.errors.required">Start Date is required</div>
-                      </div>
+                        <ngx-date [(value)]='newleaveYear.yearStartDate' [max]="newleaveYear.yearEndDate" #yearStartDate name="yearEndDate" id="yearEndDate"></ngx-date>
+                       
+                        <div *ngIf="!validateStartdate" class="error">
+                            <div>Leave Year Start Date is required</div>
+                        </div>
                       </div>
                       <div class="form-group">
                         <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
-                        <input class="form-control" placeholder="Choose End Date" nbInput [nbDatepicker]="formpicker" name="yearEndDate" #yearEndDate="ngModel" [(ngModel)]="newleaveYear.yearEndDate" required readonly>
-                        <nb-datepicker [min]="newleaveYear.yearStartDate" [max]="dateService.addYear(this.newleaveYear.yearStartDate,1)"  #formpicker></nb-datepicker>
-                           <div *ngIf="yearEndDate.invalid && (yearEndDate.dirty || yearEndDate.touched)" class="error">
-                          <div *ngIf="yearEndDate.errors.required">End Date is required</div>
-                      </div>
+                        <ngx-date [(value)]='newleaveYear.yearEndDate' #yearEndDate [min]="newleaveYear.yearStartDate" name="yearEndDate" id="yearEndDate"></ngx-date>
+                        <div *ngIf="!validateEnddate" class="error">
+                            <div>Leave Year End Date is required</div>
+                        </div>
                       </div>
         
                       <div class="form-group">
                         <nb-checkbox status="primary"  name="isActiveYear" #isActiveYear="ngModel" [(ngModel)]="newleaveYear.isActiveYear">Active</nb-checkbox>
-                      </div>
-        
+                      </div> 
+                      <!-- <form action="">
+                          <label for="">yearName</label>
+                          <input type="text" class="form-control"
+                          [(value)]='yearName' name="yearName">
+                          <label for="max">start Date</label>
+                          <ngx-date [(value)]='maxdate' [max]="maxdate"></ngx-date>
+                          <label for="min">End Date</label>
+                          <ngx-date [(value)]='mindate' [min]="mindate"></ngx-date>
+                      </form>
+                       -->
+                      
                 </form>
             </div>
             <div modal-actions class="d-flex" style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
-                <button *ngIf="!submitbtnPressed" [disabled]="leavYearForm.invalid" nbButton status="primary" class="d-flex column">Submit</button>
+                <button *ngIf="!submitbtnPressed" [disabled]="!formvalidate" nbButton status="primary" (click)="createleaveYear()" class="d-flex column">Submit</button>
                 <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
                 <button nbButton outline status="primary" (click)="showLeaveYearModal = false" class="d-flex column"
                   style="background-color: white;">Discard</button>
