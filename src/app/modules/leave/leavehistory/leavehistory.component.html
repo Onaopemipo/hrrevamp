@@ -101,7 +101,7 @@
 
             <div class="form-group">
                 <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
-                <input type="number" class="form-control" placeholder="Enter Number Of Days" name="numDays" #numDays="ngModel" [(ngModel)]="leavePlanModel.noOfDays" required>
+                <input type="number" (keyup)="getEndDate()" class="form-control" placeholder="Enter Number Of Days" name="numDays" #numDays="ngModel" [(ngModel)]="leavePlanModel.noOfDays" required>
                 <div *ngIf="numDays.invalid && (numDays.dirty || numDays.touched)" class="error">
                   <div *ngIf="numDays.errors.required">Number of days is required</div>
                 </div>
@@ -110,7 +110,7 @@
             <div class="form-group">
                 <label for="End Date" style="font-size: small;font-weight: bold;">End Date:</label>
                 <!-- <input type="number" class="form-control" [disabled] placeholder="Enter Start Date"  name="endDate" #endDate="ngModel" [(ngModel)]="leavePlanModel.endDate" required> -->
-                <ngx-date [(value)]="leavePlanModel.endDate" [min]="leavePlanModel.startDate"></ngx-date>
+                <ngx-date [(value)]="leavePlanModel.endDate" [min]="leavePlanModel.startDate" disabled></ngx-date>
               </div>
 
             <div class="form-group">

@@ -19,7 +19,7 @@
   </ngx-default-content>
   <ngx-tablecomponent
     *ngIf="!showEmpty"
-    [tableColum]="tableColumns"
+    [tableColum]="_tableColumns"
     [userData]="tableData"
     [loading]="loading"
     (pageChange)="loadNewPage($event)"
@@ -28,35 +28,9 @@
 <ngx-side-modal [(show)]="showModal" [isPage]="true">
   <div modal-header>Add project</div>
   <div modal-body>
-    <div class="my-form linear-form">
-      <h4><span>Add Manually</span> <span>Upload excel document</span></h4>
-
-      <div class="form-group">
-        <label>Name</label>
-        <input class="form-control" placeholder="1" />
-      </div>
-
-      <div class="form-group">
-        <label>Start Date</label>
-        <ngx-date></ngx-date>
-      </div>
-
-      <div class="form-group">
-        <label>End Date</label>
-        <ngx-date></ngx-date>
-      </div>
-
-      <div class="form-group">
-        <label>Description</label>
-        <ngx-wysisyg-input></ngx-wysisyg-input>
-      </div>
-
-      <div class="form-group">
-        <label>Project list</label>
-        <ngx-file-upload></ngx-file-upload>
-      </div>
-    </div>
+    
   </div>
+
   <div modal-actions>
     <button nbButton status="primary">save</button>
   </div>

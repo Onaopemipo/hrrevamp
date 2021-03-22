@@ -1,0 +1,214 @@
+<ngx-componentsheader *ngIf="newCandidate" [requiredButton]="[{name:'plan', label:'Add Candidate', icon: 'plus'}]" (buttonClick)="addCandidate()" pageName='Roles'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="!newCandidate" pageName='Add Candidate'></ngx-componentsheader>
+<div *ngIf="newCandidate" style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
+  <span><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px;">Back</a></span>
+</div>
+<nb-card *ngIf="newCandidate">
+  <ngx-tableheader></ngx-tableheader>
+  <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+</nb-card>
+
+
+<nb-tabset *ngIf="!newCandidate" style="background-color: #ffffff; padding: 10px;">
+  <nb-tab tabTitle="Add Manually">
+    <form>
+      <div class="form-group row mydiv">
+        <label for="Channel" class="col-sm-3 col-form-label mylabel">Channel</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <select class="custom-select" (change)="onChangeChannel($event.target.value)" required>
+            <option *ngFor="let i of channel"  [value]=i.source>{{i.label}}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Employee Database -->
+
+     <div *ngIf="selectedChannel == 'database'">
+
+      <div class="form-group row mydiv">
+        <label for="Department" class="col-sm-3 col-form-label mylabel">Name</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <input type="email" class="form-control" name="name" placeholder="johndoe@gmail.com">
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+        <label for="Country" class="col-sm-3 col-form-label mylabel">Department</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <!-- <ngx-employee-master-search></ngx-employee-master-search> -->
+          <select class="custom-select" required>
+            <option value="">Select </option>
+            <option value="1">Employee Database</option>
+            <option value="2">Recruitment Porta;</option>
+            <option value="3">External Source</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+        <label for="Country" class="col-sm-3 col-form-label mylabel">Unit/Division</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <select class="custom-select" required>
+            <option value="">Select </option>
+            <option value="1">Employee Database</option>
+            <option value="2">Recruitment Porta;</option>
+            <option value="3">External Source</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+        <label for="Country" class="col-sm-3 col-form-label mylabel">Position</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <select class="custom-select" required>
+            <option value="">Select </option>
+            <option value="1">Employee Database</option>
+            <option value="2">Recruitment Porta;</option>
+            <option value="3">External Source</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+        <label for="Country" class="col-sm-3 col-form-label mylabel">Purpose</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <select class="custom-select" required>
+            <option value="">Select </option>
+            <option value="1">Employee Database</option>
+            <option value="2">Recruitment Porta;</option>
+            <option value="3">External Source</option>
+          </select>
+        </div>
+      </div>
+     </div>
+
+
+<!-- Recruitment Portal -->
+
+  <div *ngIf="selectedChannel == 'portal'">
+        <div class="form-group row mydiv">
+          <label for="Name" class="col-sm-3 col-form-label mylabel">Name</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <!-- <ngx-employee-master-search></ngx-employee-master-search> -->
+            <input type="text" class="form-control" name="name" placeholder="John Doe">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Email</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+              <input type="email" class="form-control" name="email" placeholder="johndoe@gmail.com">
+            </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Phone" class="col-sm-3 col-form-label mylabel">Phone</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+              <input type="tel" class="form-control" name="phone" placeholder="090-000-000-00">
+            </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <label for="Country" class="col-sm-3 col-form-label mylabel">Purpose</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select class="custom-select" required>
+              <option value="">Select </option>
+              <option value="1">Employee Database</option>
+              <option value="2">Recruitment Porta;</option>
+              <option value="3">External Source</option>
+            </select>
+          </div>
+        </div>
+ </div>
+
+
+  <!-- External Source -->
+
+  <div *ngIf="selectedChannel == 'external'">
+    <div class="form-group row mydiv">
+      <label for="Department" class="col-sm-3 col-form-label mylabel">Name</label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <input type="email" class="form-control" id="jobTitle" placeholder="johndoe@gmail.com">
+      </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <label for="Country" class="col-sm-3 col-form-label mylabel">Email</label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+          <input type="email" class="form-control" name="email" placeholder="johndoe@gmail.com">
+        </div>
+      </div>
+
+
+    <div class="form-group row mydiv">
+      <label for="Phone" class="col-sm-3 col-form-label mylabel">Phone</label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+          <input type="tel" class="form-control" name="phone" placeholder="090-000-000-00">
+        </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <label for="Website" class="col-sm-3 col-form-label mylabel">Website</label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <input type="url" class="form-control" name="website" placeholder="Enter Website">
+      </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <label for="LinkedIn" class="col-sm-3 col-form-label mylabel">LinkedIn</label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+          <input type="url" class="form-control" id="jobTitle" placeholder="LinkedIn URL">
+        </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <label for="Country" class="col-sm-3 col-form-label mylabel">Purpose</label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <select class="custom-select" required>
+          <option value="">Select </option>
+          <option value="1">Employee Database</option>
+          <option value="2">Recruitment Porta;</option>
+          <option value="3">External Source</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+      <div class="form-group row">
+        <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+        <div class="col-sm-6">
+          <button nbButton status="primary">Create Plan</button>
+          <span style="padding: 8px;"></span>
+          <button nbButton style="color: #4847E0;">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-tab>
+
+  <nb-tab tabTitle="Bulk Upload">
+<form action="">
+  <div class="form-group row mydiv">
+    <label for="website" class="col-sm-3 col-form-label mylabel">Employee List</label>
+
+    <ngx-file-upload></ngx-file-upload>
+
+    <div class="col-md-4 col-lg-4 col-sm-4">
+      <i class="fa fa-download" style="color: #4847E0; padding: 10px;" aria-hidden="true"></i>
+      <span style="color: #4847E0; padding: 10px;" >Download Template</span>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+    <div class="col-sm-6">
+      <button nbButton status="primary">Save</button>
+      <span style="padding: 8px;"></span>
+      <button nbButton style="color: #4847E0;">Cancel</button>
+    </div>
+  </div>
+</form>
+  </nb-tab>
+ </nb-tabset>
+
+

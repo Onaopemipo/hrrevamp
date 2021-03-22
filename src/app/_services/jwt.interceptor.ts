@@ -4,7 +4,7 @@ import { AuthenticationService } from './authentication.service';
 import { User, UserClass } from '../_models/user';
 
 
-import { mergeMap as _observableMergeMap, catchError as _observableCatch, map } from 'rxjs/operators';
+import { mergeMap as _observableMergeMap, catchError as _observableCatch, map, tap } from 'rxjs/operators';
 import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
@@ -61,17 +61,18 @@ export class JwtInterceptor implements HttpInterceptor {
         }
 
         return next.handle(request)
-            .pipe(_observableCatch
-                (
-                    (response_: any) =>
+            .pipe(tap ((response_: HttpEvent<any>) =>
             {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processResponse(<any>response_);
+                if (response_ instanceof HttpResponseBase) {
+                
+                    try {                    
+                        return this.processResponse(<any>response_);
+                        
                 } catch (e) {
                     return <Observable<any>><any>_observableThrow(e);
                 }
-            } else
+            }
+            else
                 return <Observable<any>><any>_observableThrow(response_);
             }
             )
@@ -79,7 +80,7 @@ export class JwtInterceptor implements HttpInterceptor {
     }
 
     protected processResponse(response: HttpResponseBase): Observable<any> {
-      //  console.log(response);
+     //   console.log(response)
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -87,15 +88,16 @@ export class JwtInterceptor implements HttpInterceptor {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+   
+            return blobToText(responseBlob).pipe(tap(_responseText => {
             let result200: any = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                console.log(_responseText);
+            
            // result200 = VwUserObjApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(tap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (resultData400) {
@@ -109,7 +111,7 @@ export class JwtInterceptor implements HttpInterceptor {
             }));
         }
         else if (status === 401) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(tap(_responseText => {
                 let result401: any = null;
               //  console.log(_responseText)
                 this.alertService.openModalAlert(ALERT_TYPES.FAILED, _responseText, "Ok").subscribe(data => {
@@ -123,7 +125,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 })); 
         }
         else if (status === 403) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(tap(_responseText => {
                 let result403: any = null;
                 this.alertService.openModalAlert(ALERT_TYPES.FAILED,_responseText, "Go to Dashboard", ).subscribe(data => {
                     this.router.navigate(['/dashboard']);
@@ -136,7 +138,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 })); 
         }     
         else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(tap(_responseText => {
             return throwException("Server Error", status, _responseText, _headers);
             }));
         }

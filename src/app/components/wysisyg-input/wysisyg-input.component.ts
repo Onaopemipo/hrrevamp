@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ngx-wysisyg-input',
@@ -11,7 +12,14 @@ export class WysisygInputComponent implements OnInit {
     this.model = val;
   }
   @Output() valueChange = new EventEmitter<string>();
+
+  @Input() set ngModel(val: string) {
+    this.model = val;
+  }
+  @Output() ngModelChange = new EventEmitter<string>();
   model = '';
+
+  myForm = new FormControl();
   constructor() { }
 
   ngOnInit(): void {
@@ -19,6 +27,7 @@ export class WysisygInputComponent implements OnInit {
 
   onChange() {
     this.valueChange.emit(this.model);
+    this.ngModelChange.emit(this.model);
   }
 
 }
