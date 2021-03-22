@@ -84,7 +84,6 @@ import { LoadableButtonComponent } from './loadable-button/loadable-button.compo
 import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
-import { BaseComponent } from './base/base.component';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -121,7 +120,6 @@ import { BaseComponent } from './base/base.component';
     LoadableButtonComponent,
     MultiSelectComponent,
     CustomFormComponent,
-    // BaseComponent,
   ],
   imports: [
     FormsModule,
