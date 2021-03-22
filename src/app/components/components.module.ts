@@ -82,6 +82,8 @@ import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
 import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
 import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
+import { MultiSelectComponent } from './multi-select/multi-select.component';
+import { CustomFormComponent } from './custom-form/custom-form.component';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -116,6 +118,8 @@ import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
     ConfirmBoxComponent,
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
+    MultiSelectComponent,
+    CustomFormComponent,
   ],
   imports: [
     FormsModule,
