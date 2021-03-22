@@ -1,23 +1,31 @@
 import { Injectable } from '@angular/core';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { of } from 'rxjs';
+import { AddUpdateExpenseServiceProxy, ExpenseDTO, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
+import { of, Subject } from 'rxjs';
 
 enum ACTIONS {EDIT = '1', DELETE = '2'}
 
-export class MyExpenseRequest{}
+export class MyExpenseRequest extends ExpenseDTO{
+  public constructor(expense: ExpenseDTO = new ExpenseDTO()) {
+    super(expense);
+  }
+}
 
-export class ExpenseRequestFilter{}
+export class ExpenseRequestFilter {}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpenseRequestService extends CrudService<MyExpenseRequest, ExpenseRequestFilter, MyExpenseRequest>{
-  constructor() {
+  constructor(
+    private api_create: AddUpdateExpenseServiceProxy,
+    private api_list: FetchExpensesServiceProxy,
+  ) {
     super();
   }
 
   create(data: MyExpenseRequest) {
-    return of();
+    return this.api_create.addUpdateExpense(data);
   }
 
   delete() {
@@ -29,10 +37,11 @@ export class ExpenseRequestService extends CrudService<MyExpenseRequest, Expense
   }
 
   list(filter: ExpenseRequestFilter) {
-    const data: ListResult<MyExpenseRequest> = {
-      data: [{}],
-      length: 10
-    };
-    return of(data);
+    const subject = new Subject<ListResult<MyExpenseRequest>>();
+    this.api_list.fetchExpenses(0, 0, 0, 0, 0, '0', '0', '0', 0, 0, 0).subscribe(data => {
+      subject.next({data: data.result.map(expense => new MyExpenseRequest(expense)), length: data.totalCount});
+      subject.complete();
+    });
+    return subject.asObservable();
   }
 }

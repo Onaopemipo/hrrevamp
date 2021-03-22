@@ -18,7 +18,9 @@ enum ACTIONS {EDIT = '1', DELETE = '2'}
   templateUrl: './expense-request.component.html',
   styleUrls: ['./expense-request.component.scss']
 })
-export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, {}, MyExpenseRequest> {
+export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, Object, MyExpenseRequest> {
+  projects = [];
+  types = [];
   topActionButtons = [
     { name: 'CREATE_NEW', label: 'Create new', icon: 'plus', outline: false },
   ];
@@ -54,7 +56,9 @@ export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, {},
 
   getData() { return this.api.list(this.filter); }
   
-  getNewEditingData() { return {}; }
+  getNewEditingData() { 
+    return new MyExpenseRequest();
+   }
 
   saveData() {
     return this.api.create(this.editingData);

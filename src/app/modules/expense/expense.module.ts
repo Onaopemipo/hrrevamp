@@ -9,6 +9,7 @@ import { ExpenseRequestComponent } from './expense-request/expense-request.compo
 import { ExpenseManagementComponent } from './expense-management/expense-management.component';
 import { ExpenseReportComponent } from './expense-report/expense-report.component';
 import { ExpenseRequestService } from './services/expense-request.service';
+import { AddUpdateExpenseServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
 
 
 
@@ -21,6 +22,8 @@ import { ExpenseRequestService } from './services/expense-request.service';
     ExpenseReportComponent,
   ],
   providers: [
+    AddUpdateExpenseServiceProxy,
+    FetchExpensesServiceProxy,
     ExpenseRequestService,
   ],
   imports: [
