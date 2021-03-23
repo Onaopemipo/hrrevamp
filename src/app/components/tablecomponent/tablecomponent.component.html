@@ -1,6 +1,5 @@
-<ngx-tableheader *ngIf="showFilter"
-[filterFields]="tableColum" (filterDataChange)="filterUpdated($event)"></ngx-tableheader
->
+<ngx-tableheader *ngIf="showFilter" [filterFields]="tableColum" (filterDataChange)="filterUpdated($event)">
+</ngx-tableheader>
 
 <div class="table-responsive">
   <table class="table table-hover" [class]="{'table-2': table2}">
@@ -26,8 +25,10 @@
             <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === NULL">{{ data[col.name] }}</span>
             <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
             <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
-            <span *ngIf="col.type === COLUMN_TYPES.Link"> 
-              <button nbButton status='primary' outline style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;" (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
+            <span *ngIf="col.type === COLUMN_TYPES.Link">
+              <button nbButton status='primary' outline
+                style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
+                (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
             </span>
           </td>
           <td *ngIf="showActions">
@@ -42,16 +43,13 @@
                 </div>
               </div>
             </ng-template>
-            <button nbButton outline status="primary" [nbPopover]="card" 
-              style="
+            <button nbButton outline status="primary" [nbPopover]="card" style="
                 min-width: unset !important;
                 background: transparent;
                 border: none;
                 padding: 0px;
               ">
-              <nb-icon
-                icon="activity-outline"
-              ></nb-icon>
+              <nb-icon icon="more-horizontal-outline"></nb-icon>
             </button>
           </td>
         </tr>
@@ -62,11 +60,7 @@
       </tr>
       <tr *ngIf="loading">
         <td colspan="5">
-          <nb-card
-            [nbSpinner]="true"
-            nbSpinnerSize="medium"
-            nbSpinnerStatus="primary"
-          >
+          <nb-card [nbSpinner]="true" nbSpinnerSize="medium" nbSpinnerStatus="primary">
             <nb-card-body> Loading... </nb-card-body>
           </nb-card>
         </td>
@@ -78,8 +72,19 @@
 <div style="display: flex;" *ngIf="!table2">
   <div style="flex: auto;">Showing 1 - 10 of 1000</div>
   <div class="paginator">
-    <span>Prev</span>
-    <span (click)="pageClicked(page)" *ngFor="let page of paginatioShowingPages">{{page}}</span>
-    <span>Next</span>
+    <span>
+
+      <nb-icon icon='arrow-ios-back-outline' (click)="pageClicked(currentPage - 1)"></nb-icon>
+      <!-- <i class="fas fa-arrow-left" (click)="pageClicked(currentPage - 1)" ></i> -->
+    </span>
+
+    {{currentPage}} of {{totalNoOfPages}}
+
+
+    <!-- <span (click)="pageClicked(page)" *ngFor="let page of paginatioShowingPages">{{Page}}</span> -->
+    <!-- <span><i class="fas fa-arrow-right" (click)="pageClicked(currentPage + 1)"> </i> -->
+      <span>
+    <nb-icon icon='arrow-ios-forward-outline' (click)="pageClicked(currentPage + 1)"></nb-icon>
+    </span>
   </div>
 </div>

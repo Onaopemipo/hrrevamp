@@ -37,7 +37,11 @@ export class FileUploadComponent implements OnInit {
 
   _files: Transfer[];
   get files() {
-    return this._files;
+    let file = this._files;
+    if(!file){
+      file = [];
+    }
+    return file;
   }
   onDropFileceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
