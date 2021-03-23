@@ -34,9 +34,9 @@ PositionFilter, MyPosition> implements OnInit {
   // TOP_ACTIONS = TOP_ACTIONS;
 
   tableColumns = [
-    { name: 'location_name', title: 'Location Name' },
-    { name: 'state', title: 'State' },
-    { name: 'lga', title: 'LGA' },
+    { name: 'title', title: 'Title' },
+    { name: 'min_years_experience', title: 'Minimum years of experience' },
+    { name: 'promotion_min_years', title: 'Promotion minimum years' },
     { name: '', title: 'Status', type: ColumnTypes.Status },
   ];
 

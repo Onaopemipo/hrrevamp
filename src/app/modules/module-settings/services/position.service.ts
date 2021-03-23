@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { Position } from 'app/_services/service-proxies';
+import { AddUpdatePositionServiceProxy, GetAllPositionsServiceProxy, ManagePositionDTO, Position, PositionDTO } from 'app/_services/service-proxies';
 import { of, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 
-export class MyPosition extends Position implements IStatus {
-  data: Position;
+export class MyPosition extends PositionDTO implements IStatus {
+  data: PositionDTO;
+  selectedQualifications: string;
+  selectedCertifications: string;
 
-  public constructor(data: Position = new Position()) {
+  public constructor(data: PositionDTO = new PositionDTO()) {
     super(data);
     this.data = data;
     Object.assign(this, data);
@@ -26,7 +29,8 @@ export class MyPosition extends Position implements IStatus {
   }
 
   toManage() {
-    // return new ManageDepartmentDTO();
+    return new ManagePositionDTO({...this, selectedQualifications: this.selectedQualifications,
+      selectedCertifications: this.selectedCertifications });
   }
 }
 
@@ -47,17 +51,21 @@ export class PositionService implements CrudService<PositionFilter, MyPosition, 
 
   pageSize = DEFAULT_PAGE_SIZE;
   constructor(
+    private list_api: GetAllPositionsServiceProxy,
+    private creare_api: AddUpdatePositionServiceProxy,
   ) { }
 
   list(filter: PositionFilter) {
-    const subject = new Subject<ListResult<any>>();
-    const positions = [new MyPosition()];
-    subject.next({data: positions, length: 5});
-    return subject.asObservable();
+    return this.list_api.getAllPositions(10, filter.page,
+      filter.parent_position, filter.next_position, filter.min_salary).pipe(
+      map(res => {
+        return {data: res.result.map(pos => new MyPosition(pos)), length: res.totalCount};
+      })
+    );
   }
 
   create(data: MyPosition) {
-    return of({});
+    return this.creare_api.addUpdatePosition(data.toManage());
     // return this.api_create.addUpdateLocation(new ManageLocationDTO(data));
   }
 

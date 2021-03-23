@@ -6,7 +6,10 @@ import { ModuleSettingsComponent } from './module-settings.component';
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { DepartmentListComponent } from './pages/department-list/department-list.component';
-import { AddUpdateDepartmentServiceProxy, AddUpdateLocationServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, GetAllLocationsServiceProxy, GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateDepartmentServiceProxy,     AddUpdatePositionServiceProxy,
+  GetAllPositionsServiceProxy, AddUpdateLocationServiceProxy, DataServiceProxy,
+  GetAllDepartmentsServiceProxy, GetAllLocationsServiceProxy,
+  GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy, GetAllJobRolesServiceProxy, AddUpdateJobRolesServiceProxy, DeleteJobRoleServiceProxy, SalaryscaleServiceProxy } from 'app/_services/service-proxies';
 import { ApiService } from './services/api.service';
 import { PageService } from './services/page.service';
 // import { BaseComponent } from './base/base.component';
@@ -30,6 +33,8 @@ import { SystemoptionComponent } from './pages/systemoption/systemoption.compone
 import { RequestService } from './services/Requestservice';
 import { GenericService } from './services/generic.service';
 import { SystemOptionService } from './services/systemoptionservice';
+import { PositionService } from './services/position.service';
+import { JobRoleService } from './services/job-role.service';
 
 
 // import { SalaryScaleComponent } from './pages/salary-scale/department-list.component';
@@ -53,7 +58,7 @@ import { SystemOptionService } from './services/systemoptionservice';
     EventsComponent,
     GenericComponent,
     RequestComponent,
-    SystemoptionComponent,    
+    SystemoptionComponent,
     // PositionListComponent,
     // SalaryScaleComponent,
   ],
@@ -69,6 +74,8 @@ import { SystemOptionService } from './services/systemoptionservice';
     GetAllDepartmentsServiceProxy,
     GetDepartmentByIdServiceProxy,
     AddUpdateDepartmentServiceProxy,
+    AddUpdatePositionServiceProxy,
+    GetAllPositionsServiceProxy,
     AlertserviceService,
     ConfirmBoxService,
     LocationService,
@@ -83,6 +90,12 @@ import { SystemOptionService } from './services/systemoptionservice';
     RequestService,
     GenericService,
     SystemOptionService,
+    PositionService,
+    GetAllJobRolesServiceProxy,
+    AddUpdateJobRolesServiceProxy,
+    DeleteJobRoleServiceProxy,
+    JobRoleService,
+    SalaryscaleServiceProxy,
   ]
 })
 export class ModuleSettingsModule { }

@@ -26,7 +26,6 @@ SalaryScaleFilter, MySalaryScale> implements OnInit {
   topActionButtons = [
     { name: TOP_ACTIONS.ADD, label: 'Add Salary Scale', icon: '', outline: false },
   ];
-
   // TOP_ACTIONS = TOP_ACTIONS;
 
   tableColumns = [
