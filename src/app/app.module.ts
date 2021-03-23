@@ -74,6 +74,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ConfirmBoxService } from './_services/confirm-box.service';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -135,7 +136,8 @@ FullCalendarModule.registerPlugins([
     NbLayoutModule,
     NgxChartsModule,
     NbDatepickerModule.forRoot(),
-    ComponentsModule
+    NgMultiSelectDropDownModule.forRoot(),
+    ComponentsModule,
   ],
   bootstrap: [AppComponent],
   providers: [

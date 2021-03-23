@@ -16,12 +16,15 @@ td, th{
 }
 
 .paginator{
-
+ border: solid #86828D ;
+ display: flex;
+ display: block;
+ padding: 1rem;
+ border-radius: 3px;
 }
 
 .paginator > span{
     padding: 5px;
-    border: 1px solid black;
     cursor: pointer;
 }
 

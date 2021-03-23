@@ -22,9 +22,11 @@
   <ngx-tablecomponent
     *ngIf="!showEmpty"
     [tableColum]="tableColumns"
+    [actions]="tableActions"
     [userData]="tableData"
     [loading]="loading"
     (pageChange)="loadNewPage($event)"
+    (actionClick)="tableActionClicked($event)"
   ></ngx-tablecomponent>
 </div>
 <ngx-side-modal [(show)]="showModal">
@@ -33,44 +35,51 @@
     <div class="my-form">
       <h4></h4>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Employee Name</label>
-        <input class="form-control" placeholder="1" />
-      </div>
+        <input class="form-control" placeholder="1" [(ngModel)]="editingData."/>
+      </div> -->
 
       <div class="form-group">
-        <label>Employee Number</label>
-        <input class="form-control" placeholder="1" />
+        <label>Employee</label>
+        <div>
+          <ngx-employee-master-search></ngx-employee-master-search>
+        </div>
       </div>
 
       <div class="form-group">
         <label>Project</label>
-        <input class="form-control" placeholder="1" />
+        <select [(ngModel)]="editingData.expenseProjectId" class="form-control">
+          <option *ngFor="let project of projects" [value]="project.id"> {{project.name}}</option>
+        </select>
       </div>
 
       <div class="form-group">
-        <label>Expense Type</label>
-        <input class="form-control" placeholder="1" />
+        <label>Expense Type<span>(Optional)</span></label>
+        <select [(ngModel)]="editingData.expenseProjectId" class="form-control">
+          <option *ngFor="let type of types" [value]="type.id"> {{type.name}}</option>
+        </select>
+        <!-- <input class="form-control" placeholder="1" /> -->
       </div>
 
       <div class="form-group">
-        <label>Expense sub-type</label>
-        <input class="form-control" placeholder="1" />
+        <label>Expense sub-type<span>(Optional)</span></label>
+        <input class="form-control" placeholder="1" [(ngModel)]="editingData.expenseSubTypeId"/>
       </div>
 
       <div class="form-group">
         <label>Amount</label>
-        <app-amount-input></app-amount-input>
+        <app-amount-input [(value)]="editingData.requestedAmount"></app-amount-input>
       </div>
 
       <div class="form-group">
         <label>Date incurred</label>
-        <ngx-date></ngx-date>
+        <ngx-date [(value)]="editingData.dateIncurred"></ngx-date>
       </div>
 
       <div class="form-group">
-        <label>Description</label>
-        <ngx-wysisyg-input></ngx-wysisyg-input>
+        <label>Description<span>(Optional)</span></label>
+        <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
       </div>
 
       <div class="form-group">
@@ -80,6 +89,8 @@
     </div>
   </div>
   <div modal-actions>
-    <button nbButton status="primary">save</button>
+    <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+    <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
+    <button nbButton status="primary" outline (click)="hideModal()">Cancel </button>
   </div>
 </ngx-side-modal>

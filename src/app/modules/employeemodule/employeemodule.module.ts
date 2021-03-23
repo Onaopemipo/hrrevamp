@@ -1,3 +1,4 @@
+import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -51,6 +52,7 @@ import { CardComponent } from './card/card.component';
 import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
+import { ExitRequestService } from './services/exit-request.service';
 
 
 
@@ -101,15 +103,20 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,  
+    NbDialogModule,
     NgxFlowModule
-    
+
   ],
   providers: [
     {
       provide: FlowInjectionToken,
       useValue: Flow,
     },
+
+    CreateEmployeeServiceProxy,
+    FetchAllEmployeesServiceProxy,
+    DataServiceProxy,
+    ExitRequestService,
 ]
 })
 export class EmployeemoduleModule { }

@@ -25,5 +25,5 @@ export interface TableAction {
 
 export interface TableActionEvent {
     name: string;
-    data: object;
+    data: any;
 }

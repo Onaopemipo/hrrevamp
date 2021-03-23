@@ -1,20 +1,66 @@
 import { NbTabComponent } from '@nebular/theme';
-import { TableColumn } from './../../../components/tablecomponent/models';
+import { TableAction, TableActionEvent, TableColumn } from './../../../components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
 import { TAB } from '@angular/cdk/keycodes';
+import { BaseComponent } from 'app/components/base/base.component';
+import { ConfirmBoxService } from 'app/_services/confirm-box.service';
+import { MyVendor, VendorService } from '../services/vendor.service';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { ListResult } from 'app/_services/base-api.service';
+import { Observable } from 'rxjs';
 
 enum TABS {
   vendors = 'vendor', types = 'type'
 }
+
+enum ACTIONS {EDIT = '1', DELETE = '2'}
 @Component({
   selector: 'ngx-administration',
   templateUrl: './administration.component.html',
   styleUrls: ['./administration.component.scss']
 })
-export class AdministrationComponent implements OnInit {
+export class AdministrationComponent extends BaseComponent<MyVendor, {}, MyVendor> {
+  filter: {} = {};
+  validator = {};
+  data: MyVendor[];
+  getData(): Observable<ListResult<MyVendor>> {
+    return this.vendor_api.list(this.filter);
+  }
+  saveData(): Observable<any> {
+    if (this.uploadVendor) {
+      return this.vendor_api.upload({data: this.editingData.uploadFile.flowFile.file, fileName: 'aaa'});
+    }
+    return this.vendor_api.create(this.editingData);
+  }
+  getNewEditingData(): MyVendor {
+    return new MyVendor();
+  }
+  successMessage: string = "";
+  deleteData(data: MyVendor): Observable<any> {
+    throw new Error('Method not implemented.');
+  }
+  tableActionClicked(event: TableActionEvent) {
+    this.editingData = event.data;
+    if (event.name === ACTIONS.EDIT) {
+      this.showModal = true;
+    }
+    if (event.name === ACTIONS.DELETE) {
+      this.deleteRow('Are you sure to delete this department?');
+    }
+  }
 
-  constructor() { }
+  tableActions: TableAction[] = [
+    {name: ACTIONS.EDIT, label: 'Edit'},
+    {name: ACTIONS.DELETE, label: 'Delete'},
+  ];
+  constructor(
+    protected confirmBox: ConfirmBoxService,
+    private vendor_api: VendorService,
+    protected alertService: AlertserviceService,
+  ) {
+    super(confirmBox);
+  }
   actions: TopAction[] = [
     {name: 'create', label: 'Create New', icon: 'plus'}
   ];
@@ -48,9 +94,6 @@ export class AdministrationComponent implements OnInit {
     {name: 'cost', title: 'Cost/Head'},
     {name: 'trainees', title: 'Trainess'}];
 
-  ngOnInit(): void {
-  }
-
   get pagetitle() {
     return 'Training Administration';
   }
@@ -65,13 +108,13 @@ export class AdministrationComponent implements OnInit {
       this.newTrainingType = true;
       this.trainingType = false;
     }
-
+    this.showModal = true;
   }
 
-  uploadVendor() {
-    this.vendorWindow = true;
-    this.newTraining = false;
-    this.welcome = false;
+  uploadVendor = false;
+
+  toggleUploadVendor() {
+    this.uploadVendor = !this.uploadVendor;
   }
 
   addNewTraining() {

@@ -18,7 +18,7 @@ export class CompetencyComponent implements OnInit {
   selectedPanel: any = { title: 'Role_Details', label: 'Role Details', status: 'Active'};
   competencyChecklist = [
     { title: 'Role_Details', label: 'Role Details', status: 'Active' },
-    { title: 'Cardre', label: 'Cardre', status: 'Inactive' }
+    { title: 'Cadre', label: 'Cadre', status: 'Inactive' }
   ];
   constructor() { }
 
@@ -42,6 +42,14 @@ export class CompetencyComponent implements OnInit {
 
   toggleScoreCard(event) {
     this.scoreCardClick = !this.scoreCardClick;
+  }
+
+  addRole(){
+
+  }
+
+  addCadre(){
+
   }
 
 }

@@ -29,24 +29,34 @@
     <div class="my-form">
       <div class="form-group">
         <label>Department Name</label>
-        <input
-          class="form-control"
-          [(ngModel)]="editingData.department_name"
-          placeholder="Name"
+        <div>
+          <input
+            class="form-control"
+            [(ngModel)]="editingData.name"
+            placeholder="Name"
         />
+        <ng-template [ngIf]="errors['name']">
+          <span *ngFor="let error of errors['name']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
       </div>
       <div class="form-group">
         <label>Department Code</label>
-        <input
+        <div>
+          <input
           class="form-control"
           [(ngModel)]="editingData.code"
           placeholder="Code"
         />
+          <ng-template [ngIf]="errors['code']">
+            <span *ngFor="let error of errors['code']" class="error">{{error}}</span>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
   <div modal-actions>
-    <ngx-loadable-button (click)="submitForm()" [loading]="loading" style="margin-right: 1rem;">Save</ngx-loadable-button>
+    <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
     <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
     <button nbButton status="primary" outline (click)="hideModal()">
       cancel

@@ -82,6 +82,10 @@ import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
 import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
 import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
+import { MultiSelectComponent } from './multi-select/multi-select.component';
+import { CustomFormComponent } from './custom-form/custom-form.component';
+import { PageComponent } from './page/page.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -116,6 +120,9 @@ import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
     ConfirmBoxComponent,
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
+    MultiSelectComponent,
+    CustomFormComponent,
+    PageComponent,
   ],
   imports: [
     FormsModule,
@@ -170,6 +177,7 @@ import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
     NbCardModule,
     NbInputModule,
     NbContextMenuModule,
+    NgMultiSelectDropDownModule,
   ],
   providers: [
     {
@@ -221,6 +229,7 @@ import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
     NbDialogModule,
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
+    PageComponent,
   ],
 })
 export class ComponentsModule { }

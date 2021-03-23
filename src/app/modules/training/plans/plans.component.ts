@@ -3,6 +3,7 @@ import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { NbTabComponent } from '@nebular/theme';
+import { BaseComponent } from 'app/components/base/base.component';
 
 enum TABS {
   pending = 'pending', approved = 'approved', declined = 'declined'
@@ -12,7 +13,7 @@ enum TABS {
   templateUrl: './plans.component.html',
   styleUrls: ['./plans.component.scss']
 })
-export class PlansComponent implements OnInit {
+export class PlansComponent {
 
   actions: TopAction[] = [
     {name: 'create', label: 'Create New', icon: 'plus'}
