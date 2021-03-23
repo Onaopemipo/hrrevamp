@@ -1,3 +1,4 @@
+import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -101,15 +102,19 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
     NbUserModule,
     NbTabsetModule,
     NbPopoverModule,
-    NbDialogModule,  
+    NbDialogModule,
     NgxFlowModule
-    
+
   ],
   providers: [
     {
       provide: FlowInjectionToken,
       useValue: Flow,
     },
+
+    CreateEmployeeServiceProxy,
+    FetchAllEmployeesServiceProxy,
+    DataServiceProxy,
 ]
 })
 export class EmployeemoduleModule { }
