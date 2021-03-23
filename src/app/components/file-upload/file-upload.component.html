@@ -11,6 +11,7 @@
   <label class="file-label filebutton" style="width: 100%;">
     <!-- <input class="file-input" type="file" class="inputfile" name="resume" /> -->
     <span class="file-cta" (change)="filereceived(flowBasic)"
+    *ngIf='files.length == 0'
       type="file"
       flowButton
       [flow]="flowBasic.flowJs"
