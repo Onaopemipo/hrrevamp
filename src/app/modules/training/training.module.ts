@@ -45,9 +45,21 @@ import {
 } from '@nebular/theme';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { VendorService } from './services/vendor.service';
+import { TrainingServiceProxy } from 'app/_services/service-proxies';
+import { CategoriesComponent } from './categories/categories.component';
+import { TrainingCategoryService } from './services/training-category.service';
+import { TrainingSpecializationService } from './services/training-specialization.service';
+import { SpecializationComponent } from './specialization/specialization.component';
 
 @NgModule({
-  declarations: [DashboardComponent, RequestsComponent, PlansComponent, AdministrationComponent],
+  declarations: [DashboardComponent, RequestsComponent, PlansComponent, AdministrationComponent, CategoriesComponent, SpecializationComponent],
+  providers: [
+    TrainingServiceProxy,
+    VendorService,
+    TrainingCategoryService,
+    TrainingSpecializationService,
+  ],
   imports: [
     CommonModule,
     ComponentsModule,

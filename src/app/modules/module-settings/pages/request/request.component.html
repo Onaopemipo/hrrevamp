@@ -1,0 +1,94 @@
+
+<ngx-componentsheader
+pageName="Request"
+[requiredButton]="topActionButtons"
+(buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+<ngx-default-content
+  *ngIf="showEmpty"
+  pageHeader="Create your first Department"
+  pageDescription="Click on the button to create a Department"
+  buttonValue="Create Department"
+  (buttonClick)="createNewClicked()"
+>
+</ngx-default-content>
+<ngx-tablecomponent
+  *ngIf="!showEmpty"
+  [tableColum]="tableColumns"
+  [actions]="tableActions"
+  [userData]="tableData"
+  [loading]="loading"
+  (filterChange)="filterUpdated($event)"
+  [showFilter]="true"
+  (actionClick)="tableActionClicked($event)"
+></ngx-tablecomponent>
+</div>
+<ngx-side-modal [(show)]="showModal" (closed)="clearEditingData()">
+<div modal-header>Add New Department</div>
+<div modal-body>
+  <div class="my-form">
+    <div class="form-group">
+      <label>Name</label>
+      <div>
+        <input
+          class="form-control"
+          [(ngModel)]="editingData.Name"
+          placeholder="Name"
+      />
+      <ng-template [ngIf]="errors['Name']">
+        <span *ngFor="let error of errors['Name']" class="error">{{error}}</span>
+      </ng-template>
+      </div>
+    </div>
+    
+    <div class="form-group">
+        <label>Code</label>
+        <div>
+          <input
+            class="form-control"
+            [(ngModel)]="editingData.Code"
+            placeholder="Name"
+        />
+        <ng-template [ngIf]="errors['Code']">
+          <span *ngFor="let error of errors['Code']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
+      </div>
+
+    
+    <div class="form-group">
+        <label>Enable Step Notify</label>
+        <div>
+        
+          <input
+          type="checkbox"
+          class="form-control"
+          [(ngModel)]="editingData.Enable_Step"
+          placeholder="Code"
+        />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Is System Requirement</label>
+        <div>
+        
+          <input
+          type="checkbox"
+          class="form-control"
+          [(ngModel)]="editingData.isSystem"
+          placeholder="Code"
+        />
+        </div>
+      </div>
+  </div>
+</div>
+<div modal-actions>
+  <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+  <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
+  <button nbButton status="primary" outline (click)="hideModal()">
+    cancel
+  </button>
+</div>
+</ngx-side-modal>
+

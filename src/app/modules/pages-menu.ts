@@ -190,6 +190,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/training/',
       },
       {
+        title: 'Training Categories',
+        link: '/training/categories/',
+      },
+      {
+        title: 'Training Specializations',
+        link: '/training/specializations/',
+      },
+      {
         title: 'Training Plans',
         link: '/training/plans',
       },
@@ -329,8 +337,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Request',
         link: '/disbursement/disbursement/requests',
       },
-
-
     ]
   },
   {
@@ -346,6 +352,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Settings',
     link: '/',
     icon: '/assets/icons/settings.jpg',
+    children: [
+      {title: 'Department', link: '/setup/department'},
+      {title: 'Location', link: '/setup/location'},
+      {title: 'Position', link: '/setup/position'},
+      {title: 'Job Role', link: '/setup/job-role'},
+      {title: 'Salary Scale', link: '/setup/salary-scale'},
+    ]
   },
 
 ];

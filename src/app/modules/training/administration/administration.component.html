@@ -1,21 +1,78 @@
-<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="rButton" (buttonClick)="addTraining()">
+<ngx-componentsheader
+  actions="actions"
+  [pageName]="pagetitle"
+  [requiredButton]="rButton"
+  (buttonClick)="pageActionClicked($event)"
+>
 </ngx-componentsheader>
-<div style="padding: 5px;"></div>
-
-<div class="container" style="background-color: #ffffff;">
+<div style="padding: 5px"></div>
+<!-- 
+<div class="container" style="background-color: #ffffff">
   <nb-tabset (changeTab)="tabSelected($event)">
     <nb-tab tabTitle="Vendors" [tabId]="TABS.vendors">
-          <div *ngIf="welcome && TrainingVendorData ==''" style="min-height: 80vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
-            <div>
-              <h5>You have not setup any training vendor</h5>
-              <p style="text-align: center;">Click on the button to start your setup</p>
+      <ngx-default-content
+        pageHeader="You have not setup any training vendor"
+        pageDescription="Click on the button to start your setup"
+        buttonValue="Add Training Vendor"
+        (buttonClick)="addTraining()"
+        *ngIf="showEmpty && !showModal"
+      >
+      </ngx-default-content>
 
-              <div class="text-center">
-                <button type="submit" class="btn my-button btn-md" (click)="addTraining()">Add Training Vendor</button>
+      <div
+        *ngIf="!showModal && !showEmpty"
+        id="home"
+        class="container tab-pane active"
+      >
+        <br />
+        <ngx-tablecomponent
+          *ngIf="!showEmpty"
+          [tableColum]="myVendorTable"
+          [actions]="tableActions"
+          [userData]="tableData"
+          [loading]="loading"
+          (pageChange)="loadNewPage($event)"
+          (actionClick)="tableActionClicked($event)"
+        ></ngx-tablecomponent>
+      </div>
+      <ng-template [ngIf]="showModal">
+        <div *ngIf="!uploadVendor">
+          <div style="padding: 20px 0px 5px 0px">
+            <span style="font-size: 15px; font-weight: bold"
+              >Add Vendor Manually</span
+            >
+          </div>
+
+          <br />
+          <form>
+            <div class="form-group row mydiv">
+              <label for="vendorName" class="col-sm-3 col-form-label mylabel"
+                >Vendor Name</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Vendor Name"
+                  name="name"
+                  [(ngModel)]="editingData.name"
+                />
               </div>
             </div>
+            <div class="form-group row mydiv">
+              <label for="contactPerson" class="col-sm-3 col-form-label mylabel"
+                >Primary Contact Person</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="contactPerson"
+                  placeholder="Primary Contact Person"
+                  [(ngModel)]="editingData.contactPerson"
+                />
+              </div>
             </div>
-
     <div *ngIf="welcome && TrainingVendorData !=''" id="home" class="container tab-pane active"><br>
       <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [tableColum]="myVendorTable"></ngx-tablecomponent>
@@ -42,6 +99,20 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="phone" class="col-sm-3 col-form-label mylabel"
+                >Phone</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="tel"
+                  class="form-control"
+                  name="phone"
+                  placeholder="Phone"
+                  [(ngModel)]="editingData.phoneNo"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="phone" class="col-sm-3 col-form-label mylabel">Phone</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -49,6 +120,20 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="email" class="col-sm-3 col-form-label mylabel"
+                >Email</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  placeholder="Email"
+                  [(ngModel)]="editingData.email"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="email" class="col-sm-3 col-form-label mylabel">Email</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -56,6 +141,20 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="vendorTag" class="col-sm-3 col-form-label mylabel"
+                >Vendor Tag</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="vendorName"
+                  placeholder="Vendor Tag"
+                  [(ngModel)]="editingData.trainingTag"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="vendorTag" class="col-sm-3 col-form-label mylabel">Vendor Tag</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -63,6 +162,20 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="website" class="col-sm-3 col-form-label mylabel"
+                >Website</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="url"
+                  class="form-control"
+                  name="website"
+                  placeholder="Website"
+                  [(ngModel)]="editingData.website"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="website" class="col-sm-3 col-form-label mylabel">Website</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -70,6 +183,26 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label
+                for="specialization"
+                class="col-sm-3 col-form-label mylabel"
+                >Specialization</label
+              >
+              <div class="col-sm-4">
+                <select
+                  class="custom-select"
+                  required
+                  name="specialization_id"
+                  [(ngModel)]="editingData.trainingSpecializationId"
+                >
+                  <option value="">Select</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="specialization" class="col-sm-3 col-form-label mylabel">Specialization</label>
           <div class="col-md-4 col-lg-4 col-lg-4 col-sm-4">
@@ -82,6 +215,38 @@
           </div>
         </div>
 
+            <div class="form-group row">
+              <label
+                for="specialization"
+                class="col-sm-3 col-form-label"
+                style="font-weight: bold"
+              ></label>
+              <div class="col-sm-4">
+                <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+                <br />
+                <div style="padding: 10px 10px 10px 0px">
+                  <span>
+                    <a
+                      (click)="toggleUploadVendor()"
+                      class="mylink"
+                      style="
+                        cursor: pointer;
+                        color: #4847e0;
+                        text-decoration: underline;
+                      "
+                      >Add Vendor through Excel</a
+                    ></span
+                  >
+                </div>
+              </div>
+            </div>
+          </form>
+        </div> -->
+
+
+        <!-- Upload Vendor with Excel -->
+       
+         <!--
         <div class="form-group row">
           <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -95,27 +260,74 @@
       </form>
 
     </div>
-
+-->
             <!-- Upload Vendor with Excel -->
 
-    <div *ngIf="vendorWindow" class="container" style="background-color: white; height: auto;">
-    <div style="padding: 20px 0px 5px 0px;">
-    <span style="font-size: 15px; font-weight: bold;">Upload Vendor List</span>
-    </div>
+  
+   <!--
+            <div
+          *ngIf="uploadVendor"
+          class="container"
+          style="background-color: white; height: auto"
+        >
+          <div style="padding: 20px 0px 5px 0px">
+            <span style="font-size: 15px; font-weight: bold"
+              >Upload Vendor List</span
+            >
+          </div>
 
-        <br>
-        <form>
-          <div class="form-group row mydiv">
-            <label for="website" class="col-sm-3 col-form-label mylabel">Vendor List</label>
+          <br />
+          <form>
+            <div class="form-group row mydiv">
+              <label for="website" class="col-sm-3 col-form-label mylabel"
+                >Vendor List</label
+              >
 
-            <ngx-file-upload></ngx-file-upload>
+              <ngx-file-upload [(value)]="editingData.uploadFile"></ngx-file-upload>
 
+              <div class="col-sm-4">
+                <i
+                  class="fa fa-download"
+                  style="color: #4847e0; padding: 10px"
+                  aria-hidden="true"
+                ></i>
+                <span style="color: #4847e0; padding: 10px"
+                  >Download Template</span
+                >
+              </div>
+            </div>
             <div class="col-md-4 col-lg-4 col-sm-4">
               <i class="fa fa-download" style="color: #4847E0; padding: 10px;" aria-hidden="true"></i>
               <span style="color: #4847E0; padding: 10px;" >Download Template</span>
             </div>
           </div>
 
+            <div class="form-group row">
+              <label
+                for="save"
+                class="col-sm-3 col-form-label"
+                style="font-weight: bold"
+              ></label>
+              <div class="col-sm-4" style="padding-left: 0px">
+                <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+                <div style="padding: 10px 10px 10px 0px">
+                  <span>
+                    <a
+                      (click)="toggleUploadVendor()"
+                      style="
+                        cursor: pointer;
+                        color: #4847e0;
+                        text-decoration: underline;
+                      "
+                      >Add Vendor manually</a
+                    ></span
+                  >
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </ng-template>
           <div class="form-group row">
             <label for="save" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
             <div class="col-md-4 col-lg-4 col-sm-4" style="padding-left: 0px;">
@@ -129,27 +341,65 @@
 
       </div>
     </nb-tab>
-<!-- Training Types -->
+    -->
 
-<nb-tab tabTitle="Types" [tabId]="TABS.types">
-  <div *ngIf="trainingType && TrainingTypeData==''"  style="min-height: 80vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
-    <div class="center">
-      <h5 style="text-align: center;">You have not setup any training type</h5>
-      <p style="text-align: center;">Click on the button to start your set up</p>
 
-      <div class="text-center">
-        <button type="submit" class="btn my-button btn-md" (click)="addTraining()">Add Training Type</button>
-      </div>
-    </div>
-  </div>
+    <!-- Training Types -->
 
-<nb-card *ngIf="trainingType && TrainingTypeData !=''" id="home" class="container tab-pane active"><br>
-  <nb-card-body>
-    <ngx-tableheader></ngx-tableheader>
-  <ngx-tablecomponent  [tableColum]="myTable"></ngx-tablecomponent>
-  </nb-card-body>
-</nb-card>
 
+      <!--
+    <nb-tab tabTitle="Types" [tabId]="TABS.types">
+      <ngx-default-content
+        *ngIf="showEmpty && !showModal"
+        pageHeader="You have not setup any training type"
+        pageDescription="Click on the button to start your setup"
+        buttonValue="Add Training Type"
+        (buttonClick)="createNewClicked()"
+      ></ngx-default-content>
+
+      <nb-card *ngIf="!showModal && !showEmpty" id="home" class="container tab-pane active"
+        ><br />
+        <nb-card-body>
+          <ngx-tableheader></ngx-tableheader>
+          <ngx-tablecomponent [tableColum]="myTable"></ngx-tablecomponent>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card
+        *ngIf="showModal"
+        class="container"
+        style="background-color: white; height: 800px"
+      >
+        <nb-card-body>
+          <form>
+            <div class="form-group row mydiv">
+              <label for="Title" class="col-sm-3 col-form-label mylabel"
+                >Title</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vendorName"
+                  placeholder="Enter Text"
+                />
+              </div>
+            </div>
+            <div class="form-group row mydiv">
+              <label
+                for="Specialization"
+                class="col-sm-3 col-form-label mylabel"
+                >Specialization</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contactPerson"
+                  placeholder="Specialization"
+                />
+              </div>
+            </div>
 
 <nb-card *ngIf="newTrainingType" class="container" style="background-color: white; height: 800px;">
   <nb-card-body>
@@ -167,6 +417,23 @@
         </div>
       </div>
 
+            <div class="form-group row mydiv">
+              <label for="phone" class="col-sm-3 col-form-label mylabel"
+                >Category</label
+              >
+              <div class="col-sm-4">
+                <nb-radio-group
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                  "
+                >
+                  <nb-radio value="1">Internal</nb-radio>
+                  <nb-radio value="2">External</nb-radio>
+                </nb-radio-group>
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="phone" class="col-sm-3 col-form-label mylabel">Category</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -177,6 +444,19 @@
           </div>
         </div>
 
+            <div *ngIf="category == 'External'" class="form-group row mydiv">
+              <label for="website" class="col-sm-3 col-form-label mylabel"
+                >Vendor</label
+              >
+              <div class="col-sm-4">
+                <select class="custom-select" required>
+                  <option value="">Select</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
         <div *ngIf="category =='External'" class="form-group row mydiv">
           <label for="website" class="col-sm-3 col-form-label mylabel">Vendor</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -189,6 +469,20 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="cost" class="col-sm-3 col-form-label mylabel"
+                >Cost per head</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="costPerHead"
+                  id="cost"
+                  placeholder="Enter Amount"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="cost" class="col-sm-3 col-form-label mylabel">Cost per head</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -196,6 +490,20 @@
           </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="training" class="col-sm-3 col-form-label mylabel"
+                >No of Trainees</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="noOfTrainees"
+                  id="trainees"
+                  placeholder="Enter Text"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="training" class="col-sm-3 col-form-label mylabel">No of Trainees</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -203,6 +511,19 @@
         </div>
         </div>
 
+            <div class="form-group row mydiv">
+              <label for="amount" class="col-sm-3 col-form-label mylabel"
+                >Overall budget cost (optional)</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="amount"
+                  placeholder="Enter Amount"
+                />
+              </div>
+            </div>
         <div class="form-group row mydiv">
           <label for="amount" class="col-sm-3 col-form-label mylabel">Overall budget cost (optional)</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -210,6 +531,14 @@
           </div>
         </div>
 
+            <div *ngIf="category == 'Internal'" class="form-group row mydiv">
+              <label for="content" class="col-sm-3 col-form-label mylabel"
+                >Content</label
+              >
+              <div class="col-sm-4">
+                <ngx-file-upload></ngx-file-upload>
+              </div>
+            </div>
         <div *ngIf="category =='Internal'" class="form-group row mydiv">
           <label for="content" class="col-sm-3 col-form-label mylabel">Content</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -217,6 +546,21 @@
           </div>
         </div>
 
+            <div *ngIf="category == 'Internal'" class="form-group row mydiv">
+              <label
+                for="resourceperson"
+                class="col-sm-3 col-form-label mylabel"
+                >Resource Person</label
+              >
+              <div class="col-sm-4">
+                <select class="custom-select" name="resourcePerson" required>
+                  <option value="">Select</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
         <div *ngIf="category =='Internal'" class="form-group row mydiv">
           <label for="resourceperson" class="col-sm-3 col-form-label mylabel">Resource Person</label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -229,6 +573,32 @@
           </div>
         </div>
 
+            <div class="form-group row">
+              <label
+                for="specialization"
+                class="col-sm-3 col-form-label"
+                style="font-weight: bold"
+              ></label>
+              <div class="col-sm-4">
+                <button
+                  type="submit"
+                  class="btn my-button"
+                  style="padding: 7px 20px"
+                >
+                  Save
+                </button>
+                <span style="padding: 8px"></span>
+                <button
+                  type="submit"
+                  class="btn cancel-button"
+                  style="padding: 5px 20px"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </nb-card-body>
         <div class="form-group row">
           <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
           <div class="col-md-4 col-lg-4 col-sm-4">
@@ -242,4 +612,4 @@
       </nb-card>
     </nb-tab>
   </nb-tabset>
-</div>
+</div> -->

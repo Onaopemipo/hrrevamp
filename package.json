@@ -73,6 +73,7 @@
     "ionicons": "2.0.1",
     "leaflet": "1.2.0",
     "nebular-icons": "1.1.0",
+    "ng-multiselect-dropdown": "^0.3.4",
     "ng2-ckeditor": "^1.2.9",
     "ng2-smart-table": "^1.6.0",
     "ngx-echarts": "^4.2.2",
@@ -89,6 +90,7 @@
     "tinymce": "4.5.7",
     "tslib": "^2.0.0",
     "typeface-exo": "0.0.22",
+    "validate.js": "^0.13.1",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
