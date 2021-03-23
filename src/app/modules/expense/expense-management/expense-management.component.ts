@@ -39,10 +39,13 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   ];
   }
 
-  allProjects: ExpenseProjectDto = new ExpenseProjectDto().clone();
-  myexpense: ExpenseTypeDto;
+  allProjects: ExpenseProjectDto = new ExpenseProjectDto();
+  myexpenseType: ExpenseTypeDto = new ExpenseTypeDto();
   myProjects: ExpenseGroup [] = [];
   myTypes: ExpenseType [] = [];
+
+  uploadType: string = 'manual';
+
 
   newProject: NgForm;
 
@@ -66,6 +69,24 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   //   console.log('Yesssss',this.myProject)
   // }
 
+  changeUploadType(type){
+
+    console.log('Hey guy',type)
+    if(type == 'manual'){
+      this.uploadType = 'manual';
+    }
+    else
+    this.uploadType = 'bulk';
+  }
+
+  // addProject(){
+  //   console.log('Hello Sir');
+  // }
+
+  // addExpenseType(){
+  //   console.log('Hello Ma');
+  // }
+
   createProject(){
     this.project.addUpdateExpenseProject(this.allProjects).subscribe(data => {
       if(!data.hasError){
@@ -79,7 +100,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   }
 
   createTypes(){
-    this.types.addUpdateExpenseType(this.myexpense).subscribe(data => {
+    this.types.addUpdateExpenseType(this.myexpenseType).subscribe(data => {
       if(!data.hasError){
         console.log('Success')
       }

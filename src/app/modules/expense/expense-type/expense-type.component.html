@@ -1,3 +1,4 @@
+<ng-template [ngIf]="!showModal">
 <ngx-componentsheader
   pageName="Expense Type"
   [requiredButton]="topActionButtons"
@@ -25,7 +26,8 @@
     (pageChange)="loadNewPage($event)"
   ></ngx-tablecomponent>
 </div>
-<ngx-side-modal [(show)]="showModal">
+</ng-template>
+<div *ngIf="showModal && selectedTab === TABS.PROJECTS">
   <div modal-header>Add project</div>
   <div modal-body>
     <div class="my-form">
@@ -60,4 +62,4 @@
   <div modal-actions>
     <button nbButton status="primary">save</button>
   </div>
-</ngx-side-modal>
+</div>
