@@ -84,6 +84,8 @@ import { LoadableButtonComponent } from './loadable-button/loadable-button.compo
 import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+import { PageComponent } from './page/page.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -120,6 +122,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     LoadableButtonComponent,
     MultiSelectComponent,
     CustomFormComponent,
+    PageComponent,
   ],
   imports: [
     FormsModule,
@@ -174,6 +177,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     NbCardModule,
     NbInputModule,
     NbContextMenuModule,
+    NgMultiSelectDropDownModule,
   ],
   providers: [
     {
@@ -225,6 +229,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     NbDialogModule,
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
+    PageComponent,
   ],
 })
 export class ComponentsModule { }
