@@ -4,6 +4,8 @@ import { AdministrationComponent } from './administration/administration.compone
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { CategoriesComponent } from './categories/categories.component';
+import { SpecializationComponent } from './specialization/specialization.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +15,16 @@ export const routes: Routes = [
   {
     path: 'administration',
     component: AdministrationComponent
+  },
+
+  {
+    path: 'categories',
+    component: CategoriesComponent
+  },
+
+  {
+    path: 'specializations',
+    component: SpecializationComponent
   },
 
   {

@@ -14,6 +14,7 @@ import { GenericComponent } from './pages/generic/generic.component';
 import { RequestComponent } from './pages/request/request.component';
 import { SystemoptionComponent } from './pages/systemoption/systemoption.component';
 import { system } from 'faker';
+import { JobRoleComponent } from './pages/job-role/job-role.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,9 @@ const routes: Routes = [
         component: LocationListComponent,
       },
       {
+        path: 'job-role',
+        component: JobRoleComponent,
+      },      {
         path: 'position',
         component: PositionListComponent,
       },

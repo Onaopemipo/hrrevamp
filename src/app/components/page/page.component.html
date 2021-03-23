@@ -1,0 +1,22 @@
+<ngx-componentsheader actions="actions" [pageName]="pageTitle" [requiredButton]="requiredButton" (buttonClick)="topActionButtonClicked($event)"></ngx-componentsheader>
+
+<div style="padding: 10px;"></div>
+<div class="container" style="background-color: #ffffff; height: 1000px;">
+  <nb-tabset>
+    <nb-tab [tabTitle]="tab.label" [tabId]="tab.name" *ngFor="let tab of tabs"></nb-tab>   
+  </nb-tabset>
+    <ngx-default-content></ngx-default-content>
+    <ngx-tableheader></ngx-tableheader>
+    <ngx-tablecomponent [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
+</div>
+<ngx-side-modal [(show)]="showModal">
+    <div modal-header>
+        {{formTitle}}
+    </div>
+    <div modal-body>
+        <ngx-custom-form [loadingSave]="loadingSave" [formConfig]="formConfig" [(value)]="data" (valueChange)="dataChanged($event)" (onCancel)="onFormCancelled()"></ngx-custom-form>
+    </div>
+    <div modal-footer>
+        <!-- YYY -->
+    </div>
+</ngx-side-modal>

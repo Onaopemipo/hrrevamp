@@ -10,7 +10,7 @@ import { ExpenseRequestComponent } from './expense-request/expense-request.compo
 import { ExpenseManagementComponent } from './expense-management/expense-management.component';
 import { ExpenseReportComponent } from './expense-report/expense-report.component';
 import { ExpenseRequestService } from './services/expense-request.service';
-import { AddUpdateExpenseServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
 
 
 
@@ -23,9 +23,14 @@ import { AddUpdateExpenseServiceProxy, FetchExpensesServiceProxy } from 'app/_se
     ExpenseReportComponent,
   ],
   providers: [
+    AddUpdateExpenseProjectServiceProxy,
     AddUpdateExpenseServiceProxy,
-    FetchExpensesServiceProxy,
     ExpenseRequestService,
+    FetchExpensesServiceProxy,
+    AddUpdateLoanTypeServiceProxy,
+    GetExpenseTypesServiceProxy,
+    GetExpenseProjectServiceProxy,
+    GetExpenseProjectServiceProxy,
   ],
   imports: [
     CommonModule,
@@ -33,13 +38,5 @@ import { AddUpdateExpenseServiceProxy, FetchExpensesServiceProxy } from 'app/_se
     ThemeModule,
     ExpenseRoutingModule,
   ],
-
-  providers: [
-    AddUpdateExpenseProjectServiceProxy,
-    GetExpenseProjectServiceProxy,
-    AddUpdateLoanTypeServiceProxy,
-    GetExpenseTypesServiceProxy,
-    GetExpenseProjectServiceProxy
-]
 })
 export class ExpenseModule { }
