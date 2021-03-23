@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { AddUpdateLocationServiceProxy, GetAllLocationsServiceProxy, GetLocationByIdServiceProxy, LocationDTO, ManageLocationDTO, VwPosition } from 'app/_services/service-proxies';
+import { Position } from 'app/_services/service-proxies';
 import { of, Subject } from 'rxjs';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 
-export class MyPosition extends VwPosition implements IStatus {
-  data: VwPosition;
+export class MyPosition extends Position implements IStatus {
+  data: Position;
 
-  public constructor(data: VwPosition = new VwPosition()) {
+  public constructor(data: Position = new Position()) {
     super(data);
     this.data = data;
     Object.assign(this, data);
@@ -30,7 +30,7 @@ export class MyPosition extends VwPosition implements IStatus {
   }
 }
 
-export interface PositionFilter extends BaseFilter{
+export interface PositionFilter extends BaseFilter {
   title?: string;
   description?: number;
   min_no_of_years_for_promotion?: number;

@@ -91,10 +91,10 @@ export class ExpenseManagementComponent extends MainBaseComponent {
 
   getProjects(){
     this.getmyproject.getExpenseProject(1,'','',true,'','',1,1).subscribe(data => {
-      if(!data.hasError){
-        this.myProjects = data.result;
+      // if(!data.){
+        this.myProjects = data;
         console.log('Hey See here', this.myProjects)
-      }
+      // }
     })
   }
 

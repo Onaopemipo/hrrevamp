@@ -90,7 +90,6 @@ PositionFilter, MyPosition> implements OnInit {
     private dataService: DataServiceProxy,
   ) {
     super(confirmBox);
-    this.editingData.promotion_min_years;
   }
 
   pageTitle = 'Positions';
