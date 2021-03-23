@@ -52,6 +52,7 @@ import { CardComponent } from './card/card.component';
 import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
+import { ExitRequestService } from './services/exit-request.service';
 
 
 
@@ -115,6 +116,7 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
     CreateEmployeeServiceProxy,
     FetchAllEmployeesServiceProxy,
     DataServiceProxy,
+    ExitRequestService,
 ]
 })
 export class EmployeemoduleModule { }
