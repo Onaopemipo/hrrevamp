@@ -15,6 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'CORE HR',
     group: true,
   },
+
   {
     title: 'Employee Self Service',
     icon: '/assets/icons/EmployeeManagement.jpg',
@@ -76,6 +77,48 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
     ]
   },
+
+  {
+    title: 'Career Succession',
+    icon: '/assets/icons/career.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: 'career-succession/dashbaord',
+      },
+
+      {
+        title: 'Competency',
+        link: 'career-succession/competency',
+      },
+
+      {
+        title: 'Succession Plans',
+        link: 'career-succession/planning',
+      },
+
+      {
+        title: 'Talent Pool',
+        link: 'career-succession/talent-pool',
+      },
+
+      {
+        title: '9 Box Grid Appraisal',
+        link: 'career-succession/gridbox',
+      },
+
+      {
+        title: 'Roles',
+        link: 'career-succession/roles',
+      },
+
+      {
+        title: 'Report',
+        link: 'career-succession/report',
+      },
+    ]
+  },
+
   {
     title: 'Leave Management',
     icon: '/assets/icons/LeaveManagement.jpg',
