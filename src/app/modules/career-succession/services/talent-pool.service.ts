@@ -116,6 +116,7 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
       data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(pool_id => new MyTalentPoolEmployee().fake(pool_id)),
       length: 10
     };
+    return createSubscription(data);
   }
 
   addToPool(id: number, employee: MyTalentPoolEmployee) {
