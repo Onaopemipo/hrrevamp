@@ -1,5 +1,5 @@
 
-<div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal, 'full-page': isPage}" class="my-modal" *ngIf="show_modal">
+<div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal, 'full-page': isPage}" class="my-modal">
     <!-- <div style="flex: auto"></div>     -->
     <ngx-componentsheader [pageName]="title" *ngIf="isPage"></ngx-componentsheader>
     <div style="flex: auto" (click)="closeModal()"></div>

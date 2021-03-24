@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { SalaryScale } from 'app/_services/service-proxies';
+import { SalaryScale, SalaryscaleServiceProxy } from 'app/_services/service-proxies';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 
 export class MySalaryScale extends SalaryScale implements IStatus {
@@ -35,23 +36,20 @@ export class SalaryScaleService implements CrudService<SalaryScaleFilter, MySala
 
   pageSize = DEFAULT_PAGE_SIZE;
   constructor(
+    private api: SalaryscaleServiceProxy
   ) { }
 
   list(filter: SalaryScaleFilter) {
-    const subject = new Subject<ListResult<any>>();
-    window.setTimeout(() => {
-      subject.next({data: [new MySalaryScale()], length: 10});
-    }, 2000);
-    return subject.asObservable();
+    return this.api.getAllSalaryscale(10, filter.page).pipe(map(res => {
+      return {
+        data: res.result.map(scale => new MySalaryScale(scale)),
+        length: res.totalCount
+      };
+    }));
   }
 
   create(data: MySalaryScale) {
-    const subject = new Subject<any>();
-    window.setTimeout(() => {
-      subject.next({});
-      subject.complete();
-    }, 2000);
-    return subject.asObservable();
+    return this.api.addUpdateSalaryscale(data);
   }
 
   init() {}

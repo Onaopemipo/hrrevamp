@@ -50,7 +50,6 @@ SalaryGradeFilter, MySalaryGrade> implements OnInit {
   getNewEditingData() { return new MySalaryGrade(); }
 
   saveData(data: MySalaryGrade) {
-    console.log(1000)
     if (this.editingData.id) {
       this.successMessage = SUCCESS_MESSAGES.edit;
     } else {

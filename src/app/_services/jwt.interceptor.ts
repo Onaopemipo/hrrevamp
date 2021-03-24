@@ -64,10 +64,10 @@ export class JwtInterceptor implements HttpInterceptor {
             .pipe(tap ((response_: HttpEvent<any>) =>
             {
                 if (response_ instanceof HttpResponseBase) {
-                
-                    try {                    
+
+                    try {
                         return this.processResponse(<any>response_);
-                        
+
                 } catch (e) {
                     return <Observable<any>><any>_observableThrow(e);
                 }
@@ -88,11 +88,11 @@ export class JwtInterceptor implements HttpInterceptor {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-   
+
             return blobToText(responseBlob).pipe(tap(_responseText => {
             let result200: any = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            
+
            // result200 = VwUserObjApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
@@ -117,12 +117,12 @@ export class JwtInterceptor implements HttpInterceptor {
                 this.alertService.openModalAlert(ALERT_TYPES.FAILED, _responseText, "Ok").subscribe(data => {
                     this.authServ.clearusers();
                   if (data) {
-             
+
                   }
                 });
-             
+
                 return throwException("Unauthorized Request", status, _responseText, _headers, result401);
-                })); 
+                }));
         }
         else if (status === 403) {
             return blobToText(responseBlob).pipe(tap(_responseText => {
@@ -130,13 +130,13 @@ export class JwtInterceptor implements HttpInterceptor {
                 this.alertService.openModalAlert(ALERT_TYPES.FAILED,_responseText, "Go to Dashboard", ).subscribe(data => {
                     this.router.navigate(['/dashboard']);
                   if (data) {
-             
+
                   }
                 });
-             
+
                 return throwException("Forbidden, You don't have permission to access the Resource", status, _responseText, _headers, result403);
-                })); 
-        }     
+                }));
+        }
         else if (status === 500) {
             return blobToText(responseBlob).pipe(tap(_responseText => {
             return throwException("Server Error", status, _responseText, _headers);

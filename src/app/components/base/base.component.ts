@@ -113,7 +113,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
     this.loadingSave = true;
     this.saveData(this.editingData).subscribe(data => {
       this.loadingSave = false;
-      if(data.isSuccessful){
+      if (data.isSuccessful) {
         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,
           this.successMessage, 'Ok').subscribe(data => {
             this.reload();
@@ -121,7 +121,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
       } else {
         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED,
           data.message, 'Ok').subscribe(data => {
-          });
+        });
       }
     });
   }
