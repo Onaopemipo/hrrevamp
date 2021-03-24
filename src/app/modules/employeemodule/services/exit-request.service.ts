@@ -3,20 +3,22 @@ import { CrudService, ListResult } from 'app/_services/base-api.service';
 import { random } from 'faker';
 import { Observable, of, Subject } from 'rxjs';
 import { extend } from 'validate.js';
+import { Transfer } from '@flowjs/ngx-flow';
+import * as fakerStatic from 'faker';
 
 export class MyExitRequest {
-  id: number;
-  fullName: string;
-  dateRequested: string;
-  endDate: string;
-  type: string;
-  status: number;
+  id?: number;
+  fullName?: string;
+  dateRequested?: string;
+  endDate?: string;
+  type?: string;
+  status?: number;
 
   reason: string;
   subReason: string;
   sourceOfInitiation: string;
-  exitDate: string;
-  uploadUnsupportingDocument: File;
+  exitDate: Date;
+  uploadUnsupportingDocument: Transfer[];
   comment: string;
 
   constructor(obj: object ){
@@ -64,7 +66,7 @@ export class ExitRequestService extends CrudService<MyExitRequestFilter, MyExitR
     return of();
   }
   delete(id: number) {
-    throw new Error('Method not implemented.');
+    return of();
   }
 
   // constructor() { }
