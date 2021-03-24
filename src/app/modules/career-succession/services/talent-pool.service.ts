@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
 import { Observable, Subject } from 'rxjs';
 import * as fakerStatic from 'faker';
+import { Employee } from 'app/_services/service-proxies';
+import { createSubscription, MessageOut } from './base';
+import { MyEmployeeDatail } from './employees.service'
 
 export class EmployeeName {
   name: string;
@@ -56,24 +59,27 @@ export class MyTalentPool {
 export class TalentPoolFilter {
 
 }
-class MessageOut {
-  isSuccessful: boolean;
-  message: string;
-  redirectUrl: string;
-  retId: 0;
 
-  constructor(message, isSuccesful) {
-    this.message = message;
-    this.isSuccessful = isSuccesful;
-  }
+
+export enum EmployeeChannelEnum {
+  employeeDatabase, recruitmentDatabase, externalSource
 }
-function createSubscription<T>(data: T) {
-  const subject = new Subject<T>();
-  window.setTimeout(() => {
-    subject.next(data);
-    subject.complete();
-  }, 1000);
-  return subject.asObservable();
+
+export class MyTalentPoolEmployee {
+  channel: EmployeeChannelEnum;
+  purpose: string;
+  name: string;
+  employee_id: number;
+  employee: MyEmployeeDatail;
+  department: string;
+  position: string;
+
+  fake(id) {
+    this.channel = EmployeeChannelEnum.employeeDatabase;
+    this.employee_id = 1;
+    this.employee = new MyEmployeeDatail().fake(1);
+    return this;
+  }
 }
 
 @Injectable({
@@ -103,4 +109,24 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
     return createSubscription(new MessageOut('Error while deleting talent pool', false));
   }
 
+  fetchEmployees(id) {
+    const data: ListResult<MyTalentPoolEmployee> = {
+      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(pool_id => new MyTalentPoolEmployee().fake(pool_id)),
+      length: 10
+    };
+  }
+
+  addToPool(id: number, employee: MyTalentPoolEmployee) {
+    if (fakerStatic.random.boolean()) {
+      return createSubscription(new MessageOut('Talent Pool created successfully', true));
+    }
+    return createSubscription(new MessageOut('Error while creating talent pool', false));
+  }
+
+  removeFromTalentPool(id: number, employee: MyTalentPoolEmployee) {
+    if (fakerStatic.random.boolean()) {
+      return createSubscription(new MessageOut('Talent Pool created successfully', true));
+    }
+    return createSubscription(new MessageOut('Error while creating talent pool', false));
+  }
 }
