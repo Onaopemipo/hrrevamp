@@ -15,6 +15,7 @@ export class TalentPoolComponent implements OnInit {
   newPool:boolean = false;
   talentPool: string = '';
   poolModel: TalentPoolModel[] = []
+  allPool: string = '';
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -31,6 +32,12 @@ export class TalentPoolComponent implements OnInit {
 
   addNewPool(){
   this.newPool = !this.newPool;
+  }
+
+
+  createTalentPool(){
+    let poolRecord = this.poolModel;
+    console.log('this is it:', poolRecord)
   }
 
 }

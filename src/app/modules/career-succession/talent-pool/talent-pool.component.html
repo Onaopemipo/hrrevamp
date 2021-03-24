@@ -1,5 +1,5 @@
 <ngx-componentsheader pageName='Talent Pool'></ngx-componentsheader>
-<div *ngIf="newPool==false" style="background-color: #ffffff;">
+<div *ngIf="newPool==false  && allPool ==''" style="background-color: #ffffff;">
   <nb-card
     style="min-height: 100vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
     <nb-card-body>
@@ -12,21 +12,24 @@
 
 </div>
 
-<div *ngIf="newPool ==true">
+<div *ngIf="newPool ==true && allPool ==''">
   <nb-card>
     <nb-card-body>
       <form>
         <div class="form-group row mydiv">
           <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" id="jobTitle" placeholder="Pool Title">
+            <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="poolModel.title" placeholder="Pool Title">
+          <div *ngIf="point.invalid && (point.dirty || point.touched)" class="error">
+            <div *ngIf="point.errors.required">Title is required</div>
           </div>
+        </div>
         </div>
 
         <div class="form-group row mydiv">
           <label for="Department" class="col-sm-3 col-form-label mylabel">Description</label>
             <div class="col-sm-6 col-md-6 col-lg-6">
-              <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+              <ngx-wysisyg-input style="padding-left: -10px;" [(value)]="poolModel.description"></ngx-wysisyg-input>
           </div>
         </div>
 
@@ -34,37 +37,46 @@
         <div class="form-group row mydiv">
           <label for="Country" class="col-sm-3 col-form-label mylabel">Category</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" required>
+            <select class="custom-select" name="category" #category="ngModel" [(ngModel)]="poolModel.category" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
+          <div *ngIf="category.invalid && (category.dirty || category.touched)" class="error">
+            <div *ngIf="category.errors.required">Category is required</div>
           </div>
+        </div>
         </div>
 
         <div class="form-group row mydiv">
           <label for="Region" class="col-sm-3 col-form-label mylabel">Type</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" required>
+            <select class="custom-select" name="type" #type="ngModel" [(ngModel)]="poolModel.type" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
+          <div *ngIf="type.invalid && (type.dirty || type.touched)" class="error">
+            <div *ngIf="type.errors.required">Type is required</div>
           </div>
+        </div>
         </div>
 
         <div class="form-group row mydiv">
           <label for="Region" class="col-sm-3 col-form-label mylabel">Recruitment Point</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" required>
+            <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolModel.point" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
+          <div *ngIf="point.invalid && (point.dirty || point.touched)" class="error">
+            <div *ngIf="point.errors.required">Recruitment Point is required</div>
           </div>
+        </div>
         </div>
 
 
@@ -72,26 +84,35 @@
         <div class="form-group row mydiv">
           <label for="Skill Weight" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="skillWeight" placeholder="Skill Weight">
+            <input type="text" class="form-control" name="skillWeight" #skillWeight="ngModel" [(ngModel)]="poolModel.skillWeight" placeholder="Skill Weight" required>
+          <div *ngIf="skillWeight.invalid && (skillWeight.dirty || skillWeight.touched)" class="error">
+            <div *ngIf="skillWeight.errors.required">Skill Weight is required</div>
           </div>
+        </div>
         </div>
 
         <div class="form-group row mydiv">
           <label for="Experience" class="col-sm-3 col-form-label mylabel">Experience</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="Experience" required>
+            <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="poolModel.experience" required>
               <option value="">Select </option>
               <option value="1">Beginner</option>
               <option value="2">Intermediate</option>
               <option value="3">Master</option>
             </select>
+          <div *ngIf="experience.invalid && (experience.dirty || experience.touched)" class="error">
+            <div *ngIf="experience.errors.required">Experience is required</div>
           </div>
+        </div>
         </div>
 
         <div class="form-group row mydiv">
           <label for="Experience Weight" class="col-sm-3 col-form-label mylabel">Experience Weight</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="experienceWeight" placeholder="Experience Weight">
+            <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolModel.expWeight" placeholder="Experience Weight" required>
+            <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
+              <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
+            </div>
           </div>
         </div>
 
@@ -99,7 +120,7 @@
         <div class="form-group row">
           <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
           <div class="col-sm-6">
-            <button nbButton status="primary">Create Pool</button>
+            <button nbButton status="primary" (click)="createTalentPool()">Create Pool</button>
             <span style="padding: 8px;"></span>
             <button nbButton style="color: #4847E0;">Cancel</button>
           </div>
@@ -109,7 +130,7 @@
   </nb-card>
 </div>
 
-<div *ngIf="newPool == true">
+<div *ngIf="allPool !=''">
       <nb-card class="cardTitle" (click)="toggleCard('applied')" #applied>
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
