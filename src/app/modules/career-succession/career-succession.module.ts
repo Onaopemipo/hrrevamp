@@ -19,10 +19,16 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
 import { CompareCompetencyComponent } from './compare-competency/compare-competency.component';
 import { GridboxComponent } from './gridbox/gridbox.component';
 import { TestpoolComponent } from './testpool/testpool.component';
+import { TalentPoolService } from './services/talent-pool.service';
+import { EmployeesService } from './services/employees.service';
 
 
 @NgModule({
   declarations: [DashboardComponent, ReportListComponent, TrainingRecordComponent, CompetencyComponent, TalentPoolComponent, RolesComponent, PlanningComponent, TreeComponent, ProfileDetailsComponent, CompareCompetencyComponent, GridboxComponent, TestpoolComponent],
+  providers: [
+    TalentPoolService,
+    EmployeesService
+  ],
   imports: [
     CommonModule,
     CareerSuccessionRoutingModule,
