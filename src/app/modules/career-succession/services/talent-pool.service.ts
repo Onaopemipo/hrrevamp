@@ -13,25 +13,41 @@ export class EmployeeName {
     return this;
   }
 }
-export class MyTalentPool {
+
+export enum TalentPoolRequirementTypes {
+  qualification, certification, skill, ability, experience
+}
+export class MyTalentPoolRequirement {
   id: number;
-  title: string;
-  description: string;
-  type: string;
+  type: TalentPoolRequirementTypes;
   requirementPoint: number;
   skillWeight: number;
   experience: number;
   experienceWeight: number;
+
+  fake(id) {
+    this.id = id;
+    this.type = TalentPoolRequirementTypes.ability;
+    this.requirementPoint = fakerStatic.random.number(10);
+    this.skillWeight = fakerStatic.random.number(10);
+    this.experience = fakerStatic.random.number(10);
+    this.experienceWeight = fakerStatic.random.number(10);
+    return this;
+  }
+}
+
+export class MyTalentPool {
+  id: number;
+  title: string;
+  description: string;
   employees: EmployeeName[];
+  requirements: MyTalentPoolRequirement[];
 
   fake(id) {
     this.id = id;
     this.title = fakerStatic.name.title();
     this.description = fakerStatic.lorem.sentence();
-    this.type = fakerStatic.name.suffix();
-    this.requirementPoint = fakerStatic.random.number();
-    this.skillWeight = fakerStatic.random.number();
-    this.experienceWeight = fakerStatic.random.number();
+    this.requirements = [1, 2, 3, 4, 5, 6].map(employee => new MyTalentPoolRequirement().fake(id));
     this.employees = [1, 2, 3, 4, 5, 6, 7, 9, 10].map(employee_id => new EmployeeName().fake(employee_id));
     return this;
   }
@@ -40,7 +56,7 @@ export class MyTalentPool {
 export class TalentPoolFilter {
 
 }
-class MessageOut{
+class MessageOut {
   isSuccessful: boolean;
   message: string;
   redirectUrl: string;
