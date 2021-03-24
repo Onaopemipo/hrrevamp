@@ -1,4 +1,4 @@
-import { CalendarOptions } from '@fullcalendar/angular';
+ import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 

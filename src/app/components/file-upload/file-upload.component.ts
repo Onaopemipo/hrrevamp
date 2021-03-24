@@ -57,4 +57,5 @@ export class FileUploadComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
   }
+ 
 }
