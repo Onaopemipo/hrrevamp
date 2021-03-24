@@ -67,7 +67,7 @@
         <div class="form-group row mydiv">
           <label for="Region" class="col-sm-3 col-form-label mylabel">Recruitment Point</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolModel.point" required>
+            <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolModel.requirementPoint" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -78,8 +78,6 @@
           </div>
         </div>
         </div>
-
-
 
         <div class="form-group row mydiv">
           <label for="Skill Weight" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
@@ -109,10 +107,17 @@
         <div class="form-group row mydiv">
           <label for="Experience Weight" class="col-sm-3 col-form-label mylabel">Experience Weight</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolModel.expWeight" placeholder="Experience Weight" required>
+            <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolModel.experienceWeight" placeholder="Experience Weight" required>
             <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
               <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
             </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <div class="col-sm-6">
+            <button nbButton status="primary" (click)="createTalentPool()">Add More Requirement</button>
           </div>
         </div>
 
