@@ -43,6 +43,7 @@ export class MyTalentPool {
   id: number;
   title: string;
   description: string;
+  no_of_employees: number;
   employees: EmployeeName[];
   requirements: MyTalentPoolRequirement[];
 
@@ -52,6 +53,7 @@ export class MyTalentPool {
     this.description = fakerStatic.lorem.sentence();
     this.requirements = [1, 2, 3, 4, 5, 6].map(employee => new MyTalentPoolRequirement().fake(id));
     this.employees = [1, 2, 3, 4, 5, 6, 7, 9, 10].map(employee_id => new EmployeeName().fake(employee_id));
+    this.no_of_employees = fakerStatic.random.number();
     return this;
   }
 }
