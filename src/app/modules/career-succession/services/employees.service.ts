@@ -74,6 +74,10 @@ export class MyEmployeeDatail {
   abilities?: EmployeeAbilities[];
   skills?: EmployeeSkill[];
 
+  constructor(obj) {
+    Object.assign(this, obj);
+  }
+
   fake(id) {
     this.id = id;
     this.position_name = fakerStatic.name.findName() + ' ' + fakerStatic.name.findName()
@@ -93,10 +97,30 @@ export class MyEmployeeDatail {
   }
 }
 
+export interface EmployeeFilter {
+}
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeesService {
+  constructor() { }
+
+  list(filter: EmployeeFilter) {
+    const data = [1, 2, 3, 4, 5, 6].map(_id => new MyEmployeeDatail({}).fake(_id));
+    return createSubscription(data);
+  }
+
+  fetch(id) {
+    const data = new MyEmployeeDatail().fake(1);
+    return createSubscription(data);
+  }
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SuccessionService {
   constructor() { }
 
   fetch(id) {
