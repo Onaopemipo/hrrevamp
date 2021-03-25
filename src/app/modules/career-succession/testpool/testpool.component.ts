@@ -1,3 +1,5 @@
+import { MyTalentPoolEmployee, TalentPoolService } from './../services/talent-pool.service';
+import { ActivatedRoute } from '@angular/router';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -23,11 +25,14 @@ channel: { source: string, label: string, status: boolean }[] = [
 selectedChannel: string = 'database';
 
  newCandidate: boolean = true;
+ pageTitle:string = '';
+ candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
 
-  constructor() { }
+  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService) { }
 
   ngOnInit(): void {
     console.log(this.channel)
+    this.pageTitle = this.router.snapshot.paramMap.get("title")
   }
 
   goback(){
@@ -37,6 +42,13 @@ selectedChannel: string = 'database';
 
   addCandidate(){
     this.newCandidate = !this.newCandidate;
+  }
+
+  async addCandidateToPool(){
+   const data = await this.poolservice.addToPool(1,this.candidateModel).toPromise()
+   if(data.isSuccessful){
+    console.log('Hey Boss', data.message)
+   }
   }
 
 onChangeChannel($value){

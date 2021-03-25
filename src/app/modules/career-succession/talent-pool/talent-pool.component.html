@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group row mydiv">
-          <label for="Department" class="col-sm-3 col-form-label mylabel">Description</label>
+          <label for="Description" class="col-sm-3 col-form-label mylabel">Description</label>
             <div class="col-sm-6 col-md-6 col-lg-6">
               <ngx-wysisyg-input style="padding-left: -10px;" [(value)]="poolModel.description"></ngx-wysisyg-input>
           </div>
@@ -35,9 +35,9 @@
 
         <h6>Pool Requirements</h6>
         <div class="form-group row mydiv">
-          <label for="Country" class="col-sm-3 col-form-label mylabel">Category</label>
+          <label for="Category" class="col-sm-3 col-form-label mylabel">Category</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="category" #category="ngModel" [(ngModel)]="poolModel.category" required>
+            <select class="custom-select" name="category" #category="ngModel" [(ngModel)]="poolRequirementModel.category" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -50,9 +50,9 @@
         </div>
 
         <div class="form-group row mydiv">
-          <label for="Region" class="col-sm-3 col-form-label mylabel">Type</label>
+          <label for="Type" class="col-sm-3 col-form-label mylabel">Type</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="type" #type="ngModel" [(ngModel)]="poolModel.type" required>
+            <select class="custom-select" name="type" #type="ngModel" [(ngModel)]="poolRequirementModel.type" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -65,9 +65,9 @@
         </div>
 
         <div class="form-group row mydiv">
-          <label for="Region" class="col-sm-3 col-form-label mylabel">Recruitment Point</label>
+          <label for="Point" class="col-sm-3 col-form-label mylabel">Recruitment Point</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolModel.requirementPoint" required>
+            <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolRequirementModel.requirementPoint" required>
               <option value="">Select </option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -82,7 +82,7 @@
         <div class="form-group row mydiv">
           <label for="Skill Weight" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="skillWeight" #skillWeight="ngModel" [(ngModel)]="poolModel.skillWeight" placeholder="Skill Weight" required>
+            <input type="text" class="form-control" name="skillWeight" #skillWeight="ngModel" [(ngModel)]="poolRequirementModel.skillWeight" placeholder="Skill Weight" required>
           <div *ngIf="skillWeight.invalid && (skillWeight.dirty || skillWeight.touched)" class="error">
             <div *ngIf="skillWeight.errors.required">Skill Weight is required</div>
           </div>
@@ -92,7 +92,7 @@
         <div class="form-group row mydiv">
           <label for="Experience" class="col-sm-3 col-form-label mylabel">Experience</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="poolModel.experience" required>
+            <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="poolRequirementModel.experience" required>
               <option value="">Select </option>
               <option value="1">Beginner</option>
               <option value="2">Intermediate</option>
@@ -107,23 +107,23 @@
         <div class="form-group row mydiv">
           <label for="Experience Weight" class="col-sm-3 col-form-label mylabel">Experience Weight</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolModel.experienceWeight" placeholder="Experience Weight" required>
-            <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
-              <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
-            </div>
+            <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolRequirementModel.experienceWeight" placeholder="Experience Weight" required>
+          </div>
+          <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
+            <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
           <div class="col-sm-6">
-            <button nbButton status="primary" (click)="createTalentPool()">Add More Requirement</button>
+            <button nbButton status="primary" (click)="addRequirement()">Add More Requirement</button>
           </div>
         </div>
 
 
         <div class="form-group row">
-          <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+          <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
           <div class="col-sm-6">
             <button nbButton status="primary" (click)="createTalentPool()">Create Pool</button>
             <span style="padding: 8px;"></span>
@@ -136,48 +136,27 @@
 </div>
 
 <div *ngIf="allPool !=''">
-      <nb-card class="cardTitle" (click)="toggleCard('applied')" #applied>
+      <nb-card *ngFor="let pool of allTalentPool" class="cardTitle">
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>Applied</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <p>This is a description of what the pool is all about</p>
-        </nb-card-body>
-      </nb-card>
+            <div>
+              <span>{{pool.title}}</span>
+              <span style="margin-left: 5px; font-size: 12;">
+                <i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>
+                {{pool.no_of_employees}} Employees</span>
+            </div>
 
-      <nb-card>
-        <nb-card-header>
-          <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>Shortlisted</span><span class="actions"><a href="javascript:void(0)"
-              (click)="showModal()">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+            <div>
+              <span class="actions">
+                <a href="javascript:void(0);" (click)="editPool(pool.id)" style="padding: 10px;">Edit</a>
+                <a [routerLink]="['../talentpool', pool.title]">View</a>
+                <a style="padding: 10px; color:#EB5757;" href="javascript:void(0);" (click)="deletePool(pool.id)">Delete</a>
+              </span>
+            </div>
           </div>
         </nb-card-header>
         <nb-card-body>
-          <p>This is a description of what the pool is all about</p>
-        </nb-card-body>
-      </nb-card>
-
-      <nb-card>
-        <nb-card-header>
-          <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>Pending offer</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <p>This is a description of what the pool is all about</p>
-        </nb-card-body>
-      </nb-card>
-
-      <nb-card>
-        <nb-card-header>
-          <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>Hired</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <p>This is a description of what the pool is all about</p>
+          <p>{{pool.description}}</p>
         </nb-card-body>
       </nb-card>
 </div>

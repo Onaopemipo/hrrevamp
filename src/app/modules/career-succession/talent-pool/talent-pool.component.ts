@@ -1,4 +1,4 @@
-import { MyTalentPool } from './../services/talent-pool.service';
+import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from './../services/talent-pool.service';
 import { TalentPoolModel } from './../../../_models/careers.model';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
@@ -15,9 +15,11 @@ export class TalentPoolComponent implements OnInit {
   myButton: string = 'Create Talent Pool';
   newPool:boolean = false;
   talentPool: string = '';
-  // poolModel: TalentPoolModel[] = []
+  poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
   poolModel: MyTalentPool = new MyTalentPool;
-  allPool: string = '';
+  allTalentPool: MyTalentPool [] = [];
+  allPool: string = 'dsd';
+
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -27,19 +29,55 @@ export class TalentPoolComponent implements OnInit {
     {name: 'certification', title: 'certification'},
     {name: 'skills', title: 'Skills'},
   ];
-  constructor() { }
+  constructor(private poolservice: TalentPoolService) { }
 
   ngOnInit(): void {
+    this.fetchPool();
   }
 
   addNewPool(){
   this.newPool = !this.newPool;
   }
 
+  // createPool(){
+  //   this.poolservice.create()
+  // }
 
   createTalentPool(){
     let poolRecord = this.poolModel;
+    this.poolservice.create(this.poolModel).subscribe(data => {
+      if(data.isSuccessful){
+        console.log('Congrats')
+      }
+      else {
+        console.log('Try again please')
+      }
+    })
     console.log('this is it:', poolRecord)
+  }
+
+  async fetchPool(){
+    const data = await this.poolservice.list({}).toPromise()
+    console.log('Yes Boss, the data is here:',data.data)
+    this.allTalentPool = data.data;
+  }
+
+  addRequirement(){
+    let poolRequirement = this.poolRequirementModel;
+    console.log('Hey Boss',poolRequirement)
+    this.poolRequirementModel = new MyTalentPoolRequirement
+    // this.poolRequirementModel = [];
+  }
+
+  editPool(){
+
+  }
+
+  async deletePool(id){
+   const data = await this.poolservice.delete(id).toPromise();
+   if(data.isSuccessful){
+     console.log('Deleted:', data.message)
+   }
   }
 
 }

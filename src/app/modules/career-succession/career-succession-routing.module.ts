@@ -54,7 +54,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'test-pool',
+    path: 'talentpool/:title',
     component: TestpoolComponent
 
   },
