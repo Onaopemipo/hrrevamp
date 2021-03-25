@@ -1,3 +1,4 @@
+import { TalentPoolModel } from './../../../_models/careers.model';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,6 +14,7 @@ export class TalentPoolComponent implements OnInit {
   myButton: string = 'Create Talent Pool';
   newPool:boolean = false;
   talentPool: string = '';
+  poolModel: TalentPoolModel[] = []
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},

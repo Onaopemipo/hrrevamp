@@ -93,32 +93,35 @@
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For Termination</label>
           <div class="col-sm-8">
-            <input type="text" nbInput fullWidth placeholder="Company Enter Reason For Termination">
+            <input type="text" nbInput fullWidth placeholder="Company Enter Reason For Termination"
+            name = "ReasonForLeaving" ([ngModel])="ReasonForLeaving">
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Sub-Reason</label>
           <div class="col-sm-8">
-            <input type="text" nbInput fullWidth placeholder="Enter Sub-Reason">
+            <input type="text" nbInput fullWidth placeholder="Enter Sub-Reason"([ngModel])="SubReason" name="SubReason">
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Source of initiation</label>
           <div class="col-sm-8">
-            <input type="text" nbInput fullWidth placeholder="Enter Source of initiation">
+            <input type="text" nbInput fullWidth placeholder="Enter Source of initiation" [(ngModel)]="SourceOfInitiation"
+            name="SourceOfInitiation">
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Exit</label>
           <div class="col-sm-8">
-            <input type="text" nbInput fullWidth placeholder="Enter Date of Exit">
+            <input type="text" nbInput fullWidth placeholder="Enter Date of Exit" [(ngModel)]="DateOfExit"
+            name="DateOfExit">
           </div>
         </div>
-        <hr>
+        <!-- <hr>jj-{{selectedOption}}=uuuu -->
         <div class="form-group row" style="margin-top: 15px;">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Upload Affected Employee</label>
           <div class="col-sm-8">
-            <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
+            <nb-radio-group [(ngModel)]="selectedOption" name="selectedOption" class="d-flex">
               <nb-radio value="1">Bulk Upload</nb-radio>
               <nb-radio value="2">Individual Upload</nb-radio>
 
@@ -133,7 +136,7 @@
           <div class="col-md-8 col-xxl-8 ">
             <div style="display: flex;flex-direction: row;">
               <div>
-                <ngx-file-upload class="form-control"></ngx-file-upload>
+                <ngx-file-upload [(value)]="FileUpload" class="form-control"></ngx-file-upload>
               </div>
               <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
                 <img style="height: 20px; margin-right: 10px;" src="assets/icons/download.jpg" alt=""><span
@@ -153,7 +156,7 @@
           <div class="col-md-8 col-xxl-8 ">
             <div style="display: flex;flex-direction: row;">
               <div>
-                <ngx-file-upload class="form-control"></ngx-file-upload>
+                <ngx-file-upload  [(value)]="DocUpload" class="form-control"></ngx-file-upload>
               </div>
               <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
                 Not More than 1 mb
@@ -169,7 +172,8 @@
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Additional comment</label>
           <div class="col-sm-8">
 
-            <textarea rows="5" nbInput fullWidth placeholder="Enter Additional comment here"></textarea>
+            <textarea rows="5" nbInput fullWidth placeholder="Enter Additional comment here" ([ngModel])="AdditionalComment"
+            name="AdditionalComment"></textarea>
           </div>
 
         </div>
@@ -178,7 +182,7 @@
           <div class="col-sm-4 col-form-label listsubheader"></div>
           <div class="col-sm-8" style=" display: flex;justify-content: center; margin-top: 3rem;margin-bottom: 2rem;">
 
-            <button nbButton status="primary" style="display: flex; justify-content: center;">Proceed</button>
+            <button nbButton status="primary" style="display: flex; justify-content: center;" (submit)="onSubmit()">Proceed</button>
           </div>
 
         </div>

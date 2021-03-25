@@ -18,9 +18,12 @@
                 
             </nb-tab>
         </nb-tabset>
-        <ngx-tableheader></ngx-tableheader>
-
-        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+        <ngx-tableheader>
+            
+        </ngx-tableheader>
+        <input [(ngModel)]='filter.id'/>
+        <button (click)='loadData()'>kk</button>
+        <ngx-tablecomponent [userData]='data' [tableColum]="tableColumns" [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
 
 
