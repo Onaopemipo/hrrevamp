@@ -12,67 +12,79 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NineGridBoxEmployeeComponent } from './nine-grid-box-employee/nine-grid-box-employee.component';
 import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
+import { CareerSuccessionComponent } from './career-succession.component';
+import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
-  },
+    component: CareerSuccessionComponent,
+    children: [
+      {
+        path: '',
+        component: DashboardComponent
+      },
+      {
+        path: 'profiledetails/:id',
+        component: ProfileDetailsComponent
+      },
 
-  {
-    path: 'competency',
-    component: CompetencyComponent
-  },
+      {
+        path: 'competency',
+        component: CompetencyComponent
+      },
 
-  {
-    path: 'talent-pool',
-    component: TalentPoolComponent
-  },
+      {
+        path: 'talent-pool',
+        component: TalentPoolComponent
+      },
 
-  {
-      path: 'report-list',
-      component: ReportListComponent
-  },
+      {
+          path: 'report-list',
+          component: ReportListComponent
+      },
 
-  {
-    path: 'training-record',
-    component: TrainingRecordComponent
-  },
+      {
+        path: 'training-record',
+        component: TrainingRecordComponent
+      },
 
-  {
-      path: 'roles',
-      component: RolesComponent
+      {
+          path: 'roles',
+          component: RolesComponent
+      },
 
-  },
+      {
+          path: 'planning',
+          component: PlanningComponent
+      },
 
-  {
-      path: 'planning',
-      component: PlanningComponent
-  },
+      {
+        path: 'compare-competency',
+        component: CompareCompetencyComponent
+      },
 
-  {
-    path: 'succession/:id',
-    component: SucessionPlanDetailComponent,
-  },
+      {
+        path: 'test-pool',
+        component: TestpoolComponent
 
-  {
-    path: 'compare-competency',
-    component: CompareCompetencyComponent
-  },
+      },
+      {
+        path: 'gridbox',
+        component: GridboxComponent
+      },
 
-  {
-    path: 'test-pool',
-    component: TestpoolComponent
+      {
+        path: 'succession/:id',
+        component: SucessionPlanDetailComponent,
+      },
 
-  },
-  {
-    path: 'gridbox',
-    component: GridboxComponent
-  },
-  {
-    path: 'gridbox/:id',
-    component: NineGridBoxEmployeeComponent
-  },
+      {
+        path: 'gridbox/:id',
+        component: NineGridBoxEmployeeComponent
+      },
+    ]
+  }
 ];
 
 @NgModule({
