@@ -10,57 +10,69 @@ import { CompetencyComponent } from './competency/competency.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CareerSuccessionComponent } from './career-succession.component';
+import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
-  },
-
-  {
-    path: 'competency',
-    component: CompetencyComponent
-  },
-
-  {
-    path: 'talent-pool',
-    component: TalentPoolComponent
-  },
-
-  {
-      path: 'report-list',
-      component: ReportListComponent
-  },
-
-  {
-    path: 'training-record',
-    component: TrainingRecordComponent
-  },
-
-  {
-      path: 'roles',
-      component: RolesComponent
-
-  },
-
-  {
-      path: 'planning',
-      component: PlanningComponent
-  },
-
-  {
-    path: 'compare-competency',
-    component: CompareCompetencyComponent
-  },
-
-  {
-    path: 'test-pool',
-    component: TestpoolComponent
-
-  },
-  {
-    path: 'gridbox',
-    component: GridboxComponent
+    component: CareerSuccessionComponent,
+    children: [
+      {
+        path: '',
+        component: DashboardComponent
+      },
+      {
+        path: 'profiledetails/:id',
+        component: ProfileDetailsComponent
+      },
+    
+      {
+        path: 'competency',
+        component: CompetencyComponent
+      },
+    
+      {
+        path: 'talent-pool',
+        component: TalentPoolComponent
+      },
+    
+      {
+          path: 'report-list',
+          component: ReportListComponent
+      },
+    
+      {
+        path: 'training-record',
+        component: TrainingRecordComponent
+      },
+    
+      {
+          path: 'roles',
+          component: RolesComponent
+    
+      },
+    
+      {
+          path: 'planning',
+          component: PlanningComponent
+      },
+    
+      {
+        path: 'compare-competency',
+        component: CompareCompetencyComponent
+      },
+    
+      {
+        path: 'test-pool',
+        component: TestpoolComponent
+    
+      },
+      {
+        path: 'gridbox',
+        component: GridboxComponent
+      }
+    ]
   }
 ];
 

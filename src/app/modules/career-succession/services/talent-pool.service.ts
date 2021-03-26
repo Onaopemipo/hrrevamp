@@ -79,7 +79,7 @@ export class MyTalentPoolEmployee {
   fake(id) {
     this.channel = EmployeeChannelEnum.employeeDatabase;
     this.employee_id = 1;
-    this.employee = new MyEmployeeDatail().fake(1);
+    this.employee = new MyEmployeeDatail({}).fake(1);
     return this;
   }
 }

@@ -14,29 +14,29 @@
           <div class="col-md-11">
             <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
                 <div class="col-md-4 col-lg-4 col-sm-6">
-                    <span style="font-weight: 600; padding-right:25px;">Name:</span><span>Dami Ogunmola</span>
+                    <span style="font-weight: 600; padding-right:25px;">Name:</span><span>{{data.employee_name}}</span>
                   </div>
 
                   <div class="col-md-4 col-lg-4 col-sm-6">
-                    <span style="font-weight: 600; padding-right:25px;">Department:</span><span>Marketing</span>
+                      <span style="font-weight: 600; padding-right:25px;">Department:</span><span>{{data.department_name}}</span>
                   </div>
 
                   <div class="col-md-4 col-lg-4 col-sm-6">
-                    <span style="font-weight: 600; padding-right:25px;">Level:</span><span>Grade 14</span>
+                    <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{data.level}}</span>
                   </div>
                 </div>
 
                 <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
                   <div class="col-md-4 col-lg-4 col-sm-6">
-                      <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>Managing Director</span>
+                      <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{data.job_role_name}}</span>
                     </div>
 
                     <div class="col-md-4 col-lg-4 col-sm-6">
-                      <span style="font-weight: 600; padding-right:25px;">Unit/Division:</span><span>Sales</span>
+                      <span style="font-weight: 600; padding-right:25px;">Unit/Division:</span><span>{{data.unit_name}}</span>
                     </div>
 
                     <div class="col-md-4 col-lg-4 col-sm-6">
-                      <span style="font-weight: 600; padding-right:25px;">Location:</span><span>Lagos</span>
+                      <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{data.location_name}}</span>
                     </div>
                   </div>
             </div>
@@ -53,33 +53,24 @@
     <div>
       <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
         <div class="col-md-6">
+          
           <span class="title">Qualifications</span>
-          <div style="padding: 5px;"></div>
-          <div style="display: flex; flex-direction: column; justify-self: center;">
-            <span class="title">10 years' experience in a supervisory role</span>
-            <span class="date">From 2010 - 2014</span>
-          </div>
-
-          <div style="padding: 5px;"></div>
-          <div style="display: flex; flex-direction: column; justify-self: center;">
-            <span class="title">M.Sc in Business Administration</span>
-            <span class="date">From 2010 - 2014</span>
-          </div>
-
-          <div style="padding: 5px;"></div>
-          <div style="display: flex; flex-direction: column; justify-self: center;">
-            <span class="title">B.Sc in Business Management</span>
-            <span class="date">From 2010 - 2014</span>
+          <div *ngFor="let qualification of data.qualifications">
+            <div style="padding: 5px;"></div>
+            <div style="display: flex; flex-direction: column; justify-self: center;">
+              <span class="title">{{qualification.name}}</span>
+              <span class="date">From {{qualification.startdate|date:'MMM d, y'}} - {{qualification.stopdate|date:'MMM d, y'}}</span>
+            </div>
           </div>
 
           <div style="padding: 15px;"></div>
           <span class="title">Abilities</span>
           <div style="padding: 5px;"></div>
-          <div>
+          <div *ngFor="let ability of data.abilities">
+            <p style="font-size: 14px;">{{ability.name}}</p>
+            <!-- <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
             <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
-            <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
-            <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
-            <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
+            <p style="font-size: 14px;">Ability to create financial reports and audits.</p> -->
           </div>
 
 
@@ -89,8 +80,8 @@
         <div class="col-md-6">
           <span class="title">Certifications</span>
           <div style="padding: 5px;"></div>
-          <div style="display: flex; flex-direction: column; justify-self: center;">
-            <span><i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Google Digital Marketing Certification</span>
+          <div style="display: flex; flex-direction: column; justify-self: center;" *ngFor="let certification of data.certification">
+            <span><i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>{{certification.name}}</span>
             <span ><i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Microsoft Azure Certification</span>
             <span><i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Asp.Net Certification</span>
           </div>
@@ -99,10 +90,10 @@
 
           <span class="title">Skills</span>
           <div style="padding: 5px;"></div>
-          <div style="display: flex; flex-direction: column; justify-self: center;">
-            <span>HTML</span>
-            <nb-progress-bar [value]="80" size="tiny" status="primary"></nb-progress-bar>
-            <div style="padding: 3px;"></div>
+          <div style="display: flex; flex-direction: column; justify-self: center;" *ngFor="let skill of data.skills">
+            <span>{{skill.name}}</span>
+            <nb-progress-bar [value]="skill.point" size="tiny" status="primary"></nb-progress-bar>
+            <!-- <div style="padding: 3px;"></div>
             <span>Javascript</span>
             <nb-progress-bar [value]="90" size="tiny" status="primary"></nb-progress-bar>
             <div style="padding: 3px;"></div>
@@ -113,7 +104,7 @@
             <nb-progress-bar [value]="30" size="tiny" status="primary"></nb-progress-bar>
             <div style="padding: 3px;"></div>
             <span>Python</span>
-            <nb-progress-bar [value]="75" size="tiny" status="primary"></nb-progress-bar>
+            <nb-progress-bar [value]="75" size="tiny" status="primary"></nb-progress-bar> -->
           </div>
         </div>
       </div>

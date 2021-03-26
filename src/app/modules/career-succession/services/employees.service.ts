@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Certification, QualificationGrade, Skill } from 'app/_services/service-proxies';
+import { Certification, EmployeeQualification, QualificationGrade, Skill } from 'app/_services/service-proxies';
 import * as fakerStatic from 'faker';
 import { createSubscription } from './base';
 
-export class MyEmployeeQualification extends QualificationGrade{
+export class MyEmployeeQualification extends EmployeeQualification{
   constructor(obj) {
     super();
     Object.assign(this, obj);
@@ -14,6 +14,8 @@ export class MyEmployeeQualification extends QualificationGrade{
     const qualifications = ['BSC in engineering', 'MSC in engineering', 'BSC in art'];
     const random = Math.floor(Math.random() * qualifications.length);
     this.name = qualifications[random];
+    this.startdate = fakerStatic.date.past(2000);
+    this.stopdate = fakerStatic.date.future(2005);
     return this;
   }
 }
@@ -55,6 +57,7 @@ export class EmployeeSkill extends Skill {
     const certifications = ['FIGMA', 'CSS', 'HTML'];
     const random = Math.floor(Math.random() * certifications.length);
     this.name = certifications[random];
+    this.point = fakerStatic.random.number(100)
     return this;
   }
 }
@@ -67,6 +70,7 @@ export class MyEmployeeDatail {
   unit_name: string;
   level: number;
   location_name: string;
+  job_role_name: string;
   picture: string;
 
   qualifications?: MyEmployeeQualification[];
@@ -80,10 +84,11 @@ export class MyEmployeeDatail {
 
   fake(id) {
     this.id = id;
-    this.position_name = fakerStatic.name.findName() + ' ' + fakerStatic.name.findName()
-    this.employee_name = fakerStatic.name.jobArea();
+    this.position_name = fakerStatic.name.findName();
+    this.employee_name = fakerStatic.name.findName();
     this.department_name = fakerStatic.name.jobArea();
     this.unit_name = fakerStatic.name.jobArea();
+    this.job_role_name = fakerStatic.name.jobTitle();
     this.level = fakerStatic.random.number(15);
     this.location_name = fakerStatic.address.city();
     this.picture = fakerStatic.image.avatar();
@@ -106,12 +111,15 @@ export class EmployeesService {
   constructor() { }
 
   list(filter: EmployeeFilter) {
-    const data = [1, 2, 3, 4, 5, 6].map(_id => new MyEmployeeDatail({}).fake(_id));
+    const data = {
+      data: [1, 2, 3, 4, 5, 6].map(_id => new MyEmployeeDatail({}).fake(_id)),
+      length: 10,
+    }
     return createSubscription(data);
   }
 
   fetch(id) {
-    const data = new MyEmployeeDatail().fake(1);
+    const data = new MyEmployeeDatail({}).fake(1);
     return createSubscription(data);
   }
 }
@@ -124,7 +132,7 @@ export class SuccessionService {
   constructor() { }
 
   fetch(id) {
-    const data = new MyEmployeeDatail().fake(1);
+    const data = new MyEmployeeDatail({}).fake(1);
     return createSubscription(data);
   }
 }
