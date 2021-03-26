@@ -10,6 +10,8 @@ import { CompetencyComponent } from './competency/competency.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NineGridBoxEmployeeComponent } from './nine-grid-box-employee/nine-grid-box-employee.component';
+import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
 
 const routes: Routes = [
   {
@@ -49,6 +51,11 @@ const routes: Routes = [
   },
 
   {
+    path: 'succession/:id',
+    component: SucessionPlanDetailComponent,
+  },
+
+  {
     path: 'compare-competency',
     component: CompareCompetencyComponent
   },
@@ -61,7 +68,11 @@ const routes: Routes = [
   {
     path: 'gridbox',
     component: GridboxComponent
-  }
+  },
+  {
+    path: 'gridbox/:id',
+    component: NineGridBoxEmployeeComponent
+  },
 ];
 
 @NgModule({
