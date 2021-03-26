@@ -1,5 +1,6 @@
-import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from './../services/talent-pool.service';
-import { TalentPoolModel } from './../../../_models/careers.model';
+import { ConfirmBoxService } from 'app/_services/confirm-box.service';
+import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
+// import { TalentPoolModel } from './../../../_models/careers.model';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./talent-pool.component.scss']
 })
 export class TalentPoolComponent implements OnInit {
-
+  rButton = [
+    {name: 'a', label: 'Add New', icon: 'plus'},
+  ]
   talentPoolHeader: string = 'Create a Talent Pool';
   talentPoolDescription: string = 'Click on the button to create your first pool';
   myButton: string = 'Create Talent Pool';
@@ -18,8 +21,8 @@ export class TalentPoolComponent implements OnInit {
   poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
   poolModel: MyTalentPool = new MyTalentPool;
   allTalentPool: MyTalentPool [] = [];
-  allPool: string = 'dsd';
-
+  loading = false;
+  viewPoolModal: boolean = false;
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -29,7 +32,7 @@ export class TalentPoolComponent implements OnInit {
     {name: 'certification', title: 'certification'},
     {name: 'skills', title: 'Skills'},
   ];
-  constructor(private poolservice: TalentPoolService) { }
+  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService) { }
 
   ngOnInit(): void {
     this.fetchPool();
@@ -39,15 +42,15 @@ export class TalentPoolComponent implements OnInit {
   this.newPool = !this.newPool;
   }
 
-  // createPool(){
-  //   this.poolservice.create()
-  // }
+  modalShow(){
+    this.viewPoolModal = !this.viewPoolModal;
+  }
 
   createTalentPool(){
     let poolRecord = this.poolModel;
     this.poolservice.create(this.poolModel).subscribe(data => {
       if(data.isSuccessful){
-        console.log('Congrats')
+        console.log('Congrats, pool created successfully')
       }
       else {
         console.log('Try again please')
@@ -66,7 +69,6 @@ export class TalentPoolComponent implements OnInit {
     let poolRequirement = this.poolRequirementModel;
     console.log('Hey Boss',poolRequirement)
     this.poolRequirementModel = new MyTalentPoolRequirement
-    // this.poolRequirementModel = [];
   }
 
   editPool(){
@@ -74,10 +76,18 @@ export class TalentPoolComponent implements OnInit {
   }
 
   async deletePool(id){
+    const approved = await this.confirm.confirm('Are you sure?').toPromise();
+    if(!approved) {
+      this.confirm.close();
+      return false;
+    }
+    this.confirm.showLoading();
    const data = await this.poolservice.delete(id).toPromise();
    if(data.isSuccessful){
      console.log('Deleted:', data.message)
    }
+   this.confirm.close();
+   return true;
   }
 
 }

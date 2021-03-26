@@ -1,5 +1,5 @@
-<ngx-componentsheader pageName='Talent Pool'></ngx-componentsheader>
-<div *ngIf="newPool==false  && allPool ==''" style="background-color: #ffffff;">
+<ngx-componentsheader pageName='Talent Pool' [requiredButton]="rButton" (buttonClick)="addNewPool()"></ngx-componentsheader>
+<div *ngIf="newPool==false  && allTalentPool.length === 0" style="background-color: #ffffff;">
   <nb-card
     style="min-height: 100vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
     <nb-card-body>
@@ -12,7 +12,8 @@
 
 </div>
 
-<div *ngIf="newPool ==true && allPool ==''">
+
+<div *ngIf="newPool == true">
   <nb-card>
     <nb-card-body>
       <form>
@@ -20,8 +21,8 @@
           <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
             <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="poolModel.title" placeholder="Pool Title">
-          <div *ngIf="point.invalid && (point.dirty || point.touched)" class="error">
-            <div *ngIf="point.errors.required">Title is required</div>
+          <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+            <div *ngIf="title.errors.required">Title is required</div>
           </div>
         </div>
         </div>
@@ -32,95 +33,6 @@
               <ngx-wysisyg-input style="padding-left: -10px;" [(value)]="poolModel.description"></ngx-wysisyg-input>
           </div>
         </div>
-
-        <h6>Pool Requirements</h6>
-        <div class="form-group row mydiv">
-          <label for="Category" class="col-sm-3 col-form-label mylabel">Category</label>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="category" #category="ngModel" [(ngModel)]="poolRequirementModel.category" required>
-              <option value="">Select </option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          <div *ngIf="category.invalid && (category.dirty || category.touched)" class="error">
-            <div *ngIf="category.errors.required">Category is required</div>
-          </div>
-        </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <label for="Type" class="col-sm-3 col-form-label mylabel">Type</label>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="type" #type="ngModel" [(ngModel)]="poolRequirementModel.type" required>
-              <option value="">Select </option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          <div *ngIf="type.invalid && (type.dirty || type.touched)" class="error">
-            <div *ngIf="type.errors.required">Type is required</div>
-          </div>
-        </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <label for="Point" class="col-sm-3 col-form-label mylabel">Recruitment Point</label>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolRequirementModel.requirementPoint" required>
-              <option value="">Select </option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          <div *ngIf="point.invalid && (point.dirty || point.touched)" class="error">
-            <div *ngIf="point.errors.required">Recruitment Point is required</div>
-          </div>
-        </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <label for="Skill Weight" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="skillWeight" #skillWeight="ngModel" [(ngModel)]="poolRequirementModel.skillWeight" placeholder="Skill Weight" required>
-          <div *ngIf="skillWeight.invalid && (skillWeight.dirty || skillWeight.touched)" class="error">
-            <div *ngIf="skillWeight.errors.required">Skill Weight is required</div>
-          </div>
-        </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <label for="Experience" class="col-sm-3 col-form-label mylabel">Experience</label>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="poolRequirementModel.experience" required>
-              <option value="">Select </option>
-              <option value="1">Beginner</option>
-              <option value="2">Intermediate</option>
-              <option value="3">Master</option>
-            </select>
-          <div *ngIf="experience.invalid && (experience.dirty || experience.touched)" class="error">
-            <div *ngIf="experience.errors.required">Experience is required</div>
-          </div>
-        </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <label for="Experience Weight" class="col-sm-3 col-form-label mylabel">Experience Weight</label>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolRequirementModel.experienceWeight" placeholder="Experience Weight" required>
-          </div>
-          <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
-            <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-          <div class="col-sm-6">
-            <button nbButton status="primary" (click)="addRequirement()">Add More Requirement</button>
-          </div>
-        </div>
-
 
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
@@ -135,7 +47,8 @@
   </nb-card>
 </div>
 
-<div *ngIf="allPool !=''">
+
+<div *ngIf="allTalentPool.length > 0 && newPool == false">
       <nb-card *ngFor="let pool of allTalentPool" class="cardTitle">
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -149,7 +62,7 @@
             <div>
               <span class="actions">
                 <a href="javascript:void(0);" (click)="editPool(pool.id)" style="padding: 10px;">Edit</a>
-                <a [routerLink]="['../talentpool', pool.title]">View</a>
+                <a [routerLink]="['../talentpool', pool.id]">View</a>
                 <a style="padding: 10px; color:#EB5757;" href="javascript:void(0);" (click)="deletePool(pool.id)">Delete</a>
               </span>
             </div>
@@ -159,4 +72,22 @@
           <p>{{pool.description}}</p>
         </nb-card-body>
       </nb-card>
+
+
+      <ngx-side-modal *ngFor="let pool of allTalentPool" [(show)]='viewPoolModal' style="width: 500px;">
+        <div modal-header>{{pool.title}}</div>
+        <div modal-body>
+
+        </div>
+
+        <div modal-actions class="d-flex mb-5">
+            <button nbButton status="primary" class="d-flex column">Submit</button>
+            <button nbButton outline status="primary" class="d-flex column">Discard</button>
+            <button class="d-flex column Attach">
+                <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
+                Attach</button>
+
+        </div>
+        <div style="margin-top: 15px;"></div>
+    </ngx-side-modal>
 </div>

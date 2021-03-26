@@ -22,6 +22,7 @@ export enum TalentPoolRequirementTypes {
 }
 export class MyTalentPoolRequirement {
   id: number;
+  category: string;
   type: TalentPoolRequirementTypes;
   requirementPoint: number;
   skillWeight: number;
@@ -46,6 +47,11 @@ export class MyTalentPool {
   no_of_employees: number;
   employees: EmployeeName[];
   requirements: MyTalentPoolRequirement[];
+
+  constructor(){
+    this.employees = [];
+    this.requirements = [];
+  }
 
   fake(id) {
     this.id = id;
@@ -96,7 +102,8 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
     return createSubscription(data);
   }
   fetch(id: number) {
-    throw new Error('Method not implemented.');
+    const data = new MyTalentPool().fake(id);
+    return createSubscription(data);
   }
   create(data: MyTalentPool) {
     if (fakerStatic.random.boolean()) {
@@ -118,6 +125,19 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
     };
     return createSubscription(data);
   }
+  addRequirementToPool(pool: MyTalentPool, requirement: MyTalentPoolRequirement) {
+    if (fakerStatic.random.boolean()) {
+      return createSubscription(new MessageOut('Talent Pool created successfully', true));
+    }
+    return createSubscription(new MessageOut('Error while creating talent pool', false));
+  }
+
+  removeRequirementFromPool(pool: MyTalentPool, requirement: MyTalentPoolRequirement) {
+    if (fakerStatic.random.boolean()) {
+      return createSubscription(new MessageOut('Talent Pool created successfully', true));
+    }
+    return createSubscription(new MessageOut('Error while creating talent pool', false));
+  }
 
   addToPool(id: number, employee: MyTalentPoolEmployee) {
     if (fakerStatic.random.boolean()) {
@@ -131,5 +151,15 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
       return createSubscription(new MessageOut('Talent Pool created successfully', true));
     }
     return createSubscription(new MessageOut('Error while creating talent pool', false));
+  }
+
+  getRequirementTypes(){
+    return createSubscription([
+      {name: TalentPoolRequirementTypes.qualification, label: 'Qualification'},
+      {name: TalentPoolRequirementTypes.certification, label: 'Certification'},
+      {name: TalentPoolRequirementTypes.skill, label: 'Skill'},
+      {name: TalentPoolRequirementTypes.ability, label: 'Ability'},
+      {name: TalentPoolRequirementTypes.experience, label: 'Experience'},
+    ]);
   }
 }

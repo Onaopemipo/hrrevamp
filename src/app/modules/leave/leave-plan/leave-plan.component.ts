@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   GetLeaveTypesServiceProxy,
-  FetchLeavePlanServiceProxy, LeavePlanDTO, LeavePlanResource, MessageOutApiResult, 
+  FetchLeavePlanServiceProxy, LeavePlanDTO, LeavePlanResource, MessageOutApiResult,
   PostServiceProxy,
   LeaveYearDTOListApiResult
 } from '../../../_services/service-proxies';
@@ -41,7 +41,7 @@ export class LeavePlanComponent implements OnInit {
     page_no: 1
   }
 
-  
+
 
   // believe = {
   //   isAnnualLeave? : Boolea,n
@@ -104,11 +104,6 @@ export class LeavePlanComponent implements OnInit {
 
 
   }
-
-
-
-
-
 
   showAddPlanModal = false;
   showLeavePlanModal = false;
