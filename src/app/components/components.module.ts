@@ -81,7 +81,13 @@ import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
 import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
 import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
-import {FetchAllEmployeesServiceProxy} from '../_services/service-proxies';
+import {   SearchEmployeesServiceProxy,
+  GetAllDepartmentsServiceProxy,
+  GradeLevelServiceProxy,
+  GetAllJobRolesServiceProxy,
+  GetAllLocationsServiceProxy,
+  SalaryscaleServiceProxy,
+  CommonServiceProxy} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { PageComponent } from './page/page.component';
@@ -188,7 +194,13 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
-    FetchAllEmployeesServiceProxy
+    SearchEmployeesServiceProxy,
+    GetAllDepartmentsServiceProxy,
+    GradeLevelServiceProxy,
+    GetAllJobRolesServiceProxy,
+    GetAllLocationsServiceProxy,
+    SalaryscaleServiceProxy,
+    CommonServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,

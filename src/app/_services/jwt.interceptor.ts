@@ -63,17 +63,18 @@ export class JwtInterceptor implements HttpInterceptor {
         }
         const started = Date.now();
         let ok: any;
-        return next.handle(request).pipe( tap(
-            (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
-            (error: HttpErrorResponse) => ok = error
-          ),
-          // Log when response observable either completes or errors
-          finalize(() => {
-            const elapsed = Date.now() - started;
-            const msg = `${request.method} "${request.urlWithParams}" ${ok} in ${elapsed} ms.`;
-           //   console.log(msg);
-              this.processResponse(<any>ok)
-          }))
+        return next.handle(request)
+        //     .pipe(tap(
+        //     (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
+        //     (error: HttpErrorResponse) => ok = error
+        //   ),
+        //   // Log when response observable either completes or errors
+        //   finalize(() => {
+        //     const elapsed = Date.now() - started;
+        //     const msg = `${request.method} "${request.urlWithParams}" ${ok.status} in ${elapsed} ms.`;
+        //       console.log(msg);
+        //      //this.processResponse(<any>ok)
+        //   }))
         
             // .pipe(tap ((response_: HttpEvent<any>) =>
             // {
@@ -156,11 +157,11 @@ export class JwtInterceptor implements HttpInterceptor {
             return throwException("Server Error", status, _responseText, _headers);
             }));
         }
-        else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
+        // else if (status !== 200 && status !== 204) {
+        //     return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+        //     return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        //     }));
+        // }
         return _observableOf<any>(<any>null);
     }
 }

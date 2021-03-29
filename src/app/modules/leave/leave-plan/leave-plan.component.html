@@ -88,7 +88,7 @@
 
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee Name:</label>
-               <ngx-employee-master-search [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
 
             <div class="form-group">
