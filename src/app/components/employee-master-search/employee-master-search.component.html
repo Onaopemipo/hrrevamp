@@ -3,7 +3,7 @@
     <ngx-employee-list [allowmultipleselection]="allowmultipleselection" [selectedEmployees]="selectedEmployees" [selectedEmployeeRecord]="selectedEmployeeRecord"></ngx-employee-list>
     <button (click)="showMasterSearchModal()" class="underlined-button">
   
-        <span *ngIf="selectedEmployees.length > 0 || selectedEmployeeRecord">Edit</span>
+        <span *ngIf="selectedEmployees.length > 0 || selectedEmployeeRecord">Update</span>
         <span *ngIf="selectedEmployees.length < 1 && !selectedEmployeeRecord">Add Employee</span>
         </button>
 </div>
@@ -15,41 +15,46 @@
         <form id="searchForm" name="searchForm" #searchForm="ngForm">
         <nb-form-field>
             <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-            <input #searchtText type="text" id="searchtText" name="searchtText" nbInput class="form-control" [(ngModel)]="filterObject.searchtText" required>
+            <input #searchtText type="text" id="searchtText" name="searchtText" nbInput class="form-control" [(ngModel)]="filterObject.searchtText">
         </nb-form-field>
         <div class="row" style="padding-top:10px">
             <div class="col-sm-4 form-group">
                 <label>Department</label>
-                <select class="form-control">
-                    <option></option>
+                <select class="form-control" #searchDepartment  id="searchDepartment" name="searchDepartment" [(ngModel)]="filterObject.searchDepartment">
+                    <option value="0">--Select Department--</option>
+                    <option *ngFor="let dep of allDepartment;" [value]="dep.id">{{dep.name}}</option>
                 </select>
             </div>
             <div class="col-sm-4 form-group">
-                <label>Branch</label>
-                <select class="form-control">
-                    <option></option>
+                <label>Location</label>
+                <select class="form-control" #searchLocation  id="searchLocation" name="searchLocation" [(ngModel)]="filterObject.searchLocation">
+                    <option value="0">--Select Location--</option>
+                    <option *ngFor="let loc of allLocation;" [value]="loc.id">{{loc.location_name}}</option>
                 </select>
             </div>
             <div class="col-sm-4 form-group">
-                <label>Unit</label>
-                <select class="form-control">
-                    <option></option>
+                <label>Job Role</label>
+                <select class="form-control" #searchJobRole  id="searchJobRole" name="searchJobRole"   [(ngModel)]="filterObject.searchJobRole">
+                    <option value="0">--Select Role--</option>
+                    <option *ngFor="let job of allJobRole;" [value]="job.id">{{job.name}}</option>
                 </select>
             </div>
             <div class="col-sm-4 form-group">
-                <label>Level</label>
-                <select class="form-control">
-                    <option></option>
+                <label>Grade</label>
+                <select class="form-control" #saerchGrade  id="saerchGrade" name="saerchGrade"  [(ngModel)]="filterObject.saerchGrade">
+                    <option value="0">--Select Grade--</option>
+                    <option *ngFor="let gra of allGrade;" [value]="gra.id">{{gra.name}}</option>
                 </select>
             </div>
             <div class="col-sm-4 form-group">
-                <label>Gender</label>
-                <select class="form-control">
-                    <option></option>
+                <label>Salary Scale</label>
+                <select class="form-control" #salaryscaleId  id="salaryscaleId" name="salaryscaleId"  [(ngModel)]="filterObject.salaryscaleId">
+                   <option value="0">--Select Scale--</option>
+                    <option *ngFor="let sal of allsalaryScale;" [value]="sal.id">{{sal.name}}</option>
                 </select>
             </div>
             <div class="col-sm-4 form-group" style="padding-top:26px">         
-                <button [disabled]="searchForm.invalid" *ngIf="!searchbtnclicked" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
+                <button [disabled]="disableSearchBtn" *ngIf="!searchbtnclicked" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
                 <button *ngIf="searchbtnclicked" nbButton status='primary' style="min-width: unset !important;">Processing&nbsp;<i class="fa fa-spin fa-spinner"></i></button>
             </div>
         </div>

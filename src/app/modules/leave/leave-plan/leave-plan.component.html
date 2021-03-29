@@ -1,20 +1,24 @@
 <ngx-componentsheader pageName='Leave Plan' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
 
-<nb-tabset>
-    <nb-tab tabTitle="Approved"></nb-tab>
-    <nb-tab tabTitle="Pending"></nb-tab>
-    <nb-tab tabTitle="Rejected"></nb-tab>
-</nb-tabset>
 
 
-<ngx-tableheader></ngx-tableheader>
+
+
+
+<nb-card>
+    <nb-card-body>
+        <nb-tabset>
+            <nb-tab tabTitle="Approved"></nb-tab>
+            <nb-tab tabTitle="Pending"></nb-tab>
+            <nb-tab tabTitle="Rejected"></nb-tab>
+        </nb-tabset>
+        <ngx-tableheader></ngx-tableheader>
 <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+    </nb-card-body>
+</nb-card>
 
-<select [(ngModel)]="selectedOption">
-    <option value="1">First Name</option>
-    <option value="2">Last Name</option>
-</select>
+
 
 <ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px;">
     <div modal-header>Apply For Leave</div>
@@ -84,7 +88,7 @@
 
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee Name:</label>
-               <ngx-employee-master-search [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
 
             <div class="form-group">
@@ -105,7 +109,7 @@
                 <textarea class="form-control" placeholder="Enter Comment" id="Comment">Comment</textarea>
             </div>
 
-<!--
+<!-- 
 
             <div class="d-flex-column">
                 <nb-checkbox (checkedChange)="toggle($event)">

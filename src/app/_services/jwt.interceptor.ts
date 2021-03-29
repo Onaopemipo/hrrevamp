@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { User, UserClass } from '../_models/user';
 
 
-import { mergeMap as _observableMergeMap, catchError as _observableCatch, map, tap } from 'rxjs/operators';
+import { mergeMap as _observableMergeMap, catchError as _observableCatch, map, tap, finalize } from 'rxjs/operators';
 import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 import { AlertserviceService } from './alertservice.service';
 import { Router } from '@angular/router';
+
 
 enum ALERT_TYPES {
     SUCCESS = 'success',
@@ -46,6 +47,7 @@ export class JwtInterceptor implements HttpInterceptor {
     main_id = 0;
     user: User = {};
     authstatus: boolean = false;
+    
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
     constructor(public authServ: AuthenticationService, public alertService: AlertserviceService,public router: Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -59,28 +61,42 @@ export class JwtInterceptor implements HttpInterceptor {
                 },
             });
         }
-
+        const started = Date.now();
+        let ok: any;
         return next.handle(request)
-            .pipe(tap ((response_: HttpEvent<any>) =>
-            {
-                if (response_ instanceof HttpResponseBase) {
+        //     .pipe(tap(
+        //     (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
+        //     (error: HttpErrorResponse) => ok = error
+        //   ),
+        //   // Log when response observable either completes or errors
+        //   finalize(() => {
+        //     const elapsed = Date.now() - started;
+        //     const msg = `${request.method} "${request.urlWithParams}" ${ok.status} in ${elapsed} ms.`;
+        //       console.log(msg);
+        //      //this.processResponse(<any>ok)
+        //   }))
+        
+            // .pipe(tap ((response_: HttpEvent<any>) =>
+            // {
+            //     if (response_ instanceof HttpResponseBase) {
+            //         console.log(response_)
+            //         try {
+                        
+            //             return this.processResponse(<any>response_);
 
-                    try {
-                        return this.processResponse(<any>response_);
-
-                } catch (e) {
-                    return <Observable<any>><any>_observableThrow(e);
-                }
-            }
-            else
-                return <Observable<any>><any>_observableThrow(response_);
-            }
-            )
-            );
+            //     } catch (e) {
+            //         return <Observable<any>><any>_observableThrow(e);
+            //     }
+            // }
+            // else
+            //     return <Observable<any>><any>_observableThrow(response_);
+            // }
+            // )
+            // );
     }
 
     protected processResponse(response: HttpResponseBase): Observable<any> {
-     //   console.log(response)
+    // console.log(response)
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -111,28 +127,27 @@ export class JwtInterceptor implements HttpInterceptor {
             }));
         }
         else if (status === 401) {
-            return blobToText(responseBlob).pipe(tap(_responseText => {
-                let result401: any = null;
-              //  console.log(_responseText)
-                this.alertService.openModalAlert(ALERT_TYPES.FAILED, _responseText, "Ok").subscribe(data => {
-                    this.authServ.clearusers();
-                  if (data) {
+            this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Unauthorized access denied", "Ok").subscribe(data => {
+                this.authServ.clearusers();
+              if (data) {
 
-                  }
-                });
+              }
+            });
+            return blobToText(responseBlob).pipe(tap(_responseText => {
+                let result401: any = null;                   
 
                 return throwException("Unauthorized Request", status, _responseText, _headers, result401);
                 }));
         }
         else if (status === 403) {
-            return blobToText(responseBlob).pipe(tap(_responseText => {
-                let result403: any = null;
-                this.alertService.openModalAlert(ALERT_TYPES.FAILED,_responseText, "Go to Dashboard", ).subscribe(data => {
-                    this.router.navigate(['/dashboard']);
-                  if (data) {
+            this.alertService.openModalAlert(ALERT_TYPES.FAILED,"Forbidden, You don't have permission to access the Resource", "Go to Dashboard", ).subscribe(data => {
+                this.router.navigate(['/dashboard']);
+              if (data) {
 
-                  }
-                });
+              }
+            });
+            return blobToText(responseBlob).pipe(tap(_responseText => {
+                let result403: any = null;           
 
                 return throwException("Forbidden, You don't have permission to access the Resource", status, _responseText, _headers, result403);
                 }));
@@ -142,7 +157,7 @@ export class JwtInterceptor implements HttpInterceptor {
             return throwException("Server Error", status, _responseText, _headers);
             }));
         }
-        //else if (status !== 200 && status !== 204) {
+        // else if (status !== 200 && status !== 204) {
         //     return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
         //     return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         //     }));

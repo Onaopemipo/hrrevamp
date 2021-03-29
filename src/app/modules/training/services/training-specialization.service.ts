@@ -30,7 +30,7 @@ export class TrainingSpecializationService extends CrudService<MyTrainingSpecial
     throw new Error('Method not implemented.');
   }
   create(data: MyTrainingSpecialization) {
-    return this.trainingService.createorupdatespecialization(data);
+    return this.trainingService.addUpdateSpecialization(data);
   }
   delete(id: number) {
     return this.trainingService.deleteSpecialization(id);
