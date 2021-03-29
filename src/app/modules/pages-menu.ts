@@ -350,7 +350,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Expense Report',
-        link: '/expenses/request'
+        link: '/expenses/report'
       }
 
     ]
@@ -401,6 +401,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {title: 'Position', link: '/setup/position'},
       {title: 'Job Role', link: '/setup/job-role'},
       {title: 'Salary Scale', link: '/setup/salary-scale'},
+      {title: 'Request Type', link: '/setup/request'},
+      {title: 'Events', link: '/setup/event'},
     ]
   },
 

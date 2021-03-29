@@ -50,6 +50,7 @@ import { TrainingServiceProxy } from 'app/_services/service-proxies';
 import { CategoriesComponent } from './categories/categories.component';
 import { TrainingCategoryService } from './services/training-category.service';
 import { TrainingSpecializationService } from './services/training-specialization.service';
+import { TrainingPlanService } from './services/plan.service';
 import { SpecializationComponent } from './specialization/specialization.component';
 
 @NgModule({
@@ -59,6 +60,7 @@ import { SpecializationComponent } from './specialization/specialization.compone
     VendorService,
     TrainingCategoryService,
     TrainingSpecializationService,
+    TrainingPlanService,
   ],
   imports: [
     CommonModule,

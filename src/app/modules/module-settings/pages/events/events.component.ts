@@ -17,11 +17,6 @@ const SUCCESS_MESSAGES = {
 };
 
 
-// enum TOP_ACTIONS {
-//   ADD_EVENT,
-
-// }
-
 @Component({
   selector: 'ngx-events',
   templateUrl: './events.component.html',

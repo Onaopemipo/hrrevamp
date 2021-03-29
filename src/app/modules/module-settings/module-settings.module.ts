@@ -9,6 +9,14 @@ import { DepartmentListComponent } from './pages/department-list/department-list
 import { AddUpdateDepartmentServiceProxy,     AddUpdatePositionServiceProxy,
   GetAllPositionsServiceProxy, AddUpdateLocationServiceProxy, DataServiceProxy,
   GetAllDepartmentsServiceProxy, GetAllLocationsServiceProxy,
+  GetRequestTypeByIdServiceProxy,
+    AddUpdateRequestTypeServiceProxy,
+    GetAllRequestTypeServiceProxy,
+    DeleteRequestTypeServiceProxy,
+    GetEventsByIdServiceProxy,
+    AddUpdateEventsServiceProxy,
+    GetAllEventsServiceProxy,
+    DeleteEventsServiceProxy,
   GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy, GetAllJobRolesServiceProxy, AddUpdateJobRolesServiceProxy, DeleteJobRoleServiceProxy, SalaryscaleServiceProxy } from 'app/_services/service-proxies';
 import { ApiService } from './services/api.service';
 import { PageService } from './services/page.service';
@@ -96,6 +104,14 @@ import { JobRoleService } from './services/job-role.service';
     DeleteJobRoleServiceProxy,
     JobRoleService,
     SalaryscaleServiceProxy,
+    GetRequestTypeByIdServiceProxy,
+    AddUpdateRequestTypeServiceProxy,
+    GetAllRequestTypeServiceProxy,
+    DeleteRequestTypeServiceProxy,
+    GetEventsByIdServiceProxy,
+    AddUpdateEventsServiceProxy,
+    GetAllEventsServiceProxy,
+    DeleteEventsServiceProxy,
   ]
 })
 export class ModuleSettingsModule { }

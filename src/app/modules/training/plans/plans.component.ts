@@ -4,99 +4,71 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { NbTabComponent } from '@nebular/theme';
 import { BaseComponent } from 'app/components/base/base.component';
+import { MyTrainingPlan, TrainingPlanService } from '../services/plan.service';
+import { ListResult } from 'app/_services/base-api.service';
+import { Observable } from 'rxjs';
+import { FormConfig, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
+import { ConfirmBoxService } from 'app/_services/confirm-box.service';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { TrainingCategoryService } from '../services/training-category.service';
+import { TrainingSpecializationService } from '../services/training-specialization.service';
 
 enum TABS {
   pending = 'pending', approved = 'approved', declined = 'declined'
 }
+
+
+
+
+type ModelType = MyTrainingPlan;
+type FilterType = {};
+
 @Component({
   selector: 'ngx-plans',
   templateUrl: './plans.component.html',
   styleUrls: ['./plans.component.scss']
 })
-export class PlansComponent {
-
-  actions: TopAction[] = [
-    {name: 'create', label: 'Create New', icon: 'plus'}
+export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelType> {
+  filter: {} = {};
+  data: ModelType[] = [];
+  getData(): Observable<ListResult<ModelType>> {
+    return this.api.list(this.filter);
+  }
+  saveData(e: ModelType): Observable<any> {
+    return this.api.create(e);
+  }
+  getNewEditingData(): ModelType {
+    return new MyTrainingPlan();
+  }
+  successMessage: string = 'Category saved successfully';
+  deleteData(data: ModelType): Observable<any> {
+    return this.api.delete(data.id);
+  }
+  
+  tableColumns: TableColumn [] = [
+    {name: 'trainingType', title: 'Type'},
+    {name: 'specialiazation', title: 'Specialiazation'},
+    {name: 'vendor', title: 'Vendor'},
+    {name: 'budget', title: 'Budget'},
+    {name: 'startDate', title: 'Start Date'},
+    {name: 'endDate', title: 'End Date'},
+    {name: 'status', title: 'Status'},
   ];
 
-  myPlanHeader: string = 'You have not setup any Training Plan';
-  myPlanDesc: string = 'Click on the button to start your set up';
-
-  myButton: string = 'Setup Training Plan';
-
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    events: [
-      { title: 'event 1', date: '2021-02-08' },
-      { title: 'event 2', date: '2019-04-02' }
-    ],
-    eventClick: (ev) => { alert(ev); }
+  pageTitle = 'Training Categories';
+  requiredButton = [{name: 'newTraining', label: 'New Category', icon: 'plus'}];
+  formConfig: FormConfig = {
+    fields: [
+      {name: 'name', label: 'Name', type: FORM_TYPES.text}
+    ]
   };
-
-  welcome: boolean = true;
-  newTrainingWindow: boolean = false;
-  calendarWindow: boolean = false;
-  trainingType: boolean = true;
-  newTrainingType: boolean = false;
-  trainingCategory: boolean = true;
-  category = 'Internal';
-
-  TrainingPlanData = '';
-  // TrainingPlanq = '';
-
-  addVendor = 'Add New Vendor';
-  addType = 'Add Training Type';
-
-
-  myTable: TableColumn [] = [
-  {name: 'trainingType', title: 'Type'},
-  {name: 'specialiazation', title: 'Specialiazation'},
-  {name: 'vendor', title: 'Vendor'},
-  {name: 'budget', title: 'Budget'},
-  {name: 'startDate', title: 'Start Date'},
-  {name: 'endDate', title: 'End Date'},
-  {name: 'status', title: 'Status'},
-];
-
-  ngOnInit(): void {
-
+  formTitle = 'Add new Category';
+  constructor(
+    protected confirmBox: ConfirmBoxService,
+    protected alertService: AlertserviceService,
+    private api: TrainingPlanService,
+    ) {
+      super(confirmBox);
   }
 
-  get pagetitle() {
-    return 'Training Plan';
-  }
-
-  addTrainingPlan() {
-    // this.newTrainingWindow = true;
-    this.welcome = false;
-    this.showModal = true;
-  }
-
-  uploadVendor() {
-    this.calendarWindow = true;
-    this.newTrainingWindow = false;
-    this.welcome = false;
-  }
-
-  addNewTraining() {
-    this.newTrainingType = true;
-    this.trainingType = false;
-    this.showModal = true;
-  }
-
-  changed(data) {
-
-  }
-
-  TABS = TABS;
-  selectedTab = TABS.pending;
-  showModal = false;
-
-  tabSelected(tab: NbTabComponent) {
-    const b: any = tab.tabId;
-    console.log(tab);
-    this.selectedTab = b;
-  }
 }
-
-

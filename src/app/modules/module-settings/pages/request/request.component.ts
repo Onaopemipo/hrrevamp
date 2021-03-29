@@ -29,7 +29,7 @@ MyRequest>implements OnInit {
   
 
   topActionButtons = [
-    { name: TOP_ACTIONS.ADD_DEPARTMENT, label: 'Add Events', icon: '', outline: false },
+    { name: TOP_ACTIONS.ADD_DEPARTMENT, label: 'Add Request Type', icon: '', outline: false },
   ];
 
   TOP_ACTIONS = TOP_ACTIONS;
@@ -63,7 +63,8 @@ MyRequest>implements OnInit {
     } else {
       this.successMessage = SUCCESS_MESSAGES.create;
     }
-    return this.Api.create(this.editingData);
+    const request = new MyRequest().fromObj(this.editingData);
+    return this.Api.create(request);
   }
 
   getData() {
@@ -93,8 +94,7 @@ MyRequest>implements OnInit {
   }
 
   public constructor(
-    private Api:RequestService,
-    
+    private Api: RequestService,
     private pageService: PageService,
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,
@@ -103,13 +103,11 @@ MyRequest>implements OnInit {
   }
 
   validator = {
-    Title: {
+    Name: {
       presence: true,
     },
     Code: {
       presence: true,
     },
-    
-
   };
 }
