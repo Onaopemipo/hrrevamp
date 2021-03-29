@@ -3,17 +3,27 @@ import { Router, CanActivate, ActivatedRoute, CanLoad, Route } from '@angular/ro
 import { AuthService } from './auth.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { IVwUserObj, VwUserObj } from './service-proxies';
-
+import { AlertserviceService } from './alertservice.service';
+enum ALERT_TYPES {
+  SUCCESS = 'success',
+  FAILED = 'danger',
+  COPIED = 'copied',
+}
 @Injectable()
 export class AuthGuardService implements CanLoad {
   constructor(public auth: AuthService, public router: Router,
-    private AuthenService: AuthenticationService) { }
+    private AuthenService: AuthenticationService,public alertService: AlertserviceService) { }
   canLoad(routes: Route): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.auth.isAuthenticated().then(data => {
         localStorage.setItem('returnUrl', this.router.url);  
         if (!data) {
-          this.router.navigate(['auth']);
+          this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
+            this.AuthenService.clearusers();
+            if (data) {
+
+            }
+          });  
           resolve(false);
         } else {
           this.AuthenService.getuser().then((usersdata: IVwUserObj[]) => {
@@ -22,12 +32,23 @@ export class AuthGuardService implements CanLoad {
               if (usersdata[0]) {
                 resolve(true);
               } else {
-                this.router.navigate(['auth']);
+                this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
+                  this.AuthenService.clearusers();
+                if (data) {
+  
+                }
+              });            
                 resolve(false);
                 
               }
             } else {
-              this.router.navigate(['auth']);
+              this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
+                this.AuthenService.clearusers();
+              if (data) {
+
+              }
+            });
+            
               resolve(false);
             }
           });
