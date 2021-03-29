@@ -6,10 +6,12 @@ import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 import { LeaveyearComponent } from './leaveyear/leaveyear.component';
+import { AuthGuardService as AuthGuard } from '../../_services/auth-guard.service';
 const routes: Routes = [
     {
         path: '',
-        component: LeaveComponent,
+    component: LeaveComponent,
+    canLoad: [AuthGuard],
         children: [
 
           {
@@ -23,7 +25,7 @@ const routes: Routes = [
 
           {
             path: 'plan',
-            component: LeavePlanComponent
+            component: LeavePlanComponent,
           },
           {
             path: 'leaveyear',
