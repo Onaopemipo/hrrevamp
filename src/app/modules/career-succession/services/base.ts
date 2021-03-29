@@ -43,6 +43,9 @@ function get_name(args: FakeConfig) {
 }
 
 function get_number(args: FakeConfig) {
+  if(args.max) {
+    return fakerStatic.random.number(args.max);
+  }
   return fakerStatic.random.number();
 }
 
@@ -50,15 +53,25 @@ function get_object(args: FakeConfig) {
   return new args.class().getFake();
 }
 
+function get_date(args: FakeConfig) {
+  return fakerStatic.date.past();
+}
+
+function get_boolean(args: FakeConfig) {
+  return fakerStatic.random.boolean();
+}
+
 export interface Ctor {
   new (...args: []): any;
 }
 
 export const FAKER_CONFIG = {
+  boolean: get_boolean,
   words: get_word,
   name: get_name,
   number: get_number,
   object: get_object,
+  date: get_date,
 };
 export interface IFaker {
   getFake();
@@ -72,7 +85,7 @@ export function myClassFaker<T extends Ctor>(OldClass: T): T{
       const fake_function = property.type;
       if (property.args.array) {
         const arr = [];
-        for (let a = 1; a < fakerStatic.random.number(100); a++){
+        for (let a = 1; a < fakerStatic.random.number(100); a++) {
           arr.push(a);
         }
         res[property.name] = arr.map(a => fake_function(property.args));
@@ -92,9 +105,10 @@ export function myClassFaker<T extends Ctor>(OldClass: T): T{
   // }
 }
 
-export interface FakeConfig{
+export interface FakeConfig {
   array?: boolean;
   class?: any;
+  max?: number;
 }
 
 export interface IFakeProperty {
@@ -114,4 +128,11 @@ export function myPropertyFaker(type, args: FakeConfig) {
     // console.log(classes);
   }
   return testProperty;
+}
+
+export function getCreateResponse(){
+  if (fakerStatic.random.boolean()) {
+    return createSubscription(new MessageOut('Talent Pool created successfully', true));
+  }
+  return createSubscription(new MessageOut('Error while creating talent pool', false));
 }

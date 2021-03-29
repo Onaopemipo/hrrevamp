@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Succession Plan' [requiredButton]="requiredButtons"></ngx-componentsheader>
+<ngx-componentsheader pageName='Succession Plan' [requiredButton]="requiredButtons" (buttonClick)="pageActionClicked($event)"></ngx-componentsheader>
 <div class="main-page-container">
     <ngx-default-content
         *ngIf="showEmpty"
