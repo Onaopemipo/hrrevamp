@@ -17,8 +17,8 @@ export class CompetencyComponent implements OnInit {
   selectedCase: string = 'Role_Details';
   selectedPanel: any = { title: 'Role_Details', label: 'Role Details', status: 'Active'};
   competencyChecklist = [
-    { title: 'Role_Details', label: 'Role Details', status: 'Active' },
-    { title: 'Cadre', label: 'Cadre', status: 'Inactive' }
+    { title: 'Role', label: 'Role', status: 'Active' },
+    { title: 'Position', label: 'Position', status: 'Inactive' }
   ];
   constructor() { }
 
