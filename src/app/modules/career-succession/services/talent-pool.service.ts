@@ -3,8 +3,9 @@ import { CrudService, ListResult } from 'app/_services/base-api.service';
 import { Observable, Subject } from 'rxjs';
 import * as fakerStatic from 'faker';
 import { Employee } from 'app/_services/service-proxies';
-import { createSubscription, MessageOut } from './base';
+import { createSubscription, MessageOut, randomEnumValue } from './base';
 import { MyEmployeeDatail } from './employees.service'
+import { Transfer } from '@flowjs/ngx-flow';
 
 export class EmployeeName {
   name: string;
@@ -73,21 +74,35 @@ export class MyTalentPoolEmployee {
   name: string;
   employee_id: number;
   employee: MyEmployeeDatail;
-  department: string;
+  email: string;
+  phone: string;
+  website: string;
+  linkedin: string;
+  file: Transfer;
   position: string;
 
-  fake(id) {
-    this.channel = EmployeeChannelEnum.employeeDatabase;
+  fake(id, channel=randomEnumValue(EmployeeChannelEnum)) {
+    this.channel = channel as any;
     this.employee_id = 1;
     this.employee = new MyEmployeeDatail({}).fake(1);
+    this.name = fakerStatic.name.findName() + ' ' + fakerStatic.name.firstName();
+    this.email = fakerStatic.name.firstName() + '@gmail.com';
+    this.phone = '0804234232';
+    this.website = 'http://' + fakerStatic.name.firstName() + '.com';
+    this.linkedin = 'http://linkedin.com/' + fakerStatic.name.firstName();
     return this;
   }
+}
+
+export interface ITalentPoolEmployeeFilter {
+  channel?: EmployeeChannelEnum;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPool, MyTalentPool> {
+
   list(filter: TalentPoolFilter): Observable<ListResult<MyTalentPool>> {
     const data: ListResult<MyTalentPool> = {
       data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(id => new MyTalentPool().fake(id)),
@@ -95,15 +110,18 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
     };
     return createSubscription(data);
   }
+
   fetch(id: number) {
     throw new Error('Method not implemented.');
   }
+
   create(data: MyTalentPool) {
     if (fakerStatic.random.boolean()) {
       return createSubscription(new MessageOut('Talent Pool created successfully', true));
     }
     return createSubscription(new MessageOut('Error while creating talent pool', false));
   }
+
   delete(id: number) {
     if (fakerStatic.random.boolean()) {
       return createSubscription(new MessageOut('Talent Pool ddeleted successfully', true));
@@ -111,9 +129,9 @@ export class TalentPoolService extends CrudService<TalentPoolFilter, MyTalentPoo
     return createSubscription(new MessageOut('Error while deleting talent pool', false));
   }
 
-  fetchEmployees(id) {
+  fetchEmployees(id, filter: ITalentPoolEmployeeFilter) {
     const data: ListResult<MyTalentPoolEmployee> = {
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(pool_id => new MyTalentPoolEmployee().fake(pool_id)),
+      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(pool_id => new MyTalentPoolEmployee().fake(pool_id, filter.channel)),
       length: 10
     };
     return createSubscription(data);

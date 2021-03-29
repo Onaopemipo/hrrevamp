@@ -1,20 +1,27 @@
 <div class="row">
-    <div class="col-sm-6">
-       <div style="padding-top:10px"> <h6 class="header4-bold">{{pageName}}</h6></div>
+  <div class="col-sm-6">
+    <div style="padding-top: 10px">
+      <h6 class="header4-bold">{{ pageName }}</h6>
     </div>
-    <div class="col-sm-6" >
-        <div style="float: right; padding: 5px;">
-            <ng-content select='[headerButton]'>
-            </ng-content>
-        </div>
-    <div style="float: right; padding: 5px;" *ngFor="let btn of requiredButton; let i = index">
-        <button   [outline]='btn.outline' (click)="buttonClick.emit(btn.name)" nbButton status="primary" >
-            <nb-icon *ngIf="btn.icon" icon="{{btn.icon}}"></nb-icon>&nbsp;{{btn.label}}
-        </button>
+  </div>
+  <div class="col-sm-6">
+    <div style="float: right; padding: 5px">
+      <ng-content select="[headerButton]"> </ng-content>
     </div>
-
+    <div
+      style="float: right; padding: 5px"
+      *ngFor="let btn of requiredButton; let i = index"
+    >
+      <button
+        [outline]="btn.outline"
+        (click)="buttonClick.emit(btn.name)"
+        nbButton
+        status="primary"
+      >
+        <nb-icon *ngIf="btn.icon" icon="{{ btn.icon }}"></nb-icon>&nbsp;{{
+          btn.label
+        }}
+      </button>
     </div>
-    </div>
-
-   
-    
+  </div>
+</div>

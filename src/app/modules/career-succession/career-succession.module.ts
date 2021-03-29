@@ -21,13 +21,33 @@ import { GridboxComponent } from './gridbox/gridbox.component';
 import { TestpoolComponent } from './testpool/testpool.component';
 import { TalentPoolService } from './services/talent-pool.service';
 import { EmployeesService } from './services/employees.service';
+import { NineBoxGridService } from './services/nine-box-grid.service';
+import { NineGridBoxEmployeeComponent } from './nine-grid-box-employee/nine-grid-box-employee.component';
+import { SuccessionPlanService } from './services/succession-plan.service';
+import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
+import { SucessionPlanCreateComponent } from './sucession-plan-create/sucession-plan-create.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, ReportListComponent, TrainingRecordComponent, CompetencyComponent, TalentPoolComponent, RolesComponent, PlanningComponent, TreeComponent, ProfileDetailsComponent, CompareCompetencyComponent, GridboxComponent, TestpoolComponent],
+  declarations: [
+    DashboardComponent,
+    ReportListComponent,
+    TrainingRecordComponent,
+    CompetencyComponent,
+    TalentPoolComponent,
+    RolesComponent,
+    PlanningComponent,
+    TreeComponent,
+    ProfileDetailsComponent,
+    CompareCompetencyComponent,
+    GridboxComponent,
+    TestpoolComponent,
+    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SucessionPlanCreateComponent],
   providers: [
     TalentPoolService,
-    EmployeesService
+    EmployeesService,
+    NineBoxGridService,
+    SuccessionPlanService,
   ],
   imports: [
     CommonModule,

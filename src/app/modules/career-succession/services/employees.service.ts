@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Certification, EmployeeQualification, QualificationGrade, Skill } from 'app/_services/service-proxies';
 import * as fakerStatic from 'faker';
-import { createSubscription } from './base';
+import {createSubscription, IFaker} from './base';
+
 
 export class MyEmployeeQualification extends EmployeeQualification{
   constructor(obj) {
@@ -62,7 +63,7 @@ export class EmployeeSkill extends Skill {
   }
 }
 
-export class MyEmployeeDatail {
+export class MyEmployeeDatail implements IFaker{
   id: number;
   position_name: string;
   employee_name: string;
@@ -92,13 +93,17 @@ export class MyEmployeeDatail {
     this.level = fakerStatic.random.number(15);
     this.location_name = fakerStatic.address.city();
     this.picture = fakerStatic.image.avatar();
-  
+
     this.qualifications = [1, 2, 3, 4, 5, 6].map(_id => new MyEmployeeQualification({}).fake(_id));
     this.certification = [1, 2, 3, 4, 5, 6].map(_id => new EmployeeCertification({}).fake(_id));
     this.abilities = [1, 2, 3, 4, 5, 6].map(_id => new EmployeeAbilities({}).fake(_id));
     this.skills = [1, 2, 3, 4, 5, 6].map(_id => new EmployeeSkill({}).fake(_id));
 
     return this;
+  }
+
+  getFake() {
+    return this.fake(1);
   }
 }
 
