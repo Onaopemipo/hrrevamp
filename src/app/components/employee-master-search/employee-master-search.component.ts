@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {EmployeeDTO, FetchAllEmployeesServiceProxy} from '../../_services/service-proxies';
+import {EmployeeDTO,CommonServiceProxy, FetchAllEmployeesServiceProxy, GetAllDepartmentsServiceProxy, GetAllJobRolesServiceProxy, GetAllLocationsServiceProxy, GradeLevelServiceProxy, SalaryscaleServiceProxy, SearchEmployeesServiceProxy} from '../../_services/service-proxies';
 @Component({
   selector: 'ngx-employee-list',
   template: `    
@@ -36,32 +36,112 @@ export class EmployeeMasterSearchComponent implements OnInit {
   emptyRecord: EmployeeDTO;
   src:string = '';
   searchbtnclicked: boolean = false;
-filterObject:{
+  filterObject: {
+    searchDepartment?: number;
+    searchLocation?: number;
+    searchJobRole?: number;
+    saerchGrade?: number
+    searchPeopleGroup?: number;
   searchtText?: string;
-  contractStatus?: number,
-  pageSize?: number
-}={};
+    pageSize?: number;
+
+    companyId?: number;
+    searchType?: number;
+    ministryId?: number;
+    salaryscaleId?: number;
+    gradestepId?: number;
+
+}={searchDepartment:0,searchLocation:0,searchJobRole:0,saerchGrade:0,searchPeopleGroup:0,searchtText:'',pageSize:1000,salaryscaleId:0};
 employeeResultTotal = 0;
-allEmployees:EmployeeDTO[]=[];
+  allEmployees: EmployeeDTO[] = [];
+  allDepartment = [];
+  allLocation = [];
+  allJobRole = [];
+  allGrade = [];
+  allsalaryScale = [];
 @Input() addbtnText: string = '';
 @Input() allowmultipleselection: boolean = false;
 @Input() selectionHeader = 'Select Employees';
-  constructor(private allemployeeServices: FetchAllEmployeesServiceProxy) { }
+  constructor(private allemployeeServices: SearchEmployeesServiceProxy,
+    private alldepartmentService: GetAllDepartmentsServiceProxy,
+    private GradeLevelService: GradeLevelServiceProxy,
+    private GetAllJobRolesService: GetAllJobRolesServiceProxy,
+    private GetAllLocationsService: GetAllLocationsServiceProxy,
+    private SalaryscaleService: SalaryscaleServiceProxy,
+  private CommonService: CommonServiceProxy) { }
   
   get disableaddbtn() {
   if(this.selectedEmployeeRecord || this.selectedEmployees.length > 0){
     return true;
   } else {
     return false;
+  }  
   }
- 
-  
-}
+
+  get disableSearchBtn() {
+    let resp: boolean = true;
+    Object.entries(this.filterObject).map(([key, value], index) => {
+      if (value && (value != "" || value != null)) {
+
+        resp = false;
+      }
+    });
+
+    return resp;
+  }
+
+  getAllDepartment() {
+    this.CommonService.getDepartments().subscribe(res => {
+      if (!res.hasError) {
+        this.allDepartment = res.result;
+  }
+})
+    
+  }
+  getAllLocation() {
+    this.CommonService.getLocations().subscribe(res => {
+      if (!res.hasError) {
+        this.allLocation = res.result;
+  }
+    })
+  }
+  getAllJobRole() {
+    this.CommonService.getJobRoles().subscribe(res => {
+      if (!res.hasError) {
+        this.allJobRole = res.result;
+  }
+    })
+   
+  }
+  getAllGrade() {
+    this.CommonService.getGrades().subscribe(res => {
+      if (!res.hasError) {
+        this.allGrade = res.result;
+  }
+    })
+  }
+  getAllSalaryScale() {
+    this.CommonService.getSalaryScale().subscribe(res => {
+      if (!res.hasError) {
+        this.allsalaryScale = res.result;
+  }
+    })
+  }
+  getAllPeoplesGroup() {
+    
+  }
   ngOnInit(): void {
+    this.getAllDepartment();
+    this.getAllLocation()
+    this.getAllJobRole();
+    this.getAllGrade();
+    this.getAllPeoplesGroup();
   }
 getallemployee(){
 this.searchbtnclicked = true;
-  this.allemployeeServices.getAllEmployees(this.filterObject.searchtText,this.filterObject.contractStatus,this.filterObject.pageSize).subscribe(data=>{
+  this.allemployeeServices.searchEmployees(this.filterObject.pageSize, this.filterObject.companyId, this.filterObject.searchType,
+    this.filterObject.searchtText, this.filterObject.searchPeopleGroup, this.filterObject.ministryId, this.filterObject.searchDepartment,
+  this.filterObject.searchJobRole,this.filterObject.searchLocation,this.filterObject.salaryscaleId,this.filterObject.gradestepId,this.filterObject.gradestepId).subscribe(data => {
 if(!data.hasError){
   this.allEmployees = data.result
   this.employeeResultTotal = data.totalCount;
