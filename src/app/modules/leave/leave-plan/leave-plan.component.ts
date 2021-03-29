@@ -138,7 +138,9 @@ export class LeavePlanComponent implements OnInit {
 
 
   checked = false;
-
+  getSelectedEmployee(event) {
+    console.log(event)
+  }
   toggle(checked: boolean) {
     this.checked = checked;
   }

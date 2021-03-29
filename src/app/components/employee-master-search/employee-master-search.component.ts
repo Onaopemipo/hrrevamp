@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
 import {EmployeeDTO,CommonServiceProxy, FetchAllEmployeesServiceProxy, GetAllDepartmentsServiceProxy, GetAllJobRolesServiceProxy, GetAllLocationsServiceProxy, GradeLevelServiceProxy, SalaryscaleServiceProxy, SearchEmployeesServiceProxy} from '../../_services/service-proxies';
 @Component({
   selector: 'ngx-employee-list',
@@ -61,7 +62,9 @@ employeeResultTotal = 0;
   allsalaryScale = [];
 @Input() addbtnText: string = '';
 @Input() allowmultipleselection: boolean = false;
-@Input() selectionHeader = 'Select Employees';
+  @Input() selectionHeader = 'Select Employees';
+  @Output() masterSubmitted = new EventEmitter<EmployeeDTO[]>();
+ 
   constructor(private allemployeeServices: SearchEmployeesServiceProxy,
     private alldepartmentService: GetAllDepartmentsServiceProxy,
     private GradeLevelService: GradeLevelServiceProxy,
@@ -175,7 +178,9 @@ updateSelectedEmployee(i){
 
 }
   showModal = false;
-okMasterSearch(){
+  okMasterSearch() {
+    if (!this.allowmultipleselection){ this.selectedEmployees = []; this.selectedEmployees.push(this.selectedEmployeeRecord);}
+    this.masterSubmitted.emit(this.selectedEmployees);
   this.showModal = false;
 }
 cancelMasterSearch(){
