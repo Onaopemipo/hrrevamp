@@ -3,7 +3,7 @@ import { NbDialogService } from '@nebular/theme';
 import { NbDialogRef } from '@nebular/theme';
 import { Observable, Subject } from 'rxjs';
 
-enum ALERT_TYPES {
+export enum ALERT_TYPES {
   SUCCESS = 'success',
   FAILED = 'danger',
   COPIED = 'copied',
@@ -24,7 +24,12 @@ enum ALERT_TYPES {
    </div>
    <div style="padding:10px">
    <span class="listsubheader">{{alertMessage}}!</span>
+<div *ngIf="catchErrorAlert" style="display:flex;flex-direction: column; padding: 10px 0 0 0">
+<span *ngFor="let err of alerterrors" style="color:red"> * {{err}}</span>
+</div>
+
    </div>
+
    <div style="padding:10px">
    <button nbButton type="button" (click)="submit()"
    style="background-color: #4847E0;
@@ -45,6 +50,8 @@ export class alertmodalComponent implements OnInit {
   alertType: string = '';
   alertMessage: string = '';
   alertButtonMessage: string = '';
+  catchErrorAlert: boolean = false;
+  alerterrors = [];
   constructor(protected ref: NbDialogRef<alertmodalComponent>, private alertController: AlertserviceService ) {}
   cancel() {
     this.ref.close();
@@ -58,6 +65,15 @@ export class alertmodalComponent implements OnInit {
     this.alertType = this.alertController.alertType;
     this.alertMessage = this.alertController.alertMessage;
     this.alertButtonMessage = this.alertController.alertButtonMessage;
+    this.catchErrorAlert = this.alertController.catchErrorAlert;
+    var initialerr = this.alertController.alerterrors;
+    if (initialerr) {
+      Object.entries(initialerr).forEach(([key, value], index) => {
+        this.alerterrors.push(value[0])
+      })
+  
+    }
+    
   }
 }
 
@@ -71,6 +87,8 @@ export class AlertserviceService {
   alertMessage: string = '';
   alertButtonMessage: string = '';
   ALERT_TYPES = ALERT_TYPES;
+  catchErrorAlert: boolean = false;
+  alerterrors: Array<any>[] = [];
   constructor(private dialogService: NbDialogService) { }
 
   openModalAlert(alertType, alertMessage, alertButtonMessage): Observable<any> {
@@ -84,6 +102,21 @@ export class AlertserviceService {
       })
       .onClose.subscribe(name => { newSubjectResponse.next(name); });
 
+    return newSubjectResponse;
+  }
+
+  openCatchErrorModal(alertType, alertMessage, alertButtonMessage,errors): Observable<any>{
+    this.catchErrorAlert = true;
+    this.alertType = alertType;
+    this.alertMessage = alertMessage;
+    this.alertButtonMessage = alertButtonMessage;
+    this.alerterrors = errors;
+    const newSubjectResponse = new Subject();
+    this.dialogService.open(alertmodalComponent,
+      {
+       closeOnEsc: false
+      })
+      .onClose.subscribe(name => { newSubjectResponse.next(name); });
     return newSubjectResponse;
   }
 }

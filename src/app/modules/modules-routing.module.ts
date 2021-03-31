@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModulesComponent } from './modules.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { AuthGuardService as AuthGuard } from '../_services/auth-guard.service';
 
 const routes: Routes = [{
   path: '',
@@ -10,6 +11,7 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
+      canLoad: [AuthGuard],
     },
     {
       path: 'complaints',
@@ -41,11 +43,11 @@ const routes: Routes = [{
       loadChildren: () => import('../modules/disbursement/disbursement.module')
         .then(m => m.DisbursementModule)
     },
-    // {
-    //   path: 'leave',
-    //   loadChildren: () => import('../modules/leave/leave.module')
-    //     .then(m => m.LeaveModule)
-    // },
+    {
+      path: 'leave',
+      loadChildren: () => import('../modules/leave/leave.module')
+        .then(m => m.LeaveModule)
+    },
     {
       path: 'expenses',
       loadChildren: () => import('../modules/expense/expense.module')

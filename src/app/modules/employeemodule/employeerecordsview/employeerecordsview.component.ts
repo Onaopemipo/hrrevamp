@@ -1,7 +1,7 @@
 import { EmployeeDTO, IEmployeeDTO, CreateEmployeeServiceProxy, DropdownValue, DropdownValueDTO,  DataServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
+import { FormGroup, NgForm } from '@angular/forms';
+import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 @Component({
   selector: 'ngx-employeerecordsview',
   templateUrl: './employeerecordsview.component.html',
@@ -22,7 +22,9 @@ export class EmployeerecordsviewComponent implements OnInit {
     { title: 'pension_panel', label: 'Pension', status: 'Inactive' },
     { title: 'History_panel', label: 'History', status: 'Inactive' },
     { title: 'skills_panel', label: 'Skills', status: 'Inactive' },
-    { title: 'custom_panel', label: 'Custom Form', status: 'Inactive'},
+    { title: 'training_panel', label: 'Training', status: 'Inactive' },
+    { title: 'certification_panel', label: 'Certifications', status: 'Inactive' },
+    { title: 'custom_panel', label: 'Employee Custom Form', status: 'Inactive'},
   ];
 
   newEmployeeForm: NgForm;
@@ -33,7 +35,27 @@ export class EmployeerecordsviewComponent implements OnInit {
   religionValues: DropdownValue[]  = [];
   employmentStatusValues: DropdownValue[]  = [];
   // allgender: string [] = [];
-
+  showEmployeeContractModal: boolean = false;
+  showdocumentUploadModal: boolean = false;
+  showQualificationModal: boolean = false;
+  showEmpHistoryModal: boolean = false;
+  showSkillModal: boolean = false;
+  showTrainingModal: boolean = false;
+  showCertificationModal: boolean = false;
+  trainingForm: FormGroup;
+  certificationForm: FormGroup;
+  skillForm: FormGroup;
+  EmHistoryForm: FormGroup;
+  showbankModal: boolean = false;
+  contractForm: FormGroup;
+  bankForm: FormGroup;
+  documentUploadtForm: FormGroup;
+  qualificationForm: FormGroup;
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+  btnContractSubmitted: boolean = false;
+  files: Transfer[]=[];
   constructor(private newEmployee: CreateEmployeeServiceProxy, private myDropdown: DataServiceProxy ) { }
   selectPanel(hiringlist, i) {
     this.selectedPanel = hiringlist;
@@ -43,6 +65,9 @@ export class EmployeerecordsviewComponent implements OnInit {
     })
     this.hiringChecklist[i].status = 'Active';
     this.selectedCase = this.hiringChecklist[i].title;
+  }
+  openSideBar() {
+    this.showEmployeeContractModal = true;
   }
   ngOnInit(): void {
     this.getMaritalStatus();
@@ -67,7 +92,9 @@ export class EmployeerecordsviewComponent implements OnInit {
       }
     })
   }
-
+  getSelectedEmployee(event) {
+    
+  }
   getEmploymentStatus(){
     this.myDropdown.getDropDownValuesById(1).subscribe(data => {
       if(!data.hasError){
@@ -103,6 +130,15 @@ export class EmployeerecordsviewComponent implements OnInit {
     })
   }
 
+  nextPanel() {    
+    var pos = this.hiringChecklist.findIndex(x => x.title == this.selectedPanel.title);
+    var newPos = parseInt(String(pos)) + parseInt(String(1));
+  
+    if (newPos) {
+      this.selectPanel(this.hiringChecklist[newPos], newPos);
+    }    
+  }
+
   createEmployee(){
     this.newEmployee.addEmployee(this.createNewEmployee).subscribe(data => {
       if(data.hasError){
@@ -113,5 +149,24 @@ export class EmployeerecordsviewComponent implements OnInit {
       }
     })
   }
+  removeFile(event: FlowDirective, mFile: Transfer) {
+    this.files = this.files.filter(file => file.name !== mFile.name);
+    event.cancelFile(mFile);
+  }
 
+
+  onDropFileceived(event: FlowDirective) {
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;
+    });
+  }
+  filereceived(event: FlowDirective) {
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;
+    });
+  }
+  onDragOver(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
 }

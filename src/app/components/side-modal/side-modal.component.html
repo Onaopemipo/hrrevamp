@@ -11,7 +11,7 @@
                 <ng-content select='[modal-header]' *ngIf="!title">
                 </ng-content>
             </div>
-            <div class="body" style="overflow: scroll;">
+            <div class="body" style="overflow: scroll;flex: auto;">
                 <ng-content select='[modal-body]'></ng-content>
             </div>
             <div class="actions side-modal-actions">
