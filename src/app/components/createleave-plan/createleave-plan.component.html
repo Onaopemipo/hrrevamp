@@ -1,0 +1,99 @@
+<ngx-side-modal [(show)]='showModal' style="width: 500px; height: 1000px;">
+    
+    <div modal-header>Add New Leave Plan</div>
+    <div modal-body>
+     
+        <form id="leavePlan" name="leavePlan" #leavePlan="ngForm">
+
+            <div class="form-group">
+                <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee:</label>
+               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+            </div>
+
+            <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
+                <ngx-date [(value)]='leaveD.startDate' (valueChange)="processStartEndNoofDays()" [max]="leaveD.endDate" #startDate name="startDate" id="startDate"></ngx-date>
+               
+                <div *ngIf="!validateStartdate" class="error">
+                    <div>Leave Plan Start Date is required</div>
+                </div>
+              </div>
+
+            <div class="form-group">
+                <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
+                <input type="number" (keyup)="noOfDaysValidation()"  [(ngModel)]="leaveD.noOfDays" id="noOfDays" name="noOfDays" #noOfDays="ngModel" class="form-control" placeholder="Enter Number Of Days" required>
+                <div *ngIf="noOfDays.invalid && (noOfDays.dirty || noOfDays.touched)" class="error">
+                    <div *ngIf="noOfDays.errors.required">
+                     Number of Days is required
+                    </div>
+                </div>
+                <div *ngIf="noOfDaysError" class="error">
+                    {{noOfDaysError}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
+                <ngx-date  [(value)]='leaveD.endDate' (valueChange)="processStartEndNoofDays()" #endDate [min]="leaveD.startDate" name="endDate" id="endDate"></ngx-date>
+                <div *ngIf="!validateEnddate" class="error">
+                    <div>Leave Plan End Date is required</div>
+                </div>
+              </div>
+              <div class="row" style="padding-top:10px">
+                <div class="col-sm-6 form-group">
+                    <label>Leave Year</label>
+                    <select class="form-control" #leaveYearId="ngModel"  id="leaveYearId" name="leaveYearId"   [(ngModel)]="leaveD.leaveYearId" required>
+                        <option value="">--Select Year--</option>
+                        <option *ngFor="let leaveYr of allLeaveYears;" [value]="leaveYr.id">{{leaveYr.yearName}}</option>
+                    </select>
+                    <div *ngIf="leaveYearId.invalid && (leaveYearId.dirty || leaveYearId.touched)" class="error">
+                        <div *ngIf="leaveYearId.errors.required">
+                          Leave Year is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Leave Type</label>
+                    <select class="form-control" #leaveTypeId="ngModel"  id="leaveTypeId" name="leaveTypeId"  [(ngModel)]="leaveD.leaveTypeId" required>
+                        <option value="">--Select Type--</option>
+                        <option *ngFor="let leavetype of allLeavetypes;" [value]="leavetype.id">{{leavetype.name}}</option>
+                    </select>
+                    <div *ngIf="leaveTypeId.invalid && (leaveTypeId.dirty || leaveTypeId.touched)" class="error">
+                        <div *ngIf="leaveTypeId.errors.required">
+                          Leave Type is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Location</label>
+                    <select class="form-control" #locationId="ngModel"  id="locationId" name="locationId" [(ngModel)]="leaveD.locationId" required>
+                        <option value="">--Select Location--</option>
+                        <option *ngFor="let loc of allLocation;" [value]="loc.id">{{loc.location_name}}</option>
+                    </select>
+                    <div *ngIf="locationId.invalid && (locationId.dirty || locationId.touched)" class="error">
+                        <div *ngIf="locationId.errors.required">
+                          Location is required
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Comment</label>
+                <textarea rows="5"  id="comment" name="comment" [(ngModel)]="leaveD.comment" nbInput fullWidth   placeholder="Enter Comment"></textarea>
+              </div>     
+            </form>
+    </div>
+
+
+
+    <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+        <button *ngIf="btnSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!btnSubmitted" [disabled]="!disableSubmitbtn" nbButton status="primary" class="d-flex column" (click)="createLeavePlan()">Submit</button>
+        <button nbButton outline status="primary" (click)="showModal = false" class="d-flex column"
+            style="background-color: white;">Discard</button>
+        <!-- <button class="d-flex column Attach">
+            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
+            Attach</button> -->
+    </div>
+    <div style="margin-top: 10px;"></div>
+
+</ngx-side-modal>

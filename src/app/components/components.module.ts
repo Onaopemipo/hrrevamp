@@ -82,16 +82,13 @@ import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
 import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
 import {   SearchEmployeesServiceProxy,
-  GetAllDepartmentsServiceProxy,
-  GradeLevelServiceProxy,
-  GetAllJobRolesServiceProxy,
-  GetAllLocationsServiceProxy,
-  SalaryscaleServiceProxy,
   CommonServiceProxy} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { PageComponent } from './page/page.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.component';
+import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -129,6 +126,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MultiSelectComponent,
     CustomFormComponent,
     PageComponent,
+    CreateleavePlanComponent,
+    CreateleaveRequestComponent,
   ],
   imports: [
     FormsModule,
@@ -195,11 +194,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NbMenuService,
     NbDatepickerDirective,
     SearchEmployeesServiceProxy,
-    GetAllDepartmentsServiceProxy,
-    GradeLevelServiceProxy,
-    GetAllJobRolesServiceProxy,
-    GetAllLocationsServiceProxy,
-    SalaryscaleServiceProxy,
     CommonServiceProxy
   ],
   exports: [
@@ -242,6 +236,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
     PageComponent,
+    CreateleavePlanComponent,
+    CreateleaveRequestComponent,
+    MultiSelectComponent
   ],
 })
 export class ComponentsModule { }
