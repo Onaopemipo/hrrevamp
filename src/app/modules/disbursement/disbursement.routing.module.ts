@@ -1,3 +1,4 @@
+import { UpdateItemComponent } from './budget/update-item/update-item.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BudgetListComponent } from './budget/budget-list/budget-list.component';
@@ -36,6 +37,11 @@ const routes: Routes = [
       {
         path: 'disbursement/history',
         component: DisbursementHistoryComponent,
+      },
+
+      {
+        path: 'disbursement/update-item/:id',
+        component: UpdateItemComponent,
       },
     ]
   },

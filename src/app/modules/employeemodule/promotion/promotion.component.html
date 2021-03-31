@@ -1,6 +1,4 @@
-
-
-<ngx-componentsheader pageName='Promotion List'>
+<ngx-componentsheader pageName='Promotion List' [requiredButton]="rButton" (buttonClick)="onTopActionClick($event)">
 
 </ngx-componentsheader>
 
@@ -8,7 +6,7 @@
 <nb-card style="margin-top: 15px;">
     <nb-card-body>
 
-        
+
         <ngx-tableheader></ngx-tableheader>
 
         <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>

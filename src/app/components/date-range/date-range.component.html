@@ -11,7 +11,7 @@
 <nb-datepicker #endDate></nb-datepicker>
 </div> -->
 <div style="display: flex;">
-    <ngx-date></ngx-date>
+    <ngx-date [(value)]="_start" [max]='_end' (valueChange)='updateStart()'></ngx-date>
     <div style="margin-left: 20px; margin-right: 20px; font-size: 20px; text-align: center; justify-content: center; display: flex;">-</div>
-    <ngx-date></ngx-date>
+    <ngx-date  [(value)]="_end" [min]='_start' (valueChange)='updateEnd()'></ngx-date>
 </div>
