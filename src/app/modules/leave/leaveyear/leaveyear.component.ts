@@ -52,6 +52,7 @@ export class LeaveyearComponent implements OnInit {
     private alertservice : AlertserviceService,
     public dateService: NbDateService<Date>) { }
   
+
     tableActionClicked(event: TableActionEvent) { }
   filterUpdated(filter: any) {
     this.filter = {...this.filter, ...filter};
@@ -84,11 +85,19 @@ export class LeaveyearComponent implements OnInit {
   createleaveYear() {
     this.submitbtnPressed = true;
     this.leaveYearService.createLeaveYear(this.newleaveYear).subscribe(response => {
-      if (response.hasError) {
+      if (!response.hasError) {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK')
+      } else {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, response.message, 'OK')
       }
-    })
-    this.submitbtnPressed = false
+      this.submitbtnPressed = false;
+    }, (error) => {
+      this.submitbtnPressed = false;
+      if (error.status == 400) {
+        this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+      }
+    });
+  
   }
   showLeaveYearModal = false;
   getleaveYear() {
@@ -104,6 +113,8 @@ export class LeaveyearComponent implements OnInit {
           
         }
 
+      }, (error) => {
+        console.log(error);
       }
       );
   }
