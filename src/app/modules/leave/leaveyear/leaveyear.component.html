@@ -1,16 +1,33 @@
 
-<ngx-componentsheader [pageName]='LeaveYear' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 
 </ngx-componentsheader>
 
 <nb-card>
     <nb-card-body>
-
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+        <ngx-default-content
+        *ngIf="!showEmpty"
+        pageHeader="Create your first Leave Year"
+        pageDescription="Click on the button to create a Leave Year"
+        buttonValue="Create Leave Year"
+        (buttonClick)="modal('add_leave_year')"
+      >
+      </ngx-default-content>
+        <ngx-tablecomponent  
+        *ngIf="showEmpty"
+        (filterChange)="filterUpdated($event)"
+        [showFilter]="true"
+        (actionClick)="tableActionClicked($event)"
+        [actions]="tableActions" 
+        [userData]="LeaveYear" 
+        [tableColum]="tableColumns"
+        [totalItems]="totalItems"
+        [currentPage]="currentPage"
+        >
+    </ngx-tablecomponent>
         
         <ngx-side-modal [(show)]='showLeaveYearModal' style="width: 500px; height: 1000px;">
-            <div modal-header>Add Leave Type</div>
+            <div modal-header>Add Leave Year</div>
             <div modal-body>
                 <form #leavYearForm="ngForm" name="leavYearForm" id="leavYearForm">
                     <div class="form-group">
@@ -38,18 +55,7 @@
         
                       <div class="form-group">
                         <nb-checkbox status="primary"  name="isActiveYear" #isActiveYear="ngModel" [(ngModel)]="newleaveYear.isActiveYear">Active</nb-checkbox>
-                      </div> 
-                      <!-- <form action="">
-                          <label for="">yearName</label>
-                          <input type="text" class="form-control"
-                          [(value)]='yearName' name="yearName">
-                          <label for="max">start Date</label>
-                          <ngx-date [(value)]='maxdate' [max]="maxdate"></ngx-date>
-                          <label for="min">End Date</label>
-                          <ngx-date [(value)]='mindate' [min]="mindate"></ngx-date>
-                      </form>
-                       -->
-                      
+                      </div>                      
                 </form>
             </div>
             <div modal-actions class="d-flex" style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">

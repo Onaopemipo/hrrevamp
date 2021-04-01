@@ -14,7 +14,7 @@ export class EmployeerbulkaddComponent implements OnInit {
     event.cancelFile(mFile);
   }
 
-  files: Transfer[];
+  files: Transfer[]=[];
   onDropFileceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
