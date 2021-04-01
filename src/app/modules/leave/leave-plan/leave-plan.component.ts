@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NbDateService } from '@nebular/theme';
+import { TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
 import {
   GetLeaveTypesServiceProxy,
@@ -77,8 +78,9 @@ export class LeavePlanComponent implements OnInit {
   }
 
   LeaveData: LeavePlanResource[] = [];
-
-  constructor(private FetchLeavePlanServiceProxy: FetchLeavePlanServiceProxy,
+  loading = false;
+  constructor(
+    private FetchLeavePlanServiceProxy: FetchLeavePlanServiceProxy,
     public dateService: NbDateService<Date>,
 
  ) { }
@@ -86,7 +88,6 @@ export class LeavePlanComponent implements OnInit {
   ngOnInit(): void {
     this.getleavePlan();
   }
-
 
 
   showAddPlanModal = false;
