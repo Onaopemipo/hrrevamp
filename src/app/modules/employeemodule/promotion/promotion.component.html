@@ -11,6 +11,34 @@
 
         <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
     </nb-card-body>
-
-
 </nb-card>
+
+<ngx-side-modal [(show)]='submitList' style="width: 500px;">
+  <div modal-header>Add to List</div>
+  <div modal-body>
+    <nb-card>
+            <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Channel" class="col-form-label mylabel"></label>
+                <ngx-employee-master-search></ngx-employee-master-search>
+              </div>
+            </div>
+    </nb-card>
+
+  </div>
+</ngx-side-modal>
+
+<ngx-side-modal [(show)]='submitList' style="width: 500px;">
+  <div modal-header>Add to List</div>
+  <div modal-body>
+    <nb-card>
+            <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Channel" class="col-form-label mylabel"></label>
+                <ngx-employee-master-search [addbtnText]="Submit"></ngx-employee-master-search>
+              </div>
+            </div>
+    </nb-card>
+
+  </div>
+</ngx-side-modal>

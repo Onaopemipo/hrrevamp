@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../_services/alertservice.service';
-import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, PromotionListServiceProxy, AddUpdateEligibleBucketServiceProxy, FetchEmployeeByIdServiceProxy } from './../../_services/service-proxies';
+import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, PromotionListServiceProxy, AddUpdateEligibleBucketServiceProxy, FetchEmployeeByIdServiceProxy, FetchEmployeeContractByEmployeeIdServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -122,6 +122,7 @@ import { ExitRequestService } from './services/exit-request.service';
     FetchEmployeeByIdServiceProxy,
     AlertserviceService,
     PromotionListServiceProxy,
+    FetchEmployeeContractByEmployeeIdServiceProxy,
 ]
 })
 export class EmployeemoduleModule { }

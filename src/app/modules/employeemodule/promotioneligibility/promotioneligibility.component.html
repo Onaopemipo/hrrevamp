@@ -1,12 +1,6 @@
-<ngx-componentsheader pageName='Promotion Eligibility List' [requiredButton]="topActionButtons"
+<ngx-componentsheader pageName='Promotion Eligibility Bucket List' [requiredButton]="topActionButtons"
     (buttonClick)='modal($event)'>
 </ngx-componentsheader>
-
-
-
-
-
-
 
 <nb-card style="margin-top: 15px;">
     <nb-card-body>
@@ -46,7 +40,7 @@
                     <label for="Approval">Approval workflow:</label>
                     <label for="" style="font-size: small; font-weight: lighter;">Ensure you created the workflow with category as PROMOTIONS </label>
                     <select class="form-control" name="approval" [(ngModel)]="promotionBucketList.approvalWorkFlows" #approval="ngModel">
-
+                      <option value="1">Approval</option>
                     </select>
                   </div>
                 </div>

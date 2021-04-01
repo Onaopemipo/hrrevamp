@@ -26,6 +26,9 @@ export class PromotionComponent implements OnInit {
   ]
 
   promotionList: Sp_FetchEligibleEmployees [] = [];
+  submitList: boolean = false;
+  saveList: boolean = false;
+  Submit: string = "Submit"
 
   constructor(private promotion: PromotionListServiceProxy, private alert: AlertserviceService) { }
 
@@ -44,10 +47,14 @@ export class PromotionComponent implements OnInit {
 
   onTopActionClick(event){
     if(event === 'submit'){
+      this.submitList = !this.submitList;
       console.log('I am Submitting')
     } else {
+      this.saveList = !this.saveList;
       console.log('I am saving')
     }
   }
+
+
 
 }

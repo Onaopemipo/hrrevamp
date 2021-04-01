@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { FetchEmployeeByIdServiceProxy, EmployeeDTO, PromotionListServiceProxy, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, PromotionListServiceProxy, Sp_FetchEligibleEmployees, FetchEmployeeContractByEmployeeIdServiceProxy, EmployeeContractAssignmentDTO } from './../../../_services/service-proxies';
 import { EmployeesService } from './../../career-succession/services/employees.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -29,9 +29,11 @@ export class PromotioninfoComponent implements OnInit {
   ];
 
   employeeDetails: EmployeeDTO = new EmployeeDTO().clone();
+  contractDetails: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO;
 
 
-  constructor(private employee: FetchEmployeeByIdServiceProxy, private alert: AlertserviceService) { }
+  constructor(private employee: FetchEmployeeByIdServiceProxy, private alert: AlertserviceService,
+     private contract: FetchEmployeeContractByEmployeeIdServiceProxy) { }
 
 
   selectPanel(hiringlist, i) {
@@ -51,7 +53,14 @@ export class PromotioninfoComponent implements OnInit {
     const data = await this.employee.getEmployeeById(1).toPromise();
     if(!data.hasError){
       this.employeeDetails = data.result;
-      console.log()
+      console.log('Success', this.employeeDetails)
+    }
+  }
+
+  async getContractDetails(){
+    const data = await this.contract.fetchEmployeeContractByEmployeeId(1).toPromise();
+    if(!data.hasError){
+      this.contractDetails = data.result;
     }
   }
 
