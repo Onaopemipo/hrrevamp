@@ -52,15 +52,19 @@ import { TrainingCategoryService } from './services/training-category.service';
 import { TrainingSpecializationService } from './services/training-specialization.service';
 import { TrainingPlanService } from './services/plan.service';
 import { SpecializationComponent } from './specialization/specialization.component';
+import { TrainingTypeComponent } from './training-type/training-type.component';
+import { TrainingVendorComponent } from './training-vendor/training-vendor.component';
+import { TypesService } from './services/types.service';
 
 @NgModule({
-  declarations: [DashboardComponent, RequestsComponent, PlansComponent, AdministrationComponent, CategoriesComponent, SpecializationComponent],
+  declarations: [DashboardComponent, RequestsComponent, PlansComponent, AdministrationComponent, CategoriesComponent, SpecializationComponent, TrainingTypeComponent, TrainingVendorComponent],
   providers: [
     TrainingServiceProxy,
     VendorService,
     TrainingCategoryService,
     TrainingSpecializationService,
     TrainingPlanService,
+    TypesService,
   ],
   imports: [
     CommonModule,

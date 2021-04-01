@@ -15,6 +15,14 @@ export class MyTrainingSpecialization extends TrainingSpecialization implements 
   getStatusColor(): MyColor {
     return this.is_Active ? new MyColor(100, 100, 100) :  new MyColor(100, 100, 0);
   }
+
+  get selectValue() {
+    return this.id;
+  }
+
+  get selectLabel() {
+    return this.name;
+  }
 }
 
 @Injectable({

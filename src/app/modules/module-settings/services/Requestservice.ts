@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { AddUpdateRequestTypeServiceProxy, DeleteRequestTypeServiceProxy, GetAllRequestTypeServiceProxy, GetRequestTypeByIdServiceProxy, IMessageOut, LocationDTO, ManageEventDTO, ManageLocationDTO, ManageRequestTypeDTO, Request, RequestTypeDTO } from 'app/_services/service-proxies';
+import { AddRequestViewModel, AddUpdateRequestTypeServiceProxy, DeleteRequestTypeServiceProxy, GetAllRequestTypeServiceProxy, GetRequestTypeByIdServiceProxy, IMessageOut, LocationDTO, ManageEventDTO, ManageLocationDTO, ManageRequestTypeDTO, Request, RequestTypeDTO } from 'app/_services/service-proxies';
 import { of, Subject } from 'rxjs';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 import { MyEvent } from './events.service';
@@ -47,13 +47,16 @@ export class MyRequest implements IStatus {
   }
 
   toManage() {
-    return new ManageRequestTypeDTO({
+    return new AddRequestViewModel({
       name: this.Name,
       id: this.id,
       code: this.Code,
-      is_StepNotify: this.Enable_Step,
-      is_SystemRequirment: this.isSystem,
-      isActive: this.is_Active
+      enable_step_notify: this.Enable_Step,
+      is_system_requirement: this.isSystem,
+      typeId: '',
+      approval: '',
+      processid: 0,
+      // act: this.is_Active
     });
   }
 }

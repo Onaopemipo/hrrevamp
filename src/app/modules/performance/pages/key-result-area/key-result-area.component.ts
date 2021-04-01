@@ -16,7 +16,7 @@ export class KeyResultAreaComponent extends MainBaseComponent {
   topActionButtons = [
  {name: 'ADD__KEY__RESULT__AREAS', label: 'Add Key Result Areas', icon: 'plus', outline: false},
 ]
-TOP_ACTIONS = TOP_ACTIONS
+TOP_ACTIONS = TOP_ACTIONS;
 tableColumns = [
                 {name: 'date', title: 'KRA'},
 {name: 'date', title: 'Description'},

@@ -87,11 +87,19 @@ import {   SearchEmployeesServiceProxy,
   GetAllJobRolesServiceProxy,
   GetAllLocationsServiceProxy,
   SalaryscaleServiceProxy,
-  CommonServiceProxy} from '../_services/service-proxies';
+  CommonServiceProxy,
+  GetLocationByIdServiceProxy,
+  TrainingServiceProxy} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { PageComponent } from './page/page.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
+import { LocationService } from 'app/modules/module-settings/services/location.service';
+import { TrainingCategoryService } from 'app/modules/training/services/training-category.service';
+import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
+import { TypesService } from 'app/modules/training/services/types.service';
+import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/module-settings-providers.module';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -184,6 +192,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NbInputModule,
     NbContextMenuModule,
     NgMultiSelectDropDownModule,
+    ModuleSettingsProvidersModule,
   ],
   providers: [
     {
@@ -200,7 +209,18 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     GetAllJobRolesServiceProxy,
     GetAllLocationsServiceProxy,
     SalaryscaleServiceProxy,
-    CommonServiceProxy
+    CommonServiceProxy,
+    LocationService,
+    DepartmentsService,
+    TrainingCategoryService,
+    TrainingSpecializationService,
+    GetAllDepartmentsServiceProxy,
+    GetAllLocationsServiceProxy,
+    GetLocationByIdServiceProxy,
+    TypesService,
+    LocationService,
+    DepartmentsService,
+    TrainingServiceProxy,
   ],
   exports: [
     ComponentsheaderComponent,
@@ -242,6 +262,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
     PageComponent,
+    MultiSelectComponent,
   ],
 })
 export class ComponentsModule { }

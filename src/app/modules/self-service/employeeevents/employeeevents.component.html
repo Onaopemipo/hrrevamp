@@ -1,16 +1,10 @@
-<!-- <button nbButton [nbPopover]="formcomponent" style="position: absolute; top: 50%; left: 50%;;"></button> -->
- <div style="padding-top:10px"> <h6 class="header4-bold">{{Events}}</h6></div>
- <div class="card" style="height: calc(100vh - 170px - 5rem);">
-    
-    <ngx-calender #calendar style="height: 100%;" (dateClick)="showPopover()"></ngx-calender>
- </div>
- <!-- <ngx-calender style="height: 100vh;"></ngx-calender> -->
 <nb-card>
     <nb-card-body style="height: 43vh;">
         <div style="width: 100%; position: relative;">
+            <ngx-cal></ngx-cal>
             <button nbButton [nbPopover]="formcomponent" style="position: fixed; top: 50%; left: 50%;;"></button>
             <ngx-calender style="background-color: white; height: 700px;"></ngx-calender>
-            <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar>
+            <!-- <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar> -->
         </div>
     </nb-card-body>
 </nb-card>

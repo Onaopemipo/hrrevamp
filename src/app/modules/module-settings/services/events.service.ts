@@ -33,6 +33,7 @@ export class MyEvent implements IStatus {
       id: this.id,
       title: this.Title,
       notify_Employee: this.Notify_Employee,
+      file: null,
     });
   }
 }

@@ -1,6 +1,7 @@
 import { S } from '@angular/cdk/keycodes';
 import { formatPercent } from '@angular/common';
 import { IStatus, MyColor } from 'app/components/status/models';
+import { RequestDTO } from 'app/_services/service-proxies';
 
 enum STATUS {
     RESOLVED, IN_PROGRESS, UN_RESOLVED, CANCELLED, APPROVED, PENDING, DECLINED
@@ -14,16 +15,24 @@ export interface IComplaint {
     title: string;
     complainerName: string;
     description: string;
-    status: number;
+    status: string;
     time: Date;
     complainerEmail: string;
-    referenceNo: number;
+    referenceNo: string;
 }
 
 export class Complaint implements IStatus {
     private iComplaint: IComplaint;
-    constructor(iComplaint: IComplaint) {
-        this.iComplaint = iComplaint;
+    constructor(request: RequestDTO) {
+        // this.iComplaint = iComplaint;
+        this.iComplaint.id = request.id;
+        this.iComplaint.title = request.title;
+        this.iComplaint.complainerName = request.employeeName;
+        this.iComplaint.description = request.description;
+        this.iComplaint.status = request.status;
+        this.iComplaint.time = request.dateModified;
+        // this.iComplaint.complainerEmail = request.email;
+        this.iComplaint.referenceNo = request.refNo;
     }
 
     get complainerImageSrc() {

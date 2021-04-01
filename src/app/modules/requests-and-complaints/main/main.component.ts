@@ -24,10 +24,15 @@ export class MainComponent implements OnInit {
   complaints: Complaint[] = [];
   selectedComplaint?: Complaint;
   newComplaint = {
-    type: 'A'
+    type: 'A',
+    employeeId: 1,
+    description: '',
+    title: '',
   };
   loading = false;
   loadingNext = false;
+
+
   constructor(
     private apiService: ApiService
   ) { }
@@ -39,7 +44,7 @@ export class MainComponent implements OnInit {
   loadRequests() {
     const subject = new Subject<Complaint[]>();
     this.apiService.getComplaints(this.pageNo).subscribe(data => {
-      subject.next(data.map(iComplaint => new Complaint(iComplaint)));
+      subject.next(data.data.map(iComplaint => new Complaint(iComplaint)));
       subject.complete();
     });
     return subject.asObservable();
@@ -48,7 +53,7 @@ export class MainComponent implements OnInit {
   loadComplaints() {
     const subject = new Subject<Complaint[]>();
     this.apiService.getComplaints(this.pageNo).subscribe(data => {
-      subject.next(data.map(iComplaint => new Complaint(iComplaint)));
+      subject.next(data.data.map(iComplaint => new Complaint(iComplaint)));
       subject.complete();
     });
     return subject.asObservable();
@@ -117,6 +122,14 @@ export class MainComponent implements OnInit {
     if (event === TOP_ACTIONS.createNew) {
       this.showCreateModal = true;
     }
+  }
+
+  loadingSave = false;
+  async submitForm() {
+    alert(10)
+    this.loadingSave = true;
+    const res = await this.apiService.createComplaint(this.newComplaint).toPromise();
+    this.loadingSave = false;
   }
 
 }

@@ -9,6 +9,7 @@ import { FormConfig } from '../custom-form/custom-form.component';
 export class PageComponent implements OnInit {
 
   data = {};
+  @Input() tab = false;
   @Input() pageTitle = 'Name';
 
   @Input() set value(val: object) {

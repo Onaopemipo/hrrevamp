@@ -10,8 +10,8 @@ export default Factory.define<IComplaint>(({ sequence }) => ({
   complainerName: fakerStatic.name.firstName() + ' ' + fakerStatic.name.lastName(),
   title: fakerStatic.lorem.sentence(10),
   description: fakerStatic.lorem.sentences(),
-  referenceNo: fakerStatic.random.number(),
-  status: random.number(3),
+  referenceNo: String(fakerStatic.random.number()),
+  status: String(random.number(3)),
   time: fakerStatic.date.recent(),
 
 }));

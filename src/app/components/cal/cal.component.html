@@ -1,3 +1,18 @@
-vvv
-<div #calendar style="height: 100%; width: 100vw"></div>
-yyy
+
+{{monthLabel}} - {{year}} <button (click)="prevMonth()">Prev</button><button (click)="nextMonth()">Next</button>
+<button (click)="gotoThisMonth()">Today</button>
+<table>
+    <tr>
+        <th *ngFor="let day of days">
+            {{day.name}}
+        </th>
+    </tr>
+
+    <tbody>
+        <tr *ngFor="let week of weeks" >
+            <td *ngFor="let day of week" [class]="{'other-month': day.getMonth() !== month}">
+                {{day.getDate()}}
+            </td>
+        </tr>
+    </tbody>
+</table>

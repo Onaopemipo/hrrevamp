@@ -9,7 +9,7 @@ export class RadioButtonComponent implements OnInit {
 
   @Input() horizontal = false;
   // @Output() changed = new EventEmitter<string>();
-  @Input() items: string[] = [];
+  @Input() items: [] = [];
   selected = '';
   @Input() set value(val) {
     this.selected = val;

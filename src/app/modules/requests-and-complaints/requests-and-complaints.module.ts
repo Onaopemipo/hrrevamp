@@ -8,6 +8,7 @@ import { NbInfiniteListDirective, NbListModule, NbSelectModule, NbTabsetModule }
 import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
 import { SelectInputComponent } from './components/select-input/select-input.component';
 import { FormsModule } from '@angular/forms';
+import { AddUpdateRequestServiceProxy, GetAllRequestServiceProxy } from 'app/_services/service-proxies';
 
 
 
@@ -23,7 +24,9 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
   providers: [
-    ApiService
+    ApiService,
+    AddUpdateRequestServiceProxy,
+    GetAllRequestServiceProxy,
   ]
 })
 export class RequestsAndComplaintsModule { }

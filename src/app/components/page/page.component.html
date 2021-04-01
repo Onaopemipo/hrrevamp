@@ -1,8 +1,8 @@
-<ngx-componentsheader actions="actions" [pageName]="pageTitle" [requiredButton]="requiredButton" (buttonClick)="topActionButtonClicked($event)"></ngx-componentsheader>
+<ngx-componentsheader *ngIf='!tab' actions="actions" [pageName]="pageTitle" [requiredButton]="requiredButton" (buttonClick)="topActionButtonClicked($event)"></ngx-componentsheader>
 
 <div style="padding: 10px;"></div>
 <div class="container" style="background-color: #ffffff; height: 1000px;">
-  <nb-tabset>
+  <nb-tabset *ngIf='!tab'>
     <nb-tab [tabTitle]="tab.label" [tabId]="tab.name" *ngFor="let tab of tabs"></nb-tab>   
   </nb-tabset>
     <ngx-default-content></ngx-default-content>

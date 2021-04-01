@@ -44,7 +44,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
   deleteData(data: ModelType): Observable<any> {
     return this.api.delete(data.id);
   }
-  
+
   tableColumns: TableColumn [] = [
     {name: 'trainingType', title: 'Type'},
     {name: 'specialiazation', title: 'Specialiazation'},

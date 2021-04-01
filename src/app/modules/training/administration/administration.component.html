@@ -1,11 +1,23 @@
 <ngx-componentsheader
   actions="actions"
-  [pageName]="pagetitle"
+  [pageName]="pageTitle"
   [requiredButton]="rButton"
   (buttonClick)="pageActionClicked($event)"
 >
 </ngx-componentsheader>
 <div style="padding: 5px"></div>
+<div class="container" style="background-color: #ffffff">
+  <nb-tabset (changeTab)="tabSelected($event)">
+    <nb-tab tabTitle="Vendors" [tabId]="TABS.vendors">
+      <ngx-training-vendor></ngx-training-vendor>
+      </nb-tab>
+      <nb-tab tabTitle="Types" [tabId]="TABS.types">
+        <ngx-training-type></ngx-training-type>
+      </nb-tab>
+  </nb-tabset>
+</div>
+
+
 <!-- 
 <div class="container" style="background-color: #ffffff">
   <nb-tabset (changeTab)="tabSelected($event)">
