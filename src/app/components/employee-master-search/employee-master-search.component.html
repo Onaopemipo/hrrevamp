@@ -1,11 +1,12 @@
 
 <div>
-    <ngx-employee-list [allowmultipleselection]="allowmultipleselection" [selectedEmployees]="selectedEmployees" [selectedEmployeeRecord]="selectedEmployeeRecord"></ngx-employee-list>
     <button (click)="showMasterSearchModal()" class="underlined-button">
   
         <span *ngIf="selectedEmployees.length > 0 || selectedEmployeeRecord">Update</span>
         <span *ngIf="selectedEmployees.length < 1 && !selectedEmployeeRecord">Add Employee</span>
-        </button>
+    </button>
+    <ngx-employee-list [allowmultipleselection]="allowmultipleselection" [selectedEmployees]="selectedEmployees" [selectedEmployeeRecord]="selectedEmployeeRecord"></ngx-employee-list>
+
 </div>
 
 <ngx-side-modal [(show)]="showModal">

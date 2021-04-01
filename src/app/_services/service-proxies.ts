@@ -22,7 +22,7 @@ export class GetTokenServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -107,7 +107,7 @@ export class ValidateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -190,7 +190,7 @@ export class ForgotPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -273,7 +273,7 @@ export class ResetPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -358,7 +358,7 @@ export class ConfirmEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -444,7 +444,7 @@ export class FetchActivityLogServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -545,7 +545,7 @@ export class PostServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1290,7 +1290,7 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1482,7 +1482,7 @@ export class SubordinateAppraisalsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1568,7 +1568,7 @@ export class GetEmployeePerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1669,7 +1669,7 @@ export class SubmitEmployeeAppraisalReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1756,7 +1756,7 @@ export class EmployeePerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1857,7 +1857,7 @@ export class SubmitPerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -1943,7 +1943,7 @@ export class GetEmployeeAppraisalHistoriesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -2029,7 +2029,7 @@ export class AssetManagementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -4772,7 +4772,7 @@ export class AzureStorageManagerServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -4930,7 +4930,7 @@ export class AddUpdateBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5016,7 +5016,7 @@ export class FetchAllBudgetsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5097,7 +5097,7 @@ export class FetchGetBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5183,7 +5183,7 @@ export class AddUpdateBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5269,7 +5269,7 @@ export class FetchAllBudgetItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5350,7 +5350,7 @@ export class FetchBudgetItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5431,7 +5431,7 @@ export class FetchGetBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5517,7 +5517,7 @@ export class AddUpdateEmployeetoNineBoxGridServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5603,7 +5603,7 @@ export class MoveEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5689,7 +5689,7 @@ export class RemoveEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5775,7 +5775,7 @@ export class GetEmployeeebyGridBoxServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -5867,7 +5867,7 @@ export class GetGridBoxCountServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6081,7 +6081,7 @@ export class AddUpdateEmployeetoTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6167,7 +6167,7 @@ export class AddUpdateRequirmentstoTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6256,7 +6256,7 @@ export class CareerSuccessionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6342,7 +6342,7 @@ export class CareerPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6428,7 +6428,7 @@ export class DeleteEmployeefromTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6519,7 +6519,7 @@ export class GetTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6733,7 +6733,7 @@ export class RemoveEmployeeFromSuccessorServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6822,7 +6822,7 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -6908,7 +6908,7 @@ export class CommonServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -8304,7 +8304,7 @@ export class CreateConfirmationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -8389,7 +8389,7 @@ export class SaveConfirmationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -8474,7 +8474,7 @@ export class GetConfirmationsByDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -8570,7 +8570,216 @@ export class DataServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+    }
+
+    /**
+     * API for getting Bulk Upload Process/Types i.e.
+    {'Profile': 1, 'Contract': 2, 'Qualification': 3 }
+     * @return Success
+     */
+    employeeProfileOperation(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/EmployeeProfileOperation";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEmployeeProfileOperation(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEmployeeProfileOperation(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processEmployeeProfileOperation(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
+
+    /**
+     * API for getting Bank Account Types for dropdowns
+     * @return Success
+     */
+    getAccountTypes(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/GetAccountTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAccountTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAccountTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAccountTypes(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
+
+    /**
+     * API for getting Bulk Upload Process/Types i.e.
+    {'Employee Bank Upload': 2, 'Employee Records Upload': 10}
+     * @return Success
+     */
+    getBulkUploadProcesses(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/GetBulkUploadProcesses";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetBulkUploadProcesses(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetBulkUploadProcesses(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetBulkUploadProcesses(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
     }
 
     /**
@@ -9786,7 +9995,7 @@ export class AddUpdateDepartmentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -9872,7 +10081,7 @@ export class GetAllDepartmentsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -9964,7 +10173,7 @@ export class GetDepartmentByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10050,7 +10259,7 @@ export class FetchDeploymentByReferenceNoServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10133,7 +10342,7 @@ export class FetchDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10218,7 +10427,7 @@ export class EmployeeDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10298,7 +10507,7 @@ export class SingleDisbursementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10384,7 +10593,7 @@ export class FetchEmailLogsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10479,7 +10688,7 @@ export class FetchEmailLogByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10565,7 +10774,7 @@ export class FetchEmailTemplateByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10651,7 +10860,7 @@ export class UpdateEmailTemplateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10737,7 +10946,7 @@ export class CreateEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10816,6 +11025,174 @@ export class CreateEmployeeServiceProxy {
 }
 
 @Injectable()
+export class DownloadEmployeeBulkServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+    }
+
+    /**
+     * API for downloading Sample Template for Bulk Upload
+     * @return Success
+     */
+    downloadEmployeeBulkTemplate(): Observable<File> {
+        let url_ = this.baseUrl + "/api/Employee/DownloadEmployeeBulk/DownloadEmployeeBulkTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDownloadEmployeeBulkTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDownloadEmployeeBulkTemplate(<any>response_);
+                } catch (e) {
+                    return <Observable<File>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<File>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDownloadEmployeeBulkTemplate(response: HttpResponseBase): Observable<File> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = File.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<File>(<any>null);
+    }
+}
+
+@Injectable()
+export class EmployeeBulkUploadServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+    }
+
+    /**
+     * API for Employee Bulk uploading
+     * @param bulkFile (optional) 
+     * @return Success
+     */
+    employeeBulkUpload(bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Employee/EmployeeBulkUpload/EmployeeBulkUpload";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (bulkFile !== null && bulkFile !== undefined)
+            content_.append("bulkFile", bulkFile.data, bulkFile.fileName ? bulkFile.fileName : "bulkFile");
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEmployeeBulkUpload(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEmployeeBulkUpload(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processEmployeeBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class UploadProfileImageServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -10823,7 +11200,7 @@ export class UploadProfileImageServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -10912,7 +11289,7 @@ export class FetchEmployeesDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11008,7 +11385,7 @@ export class FetchEmployeesByName_IdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11095,7 +11472,7 @@ export class FetchEmployeeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11181,7 +11558,7 @@ export class SearchEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11310,7 +11687,7 @@ export class FetchAllEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11404,7 +11781,7 @@ export class FetchEmployeeContractByEmployeeIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11490,7 +11867,7 @@ export class AddUpdateEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11576,7 +11953,7 @@ export class GetAllEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11668,7 +12045,7 @@ export class GetEventsByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11754,7 +12131,7 @@ export class DeleteEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11840,7 +12217,7 @@ export class AddUpdateExpenseGroupServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -11925,7 +12302,7 @@ export class ToggleExpenseGroupServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12008,7 +12385,7 @@ export class GetExpenseGroupsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12122,7 +12499,7 @@ export class AddUpdateExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12207,7 +12584,7 @@ export class ToggleExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12290,7 +12667,7 @@ export class GetExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12406,7 +12783,7 @@ export class AddUpdateExpenseServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12491,7 +12868,7 @@ export class ToggleExpenseRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12574,7 +12951,7 @@ export class FetchExpensesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12703,7 +13080,7 @@ export class FetchExpensesDetailedServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -12851,7 +13228,7 @@ export class AddUpdateLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13082,7 +13459,7 @@ export class ToggleExpenseTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13165,7 +13542,7 @@ export class GetExpenseTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13275,7 +13652,7 @@ export class AddExpenseSubTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13360,7 +13737,7 @@ export class ToggleExpenseSubTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13446,7 +13823,7 @@ export class GetExpenseTypeNameServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13529,7 +13906,7 @@ export class GetExpenseSubTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13639,7 +14016,7 @@ export class GradeLevelServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -13885,7 +14262,7 @@ export class GradeLevelBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14199,7 +14576,7 @@ export class AddUpdateJobRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14285,7 +14662,7 @@ export class GetAllJobRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14377,7 +14754,7 @@ export class GetJobRoleByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14463,7 +14840,7 @@ export class DeleteJobRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14549,7 +14926,7 @@ export class FetchKeyResultAreasServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14657,7 +15034,7 @@ export class FetchKRAsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14738,7 +15115,7 @@ export class FetchKeyResultAreaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14824,7 +15201,7 @@ export class CreateKeyResultAreaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -14912,7 +15289,7 @@ export class AssignKRAServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15000,7 +15377,7 @@ export class AddUpdateKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15086,7 +15463,7 @@ export class AddUpdateEmployeeKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15172,7 +15549,7 @@ export class FetchKPIsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15258,7 +15635,7 @@ export class FetchKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15344,7 +15721,7 @@ export class FetchEmployeeKPIsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15430,7 +15807,7 @@ export class LeaveEntitlementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15802,7 +16179,7 @@ export class AddUpdateHolidayServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15888,7 +16265,7 @@ export class GetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -15969,7 +16346,7 @@ export class GetByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16055,7 +16432,7 @@ export class DeleteServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16363,7 +16740,7 @@ export class FetchLeavePlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16469,7 +16846,7 @@ export class LeavePlanEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16553,7 +16930,7 @@ export class ApproveOrRejectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16640,7 +17017,7 @@ export class PostReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16727,7 +17104,7 @@ export class CreateLeaveByAdminServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16813,7 +17190,7 @@ export class GetLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -16982,7 +17359,7 @@ export class CancelLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17068,7 +17445,7 @@ export class GetLeaveTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17166,7 +17543,7 @@ export class DeleteLeaveTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17252,7 +17629,7 @@ export class GetLeaveTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17338,7 +17715,7 @@ export class LeaveWorkFlowServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17641,7 +18018,7 @@ export class GetLeaveYearsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17736,7 +18113,7 @@ export class GetLeaveYearServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17822,7 +18199,7 @@ export class PostFullRepaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -17907,7 +18284,7 @@ export class SimulatePaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18010,7 +18387,7 @@ export class GetLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18133,7 +18510,7 @@ export class GetLoanSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18216,7 +18593,7 @@ export class UpdateLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18301,7 +18678,7 @@ export class LoadRepaymentScheduleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18391,7 +18768,7 @@ export class FetchLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18514,7 +18891,7 @@ export class GetLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18609,7 +18986,7 @@ export class ToggleLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18694,7 +19071,7 @@ export class GetLoanTypesByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18818,7 +19195,7 @@ export class FetchLoanTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18908,7 +19285,7 @@ export class AddUpdateLocationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -18994,7 +19371,7 @@ export class GetAllLocationsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19096,7 +19473,7 @@ export class GetLocationByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19182,7 +19559,7 @@ export class FetchOnboardingPersonnalDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19277,7 +19654,7 @@ export class FetchOnboardingDocummentDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19377,7 +19754,7 @@ export class FetchOnboardingMedicalDisclosureDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19477,7 +19854,7 @@ export class FetchOnboardingPaymentDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19577,7 +19954,7 @@ export class FetchOnboardingTaxDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19677,7 +20054,7 @@ export class FetchEmployeeOnboardingDataDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19767,7 +20144,7 @@ export class AddUpdatePayElementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19853,7 +20230,7 @@ export class GetAllPayElementsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -19965,7 +20342,7 @@ export class GetPayElementByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20051,7 +20428,7 @@ export class AddUpdatePaymentInstitutionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20137,7 +20514,7 @@ export class GetAllPaymentInstitutionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20234,7 +20611,7 @@ export class GetPaymentInstitutionByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20320,7 +20697,7 @@ export class AddUpdatePayScaleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20406,7 +20783,7 @@ export class GetAllPayrollTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20503,7 +20880,7 @@ export class GetPayrollTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20590,7 +20967,7 @@ export class FetchPerformanceCyclesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20703,7 +21080,7 @@ export class FetchPerformanceCycleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20789,7 +21166,7 @@ export class AddUpdatePerformanceCycleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20877,7 +21254,7 @@ export class AddUpdatePositionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -20963,7 +21340,7 @@ export class GetAllPositionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21070,7 +21447,7 @@ export class GetPositionByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21156,7 +21533,7 @@ export class AddUpdateEligibleBucketServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21241,7 +21618,7 @@ export class PromotionListServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21331,7 +21708,7 @@ export class FetchPromotionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21411,7 +21788,7 @@ export class PromotionSchedule_SearchServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21517,7 +21894,7 @@ export class FetchRatingsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21598,7 +21975,7 @@ export class AddUpdateRatingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21682,7 +22059,7 @@ export class DeleteRatingRecordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21768,7 +22145,7 @@ export class AddUpdateRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21854,7 +22231,7 @@ export class GetAllRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -21966,7 +22343,7 @@ export class GetRequestByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -22052,7 +22429,7 @@ export class AddUpdateRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -22060,8 +22437,81 @@ export class AddUpdateRequestTypeServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    addUpdateRequestType(body: ManageRequestTypeDTO | undefined): Observable<MessageOutApiResult> {
+    addUpdateRequestTypeRequest(body: ManageRequestTypeDTO | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/RequestType/AddUpdateRequestType/Add-Update-RequestType";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateRequestTypeRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateRequestTypeRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateRequestTypeRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateRequestType(body: AddRequestViewModel | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/RewardDisciplinary/AddUpdateRequestType/AddUpdateRequestType";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -22128,79 +22578,6 @@ export class AddUpdateRequestTypeServiceProxy {
         }
         return _observableOf<MessageOutApiResult>(<any>null);
     }
-
-    /**
-     * @param body (optional) 
-     * @return Success
-     */
-    addUpdateRequestTypeReward(body: AddRequestViewModel | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/RewardDisciplinary/AddUpdateRequestType/AddUpdateRequestType";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddUpdateRequestTypeReward(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processAddUpdateRequestTypeReward(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processAddUpdateRequestTypeReward(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
 }
 
 @Injectable()
@@ -22211,7 +22588,7 @@ export class GetAllRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -22303,7 +22680,7 @@ export class GetRequestTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -22389,7 +22766,7 @@ export class DeleteRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -22474,7 +22851,7 @@ export class RetirementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23333,7 +23710,7 @@ export class GetAllRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23429,7 +23806,7 @@ export class RequestDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23512,7 +23889,7 @@ export class RequestTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23592,7 +23969,7 @@ export class FetchRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23673,7 +24050,7 @@ export class FetchAllRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23755,7 +24132,7 @@ export class FetchRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23842,7 +24219,7 @@ export class CreateRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -23929,7 +24306,7 @@ export class FetchRolePermissionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24009,7 +24386,7 @@ export class FetchRolePermissionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24094,7 +24471,7 @@ export class RolePermissionMappingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24179,7 +24556,7 @@ export class SalaryscaleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24493,7 +24870,7 @@ export class CreateSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24578,7 +24955,7 @@ export class FetchSubscriptionPlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24658,7 +25035,7 @@ export class FetchSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24743,7 +25120,7 @@ export class FetchSubscriptionPlanModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24828,7 +25205,7 @@ export class VerifySubscriptionPaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -24916,7 +25293,7 @@ export class TenantSignUpServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25002,7 +25379,7 @@ export class ConfirmTenantEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25090,7 +25467,7 @@ export class RegisterCompanyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25175,7 +25552,7 @@ export class FetchAllTenantsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25274,7 +25651,7 @@ export class FetchTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25355,7 +25732,7 @@ export class UpdateTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25439,7 +25816,7 @@ export class AddTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -25523,7 +25900,7 @@ export class TrainingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -28368,7 +28745,7 @@ export class RegisterUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -28453,7 +28830,7 @@ export class UpdateUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -28538,7 +28915,7 @@ export class FetchAllUsersServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://104.40.215.33:8000/smartaceapi";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
     }
 
     /**
@@ -29326,8 +29703,6 @@ export interface IAnnouncementTypeDto {
 export class AnnouncementType implements IAnnouncementType {
     catalog!: string | undefined;
     departmentId!: number;
-    companyId!: number;
-    subId!: number;
     id!: number;
     companyID!: number;
     subID!: number;
@@ -29351,8 +29726,6 @@ export class AnnouncementType implements IAnnouncementType {
         if (_data) {
             this.catalog = _data["catalog"];
             this.departmentId = _data["departmentId"];
-            this.companyId = _data["companyId"];
-            this.subId = _data["subId"];
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
@@ -29376,8 +29749,6 @@ export class AnnouncementType implements IAnnouncementType {
         data = typeof data === 'object' ? data : {};
         data["catalog"] = this.catalog;
         data["departmentId"] = this.departmentId;
-        data["companyId"] = this.companyId;
-        data["subId"] = this.subId;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -29401,8 +29772,6 @@ export class AnnouncementType implements IAnnouncementType {
 export interface IAnnouncementType {
     catalog: string | undefined;
     departmentId: number;
-    companyId: number;
-    subId: number;
     id: number;
     companyID: number;
     subID: number;
@@ -29559,8 +29928,6 @@ export class Announcement implements IAnnouncement {
     externalUrl!: string | undefined;
     startDate!: Date;
     closeDate!: Date;
-    companyId!: number;
-    subId!: number;
     id!: number;
     companyID!: number;
     subID!: number;
@@ -29588,8 +29955,6 @@ export class Announcement implements IAnnouncement {
             this.externalUrl = _data["externalUrl"];
             this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
             this.closeDate = _data["closeDate"] ? new Date(_data["closeDate"].toString()) : <any>undefined;
-            this.companyId = _data["companyId"];
-            this.subId = _data["subId"];
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
@@ -29617,8 +29982,6 @@ export class Announcement implements IAnnouncement {
         data["externalUrl"] = this.externalUrl;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["closeDate"] = this.closeDate ? this.closeDate.toISOString() : <any>undefined;
-        data["companyId"] = this.companyId;
-        data["subId"] = this.subId;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -29646,8 +30009,6 @@ export interface IAnnouncement {
     externalUrl: string | undefined;
     startDate: Date;
     closeDate: Date;
-    companyId: number;
-    subId: number;
     id: number;
     companyID: number;
     subID: number;
@@ -38504,6 +38865,7 @@ export interface IRequestTypeIListApiResult {
 }
 
 export class Skill implements ISkill {
+    sectorId!: number;
     name!: string | undefined;
     point!: number | undefined;
     employeeSkills!: EmployeeSkill[] | undefined;
@@ -38528,6 +38890,7 @@ export class Skill implements ISkill {
 
     init(_data?: any) {
         if (_data) {
+            this.sectorId = _data["sectorId"];
             this.name = _data["name"];
             this.point = _data["point"];
             if (Array.isArray(_data["employeeSkills"])) {
@@ -38556,6 +38919,7 @@ export class Skill implements ISkill {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["sectorId"] = this.sectorId;
         data["name"] = this.name;
         data["point"] = this.point;
         if (Array.isArray(this.employeeSkills)) {
@@ -38584,6 +38948,7 @@ export class Skill implements ISkill {
 }
 
 export interface ISkill {
+    sectorId: number;
     name: string | undefined;
     point: number | undefined;
     employeeSkills: EmployeeSkill[] | undefined;
@@ -38601,6 +38966,7 @@ export interface ISkill {
 export class EmployeeSkill implements IEmployeeSkill {
     employeeId!: number;
     skillId!: number;
+    skillName!: string | undefined;
     startDate!: Date | undefined;
     numberOfExperienceInMonth!: number | undefined;
     point!: number | undefined;
@@ -38629,6 +38995,7 @@ export class EmployeeSkill implements IEmployeeSkill {
         if (_data) {
             this.employeeId = _data["employeeId"];
             this.skillId = _data["skillId"];
+            this.skillName = _data["skillName"];
             this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
             this.numberOfExperienceInMonth = _data["numberOfExperienceInMonth"];
             this.point = _data["point"];
@@ -38657,6 +39024,7 @@ export class EmployeeSkill implements IEmployeeSkill {
         data = typeof data === 'object' ? data : {};
         data["employeeId"] = this.employeeId;
         data["skillId"] = this.skillId;
+        data["skillName"] = this.skillName;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["numberOfExperienceInMonth"] = this.numberOfExperienceInMonth;
         data["point"] = this.point;
@@ -38685,6 +39053,7 @@ export class EmployeeSkill implements IEmployeeSkill {
 export interface IEmployeeSkill {
     employeeId: number;
     skillId: number;
+    skillName: string | undefined;
     startDate: Date | undefined;
     numberOfExperienceInMonth: number | undefined;
     point: number | undefined;
@@ -39331,6 +39700,295 @@ export interface IEmployeeCertification {
     modifiedById: number | undefined;
 }
 
+export class State implements IState {
+    country_id!: number;
+    state_name!: string | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IState) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.country_id = _data["country_id"];
+            this.state_name = _data["state_name"];
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): State {
+        data = typeof data === 'object' ? data : {};
+        let result = new State();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["country_id"] = this.country_id;
+        data["state_name"] = this.state_name;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): State {
+        const json = this.toJSON();
+        let result = new State();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IState {
+    country_id: number;
+    state_name: string | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class LGA implements ILGA {
+    state_id!: number | undefined;
+    lga_name!: string | undefined;
+    directorate_id!: number;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: ILGA) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.state_id = _data["state_id"];
+            this.lga_name = _data["lga_name"];
+            this.directorate_id = _data["directorate_id"];
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): LGA {
+        data = typeof data === 'object' ? data : {};
+        let result = new LGA();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["state_id"] = this.state_id;
+        data["lga_name"] = this.lga_name;
+        data["directorate_id"] = this.directorate_id;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): LGA {
+        const json = this.toJSON();
+        let result = new LGA();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ILGA {
+    state_id: number | undefined;
+    lga_name: string | undefined;
+    directorate_id: number;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class Address implements IAddress {
+    employee_id!: number;
+    country_id!: number;
+    state_id!: number;
+    lga_id!: number;
+    address1!: string | undefined;
+    address2!: string | undefined;
+    address_type!: number;
+    is_primary_address!: boolean;
+    employee!: Employee;
+    state!: State;
+    lga!: LGA;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IAddress) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employee_id = _data["employee_id"];
+            this.country_id = _data["country_id"];
+            this.state_id = _data["state_id"];
+            this.lga_id = _data["lga_id"];
+            this.address1 = _data["address1"];
+            this.address2 = _data["address2"];
+            this.address_type = _data["address_type"];
+            this.is_primary_address = _data["is_primary_address"];
+            this.employee = _data["employee"] ? Employee.fromJS(_data["employee"]) : <any>undefined;
+            this.state = _data["state"] ? State.fromJS(_data["state"]) : <any>undefined;
+            this.lga = _data["lga"] ? LGA.fromJS(_data["lga"]) : <any>undefined;
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): Address {
+        data = typeof data === 'object' ? data : {};
+        let result = new Address();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employee_id"] = this.employee_id;
+        data["country_id"] = this.country_id;
+        data["state_id"] = this.state_id;
+        data["lga_id"] = this.lga_id;
+        data["address1"] = this.address1;
+        data["address2"] = this.address2;
+        data["address_type"] = this.address_type;
+        data["is_primary_address"] = this.is_primary_address;
+        data["employee"] = this.employee ? this.employee.toJSON() : <any>undefined;
+        data["state"] = this.state ? this.state.toJSON() : <any>undefined;
+        data["lga"] = this.lga ? this.lga.toJSON() : <any>undefined;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): Address {
+        const json = this.toJSON();
+        let result = new Address();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddress {
+    employee_id: number;
+    country_id: number;
+    state_id: number;
+    lga_id: number;
+    address1: string | undefined;
+    address2: string | undefined;
+    address_type: number;
+    is_primary_address: boolean;
+    employee: Employee;
+    state: State;
+    lga: LGA;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
 export class Employee implements IEmployee {
     userId!: number;
     titleId!: number;
@@ -39380,6 +40038,7 @@ export class Employee implements IEmployee {
     employeeSkills!: EmployeeSkill[] | undefined;
     employeeQualifications!: EmployeeQualification[] | undefined;
     employeeCertifications!: EmployeeCertification[] | undefined;
+    addresses!: Address[] | undefined;
     id!: number;
     companyID!: number;
     subID!: number;
@@ -39460,6 +40119,11 @@ export class Employee implements IEmployee {
                 this.employeeCertifications = [] as any;
                 for (let item of _data["employeeCertifications"])
                     this.employeeCertifications!.push(EmployeeCertification.fromJS(item));
+            }
+            if (Array.isArray(_data["addresses"])) {
+                this.addresses = [] as any;
+                for (let item of _data["addresses"])
+                    this.addresses!.push(Address.fromJS(item));
             }
             this.id = _data["id"];
             this.companyID = _data["companyID"];
@@ -39542,6 +40206,11 @@ export class Employee implements IEmployee {
             for (let item of this.employeeCertifications)
                 data["employeeCertifications"].push(item.toJSON());
         }
+        if (Array.isArray(this.addresses)) {
+            data["addresses"] = [];
+            for (let item of this.addresses)
+                data["addresses"].push(item.toJSON());
+        }
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -39611,6 +40280,7 @@ export interface IEmployee {
     employeeSkills: EmployeeSkill[] | undefined;
     employeeQualifications: EmployeeQualification[] | undefined;
     employeeCertifications: EmployeeCertification[] | undefined;
+    addresses: Address[] | undefined;
     id: number;
     companyID: number;
     subID: number;
@@ -40838,89 +41508,6 @@ export interface ICountryIListApiResult {
     totalCount: number;
 }
 
-export class State implements IState {
-    country_id!: number;
-    state_name!: string | undefined;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: IState) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.country_id = _data["country_id"];
-            this.state_name = _data["state_name"];
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): State {
-        data = typeof data === 'object' ? data : {};
-        let result = new State();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["country_id"] = this.country_id;
-        data["state_name"] = this.state_name;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): State {
-        const json = this.toJSON();
-        let result = new State();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IState {
-    country_id: number;
-    state_name: string | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
 export class StateIListApiResult implements IStateIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
@@ -40982,93 +41569,6 @@ export interface IStateIListApiResult {
     message: string | undefined;
     result: State[] | undefined;
     totalCount: number;
-}
-
-export class LGA implements ILGA {
-    state_id!: number | undefined;
-    lga_name!: string | undefined;
-    directorate_id!: number;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ILGA) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.state_id = _data["state_id"];
-            this.lga_name = _data["lga_name"];
-            this.directorate_id = _data["directorate_id"];
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): LGA {
-        data = typeof data === 'object' ? data : {};
-        let result = new LGA();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["state_id"] = this.state_id;
-        data["lga_name"] = this.lga_name;
-        data["directorate_id"] = this.directorate_id;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): LGA {
-        const json = this.toJSON();
-        let result = new LGA();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILGA {
-    state_id: number | undefined;
-    lga_name: string | undefined;
-    directorate_id: number;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
 }
 
 export class LGAIListApiResult implements ILGAIListApiResult {
@@ -42686,6 +43186,43 @@ export interface IEmployeeDTO {
     lastBVNValidation: Date | undefined;
     deviceId: number | undefined;
     isOnboarding: boolean;
+}
+
+export class File implements IFile {
+
+    constructor(data?: IFile) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+    }
+
+    static fromJS(data: any): File {
+        data = typeof data === 'object' ? data : {};
+        let result = new File();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        return data; 
+    }
+
+    clone(): File {
+        const json = this.toJSON();
+        let result = new File();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFile {
 }
 
 export class DropdownValueDTO implements IDropdownValueDTO {

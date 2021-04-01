@@ -16,11 +16,11 @@ td, th{
 }
 
 .paginator{
- border: solid #86828D ;
+ border: solid #86828D 1px;
  display: flex;
- display: block;
- padding: 1rem;
- border-radius: 3px;
+ flex-direction: row;
+ padding: .3rem;
+ border-radius: 4px;
 }
 
 .paginator > span{

@@ -69,22 +69,23 @@
   </table>
 </div>
 
-<div style="display: flex;" *ngIf="!table2">
-  <div style="flex: auto;">Showing 1 - 10 of 1000</div>
-  <div class="paginator">
-    <span>
-
-      <nb-icon icon='arrow-ios-back-outline' (click)="pageClicked(currentPage - 1)"></nb-icon>
-      <!-- <i class="fas fa-arrow-left" (click)="pageClicked(currentPage - 1)" ></i> -->
-    </span>
-
-    {{currentPage}} of {{totalNoOfPages}}
-
-
-    <!-- <span (click)="pageClicked(page)" *ngFor="let page of paginatioShowingPages">{{Page}}</span> -->
-    <!-- <span><i class="fas fa-arrow-right" (click)="pageClicked(currentPage + 1)"> </i> -->
-      <span>
-    <nb-icon icon='arrow-ios-forward-outline' (click)="pageClicked(currentPage + 1)"></nb-icon>
-    </span>
+<div style="display: flex;padding-top: 10px;" *ngIf="!table2">
+  <div style="flex: auto;">
+  <div style="padding-top: 7px;">
+    Showing {{currentPage}} - {{pageSize}} of {{totalNoOfPages}}
   </div>
+  </div>
+  <div>
+    <div class="paginator">
+      <nb-actions size="medium">
+        <nb-action [disabled]="currentPage <= 1" (click)="pageClicked(currentPage - 1)" icon="arrow-ios-back-outline"></nb-action>
+      <nb-action>{{currentPage}}</nb-action>
+    
+        <nb-action icon="arrow-ios-forward-outline" [disabled]="currentPage <= totalNoOfPages" (click)="pageClicked(currentPage + 1)"></nb-action>
+      </nb-actions>
+ 
+ 
+    </div>
+  </div>
+
 </div>
