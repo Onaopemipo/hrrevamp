@@ -1,3 +1,4 @@
+import { DataServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { FetchEmployeeByIdServiceProxy, EmployeeDTO, PromotionListServiceProxy, Sp_FetchEligibleEmployees, FetchEmployeeContractByEmployeeIdServiceProxy, EmployeeContractAssignmentDTO } from './../../../_services/service-proxies';
 import { EmployeesService } from './../../career-succession/services/employees.service';
@@ -33,7 +34,7 @@ export class PromotioninfoComponent implements OnInit {
 
 
   constructor(private employee: FetchEmployeeByIdServiceProxy, private alert: AlertserviceService,
-     private contract: FetchEmployeeContractByEmployeeIdServiceProxy) { }
+     private contract: FetchEmployeeContractByEmployeeIdServiceProxy, private dataService: DataServiceProxy) { }
 
 
   selectPanel(hiringlist, i) {
@@ -46,11 +47,12 @@ export class PromotioninfoComponent implements OnInit {
     this.selectedCase = this.employeeviewlist[i].title;
   }
   ngOnInit(): void {
-
+    this.getEmployeeInfo();
+    this.getContractDetails();
   }
 
   async getEmployeeInfo(){
-    const data = await this.employee.getEmployeeById(1).toPromise();
+    const data = await this.employee.getEmployeeById(0).toPromise();
     if(!data.hasError){
       this.employeeDetails = data.result;
       console.log('Success', this.employeeDetails)
@@ -58,10 +60,14 @@ export class PromotioninfoComponent implements OnInit {
   }
 
   async getContractDetails(){
-    const data = await this.contract.fetchEmployeeContractByEmployeeId(1).toPromise();
+    const data = await this.contract.fetchEmployeeContractByEmployeeId(0).toPromise();
     if(!data.hasError){
       this.contractDetails = data.result;
     }
+  }
+
+  async getQualifications(){
+    // const data = await this.dataService.employeeProfileOperation()
   }
 
 

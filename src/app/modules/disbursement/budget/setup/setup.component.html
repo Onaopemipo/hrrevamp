@@ -6,26 +6,28 @@
   <div class="my-form">
 <ng-template [ngIf]="page === 1">
     <h4>Set up your overall budget</h4>
+ <form #budgetForm="ngForm" name="budgetForm">
   <div class="row">
     <div class="col-sm-6 linear-form">
       <div class="form-group row">
         <div class="col">
           <label>Financial Year</label>
-        <ngx-date-range style="width: 60%;" [(start)]="budget.financial_year_start" [(end)]="budget.financial_year_end"></ngx-date-range>
+        <ngx-date-range style="width: 60%;" [(start)]="budget.startDate" [(end)]="budget.endDate" aria-required="true"></ngx-date-range>
         </div>
       </div>
       <div class="form-group row">
        <div class="col">
         <label>Total amount</label>
-        <app-amount-input [(value)]="budget.amount"></app-amount-input>
+        <app-amount-input [(value)]="budget.totalBudgetAmount" aria-required="true"></app-amount-input>
        </div>
       </div>
       <div class="form-group" style="margin-top: 20px">
         <label></label>
-        <button nbButton status="primary" (click)="addBudget()">Save and Continue</button>
+        <button nbButton status="primary" (click)="addBudget()" [disabled]="budgetForm.invalid">Save and Continue</button>
       </div>
     </div>
   </div>
+ </form>
 </ng-template>
 
 <ng-template [ngIf]="page === 2">

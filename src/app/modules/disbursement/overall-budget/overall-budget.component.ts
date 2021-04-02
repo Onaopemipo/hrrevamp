@@ -1,3 +1,4 @@
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, MyBudgetItemDepartment, BudgetItemService } from './../services/budget-item.service';
@@ -16,12 +17,12 @@ export class OverallBudgetComponent implements OnInit {
   editBudgetModal: boolean = false;
   addItemModal: boolean = false;
   editItem: boolean = false;
-  budget: MyBudget = new MyBudget;
+  budget: BudgetDTO = new BudgetDTO;
   budgetItem: MyBudgetItem = new MyBudgetItem;
   departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
 
-  constructor(private router: Router, private budgetItemService: BudgetItemService,
-    private budgetService: BudgetService, private alertMe: AlertserviceService) { }
+  constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
+    private budgetService: FetchAllBudgetsServiceProxy, private budgetServices: FetchGetBudgetServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
     this.fetAllBudget();
@@ -38,14 +39,14 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   overallBudget: MyBudget = new MyBudget;
-  myBudget: MyBudget [] = [];
+  myBudget: BudgetDTO [] = [];
   currentFinancialYear;
   dataIndex: number = 20781;
-  finYear: MyBudget = new MyBudget;
+  finYear: BudgetDTO = new BudgetDTO;
   loader:boolean = false;
   finLoading: boolean = false;
   item: MyBudgetItem = new MyBudgetItem;
-  allBudgetItems: MyBudgetItem []= [];
+  allBudgetItems: BudgetItemDTO []= [];
   allItems: MyBudgetItem []= [];
 
   addBudgetItem(){
@@ -58,8 +59,8 @@ export class OverallBudgetComponent implements OnInit {
   }
 
  async fetAllBudgetItems(){
-    const data = await this.budgetItemService.list(this.dataIndex, this.item).toPromise();
-    this.allBudgetItems = data.data
+    const data = await this.budgetItemService.getAllBudgetItems().toPromise();
+    this.allBudgetItems = data.result
     console.log('Yo boss', this.allBudgetItems)
   }
 
@@ -82,17 +83,17 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   async fetAllBudget(){
-   const data = await this.budgetService.list(this.overallBudget).toPromise();
-   this.myBudget = data.data;
-   console.log('All Bugdet Items', data.data)
+   const data = await this.budgetService.getAllBudgets().toPromise();
+   this.myBudget = data.result;
+   console.log('All Bugdet Items', this.myBudget)
   }
 
-  async onChangeYear(event:number){
+  async onChangeYear(budgetId:number){
     this.loader = !this.loader
     this.finLoading = true;
-    this.dataIndex = event;
-    const data = await this.budgetService.fetch(event).toPromise();
-    this.finYear = data;
+    this.dataIndex = budgetId;
+    const data = await this.budgetServices.getGetBudget(budgetId).toPromise();
+    this.finYear = data.result;
     this.finLoading = false;
   }
 

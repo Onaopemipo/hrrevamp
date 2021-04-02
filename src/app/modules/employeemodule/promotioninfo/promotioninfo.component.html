@@ -20,7 +20,7 @@
         </div>
         </div>
     </nb-card-body>
-    <div  style.height="{{(scase.offsetHeight < 402)?380 : (scase.offsetHeight - 210) }}px" >
+    <div>
         <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of employeeviewlist; let i = index">
 
             <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
@@ -40,25 +40,9 @@
                     <div class="fmContainer" *ngSwitchCase="'personal_Info'">
                         <nb-tabset>
                             <nb-tab tabTitle="Personal information">
-                                <nb-card-header style="margin-bottom: 4rem;">
 
-
-                                    <div style="display: flex; flex-direction: row; align-items: center;">
-
-                                        <div>
-                                            <p style="font-weight: bold;">Personal Information</p>
-                                        </div>
-
-
-                                    </div>
-
-                                </nb-card-header>
-
-
-
-
-                                <div *ngFor="let i of [0,1,2,3,4,5,6,7,8]" style="font-weight: bold; padding: 2rem;">
-                                    <div class="row">
+                                <div style="font-weight: normal;">
+                                    <div class="row" style="padding-bottom: 20px;">
                                         <div class="col-sm-4">
                                             <span>First Name</span>
                                         </div>
@@ -67,7 +51,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" style="padding-bottom: 20px;">
                                       <div class="col-sm-4">
                                           <span>Last Name</span>
                                       </div>
@@ -76,7 +60,7 @@
                                       </div>
                                   </div>
 
-                                  <div class="row">
+                                  <div class="row" style="padding-bottom: 20px;">
                                     <div class="col-sm-4">
                                         <span>Employee ID</span>
                                     </div>
@@ -85,7 +69,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" style="padding-bottom: 20px;">
                                   <div class="col-sm-4">
                                       <span>Email Address</span>
                                   </div>
@@ -94,7 +78,7 @@
                                   </div>
                               </div>
 
-                              <div class="row">
+                              <div class="row" style="padding-bottom: 20px;">
                                 <div class="col-sm-4">
                                     <span>Position</span>
                                 </div>
@@ -103,7 +87,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" style="padding-bottom: 20px;">
                               <div class="col-sm-4">
                                   <span>Department</span>
                               </div>
@@ -112,7 +96,7 @@
                               </div>
                           </div>
 
-                          <div class="row">
+                          <div class="row" style="padding-bottom: 20px;">
                             <div class="col-sm-4">
                                 <span>Residential LGA</span>
                             </div>
@@ -121,7 +105,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="padding-bottom: 20px;">
                           <div class="col-sm-4">
                               <span>Residential State</span>
                           </div>
@@ -135,13 +119,6 @@
                             </nb-tab>
 
                             <nb-tab tabTitle="Qualifications">
-                                <nb-card-header>
-                                    <h6>Qualifications</h6>
-
-                                </nb-card-header>
-
-                                <br>
-
 
                                 <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
 
@@ -151,18 +128,10 @@
                         </nb-tabset>
                     </div>
                     <div class="fmContainer" *ngSwitchCase="'promotion_info'">
-                        <nb-tabset>
-                            <nb-tab tabTitle="Promotional Information">
-                                <nb-card-header>
-                                    <h6>Promotional Promotion</h6>
 
-                                </nb-card-header>
-
-                                <br>
-
-
-                                <div *ngFor="let i of [0,1,2,3,4,5,6,7,8]" style="font-weight: bold; padding: 2rem;">
-                                    <div class="row">
+                                <div style="font-weight:normal;">
+                                  <h5 style="padding-bottom: 20px;">Promotion Information</h5>
+                                    <div class="row" style="padding-bottom: 20px;">
                                         <div class="col-sm-4">
                                             <span>Appointment Date</span>
                                         </div>
@@ -170,6 +139,70 @@
                                             <span>24/08/2021</span>
                                         </div>
                                     </div>
+
+                                    <div class="row" style="padding-bottom: 20px;">
+                                      <div class="col-sm-4">
+                                          <span>Confirmation Date</span>
+                                      </div>
+                                      <div class="col-sm-8">
+                                          <span>24/08/2021</span>
+                                      </div>
+                                  </div>
+
+                                  <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-sm-4">
+                                        <span>Last Promotion Date</span>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <span>24/08/2021</span>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding-bottom: 20px;">
+                                  <div class="col-sm-4">
+                                      <span>Effective Date</span>
+                                  </div>
+                                  <div class="col-sm-8">
+                                      <span>24/08/2021</span>
+                                  </div>
+                              </div>
+
+                              <div class="row" style="padding-bottom: 20px;">
+                                <div class="col-sm-4">
+                                    <span>Current Level</span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span>Level 15</span>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-bottom: 20px;">
+                              <div class="col-sm-4">
+                                  <span>Duration in Grade</span>
+                              </div>
+                              <div class="col-sm-8">
+                                  <span>12 Months</span>
+                              </div>
+                          </div>
+
+                          <div class="row" style="padding-bottom: 20px;">
+                            <div class="col-sm-4">
+                                <span>Professional Qualifications</span>
+                            </div>
+                            <div class="col-sm-8">
+                                <span>9</span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 20px;">
+                          <div class="col-sm-4">
+                              <span>Next Level</span>
+                          </div>
+                          <div class="col-sm-8">
+                              <span>Senior UX Manager</span>
+                          </div>
+                      </div>
+
                                 </div>
 
                                 <div class="row">
@@ -186,11 +219,6 @@
 
                                     </div>
                                 </div>
-
-
-                            </nb-tab>
-
-                        </nb-tabset>
                     </div>
 
                 </div>
