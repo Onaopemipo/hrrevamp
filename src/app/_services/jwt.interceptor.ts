@@ -56,7 +56,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
 
             this.authServ.getuser().then(data => {
-              //  console.log(data);
+                console.log(data);
             })
             const token = this.authServ.globalUser.value.jwt_token;
             request = request.clone({
