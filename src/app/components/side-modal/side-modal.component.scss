@@ -15,7 +15,7 @@
     left: 0px;
     height: 100vh;
     width: 100vw;
-    background-color: #ff01;
+    background-color:rgba(0, 0, 0, 0.3);
     display: flex;
     transition-property: visibility;
     transition-duration: 1s;
@@ -55,6 +55,10 @@
 
 .modal-p{
     transition: width 2s;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    background: white;
 }
 
 .header{

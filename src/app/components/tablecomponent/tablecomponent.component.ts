@@ -65,6 +65,7 @@ export class TablecomponentComponent implements OnInit {
   pageData = [];
   tableData = [];
   _currentPage = 1;
+  pageSize = 10;
   paginatioShowingPages = [1, 2, 3, 4, 5, 6];
   get totalNoOfPages() {
     return Math.ceil(this.totalItems / 10);
@@ -78,7 +79,7 @@ export class TablecomponentComponent implements OnInit {
     // if (this.totalNoOfPages < 3) {
     //   this.paginatioShowingPages = [0, 1, 2, 3, 4];
     // } else {}
-    this.paginatioShowingPages = [1, 2, 3, 4, 5, 6];
+    //this.paginatioShowingPages = [1, 2, 3, 4, 5, 6];
   }
   get currentPage() {
     return this._currentPage;
@@ -124,6 +125,7 @@ export class TablecomponentComponent implements OnInit {
 
   filter = {}
   pageClicked(pageNo: number) {
+    console.log('am here')
     this.pageChange.emit(pageNo);
     this.filter = {...this.filter, ...{page: pageNo, } };
     this.filterChange.emit(this.filter);

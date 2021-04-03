@@ -87,9 +87,9 @@ import {   SearchEmployeesServiceProxy,
   GetAllJobRolesServiceProxy,
   GetAllLocationsServiceProxy,
   SalaryscaleServiceProxy,
-  CommonServiceProxy,
   GetLocationByIdServiceProxy,
-  TrainingServiceProxy} from '../_services/service-proxies';
+  TrainingServiceProxy,
+  CommonServiceProxy} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { PageComponent } from './page/page.component';
@@ -100,6 +100,8 @@ import { TrainingCategoryService } from 'app/modules/training/services/training-
 import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
 import { TypesService } from 'app/modules/training/services/types.service';
 import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/module-settings-providers.module';
+import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.component';
+import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -137,6 +139,8 @@ import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/modul
     MultiSelectComponent,
     CustomFormComponent,
     PageComponent,
+    CreateleavePlanComponent,
+    CreateleaveRequestComponent,
   ],
   imports: [
     FormsModule,
@@ -221,6 +225,7 @@ import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/modul
     LocationService,
     DepartmentsService,
     TrainingServiceProxy,
+    CommonServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,
@@ -262,6 +267,9 @@ import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/modul
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
     PageComponent,
+    MultiSelectComponent,
+    CreateleavePlanComponent,
+    CreateleaveRequestComponent,
     MultiSelectComponent,
   ],
 })

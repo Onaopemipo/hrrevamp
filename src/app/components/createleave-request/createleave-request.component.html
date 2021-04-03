@@ -1,0 +1,82 @@
+<ngx-side-modal [(show)]='showModalRequest' style="width: 500px;">
+    <div modal-header>Apply For Leave</div>
+    <div modal-body>
+        <form action="">
+            <div class="form-group">
+                <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee:</label>
+               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+            </div>
+
+           
+
+            <div class="form-group">
+                <label>Leave Year</label>
+                <select class="form-control" #leaveYearID="ngModel"  id="leaveYearID" name="leaveYearID"   [(ngModel)]="leaveReq.leaveYearID" required>
+                    <option value="">--Select Year--</option>
+                    <option *ngFor="let leaveYr of allLeaveYears;" [value]="leaveYr.id">{{leaveYr.yearName}}</option>
+                </select>
+                <div *ngIf="leaveYearID.invalid && (leaveYearID.dirty || leaveYearID.touched)" class="error">
+                    <div *ngIf="leaveYearID.errors.required">
+                      Leave Year is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Leave Type</label>
+                <select class="form-control" #leaveTypeID="ngModel"  id="leaveTypeID" name="leaveTypeID"  [(ngModel)]="leaveReq.leaveTypeID" required>
+                    <option value="">--Select Type--</option>
+                    <option *ngFor="let leavetype of allLeavetypes;" [value]="leavetype.id">{{leavetype.name}}</option>
+                </select>
+                <div *ngIf="leaveTypeID.invalid && (leaveTypeID.dirty || leaveTypeID.touched)" class="error">
+                    <div *ngIf="leaveTypeID.errors.required">
+                      Leave Type is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
+                <ngx-date [(value)]='leaveReq.startDate'   #startDate name="startDate" id="startDate"></ngx-date>
+               
+                <div *ngIf="!validateStartdate" class="error">
+                    <div>Leave Plan Start Date is required</div>
+                </div>
+              </div>
+
+           
+            <div class="form-group">
+                <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
+                <input type="number"  [(ngModel)]="leaveReq.noOfDays" id="noOfDays" name="noOfDays" #noOfDays="ngModel" class="form-control" placeholder="Enter Number Of Days" required>
+                <div *ngIf="noOfDays.invalid && (noOfDays.dirty || noOfDays.touched)" class="error">
+                    <div *ngIf="noOfDays.errors.required">
+                     Number of Days is required
+                    </div>
+                </div>
+             
+            </div>
+            <div class="form-group">
+                <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Contact Info On
+                    Leave:</label>
+                <input type="number" class="form-control" placeholder="Enter Contact-info" id="Contact Info">
+            </div>
+            <div class="form-group">
+                <label for="Employee Name" style="font-size: small;font-weight: bold;">Reflief Officer:</label>
+               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'relief')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+            </div>
+
+
+
+        </form>
+    </div>
+
+    <div modal-actions class="d-flex mb-5">
+        <button *ngIf="btnSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!btnSubmitted" [disabled]="!disableApplyLeave" nbButton status="primary" (click)="createLeaveRequest()" class="d-flex column">Submit</button>
+        <button nbButton outline status="primary" class="d-flex column" (click)="showModalRequest = false">Discard</button>
+        <button class="d-flex column Attach">
+            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 5px;margin-right: 10px;">
+            Attach</button>
+
+    </div>
+    <div style="margin-top: 15px;"></div>
+</ngx-side-modal>

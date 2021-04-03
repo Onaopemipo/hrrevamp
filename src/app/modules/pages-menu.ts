@@ -74,6 +74,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Employee Records',
         link: '/employeemodule/employeerecords',
       },
+      {
+        title: 'Employee Deployment',
+        link: '/employeemodule/deploymentview',
+      },
 
     ]
   },

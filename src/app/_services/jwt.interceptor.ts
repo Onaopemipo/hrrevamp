@@ -63,7 +63,7 @@ export class JwtInterceptor implements HttpInterceptor {
         }
         const started = Date.now();
         let ok: any;
-        return next.handle(request)
+        return next.handle(request);
         //     .pipe(tap(
         //     (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
         //     (error: HttpErrorResponse) => ok = error
