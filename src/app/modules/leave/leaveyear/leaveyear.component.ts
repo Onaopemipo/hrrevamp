@@ -3,7 +3,34 @@ import { FormGroup } from '@angular/forms';
 import { PostServiceProxy, LeaveYearDTO, LeaveYearCreatePayload, GetLeaveYearServiceProxy, LeaveYearDTOApiResult, LeaveYearDTOListApiResult, GetLeaveYearsServiceProxy } from '../../../_services/service-proxies';
 import { AlertserviceService } from '../../../_services/alertservice.service'
 import { NbDateService } from '@nebular/theme';
-import { ColumnTypes,TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { IStatus, MyColor } from 'app/components/status/models';
+
+export class LeaveYearWithStatus implements IStatus {
+  leaveYear: LeaveYearDTO
+  
+  constructor(leaveYear: LeaveYearDTO) {
+    this.leaveYear = leaveYear;
+    window.globalThis.a = this
+    window.globalThis.aaa = this;
+  }
+  get status() {
+    return this.leaveYear.log_status;
+}
+  getStatusLabel() {
+    if (this.leaveYear.log_status === 0) return 'Pending';
+    if (this.leaveYear.log_status === 1) return 'Approved';
+    if (this.leaveYear.log_status === 2) return 'Rejected';
+
+  }
+  getStatusColor() {
+    if (this.leaveYear.log_status  === 0) return new MyColor(242, 153, 74);
+    if (this.leaveYear.log_status === 1) return new MyColor(0, 153, 74);
+    if (this.leaveYear.log_status === 2) return new MyColor(253, 238, 238);
+    return new MyColor(242, 0, 74);
+ }
+ }
+
 enum ACTIONS { EDIT = '1', DELETE = '2' }
 
 @Component({
@@ -13,7 +40,7 @@ enum ACTIONS { EDIT = '1', DELETE = '2' }
 })
 export class LeaveyearComponent implements OnInit {
   pageName: string = "Leave Year";
-  LeaveYear: LeaveYearDTO[] = [];
+  LeaveYear = [];
   leavYearForm: FormGroup;
   newleaveYear = new LeaveYearCreatePayload().clone();
   topActionButtons = [
@@ -52,6 +79,7 @@ export class LeaveyearComponent implements OnInit {
     private alertservice : AlertserviceService,
     public dateService: NbDateService<Date>) { }
   
+
     tableActionClicked(event: TableActionEvent) { }
   filterUpdated(filter: any) {
     this.filter = {...this.filter, ...filter};
@@ -84,11 +112,19 @@ export class LeaveyearComponent implements OnInit {
   createleaveYear() {
     this.submitbtnPressed = true;
     this.leaveYearService.createLeaveYear(this.newleaveYear).subscribe(response => {
-      if (response.hasError) {
+      if (!response.hasError) {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK')
+      } else {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, response.message, 'OK')
       }
-    })
-    this.submitbtnPressed = false
+      this.submitbtnPressed = false;
+    }, (error) => {
+      this.submitbtnPressed = false;
+      if (error.status == 400) {
+        this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+      }
+    });
+  
   }
   showLeaveYearModal = false;
   getleaveYear() {
@@ -98,12 +134,17 @@ export class LeaveyearComponent implements OnInit {
         this.loading = false;
         if(!leaveyears.hasError)
         {
-          this.LeaveYear = leaveyears.result;
+          var lvyr = leaveyears.result.map(lvyr=>new LeaveYearWithStatus(lvyr));
+          console.log(lvyr)
+          this.LeaveYear = lvyr;
+         
           this.totalItems = leaveyears.totalCount;
         } else {
           
         }
 
+      }, (error) => {
+        console.log(error);
       }
       );
   }

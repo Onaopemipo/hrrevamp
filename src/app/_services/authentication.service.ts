@@ -22,7 +22,7 @@ export class AuthenticationService {
           this.users= JSON.parse(localStorage.getItem('user'));
             if (this.users) {
                 if(this.users.length > 0){
-                this.globalUser.next(this.users[0]);
+                    this.globalUser.next(this.users[0]);
            } }
             resolve(this.users);
 
