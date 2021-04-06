@@ -114,7 +114,7 @@ export class LeavehistoryComponent implements OnInit {
   //  }
 
   fetchLeaveYear(){
-    this.leaveyear.getLeaveYears(this.startYearDate,'',this.endYearDate,0).subscribe(data => {
+    this.leaveyear.getLeaveYears(this.startYearDate,'',this.endYearDate,0,1,10).subscribe(data => {
       // if(!data.hasError){
         this.allLeaveYear = data.result;
         console.log(this.allLeaveYear);
@@ -125,7 +125,7 @@ export class LeavehistoryComponent implements OnInit {
   }
 
   fetchLeaveType(){
-    this.leavetype.getLeaveTypes(true,0,false,0).subscribe(data => {
+    this.leavetype.getLeaveTypes(true,0,false,0,1,10).subscribe(data => {
       // if(!data.hasError){
         this.allLeaveType = data.result;
         console.log(data);
