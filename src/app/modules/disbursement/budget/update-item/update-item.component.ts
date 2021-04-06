@@ -1,3 +1,6 @@
+import { Department } from 'app/_services/service-proxies';
+import { AlertserviceService } from './../../../../_services/alertservice.service';
+import { MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateItemComponent implements OnInit {
 
-  constructor() { }
+  departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
+  allDepartments: Department [] = [];
+
+
+  constructor(private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
+  }
+
+  updateBudgetItem(e){
+
+  }
+
+  addDepartment(){
+    let myDepartment: MyBudgetItemDepartment[] = [];
+    myDepartment.push(this.departments)
+    this.alertMe.openModalAlert('confirm','Added', 'Dismiss')
+    console.log(myDepartment);
   }
 
 }

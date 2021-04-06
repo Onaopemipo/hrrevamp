@@ -80,6 +80,8 @@ export class DisbursementHistoryComponent implements OnInit {
   }
   tableData = [];
 
+getHistory(){
 
+}
 
 }
