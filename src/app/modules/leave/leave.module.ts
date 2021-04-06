@@ -1,4 +1,4 @@
-import { CreateLeaveByAdminServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearServiceProxy, GetLeaveYearsServiceProxy } from './../../_services/service-proxies';
+import { CreateLeaveByAdminServiceProxy, CreateLeaveYearServiceProxy, DeleteServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearServiceProxy, GetLeaveYearsServiceProxy } from './../../_services/service-proxies';
 import { ThemeModule } from './../../@theme/theme.module';
 import { LeaveComponent } from './leave.component';
 import { NgModule } from '@angular/core';
@@ -40,7 +40,9 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     GetLeaveTypesServiceProxy,
     AlertserviceService,
     GetLeaveYearsServiceProxy,
-    CreateLeaveByAdminServiceProxy
+    CreateLeaveByAdminServiceProxy,
+    DeleteServiceProxy,
+    CreateLeaveYearServiceProxy
    ]
 })
 export class LeaveModule { }

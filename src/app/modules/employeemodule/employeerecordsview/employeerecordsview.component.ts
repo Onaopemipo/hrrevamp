@@ -1,4 +1,4 @@
-import { EmployeeDTO, IEmployeeDTO, CreateEmployeeServiceProxy, DropdownValue, DropdownValueDTO,  DataServiceProxy } from './../../../_services/service-proxies';
+import { EmployeeDTO, IEmployeeDTO, CreateEmployeeServiceProxy, DropdownValue, DropdownValueDTO,  DataServiceProxy, ManageEmployeeDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
@@ -28,7 +28,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
 
   newEmployeeForm: NgForm;
-  createNewEmployee: EmployeeDTO = new EmployeeDTO().clone();
+  createNewEmployee: ManageEmployeeDTO = new ManageEmployeeDTO().clone();
 
   maritalStatusValues: DropdownValue[] = [];
   genderValues: DropdownValue[] = [];

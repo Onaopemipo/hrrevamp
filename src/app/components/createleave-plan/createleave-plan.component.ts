@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NbDateService } from '@nebular/theme';
 import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
-import { CommonServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearsServiceProxy, LeavePlanDTO, LeavePlanResource, PostServiceProxy } from 'app/_services/service-proxies';
+import { CommonServiceProxy, CreateLeavePlanServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearsServiceProxy, LeavePlanDTO, LeavePlanResource, PostServiceProxy } from 'app/_services/service-proxies';
 
 @Component({
   selector: 'ngx-createleave-plan',
@@ -29,7 +29,8 @@ export class CreateleavePlanComponent implements OnInit {
     private CommonService: CommonServiceProxy,
     private GetLeaveYearsService: GetLeaveYearsServiceProxy,
     private GetLeaveTypesService: GetLeaveTypesServiceProxy,
-    private alertService: AlertserviceService,) { }
+    private alertService: AlertserviceService,
+  private CreateLeavePlanService: CreateLeavePlanServiceProxy) { }
 
 
   get disableSubmitbtn() {
@@ -44,7 +45,7 @@ export class CreateleavePlanComponent implements OnInit {
   }
   createLeavePlan() {
     this.btnSubmitted = true;
-    this.PostServiceProxy.createLeavePlan(this.leaveD).subscribe(resp=>{
+    this.CreateLeavePlanService.createLeavePlan(this.leaveD).subscribe(resp=>{
       if (!resp.hasError) {
         this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, resp.message, "ok").subscribe(data => {
           this.leaveD = new LeavePlanDTO().clone();
@@ -158,14 +159,14 @@ export class CreateleavePlanComponent implements OnInit {
   
    
    getAllLeaveType() {
-     this.GetLeaveTypesService.getLeaveTypes(true, 0, false, 0).subscribe(res => {
+     this.GetLeaveTypesService.getLeaveTypes(true, 0, false, 0,1,10).subscribe(res => {
        if (!res.hasError) {
          this.allLeavetypes = res.result;
        }
      })
    }
    getAllLeaveYear() {
-     this.GetLeaveYearsService.getLeaveYears(new Date('01/01/2000'),'',new Date(),0).subscribe(res => {
+     this.GetLeaveYearsService.getLeaveYears(new Date('01/01/2000'),'',new Date(),0,1,10).subscribe(res => {
        if (!res.hasError) {
          this.allLeaveYears = res.result;
        }

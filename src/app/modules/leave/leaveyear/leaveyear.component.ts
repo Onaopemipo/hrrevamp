@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { PostServiceProxy, LeaveYearDTO, LeaveYearCreatePayload, GetLeaveYearServiceProxy, LeaveYearDTOApiResult, LeaveYearDTOListApiResult, GetLeaveYearsServiceProxy } from '../../../_services/service-proxies';
+import { PostServiceProxy, LeaveYearDTO, LeaveYearCreatePayload,CreateLeaveYearServiceProxy, GetLeaveYearServiceProxy, LeaveYearDTOApiResult, LeaveYearDTOListApiResult, GetLeaveYearsServiceProxy, DeleteServiceProxy } from '../../../_services/service-proxies';
 import { AlertserviceService } from '../../../_services/alertservice.service'
 import { NbDateService } from '@nebular/theme';
 import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { IStatus, MyColor } from 'app/components/status/models';
 
-export class LeaveYearWithStatus implements IStatus {
-  leaveYear: LeaveYearDTO
+export class LeaveYearWithStatus extends LeaveYearDTO implements IStatus {
+  leaveYear: LeaveYearDTO;
   
   constructor(leaveYear: LeaveYearDTO) {
+    super(leaveYear);
     this.leaveYear = leaveYear;
-    window.globalThis.a = this
-    window.globalThis.aaa = this;
+
   }
   get status() {
     return this.leaveYear.log_status;
@@ -67,20 +67,39 @@ export class LeaveyearComponent implements OnInit {
     yearName: null,
     yearEndDate: null,
     companyID: undefined,
+    pageSize: 10,
+    pageNumber: 1
   }
 
   totalItems = 0;
-  currentPage = 0;
+  currentPage = 1;
 
   submitbtnPressed: boolean = false;
   loading: boolean = false;
+  modificationStatus: boolean = false;
   constructor(private leaveYearService: PostServiceProxy,
+    private DeleteService: DeleteServiceProxy,
     private GetLeaveYearServiceProxy: GetLeaveYearsServiceProxy,
+    private CreateLeaveYearService: CreateLeaveYearServiceProxy,
     private alertservice : AlertserviceService,
     public dateService: NbDateService<Date>) { }
   
 
-    tableActionClicked(event: TableActionEvent) { }
+  tableActionClicked(event: TableActionEvent) {
+    if (event.name == "1") {
+      this.newleaveYear = event.data;
+      this.showLeaveYearModal = true;
+      this.modificationStatus = true;
+    }
+    if (event.name == "2") {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.yearName, 'Yes').subscribe(data => {
+        if (data == "closed") {
+          this.deleteleaveYear(event.data.id);
+        }
+  
+      })
+    }
+     }
   filterUpdated(filter: any) {
     this.filter = {...this.filter, ...filter};
     this.getleaveYear();
@@ -91,7 +110,7 @@ export class LeaveyearComponent implements OnInit {
   modal(buttion) {
     if (buttion === 'add_leave_year') {
       this.showLeaveYearModal = true;
-
+      this.modificationStatus = false;
     }
   }
 
@@ -109,11 +128,34 @@ export class LeaveyearComponent implements OnInit {
     if (this.newleaveYear.yearName && this.newleaveYear.yearStartDate && this.newleaveYear.yearEndDate) return true;
     return false;
   }
+  deleteleaveYear(id) {
+    this.DeleteService.deleteLeaveYear(id).subscribe(response => {
+      if (!response.hasError) {
+        this.getleaveYear();
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
+        this.newleaveYear = new LeaveYearCreatePayload().clone();
+        this.modificationStatus = false;
+      } else {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, response.message, 'OK')
+      }
+
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+      }
+    });
+  
+  }
   createleaveYear() {
     this.submitbtnPressed = true;
-    this.leaveYearService.createLeaveYear(this.newleaveYear).subscribe(response => {
+    this.CreateLeaveYearService.createLeaveYear(this.newleaveYear).subscribe(response => {
       if (!response.hasError) {
-        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK')
+        this.getleaveYear();
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
+        this.newleaveYear = new LeaveYearCreatePayload().clone();
+        this.showLeaveYearModal = false;
+        this.modificationStatus = false;
       } else {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, response.message, 'OK')
       }
@@ -129,16 +171,18 @@ export class LeaveyearComponent implements OnInit {
   showLeaveYearModal = false;
   getleaveYear() {
     this.loading = true;
-    this.GetLeaveYearServiceProxy.getLeaveYears(this.filter.yearStartDate, this.filter.yearName, this.filter.yearEndDate, this.filter.companyID)
+    this.GetLeaveYearServiceProxy.getLeaveYears(this.filter.yearStartDate, this.filter.yearName, this.filter.yearEndDate, this.filter.companyID, this.filter.pageNumber, this.filter.pageSize)
       .subscribe(leaveyears => {
         this.loading = false;
+        this.modificationStatus = false;
         if(!leaveyears.hasError)
         {
           var lvyr = leaveyears.result.map(lvyr=>new LeaveYearWithStatus(lvyr));
           console.log(lvyr)
           this.LeaveYear = lvyr;
          
-          this.totalItems = leaveyears.totalCount;
+          this.totalItems = leaveyears.totalRecord;
+         
         } else {
           
         }

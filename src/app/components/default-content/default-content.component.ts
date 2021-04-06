@@ -10,6 +10,7 @@ export class DefaultContentComponent implements OnInit {
   @Input() pageHeader: string;
   @Input() pageDescription: string;
   @Input() buttonValue: string;
+  @Input() loading: boolean = false;
   @Output() buttonClick = new EventEmitter();
   constructor() { }
 

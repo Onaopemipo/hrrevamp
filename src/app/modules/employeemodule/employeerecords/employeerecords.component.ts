@@ -53,7 +53,7 @@ export class EmployeerecordsComponent implements OnInit {
   }
 
   getAllEmployees(){
-    this.allemployees.getAllEmployees('',2,2).subscribe(data => {
+    this.allemployees.getAllEmployees('',2,1,10).subscribe(data => {
       if(data.hasError){
         console.log('There was an error')
       }
