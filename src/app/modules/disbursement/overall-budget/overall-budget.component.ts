@@ -1,4 +1,4 @@
-import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO } from './../../../_services/service-proxies';
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, MyBudgetItemDepartment, BudgetItemService } from './../services/budget-item.service';
@@ -22,12 +22,14 @@ export class OverallBudgetComponent implements OnInit {
   departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
 
   constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
-    private budgetService: FetchAllBudgetsServiceProxy, private budgetServices: FetchGetBudgetServiceProxy, private alertMe: AlertserviceService) { }
+    private budgetService: FetchAllBudgetsServiceProxy, private budgetServices: FetchGetBudgetServiceProxy,
+    private alertMe: AlertserviceService, private common: CommonServiceProxy) { }
 
   ngOnInit(): void {
     this.fetAllBudget();
     this.onChangeYear(this.dataIndex);
     this.fetAllBudgetItems();
+    this.fetchDepartments();
   }
 
   topActionButtons: IRequiredButton[] = [
@@ -38,12 +40,13 @@ export class OverallBudgetComponent implements OnInit {
     return 300000;
   }
 
+  allDepartments: Department [] = [];
   overallBudget: MyBudget = new MyBudget;
   myBudget: BudgetDTO [] = [];
   currentFinancialYear;
   dataIndex: number = 20781;
   finYear: BudgetDTO = new BudgetDTO;
-  loader:boolean = false;
+  // loader:boolean = false;
   finLoading: boolean = false;
   item: MyBudgetItem = new MyBudgetItem;
   allBudgetItems: BudgetItemDTO []= [];
@@ -82,6 +85,14 @@ export class OverallBudgetComponent implements OnInit {
     console.log('Here is your Budget', this.myBudget)
   }
 
+  async fetchDepartments(){
+    const data = await this.common.getDepartments().toPromise();
+    if(!data.hasError){
+      this.allDepartments = data.result;
+      console.log('My departments', this.allDepartments)
+    }
+  }
+
   async fetAllBudget(){
    const data = await this.budgetService.getAllBudgets().toPromise();
    this.myBudget = data.result;
@@ -89,12 +100,21 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   async onChangeYear(budgetId:number){
-    this.loader = !this.loader
+    // this.loader = !this.loader;
     this.finLoading = true;
     this.dataIndex = budgetId;
     const data = await this.budgetServices.getGetBudget(budgetId).toPromise();
+    // if(data.totalCount < 0){
+    //   this.alertMe.openModalAlert('Success', 'No data found!', 'Dismiss')
+    //   this.finLoading = false;
+    // }
+
+    // setTimeout(()=>{                           //<<<---using ()=> syntax
+    //   this.finLoading = false;
+    //   alert('Timedout')
+    //  }, 3000);
+
     this.finYear = data.result;
-    this.finLoading = false;
   }
 
   async loadBudgetItems(event:number){

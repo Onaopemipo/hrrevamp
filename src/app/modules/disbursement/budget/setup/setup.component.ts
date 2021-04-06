@@ -25,7 +25,6 @@ export class SetupComponent implements OnInit {
 
   gotoBudgetItems() {
     alert(this.page = 2);
-    console.log('hdjdhdhdh')
   }
 
   async addBudget(){

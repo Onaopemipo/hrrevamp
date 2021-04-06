@@ -33,12 +33,14 @@ export class PromotionComponent implements OnInit {
   constructor(private promotion: PromotionListServiceProxy, private alert: AlertserviceService) { }
 
   ngOnInit(): void {
+    this.getPromotionList();
   }
 
  async getPromotionList(){
-    const data = await this.promotion.promotionList(1,1).toPromise()
-    if(data.hasError){
+    const data = await this.promotion.promotionList(0,0).toPromise()
+    if(!data.hasError){
       this.promotionList = data.result;
+      console.log(this.promotionList)
     }
     else{
     this.alert.openModalAlert('Error', 'Error fetching data', 'Dismiss')

@@ -1,6 +1,7 @@
 <ngx-componentsheader pageName="Overall Budget" [requiredButton]="">
   <div headerButton>
     <select class="form-control" name="financialYear" (change)="onChangeYear($event.target.value)">
+      <option value="">Select Financial Year</option>
       <option *ngFor="let item of myBudget" [value]="item.id">{{item.financial_year_start | date : 'longDate'}} - {{item.financial_year_end | date : 'longDate'}}</option>
     </select>
   </div>
@@ -95,6 +96,7 @@
     <button nbButton type="outline" status="primary" outline style="border: none;" (click)="updateBudgetItem(finYear.id)">Edit budget</button>
   </div>
 </div>
+
 <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
  <div style="font-size: 32px;">
    <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
@@ -171,7 +173,7 @@
   </div>
 </ngx-template>
 
-<ngx-template *ngIf="allBudgetItems.length > 0 && finLoading == true">
+<ngx-template *ngIf="finLoading == true">
   <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
     <div style="font-size: 32px;">
       <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
@@ -211,9 +213,8 @@
           <div class="col">
             <label>Department</label>
             <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
-              <option value="1">Finance</option>
-              <option value="2">HR</option>
-              <option value="3">IT</option>
+              <option value="1">Select Department</option>
+              <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.Department[0]}}</option>
             </select>
           </div>
           </div>
@@ -278,9 +279,8 @@
         <div class="col">
           <label>Department</label>
           <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
-            <option value="1">Finance</option>
-            <option value="2">HR</option>
-            <option value="3">IT</option>
+            <option value="1">Select Department</option>
+            <option *ngFor="let dep of allDepartments[0]" value=dep.code>{{dep.name}}</option>
           </select>
         </div>
         </div>

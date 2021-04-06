@@ -1,5 +1,5 @@
 import { DataServiceProxy } from 'app/_services/service-proxies';
-import { FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, AddUpdateBudgetServiceProxy, SingleDisbursementServiceProxy, GetExpenseProjectServiceProxy, GetAllPaymentInstitutionsServiceProxy } from './../../_services/service-proxies';
+import { FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, AddUpdateBudgetServiceProxy, SingleDisbursementServiceProxy, GetExpenseProjectServiceProxy, GetAllPaymentInstitutionsServiceProxy, FetchExpensesServiceProxy } from './../../_services/service-proxies';
 import { UpdateItemComponent } from './budget/update-item/update-item.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -47,8 +47,8 @@ import { OverallBudgetComponent } from './overall-budget/overall-budget.componen
     GetAllPaymentInstitutionsServiceProxy,
     GetExpenseProjectServiceProxy,
     DataServiceProxy,
-
-
+    AddUpdateBudgetServiceProxy,
+    FetchExpensesServiceProxy,
   ],
 
 })

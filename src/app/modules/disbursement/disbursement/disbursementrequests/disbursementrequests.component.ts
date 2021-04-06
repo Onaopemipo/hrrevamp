@@ -1,3 +1,4 @@
+import { FetchExpensesServiceProxy, ExpenseDTO } from './../../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { DisbursementService, MyDisbursement } from './../../services/disbursement.service';
 import { T } from '@angular/cdk/keycodes';
@@ -15,14 +16,15 @@ enum TABS {
 })
 export class DisbursementrequestsComponent implements OnInit {
 
-  constructor(private disbursement: DisbursementService, private alert: AlertserviceService) { }
+  constructor(private disbursement: DisbursementService, private alert: AlertserviceService,
+    private request: FetchExpensesServiceProxy) { }
 
   ngOnInit(): void {
-    this.getDisbursement()
+    this.allDisbursementRequest()
   }
 
   selectedTab = TABS.ALL_REQUESTS;
-  allDisbursements: MyDisbursement = new MyDisbursement;
+  allDisbursements: ExpenseDTO [] = [];
 
   selectTab(tab: TABS) {
     this.selectedTab = tab;
@@ -64,10 +66,14 @@ export class DisbursementrequestsComponent implements OnInit {
   tableData = [];
 
 
-  async getDisbursement(){
-    const data = await this.disbursement.list(this.allDisbursements).toPromise();
-    this.alert.openModalAlert('success', 'Data has been added', 'Dismiss')
-    console.log(data)
+
+
+  async allDisbursementRequest(){
+    const data = await this.request.fetchExpenses(0,0,0,0,0,'','','',0,0,0).toPromise();
+    if(!data.hasError){
+      this.allDisbursements = data.result;
+      console.log('Hello!', this.allDisbursementRequest)
+    }
   }
 
 }
