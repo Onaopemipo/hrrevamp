@@ -51,7 +51,6 @@ export class CreateDisbursementComponent implements OnInit {
     this.getBanks();
     this.getCategories();
     this.getProjects();
-    console.log(this.allbanksName.length)
   }
 
   selectTab(tab: TABS) {
