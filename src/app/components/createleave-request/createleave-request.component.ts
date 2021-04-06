@@ -63,14 +63,14 @@ export class CreateleaveRequestComponent implements OnInit {
       return resp;
     }
     getAllLeaveType() {
-      this.GetLeaveTypesService.getLeaveTypes(true, 0, false, 0).subscribe(res => {
+      this.GetLeaveTypesService.getLeaveTypes(true, 0, false, 0,1,10).subscribe(res => {
         if (!res.hasError) {
           this.allLeavetypes = res.result;
         }
       })
     }
     getAllLeaveYear() {
-      this.GetLeaveYearsService.getLeaveYears(new Date('01/01/2000'),'',new Date(),0).subscribe(res => {
+      this.GetLeaveYearsService.getLeaveYears(new Date('01/01/2000'),'',new Date(),0,1,10).subscribe(res => {
         if (!res.hasError) {
           this.allLeaveYears = res.result;
         }

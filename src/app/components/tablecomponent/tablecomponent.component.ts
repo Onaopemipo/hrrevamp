@@ -10,6 +10,7 @@ export enum ActionsType {
   none = 3
 }
 
+export enum ACTIONS { EDIT = '1', DELETE = '2' }
 
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };

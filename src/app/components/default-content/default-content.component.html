@@ -1,13 +1,16 @@
 <nb-card>
   <nb-card-body>
     <div class="centWrapper">
-      <div class="center">
+      <div class="center" *ngIf="!loading">
         <h5 style="text-align: center;">{{pageHeader}}</h5>
         <p style="text-align: center;">{{pageDescription}}</p>
       
         <div *ngIf="buttonValue" class="col text-center">
           <button type="submit" class="btn my-button btn-md" (click)="buttonClick.emit()">{{buttonValue}}</button>
         </div>
+      </div>
+      <div class="center" *ngIf="loading">
+        <i class="fa fa-spin fa-spinner fa-4x"></i>&nbsp; Loading...
       </div>
     </div>
    
