@@ -27,3 +27,4 @@ export interface TableActionEvent {
     name: string;
     data: any;
 }
+export enum ACTIONS { EDIT = '1', DELETE = '2' }
