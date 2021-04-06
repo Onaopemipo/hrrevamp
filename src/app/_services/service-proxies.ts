@@ -26,7 +26,7 @@ export class GetTokenServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     getToken(body: UserLoginDTO | undefined): Observable<VwUserObjApiResult> {
@@ -111,7 +111,7 @@ export class ValidateServiceProxy {
     }
 
     /**
-     * @param key_token (optional)
+     * @param key_token (optional) 
      * @return Success
      */
     validate(key_token: string | null | undefined): Observable<VwUserObjApiResult> {
@@ -194,7 +194,7 @@ export class ForgotPasswordServiceProxy {
     }
 
     /**
-     * @param email (optional)
+     * @param email (optional) 
      * @return Success
      */
     forgotPassword(email: string | null | undefined): Observable<MessageOutApiResult> {
@@ -277,7 +277,7 @@ export class ResetPasswordServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     resetPassword(body: ResestPasswordDTO | undefined): Observable<MessageOutApiResult> {
@@ -362,8 +362,8 @@ export class ConfirmEmailServiceProxy {
     }
 
     /**
-     * @param userId (optional)
-     * @param token (optional)
+     * @param userId (optional) 
+     * @param token (optional) 
      * @return Success
      */
     confirmEmail(userId: string | null | undefined, token: string | null | undefined): Observable<VwUserObjApiResult> {
@@ -448,11 +448,11 @@ export class FetchActivityLogServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param moduleName (optional)
-     * @param operationType (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param id (optional) 
+     * @param moduleName (optional) 
+     * @param operationType (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getActivityLog(id: number | undefined, moduleName: string | null | undefined, operationType: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ActivityLogIListApiResult> {
@@ -549,7 +549,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateIAnnouncementType(body: AnnouncementTypeDto | undefined): Observable<MessageOutApiResult> {
@@ -622,7 +622,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateAnnouncement(body: AnnouncementDto | undefined): Observable<MessageOutApiResult> {
@@ -695,85 +695,8 @@ export class PostServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create  leave plan. Note all fields are required
-     * @param body (optional)
-     * @return Success
-     */
-    createLeavePlan(body: LeavePlanDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LeavePlan/Post/CreateLeavePlan";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreateLeavePlan(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreateLeavePlan(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCreateLeavePlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
-
-    /**
-=======
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * this method is used to create and edit leave type. Note all fields are required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createLeaveType(body: LeaveTypeCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -846,85 +769,7 @@ export class PostServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create and edit leave year. Note: all fields are required
-     * @param body (optional)
-     * @return Success
-     */
-    createLeaveYear(body: LeaveYearCreatePayload | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LeaveYear/Post/CreateLeaveYear";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreateLeaveYear(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreateLeaveYear(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCreateLeaveYear(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
-
-    /**
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateOnboardingPersonnalData(body: OnboardingPersonalDTO | undefined): Observable<MessageOutApiResult> {
@@ -997,7 +842,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingPaymentData(body: OnboardingBankDTO | undefined): Observable<MessageOutApiResult> {
@@ -1070,7 +915,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingWorkData(body: OnboardingWorkDTO | undefined): Observable<MessageOutApiResult> {
@@ -1143,7 +988,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingTaxData(body: OnboardingTaxDTO | undefined): Observable<MessageOutApiResult> {
@@ -1216,7 +1061,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingMedicalDisclosureData(body: OnboardingMedicalDisclosureDTO | undefined): Observable<MessageOutApiResult> {
@@ -1301,10 +1146,10 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param catalog (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param catalog (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAnnouncementTypeByCriteria(iD: number | undefined, catalog: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<AnnouncementTypeListApiResult> {
@@ -1387,12 +1232,12 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param announcementMessage (optional)
-     * @param catalog (optional)
-     * @param departmentId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param announcementMessage (optional) 
+     * @param catalog (optional) 
+     * @param departmentId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAnnouncementByCriteria(iD: number | undefined, announcementMessage: string | null | undefined, catalog: string | null | undefined, departmentId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<AnnouncementListApiResult> {
@@ -1494,7 +1339,7 @@ export class SubordinateAppraisalsServiceProxy {
 
     /**
      * API for retrieving all Current Appraisal for Review by Line-Managers
-     * @param cycleId (optional)
+     * @param cycleId (optional) 
      * @return Success
      */
     subordinateAppraisalLists(cycleId: number | undefined): Observable<AppraisalReviewerListDTOIListApiResult> {
@@ -1580,10 +1425,10 @@ export class GetEmployeePerformanceReviewServiceProxy {
 
     /**
      * API for retrieving Current Employees Appraisal for Review by Reviewer
-     * @param reviewerContractId (optional)
-     * @param employeeContractId (optional)
-     * @param cycleId (optional)
-     * @param kraId (optional)
+     * @param reviewerContractId (optional) 
+     * @param employeeContractId (optional) 
+     * @param cycleId (optional) 
+     * @param kraId (optional) 
      * @return Success
      */
     getEmployeePerformanceReview(reviewerContractId: number | undefined, employeeContractId: number | undefined, cycleId: number | undefined, kraId: number | undefined): Observable<KpiReviewDTOApiResult> {
@@ -1682,7 +1527,7 @@ export class SubmitEmployeeAppraisalReviewServiceProxy {
     /**
      * API for submitting Employee's Appraisal Performance review for
     the KPIs under the assigned KRA by Reviewer
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     submitEmployeeAppraisalReview(body: PerformanceReviewDTO | undefined): Observable<MessageOutApiResult> {
@@ -1768,10 +1613,10 @@ export class EmployeePerformanceReviewServiceProxy {
 
     /**
      * API for retrieving Current Appraisal for Review by Employee
-     * @param reviewerContractId (optional)
-     * @param employeeContractId (optional)
-     * @param cycleId (optional)
-     * @param kraId (optional)
+     * @param reviewerContractId (optional) 
+     * @param employeeContractId (optional) 
+     * @param cycleId (optional) 
+     * @param kraId (optional) 
      * @return Success
      */
     employeePerformanceReview(reviewerContractId: number | undefined, employeeContractId: number | undefined, cycleId: number | undefined, kraId: number | undefined): Observable<KpiReviewDTOApiResult> {
@@ -1869,7 +1714,7 @@ export class SubmitPerformanceReviewServiceProxy {
 
     /**
      * API for submitting Employee's Performance review for the KPIs under the assigned KRA
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     submitEmployeePerformanceReview(body: PerformanceReviewDTO | undefined): Observable<MessageOutApiResult> {
@@ -1955,7 +1800,7 @@ export class GetEmployeeAppraisalHistoriesServiceProxy {
 
     /**
      * API for retrieving all Past Employee Appraisal Histories
-     * @param cycleId (optional)
+     * @param cycleId (optional) 
      * @return Success
      */
     employeeAppraisalHistories(cycleId: number | undefined): Observable<EmployeeAppraisalHistoryDTOIListApiResult> {
@@ -2040,12 +1885,8 @@ export class FetchApprovalProcessServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for fetching approval processes
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchApprovalProcess(id: number | undefined): Observable<ApprovalProcessListApiResult> {
@@ -2114,45 +1955,7 @@ export class FetchApprovalProcessServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-<<<<<<< HEAD
-        return _observableOf<MessageOutIListApiResult>(<any>null);
-    }
-
-    /**
-     * @param body (optional)
-     * @return Success
-     */
-    addDeperciationProfile(body: AssetDeperciationProfileDTO | undefined): Observable<MessageOutIListApiResult> {
-        let url_ = this.baseUrl + "/api/AssetManagement/AddDeperciationProfile";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddDeperciationProfile(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processAddDeperciationProfile(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutIListApiResult>><any>_observableThrow(response_);
-        }));
-=======
         return _observableOf<ApprovalProcessListApiResult>(<any>null);
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 }
 
@@ -2168,13 +1971,9 @@ export class FetchApprovalProcessStepsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for fetching approval processes steps
      * @param processId (optional) 
      * @param stepId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchApprovalProcessSteps(processId: number | undefined, stepId: number | undefined): Observable<ApprovalStepListApiResult> {
@@ -2263,14 +2062,10 @@ export class FetchPendingItemsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for fetching my pending approval items
      * @param processId (optional) 
      * @param startDate (optional) 
      * @param endDate (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchPendingItems(processId: number | undefined, startDate: Date | null | undefined, endDate: Date | null | undefined): Observable<VwPendingApprovalListApiResult> {
@@ -2359,12 +2154,8 @@ export class SaveApprovalProcessServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for saving and updating an approval process
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     saveApprovalProcess(body: ApprovalProcess | undefined): Observable<MessageOutApiResult> {
@@ -2449,12 +2240,8 @@ export class SaveApprovalProcessStepServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for saving and updating an approval process step
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     saveApprovalProcessStep(body: ApprovalStep | undefined): Observable<MessageOutApiResult> {
@@ -2539,12 +2326,8 @@ export class RemoveApprovalProcessStepServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for removing an approval process step
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     removeApprovalProcessStep(body: ApprovalStep | undefined): Observable<MessageOutApiResult> {
@@ -2719,7 +2502,7 @@ export class PostApprovalLogServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     postApprovalLog(body: ApprovalLog | undefined): Observable<ApprovalResponseObjApiResult> {
@@ -2804,7 +2587,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetType(body: AssetTypeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -2877,7 +2660,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addDeperciationProfile(body: AssetDeperciationProfileDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -2950,7 +2733,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetSubType(body: AssetSubTypeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3023,7 +2806,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCatergory(body: AssetCategoryDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3096,7 +2879,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetStatus(body: AssetStatusDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3169,7 +2952,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetMake(body: AssetMakeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3242,7 +3025,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetModel(body: AssetModelDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3315,7 +3098,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addAsset(body: AssetDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3388,7 +3171,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addAssetRequest(body: AssetRequestDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3461,7 +3244,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assignment(body: AssignmentDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3534,7 +3317,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCallback(body: AssetCallbackDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3607,7 +3390,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCheckIn(body: AssetcheckInFilter | undefined): Observable<MessageOutIListApiResult> {
@@ -3680,113 +3463,14 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     assetCheckInComfirmation(body: AssetcheckInFilter | undefined): Observable<MessageOutIListApiResult> {
         let url_ = this.baseUrl + "/api/AssetManagement/AssetCheckInComfirmation";
         url_ = url_.replace(/[?&]$/, "");
 
-<<<<<<< HEAD
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetActivateAsset(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetActivateAsset(<any>response_);
-                } catch (e) {
-                    return <Observable<AssetDTOIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<AssetDTOIListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetActivateAsset(response: HttpResponseBase): Observable<AssetDTOIListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = AssetDTOIListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<AssetDTOIListApiResult>(<any>null);
-    }
-
-    /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-     * @return Success
-     */
-    getDeactivateAsset(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/AssetManagement/GetDeactivateAsset?";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        if (name !== undefined && name !== null)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&";
-        if (isFilter === null)
-            throw new Error("The parameter 'isFilter' cannot be null.");
-        else if (isFilter !== undefined)
-            url_ += "IsFilter=" + encodeURIComponent("" + isFilter) + "&";
-        if (isActive !== undefined && isActive !== null)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-=======
         const content_ = JSON.stringify(body);
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
         let options_ : any = {
             body: content_,
@@ -3852,15 +3536,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     updateAssetRequest(body: UpdateAssetRequest | undefined): Observable<MessageOutIListApiResult> {
@@ -3933,15 +3609,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteAssetType(body: AssetTypeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4014,15 +3682,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteAssetSubType(body: AssetSubTypeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4095,15 +3755,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteAssetCategory(body: AssetCategoryDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4176,15 +3828,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteAssetMake(body: AssetMakeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4257,15 +3901,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteAssetModel(body: AssetModelDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4338,16 +3974,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param assetTypeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteAssetStatus(body: AssetStatusDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4420,20 +4047,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param assetSubTypeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getActivateAsset(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -4518,20 +4136,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param assetmakeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDeactivateAsset(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -4616,11 +4225,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetType(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetTypeDTOIListApiResult> {
@@ -4705,11 +4314,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetSubType(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetSubTypeDTOIListApiResult> {
@@ -4794,21 +4403,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param employeeId (optional)
-     * @param assetId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
-=======
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetCategory(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetCategoryDTOIListApiResult> {
@@ -4893,16 +4492,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for downloading Document in form of Base64string by passing the filename
-     * @param filename (optional)
-=======
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetMake(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetMakeDTOIListApiResult> {
@@ -4987,16 +4581,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param employeeNumber (optional)
-     * @param docType (optional)
-=======
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetModel(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetModelDTOIListApiResult> {
@@ -5081,16 +4670,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Budget for a particular period
-     * @param body (optional)
-=======
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetStatus(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetStatusDTOIListApiResult> {
@@ -5269,17 +4853,12 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Single Budget details by id for CRUD Operation
-     * @param id (optional)
-=======
      * @param assetSubTypeId (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetbyAssetSubtypeId(assetSubTypeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -5368,17 +4947,12 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating BudgetItem and it's Allocations
-     * @param body (optional)
-=======
      * @param assetmakeId (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetModelByAssetMakeId(assetmakeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -5645,10 +5219,6 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Single Budget details by id for CRUD Operation
-     * @param id (optional)
-=======
      * @param employeeId (optional) 
      * @param assetId (optional) 
      * @param pageNumber (optional) 
@@ -5656,7 +5226,6 @@ export class AssetManagementServiceProxy {
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAssetByAssigedEmployee(employeeId: number | undefined, assetId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetHistoryDTOIListApiResult> {
@@ -5761,12 +5330,7 @@ export class AddUpdateBenefitPlanServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Employee to ninebox Grid
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateBenefitPlan(body: BenefitPlanDTO | undefined): Observable<MessageOutApiResult> {
@@ -5851,12 +5415,7 @@ export class DeleteBenefitPlanServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Moving Employee
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteBenefitPlan(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -5941,15 +5500,10 @@ export class GetBenefitPlanByCriteriaServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Remove Employee
-     * @param body (optional)
-=======
      * @param iD (optional) 
      * @param catalog (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getBenefitPlanByCriteria(iD: number | undefined, catalog: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<BenefitPlanListApiResult> {
@@ -6044,14 +5598,7 @@ export class AddUpdateEmployeeCoverageBenefitServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch  Employee by Grid Box.
-    Note: all filter are optional
-     * @param gridboxID (optional)
-     * @param departmentId (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateEmployeeCoverageBenefit(body: EmployeeCoverageBenefitDTO | undefined): Observable<MessageOutApiResult> {
@@ -6136,44 +5683,6 @@ export class FetchEmployeeCoverageBenefitServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch by Grid Box counts.
-    Note: all filter are optional
-     * @param user_id (optional)
-     * @param employee_id (optional)
-     * @param employee_number (optional)
-     * @param employee_contract_id (optional)
-     * @param grade_id (optional)
-     * @param confirmation_date (optional)
-     * @param serial_no (optional)
-     * @param first_name (optional)
-     * @param last_name (optional)
-     * @param full_name (optional)
-     * @param other_name (optional)
-     * @param department (optional)
-     * @param department_id (optional)
-     * @param email (optional)
-     * @param phone_number (optional)
-     * @param email_confirmed (optional)
-     * @param session_token (optional)
-     * @param jwt_token (optional)
-     * @param user_token (optional)
-     * @param company_id (optional)
-     * @param licenseUsuage (optional)
-     * @param licenseCount (optional)
-     * @param company_name (optional)
-     * @param sub_id (optional)
-     * @param isAdmin (optional)
-     * @param isSuperAdmin (optional)
-     * @param isTenantAdmin (optional)
-     * @param isActiveBySysOrAdmin (optional)
-     * @param lstPermissions (optional)
-     * @param message (optional)
-     * @param isSuccessful (optional)
-     * @param retId (optional)
-     * @param redirectUrl (optional)
-     * @param errors (optional)
-=======
      * @param iD (optional) 
      * @param coverageName (optional) 
      * @param coveragePlanId (optional) 
@@ -6182,7 +5691,6 @@ export class FetchEmployeeCoverageBenefitServiceProxy {
      * @param subID (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchEmployeeCoverageBenefit(iD: number | undefined, coverageName: string | null | undefined, coveragePlanId: number | undefined, companyID: number | undefined, employeeId: number | undefined, subID: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<EmployeeCoverageListApiResult> {
@@ -6293,12 +5801,7 @@ export class DeleteEmployeeCoverageBenefitServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Employee  to Talent Pool
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteEmployeeCoverageBenefit(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -6383,13 +5886,7 @@ export class AddUpdateCoverageServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Requirments  to Talent Pool
-     * @param talentPoolId (optional)
-     * @param requirements (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateCoverage(body: CoveragePlanDTO | undefined): Observable<MessageOutApiResult> {
@@ -6474,17 +5971,12 @@ export class FetchCoveragePlansServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating CareerSuccsions
-     * @param body (optional)
-=======
      * @param id (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @param modifiedDate (optional) 
      * @param coverageName (optional) 
      * @param comapnyId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchCoveragePlans(id: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, modifiedDate: Date | null | undefined, coverageName: string | null | undefined, comapnyId: number | undefined): Observable<CoveragePlanListApiResult> {
@@ -6585,12 +6077,7 @@ export class DeleteCoveragePlansServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Creating  Talent Pool
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteCoveragePlan(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -6675,14 +6162,8 @@ export class AddUpdateBudgetServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for  Delete  Employee from Talent Pool
-     * @param talentPoolId (optional)
-     * @param employeeId (optional)
-=======
      * API for add/updating Budget for a particular period
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateBudget(body: ManageBudgetDTO | undefined): Observable<MessageOutApiResult> {
@@ -6767,46 +6248,7 @@ export class FetchAllBudgetsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch TalentPools.
-    Note: all filter are optional
-     * @param user_id (optional)
-     * @param employee_id (optional)
-     * @param employee_number (optional)
-     * @param employee_contract_id (optional)
-     * @param grade_id (optional)
-     * @param confirmation_date (optional)
-     * @param serial_no (optional)
-     * @param first_name (optional)
-     * @param last_name (optional)
-     * @param full_name (optional)
-     * @param other_name (optional)
-     * @param department (optional)
-     * @param department_id (optional)
-     * @param email (optional)
-     * @param phone_number (optional)
-     * @param email_confirmed (optional)
-     * @param session_token (optional)
-     * @param jwt_token (optional)
-     * @param user_token (optional)
-     * @param company_id (optional)
-     * @param licenseUsuage (optional)
-     * @param licenseCount (optional)
-     * @param company_name (optional)
-     * @param sub_id (optional)
-     * @param isAdmin (optional)
-     * @param isSuperAdmin (optional)
-     * @param isTenantAdmin (optional)
-     * @param isActiveBySysOrAdmin (optional)
-     * @param lstPermissions (optional)
-     * @param message (optional)
-     * @param isSuccessful (optional)
-     * @param retId (optional)
-     * @param redirectUrl (optional)
-     * @param errors (optional)
-=======
      * API for retrieving All Budgets for further CRUD operation
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllBudgets(): Observable<BudgetDTOIListApiResult> {
@@ -6887,14 +6329,8 @@ export class FetchGetBudgetServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Remove Employee form Successor
-     * @param successionId (optional)
-     * @param employee (optional)
-=======
      * API for getting Single Budget details by id for CRUD Operation
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getGetBudget(id: number | undefined): Observable<BudgetDTOApiResult> {
@@ -6979,13 +6415,8 @@ export class AddUpdateBudgetItemServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Remove Requirment from TalentPool
-     * @param requirementId (optional)
-=======
      * API for add/updating BudgetItem and it's Allocations
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateBudgetItem(body: ManageBudgetItemDTO | undefined): Observable<MessageOutApiResult> {
@@ -7404,15 +6835,8 @@ export class MoveEmployeeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Tenant Beneficiaries that can be use for dropdowns
-    and takes searchText (i.e. account-name, account-no, bank-name, bank-code)
-    for filtering
-     * @param searchText (optional)
-=======
      * API for Moving Employee
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     moveEmployee(body: ManageMoveEmployeeFilterDTO | undefined): Observable<MessageOutApiResult> {
@@ -9054,11 +8478,7 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for getting Payment Elements that can be use for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPayElements(): Observable<ElementIListApiResult> {
@@ -9127,11 +8547,7 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for getting Payroll Types that can be use for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPayrollTypes(): Observable<PayrollTypeIListApiResult> {
@@ -9200,14 +8616,7 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param log_status (optional)
-     * @param _PageSize (optional)
-=======
      * API for getting Frequencies that can be use for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getFrequencies(): Observable<FrequencyRuleIListApiResult> {
@@ -9768,20 +9177,7 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting the list of different Generics/Common Dropdowns on the System by their Constant Name
-    Some of the Constant names for the Dropdowns are;
-    1: employment_status
-    2: department
-    3: bank
-    4: marital_status
-    8: religion
-    10: title
-    12: gender
-     * @param dropDownName (optional)
-=======
      * API for getting JobRoles that can be use for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getJobRoles(): Observable<JobRoleIListApiResult> {
@@ -9850,20 +9246,7 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting the list of different Generics/Common Dropdowns on the System by their Constant Value
-    Some of the Constant names for the Dropdowns are;
-    employment_status: 1
-    department: 2
-    bank: 3
-    marital_status: 4
-    religion: 8
-    title: 10
-    gender: 12
-     * @param dropDownId (optional)
-=======
      * API for getting Events that can be use for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEvents(): Observable<EventIListApiResult> {
@@ -10208,12 +9591,7 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting the list of all Local Govts by State
-     * @param stateId (optional)
-=======
      * API for getting GradeSteps that can be use for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getGradeSteps(): Observable<GradeStepIListApiResult> {
@@ -10792,16 +10170,11 @@ export class FetchCompensationServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Department
-     * @param body (optional)
-=======
      * @param iD (optional) 
      * @param compensationName (optional) 
      * @param employeeId (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchCompensation(iD: number | undefined, compensationName: string | null | undefined, employeeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DependantListApiResult> {
@@ -10900,14 +10273,7 @@ export class DeleteCompensationServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Departments.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteCompensation(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -10992,12 +10358,7 @@ export class AddUpdateEmployeeCompensationServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Department by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateEmployeeCompensation(body: EmployeeCompensationDTO | undefined): Observable<MessageOutApiResult> {
@@ -11082,15 +10443,11 @@ export class FetchEmployeeCompensationServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param referenceNo (optional)
-=======
      * @param iD (optional) 
      * @param compensationId (optional) 
      * @param employeeId (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchEmployeeCompensation(iD: number | undefined, compensationId: number | undefined, employeeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DependantListApiResult> {
@@ -11191,7 +10548,7 @@ export class DeleteEmployeeCompensationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteEmployeeCompensation(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -11361,12 +10718,7 @@ export class SaveConfirmationServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for posting/updating Single Disbursement
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     saveConfirmation(body: VwConfirmationDTO | undefined): Observable<MessageOutApiResult> {
@@ -11451,18 +10803,10 @@ export class GetConfirmationsByDetailsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving all Email Logs by email log filtering parameter
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param emailTo (optional)
-     * @param pageSize (optional)
-=======
      * @param startDate (optional) 
      * @param endDate (optional) 
      * @param log_status (optional) 
      * @param _PageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getConfirmationsByDetails(startDate: Date | null | undefined, endDate: Date | null | undefined, log_status: number | undefined, _PageSize: number | undefined): Observable<VwConfirmationDTOIListApiResult> {
@@ -11555,12 +10899,7 @@ export class FetchDashboardDataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Single EmailLog Details by id for CRUD Operation
-     * @param id (optional)
-=======
      * API for fetching admin dashboard
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchDashboardData(): Observable<DashboardDTOApiResult> {
@@ -11641,13 +10980,8 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Email Template by id for CRUD Operation
-     * @param id (optional)
-=======
      * API for getting Bulk Upload Process/Types i.e.
     {'Profile': 1, 'Contract': 2, 'Qualification': 3 }
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     employeeProfileOperation(): Observable<IDTextViewModelIListApiResult> {
@@ -11716,12 +11050,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for updating Email Template
-     * @param body (optional)
-=======
      * API for getting Bank Account Types for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAccountTypes(): Observable<IDTextViewModelIListApiResult> {
@@ -11790,13 +11119,8 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding a single Employee profile
-     * @param body (optional)
-=======
      * API for getting Bulk Upload Process/Types i.e.
     {'Employee Bank Upload': 2, 'Employee Records Upload': 10}
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getBulkUploadProcesses(): Observable<IDTextViewModelIListApiResult> {
@@ -11934,12 +11258,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Employee Bulk uploading
-     * @param bulkFile (optional)
-=======
      * API for getting Document Types while uploading document on the system for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDocumentTypes(): Observable<IDTextViewModelIListApiResult> {
@@ -12008,13 +11327,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for uploading Employee profile picture
-     * @param base64Image (optional)
-     * @param employeeId (optional)
-=======
      * API for getting Disbursement Categories enumerable that can be use for dropdowns, option button
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDisbursementCategories(): Observable<IDTextViewModelIListApiResult> {
@@ -12083,14 +11396,6 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving all Employees by Employee number (i.e. for specific Employee) or
-    empty string (i.e. for all Employee
-    with their few details for further CRUD operation
-     * @param searchText (optional)
-     * @param contractStatus (optional)
-     * @param pageSize (optional)
-=======
      * API for getting the list of different Generics/Common Dropdowns on the System by their Constant Name
     Some of the Constant names for the Dropdowns are;
     1: employment_status
@@ -12103,7 +11408,6 @@ export class DataServiceProxy {
     14: pfa
     27: Sectors
      * @param dropDownName (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDropDownValues(dropDownName: string | null | undefined): Observable<DropdownValueIListApiResult> {
@@ -12174,13 +11478,6 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving all Employees with details (includes; Fullname, Id, EmpNo)
-    that matches the supplied name/employee Id
-    which can be use in various part of the system for Dropdown selection for;
-    Supervisor-List, Appraisal-Reviewer-List etc
-     * @param nameId (optional)
-=======
      * API for getting the list of different Generics/Common Dropdowns on the System by their Constant Value
     Some of the Constant names for the Dropdowns are;
     employment_status: 1
@@ -12193,7 +11490,6 @@ export class DataServiceProxy {
     pension fund administrator: 14
     sectors: 27
      * @param dropDownId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDropDownValuesById(dropDownId: number | undefined): Observable<DropdownValueIListApiResult> {
@@ -12266,12 +11562,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving single Employee's record
-     * @param employeeId (optional)
-=======
      * API for getting Tenant Status enumerable that can be use for filtering parameter
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getTenantStatus(): Observable<IDTextViewModelIListApiResult> {
@@ -12340,21 +11631,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Master Employees Search
-     * @param pageSize (optional)
-     * @param companyId (optional)
-     * @param searchText (optional)
-     * @param peopleGroupId (optional)
-     * @param departmentId (optional)
-     * @param jobRoleId (optional)
-     * @param locationId (optional)
-     * @param salaryscaleId (optional)
-     * @param gradeId (optional)
-     * @param gradestepId (optional)
-=======
      * API for getting the list of all Countries on the System
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getCountries(): Observable<CountryIListApiResult> {
@@ -12423,14 +11700,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving All Tenant's registered Employees
-     * @param searchText (optional)
-     * @param contractStatus (optional)
-     * @param pageSize (optional)
-=======
      * API for getting the list of all States on the System
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getStates(): Observable<StateIListApiResult> {
@@ -12499,12 +11769,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving Employee's Contract profile by Employee Id
-     * @param employeeId (optional)
-=======
      * API for getting the list of all Local Govts on the System
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLGAs(): Observable<LGAIListApiResult> {
@@ -12573,13 +11838,8 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Event
-     * @param body (optional)
-=======
      * API for getting the list of all Local Govts by State
      * @param stateId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLGAsByState(stateId: number | undefined): Observable<LGAIListApiResult> {
@@ -12652,14 +11912,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Events.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for getting the list of Unit of Measurement enumerable that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getUnitOfMeasurements(): Observable<IDTextViewModelIListApiResult> {
@@ -12728,12 +11981,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get jobroles by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * API for getting the list of Rating Types enumerable that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRatingTypes(): Observable<IDTextViewModelIListApiResult> {
@@ -12802,13 +12050,8 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete JobRole
-     * @param id (optional)
-=======
      * API for getting the list of Performance Review Purposes enumerable (Confirmation, Promotion, etc)
     that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getReviewPurposes(): Observable<IDTextViewModelIListApiResult> {
@@ -12877,12 +12120,8 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for getting the list of Organization Strategies enumerable(Financial, Customer, etc)
     that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getStrategyCategories(): Observable<IDTextViewModelIListApiResult> {
@@ -12951,11 +12190,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param encryptedId (optional)
-=======
      * API for getting the list of Appraisal Types enumerable that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAppraisalTypes(): Observable<IDTextViewModelIListApiResult> {
@@ -13024,18 +12259,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param companyID (optional)
-     * @param subID (optional)
-     * @param name (optional)
-     * @param iD (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * API for getting the list of an enumerable Employee Contract Status that can be use for dropdown values in filter
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmployeeContractStatus(): Observable<IDTextViewModelIListApiResult> {
@@ -13104,11 +12328,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for getting the list of Requests Types enumerable that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRequestTypes(): Observable<IDTextViewModelIListApiResult> {
@@ -13177,11 +12397,7 @@ export class DataServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param encryptedId (optional)
-=======
      * API for getting the list of Activity Types   for Manpower enumerable that can be use for dropdown values
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getActivityTypes(): Observable<IDTextViewModelIListApiResult> {
@@ -13262,19 +12478,8 @@ export class AddUpdateDepartmentServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param iD (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param ban (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * API for adding/updating Department
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateDepartment(body: ManageDepartmentDTO | undefined): Observable<MessageOutApiResult> {
@@ -13359,14 +12564,10 @@ export class GetAllDepartmentsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API to Fetch Departments.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllDepartments(pageSize: number | undefined, pageNumber: number | undefined): Observable<DepartmentDTOListApiResult> {
@@ -13455,12 +12656,8 @@ export class GetDepartmentByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param encryptedId (optional)
-=======
      * API to get Department by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDepartment(id: number | undefined): Observable<DepartmentDTOApiResult> {
@@ -13545,21 +12742,7 @@ export class AddUpdateDependantServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param companyID (optional)
-     * @param subID (optional)
-     * @param iD (optional)
-     * @param userid (optional)
-     * @param companyid (optional)
-     * @param searchText (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateDependant(body: DependantDTO | undefined): Observable<MessageOutApiResult> {
@@ -13644,24 +12827,7 @@ export class DeleteDependantServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param projid (optional)
-     * @param expensegrpid (optional)
-     * @param expensetypeid (optional)
-     * @param locationid (optional)
-     * @param deptid (optional)
-     * @param userid (optional)
-     * @param companyid (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param searchText (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteDependant(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -13746,9 +12912,6 @@ export class GetDependantByCriteriaServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * @param iD (optional) 
      * @param firstName (optional) 
      * @param lastName (optional) 
@@ -13757,7 +12920,6 @@ export class GetDependantByCriteriaServiceProxy {
      * @param nIN (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchDependants(iD: number | undefined, firstName: string | null | undefined, lastName: string | null | undefined, dependantType: string | null | undefined, gender: string | null | undefined, nIN: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DependantListApiResult> {
@@ -13860,13 +13022,9 @@ export class GetAllDependantByCompanyIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * @param employeeId (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllDependantByCompanyId(employeeId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<DependantResultDTOListApiResult> {
@@ -13959,13 +13117,9 @@ export class GetAllDependantByEmployeeIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * @param employeeId (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllDependantByEmployeeId(employeeId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<DependantResultDTOListApiResult> {
@@ -14058,11 +13212,7 @@ export class FetchDeploymentByReferenceNoServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param encryptedId (optional)
-=======
      * @param referenceNo (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchDeploymentByReferenceNo(referenceNo: string | null | undefined): Observable<DeploymentLogIListApiResult> {
@@ -14145,18 +13295,7 @@ export class FetchDeploymentServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param iD (optional)
-     * @param ledgerNo (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchDeployment(body: SearchDeploymentDto | undefined): Observable<CreateDeploymentViewModelIListApiResult> {
@@ -14241,10 +13380,6 @@ export class EmployeeDeploymentServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     employeeDeployment(): Observable<CreateDeploymentViewModelIListApiResult> {
@@ -14325,13 +13460,8 @@ export class SingleDisbursementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param typeId (optional)
-     * @param encryptedId (optional)
-=======
      * API for posting/updating Single Disbursement
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     postSingleDisbursement(body: SingleDisbursementPostDTO | undefined): Observable<MessageOutApiResult> {
@@ -14416,15 +13546,11 @@ export class FetchEmailLogsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param encryptedId (optional)
-=======
      * API for retrieving all Email Logs by email log filtering parameter
      * @param startDate (optional) 
      * @param endDate (optional) 
      * @param emailTo (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmailLogs(startDate: Date | null | undefined, endDate: Date | null | undefined, emailTo: string | null | undefined, pageSize: number | undefined): Observable<EmailLogDTOIListApiResult> {
@@ -14515,19 +13641,8 @@ export class FetchEmailLogByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param iD (optional)
-     * @param ledgerNo (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * API for getting Single EmailLog Details by id for CRUD Operation
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmailLogById(id: number | undefined): Observable<EmailLogDTOApiResult> {
@@ -14612,13 +13727,8 @@ export class FetchEmailTemplateByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating GradeLevel
-     * @param body (optional)
-=======
      * API for getting Email Template by id for CRUD Operation
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmailTemplateById(id: number | undefined): Observable<EmailTemplateDTOApiResult> {
@@ -14703,13 +13813,8 @@ export class UpdateEmailTemplateServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API  for Deleting GradeLevel
-     * @param body (optional)
-=======
      * API for updating Email Template
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     updateEmailTemplate(body: EmailTemplateDTO | undefined): Observable<MessageOutApiResult> {
@@ -14794,17 +13899,8 @@ export class CreateEmployeeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch GradeLevel.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param promotion_min_years (optional)
-     * @param promotion_min_in_days (optional)
-=======
      * API for adding a single Employee profile
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addEmployee(body: ManageEmployeeDTO | undefined): Observable<MessageOutApiResult> {
@@ -14889,12 +13985,7 @@ export class DownloadEmployeeBulkServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating GradeLevelBenefit
-     * @param body (optional)
-=======
      * API for downloading Sample Template for Bulk Upload
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     downloadEmployeeBulkTemplate(): Observable<File> {
@@ -14975,13 +14066,8 @@ export class EmployeeBulkUploadServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API  for Deleting GradeLevelBenefit
-     * @param id (optional)
-=======
      * API for Employee Bulk uploading
      * @param bulkFile (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     employeeBulkUpload(bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
@@ -15067,14 +14153,9 @@ export class UploadProfileImageServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get GradeLevelBenefit by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * API for uploading Employee profile picture
      * @param base64Image (optional) 
      * @param employeeId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     uploadProfileImage(base64Image: string | null | undefined, employeeId: number | undefined): Observable<MessageOutApiResult> {
@@ -15161,12 +14242,6 @@ export class FetchEmployeesDetailsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch GradeLevelBenefit.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for retrieving all Employees by Employee number (i.e. for specific Employee) or
     empty string (i.e. for all Employee
     with their few details for further CRUD operation
@@ -15174,7 +14249,6 @@ export class FetchEmployeesDetailsServiceProxy {
      * @param contractStatus (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmployeesDetails(searchText: string | null | undefined, contractStatus: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<DropdownValueDTOIListApiResult> {
@@ -15269,16 +14343,11 @@ export class FetchEmployeesByName_IdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating JobRole
-     * @param body (optional)
-=======
      * API for retrieving all Employees with details (includes; Fullname, Id, EmpNo)
     that matches the supplied name/employee Id 
     which can be use in various part of the system for Dropdown selection for;
     Supervisor-List, Appraisal-Reviewer-List etc
      * @param nameId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmployeesByNameId(nameId: string | null | undefined): Observable<DropdownValueDTOIListApiResult> {
@@ -15361,15 +14430,8 @@ export class FetchEmployeeByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch JobRoles.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for retrieving single Employee's record
      * @param employeeId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmployeeById(employeeId: number | undefined): Observable<EmployeeDTOApiResult> {
@@ -15454,10 +14516,6 @@ export class SearchEmployeesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get jobroles by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * API for Master Employees Search
      * @param pageSize (optional) 
      * @param companyId (optional) 
@@ -15469,7 +14527,6 @@ export class SearchEmployeesServiceProxy {
      * @param salaryscaleId (optional) 
      * @param gradeId (optional) 
      * @param gradestepId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     searchEmployees(pageSize: number | undefined, companyId: number | undefined, searchText: string | null | undefined, peopleGroupId: number | undefined, departmentId: number | undefined, jobRoleId: number | undefined, locationId: number | undefined, salaryscaleId: number | undefined, gradeId: number | undefined, gradestepId: number | undefined): Observable<EmployeeDTOIListApiResult> {
@@ -15588,16 +14645,11 @@ export class FetchAllEmployeesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete Jobrole
-     * @param id (optional)
-=======
      * API for retrieving All Tenant's registered Employees
      * @param searchText (optional) 
      * @param contractStatus (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllEmployees(searchText: string | null | undefined, contractStatus: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<EmployeeDTOIListApiResult> {
@@ -15692,19 +14744,8 @@ export class FetchEmployeeContractByEmployeeIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving all Key Result Areas with filters as follows
-    'Status: for Active/InActive' Key Result Area
-    'RatingType: for Open-ended/Close-ended' Key Result Area
-     * @param status (optional)
-     * @param ratingType (optional)
-     * @param strategyCategoryId (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for retrieving Employee's Contract profile by Employee Id
      * @param employeeId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchEmployeeContractByEmployeeId(employeeId: number | undefined): Observable<EmployeeContractAssignmentDTOApiResult> {
@@ -15875,15 +14916,10 @@ export class GetAllEventsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Single Key Result Area Details by id for CRUD Operation
-     * @param id (optional)
-=======
      * API to Fetch Events.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllEvents(pageSize: number | undefined, pageNumber: number | undefined): Observable<EventDTOListApiResult> {
@@ -15972,15 +15008,8 @@ export class GetEventsByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Key Result Areas
-    Toggle (i.e. While Updating use the property 'IsActive'
-    as Radio-toggle button and pass true/false. When creating new Key Result Areas 'IsActive is by default)
-     * @param body (optional)
-=======
      * API to get jobroles by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEventsById(id: number | undefined): Observable<EventDTOApiResult> {
@@ -16065,15 +15094,8 @@ export class DeleteEventsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Key Result Areas
-    Toggle (i.e. While Updating use the property 'IsActive'
-    as Radio-toggle button and pass true/false. When creating new Key Result Areas 'IsActive is by default)
-     * @param body (optional)
-=======
      * this method is used to delete JobRole
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteEvents(id: number | undefined): Observable<MessageOutApiResult> {
@@ -16158,12 +15180,7 @@ export class AddUpdateExpenseGroupServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Key Performance Index (KPI) by Admin/Line Managers
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateExpenseGroup(body: ExpenseGroupDto | undefined): Observable<MessageOutApiResult> {
@@ -16248,12 +15265,7 @@ export class ToggleExpenseGroupServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Employee's Key Performance Index (KPI)
-     * @param body (optional)
-=======
      * @param encryptedId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     toggleExpenseGroup(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -16336,10 +15348,6 @@ export class GetExpenseGroupsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving All Key Performance Index (KPIs) attach to a KRA
-     * @param key_area_id (optional)
-=======
      * @param companyID (optional) 
      * @param subID (optional) 
      * @param name (optional) 
@@ -16348,7 +15356,6 @@ export class GetExpenseGroupsServiceProxy {
      * @param code (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getExpenseGroups(companyID: number | undefined, subID: number | undefined, name: string | null | undefined, iD: number | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseGroupIListApiResult> {
@@ -16455,107 +15462,14 @@ export class AddUpdateExpenseProjectServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Single Key Performance Index (KPI) Details by id for CRUD Operation
-     * @param id (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateExpenseProject(body: ExpenseProjectDto | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/ExpenseProject/AddUpdateExpenseProject/AddUpdateExpenseProject";
         url_ = url_.replace(/[?&]$/, "");
 
-<<<<<<< HEAD
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetKPI(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetKPI(<any>response_);
-                } catch (e) {
-                    return <Observable<KpiDTOApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<KpiDTOApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetKPI(response: HttpResponseBase): Observable<KpiDTOApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = KpiDTOApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<KpiDTOApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class FetchEmployeeKPIsServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
-
-    /**
-     * API for retrieving Employee's Key Performance Index (KPI)
-     * @param key_area_id (optional)
-     * @return Success
-     */
-    getEmployeeKPIs(key_area_id: number | undefined): Observable<KpiDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/KPI/FetchEmployeeKPIs/GetEmployeeKPIs?";
-        if (key_area_id === null)
-            throw new Error("The parameter 'key_area_id' cannot be null.");
-        else if (key_area_id !== undefined)
-            url_ += "key_area_id=" + encodeURIComponent("" + key_area_id) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-=======
         const content_ = JSON.stringify(body);
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
         let options_ : any = {
             body: content_,
@@ -16716,10 +15630,6 @@ export class GetExpenseProjectServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is get leave entitlement by Id. Id is required
-     * @param id (optional)
-=======
      * @param iD (optional) 
      * @param name (optional) 
      * @param description (optional) 
@@ -16728,7 +15638,6 @@ export class GetExpenseProjectServiceProxy {
      * @param code (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getExpenseProject(iD: number | undefined, name: string | null | undefined, description: string | null | undefined, ban: boolean | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseProject[]> {
@@ -16837,12 +15746,7 @@ export class AddUpdateExpenseServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to used to create and edit leave entitlement. Note all fields are required.
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateExpense(body: ExpenseDTO | undefined): Observable<MessageOutApiResult> {
@@ -16927,12 +15831,7 @@ export class ToggleExpenseRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete leave entitlement
-     * @param id (optional)
-=======
      * @param encryptedId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     toggleExpenseRequest(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -17144,10 +16043,6 @@ export class FetchExpensesDetailedServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Leave Holiday Date
-     * @param body (optional)
-=======
      * @param projid (optional) 
      * @param expensegrpid (optional) 
      * @param expensetypeid (optional) 
@@ -17162,7 +16057,6 @@ export class FetchExpensesDetailedServiceProxy {
      * @param searchText (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchExpensesDetailed(projid: number | undefined, expensegrpid: number | undefined, expensetypeid: number | undefined, locationid: number | undefined, deptid: number | undefined, userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseDTOIListApiResult> {
@@ -17370,12 +16264,7 @@ export class AddUpdateLoanTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is get leave holiday date by Id. Id is required
-     * @param id (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateLoanRequest(body: LoanRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -17448,12 +16337,7 @@ export class AddUpdateLoanTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete leave holiday date
-     * @param id (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateLoanType(body: LoanTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -17538,12 +16422,7 @@ export class ToggleExpenseTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete leave plan
-     * @param id (optional)
-=======
      * @param encryptedId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     toggleExpenseType(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -17626,10 +16505,6 @@ export class GetExpenseTypesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete. leave request Id is required
-     * @param id (optional)
-=======
      * @param iD (optional) 
      * @param ledgerNo (optional) 
      * @param name (optional) 
@@ -17638,7 +16513,6 @@ export class GetExpenseTypesServiceProxy {
      * @param code (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getExpenseTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseTypeIListApiResult> {
@@ -17729,19 +16603,6 @@ export class GetExpenseTypesServiceProxy {
     }
 }
 
-<<<<<<< HEAD
-    /**
-     * this method is used to delete leave year
-     * @param id (optional)
-     * @return Success
-     */
-    deleteLeaveYear(id: number | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LeaveYear/Delete/DeleteLeaveYear?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&";
-=======
 @Injectable()
 export class AddExpenseSubTypeServiceProxy {
     private http: HttpClient;
@@ -17759,7 +16620,6 @@ export class AddExpenseSubTypeServiceProxy {
      */
     addExpenseSubType(body: ExpenseSubType | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/ExpenseType/AddExpenseSubType/AddExpenseSubType";
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -17840,19 +16700,8 @@ export class ToggleExpenseSubTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used fetch leave plans. all filter are optional
-     * @param isApproved (optional)
-     * @param leaveYearId (optional)
-     * @param empno (optional)
-     * @param strStartDate (optional)
-     * @param strEndDate (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * @param typeId (optional) 
      * @param encryptedId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     toggleExpenseSubType(typeId: string | null | undefined, encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -17937,12 +16786,7 @@ export class GetExpenseTypeNameServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used fetch events using calender type.calender type include: LeavePlan, ActiveLeaveRequests
-     * @param calenderType (optional)
-=======
      * @param encryptedId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getExpenseTypeName(encryptedId: string | null | undefined): Observable<ExpenseTypeIListApiResult> {
@@ -18025,11 +16869,6 @@ export class GetExpenseSubTypesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to approve or reject leave plan. Note all fields are requiered except companyId
-    it uses Enum Leaveplan status : Approved = 1, Reject = 2, Pending =3
-     * @param body (optional)
-=======
      * @param iD (optional) 
      * @param ledgerNo (optional) 
      * @param name (optional) 
@@ -18038,7 +16877,6 @@ export class GetExpenseSubTypesServiceProxy {
      * @param code (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getExpenseSubTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseTypeIListApiResult> {
@@ -18141,14 +16979,8 @@ export class FileStorageManagerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to review leave plan. Note all fields are requiered except companyId
-    it uses Enum Leaveplan status : Approved = 1, Reject = 2, Pending =3
-     * @param body (optional)
-=======
      * API to upload documents for Employee on the system.
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     uploadDocuments(body: ManageDocumentDTO | undefined): Observable<MessageOutApiResult> {
@@ -18221,13 +17053,8 @@ export class FileStorageManagerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create and edit leave by admin.
-     * @param body (optional)
-=======
      * API for downloading Document in form of Base64string by passing the filename
      * @param filename (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     downloadMiscDocument(filename: string | null | undefined): Observable<StringApiResult> {
@@ -18298,17 +17125,8 @@ export class FileStorageManagerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to get leave report.
-    all filter is optional
-     * @param departmentId (optional)
-     * @param leaveYearId (optional)
-     * @param leaveTypeId (optional)
-     * @param locationId (optional)
-=======
      * @param employeeNumber (optional) 
      * @param docType (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchEmployeeDocuments(employeeNumber: string | null | undefined, docType: string | null | undefined): Observable<AzureDocsListApiResult> {
@@ -18393,13 +17211,7 @@ export class FileUploadServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to get leave by Id.
-    Id is required
-     * @param id (optional)
-=======
      * @param files (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     uploadFiles(files: FileParameter[] | null | undefined): Observable<void> {
@@ -18464,13 +17276,8 @@ export class GradeLevelServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to cancel leave request by initiator. leave request Id is required
-     * @param id (optional)
-=======
      * API for adding/updating GradeLevel
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateGradeLevel(body: GradeLevelCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -18543,17 +17350,8 @@ export class GradeLevelServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * fetch LeaveTypes.
-    Note: all filter are optional
-     * @param isAnnualLeave (optional)
-     * @param maxDays (optional)
-     * @param isGradeDependent (optional)
-     * @param minDays (optional)
-=======
      * API  for Deleting GradeLevel
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     delete_GradeLevel(body: number | undefined): Observable<MessageOutApiResult> {
@@ -18626,17 +17424,12 @@ export class GradeLevelServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete leave type
-     * @param id (optional)
-=======
      * API to Fetch GradeLevel.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
      * @param promotion_min_years (optional) 
      * @param promotion_min_in_days (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllGradeLevel(pageSize: number | undefined, pageNumber: number | undefined, promotion_min_years: number | null | undefined, promotion_min_in_days: number | null | undefined): Observable<GradeLevelDTOListApiResult> {
@@ -18729,13 +17522,8 @@ export class GradeLevelBenefitServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * This method is used to get leave type by id
-     * @param id (optional)
-=======
      * API for adding/updating GradeLevelBenefit
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateGradeLevelBenefit(body: ManageGradeLevelBenefitDTO | undefined): Observable<MessageOutApiResult> {
@@ -18882,13 +17670,8 @@ export class GradeLevelBenefitServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is get leave workflow by Id. Id is required
-     * @param id (optional)
-=======
      * API to get GradeLevelBenefit by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getGradeLevelBenefitById(id: number | undefined): Observable<GradeLevelBenefitDTOApiResult> {
@@ -18961,15 +17744,10 @@ export class GradeLevelBenefitServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to used to create and edit leave workflow. Note all fields are requiered.
-     * @param body (optional)
-=======
      * API to Fetch GradeLevelBenefit.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllGradeLevelBenefit(pageSize: number | undefined, pageNumber: number | undefined): Observable<GradeLevelBenefitDTOListApiResult> {
@@ -19058,13 +17836,8 @@ export class AddUpdateJobRolesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete leave workflow
-     * @param id (optional)
-=======
      * API for adding/updating JobRole
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateJobRoles(body: ManageJobRoleDTO | undefined): Observable<MessageOutApiResult> {
@@ -19149,18 +17922,10 @@ export class GetAllJobRolesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * Gets leave years
-     * @param yearStartDate (optional)
-     * @param yearName (optional)
-     * @param yearEndDate (optional)
-     * @param companyID (optional)
-=======
      * API to Fetch JobRoles.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllJobRoles(pageSize: number | undefined, pageNumber: number | undefined): Observable<JobRolesDTOListApiResult> {
@@ -19249,13 +18014,8 @@ export class GetJobRoleByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete leave year
-     * @param id (optional)
-=======
      * API to get jobroles by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getJobRolesById(id: number | undefined): Observable<JobRolesDTOApiResult> {
@@ -19340,12 +18100,8 @@ export class DeleteJobRoleServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * this method is used to delete Jobrole
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteJobRole(id: number | undefined): Observable<MessageOutApiResult> {
@@ -19430,13 +18186,6 @@ export class FetchKeyResultAreasServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param principal (optional)
-     * @param interestType (optional)
-     * @param tenor (optional)
-     * @param interestRate (optional)
-     * @param effectiveDate (optional)
-=======
      * API for retrieving all Key Result Areas with filters as follows 
     'Status: for Active/InActive' Key Result Area
     'RatingType: for Open-ended/Close-ended' Key Result Area
@@ -19445,7 +18194,6 @@ export class FetchKeyResultAreasServiceProxy {
      * @param strategyCategoryId (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getKeyResultAreas(status: number | undefined, ratingType: number | undefined, strategyCategoryId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<SectionDTOIListApiResult> {
@@ -19546,19 +18294,7 @@ export class FetchKRAsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param userid (optional)
-     * @param companyid (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param searchText (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for retrieving all Key Result Areas without filters that can be using for dropdowns
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getKRAs(): Observable<KPISectionIListApiResult> {
@@ -19639,12 +18375,8 @@ export class FetchKeyResultAreaServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param loanId (optional)
-=======
      * API for getting Single Key Result Area Details by id for CRUD Operation
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getKeyResultArea(id: number | undefined): Observable<SectionDTOApiResult> {
@@ -19729,14 +18461,10 @@ export class CreateKeyResultAreaServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for add/updating Key Result Areas 
     Toggle (i.e. While Updating use the property 'IsActive'
     as Radio-toggle button and pass true/false. When creating new Key Result Areas 'IsActive is by default)
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     createKeyResultArea(body: ManageSectionDTO | undefined): Observable<MessageOutApiResult> {
@@ -19821,15 +18549,10 @@ export class AssignKRAServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param loanId (optional)
-     * @param recompute (optional)
-=======
      * API for add/updating Key Result Areas 
     Toggle (i.e. While Updating use the property 'IsActive'
     as Radio-toggle button and pass true/false. When creating new Key Result Areas 'IsActive is by default)
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     assignKRA(body: AssignKraDto | undefined): Observable<MessageOutApiResult> {
@@ -19914,20 +18637,8 @@ export class AddUpdateKPIServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param userid (optional)
-     * @param companyid (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param searchText (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for add/updating Key Performance Index (KPI) by Admin/Line Managers
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateKPI(body: ManageKpiDTO | undefined): Observable<MessageOutApiResult> {
@@ -20012,14 +18723,8 @@ export class AddUpdateEmployeeKPIServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param companyId (optional)
-     * @param loanreqId (optional)
-     * @param userid (optional)
-=======
      * API for add/updating Employee's Key Performance Index (KPI)
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateEmployeeKPI(body: ManageKpiDTO | undefined): Observable<MessageOutApiResult> {
@@ -20104,12 +18809,8 @@ export class FetchKPIsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for retrieving All Key Performance Index (KPIs) attach to a KRA
      * @param key_area_id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getKPIs(key_area_id: number | undefined): Observable<KpiDTOIListApiResult> {
@@ -20194,21 +18895,8 @@ export class FetchKPIServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param iD (optional)
-     * @param code (optional)
-     * @param ledgerNo (optional)
-     * @param name (optional)
-     * @param minTenor (optional)
-     * @param maxTenor (optional)
-     * @param minAmount (optional)
-     * @param maxAmount (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-=======
      * API for getting Single Key Performance Index (KPI) Details by id for CRUD Operation
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getKPI(id: number | undefined): Observable<KpiDTOApiResult> {
@@ -20293,13 +18981,8 @@ export class FetchEmployeeKPIsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param iD (optional)
-     * @param companyID (optional)
-=======
      * API for retrieving Employee's Key Performance Index (KPI)
      * @param key_area_id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEmployeeKPIs(key_area_id: number | undefined): Observable<KpiDTOIListApiResult> {
@@ -20384,14 +19067,9 @@ export class LeaveEntitlementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Location
-     * @param body (optional)
-=======
      * this method is used to fetch all the leave entitlements. no param for now
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveEntitlements(pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveEntitlementResourceListApiResult> {
@@ -20468,17 +19146,8 @@ export class LeaveEntitlementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Locations.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param lga_id (optional)
-     * @param state_id (optional)
-=======
      * this method is get leave entitlement by Id. Id is required
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveEntitlement(id: number | undefined): Observable<LeaveEntitlementResourceApiResult> {
@@ -20551,13 +19220,8 @@ export class LeaveEntitlementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Location by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * this method is used to used to create and edit leave entitlement. Note all fields are required.
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addLeaveEntitlement(body: LeaveEntitlementPayload | undefined): Observable<MessageOutApiResult> {
@@ -20630,14 +19294,8 @@ export class LeaveEntitlementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
-=======
      * this method is used to delete leave entitlement
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteLeaveEntitlement(id: number | undefined): Observable<MessageOutApiResult> {
@@ -20710,14 +19368,7 @@ export class LeaveEntitlementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
-=======
      * this method is used to fetch all grades for a particular company. it uses authenticated user comapyid
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getGrades(): Observable<GradeListApiResult> {
@@ -20798,15 +19449,8 @@ export class AddUpdateHolidayServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
-=======
      * API for add/updating Leave Holiday Date
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateHoliday(body: ManageLeaveHolidayDTO | undefined): Observable<MessageOutApiResult> {
@@ -20891,15 +19535,8 @@ export class HolidayDatesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
-=======
      * this method is used to fetch all or by Id. no param for now
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getHolidayDates(body: LeaveFilterDTO | undefined): Observable<LeaveHolidayDTOListApiResult> {
@@ -20984,15 +19621,8 @@ export class GetByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
-=======
      * this method is get leave holiday date by Id. Id is required
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getHolidayById(id: number | undefined): Observable<LeaveHolidayDTOApiResult> {
@@ -21077,13 +19707,8 @@ export class DeleteServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-=======
      * this method is used to delete leave holiday date
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteHolidayDate(id: number | undefined): Observable<MessageOutApiResult> {
@@ -21156,13 +19781,8 @@ export class DeleteServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Pay Element
-     * @param body (optional)
-=======
      * this method is used to delete leave plan
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteLeavePlan(id: number | undefined): Observable<MessageOutApiResult> {
@@ -21235,19 +19855,8 @@ export class DeleteServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Payment Elements.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param payTypeId (optional)
-     * @param paymentInstitutionId (optional)
-     * @param elementTypeId (optional)
-     * @param elementCategoryId (optional)
-=======
      * this method is used to delete. leave request Id is required
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteLeaveRequest(id: number | undefined): Observable<MessageOutApiResult> {
@@ -21320,13 +19929,8 @@ export class DeleteServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Payment Element by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * this method is used to delete leave year
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteLeaveYear(id: number | undefined): Observable<MessageOutApiResult> {
@@ -21411,13 +20015,8 @@ export class CreateLeavePlanServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Payment Institution
-     * @param body (optional)
-=======
      * this method is used to create  leave plan. Note all fields are required
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     createLeavePlan(body: LeavePlanDTO | undefined): Observable<MessageOutApiResult> {
@@ -21502,13 +20101,6 @@ export class FetchLeavePlanServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Payment Institutions.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param categoryId (optional)
-=======
      * this method is used fetch leave plans. all filter are optional
      * @param isApproved (optional) 
      * @param leaveYearId (optional) 
@@ -21517,7 +20109,6 @@ export class FetchLeavePlanServiceProxy {
      * @param strEndDate (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchLeavePlans(isApproved: number | null | undefined, leaveYearId: number | null | undefined, empno: string | null | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeavePlanResourceListApiResult> {
@@ -21616,13 +20207,8 @@ export class LeavePlanEventsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Payment Institution by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * this method is used fetch events using calender type.calender type include: LeavePlan, ActiveLeaveRequests
      * @param calenderType (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeavePlanEvents(calenderType: string | null | undefined): Observable<LeavePlanResourceListApiResult> {
@@ -21705,14 +20291,9 @@ export class ApproveOrRejectServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Payroll Type (Pay Scale)
-     * @param body (optional)
-=======
      * this method is used to approve or reject leave plan. Note all fields are requiered except companyId
     it uses Enum Leaveplan status : Approved = 1, Reject = 2, Pending =3
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     approveOrRejectLeavePlan(body: ApproveOrRejectPayload | undefined): Observable<MessageOutApiResult> {
@@ -21797,17 +20378,9 @@ export class PostReviewServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Payroll Types.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param frequencyRuleId (optional)
-=======
      * this method is used to review leave plan. Note all fields are requiered except companyId
     it uses Enum Leaveplan status : Approved = 1, Reject = 2, Pending =3
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     postReview(body: ApproveOrRejectPayload | undefined): Observable<MessageOutApiResult> {
@@ -21892,14 +20465,8 @@ export class CreateLeaveByAdminServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Payroll Type by id and can be used for update, details and also
-    includes; No. of Employees and Employee list that are attached to this PayScale etc
-     * @param id (optional)
-=======
      * this method is used to create and edit leave by admin.
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     createLeaveByAdmin(body: ManageLeaveRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -21984,17 +20551,6 @@ export class GetLeaveRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving all Performance Cycles with filters as follows
-    'Status: for Active, Pending_Approval, Approved, Ongoing, Closed
-    'RatingType: for Open-ended/Close-ended'
-     * @param status (optional)
-     * @param departmentId (optional)
-     * @param locationId (optional)
-     * @param unitId (optional)
-     * @param ratingType (optional)
-     * @param pageSize (optional)
-=======
      * this method is used to get leave report.
     all filter is optional
      * @param departmentId (optional) 
@@ -22003,7 +20559,6 @@ export class GetLeaveRequestServiceProxy {
      * @param locationId (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveReports(departmentId: string | null | undefined, leaveYearId: string | null | undefined, leaveTypeId: string | null | undefined, locationId: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LeaveReportListDTOListApiResult> {
@@ -22088,14 +20643,9 @@ export class GetLeaveRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting Single Performance Cycle Details by id for CRUD Operation
-     * @param id (optional)
-=======
      * this method is used to get leave by Id.
     Id is required
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveRequestById(id: number | undefined): Observable<LeaveRequestApiResult> {
@@ -22180,15 +20730,8 @@ export class CancelLeaveRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Performance Cycle
-    Toggle (i.e. While Updating use the property 'IsActive'
-    as Radio-toggle button and pass true/false. When creating new Performance Cycle 'IsActive is by default)
-     * @param body (optional)
-=======
      * this method is used to cancel leave request by initiator. leave request Id is required
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     cancelLeaveRequest(id: number | undefined): Observable<MessageOutApiResult> {
@@ -22273,10 +20816,6 @@ export class GetLeaveTypesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Position
-     * @param body (optional)
-=======
      * fetch LeaveTypes.
     Note: all filter are optional
      * @param isAnnualLeave (optional) 
@@ -22285,7 +20824,6 @@ export class GetLeaveTypesServiceProxy {
      * @param minDays (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveTypes(isAnnualLeave: boolean | undefined, maxDays: number | null | undefined, isGradeDependent: boolean | undefined, minDays: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveTypeDTOListApiResult> {
@@ -22386,18 +20924,8 @@ export class DeleteLeaveTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Positions.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param parentPositionId (optional)
-     * @param nextPositionId (optional)
-     * @param basicSalary (optional)
-=======
      * this method is used to delete leave type
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteLeaveType(id: number | undefined): Observable<MessageOutApiResult> {
@@ -22482,13 +21010,8 @@ export class GetLeaveTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Position by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * This method is used to get leave type by id
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveType(id: number | undefined): Observable<LeaveTypeDTOApiResult> {
@@ -22573,11 +21096,7 @@ export class LeaveWorkFlowServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * this method is used to fetch all the leave workflow. no param for now
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     get(): Observable<LeaveWorkFlowResourceListApiResult> {
@@ -22646,13 +21165,8 @@ export class LeaveWorkFlowServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param _PageSize (optional)
-     * @param eligiblility_id (optional)
-=======
      * this method is get leave workflow by Id. Id is required
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveWorkFlowById(id: number | undefined): Observable<LeaveWorkFlowResourceApiResult> {
@@ -22799,17 +21313,8 @@ export class LeaveWorkFlowServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param _eligibilityId (optional)
-     * @param _action (optional)
-     * @param _selected (optional)
-     * @param waive_rule (optional)
-     * @param promotionCategoryId (optional)
-     * @param parentPositionId (optional)
-=======
      * this method is used to delete leave workflow
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteLeaveWorkFlow(id: number | undefined): Observable<MessageOutApiResult> {
@@ -22999,13 +21504,8 @@ export class CreateLeaveYearServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for add/updating Rating
-     * @param payloads (optional)
-=======
      * this method is used to create and edit leave year. Note: all fields are required
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     createLeaveYear(body: LeaveYearCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -23090,13 +21590,8 @@ export class GetLeaveYearServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for deleting Rating
-     * @param id (optional)
-=======
      * this method is used to delete leave year
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLeaveYear(id: number | undefined): Observable<LeaveYearDTOApiResult> {
@@ -23181,12 +21676,7 @@ export class PostFullRepaymentServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Request
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     postFullRepayment(body: PostLoanDto | undefined): Observable<MessageOutApiResult> {
@@ -23271,22 +21761,11 @@ export class SimulatePaymentServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Requests.
-    Note: all filter are optional
-     * @param departmentId (optional)
-     * @param requestStatusId (optional)
-     * @param log_status (optional)
-     * @param requestTypeId (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * @param principal (optional) 
      * @param interestType (optional) 
      * @param tenor (optional) 
      * @param interestRate (optional) 
      * @param effectiveDate (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     simulatePayment(principal: number | undefined, interestType: number | undefined, tenor: number | undefined, interestRate: number | undefined, effectiveDate: string | null | undefined): Observable<LoanRepaymentLogIListApiResult> {
@@ -23385,10 +21864,6 @@ export class GetLoanRequestsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Department by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * @param userid (optional) 
      * @param companyid (optional) 
      * @param startDate (optional) 
@@ -23398,7 +21873,6 @@ export class GetLoanRequestsServiceProxy {
      * @param searchText (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLoanRequests(userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
@@ -23513,12 +21987,7 @@ export class GetLoanSummaryServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating RequestType
-     * @param body (optional)
-=======
      * @param loanId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLoanSummary(loanId: string | null | undefined): Observable<IdNameObjIListApiResult> {
@@ -23601,7 +22070,7 @@ export class UpdateLoanRequestServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateLoanRequest(body: UpdateLoadRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -23686,15 +22155,8 @@ export class LoadRepaymentScheduleServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch RequestType.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * @param loanId (optional) 
      * @param recompute (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     loadRepaymentSchedule(loanId: number | undefined, recompute: number | undefined): Observable<LoanRepaymentLogIListApiResult> {
@@ -23783,10 +22245,6 @@ export class FetchLoanRequestsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get RequestType by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * @param userid (optional) 
      * @param companyid (optional) 
      * @param startDate (optional) 
@@ -23796,7 +22254,6 @@ export class FetchLoanRequestsServiceProxy {
      * @param searchText (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchLoanRequests(userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
@@ -23911,13 +22368,9 @@ export class GetLoanRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-=======
      * @param companyId (optional) 
      * @param loanreqId (optional) 
      * @param userid (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLoanRequest(companyId: number | undefined, loanreqId: number | undefined, userid: number | undefined): Observable<LoanRequestApiResult> {
@@ -24010,39 +22463,7 @@ export class ToggleLoanTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Post Retirement
-     * @param iD (optional)
-     * @param retirementLogId (optional)
-     * @param retirementTypeId (optional)
-     * @param retirementType (optional)
-     * @param age (optional)
-     * @param strAge (optional)
-     * @param yearsOfService (optional)
-     * @param strYearsOfService (optional)
-     * @param employeeId (optional)
-     * @param employeeContractId (optional)
-     * @param staffNo (optional)
-     * @param fullName (optional)
-     * @param dOB (optional)
-     * @param appointmentDate (optional)
-     * @param effectiveDate (optional)
-     * @param strEffectiveDate (optional)
-     * @param refNo (optional)
-     * @param causeOfLeaving (optional)
-     * @param otherComments (optional)
-     * @param submittedBy (optional)
-     * @param dateSubmitted (optional)
-     * @param reviewedBy (optional)
-     * @param reviewerComment (optional)
-     * @param dateReviewed (optional)
-     * @param isAccepted (optional)
-     * @param log_status (optional)
-     * @param adminMode (optional)
-     * @param saveNsubmit (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     toggleLoanType(body: LoadTypeById | undefined): Observable<MessageOutApiResult> {
@@ -24127,20 +22548,6 @@ export class GetLoanTypesByCriteriaServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Retireee.
-    Note: all filter are optional
-     * @param startdte (optional)
-     * @param enddte (optional)
-     * @param searchText (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param _selected (optional)
-     * @param startdate (optional)
-     * @param endate (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * @param iD (optional) 
      * @param code (optional) 
      * @param ledgerNo (optional) 
@@ -24151,7 +22558,6 @@ export class GetLoanTypesByCriteriaServiceProxy {
      * @param maxAmount (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLoanTypesByCriteria(iD: number | undefined, code: string | null | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, minTenor: number | undefined, maxTenor: number | undefined, minAmount: number | undefined, maxAmount: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeIListApiResult> {
@@ -24266,23 +22672,8 @@ export class FetchLoanTypeByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Retireee.
-    Note: all filter are optional
-     * @param startdte (optional)
-     * @param enddte (optional)
-     * @param searchText (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param _selected (optional)
-     * @param startdate (optional)
-     * @param endate (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * @param iD (optional) 
      * @param companyID (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchLoanTypeById(iD: number | undefined, companyID: number | undefined): Observable<LoanTypeIListApiResult> {
@@ -24371,23 +22762,8 @@ export class AddUpdateLocationServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Retireee.
-    Note: all filter are optional
-     * @param startdte (optional)
-     * @param enddte (optional)
-     * @param searchText (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param _selected (optional)
-     * @param startdate (optional)
-     * @param endate (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * API for adding/updating Location
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateLocation(body: ManageLocationDTO | undefined): Observable<MessageOutApiResult> {
@@ -24474,14 +22850,10 @@ export class GetAllLocationsServiceProxy {
     /**
      * API to Fetch Locations.
     Note: all filter are optional
-<<<<<<< HEAD
-     * @param id (optional)
-=======
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
      * @param lga_id (optional) 
      * @param state_id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllLocations(pageSize: number | undefined, pageNumber: number | undefined, lga_id: number | undefined, state_id: number | undefined): Observable<LocationDTOListApiResult> {
@@ -24578,47 +22950,8 @@ export class GetLocationByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Retirement by Employee Id.
-    Note: all filter are optional
-     * @param user_id (optional)
-     * @param employee_id (optional)
-     * @param employee_number (optional)
-     * @param employee_contract_id (optional)
-     * @param grade_id (optional)
-     * @param confirmation_date (optional)
-     * @param serial_no (optional)
-     * @param first_name (optional)
-     * @param last_name (optional)
-     * @param full_name (optional)
-     * @param other_name (optional)
-     * @param department (optional)
-     * @param department_id (optional)
-     * @param email (optional)
-     * @param phone_number (optional)
-     * @param email_confirmed (optional)
-     * @param session_token (optional)
-     * @param jwt_token (optional)
-     * @param user_token (optional)
-     * @param company_id (optional)
-     * @param licenseUsuage (optional)
-     * @param licenseCount (optional)
-     * @param company_name (optional)
-     * @param sub_id (optional)
-     * @param isAdmin (optional)
-     * @param isSuperAdmin (optional)
-     * @param isTenantAdmin (optional)
-     * @param isActiveBySysOrAdmin (optional)
-     * @param lstPermissions (optional)
-     * @param message (optional)
-     * @param isSuccessful (optional)
-     * @param retId (optional)
-     * @param redirectUrl (optional)
-     * @param errors (optional)
-=======
      * API to get Location by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getLocation(id: number | undefined): Observable<LocationDTOApiResult> {
@@ -24703,16 +23036,8 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating RetirementType
-     * @param iD (optional)
-     * @param name (optional)
-     * @param requirments (optional)
-     * @param isEntitledToBenefits (optional)
-=======
      * API for adding/updating DepartmentActivity
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateDepartmentActivity(body: DepartmentActivityDTO | undefined): Observable<MessageOutApiResult> {
@@ -24785,16 +23110,9 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param _PageSize (optional)
-     * @param log_status (optional)
-=======
      * API to Fetch Requirments Details.
     Note: all filter are optional
      * @param reqId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRequirmentsDetails(reqId: number | undefined): Observable<MessageOutListApiResult> {
@@ -24867,14 +23185,10 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param id (optional)
-=======
      * API to Fetch baseYear.
     Note: all filter are optional
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchBaseYear(pageNumber: number | undefined, pageSize: number | undefined): Observable<BaseYearDTOListApiResult> {
@@ -25224,14 +23538,8 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for getting single Role for CRUD operation as a Super Admin that possesses
-    'Role Management' Privilege
-     * @param id (optional)
-=======
      * API for submitting Requirment Review
      * @param activitymodel (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     submit_Requirment_Review(activitymodel: string | null | undefined): Observable<MessageOutApiResult> {
@@ -25302,11 +23610,6 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Adding/Updating Roles as a Super Admin that possesses
-    'Role Management' Privilege
-     * @param body (optional)
-=======
      * API to fetch Projection Activity
     Note: all filter are optional
      * @param activityTypeId (optional) 
@@ -25314,7 +23617,6 @@ export class ManpowerServiceProxy {
      * @param status (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetch_Projection_Activity(activityTypeId: number | undefined, deptId: number | undefined, status: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
@@ -25508,12 +23810,8 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param roleId (optional)
-=======
      * API to add requirment to plan
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     add_Requirement_ToPlan(body: DepartmentManPowerActivityDTO | undefined): Observable<MessageOutApiResult> {
@@ -25586,11 +23884,7 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * @param requirementId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     remove_Requirement_ToPlan(requirementId: number | undefined): Observable<MessageOutApiResult> {
@@ -25663,10 +23957,6 @@ export class ManpowerServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Salaryscale
-     * @param body (optional)
-=======
      * API to Download AssetReport
     Note: all filter are optional
      * @param pageNumber (optional) 
@@ -25674,7 +23964,6 @@ export class ManpowerServiceProxy {
      * @param name (optional) 
      * @param isFilter (optional) 
      * @param isActive (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetch_Asset_Report(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -25771,16 +24060,9 @@ export class FetchOnboardingPersonnalDataByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to Fetch Salaryscale.
-    Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-=======
      * @param id (optional) 
      * @param companyId (optional) 
      * @param subId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchOnboardingPersonnalDataById(id: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingPersonalInfoApiResult> {
@@ -25873,15 +24155,10 @@ export class FetchOnboardingDocummentDataByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Salaryscale by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * @param id (optional) 
      * @param onboardingId (optional) 
      * @param companyId (optional) 
      * @param subId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchOnboardingDocummentDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingDocumentInfoApiResult> {
@@ -25978,15 +24255,10 @@ export class FetchOnboardingMedicalDisclosureDataByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete Salaryscale
-     * @param id (optional)
-=======
      * @param id (optional) 
      * @param onboardingId (optional) 
      * @param companyId (optional) 
      * @param subId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchOnboardingMedicalDisclosureDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingMedicalDisclosureInfoApiResult> {
@@ -26083,14 +24355,10 @@ export class FetchOnboardingPaymentDataByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * @param id (optional) 
      * @param onboardingId (optional) 
      * @param companyId (optional) 
      * @param subId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchOnboardingPaymentDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingMedicalDisclosureInfoApiResult> {
@@ -26287,12 +24555,8 @@ export class FetchEmployeeOnboardingDataDetailsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param planId (optional)
-=======
      * @param onboardingId (optional) 
      * @param companyId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchEmployeeOnboardingDataDetails(onboardingId: number | undefined, companyId: number | undefined): Observable<EmployeeOnboardingPersonalDataListApiResult> {
@@ -26381,12 +24645,8 @@ export class AddUpdatePayElementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param planId (optional)
-=======
      * API for adding/updating Pay Element
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdatePayElement(body: ManagePayElementDTO | undefined): Observable<MessageOutApiResult> {
@@ -26471,12 +24731,6 @@ export class GetAllPayElementsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for verifying and updating Tenant's Subscription Payment
-    with payment reference and userid
-     * @param reference (optional)
-     * @param userId (optional)
-=======
      * API to Fetch Payment Elements.
     Note: all filter are optional
      * @param pageSize (optional) 
@@ -26485,7 +24739,6 @@ export class GetAllPayElementsServiceProxy {
      * @param paymentInstitutionId (optional) 
      * @param elementTypeId (optional) 
      * @param elementCategoryId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllPayElements(pageSize: number | undefined, pageNumber: number | undefined, payTypeId: number | undefined, paymentInstitutionId: number | undefined, elementTypeId: number | undefined, elementCategoryId: number | undefined): Observable<PayElementDTOListApiResult> {
@@ -26590,13 +24843,8 @@ export class GetPayElementByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for signing up Tenant's account on the system
-     * @param body (optional)
-=======
      * API to get Payment Element by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPayElement(id: number | undefined): Observable<PayElementDTOApiResult> {
@@ -26681,15 +24929,8 @@ export class AddUpdatePaymentInstitutionServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for confirming Tenant's email account by providing the two querystring inside
-    the Confirmation link ('userid' and 'token')
-     * @param userId (optional)
-     * @param token (optional)
-=======
      * API for adding/updating Payment Institution
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdatePaymentInstitution(body: ManagePayInstitutionDTO | undefined): Observable<MessageOutApiResult> {
@@ -26774,15 +25015,11 @@ export class GetAllPaymentInstitutionsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API to Fetch Payment Institutions.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
      * @param categoryId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllPaymentInstitutions(pageSize: number | undefined, pageNumber: number | undefined, categoryId: number | undefined): Observable<PayInstitutionDTOListApiResult> {
@@ -26875,16 +25112,8 @@ export class GetPaymentInstitutionByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for retrieving All Tenant on the system with filtering parameters
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchText (optional)
-     * @param status (optional)
-=======
      * API to get Payment Institution by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPaymentInstitution(id: number | undefined): Observable<PayInstitutionDTOApiResult> {
@@ -27055,14 +25284,9 @@ export class GetPayrollAnalysisServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for updating Tenant's Modules
-     * @param payload (optional)
-=======
      * API for fetching payroll analysis
      * @param payrollRunId (optional) 
      * @param payrollTypeId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPayrollAnalysis(payrollRunId: number | undefined, payrollTypeId: number | undefined): Observable<RptPayrollRunAnalysisListApiResult> {
@@ -27151,13 +25375,8 @@ export class GetBankScheduleServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for creating Tenant's Modules
-     * @param payload (optional)
-=======
      * API for fetching the bank schedule
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getBankSchedule(payrollRunId: number | undefined): Observable<RptBankScheduleListApiResult> {
@@ -27242,13 +25461,8 @@ export class GetEarningsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create  or update  training vendor.  if it is update, training vendor Id is required
-     * @param body (optional)
-=======
      * API for fetching the payroll earnings
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getEarnings(payrollRunId: number | undefined): Observable<RptEarningsListApiResult> {
@@ -27419,15 +25633,8 @@ export class GetAllElementsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used fetch training vendor. all filter are optional
-     * @param name (optional)
-     * @param trainingSpecializationId (optional)
-     * @param trainingTag (optional)
-=======
      * API for fetching the all the payroll elements
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllElements(payrollRunId: number | undefined): Observable<RptAllElementSheetListApiResult> {
@@ -27512,13 +25719,8 @@ export class GetDeductionSummaryServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used get training vendor by Id.
-     * @param id (optional)
-=======
      * API for fetching the all the payroll deduction elements
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getDeductionSummary(payrollRunId: number | undefined): Observable<RptDeductionSummaryListApiResult> {
@@ -27603,13 +25805,8 @@ export class GetPaymentSummaryServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete training vendor
-     * @param id (optional)
-=======
      * API for fetching the all the payroll earning elements
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPaymentSummary(payrollRunId: number | undefined): Observable<RptPaymentSummaryListApiResult> {
@@ -27694,13 +25891,8 @@ export class GetTaxDetailServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to upload excel file of vendors. accepted file format ".xlsx", ".xls"
-     * @param file (optional)
-=======
      * API for fetching the all the payroll tax elements details
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getTaxDetail(payrollRunId: number | undefined): Observable<RptTaxDetailListApiResult> {
@@ -27785,13 +25977,8 @@ export class GetTaxSummaryServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create  or update  training type.  if it is update, training vendour Id is required
-     * @param body (optional)
-=======
      * API for fetching the all the payroll tax elements summary
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getTaxSummary(payrollRunId: number | undefined): Observable<RptTaxSummaryListApiResult> {
@@ -27876,16 +26063,8 @@ export class GetPensionDetailServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used fetch training types. all filter are optional
-     * @param name (optional)
-     * @param trainingVendorId (optional)
-     * @param trainingSpecializationId (optional)
-     * @param trainingCategoryId (optional)
-=======
      * API for fetching the all the payroll pension elements details
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPensionDetail(payrollRunId: number | undefined): Observable<RptPensionDetailListApiResult> {
@@ -27970,13 +26149,8 @@ export class GetPensionSummaryServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used get training type by Id.
-     * @param id (optional)
-=======
      * API for fetching the all the payroll pension elements summary
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPensionSummary(payrollRunId: number | undefined): Observable<RptPensionSummaryListApiResult> {
@@ -28061,13 +26235,8 @@ export class FetchPayrollServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is use to change training type status. Note:  if status false, it means inactive while true means active
-     * @param body (optional)
-=======
      * API for fetching payroll runs
      * @param payrollRunId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchPayroll(payrollRunId: number | undefined): Observable<PayrollRunListApiResult> {
@@ -28152,14 +26321,9 @@ export class FetchPayslipsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete training type
-     * @param id (optional)
-=======
      * API for fetching the payslips
      * @param payrollRunId (optional) 
      * @param payslipId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchPayslips(payrollRunId: number | undefined, payslipId: number | undefined): Observable<PayslipListApiResult> {
@@ -28248,13 +26412,8 @@ export class FetchPayslipItemsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create  or update  training Category.  if it is update, training Category Id is required
-     * @param body (optional)
-=======
      * API for fetching the payslips items
      * @param payslipId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchPayslipItems(payslipId: number | undefined): Observable<PayslipItemListApiResult> {
@@ -28425,16 +26584,11 @@ export class GetAllPayrollTypesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used get training Category by Id.
-     * @param id (optional)
-=======
      * API to Fetch Payroll Types.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
      * @param frequencyRuleId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllPayrollTypes(pageSize: number | undefined, pageNumber: number | undefined, frequencyRuleId: number | undefined): Observable<PayrollTypeDTOListApiResult> {
@@ -28527,14 +26681,9 @@ export class GetPayrollTypeByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete training category
-     * @param id (optional)
-=======
      * API to get Payroll Type by id and can be used for update, details and also
     includes; No. of Employees and Employee list that are attached to this PayScale etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPayrollType(id: number | undefined): Observable<PayrollTypeDTOApiResult> {
@@ -28619,10 +26768,6 @@ export class FetchPerformanceCyclesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create  or update  training Specialization/Expertise.  if it is update, training specialization Id is required
-     * @param body (optional)
-=======
      * API for retrieving all Performance Cycles with filters as follows 
     'Status: for Active, Pending_Approval, Approved, Ongoing, Closed
     'RatingType: for Open-ended/Close-ended'
@@ -28632,7 +26777,6 @@ export class FetchPerformanceCyclesServiceProxy {
      * @param unitId (optional) 
      * @param ratingType (optional) 
      * @param pageSize (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPerformanceCycles(status: number | undefined, departmentId: number | undefined, locationId: number | undefined, unitId: number | undefined, ratingType: number | undefined, pageSize: number | undefined): Observable<CycleDTOIListApiResult> {
@@ -28823,15 +26967,10 @@ export class AddUpdatePerformanceCycleServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used get training Specialization by Id.
-     * @param id (optional)
-=======
      * API for add/updating Performance Cycle
     Toggle (i.e. While Updating use the property 'IsActive'
     as Radio-toggle button and pass true/false. When creating new Performance Cycle 'IsActive is by default)
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdatePerformanceCycle(body: ManageCycleDTO | undefined): Observable<MessageOutApiResult> {
@@ -28916,13 +27055,8 @@ export class AddUpdatePositionServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete training Specialization
-     * @param id (optional)
-=======
      * API for adding/updating Position
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdatePosition(body: ManagePositionDTO | undefined): Observable<MessageOutApiResult> {
@@ -29007,10 +27141,6 @@ export class GetAllPositionsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Training Plan.
-     * @param body (optional)
-=======
      * API to Fetch Positions.
     Note: all filter are optional
      * @param pageSize (optional) 
@@ -29018,7 +27148,6 @@ export class GetAllPositionsServiceProxy {
      * @param parentPositionId (optional) 
      * @param nextPositionId (optional) 
      * @param basicSalary (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllPositions(pageSize: number | undefined, pageNumber: number | undefined, parentPositionId: number | undefined, nextPositionId: number | undefined, basicSalary: number | undefined): Observable<PositionDTOListApiResult> {
@@ -29119,13 +27248,8 @@ export class GetPositionByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used fetch training plan. Note filters are optional
-     * @param body (optional)
-=======
      * API to get Position by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getPosition(id: number | undefined): Observable<PositionDTOApiResult> {
@@ -29210,13 +27334,8 @@ export class AddUpdateProfessionalBodyServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get Training Plan by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * API for adding/updating Professional Body
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateProfessionalBody(body: ManageProfessionalBodyDTO | undefined): Observable<MessageOutApiResult> {
@@ -29301,16 +27420,11 @@ export class GetAllProfessionalBodiesServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to change Training Plan status. if training status: false = inactive, true = active
-     * @param id (optional)
-=======
      * API to Fetch Professional Bodies.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
      * @param sectorId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllProfessionalBodies(pageSize: number | undefined, pageNumber: number | undefined, sectorId: number | undefined): Observable<ProfessionalBodyDTOListApiResult> {
@@ -29403,13 +27517,8 @@ export class GetProfessionalBodyByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete Training Plan
-     * @param id (optional)
-=======
      * API to get Professional Body by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getProfessionalBody(id: number | undefined): Observable<ProfessionalBodyDTOApiResult> {
@@ -29494,12 +27603,7 @@ export class AddUpdateEligibleBucketServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to create or update  training Criteria. if it is update, training specialization Id is required
-     * @param body (optional)
-=======
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateEligibleBucket(body: PromotionEligibilityViewModel | undefined): Observable<MessageOutApiResult> {
@@ -29572,13 +27676,6 @@ export class AddUpdateEligibleBucketServiceProxy {
     }
 }
 
-<<<<<<< HEAD
-    /**
-     * this method is used fetch training criteria.
-     * @param name (optional)
-     * @param min_Age (optional)
-     * @param min_LengthOfService (optional)
-=======
 @Injectable()
 export class PromotionListServiceProxy {
     private http: HttpClient;
@@ -29593,7 +27690,6 @@ export class PromotionListServiceProxy {
     /**
      * @param _PageSize (optional) 
      * @param eligiblility_id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     promotionList(_PageSize: number | undefined, eligiblility_id: number | undefined): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
@@ -29682,11 +27778,6 @@ export class FetchPromotionsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used get training criteria by Id.
-     * @param id (optional)
-=======
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     fetchPromotions(): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
@@ -29767,17 +27858,12 @@ export class PromotionSchedule_SearchServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete training Criteria
-     * @param id (optional)
-=======
      * @param _eligibilityId (optional) 
      * @param _action (optional) 
      * @param _selected (optional) 
      * @param waive_rule (optional) 
      * @param promotionCategoryId (optional) 
      * @param parentPositionId (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     promotionSchedule_Search(_eligibilityId: number | undefined, _action: string | null | undefined, _selected: string | null | undefined, waive_rule: number | undefined, promotionCategoryId: number | undefined, parentPositionId: number | undefined): Observable<VwPromotionScheduleApiResult> {
@@ -29878,12 +27964,7 @@ export class FetchRatingsServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to asign training to employees.  Note: file is not required
-     * @param body (optional)
-=======
      * API for retrieving all Ratings
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRatings(): Observable<RatingDTOIListApiResult> {
@@ -29964,16 +28045,8 @@ export class AddUpdateRatingServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used fetch training assigned to employee. all filter are optional
-     * @param specializationName (optional)
-     * @param trainingTypeName (optional)
-     * @param name (optional)
-     * @param trainingVendorName (optional)
-=======
      * API for add/updating Rating
      * @param payloads (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateRating(payloads: string | null | undefined): Observable<MessageOutApiResult> {
@@ -30056,13 +28129,8 @@ export class DeleteRatingRecordServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used send training for approval.
-     * @param id (optional)
-=======
      * API for deleting Rating
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteRating(id: number | undefined): Observable<MessageOutApiResult> {
@@ -30147,13 +28215,8 @@ export class AddUpdateRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to notify employee for assigned training.
-     * @param id (optional)
-=======
      * API for adding/updating Request
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     addUpdateRequest(body: ManageRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -30238,10 +28301,6 @@ export class GetAllRequestServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to remove employees from training.
-     * @param body (optional)
-=======
      * API to Fetch Requests.
     Note: all filter are optional
      * @param departmentId (optional) 
@@ -30250,7 +28309,6 @@ export class GetAllRequestServiceProxy {
      * @param requestTypeId (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllRequest(departmentId: number | undefined, requestStatusId: number | undefined, log_status: number | undefined, requestTypeId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RequestDTOListApiResult> {
@@ -30355,13 +28413,8 @@ export class GetRequestByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to remove employee from training
-     * @param body (optional)
-=======
      * API to get Department by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRequestById(id: number | undefined): Observable<RequestDTOApiResult> {
@@ -30446,13 +28499,8 @@ export class CreateUpdateRequestTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to delete employee added to training
-     * @param id (optional)
-=======
      * API for adding/updating RequestType
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     createUpdateRequestType(body: ManageRequestTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -30537,15 +28585,10 @@ export class GetAllRequestTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used get emp training by Id.
-     * @param id (optional)
-=======
      * API to Fetch RequestType.
     Note: all filter are optional
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllRequestType(pageSize: number | undefined, pageNumber: number | undefined): Observable<RequestTypeDTOListApiResult> {
@@ -30634,13 +28677,8 @@ export class GetRequestTypeByIdServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to  save employee feedback after training.
-     * @param body (optional)
-=======
      * API to get RequestType by id and can be used for update, details etc
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRequestTypeById(id: number | undefined): Observable<RequestTypeDTOApiResult> {
@@ -30725,12 +28763,7 @@ export class DeleteRequestTypeServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to upload excel file of vendors. accepted file format ".xlsx", ".xls"
-     * @param body (optional)
-=======
      * @param id (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     deleteRequestType(id: number | undefined): Observable<MessageOutApiResult> {
@@ -30815,15 +28848,10 @@ export class RetirementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * this method is used to update emp training
-     * @param body (optional)
-=======
      * API for adding/updating Post Retirement
      * @param adminMode (optional) 
      * @param saveNsubmit (optional) 
      * @param body (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     postRetireee(adminMode: number | undefined, saveNsubmit: number | undefined, body: RetirmentDTO | undefined): Observable<MessageOutApiResult> {
@@ -30904,9 +28932,6 @@ export class RetirementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API to Fetch Retireee.
     Note: all filter are optional
      * @param startdte (optional) 
@@ -30919,7 +28944,6 @@ export class RetirementServiceProxy {
      * @param endate (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getAllRetire(startdte: string | null | undefined, enddte: string | null | undefined, searchText: string | null | undefined, searchType: number | null | undefined, page: number | null | undefined, _selected: string | null | undefined, startdate: Date | null | undefined, endate: Date | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
@@ -31012,9 +29036,6 @@ export class RetirementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API to Fetch Retireee.
     Note: all filter are optional
      * @param startdte (optional) 
@@ -31027,7 +29048,6 @@ export class RetirementServiceProxy {
      * @param endate (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     getRetirees(startdte: string | null | undefined, enddte: string | null | undefined, searchText: string | null | undefined, searchType: number | null | undefined, page: number | null | undefined, _selected: string | null | undefined, startdate: Date | null | undefined, endate: Date | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
@@ -31120,12 +29140,6 @@ export class RetirementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param firstName (optional)
-     * @param lastName (optional)
-     * @param email (optional)
-     * @param pageSize (optional)
-=======
      * API to Fetch Retireee.
     Note: all filter are optional
      * @param startdte (optional) 
@@ -31138,7 +29152,6 @@ export class RetirementServiceProxy {
      * @param endate (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
      * @return Success
      */
     searchRetiree(startdte: string | null | undefined, enddte: string | null | undefined, searchText: string | null | undefined, searchType: number | null | undefined, page: number | null | undefined, _selected: string | null | undefined, startdate: Date | null | undefined, endate: Date | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
@@ -31244,14 +29257,6 @@ export class RetirementServiceProxy {
             url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-<<<<<<< HEAD
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["email"] = this.email;
-        data["password"] = this.password;
-        return data;
-    }
-=======
         let options_ : any = {
             observe: "response",
             responseType: "blob",
@@ -31259,7 +29264,6 @@ export class RetirementServiceProxy {
                 "Accept": "text/plain"
             })
         };
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
             return this.processGetRetirmentByid(response_);
@@ -44369,57 +42373,11 @@ export class ManageMoveEmployeeFilterDTO implements IManageMoveEmployeeFilterDTO
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["user_id"] = this.user_id;
-        data["employee_id"] = this.employee_id;
-        data["employee_number"] = this.employee_number;
-        data["employee_contract_id"] = this.employee_contract_id;
-        data["grade_id"] = this.grade_id;
-        data["confirmation_date"] = this.confirmation_date ? this.confirmation_date.toISOString() : <any>undefined;
-        data["serial_no"] = this.serial_no;
-        data["first_name"] = this.first_name;
-        data["last_name"] = this.last_name;
-        data["full_name"] = this.full_name;
-        data["other_name"] = this.other_name;
-        data["department"] = this.department;
-        data["department_id"] = this.department_id;
-        data["email"] = this.email;
-        data["phone_number"] = this.phone_number;
-        data["email_confirmed"] = this.email_confirmed;
-        data["session_token"] = this.session_token;
-        data["jwt_token"] = this.jwt_token;
-        data["user_token"] = this.user_token;
-        data["company_id"] = this.company_id;
-        data["licenseUsuage"] = this.licenseUsuage;
-        data["licenseCount"] = this.licenseCount;
-        data["company_name"] = this.company_name;
-        data["sub_id"] = this.sub_id;
-        data["isAdmin"] = this.isAdmin;
-        data["isSuperAdmin"] = this.isSuperAdmin;
-        data["isTenantAdmin"] = this.isTenantAdmin;
-        data["isActiveBySysOrAdmin"] = this.isActiveBySysOrAdmin;
-        if (Array.isArray(this.lstPermissions)) {
-            data["lstPermissions"] = [];
-            for (let item of this.lstPermissions)
-                data["lstPermissions"].push(item);
-        }
-        data["message"] = this.message;
-        data["isSuccessful"] = this.isSuccessful;
-        data["retId"] = this.retId;
-        data["redirectUrl"] = this.redirectUrl;
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item);
-        }
-        return data;
-=======
         data["togridboxId"] = this.togridboxId;
         data["fromgridboxId"] = this.fromgridboxId;
         data["employeeId"] = this.employeeId;
         data["justification"] = this.justification;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageMoveEmployeeFilterDTO {
@@ -44484,12 +42442,8 @@ export class NineGridBoxDTOListApiResult implements INineGridBoxDTOListApiResult
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): NineGridBoxDTOListApiResult {
@@ -44537,22 +42491,9 @@ export class GridBoxCountDTO implements IGridBoxCountDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["message"] = this.message;
-        data["isSuccessful"] = this.isSuccessful;
-        data["retId"] = this.retId;
-        data["redirectUrl"] = this.redirectUrl;
-        if (Array.isArray(this.errors)) {
-            data["errors"] = [];
-            for (let item of this.errors)
-                data["errors"].push(item);
-        }
-        return data;
-=======
         data["gridboxId"] = this.gridboxId;
         data["gridboxCount"] = this.gridboxCount;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GridBoxCountDTO {
@@ -44615,12 +42556,8 @@ export class GridBoxCountDTOListApiResult implements IGridBoxCountDTOListApiResu
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GridBoxCountDTOListApiResult {
@@ -44696,13 +42633,6 @@ export class EmployeeTalentPoolHistoryDTO implements IEmployeeTalentPoolHistoryD
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["token"] = this.token;
-        data["email"] = this.email;
-        data["password"] = this.password;
-        data["confirmPassword"] = this.confirmPassword;
-        return data;
-=======
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -44720,7 +42650,6 @@ export class EmployeeTalentPoolHistoryDTO implements IEmployeeTalentPoolHistoryD
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeTalentPoolHistoryDTO {
@@ -45067,16 +42996,9 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
                 data["successionAdditionalCompetency"].push(item.toJSON());
         }
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CareerSuccessorDTO {
@@ -45172,16 +43094,11 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
             for (let item of this.successionEmployee)
                 data["successionEmployee"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["holderId"] = this.holderId;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CareerSuccessionDTO {
@@ -45276,13 +43193,6 @@ export class TalentpoolrequirementDTO implements ITalentpoolrequirementDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["catalog"] = this.catalog;
-        data["companyId"] = this.companyId;
-        data["subId"] = this.subId;
-        data["departmentId"] = this.departmentId;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["requirementCategory"] = this.requirementCategory;
@@ -45305,7 +43215,6 @@ export class TalentpoolrequirementDTO implements ITalentpoolrequirementDTO {
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TalentpoolrequirementDTO {
@@ -45405,12 +43314,6 @@ export class AddTalentPoolDTO implements IAddTalentPoolDTO {
         data["loggedByUserId"] = this.loggedByUserId;
         data["loggedByUserName"] = this.loggedByUserName;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         data["stringtalentPoolRequirement"] = this.stringtalentPoolRequirement;
@@ -45420,7 +43323,6 @@ export class AddTalentPoolDTO implements IAddTalentPoolDTO {
                 data["talentPoolRequirement"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): AddTalentPoolDTO {
@@ -45494,12 +43396,8 @@ export class AddTalentPoolDTOListApiResult implements IAddTalentPoolDTOListApiRe
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): AddTalentPoolDTOListApiResult {
@@ -45554,23 +43452,11 @@ export class ManageCertificationDTO implements IManageCertificationDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["announcementTypeId"] = this.announcementTypeId;
-        data["announcementMessage"] = this.announcementMessage;
-        data["departmentId"] = this.departmentId;
-        data["externalUrl"] = this.externalUrl;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["closeDate"] = this.closeDate ? this.closeDate.toISOString() : <any>undefined;
-        data["companyId"] = this.companyId;
-        data["subId"] = this.subId;
-        return data;
-=======
         data["professionalBodyId"] = this.professionalBodyId;
         data["name"] = this.name;
         data["code"] = this.code;
         data["point"] = this.point;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageCertificationDTO {
@@ -45656,7 +43542,7 @@ export class CertificationDTO implements ICertificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): CertificationDTO {
@@ -45731,12 +43617,8 @@ export class CertificationDTOListApiResult implements ICertificationDTOListApiRe
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CertificationDTOListApiResult {
@@ -45790,41 +43672,12 @@ export class CertificationDTOApiResult implements ICertificationDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["contractId"] = this.contractId;
-        data["employeeId"] = this.employeeId;
-        data["firstName"] = this.firstName;
-        data["otherNames"] = this.otherNames;
-        data["lastName"] = this.lastName;
-        data["fullName"] = this.fullName;
-        data["employeeNumber"] = this.employeeNumber;
-        data["departmentId"] = this.departmentId;
-        data["department"] = this.department;
-        data["supervisorId"] = this.supervisorId;
-        data["supervisorContractId"] = this.supervisorContractId;
-        data["periodId"] = this.periodId;
-        data["period"] = this.period;
-        data["assignedKra"] = this.assignedKra;
-        data["assignedKpi"] = this.assignedKpi;
-        data["cycleStatus"] = this.cycleStatus;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["isSubmitted"] = this.isSubmitted;
-        data["supervisorFullName"] = this.supervisorFullName;
-        data["reviewStatus"] = this.reviewStatus;
-        data["isApproved"] = this.isApproved;
-        data["isReviewerSubmitted"] = this.isReviewerSubmitted;
-        data["isReviewerStartedAppraisal"] = this.isReviewerStartedAppraisal;
-        data["employeeStatus"] = this.employeeStatus;
-        data["reviewerStatus"] = this.reviewerStatus;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CertificationDTOApiResult {
@@ -45904,10 +43757,6 @@ export class PayslipCategory implements IPayslipCategory {
             for (let item of this.elements)
                 data["elements"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["company_id"] = this.company_id;
         data["sub_id"] = this.sub_id;
@@ -45920,7 +43769,6 @@ export class PayslipCategory implements IPayslipCategory {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayslipCategory {
@@ -46010,19 +43858,6 @@ export class ElementClassification implements IElementClassification {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["title"] = this.title;
-        data["responseId"] = this.responseId;
-        data["appraisalId"] = this.appraisalId;
-        data["employeeComment"] = this.employeeComment;
-        data["employeeScore"] = this.employeeScore;
-        data["reviewerComment"] = this.reviewerComment;
-        data["reviewerScore"] = this.reviewerScore;
-        data["averageScore"] = this.averageScore;
-        data["kraId"] = this.kraId;
-        data["kpiId"] = this.kpiId;
-        return data;
-=======
         data["name"] = this.name;
         data["type"] = this.type;
         data["priority_id"] = this.priority_id;
@@ -46212,7 +44047,6 @@ export class Element implements IElement {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Element {
@@ -46336,9 +44170,6 @@ export class PaymentInstitution implements IPaymentInstitution {
             for (let item of this.elements)
                 data["elements"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        return data;
-=======
         data["id"] = this.id;
         data["company_id"] = this.company_id;
         data["sub_id"] = this.sub_id;
@@ -46351,7 +44182,6 @@ export class PaymentInstitution implements IPaymentInstitution {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PaymentInstitution {
@@ -46429,12 +44259,8 @@ export class PaymentInstitutionIListApiResult implements IPaymentInstitutionILis
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PaymentInstitutionIListApiResult {
@@ -46471,87 +44297,12 @@ export class ElementIListApiResult implements IElementIListApiResult {
 
     init(_data?: any) {
         if (_data) {
-<<<<<<< HEAD
-            this.appraisalId = _data["appraisalId"];
-            this.employeeId = _data["employeeId"];
-            this.employeeContractId = _data["employeeContractId"];
-            this.reviewerContractId = _data["reviewerContractId"];
-            this.cycleId = _data["cycleId"];
-            this.kraId = _data["kraId"];
-            this.employeeComment = _data["employeeComment"];
-            this.reviewerComment = _data["reviewerComment"];
-            this.assignedKPIs = _data["assignedKPIs"];
-        }
-    }
-
-    static fromJS(data: any): PerformanceReviewDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new PerformanceReviewDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["appraisalId"] = this.appraisalId;
-        data["employeeId"] = this.employeeId;
-        data["employeeContractId"] = this.employeeContractId;
-        data["reviewerContractId"] = this.reviewerContractId;
-        data["cycleId"] = this.cycleId;
-        data["kraId"] = this.kraId;
-        data["employeeComment"] = this.employeeComment;
-        data["reviewerComment"] = this.reviewerComment;
-        data["assignedKPIs"] = this.assignedKPIs;
-        return data;
-    }
-
-    clone(): PerformanceReviewDTO {
-        const json = this.toJSON();
-        let result = new PerformanceReviewDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IPerformanceReviewDTO {
-    appraisalId: number;
-    employeeId: number;
-    employeeContractId: number;
-    reviewerContractId: number;
-    cycleId: number;
-    kraId: number;
-    employeeComment: string | undefined;
-    reviewerComment: string | undefined;
-    assignedKPIs: string | undefined;
-}
-
-export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO {
-    appraisalId!: number;
-    cycleId!: number;
-    cycle!: string | undefined;
-    appraisalTypeId!: number;
-    appraisalType!: string | undefined;
-    ratingTypeId!: number;
-    ratingType!: string | undefined;
-    periodUnderReview!: string | undefined;
-    totalPercentageScore!: number;
-    grade!: string | undefined;
-    recommendationId!: number;
-    recommendation!: string | undefined;
-
-    constructor(data?: IEmployeeAppraisalHistoryDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-=======
             this.hasError = _data["hasError"];
             this.message = _data["message"];
             if (Array.isArray(_data["result"])) {
                 this.result = [] as any;
                 for (let item of _data["result"])
                     this.result!.push(Element.fromJS(item));
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
             }
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
@@ -46567,21 +44318,6 @@ export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["appraisalId"] = this.appraisalId;
-        data["cycleId"] = this.cycleId;
-        data["cycle"] = this.cycle;
-        data["appraisalTypeId"] = this.appraisalTypeId;
-        data["appraisalType"] = this.appraisalType;
-        data["ratingTypeId"] = this.ratingTypeId;
-        data["ratingType"] = this.ratingType;
-        data["periodUnderReview"] = this.periodUnderReview;
-        data["totalPercentageScore"] = this.totalPercentageScore;
-        data["grade"] = this.grade;
-        data["recommendationId"] = this.recommendationId;
-        data["recommendation"] = this.recommendation;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -46592,7 +44328,6 @@ export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ElementIListApiResult {
@@ -46724,17 +44459,6 @@ export class EmployeeContractAssignment implements IEmployeeContractAssignment {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["assignmentNumber"] = this.assignmentNumber;
         data["employeeId"] = this.employeeId;
         data["supervisorId"] = this.supervisorId;
@@ -46780,7 +44504,6 @@ export class EmployeeContractAssignment implements IEmployeeContractAssignment {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeContractAssignment {
@@ -46895,16 +44618,6 @@ export class FrequencyRuleMapping implements IFrequencyRuleMapping {
         data["payPeriodId"] = this.payPeriodId;
         data["frequencyRule"] = this.frequencyRule ? this.frequencyRule.toJSON() : <any>undefined;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["subID"] = this.subID;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         data["company_id"] = this.company_id;
         data["sub_id"] = this.sub_id;
         data["is_deleted"] = this.is_deleted;
@@ -46916,7 +44629,6 @@ export class FrequencyRuleMapping implements IFrequencyRuleMapping {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): FrequencyRuleMapping {
@@ -47014,10 +44726,6 @@ export class FrequencyRule implements IFrequencyRule {
             for (let item of this.payrollTypes)
                 data["payrollTypes"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         if (Array.isArray(this.frequencyRuleMappings)) {
             data["frequencyRuleMappings"] = [];
             for (let item of this.frequencyRuleMappings)
@@ -47035,7 +44743,6 @@ export class FrequencyRule implements IFrequencyRule {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): FrequencyRule {
@@ -47152,14 +44859,6 @@ export class PayrollType implements IPayrollType {
         data["scheduleRunDate_Offset"] = this.scheduleRunDate_Offset;
         data["negativePaymentAllowed"] = this.negativePaymentAllowed;
         data["code"] = this.code;
-<<<<<<< HEAD
-        data["deperciationDate"] = this.deperciationDate ? this.deperciationDate.toISOString() : <any>undefined;
-        data["purchaseYear"] = this.purchaseYear;
-        data["depriciationType"] = this.depriciationType;
-        data["peroidicity"] = this.peroidicity ? this.peroidicity.toISOString() : <any>undefined;
-        data["deperciationPercentage"] = this.deperciationPercentage;
-        return data;
-=======
         if (Array.isArray(this.employees)) {
             data["employees"] = [];
             for (let item of this.employees)
@@ -47178,7 +44877,6 @@ export class PayrollType implements IPayrollType {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayrollType {
@@ -47255,20 +44953,6 @@ export class PayrollTypeIListApiResult implements IPayrollTypeIListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["assetTypeId"] = this.assetTypeId;
-        data["assetid"] = this.assetid;
-        data["companyID"] = this.companyID;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["subID"] = this.subID;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        data["code"] = this.code;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -47279,7 +44963,6 @@ export class PayrollTypeIListApiResult implements IPayrollTypeIListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayrollTypeIListApiResult {
@@ -47337,17 +45020,6 @@ export class FrequencyRuleIListApiResult implements IFrequencyRuleIListApiResult
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["subID"] = this.subID;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -47358,7 +45030,6 @@ export class FrequencyRuleIListApiResult implements IFrequencyRuleIListApiResult
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): FrequencyRuleIListApiResult {
@@ -47438,16 +45109,12 @@ export class Course implements ICourse {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Course {
@@ -47533,16 +45200,12 @@ export class QualificationGrade implements IQualificationGrade {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): QualificationGrade {
@@ -47637,16 +45300,12 @@ export class Qualification implements IQualification {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Qualification {
@@ -47772,16 +45431,12 @@ export class EmployeeQualification implements IEmployeeQualification {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeQualification {
@@ -47891,16 +45546,12 @@ export class ProfessionalBody implements IProfessionalBody {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ProfessionalBody {
@@ -47987,11 +45638,6 @@ export class Certification implements ICertification {
         data["point"] = this.point;
         data["professionalBody"] = this.professionalBody ? this.professionalBody.toJSON() : <any>undefined;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["assetid"] = this.assetid;
-        data["comment"] = this.comment;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -48001,7 +45647,6 @@ export class Certification implements ICertification {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Certification {
@@ -48101,14 +45746,6 @@ export class EmployeeCertification implements IEmployeeCertification {
         data["employee"] = this.employee ? this.employee.toJSON() : <any>undefined;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
-<<<<<<< HEAD
-        data["message"] = this.message;
-        data["processcode"] = this.processcode;
-        data["itemId"] = this.itemId;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["isapproved"] = this.isapproved;
-        return data;
-=======
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
         data["isDeleted"] = this.isDeleted;
@@ -48117,7 +45754,6 @@ export class EmployeeCertification implements IEmployeeCertification {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeCertification {
@@ -48202,16 +45838,12 @@ export class State implements IState {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): State {
@@ -48292,16 +45924,12 @@ export class LGA implements ILGA {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LGA {
@@ -48392,17 +46020,6 @@ export class Address implements IAddress {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["employee_id"] = this.employee_id;
         data["country_id"] = this.country_id;
         data["state_id"] = this.state_id;
@@ -48424,7 +46041,6 @@ export class Address implements IAddress {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Address {
@@ -48665,10 +46281,6 @@ export class Employee implements IEmployee {
             for (let item of this.employeeSkills)
                 data["employeeSkills"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         if (Array.isArray(this.employeeQualifications)) {
             data["employeeQualifications"] = [];
             for (let item of this.employeeQualifications)
@@ -48694,7 +46306,6 @@ export class Employee implements IEmployee {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Employee {
@@ -48825,17 +46436,6 @@ export class EmployeeSkill implements IEmployeeSkill {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["employeeId"] = this.employeeId;
         data["skillId"] = this.skillId;
         data["skillName"] = this.skillName;
@@ -48854,7 +46454,6 @@ export class EmployeeSkill implements IEmployeeSkill {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeSkill {
@@ -48951,10 +46550,6 @@ export class Skill implements ISkill {
             for (let item of this.employeeSkills)
                 data["employeeSkills"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -48965,7 +46560,6 @@ export class Skill implements ISkill {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Skill {
@@ -49040,12 +46634,8 @@ export class SkillIListApiResult implements ISkillIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SkillIListApiResult {
@@ -49121,10 +46711,6 @@ export class Sector implements ISector {
             for (let item of this.skills)
                 data["skills"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -49135,7 +46721,6 @@ export class Sector implements ISector {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Sector {
@@ -49207,12 +46792,8 @@ export class SectorIListApiResult implements ISectorIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SectorIListApiResult {
@@ -49278,12 +46859,8 @@ export class ProfessionalBodyIListApiResult implements IProfessionalBodyIListApi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ProfessionalBodyIListApiResult {
@@ -49302,130 +46879,7 @@ export interface IProfessionalBodyIListApiResult {
     totalRecord: number;
 }
 
-<<<<<<< HEAD
-export class AssetHistoryDTO implements IAssetHistoryDTO {
-    id!: number;
-    companyID!: number;
-    name!: string | undefined;
-    description!: string | undefined;
-    assignedEmployeeName!: string | undefined;
-    subID!: number;
-    dateCreated!: Date;
-    isDeleted!: boolean;
-    isActive!: boolean;
-    assetId!: number;
-    status!: number;
-    assignedEmployeeid!: number;
-    assetName!: string | undefined;
-    statusName!: string | undefined;
-    employeeId!: number;
-    employeeName!: string | undefined;
-    departmentAssignedTo!: number;
-    departmentNameAssignedTo!: string | undefined;
-    assignedDate!: Date;
-    employeelocationName!: string | undefined;
-
-    constructor(data?: IAssetHistoryDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-            this.assignedEmployeeName = _data["assignedEmployeeName"];
-            this.subID = _data["subID"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.isDeleted = _data["isDeleted"];
-            this.isActive = _data["isActive"];
-            this.assetId = _data["assetId"];
-            this.status = _data["status"];
-            this.assignedEmployeeid = _data["assignedEmployeeid"];
-            this.assetName = _data["assetName"];
-            this.statusName = _data["statusName"];
-            this.employeeId = _data["employeeId"];
-            this.employeeName = _data["employeeName"];
-            this.departmentAssignedTo = _data["departmentAssignedTo"];
-            this.departmentNameAssignedTo = _data["departmentNameAssignedTo"];
-            this.assignedDate = _data["assignedDate"] ? new Date(_data["assignedDate"].toString()) : <any>undefined;
-            this.employeelocationName = _data["employeelocationName"];
-        }
-    }
-
-    static fromJS(data: any): AssetHistoryDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new AssetHistoryDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["assignedEmployeeName"] = this.assignedEmployeeName;
-        data["subID"] = this.subID;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        data["assetId"] = this.assetId;
-        data["status"] = this.status;
-        data["assignedEmployeeid"] = this.assignedEmployeeid;
-        data["assetName"] = this.assetName;
-        data["statusName"] = this.statusName;
-        data["employeeId"] = this.employeeId;
-        data["employeeName"] = this.employeeName;
-        data["departmentAssignedTo"] = this.departmentAssignedTo;
-        data["departmentNameAssignedTo"] = this.departmentNameAssignedTo;
-        data["assignedDate"] = this.assignedDate ? this.assignedDate.toISOString() : <any>undefined;
-        data["employeelocationName"] = this.employeelocationName;
-        return data;
-    }
-
-    clone(): AssetHistoryDTO {
-        const json = this.toJSON();
-        let result = new AssetHistoryDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAssetHistoryDTO {
-    id: number;
-    companyID: number;
-    name: string | undefined;
-    description: string | undefined;
-    assignedEmployeeName: string | undefined;
-    subID: number;
-    dateCreated: Date;
-    isDeleted: boolean;
-    isActive: boolean;
-    assetId: number;
-    status: number;
-    assignedEmployeeid: number;
-    assetName: string | undefined;
-    statusName: string | undefined;
-    employeeId: number;
-    employeeName: string | undefined;
-    departmentAssignedTo: number;
-    departmentNameAssignedTo: string | undefined;
-    assignedDate: Date;
-    employeelocationName: string | undefined;
-}
-
-export class AssetHistoryDTOIListApiResult implements IAssetHistoryDTOIListApiResult {
-=======
 export class CertificationIListApiResult implements ICertificationIListApiResult {
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     hasError!: boolean;
     message!: string | undefined;
     result!: Certification[] | undefined;
@@ -49472,73 +46926,11 @@ export class CertificationIListApiResult implements ICertificationIListApiResult
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-    }
-
-    clone(): AssetHistoryDTOIListApiResult {
-        const json = this.toJSON();
-        let result = new AssetHistoryDTOIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAssetHistoryDTOIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: AssetHistoryDTO[] | undefined;
-    totalCount: number;
-}
-
-export class StringApiResult implements IStringApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: string | undefined;
-    totalCount!: number;
-
-    constructor(data?: IStringApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            this.result = _data["result"];
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): StringApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new StringApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result;
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): StringApiResult {
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
 
     clone(): CertificationIListApiResult {
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
         const json = this.toJSON();
         let result = new CertificationIListApiResult();
         result.init(json);
@@ -49611,14 +47003,6 @@ export class TenantBeneficiary implements ITenantBeneficiary {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["name"] = this.name;
-        data["directory"] = this.directory;
-        data["lastModifiedDate"] = this.lastModifiedDate;
-        data["url"] = this.url;
-        data["size"] = this.size;
-        return data;
-=======
         data["accountNo"] = this.accountNo;
         data["accountName"] = this.accountName;
         data["bankId"] = this.bankId;
@@ -49636,7 +47020,6 @@ export class TenantBeneficiary implements ITenantBeneficiary {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TenantBeneficiary {
@@ -49713,12 +47096,8 @@ export class TenantBeneficiaryIListApiResult implements ITenantBeneficiaryIListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TenantBeneficiaryIListApiResult {
@@ -49841,12 +47220,6 @@ export class DeploymentLog implements IDeploymentLog {
         data["filePath"] = this.filePath;
         data["location"] = this.location ? this.location.toJSON() : <any>undefined;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["totalBudgetAmount"] = this.totalBudgetAmount;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -49856,7 +47229,6 @@ export class DeploymentLog implements IDeploymentLog {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DeploymentLog {
@@ -49974,7 +47346,7 @@ export class Location implements ILocation {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Location {
@@ -50049,12 +47421,8 @@ export class LocationIListApiResult implements ILocationIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LocationIListApiResult {
@@ -50120,12 +47488,8 @@ export class DepartmentIListApiResult implements IDepartmentIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentIListApiResult {
@@ -50144,70 +47508,7 @@ export interface IDepartmentIListApiResult {
     totalRecord: number;
 }
 
-<<<<<<< HEAD
-export class ManageBudgetItemDTO implements IManageBudgetItemDTO {
-    id!: number;
-    name!: string | undefined;
-    code!: string | undefined;
-    totalBudget!: number;
-    budgetAllocations!: string | undefined;
-
-    constructor(data?: IManageBudgetItemDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.code = _data["code"];
-            this.totalBudget = _data["totalBudget"];
-            this.budgetAllocations = _data["budgetAllocations"];
-        }
-    }
-
-    static fromJS(data: any): ManageBudgetItemDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new ManageBudgetItemDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["code"] = this.code;
-        data["totalBudget"] = this.totalBudget;
-        data["budgetAllocations"] = this.budgetAllocations;
-        return data;
-    }
-
-    clone(): ManageBudgetItemDTO {
-        const json = this.toJSON();
-        let result = new ManageBudgetItemDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IManageBudgetItemDTO {
-    id: number;
-    name: string | undefined;
-    code: string | undefined;
-    totalBudget: number;
-    budgetAllocations: string | undefined;
-}
-
-export class Department implements IDepartment {
-=======
 export class JobRole implements IJobRole {
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     name!: string;
     code!: string | undefined;
     amount!: number | undefined;
@@ -50283,7 +47584,7 @@ export class JobRole implements IJobRole {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): JobRole {
@@ -50445,7 +47746,7 @@ export class Event implements IEvent {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Event {
@@ -50518,22 +47819,9 @@ export class EventIListApiResult implements IEventIListApiResult {
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EventIListApiResult {
@@ -50622,7 +47910,7 @@ export class PositionRequirement implements IPositionRequirement {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): PositionRequirement {
@@ -50744,7 +48032,7 @@ export class Position implements IPosition {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Position {
@@ -50817,23 +48105,6 @@ export class PositionIListApiResult implements IPositionIListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["disbursementBudgetItemId"] = this.disbursementBudgetItemId;
-        data["departmentId"] = this.departmentId;
-        data["allocatedAmount"] = this.allocatedAmount;
-        data["department"] = this.department ? this.department.toJSON() : <any>undefined;
-        data["disbursementBudgetItem"] = this.disbursementBudgetItem ? this.disbursementBudgetItem.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -50844,7 +48115,6 @@ export class PositionIListApiResult implements IPositionIListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PositionIListApiResult {
@@ -50921,16 +48191,7 @@ export class SalaryScale implements ISalaryScale {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        if (Array.isArray(this.budgetItemAllocations)) {
-            data["budgetItemAllocations"] = [];
-            for (let item of this.budgetItemAllocations)
-                data["budgetItemAllocations"].push(item.toJSON());
-        }
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SalaryScale {
@@ -51002,12 +48263,8 @@ export class SalaryScaleIListApiResult implements ISalaryScaleIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SalaryScaleIListApiResult {
@@ -51083,17 +48340,6 @@ export class Grade implements IGrade {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["name"] = this.name;
         data["code"] = this.code;
         data["created_by"] = this.created_by;
@@ -51111,7 +48357,6 @@ export class Grade implements IGrade {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Grade {
@@ -51188,12 +48433,8 @@ export class GradeIListApiResult implements IGradeIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeIListApiResult {
@@ -51286,16 +48527,12 @@ export class GradeStep implements IGradeStep {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeStep {
@@ -51373,13 +48610,9 @@ export class GradeStepIListApiResult implements IGradeStepIListApiResult {
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        return data;
-=======
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeStepIListApiResult {
@@ -51459,13 +48692,6 @@ export class GradeLevelBenefit implements IGradeLevelBenefit {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["togridboxId"] = this.togridboxId;
-        data["fromgridboxId"] = this.fromgridboxId;
-        data["employeeId"] = this.employeeId;
-        data["justification"] = this.justification;
-        return data;
-=======
         data["salaryScaleId"] = this.salaryScaleId;
         data["gradeId"] = this.gradeId;
         data["gradeStepId"] = this.gradeStepId;
@@ -51485,7 +48711,6 @@ export class GradeLevelBenefit implements IGradeLevelBenefit {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeLevelBenefit {
@@ -51564,12 +48789,8 @@ export class GradeLevelBenefitIListApiResult implements IGradeLevelBenefitIListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeLevelBenefitIListApiResult {
@@ -51645,11 +48866,6 @@ export class RequestType implements IRequestType {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["gridboxId"] = this.gridboxId;
-        data["gridboxCount"] = this.gridboxCount;
-        return data;
-=======
         data["name"] = this.name;
         data["typeId"] = this.typeId;
         data["approval"] = this.approval;
@@ -51667,7 +48883,6 @@ export class RequestType implements IRequestType {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestType {
@@ -51744,12 +48959,8 @@ export class RequestTypeIListApiResult implements IRequestTypeIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestTypeIListApiResult {
@@ -51827,16 +49038,12 @@ export class RequestFile implements IRequestFile {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestFile {
@@ -51969,21 +49176,12 @@ export class Request implements IRequest {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-<<<<<<< HEAD
-        if (Array.isArray(this.employeeTalentPoolHistory)) {
-            data["employeeTalentPoolHistory"] = [];
-            for (let item of this.employeeTalentPoolHistory)
-                data["employeeTalentPoolHistory"].push(item.toJSON());
-        }
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Request {
@@ -52062,28 +49260,6 @@ export class RequestIListApiResult implements IRequestIListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["careerSuccessorId"] = this.careerSuccessorId;
-        data["requirementCategory"] = this.requirementCategory;
-        data["skillId"] = this.skillId;
-        data["skillName"] = this.skillName;
-        data["trainingId"] = this.trainingId;
-        data["trainingName"] = this.trainingName;
-        data["certificationId"] = this.certificationId;
-        data["certificationName"] = this.certificationName;
-        data["qualificationId"] = this.qualificationId;
-        data["qualificationName"] = this.qualificationName;
-        data["abilityId"] = this.abilityId;
-        data["abilityName"] = this.abilityName;
-        data["experience"] = this.experience;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -52094,7 +49270,6 @@ export class RequestIListApiResult implements IRequestIListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestIListApiResult {
@@ -52149,42 +49324,11 @@ export class RetirementDocAttachment implements IRetirementDocAttachment {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeId"] = this.employeeId;
-        data["employeeName"] = this.employeeName;
-        data["growthDuration"] = this.growthDuration;
-        data["currentPositionId"] = this.currentPositionId;
-        data["currentPositionName"] = this.currentPositionName;
-        data["currentJobPositionName"] = this.currentJobPositionName;
-        data["targetPositionId"] = this.targetPositionId;
-        data["positionHolderId"] = this.positionHolderId;
-        data["positionHolderName"] = this.positionHolderName;
-        data["comment"] = this.comment;
-        data["careerSuccessionId"] = this.careerSuccessionId;
-        data["isNotification"] = this.isNotification;
-        if (Array.isArray(this.successionCompetency)) {
-            data["successionCompetency"] = [];
-            for (let item of this.successionCompetency)
-                data["successionCompetency"].push(item.toJSON());
-        }
-        if (Array.isArray(this.successionAdditionalCompetency)) {
-            data["successionAdditionalCompetency"] = [];
-            for (let item of this.successionAdditionalCompetency)
-                data["successionAdditionalCompetency"].push(item.toJSON());
-        }
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         data["retirementId"] = this.retirementId;
         data["documentName"] = this.documentName;
         data["docUrl"] = this.docUrl;
         data["retirement"] = this.retirement ? this.retirement.toJSON() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirementDocAttachment {
@@ -52263,15 +49407,7 @@ export class Retirement implements IRetirement {
             for (let item of this.retirmentDocAttachments)
                 data["retirmentDocAttachments"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["holderId"] = this.holderId;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Retirement {
@@ -52333,31 +49469,6 @@ export class RetirementIListApiResult implements IRetirementIListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["requirementCategory"] = this.requirementCategory;
-        data["skillId"] = this.skillId;
-        data["skillName"] = this.skillName;
-        data["trainingId"] = this.trainingId;
-        data["trainingName"] = this.trainingName;
-        data["certificationId"] = this.certificationId;
-        data["certificationName"] = this.certificationName;
-        data["qualificationId"] = this.qualificationId;
-        data["qualificationName"] = this.qualificationName;
-        data["abilityId"] = this.abilityId;
-        data["abilityName"] = this.abilityName;
-        data["experience"] = this.experience;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["skillWeight"] = this.skillWeight;
-        data["points"] = this.points;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -52368,7 +49479,6 @@ export class RetirementIListApiResult implements IRetirementIListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirementIListApiResult {
@@ -52421,30 +49531,10 @@ export class RetirementType implements IRetirementType {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["talentPoolName"] = this.talentPoolName;
-        data["employeeCount"] = this.employeeCount;
-        data["description"] = this.description;
-        data["loggedByUserId"] = this.loggedByUserId;
-        data["loggedByUserName"] = this.loggedByUserName;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        data["stringtalentPoolRequirement"] = this.stringtalentPoolRequirement;
-        if (Array.isArray(this.talentPoolRequirement)) {
-            data["talentPoolRequirement"] = [];
-            for (let item of this.talentPoolRequirement)
-                data["talentPoolRequirement"].push(item.toJSON());
-        }
-        return data;
-=======
         data["name"] = this.name;
         data["requirements"] = this.requirements;
         data["isEntitledToBenefits"] = this.isEntitledToBenefits;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirementType {
@@ -52509,12 +49599,8 @@ export class RetirementTypeIListApiResult implements IRetirementTypeIListApiResu
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirementTypeIListApiResult {
@@ -52569,25 +49655,11 @@ export class CompensationDTO implements ICompensationDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         data["compensationName"] = this.compensationName;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CompensationDTO {
@@ -52671,19 +49743,6 @@ export class Dependant implements IDependant {
         data["nin"] = this.nin;
         data["dateofBirth"] = this.dateofBirth ? this.dateofBirth.toISOString() : <any>undefined;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -52693,7 +49752,6 @@ export class Dependant implements IDependant {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Dependant {
@@ -52762,46 +49820,6 @@ export class DependantListApiResult implements IDependantListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["payrollItemId"] = this.payrollItemId;
-        data["payTypeId"] = this.payTypeId;
-        data["paymentInstitutionId"] = this.paymentInstitutionId;
-        data["name"] = this.name;
-        data["proirity_id"] = this.proirity_id;
-        data["report_name"] = this.report_name;
-        data["description"] = this.description;
-        data["element_classification_id"] = this.element_classification_id;
-        data["payslipCategoryId"] = this.payslipCategoryId;
-        data["currency"] = this.currency;
-        data["is_reoccuring"] = this.is_reoccuring;
-        data["is_variable"] = this.is_variable;
-        data["is_system_default"] = this.is_system_default;
-        data["amount"] = this.amount;
-        data["ratio"] = this.ratio;
-        data["isTaxDeduct"] = this.isTaxDeduct;
-        data["taxPercentage"] = this.taxPercentage;
-        data["hourlyPay"] = this.hourlyPay;
-        data["noOfWorkHours"] = this.noOfWorkHours;
-        data["short_text"] = this.short_text;
-        data["effective_start_date"] = this.effective_start_date ? this.effective_start_date.toISOString() : <any>undefined;
-        data["termination_end_date"] = this.termination_end_date ? this.termination_end_date.toISOString() : <any>undefined;
-        data["sys_Code"] = this.sys_Code;
-        data["paymentInstitution"] = this.paymentInstitution ? this.paymentInstitution.toJSON() : <any>undefined;
-        data["payslipCategory"] = this.payslipCategory ? this.payslipCategory.toJSON() : <any>undefined;
-        data["elementClassification"] = this.elementClassification ? this.elementClassification.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -52812,7 +49830,6 @@ export class DependantListApiResult implements IDependantListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DependantListApiResult {
@@ -52877,19 +49894,6 @@ export class EmployeeCompensationDTO implements IEmployeeCompensationDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         data["employeeId"] = this.employeeId;
         data["compensationId"] = this.compensationId;
         data["companyID"] = this.companyID;
@@ -52900,7 +49904,6 @@ export class EmployeeCompensationDTO implements IEmployeeCompensationDTO {
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeCompensationDTO {
@@ -52985,17 +49988,6 @@ export class VwConfirmationDTO implements IVwConfirmationDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["company_id"] = this.company_id;
         data["subsidiary_id"] = this.subsidiary_id;
@@ -53015,7 +50007,6 @@ export class VwConfirmationDTO implements IVwConfirmationDTO {
         data["str_effective_date"] = this.str_effective_date;
         data["confirmationDate"] = this.confirmationDate ? this.confirmationDate.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): VwConfirmationDTO {
@@ -53094,12 +50085,8 @@ export class VwConfirmationDTOIListApiResult implements IVwConfirmationDTOIListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): VwConfirmationDTOIListApiResult {
@@ -53153,60 +50140,12 @@ export class VwDashboard implements IVwDashboard {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["assignmentNumber"] = this.assignmentNumber;
-        data["employeeId"] = this.employeeId;
-        data["supervisorId"] = this.supervisorId;
-        data["departmentId"] = this.departmentId;
-        data["payRollTypeId"] = this.payRollTypeId;
-        data["jobId"] = this.jobId;
-        data["gradeId"] = this.gradeId;
-        data["gradeStepId"] = this.gradeStepId;
-        data["locationId"] = this.locationId;
-        data["positionId"] = this.positionId;
-        data["ministryId"] = this.ministryId;
-        data["employmentTypeId"] = this.employmentTypeId;
-        data["contractEndDate"] = this.contractEndDate ? this.contractEndDate.toISOString() : <any>undefined;
-        data["salaryScaleId"] = this.salaryScaleId;
-        data["dateofPresentAppointment"] = this.dateofPresentAppointment ? this.dateofPresentAppointment.toISOString() : <any>undefined;
-        data["dateOfAppointment"] = this.dateOfAppointment ? this.dateOfAppointment.toISOString() : <any>undefined;
-        data["dateOfLastDeployment"] = this.dateOfLastDeployment ? this.dateOfLastDeployment.toISOString() : <any>undefined;
-        data["dateOfConversion"] = this.dateOfConversion ? this.dateOfConversion.toISOString() : <any>undefined;
-        data["dateOfConfirmation"] = this.dateOfConfirmation ? this.dateOfConfirmation.toISOString() : <any>undefined;
-        data["dateDeployed"] = this.dateDeployed ? this.dateDeployed.toISOString() : <any>undefined;
-        data["datePromotion"] = this.datePromotion ? this.datePromotion.toISOString() : <any>undefined;
-        data["dateOfRetirement"] = this.dateOfRetirement ? this.dateOfRetirement.toISOString() : <any>undefined;
-        data["retirementTypeId"] = this.retirementTypeId;
-        data["isContractActive"] = this.isContractActive;
-        data["isDefaultContract"] = this.isDefaultContract;
-        data["noOfLeaveDays"] = this.noOfLeaveDays;
-        data["peopleGroupId"] = this.peopleGroupId;
-        data["lastPromotionDate"] = this.lastPromotionDate ? this.lastPromotionDate.toISOString() : <any>undefined;
-        data["schoolId"] = this.schoolId;
-        data["unitId"] = this.unitId;
-        data["cadreID"] = this.cadreID;
-        data["directorateID"] = this.directorateID;
-        data["lcdaID"] = this.lcdaID;
-        data["isOffPayrolled"] = this.isOffPayrolled;
-        data["payrollType"] = this.payrollType ? this.payrollType.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["countDueForRetirement"] = this.countDueForRetirement;
         data["dueForConfirmation"] = this.dueForConfirmation;
         data["dueForPromotion"] = this.dueForPromotion;
         data["dueForDeployment"] = this.dueForDeployment;
         data["totalNoOfEmployees"] = this.totalNoOfEmployees;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): VwDashboard {
@@ -53254,27 +50193,9 @@ export class DashboardData implements IDashboardData {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["frequencyRuleId"] = this.frequencyRuleId;
-        data["payPeriodId"] = this.payPeriodId;
-        data["frequencyRule"] = this.frequencyRule ? this.frequencyRule.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         data["name"] = this.name;
         data["value"] = this.value;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DashboardData {
@@ -53326,37 +50247,11 @@ export class DashboardData2 implements IDashboardData2 {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-<<<<<<< HEAD
-        data["type"] = this.type;
-        if (Array.isArray(this.payrollTypes)) {
-            data["payrollTypes"] = [];
-            for (let item of this.payrollTypes)
-                data["payrollTypes"].push(item.toJSON());
-        }
-        if (Array.isArray(this.frequencyRuleMappings)) {
-            data["frequencyRuleMappings"] = [];
-            for (let item of this.frequencyRuleMappings)
-                data["frequencyRuleMappings"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         data["email"] = this.email;
         data["desc"] = this.desc;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DashboardData2 {
@@ -53502,23 +50397,7 @@ export class DashboardDTO implements IDashboardDTO {
             for (let item of this.lstAnnouncementData)
                 data["lstAnnouncementData"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["frequencyRule"] = this.frequencyRule ? this.frequencyRule.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["row_version"] = this.row_version;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DashboardDTO {
@@ -53581,12 +50460,8 @@ export class DashboardDTOApiResult implements IDashboardDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DashboardDTOApiResult {
@@ -53699,12 +50574,8 @@ export class IDTextViewModelIListApiResult implements IIDTextViewModelIListApiRe
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): IDTextViewModelIListApiResult {
@@ -53787,7 +50658,7 @@ export class DropdownValue implements IDropdownValue {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DropdownValue {
@@ -53861,12 +50732,8 @@ export class DropdownValueIListApiResult implements IDropdownValueIListApiResult
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DropdownValueIListApiResult {
@@ -53946,7 +50813,7 @@ export class Country implements ICountry {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Country {
@@ -54018,22 +50885,9 @@ export class CountryIListApiResult implements ICountryIListApiResult {
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CountryIListApiResult {
@@ -54166,12 +51020,8 @@ export class LGAIListApiResult implements ILGAIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LGAIListApiResult {
@@ -54221,22 +51071,10 @@ export class ManageDepartmentDTO implements IManageDepartmentDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["name"] = this.name;
         data["code"] = this.code;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageDepartmentDTO {
@@ -54319,12 +51157,8 @@ export class DepartmentDTO implements IDepartmentDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        return data;
-=======
         data["headOfDepartment"] = this.headOfDepartment;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentDTO {
@@ -54399,12 +51233,8 @@ export class DepartmentDTOListApiResult implements IDepartmentDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentDTOListApiResult {
@@ -54524,17 +51354,6 @@ export class DependantDTO implements IDependantDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["employeeId"] = this.employeeId;
         data["firstName"] = this.firstName;
         data["lastName"] = this.lastName;
@@ -54543,7 +51362,6 @@ export class DependantDTO implements IDependantDTO {
         data["nin"] = this.nin;
         data["dateofBirth"] = this.dateofBirth ? this.dateofBirth.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DependantDTO {
@@ -54691,12 +51509,8 @@ export class DependantResultDTOListApiResult implements IDependantResultDTOListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DependantResultDTOListApiResult {
@@ -54754,24 +51568,6 @@ export class DeploymentLogIListApiResult implements IDeploymentLogIListApiResult
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["positionId"] = this.positionId;
-        data["requirementId"] = this.requirementId;
-        data["requirementValue"] = this.requirementValue;
-        data["requirementTypeId"] = this.requirementTypeId;
-        data["requirementTypeName"] = this.requirementTypeName;
-        data["position"] = this.position ? this.position.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -54782,7 +51578,6 @@ export class DeploymentLogIListApiResult implements IDeploymentLogIListApiResult
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DeploymentLogIListApiResult {
@@ -54850,15 +51645,6 @@ export class SearchDeploymentDto implements ISearchDeploymentDto {
         data = typeof data === 'object' ? data : {};
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
-<<<<<<< HEAD
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["employeeContractid"] = this.employeeContractid;
         data["name"] = this.name;
         data["id"] = this.id;
@@ -54869,7 +51655,6 @@ export class SearchDeploymentDto implements ISearchDeploymentDto {
         data["pageNumber"] = this.pageNumber;
         data["pageSize"] = this.pageSize;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SearchDeploymentDto {
@@ -54925,22 +51710,10 @@ export class IdNameObj implements IIdNameObj {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["code"] = this.code;
         data["name"] = this.name;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): IdNameObj {
@@ -54994,20 +51767,6 @@ export class CreateDeploymentViewModel implements ICreateDeploymentViewModel {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["code"] = this.code;
-        data["name"] = this.name;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         if (Array.isArray(this.lstLocations)) {
             data["lstLocations"] = [];
             for (let item of this.lstLocations)
@@ -55019,7 +51778,6 @@ export class CreateDeploymentViewModel implements ICreateDeploymentViewModel {
                 data["ministries"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CreateDeploymentViewModel {
@@ -55082,12 +51840,8 @@ export class CreateDeploymentViewModelIListApiResult implements ICreateDeploymen
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CreateDeploymentViewModelIListApiResult {
@@ -55309,7 +52063,7 @@ export class EmailLog implements IEmailLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmailLog {
@@ -55383,17 +52137,6 @@ export class EmailLogAttachment implements IEmailLogAttachment {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["emailLogID"] = this.emailLogID;
         data["emailLog"] = this.emailLog ? this.emailLog.toJSON() : <any>undefined;
@@ -55402,7 +52145,6 @@ export class EmailLogAttachment implements IEmailLogAttachment {
         data["emailFileName"] = this.emailFileName;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmailLogAttachment {
@@ -55514,16 +52256,12 @@ export class EmailLogDTO implements IEmailLogDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        return data;
-=======
         if (Array.isArray(this.emailAttachments)) {
             data["emailAttachments"] = [];
             for (let item of this.emailAttachments)
                 data["emailAttachments"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmailLogDTO {
@@ -55605,12 +52343,8 @@ export class EmailLogDTOIListApiResult implements IEmailLogDTOIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmailLogDTOIListApiResult {
@@ -55728,17 +52462,6 @@ export class EmailTemplateDTO implements IEmailTemplateDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["name"] = this.name;
         data["subject"] = this.subject;
         data["text"] = this.text;
@@ -55748,7 +52471,6 @@ export class EmailTemplateDTO implements IEmailTemplateDTO {
                 data["emailTemplateCol"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmailTemplateDTO {
@@ -55806,12 +52528,8 @@ export class EmailTemplateDTOApiResult implements IEmailTemplateDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmailTemplateDTOApiResult {
@@ -55914,17 +52632,6 @@ export class ManageEmployeeDTO implements IManageEmployeeDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["profileOperation"] = this.profileOperation;
         data["titleId"] = this.titleId;
         data["religionId"] = this.religionId;
@@ -55954,7 +52661,6 @@ export class ManageEmployeeDTO implements IManageEmployeeDTO {
         data["skills"] = this.skills;
         data["documents"] = this.documents;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageEmployeeDTO {
@@ -56020,19 +52726,7 @@ export class File implements IFile {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): File {
@@ -56081,33 +52775,12 @@ export class DropdownValueDTO implements IDropdownValueDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["sectorId"] = this.sectorId;
-        data["name"] = this.name;
-        data["point"] = this.point;
-        if (Array.isArray(this.employeeSkills)) {
-            data["employeeSkills"] = [];
-            for (let item of this.employeeSkills)
-                data["employeeSkills"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["option_text"] = this.option_text;
         data["option_value"] = this.option_value;
         data["employee_number"] = this.employee_number;
         data["company_id"] = this.company_id;
         data["subsidary_id"] = this.subsidary_id;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DropdownValueDTO {
@@ -56165,26 +52838,6 @@ export class DropdownValueDTOIListApiResult implements IDropdownValueDTOIListApi
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["employeeId"] = this.employeeId;
-        data["skillId"] = this.skillId;
-        data["skillName"] = this.skillName;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["numberOfExperienceInMonth"] = this.numberOfExperienceInMonth;
-        data["point"] = this.point;
-        data["employee"] = this.employee ? this.employee.toJSON() : <any>undefined;
-        data["skill"] = this.skill ? this.skill.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -56195,7 +52848,6 @@ export class DropdownValueDTOIListApiResult implements IDropdownValueDTOIListApi
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DropdownValueDTOIListApiResult {
@@ -56366,15 +53018,6 @@ export class EmployeeContractAssignmentDTO implements IEmployeeContractAssignmen
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
-<<<<<<< HEAD
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["supNumber"] = this.supNumber;
         data["assignmentNumber"] = this.assignmentNumber;
         data["firstName"] = this.firstName;
@@ -56435,7 +53078,6 @@ export class EmployeeContractAssignmentDTO implements IEmployeeContractAssignmen
         data["lcda_id"] = this.lcda_id;
         data["lga_id"] = this.lga_id;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeContractAssignmentDTO {
@@ -56544,30 +53186,11 @@ export class Pension implements IPension {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["name"] = this.name;
-        if (Array.isArray(this.employeeQualifications)) {
-            data["employeeQualifications"] = [];
-            for (let item of this.employeeQualifications)
-                data["employeeQualifications"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["pensionerFileNo"] = this.pensionerFileNo;
         data["pfaId"] = this.pfaId;
         data["pfa"] = this.pfa;
         data["rsaNumber"] = this.rsaNumber;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Pension {
@@ -56673,7 +53296,7 @@ export class EmployeeQualificationDTO implements IEmployeeQualificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeQualificationDTO {
@@ -56793,7 +53416,7 @@ export class AddressDTO implements IAddressDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): AddressDTO {
@@ -56900,7 +53523,7 @@ export class EmployeeBankDTO implements IEmployeeBankDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeBankDTO {
@@ -57012,7 +53635,7 @@ export class NextOfKin implements INextOfKin {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): NextOfKin {
@@ -57124,7 +53747,7 @@ export class EmployeeHistoryDTO implements IEmployeeHistoryDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeHistoryDTO {
@@ -57232,7 +53855,7 @@ export class EmployeeCertificationDTO implements IEmployeeCertificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCertificationDTO {
@@ -57339,7 +53962,7 @@ export class Document implements IDocument {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Document {
@@ -57571,18 +54194,6 @@ export class EmployeeDTO implements IEmployeeDTO {
             for (let item of this.addresses)
                 data["addresses"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         if (Array.isArray(this.banks)) {
             data["banks"] = [];
             for (let item of this.banks)
@@ -57610,7 +54221,6 @@ export class EmployeeDTO implements IEmployeeDTO {
                 data["documents"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeDTO {
@@ -57890,21 +54500,9 @@ export class ManageEventDTO implements IManageEventDTO {
         data = typeof data === 'object' ? data : {};
         data["title"] = this.title;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["notify_Employee"] = this.notify_Employee;
         data["file"] = this.file;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageEventDTO {
@@ -57996,16 +54594,12 @@ export class EventDTO implements IEventDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        return data;
-=======
         data["eventTypeID"] = this.eventTypeID;
         data["title"] = this.title;
         data["isSystem"] = this.isSystem;
         data["notify_Employee"] = this.notify_Employee;
         data["file"] = this.file;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EventDTO {
@@ -58084,12 +54678,8 @@ export class EventDTOListApiResult implements IEventDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EventDTOListApiResult {
@@ -58143,21 +54733,12 @@ export class EventDTOApiResult implements IEventDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["retirementId"] = this.retirementId;
-        data["documentName"] = this.documentName;
-        data["docUrl"] = this.docUrl;
-        data["retirement"] = this.retirement ? this.retirement.toJSON() : <any>undefined;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EventDTOApiResult {
@@ -58212,27 +54793,11 @@ export class ExpenseGroupDto implements IExpenseGroupDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["retirementTypeId"] = this.retirementTypeId;
-        data["retirementUserId"] = this.retirementUserId;
-        data["comment"] = this.comment;
-        data["dateRetired"] = this.dateRetired ? this.dateRetired.toISOString() : <any>undefined;
-        data["loggedDate"] = this.loggedDate ? this.loggedDate.toISOString() : <any>undefined;
-        data["createdBy"] = this.createdBy;
-        data["requriesBenefits"] = this.requriesBenefits;
-        if (Array.isArray(this.retirmentDocAttachments)) {
-            data["retirmentDocAttachments"] = [];
-            for (let item of this.retirmentDocAttachments)
-                data["retirmentDocAttachments"].push(item.toJSON());
-        }
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["name"] = this.name;
         data["referenceId"] = this.referenceId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseGroupDto {
@@ -58245,84 +54810,10 @@ export class ExpenseGroupDto implements IExpenseGroupDto {
 
 export interface IExpenseGroupDto {
     id: number;
-<<<<<<< HEAD
-    retirementTypeId: number;
-    retirementUserId: number;
-    comment: string | undefined;
-    dateRetired: Date;
-    loggedDate: Date;
-    createdBy: string | undefined;
-    requriesBenefits: boolean;
-    retirmentDocAttachments: RetirementDocAttachment[] | undefined;
-}
-
-export class RetirementIListApiResult implements IRetirementIListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: Retirement[] | undefined;
-    totalCount!: number;
-
-    constructor(data?: IRetirementIListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(Retirement.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): RetirementIListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new RetirementIListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): RetirementIListApiResult {
-        const json = this.toJSON();
-        let result = new RetirementIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IRetirementIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: Retirement[] | undefined;
-    totalCount: number;
-=======
     companyID: number;
     subID: number;
     name: string | undefined;
     referenceId: string | undefined;
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 }
 
 export class ExpenseGroup implements IExpenseGroup {
@@ -58373,11 +54864,6 @@ export class ExpenseGroup implements IExpenseGroup {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-<<<<<<< HEAD
-        data["requirements"] = this.requirements;
-        data["isEntitledToBenefits"] = this.isEntitledToBenefits;
-        return data;
-=======
         data["referenceId"] = this.referenceId;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
@@ -58389,7 +54875,6 @@ export class ExpenseGroup implements IExpenseGroup {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseGroup {
@@ -58461,12 +54946,8 @@ export class ExpenseGroupIListApiResult implements IExpenseGroupIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseGroupIListApiResult {
@@ -58564,15 +55045,7 @@ export class ExpenseProjectDto implements IExpenseProjectDto {
         data["startDateString"] = this.startDateString;
         data["endDateString"] = this.endDateString;
         data["status"] = this.status;
-<<<<<<< HEAD
-        data["staff_no"] = this.staff_no;
-        data["effective_date"] = this.effective_date ? this.effective_date.toISOString() : <any>undefined;
-        data["str_effective_date"] = this.str_effective_date;
-        data["confirmationDate"] = this.confirmationDate ? this.confirmationDate.toISOString() : <any>undefined;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseProjectDto {
@@ -58655,17 +55128,6 @@ export class ExpenseDoc implements IExpenseDoc {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["expenseId"] = this.expenseId;
         data["path"] = this.path;
         data["docType"] = this.docType;
@@ -58680,7 +55142,6 @@ export class ExpenseDoc implements IExpenseDoc {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseDoc {
@@ -58801,10 +55262,6 @@ export class ExpenseSubType implements IExpenseSubType {
         }
         data["expenseType"] = this.expenseType ? this.expenseType.toJSON() : <any>undefined;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["text"] = this.text;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -58814,7 +55271,6 @@ export class ExpenseSubType implements IExpenseSubType {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseSubType {
@@ -58929,10 +55385,6 @@ export class ExpenseType implements IExpenseType {
             for (let item of this.expenses)
                 data["expenses"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         if (Array.isArray(this.expenseSubTypes)) {
             data["expenseSubTypes"] = [];
             for (let item of this.expenseSubTypes)
@@ -58948,7 +55400,6 @@ export class ExpenseType implements IExpenseType {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseType {
@@ -59075,7 +55526,7 @@ export class ExpenseProjectActivity implements IExpenseProjectActivity {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProjectActivity {
@@ -59253,10 +55704,6 @@ export class Expense implements IExpense {
             for (let item of this.expenseDocs)
                 data["expenseDocs"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["expenseType"] = this.expenseType ? this.expenseType.toJSON() : <any>undefined;
         data["expenseSubType"] = this.expenseSubType ? this.expenseSubType.toJSON() : <any>undefined;
         data["expenseProjectActivity"] = this.expenseProjectActivity ? this.expenseProjectActivity.toJSON() : <any>undefined;
@@ -59271,7 +55718,6 @@ export class Expense implements IExpense {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Expense {
@@ -59424,7 +55870,7 @@ export class ExpenseProject implements IExpenseProject {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProject {
@@ -59457,76 +55903,6 @@ export interface IExpenseProject {
     modifiedById: number | undefined;
 }
 
-<<<<<<< HEAD
-export class CountryIListApiResult implements ICountryIListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: Country[] | undefined;
-    totalCount!: number;
-
-    constructor(data?: ICountryIListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(Country.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): CountryIListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new CountryIListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): CountryIListApiResult {
-        const json = this.toJSON();
-        let result = new CountryIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICountryIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: Country[] | undefined;
-    totalCount: number;
-}
-
-export class StateIListApiResult implements IStateIListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: State[] | undefined;
-    totalCount!: number;
-=======
 export class ExpenseDTO implements IExpenseDTO {
     id!: number;
     companyID!: number;
@@ -59579,7 +55955,6 @@ export class ExpenseDTO implements IExpenseDTO {
     tempRef!: string | undefined;
     departmentName!: string | undefined;
     locatioName!: string | undefined;
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
     constructor(data?: IExpenseDTO) {
         if (data) {
@@ -59655,17 +56030,6 @@ export class ExpenseDTO implements IExpenseDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -59718,7 +56082,6 @@ export class ExpenseDTO implements IExpenseDTO {
         data["departmentName"] = this.departmentName;
         data["locatioName"] = this.locatioName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseDTO {
@@ -59830,64 +56193,8 @@ export class ExpenseDTOIListApiResult implements IExpenseDTOIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-    }
-
-    clone(): LGAIListApiResult {
-        const json = this.toJSON();
-        let result = new LGAIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILGAIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: LGA[] | undefined;
-    totalCount: number;
-}
-
-export class ManageDepartmentDTO implements IManageDepartmentDTO {
-    id!: number;
-    name!: string;
-    code!: string;
-
-    constructor(data?: IManageDepartmentDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.code = _data["code"];
-        }
-    }
-
-    static fromJS(data: any): ManageDepartmentDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new ManageDepartmentDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["code"] = this.code;
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseDTOIListApiResult {
@@ -59965,17 +56272,9 @@ export class ExpenseTypeDto implements IExpenseTypeDto {
         data["code"] = this.code;
         data["isDefault"] = this.isDefault;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        data["headOfDepartment"] = this.headOfDepartment;
-        return data;
-=======
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseTypeDto {
@@ -60048,12 +56347,8 @@ export class ExpenseTypeIListApiResult implements IExpenseTypeIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ExpenseTypeIListApiResult {
@@ -60117,13 +56412,6 @@ export class ManageDocumentDTO implements IManageDocumentDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["employee_id"] = this.employee_id;
         data["employeeNo"] = this.employeeNo;
@@ -60135,7 +56423,6 @@ export class ManageDocumentDTO implements IManageDocumentDTO {
         data["docType"] = this.docType;
         data["comment"] = this.comment;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageDocumentDTO {
@@ -60198,12 +56485,8 @@ export class StringApiResult implements IStringApiResult {
         data["message"] = this.message;
         data["result"] = this.result;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): StringApiResult {
@@ -60258,22 +56541,11 @@ export class AzureDocs implements IAzureDocs {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["strStartDate"] = this.strStartDate;
-        data["strEndDate"] = this.strEndDate;
-        data["referenceId"] = this.referenceId;
-        data["code"] = this.code;
-        data["pageNumber"] = this.pageNumber;
-        data["pageSize"] = this.pageSize;
-        return data;
-=======
         data["directory"] = this.directory;
         data["lastModifiedDate"] = this.lastModifiedDate;
         data["url"] = this.url;
         data["size"] = this.size;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): AzureDocs {
@@ -60400,16 +56672,12 @@ export class GradeLevelCreatePayload implements IGradeLevelCreatePayload {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-<<<<<<< HEAD
-        return data;
-=======
         data["code"] = this.code;
         data["created_by"] = this.created_by;
         data["promotion_min_years"] = this.promotion_min_years;
         data["promotion_min_in_days"] = this.promotion_min_in_days;
         data["noOfLeaveDays"] = this.noOfLeaveDays;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeLevelCreatePayload {
@@ -60489,19 +56757,6 @@ export class GradeLevelDTO implements IGradeLevelDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        if (Array.isArray(this.lstLocations)) {
-            data["lstLocations"] = [];
-            for (let item of this.lstLocations)
-                data["lstLocations"].push(item.toJSON());
-        }
-        if (Array.isArray(this.ministries)) {
-            data["ministries"] = [];
-            for (let item of this.ministries)
-                data["ministries"].push(item.toJSON());
-        }
-        return data;
-=======
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -60520,7 +56775,6 @@ export class GradeLevelDTO implements IGradeLevelDTO {
         data["noOfLeaveDays"] = this.noOfLeaveDays;
         data["salaryScaleId"] = this.salaryScaleId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeLevelDTO {
@@ -60598,12 +56852,8 @@ export class GradeLevelDTOListApiResult implements IGradeLevelDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeLevelDTOListApiResult {
@@ -60674,16 +56924,6 @@ export class ManageGradeLevelBenefitDTO implements IManageGradeLevelBenefitDTO {
         data["gradeId"] = this.gradeId;
         data["gradeStepId"] = this.gradeStepId;
         data["amount"] = this.amount;
-<<<<<<< HEAD
-        data["accountNumber"] = this.accountNumber;
-        data["accountName"] = this.accountName;
-        data["bankId"] = this.bankId;
-        data["scheduledDate"] = this.scheduledDate ? this.scheduledDate.toISOString() : <any>undefined;
-        data["description"] = this.description;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        return data;
-=======
         data["salaryScaleId"] = this.salaryScaleId;
         data["name"] = this.name;
         data["promotion_min_years"] = this.promotion_min_years;
@@ -60691,7 +56931,6 @@ export class ManageGradeLevelBenefitDTO implements IManageGradeLevelBenefitDTO {
         data["benefitId"] = this.benefitId;
         data["gradeName"] = this.gradeName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageGradeLevelBenefitDTO {
@@ -60798,9 +57037,6 @@ export class GradeLevelBenefitDTO implements IGradeLevelBenefitDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        return data;
-=======
         data["salaryScaleId"] = this.salaryScaleId;
         data["promotion_min_years"] = this.promotion_min_years;
         data["promotion_min_in_days"] = this.promotion_min_in_days;
@@ -60811,7 +57047,6 @@ export class GradeLevelBenefitDTO implements IGradeLevelBenefitDTO {
         data["amount"] = this.amount;
         data["gradeName"] = this.gradeName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeLevelBenefitDTO {
@@ -61009,21 +57244,11 @@ export class ManageJobRoleDTO implements IManageJobRoleDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["emailLogID"] = this.emailLogID;
-        data["emailLog"] = this.emailLog ? this.emailLog.toJSON() : <any>undefined;
-        data["folderOnServer"] = this.folderOnServer;
-        data["fileNameOnServer"] = this.fileNameOnServer;
-        data["emailFileName"] = this.emailFileName;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        return data;
-=======
         data["name"] = this.name;
         data["code"] = this.code;
         data["amount"] = this.amount;
         data["parentPositionId"] = this.parentPositionId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageJobRoleDTO {
@@ -61112,19 +57337,10 @@ export class JobRolesDTO implements IJobRolesDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        if (Array.isArray(this.emailAttachments)) {
-            data["emailAttachments"] = [];
-            for (let item of this.emailAttachments)
-                data["emailAttachments"].push(item.toJSON());
-        }
-        return data;
-=======
         data["promotion_min_years"] = this.promotion_min_years;
         data["next_job_role_id"] = this.next_job_role_id;
         data["parent_id"] = this.parent_id;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): JobRolesDTO {
@@ -61201,12 +57417,8 @@ export class JobRolesDTOListApiResult implements IJobRolesDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): JobRolesDTOListApiResult {
@@ -61264,12 +57476,8 @@ export class JobRolesDTOApiResult implements IJobRolesDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): JobRolesDTOApiResult {
@@ -61358,17 +57566,6 @@ export class SectionDTO implements ISectionDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["name"] = this.name;
-        data["subject"] = this.subject;
-        data["text"] = this.text;
-        if (Array.isArray(this.emailTemplateCol)) {
-            data["emailTemplateCol"] = [];
-            for (let item of this.emailTemplateCol)
-                data["emailTemplateCol"].push(item.toJSON());
-        }
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["section_name"] = this.section_name;
@@ -61391,7 +57588,6 @@ export class SectionDTO implements ISectionDTO {
         data["strategyCategory"] = this.strategyCategory;
         data["ratingType"] = this.ratingType;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SectionDTO {
@@ -61474,12 +57670,8 @@ export class SectionDTOIListApiResult implements ISectionDTOIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SectionDTOIListApiResult {
@@ -61590,60 +57782,6 @@ export class KPI implements IKPI {
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-<<<<<<< HEAD
-        data["serialNo"] = this.serialNo;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["otherNames"] = this.otherNames;
-        data["employeeNumber"] = this.employeeNumber;
-        data["assignmentNumber"] = this.assignmentNumber;
-        data["dateOfBirth"] = this.dateOfBirth ? this.dateOfBirth.toISOString() : <any>undefined;
-        data["maritalStatusId"] = this.maritalStatusId;
-        data["genderId"] = this.genderId;
-        data["lasraaNumber"] = this.lasraaNumber;
-        data["regNo"] = this.regNo;
-        data["estabFileNo"] = this.estabFileNo;
-        data["personalEmail"] = this.personalEmail;
-        data["workEmail"] = this.workEmail;
-        data["fullName"] = this.fullName;
-        data["peopleGroupId"] = this.peopleGroupId;
-        data["niNumber"] = this.niNumber;
-        data["profilePic"] = this.profilePic;
-        data["workMobile"] = this.workMobile;
-        data["defaultMobile"] = this.defaultMobile;
-        data["dialingCode"] = this.dialingCode;
-        data["subjectSpecialization"] = this.subjectSpecialization;
-        data["selfServiceStatus"] = this.selfServiceStatus;
-        data["employmentStatusId"] = this.employmentStatusId;
-        data["employmentStatus"] = this.employmentStatus;
-        data["yearsOfService"] = this.yearsOfService;
-        data["age"] = this.age;
-        data["department"] = this.department;
-        data["jobRole"] = this.jobRole;
-        data["location"] = this.location;
-        data["pensionerFileNo"] = this.pensionerFileNo;
-        data["pfaId"] = this.pfaId;
-        data["rsaNumber"] = this.rsaNumber;
-        data["stateOfOrigion"] = this.stateOfOrigion;
-        data["lgaOfOrigion"] = this.lgaOfOrigion;
-        data["internalAddressLine"] = this.internalAddressLine;
-        data["addressLine1"] = this.addressLine1;
-        data["addressLine2"] = this.addressLine2;
-        data["originCountry"] = this.originCountry;
-        data["originState"] = this.originState;
-        data["residentialCountry"] = this.residentialCountry;
-        data["residentialState"] = this.residentialState;
-        data["residentialLga"] = this.residentialLga;
-        data["residentialAddress"] = this.residentialAddress;
-        data["created_by"] = this.created_by;
-        data["bvn"] = this.bvn;
-        data["bvnStatus"] = this.bvnStatus;
-        data["bvnValidationResponse"] = this.bvnValidationResponse;
-        data["lastBVNValidation"] = this.lastBVNValidation ? this.lastBVNValidation.toISOString() : <any>undefined;
-        data["deviceId"] = this.deviceId;
-        data["isOnboarding"] = this.isOnboarding;
-        return data;
-=======
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
@@ -61777,7 +57915,6 @@ export class KPISection implements IKPISection {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): KPISection {
@@ -61850,9 +57987,6 @@ export class KPISectionIListApiResult implements IKPISectionIListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -61863,7 +57997,6 @@ export class KPISectionIListApiResult implements IKPISectionIListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): KPISectionIListApiResult {
@@ -61917,21 +58050,12 @@ export class SectionDTOApiResult implements ISectionDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["option_text"] = this.option_text;
-        data["option_value"] = this.option_value;
-        data["employee_number"] = this.employee_number;
-        data["company_id"] = this.company_id;
-        data["subsidary_id"] = this.subsidary_id;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SectionDTOApiResult {
@@ -61993,17 +58117,6 @@ export class ManageSectionDTO implements IManageSectionDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["name"] = this.name;
         data["score"] = this.score;
@@ -62014,7 +58127,6 @@ export class ManageSectionDTO implements IManageSectionDTO {
         data["instructions"] = this.instructions;
         data["ratingTypeId"] = this.ratingTypeId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageSectionDTO {
@@ -62070,19 +58182,11 @@ export class AssignKraDto implements IAssignKraDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["cycleId"] = this.cycleId;
         data["krAs"] = this.krAs;
         data["reviewerId"] = this.reviewerId;
         data["employeeContractIds"] = this.employeeContractIds;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): AssignKraDto {
@@ -62139,17 +58243,6 @@ export class ManageKpiDTO implements IManageKpiDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["title"] = this.title;
         data["description"] = this.description;
@@ -62158,7 +58251,6 @@ export class ManageKpiDTO implements IManageKpiDTO {
         data["unit_of_measurement_id"] = this.unit_of_measurement_id;
         data["canComment"] = this.canComment;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageKpiDTO {
@@ -62263,68 +58355,6 @@ export class KpiDTO implements IKpiDTO {
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
-<<<<<<< HEAD
-        data["supNumber"] = this.supNumber;
-        data["assignmentNumber"] = this.assignmentNumber;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["otherName"] = this.otherName;
-        data["employeeId"] = this.employeeId;
-        data["employmentTypeId"] = this.employmentTypeId;
-        data["contractEndDate"] = this.contractEndDate ? this.contractEndDate.toISOString() : <any>undefined;
-        data["supervisorId"] = this.supervisorId;
-        data["supervisorName"] = this.supervisorName;
-        data["fullName"] = this.fullName;
-        data["departmentId"] = this.departmentId;
-        data["departmentName"] = this.departmentName;
-        data["jobId"] = this.jobId;
-        data["jobName"] = this.jobName;
-        data["gradeId"] = this.gradeId;
-        data["gradeName"] = this.gradeName;
-        data["gradeStepId"] = this.gradeStepId;
-        data["stepNo"] = this.stepNo;
-        data["locationId"] = this.locationId;
-        data["locationName"] = this.locationName;
-        data["locationCode"] = this.locationCode;
-        data["positionId"] = this.positionId;
-        data["positionName"] = this.positionName;
-        data["ministryId"] = this.ministryId;
-        data["ministryName"] = this.ministryName;
-        data["salaryScaleId"] = this.salaryScaleId;
-        data["salaryScaleName"] = this.salaryScaleName;
-        data["dateofPresentAppointment"] = this.dateofPresentAppointment ? this.dateofPresentAppointment.toISOString() : <any>undefined;
-        data["dateofPresentAppointmentStr"] = this.dateofPresentAppointmentStr;
-        data["dateOfAppointment"] = this.dateOfAppointment ? this.dateOfAppointment.toISOString() : <any>undefined;
-        data["dateOfAppointmentStr"] = this.dateOfAppointmentStr;
-        data["dateOfLastDeployment"] = this.dateOfLastDeployment ? this.dateOfLastDeployment.toISOString() : <any>undefined;
-        data["dateOfLastDeploymentStr"] = this.dateOfLastDeploymentStr;
-        data["dateOfConversion"] = this.dateOfConversion ? this.dateOfConversion.toISOString() : <any>undefined;
-        data["dateOfConversionStr"] = this.dateOfConversionStr;
-        data["dateOfConfirmation"] = this.dateOfConfirmation ? this.dateOfConfirmation.toISOString() : <any>undefined;
-        data["dateOfConfirmationStr"] = this.dateOfConfirmationStr;
-        data["dateDeployed"] = this.dateDeployed ? this.dateDeployed.toISOString() : <any>undefined;
-        data["dateDeployedStr"] = this.dateDeployedStr;
-        data["contractEndDateStr"] = this.contractEndDateStr;
-        data["datePromotion"] = this.datePromotion ? this.datePromotion.toISOString() : <any>undefined;
-        data["datePromotionStr"] = this.datePromotionStr;
-        data["dateOfRetirement"] = this.dateOfRetirement ? this.dateOfRetirement.toISOString() : <any>undefined;
-        data["dateOfRetirementStr"] = this.dateOfRetirementStr;
-        data["totalEarnings"] = this.totalEarnings;
-        data["totalDeductions"] = this.totalDeductions;
-        data["netPayment"] = this.netPayment;
-        data["isContractActive"] = this.isContractActive;
-        data["isDefaultContract"] = this.isDefaultContract;
-        data["noOfLeaveDays"] = this.noOfLeaveDays;
-        data["peopleGroupId"] = this.peopleGroupId;
-        data["lastPromotionDate"] = this.lastPromotionDate ? this.lastPromotionDate.toISOString() : <any>undefined;
-        data["url"] = this.url;
-        data["payRollTypeId"] = this.payRollTypeId;
-        data["cadreId"] = this.cadreId;
-        data["directorate_id"] = this.directorate_id;
-        data["lcda_id"] = this.lcda_id;
-        data["lga_id"] = this.lga_id;
-        return data;
-=======
         data["title"] = this.title;
         data["kpi_section_id"] = this.kpi_section_id;
         data["unit_of_measurement_id"] = this.unit_of_measurement_id;
@@ -62351,7 +58381,6 @@ export class KpiDTO implements IKpiDTO {
         data["isActive"] = this.isActive;
         data["unitOfMeasurement"] = this.unitOfMeasurement;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): KpiDTO {
@@ -62440,12 +58469,8 @@ export class KpiDTOIListApiResult implements IKpiDTOIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): KpiDTOIListApiResult {
@@ -62499,20 +58524,12 @@ export class KpiDTOApiResult implements IKpiDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["title"] = this.title;
-        data["id"] = this.id;
-        data["notify_Employee"] = this.notify_Employee;
-        data["file"] = this.file;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): KpiDTOApiResult {
@@ -62604,16 +58621,7 @@ export class LeaveEntitlementResource implements ILeaveEntitlementResource {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        data["eventTypeID"] = this.eventTypeID;
-        data["title"] = this.title;
-        data["isSystem"] = this.isSystem;
-        data["notify_Employee"] = this.notify_Employee;
-        data["file"] = this.file;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveEntitlementResource {
@@ -62690,12 +58698,8 @@ export class LeaveEntitlementResourceListApiResult implements ILeaveEntitlementR
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveEntitlementResourceListApiResult {
@@ -62753,12 +58757,8 @@ export class LeaveEntitlementResourceApiResult implements ILeaveEntitlementResou
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveEntitlementResourceApiResult {
@@ -62777,75 +58777,10 @@ export interface ILeaveEntitlementResourceApiResult {
     totalRecord: number;
 }
 
-<<<<<<< HEAD
-export class ExpenseGroupDto implements IExpenseGroupDto {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    name!: string | undefined;
-    referenceId!: string | undefined;
-
-    constructor(data?: IExpenseGroupDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.name = _data["name"];
-            this.referenceId = _data["referenceId"];
-        }
-    }
-
-    static fromJS(data: any): ExpenseGroupDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ExpenseGroupDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["name"] = this.name;
-        data["referenceId"] = this.referenceId;
-        return data;
-    }
-
-    clone(): ExpenseGroupDto {
-        const json = this.toJSON();
-        let result = new ExpenseGroupDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IExpenseGroupDto {
-    id: number;
-    companyID: number;
-    subID: number;
-    name: string | undefined;
-    referenceId: string | undefined;
-}
-
-export class ExpenseGroup implements IExpenseGroup {
-    name!: string | undefined;
-    referenceId!: string | undefined;
-=======
 export class LeaveEntitlementPayload implements ILeaveEntitlementPayload {
     gradeID!: number;
     leaveTypeID!: number;
     entitlement!: number;
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     id!: number;
 
     constructor(data?: ILeaveEntitlementPayload) {
@@ -62879,19 +58814,7 @@ export class LeaveEntitlementPayload implements ILeaveEntitlementPayload {
         data["leaveTypeID"] = this.leaveTypeID;
         data["entitlement"] = this.entitlement;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveEntitlementPayload {
@@ -62956,12 +58879,8 @@ export class GradeListApiResult implements IGradeListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): GradeListApiResult {
@@ -63016,25 +58935,8 @@ export class ManageLeaveHolidayDTO implements IManageLeaveHolidayDTO {
         data["id"] = this.id;
         data["holidayDate"] = this.holidayDate ? this.holidayDate.toISOString() : <any>undefined;
         data["description"] = this.description;
-<<<<<<< HEAD
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["ban"] = this.ban;
-        data["referenceId"] = this.referenceId;
-        data["code"] = this.code;
-        data["isClosedEnded"] = this.isClosedEnded;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        data["actionTitle"] = this.actionTitle;
-        data["startDateString"] = this.startDateString;
-        data["endDateString"] = this.endDateString;
-        data["status"] = this.status;
-        return data;
-=======
         data["leaveYearId"] = this.leaveYearId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageLeaveHolidayDTO {
@@ -63081,26 +58983,9 @@ export class LeaveFilterDTO implements ILeaveFilterDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["expenseId"] = this.expenseId;
-        data["path"] = this.path;
-        data["docType"] = this.docType;
-        data["expense"] = this.expense ? this.expense.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["pageNumber"] = this.pageNumber;
         data["pageSize"] = this.pageSize;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveFilterDTO {
@@ -63180,7 +59065,7 @@ export class LeaveHolidayDTO implements ILeaveHolidayDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveHolidayDTO {
@@ -63253,22 +59138,9 @@ export class LeaveHolidayDTOListApiResult implements ILeaveHolidayDTOListApiResu
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveHolidayDTOListApiResult {
@@ -63393,33 +59265,9 @@ export class LeavePlanDTO implements ILeavePlanDTO {
         data["comment"] = this.comment;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["closedEnded"] = this.closedEnded;
-        data["ban"] = this.ban;
-        data["referenceId"] = this.referenceId;
-        data["code"] = this.code;
-        data["isDefault"] = this.isDefault;
-        if (Array.isArray(this.expenses)) {
-            data["expenses"] = [];
-            for (let item of this.expenses)
-                data["expenses"].push(item.toJSON());
-        }
-        data["expenseProject"] = this.expenseProject ? this.expenseProject.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["noOfDays"] = this.noOfDays;
         data["locationId"] = this.locationId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeavePlanDTO {
@@ -63507,12 +59355,6 @@ export class LeavePlanResource implements ILeavePlanResource {
         data["strApprovalStatus"] = this.strApprovalStatus;
         data["isApproved"] = this.isApproved;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["id"] = this.id;
         data["employeeContractId"] = this.employeeContractId;
         data["leaveTypeId"] = this.leaveTypeId;
@@ -63530,7 +59372,6 @@ export class LeavePlanResource implements ILeavePlanResource {
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeavePlanResource {
@@ -63609,107 +59450,10 @@ export class LeavePlanResourceListApiResult implements ILeavePlanResourceListApi
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-    }
-
-    clone(): ExpenseProject {
-        const json = this.toJSON();
-        let result = new ExpenseProject();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IExpenseProject {
-    name: string | undefined;
-    description: string | undefined;
-    startDate: Date | undefined;
-    endDate: Date | undefined;
-    ban: boolean;
-    referenceId: string | undefined;
-    code: string | undefined;
-    isClosedEnded: boolean;
-    expenses: Expense[] | undefined;
-    expenseProjectActivities: ExpenseProjectActivity[] | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class ExpenseDTO implements IExpenseDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    dateCreated!: Date;
-    isDeleted!: boolean;
-    isActive!: boolean;
-    approvalProcessId!: number;
-    title!: string | undefined;
-    description!: string | undefined;
-    expenseSubTypeId!: number | undefined;
-    expenseSubTypeName!: string | undefined;
-    expenseTypeId!: number;
-    expenseTypeName!: string | undefined;
-    loggedByUserId!: number;
-    loggedByUsername!: string | undefined;
-    loggedForEmployeeId!: number | undefined;
-    loggedForEmployeeName!: string | undefined;
-    loggedForEmployeeNo!: string | undefined;
-    expenseProjectActivityId!: number | undefined;
-    expenseProjectActivityName!: string | undefined;
-    expenseProjectId!: number;
-    expenseProjectName!: string | undefined;
-    requestedAmount!: number;
-    approvedAmount!: number;
-    dateIncurred!: Date | undefined;
-    dateReconciled!: Date | undefined;
-    dateDisbursed!: Date | undefined;
-    disburseComment!: string | undefined;
-    dateApproved!: Date | undefined;
-    reconciledStatus!: boolean;
-    reconciledBy!: number | undefined;
-    reconciledByName!: string | undefined;
-    disbursedBy!: string | undefined;
-    disbursedByName!: string | undefined;
-    approvedBy!: number | undefined;
-    approvedByName!: string | undefined;
-    refNo!: string | undefined;
-    departmentId!: number;
-    declineReason!: string | undefined;
-    disbursementType!: number | undefined;
-    is_disbursed!: boolean;
-    log_status!: number;
-    expenseGroupId!: number;
-    expenseGroupName!: string | undefined;
-    strRequestedAmount!: string | undefined;
-    strApprovedAmount!: string | undefined;
-    strDateIncurred!: string | undefined;
-    _ServerDocURL!: string | undefined;
-    tempRef!: string | undefined;
-    departmentName!: string | undefined;
-    locatioName!: string | undefined;
-=======
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
     clone(): LeavePlanResourceListApiResult {
         const json = this.toJSON();
@@ -63765,63 +59509,9 @@ export class ApproveOrRejectPayload implements IApproveOrRejectPayload {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["title"] = this.title;
-        data["description"] = this.description;
-        data["expenseSubTypeId"] = this.expenseSubTypeId;
-        data["expenseSubTypeName"] = this.expenseSubTypeName;
-        data["expenseTypeId"] = this.expenseTypeId;
-        data["expenseTypeName"] = this.expenseTypeName;
-        data["loggedByUserId"] = this.loggedByUserId;
-        data["loggedByUsername"] = this.loggedByUsername;
-        data["loggedForEmployeeId"] = this.loggedForEmployeeId;
-        data["loggedForEmployeeName"] = this.loggedForEmployeeName;
-        data["loggedForEmployeeNo"] = this.loggedForEmployeeNo;
-        data["expenseProjectActivityId"] = this.expenseProjectActivityId;
-        data["expenseProjectActivityName"] = this.expenseProjectActivityName;
-        data["expenseProjectId"] = this.expenseProjectId;
-        data["expenseProjectName"] = this.expenseProjectName;
-        data["requestedAmount"] = this.requestedAmount;
-        data["approvedAmount"] = this.approvedAmount;
-        data["dateIncurred"] = this.dateIncurred ? this.dateIncurred.toISOString() : <any>undefined;
-        data["dateReconciled"] = this.dateReconciled ? this.dateReconciled.toISOString() : <any>undefined;
-        data["dateDisbursed"] = this.dateDisbursed ? this.dateDisbursed.toISOString() : <any>undefined;
-        data["disburseComment"] = this.disburseComment;
-        data["dateApproved"] = this.dateApproved ? this.dateApproved.toISOString() : <any>undefined;
-        data["reconciledStatus"] = this.reconciledStatus;
-        data["reconciledBy"] = this.reconciledBy;
-        data["reconciledByName"] = this.reconciledByName;
-        data["disbursedBy"] = this.disbursedBy;
-        data["disbursedByName"] = this.disbursedByName;
-        data["approvedBy"] = this.approvedBy;
-        data["approvedByName"] = this.approvedByName;
-        data["refNo"] = this.refNo;
-        data["departmentId"] = this.departmentId;
-        data["declineReason"] = this.declineReason;
-        data["disbursementType"] = this.disbursementType;
-        data["is_disbursed"] = this.is_disbursed;
-        data["log_status"] = this.log_status;
-        data["expenseGroupId"] = this.expenseGroupId;
-        data["expenseGroupName"] = this.expenseGroupName;
-        data["strRequestedAmount"] = this.strRequestedAmount;
-        data["strApprovedAmount"] = this.strApprovedAmount;
-        data["strDateIncurred"] = this.strDateIncurred;
-        data["_ServerDocURL"] = this._ServerDocURL;
-        data["tempRef"] = this.tempRef;
-        data["departmentName"] = this.departmentName;
-        data["locatioName"] = this.locatioName;
-        return data;
-=======
         data["companyId"] = this.companyId;
         data["leavePlaneStatus"] = this.leavePlaneStatus;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ApproveOrRejectPayload {
@@ -63881,17 +59571,6 @@ export class ManageLeaveRequestDTO implements IManageLeaveRequestDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["employeeNumber"] = this.employeeNumber;
         data["leaveTypeID"] = this.leaveTypeID;
@@ -63902,7 +59581,6 @@ export class ManageLeaveRequestDTO implements IManageLeaveRequestDTO {
         data["reliefOfficerStaffNo"] = this.reliefOfficerStaffNo;
         data["file"] = this.file;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageLeaveRequestDTO {
@@ -63984,20 +59662,6 @@ export class LeaveReportListDTO implements ILeaveReportListDTO {
         data = typeof data === 'object' ? data : {};
         data["sn"] = this.sn;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["ledgerNo"] = this.ledgerNo;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["referenceId"] = this.referenceId;
-        data["code"] = this.code;
-        data["isDefault"] = this.isDefault;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data;
-=======
         data["fullName"] = this.fullName;
         data["position"] = this.position;
         data["yearName"] = this.yearName;
@@ -64013,7 +59677,6 @@ export class LeaveReportListDTO implements ILeaveReportListDTO {
         data["daysRem"] = this.daysRem;
         data["noOfDays"] = this.noOfDays;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveReportListDTO {
@@ -64090,12 +59753,8 @@ export class LeaveReportListDTOListApiResult implements ILeaveReportListDTOListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveReportListDTOListApiResult {
@@ -64306,15 +59965,6 @@ export class LeaveType implements ILeaveType {
         data["pro_rateLeaveDays"] = this.pro_rateLeaveDays;
         data["onlyForConfirmStaff"] = this.onlyForConfirmStaff;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["name"] = this.name;
-        data["code"] = this.code;
-        data["created_by"] = this.created_by;
-        data["promotion_min_years"] = this.promotion_min_years;
-        data["promotion_min_in_days"] = this.promotion_min_in_days;
-        data["noOfLeaveDays"] = this.noOfLeaveDays;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -64324,7 +59974,6 @@ export class LeaveType implements ILeaveType {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveType {
@@ -64434,15 +60083,7 @@ export class LeaveEntitlement implements ILeaveEntitlement {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        data["promotion_min_years"] = this.promotion_min_years;
-        data["promotion_min_in_days"] = this.promotion_min_in_days;
-        data["noOfLeaveDays"] = this.noOfLeaveDays;
-        data["salaryScaleId"] = this.salaryScaleId;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveEntitlement {
@@ -64610,10 +60251,6 @@ export class LeaveRequest implements ILeaveRequest {
             for (let item of this.leaveHistory)
                 data["leaveHistory"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         if (Array.isArray(this.leaveEntitlement)) {
             data["leaveEntitlement"] = [];
             for (let item of this.leaveEntitlement)
@@ -64632,7 +60269,6 @@ export class LeaveRequest implements ILeaveRequest {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveRequest {
@@ -64719,27 +60355,12 @@ export class LeaveRequestApiResult implements ILeaveRequestApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["benefitName"] = this.benefitName;
-        data["gradeId"] = this.gradeId;
-        data["gradeStepId"] = this.gradeStepId;
-        data["amount"] = this.amount;
-        data["salaryScaleId"] = this.salaryScaleId;
-        data["name"] = this.name;
-        data["promotion_min_years"] = this.promotion_min_years;
-        data["noOfLeaveDays"] = this.noOfLeaveDays;
-        data["benefitId"] = this.benefitId;
-        data["gradeName"] = this.gradeName;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveRequestApiResult {
@@ -64852,20 +60473,7 @@ export class LeaveTypeDTO implements ILeaveTypeDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        data["salaryScaleId"] = this.salaryScaleId;
-        data["promotion_min_years"] = this.promotion_min_years;
-        data["promotion_min_in_days"] = this.promotion_min_in_days;
-        data["noOfLeaveDays"] = this.noOfLeaveDays;
-        data["gradeId"] = this.gradeId;
-        data["gradeStepId"] = this.gradeStepId;
-        data["salaryScaleName"] = this.salaryScaleName;
-        data["amount"] = this.amount;
-        data["gradeName"] = this.gradeName;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveTypeDTO {
@@ -64949,12 +60557,8 @@ export class LeaveTypeDTOListApiResult implements ILeaveTypeDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveTypeDTOListApiResult {
@@ -65012,17 +60616,6 @@ export class LeaveTypeCreatePayload implements ILeaveTypeCreatePayload {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["name"] = this.name;
         data["allowedGender"] = this.allowedGender;
@@ -65031,7 +60624,6 @@ export class LeaveTypeCreatePayload implements ILeaveTypeCreatePayload {
         data["maxNoofPossibleApplication"] = this.maxNoofPossibleApplication;
         data["maxNoofYearlyApplication"] = this.maxNoofYearlyApplication;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveTypeCreatePayload {
@@ -65087,21 +60679,12 @@ export class LeaveTypeDTOApiResult implements ILeaveTypeDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["code"] = this.code;
-        data["amount"] = this.amount;
-        data["parentPositionId"] = this.parentPositionId;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveTypeDTOApiResult {
@@ -65195,14 +60778,7 @@ export class LeaveWorkFlow implements ILeaveWorkFlow {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-<<<<<<< HEAD
-        data["promotion_min_years"] = this.promotion_min_years;
-        data["next_job_role_id"] = this.next_job_role_id;
-        data["parent_id"] = this.parent_id;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveWorkFlow {
@@ -65228,75 +60804,6 @@ export interface ILeaveWorkFlow {
     createdById: number;
     dateModified: Date | undefined;
     modifiedById: number | undefined;
-<<<<<<< HEAD
-    promotion_min_years: number | undefined;
-    next_job_role_id: number | undefined;
-    parent_id: number | undefined;
-}
-
-export class JobRolesDTOListApiResult implements IJobRolesDTOListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: JobRolesDTO[] | undefined;
-    totalCount!: number;
-
-    constructor(data?: IJobRolesDTOListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(JobRolesDTO.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): JobRolesDTOListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new JobRolesDTOListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): JobRolesDTOListApiResult {
-        const json = this.toJSON();
-        let result = new JobRolesDTOListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IJobRolesDTOListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: JobRolesDTO[] | undefined;
-    totalCount: number;
-=======
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 }
 
 export class LeaveWorkFlowItem implements ILeaveWorkFlowItem {
@@ -65358,13 +60865,6 @@ export class LeaveWorkFlowItem implements ILeaveWorkFlowItem {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["stepName"] = this.stepName;
         data["jobRoleID"] = this.jobRoleID;
         data["leaveWorkFlowID"] = this.leaveWorkFlowID;
@@ -65383,7 +60883,6 @@ export class LeaveWorkFlowItem implements ILeaveWorkFlowItem {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveWorkFlowItem {
@@ -65483,15 +60982,7 @@ export class LeaveWorkFlowResource implements ILeaveWorkFlowResource {
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-<<<<<<< HEAD
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        data["strategyCategory"] = this.strategyCategory;
-        data["ratingType"] = this.ratingType;
-        return data;
-=======
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveWorkFlowResource {
@@ -65564,12 +61055,8 @@ export class LeaveWorkFlowResourceListApiResult implements ILeaveWorkFlowResourc
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveWorkFlowResourceListApiResult {
@@ -65623,39 +61110,12 @@ export class LeaveWorkFlowResourceApiResult implements ILeaveWorkFlowResourceApi
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["kpi_section_id"] = this.kpi_section_id;
-        data["title"] = this.title;
-        data["unit_of_measurement_id"] = this.unit_of_measurement_id;
-        data["canComment"] = this.canComment;
-        data["instruction"] = this.instruction;
-        data["description"] = this.description;
-        data["is_compulsory"] = this.is_compulsory;
-        data["order"] = this.order;
-        data["is_closed_ended"] = this.is_closed_ended;
-        data["score"] = this.score;
-        data["sendToEmployee"] = this.sendToEmployee;
-        data["is_employee_entry"] = this.is_employee_entry;
-        data["contract_id"] = this.contract_id;
-        data["kpiSection"] = this.kpiSection ? this.kpiSection.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveWorkFlowResourceApiResult {
@@ -65795,13 +61255,8 @@ export class LeaveYearDTO implements ILeaveYearDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["create_contextyId"] = this.create_contextyId;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["modifie_contextyId"] = this.modifie_contextyId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveYearDTO {
@@ -65876,73 +61331,11 @@ export class LeaveYearDTOListApiResult implements ILeaveYearDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-    }
-
-    clone(): KPISectionIListApiResult {
-        const json = this.toJSON();
-        let result = new KPISectionIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IKPISectionIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: KPISection[] | undefined;
-    totalCount: number;
-}
-
-export class SectionDTOApiResult implements ISectionDTOApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: SectionDTO;
-    totalCount!: number;
-
-    constructor(data?: ISectionDTOApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            this.result = _data["result"] ? SectionDTO.fromJS(_data["result"]) : <any>undefined;
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): SectionDTOApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new SectionDTOApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): SectionDTOApiResult {
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
 
     clone(): LeaveYearDTOListApiResult {
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
         const json = this.toJSON();
         let result = new LeaveYearDTOListApiResult();
         result.init(json);
@@ -65994,23 +61387,11 @@ export class LeaveYearCreatePayload implements ILeaveYearCreatePayload {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["name"] = this.name;
-        data["score"] = this.score;
-        data["weight"] = this.weight;
-        data["strategyCategoryId"] = this.strategyCategoryId;
-        data["order"] = this.order;
-        data["description"] = this.description;
-        data["instructions"] = this.instructions;
-        data["ratingTypeId"] = this.ratingTypeId;
-        return data;
-=======
         data["yearName"] = this.yearName;
         data["isActiveYear"] = this.isActiveYear;
         data["yearStartDate"] = this.yearStartDate ? this.yearStartDate.toISOString() : <any>undefined;
         data["yearEndDate"] = this.yearEndDate ? this.yearEndDate.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveYearCreatePayload {
@@ -66064,20 +61445,12 @@ export class LeaveYearDTOApiResult implements ILeaveYearDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["cycleId"] = this.cycleId;
-        data["krAs"] = this.krAs;
-        data["reviewerId"] = this.reviewerId;
-        data["employeeContractIds"] = this.employeeContractIds;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LeaveYearDTOApiResult {
@@ -66188,15 +61561,6 @@ export class LoanRequestDTO implements ILoanRequestDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["title"] = this.title;
-        data["description"] = this.description;
-        data["kra_id"] = this.kra_id;
-        data["score"] = this.score;
-        data["unit_of_measurement_id"] = this.unit_of_measurement_id;
-        data["canComment"] = this.canComment;
-        return data;
-=======
         data["loanTypeId"] = this.loanTypeId;
         data["refNo"] = this.refNo;
         data["employeeNo"] = this.employeeNo;
@@ -66230,7 +61594,6 @@ export class LoanRequestDTO implements ILoanRequestDTO {
         data["justification"] = this.justification;
         data["submittedByUserId"] = this.submittedByUserId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoanRequestDTO {
@@ -66314,37 +61677,6 @@ export class PostLoanDto implements IPostLoanDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["title"] = this.title;
-        data["kpi_section_id"] = this.kpi_section_id;
-        data["unit_of_measurement_id"] = this.unit_of_measurement_id;
-        data["canComment"] = this.canComment;
-        data["is_closed_ended"] = this.is_closed_ended;
-        data["section_name"] = this.section_name;
-        data["sectionTotalScore"] = this.sectionTotalScore;
-        data["instruction"] = this.instruction;
-        data["description"] = this.description;
-        data["is_compulsory"] = this.is_compulsory;
-        data["order"] = this.order;
-        data["order_count"] = this.order_count;
-        data["kpi_score"] = this.kpi_score;
-        data["employee_score"] = this.employee_score;
-        data["supervisor_score"] = this.supervisor_score;
-        data["score"] = this.score;
-        data["is_employee_entry"] = this.is_employee_entry;
-        data["sendToEmployee"] = this.sendToEmployee;
-        data["contract_id"] = this.contract_id;
-        data["response"] = this.response;
-        data["supervisorResponse"] = this.supervisorResponse;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        data["unitOfMeasurement"] = this.unitOfMeasurement;
-        return data;
-=======
         data["loan_id"] = this.loan_id;
         data["repaymentcomment"] = this.repaymentcomment;
         data["repaymenttotalamt"] = this.repaymenttotalamt;
@@ -66352,7 +61684,6 @@ export class PostLoanDto implements IPostLoanDto {
         data["partamt"] = this.partamt;
         data["repytdate"] = this.repytdate;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PostLoanDto {
@@ -66417,17 +61748,6 @@ export class LoanRepaymentLog implements ILoanRepaymentLog {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["loanRequestId"] = this.loanRequestId;
         data["amountRepaid"] = this.amountRepaid;
@@ -66439,7 +61759,6 @@ export class LoanRepaymentLog implements ILoanRepaymentLog {
         data["isSchedule"] = this.isSchedule;
         data["strRepaymentDate"] = this.strRepaymentDate;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoanRepaymentLog {
@@ -66510,12 +61829,8 @@ export class LoanRepaymentLogIListApiResult implements ILoanRepaymentLogIListApi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoanRepaymentLogIListApiResult {
@@ -66573,25 +61888,6 @@ export class LoanRequestDTOIListApiResult implements ILoanRequestDTOIListApiResu
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["gradeID"] = this.gradeID;
-        data["leaveTypeID"] = this.leaveTypeID;
-        data["entitlement"] = this.entitlement;
-        data["daysUsed"] = this.daysUsed;
-        data["daysRemaining"] = this.daysRemaining;
-        data["leaveType"] = this.leaveType;
-        data["grade"] = this.grade;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -66602,7 +61898,6 @@ export class LoanRequestDTOIListApiResult implements ILoanRequestDTOIListApiResu
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoanRequestDTOIListApiResult {
@@ -66668,12 +61963,8 @@ export class IdNameObjIListApiResult implements IIdNameObjIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): IdNameObjIListApiResult {
@@ -66725,19 +62016,11 @@ export class UpdateLoadRequestDTO implements IUpdateLoadRequestDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["effective_date"] = this.effective_date;
         data["loan_id"] = this.loan_id;
         data["approved_tenor"] = this.approved_tenor;
         data["approved_amt"] = this.approved_amt;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): UpdateLoadRequestDTO {
@@ -66922,9 +62205,6 @@ export class LoanRequest implements ILoanRequest {
         data["outstandingPrincipal"] = this.outstandingPrincipal;
         data["outstandingInterest"] = this.outstandingInterest;
         data["id"] = this.id;
-<<<<<<< HEAD
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -66934,7 +62214,6 @@ export class LoanRequest implements ILoanRequest {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoanRequest {
@@ -67037,12 +62316,8 @@ export class LoanRequestApiResult implements ILoanRequestApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoanRequestApiResult {
@@ -67246,15 +62521,8 @@ export class LoadTypeById implements ILoadTypeById {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["holidayDate"] = this.holidayDate ? this.holidayDate.toISOString() : <any>undefined;
-        data["description"] = this.description;
-        data["leaveYearId"] = this.leaveYearId;
-        return data;
-=======
         data["companyID"] = this.companyID;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LoadTypeById {
@@ -67382,7 +62650,7 @@ export class LoanType implements ILoanType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LoanType {
@@ -67472,73 +62740,11 @@ export class LoanTypeIListApiResult implements ILoanTypeIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-    }
-
-    clone(): LeaveHolidayDTOListApiResult {
-        const json = this.toJSON();
-        let result = new LeaveHolidayDTOListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILeaveHolidayDTOListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: LeaveHolidayDTO[] | undefined;
-    totalCount: number;
-}
-
-export class LeaveHolidayDTOApiResult implements ILeaveHolidayDTOApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: LeaveHolidayDTO;
-    totalCount!: number;
-
-    constructor(data?: ILeaveHolidayDTOApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            this.result = _data["result"] ? LeaveHolidayDTO.fromJS(_data["result"]) : <any>undefined;
-            this.totalCount = _data["totalCount"];
-        }
-    }
-
-    static fromJS(data: any): LeaveHolidayDTOApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new LeaveHolidayDTOApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): LeaveHolidayDTOApiResult {
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
 
     clone(): LoanTypeIListApiResult {
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
         const json = this.toJSON();
         let result = new LoanTypeIListApiResult();
         result.init(json);
@@ -67589,24 +62795,12 @@ export class ManageLocationDTO implements IManageLocationDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["employeeContractId"] = this.employeeContractId;
-        data["leaveTypeId"] = this.leaveTypeId;
-        data["leaveYearId"] = this.leaveYearId;
-        data["comment"] = this.comment;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["noOfDays"] = this.noOfDays;
-        data["locationId"] = this.locationId;
-        return data;
-=======
         data["id"] = this.id;
         data["location_name"] = this.location_name;
         data["state_id"] = this.state_id;
         data["lga_id"] = this.lga_id;
         data["is_enabled"] = this.is_enabled;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManageLocationDTO {
@@ -67681,24 +62875,6 @@ export class LocationDTO implements ILocationDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["employeeContractId"] = this.employeeContractId;
-        data["leaveTypeId"] = this.leaveTypeId;
-        data["leaveYearId"] = this.leaveYearId;
-        data["comment"] = this.comment;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["noOfDays"] = this.noOfDays;
-        data["locationName"] = this.locationName;
-        data["locationId"] = this.locationId;
-        data["employeeNo"] = this.employeeNo;
-        data["fullName"] = this.fullName;
-        data["leaveType"] = this.leaveType;
-        data["leaveYear"] = this.leaveYear;
-        data["companyId"] = this.companyId;
-        data["subId"] = this.subId;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["location_name"] = this.location_name;
@@ -67714,7 +62890,6 @@ export class LocationDTO implements ILocationDTO {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LocationDTO {
@@ -67790,12 +62965,8 @@ export class LocationDTOListApiResult implements ILocationDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LocationDTOListApiResult {
@@ -67849,19 +63020,12 @@ export class LocationDTOApiResult implements ILocationDTOApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyId"] = this.companyId;
-        data["leavePlaneStatus"] = this.leavePlaneStatus;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): LocationDTOApiResult {
@@ -67976,17 +63140,6 @@ export class DepartmentManPowerActivityDTO implements IDepartmentManPowerActivit
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["employeeNumber"] = this.employeeNumber;
-        data["leaveTypeID"] = this.leaveTypeID;
-        data["leaveYearID"] = this.leaveYearID;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["noOfDays"] = this.noOfDays;
-        data["contactInfoOnLeave"] = this.contactInfoOnLeave;
-        data["reliefOfficerStaffNo"] = this.reliefOfficerStaffNo;
-        data["file"] = this.file;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["departmentActivityId"] = this.departmentActivityId;
@@ -68022,7 +63175,6 @@ export class DepartmentManPowerActivityDTO implements IDepartmentManPowerActivit
         data["statusName"] = this.statusName;
         data["activityTypeName"] = this.activityTypeName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentManPowerActivityDTO {
@@ -68161,23 +63313,6 @@ export class DepartmentActivityDTO implements IDepartmentActivityDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["fullName"] = this.fullName;
-        data["position"] = this.position;
-        data["yearName"] = this.yearName;
-        data["leaveType"] = this.leaveType;
-        data["approvalStatus"] = this.approvalStatus;
-        data["employeeID"] = this.employeeID;
-        data["employeeContractID"] = this.employeeContractID;
-        data["startDate"] = this.startDate;
-        data["enddate"] = this.enddate;
-        data["resumptionDate"] = this.resumptionDate;
-        data["entitlement"] = this.entitlement;
-        data["assignmentNumber"] = this.assignmentNumber;
-        data["daysRem"] = this.daysRem;
-        data["noOfDays"] = this.noOfDays;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["activityTypeId"] = this.activityTypeId;
         data["departmentId"] = this.departmentId;
@@ -68212,7 +63347,6 @@ export class DepartmentActivityDTO implements IDepartmentActivityDTO {
                 data["requirements"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentActivityDTO {
@@ -68303,12 +63437,8 @@ export class MessageOutListApiResult implements IMessageOutListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): MessageOutListApiResult {
@@ -68360,30 +63490,11 @@ export class BaseYearJobRoleDTO implements IBaseYearJobRoleDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["yearName"] = this.yearName;
-        data["isActiveYear"] = this.isActiveYear;
-        data["yearStartDate"] = this.yearStartDate ? this.yearStartDate.toISOString() : <any>undefined;
-        data["yearEndDate"] = this.yearEndDate ? this.yearEndDate.toISOString() : <any>undefined;
-        data["yearEndDateString"] = this.yearEndDateString;
-        data["yearStartDateString"] = this.yearStartDateString;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["roleId"] = this.roleId;
         data["roleName"] = this.roleName;
         data["roleCount"] = this.roleCount;
         data["roleCost"] = this.roleCost;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): BaseYearJobRoleDTO {
@@ -68489,38 +63600,11 @@ export class BaseYearGradeDTO implements IBaseYearGradeDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["description"] = this.description;
-        data["isDeductableFromAnualLeave"] = this.isDeductableFromAnualLeave;
-        data["excludeWeekendInCalculation"] = this.excludeWeekendInCalculation;
-        data["isOnlyAvailableToAdmin"] = this.isOnlyAvailableToAdmin;
-        data["isAnnualLeave"] = this.isAnnualLeave;
-        data["allowedGender"] = this.allowedGender;
-        data["maxDays"] = this.maxDays;
-        data["minDays"] = this.minDays;
-        data["isSystemDefault"] = this.isSystemDefault;
-        data["maxNoofPossibleApplication"] = this.maxNoofPossibleApplication;
-        data["maxNoofYearlyApplication"] = this.maxNoofYearlyApplication;
-        data["isGradeDependent"] = this.isGradeDependent;
-        data["pro_rateLeaveDays"] = this.pro_rateLeaveDays;
-        data["onlyForConfirmStaff"] = this.onlyForConfirmStaff;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["gradeId"] = this.gradeId;
         data["gradeName"] = this.gradeName;
         data["gradeCount"] = this.gradeCount;
         data["gradeCost"] = this.gradeCost;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): BaseYearGradeDTO {
@@ -68583,25 +63667,6 @@ export class BaseYearDTO implements IBaseYearDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["gradeID"] = this.gradeID;
-        data["leaveTypeID"] = this.leaveTypeID;
-        data["entitlement"] = this.entitlement;
-        data["daysUsed"] = this.daysUsed;
-        data["daysRemaining"] = this.daysRemaining;
-        data["leaveType"] = this.leaveType ? this.leaveType.toJSON() : <any>undefined;
-        data["grades"] = this.grades ? this.grades.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["baseYear"] = this.baseYear;
         if (Array.isArray(this.jobRole)) {
             data["jobRole"] = [];
@@ -68619,7 +63684,6 @@ export class BaseYearDTO implements IBaseYearDTO {
                 data["grade"].push(item.toJSON());
         }
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): BaseYearDTO {
@@ -68683,25 +63747,9 @@ export class BaseYearDTOListApiResult implements IBaseYearDTOListApiResult {
             for (let item of this.result)
                 data["result"].push(item.toJSON());
         }
-<<<<<<< HEAD
-        data["approvalDecision"] = this.approvalDecision;
-        data["approvalStatus"] = this.approvalStatus;
-        data["log_status"] = this.log_status;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): BaseYearDTOListApiResult {
@@ -68767,12 +63815,8 @@ export class DepartmentActivityDTOListApiResult implements IDepartmentActivityDT
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentActivityDTOListApiResult {
@@ -68830,32 +63874,6 @@ export class DepartmentManPowerActivityDTOIListApiResult implements IDepartmentM
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isDeductableFromAnualLeave"] = this.isDeductableFromAnualLeave;
-        data["excludeWeekendInCalculation"] = this.excludeWeekendInCalculation;
-        data["isOnlyAvailableToAdmin"] = this.isOnlyAvailableToAdmin;
-        data["isAnnualLeave"] = this.isAnnualLeave;
-        data["allowedGender"] = this.allowedGender;
-        data["maxDays"] = this.maxDays;
-        data["minDays"] = this.minDays;
-        data["isSystemDefault"] = this.isSystemDefault;
-        data["maxNoofPossibleApplication"] = this.maxNoofPossibleApplication;
-        data["maxNoofYearlyApplication"] = this.maxNoofYearlyApplication;
-        data["isGradeDependent"] = this.isGradeDependent;
-        data["pro_rateLeaveDays"] = this.pro_rateLeaveDays;
-        data["onlyForConfirmStaff"] = this.onlyForConfirmStaff;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -68866,7 +63884,6 @@ export class DepartmentManPowerActivityDTOIListApiResult implements IDepartmentM
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): DepartmentManPowerActivityDTOIListApiResult {
@@ -68932,9 +63949,6 @@ export class DepartmentActivityDTOIListApiResult implements IDepartmentActivityD
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
@@ -69074,7 +64088,6 @@ export class OnboardingPersonalDTO implements IOnboardingPersonalDTO {
         data["userId"] = this.userId;
         data["created_by"] = this.created_by;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingPersonalDTO {
@@ -69181,15 +64194,6 @@ export class OnboardingBankDTO implements IOnboardingBankDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["name"] = this.name;
-        data["allowedGender"] = this.allowedGender;
-        data["maxDays"] = this.maxDays;
-        data["minDays"] = this.minDays;
-        data["maxNoofPossibleApplication"] = this.maxNoofPossibleApplication;
-        data["maxNoofYearlyApplication"] = this.maxNoofYearlyApplication;
-        return data;
-=======
         data["companyId"] = this.companyId;
         data["subID"] = this.subID;
         data["onboardingId"] = this.onboardingId;
@@ -69208,7 +64212,6 @@ export class OnboardingBankDTO implements IOnboardingBankDTO {
         data["dialingCode"] = this.dialingCode;
         data["created_by"] = this.created_by;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingBankDTO {
@@ -69303,13 +64306,6 @@ export class OnboardingWorkDTO implements IOnboardingWorkDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["companyId"] = this.companyId;
         data["subID"] = this.subID;
@@ -69330,7 +64326,6 @@ export class OnboardingWorkDTO implements IOnboardingWorkDTO {
         data["userId"] = this.userId;
         data["created_by"] = this.created_by;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingWorkDTO {
@@ -69437,15 +64432,9 @@ export class OnboardingTaxDTO implements IOnboardingTaxDTO {
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-<<<<<<< HEAD
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["dialingCode"] = this.dialingCode;
         data["created_by"] = this.created_by;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingTaxDTO {
@@ -69541,15 +64530,9 @@ export class OnboardingMedicalDisclosureDTO implements IOnboardingMedicalDisclos
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-<<<<<<< HEAD
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["userId"] = this.userId;
         data["created_by"] = this.created_by;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingMedicalDisclosureDTO {
@@ -69693,13 +64676,9 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-<<<<<<< HEAD
-        return data;
-=======
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingPersonalInfo {
@@ -69783,12 +64762,8 @@ export class OnboardingPersonalInfoApiResult implements IOnboardingPersonalInfoA
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingPersonalInfoApiResult {
@@ -69862,13 +64837,6 @@ export class OnboardingDocumentInfo implements IOnboardingDocumentInfo {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["onboardingId"] = this.onboardingId;
         data["nyscCertificate"] = this.nyscCertificate;
         data["birthCertificate"] = this.birthCertificate;
@@ -69885,7 +64853,6 @@ export class OnboardingDocumentInfo implements IOnboardingDocumentInfo {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingDocumentInfo {
@@ -69949,20 +64916,12 @@ export class OnboardingDocumentInfoApiResult implements IOnboardingDocumentInfoA
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["leaveWorkFlowID"] = this.leaveWorkFlowID;
-        data["departmentID"] = this.departmentID;
-        data["workFlowName"] = this.workFlowName;
-        data["workFlowString"] = this.workFlowString;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingDocumentInfoApiResult {
@@ -70047,13 +65006,8 @@ export class OnboardingMedicalDisclosureInfo implements IOnboardingMedicalDisclo
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-<<<<<<< HEAD
-        data["modifie_contextyId"] = this.modifie_contextyId;
-        return data;
-=======
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingMedicalDisclosureInfo {
@@ -70120,12 +65074,8 @@ export class OnboardingMedicalDisclosureInfoApiResult implements IOnboardingMedi
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingMedicalDisclosureInfoApiResult {
@@ -70144,68 +65094,6 @@ export interface IOnboardingMedicalDisclosureInfoApiResult {
     totalRecord: number;
 }
 
-<<<<<<< HEAD
-export class LeaveYearCreatePayload implements ILeaveYearCreatePayload {
-    yearName!: string;
-    isActiveYear!: boolean;
-    yearStartDate!: Date;
-    yearEndDate!: Date;
-
-    constructor(data?: ILeaveYearCreatePayload) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.yearName = _data["yearName"];
-            this.isActiveYear = _data["isActiveYear"];
-            this.yearStartDate = _data["yearStartDate"] ? new Date(_data["yearStartDate"].toString()) : <any>undefined;
-            this.yearEndDate = _data["yearEndDate"] ? new Date(_data["yearEndDate"].toString()) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): LeaveYearCreatePayload {
-        data = typeof data === 'object' ? data : {};
-        let result = new LeaveYearCreatePayload();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["yearName"] = this.yearName;
-        data["isActiveYear"] = this.isActiveYear;
-        data["yearStartDate"] = this.yearStartDate ? this.yearStartDate.toISOString() : <any>undefined;
-        data["yearEndDate"] = this.yearEndDate ? this.yearEndDate.toISOString() : <any>undefined;
-        return data;
-    }
-
-    clone(): LeaveYearCreatePayload {
-        const json = this.toJSON();
-        let result = new LeaveYearCreatePayload();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILeaveYearCreatePayload {
-    yearName: string;
-    isActiveYear: boolean;
-    yearStartDate: Date;
-    yearEndDate: Date;
-}
-
-export class LeaveYearDTOApiResult implements ILeaveYearDTOApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: LeaveYearDTO;
-    totalCount!: number;
-=======
 export class OnboardingTaxInfo implements IOnboardingTaxInfo {
     onboardingId!: number;
     taxId!: string | undefined;
@@ -70224,7 +65112,6 @@ export class OnboardingTaxInfo implements IOnboardingTaxInfo {
     createdById!: number;
     dateModified!: Date | undefined;
     modifiedById!: number | undefined;
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
     constructor(data?: IOnboardingTaxInfo) {
         if (data) {
@@ -70266,64 +65153,6 @@ export class OnboardingTaxInfo implements IOnboardingTaxInfo {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-    }
-
-    clone(): LeaveYearDTOApiResult {
-        const json = this.toJSON();
-        let result = new LeaveYearDTOApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILeaveYearDTOApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: LeaveYearDTO;
-    totalCount: number;
-}
-
-export class LoanRequestDTO implements ILoanRequestDTO {
-    id!: number;
-    loanTypeId!: number;
-    refNo!: string | undefined;
-    employeeNo!: string | undefined;
-    employeeName!: string | undefined;
-    loanTypeName!: string | undefined;
-    employeeId!: number;
-    log_status!: number;
-    is_disbursed!: boolean;
-    is_active!: boolean;
-    amount!: number;
-    tenor!: number;
-    totalPrincipalRepaid!: number;
-    approvalProcessId!: number;
-    requestedTenor!: number;
-    approvedTenor!: number;
-    strRequestedAmount!: string | undefined;
-    strEffectiveDate!: string | undefined;
-    tempRef!: string | undefined;
-    strApprovedAmount!: string | undefined;
-    strMaturityDate!: string | undefined;
-    _ServerDocURL!: string | undefined;
-    strGuarantorIds!: string | undefined;
-    effectiveDate!: Date | undefined;
-    outstandingPrincipal!: number;
-    outstandingInterest!: number;
-    requestedAmount!: number;
-    approvedAmount!: number;
-    autoDeduction!: boolean;
-    customAnswer!: string | undefined;
-    loggedForEmployeeId!: string | undefined;
-    justification!: string | undefined;
-    submittedByUserId!: number;
-=======
         data["onboardingId"] = this.onboardingId;
         data["taxId"] = this.taxId;
         data["nationality_Nigeria"] = this.nationality_Nigeria;
@@ -70343,7 +65172,6 @@ export class LoanRequestDTO implements ILoanRequestDTO {
         data["modifiedById"] = this.modifiedById;
         return data; 
     }
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 
     clone(): OnboardingTaxInfo {
         const json = this.toJSON();
@@ -70408,49 +65236,12 @@ export class OnboardingTaxInfoApiResult implements IOnboardingTaxInfoApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["loanTypeId"] = this.loanTypeId;
-        data["refNo"] = this.refNo;
-        data["employeeNo"] = this.employeeNo;
-        data["employeeName"] = this.employeeName;
-        data["loanTypeName"] = this.loanTypeName;
-        data["employeeId"] = this.employeeId;
-        data["log_status"] = this.log_status;
-        data["is_disbursed"] = this.is_disbursed;
-        data["is_active"] = this.is_active;
-        data["amount"] = this.amount;
-        data["tenor"] = this.tenor;
-        data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["requestedTenor"] = this.requestedTenor;
-        data["approvedTenor"] = this.approvedTenor;
-        data["strRequestedAmount"] = this.strRequestedAmount;
-        data["strEffectiveDate"] = this.strEffectiveDate;
-        data["tempRef"] = this.tempRef;
-        data["strApprovedAmount"] = this.strApprovedAmount;
-        data["strMaturityDate"] = this.strMaturityDate;
-        data["_ServerDocURL"] = this._ServerDocURL;
-        data["strGuarantorIds"] = this.strGuarantorIds;
-        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
-        data["outstandingPrincipal"] = this.outstandingPrincipal;
-        data["outstandingInterest"] = this.outstandingInterest;
-        data["requestedAmount"] = this.requestedAmount;
-        data["approvedAmount"] = this.approvedAmount;
-        data["autoDeduction"] = this.autoDeduction;
-        data["customAnswer"] = this.customAnswer;
-        data["loggedForEmployeeId"] = this.loggedForEmployeeId;
-        data["justification"] = this.justification;
-        data["submittedByUserId"] = this.submittedByUserId;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingTaxInfoApiResult {
@@ -70524,15 +65315,6 @@ export class OnboardingPaymentInfo implements IOnboardingPaymentInfo {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["loan_id"] = this.loan_id;
-        data["repaymentcomment"] = this.repaymentcomment;
-        data["repaymenttotalamt"] = this.repaymenttotalamt;
-        data["repaymenttype"] = this.repaymenttype;
-        data["partamt"] = this.partamt;
-        data["repytdate"] = this.repytdate;
-        return data;
-=======
         data["onboardingId"] = this.onboardingId;
         data["bankNameId"] = this.bankNameId;
         data["accountName"] = this.accountName;
@@ -70549,7 +65331,6 @@ export class OnboardingPaymentInfo implements IOnboardingPaymentInfo {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingPaymentInfo {
@@ -70652,18 +65433,6 @@ export class OnboardingWorkInformation implements IOnboardingWorkInformation {
         data["location"] = this.location;
         data["workEmail"] = this.workEmail;
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["loanRequestId"] = this.loanRequestId;
-        data["amountRepaid"] = this.amountRepaid;
-        data["principalRepayment"] = this.principalRepayment;
-        data["interestRepayment"] = this.interestRepayment;
-        data["repaymentDate"] = this.repaymentDate ? this.repaymentDate.toISOString() : <any>undefined;
-        data["repaymentType"] = this.repaymentType;
-        data["comment"] = this.comment;
-        data["isSchedule"] = this.isSchedule;
-        data["strRepaymentDate"] = this.strRepaymentDate;
-        return data;
-=======
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
@@ -70673,7 +65442,6 @@ export class OnboardingWorkInformation implements IOnboardingWorkInformation {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): OnboardingWorkInformation {
@@ -70745,17 +65513,6 @@ export class EmployeeOnboardingPersonalData implements IEmployeeOnboardingPerson
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["onboardingId"] = this.onboardingId;
         data["onboardingDocumentInfo"] = this.onboardingDocumentInfo ? this.onboardingDocumentInfo.toJSON() : <any>undefined;
         data["onboardingMedicalDisclosureInfo"] = this.onboardingMedicalDisclosureInfo ? this.onboardingMedicalDisclosureInfo.toJSON() : <any>undefined;
@@ -70764,7 +65521,6 @@ export class EmployeeOnboardingPersonalData implements IEmployeeOnboardingPerson
         data["onboardingTaxInfo"] = this.onboardingTaxInfo ? this.onboardingTaxInfo.toJSON() : <any>undefined;
         data["onboardingWorkInformation"] = this.onboardingWorkInformation ? this.onboardingWorkInformation.toJSON() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeOnboardingPersonalData {
@@ -70832,12 +65588,8 @@ export class EmployeeOnboardingPersonalDataListApiResult implements IEmployeeOnb
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmployeeOnboardingPersonalDataListApiResult {
@@ -70915,17 +65667,6 @@ export class ManagePayElementDTO implements IManagePayElementDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["payrollItemId"] = this.payrollItemId;
         data["payTypeId"] = this.payTypeId;
@@ -70944,7 +65685,6 @@ export class ManagePayElementDTO implements IManagePayElementDTO {
         data["start_date"] = this.start_date ? this.start_date.toISOString() : <any>undefined;
         data["end_date"] = this.end_date ? this.end_date.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManagePayElementDTO {
@@ -71060,13 +65800,6 @@ export class PayElementDTO implements IPayElementDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["effective_date"] = this.effective_date;
-        data["loan_id"] = this.loan_id;
-        data["approved_tenor"] = this.approved_tenor;
-        data["approved_amt"] = this.approved_amt;
-        return data;
-=======
         data["id"] = this.id;
         data["company_id"] = this.company_id;
         data["sub_id"] = this.sub_id;
@@ -71098,7 +65831,6 @@ export class PayElementDTO implements IPayElementDTO {
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["payType"] = this.payType;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayElementDTO {
@@ -71181,59 +65913,6 @@ export class PayElementDTOListApiResult implements IPayElementDTOListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["loanTypeId"] = this.loanTypeId;
-        data["submittedByUserId"] = this.submittedByUserId;
-        data["loggedForEmployeeId"] = this.loggedForEmployeeId;
-        data["refNo"] = this.refNo;
-        data["interestRate"] = this.interestRate;
-        data["requestedAmount"] = this.requestedAmount;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["interestType"] = this.interestType;
-        data["requestedTenor"] = this.requestedTenor;
-        data["approvedTenor"] = this.approvedTenor;
-        data["approvedAmount"] = this.approvedAmount;
-        data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
-        data["totalInterestRepaid"] = this.totalInterestRepaid;
-        data["totalAmountRepaid"] = this.totalAmountRepaid;
-        data["lastRepaymentDate"] = this.lastRepaymentDate ? this.lastRepaymentDate.toISOString() : <any>undefined;
-        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
-        data["dateApproved"] = this.dateApproved ? this.dateApproved.toISOString() : <any>undefined;
-        data["customAnswer"] = this.customAnswer;
-        data["justification"] = this.justification;
-        data["log_status"] = this.log_status;
-        data["is_disbursed"] = this.is_disbursed;
-        data["date_disbursed"] = this.date_disbursed ? this.date_disbursed.toISOString() : <any>undefined;
-        data["autoDeduction"] = this.autoDeduction;
-        data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
-        data["maxLoanRepaytAmount"] = this.maxLoanRepaytAmount;
-        data["is_repaid"] = this.is_repaid;
-        data["disbursementdetails"] = this.disbursementdetails;
-        data["disburseby"] = this.disburseby;
-        data["disbursementType"] = this.disbursementType;
-        data["employeeNo"] = this.employeeNo;
-        data["employeeName"] = this.employeeName;
-        data["loanTypeName"] = this.loanTypeName;
-        data["strRequestedAmount"] = this.strRequestedAmount;
-        data["strEffectiveDate"] = this.strEffectiveDate;
-        data["tempRef"] = this.tempRef;
-        data["strApprovedAmount"] = this.strApprovedAmount;
-        data["strMaturityDate"] = this.strMaturityDate;
-        data["_ServerDocURL"] = this._ServerDocURL;
-        data["strGuarantorIds"] = this.strGuarantorIds;
-        data["outstandingPrincipal"] = this.outstandingPrincipal;
-        data["outstandingInterest"] = this.outstandingInterest;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -71244,7 +65923,6 @@ export class PayElementDTOListApiResult implements IPayElementDTOListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayElementDTOListApiResult {
@@ -71302,12 +65980,8 @@ export class PayElementDTOApiResult implements IPayElementDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayElementDTOApiResult {
@@ -71366,31 +66040,10 @@ export class ManagePayInstitutionDTO implements IManagePayInstitutionDTO {
         data["id"] = this.id;
         data["categoryId"] = this.categoryId;
         data["name"] = this.name;
-<<<<<<< HEAD
-        data["description"] = this.description;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["interestRate"] = this.interestRate;
-        data["minTenor"] = this.minTenor;
-        data["maxTenor"] = this.maxTenor;
-        data["minAmount"] = this.minAmount;
-        data["maxAmount"] = this.maxAmount;
-        data["interestType"] = this.interestType;
-        data["requiresGuarantor"] = this.requiresGuarantor;
-        data["requiredNoOfGuarantors"] = this.requiredNoOfGuarantors;
-        data["eligibleGrades"] = this.eligibleGrades;
-        data["eligibleEmploymentStatus"] = this.eligibleEmploymentStatus;
-        data["customQuestion"] = this.customQuestion;
-        data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
-        data["strMinAmount"] = this.strMinAmount;
-        data["strMaxAmount"] = this.strMaxAmount;
-        data["strRequiresGuarantor"] = this.strRequiresGuarantor;
-        return data;
-=======
         data["accountName"] = this.accountName;
         data["accountNumber"] = this.accountNumber;
         data["bankId"] = this.bankId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ManagePayInstitutionDTO {
@@ -71466,10 +66119,6 @@ export class PayInstitutionDTO implements IPayInstitutionDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-<<<<<<< HEAD
-        data["companyID"] = this.companyID;
-        return data;
-=======
         data["company_id"] = this.company_id;
         data["sub_id"] = this.sub_id;
         data["categoryId"] = this.categoryId;
@@ -71485,7 +66134,6 @@ export class PayInstitutionDTO implements IPayInstitutionDTO {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayInstitutionDTO {
@@ -71553,38 +66201,6 @@ export class PayInstitutionDTOListApiResult implements IPayInstitutionDTOListApi
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["code"] = this.code;
-        data["ledgerNo"] = this.ledgerNo;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["interestRate"] = this.interestRate;
-        data["minTenor"] = this.minTenor;
-        data["maxTenor"] = this.maxTenor;
-        data["minAmount"] = this.minAmount;
-        data["maxAmount"] = this.maxAmount;
-        data["interestType"] = this.interestType;
-        data["requiresGuarantor"] = this.requiresGuarantor;
-        data["requiredNoOfGuarantors"] = this.requiredNoOfGuarantors;
-        data["eligibleGrades"] = this.eligibleGrades;
-        data["eligibleEmploymentStatus"] = this.eligibleEmploymentStatus;
-        data["customQuestion"] = this.customQuestion;
-        data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
-        data["strMinAmount"] = this.strMinAmount;
-        data["strMaxAmount"] = this.strMaxAmount;
-        data["strRequiresGuarantor"] = this.strRequiresGuarantor;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -71595,7 +66211,6 @@ export class PayInstitutionDTOListApiResult implements IPayInstitutionDTOListApi
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayInstitutionDTOListApiResult {
@@ -71653,12 +66268,8 @@ export class PayInstitutionDTOApiResult implements IPayInstitutionDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayInstitutionDTOApiResult {
@@ -71795,14 +66406,6 @@ export class RptPayslipAnalyzerListApiResult implements IRptPayslipAnalyzerListA
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["location_name"] = this.location_name;
-        data["state_id"] = this.state_id;
-        data["lga_id"] = this.lga_id;
-        data["is_enabled"] = this.is_enabled;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -71813,7 +66416,6 @@ export class RptPayslipAnalyzerListApiResult implements IRptPayslipAnalyzerListA
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPayslipAnalyzerListApiResult {
@@ -71869,24 +66471,6 @@ export class RptPayrollRunAnalysis implements IRptPayrollRunAnalysis {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["location_name"] = this.location_name;
-        data["lga_id"] = this.lga_id;
-        data["state_id"] = this.state_id;
-        data["lga"] = this.lga;
-        data["state"] = this.state;
-        data["is_enabled"] = this.is_enabled;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["payrollRunId"] = this.payrollRunId;
         data["payPeriod"] = this.payPeriod;
         data["payrollType"] = this.payrollType;
@@ -71894,7 +66478,6 @@ export class RptPayrollRunAnalysis implements IRptPayrollRunAnalysis {
         data["totalDeduction"] = this.totalDeduction;
         data["totalNetPayt"] = this.totalNetPayt;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPayrollRunAnalysis {
@@ -71961,12 +66544,8 @@ export class RptPayrollRunAnalysisListApiResult implements IRptPayrollRunAnalysi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPayrollRunAnalysisListApiResult {
@@ -72036,13 +66615,6 @@ export class RptBankSchedule implements IRptBankSchedule {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["sn"] = this.sn;
         data["employeeNo"] = this.employeeNo;
         data["fullName"] = this.fullName;
@@ -72057,7 +66629,6 @@ export class RptBankSchedule implements IRptBankSchedule {
         data["step"] = this.step;
         data["location"] = this.location;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptBankSchedule {
@@ -72123,40 +66694,6 @@ export class RptBankScheduleListApiResult implements IRptBankScheduleListApiResu
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyId"] = this.companyId;
-        data["subID"] = this.subID;
-        data["titleId"] = this.titleId;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["otherNames"] = this.otherNames;
-        data["phoneNumber"] = this.phoneNumber;
-        data["dateOfBirth"] = this.dateOfBirth ? this.dateOfBirth.toISOString() : <any>undefined;
-        data["maritalStatusId"] = this.maritalStatusId;
-        data["genderId"] = this.genderId;
-        data["residentialAddress"] = this.residentialAddress;
-        data["personalEmail"] = this.personalEmail;
-        data["defaultMobile"] = this.defaultMobile;
-        data["religionId"] = this.religionId;
-        data["martialStatusId"] = this.martialStatusId;
-        data["fieldOfStudy"] = this.fieldOfStudy;
-        data["degree"] = this.degree;
-        data["dateofCompletion"] = this.dateofCompletion ? this.dateofCompletion.toISOString() : <any>undefined;
-        data["cgpa"] = this.cgpa;
-        data["institutionId"] = this.institutionId;
-        data["nextOfKinFullName"] = this.nextOfKinFullName;
-        data["netofKinRelationship"] = this.netofKinRelationship;
-        data["nextofKinPhoneNumber"] = this.nextofKinPhoneNumber;
-        data["nextofKinAddress"] = this.nextofKinAddress;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["userId"] = this.userId;
-        data["created_by"] = this.created_by;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -72167,7 +66704,6 @@ export class RptBankScheduleListApiResult implements IRptBankScheduleListApiResu
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptBankScheduleListApiResult {
@@ -72223,27 +66759,6 @@ export class RptEarnings implements IRptEarnings {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyId"] = this.companyId;
-        data["subID"] = this.subID;
-        data["onboardingId"] = this.onboardingId;
-        data["bankNameId"] = this.bankNameId;
-        data["accountName"] = this.accountName;
-        data["accountNumber"] = this.accountNumber;
-        data["accountTypeId"] = this.accountTypeId;
-        data["paymentMethodId"] = this.paymentMethodId;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["userId"] = this.userId;
-        data["bvn"] = this.bvn;
-        data["fullName"] = this.fullName;
-        data["dialingCode"] = this.dialingCode;
-        data["created_by"] = this.created_by;
-        return data;
-=======
         data["sn"] = this.sn;
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
@@ -72251,7 +66766,6 @@ export class RptEarnings implements IRptEarnings {
         data["amount"] = this.amount;
         data["locationName"] = this.locationName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptEarnings {
@@ -72310,28 +66824,6 @@ export class RptEarningsListApiResult implements IRptEarningsListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyId"] = this.companyId;
-        data["subID"] = this.subID;
-        data["onboardingId"] = this.onboardingId;
-        data["hireDate"] = this.hireDate ? this.hireDate.toISOString() : <any>undefined;
-        data["dateofJoining"] = this.dateofJoining ? this.dateofJoining.toISOString() : <any>undefined;
-        data["salaryPerAnnum"] = this.salaryPerAnnum;
-        data["desginationId"] = this.desginationId;
-        data["employeeTypeId"] = this.employeeTypeId;
-        data["departmentId"] = this.departmentId;
-        data["reportingManagerId"] = this.reportingManagerId;
-        data["location"] = this.location;
-        data["workEmail"] = this.workEmail;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["userId"] = this.userId;
-        data["created_by"] = this.created_by;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -72342,7 +66834,6 @@ export class RptEarningsListApiResult implements IRptEarningsListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptEarningsListApiResult {
@@ -72398,26 +66889,6 @@ export class RptDeductions implements IRptDeductions {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyId"] = this.companyId;
-        data["subID"] = this.subID;
-        data["onboardingId"] = this.onboardingId;
-        data["taxId"] = this.taxId;
-        data["nationality_Nigeria"] = this.nationality_Nigeria;
-        data["passportNumber"] = this.passportNumber;
-        data["passportExpiryDate"] = this.passportExpiryDate ? this.passportExpiryDate.toISOString() : <any>undefined;
-        data["countryId"] = this.countryId;
-        data["visaTypeId"] = this.visaTypeId;
-        data["visaExpiryDate"] = this.visaExpiryDate ? this.visaExpiryDate.toISOString() : <any>undefined;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dialingCode"] = this.dialingCode;
-        data["created_by"] = this.created_by;
-        return data;
-=======
         data["sn"] = this.sn;
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
@@ -72425,7 +66896,6 @@ export class RptDeductions implements IRptDeductions {
         data["amount"] = this.amount;
         data["locationName"] = this.locationName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptDeductions {
@@ -72484,23 +66954,6 @@ export class RptDeductionsListApiResult implements IRptDeductionsListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["companyId"] = this.companyId;
-        data["subID"] = this.subID;
-        data["onboardingId"] = this.onboardingId;
-        data["genotype"] = this.genotype;
-        data["bloodGroup"] = this.bloodGroup;
-        data["anyPreInjury"] = this.anyPreInjury;
-        data["statePreInjury"] = this.statePreInjury;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["userId"] = this.userId;
-        data["created_by"] = this.created_by;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -72511,7 +66964,6 @@ export class RptDeductionsListApiResult implements IRptDeductionsListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptDeductionsListApiResult {
@@ -72567,40 +67019,6 @@ export class RptAllElementSheet implements IRptAllElementSheet {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["userId"] = this.userId;
-        data["titleId"] = this.titleId;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["phoneNumber"] = this.phoneNumber;
-        data["dateofBirth"] = this.dateofBirth ? this.dateofBirth.toISOString() : <any>undefined;
-        data["martialStatus"] = this.martialStatus;
-        data["genderId"] = this.genderId;
-        data["residentialAddress"] = this.residentialAddress;
-        data["fieldofStudy"] = this.fieldofStudy;
-        data["degree"] = this.degree;
-        data["defaultMobile"] = this.defaultMobile;
-        data["personalEmail"] = this.personalEmail;
-        data["dateofCompletion"] = this.dateofCompletion ? this.dateofCompletion.toISOString() : <any>undefined;
-        data["cgpa"] = this.cgpa;
-        data["institutionId"] = this.institutionId;
-        data["nextOfKinFullName"] = this.nextOfKinFullName;
-        data["netofKinRelationship"] = this.netofKinRelationship;
-        data["nextofKinPhoneNumber"] = this.nextofKinPhoneNumber;
-        data["nextofKinAddress"] = this.nextofKinAddress;
-        data["martialStatusId"] = this.martialStatusId;
-        data["completedOnboarding"] = this.completedOnboarding;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["sn"] = this.sn;
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
@@ -72608,7 +67026,6 @@ export class RptAllElementSheet implements IRptAllElementSheet {
         data["amount"] = this.amount;
         data["locationName"] = this.locationName;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptAllElementSheet {
@@ -72675,12 +67092,8 @@ export class RptAllElementSheetListApiResult implements IRptAllElementSheetListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptAllElementSheetListApiResult {
@@ -72730,29 +67143,10 @@ export class RptDeductionSummary implements IRptDeductionSummary {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["onboardingId"] = this.onboardingId;
-        data["nyscCertificate"] = this.nyscCertificate;
-        data["birthCertificate"] = this.birthCertificate;
-        data["driverLicense"] = this.driverLicense;
-        data["addtionalDocument"] = this.addtionalDocument;
-        data["passport"] = this.passport;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["sn"] = this.sn;
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptDeductionSummary {
@@ -72816,12 +67210,8 @@ export class RptDeductionSummaryListApiResult implements IRptDeductionSummaryLis
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptDeductionSummaryListApiResult {
@@ -72871,28 +67261,10 @@ export class RptPaymentSummary implements IRptPaymentSummary {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["onboardingId"] = this.onboardingId;
-        data["genotype"] = this.genotype;
-        data["bloodGroup"] = this.bloodGroup;
-        data["anyPreInjury"] = this.anyPreInjury;
-        data["statePreInjury"] = this.statePreInjury;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["sn"] = this.sn;
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPaymentSummary {
@@ -72956,12 +67328,8 @@ export class RptPaymentSummaryListApiResult implements IRptPaymentSummaryListApi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPaymentSummaryListApiResult {
@@ -73015,33 +67383,12 @@ export class RptTaxDetail implements IRptTaxDetail {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["onboardingId"] = this.onboardingId;
-        data["taxId"] = this.taxId;
-        data["nationality_Nigeria"] = this.nationality_Nigeria;
-        data["passportNumber"] = this.passportNumber;
-        data["passportExpiryDate"] = this.passportExpiryDate ? this.passportExpiryDate.toISOString() : <any>undefined;
-        data["countryId"] = this.countryId;
-        data["visaTypeId"] = this.visaTypeId;
-        data["visaExpiryDate"] = this.visaExpiryDate ? this.visaExpiryDate.toISOString() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
         data["location"] = this.location;
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptTaxDetail {
@@ -73107,12 +67454,8 @@ export class RptTaxDetailListApiResult implements IRptTaxDetailListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptTaxDetailListApiResult {
@@ -73160,28 +67503,9 @@ export class RptTaxSummary implements IRptTaxSummary {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["onboardingId"] = this.onboardingId;
-        data["bankNameId"] = this.bankNameId;
-        data["accountName"] = this.accountName;
-        data["accountNumber"] = this.accountNumber;
-        data["accountTypeId"] = this.accountTypeId;
-        data["paymentMethodId"] = this.paymentMethodId;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["location"] = this.location;
         data["amount"] = this.amount;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptTaxSummary {
@@ -73236,28 +67560,6 @@ export class RptTaxSummaryListApiResult implements IRptTaxSummaryListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["onboardingId"] = this.onboardingId;
-        data["hireDate"] = this.hireDate ? this.hireDate.toISOString() : <any>undefined;
-        data["dateofJoining"] = this.dateofJoining ? this.dateofJoining.toISOString() : <any>undefined;
-        data["salaryPerAnnum"] = this.salaryPerAnnum;
-        data["desginationId"] = this.desginationId;
-        data["employeeTypeId"] = this.employeeTypeId;
-        data["departmentId"] = this.departmentId;
-        data["reportingManagerId"] = this.reportingManagerId;
-        data["location"] = this.location;
-        data["workEmail"] = this.workEmail;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -73268,7 +67570,6 @@ export class RptTaxSummaryListApiResult implements IRptTaxSummaryListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptTaxSummaryListApiResult {
@@ -73330,16 +67631,6 @@ export class RptPensionDetail implements IRptPensionDetail {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["onboardingId"] = this.onboardingId;
-        data["onboardingDocumentInfo"] = this.onboardingDocumentInfo ? this.onboardingDocumentInfo.toJSON() : <any>undefined;
-        data["onboardingMedicalDisclosureInfo"] = this.onboardingMedicalDisclosureInfo ? this.onboardingMedicalDisclosureInfo.toJSON() : <any>undefined;
-        data["onboardingPaymentInfo"] = this.onboardingPaymentInfo ? this.onboardingPaymentInfo.toJSON() : <any>undefined;
-        data["onboardingPersonalInfo"] = this.onboardingPersonalInfo ? this.onboardingPersonalInfo.toJSON() : <any>undefined;
-        data["onboardingTaxInfo"] = this.onboardingTaxInfo ? this.onboardingTaxInfo.toJSON() : <any>undefined;
-        data["onboardingWorkInformation"] = this.onboardingWorkInformation ? this.onboardingWorkInformation.toJSON() : <any>undefined;
-        return data;
-=======
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
         data["pfaCode"] = this.pfaCode;
@@ -73350,7 +67641,6 @@ export class RptPensionDetail implements IRptPensionDetail {
         data["employerContribution"] = this.employerContribution;
         data["remittance"] = this.remittance;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPensionDetail {
@@ -73420,12 +67710,8 @@ export class RptPensionDetailListApiResult implements IRptPensionDetailListApiRe
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPensionDetailListApiResult {
@@ -73481,26 +67767,6 @@ export class RptPensionSummary implements IRptPensionSummary {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["payrollItemId"] = this.payrollItemId;
-        data["payTypeId"] = this.payTypeId;
-        data["paymentInstitutionId"] = this.paymentInstitutionId;
-        data["name"] = this.name;
-        data["elementTypeId"] = this.elementTypeId;
-        data["elementCategoryId"] = this.elementCategoryId;
-        data["is_reoccurring"] = this.is_reoccurring;
-        data["isTaxDeduct"] = this.isTaxDeduct;
-        data["amount"] = this.amount;
-        data["is_variable"] = this.is_variable;
-        data["ratio"] = this.ratio;
-        data["taxPercentage"] = this.taxPercentage;
-        data["hourlyPay"] = this.hourlyPay;
-        data["noOfWorkHours"] = this.noOfWorkHours;
-        data["start_date"] = this.start_date ? this.start_date.toISOString() : <any>undefined;
-        data["end_date"] = this.end_date ? this.end_date.toISOString() : <any>undefined;
-        return data;
-=======
         data["pfaCode"] = this.pfaCode;
         data["pfaName"] = this.pfaName;
         data["empCount"] = this.empCount;
@@ -73508,7 +67774,6 @@ export class RptPensionSummary implements IRptPensionSummary {
         data["employerContribution"] = this.employerContribution;
         data["remittance"] = this.remittance;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPensionSummary {
@@ -73567,39 +67832,6 @@ export class RptPensionSummaryListApiResult implements IRptPensionSummaryListApi
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["payrollItemId"] = this.payrollItemId;
-        data["payTypeId"] = this.payTypeId;
-        data["paymentInstitutionId"] = this.paymentInstitutionId;
-        data["paymentInstitution"] = this.paymentInstitution;
-        data["name"] = this.name;
-        data["elementTypeId"] = this.elementTypeId;
-        data["elementType"] = this.elementType;
-        data["elementCategoryId"] = this.elementCategoryId;
-        data["elementCategory"] = this.elementCategory;
-        data["is_reoccurring"] = this.is_reoccurring;
-        data["isTaxDeduct"] = this.isTaxDeduct;
-        data["amount"] = this.amount;
-        data["is_variable"] = this.is_variable;
-        data["ratio"] = this.ratio;
-        data["taxPercentage"] = this.taxPercentage;
-        data["hourlyPay"] = this.hourlyPay;
-        data["noOfWorkHours"] = this.noOfWorkHours;
-        data["start_date"] = this.start_date ? this.start_date.toISOString() : <any>undefined;
-        data["end_date"] = this.end_date ? this.end_date.toISOString() : <any>undefined;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["payType"] = this.payType;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -73610,7 +67842,6 @@ export class RptPensionSummaryListApiResult implements IRptPensionSummaryListApi
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RptPensionSummaryListApiResult {
@@ -73712,17 +67943,6 @@ export class PayrollRun implements IPayrollRun {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["payrollTypeId"] = this.payrollTypeId;
         data["payPeriodId"] = this.payPeriodId;
@@ -73753,7 +67973,6 @@ export class PayrollRun implements IPayrollRun {
         data["locationId"] = this.locationId;
         data["departmentId"] = this.departmentId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayrollRun {
@@ -73843,12 +68062,8 @@ export class PayrollRunListApiResult implements IPayrollRunListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayrollRunListApiResult {
@@ -73957,9 +68172,6 @@ export class Payslip implements IPayslip {
         data["accountNo"] = this.accountNo;
         data["bankName"] = this.bankName;
         data["bankId"] = this.bankId;
-<<<<<<< HEAD
-        return data;
-=======
         data["pfaId"] = this.pfaId;
         data["rsaNo"] = this.rsaNo;
         data["locationId"] = this.locationId;
@@ -73968,7 +68180,6 @@ export class Payslip implements IPayslip {
         data["taxBalanceYTD"] = this.taxBalanceYTD;
         data["taxableIncomeYTD"] = this.taxableIncomeYTD;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Payslip {
@@ -74045,24 +68256,6 @@ export class PayslipListApiResult implements IPayslipListApiResult {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["id"] = this.id;
-        data["company_id"] = this.company_id;
-        data["sub_id"] = this.sub_id;
-        data["categoryId"] = this.categoryId;
-        data["name"] = this.name;
-        data["accountName"] = this.accountName;
-        data["accountNumber"] = this.accountNumber;
-        data["bankId"] = this.bankId;
-        data["is_deleted"] = this.is_deleted;
-        data["is_active"] = this.is_active;
-        data["created_by"] = this.created_by;
-        data["deleted_by"] = this.deleted_by;
-        data["updated_by"] = this.updated_by;
-        data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
-        data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        return data;
-=======
         data["hasError"] = this.hasError;
         data["message"] = this.message;
         if (Array.isArray(this.result)) {
@@ -74073,7 +68266,6 @@ export class PayslipListApiResult implements IPayslipListApiResult {
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayslipListApiResult {
@@ -74143,17 +68335,6 @@ export class PayslipItem implements IPayslipItem {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-<<<<<<< HEAD
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        return data;
-=======
         data["id"] = this.id;
         data["payslipId"] = this.payslipId;
         data["payrollRunId"] = this.payrollRunId;
@@ -74168,7 +68349,6 @@ export class PayslipItem implements IPayslipItem {
         data["dateProcessed"] = this.dateProcessed ? this.dateProcessed.toISOString() : <any>undefined;
         data["varianceId"] = this.varianceId;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayslipItem {
@@ -74242,12 +68422,8 @@ export class PayslipItemListApiResult implements IPayslipItemListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayslipItemListApiResult {
@@ -74315,7 +68491,7 @@ export class ManagePayrollTypeDTO implements IManagePayrollTypeDTO {
         data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
         data["negativePaymentAllowed"] = this.negativePaymentAllowed;
         data["code"] = this.code;
-        return data;
+        return data; 
     }
 
     clone(): ManagePayrollTypeDTO {
@@ -74398,7 +68574,7 @@ export class EmployeeProfileDTO implements IEmployeeProfileDTO {
         data["grade"] = this.grade;
         data["employmentTypeId"] = this.employmentTypeId;
         data["employmentType"] = this.employmentType;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeProfileDTO {
@@ -74517,7 +68693,7 @@ export class PayrollTypeDTO implements IPayrollTypeDTO {
             for (let item of this.employees)
                 data["employees"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): PayrollTypeDTO {
@@ -74598,12 +68774,8 @@ export class PayrollTypeDTOListApiResult implements IPayrollTypeDTOListApiResult
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayrollTypeDTOListApiResult {
@@ -74661,12 +68833,8 @@ export class PayrollTypeDTOApiResult implements IPayrollTypeDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PayrollTypeDTOApiResult {
@@ -74839,7 +69007,7 @@ export class CycleDTO implements ICycleDTO {
         data["reviewPurpose"] = this.reviewPurpose;
         data["appraisalType"] = this.appraisalType;
         data["ratingType"] = this.ratingType;
-        return data;
+        return data; 
     }
 
     clone(): CycleDTO {
@@ -74943,12 +69111,8 @@ export class CycleDTOIListApiResult implements ICycleDTOIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CycleDTOIListApiResult {
@@ -75006,12 +69170,8 @@ export class CycleDTOApiResult implements ICycleDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CycleDTOApiResult {
@@ -75112,7 +69272,7 @@ export class ManageCycleDTO implements IManageCycleDTO {
         data["lastPeriodUnderReview"] = this.lastPeriodUnderReview;
         data["dueDate"] = this.dueDate ? this.dueDate.toISOString() : <any>undefined;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): ManageCycleDTO {
@@ -75200,7 +69360,7 @@ export class ManagePositionDTO implements IManagePositionDTO {
         data["next_position_id"] = this.next_position_id;
         data["selectedQualifications"] = this.selectedQualifications;
         data["selectedCertifications"] = this.selectedCertifications;
-        return data;
+        return data; 
     }
 
     clone(): ManagePositionDTO {
@@ -75314,7 +69474,7 @@ export class PositionDTO implements IPositionDTO {
             for (let item of this.positionRequirements)
                 data["positionRequirements"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): PositionDTO {
@@ -75394,12 +69554,8 @@ export class PositionDTOListApiResult implements IPositionDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PositionDTOListApiResult {
@@ -75457,12 +69613,8 @@ export class PositionDTOApiResult implements IPositionDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): PositionDTOApiResult {
@@ -75792,7 +69944,7 @@ export class SelectListGroup implements ISelectListGroup {
         data = typeof data === 'object' ? data : {};
         data["disabled"] = this.disabled;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): SelectListGroup {
@@ -75848,7 +70000,7 @@ export class SelectListItem implements ISelectListItem {
         data["selected"] = this.selected;
         data["text"] = this.text;
         data["value"] = this.value;
-        return data;
+        return data; 
     }
 
     clone(): SelectListItem {
@@ -76021,7 +70173,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
         data["log_status_id"] = this.log_status_id;
         data["effective_date"] = this.effective_date ? this.effective_date.toISOString() : <any>undefined;
         data["str_effective_date"] = this.str_effective_date;
-        return data;
+        return data; 
     }
 
     clone(): Sp_FetchEligibleEmployees {
@@ -76179,7 +70331,7 @@ export class PromotionEligibilityViewModel implements IPromotionEligibilityViewM
         data["strDateGenerated"] = this.strDateGenerated;
         data["isClosed"] = this.isClosed;
         data["strDateClosed"] = this.strDateClosed;
-        return data;
+        return data; 
     }
 
     clone(): PromotionEligibilityViewModel {
@@ -76260,12 +70412,8 @@ export class Sp_FetchEligibleEmployeesIListApiResult implements ISp_FetchEligibl
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): Sp_FetchEligibleEmployeesIListApiResult {
@@ -76385,7 +70533,7 @@ export class VwGradeSteps implements IVwGradeSteps {
             for (let item of this.nextGradeSteps)
                 data["nextGradeSteps"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): VwGradeSteps {
@@ -76520,7 +70668,7 @@ export class VwPromotionSchedule implements IVwPromotionSchedule {
             for (let item of this.promotionCategorys)
                 data["promotionCategorys"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): VwPromotionSchedule {
@@ -76585,12 +70733,8 @@ export class VwPromotionScheduleApiResult implements IVwPromotionScheduleApiResu
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): VwPromotionScheduleApiResult {
@@ -76673,7 +70817,7 @@ export class RatingDTO implements IRatingDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RatingDTO {
@@ -76747,12 +70891,8 @@ export class RatingDTOIListApiResult implements IRatingDTOIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RatingDTOIListApiResult {
@@ -76835,7 +70975,7 @@ export class ManageRequestDTO implements IManageRequestDTO {
         data["submitted_by"] = this.submitted_by;
         data["date_resolved"] = this.date_resolved ? this.date_resolved.toISOString() : <any>undefined;
         data["refNo"] = this.refNo;
-        return data;
+        return data; 
     }
 
     clone(): ManageRequestDTO {
@@ -76962,7 +71102,7 @@ export class RequestDTO implements IRequestDTO {
         data["refNo"] = this.refNo;
         data["employeeName"] = this.employeeName;
         data["status"] = this.status;
-        return data;
+        return data; 
     }
 
     clone(): RequestDTO {
@@ -77048,12 +71188,8 @@ export class RequestDTOListApiResult implements IRequestDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestDTOListApiResult {
@@ -77111,12 +71247,8 @@ export class RequestDTOApiResult implements IRequestDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestDTOApiResult {
@@ -77178,7 +71310,7 @@ export class ManageRequestTypeDTO implements IManageRequestTypeDTO {
         data["is_SystemRequirment"] = this.is_SystemRequirment;
         data["isActive"] = this.isActive;
         data["is_StepNotify"] = this.is_StepNotify;
-        return data;
+        return data; 
     }
 
     clone(): ManageRequestTypeDTO {
@@ -77277,7 +71409,7 @@ export class RequestTypeDTO implements IRequestTypeDTO {
         data["processid"] = this.processid;
         data["enable_step_notify"] = this.enable_step_notify;
         data["is_system_requirement"] = this.is_system_requirement;
-        return data;
+        return data; 
     }
 
     clone(): RequestTypeDTO {
@@ -77356,12 +71488,8 @@ export class RequestTypeDTOListApiResult implements IRequestTypeDTOListApiResult
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestTypeDTOListApiResult {
@@ -77419,12 +71547,8 @@ export class RequestTypeDTOApiResult implements IRequestTypeDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestTypeDTOApiResult {
@@ -77546,7 +71670,7 @@ export class RetirmentDTO implements IRetirmentDTO {
         data["dateReviewed"] = this.dateReviewed ? this.dateReviewed.toISOString() : <any>undefined;
         data["isAccepted"] = this.isAccepted;
         data["log_status"] = this.log_status;
-        return data;
+        return data; 
     }
 
     clone(): RetirmentDTO {
@@ -77633,12 +71757,8 @@ export class RetirmentDTOListApiResult implements IRetirmentDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirmentDTOListApiResult {
@@ -77696,12 +71816,8 @@ export class RetirmentDTOApiResult implements IRetirmentDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirmentDTOApiResult {
@@ -77759,12 +71875,8 @@ export class RetirementApiResult implements IRetirementApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RetirementApiResult {
@@ -77887,7 +71999,7 @@ export class AddRequestViewModel implements IAddRequestViewModel {
         data["code"] = this.code;
         data["enable_step_notify"] = this.enable_step_notify;
         data["is_system_requirement"] = this.is_system_requirement;
-        return data;
+        return data; 
     }
 
     clone(): AddRequestViewModel {
@@ -77961,7 +72073,7 @@ export class RequestItemViewModel implements IRequestItemViewModel {
         data["resolution"] = this.resolution;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data;
+        return data; 
     }
 
     clone(): RequestItemViewModel {
@@ -78029,7 +72141,7 @@ export class RequestViewModel implements IRequestViewModel {
             for (let item of this.lstOfRequests)
                 data["lstOfRequests"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): RequestViewModel {
@@ -78094,12 +72206,8 @@ export class RequestViewModelIListApiResult implements IRequestViewModelIListApi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestViewModelIListApiResult {
@@ -78174,7 +72282,7 @@ export class RequestFileDto implements IRequestFileDto {
         data["employee"] = this.employee;
         data["itemId"] = this.itemId;
         data["employeeName"] = this.employeeName;
-        return data;
+        return data; 
     }
 
     clone(): RequestFileDto {
@@ -78240,12 +72348,8 @@ export class RequestFileDtoIListApiResult implements IRequestFileDtoIListApiResu
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RequestFileDtoIListApiResult {
@@ -78301,7 +72405,7 @@ export class ApplicationRoleDTO implements IApplicationRoleDTO {
         data["name"] = this.name;
         data["description"] = this.description;
         data["isSystemRole"] = this.isSystemRole;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRoleDTO {
@@ -78366,12 +72470,8 @@ export class ApplicationRoleDTOIListApiResult implements IApplicationRoleDTOILis
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ApplicationRoleDTOIListApiResult {
@@ -78429,12 +72529,8 @@ export class ApplicationRoleDTOApiResult implements IApplicationRoleDTOApiResult
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ApplicationRoleDTOApiResult {
@@ -78490,7 +72586,7 @@ export class PermissionDTO implements IPermissionDTO {
         data["name"] = this.name;
         data["applicationName"] = this.applicationName;
         data["code"] = this.code;
-        return data;
+        return data; 
     }
 
     clone(): PermissionDTO {
@@ -78550,7 +72646,7 @@ export class RolePermissionDTO implements IRolePermissionDTO {
             for (let item of this.permissions)
                 data["permissions"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): RolePermissionDTO {
@@ -78614,12 +72710,8 @@ export class RolePermissionDTOIListApiResult implements IRolePermissionDTOIListA
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RolePermissionDTOIListApiResult {
@@ -78677,12 +72769,8 @@ export class RolePermissionDTOApiResult implements IRolePermissionDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): RolePermissionDTOApiResult {
@@ -78743,7 +72831,7 @@ export class RolePermissionMappingDTO implements IRolePermissionMappingDTO {
             for (let item of this.permissionIds)
                 data["permissionIds"].push(item);
         }
-        return data;
+        return data; 
     }
 
     clone(): RolePermissionMappingDTO {
@@ -78796,7 +72884,7 @@ export class ManageSalaryscaleDTO implements IManageSalaryscaleDTO {
         data["name"] = this.name;
         data["code"] = this.code;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): ManageSalaryscaleDTO {
@@ -78878,7 +72966,7 @@ export class SalaryscaleDTO implements ISalaryscaleDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): SalaryscaleDTO {
@@ -78952,12 +73040,8 @@ export class SalaryscaleDTOListApiResult implements ISalaryscaleDTOListApiResult
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SalaryscaleDTOListApiResult {
@@ -79015,12 +73099,8 @@ export class SalaryscaleDTOApiResult implements ISalaryscaleDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SalaryscaleDTOApiResult {
@@ -79264,7 +73344,7 @@ export class Modular implements IModular {
             for (let item of this.subscriptionPlanModules)
                 data["subscriptionPlanModules"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): Modular {
@@ -79329,7 +73409,7 @@ export class SubscriptionPlanModule implements ISubscriptionPlanModule {
         data["modularDefaultEnabled"] = this.modularDefaultEnabled;
         data["subscriptionPlan"] = this.subscriptionPlan ? this.subscriptionPlan.toJSON() : <any>undefined;
         data["modular"] = this.modular ? this.modular.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlanModule {
@@ -79410,7 +73490,7 @@ export class SubscriptionPlan implements ISubscriptionPlan {
             for (let item of this.subscriptionPlanModules)
                 data["subscriptionPlanModules"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlan {
@@ -79480,12 +73560,8 @@ export class SubscriptionPlanIListApiResult implements ISubscriptionPlanIListApi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SubscriptionPlanIListApiResult {
@@ -79543,12 +73619,8 @@ export class SubscriptionPlanApiResult implements ISubscriptionPlanApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SubscriptionPlanApiResult {
@@ -79614,12 +73686,8 @@ export class SubscriptionPlanModuleIListApiResult implements ISubscriptionPlanMo
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): SubscriptionPlanModuleIListApiResult {
@@ -79672,7 +73740,7 @@ export class CompanySignUpDTO implements ICompanySignUpDTO {
         data["email"] = this.email;
         data["phoneNumber"] = this.phoneNumber;
         data["password"] = this.password;
-        return data;
+        return data; 
     }
 
     clone(): CompanySignUpDTO {
@@ -79765,7 +73833,7 @@ export class CompanyDTO implements ICompanyDTO {
         data["maxEmployeeCount"] = this.maxEmployeeCount;
         data["subscriptionPlanId"] = this.subscriptionPlanId;
         data["password"] = this.password;
-        return data;
+        return data; 
     }
 
     clone(): CompanyDTO {
@@ -79893,7 +73961,7 @@ export class Company implements ICompany {
         data["colorBackGround"] = this.colorBackGround;
         data["domainName"] = this.domainName;
         data["isTrial"] = this.isTrial;
-        return data;
+        return data; 
     }
 
     clone(): Company {
@@ -79978,12 +74046,8 @@ export class CompanyIListApiResult implements ICompanyIListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CompanyIListApiResult {
@@ -80048,7 +74112,7 @@ export class CompanyModuleDTO implements ICompanyModuleDTO {
         data["moduleName"] = this.moduleName;
         data["icon"] = this.icon;
         data["isReadonly"] = this.isReadonly;
-        return data;
+        return data; 
     }
 
     clone(): CompanyModuleDTO {
@@ -80116,12 +74180,8 @@ export class CompanyModuleDTOIListApiResult implements ICompanyModuleDTOIListApi
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): CompanyModuleDTOIListApiResult {
@@ -80192,7 +74252,7 @@ export class TrainingVendorPayload implements ITrainingVendorPayload {
         data["description"] = this.description;
         data["trainingSpecializationId"] = this.trainingSpecializationId;
         data["trainingTag"] = this.trainingTag;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendorPayload {
@@ -80276,7 +74336,7 @@ export class TrainingSpecialization implements ITrainingSpecialization {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecialization {
@@ -80387,7 +74447,7 @@ export class TrainingVendorResource implements ITrainingVendorResource {
         data["deleted_By"] = this.deleted_By;
         data["trainingSpecializationId"] = this.trainingSpecializationId;
         data["trainingSpecialization"] = this.trainingSpecialization ? this.trainingSpecialization.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendorResource {
@@ -80468,12 +74528,8 @@ export class TrainingVendorResourceListApiResult implements ITrainingVendorResou
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingVendorResourceListApiResult {
@@ -80531,12 +74587,8 @@ export class TrainingVendorResourceApiResult implements ITrainingVendorResourceA
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingVendorResourceApiResult {
@@ -80610,7 +74662,7 @@ export class TrainingTypePayload implements ITrainingTypePayload {
         data["name"] = this.name;
         data["file"] = this.file;
         data["trainingCategoryId"] = this.trainingCategoryId;
-        return data;
+        return data; 
     }
 
     clone(): TrainingTypePayload {
@@ -80719,7 +74771,7 @@ export class TrainingVendor implements ITrainingVendor {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendor {
@@ -80826,7 +74878,7 @@ export class TrainingCategory implements ITrainingCategory {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategory {
@@ -80985,7 +75037,7 @@ export class TrainingType implements ITrainingType {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingType {
@@ -81137,7 +75189,7 @@ export class Training implements ITraining {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): Training {
@@ -81304,7 +75356,7 @@ export class TrainingTypeResource implements ITrainingTypeResource {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingTypeResource {
@@ -81396,12 +75448,8 @@ export class TrainingTypeResourceListApiResult implements ITrainingTypeResourceL
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingTypeResourceListApiResult {
@@ -81459,12 +75507,8 @@ export class TrainingTypeResourceApiResult implements ITrainingTypeResourceApiRe
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingTypeResourceApiResult {
@@ -81514,7 +75558,7 @@ export class ToggleTrainingType implements IToggleTrainingType {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["status"] = this.status;
-        return data;
+        return data; 
     }
 
     clone(): ToggleTrainingType {
@@ -81561,7 +75605,7 @@ export class TrainingCategoryPayload implements ITrainingCategoryPayload {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategoryPayload {
@@ -81638,7 +75682,7 @@ export class TrainingCategoryResource implements ITrainingCategoryResource {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategoryResource {
@@ -81711,12 +75755,8 @@ export class TrainingCategoryResourceListApiResult implements ITrainingCategoryR
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingCategoryResourceListApiResult {
@@ -81772,7 +75812,7 @@ export class TrainingSpecializationPayload implements ITrainingSpecializationPay
         data["name"] = this.name;
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecializationPayload {
@@ -81851,7 +75891,7 @@ export class TrainingSpecializationDTO implements ITrainingSpecializationDTO {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecializationDTO {
@@ -81924,12 +75964,8 @@ export class TrainingSpecializationDTOListApiResult implements ITrainingSpeciali
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingSpecializationDTOListApiResult {
@@ -81987,12 +76023,8 @@ export class TrainingSpecializationDTOApiResult implements ITrainingSpecializati
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingSpecializationDTOApiResult {
@@ -82075,7 +76107,7 @@ export class ManageTrainingDTO implements IManageTrainingDTO {
         data["costPerEmployee"] = this.costPerEmployee;
         data["selectedEmployees"] = this.selectedEmployees;
         data["attachment"] = this.attachment;
-        return data;
+        return data; 
     }
 
     clone(): ManageTrainingDTO {
@@ -82154,7 +76186,7 @@ export class TrainingFilterDTO implements ITrainingFilterDTO {
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
         data["totalCost"] = this.totalCost;
         data["costPerEmployee"] = this.costPerEmployee;
-        return data;
+        return data; 
     }
 
     clone(): TrainingFilterDTO {
@@ -82274,7 +76306,7 @@ export class TrainingDTO implements ITrainingDTO {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingDTO {
@@ -82359,12 +76391,8 @@ export class TrainingDTOListApiResult implements ITrainingDTOListApiResult {
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingDTOListApiResult {
@@ -82422,12 +76450,8 @@ export class TrainingDTOApiResult implements ITrainingDTOApiResult {
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingDTOApiResult {
@@ -82510,7 +76534,7 @@ export class TrainingCriteriaPayload implements ITrainingCriteriaPayload {
         data["employmentTypeId"] = this.employmentTypeId;
         data["salaryScaleId"] = this.salaryScaleId;
         data["positionId"] = this.positionId;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCriteriaPayload {
@@ -82598,7 +76622,7 @@ export class Ministry implements IMinistry {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Ministry {
@@ -82736,7 +76760,7 @@ export class TrainingCriteriaResource implements ITrainingCriteriaResource {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCriteriaResource {
@@ -82826,12 +76850,8 @@ export class TrainingCriteriaResourceListApiResult implements ITrainingCriteriaR
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): TrainingCriteriaResourceListApiResult {
@@ -82887,7 +76907,7 @@ export class AssignTrainingToEmpPayload implements IAssignTrainingToEmpPayload {
         data["trainingId"] = this.trainingId;
         data["training"] = this.training;
         data["file"] = this.file;
-        return data;
+        return data; 
     }
 
     clone(): AssignTrainingToEmpPayload {
@@ -82905,116 +76925,6 @@ export interface IAssignTrainingToEmpPayload {
     file: string | undefined;
 }
 
-<<<<<<< HEAD
-export class Document implements IDocument {
-    employee_Id!: number;
-    employeeNo!: string | undefined;
-    name!: string;
-    docUrl!: string | undefined;
-    directory!: string | undefined;
-    docType!: string | undefined;
-    lastModifiedDate!: Date;
-    comment!: string | undefined;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: IDocument) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.employee_Id = _data["employee_Id"];
-            this.employeeNo = _data["employeeNo"];
-            this.name = _data["name"];
-            this.docUrl = _data["docUrl"];
-            this.directory = _data["directory"];
-            this.docType = _data["docType"];
-            this.lastModifiedDate = _data["lastModifiedDate"] ? new Date(_data["lastModifiedDate"].toString()) : <any>undefined;
-            this.comment = _data["comment"];
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): Document {
-        data = typeof data === 'object' ? data : {};
-        let result = new Document();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["employee_Id"] = this.employee_Id;
-        data["employeeNo"] = this.employeeNo;
-        data["name"] = this.name;
-        data["docUrl"] = this.docUrl;
-        data["directory"] = this.directory;
-        data["docType"] = this.docType;
-        data["lastModifiedDate"] = this.lastModifiedDate ? this.lastModifiedDate.toISOString() : <any>undefined;
-        data["comment"] = this.comment;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data;
-    }
-
-    clone(): Document {
-        const json = this.toJSON();
-        let result = new Document();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IDocument {
-    employee_Id: number;
-    employeeNo: string | undefined;
-    name: string;
-    docUrl: string | undefined;
-    directory: string | undefined;
-    docType: string | undefined;
-    lastModifiedDate: Date;
-    comment: string | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-=======
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
 export class EmpTrainingResource implements IEmpTrainingResource {
     id!: number;
     contractId!: number;
@@ -83132,7 +77042,7 @@ export class EmpTrainingResource implements IEmpTrainingResource {
         data["location"] = this.location;
         data["jobRole"] = this.jobRole;
         data["position"] = this.position;
-        return data;
+        return data; 
     }
 
     clone(): EmpTrainingResource {
@@ -83221,12 +77131,8 @@ export class EmpTrainingResourceListApiResult implements IEmpTrainingResourceLis
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmpTrainingResourceListApiResult {
@@ -83276,7 +77182,7 @@ export class AssignTrainingToOneEmpPayload implements IAssignTrainingToOneEmpPay
         data = typeof data === 'object' ? data : {};
         data["emplogId"] = this.emplogId;
         data["trainingId"] = this.trainingId;
-        return data;
+        return data; 
     }
 
     clone(): AssignTrainingToOneEmpPayload {
@@ -83331,12 +77237,8 @@ export class EmpTrainingResourceApiResult implements IEmpTrainingResourceApiResu
         data["message"] = this.message;
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): EmpTrainingResourceApiResult {
@@ -83386,7 +77288,7 @@ export class EmpFeedBack implements IEmpFeedBack {
         data = typeof data === 'object' ? data : {};
         data["emplogId"] = this.emplogId;
         data["feedBack"] = this.feedBack;
-        return data;
+        return data; 
     }
 
     clone(): EmpFeedBack {
@@ -83469,7 +77371,7 @@ export class EmployeeTrainingDTO implements IEmployeeTrainingDTO {
         data["age"] = this.age;
         data["yearsOfService"] = this.yearsOfService;
         data["hasAttended"] = this.hasAttended;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeTrainingDTO {
@@ -83545,7 +77447,7 @@ export class ApplicationPermission implements IApplicationPermission {
             for (let item of this.applicationRolePermissions)
                 data["applicationRolePermissions"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): ApplicationPermission {
@@ -83607,7 +77509,7 @@ export class ApplicationRolePermission implements IApplicationRolePermission {
         data["applicationPermissionId"] = this.applicationPermissionId;
         data["applicationRole"] = this.applicationRole ? this.applicationRole.toJSON() : <any>undefined;
         data["applicationPermission"] = this.applicationPermission ? this.applicationPermission.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRolePermission {
@@ -83681,7 +77583,7 @@ export class ApplicationRole implements IApplicationRole {
         data["name"] = this.name;
         data["normalizedName"] = this.normalizedName;
         data["concurrencyStamp"] = this.concurrencyStamp;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRole {
@@ -83828,7 +77730,7 @@ export class RegisterUserDTO implements IRegisterUserDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RegisterUserDTO {
@@ -83931,7 +77833,7 @@ export class ApplicationUserDTO implements IApplicationUserDTO {
         data["token"] = this.token;
         data["apiSessionId"] = this.apiSessionId;
         data["lastComputerName"] = this.lastComputerName;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationUserDTO {
@@ -84006,12 +77908,8 @@ export class ApplicationUserDTOIListApiResult implements IApplicationUserDTOILis
                 data["result"].push(item.toJSON());
         }
         data["totalCount"] = this.totalCount;
-<<<<<<< HEAD
-        return data;
-=======
         data["totalRecord"] = this.totalRecord;
         return data; 
->>>>>>> 2bb36f97894a1e1b13299f808a1a0f341f725c4f
     }
 
     clone(): ApplicationUserDTOIListApiResult {
