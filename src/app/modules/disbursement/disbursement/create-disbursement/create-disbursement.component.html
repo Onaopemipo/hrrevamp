@@ -17,7 +17,7 @@
             placeholder="Select Channel" name="channel" #channel="ngModel" [(ngModel)]="disbursement.channelId"
           >
           <option value=""  disabled>Select Channel</option>
-          <option value="1" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
+          <option value="mychannel.id" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
         </select>
           </div>
         </div>
@@ -40,7 +40,7 @@
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <select class="form-control" name="bugetItem" #budgetItem="ngModel" [(ngModel)]="disbursement.disbursementBudgetItemId" placeholder="Select">
-                <option value="">--Select Budget Item--</option>
+                <option value="" disabled>--Select Budget Item--</option>
                 <option *ngFor="let item of allBudgetItems" value="item.code">{{ item.name }}</option>
               </select>
               </div>
@@ -55,7 +55,7 @@
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <select class="form-control" name="projectItem" #projectItem="ngModel" [(ngModel)]="disbursement.projectId" placeholder="Select">
-                  <option value="">Select Project Item</option>
+                  <option value="" disabled>Select Project Item</option>
                   <option *ngFor="let project of allProjects" value="project.code">{{ project.name }}</option>
                 </select>
               </div>
@@ -82,11 +82,11 @@
             <div *ngIf="myrecipient == '1'">
               <div class="form-group row" style="margin-top: 20px">
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                  <label>Bank Name </label>
+                  <label>Bank Name</label>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                   <select class="form-control" name="bankName" #bankName="ngModel" [(ngModel)]="disbursement">
-                    <option  value="">-- Select Bank --</option>
+                    <option  value="" disabled>-- Select Bank --</option>
                     <option *ngFor="let bank of allbanksName; let i = index" value="bank.option_value">{{bank.option_text}}</option>
                   </select>
                 </div>
@@ -122,8 +122,8 @@
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <select class="form-control" name="beneficiary" #beneficiary="ngModel" [(ngModel)]="disbursement.beneficiary_id">
-                  <option value="">--Select Beneficiary--</option>
-                  <option *ngFor="let mybenefiary of allBeneficiaries" value="mybenefiary.id">{{mybenefiary.accountName}}</option>
+                  <option value="" disabled>--Select Beneficiary--</option>
+                  <option *ngFor="let mybenefiary of allBeneficiaries; let i = index" value="mybenefiary.id">{{mybenefiary.accountName}}</option>
                 </select>
               </div>
               <div *ngIf="beneficiary.invalid && (beneficiary.dirty || beneficiary.touched)" class="error">
@@ -187,8 +187,8 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                   <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequencyId" placeholder="Frequency">
-                    <option value="" default>--Select Frequency--</option>
-                    <option *ngFor="let frequent of allFrequcbies" value="frequent.id">{{frequent.name}}</option>
+                    <option value="" disabled>--Select Frequency--</option>
+                    <option *ngFor="let frequent of allFrequencies; let i = index" value="frequent.id">{{frequent.name}}</option>
                   </select>
                 </div>
 
@@ -278,10 +278,11 @@
 
               <div *ngIf="recurrence == true">
                 <div class="form-group row" style="margin-top: 20px">
+                  <div class="col-sm-2"></div>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequencyId" placeholder="Frequency">
                       <option value="" default>--Select Frequency--</option>
-                      <option *ngFor="let frequent of allFrequcbies" value="frequent.id">{{frequent.name}}</option>
+                      <option *ngFor="let frequent of allFrequencies" value="frequent.id">{{frequent.name}}</option>
                     </select>
                   </div>
 

@@ -6,7 +6,7 @@
     </select>
   </div>
 </ngx-componentsheader>
-<div *ngIf="finLoading == false" style="background-color: white; min-height: 10vh">
+<div style="background-color: white; min-height: 10vh">
   <div class="row" style="padding-top: 1rem; padding-bottom: 1rem">
     <div class="col-sm-6">
       <div
@@ -97,12 +97,13 @@
   </div>
 </div>
 
-<div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
+<!-- <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
  <div style="font-size: 32px;">
    <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
  </div>
+</div> -->
 
-</div>
+
 <ngx-componentsheader
   pageName="Budget Items"
   [requiredButton]="topActionButtons"

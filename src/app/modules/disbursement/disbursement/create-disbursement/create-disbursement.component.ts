@@ -119,7 +119,7 @@ async getBanks(){
 }
 
 async getChannels(){
-  const data = await this.channel.getAllPaymentInstitutions(10,1,0).toPromise();
+  const data = await this.commonService.getPaymentChannels().toPromise();
   if(!data.hasError){
     this.allChannels = data.result;
     console.log('this',this.allChannels)
