@@ -12,18 +12,20 @@
       <div class="form-group row">
         <div class="col">
           <label>Financial Year</label>
-        <ngx-date-range style="width: 60%;" [(start)]="budget.startDate" [(end)]="budget.endDate" aria-required="true"></ngx-date-range>
+        <ngx-date-range style="width: 60%;" [(start)]="budget.financialYearStartDate" [(end)]="budget.financialYearEndDate" required></ngx-date-range>
         </div>
       </div>
       <div class="form-group row">
        <div class="col">
         <label>Total amount</label>
-        <app-amount-input [(value)]="budget.totalBudgetAmount" aria-required="true"></app-amount-input>
+        <app-amount-input [(value)]="budget.totalBudgetAmount" required></app-amount-input>
        </div>
       </div>
-      <div class="form-group" style="margin-top: 20px">
-        <label></label>
+      <div class="form-group row" style="margin-top: 20px">
+        <div class="col">
+          <label></label>
         <button nbButton status="primary" (click)="addBudget()" [disabled]="budgetForm.invalid">Save and Continue</button>
+        </div>
       </div>
     </div>
   </div>
@@ -31,57 +33,63 @@
 </ng-template>
 
 <ng-template [ngIf]="page === 2">
+    <h4>Update Budget Item</h4>
+      <form #editItem="ngForm" name="editItem">
+          <div class="row">
+            <div class="form-group col">
+              <label>Budget Item</label>
+              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.name" [(value)]="budgetItem.name" required>
+            </div>
+          </div>
 
-  <!-- <h4>Add a budget item</h4> -->
-  <!-- <div class="row">
-    <div class="col-sm-6 linear-form">
-      <div class="form-group">
-        <label>Budget Item</label>
-        <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.budget_item" required>
-      </div>
-      <div class="form-group">
-        <label>Budget Code</label>
-        <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.budget_code" required>
-      </div>
-      <div class="form-group">
-        <label>Total Budget Amount</label>
-        <input class="form-control" name="itemAmount" #itemAmount="ngModel" [(ngModel)]="budgetItem.amount" required>
-      </div>
-    </div>
-  </div>
-      <hr/>
-      <div class="row">
-      <div class="col-sm-6 linear-form">
-      <div class="form-group">
-        <label>Department</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Allocated amount</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label></label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group" style="margin-top: 20px">
-        <label></label>
-        <div>
-            <button nbButton status="primary" class="border-none" outline>
-              <nb-icon icon="plus-outline"></nb-icon>
-              Add department
-            </button>
-        </div>
-      </div>
-      <div class="form-group" style="margin-top: 20px">
-        <label></label>
-        <div>
-            <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-            <button nbButton status="primary">Save</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+          <div class="form-group row">
+            <div class="col">
+              <label>Budget Code</label>
+              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.code" [(value)]="budgetItem.code" placeholder="Budget Code" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <label>Total Budget Amount</label>
+              <app-amount-input [(value)]="budgetItem.totalBudget"></app-amount-input>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="form-group row">
+          <div class="col">
+            <label>Department</label>
+            <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
+              <option value="1">Select Department</option>
+              <option *ngFor="let dep of allDepartments[0]" value=dep.code>{{dep.name}}</option>
+            </select>
+          </div>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <label>Allocated amount</label>
+              <app-amount-input [(value)]="departments.amount"></app-amount-input>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 20px">
+            <label></label>
+            <div>
+                <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
+                  <nb-icon icon="plus-outline"></nb-icon>
+                  Add department
+                </button>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 20px">
+            <label></label>
+            <div>
+                <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
+                <button nbButton status="primary" (click)="updateBudgetItem($event)">Update</button>
+            </div>
+          </div>
+        </form>
   </ng-template>
   </div>
 </div>

@@ -26,13 +26,18 @@ export class SetupComponent implements OnInit {
   gotoBudgetItems() {
     alert(this.page = 2);
   }
-
+get disableSubmitbtn(){
+  let resp = true;
+  if(this.budget.totalBudgetAmount == 0 && this.budget.financialYearStartDate ) return false;
+  return resp;
+}
   async addBudget(){
   const data = await this.budgetService.addUpdateBudget(this.budget).toPromise();
   if(!data.hasError){
   this.alert.openModalAlert('Budget Created', 'Budget Added Successfully', 'Dismiss');
+  this.page = 2;
   } else {
-    console.log(data.message)
+    this.alert.openModalAlert('Failed', 'Budget could not be added', 'Dismiss');
   }
   }
 
