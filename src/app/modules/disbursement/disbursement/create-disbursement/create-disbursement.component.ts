@@ -126,6 +126,12 @@ async getChannels(){
   }
 }
 
+get disableSubmitbtn(){
+  let resp = true;
+  if(this.disbursement.amount == 0 && !this.disbursement.endDate && !this.disbursement.startDate) resp= false;
+  return resp;
+}
+
 async getProjects(){
   const data = await this.project.getExpenseProject(0,'','',false,'','',1,10).toPromise();
   this.allProjects = data;

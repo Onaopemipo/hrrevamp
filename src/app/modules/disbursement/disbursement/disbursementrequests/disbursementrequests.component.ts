@@ -16,6 +16,8 @@ enum TABS {
 })
 export class DisbursementrequestsComponent implements OnInit {
 
+  tableActions = [{}];
+  myHeader: string = 'No request found';
   constructor(private disbursement: DisbursementService, private alert: AlertserviceService,
     private request: FetchExpensesServiceProxy) { }
 
@@ -66,7 +68,25 @@ export class DisbursementrequestsComponent implements OnInit {
   tableData = [];
 
 
-
+getTableActions (){
+  if(TABS.ALL_REQUESTS){
+    this.tableActions = [{name: 'pending', label:'Pending'},
+    {name: 'disburse', label:'Disburse'},
+  ]
+  } else if(TABS.DISBURSED){
+    this.tableActions = [{name: 'pending', label:'Pending'},
+    {name: 'disburse', label:'Disburse'},
+  ]
+  } else if(TABS.FAILED){
+    this.tableActions = [{name: 'pending', label:'Pending'},
+    {name: 'disburse', label:'Disburse'},
+  ]
+  } else if(TABS.PENDING){
+    this.tableActions = [{name: 'pending', label:'Pending'},
+    {name: 'disburse', label:'Disburse'},
+  ]
+  }
+}
 
   async allDisbursementRequest(){
     const data = await this.request.fetchExpenses(0,0,0,0,0,'','','',0,0,0).toPromise();
