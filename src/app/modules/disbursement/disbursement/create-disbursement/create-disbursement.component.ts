@@ -1,6 +1,6 @@
 import { DataServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { AddUpdateBudgetServiceProxy, ManageBudgetDTO, SingleDisbursementPostDTO, SingleDisbursementServiceProxy, IDTextViewModel, BudgetItemDTO, FetchAllBudgetItemsServiceProxy, GetAllPaymentInstitutionsServiceProxy, PayInstitutionDTO, DropdownValue, GetExpenseProjectServiceProxy, IDropdownValue, FrequencyRule } from './../../../../_services/service-proxies';
+import { ExpenseProject, AddUpdateBudgetServiceProxy, ManageBudgetDTO, SingleDisbursementPostDTO, SingleDisbursementServiceProxy, IDTextViewModel, BudgetItemDTO, FetchAllBudgetItemsServiceProxy, GetAllPaymentInstitutionsServiceProxy, PayInstitutionDTO, DropdownValue, GetExpenseProjectServiceProxy, IDropdownValue, FrequencyRule, TenantBeneficiary } from './../../../../_services/service-proxies';
 import { MyDisbursement, DisbursementService } from './../../services/disbursement.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
@@ -24,16 +24,16 @@ export class CreateDisbursementComponent implements OnInit {
   selectedTab = TABS.SINGLE;
   TABS = TABS;
 
-  disburseForm: FormGroup;
+  disburseForm: NgForm;
   budgetItem: boolean = true;
   myrecipient: string = '1';
   recurrence: boolean = false;
   allBudgetItems: BudgetItemDTO []= [];
   allChannels = [];
   allbanksName:IDropdownValue[] = [];
-  allProjects: any = [];
-  saveBeneficiary;
+  allProjects: ExpenseProject [] = [];
   allFrequencies: FrequencyRule [] = [];
+  allBeneficiaries: TenantBeneficiary [] = [];
 
   AllCategories: IDTextViewModel [] = [];
 
@@ -51,7 +51,8 @@ export class CreateDisbursementComponent implements OnInit {
     this.getBanks();
     this.getCategories();
     this.getProjects();
-    console.log(this.allbanksName.length)
+    this.fetAllBudgetItems();
+    this. getBeneficiaries();
   }
 
   selectTab(tab: TABS) {
@@ -77,8 +78,11 @@ benefiary(event){
 
 async fetAllBudgetItems(){
   const data = await this.budgetItemService.getAllBudgetItems().toPromise();
-  this.allBudgetItems = data.result
-  console.log('Yo boss,, I am here', this.allBudgetItems)
+  if(!data.hasError){
+    this.allBudgetItems = data.result;
+    console.log('Yo boss,, I am here', this.allBudgetItems)
+  }
+
 }
 
 async getFrequencies(){
@@ -115,17 +119,36 @@ async getBanks(){
 }
 
 async getChannels(){
-  const data = await this.channel.getAllPaymentInstitutions(10,1,0).toPromise();
+  const data = await this.commonService.getPaymentChannels().toPromise();
   if(!data.hasError){
     this.allChannels = data.result;
     console.log('this',this.allChannels)
   }
 }
 
+get disableSubmitbtn(){
+  let resp = true;
+  if(this.disbursement.amount == 0 && !this.disbursement.endDate && !this.disbursement.startDate) resp= false;
+  return resp;
+}
+
 async getProjects(){
-  const data = await this.project.getExpenseProject(0,'','',false,'','',0,0).toPromise();
+  const data = await this.project.getExpenseProject(0,'','',false,'','',1,10).toPromise();
   this.allProjects = data;
-  console.log('this',this.allProjects)
+  console.log('this is project:',this.allProjects)
+}
+
+async getBeneficiaries(){
+  const data = await this.commonService.getBeneficiaries('').toPromise();
+  if(!data.hasError){
+    this.allBeneficiaries = data.result;
+    console.log('beneficiaries: ', this.allBeneficiaries)
+  }
+}
+
+
+saveBeneficiary(event){
+alert(event);
 }
 
 }

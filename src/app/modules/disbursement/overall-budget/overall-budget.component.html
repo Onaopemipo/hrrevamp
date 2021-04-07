@@ -1,50 +1,89 @@
-<ngx-componentsheader pageName="Overall Budget" [requiredButton]="">
-  <div headerButton>
-    <select class="form-control" name="financialYear" (change)="onChangeYear($event.target.value)">
-      <option value="">Select Financial Year</option>
-      <option *ngFor="let item of myBudget" [value]="item.id">{{item.financial_year_start | date : 'longDate'}} - {{item.financial_year_end | date : 'longDate'}}</option>
-    </select>
-  </div>
-</ngx-componentsheader>
-<div *ngIf="finLoading == false" style="background-color: white; min-height: 10vh">
-  <div class="row" style="padding-top: 1rem; padding-bottom: 1rem">
-    <div class="col-sm-6">
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          justify-content: space-around;
-          border-right: 1px solid #00000020;
-        "
-      >
+
+<div *ngIf="defaultPage < 1">
+
+<ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
+</ngx-default-content>
+</div>
+
+<div *ngIf="defaultPage > 0">
+  <ngx-componentsheader pageName="Overall Budget" [requiredButton]="">
+    <div headerButton>
+      <select class="form-control" name="financialYear" (change)="onChangeYear($event.target.value)">
+        <option value="">Select Financial Year</option>
+        <option *ngFor="let item of myBudget" [value]="item.id">{{item.financialYearStartDate	 | date : 'longDate'}} - {{item.financialYearEndDate | date : 'longDate'}}</option>
+      </select>
+    </div>
+  </ngx-componentsheader>
+
+
+  <div style="background-color: white; min-height: 10vh">
+    <div class="row" style="padding-top: 1rem; padding-bottom: 1rem">
+      <div class="col-sm-6">
         <div
           style="
-            border: 20px solid #4847e0;
-            border-left-color: #f6f7f9;
-            border-radius: 50%;
-            width: 180px;
-            height: 180px;
             display: flex;
             justify-content: center;
-            text-align: center;
-            flex-direction: column;
             align-items: center;
+            justify-content: space-around;
+            border-right: 1px solid #00000020;
           "
         >
-        <span style="font-size: 18px; font-weight: 500;">{{finYear.spent | currency:'NGN':'symbol'}}</span>
-        <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
+          <div
+            style="
+              border: 20px solid #4847e0;
+              border-left-color: #f6f7f9;
+              border-radius: 50%;
+              width: 180px;
+              height: 180px;
+              display: flex;
+              justify-content: center;
+              text-align: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+          <span style="font-size: 18px; font-weight: 500;">{{finYear.spent | currency:'NGN':'symbol'}}</span>
+          <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
+        </div>
+          <div>
+            <div style="display: flex; align-items: center">
+              <div
+                style="
+                  padding: 1rem;
+                  background-color: #28a87a1e;
+                  font-size: 1.5rem;
+                "
+              >
+                <i class="far fa-file-alt" style="color: #28a87a"></i>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  margin-left: 1px;
+                  height: 3.5rem;
+                  justify-content: space-between;
+                  padding: 0.3rem;
+                "
+              >
+                <span class="gray-1">Total budget</span>
+                <span class="header5-bold">{{finYear.totalBudgetAmount | currency:'NGN':'symbol'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-        <div>
+      <div class="col-sm-6">
+        <div style="justify-content: center; height: 100%; display: flex">
           <div style="display: flex; align-items: center">
             <div
               style="
                 padding: 1rem;
-                background-color: #28a87a1e;
+                background-color: #0070ff1e;
                 font-size: 1.5rem;
               "
             >
-              <i class="far fa-file-alt" style="color: #28a87a"></i>
+              <i class="fas fa-calendar" style="color: #0070ff"></i>
             </div>
             <div
               style="
@@ -56,157 +95,187 @@
                 padding: 0.3rem;
               "
             >
-              <span class="gray-1">Total budget</span>
-              <span class="header5-bold">{{finYear.totalBudgetAmount | currency:'NGN':'symbol'}}</span>
+              <span class="gray-1">Financial year</span>
+              <span class="header5-bold">{{finYear.financialYearStartDate | date : 'longDate'}} - {{finYear.financialYearEndDate | date : 'longDate'}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div style="justify-content: center; height: 100%; display: flex">
-        <div style="display: flex; align-items: center">
-          <div
-            style="
-              padding: 1rem;
-              background-color: #0070ff1e;
-              font-size: 1.5rem;
-            "
-          >
-            <i class="fas fa-calendar" style="color: #0070ff"></i>
+    <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+      <button nbButton type="outline" status="primary" outline style="border: none;" (click)="updateBudgetItem(finYear.id)">Edit budget</button>
+    </div>
+  </div>
+
+
+  <ngx-componentsheader
+    pageName="Budget Items"
+    [requiredButton]="topActionButtons"
+    (buttonClick)="modalShow()"
+  ></ngx-componentsheader>
+
+  <ngx-template *ngIf="finLoading == false">
+    <div class="row">
+      <div class="col-sm-4"  *ngFor="let budget of allBudgetItems">
+        <div
+          class="budget-item card"
+          style="
+            margin: 0.3rem;
+            background-color: white;
+            border-radius: 4px;
+            padding: 0.5rem;
+          "
+        >
+          <h5>{{budget.name}}</h5>
+          <div style="font-size: 1.3rem">{{budget.totalBudget | currency:'NGN':'symbol'}}</div>
+          <div style="text-align: right; font-size: 1rem" class="grey">
+            {{budget.totalBudget | currency:'NGN':'symbol'}} spent
           </div>
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              margin-left: 1px;
-              height: 3.5rem;
-              justify-content: space-between;
-              padding: 0.3rem;
-            "
-          >
-            <span class="gray-1">Financial year</span>
-            <span class="header5-bold">{{finYear.financial_year_start | date : 'longDate'}} - {{finYear.financial_year_end | date : 'longDate'}}</span>
+          <div>
+            <div class="progress" style="height: 0.5rem;">
+              <div
+                class="progress-bar"
+                role="progressbar"
+                style="width: 25%"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; align-items: center">
+              <div
+                style="
+                  background-color: #f2994a;
+                  width: 0.5rem;
+                  height: 0.5rem;
+                  border-radius: 50%;
+                  margin-right: 0.3rem;
+                "
+              ></div>
+              <div style="font-size: 18px; font-weight: 500;">{{budget.departments[0].department_name}}</div>
+            </div>
+            <div style="display: flex" class="budget-item-department">
+              <div style="flex: auto">
+                <span>{{budget.departments[0].amount | currency:'NGN':'symbol'}}</span>
+                <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
+              </div>
+              <div>
+                <span>{{budget.departments[0].spent | currency:'NGN':'symbol'}}</span>
+                <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: flex-end;">
+            <button (click)="editModal()" nbButton type="outline" status="primary" outline style="border: none;">
+              view
+              <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left: 0.5rem;"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
-    <button nbButton type="outline" status="primary" outline style="border: none;" (click)="updateBudgetItem(finYear.id)">Edit budget</button>
-  </div>
-</div>
+  </ngx-template>
 
-<div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
- <div style="font-size: 32px;">
-   <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
- </div>
+  <ngx-template *ngIf="finLoading == true">
+    <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
+      <div style="font-size: 32px;">
+        <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
+      </div>
+    </div>
+  </ngx-template>
 
-</div>
-<ngx-componentsheader
-  pageName="Budget Items"
-  [requiredButton]="topActionButtons"
-  (buttonClick)="modalShow()"
-></ngx-componentsheader>
-
-<ngx-template *ngIf="allBudgetItems.length > 0 && finLoading == false">
-  <div class="row">
-    <div class="col-sm-4"  *ngFor="let budget of allBudgetItems">
-      <div
-        class="budget-item card"
-        style="
-          margin: 0.3rem;
-          background-color: white;
-          border-radius: 4px;
-          padding: 0.5rem;
-        "
-      >
-        <h5>{{budget.budget_item}}</h5>
-        <div style="font-size: 1.3rem">{{budget.totalBudget | currency:'NGN':'symbol'}}</div>
-        <div style="text-align: right; font-size: 1rem" class="grey">
-          {{budget.totalBudget | currency:'NGN':'symbol'}} spent
-        </div>
+  <div>
+    <ngx-side-modal [(show)]='addItemModal' style="width: 500px;">
+      <div modal-header>Add Budget Item</div>
+      <div modal-body>
         <div>
-          <div class="progress" style="height: 0.5rem;">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style="width: 25%"
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-        </div>
-        <div>
-          <div style="display: flex; align-items: center">
-            <div
-              style="
-                background-color: #f2994a;
-                width: 0.5rem;
-                height: 0.5rem;
-                border-radius: 50%;
-                margin-right: 0.3rem;
-              "
-            ></div>
-            <div style="font-size: 18px; font-weight: 500;">{{budget.departments[0].department_name}}</div>
-          </div>
-          <div style="display: flex" class="budget-item-department">
-            <div style="flex: auto">
-              <span>{{budget.departments[0].amount | currency:'NGN':'symbol'}}</span>
-              <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
+            <div class="row">
+              <div class="form-group col">
+                <label>Budget Item</label>
+                <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.name" placeholder="e.g Salary" required>
+              </div>
             </div>
-            <div>
-              <span>{{budget.departments[0].spent | currency:'NGN':'symbol'}}</span>
-              <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
+
+            <div class="form-group row">
+              <div class="col">
+                <label>Budget Code</label>
+                <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.code" placeholder="Budget Code" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <label>Total Budget Amount</label>
+                <app-amount-input [(value)]="budgetItem.totalBudget"></app-amount-input>
+                <!-- <input class="form-control" name="itemAmount" #itemAmount="ngModel" [(ngModel)]="budgetItem.amount" placeholder="Total Budget Amount" required> -->
+              </div>
             </div>
           </div>
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-          <button (click)="editModal()" nbButton type="outline" status="primary" outline style="border: none;">
-            view
-            <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left: 0.5rem;"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</ngx-template>
 
-<ngx-template *ngIf="finLoading == true">
-  <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
-    <div style="font-size: 32px;">
-      <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
-    </div>
-  </div>
-</ngx-template>
+            <hr/>
+            <div class="form-group row">
+            <div class="col">
+              <label>Department</label>
+              <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
+                <option value="1">Select Department</option>
+                <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.Department[0]}}</option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <label>Allocated amount</label>
+                <app-amount-input [(value)]="departments.amount"></app-amount-input>
+              <!-- <input class="form-control"  name="allocatedAmount" #allocatedAmount="ngModel" [(ngModel)]="departments.amount"> -->
+              </div>
 
-<div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px">
+              <label></label>
+              <div>
+                  <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
+                    <nb-icon icon="plus-outline"></nb-icon>
+                    Add department
+                  </button>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+              <label></label>
+              <div>
+                  <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
+                  <button nbButton status="primary">Save</button>
+              </div>
+            </div>
+        </div>
+      <!-- <div style="margin-top: 15px;"></div> -->
+  </ngx-side-modal>
+  </div>
+
   <ngx-side-modal [(show)]='addItemModal' style="width: 500px;">
-    <div modal-header>Add Budget Item</div>
+    <div modal-header>Update Budget Item</div>
     <div modal-body>
-      <div>
+      <form #editItem="ngForm" name="editItem">
           <div class="row">
             <div class="form-group col">
               <label>Budget Item</label>
-              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.budget_item" placeholder="e.g Salary" required>
+              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.name" [(value)]="budgetItem.name" required>
             </div>
           </div>
 
           <div class="form-group row">
             <div class="col">
               <label>Budget Code</label>
-              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.budget_code" placeholder="Budget Code" required>
+              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.code" [(value)]="budgetItem.code" placeholder="Budget Code" required>
             </div>
           </div>
           <div class="form-group row">
             <div class="col">
               <label>Total Budget Amount</label>
-              <app-amount-input [(value)]="budgetItem.amount"></app-amount-input>
-              <!-- <input class="form-control" name="itemAmount" #itemAmount="ngModel" [(ngModel)]="budgetItem.amount" placeholder="Total Budget Amount" required> -->
+              <app-amount-input [(value)]="budgetItem.totalBudget"></app-amount-input>
             </div>
           </div>
-        </div>
 
           <hr/>
           <div class="form-group row">
@@ -214,7 +283,7 @@
             <label>Department</label>
             <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
               <option value="1">Select Department</option>
-              <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.Department[0]}}</option>
+              <option *ngFor="let dep of allDepartments[0]" value=dep.code>{{dep.name}}</option>
             </select>
           </div>
           </div>
@@ -224,7 +293,6 @@
               <app-amount-input [(value)]="departments.amount"></app-amount-input>
             <!-- <input class="form-control"  name="allocatedAmount" #allocatedAmount="ngModel" [(ngModel)]="departments.amount"> -->
             </div>
-
           </div>
 
           <div class="form-group" style="margin-top: 20px">
@@ -236,106 +304,41 @@
                 </button>
             </div>
           </div>
+
           <div class="form-group" style="margin-top: 20px">
             <label></label>
             <div>
                 <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-                <button nbButton status="primary">Save</button>
+                <button nbButton status="primary" (click)="updateBudgetItem($event)">Update</button>
             </div>
           </div>
-      </div>
-    <!-- <div style="margin-top: 15px;"></div> -->
-</ngx-side-modal>
-</div>
+        </form>
+    </div>
+  </ngx-side-modal>
 
-<ngx-side-modal [(show)]='editItem' style="width: 500px;">
-  <div modal-header>Update Budget Item</div>
-  <div modal-body>
-    <div>
-        <div class="row">
-          <div class="form-group col">
-            <label>Budget Item</label>
-            <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.budget_item" [(value)]="budgetItem.budget_item" required>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col">
-            <label>Budget Code</label>
-            <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.budget_code" placeholder="Budget Code" required>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col">
-            <label>Total Budget Amount</label>
-            <app-amount-input [(value)]="budgetItem.amount"></app-amount-input>
-            <!-- <input class="form-control" name="itemAmount" #itemAmount="ngModel" [(ngModel)]="budgetItem.amount" placeholder="Total Budget Amount" required> -->
-          </div>
-        </div>
-      </div>
-
-        <hr/>
-        <div class="form-group row">
+  <ngx-side-modal [(show)]='editBudgetModal' style="width: 500px;">
+  <h4 modal-header>Set up your overall budget</h4>
+  <div class="row" modal-body>
+    <div class="col-sm-6 linear-form">
+      <div class="form-group row">
         <div class="col">
-          <label>Department</label>
-          <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
-            <option value="1">Select Department</option>
-            <option *ngFor="let dep of allDepartments[0]" value=dep.code>{{dep.name}}</option>
-          </select>
-        </div>
-        </div>
-        <div class="form-group row">
-          <div class="col">
-            <label>Allocated amount</label>
-            <app-amount-input [(value)]="departments.amount"></app-amount-input>
-          <!-- <input class="form-control"  name="allocatedAmount" #allocatedAmount="ngModel" [(ngModel)]="departments.amount"> -->
-          </div>
+          <label>Financial Year</label>
+        <ngx-date-range style="width: 60%;" [(start)]="finYear.financialYearStartDate" [(end)]="finYear.financialYearEndDate"></ngx-date-range>
         </div>
 
-        <div class="form-group" style="margin-top: 20px">
-          <label></label>
-          <div>
-              <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
-                <nb-icon icon="plus-outline"></nb-icon>
-                Add department
-              </button>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-top: 20px">
-          <label></label>
-          <div>
-              <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-              <button nbButton status="primary" (click)="updateBudgetItem($event)">Update</button>
-          </div>
-        </div>
-    </div>
-  <!-- <div style="margin-top: 15px;"></div> -->
-
-  <!-- [max]="leavePlanModel.endDate" [(value)]="leavePlanModel.startDate" -->
-</ngx-side-modal>
-
-<ngx-side-modal [(show)]='editBudgetModal' style="width: 500px;">
-<h4 modal-header>Set up your overall budget</h4>
-<div class="row" modal-body>
-  <div class="col-sm-6 linear-form">
-    <div class="form-group row">
-      <div class="col">
-        <label>Financial Year</label>
-      <ngx-date-range style="width: 60%;" [(start)]="finYear.startDate" [(end)]="finYear.endDate"></ngx-date-range>
       </div>
-
-    </div>
-    <div class="form-group row">
-     <div class="col">
-      <label>Total amount</label>
-      <app-amount-input [(value)]="finYear.totalBudgetAmount"></app-amount-input>
-     </div>
-    </div>
-    <div class="form-group row" style="margin-top: 20px">
-      <label></label>
-      <button nbButton status="primary" (click)="addBudget()">Save and Continue</button>
+      <div class="form-group row">
+       <div class="col">
+        <label>Total amount</label>
+        <app-amount-input [(value)]="finYear.totalBudgetAmount"></app-amount-input>
+       </div>
+      </div>
+      <div class="form-group row" style="margin-top: 20px">
+        <label></label>
+        <button nbButton status="primary" (click)="addBudget()">Save and Continue</button>
+      </div>
     </div>
   </div>
+  </ngx-side-modal>
+
 </div>
-</ngx-side-modal>

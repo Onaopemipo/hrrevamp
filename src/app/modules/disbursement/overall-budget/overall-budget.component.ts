@@ -14,11 +14,15 @@ import { IRequiredButton } from 'app/components/componentsheader/componentsheade
 })
 export class OverallBudgetComponent implements OnInit {
 
+  myHeader: string = 'You have not created any budget';
+  myDescription: string = 'Start your setup by clicking the button below';
+  myButton: string = 'Create Budget'
   editBudgetModal: boolean = false;
   addItemModal: boolean = false;
   editItem: boolean = false;
+  defaultPage: number = 0;
   budget: BudgetDTO = new BudgetDTO;
-  budgetItem: MyBudgetItem = new MyBudgetItem;
+  budgetItem: BudgetItemDTO = new BudgetItemDTO;
   departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
 
   constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
@@ -48,7 +52,7 @@ export class OverallBudgetComponent implements OnInit {
   finYear: BudgetDTO = new BudgetDTO;
   // loader:boolean = false;
   finLoading: boolean = false;
-  item: MyBudgetItem = new MyBudgetItem;
+  editBudgetItem: MyBudgetItem = new MyBudgetItem;
   allBudgetItems: BudgetItemDTO []= [];
   allItems: MyBudgetItem []= [];
 
@@ -58,6 +62,10 @@ export class OverallBudgetComponent implements OnInit {
 
   modalShow(){
     this.addItemModal = !this.addItemModal;
+
+  }
+
+  checkEmpty(){
 
   }
 
@@ -95,8 +103,11 @@ export class OverallBudgetComponent implements OnInit {
 
   async fetAllBudget(){
    const data = await this.budgetService.getAllBudgets().toPromise();
-   this.myBudget = data.result;
-   console.log('All Bugdet Items', this.myBudget)
+   if(!data.hasError){
+    this.myBudget = data.result;
+    this.defaultPage = data.totalRecord
+    console.log('All Bugdet Items', this.myBudget)
+   }
   }
 
   async onChangeYear(budgetId:number){
@@ -104,16 +115,6 @@ export class OverallBudgetComponent implements OnInit {
     this.finLoading = true;
     this.dataIndex = budgetId;
     const data = await this.budgetServices.getGetBudget(budgetId).toPromise();
-    // if(data.totalCount < 0){
-    //   this.alertMe.openModalAlert('Success', 'No data found!', 'Dismiss')
-    //   this.finLoading = false;
-    // }
-
-    // setTimeout(()=>{                           //<<<---using ()=> syntax
-    //   this.finLoading = false;
-    //   alert('Timedout')
-    //  }, 3000);
-
     this.finYear = data.result;
   }
 
@@ -134,9 +135,4 @@ export class OverallBudgetComponent implements OnInit {
   // budgetModal(){
   //   this.editBudgetModal = !this.editBudgetModal;
   // }
-
-  addBudget(){
-
-  }
-
 }

@@ -17,7 +17,7 @@
             placeholder="Select Channel" name="channel" #channel="ngModel" [(ngModel)]="disbursement.channelId"
           >
           <option value=""  disabled>Select Channel</option>
-          <option value="1" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
+          <option value="mychannel.id" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
         </select>
           </div>
         </div>
@@ -28,8 +28,8 @@
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <nb-radio-group name="disburse_for" #disburse_for="ngModel" [(ngModel)]="disbursement" (ngModelChange)="changeDisburse($event)">
-                  <nb-radio [value]=true >Budget Item</nb-radio>
-                  <nb-radio [value]=false>Project</nb-radio>
+                  <nb-radio [value]="true" >Budget Item</nb-radio>
+                  <nb-radio [value]="false">Project</nb-radio>
                 </nb-radio-group>
               </div>
             </div>
@@ -40,7 +40,7 @@
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <select class="form-control" name="bugetItem" #budgetItem="ngModel" [(ngModel)]="disbursement.disbursementBudgetItemId" placeholder="Select">
-                <option value="">--Select Budget Item--</option>
+                <option value="" disabled>--Select Budget Item--</option>
                 <option *ngFor="let item of allBudgetItems" value="item.code">{{ item.name }}</option>
               </select>
               </div>
@@ -55,7 +55,8 @@
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <select class="form-control" name="projectItem" #projectItem="ngModel" [(ngModel)]="disbursement.projectId" placeholder="Select">
-                  <option value="1">Select Project Item</option>
+                  <option value="" disabled>Select Project Item</option>
+                  <option *ngFor="let project of allProjects" value="project.code">{{ project.name }}</option>
                 </select>
               </div>
               <div *ngIf="projectItem.invalid && (projectItem.dirty || projectItem.touched)" class="error">
@@ -81,11 +82,11 @@
             <div *ngIf="myrecipient == '1'">
               <div class="form-group row" style="margin-top: 20px">
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                  <label>Bank Name </label>
+                  <label>Bank Name</label>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                   <select class="form-control" name="bankName" #bankName="ngModel" [(ngModel)]="disbursement">
-                    <option  value="">-- Select Bank --</option>
+                    <option  value="" disabled>-- Select Bank --</option>
                     <option *ngFor="let bank of allbanksName; let i = index" value="bank.option_value">{{bank.option_text}}</option>
                   </select>
                 </div>
@@ -108,6 +109,9 @@
                 <div class="col-sm-6 col-md-6 col-lg-6">
                   <input type="text" class="form-control" name="accountName" #accountName="ngModel" [(ngModel)]="disbursement.accountName" placeholder="Enter Account Name">
                 </div>
+                <div *ngIf="accountName.invalid && (accountName.dirty || accountName.touched)" class="error">
+                  <div *ngIf="accountName.errors.required">Account Name is required</div>
+                </div>
               </div>
 
             </div>
@@ -117,7 +121,10 @@
                 <label>Beneficiary</label>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
-                <select class="form-control" name="beneficiary" #beneficiary="ngModel" [(ngModel)]="disbursement.beneficiary_id" placeholder="Select Bank"></select>
+                <select class="form-control" name="beneficiary" #beneficiary="ngModel" [(ngModel)]="disbursement.beneficiary_id">
+                  <option value="" disabled>--Select Beneficiary--</option>
+                  <option *ngFor="let mybenefiary of allBeneficiaries; let i = index" value="mybenefiary.id">{{mybenefiary.accountName}}</option>
+                </select>
               </div>
               <div *ngIf="beneficiary.invalid && (beneficiary.dirty || beneficiary.touched)" class="error">
                 <div *ngIf="beneficiary.errors.required">Project Item is required</div>
@@ -180,8 +187,8 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                   <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequencyId" placeholder="Frequency">
-                    <option value="" default>--Select Frequency--</option>
-                    <option *ngFor="let frequent of allFrequcbies" value="frequent.id">{{frequent.name}}</option>
+                    <option value="" disabled>--Select Frequency--</option>
+                    <option *ngFor="let frequent of allFrequencies; let i = index" value="frequent.id">{{frequent.name}}</option>
                   </select>
                 </div>
 
@@ -191,7 +198,7 @@
                   <label>Start Date</label>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
-                  <ngx-date [max]="disbursement.endDate" [value]="disbursement.startDate"></ngx-date>
+                  <ngx-date [max]="disbursement.endDate" [(value)]="disbursement.startDate"></ngx-date>
                 </div>
               </div>
               <div class="form-group row" style="margin-top: 20px">
@@ -199,7 +206,7 @@
                   <label>End Date</label>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
-                  <ngx-date  [min]="disbursement.startDate" [value]="disbursement.endDate"></ngx-date>
+                  <ngx-date  [min]="disbursement.startDate" [(value)]="disbursement.endDate"></ngx-date>
                 </div>
               </div>
             </div>
@@ -256,7 +263,7 @@
                 <label>Comments</label>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
-                <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+                <!-- <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input> -->
               </div>
             </div>
 
@@ -271,11 +278,12 @@
 
               <div *ngIf="recurrence == true">
                 <div class="form-group row" style="margin-top: 20px">
-                  <div class="col-sm-2 col-md-2 col-lg-2">
-                    <label>Frequency</label>
-                  </div>
+                  <div class="col-sm-2"></div>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequency" placeholder="Frequency"></select>
+                    <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequencyId" placeholder="Frequency">
+                      <option value="" default>--Select Frequency--</option>
+                      <option *ngFor="let frequent of allFrequencies" value="frequent.id">{{frequent.name}}</option>
+                    </select>
                   </div>
 
                 </div>
