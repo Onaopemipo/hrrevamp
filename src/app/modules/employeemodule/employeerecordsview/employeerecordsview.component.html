@@ -848,7 +848,8 @@
         <div modal-header>Add New Bank <br> <small>Fill in Below Details</small></div>
         <div modal-body>
           <form id="bankForm" name="bankForm" #bankForm="ngForm">
-    
+            <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
+           
             <div class="row" style="padding-top:10px">
               <div class="col-sm-6 form-group">
                 <label>Bank Name</label>
@@ -885,10 +886,13 @@
          
           
           </form>
+          <div style="padding-top: 5px;">
+            <div class="cbadge" *ngFor="let tempbank of tempEmpBanksList">{{tempbank.account_no}}</div>
+          </div>
         </div>
         <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
           <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+          <button *ngIf="!btnContractSubmitted" (click)="submitbank(indVEmpBanks)"  nbButton status="primary" class="d-flex column" >Submit</button>
           
   
       </div>
