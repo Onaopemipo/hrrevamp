@@ -32,12 +32,12 @@ export class EmployeeviewComponent implements OnInit {
   ];
 
   tableColumns = [
-    { name: 'employee.qualifications[0].name', title: ' Qualification Name' },
-    { name: 'employee.qualifications[0].type', title: 'Qualification Type' },
-    { name: 'employee.qualifications[0].courseName', title: 'Course Name' },
-    { name: 'employee.qualifications[0].institution', title: 'Institution' },
-    { name: 'employee.qualifications[0].startDate', title: 'Start Date' },
-    { name: 'employee.qualifications[0].endDate', title: 'End Date' },
+    { name: '', title: ' Qualification Name' },
+    { name: '', title: 'Qualification Type' },
+    { name: '', title: 'Course Name' },
+    { name: '', title: 'Institution' },
+    { name: '', title: 'Start Date' },
+    { name: '', title: 'End Date' },
   ];
   selectedCase: string = 'personal_Info';
   selectedPanel: any = { title: 'personal_Info', label: 'Personal Information', status: 'Active' };
@@ -86,12 +86,12 @@ export class EmployeeviewComponent implements OnInit {
 
   }
   data=[
-    { name: 'employee.qualifications[0].name', title: ' Qualification Name' },
-    { name: 'employee.qualifications[0].type', title: 'Qualification Type' },
-    { name: 'employee.qualifications[0].courseName', title: 'Course Name' },
-    { name: 'employee.qualifications[0].institution', title: 'Institution' },
-    { name: 'employee.qualifications[0].startDate', title: 'Start Date' },
-    { name: 'employee.qualifications[0].endDate', title: 'End Date' },
+    { name: '', title: ' Qualification Name' },
+    { name: '', title: 'Qualification Type' },
+    { name: '', title: 'Course Name' },
+    { name: '', title: 'Institution' },
+    { name: '', title: 'Start Date' },
+    { name: '', title: 'End Date' },
    ,
   ]
 
