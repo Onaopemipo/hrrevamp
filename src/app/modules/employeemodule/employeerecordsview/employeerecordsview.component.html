@@ -1,8 +1,9 @@
 <ngx-componentsheader [pageName]="title"  >
 <div headerButton>
-  <button (click)="modal('submit')" nbButton status="primary" >
- Submit
-</button>
+  <ngx-loadable-button [loading]="loading"  (click)="modal('submit')" >
+    Submit
+  </ngx-loadable-button>
+
 </div>
 </ngx-componentsheader>
 
@@ -95,7 +96,7 @@
                           <div class="form-group row">
                             <label for="PhoneNumber" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.defaultMobile" placeholder="Phone Number" required>
+                              <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.phoneNumber" placeholder="Phone Number" required>
                               <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
                                 <div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
                               </div>
@@ -349,37 +350,37 @@
 
                 <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
                     <div style="padding-top:1.5rem;">
-                        <form>
+                        <form id="nxtKinForm" name="nxtKinForm" #nxtKinForm="ngForm">
                           <div class="row" style="padding-top:10px">
                             <div class="col-sm-6 form-group">
                               <label>First Name</label>
-                              <input type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
+                              <input #nok_first_name="ngModel" id="nok_first_name" name="nok_first_name" [(ngModel)]="createNewEmployee.nexkOfKin.nok_first_name" type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
                            
                             </div>
                             <div class="col-sm-6 form-group">
                               <label>Last Name</label>
-                              <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Last Name"  required>
+                              <input #nok_last_name="ngModel" id="nok_last_name" name="nok_last_name" [(ngModel)]="createNewEmployee.nexkOfKin.nok_last_name" type="text" fullWidth class="form-control" nbInput placeholder="Enter Last Name"  required>
                            
                             </div>
                             <div class="col-sm-6 form-group">
                               <label>Phone Number</label>
-                              <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Phone Number"  required>
+                              <input #nok_phone="ngModel" id="nok_phone" name="nok_phone" [(ngModel)]="createNewEmployee.nexkOfKin.nok_phone" type="text" fullWidth class="form-control" nbInput placeholder="Enter Phone Number"  required>
                            
                             </div>
                             <div class="col-sm-6 form-group">
                               <label>Relationship with Next of Kin</label>
-                              <input type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
+                              <input #nok_relationship="ngModel" id="nok_relationship" name="nok_relationship" [(ngModel)]="createNewEmployee.nexkOfKin.nok_relationship" type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
                            
                             </div>
                             <div class="col-sm-12 form-group">
                               <label>Next of Kin Address</label>
-                              <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                              <input #nok_address="ngModel" id="nok_address" name="nok_address" [(ngModel)]="createNewEmployee.nexkOfKin.nok_address" type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
                            
                             </div>
                           </div>
                               <div class="form-group row">
                                 <div class="col-sm-12">
-                                  <button type="submit" nbButton status="primary" >Submit</button>
+                                  <button type="submit" nbButton status="primary" [disabled]="nxtKinForm.invalid"  (click)="nextPanel()" >Next</button>
                                 </div>
                               </div>
                         </form>
@@ -421,14 +422,16 @@
                        
                         </div>
                         <div class="col-sm-12 form-group">
-                          <label>Address 1</label>
+                          <label>Address Line 1</label>
                           <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
-                          <nb-checkbox>Primary Account</nb-checkbox>
                         </div>
                         <div class="col-sm-12 form-group">
-                          <label>Address 2</label>
+                          <label>Address Line 2</label>
                           <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
-                          <nb-checkbox>Primary Account</nb-checkbox>
+                    
+                        </div>
+                        <div class="col-sm-12 form-group">
+                           <nb-checkbox>Primary Account</nb-checkbox>
                         </div>
                       </div>
                           <div class="form-group row">
@@ -888,7 +891,7 @@
           </form>
           <div style="padding-top: 5px;">
             <div class="row">
-<div class="col-sm-6"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
+<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
   <div class="cbadge">{{getbankname(tempbank.id_bank)}}&nbsp;|&nbsp;{{tempbank.numb_account}}&nbsp;<i class="fa fa-times" (click)="removefromBank(i)" style="color:#EB5757;cursor: pointer;"></i></div>
 </div>
             </div>
@@ -896,7 +899,7 @@
           </div>
         </div>
         <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
-          <ngx-loadable-button [loading]="EmpBankloading" [disabled]="tempEmpBanksList.length < 1" (click)="submit(indVEmpBanks)" >
+          <ngx-loadable-button [loading]="EmpBankloading" [disabled]="tempEmpBanksList.length < 1" (click)="submitbank()" >
             Submit
           </ngx-loadable-button>           
           <div style="padding-left: 15px;">

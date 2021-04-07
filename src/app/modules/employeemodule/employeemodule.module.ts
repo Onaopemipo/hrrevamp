@@ -1,4 +1,4 @@
-import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy } from './../../_services/service-proxies';
+import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, FetchEmployeeByIdServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -119,6 +119,7 @@ import { ExitRequestService } from './services/exit-request.service';
     FetchAllEmployeesServiceProxy,
     DataServiceProxy,
     ExitRequestService,
+    FetchEmployeeByIdServiceProxy
 ]
 })
 export class EmployeemoduleModule { }

@@ -1,19 +1,24 @@
 import {
   EmployeeDTO,
   IEmployeeDTO, CreateEmployeeServiceProxy,
-  DropdownValue, EmployeeBankDTO,DropdownValueDTO, DataServiceProxy, ManageEmployeeDTO, IDTextViewModel, EmployeeQualificationDTO,Document
+  FetchEmployeeByIdServiceProxy,
+  DropdownValue, EmployeeBankDTO,DropdownValueDTO, DataServiceProxy, ManageEmployeeDTO, IDTextViewModel, EmployeeQualificationDTO,Document, NextOfKin
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { ColumnTypes, TableAction, TableActionEvent,ACTIONS } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ThreeColumnsLayoutComponent } from 'app/@theme/layouts';
 @Component({
   selector: 'ngx-employeerecordsview',
   templateUrl: './employeerecordsview.component.html',
   styleUrls: ['./employeerecordsview.component.scss']
 })
 export class EmployeerecordsviewComponent implements OnInit {
+  nxtKinForm: FormGroup;
+  loading: boolean = false;
   title: string = "Employee Profile"
   selectedCase: string = 'profile_panel';
   selectedPanel: any ={ title: 'profile_panel', label: 'Profile', status: 'Active' };
@@ -65,6 +70,8 @@ export class EmployeerecordsviewComponent implements OnInit {
   errorMsg: string = "";
   alldocTypes: IDTextViewModel[] = [];
   reqEmployee = new ManageEmployeeDTO().clone();
+  newNextofKin = new NextOfKin().clone();
+  profileOperations = [];
 
   tempQualificationList: EmployeeQualificationDTO[] = [];
   indvQualifications: EmployeeQualificationDTO;
@@ -131,11 +138,12 @@ export class EmployeerecordsviewComponent implements OnInit {
   ]
 
     Object.entries(this.indVEmpBanks).map(([key, value], index) => {      
-      if ((value == "" || value == null || value == undefined) &&  nullable.indexOf(key) == -1) { 
+      if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
         resp = false;
       }
+      if(key == 'account_no' && !this.accountNumberValidate)resp = false;
     });
- 
+    
     return resp;
   }
   EmpBankloading: boolean = false;
@@ -151,10 +159,12 @@ export class EmployeerecordsviewComponent implements OnInit {
     { name: 'is_primary', title: 'Primary', type: ColumnTypes.Text },
    
   ];
+  accountNumberValidate: boolean = false;
   bankList: DropdownValue[] = [];
   accounttypes: IDTextViewModel[] = [];
   constructor(private newEmployee: CreateEmployeeServiceProxy, private myDropdown: DataServiceProxy,
-    private alertservice : AlertserviceService,) { }
+    private alertservice: AlertserviceService, private FetchEmployeeByIdService: FetchEmployeeByIdServiceProxy,
+    private activatedroute: ActivatedRoute, private router: Router) { }
 
   documenttableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
@@ -218,19 +228,17 @@ export class EmployeerecordsviewComponent implements OnInit {
       }
       this.tempEmpBanksList.push(newbnkObj)
     }
-    console.log(this.tempEmpBanksList)
+   // console.log(this.tempEmpBanksList)
   }
   removefromBank(i) {
     this.tempEmpBanksList.splice(i, 1);
   }
-  submitbank(bank:EmployeeBankDTO) {
-    if (!this.createNewEmployee.id) {
-      
-    } else {
-      
-    }
-  }
 
+
+  functionAutoMap(pObject, objectB) {
+    const newObj = {...pObject, ...objectB };   
+    return newObj;
+}
   getbankname(bankid) {
     return this.bankList.find(x => x.option_value == bankid).option_text;
   }
@@ -244,24 +252,41 @@ export class EmployeerecordsviewComponent implements OnInit {
     let response = await this.myDropdown.getAccountTypes().toPromise();
     this.accounttypes = response.result;
   }
-
+  pushUpdateBank() {
+    if (this.tempEmpBanksList.length > 0) {
+      this.tempEmpBanksList.forEach(value => {
+        let newBankObject = new EmployeeBankDTO().clone();
+        newBankObject.bank_id = value.id_bank;
+        newBankObject.account_no = value.numb_account;
+        newBankObject.account_typeId = value.type_account;
+        newBankObject.bank_sort_code = value.code_sort;
+        newBankObject.is_primary = value.pry_is;
+        newBankObject.employee_id = this.createNewEmployee.id;
+        this.createNewEmployee.banks.push(newBankObject);
+      });
+     
+    }
+   
+  }
   inputNumberValidation(event) {
     var inputentry =  event.target.value;
 
     var reg = new RegExp('^[-,-.0-9]+$');
     if (inputentry && reg.test(inputentry)) {
-      if(inputentry.length != 10){
+      if (inputentry.length != 10) {
+        this.accountNumberValidate = false;
         this.errorMsg = "please input 10 digit account number";
         this.removeErrorMsg();
       } else {
         this.errorMsg = "";
+        this.accountNumberValidate = true;
         return true;
       }
       
     } else {
       if(event.key == "Backspace" || event.key == "Delete" || event.key == "ArrowLeft" || event.key == "ArrowRight"){
 
-      }else{
+      } else {
         this.errorMsg="please input number only";
         this.removeErrorMsg();        
         event.target.value = inputentry.slice(0,-1);
@@ -282,8 +307,19 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
   modal(buttion) {
     if (buttion === 'submit') {
-
+      this.createEmployee();
     }
+  }
+  getEmployeebyId(employeeId) {
+    this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
+      if (!data.hasError) {
+        this.createNewEmployee = data.result;
+    }
+    });
+}
+ async getProfileOperation() {
+    let response = await this.myDropdown.employeeProfileOperation().toPromise();
+    this.profileOperations = response.result;
   }
   selectPanel(hiringlist, i) {
     this.selectedPanel = hiringlist;
@@ -297,18 +333,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   openSideBar() {
     this.showEmployeeContractModal = true;
   }
-  ngOnInit(): void {
-    this.createNewEmployee.documents = [];
-    this.createNewEmployee.qualifications = [];
-    this.createNewEmployee.banks = [];
-    this.getMaritalStatus();
-    this.getEmploymentStatus();
-    this.getGender();
-    this.getReligion();
-    this.getDocumentType();
-    this.getBankList();
-    this.getBankAccountTypeList();
-  }
+
 
   async getDropDownValue(id, variable: DropdownValue[]){
     let response = await this.myDropdown.getDropDownValuesById(4).toPromise();
@@ -382,14 +407,43 @@ export class EmployeerecordsviewComponent implements OnInit {
       this.selectPanel(this.hiringChecklist[newPos], newPos);
     }    
   }
+  submitbank() {    
+    if (this.createNewEmployee.id) {
+      this.reqEmployee.profileOperation = this.profileOperations.find(x => x.text == "Bank").id;
+      this.createEmployee();      
+    }
+    this.showbankModal = false;
+  }
 
-  createEmployee(){
+  createEmployee() {
+    this.loading = true;
+    this.pushUpdateBank();
+    this.reqEmployee = this.functionAutoMap(this.reqEmployee, this.createNewEmployee);  
+    this.reqEmployee.banks = JSON.stringify(this.createNewEmployee.banks);
+    this.reqEmployee.nexkOfKin = JSON.stringify(this.createNewEmployee.nexkOfKin);
     this.newEmployee.addEmployee(this.reqEmployee).subscribe(data => {
       if(data.hasError){
-        console.log('There was an error');
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, "ok");
+        this.getEmployeebyId(this.createNewEmployee.id);
       }
       else {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
+          if (this.createNewEmployee.id) {
+            this.getEmployeebyId(this.createNewEmployee.id);
+            this.selectPanel(this.hiringChecklist[0],0)
+          } else {
+            this.router.navigate(['/employeemodule/employeerecords'])
+          }
+        });
+        
+        this.tempEmpBanksList = [];
         console.log(data.message)
+      }
+      this.loading = false;
+    }, (error) => {
+      this.loading = false;
+      if (error.status == 400) {
+        this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
       }
     })
   }
@@ -412,5 +466,27 @@ export class EmployeerecordsviewComponent implements OnInit {
   onDragOver(event) {
     event.stopPropagation();
     event.preventDefault();
+  }
+  
+  ngOnInit(): void {
+    this.createNewEmployee.documents = [];
+    this.createNewEmployee.qualifications = [];
+    this.createNewEmployee.banks = [];
+    this.createNewEmployee.nexkOfKin = new NextOfKin().clone();
+    this.getMaritalStatus();
+    this.getEmploymentStatus();
+    this.getGender();
+    this.getReligion();
+    this.getDocumentType();
+    this.getBankList();
+    this.getBankAccountTypeList();
+    this.getProfileOperation();
+    this.activatedroute.queryParams.subscribe(data => {
+      if (data) {
+        if (data.employee_id) {
+          this.getEmployeebyId(data.employee_id);
+        }
+      }
+    })
   }
 }
