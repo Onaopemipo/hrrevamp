@@ -44,6 +44,7 @@ import {
   NbSpinnerModule,
   NbListModule,
   NbLayoutModule,
+  NbDialogService,
 
 
 } from '@nebular/theme';
@@ -63,15 +64,17 @@ import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_services/jwt.interceptor';
 
 import { InputvalidationService } from './_services/inputvalidation.service';
-
-
-
+import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { ComponentsModule } from 'app/components/components.module';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ConfirmBoxService } from './_services/confirm-box.service';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -133,6 +136,8 @@ FullCalendarModule.registerPlugins([
     NbLayoutModule,
     NgxChartsModule,
     NbDatepickerModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
+    ComponentsModule,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -144,7 +149,10 @@ FullCalendarModule.registerPlugins([
     InputvalidationService,
 
     DecimalPipe,
-
+    GetTokenServiceProxy,
+    ConfirmBoxService,
+    NbDialogService,
+    AlertserviceService
   ],
 })
 export class AppModule {

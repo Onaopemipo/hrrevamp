@@ -1,7 +1,7 @@
 <ng-container #flowBasic="flow" [flowConfig]="{ target: '/' }"></ng-container>
 
 <button   [outline]='btnoutline' (click)="openbulkUploadModal(dialog)" nbButton status="primary" >
-  Bulk Upload
+ {{btnLabel}}
 </button>
 
 <ng-template #dialog let-data let-ref="dialogRef">

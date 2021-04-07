@@ -11,6 +11,7 @@ import { InputvalidationService } from '../../_services/inputvalidation.service'
 export class AmountInputComponent implements OnInit {
   innerValue: string;
   invalid = false;
+  @Input() disabled = false;
   @Input() set value(val) {
     // this.innerValue = val
   }
@@ -31,10 +32,10 @@ export class AmountInputComponent implements OnInit {
 
   getCurrency(amount: string) {
     const amountInString = amount.toString().replace('.', '').replace(/,/g, '');
-    console.log(amountInString);
+    // console.log(amountInString);
     const amt = Number(amountInString);
     const divamnt = (amt / 100);
-    console.log(amount, amt, divamnt);
+    // console.log(amount, amt, divamnt);
     this.valueChange.next(divamnt);
     return this.currencyPipe.transform(divamnt, '.2');
   }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
-import { ColumnTypes, TableColumn, TableData } from './models';
+import { ColumnTypes, TableColumn, TableData, TableAction, TableActionEvent } from './models';
 
 
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
@@ -10,6 +10,7 @@ export enum ActionsType {
   none = 3
 }
 
+export enum ACTIONS { EDIT = '1', DELETE = '2' }
 
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
@@ -41,39 +42,45 @@ export class NgbdSortableHeader {
     this.sort.emit({column: this.sortable, direction: this.direction});
   }
 }
-interface TableActionEvent {
-  name: string;
-  data: object;
-}
+
 @Component({
   selector: 'ngx-tablecomponent',
   templateUrl: './tablecomponent.component.html',
   styleUrls: ['./tablecomponent.component.scss']
 })
 export class TablecomponentComponent implements OnInit {
+  items = [
+    { title: 'Profile' },
+    { title: 'Logout' },
+  ];
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
   @Input() userData: [] = [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
-  @Input() actions: Array<object>;
+  @Input() actions: TableAction[];
+  @Input() table2 = false;
+  @Input() showFilter = false;
+  // @Output() actionClicked = new EventEmitter<>();
   @Output() actionClick = new EventEmitter<TableActionEvent>();
   pageData = [];
   tableData = [];
   _currentPage = 1;
+  pageSize = 10;
   paginatioShowingPages = [1, 2, 3, 4, 5, 6];
   get totalNoOfPages() {
     return Math.ceil(this.totalItems / 10);
   }
   @Input() totalItems = 1000;
   @Output() pageChange = new EventEmitter<number>();
+  @Output() filterChange = new EventEmitter<object>();
   @Input() set currentPage(val: number) {
     this._currentPage = val;
     // TODO: Generate pagination items
     // if (this.totalNoOfPages < 3) {
     //   this.paginatioShowingPages = [0, 1, 2, 3, 4];
     // } else {}
-    this.paginatioShowingPages = [1, 2, 3, 4, 5, 6];
+    //this.paginatioShowingPages = [1, 2, 3, 4, 5, 6];
   }
   get currentPage() {
     return this._currentPage;
@@ -82,6 +89,13 @@ export class TablecomponentComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   constructor() { }
+
+  customActionClicked(col, data){
+    this.actionClick.emit({
+      name: col.name,
+      data,
+    })
+  }
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers
@@ -110,8 +124,16 @@ export class TablecomponentComponent implements OnInit {
     }, 3000);
   }
 
+  filter = {}
   pageClicked(pageNo: number) {
     this.pageChange.emit(pageNo);
+    this.filter = {...this.filter, ...{page: pageNo, } };
+    this.filterChange.emit(this.filter);
+  }
+
+  filterUpdated(filter){
+    this.filter = {...filter, ...{page: this.currentPage, } };
+    this.filterChange.emit(this.filter);
   }
 
 }

@@ -1,0 +1,49 @@
+<ngx-componentsheader pageName='Assign KRA'></ngx-componentsheader>
+
+<div class="main-page-container">
+    <div class="linear-form">
+        <!-- <div class="form-group">
+            <label>Appraisal Cycle</label>
+            <select class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>Key Result Area</label>
+            <select class="form-control"></select>
+        </div> -->
+        <div class="form-group">
+            <label>Reviewer</label>
+            <ngx-employee-master-search></ngx-employee-master-search>
+        </div>
+        <div class="form-group">
+            <label>Employee</label>
+            <ngx-employee-master-search></ngx-employee-master-search>
+        </div>
+        <div class="form-group">
+            <label></label>
+            <div>
+                <button nbButton status='primary' (click)="assignKra()">Assign</button>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label></label>
+            <div>
+                <button nbButton status='primary' outline style="border: none;">
+                    <nb-icon icon='plus'></nb-icon>
+                    Add KRA
+                </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Employees</label>
+            <ngx-employee-master-search></ngx-employee-master-search>
+        </div>
+        <div class="form-group">
+            <label></label>
+            <div>
+                <button nbButton status='primary'>
+                    Assign KRA
+                </button>
+            </div>
+        </div> -->
+    </div>
+</div>

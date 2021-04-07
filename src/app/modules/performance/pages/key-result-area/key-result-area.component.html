@@ -1,0 +1,77 @@
+<ngx-componentsheader
+  pageName="Key Result Areas"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  ><ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="Create your first Cycle"
+    pageDescription="Click on the button to create a performance cycle"
+    buttonValue="Create Cycle"
+    (buttonClick)="createNewClicked()"
+    [loading]="loading"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [actions]="tableActions"
+    [userData]="tableData"
+    [loading]="loading"
+    (pageChange)="loadNewPage($event)"
+    (actionClick)="tableActionClicked($event)"
+  ></ngx-tablecomponent>
+</div>
+<ngx-side-modal [(show)]="showModal">
+  <div modal-header>New Key Result Area</div>
+  <div modal-body>
+    <div class="">
+      <div class="form-group">
+        <label>Performance Cycle</label>
+        <ngx-multi-select [singleSelection]="true" [choice_name]="ChoiceName.departments"></ngx-multi-select>
+      </div>
+
+      <div class="form-group">
+        <label>Key Result Area</label>
+        <input class="form-control" [(ngModel)]="editingData.section_name"/>
+      </div>
+
+      <div class="form-group">
+        <label>Score</label>
+        <input type="number" class="form-control" [(ngModel)]="editingData.maximum_score_obtainable"/>
+      </div>
+
+      <div class="form-group">
+        <label>Weight</label>
+        <input type="number" class="form-control" [(ngModel)]="editingData.weight"/>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+      </div>
+      <div class="form-group">
+        <label>Instruction</label>
+        <ngx-wysisyg-input [(value)]="editingData.instructions"></ngx-wysisyg-input>
+      </div>
+      <div class="form-group">
+        <label></label>
+        <div style="display: flex">
+          <button nbButton status="primary" (click)="submitForm()">save</button>
+          <div class="m-1"></div>
+          <button
+            nbButton
+            status="primary"
+            outline
+            style="background: transparent"
+          >
+            cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div modal-actions></div>
+</ngx-side-modal>

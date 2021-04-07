@@ -1,14 +1,17 @@
-<div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal}" class="my-modal">
+
+<div [class]="{'show-modal': show_modal, 'hide-modal': !show_modal, 'full-page': isPage}" class="my-modal">
     <!-- <div style="flex: auto"></div>     -->
+    <ngx-componentsheader [pageName]="title" *ngIf="isPage"></ngx-componentsheader>
     <div style="flex: auto" (click)="closeModal()"></div>
     <!-- <div > -->
-        <div style="background-color: white;overflow: scroll;"  class="modal-p" [class]="{center: center}">
-            <div style="height: 75px;" class="header-space"></div>
-            <div class="header">
-                <ng-content select='[modal-header]'>
+        <div style="background-color: white;overflow: scroll;"  class="modal-p" [class]="{center: center}" #host >
+            <div style="height: 75px;" class="header-space" *ngIf='!isPage'></div>
+            <div class="header" *ngIf="!isPage">
+                <span>{{title}}</span>
+                <ng-content select='[modal-header]' *ngIf="!title">
                 </ng-content>
             </div>
-            <div class="body">
+            <div class="body" style="overflow: scroll;flex: auto;">
                 <ng-content select='[modal-body]'></ng-content>
             </div>
             <div class="actions side-modal-actions">

@@ -77,11 +77,11 @@
     </div>
   </div>
 
-  <div class="row">
+<div class="row">
     <div class="col-xxxl-6 col-md-6" >
-        <nb-card>
-  
-            <nb-card-body>
+    <nb-card>
+
+        <nb-card-body>
         <div style="display: flex;flex-direction: row;">
 <div style="flex:auto">
 <span class="header6-bold">Distribution by Gender</span>
@@ -106,12 +106,12 @@
                 >
                 </ngx-charts-pie-chart>
               </div>
-           
+
             </nb-card-body>
           </nb-card>
     </div>
     <div class="col-xxxl-6 col-md-6" >
-        <nb-card>         
+        <nb-card>
             <nb-card-body>
               <div style="display: flex;flex-direction: row;">
                 <div style="flex:auto">
@@ -123,12 +123,12 @@
                     <nb-option value="2">Option 2</nb-option>
                   </nb-select>
                 </div>
-                        </div>
-<div style="height: 18.75rem;width: 100%;">
-  <div echarts [options]="customizePieOption" class="echart" style="height: 100%;"></div>
-</div>
+                </div>
+                <div style="height: 18.75rem;width: 100%;">
+                  <div echarts [options]="customizePieOption" class="echart" style="height: 100%;"></div>
+                </div>
 
-               
+
             </nb-card-body>
           </nb-card>
     </div>
@@ -138,7 +138,7 @@
   <div class="row">
     <div class="col-xxxl-6 col-md-6" >
         <nb-card>
-  
+
             <nb-card-body>
               <div style="display: flex;flex-direction: row;">
                 <div style="flex:auto">
@@ -152,30 +152,30 @@
                 </div>
                         </div>
               <div #barContainer style="height: 100%;">
-                <ngx-charts-bar-vertical 
-                [view]="[barContainer.offsetWidth, 300]" 
-                [scheme]="barcolorScheme" 
-                [results]="single" 
+                <ngx-charts-bar-vertical
+                [view]="[barContainer.offsetWidth, 300]"
+                [scheme]="barcolorScheme"
+                [results]="single"
                 [gradient]="gradient"
-                [xAxis]="showXAxis" 
-                [yAxis]="showYAxis" 
-                [legend]="showLegend" 
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
                 [showXAxisLabel]="showXAxisLabel"
-                [showYAxisLabel]="showYAxisLabel" 
-                [xAxisLabel]="xAxisLabel" 
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
                 [yAxisLabel]="yAxisLabel"
                 [showGridLines]="showGridLines"
                 [barPadding]="barPadding"
             >
               </ngx-charts-bar-vertical>
               </div>
-            
-           
+
+
             </nb-card-body>
           </nb-card>
     </div>
     <div class="col-xxxl-6 col-md-6" >
-        <nb-card>         
+        <nb-card>
             <nb-card-body>
               <div style="display: flex;flex-direction: row;">
                 <div style="flex:auto">
@@ -195,18 +195,18 @@
                                       <h6 style="font-size: xx-small;">{{weekdays[day_no] | date:"MMM"}}</h6>
                                       <span style="font-size: smaller;">{{weekdays[day_no] | date:"dd"}}</span>
                                   </div>
-  
+
                                   <h6 style="font-weight: lighter; font-style: normal; font-size: 12px;"
                                       class="mt-3 pl-1">
                                       {{days_of_week[day_no]}}</h6>
                               </div>
                           </div>
-                     
+
                           <div class="zee">
                               <div class="card-body" *ngFor="let i of [0,1,2,3,4,5,6,7,8]">
                                   <h4 class="card-title" style="font-size: small;">Workshop</h4>
                                   <p class="card-text" style="color: #F2994A;">Managing employeed</p>
-                                  <p class="card-text">11am - 12pm</p>   
+                                  <p class="card-text">11am - 12pm</p>
                               </div>
                           </div>
                       </div>
@@ -219,7 +219,7 @@
 
   <div class="row">
     <div class="col-xxxl-12 col-md-12" >
-      <nb-card>         
+      <nb-card>
         <nb-card-body>
           <div style="display: flex;flex-direction: row;">
             <div style="flex:auto">
@@ -238,13 +238,13 @@
 
           </nb-card-body>
       </nb-card>
-  
+
       </div>
       </div>
 
       <div class="row">
         <div class="col-xxxl-6 col-md-6" >
-          <nb-card>         
+          <nb-card>
             <nb-card-body>
               <div style="display: flex;flex-direction: row;">
                 <div style="flex:auto;">
@@ -269,7 +269,7 @@
                       </div>
                   </div>
                     <div >
-            <span class="smalltext">3 hours ago.</span>
+                  <span class="smalltext">3 hours ago.</span>
                     </div>
                     </div>
 
@@ -281,7 +281,7 @@
                           </div>
                       </div>
                         <div >
-                <span class="smalltext">3 hours ago.</span>
+                          <span class="smalltext">3 hours ago.</span>
                         </div>
                         </div>
 
@@ -322,15 +322,15 @@
                                     </div>
                                     </div>
               </div>
-       
-    
+
+
               </nb-card-body>
           </nb-card>
-      
+
           </div>
 
           <div class="col-xxxl-6 col-md-6" >
-            <nb-card>         
+            <nb-card>
               <nb-card-body>
                 <div style="display: flex;flex-direction: row;">
                   <div style="flex:auto">
@@ -339,7 +339,7 @@
                   <div>
                     <span class="a-normal" style="cursor: pointer;">View all</span>
                       </div>
-              
+
                 </div>
 
 
@@ -383,7 +383,7 @@
                           </div>
 
 
-                          
+
                       <div style="display: flex;flex-direction: row; padding-top: 1rem;">
                         <div style="flex:auto;">
                          <div style="display: flex;flex-direction: row;">
@@ -443,13 +443,13 @@
                                   </div>
                 </div>
                 </nb-card-body>
-            </nb-card>  
+            </nb-card>
 
           </div>
           </div>
           <div class="row">
             <div class="col-xxxl-6 col-md-6" >
-              <nb-card>         
+              <nb-card>
                 <nb-card-body>
                   <div style="display: flex;flex-direction: row;">
                     <div style="flex:auto">
@@ -459,7 +459,7 @@
                       <span class="a-normal" style="cursor: pointer;">View all</span>
                         </div>
                   </div>
-            
+
                   <div style="padding-top:1rem ;">
                     <div style="display: flex;justify-content: space-between; padding-top: 1rem;">
                       <div >
@@ -590,11 +590,11 @@
                   </div>
                   </nb-card-body>
               </nb-card>
-          
+
               </div>
-    
+
               <div class="col-xxxl-6 col-md-6" >
-                <nb-card>         
+                <nb-card>
                   <nb-card-body>
                     <div style="display: flex;flex-direction: row;">
                       <div style="flex:auto">
@@ -603,9 +603,9 @@
                       <div>
                         <span class="a-normal" style="cursor: pointer;">View all</span>
                           </div>
-                  
+
                     </div>
-             
+
                     <div style="padding-top:1rem ;height: 26rem;width: 100%;">
                       <div style="display: flex;flex-direction: row; padding-top: 1rem;">
                         <div style="flex:auto;">
@@ -614,9 +614,9 @@
                             <span class="smalltext" style="display: flex;flex-basis: 20px;flex-wrap: wrap;width: 80%;">This is simply dummy text of the printing and typesetting industry. </span>
                             <span class="a-small-normal" style="cursor: pointer;">Read more</span>
                             </div>
-                         
+
                         </div>
-                     
+
                           <div >
                           <div style="display: flex;flex-direction: column;">
                             <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
@@ -634,9 +634,9 @@
                                 <span class="smalltext" style="display: flex;flex-basis: 20px;flex-wrap: wrap;width: 80%;">This is simply dummy text of the printing and typesetting industry. </span>
                                 <span class="a-small-normal" style="cursor: pointer;">Read more</span>
                                 </div>
-                             
+
                             </div>
-                         
+
                               <div >
                               <div style="display: flex;flex-direction: column;">
                                 <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
@@ -652,9 +652,9 @@
                                     <span class="smalltext" style="display: flex;flex-basis: 20px;flex-wrap: wrap;width: 80%;">This is simply dummy text of the printing and typesetting industry. </span>
                                     <span class="a-small-normal" style="cursor: pointer;">Read more</span>
                                     </div>
-                                 
+
                                 </div>
-                             
+
                                   <div >
                                   <div style="display: flex;flex-direction: column;">
                                     <span class="p-300" style="color: #080730 !important;">16th - 18th</span>
@@ -666,10 +666,9 @@
 
                     </div>
 
-                
+
                     </nb-card-body>
-                </nb-card>  
-    
+                </nb-card>
+
               </div>
               </div>
-    

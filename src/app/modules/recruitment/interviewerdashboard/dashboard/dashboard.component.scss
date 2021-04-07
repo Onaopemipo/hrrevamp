@@ -1,0 +1,16 @@
+.my-analytics-div {
+  background-color: #ffffff;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 5px;
+  display: flex;
+}
+
+.first-child {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.flex-child:first-child {
+  margin-right: 5px;
+}

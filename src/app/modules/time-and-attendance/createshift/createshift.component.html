@@ -1,0 +1,154 @@
+<ngx-componentsheader [pageName]="title"></ngx-componentsheader>
+<nb-card >
+    <nb-card-body>
+
+        <nb-tabset>
+            <nb-tab tabTitle="Shift Details">
+                <form>
+                    <div class="form-group row">
+                        <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Shift Name</label>
+                        <div class="col-sm-6">
+                          <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Shift Name">
+                        </div>
+                      </div>
+        
+                  
+                    <div class="form-group row">
+                        <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Start Date</label>
+                        <div class="col-sm-6">
+                          <input type="text" nbInput fullWidth id="inputEmail1" placeholder="Start Date">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">End Date</label>
+                        <div class="col-sm-6">
+                          <input type="text" nbInput fullWidth id="inputEmail1" placeholder="End Date">
+                        </div>
+                      </div>
+               
+                      <div class="form-group row">
+                        <label class="label col-sm-4 col-form-label listsubheader">Schedule Type</label>
+                        <div class="col-sm-6">
+                            <ngx-radio-button [items]="['Rotational', 'Regular']" [horizontal]="true"></ngx-radio-button>
+                        </div>
+                     
+                    </div>
+        <div style="padding: 20px;"></div>
+                      <div class="form-group row">
+                        <div class="offset-sm-4 col-sm-8">
+                        <div style="display: flex;flex-direction:row">
+        <div style="padding: 10px 10px 10px 0;">
+            <button nbButton status="primary" class="d-flex column">Next</button>
+        </div>
+        <div style="padding: 10px;">
+            <button nbButton outline status="primary" class="d-flex column"
+            style="background-color: white;">Regular</button>
+        </div>
+       
+                        </div>
+                          
+                          
+                   
+                        </div>
+                      </div>
+        
+                  
+                </form>
+            </nb-tab>
+            <nb-tab tabTitle="Set Period">
+               <span class="smalltext">Fill in preferred time with each clock tab</span>
+               <ngx-tablecomponent [tableColum]="setPeriodtableColumns"></ngx-tablecomponent>
+               <div style="padding: 20px;"></div>
+
+               <div class="form-group row">
+                <div class="offset-md-10 col-md-2">
+                    <button nbButton status="primary" outline="true"  class="d-flex column" style="border: none !important;min-width: unset !important;float: right;">
+                        <nb-icon  icon="plus"></nb-icon>&nbsp;   Add</button>
+                </div>
+            </div>
+               <div style="padding: 20px;"></div>
+               <div class="form-group row">
+                 <div class="offset-sm-4 col-sm-8">
+                 <div style="display: flex;flex-direction:row">
+ <div style="padding: 10px 10px 10px 0;">
+     <button nbButton status="primary" class="d-flex column">Next</button>
+ </div>
+ <div style="padding: 10px;">
+     <button nbButton outline status="primary" class="d-flex column"
+     style="background-color: white;">Go back</button>
+ </div>
+
+                 </div>
+                   
+                   
+            
+                 </div>
+               </div>
+            </nb-tab>
+
+            <nb-tab tabTitle="Assign Employee">
+                <form>
+                    <div class="form-group row">
+                        <label class="label col-sm-4 col-form-label listsubheader">Upload Type</label>
+                        <div class="col-sm-6">
+                            <ngx-radio-button [items]="['Individual', 'Bulk']" [horizontal]="true"></ngx-radio-button>
+                        </div>
+                     
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="label col-sm-4 col-form-label listsubheader">Employee(s)</label>
+                        <div class="col-sm-6">
+                            <ngx-employee-master-search></ngx-employee-master-search>
+                        </div>
+                       
+                    </div>
+              
+                    <div class="form-group row">
+                        <label class="label col-sm-4 col-form-label listsubheader">Upload Employee CSV file</label>
+                        <div class="col-sm-6">                  
+        
+                                <div style="display: flex;flex-direction: row; padding-bottom: 5px;">
+                                    <div style="flex:auto;">
+                                        <ngx-file-upload></ngx-file-upload>
+                                    </div>
+                                    <div style="display: flex;align-items: center; padding: 5px;">
+                                        <nb-icon icon="download-outline" status="primary"></nb-icon>
+                                         <span class="coloredsmalltext" style="cursor: pointer;">Download Template</span>
+                                    </div>
+                                  
+                           
+                            </div>
+                    
+                        </div>
+                  
+                       
+                    </div>
+                    <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+                    <div style="padding: 30px;"></div>
+                    <div class="form-group row">
+                      <div class="col-sm-8">
+                      <div style="display: flex;flex-direction:row">
+      <div style="padding: 10px 10px 10px 0;">
+          <button nbButton status="primary" class="d-flex column">Create</button>
+      </div>
+      <div style="padding: 10px;">
+          <button nbButton outline status="primary" class="d-flex column"
+          style="background-color: white;">Go back</button>
+      </div>
+     
+                      </div>
+                        
+                        
+                 
+                      </div>
+                    </div>
+                </form>
+            </nb-tab>
+        </nb-tabset>
+     
+    </nb-card-body>
+
+
+</nb-card>
+

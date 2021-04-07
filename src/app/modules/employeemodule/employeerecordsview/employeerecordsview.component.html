@@ -1,0 +1,1180 @@
+<ngx-componentsheader [pageName]="title"  >
+<div headerButton>
+  <ngx-loadable-button [loading]="loading"  (click)="modal('submit')" >
+    Submit
+  </ngx-loadable-button>
+
+</div>
+</ngx-componentsheader>
+
+
+<div class="row">
+    <div class="col-md-4 col-xxl-4">
+    <nb-card>
+    <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
+
+    </nb-card-body>
+    <div>
+      <ng-container #flowBasic="flow" [flowConfig]="{ target: '/' }"></ng-container>
+        <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of hiringChecklist; let i = index">
+
+            <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
+            <div style="padding-left: 1rem;"><nb-icon icon="checkmark-circle-2" status="{{hiringlist.status == 'Active'? 'primary': 'none'}}"></nb-icon></div>
+            <div style="padding-left: 0.625rem;"><span [ngClass]="{'listtextActive': hiringlist.status == 'Active','listtextInactive': hiringlist.status != 'Active'}" >{{hiringlist.label}} </span> </div>
+            </div>
+
+      </div>
+    </div>
+
+    </nb-card>
+    </div>
+    <div class="col-md-8 col-xxl-8">
+    <nb-card>
+    <nb-card-body>
+        <div #scase [ngSwitch]="selectedCase">
+               <!--Personal Info-->
+        <div class="fmContainer" *ngSwitchCase="'profile_panel'">
+            <div style="padding-bottom: 5px; display: flex;flex-direction: column;">
+                <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                <div style="display: flex;flex-direction: row;">
+                 <div >
+                  <img src="assets/icons/camera.jpg" onError="this.src='assets/icons/camera.jpg'" style="border-radius: 50%; height: 7em;width: 7rem;">
+                 </div>
+                 <div style="display: flex;flex-direction: column;justify-content: center;padding-left: 15px;"
+                 flow-init     
+                 flowDrop
+                 [flow]="flowBasic.flowJs"
+                 (drop)="onDropFileceived(flowBasic)"
+                 (dragover)="onDragOver($event)"
+          
+                 >
+                 <div (change)="filereceived(flowBasic)">
+                  <a flowButton
+                  [flow]="flowBasic.flowJs" style="cursor: pointer;text-decoration: underline;color: #4847E0;">Change display picture</a>
+                </div>
+                <div *ngFor="let transfer of files; let i = index" style="color: blue; display: flex;">
+               <div *ngIf="i == 0" style=" display: flex;flex-direction: row">
+                <nb-icon nbPrefix icon="checkmark-outline" pack="eva"></nb-icon> &nbsp;&nbsp;
+                <div style="flex: auto;">{{transfer.name}}</div>
+                &nbsp;&nbsp;
+                <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
+             
+               </div>
+               
+                </div>
+                  <h6 style="font-size: small !important;">Maximum size allowed is 600kb of PNG,JPEG,JPG</h6>
+                 </div>
+                  </div>
+                  <div style="display: flex;justify-content: flex-end;">
+                  <small>Activate Self Service</small>
+                  </div>
+            </div>
+<!-- 
+            <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                <p class="smalltext">Input required Information in the fields below</p>
+                </div> -->
+                <div style="padding-top:1rem;">
+                    <form #newEmployeeForm="ngForm" name="newEmployeeForm" id="newEmployeeForm">
+                        <div class="form-group row">
+                            <label for="FirstName" class="label col-sm-4 col-form-label listsubheader">First Name</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth name="firstName" #firstName="ngModel"  [(ngModel)]="createNewEmployee.firstName" placeholder="First Name" required>
+                              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error">
+                                <div *ngIf="firstName.errors.required">First Name is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="LastName" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth name="lastName" #lastName="ngModel"  [(ngModel)]="createNewEmployee.lastName"  placeholder="Last Name" required>
+                              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
+                                <div *ngIf="lastName.errors.required">Last Name is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="PhoneNumber" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.phoneNumber" placeholder="Phone Number" required>
+                              <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                                <div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="DOB" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
+                            <div class="col-sm-8">
+                              <!-- <input type="date" nbInput fullWidth name="dateOfBirth" #dateOfBirth="ngModel"  [(ngModel)]="createNewEmployee.dateOfBirth" placeholder="Date of Birth" required> -->
+                              <!-- <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)" class="error">
+                                <div *ngIf="dateOfBirth.errors.required">Date of Birth is required</div>
+                              </div> -->
+                              <ngx-date></ngx-date>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="MaritalStatus" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
+                            <div class="col-sm-8">
+                              <select class="form-control" name="maritalStatusId" #maritalStatusId="ngModel"  [(ngModel)]="createNewEmployee.maritalStatusId"  placeholder="Marital Status" required>
+                                <option [value]="status.option_value" *ngFor="let status of maritalStatusValues">{{status.option_text}}</option>
+                              </select>
+                              <div *ngIf="maritalStatusId.invalid && (maritalStatusId.dirty || maritalStatusId.touched)" class="error">
+                                <div *ngIf="maritalStatusId.errors.required">Marital Status is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
+                            <div class="col-sm-8">
+                              <select class="form-control" name="gender" #gender="ngModel"  [(ngModel)]="createNewEmployee.genderId" placeholder="Gender" required>
+                                <option *ngFor="let gen of genderValues" [value]="gen.option_value">{{gen.option_text}} </option>
+                              </select>
+                              <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="error">
+                                <div *ngIf="gender.errors.required">Gender is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="employeeNumber" class="label col-sm-4 col-form-label listsubheader">Employee Number</label>
+                            <div class="col-sm-8">
+                              <input type="text" nbInput fullWidth name="employeeNumber" #employeeNumber="ngModel"  [(ngModel)]="createNewEmployee.employeeNumber" placeholder="Employee Number">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="workEmail" class="label col-sm-4 col-form-label listsubheader">Work Email</label>
+                            <div class="col-sm-8">
+                              <input type="email" nbInput fullWidth name="workEmail" #workEmail="ngModel"  [(ngModel)]="createNewEmployee.workEmail"  placeholder="Work Email" required>
+                              <div *ngIf="workEmail.invalid && (workEmail.dirty || workEmail.touched)" class="error">
+                                <div *ngIf="workEmail.errors.required">Work Email is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="Religion" class="label col-sm-4 col-form-label listsubheader">Religion</label>
+                            <div class="col-sm-8">
+                              <select class="form-control" name="religion" #religion="ngModel"  [(ngModel)]="createNewEmployee.religionId" placeholder="Religion" required>
+                                <option *ngFor="let rel of religionValues" [value]="rel.option_value">{{rel.option_text}}</option>
+                              </select>
+                              <div *ngIf="religion.invalid && (religion.dirty || religion.touched)" class="error">
+                                <div *ngIf="religion.errors.required">Religion is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                          <div class="form-group row">
+                            <label for="Religion" class="label col-sm-4 col-form-label listsubheader">Employment Status</label>
+                            <div class="col-sm-8">
+                              <select class="form-control" name="employmentStatus" #employmentStatus="ngModel"  [(ngModel)]="createNewEmployee.employmentStatus" placeholder="Religion" required>
+                                <option *ngFor="let employment of employmentStatusValues" [value]="employment.option_value">{{employment.option_text}} </option>
+                              </select>
+                              <div *ngIf="employmentStatus.invalid && (employmentStatus.dirty || employmentStatus.touched)" class="error">
+                                <div *ngIf="employmentStatus.errors.required">Employment Status is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label for="bvn" class="label col-sm-4 col-form-label listsubheader">BVN</label>
+                            <div class="col-sm-8">
+                              <input type="number" nbInput fullWidth min="10" max="10" name="bvn" #bvn="ngModel"  [(ngModel)]="createNewEmployee.bvn" placeholder="BVN">
+                              <div *ngIf="bvn.invalid && (bvn.dirty || bvn.touched)" class="error">
+                                <div *ngIf="bvn.errors.required">BVN is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                            <label for="personalEmail" class="label col-sm-4 col-form-label listsubheader">Personal Email</label>
+                            <div class="col-sm-8">
+                              <input type="email" nbInput fullWidth name="personalEmail" #personalEmail="ngModel"  [(ngModel)]="createNewEmployee.userEmail"  placeholder="Personal Email" required>
+                              <div *ngIf="personalEmail.invalid && (personalEmail.dirty || personalEmail.touched)" class="error">
+                                <div *ngIf="personalEmail.errors.required">Personal Email is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                            <label class="label col-sm-4 col-form-label listsubheader" style="font-weight: bold;"></label>
+                            <div class="col-sm-8 col-md-8 col-lg-8">
+                              <button nbButton status="primary" [disabled]="newEmployeeForm.invalid"  (click)="nextPanel()">Next</button>
+                              <span style="padding: 8px;"></span>
+                              <!-- <button nbButton style="color: #4847E0;">Go Back</button> -->
+                            </div>
+                          </div>
+                    </form>
+                </div>
+        </div>
+
+        <!--Work Info-->
+
+        <div class="fmContainer" *ngSwitchCase="'contract_panel'">
+            <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" *ngIf="createNewEmployee.id">
+                  <nb-icon icon="edit-2-outline" status="primary"></nb-icon> Edit
+                
+                  </div>
+            </div>
+            
+            <div *ngIf="!createNewEmployee.id" style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                <p class="smalltext">No Contract Record Found</p>
+                </div>
+
+                <div style="padding-top:1.5rem;" *ngIf="createNewEmployee.id">
+                <div style="display: flex;flex-direction: row;">
+                <div style="text-transform:capitalize;" class="header6-medium">assignment no: </div>
+                <div style="padding-left: 20px" class="header6-medium">ADMIN-1</div>
+                </div>
+                </div>
+        </div>
+
+         <!--Payment-->
+         <div class="fmContainer" *ngSwitchCase="'document_panel'">
+            <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                <div *ngIf="createNewEmployee.id">
+                  <button nbButton status="primary"  (click)="showdocumentUploadModal = true">Add New</button>
+                  </div>
+            </div>
+
+
+                <div style="padding-top:1.5rem;">             
+                  <ngx-default-content
+                  *ngIf="documentEmpty"
+                  pageHeader="No Document Found"
+                  pageDescription=""                  
+                  [loading]="documentloading"               
+                >
+                </ngx-default-content>
+                  <ngx-tablecomponent  
+                  *ngIf="!documentEmpty"              
+                  [showActions]="true"
+                  [showFilter]="false"
+                  (actionClick)="documenttableActionClicked($event)"
+                  [actions]="documenttableActions" 
+                  [userData]="createNewEmployee.documents" 
+                  [tableColum]="documenttableColumns"
+                  [totalItems]="documenttotalItems"
+                  [currentPage]="documentcurrentPage"
+                  [loading]="documentloading"
+                  >
+              </ngx-tablecomponent>
+                </div>
+        </div>
+          <!--Medical Info-->
+          <div class="fmContainer" *ngSwitchCase="'qualification_Info'">
+            <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+              <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+              <div>
+                <button nbButton status="primary"  (click)="showQualificationModal = true">Add New</button>
+                </div>
+          </div>
+
+         
+                <div style="padding-top:1.5rem;">
+                           
+                    <ngx-default-content
+                    *ngIf="qualificationEmpty"
+                    pageHeader="Add your first Qualification"
+                    pageDescription="Click on the button to add Qualification"
+                    buttonValue="Add Qualification"
+                    [loading]="qualificationloading"
+                    (buttonClick)="showQualificationModal = true"              
+                  >
+                  </ngx-default-content>
+                    <ngx-tablecomponent  
+                    *ngIf="!qualificationEmpty"              
+                    [showActions]="true"
+                    [showFilter]="false"
+                    (actionClick)="qualificationtableActionClicked($event)"
+                    [actions]="qualificationtableActions" 
+                    [userData]="createNewEmployee.qualifications" 
+                    [tableColum]="qualificationtableColumns"
+                    [totalItems]="qualificationtotalItems"
+                    [currentPage]="qualificationcurrentPage"
+                    [loading]="qualificationloading"
+                    >
+                </ngx-tablecomponent>
+              
+                </div>
+        </div>
+        <!--Bank-->
+
+
+           <div class="fmContainer" *ngSwitchCase="'bank_panel'">
+            <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+              <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+              <div>
+                <button nbButton status="primary"  (click)="showbankModal = true">Add New</button>
+                </div>
+          </div>
+                <div style="padding-top:1.5rem;">
+                  <ngx-default-content
+                  *ngIf="EmpBankEmpty"
+                  pageHeader="Add your first Bank Details"
+                  pageDescription="Click on the button to add Bank Details"
+                  buttonValue="Add Bank"
+                  [loading]="EmpBankloading"
+                  (buttonClick)="showbankModal = true"              
+                >
+                </ngx-default-content>
+                  <ngx-tablecomponent  
+                  *ngIf="!EmpBankEmpty"              
+                  [showActions]="true"
+                  [showFilter]="false"
+                  (actionClick)="embBanktableActionClicked($event)"
+                  [actions]="EmpBanktableActions" 
+                  [userData]="createNewEmployee.banks" 
+                  [tableColum]="EmpBanktableColumns"
+                  [totalItems]="EmpBanktotalItems"
+                  [currentPage]="EmpBankcurrentPage"
+                  [loading]="EmpBankloading"
+                  >
+              </ngx-tablecomponent>
+                </div>
+        </div>
+
+            <!--Next of Kin-->
+            <div class="fmContainer" *ngSwitchCase="'kin_panel'">
+                <div style="padding-bottom: 5px;">
+                    <p class="header6-medium">{{selectedPanel.label}}</p>
+                </div>
+
+                <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
+                    <div style="padding-top:1.5rem;">
+                        <form id="nxtKinForm" name="nxtKinForm" #nxtKinForm="ngForm">
+                          <div class="row" style="padding-top:10px">
+                            <div class="col-sm-6 form-group">
+                              <label>First Name</label>
+                              <input #nok_first_name="ngModel" id="nok_first_name" name="nok_first_name" [(ngModel)]="createNewEmployee.nexkOfKin.nok_first_name" type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
+                           
+                            </div>
+                            <div class="col-sm-6 form-group">
+                              <label>Last Name</label>
+                              <input #nok_last_name="ngModel" id="nok_last_name" name="nok_last_name" [(ngModel)]="createNewEmployee.nexkOfKin.nok_last_name" type="text" fullWidth class="form-control" nbInput placeholder="Enter Last Name"  required>
+                           
+                            </div>
+                            <div class="col-sm-6 form-group">
+                              <label>Phone Number</label>
+                              <input #nok_phone="ngModel" id="nok_phone" name="nok_phone" [(ngModel)]="createNewEmployee.nexkOfKin.nok_phone" type="text" fullWidth class="form-control" nbInput placeholder="Enter Phone Number"  required>
+                           
+                            </div>
+                            <div class="col-sm-6 form-group">
+                              <label>Relationship with Next of Kin</label>
+                              <input #nok_relationship="ngModel" id="nok_relationship" name="nok_relationship" [(ngModel)]="createNewEmployee.nexkOfKin.nok_relationship" type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
+                           
+                            </div>
+                            <div class="col-sm-12 form-group">
+                              <label>Next of Kin Address</label>
+                              <input #nok_address="ngModel" id="nok_address" name="nok_address" [(ngModel)]="createNewEmployee.nexkOfKin.nok_address" type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                           
+                            </div>
+                          </div>
+                              <div class="form-group row">
+                                <div class="col-sm-12">
+                                  <button type="submit" nbButton status="primary" [disabled]="nxtKinForm.invalid"  (click)="nextPanel()" >Next</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+            </div>
+
+            <!--Contact Address-->
+            <div class="fmContainer" *ngSwitchCase="'contact_panel'">
+              <div style="padding-bottom: 5px;">
+                <p class="header6-medium">{{selectedPanel.label}}</p>
+            </div>
+
+            <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
+                <div style="padding-top:1.5rem;">
+                    <form>
+                      <div class="row" style="padding-top:10px">
+                        <div class="col-sm-6 form-group">
+                          <label>Address Type</label>
+                          <input type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
+                       
+                        </div>
+                        <div class="col-sm-6 form-group">
+                          <label>Country</label>
+                          <select class="form-control"  required >
+                            <option value="">--Select Country--</option>
+                         
+                        </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                          <label>State</label>
+                          <select class="form-control"  required >
+                            <option value="">--Select State--</option>
+                         
+                        </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                          <label>Local Government Area (LGA)</label>
+                          <input type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
+                       
+                        </div>
+                        <div class="col-sm-12 form-group">
+                          <label>Address Line 1</label>
+                          <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                          <label>Address Line 2</label>
+                          <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                    
+                        </div>
+                        <div class="col-sm-12 form-group">
+                           <nb-checkbox>Primary Account</nb-checkbox>
+                        </div>
+                      </div>
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <button type="submit" nbButton status="primary" >Submit</button>
+                            </div>
+                          </div>
+                    </form>
+                </div>
+            </div>
+
+               <!--Pension-->
+               <div class="fmContainer" *ngSwitchCase="'pension_panel'">
+                <div style="padding-bottom: 5px;">
+                  <p class="header6-medium">{{selectedPanel.label}}</p>
+              </div>
+  
+              <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
+                  <div style="padding-top:1.5rem;">
+                      <form>
+                        <div class="row" style="padding-top:10px">
+                          <div class="col-sm-6 form-group">
+                            <label>Pensioner File No.</label>
+                            <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Pensioner File No"  required>
+                         
+                          </div>
+                          <div class="col-sm-6 form-group">
+                            <label>PFA Name</label>
+                            <input type="text" fullWidth class="form-control" nbInput placeholder="Enter PFA Name"  required>
+                         
+                          </div>
+                          <div class="col-sm-6 form-group">
+                            <label>RSA Number</label>
+                            <input type="text" fullWidth class="form-control" nbInput placeholder="Enter RSA Number"  required>
+                         
+                          </div>
+                        
+                        </div>
+                            <div class="form-group row">
+                              <div class="col-sm-12">
+                                <button type="submit" nbButton status="primary" >Save Changes</button>
+                              </div>
+                            </div>
+                      </form>
+                  </div>
+            </div>
+
+               <!--History-->
+               <div class="fmContainer" *ngSwitchCase="'History_panel'">
+                <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                  <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                  <div>
+                    <button nbButton status="primary"  (click)="showEmpHistoryModal = true">Add New</button>
+                    </div>
+              </div>
+                    <div style="padding-top:1.5rem;">
+                      <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Job Title</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Grade</th>
+                            <th scope="col">Salary Grade</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Action</th>
+                       
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Name</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>Mark</td>
+                            <td>Otto</td>             
+                            <td>Otto</td>          
+                            <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                    </div>
+            </div>
+
+             <!--Skills-->
+             <div class="fmContainer" *ngSwitchCase="'skills_panel'">
+              <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+                <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+                <div>
+                  <button nbButton status="primary"  (click)="showSkillModal = true">Add New</button>
+                  </div>
+            </div>
+                  <div style="padding-top:1.5rem;">
+                    <table class="table">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">Category</th>
+                          <th scope="col">Skill</th>
+                          <th scope="col">Action</th>
+                     
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Name</th>
+                          <td>Mark</td>                              
+                          <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
+                        </tr>
+                       
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+  <!--Training-->
+  <div class="fmContainer" *ngSwitchCase="'training_panel'">
+    <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+      <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+      <div>
+        <button nbButton status="primary"  (click)="showTrainingModal = true">Add New</button>
+        </div>
+  </div>
+        <div style="padding-top:1.5rem;">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name of Training</th>
+                <th scope="col">Category</th>
+                <th scope="col">Vendor</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Action</th>
+           
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td>Mark</td>                
+                <td>Mark</td>    
+                <td>Mark</td>    
+                <td>Mark</td>                  
+                <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+</div>
+  <!--Certification -->
+  <div class="fmContainer" *ngSwitchCase="'certification_panel'">
+    <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
+      <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
+      <div>
+        <button nbButton status="primary"  (click)="showCertificationModal = true">Add New</button>
+        </div>
+  </div>
+        <div style="padding-top:1.5rem;">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name of Certificate</th>
+                <th scope="col">Category</th>
+                <th scope="col">Vendor</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Action</th>
+           
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td>Mark</td>                
+                <td>Mark</td>    
+                <td>Mark</td>    
+                <td>Mark</td>                  
+                <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+</div>
+              <!--Custom Form-->
+              <div class="fmContainer" *ngSwitchCase="'custom_panel'">
+                <div style="padding-bottom: 5px;">
+                    <p class="header6-medium">{{selectedPanel.label}}</p>
+                </div>
+            </div>
+
+
+    </div>
+    </nb-card-body>
+    </nb-card>
+    </div>
+    </div>
+
+ <!--Add New Certification-->
+ <ngx-side-modal [(show)]='showCertificationModal' style="width: 500px; height: 1000px;">
+    
+  <div modal-header>Add Certification <br> <small>Fill in Below Details</small></div>
+  <div modal-body>
+    <form id="certificationForm" name="certificationForm" #certificationForm="ngForm">
+
+      <div class="row" style="padding-top:10px">
+        <div class="col-sm-6 form-group">
+          <label>Category</label>
+          <select class="form-control"  required >
+            <option value="">--Select Category--</option>
+         
+        </select>
+       
+        </div>
+        <div class="col-sm-6 form-group">
+          <label>Name of Certification</label>
+          <select class="form-control"  required >
+            <option value="">--Select Title--</option>
+         
+        </select>
+       
+        </div>
+      
+        <div class="col-sm-6 form-group">
+          <label>Vendor</label>
+          <select class="form-control"  required >
+            <option value="">--Select Title--</option>
+         
+        </select>
+       
+        </div>
+        <div class="col-sm-12 form-group">
+          <label>Start Date</label>
+          <ngx-date ></ngx-date>
+        
+        </div>
+        <div class="col-sm-12 form-group">
+          <label>End Date</label>
+          <ngx-date ></ngx-date>
+        
+        </div>
+      </div>
+   
+    
+    </form>
+  </div>
+  <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+    <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+    <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+    
+
+</div>
+<div style="margin-top: 10px;"></div>
+</ngx-side-modal>
+
+ <!--Add New Training-->
+ <ngx-side-modal [(show)]='showTrainingModal' style="width: 500px; height: 1000px;">
+    
+  <div modal-header>Add Training <br> <small>Fill in Below Details</small></div>
+  <div modal-body>
+    <form id="trainingForm" name="trainingForm" #trainingForm="ngForm">
+
+      <div class="row" style="padding-top:10px">
+        <div class="col-sm-6 form-group">
+          <label>Category</label>
+          <select class="form-control"  required >
+            <option value="">--Select Category--</option>
+         
+        </select>
+       
+        </div>
+
+        <div class="col-sm-6 form-group">
+          <label>Name of Training</label>
+          <select class="form-control"  required >
+            <option value="">--Select Title--</option>
+         
+        </select>
+       
+        </div>
+   
+        <div class="col-sm-6 form-group">
+          <label>Vendor</label>
+          <select class="form-control"  required >
+            <option value="">--Select Title--</option>
+         
+        </select>
+       
+        </div>
+        <div class="col-sm-12 form-group">
+          <label>Start Date</label>
+          <ngx-date ></ngx-date>
+        
+        </div>
+        <div class="col-sm-12 form-group">
+          <label>End Date</label>
+          <ngx-date ></ngx-date>
+        
+        </div>
+      </div>
+   
+    
+    </form>
+  </div>
+  <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+    <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+    <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+    
+
+</div>
+<div style="margin-top: 10px;"></div>
+</ngx-side-modal>
+
+      <!--Add New Skill -->
+      <ngx-side-modal [(show)]='showSkillModal' style="width: 500px; height: 1000px;">
+    
+        <div modal-header>Add New Skill <br> <small>Fill in Below Details</small></div>
+        <div modal-body>
+          <form id="skillForm" name="skillForm" #skillForm="ngForm">
+    
+            <div class="row" style="padding-top:10px">
+              <div class="col-sm-12 form-group">
+                <label>Category</label>
+                <select class="form-control"  required >
+                  <option value="">--Select Category--</option>
+               
+              </select>
+             
+              </div>
+              <div class="col-sm-12 form-group">
+                <label>Skill</label>
+          <ngx-multi-select></ngx-multi-select>
+             
+              </div>
+           
+            </div>
+         
+          
+          </form>
+        </div>
+        <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+          <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+          
+  
+      </div>
+      <div style="margin-top: 10px;"></div>
+      </ngx-side-modal>
+
+    <!--Add New Employment History-->
+    <ngx-side-modal [(show)]='showEmpHistoryModal' style="width: 500px; height: 1000px;">
+    
+      <div modal-header>Add Employment History <br> <small>Fill in Below Details</small></div>
+      <div modal-body>
+        <form id="EmHistoryForm" name="EmHistoryForm" #EmHistoryForm="ngForm">
+  
+          <div class="row" style="padding-top:10px">
+            <div class="col-sm-6 form-group">
+              <label>Job Title</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Department</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Grade</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Salary Scale</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-12 form-group">
+              <label>Start Date</label>
+              <ngx-date ></ngx-date>
+            
+            </div>
+            <div class="col-sm-12 form-group">
+              <label>End Date</label>
+              <ngx-date ></ngx-date>
+            
+            </div>
+          </div>
+       
+        
+        </form>
+      </div>
+      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+        <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+        
+
+    </div>
+    <div style="margin-top: 10px;"></div>
+    </ngx-side-modal>
+
+      <!--Add New Bank Details-->
+      <ngx-side-modal [(show)]='showbankModal' style="width: 500px; height: 1000px;">
+    
+        <div modal-header>Add New Bank <br> <small>Fill in Below Details</small></div>
+        <div modal-body>
+          <form id="bankForm" name="bankForm" #bankForm="ngForm">
+            <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
+           
+            <div class="row" style="padding-top:10px">
+              <div class="col-sm-6 form-group">
+                <label>Bank Name</label>
+                <select class="form-control" #bank_id="ngModel" [(ngModel)]="indVEmpBanks.bank_id" id="bank_id" name="bank_id" >
+                  <option value="">--Select Bank--</option>
+                  <option *ngFor="let bank of bankList" value="{{bank.option_value}}">{{bank.option_text}}</option>
+              </select>
+             
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Account Numer</label>
+                <input type="text" (keyup)="inputNumberValidation($event)"  class="form-control" #account_no="ngModel" [(ngModel)]="indVEmpBanks.account_no" id="account_no" name="account_no">
+               
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Account Type</label>
+                <select class="form-control" #account_typeId="ngModel" [(ngModel)]="indVEmpBanks.account_typeId" id="account_typeId" name="account_typeId" >
+                  <option value="">--Select Type--</option>
+                  <option *ngFor="let accounttype of accounttypes" value="{{accounttype.id}}">{{accounttype.text}}</option>
+              </select>
+             
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Sort Code</label>
+                <input type="text"  class="form-control" #bank_sort_code="ngModel" [(ngModel)]="indVEmpBanks.bank_sort_code" id="bank_sort_code" name="bank_sort_code">
+              </div>
+              <div class="col-sm-12 form-group">
+                <nb-checkbox #is_primary="ngModel" [(ngModel)]="indVEmpBanks.is_primary" id="is_primary" name="is_primary">
+                  Primary Account</nb-checkbox>
+              
+              </div>
+            
+            </div>
+         
+          
+          </form>
+          <div style="padding-top: 5px;">
+            <div class="row">
+<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
+  <div class="cbadge">{{getbankname(tempbank.id_bank)}}&nbsp;|&nbsp;{{tempbank.numb_account}}&nbsp;<i class="fa fa-times" (click)="removefromBank(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+</div>
+            </div>
+           
+          </div>
+        </div>
+        <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+          <ngx-loadable-button [loading]="EmpBankloading" [disabled]="tempEmpBanksList.length < 1" (click)="submitbank()" >
+            Submit
+          </ngx-loadable-button>           
+          <div style="padding-left: 15px;">
+            <button [disabled]="!disableaddBank" outline="true" (click)="addtopbank(indVEmpBanks)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
+         
+          </div>
+      </div>
+      <div style="margin-top: 10px;"></div>
+      </ngx-side-modal>
+
+    <!--Add New Qualification-->
+    <ngx-side-modal [(show)]='showQualificationModal' style="width: 500px; height: 1000px;">
+    
+      <div modal-header>Add Qualification <br> <small>Fill in Below Details</small></div>
+      <div modal-body>
+        <form id="qualificationForm" name="qualificationForm" #qualificationForm="ngForm">
+  
+          <div class="row" style="padding-top:10px">
+            <div class="col-sm-6 form-group">
+              <label>Name of Qualification</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Type</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Course</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Institution</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+            <div class="col-sm-12 form-group">
+              <label>Start Date</label>
+              <ngx-date ></ngx-date>
+            
+            </div>
+            <div class="col-sm-12 form-group">
+              <label>End Date</label>
+              <ngx-date ></ngx-date>
+            
+            </div>
+          </div>
+       
+        
+        </form>
+        <div class="cbadge" >4</div>
+      </div>
+      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+        <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+        
+
+    </div>
+    <div style="margin-top: 10px;"></div>
+    </ngx-side-modal>
+
+
+     <!--Add New Document-->
+    <ngx-side-modal [(show)]='showdocumentUploadModal' style="width: 500px; height: 1000px;">
+    
+      <div modal-header>Upload Document <br> <small>Fill in Below Details</small></div>
+      <div modal-body>
+        <form id="documentUploadtForm" name="documentUploadtForm" #documentUploadtForm="ngForm">
+  
+          <div class="row" style="padding-top:10px">
+            <div class="col-sm-6 form-group">
+              <label>File Name</label>
+              <input type="text"  class="form-control" nbInput placeholder="Enter File Name"  required>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>File Type</label>
+              <select class="form-control"  required >
+                <option value="">--Select Title--</option>
+             
+            </select>
+           
+            </div>
+          </div>
+          <div class="form-group">
+            <div style="width: 100%;display: flex;flex-direction: row;"  flow-init     
+            flowDrop
+            [flow]="flowBasic.flowJs"
+            (drop)="onDropFileceived(flowBasic)"
+            (dragover)="onDragOver($event)">
+            <div style="padding: 10px;border: 1px solid #C4CDD5;" (change)="filereceived(flowBasic)">
+              <button   nbButton status="primary"  flowButton
+              [flow]="flowBasic.flowJs" >Choose File</button>
+            </div>
+            <div style="padding: 10px;border: 1px solid #C4CDD5;flex: auto;">
+              <div *ngIf="files.length < 1"> <small class="smalltext">No file chosen</small></div>
+              <div *ngFor="let transfer of files; let i = index" style="color: blue; display: flex;">
+                <div *ngIf="i == 0" style=" display: flex;flex-direction: row">
+                 <nb-icon nbPrefix icon="checkmark-outline" pack="eva"></nb-icon> &nbsp;&nbsp;
+                 <div style="flex: auto;">{{transfer.name}}</div>
+                 &nbsp;&nbsp;
+                 <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
+              
+                </div>
+                
+                 </div>
+            </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Comment</label>
+            <textarea rows="5"  id="comment" name="comment"  nbInput fullWidth   placeholder="Enter Comment"></textarea>
+          </div> 
+        </form>
+      </div>
+      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+        <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+        
+
+    </div>
+    <div style="margin-top: 10px;"></div>
+    </ngx-side-modal>
+
+
+     <!--Employee Contract Record-->
+    <ngx-side-modal [(show)]='showEmployeeContractModal' style="width: 500px; height: 1000px;">
+    
+      <div modal-header>Edit Contract <br> <small>Fill in Below Details</small></div>
+      <div modal-body>
+       
+          <form id="contractForm" name="contractForm" #contractForm="ngForm">
+  
+                <div class="row" style="padding-top:10px">
+                  <div class="col-sm-6 form-group">
+                    <label>Employee Name</label>
+                    <input type="text"  class="form-control" readonly  required>
+                 
+                  </div>
+                  <div class="col-sm-6 form-group">
+                      <label>Department</label>
+                      <select class="form-control"   >
+                          <option value="">--Select Department--</option>
+                       
+                      </select>
+                 
+                  </div>
+                <div class="col-sm-6 form-group">
+               <label for="Employee Name" style="font-size: small;font-weight: bold;">Supervisor:</label>
+               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label>Job Title</label>
+                  <select class="form-control"   >
+                      <option value="">--Select Title--</option>
+                   
+                  </select>
+             
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Position</label>
+                <select class="form-control"   >
+                    <option value="">--Select Position--</option>
+                 
+                </select>
+           
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Location</label>
+              <select class="form-control"   >
+                  <option value="">--Select Location--</option>
+               
+              </select>
+         
+          </div>
+            <div class="col-sm-12 form-group">
+              <label>Date of Confirmation</label>
+              <ngx-date ></ngx-date>
+         
+          </div>
+
+          <div class="col-sm-12 form-group">
+            <label>Date of Appointment</label>
+            <ngx-date ></ngx-date>
+       
+        </div>
+        <div class="col-sm-12 form-group">
+          <label>Date of Conversion</label>
+          <ngx-date ></ngx-date>
+     
+      </div>
+      <div class="col-sm-6 form-group">
+        <label>Payroll Type</label>
+        <select class="form-control"   >
+            <option value="">--Select Location--</option>
+         
+        </select>
+   
+    </div>
+    <div class="col-sm-6 form-group">
+      <label>Employement Type</label>
+      <select class="form-control"   >
+          <option value="">--Select Type--</option>
+       
+      </select>
+  
+  </div>
+  <div class="col-sm-12 form-group">
+    <label>Contract End Date</label>
+    <ngx-date ></ngx-date>
+  
+  </div>
+  <div class="col-sm-6 form-group">
+    <label>Salary Scale</label>
+    <select class="form-control"   >
+        <option value="">--Select Scale--</option>
+     
+    </select>
+  
+  </div>
+  <div class="col-sm-6 form-group">
+    <label>Grade</label>
+    <select class="form-control"   >
+        <option value="">--Select Scale--</option>
+     
+    </select>
+  
+  </div>
+  <div class="col-sm-12 form-group">
+    <label>Date of Employment</label>
+    <ngx-date ></ngx-date>
+  
+  </div>
+  <div class="col-sm-6 form-group">
+    <label>Grade Step</label>
+    <select class="form-control"   >
+        <option value="">--Select Scale--</option>
+     
+    </select>
+  
+  </div>
+
+        </div>
+
+
+      </form>
+                </div>
+         
+            
+     
+  
+  
+  
+      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
+          <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Save Changes</button>
+     
+
+      </div>
+      <div style="margin-top: 10px;"></div>
+  
+  </ngx-side-modal>
+  

@@ -1,0 +1,77 @@
+<ngx-componentsheader
+  pageName="Salary Grade Step"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+<ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="Create your first Salary Grade Step"
+    pageDescription="Click on the button to create a Salary Grade Step"
+    buttonValue="Create Salary Grade Step"
+    (buttonClick)="createNewClicked()"
+    [loading]="loading"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [actions]="tableActions"
+    [userData]="tableData"
+    [loading]="loading"
+    (filterChange)="filterUpdated($event)"
+    [showFilter]="true"
+    (actionClick)="tableActionClicked($event)"
+  ></ngx-tablecomponent>
+</div>
+<ngx-side-modal [(show)]="showModal" (closed)="clearEditingData()">
+  <div modal-header>Add New Salary Grade Step</div>
+  <div modal-body>
+    <div class="my-form">
+      <div class="form-group">
+        <label>Salary Grade Step Name</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            [(ngModel)]="editingData.name"
+        />
+        <ng-template [ngIf]="errors['name']">
+          <span *ngFor="let error of errors['name']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Step No</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Step Number"
+            [(ngModel)]="editingData.step_no"
+            type="number"
+        />
+        <ng-template [ngIf]="errors['step_no']">
+          <span *ngFor="let error of errors['step_no']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label>Next Step</label>
+        <div>
+          <ngx-multi-select></ngx-multi-select>
+        <ng-template [ngIf]="errors['step_no']">
+          <span *ngFor="let error of errors['step_no']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+  <div modal-actions>
+    <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+    <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
+    <button nbButton status="primary" outline (click)="hideModal()">
+      cancel
+    </button>
+  </div>
+</ngx-side-modal>

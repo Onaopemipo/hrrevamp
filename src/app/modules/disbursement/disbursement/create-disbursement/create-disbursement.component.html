@@ -3,130 +3,317 @@
   [requiredButton]="[]"
 ></ngx-componentsheader>
 <div class="main-page-container">
+  <!-- {{ allBanks | json }} -->
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="Single Disbursement" [tabId]="TABS.SINGLE">
-      <!-- Tab content 1 -->
-      <div class="my-form">
-        <div class="row">
-          <div class="col-sm-6 linear-form">
-            <div class="form-group">
-              <label>Channel</label>
-              <select
-                class="form-control"
-                placeholder="Select Channel"
-              ></select>
+      <form #disburseForm="ngForm" name="disburseForm" id="disburseForm">
+        <div class="form-group row">
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Channel</label>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select
+            class="form-control"
+            placeholder="Select Channel" name="channel" #channel="ngModel" [(ngModel)]="disbursement.channelId"
+          >
+          <option value=""  disabled>Select Channel</option>
+          <option value="mychannel.id" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
+        </select>
+          </div>
+        </div>
+
+            <div class="form-group row">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Disburse for</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <nb-radio-group name="disburse_for" #disburse_for="ngModel" [(ngModel)]="disbursement" (ngModelChange)="changeDisburse($event)">
+                  <nb-radio [value]="true" >Budget Item</nb-radio>
+                  <nb-radio [value]="false">Project</nb-radio>
+                </nb-radio-group>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Disburse for</label>
-              <ngx-radio-button
-                [items]="['Budget Item', 'Project']"
-              ></ngx-radio-button>
+
+            <div *ngIf="budgetItem == true" class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Budget Item</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <select class="form-control" name="bugetItem" #budgetItem="ngModel" [(ngModel)]="disbursement.disbursementBudgetItemId" placeholder="Select">
+                <option value="" disabled>--Select Budget Item--</option>
+                <option *ngFor="let item of allBudgetItems" value="item.code">{{ item.name }}</option>
+              </select>
+              </div>
+              <div *ngIf="budgetItem.invalid && (budgetItem.dirty || budgetItem.touched)" class="error">
+                <div *ngIf="budgetItem.errors.required">Budget Item is required</div>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Budget Item</label>
-              <select class="form-control" placeholder="Select"></select>
+
+            <div *ngIf="budgetItem == false" class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Project</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <select class="form-control" name="projectItem" #projectItem="ngModel" [(ngModel)]="disbursement.projectId" placeholder="Select">
+                  <option value="" disabled>Select Project Item</option>
+                  <option *ngFor="let project of allProjects" value="project.code">{{ project.name }}</option>
+                </select>
+              </div>
+              <div *ngIf="projectItem.invalid && (projectItem.dirty || projectItem.touched)" class="error">
+                <div *ngIf="projectItem.errors.required">Project Item is required</div>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Recipient</label>
-              <ngx-radio-button
-                [items]="['New account', 'Existing Beneficiary', 'Employee']"
-              ></ngx-radio-button>
+
+
+            <div class="form-group row">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Recipient</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <nb-radio-group name="recipient" [(ngModel)]="disbursement" #recipient="ngModel" (ngModelChange)="changeRecipient($event)">
+                  <nb-radio [value]='1'>New account</nb-radio>
+                  <nb-radio [value]='2'>Existing Beneficiary</nb-radio>
+                  <nb-radio [value]='3'>Employee</nb-radio>
+                </nb-radio-group>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Beneficiary</label>
-              <select class="form-control" placeholder="Select Bank"></select>
+
+
+            <div *ngIf="myrecipient == '1'">
+              <div class="form-group row" style="margin-top: 20px">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>Bank Name</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <select class="form-control" name="bankName" #bankName="ngModel" [(ngModel)]="disbursement">
+                    <option  value="" disabled>-- Select Bank --</option>
+                    <option *ngFor="let bank of allbanksName; let i = index" value="bank.option_value">{{bank.option_text}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="form-group row" style="margin-top: 20px">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>Account Number</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <input type="number" class="form-control" name="accountNo" minlength="10" maxlength="10" #accountNo="ngModel" [(ngModel)]="disbursement.accountNumber" placeholder="Enter account number" required>
+                </div>
+              </div>
+
+              <div class="form-group row" style="margin-top: 20px">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>Account Name</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" class="form-control" name="accountName" #accountName="ngModel" [(ngModel)]="disbursement.accountName" placeholder="Enter Account Name">
+                </div>
+                <div *ngIf="accountName.invalid && (accountName.dirty || accountName.touched)" class="error">
+                  <div *ngIf="accountName.errors.required">Account Name is required</div>
+                </div>
+              </div>
+
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Select Employee</label>
-              <ngx-employee-master-search></ngx-employee-master-search>
+
+            <div *ngIf="myrecipient == '2'" class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Beneficiary</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <select class="form-control" name="beneficiary" #beneficiary="ngModel" [(ngModel)]="disbursement.beneficiary_id">
+                  <option value="" disabled>--Select Beneficiary--</option>
+                  <option *ngFor="let mybenefiary of allBeneficiaries; let i = index" value="mybenefiary.id">{{mybenefiary.accountName}}</option>
+                </select>
+              </div>
+              <div *ngIf="beneficiary.invalid && (beneficiary.dirty || beneficiary.touched)" class="error">
+                <div *ngIf="beneficiary.errors.required">Project Item is required</div>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Bank Name</label>
-              <select class="form-control" placeholder="Select Bank"></select>
+
+            <div *ngIf="myrecipient =='3'" class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Select Employee</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <ngx-employee-master-search></ngx-employee-master-search>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Account Number</label>
-              <select class="form-control" placeholder="Select Bank"></select>
+
+            <div class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Amount</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <app-amount-input [(value)]="disbursement.amount"></app-amount-input>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Account Name</label>
-              <select class="form-control" placeholder="Select Bank"></select>
+
+            <div class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Scheduled Date</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <ngx-date [(value)]="disbursement.scheduledDate"></ngx-date>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Amount</label>
-              <select class="form-control" placeholder="Select Bank"></select>
+
+            <div class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Description/purpose  </label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <ngx-wysisyg-input style="padding-left: -10px;" ></ngx-wysisyg-input>
+              </div>
+
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Scheduled Date</label>
-              <ngx-date></ngx-date>
+
+            <div class="form-group row">
+              <div class="col-sm-2 col-md-2 col-lg-2"></div>
+              <!-- <div class="col-sm-6 col-md-6 col-lg-6" >
+                <nb-checkbox *ngIf="recipient ==1" status="basic" name="benefiary" #benefiary="ngModel" [(ngModel)]="disbursement.save_as_beneficiary">Save as Beneficiary</nb-checkbox>&nbsp;&nbsp;
+                <nb-checkbox status="basic" [(ngModel)]="disbursement.isRecurring" name="recurring" #recurring="ngModel" (checkedChange)="toggle($event)">Recurring</nb-checkbox>
+              </div> -->
+              <div class="col-sm-6 col-md-6 col-lg-6" >
+                  <nb-checkbox status="basic" [(ngModel)]="disbursement.saveAsBeneficiary" name="saveBenefiary" #saveBenefiary="ngModel">Save as Beneficiary</nb-checkbox>&nbsp;&nbsp;
+                  <nb-checkbox status="basic" [(ngModel)]="disbursement.isRecurring"  name="setRecurring" #setRecurring="ngModel" (checkedChange)="toggle($event)">Recurring</nb-checkbox>
+                </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Description/purpose</label>
-              <textarea></textarea>
+
+            <div *ngIf="recurrence == true">
+              <div class="form-group row" style="margin-top: 20px">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>Frequency</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequencyId" placeholder="Frequency">
+                    <option value="" disabled>--Select Frequency--</option>
+                    <option *ngFor="let frequent of allFrequencies; let i = index" value="frequent.id">{{frequent.name}}</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="form-group row" style="margin-top: 20px">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>Start Date</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <ngx-date [max]="disbursement.endDate" [(value)]="disbursement.startDate"></ngx-date>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-top: 20px">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>End Date</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <ngx-date  [min]="disbursement.startDate" [(value)]="disbursement.endDate"></ngx-date>
+                </div>
+              </div>
             </div>
-            <div>
+
+          <div class="form-group row" style="margin-top: 20px">
+            <div class="col-sm-2 col-md-2 col-lg-2">
               <label></label>
-              <!-- <inline-checkbox-group></inline-checkbox-group> -->
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Frequency</label>
-              <select class="form-control" placeholder="Select Bank"></select>
-            </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Start Date</label>
-              <ngx-date></ngx-date>
-            </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>End Date</label>
-              <ngx-date></ngx-date>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <button nbButton status="primary" (click)="createDisbursement()" [disabled]="disburseForm.form.invalid">Submit</button>
             </div>
           </div>
-        </div>
-        <div class="form-group" style="margin-top: 20px">
-          <label></label>
-          <div>
-            <button nbButton status="primary">Submit</button>
-          </div>
-        </div>
-      </div>
+        </form>
     </nb-tab>
+
+    <!-- Bulk Disbursement -->
+
     <nb-tab tabTitle="Bulk Disbursement" [tabId]="TABS.BULK">
-      <!-- Tab content 2 -->
       <div class="my-form">
-        <div class="row">
-          <div class="col-sm-6 linear-form">
-            <div class="form-group">
-              <label>Channel</label>
-              <select
-                class="form-control"
-                placeholder="Select Channel"
-              ></select>
+        <div class="form-group row">
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Channel</label>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <select
+            class="form-control"
+            placeholder="Select Channel" name="channel" #channel="ngModel" [(ngModel)]="disbursement.channelId"
+          ></select>
+          </div>
+        </div>
+
+            <div class="form-group row">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Beneficiary list</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <ngx-file-upload></ngx-file-upload>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Beneficiary list</label>
-              <ngx-file-upload></ngx-file-upload>
+
+
+            <div class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Scheduled Date</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <ngx-date></ngx-date>
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Scheduled Date</label>
-              <ngx-date></ngx-date>
+
+
+            <div class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Comments</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <!-- <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input> -->
+              </div>
             </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label>Description/purpose</label>
-              <textarea></textarea>
-            </div>
-            <div>
-              <label></label>
-              <!-- <inline-checkbox-group></inline-checkbox-group> -->
-            </div>
-            <div class="form-group" style="margin-top: 20px">
-              <label></label>
-              <div>
-                <button nbButton status="primary">Submit</button>
+
+
+              <div class="form-group row">
+                <div class="col-sm-2 col-md-2 col-lg-2"></div>
+                <div class="col-sm-6 col-md-6 col-lg-6" >
+                  <nb-checkbox status="basic" [(ngModel)]="disbursement.saveAsBeneficiary">Save as Beneficiary</nb-checkbox>&nbsp;&nbsp;
+                  <nb-checkbox status="basic" [(ngModel)]="disbursement.isRecurring" (checkedChange)="toggle($event)">Recurring</nb-checkbox>
+                </div>
+              </div>
+
+              <div *ngIf="recurrence == true">
+                <div class="form-group row" style="margin-top: 20px">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="form-control" name="frequency" #frequency="ngModel" [(ngModel)]="disbursement.frequencyId" placeholder="Frequency">
+                      <option value="" default>--Select Frequency--</option>
+                      <option *ngFor="let frequent of allFrequencies" value="frequent.id">{{frequent.name}}</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="form-group row" style="margin-top: 20px">
+                  <div class="col-sm-2 col-md-2 col-lg-2">
+                    <label>Start Date</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <ngx-date [max]="disbursement.endDate" [value]="disbursement.startDate"></ngx-date>
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 20px">
+                  <div class="col-sm-2 col-md-2 col-lg-2">
+                    <label>End Date</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <ngx-date [min]="disbursement.startDate" [value]="disbursement.endDate"></ngx-date>
+                  </div>
+                </div>
+              </div>
+
+            <div class="form-group row" style="margin-top: 20px">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label></label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <button nbButton status="primary" (click)="createDisbursement()">Submit</button>
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </nb-tab>
   </nb-tabset>
 </div>

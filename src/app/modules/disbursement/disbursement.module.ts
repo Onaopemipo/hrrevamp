@@ -1,3 +1,6 @@
+import { DataServiceProxy } from 'app/_services/service-proxies';
+import { FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, AddUpdateBudgetServiceProxy, SingleDisbursementServiceProxy, GetExpenseProjectServiceProxy, GetAllPaymentInstitutionsServiceProxy, FetchExpensesServiceProxy, AddUpdateBudgetItemServiceProxy } from './../../_services/service-proxies';
+import { UpdateItemComponent } from './budget/update-item/update-item.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DisbursementComponent } from './disbursement.component';
@@ -9,7 +12,7 @@ import { CreateDisbursementComponent } from './disbursement/create-disbursement/
 import { DisbursementrequestsComponent } from './disbursement/disbursementrequests/disbursementrequests.component';
 import { DisbursementHistoryComponent } from './disbursement/disbursement-history/disbursement-history.component';
 import { ThemeModule } from 'app/@theme/theme.module';
-import { NbDatepickerModule } from '@nebular/theme';
+import { NbDatepickerModule, NbRadioComponent, NbRadioModule, NbCheckboxModule } from '@nebular/theme';
 import { OverallBudgetComponent } from './overall-budget/overall-budget.component';
 
 
@@ -23,6 +26,7 @@ import { OverallBudgetComponent } from './overall-budget/overall-budget.componen
     BudgetListComponent,
     CreateDisbursementComponent,
     OverallBudgetComponent,
+    UpdateItemComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +34,23 @@ import { OverallBudgetComponent } from './overall-budget/overall-budget.componen
     DisbursmentRoutingModule,
     ThemeModule,
     NbDatepickerModule,
-  ]
+    NbRadioModule,
+    NbCheckboxModule,
+  ],
+
+  providers: [
+    FetchAllBudgetsServiceProxy,
+    FetchGetBudgetServiceProxy,
+    FetchAllBudgetItemsServiceProxy,
+    SingleDisbursementServiceProxy,
+    GetExpenseProjectServiceProxy,
+    GetAllPaymentInstitutionsServiceProxy,
+    GetExpenseProjectServiceProxy,
+    DataServiceProxy,
+    AddUpdateBudgetServiceProxy,
+    FetchExpensesServiceProxy,
+    AddUpdateBudgetItemServiceProxy,
+  ],
+
 })
 export class DisbursementModule { }

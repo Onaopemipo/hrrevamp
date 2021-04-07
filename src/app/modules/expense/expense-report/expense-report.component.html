@@ -1,0 +1,22 @@
+<ngx-componentsheader
+  pageName="Expense Reports"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  ><ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader=""
+    pageDescription="Now, you have no data to report on at this time"
+    (buttonClick)="createNewClicked()"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [userData]="tableData"
+    [loading]="loading"
+    (pageChange)="loadNewPage($event)"
+  ></ngx-tablecomponent>
+</div>

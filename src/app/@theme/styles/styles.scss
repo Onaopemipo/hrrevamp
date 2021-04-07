@@ -118,11 +118,15 @@ h1{
 }
 
 .linear-form .form-group > label{
-  width: 40%;
+  width: 20%;
 }
 .linear-form .form-group > .form-control{
-  width: unset;
-  flex: auto;
+  width: 50%;
+  // flex: auto;
+}
+.linear-form .form-group > *:nth-child(2){
+  width: 50%;
+  // flex: auto;
 }
 
 .form-control[type='checkbox']{
@@ -135,6 +139,13 @@ h1{
   background-color: white;
   padding: 40px;
   height: 100%;
+}
+
+.multi-card-page > .card{
+  background-color: white;
+  padding: 40px;
+  height: 100%;
+  margin-bottom: 40px;
 }
 
 .header6-normal{
@@ -387,6 +398,10 @@ letter-spacing: 0px;
 color: #86828D !important;
 opacity: 1;
 }
+.taskdownloadbtn{
+  display: flex;
+  flex-direction: row;
+}
 .listtextActive{
   font-family:'Rubik',sans-serif !important;
   font-style: normal !important;
@@ -403,7 +418,7 @@ opacity: 1;
   &::before{
   content: '';
   height: 2.5rem;
-  border: 3px solid #4847E0;   
+  border: 3px solid #4847E0;
   display: block;
   }
 }
@@ -412,7 +427,7 @@ opacity: 1;
   &::before{
   content: '';
   height: 2.5rem;
-  border: 3px solid inherit;   
+  border: 3px solid inherit;
   display: block;
   }
 }
@@ -439,4 +454,41 @@ opacity: 1;
   line-height: 17px;
   letter-spacing: 0em;
   text-align: left;
+}
+
+
+.underlined-button{
+  text-decoration: underline;
+  font: normal normal normal 16px/22px Rubik;
+  color: #4847E0;
+  padding: 0px;
+  text-align: left;
+  width: fit-content;
+  min-width: unset !important;
+  border: none;
+  background: transparent;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  background: transparent;
+  border: none;
+}
+
+
+.error {
+  color: #e9230d;
+  font-weight: normal;
+  text-align: left;
+  font-size: 12px;
+  width: 100%;
+}
+
+.nb-theme-smartace .overlay-backdrop {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.my-form > h4{
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
 }

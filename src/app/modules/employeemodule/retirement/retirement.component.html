@@ -1,0 +1,28 @@
+
+<ngx-componentsheader pageName='Retirement' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+
+<nb-card style="margin-top: 15px;">
+    <nb-card-body>
+
+        <nb-tabset>
+            <nb-tab tabTitle="New Exits">
+            
+            </nb-tab>
+            <nb-tab tabTitle="Compelled Exist">
+                
+            </nb-tab>
+
+            <nb-tab tabTitle="Cancelled Exist">
+                
+            </nb-tab>
+        </nb-tabset>
+        <ngx-tableheader></ngx-tableheader>
+
+        <ngx-tablecomponent [userData]='data' [tableColum]="tableColumns"></ngx-tablecomponent>
+    </nb-card-body>
+
+
+</nb-card>

@@ -1,0 +1,78 @@
+<ngx-componentsheader pageName='Set KPIS'></ngx-componentsheader>
+
+<div class="main-page-container">
+    <div>
+        <div class="card" style="margin-bottom: 0.5rem;">
+            <!-- <div class="card-info" style=";"> -->
+                <div>
+                    <div>Key Result Area</div>
+                    <div>{{kra.section_name}}</div>
+                </div>
+                <div>
+                    <div>Strategy</div>
+                    <div>Operations</div>
+                </div>
+                <div>
+                    <div>Score</div>
+                    <div>{{kra.maximum_score_obtainable}}</div>
+                </div>
+                <div>
+                    <div>Weight</div>
+                    <div>{{kra.weight}}</div>
+                </div>
+            <!-- </div> -->
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+            <span style="color: #EB5757;">
+                <nb-icon icon='calendar'></nb-icon>
+                Due 05 July, 2020
+            </span>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 0.5rem;">
+        <div style="display: flex; justify-content: flex-end;" class="table-buttons">
+            <button nbButton outline text-button  status='primary'>
+                <nb-icon icon='plus'></nb-icon>
+                Add KPI
+            </button>
+            <button nbButton outline text-button  status='primary'>
+                <nb-icon icon='download-outline'></nb-icon>
+                Downlaod Template
+            </button>
+                        <button nbButton outline text-button  status='primary'>
+                <nb-icon icon='upload-outline'></nb-icon>
+                Upload KPI
+            </button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>KPIs</th>
+                    <th>UNIT OF MEASUREMENT</th>
+                    <th>SCORE</th>
+                    <th>COMMENT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let kpi of data">
+                    <td>{{kpi.section_name}}</td>
+                    <td>{{kpi.unitOfMeasurement}}</td>
+                    <td>{{kpi.sectionTotalScore}}</td>
+                    <td>{{kpi.canComment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ngx-workflow></ngx-workflow>
+    <div class="linear-form">
+        <div class="form-group">
+            <label></label>
+            <div>
+                <button nbButton status='primary'>Save</button>
+                <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

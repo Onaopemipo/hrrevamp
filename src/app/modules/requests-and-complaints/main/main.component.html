@@ -54,23 +54,29 @@
     <div modal-header>Create New</div>
     <div modal-body>
         <div class="form-group">
+            <label>Title</label>
+            <input [(ngModel)]="newComplaint.title" class="form-control"/>
+        </div>
+        <div class="form-group">
             <label>Type</label>
-            <select [(ngModel)]="newComplaint.type" class="form-control">
-                <option value="5">Complaint</option>
-                <option value="6">Request</option>
+            <select [(ngModel)]="newComplaint.requestTypeId" class="form-control">
+                <option [value]="type.id" *ngFor="let type of requestTypes">{{type.name}}</option>
+                <!-- <option value="6">Request</option> -->
             </select>
         </div>
         <div class="form-group">
             <label>Reciepent</label>
-            <input class="form-control"/>
+            <ngx-employee-master-search [(value)]="newComplaint.employeeId"></ngx-employee-master-search>
+            {{newComplaint.employeeId}}
         </div>
         <div class="form-group">
             <label>Description</label>
-            <ngx-wysisyg-input></ngx-wysisyg-input>
+            <ngx-wysisyg-input [(value)]="newComplaint.description"></ngx-wysisyg-input>
         </div>
     </div>
     <div modal-actions>
-        <button nbButton status="primary">Submit</button>
+        <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Submit</ngx-loadable-button>
+        <!-- <button nbButton status="primary"></button> -->
         <button nbButton outline status="primary">Discard</button>
         <button>Attach</button>
     </div>

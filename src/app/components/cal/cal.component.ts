@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
@@ -9,12 +9,74 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 })
 export class CalComponent implements AfterViewInit {
 
+  @Input() year = 2020;
+  @Input() month = 1;
+  @Input() day = 1;
+  weeks = [];
+
+  days = [
+    {name: 'SUN', val: 0},
+    {name: 'MON', val: 1},
+    {name: 'TUE', val: 2},
+    {name: 'WED', val: 3},
+    {name: 'THU', val: 4},
+    {name: 'FRI', val: 5},
+    {name: 'SAT', val: 6},
+  ];
+
+  dates = [];
   @ViewChild('calendar') calendar: ElementRef;
   constructor() { }
 
+  get monthLabel() {
+    const months = [
+      'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
+    ];
+    return months[this.month];
+  }
+
+  gotoThisMonth() {
+    const today = new Date();
+    this.month = today.getMonth();
+    this.year = today.getFullYear();
+    this.loadCalendar();
+  }
+
+  nextMonth(){
+    if(this.month === 11){
+      this.year += 1;
+      this.month = 0;
+    } else {
+      this.month += 1;
+    }
+    this.loadCalendar();
+  }
+
+  prevMonth(){
+    if(this.month === 0){
+      this.year -= 1;
+      this.month = 11;
+    } else {
+      this.month -= 1;
+    }
+    this.loadCalendar();
+  }
+
+  loadCalendar(){
+    const dates = [];
+    const firstDayOfMonth = new Date();
+    firstDayOfMonth.setDate(1);
+    firstDayOfMonth.setMonth(this.month);
+    firstDayOfMonth.setFullYear(this.year);
+    const dayNo = firstDayOfMonth.getDay();
+    const firstDayOfCalendar = Number(firstDayOfMonth) - dayNo * 24 * 60 * 60 * 1000;
+    this.weeks = [0, 1, 2, 3, 4, 5].map(week_no => this.days.map(day => {
+      return new Date(Number(firstDayOfCalendar) + (week_no * 7 + day.val) * 24 * 60 * 60 * 1000);
+    }));
+  }
+
   ngAfterViewInit(): void {
-    let calendar = new Calendar(this.calendar.nativeElement, {});
-    calendar.render();
+    this.loadCalendar();
   }
 
 }

@@ -6,7 +6,7 @@ export interface TableData {
 }
 
 export enum ColumnTypes {
-    Text, Status, Date
+    Text, Status, Date, Link
 }
 
 export interface TableColumn {
@@ -15,5 +15,17 @@ export interface TableColumn {
     type?: ColumnTypes;
     template?: TemplateRef<any>;
     colors?: {};
+    link_name?: string;
 }
 
+export interface TableAction {
+  label: string;
+  name: string;
+}
+
+export interface TableActionEvent<T=any> {
+    name: string;
+    data: T;
+}
+
+export enum ACTIONS { EDIT = '1', DELETE = '2' }

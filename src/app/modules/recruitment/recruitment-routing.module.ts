@@ -1,3 +1,5 @@
+import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
+import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { ApplicantsDashboardComponent } from './applicants-dashboard/applicants-dashboard.component';
 import { ApplicantssignupComponent } from './applicantssignup/applicantssignup.component';
@@ -6,6 +8,7 @@ import { ComponentsModule } from 'app/components/components.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ApplicantssigninComponent } from './applicantssignin/applicantssignin.component';
+import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
 
 export const routes: Routes = [
   {
@@ -26,14 +29,24 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
 
-      // {
-      //   path: 'applicantsdashboard',
-      //   component: ApplicantsDashboardComponent
-      // },
+      {
+        path: 'applicantprofile',
+        component: ApplicantProfileComponent
+      },
 
       {
         path: 'jobdetails',
         component: JobDetailsComponent
+      },
+
+      {
+        path: 'applicantsdashboard',
+        component: ApplicantsDashboardComponent
+      },
+
+      {
+        path: 'applicantquiz',
+        component: ApplicantquizComponent
       },
 
       {

@@ -13,6 +13,9 @@ enum TABS {
 })
 export class DisbursementHistoryComponent implements OnInit {
 
+  myHeader: string = 'No budget history';
+  myDescription: string = 'There is nothing to see here';
+  defaultPage: number = 0;
   constructor() { }
 
   ngOnInit(): void {
@@ -79,5 +82,9 @@ export class DisbursementHistoryComponent implements OnInit {
     }
   }
   tableData = [];
+
+getHistory(){
+
+}
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 
 @Component({
@@ -7,6 +7,23 @@ import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent implements OnInit {
+
+  @Input() single = true;
+  @Input() value: Transfer[]|Transfer = [];
+  @Output() valueChange = new EventEmitter<Transfer[]|Transfer>();
+  @Input() inputText: string;
+  set files(data: Transfer[]) {
+    this._files = data;
+    if (this.single) {
+      if (this._files.length > 0) {
+        this.valueChange.emit(this._files[0]);
+      } else {
+        this.valueChange.emit(null);
+      }
+    } else {
+      this.valueChange.emit(this._files);
+    }
+  }
 
   constructor() { }
 
@@ -18,7 +35,14 @@ export class FileUploadComponent implements OnInit {
     event.cancelFile(mFile);
   }
 
-  files: Transfer[];
+  _files: Transfer[];
+  get files() {
+    let file = this._files;
+    if(!file){
+      file = [];
+    }
+    return file;
+  }
   onDropFileceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
@@ -33,4 +57,5 @@ export class FileUploadComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
   }
+ 
 }

@@ -1,0 +1,27 @@
+<nb-card>
+    <nb-card-body class="retire">
+        <div class="container">
+            <img src="assets/icons/warning.jpg" alt="" style="margin-top: 1.9rem; height: 85px;">
+            <div style="margin-top: 2rem;margin-bottom: 1.5rem;">
+                <p style="font-weight: bolder; font-size: large; ">Warning !</p>
+            </div>
+            <div style="margin-top: 1rem;">
+                <p>
+                    You are about to begin a process that will terminate our employment with this organization.
+    
+                </p>
+                <p>click on proceed if you have discussed with your supervisor and intend to continue with the process</p>
+                <p>Also be informed that you will be expected to complete your 30days notice period after termination.</p>
+    
+            </div>
+           
+            <div class="d-flex" style="margin-top: 0.5rem;padding: 3rem;">
+                <button nbButton status="primary" class="d-flex column" (click)="onClick()">Proceed</button>
+                <button nbButton outline status="primary" class="d-flex column"
+                    style="background-color: white; margin-left: 1rem;">Go back</button>
+            </div>
+        </div>
+
+
+    </nb-card-body>
+</nb-card>

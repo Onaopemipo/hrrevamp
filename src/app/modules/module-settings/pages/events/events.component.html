@@ -1,0 +1,69 @@
+
+<!-- <ngx-componentsheader pageName='Events' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader> -->
+
+<ngx-componentsheader
+  pageName="Events"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+<ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="Create your first Department"
+    pageDescription="Click on the button to create a Department"
+    buttonValue="Create Department"
+    (buttonClick)="createNewClicked()"
+    [loading]="loading"
+  >
+  </ngx-default-content>
+  <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [actions]="tableActions"
+    [userData]="tableData"
+    [loading]="loading"
+    (filterChange)="filterUpdated($event)"
+    [showFilter]="true"
+    (actionClick)="tableActionClicked($event)"
+  ></ngx-tablecomponent>
+</div>
+<ngx-side-modal [(show)]="showModal" (closed)="clearEditingData()">
+  <div modal-header>Add New Department</div>
+  <div modal-body>
+    <div class="my-form">
+      <div class="form-group">
+        <label>Title</label>
+        <div>
+          <input
+            class="form-control"
+            [(ngModel)]="editingData.Title"
+            placeholder="Name"
+        />
+        <ng-template [ngIf]="errors['Title']">
+          <span *ngFor="let error of errors['Title']" class="error">{{error}}</span>
+        </ng-template>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notify Employee when created</label>
+        <div>
+        
+          <input
+          type="checkbox"
+          class="form-control"
+          [(ngModel)]="editingData.Notify_Employee"
+          placeholder="Code"
+        />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div modal-actions>
+    <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+    <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
+    <button nbButton status="primary" outline (click)="hideModal()">
+      cancel
+    </button>
+  </div>
+</ngx-side-modal>

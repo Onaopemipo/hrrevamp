@@ -1,0 +1,65 @@
+<ngx-componentsheader pageName='Promotion Eligibility Bucket List' [requiredButton]="topActionButtons"
+    (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
+<nb-card style="margin-top: 15px;">
+    <nb-card-body>
+
+        <nb-tabset>
+            <nb-tab tabTitle="Open">
+
+            </nb-tab>
+            <nb-tab tabTitle="Close">
+
+            </nb-tab>
+
+        </nb-tabset>
+        <ngx-tableheader></ngx-tableheader>
+
+        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+    </nb-card-body>
+
+    <ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px;">
+        <h6 modal-header>Add Eligibility Status</h6>
+        <div modal-body>
+            <form #promotionBucket="ngForm" name="promotionBucket">
+
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="Name">Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" name="name"
+                    #name="ngModel" [(ngModel)]="promotionBucketList.name" required>
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                      <div *ngIf="name.errors.required">Name is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="Approval">Approval workflow:</label>
+                    <label for="" style="font-size: small; font-weight: lighter;">Ensure you created the workflow with category as PROMOTIONS </label>
+                    <select class="form-control" name="approval" [(ngModel)]="promotionBucketList.approvalWorkFlows" #approval="ngModel">
+                      <option value="1">Approval</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row" style="margin-top: 20px">
+                  <div class="col">
+                    <label>Comment:</label>
+                    <ngx-wysisyg-input style="padding-left: -10px;" [(value)]="promotionBucketList.comments"></ngx-wysisyg-input>
+                  </div>
+                </div>
+            </form>
+        </div>
+
+        <div modal-actions class="d-flex mb-5" style="margin-top: 7rem;">
+            <button nbButton status="primary" class="d-flex column" [disabled]="promotionBucket.invalid" (click)="addToEligibilityList()">Submit</button>
+            <button nbButton outline status="primary" class="d-flex column" style="background-color: #fff;">Discard</button>
+
+        </div>
+        <div style="margin-top: 15px;"></div>
+    </ngx-side-modal>
+
+</nb-card>

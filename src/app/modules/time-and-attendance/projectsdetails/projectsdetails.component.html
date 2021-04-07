@@ -1,0 +1,78 @@
+<ngx-componentsheader [pageName]="title">
+
+</ngx-componentsheader>
+
+<nb-card>
+    <nb-card-body>
+        <div >
+            <div class="row" style="height: 70vh;">
+                <div class="col-sm-3" style="border-right: 1px solid #CCCCCC;padding-left: 0px;    padding-right: 0px; height: 100%;">
+                    <div class="section-header">
+                       <div style="display: flex;flex-direction: row;">
+                       <div style="padding: 5px 7px 0 0;">
+                        <span class="header6-bold">Tasks</span>
+                       </div>  
+                       <div  class="cbadge" >4</div>
+                    </div>
+                    </div>
+                    <div class="complain-items" style="overflow: scroll; height: calc(100% - 80px);" nbInfiniteList [threshold]="3000" >
+
+                        <div *ngIf="loading" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                        </div>
+                        <ng-template [ngIf]="!loading">
+                            <div class="complain-item" *ngFor="let task of newprjTask" [class]="{active: selectedProjectTask === task}" (click)="changeSelectedTask(task)">
+            
+                                <div class="complaint-detail-section">                                    
+                                    <div class="complaint-title">{{task.pTaskObj.task_name | maxStringLength:30}}</div>
+                                    <div class="complaint-detail">{{task.pTaskObj.task_content | maxStringLength:50}}</div>
+                                    <ngx-status [data]="task"></ngx-status>
+                                </div>
+                                <div style="flex-direction: column; display: flex; align-items: flex-end;">
+                                    {{task.pTaskObj.task_timestamp | datePipes}}
+                                    <div style="height: 0.5rem; width: 0.5rem; border-radius: 50%; margin-top: 1rem;" class="bg-primary"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <!-- <div *ngIf="loadingNext" style="display: flex; justify-content: center; padding-top: 5px;">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-sm-9" style="padding-left: 0px; height: 100%; overflow: scroll">
+                    <div class="section-header">
+                        <div style="display: flex;flex-direction: row;">
+                        <div style="flex: auto; padding-top: 7.5px;">
+                         <span class="header6-bold">Tasks XX</span>
+                        </div>  
+                        <div style="padding-top: 7.5px;align-items: flex-end;"><span class="smalltext">{{ todaysdate | date: 'h:mm a MMM d, y '}}</span></div>
+                     </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div style="padding: 20px;">
+                                <p class="p-300">
+                                    Scribbling signature pad is not at all different from writing on an image, which we all do regularly in our Whatsapp, Facebook etc. image shares. Essentially, we create a Canvas in the app, and let the user draw on the Canvas. 
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button  nbButton status="primary" outline="true" class="taskdownloadbtn">
+                                            <span style="flex: auto;color: #707070 !important;"> Document sent.pdf</span>
+                                            <nb-icon icon="download-outline"></nb-icon>
+                                            </button>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

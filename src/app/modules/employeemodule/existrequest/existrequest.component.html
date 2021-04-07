@@ -1,4 +1,6 @@
-<ngx-componentsheader pageName='Exit Request'>
+
+<ngx-componentsheader 
+ pageName='Exit Request'>
 </ngx-componentsheader>
 
 
@@ -14,36 +16,38 @@
                     developer</span>
             </div>
             <br>
-
-
+            
             <div>
                 <div class="d-flex mt-4" style="margin-left: 15px;">
                     <div class="mt-2">
-                        <i class="fas fa-users" style="color: blue;"></i>
+                    <img  style="height: 20px;" src="assets/icons/StaffID.jpg" alt="">
                     </div>
+                    <br>
                     <div class="ml-2">
-                        <h6 style="font-size: xx-small; font-weight: lighter;">Department</h6>
-                        <h6 style="font-size: x-small;">Product development</h6>
+                        <h6 style="font-size: xx-small; font-weight: lighter;">Staff Id</h6>
+                        <h6 style="font-size: x-small;">FGD234567</h6>
                     </div>
 
 
                 </div>
                 <div class="d-flex mt-4" style="margin-left: 15px;">
-                    <div class="mt-2">
-                        <i class="fas fa-envelope" style="color: blue;"></i>
+                    <div nbButton class="mt-2">
+                        <img src="assets/icons/Phone.jpg" style="height: 20px;" alt="">
                     </div>
+                    <br>
                     <div class="ml-2">
-                        <h6 style="font-size: xx-small; font-weight: lighter;">Email</h6>
-                        <h6 style="font-size: x-small;">sherif@smartace.ng</h6>
+                        <h6 style="font-size: xx-small; font-weight: lighter;">Phone</h6>
+                        <h6 style="font-size: x-small; font-weight: bold;">0808987663</h6>
                     </div>
                 </div>
                 <div class="d-flex mt-4" style="margin-left: 15px; padding-bottom: 10px;">
                     <div class="mt-2">
-                        <i style="margin-left: 9px;" class="fas fa-users" style="color: blue;"></i>
+                        <img src="assets/icons/department.jpg" style="height: 20px;" alt="">
                     </div>
+                    <br>
                     <div class="ml-2">
-                        <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Date of joining</h6>
-                        <h6 style="font-size: x-small; margin-left: 9px;">15th january,2021</h6>
+                        <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Department</h6>
+                        <h6 style="font-size: x-small; font-weight: bold; ">Product of Development</h6>
                     </div>
 
 
@@ -52,22 +56,37 @@
                 <div>
                     <div class="d-flex mt-4" style="margin-left: 15px;">
                         <div class="mt-2" style="font-weight: lighter;">
-                            <i class="fas fa-phone" style=" color: blue;"></i>
+                     <img style="height: 20px;" src="assets/icons/emailaddress.jpg" alt="">
                         </div>
+                        <br>
                         <div class="ml-2">
-                            <h6 style="font-size: xx-small; font-weight: lighter;">Phone Number</h6>
-                            <h6 style="font-size: x-small;">080891434128</h6>
+                            <h6 style="font-size: xx-small; font-weight: lighter;">Email address</h6>
+                            <h6 style="font-size: x-small; font-weight: bold;">sheriff@smartace.com</h6>
                         </div>
                     </div>
                     <div class="d-flex mt-4" style="margin-left: 15px;">
                         <div class="mt-2">
-                            <i class="fas fa-compass" style="color: blue;"></i>
+                            <img src="assets/icons/department.jpg" style="height: 20px;" alt="">
                         </div>
+                        <br>
                         <div class="ml-2">
-                            <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 5px;">Office Location
-                            </h6>
-                            <h6 style="font-size: x-small; margin-left: 5px;">Marina, Lekki, Lagos</h6>
+                            <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Date of joining</h6>
+                            <h6 style="font-size: x-small; font-weight: bold; ">15th/jan/2022</h6>
                         </div>
+
+                    </div>
+
+
+                    <div class="d-flex mt-4" style="margin-left: 15px;">
+                        <div class="mt-2">
+                            <img src="assets/icons/officelocation.jpg" style="height: 20px;" alt="">
+                        </div>
+                        <br>
+                        <div class="ml-2">
+                            <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Office location</h6>
+                            <h6 style="font-size: x-small; font-weight: bold; ">Marina,lekki.Lagos</h6>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -91,9 +110,9 @@
                     </nb-card-header>
 
                     <form>
+                       
                         <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Personal Email
-                                Address</label>
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For Retirement</label>
                             <div class="col-sm-8">
                                 <input type="text" nbInput fullWidth placeholder=" Enter Personal Email Address">
                             </div>
@@ -216,170 +235,412 @@
                     <br>
 
                 </nb-tab>
-                <nb-tab tabTitle="Exit Form">
+                <nb-tab tabTitle="Exit survey Form">
+                    <nb-card-header>
+                        <h6>Survey Form</h6>
+                        <p style="margin-top: 15px; font-size: small;">This form is to understand why you have decided to leave
+                            and for HR evaluation</p>
+                    </nb-card-header>
+        
+                    <br>
+        
+                    <form>
+        
+                        <div class="form-group row" style="margin-top: 15px;">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For
+                                Leaving</label>
+                            <div class="col-sm-8">
+                                <nb-radio-group [(ngModel)]="selectedOption" class="d-flex-column">
+                                    <nb-radio value="1">Higher Pay</nb-radio>
+                                    <nb-radio value="2">Insufficient Challenge</nb-radio>
+                                    <nb-radio value="2">Higher grade</nb-radio>
+                                    <nb-radio value="2">Others</nb-radio>
+        
+        
+                                </nb-radio-group>
+                                <input type="text" nbInput fullWidth placeholder="state Reason">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Why did you join smartace" class="label col-sm-4 col-form-label listsubheader">Why did
+                                you join smartace</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Why did you join smartace">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Why are you levaing" class="label col-sm-4 col-form-label listsubheader">Why are you
+                                leaving</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Enter why you are leaving">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Source of
+                                initiation</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Enter Source of initiation">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"> What will convince you
+                                to sta</label>
+                            <div class="col-sm-8">
+        
+                                <textarea rows="5" nbInput fullWidth placeholder="Enter What will convince you"></textarea>
+                            </div>
+        
+                        </div>
+        
+                        <div class="form-group row">
+                            <label for="Best and worst working experience with us"
+                                class="label col-sm-4 col-form-label listsubheader">Best and worst working experience with
+                                us</label>
+                            <div class="col-sm-8">
+        
+                                <textarea rows="5" nbInput fullWidth placeholder="Enter Additional comment here"></textarea>
+                            </div>
+        
+                        </div>
+        
+                        <hr>
+        
+        
+                        <br>
+        
+        
+        
+        
+                    </form>
+        
+        
+        
+                    <br>
+                    <nb-card-header>
+                        <p style="font-weight: bold;">New job acquisition(optional)</p>
+                    </nb-card-header>
+        
+                    <form style="margin-top: 15px;">
+        
+                        <div class="form-group row" style="margin-top: 15px;">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Select a job</label>
+                            <div class="col-sm-8">
+                                <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
+                                    <nb-radio value="1">yes</nb-radio>
+                                    <nb-radio value="2">No</nb-radio>
+        
+                                </nb-radio-group>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="New Employee Name" class="label col-sm-4 col-form-label listsubheader">New Employee
+                                Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Company New Employee Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Contact number" class="label col-sm-4 col-form-label listsubheader">Contact
+                                number</label>
+                            <div class="col-sm-8">
+                                <input type="number" nbInput fullWidth placeholder="Enter Contact number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Pay" class="label col-sm-4 col-form-label listsubheader">Pay</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Pay">
+                            </div>
+                        </div>
+        
+                        <div class="form-group row">
+                            <label for="Location" class="label col-sm-4 col-form-label listsubheader">Location</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Enter Location">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"></label>
+                            <div class="col-sm-8">
+                                <div class="d-flex">
+                                    <div style="margin-top: 19px;">
+                                        <img style="height: 20px;" src="assets/icons/warning.jpg" alt="">
+                                    </div>
+                                    <div style="margin-top: 10px; margin-left: 10px; font-weight: bold;">
+                                        <p style="font-weight: bold;">please note that once you submit and its approved by Exit
+                                            team.</p>
+                                        <p style="font-weight: bold;margin-top: -9px;"> it cannot be reverted</p>
+                                    </div>
+        
+                                </div>
+                            </div>
+                        </div>
+        
+                        <br>
+        
+        
+                        <div class="form-group row">
+                            <div class="col-md-4" style="display: flex;align-items:center">
+        
+                            </div>
+                            <div class="col-md-8 col-xxl-8 ">
+        
+                                <div class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
+        
+                                    <button nbButton status="primary" class="d-flex column">Submit</button>
+                                    <button nbButton outline status="primary" class="d-flex column"
+                                        style="background-color: white; margin-left: 10px;">Rejected</button>
+        
+                                </div>
+        
+                            </div>
+                        </div>
+        
+        
+        
+                    </form>
+        
+                </nb-tab>
+
+                <nb-tab tabTitle="Clearance Form">
+
+                    <nb-card-header>
+                        <h6>Document Clearance </h6>
+                        <p style="margin-top: 15px; font-size: small;">Changes on this page has been filled
+                            by exit team.Notifications will be sent to them via once update is made
+                        </p>
+                    </nb-card-header>
+
+                    <br>
+
+
+                    <form>
+
+
+                        <div class="form-group">
+
+                            <nb-checkbox status="primary" (checkedChange)="toggle($event)">Employee has returned office
+                                laptop</nb-checkbox>
+
+                        </div>
+                        <div class="form-group">
+
+                            <nb-checkbox (checkedChange)="toggle($event)">Employee has returned USB drives and MiFi
+                                device</nb-checkbox>
+
+                        </div>
+                        <div class="form-group">
+
+                            <nb-checkbox (checkedChange)="toggle($event)">Employee has transfer up all files to the
+                                supervisor's drive</nb-checkbox>
+
+                        </div>
+                        <div class="form-group">
+
+                            <nb-checkbox (checkedChange)="toggle($event)">Employee has returned ID card</nb-checkbox>
+
+                        </div>
+
+
+                        <div class="form-group row" style="margin-top: 5rem;">
+                            <label for="New Employee Name" class="label col-sm-4 col-form-label listsubheader">
+                                Add additional comment</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Tests" style="font-weight: bold;">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Contact number"
+                                class="label col-sm-4 col-form-label listsubheader">Attachment</label>
+                            <div class="col-sm-8">
+                                <div
+                                    style="display: flex;flex-direction: row; justify-content: space-between;border: 1px solid rgb(0, 60, 255)  ; padding: 0.5rem; border-radius: 5px;">
+                                    <div class="d-flex">
+                                        <i class="fas fa-file-pdf" style="color: red; "></i>
+                                       <span style="margin-left: 2rem;  font-weight: bold;"> Clearance Attachment</span>
+                                    </div>
+                                    <div >
+                                        <a href="">view all</a>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+                        <hr>
+
+
+                        <br>
+
+
+
+
+                    </form>
+
+
+                    <nb-card-header>
+                        <h6>Finacial Clearance </h6>
+                        <p style="margin-top: 15px; font-size: small;">Changes on this page has been filled
+                            by exit team.Notifications will be sent to them via once update is made
+                        </p>
+                    </nb-card-header>
+
+                    <form>
+
+
+                        <div class="form-group">
+
+                            <nb-checkbox status="primary" (checkedChange)="toggle($event)">Outstanding fees has been
+                                paid
+                                to employee
+                            </nb-checkbox>
+
+                        </div>
+                        <div class="form-group">
+
+                            <nb-checkbox (checkedChange)="toggle($event)">Employee has been removed from system's
+                                payroll</nb-checkbox>
+
+                        </div>
+                        <div class="form-group">
+
+                            <nb-checkbox (checkedChange)="toggle($event)">All benefits has been forwarded to employee
+                            </nb-checkbox>
+
+                        </div>
+                        <div class="form-group">
+
+                            <nb-checkbox (checkedChange)="toggle($event)">All finacial statement has been accounted for
+                            </nb-checkbox>
+
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group row" style="margin-top: 5rem;">
+                            <label for="New Employee Name" class="label col-sm-4 col-form-label listsubheader">
+                                Add additional comment</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Tests" style="font-weight: bold;">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Contact number"
+                                class="label col-sm-4 col-form-label listsubheader">Attachment</label>
+                            <div class="col-sm-8">
+                                <div
+                                    style="display: flex;flex-direction: row; justify-content: space-between;border: 1px solid rgb(0, 60, 255)  ; padding: 0.5rem; border-radius: 5px;">
+                                    <div class="d-flex">
+                                        <i class="fas fa-file-pdf" style="color: red; "></i>
+                                       <span style="margin-left: 2rem;  font-weight: bold;"> Clearance Attachment</span>
+                                    </div>
+                                    <div >
+                                        <a href="">view all</a>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+                        <hr>
+
+
+                        <br>
+
+
+
+
+                    </form>
+
+
+
+
+                    <nb-card-header>
+                        <h6>Other Clearance </h6>
+                        <p style="margin-top: 15px; font-size: small;">Changes on this page has been filled
+                            by exit team.Notifications will be sent to them via once update is made
+                        </p>
+                    </nb-card-header>
+                    <form>
+
+
+                        <div class="form-group">
+
+                            <nb-checkbox status="primary" (checkedChange)="toggle($event)">Employee has had exit
+                                interview meeting with HR</nb-checkbox>
+
+                        </div>
+
+
+
+
+
+                        <div class="form-group row" style="margin-top: 5rem;">
+                            <label for="New Employee Name" class="label col-sm-4 col-form-label listsubheader">
+                                Add additional comment</label>
+                            <div class="col-sm-8">
+                                <input type="text" nbInput fullWidth placeholder="Tests" style="font-weight: bold;">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Contact number"
+                                class="label col-sm-4 col-form-label listsubheader">Attachment</label>
+                            <div class="col-sm-8">
+                                <div
+                                    style="display: flex;flex-direction: row; justify-content: space-between;border: 1px solid rgb(0, 60, 255)  ; padding: 0.5rem; border-radius: 5px;">
+                                    <div class="d-flex">
+                                        <i class="fas fa-file-pdf" style="color: red; "></i>
+                                       <span style="margin-left: 2rem;  font-weight: bold;"> Clearance Attachment</span>
+                                    </div>
+                                    <div >
+                                        <a href="">view all</a>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </form>
+
+                    <button nbButton status="primary" class="d-flex column">Authorized</button>
+
+                    <hr>
+                    <br>
+
+
+
+                    <br>
+                  
+
+
+
 
                 </nb-tab>
 
 
             </nb-tabset>
 
-            <nb-card-header>
-                <h6>Survey Form</h6>
-                <p style="margin-top: 15px; font-size: small;">This form is to understand why you have decided to leave
-                    and for HR evaluation</p>
-            </nb-card-header>
-
-            <br>
-
-            <form>
-
-                <div class="form-group row" style="margin-top: 15px;">
-                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For
-                        Leaving</label>
-                    <div class="col-sm-8">
-                        <nb-radio-group [(ngModel)]="selectedOption" class="d-flex-column">
-                            <nb-radio value="1">Higher Pay</nb-radio>
-                            <nb-radio value="2">Insufficient Challenge</nb-radio>
-                            <nb-radio value="2">Higher grade</nb-radio>
-                            <nb-radio value="2">Others</nb-radio>
-
-
-                        </nb-radio-group>
-                        <input type="text" nbInput fullWidth placeholder="state Reason">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="Why did you join smartace" class="label col-sm-4 col-form-label listsubheader">Why did
-                        you join smartace</label>
-                    <div class="col-sm-8">
-                        <input type="text" nbInput fullWidth placeholder="Why did you join smartace">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="Why are you levaing" class="label col-sm-4 col-form-label listsubheader">Why are you
-                        leaving</label>
-                    <div class="col-sm-8">
-                        <input type="text" nbInput fullWidth placeholder="Enter why you are leaving">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Source of
-                        initiation</label>
-                    <div class="col-sm-8">
-                        <input type="text" nbInput fullWidth placeholder="Enter Source of initiation">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"> What will convince you
-                        to sta</label>
-                    <div class="col-sm-8">
-
-                        <textarea rows="5" nbInput fullWidth placeholder="Enter What will convince you"></textarea>
-                    </div>
-
-                </div>
-
-                <div class="form-group row">
-                    <label for="Best and worst working experience with us"
-                        class="label col-sm-4 col-form-label listsubheader">Best and worst working experience with
-                        us</label>
-                    <div class="col-sm-8">
-
-                        <textarea rows="5" nbInput fullWidth placeholder="Enter Additional comment here"></textarea>
-                    </div>
-
-                </div>
-
-                <hr>
-
-
-                <br>
-
-
-
-
-            </form>
-
-
-
-            <br>
-            <nb-card-header>
-                <p style="font-weight: bold;">New job acquisition(optional)</p>
-            </nb-card-header>
-
-            <form style="margin-top: 15px;">
-
-                <div class="form-group row" style="margin-top: 15px;">
-                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Select a job</label>
-                    <div class="col-sm-8">
-                        <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
-                            <nb-radio value="1">yes</nb-radio>
-                            <nb-radio value="2">No</nb-radio>
-
-                        </nb-radio-group>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="New Employee Name" class="label col-sm-4 col-form-label listsubheader">New Employee
-                        Name</label>
-                    <div class="col-sm-8">
-                        <input type="text" nbInput fullWidth placeholder="Company New Employee Name">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="Contact number" class="label col-sm-4 col-form-label listsubheader">Contact
-                        number</label>
-                    <div class="col-sm-8">
-                        <input type="number" nbInput fullWidth placeholder="Enter Contact number">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="Location" class="label col-sm-4 col-form-label listsubheader">Location</label>
-                    <div class="col-sm-8">
-                        <input type="text" nbInput fullWidth placeholder="Enter Location">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"></label>
-                    <div class="col-sm-8">
-                        <div class="d-flex">
-                            <div style="margin-top: 19px;">
-                                <img style="height: 20px;" src="assets/icons/warning.jpg" alt="">
-                            </div>
-                            <div style="margin-top: 10px; margin-left: 10px; font-weight: bold;">
-                                <p style="font-weight: bold;">please note that once you submit and its approved by Exit
-                                    team.</p>
-                                <p style="font-weight: bold;margin-top: -9px;"> it cannot be reverted</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-
-
-                <div class="form-group row">
-                    <div class="col-md-4" style="display: flex;align-items:center">
-
-                    </div>
-                    <div class="col-md-8 col-xxl-8 ">
-
-                        <div class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
-
-                            <button nbButton status="primary" class="d-flex column">Submit</button>
-                            <button nbButton outline status="primary" class="d-flex column"
-                                style="background-color: white; margin-left: 10px;">Go back</button>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-            </form>
-
+            
         </nb-card-body>
 
     </nb-card>

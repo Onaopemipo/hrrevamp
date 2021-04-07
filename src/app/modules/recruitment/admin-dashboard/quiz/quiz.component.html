@@ -1,0 +1,261 @@
+<ngx-componentsheader actions="actions" [pageName]="pagetitle" [requiredButton]="[{name:'newQuiz', label:'Create New', icon: 'plus'}]" (buttonClick)="addQuiz()"></ngx-componentsheader>
+<nb-tabset style="background-color: #ffffff; padding: 10px;">
+  <nb-tab tabTitle="Roles">
+    <ngx-tableheader></ngx-tableheader>
+    <div class="row">
+      <div class="col-xxxl-4 col-md-4" >
+        <nb-card style="border-left: 5px solid blue;">
+          <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+             <div style="display: flex; flex-direction: column;">
+               <div style="display: flex; flex-direction: column;">
+                 <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+                 <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+               </div>
+
+             </div>
+             <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+             </div>
+          </div>
+        </nb-card>
+     </div>
+      <!-- <div class="col-xxxl-4 col-md-4" >
+        <nb-card style="border-left: 5px solid red;">
+          <div style="display: flex; flex-direction: column; justify-content: space-between; align-content: center; padding: 20px;">
+             <div>
+               <div style="display: flex; flex-direction: column;">
+                 <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+                 <span>Aptitude <i class="fas fa-circle" style="align-self: center; font-size: 6px; text-align: center; padding: 3px; color: #95A8B8;"></i><span class="smalltext" style="color: #6C757D;">50 Questions</span></span>
+               </div>
+
+             </div>
+             <div style="align-content: flex-end; padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+             </div>
+          </div>
+        </nb-card>
+     </div> -->
+      <!-- <div class="col-xxxl-4 col-md-4">
+         <nb-card style="border-left: 5px solid yellow;">
+           <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+                <div style="display: flex; flex-direction: column; align-self: flex-start;">
+                  <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+                  <span class="smalltext" style="color: #6C757D;">127 Applicants</span>
+                </div>
+           </div>
+           <div class="row" style="display: flex; justify-content: flex-end; padding: 20px;"><button class="col-md-2" nbButton size="small" style="color: #4847E0;">View</button>
+           </div>
+         </nb-card>
+      </div> -->
+
+      <div class="col-xxxl-4 col-md-4" >
+        <nb-card style="border-left: 5px solid red;">
+          <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+             <div style="display: flex; flex-direction: column;">
+               <div style="display: flex; flex-direction: column;">
+                 <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+                 <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+               </div>
+
+             </div>
+             <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+             </div>
+          </div>
+        </nb-card>
+     </div>
+
+      <div class="col-xxxl-4 col-md-4" >
+        <nb-card style="border-left: 5px solid green;">
+          <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+             <div style="display: flex; flex-direction: column;">
+               <div style="display: flex; flex-direction: column;">
+                 <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+                 <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+               </div>
+
+             </div>
+             <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+             </div>
+          </div>
+        </nb-card>
+     </div>
+    </div>
+<!-- <div class="row" style="display: flex; justify-content: space-around; align-items: center;">
+  <nb-card>
+    <nb-card-body style="display: flex; flex-direction: column;">
+      <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+      <span class="smalltext" style="color: #6C757D;">127 Applicants</span>
+    </nb-card-body>
+    <div style="padding: 20px; justify-content: flex-end;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+    </div>
+  </nb-card>
+
+  <nb-card>
+    <nb-card-header>Technical Support</nb-card-header>
+  </nb-card>
+
+  <nb-card>
+    <nb-card-header>Technical Support</nb-card-header>
+  </nb-card>
+</div> -->
+
+<div class="row">
+  <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid blue;">
+      <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+         <div style="display: flex; flex-direction: column;">
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+           </div>
+
+         </div>
+         <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div>
+  <!-- <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid red;">
+      <div style="display: flex; flex-direction: column; justify-content: space-between; align-content: center; padding: 20px;">
+         <div>
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude <i class="fas fa-circle" style="align-self: center; font-size: 6px; text-align: center; padding: 3px; color: #95A8B8;"></i><span class="smalltext" style="color: #6C757D;">50 Questions</span></span>
+           </div>
+
+         </div>
+         <div style="align-content: flex-end; padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div> -->
+  <!-- <div class="col-xxxl-4 col-md-4">
+     <nb-card style="border-left: 5px solid yellow;">
+       <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+            <div style="display: flex; flex-direction: column; align-self: flex-start;">
+              <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+              <span class="smalltext" style="color: #6C757D;">127 Applicants</span>
+            </div>
+       </div>
+       <div class="row" style="display: flex; justify-content: flex-end; padding: 20px;"><button class="col-md-2" nbButton size="small" style="color: #4847E0;">View</button>
+       </div>
+     </nb-card>
+  </div> -->
+
+  <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid red;">
+      <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+         <div style="display: flex; flex-direction: column;">
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+           </div>
+
+         </div>
+         <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div>
+
+  <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid green;">
+      <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+         <div style="display: flex; flex-direction: column;">
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+           </div>
+
+         </div>
+         <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div>
+</div>
+
+<div class="row">
+  <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid blue;">
+      <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+         <div style="display: flex; flex-direction: column;">
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+           </div>
+
+         </div>
+         <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div>
+  <!-- <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid red;">
+      <div style="display: flex; flex-direction: column; justify-content: space-between; align-content: center; padding: 20px;">
+         <div>
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude <i class="fas fa-circle" style="align-self: center; font-size: 6px; text-align: center; padding: 3px; color: #95A8B8;"></i><span class="smalltext" style="color: #6C757D;">50 Questions</span></span>
+           </div>
+
+         </div>
+         <div style="align-content: flex-end; padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div> -->
+  <!-- <div class="col-xxxl-4 col-md-4">
+     <nb-card style="border-left: 5px solid yellow;">
+       <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+            <div style="display: flex; flex-direction: column; align-self: flex-start;">
+              <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+              <span class="smalltext" style="color: #6C757D;">127 Applicants</span>
+            </div>
+       </div>
+       <div class="row" style="display: flex; justify-content: flex-end; padding: 20px;"><button class="col-md-2" nbButton size="small" style="color: #4847E0;">View</button>
+       </div>
+     </nb-card>
+  </div> -->
+
+  <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid red;">
+      <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+         <div style="display: flex; flex-direction: column;">
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+           </div>
+
+         </div>
+         <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div>
+
+  <div class="col-xxxl-4 col-md-4" >
+    <nb-card style="border-left: 5px solid green;">
+      <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
+         <div style="display: flex; flex-direction: column;">
+           <div style="display: flex; flex-direction: column;">
+             <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
+             <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+           </div>
+
+         </div>
+         <div style="padding: 20px;"><span style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</span>
+         </div>
+      </div>
+    </nb-card>
+ </div>
+</div>
+</nb-tab>
+
+
+  <!-- Candidates Tab -->
+  <nb-tab tabTitle="Candidates">
+    <ngx-tableheader></ngx-tableheader>
+    <!-- <ngx-tablecomponent [tableColum]=""></ngx-tablecomponent> -->
+  </nb-tab>
+ </nb-tabset>

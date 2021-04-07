@@ -10,12 +10,12 @@
 }
 
 .my-modal{
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     height: 100vh;
     width: 100vw;
-    background-color: #ff01;
+    background-color:rgba(0, 0, 0, 0.3);
     display: flex;
     transition-property: visibility;
     transition-duration: 1s;
@@ -25,6 +25,7 @@
 
 .modal-p{
     transition: display 5s 5s;
+    padding-bottom: 2rem;
 }
 
 .hide-modal{
@@ -45,8 +46,20 @@
 .show-modal > .modal-p{
     width: 30vw;
 }
+
+.show-modal > .modal-p.center{
+    width: max-content;
+    max-width: 70vw;
+    max-height: 70vh;
+    overflow: scroll;
+}
+
 .modal-p{
     transition: width 2s;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    background: white;
 }
 
 .header{
@@ -73,4 +86,17 @@ div::-webkit-scrollbar-track {
 div::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
+}
+
+.full-page{
+    position: absolute;
+    width: 100%;
+    display: block;
+    opacity: 1;
+    background-color: #edf1f7;
+}
+
+.full-page > .modal-p{
+    width: 100%;
+    //TODO fix issue
 }

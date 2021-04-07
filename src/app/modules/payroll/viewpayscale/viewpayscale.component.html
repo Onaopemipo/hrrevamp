@@ -1,0 +1,48 @@
+<ngx-componentsheader pageName='View Pay Scale' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
+
+
+
+
+
+
+<nb-card style="margin-top: 3rem;">
+    <nb-card-body>
+
+
+        <form>
+            <div class="form-group row" *ngFor="let i of [0,1,2]">
+                <label for="Institution Name" class="label col-sm-4 col-form-label listsubheader">Scale Name</label>
+                <div class="col-sm-8">
+                    <p>Test</p>
+                </div>
+            </div>
+ 
+            
+
+
+            <ngx-componentsheader pageName='Employee on Payscale' style="margin-top: -7rem;"></ngx-componentsheader>
+
+        </form>
+
+    </nb-card-body>
+
+
+
+    <ngx-tableheader></ngx-tableheader>
+    <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+    <div class="form-group row" style="margin-top: 2rem; margin-bottom: 1rem;">
+        <label for="Account Number" class="label col-sm-4 col-form-label listsubheader"></label>
+        <div class="col-sm-8 d-flex">
+            <button nbButton status="primary" class="d-flex column">Save</button>
+            <button nbButton outline status="danger" class="d-flex column"
+                style="background-color: white; margin-left: 2rem;">Delete</button>
+                <button nbButton outline status="primary" class="d-flex column"
+                style="background-color: white; margin-left: 2rem; border: none;" >Cancel</button>
+           
+
+
+        </div>
+    </div>
+</nb-card>

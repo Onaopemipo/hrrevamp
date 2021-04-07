@@ -1,0 +1,113 @@
+<ngx-componentsheader *ngIf="!newPlan"  (buttonClick)="addPlan()"
+  pageName='Succession Plans'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newPlan" pageName='Career Succession Plan'></ngx-componentsheader>
+<!-- [requiredButton]="[{name:'plan', label:''}]" -->
+<div style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
+</div>
+<div *ngIf="!newPlan">
+  <nb-card>
+    <nb-card-body>
+      <!-- {{data|json}} -->
+      <ngx-tableheader></ngx-tableheader>
+      {{loading}}
+      <ngx-tablecomponent [loading]='loading' [tableColum]="successionTable" [userData]='data' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="newPlan">
+  <nb-card>
+    <nb-card-body>
+  
+      <nb-card>
+        
+
+        <nb-card>
+          <nb-card-header>Employee Information</nb-card-header>
+          <nb-card-body>
+              <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+                <div class="col-md">
+                  <img src="assets/icons/department.jpg" style="width:3rem;">
+                </div>
+      
+                <div class="col-md-11">
+                  <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
+                      <div class="col-md-4 col-lg-4 col-sm-6">
+                          <span style="font-weight: 600; padding-right:25px;">Name:</span><span>Dami Ogunmola</span>
+                        </div>
+      
+                        <div class="col-md-4 col-lg-4 col-sm-6">
+                          <span style="font-weight: 600; padding-right:25px;">Department:</span><span>Marketing</span>
+                        </div>
+      
+                        <div class="col-md-4 col-lg-4 col-sm-6">
+                          <span style="font-weight: 600; padding-right:25px;">Level:</span><span>Grade 14</span>
+                        </div>
+                      </div>
+      
+                      <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div class="col-md-4 col-lg-4 col-sm-6">
+                            <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>Managing Director</span>
+                          </div>
+      
+                          <div class="col-md-4 col-lg-4 col-sm-6">
+                            <span style="font-weight: 600; padding-right:25px;">Unit/Division:</span><span>Sales</span>
+                          </div>
+      
+                          <div class="col-md-4 col-lg-4 col-sm-6">
+                            <span style="font-weight: 600; padding-right:25px;">Location:</span><span>Lagos</span>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+          </nb-card-body>
+        </nb-card>
+  
+        <nb-card>
+          <nb-card-body>
+            <!-- <h6>Job title and Department details</h6> -->
+            <form>
+              <div class="form-group row mydiv">
+                <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" class="form-control" id="jobTitle" placeholder="Plan Title">
+                </div>
+              </div>
+  
+              <div class="form-group row mydiv">
+                <label for="Title" class="col-sm-3 col-form-label mylabel">Purpose</label>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" class="form-control" id="jobTitle" placeholder="Plan Title">
+                </div>
+              </div>
+  
+              <div class="form-group row">
+                <label class="col-sm-8 col-form-label" style="font-weight: bold;"></label>
+                <div class="col-sm-4" style="display: flex; flex-wrap:wrap ;">
+                  <div>
+                    <button nbButton status="primary">Create</button>
+                    <span style="padding: 8px;"></span>
+                    <button nbButton style="color: #4847E0;">Modify Plan</button>
+                  </div>
+  
+                </div>
+              </div>
+  
+            </form>
+          </nb-card-body>
+        </nb-card>
+  
+        <nb-card>
+          <nb-card-body>
+            <ngx-componentsheader pageName='Successors' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+            </ngx-componentsheader>
+            <ngx-tablecomponent [userData]='data' [tableColum]="tableColumn" [actions]='tableActions'
+              (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+          </nb-card-body>
+        </nb-card>
+      </nb-card>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+

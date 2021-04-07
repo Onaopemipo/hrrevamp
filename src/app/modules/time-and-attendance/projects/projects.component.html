@@ -1,0 +1,64 @@
+<ngx-componentsheader [pageName]="title"></ngx-componentsheader>
+<nb-card >
+    <nb-card-body>
+
+        <nb-tabset>
+            <nb-tab tabTitle="Approved">
+                <ngx-tableheader></ngx-tableheader>
+
+                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+            </nb-tab>
+            <nb-tab tabTitle="Pending">
+                <ngx-tableheader></ngx-tableheader>
+
+                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+            </nb-tab>
+
+            <nb-tab tabTitle="Rejected">
+                <ngx-tableheader></ngx-tableheader>
+
+                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+            </nb-tab>
+        </nb-tabset>
+     
+    </nb-card-body>
+
+
+</nb-card>
+
+
+<ngx-side-modal [(show)]='showcreatenewProjectModal' style="width: 500px; height: 1000px;">
+    <div modal-header>Create New Project</div>
+    <div modal-body>
+        <form action="">
+
+
+            <div class="form-group">
+                <label for="ProjectName" style="font-size: small;font-weight: bold;">Project Name:</label>
+                <input type="text" class="form-control" placeholder="Project Name" id="ProjectName">
+            </div>
+
+            <div class="form-group">
+                <label for="Comment" style="font-size: small;font-weight: bold;">Description:</label>
+                <textarea class="form-control" rows="5" placeholder="Enter Description" id="Description"></textarea>
+            </div>
+
+
+
+            <!--<label>Checked:</label> {{ checked }}-->
+
+
+        </form>
+    </div>
+
+
+
+    <div modal-actions class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
+
+        <button nbButton status="primary" class="d-flex column">Submit and Add Task</button>
+        <button nbButton outline status="primary" class="d-flex column"
+            style="background-color: white;">Discard</button>
+
+    </div>
+    <div style="margin-top: 10px;"></div>
+</ngx-side-modal>

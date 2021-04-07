@@ -1,0 +1,77 @@
+
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<nb-card>
+    <nb-card-body>
+        <ngx-default-content
+        *ngIf="showEmpty"
+        pageHeader="Create your first Leave Year"
+        pageDescription="Click on the button to create a Leave Year"
+        buttonValue="Create Leave Year"
+        [loading]="loading"
+        (buttonClick)="modal('add_leave_year')"
+      >
+      </ngx-default-content>
+        <ngx-tablecomponent  
+        *ngIf="!showEmpty"
+        (filterChange)="filterUpdated($event)"
+        [showActions]="true"
+        [showFilter]="true"
+        (actionClick)="tableActionClicked($event)"
+        [actions]="tableActions" 
+        [userData]="LeaveYear" 
+        [tableColum]="tableColumns"
+        [totalItems]="totalItems"
+        [currentPage]="currentPage"
+        [loading]="loading"
+        >
+    </ngx-tablecomponent>
+        
+        <ngx-side-modal [(show)]='showLeaveYearModal' style="width: 500px; height: 1000px;">
+            <div modal-header>Add Leave Year</div>
+            <div modal-body>
+                <form #leavYearForm="ngForm" name="leavYearForm" id="leavYearForm">
+                    <div class="form-group">
+                        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Leave Year Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter Leave Year Name" name="yearName" #yearName="ngModel" [(ngModel)]="newleaveYear.yearName" required>
+                        <div *ngIf="yearName.invalid && (yearName.dirty || yearName.touched)" class="error">
+                          <div *ngIf="yearName.errors.required">Leave Year name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
+                        <ngx-date [(value)]='newleaveYear.yearStartDate' [max]="newleaveYear.yearEndDate" #yearStartDate name="yearEndDate" id="yearEndDate"></ngx-date>
+                       
+                        <div *ngIf="!validateStartdate" class="error">
+                            <div>Leave Year Start Date is required</div>
+                        </div>
+                      </div>
+                      <div class="form-group" >
+                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
+                        <ngx-date [(value)]='newleaveYear.yearEndDate' #yearEndDate [min]="newleaveYear.yearStartDate" name="yearEndDate" id="yearEndDate"></ngx-date>
+                        <div *ngIf="!validateEnddate" class="error">
+                            <div>Leave Year End Date is required</div>
+                        </div>
+                      </div>
+        
+                      <div class="form-group">
+                        <nb-checkbox status="primary"  name="isActiveYear" #isActiveYear="ngModel" [(ngModel)]="newleaveYear.isActiveYear">Active</nb-checkbox>
+                      </div>                      
+                </form>
+            </div>
+            <div modal-actions class="d-flex" style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
+                <button *ngIf="!submitbtnPressed" [disabled]="!formvalidate" nbButton status="primary" (click)="createleaveYear()" class="d-flex column"><span *ngIf="!modificationStatus">Submit</span>
+                <span *ngIf="modificationStatus">Modify</span>
+                </button>
+                <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+                <button nbButton outline status="primary" (click)="showLeaveYearModal = false" class="d-flex column"
+                  style="background-color: white;">Discard</button>
+            </div>
+            <div style="margin-top: 10px;"></div>
+        </ngx-side-modal>
+        
+        
+    </nb-card-body>
+</nb-card>

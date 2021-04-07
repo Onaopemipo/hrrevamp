@@ -1,0 +1,4 @@
+<button nbButton status='primary' [disabled]="disabled">
+    <ng-content *ngIf="!loading"></ng-content>
+    <span *ngIf="loading"><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing...</span>
+</button>

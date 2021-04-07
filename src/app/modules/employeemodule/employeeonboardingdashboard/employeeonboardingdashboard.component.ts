@@ -10,11 +10,11 @@ export class EmployeeonboardingdashboardComponent implements OnInit {
   title: string = 'Employee Onboarding';
   customizePieOption: any = {};
   lineOption: any = {};
-  
+
   rbutton = [
     { name: 'bulk_upload', label: 'Bulk Upload', icon: '', outline: true },
     { name: 'new_employee', label: 'New Employee', icon: 'plus', outline: false },
-    
+
   ];
   constructor(private router: Router) { }
   ngAfterViewInit() {
@@ -52,12 +52,12 @@ export class EmployeeonboardingdashboardComponent implements OnInit {
                   {value: 40, name: 'Finance'},
                   {value: 32, name: 'HR'},
                   {value: 28, name: 'Engineering'},
-                 
+
               ]
           }
       ]
     };
-    
+
     this.lineOption = {
       color: ['#4847E0'],
       tooltip: {
@@ -70,7 +70,7 @@ export class EmployeeonboardingdashboardComponent implements OnInit {
         type: 'category',
         splitLine: {
           show: true
-      },       
+      },
           data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       },
       yAxis: {
@@ -86,25 +86,25 @@ export class EmployeeonboardingdashboardComponent implements OnInit {
       }
       },
       series: [{
-          data: [820, 932, 901, 934, 1290, 1330, 1320,350,500,1500,2000,1000],
+          data: [820, 932, 901, 934, 1290, 1330, 1320, 350, 500, 1500, 2000, 1000],
           type: 'line',
         smooth: true,
         showSymbol: false,
       }]
   };
   }
-  
+
   pageActionClicked(page) {
     if (page == 'new_employee') {
-   this.router.navigate(['/employeemodule/employeeonboarding'])
-    } 
+   this.router.navigate(['/employeemodule/employeeonboarding']);
+    }
     if (page == 'bulk_upload') {
     //  this.bulkuploadServices.openbulkUploadModal();
- 
-       } 
+
+       }
   }
   getuploadedfiles(event) {
-    console.log(event)
+    console.log(event);
   }
 
   ngOnInit(): void {

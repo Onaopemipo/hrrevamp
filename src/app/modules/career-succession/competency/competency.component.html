@@ -1,0 +1,204 @@
+<ngx-componentsheader *ngIf="!newRole" pageName='Competency'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newRole && selectedCase=='Role_Details'" [requiredButton]="[{name:'newRole', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newRole && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
+
+<div *ngIf="!newRole" style="background-color: #ffffff;">
+  <nb-card style="min-height: 100vh; display: flex; flex-direction: row; align-content: center;
+  align-self: center; align-items: center; justify-content:center;">
+    <nb-card-body>
+      <div><br>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
+          (buttonClick)="addNewRole()"></ngx-default-content>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+</div>
+
+<div *ngIf="newRole" class="row">
+  <div class="col-lg-3 col-md-3 col-xxl-3">
+    <nb-card>
+    <div>
+        <div #linklist style="display: flex;flex-direction: column;" *ngFor="let rolelist of competencyChecklist; let i = index">
+
+        <div (click)="selectPanel(rolelist,i)" [ngClass]="{'wizardlistactive': rolelist.status == 'Active','wizardlistinactive': rolelist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
+        <div style="padding-left: 1rem;"><nb-icon icon="checkmark-circle-2" status="{{rolelist.status == 'Active'? 'primary': 'none'}}"></nb-icon></div>
+        <div style="padding-left: 0.625rem;"><span [ngClass]="{'listtextActive': rolelist.status == 'Active','listtextInactive': rolelist.status != 'Active'}" >{{rolelist.label}} </span> </div>
+        </div>
+
+      </div>
+    </div>
+
+    </nb-card>
+    </div>
+
+  <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
+    <div  class="fmContainer" style="background-color: transparent;">
+      <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
+        <nb-card>
+        <nb-card-header>
+          <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <span>Applied</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+          </div>
+        </nb-card-header>
+        <nb-card-body *ngIf="cardClick=='applied'">
+          <h4>I am here</h4>
+        </nb-card-body>
+      </nb-card>
+
+        <nb-card>
+            <nb-card-body>
+              <form>
+                <span class="title" *ngIf="selectedCase=='Role_Details'">Add a Role</span>
+                <span class="title" *ngIf="selectedCase=='Cadre'">Add a Cadre</span>
+                <div class="form-group row mydiv">
+                  <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" name="roleName" #roleName="ngModel" placeholder="Role Name">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" name="roleDescription" #roleDescription="ngModel" placeholder="Descripion">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="department" #department="ngModel" required>
+                      <option value="">Select </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+
+                <span class="title">Unit/Division</span>
+                <div class="form-group row mydiv">
+                  <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="unit" #unit="ngModel"  required>
+                      <option value="">Select </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Region" class="col-sm-3 col-form-label mylabel">Level</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="level" #level="ngModel" required>
+                      <option value="">Select </option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
+
+                <span class="title">Qualification</span>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  </div>
+                </div>
+
+                <span class="title">Certifications</span>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" name="certTitle" #certTitle="ngModel" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  </div>
+                </div>
+
+                <span class="title">Skills</span>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" name="skillTitle" #skillTitle="ngModel" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" name="title" #title="ngModel" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  </div>
+                </div>
+
+                <span class="title">Abilities</span>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" name="abilityTitle" #abilityTitle="ngModel" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row mydiv">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  </div>
+                </div>
+              </form>
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+    </div>
+  </div>
+</div>
+

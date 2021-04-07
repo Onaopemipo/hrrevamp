@@ -1,5 +1,8 @@
+<ngx-tableheader *ngIf="showFilter" [filterFields]="tableColum" (filterDataChange)="filterUpdated($event)">
+</ngx-tableheader>
+
 <div class="table-responsive">
-  <table class="table table-hover">
+  <table class="table table-hover" [class]="{'table-2': table2}">
     <thead>
       <tr>
         <th *ngIf="showCheckBox"></th>
@@ -8,9 +11,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngIf="loading">
-        <td colspan="1000">Loading......</td>
-      </tr>
       <ng-container *ngIf="!loading">
         <tr *ngFor="let data of userData; let i = index">
           <td *ngIf="showCheckBox">
@@ -19,26 +19,34 @@
             </div>
           </td>
           <td *ngFor="let col of tableColum">
-            <span *ngIf="col.type === COLUMN_TYPES.Text">{{ data[col.name] }}</span>
+            <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === NULL">{{ data[col.name] }}</span>
             <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
             <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
+            <span *ngIf="col.type === COLUMN_TYPES.Link">
+              <button nbButton status='primary' outline
+                style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
+                (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
+            </span>
           </td>
           <td *ngIf="showActions">
             <ng-template #card>
               <div class="row">
                 <div class="col-sm-12">
                   <nb-list>
-                    <nb-list-item *ngFor="let act of actions">
+                    <nb-list-item *ngFor="let act of actions" (click)='customActionClicked(act, data)' style="cursor: pointer;">
                       {{ act.label }}
                     </nb-list-item>
                   </nb-list>
                 </div>
               </div>
             </ng-template>
-            <button nbButton status="primary" [nbPopover]="card">
-              Actions &nbsp;<nb-icon
-                icon="arrow-ios-downward-outline"
-              ></nb-icon>
+            <button nbButton outline status="primary" [nbPopover]="card" style="
+                min-width: unset !important;
+                background: transparent;
+                border: none;
+                padding: 0px;
+              ">
+              <nb-icon icon="more-horizontal-outline"></nb-icon>
             </button>
           </td>
         </tr>
@@ -48,12 +56,8 @@
         <td colspan="10000">no record found</td>
       </tr>
       <tr *ngIf="loading">
-        <td colspan="5">
-          <nb-card
-            [nbSpinner]="true"
-            nbSpinnerSize="medium"
-            nbSpinnerStatus="primary"
-          >
+        <td colspan="1000">
+          <nb-card [nbSpinner]="true" nbSpinnerSize="medium" nbSpinnerStatus="primary">
             <nb-card-body> Loading... </nb-card-body>
           </nb-card>
         </td>
@@ -62,11 +66,23 @@
   </table>
 </div>
 
-<div style="display: flex;">
-  <div style="flex: auto;">Showing 1 - 10 of 1000</div>
-  <div class="paginator">
-    <span>Prev</span>
-    <span (click)="pageClicked(page)" *ngFor="let page of paginatioShowingPages">{{page}}</span>
-    <span>Next</span>
+<div style="display: flex;padding-top: 10px;" *ngIf="!table2">
+  <div style="flex: auto;">
+  <div style="padding-top: 7px;">
+    Showing {{currentPage}} - {{pageSize}} of {{totalNoOfPages}}
   </div>
+  </div>
+  <div>
+    <div class="paginator">
+      <nb-actions size="medium">
+        <nb-action [disabled]="currentPage <= 1" (click)="pageClicked(currentPage - 1)" icon="arrow-ios-back-outline"></nb-action>
+      <nb-action>{{currentPage}}</nb-action>
+    
+        <nb-action icon="arrow-ios-forward-outline" [disabled]="currentPage <= totalNoOfPages" (click)="pageClicked(currentPage + 1)"></nb-action>
+      </nb-actions>
+ 
+ 
+    </div>
+  </div>
+
 </div>

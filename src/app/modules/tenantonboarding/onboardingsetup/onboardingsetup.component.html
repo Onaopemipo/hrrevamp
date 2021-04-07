@@ -105,7 +105,7 @@
                                 <textarea rows="5" nbInput fullWidth   placeholder="Text Area"></textarea>
                             </div>
                           </div>
-                     
+
                         <div class="form-group row">
                           <div class="offset-sm-4 col-sm-8">
                             <button type="submit" nbButton status="primary" (click)="proceedtosubcription()">Proceed</button>
@@ -113,7 +113,7 @@
                         </div>
                       </form>
                    </div>
-               
+
 
 
                    </div>
@@ -145,7 +145,7 @@
                     <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling()">Subscribe</button>
                 </div>
             </div>
-           
+
         </div>
 
         </div>
@@ -168,12 +168,12 @@
                         <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling()">Subscribe</button>
                     </div>
                 </div>
-               
+
             </div>
-    
+
             </div>
         </nb-tab>
- 
+
       </nb-tabset>
 </div>
    </div>
@@ -215,12 +215,12 @@
           <div class="form-group">
             <label for="exampleInputEmail1" class="label listsubheader">Amount</label>
             <app-amount-input></app-amount-input>
-          
+
           </div>
         </div>
         <div class="col-sm-6"></div>
           </div>
-          <div class="row">          
+          <div class="row">
             <div class="col-sm-12">
               <button  angular4-paystack
               [email]="'test@test.com'"
@@ -286,10 +286,10 @@
           </div>
           </nb-card>
         </div>
-    
+
       </div>
       <div style="padding-top:1.5rem;">
-      <div class="row">    
+      <div class="row">
         <div class="col-sm-12">
             <button style="text-transform: none !important;width: 144px;" type="button" (click)="openSuccessalert()" nbButton status="primary" >Proceed</button>
         </div>
@@ -310,7 +310,7 @@
                         <div class="col-md-12 " style="display: flex;flex-direction: column;">
                             <div style="display:flex;padding-bottom: 35px;" >
                                 <div [ngClass]="{'q-connector': selectedPanel == 'companyPanel','q-connector-inactive': selectedPanel != 'companyPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
-                            
+
                                 </div>
                                   <div (click)="gotoPanel('companyPanel','Set up your account')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
                                   Company Information
@@ -319,7 +319,7 @@
 
                             <div style="display:flex;padding-bottom: 35px;" >
                                 <div [ngClass]="selectedPanel == 'subscriptionPanel'?'q-connector':(selectedPanel == 'billingPanel'? 'q-connector':'q-connector-inactive')"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
-                               
+
                                 </div>
                                   <div  (click)="gotoPanel('subscriptionPanel','Choose Package')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
                                  Subscription
@@ -327,25 +327,25 @@
                             </div>
                             <div style="display:flex;padding-bottom: 35px;" >
                                 <div [ngClass]="{'last-q-connector': selectedPanel == 'modulesPanel','last-q-connector-inactive': selectedPanel != 'modulesPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
-                               
+
                                 </div>
                                   <div (click)="gotoPanel('modulesPanel','Activated Module')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
-                                Module Selection 
-                                
+                                Module Selection
+
                                   </div>
                             </div>
-                         
+
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        
-       
-      
+
+
+
     </div>
-   
+
    </div>
 </div>
 
@@ -372,7 +372,7 @@
     </div>
   </div>
   <div modal-actions>
-  
+
   </div>
 </ngx-side-modal>
 

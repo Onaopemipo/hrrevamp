@@ -50,7 +50,8 @@ import {
   ɵa,
   NbMenuService,
   NbDatepickerDirective,
-  NbDialogRef
+  NbDialogRef,
+  NbContextMenuModule
 } from '@nebular/theme';
 
 
@@ -62,7 +63,7 @@ import { FormsModule } from '@angular/forms';
 import { TablecomponentComponent } from './tablecomponent/tablecomponent.component';
 import { TableheaderComponent } from './tableheader/tableheader.component';
 import { SideModalComponent } from './side-modal/side-modal.component';
-import { EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
+import { EmployeeListComponent, EmployeeMasterSearchComponent } from './employee-master-search/employee-master-search.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { DateRangeComponent } from './date-range/date-range.component';
@@ -75,8 +76,34 @@ import { CalenderComponent } from './calender/calender.component';
 import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
 
 
+import { alertmodalComponent } from '../_services/alertservice.service';
+import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
+import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
+import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
-
+import {   SearchEmployeesServiceProxy,
+  GetAllDepartmentsServiceProxy,
+  GradeLevelServiceProxy,
+  GetAllJobRolesServiceProxy,
+  GetAllLocationsServiceProxy,
+  SalaryscaleServiceProxy,
+  GetLocationByIdServiceProxy,
+  TrainingServiceProxy,
+  CommonServiceProxy,
+  CreateLeavePlanServiceProxy,
+} from '../_services/service-proxies';
+import { MultiSelectComponent } from './multi-select/multi-select.component';
+import { CustomFormComponent } from './custom-form/custom-form.component';
+import { PageComponent } from './page/page.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
+import { LocationService } from 'app/modules/module-settings/services/location.service';
+import { TrainingCategoryService } from 'app/modules/training/services/training-category.service';
+import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
+import { TypesService } from 'app/modules/training/services/types.service';
+import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/module-settings-providers.module';
+import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.component';
+import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -105,9 +132,17 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     MainBaseComponent,
     CalComponent,
     CalenderComponent,
-    
-    BulkUploadComponent
-  
+    BulkUploadComponent,
+    EmployeeListComponent,
+    alertmodalComponent,
+    ConfirmBoxComponent,
+    ConfirmBoxServiceComponent,
+    LoadableButtonComponent,
+    MultiSelectComponent,
+    CustomFormComponent,
+    PageComponent,
+    CreateleavePlanComponent,
+    CreateleaveRequestComponent,
   ],
   imports: [
     FormsModule,
@@ -125,7 +160,7 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     // NbMenuModule.forRoot(),
-    NbDialogModule.forRoot(),
+    NbDialogModule.forChild(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
     NbChatModule.forRoot({
@@ -161,11 +196,11 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     NbFormFieldModule,
     NbCardModule,
     NbInputModule,
-    
-    // NgxChartsModule
+    NbContextMenuModule,
+    NgMultiSelectDropDownModule,
+    ModuleSettingsProvidersModule,
   ],
   providers: [
-    // MaxStringLengthPipe
     {
       provide: FlowInjectionToken,
       useValue: Flow,
@@ -174,7 +209,26 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     ɵa,
     NbMenuService,
     NbDatepickerDirective,
-    
+    SearchEmployeesServiceProxy,
+    GetAllDepartmentsServiceProxy,
+    GradeLevelServiceProxy,
+    GetAllJobRolesServiceProxy,
+    GetAllLocationsServiceProxy,
+    SalaryscaleServiceProxy,
+    CommonServiceProxy,
+    LocationService,
+    DepartmentsService,
+    TrainingCategoryService,
+    TrainingSpecializationService,
+    GetAllDepartmentsServiceProxy,
+    GetAllLocationsServiceProxy,
+    GetLocationByIdServiceProxy,
+    TypesService,
+    LocationService,
+    DepartmentsService,
+    TrainingServiceProxy,
+    CommonServiceProxy,
+    CreateLeavePlanServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,
@@ -198,7 +252,6 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     AmountInputComponent,
     DateRangeComponent,
     DateComponent,
-    //NbMenuModule,
     DefaultContentComponent,
     CommonModule,
     FormsModule,
@@ -209,7 +262,18 @@ import { BulkUploadComponent } from './bulk-upload/bulk-upload.component';
     CalComponent,
     NbInputModule,
     CalenderComponent,
-    BulkUploadComponent
+    BulkUploadComponent,
+    alertmodalComponent,
+    EmployeeListComponent,
+    ConfirmBoxComponent,
+    NbDialogModule,
+    ConfirmBoxServiceComponent,
+    LoadableButtonComponent,
+    PageComponent,
+    MultiSelectComponent,
+    CreateleavePlanComponent,
+    CreateleaveRequestComponent,
+    MultiSelectComponent,
   ],
 })
 export class ComponentsModule { }
