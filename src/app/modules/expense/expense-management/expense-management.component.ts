@@ -21,9 +21,9 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   TABS = TABS;
   selectedTab = TABS.PROJECTS;
   tableColumns = []
-  get _tableColumns(){
-    if(this.selectedTab === TABS.PROJECTS){
-      return  [
+  get _tableColumns() {
+    if (this.selectedTab === TABS.PROJECTS) {
+      return [
         { name: 'date', title: 'REF ID' },
         { name: 'date', title: 'Name' },
         { name: 'date', title: 'Start Date' },
@@ -32,11 +32,11 @@ export class ExpenseManagementComponent extends MainBaseComponent {
       ];
     }
     return [
-    { name: 'date', title: 'REF ID' },
-    { name: 'date', title: 'Name' },
-    { name: 'date', title: 'Sub-Type' },
-    { name: 'date', title: 'Budget Code' }
-  ];
+      { name: 'date', title: 'REF ID' },
+      { name: 'date', title: 'Name' },
+      { name: 'date', title: 'Sub-Type' },
+      { name: 'date', title: 'Budget Code' }
+    ];
   }
 
   allProjects: ExpenseProjectDto = new ExpenseProjectDto({
@@ -73,8 +73,8 @@ export class ExpenseManagementComponent extends MainBaseComponent {
     isDeleted: true,
     isActive: true
   });
-  myProjects: ExpenseGroup [] = [];
-  myTypes: ExpenseType [] = [];
+  myProjects: ExpenseGroup[] = [];
+  myTypes: ExpenseType[] = [];
 
   uploadType: string = 'manual';
 
@@ -84,7 +84,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
 
 
   constructor(private project: AddUpdateExpenseProjectServiceProxy, private types: AddUpdateLoanTypeServiceProxy,
-    private getmyproject: GetExpenseProjectServiceProxy, private getmytype: GetExpenseTypesServiceProxy  ) {
+    private getmyproject: GetExpenseProjectServiceProxy, private getmytype: GetExpenseTypesServiceProxy) {
     super();
   }
 
@@ -101,14 +101,14 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   //   console.log('Yesssss',this.myProject)
   // }
 
-  changeUploadType(type){
+  changeUploadType(type) {
 
-    console.log('Hey guy',type)
-    if(type == 'manual'){
+    console.log('Hey guy', type)
+    if (type == 'manual') {
       this.uploadType = 'manual';
     }
     else
-    this.uploadType = 'bulk';
+      this.uploadType = 'bulk';
   }
 
   // addProject(){
@@ -119,9 +119,9 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   //   console.log('Hello Ma');
   // }
 
-  createProject(){
+  createProject() {
     this.project.addUpdateExpenseProject(this.allProjects).subscribe(data => {
-      if(!data.hasError){
+      if (!data.hasError) {
         // this.myProject.push(data.result);
         console.log('suceess')
       }
@@ -131,37 +131,37 @@ export class ExpenseManagementComponent extends MainBaseComponent {
     })
   }
 
-  createTypes(){
+  createTypes() {
     this.types.addUpdateExpenseType(this.myexpenseType).subscribe(data => {
-      if(!data.hasError){
+      if (!data.hasError) {
         console.log('Success')
       }
       else {
-        console.log('Oops! Something')
+        console.log('Oops! Something');
       }
     })
   }
 
-  getProjects(){
-    this.getmyproject.getExpenseProject(1,'','',true,'','',1,1).subscribe(data => {
+  getProjects() {
+    this.getmyproject.getExpenseProject(1, '', '', true, '', '', 1, 1).subscribe(data => {
       // if(!data.){
-        this.myProjects = data;
-        console.log('Hey See here', this.myProjects)
+      this.myProjects = data;
+      console.log('Hey See here', this.myProjects);
       // }
-    })
+    });
   }
 
-  getTypes(){
-this.getmytype.getExpenseTypes(0,'','','','','',1,1).subscribe(data => {
-if(!data.hasError){
-  this.myTypes = data.result;
-  console.log('Hey See here', this.myTypes)
-}
-})
+  getTypes() {
+    this.getmytype.getExpenseTypes(0, '', '', '', '', '', 1, 1).subscribe(data => {
+      if (!data.hasError) {
+        this.myTypes = data.result;
+        console.log('Hey See here', this.myTypes);
+      }
+    });
   }
 
-  selectTab(event: NbTabComponent){
+  selectTab(event: NbTabComponent) {
     super.selectTab(event);
-    this.topActionButtons[0].label = this.selectedTab === TABS.PROJECTS ? 'Add Project' : 'Add New Type'
+    this.topActionButtons[0].label = this.selectedTab === TABS.PROJECTS ? 'Add Project' : 'Add New Type';
   }
 }

@@ -68,7 +68,7 @@ export class MultiSelectComponent implements OnInit {
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
         itemsShowLimit: 3,
-        allowSearchFilter: true
+        allowSearchFilter: true,
       };
     } else {
       const config = {};

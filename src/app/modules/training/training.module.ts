@@ -55,9 +55,11 @@ import { SpecializationComponent } from './specialization/specialization.compone
 import { TrainingTypeComponent } from './training-type/training-type.component';
 import { TrainingVendorComponent } from './training-vendor/training-vendor.component';
 import { TypesService } from './services/types.service';
+import { TrainingComponent } from './training/training.component';
+import { ThemeModule } from 'app/@theme/theme.module';
 
 @NgModule({
-  declarations: [DashboardComponent, RequestsComponent, PlansComponent, AdministrationComponent, CategoriesComponent, SpecializationComponent, TrainingTypeComponent, TrainingVendorComponent],
+  declarations: [DashboardComponent, RequestsComponent, PlansComponent, AdministrationComponent, CategoriesComponent, SpecializationComponent, TrainingTypeComponent, TrainingVendorComponent, TrainingComponent],
   providers: [
     TrainingServiceProxy,
     VendorService,
@@ -77,7 +79,8 @@ import { TypesService } from './services/types.service';
     NgxChartsModule,
     NgxEchartsModule,
     FullCalendarModule,
-    NbRadioModule
+    NbRadioModule,
+    ThemeModule,
   ]
 })
 export class TrainingModule { }

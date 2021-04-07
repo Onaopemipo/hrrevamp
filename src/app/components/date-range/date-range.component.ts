@@ -22,9 +22,11 @@ export class DateRangeComponent implements OnInit {
   @Output() startChange = new EventEmitter<Date>();
   @Output() endChange = new EventEmitter<Date>();
   @Output() valueChange = new EventEmitter<DateRange>();
-  @Input() set value(val: DateRange){
-    this._start = val.start;
-    this._end = val.end;
+  @Input() set value(val: DateRange) {
+    if (val) {
+      this._start = val.start;
+      this._end = val.end;
+    }
   }
   constructor() { }
 

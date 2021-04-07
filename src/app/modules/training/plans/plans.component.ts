@@ -13,6 +13,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 import { TrainingCategoryService } from '../services/training-category.service';
 import { TrainingSpecializationService } from '../services/training-specialization.service';
 import { EmptyConfig } from 'app/components/page/page.component';
+import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 
 enum TABS {
   pending = 'pending', approved = 'approved', declined = 'declined'
@@ -36,7 +37,8 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
     return this.api.list(this.filter);
   }
   saveData(e: ModelType): Observable<any> {
-    return this.api.create(e);
+    const data = MyTrainingPlan.fromForm(e);
+    return this.api.create(data);
   }
   getNewEditingData(): ModelType {
     return new MyTrainingPlan();
@@ -60,11 +62,13 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
   requiredButton = [{name: 'newTraining', label: 'New Plan', icon: 'plus'}];
   formConfig: FormConfig = {
     fields: [
-      {name: 'type', label: 'Training Type', type: FORM_TYPES.select},
-      {name: 'range', label: 'Date Range', type: FORM_TYPES.date_range},
+      {name: 'type', label: 'Training Type',
+        type: FORM_TYPES.select, singleSelection: true,
+        choice_name: ChoiceName.trainingType},
+      {name: 'date_range', label: 'Date Range', type: FORM_TYPES.date_range},
       {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
       // {name: 'a', label: 'Attachment', type: FORM_TYPES.att}
-      {name: 'description', label: 'Beneficiary', type: FORM_TYPES.employee},
+      {name: 'beneficiaries', label: 'Beneficiary', type: FORM_TYPES.employee},
     ]
   };
   formTitle = 'Add new Plan';

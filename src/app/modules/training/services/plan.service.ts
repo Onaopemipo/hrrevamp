@@ -5,11 +5,36 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export class MyTrainingPlan extends TrainingDTO{
+  selectedEmployees: string;
   constructor(plan = new TrainingDTO()) {
     super(plan);
   }
   toManage() {
-    return new ManageTrainingDTO();
+    return new ManageTrainingDTO({
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      selectedEmployees: this.selectedEmployees,
+      trainingTypeId: this.trainingTypeId,
+      status: true,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      specializationId: this.specializationId,
+      vendorId: this.vendorId,
+      totalCost: this.totalCost,
+      costPerEmployee: this.costPerEmployee,
+      attachment: '',
+    });
+  }
+
+  static fromForm(form: object){
+    const obj = new MyTrainingPlan();
+    obj.trainingTypeId = form['type'];
+    obj.startDate = form['range'].start;
+    obj.endDate = form['date_range'].end;
+    obj.description = form['description'];
+    obj.selectedEmployees = form['beneficiaries'];
+    return obj;
   }
 }
 export class ITrainingFilterDTO {

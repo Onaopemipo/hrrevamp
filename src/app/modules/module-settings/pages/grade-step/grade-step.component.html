@@ -55,20 +55,15 @@
         </ng-template>
         </div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Next Step</label>
         <div>
-          <input
-            class="form-control"
-            placeholder="Step Number"
-            [(ngModel)]="editingData.step_no"
-            type="number"
-        />
+          <ngx-multi-select></ngx-multi-select>
         <ng-template [ngIf]="errors['step_no']">
           <span *ngFor="let error of errors['step_no']" class="error">{{error}}</span>
         </ng-template>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
