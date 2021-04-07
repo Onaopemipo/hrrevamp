@@ -16,7 +16,7 @@ export class SetupComponent implements OnInit {
   budget: ManageBudgetDTO = new ManageBudgetDTO;
   budgetItem: ManageBudgetItemDTO = new ManageBudgetItemDTO;
   allDepartments: Department [] = [];
-  departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
+  departments: Department = new Department().clone();
 
   constructor(private budgetService: AddUpdateBudgetServiceProxy, private alertMe: AlertserviceService,
     private alert: AlertserviceService, private common: CommonServiceProxy, private updateItem: AddUpdateBudgetItemServiceProxy) { }
@@ -48,9 +48,11 @@ export class SetupComponent implements OnInit {
   }
 
   addDepartment(){
-    let myDepartment: MyBudgetItemDepartment[] = [];
-    myDepartment.push(this.departments)
-    this.alertMe.alertMessage
+    let myDepartment = new Department();
+    myDepartment.code = this.departments.code;
+    myDepartment.name = this.departments.name;
+    // myDepartment.
+    // this.alertMe.alertMessage
     console.log(myDepartment);
   }
 
