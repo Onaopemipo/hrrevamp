@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LoadableButtonComponent implements OnInit {
 
   @Input() loading = false;
+  @Input() disabled = false;
   constructor() { }
 
   ngOnInit(): void {
