@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
-import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO } from './../../../../_services/service-proxies';
+import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO } from './../../../../_services/service-proxies';
 import { MyBudgetItem, MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { MyBudget, BudgetService } from './../../services/budget.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +14,7 @@ import { NgForm } from '@angular/forms';
 export class SetupComponent implements OnInit {
 
   budget: ManageBudgetDTO = new ManageBudgetDTO;
-  budgetItem: BudgetDTO = new BudgetDTO;
+  budgetItem: BudgetItemDTO = new BudgetItemDTO;
   allDepartments: Department [] = [];
   departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
 

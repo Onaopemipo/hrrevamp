@@ -217,7 +217,7 @@
             <div class="form-group row">
             <div class="col">
               <label>Department</label>
-              <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
+              <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.code" required>
                 <option value="1">Select Department</option>
                 <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.Department[0]}}</option>
               </select>

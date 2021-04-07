@@ -61,7 +61,7 @@
             <label>Department</label>
             <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
               <option value="1">Select Department</option>
-              <option *ngFor="let dep of allDepartments[0]" value=dep.code>{{dep.name}}</option>
+              <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.name}}</option>
             </select>
           </div>
           </div>
