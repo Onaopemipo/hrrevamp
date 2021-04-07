@@ -37,7 +37,7 @@
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
                 <div style="display: flex;flex-direction: row;">
                  <div >
-                  <img src="assets/icons/camera.jpg" style="border-radius: 50%; height: 7em;width: 7rem;">
+                  <img src="assets/icons/camera.jpg" onError="this.src='assets/icons/camera.jpg'" style="border-radius: 50%; height: 7em;width: 7rem;">
                  </div>
                  <div style="display: flex;flex-direction: column;justify-content: center;padding-left: 15px;"
                  flow-init     
@@ -282,9 +282,11 @@
                            
                     <ngx-default-content
                     *ngIf="qualificationEmpty"
-                    pageHeader="No Document Found"
-                    pageDescription=""                  
-                    [loading]="qualificationloading"               
+                    pageHeader="Add your first Qualification"
+                    pageDescription="Click on the button to add Qualification"
+                    buttonValue="Add Qualification"
+                    [loading]="qualificationloading"
+                    (buttonClick)="showQualificationModal = true"              
                   >
                   </ngx-default-content>
                     <ngx-tablecomponent  
@@ -314,30 +316,28 @@
                 </div>
           </div>
                 <div style="padding-top:1.5rem;">
-                  <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Bank Name</th>
-                        <th scope="col">Account No</th>
-                        <th scope="col">Account Name</th>
-                        <th scope="col">Account Type</th>
-                        <th scope="col">Primary</th>
-                        <th scope="col">Action</th>
-                   
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Name</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Mark</td>
-                        <td>Otto</td>                  
-                        <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
+                  <ngx-default-content
+                  *ngIf="EmpBankEmpty"
+                  pageHeader="Add your first Bank Details"
+                  pageDescription="Click on the button to add Bank Details"
+                  buttonValue="Add Bank"
+                  [loading]="EmpBankloading"
+                  (buttonClick)="showbankModal = true"              
+                >
+                </ngx-default-content>
+                  <ngx-tablecomponent  
+                  *ngIf="!EmpBankEmpty"              
+                  [showActions]="true"
+                  [showFilter]="false"
+                  (actionClick)="embBanktableActionClicked($event)"
+                  [actions]="EmpBanktableActions" 
+                  [userData]="createNewEmployee.banks" 
+                  [tableColum]="EmpBanktableColumns"
+                  [totalItems]="EmpBanktotalItems"
+                  [currentPage]="EmpBankcurrentPage"
+                  [loading]="EmpBankloading"
+                  >
+              </ngx-tablecomponent>
                 </div>
         </div>
 
@@ -848,35 +848,37 @@
         <div modal-header>Add New Bank <br> <small>Fill in Below Details</small></div>
         <div modal-body>
           <form id="bankForm" name="bankForm" #bankForm="ngForm">
-    
+            <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
+           
             <div class="row" style="padding-top:10px">
               <div class="col-sm-6 form-group">
                 <label>Bank Name</label>
-                <select class="form-control"  required >
+                <select class="form-control" #bank_id="ngModel" [(ngModel)]="indVEmpBanks.bank_id" id="bank_id" name="bank_id" >
                   <option value="">--Select Bank--</option>
-               
+                  <option *ngFor="let bank of bankList" value="{{bank.option_value}}">{{bank.option_text}}</option>
               </select>
              
               </div>
               <div class="col-sm-6 form-group">
                 <label>Account Numer</label>
-                <input type="text"  class="form-control" required>
-             
+                <input type="text" (keyup)="inputNumberValidation($event)"  class="form-control" #account_no="ngModel" [(ngModel)]="indVEmpBanks.account_no" id="account_no" name="account_no">
+               
               </div>
               <div class="col-sm-6 form-group">
                 <label>Account Type</label>
-                <select class="form-control"  required >
+                <select class="form-control" #account_typeId="ngModel" [(ngModel)]="indVEmpBanks.account_typeId" id="account_typeId" name="account_typeId" >
                   <option value="">--Select Type--</option>
-               
+                  <option *ngFor="let accounttype of accounttypes" value="{{accounttype.id}}">{{accounttype.text}}</option>
               </select>
              
               </div>
               <div class="col-sm-6 form-group">
                 <label>Sort Code</label>
-                <input type="text"  class="form-control" required>
+                <input type="text"  class="form-control" #bank_sort_code="ngModel" [(ngModel)]="indVEmpBanks.bank_sort_code" id="bank_sort_code" name="bank_sort_code">
               </div>
               <div class="col-sm-12 form-group">
-                <nb-checkbox>Primary Account</nb-checkbox>
+                <nb-checkbox #is_primary="ngModel" [(ngModel)]="indVEmpBanks.is_primary" id="is_primary" name="is_primary">
+                  Primary Account</nb-checkbox>
               
               </div>
             
@@ -884,12 +886,23 @@
          
           
           </form>
+          <div style="padding-top: 5px;">
+            <div class="row">
+<div class="col-sm-6"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
+  <div class="cbadge">{{getbankname(tempbank.id_bank)}}&nbsp;|&nbsp;{{tempbank.numb_account}}&nbsp;<i class="fa fa-times" (click)="removefromBank(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+</div>
+            </div>
+           
+          </div>
         </div>
-        <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-          <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-          
-  
+        <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+          <ngx-loadable-button [loading]="EmpBankloading" [disabled]="tempEmpBanksList.length < 1" (click)="submit(indVEmpBanks)" >
+            Submit
+          </ngx-loadable-button>           
+          <div style="padding-left: 15px;">
+            <button [disabled]="!disableaddBank" outline="true" (click)="addtopbank(indVEmpBanks)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
+         
+          </div>
       </div>
       <div style="margin-top: 10px;"></div>
       </ngx-side-modal>
@@ -948,6 +961,7 @@
        
         
         </form>
+        <div class="cbadge" >4</div>
       </div>
       <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
         <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
