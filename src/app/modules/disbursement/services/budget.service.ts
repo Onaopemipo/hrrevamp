@@ -16,6 +16,10 @@ export class MyBudget implements IFaker {
   financial_year_end: Date;
   @myPropertyFaker(FAKER_CONFIG.number, {})
   amount: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {})
+  id: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {})
+  spent: number;
 }
 
 @Injectable({

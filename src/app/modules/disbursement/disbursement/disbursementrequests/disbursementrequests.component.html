@@ -5,15 +5,24 @@
 <div class="main-page-container">
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="All Requests" [tabId]="TABS.ALL_REQUESTS">
+      <ngx-tableheader></ngx-tableheader>
+       <ngx-tablecomponent [tableColum]="AllRequest" [userData]="tableData"></ngx-tablecomponent>
     </nb-tab>
+
     <nb-tab tabTitle="Disbursed" [tabId]="TABS.DISBURSED">
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [tableColum]="Disbursed" [userData]="tableData"></ngx-tablecomponent>
     </nb-tab>
+
+
     <nb-tab tabTitle="Pending" [tabId]="TABS.PENDING">
+      <ngx-tableheader></ngx-tableheader>
+       <ngx-tablecomponent [tableColum]="Pending" [userData]="tableData"></ngx-tablecomponent>
     </nb-tab>
     <nb-tab tabTitle="Failed" [tabId]="TABS.FAILED">
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [tableColum]="Failed" [userData]="tableData"></ngx-tablecomponent>
     </nb-tab>
   </nb-tabset>
 
-  <ngx-tableheader></ngx-tableheader>
-  <ngx-tablecomponent [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
 </div>

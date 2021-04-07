@@ -1,3 +1,5 @@
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { PromotionListServiceProxy, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -18,9 +20,43 @@ export class PromotionComponent implements OnInit {
     { name: 'K', title: 'STATUS' },
   ];
 
-  constructor() { }
+  rButton = [
+    {name: 'submit', label: 'Submit List'},
+    {name: 'save', label: 'Save List', outline: true},
+  ]
+
+  promotionList: Sp_FetchEligibleEmployees [] = [];
+  submitList: boolean = false;
+  saveList: boolean = false;
+  Submit: string = "Submit"
+
+  constructor(private promotion: PromotionListServiceProxy, private alert: AlertserviceService) { }
 
   ngOnInit(): void {
+    this.getPromotionList();
   }
+
+ async getPromotionList(){
+    const data = await this.promotion.promotionList(0,0).toPromise()
+    if(!data.hasError){
+      this.promotionList = data.result;
+      console.log(this.promotionList)
+    }
+    else{
+    this.alert.openModalAlert('Error', 'Error fetching data', 'Dismiss')
+    }
+  }
+
+  onTopActionClick(event){
+    if(event === 'submit'){
+      this.submitList = !this.submitList;
+      console.log('I am Submitting')
+    } else {
+      this.saveList = !this.saveList;
+      console.log('I am saving')
+    }
+  }
+
+
 
 }

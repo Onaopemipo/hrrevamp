@@ -1,3 +1,6 @@
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { NgForm } from '@angular/forms';
+import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, PromotionListServiceProxy, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TOP_ACTIONS {
@@ -27,9 +30,36 @@ export class PromotioneligibilityComponent implements OnInit {
 
   ];
 
-  constructor() { }
+  promotionBucket: NgForm;
+  promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
+  eligibilityList: Sp_FetchEligibleEmployees [] = [];
+
+  constructor(private promotion: AddUpdateEligibleBucketServiceProxy, private eligibilty: PromotionListServiceProxy,
+    private alert: AlertserviceService) { }
 
   ngOnInit(): void {
+    this.fetchEligibility();
+  }
+
+  async addToEligibilityList(){
+    const data = await this.promotion.addUpdateEligibleBucket(this.promotionBucketList).toPromise()
+    if(!data.hasError){
+
+      console.log(data.message)
+    }
+  }
+
+  async fetchEligibility(){
+    const data = await this.eligibilty.promotionList(1,1).toPromise();
+    if(!data.hasError){
+      this.alert.openModalAlert('error','Data failure','Relaod')
+      this.eligibilityList = data.result;
+      console.log(this.eligibilityList)
+    }
+    else {
+      console.log('Error has occured')
+    }
+
   }
 
   modal(buttion) {

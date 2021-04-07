@@ -54,21 +54,21 @@
                 <div class="form-group row mydiv">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="jobTitle" placeholder="Role Name">
+                    <input type="text" class="form-control" name="roleName" #roleName="ngModel" placeholder="Role Name">
                   </div>
                 </div>
 
                 <div class="form-group row mydiv">
                   <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="jobTitle" placeholder="Descripion">
+                    <input type="text" class="form-control" name="roleDescription" #roleDescription="ngModel" placeholder="Descripion">
                   </div>
                 </div>
 
                 <div class="form-group row mydiv">
                   <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" required>
+                    <select class="custom-select" name="department" #department="ngModel" required>
                       <option value="">Select </option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
@@ -81,7 +81,7 @@
                 <div class="form-group row mydiv">
                   <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" required>
+                    <select class="custom-select" name="unit" #unit="ngModel"  required>
                       <option value="">Select </option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
@@ -93,7 +93,7 @@
                 <div class="form-group row mydiv">
                   <label for="Region" class="col-sm-3 col-form-label mylabel">Level</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" required>
+                    <select class="custom-select" name="level" #level="ngModel" required>
                       <option value="">Select </option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
@@ -130,7 +130,7 @@
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                    <input type="text" class="form-control" name="certTitle" #certTitle="ngModel" placeholder="Title">
                   </div>
                 </div>
 
@@ -153,14 +153,14 @@
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                    <input type="text" class="form-control" name="skillTitle" #skillTitle="ngModel" placeholder="Title">
                   </div>
                 </div>
 
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                    <input type="text" class="form-control" name="title" #title="ngModel" placeholder="Title">
                   </div>
                 </div>
 
@@ -176,7 +176,7 @@
                 <div class="form-group row mydiv">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                    <input type="text" class="form-control" name="abilityTitle" #abilityTitle="ngModel" placeholder="Title">
                   </div>
                 </div>
 

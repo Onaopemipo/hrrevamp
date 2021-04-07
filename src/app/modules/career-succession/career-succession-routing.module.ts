@@ -65,10 +65,11 @@ const routes: Routes = [
       },
 
       {
-        path: 'test-pool',
+        path: 'talentpool/:id',
         component: TestpoolComponent
 
       },
+
       {
         path: 'gridbox',
         component: GridboxComponent

@@ -106,12 +106,37 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
 
 
-  tempEmpBanksList: EmployeeBankDTO[] = [];
+  tempEmpBanksList = [];
   indVEmpBanks = new EmployeeBankDTO().clone();
   EmpBanktotalItems = 0;
   EmpBankcurrentPage = 1;
   get EmpBankEmpty() {
     return this.createNewEmployee.banks.length === 0;
+  }
+  get disableaddBank() {
+    let resp: boolean = true;
+    
+    let nullable = [
+      'account_name', 'account_type', 'bank_name', 'companyID',
+    'createdById',
+'dateCreated',
+'dateModified',
+'employee_id',
+'id',
+'isActive',
+'isDeleted',
+'is_primary',
+'modifiedById',
+'subID',
+  ]
+
+    Object.entries(this.indVEmpBanks).map(([key, value], index) => {      
+      if ((value == "" || value == null || value == undefined) &&  nullable.indexOf(key) == -1) { 
+        resp = false;
+      }
+    });
+ 
+    return resp;
   }
   EmpBankloading: boolean = false;
   EmpBanktableActions: TableAction[] = [
@@ -119,7 +144,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     { name: ACTIONS.DELETE, label: 'Delete' },
   ];
   EmpBanktableColumns = [
-    { name: 'bank_id', title: 'Bank Name', type: ColumnTypes.Text },
+    { name: 'bank_name', title: 'Bank Name', type: ColumnTypes.Text },
     { name: 'account_no', title: 'Account No', type: ColumnTypes.Text},
     { name: 'account_name', title: 'Account Name', type: ColumnTypes.Text },
     { name: 'account_type', title: 'Account Type', type: ColumnTypes.Text },
@@ -177,24 +202,37 @@ export class EmployeerecordsviewComponent implements OnInit {
         })
       }
        }
-  addtopbank(bank:EmployeeBankDTO) {
-    let searchResult = this.tempEmpBanksList.find(x => x.account_no == bank.account_no);
+  addtopbank(bank: EmployeeBankDTO) {
+    console.log(bank)
+    let searchResult = this.tempEmpBanksList.find(x => x.numb_account == bank.account_no);
     if (searchResult) {
       this.errorMsg = "Account Exist on the List";
       this.removeErrorMsg();
     } else {
-      this.tempEmpBanksList.push(bank)
+      let newbnkObj = {
+        id_bank: bank.bank_id,
+        numb_account: bank.account_no,
+        type_account: bank.account_typeId,
+        code_sort: bank.bank_sort_code,
+        pry_is:bank.is_primary
+      }
+      this.tempEmpBanksList.push(newbnkObj)
     }
+    console.log(this.tempEmpBanksList)
   }
   removefromBank(i) {
     this.tempEmpBanksList.splice(i, 1);
   }
   submitbank(bank:EmployeeBankDTO) {
     if (!this.createNewEmployee.id) {
-      this.addtopbank(bank);
+      
     } else {
       
     }
+  }
+
+  getbankname(bankid) {
+    return this.bankList.find(x => x.option_value == bankid).option_text;
   }
   
  async getBankList() {
@@ -206,6 +244,34 @@ export class EmployeerecordsviewComponent implements OnInit {
     let response = await this.myDropdown.getAccountTypes().toPromise();
     this.accounttypes = response.result;
   }
+
+  inputNumberValidation(event) {
+    var inputentry =  event.target.value;
+
+    var reg = new RegExp('^[-,-.0-9]+$');
+    if (inputentry && reg.test(inputentry)) {
+      if(inputentry.length != 10){
+        this.errorMsg = "please input 10 digit account number";
+        this.removeErrorMsg();
+      } else {
+        this.errorMsg = "";
+        return true;
+      }
+      
+    } else {
+      if(event.key == "Backspace" || event.key == "Delete" || event.key == "ArrowLeft" || event.key == "ArrowRight"){
+
+      }else{
+        this.errorMsg="please input number only";
+        this.removeErrorMsg();        
+        event.target.value = inputentry.slice(0,-1);
+        return false;
+      }
+    
+    
+    }
+  }
+
   removeErrorMsg() {
     setTimeout(() => {
       this.errorMsg = '';

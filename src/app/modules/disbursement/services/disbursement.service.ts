@@ -14,11 +14,19 @@ export class MyDisbursement implements IFaker {
   channel: string;
   @myPropertyFaker(FAKER_CONFIG.number, {})
   budget_item_id: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {})
+  bank_name: number;
   @myPropertyFaker(FAKER_CONFIG.words, {})
   budget_item_name: string;
+  @myPropertyFaker(FAKER_CONFIG.words, {})
+  recipient: string;
   @myPropertyFaker(FAKER_CONFIG.number, {max: 3})
-  disburse_from: number;
+  disburse_for: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {max: 3})
+  account_number: number;
   @myPropertyFaker(FAKER_CONFIG.number, {})
+  @myPropertyFaker(FAKER_CONFIG.words, {})
+  account_name: string;
   employee_id: number;
   @myPropertyFaker(FAKER_CONFIG.name, {})
   employee_name: string;
@@ -32,6 +40,12 @@ export class MyDisbursement implements IFaker {
   save_as_beneficiary: boolean;
   @myPropertyFaker(FAKER_CONFIG.boolean, {})
   recurring: boolean;
+  @myPropertyFaker(FAKER_CONFIG.boolean, {})
+  frequency: boolean;
+  @myPropertyFaker(FAKER_CONFIG.boolean, {})
+  startDate: Date;
+  @myPropertyFaker(FAKER_CONFIG.boolean, {})
+  endDate: Date;
   @myPropertyFaker(FAKER_CONFIG.number, {})
   beneficiary_id: number;
   @myPropertyFaker(FAKER_CONFIG.name, {})

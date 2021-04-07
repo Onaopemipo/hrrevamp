@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 
 @myClassFaker
-class MyBudgetItemDepartment implements IFaker {
+export class MyBudgetItemDepartment implements IFaker {
   getFake() {
     // throw new Error('Method not implemented.');
     return this;
@@ -17,6 +17,8 @@ class MyBudgetItemDepartment implements IFaker {
   department_name: string;
   @myPropertyFaker(FAKER_CONFIG.number, {})
   amount: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {})
+  spent: number;
 
 }
 
@@ -27,12 +29,18 @@ export class MyBudgetItem implements IFaker {
     return this;
   }
 
+
   @myPropertyFaker(FAKER_CONFIG.words, {})
   budget_item: string;
   @myPropertyFaker(FAKER_CONFIG.words, {})
   budget_code: string;
   @myPropertyFaker(FAKER_CONFIG.number, {})
   amount: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {})
+  id: number;
+  @myPropertyFaker(FAKER_CONFIG.number, {})
+  spent: number;
+
 
   @myPropertyFaker(FAKER_CONFIG.object, {class: MyBudgetItemDepartment, array: true})
   departments: MyBudgetItemDepartment[];
@@ -50,7 +58,7 @@ export class BudgetItemService {
     });
   }
   fetch(id: number) {
-    throw new Error('Method not implemented.');
+    return new MyBudgetItem().getFake()
   }
   create(data: MyBudgetItem) {
     return getCreateResponse();
