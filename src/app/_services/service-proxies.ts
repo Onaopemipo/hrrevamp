@@ -7000,7 +7000,7 @@ export class BulkMasterServiceProxy {
      * @param bulkFile (optional) 
      * @return Success
      */
-    bulkUploadId(processId: number | undefined, bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
+    bulkUpload(processId: number | undefined, bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/BulkMaster/BulkUpload";
         url_ = url_.replace(/[?&]$/, "");
 

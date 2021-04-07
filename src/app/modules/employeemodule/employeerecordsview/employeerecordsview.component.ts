@@ -1,4 +1,8 @@
-import { EmployeeDTO, IEmployeeDTO, CreateEmployeeServiceProxy, DropdownValue, DropdownValueDTO,  DataServiceProxy, ManageEmployeeDTO, IDTextViewModel, EmployeeQualificationDTO } from './../../../_services/service-proxies';
+import {
+  EmployeeDTO,
+  IEmployeeDTO, CreateEmployeeServiceProxy,
+  DropdownValue, EmployeeBankDTO,DropdownValueDTO, DataServiceProxy, ManageEmployeeDTO, IDTextViewModel, EmployeeQualificationDTO,Document
+} from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
@@ -61,6 +65,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   alldocTypes: IDTextViewModel[] = [];
   reqEmployee = new ManageEmployeeDTO().clone();
 
+  tempQualificationList: EmployeeQualificationDTO[] = [];
   indvQualifications: EmployeeQualificationDTO;
   qualificationtotalItems = 0;
   qualificationcurrentPage = 1;
@@ -81,7 +86,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     { name: 'endDate', title: 'End Date', type: ColumnTypes.Date },
   ];
 
-
+  tempDocumentList: Document[] = [];
   indVDocuments : Document;
   documenttotalItems = 0;
   documentcurrentPage = 1;
@@ -98,6 +103,30 @@ export class EmployeerecordsviewComponent implements OnInit {
     { name: 'docType', title: 'Document Type', type: ColumnTypes.Text},
     { name: 'lastModifiedDate', title: 'Last Modified Date', type: ColumnTypes.Date },
   ];
+
+
+  tempEmpBanksList: EmployeeBankDTO[] = [];
+  indVEmpBanks : EmployeeBankDTO;
+  EmpBanktotalItems = 0;
+  EmpBankcurrentPage = 1;
+  get EmpBankEmpty() {
+    return this.createNewEmployee.banks.length === 0;
+  }
+  EmpBankloading: boolean = false;
+  EmpBanktableActions: TableAction[] = [
+    { name: ACTIONS.EDIT, label: 'Edit' },
+    { name: ACTIONS.DELETE, label: 'Delete' },
+  ];
+  EmpBanktableColumns = [
+    { name: 'bank_id', title: 'Bank Name', type: ColumnTypes.Text },
+    { name: 'account_no', title: 'Account No', type: ColumnTypes.Text},
+    { name: 'account_name', title: 'Account Name', type: ColumnTypes.Text },
+    { name: 'account_type', title: 'Account Type', type: ColumnTypes.Text },
+    { name: 'is_primary', title: 'Primary', type: ColumnTypes.Text },
+   
+  ];
+  bankList: DropdownValue[] = [];
+  accounttypes: IDTextViewModel[] = [];
   constructor(private newEmployee: CreateEmployeeServiceProxy, private myDropdown: DataServiceProxy,
     private alertservice : AlertserviceService,) { }
 
@@ -105,10 +134,10 @@ export class EmployeerecordsviewComponent implements OnInit {
     if (event.name == "1") {
       this.indVDocuments = event.data;
       this.showdocumentUploadModal = true;
-      
+ 
     }
     if (event.name == "2") {
-      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.yearName, 'Yes').subscribe(data => {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
         if (data == "closed") {
      //Delete Document Record
         }
@@ -121,9 +150,10 @@ export class EmployeerecordsviewComponent implements OnInit {
     if (event.name == "1") {
       this.indvQualifications = event.data;
       this.showQualificationModal = true;
+      
     }
     if (event.name == "2") {
-      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.yearName, 'Yes').subscribe(data => {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
         if (data == "closed") {
      //Delete Document Record
         }
@@ -131,13 +161,34 @@ export class EmployeerecordsviewComponent implements OnInit {
       })
     }
      }
+     embBanktableActionClicked(event: TableActionEvent) {
+      if (event.name == "1") {
+        this.indVEmpBanks = event.data;
+        this.showbankModal = true;
+        
+      }
+      if (event.name == "2") {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
+          if (data == "closed") {
+       //Delete Document Record
+          }
+    
+        })
+      }
+       }
+  
+  
+  
+  
+ async getBankList() {
+    let response = await this.myDropdown.getDropDownValuesById(3).toPromise();
+    this.bankList = response.result;
+  }
 
-  
-  
-  
-  
-  
-  
+  async getBankAccountTypeList() {
+    let response = await this.myDropdown.getAccountTypes().toPromise();
+    this.accounttypes = response.result;
+  }
   
   topActionButtons = [
     { name: 'submit', label: 'Submit', 'icon': '', outline: false },
@@ -162,11 +213,14 @@ export class EmployeerecordsviewComponent implements OnInit {
   ngOnInit(): void {
     this.createNewEmployee.documents = [];
     this.createNewEmployee.qualifications = [];
+    this.createNewEmployee.banks = [];
     this.getMaritalStatus();
     this.getEmploymentStatus();
     this.getGender();
     this.getReligion();
     this.getDocumentType();
+    this.getBankList();
+    this.getBankAccountTypeList();
   }
 
   async getDropDownValue(id, variable: DropdownValue[]){
