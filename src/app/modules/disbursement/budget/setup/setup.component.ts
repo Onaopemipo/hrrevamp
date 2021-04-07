@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
-import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO } from './../../../../_services/service-proxies';
+import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO } from './../../../../_services/service-proxies';
 import { MyBudgetItem, MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { MyBudget, BudgetService } from './../../services/budget.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,12 +14,12 @@ import { NgForm } from '@angular/forms';
 export class SetupComponent implements OnInit {
 
   budget: ManageBudgetDTO = new ManageBudgetDTO;
-  budgetItem: BudgetItemDTO = new BudgetItemDTO;
+  budgetItem: ManageBudgetItemDTO = new ManageBudgetItemDTO;
   allDepartments: Department [] = [];
   departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
 
   constructor(private budgetService: AddUpdateBudgetServiceProxy, private alertMe: AlertserviceService,
-    private alert: AlertserviceService, private common: CommonServiceProxy) { }
+    private alert: AlertserviceService, private common: CommonServiceProxy, private updateItem: AddUpdateBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchDepartments();
@@ -60,6 +60,10 @@ export class SetupComponent implements OnInit {
       this.allDepartments = data.result;
       console.log('My departments', this.allDepartments)
     }
+  }
+
+  async updateBudgetItem(){
+    const data = await this.updateItem.addUpdateBudgetItem(this.budgetItem).toPromise()
   }
 
 
