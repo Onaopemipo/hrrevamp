@@ -36,11 +36,11 @@ MyRequest>implements OnInit {
 
   tableColumns = [
     { name: 'Name', title: 'Name' },
-    { name: 'Code', title: 'Code',  },
-    { name: 'Approval', title: 'Approval' },
-    { name: 'Enable_Notification', title: 'Enable_Notification', type: ColumnTypes.Status },
-    { name: 'Is-Active', title: 'Status', type: ColumnTypes.Status },
-    { name: 'Date_Created', title: 'DATE_Created' },
+    // { name: 'Code', title: 'Code',  },
+    // { name: 'Approval', title: 'Approval' },
+    { name: 'Enable_Notification', title: 'Enable Notification', type: ColumnTypes.Status },
+    { name: 'is_Active', title: 'Status', type: ColumnTypes.Status },
+    { name: 'Date_Created', title: 'Date Created', type: ColumnTypes.Date },
  
   ];
 

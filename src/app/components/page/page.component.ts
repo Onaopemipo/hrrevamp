@@ -8,7 +8,19 @@ import { FormConfig } from '../custom-form/custom-form.component';
 })
 export class PageComponent implements OnInit {
 
+  _emptyConfig = {
+    pageHeader: 'Create your first Location',
+    pageDescription: 'Click on the button to create a Location',
+    buttonValue: '',
+    actionName: '1',
+  };
   data = {};
+  @Input() set emptyConfig(val) {
+    this._emptyConfig = {...this._emptyConfig, ...val};
+  }
+  get emptyConfig() {
+    return this._emptyConfig;
+  }
   @Input() tab = false;
   @Input() pageTitle = 'Name';
 
@@ -35,6 +47,7 @@ export class PageComponent implements OnInit {
 
   @Input() formTitle = '';
   @Input() loadingSave = false;
+  @Input() loading = false;
   @Output() formCompleted = new EventEmitter<object>();
   @Output() formCancelled = new EventEmitter<object>();
   // get showModal() {
@@ -67,5 +80,9 @@ export class PageComponent implements OnInit {
 
   topActionButtonClicked(event) {
     this.topActionClicked.emit(event);
+  }
+
+  get isEmpty() {
+    return this.tableData.length === 0;
   }
 }

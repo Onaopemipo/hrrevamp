@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
+import { AddUpdateExpenseProjectServiceProxy, AddUpdateExpenseServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
 import { Subject } from 'rxjs';
 
 export class MyExpenseReport {
@@ -10,12 +11,15 @@ export class MyExpenseReport {
   providedIn: 'root'
 })
 export class ExpenseReportService  extends CrudService<MyExpenseReport, {}, MyExpenseReport>{
-  constructor() {
+  constructor(
+    private create_api: AddUpdateExpenseServiceProxy,
+    private list_api: FetchExpensesServiceProxy,
+  ) {
     super();
   }
 
-  create(data){
-
+  create(data) {
+    this.create_api.addUpdateExpense(data);
   }
 
   delete(){}
@@ -28,7 +32,7 @@ export class ExpenseReportService  extends CrudService<MyExpenseReport, {}, MyEx
       subject.next({data: [], length: 0});
       subject.complete();
     }, 1000);
-    // this.api_list.fetchExpenses(0, 0, 0, 0, 0, '0', '0', '0', 0, 0, 0).subscribe(data => {
+    // this.list_api.fetchExpenses(0, 0, 0, 0, 0, '0', '0', '0', 0, 0, 0).subscribe(data => {
     //   subject.next({data: data.result.map(expense => new MyExpenseRequest(expense)), length: data.totalCount});
     //   subject.complete();
     // });

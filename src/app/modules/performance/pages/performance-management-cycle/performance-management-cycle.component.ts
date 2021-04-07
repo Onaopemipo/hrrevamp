@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
-import { MyPerformanceCycle, PerformanceManagementService } from '../../services/performance-management.service';
+import { MyPerformanceCycle, PerformanceManagementService, Review_Types } from '../../services/performance-management.service';
 import { BaseComponent } from 'app/components/base/base.component';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ListResult } from 'app/_services/base-api.service';
@@ -20,6 +20,7 @@ enum TOP_ACTIONS { ADD__NEW__CYCLE, };
   styleUrls: ['./performance-management-cycle.component.scss']
 })
 export class PerformanceManagementCycleComponent extends BaseComponent<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
+  reviewTypes = Review_Types;
   ChoiceName = ChoiceName;
   filter: MyPerformanceCycle = new MyPerformanceCycle();
   data: MyPerformanceCycle[] = [];
@@ -41,13 +42,13 @@ export class PerformanceManagementCycleComponent extends BaseComponent<MyPerform
   ];
   TOP_ACTIONS = TOP_ACTIONS;
   tableColumns = [
-    { name: 'date', title: 'Cycle Name' },
-    { name: 'date', title: 'Date (From)' },
-    { name: 'date', title: 'Date (TO)' },
+    { name: 'name', title: 'Cycle Name' },
+    { name: 'startDate', title: 'Date (From)' },
+    { name: 'endDate', title: 'Date (TO)' },
     { name: 'date', title: 'Period' },
     { name: 'date', title: 'Time' },
-    { name: 'date', title: 'Rating' },
-    { name: 'date', title: 'Status' }
+    { name: 'rating_type', title: 'Rating' },
+    { name: 'status', title: 'Status', type: ColumnTypes.Status },
   ];
 
   constructor(protected alertService: AlertserviceService,

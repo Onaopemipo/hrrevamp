@@ -15,7 +15,7 @@ export interface TableColumn {
     type?: ColumnTypes;
     template?: TemplateRef<any>;
     colors?: {};
-    link_name?: string,
+    link_name?: string;
 }
 
 export interface TableAction {
@@ -23,7 +23,7 @@ export interface TableAction {
   name: string;
 }
 
-export interface TableActionEvent {
+export interface TableActionEvent<T=any> {
     name: string;
-    data: any;
+    data: T;
 }

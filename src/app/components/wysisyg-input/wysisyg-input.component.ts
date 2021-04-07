@@ -28,6 +28,7 @@ export class WysisygInputComponent implements OnInit {
   onChange() {
     this.valueChange.emit(this.model);
     this.ngModelChange.emit(this.model);
+    console.log(this.model);
   }
 
 }

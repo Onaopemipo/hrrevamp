@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbTabComponent } from '@nebular/theme';
+import { ManageRequestDTO, RequestTypeDTO } from 'app/_services/service-proxies';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from '../services/api.service';
 import { Complaint } from './models';
@@ -23,27 +24,25 @@ export class MainComponent implements OnInit {
   pageNo = 1;
   complaints: Complaint[] = [];
   selectedComplaint?: Complaint;
-  newComplaint = {
-    type: 'A',
-    employeeId: 1,
-    description: '',
-    title: '',
-  };
+  newComplaint = new ManageRequestDTO();
   loading = false;
   loadingNext = false;
+  requestTypes: RequestTypeDTO[] = [];
 
 
   constructor(
     private apiService: ApiService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.requestTypes = await this.apiService.getRequestTypes().toPromise();
     this.loadData();
   }
 
   loadRequests() {
     const subject = new Subject<Complaint[]>();
     this.apiService.getComplaints(this.pageNo).subscribe(data => {
+      console.log(data);
       subject.next(data.data.map(iComplaint => new Complaint(iComplaint)));
       subject.complete();
     });

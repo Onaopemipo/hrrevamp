@@ -4,7 +4,14 @@ import { AddUpdatePerformanceCycleServiceProxy, CycleDTO, FetchPerformanceCycles
 import { database } from 'faker';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
- 
+
+export enum Review_Types_Enum {
+  A
+}
+
+export const Review_Types = [
+  {name: Review_Types_Enum.A, label: 'DDDDD'}
+];
 export class MyPerformanceCycle extends CycleDTO {
   instructions: string;
   constructor(data: CycleDTO = new CycleDTO()) {

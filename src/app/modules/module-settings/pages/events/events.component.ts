@@ -34,7 +34,7 @@ EventFilter, MyEvent> implements OnInit {
   TOP_ACTIONS = TOP_ACTIONS;
 
   tableColumns = [
-    { name: 'name', title: 'Title' },
+    { name: 'title', title: 'Title' },
     { name: 'status', title: 'Status', type: ColumnTypes.Status },
   ];
 

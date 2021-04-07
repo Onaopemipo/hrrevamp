@@ -59,14 +59,15 @@
         </div>
         <div class="form-group">
             <label>Type</label>
-            <select [(ngModel)]="newComplaint.type" class="form-control">
-                <option value="5">Complaint</option>
-                <option value="6">Request</option>
+            <select [(ngModel)]="newComplaint.requestTypeId" class="form-control">
+                <option [value]="type.id" *ngFor="let type of requestTypes">{{type.name}}</option>
+                <!-- <option value="6">Request</option> -->
             </select>
         </div>
         <div class="form-group">
             <label>Reciepent</label>
             <ngx-employee-master-search [(value)]="newComplaint.employeeId"></ngx-employee-master-search>
+            {{newComplaint.employeeId}}
         </div>
         <div class="form-group">
             <label>Description</label>

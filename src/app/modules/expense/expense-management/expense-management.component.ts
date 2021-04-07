@@ -39,8 +39,40 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   ];
   }
 
-  allProjects: ExpenseProjectDto = new ExpenseProjectDto();
-  myexpenseType: ExpenseTypeDto = new ExpenseTypeDto();
+  allProjects: ExpenseProjectDto = new ExpenseProjectDto({
+    id: 0,
+    name: "string",
+    companyID: 0,
+    subID: 0,
+    description: "string",
+    startDate: new Date(),
+    startDateString: '',
+    endDateString: '',
+    endDate: new Date(),
+    ban: true,
+    referenceId: 'string',
+    code: 'string',
+    isClosedEnded: true,
+    dateCreated: new Date(),
+    isDeleted: true,
+    isActive: true,
+    actionTitle: "string",
+    status: "string"
+  });
+  myexpenseType: ExpenseTypeDto = new ExpenseTypeDto({
+    id: 0,
+    companyID: 0,
+    subID: 0,
+    ledgerNo: 'string',
+    name: 'string',
+    description: 'string',
+    referenceId: 'string',
+    code: 'string',
+    isDefault: true,
+    dateCreated: new Date(),
+    isDeleted: true,
+    isActive: true
+  });
   myProjects: ExpenseGroup [] = [];
   myTypes: ExpenseType [] = [];
 

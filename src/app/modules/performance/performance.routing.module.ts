@@ -36,11 +36,11 @@ export const routes: Routes = [
             component: KeyResultAreaComponent,
         },
         {
-            path: 'kra/assign',
+            path: 'kra/:id/assign',
             component: AssignKraComponent,
         },
         {
-            path: 'kpi',
+            path: 'kra/:id/kpi',
             component: SetKpiComponent,
         },
         {

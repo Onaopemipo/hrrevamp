@@ -27,6 +27,14 @@ export class MyRequest implements IStatus {
 
   public constructor(request = new RequestTypeDTO()) {
     this.request = request;
+    this.Name = request.name;
+    this.Code = request.code;
+    this.Approval = request.approval;
+    this.Enable_Notification = request.enable_step_notify;
+    this.is_Active = request.isActive;
+    this.id = request.id;
+    this.isSystem = request.is_system_requirement;
+    this.Date_Created = request.dateCreated;
   }
 
   // get id() {

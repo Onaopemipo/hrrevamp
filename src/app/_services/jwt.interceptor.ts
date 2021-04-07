@@ -100,7 +100,8 @@ export class JwtInterceptor implements HttpInterceptor {
     }
 
     protected processResponse(response: HttpResponseBase): Observable<any> {
-    // console.log(response)
+        alert(6)
+    console.log(response)
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :

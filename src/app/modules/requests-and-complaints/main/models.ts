@@ -24,7 +24,18 @@ export interface IComplaint {
 export class Complaint implements IStatus {
     private iComplaint: IComplaint;
     constructor(request: RequestDTO) {
+        console.log(request);
         // this.iComplaint = iComplaint;
+        this.iComplaint = {
+            id: request.id,
+            title: request.title,
+            complainerName: request.employeeName,
+            description: request.description,
+            status: request.status,
+            time: request.dateModified,
+            complainerEmail: 'xxx@email.cc', //request.email;
+            referenceNo: request.refNo,
+        }
         this.iComplaint.id = request.id;
         this.iComplaint.title = request.title;
         this.iComplaint.complainerName = request.employeeName;

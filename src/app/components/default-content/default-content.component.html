@@ -1,7 +1,7 @@
 <nb-card>
   <nb-card-body>
     <div class="centWrapper">
-      <div class="center">
+      <div class="center"  *ngIf="!loading">
         <h5 style="text-align: center;">{{pageHeader}}</h5>
         <p style="text-align: center;">{{pageDescription}}</p>
       
@@ -9,6 +9,7 @@
           <button type="submit" class="btn my-button btn-md" (click)="buttonClick.emit()">{{buttonValue}}</button>
         </div>
       </div>
+      <div *ngIf="loading"> .... </div>
     </div>
    
   </nb-card-body>

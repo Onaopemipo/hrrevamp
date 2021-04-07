@@ -3,7 +3,7 @@ import { EventInput } from '@fullcalendar/angular';
 import { TableColumn } from '../tablecomponent/models';
 
 const SORT_KEY = 'sort';
-export interface FilterField extends TableColumn{};
+export interface FilterField extends TableColumn {};
 @Component({
   selector: 'ngx-tableheader',
   templateUrl: './tableheader.component.html',

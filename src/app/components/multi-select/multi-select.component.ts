@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
 import { LocationService } from 'app/modules/module-settings/services/location.service';
+import { PositionService } from 'app/modules/module-settings/services/position.service';
 import { TrainingCategoryService } from 'app/modules/training/services/training-category.service';
 import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
 import { TypesService } from 'app/modules/training/services/types.service';
@@ -11,6 +12,7 @@ export enum ChoiceName {
   trainingSpecialization,
   trainingType,
   departments,
+  positions,
   locations,
   units,
 }
@@ -23,10 +25,15 @@ export class MultiSelectComponent implements OnInit {
   @Input() set value(val) {
     this.selectedItems = val;
   }
+  @Input() set idValue(val){
+
+  }
+  @Output() idValueChange = new EventEmitter();
 
   @Output() valueChange = new EventEmitter();
   @Input() choice_name: ChoiceName = null;
   @Input() singleSelection = true;
+  @Input() items: [] = null;
 
   constructor(
     private trainingCategoryService: TrainingCategoryService,
@@ -34,6 +41,7 @@ export class MultiSelectComponent implements OnInit {
     private trainingTypeService: TypesService,
     private locationService: LocationService,
     private departmentService: DepartmentsService,
+    private positionService: PositionService,
   ) {}
 
   dropdownList = [];
@@ -70,6 +78,7 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.trainingType] = this.trainingTypeService;
       config[ChoiceName.locations] = this.locationService;
       config[ChoiceName.departments] = this.departmentService;
+      config[ChoiceName.positions] = this.positionService;
       this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;
       console.log(this.dropdownList)
       //1 this.dropdownList = (await this.trainingSpecializationService.list({}).toPromise()).data;
@@ -83,10 +92,28 @@ export class MultiSelectComponent implements OnInit {
         allowSearchFilter: true,
       };
     }
+    if (this.items) {
+      this.dropdownList = this.items;
+      this.dropdownSettings = {
+        singleSelection: this.singleSelection,
+        idField: 'name',
+        textField: 'label',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+      };
+    }
   }
   onItemSelect(item: any) {
     console.log(item);
     this.valueChange.emit(this.selectedItems);
+    const idValues = this.selectedItems.map(data => data[this.dropdownSettings.idField]);
+    if (this.singleSelection) {
+      this.idValueChange.emit(idValues.length > 0 ? idValues[0] : null);
+    } else {
+      this.idValueChange.emit(idValues);
+    }
   }
   onSelectAll(items: any) {
     console.log(items);
