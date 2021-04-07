@@ -1,6 +1,7 @@
-import { AlertserviceService } from 'app/_services/alertservice.service';
+import { AlertserviceService } from './../../../../_services/alertservice.service';
+import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
 import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO } from './../../../../_services/service-proxies';
-import { MyBudgetItem } from './../../services/budget-item.service';
+import { MyBudgetItem, MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { MyBudget, BudgetService } from './../../services/budget.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -13,8 +14,12 @@ import { NgForm } from '@angular/forms';
 export class SetupComponent implements OnInit {
 
   budget: ManageBudgetDTO = new ManageBudgetDTO;
+  budgetItem: BudgetDTO = new BudgetDTO;
+  allDepartments: Department [] = [];
+  departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
 
-  constructor(private budgetService: AddUpdateBudgetServiceProxy, private alert: AlertserviceService) { }
+  constructor(private budgetService: AddUpdateBudgetServiceProxy, private alertMe: AlertserviceService,
+    private alert: AlertserviceService, private common: CommonServiceProxy) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +45,22 @@ export class SetupComponent implements OnInit {
     this.alert.openModalAlert('Failed', 'Budget could not be added', 'Dismiss');
   }
   }
+
+  addDepartment(){
+    let myDepartment: MyBudgetItemDepartment[] = [];
+    myDepartment.push(this.departments)
+    this.alertMe.alertMessage
+    console.log(myDepartment);
+  }
+
+  async fetchDepartments(){
+    const data = await this.common.getDepartments().toPromise();
+    if(!data.hasError){
+      this.allDepartments = data.result;
+      console.log('My departments', this.allDepartments)
+    }
+  }
+
 
 
 
