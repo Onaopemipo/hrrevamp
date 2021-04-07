@@ -2,7 +2,15 @@
   pageName="Disbursement History"
   [requiredButton]="[]"
 ></ngx-componentsheader>
-<div class="main-page-container">
+<div *ngIf="defaultPage < 1">
+
+  <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription">
+  </ngx-default-content>
+  </div>
+
+
+
+<div *ngIf="defaultPage > 0" class="main-page-container">
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="Single" [tabId]="TABS.SINGLE">
     </nb-tab>
