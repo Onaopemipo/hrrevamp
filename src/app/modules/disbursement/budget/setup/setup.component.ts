@@ -22,6 +22,7 @@ export class SetupComponent implements OnInit {
     private alert: AlertserviceService, private common: CommonServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchDepartments();
   }
 
   page = 1;
