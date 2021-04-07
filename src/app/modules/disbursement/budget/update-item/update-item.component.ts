@@ -1,5 +1,5 @@
 import { BudgetItemDTO, FetchAllBudgetItemsServiceProxy, FetchGetBudgetServiceProxy, FetchBudgetItemsServiceProxy, FetchGetBudgetItemServiceProxy } from './../../../../_services/service-proxies';
-import { Department, DepartmentDTO } from 'app/_services/service-proxies';
+import { Department, DepartmentDTO } from './../../../../_services/service-proxies';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 // import { MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { Component, OnInit } from '@angular/core';

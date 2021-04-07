@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
 import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO } from './../../../../_services/service-proxies';
-import { MyBudgetItem, MyBudgetItemDepartment } from './../../services/budget-item.service';
+import { MyBudgetItem } from './../../services/budget-item.service';
 import { MyBudget, BudgetService } from './../../services/budget.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -16,7 +16,7 @@ export class SetupComponent implements OnInit {
   budget: ManageBudgetDTO = new ManageBudgetDTO;
   budgetItem: BudgetDTO = new BudgetDTO;
   allDepartments: Department [] = [];
-  departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
+  departments:any ='';
 
   constructor(private budgetService: AddUpdateBudgetServiceProxy, private alertMe: AlertserviceService,
     private alert: AlertserviceService, private common: CommonServiceProxy) { }
@@ -47,7 +47,7 @@ export class SetupComponent implements OnInit {
   }
 
   addDepartment(){
-    let myDepartment: MyBudgetItemDepartment[] = [];
+    let myDepartment = [];
     myDepartment.push(this.departments)
     this.alertMe.alertMessage
     console.log(myDepartment);

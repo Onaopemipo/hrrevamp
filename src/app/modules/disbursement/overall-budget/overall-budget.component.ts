@@ -1,7 +1,7 @@
 import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
-import { MyBudgetItem, MyBudgetItemDepartment, BudgetItemService } from './../services/budget-item.service';
+import { MyBudgetItem, BudgetItemService } from './../services/budget-item.service';
 import { MyBudget, BudgetService } from './../services/budget.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +23,7 @@ export class OverallBudgetComponent implements OnInit {
   defaultPage: number = 0;
   budget: BudgetDTO = new BudgetDTO;
   budgetItem: BudgetItemDTO = new BudgetItemDTO;
-  departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
+  departments: any = '';
 
   constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
     private budgetService: FetchAllBudgetsServiceProxy, private budgetServices: FetchGetBudgetServiceProxy,
@@ -80,7 +80,7 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   addDepartment(){
-    let myDepartment: MyBudgetItemDepartment[] = [];
+    let myDepartment = [];
     myDepartment.push(this.departments)
     this.alertMe.alertMessage
     console.log(myDepartment);
