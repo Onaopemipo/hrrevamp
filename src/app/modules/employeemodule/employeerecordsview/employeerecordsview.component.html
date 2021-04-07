@@ -1,8 +1,9 @@
 <ngx-componentsheader [pageName]="title"  >
 <div headerButton>
-  <button (click)="modal('submit')" nbButton status="primary" >
- Submit
-</button>
+  <ngx-loadable-button [loading]="loading"  (click)="modal('submit')" >
+    Submit
+  </ngx-loadable-button>
+
 </div>
 </ngx-componentsheader>
 
@@ -40,12 +41,12 @@
                   <img src="assets/icons/camera.jpg" onError="this.src='assets/icons/camera.jpg'" style="border-radius: 50%; height: 7em;width: 7rem;">
                  </div>
                  <div style="display: flex;flex-direction: column;justify-content: center;padding-left: 15px;"
-                 flow-init
+                 flow-init     
                  flowDrop
                  [flow]="flowBasic.flowJs"
                  (drop)="onDropFileceived(flowBasic)"
                  (dragover)="onDragOver($event)"
-
+          
                  >
                  <div (change)="filereceived(flowBasic)">
                   <a flowButton
@@ -57,9 +58,9 @@
                 <div style="flex: auto;">{{transfer.name}}</div>
                 &nbsp;&nbsp;
                 <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
-
+             
                </div>
-
+               
                 </div>
                   <h6 style="font-size: small !important;">Maximum size allowed is 600kb of PNG,JPEG,JPG</h6>
                  </div>
@@ -68,7 +69,7 @@
                   <small>Activate Self Service</small>
                   </div>
             </div>
-<!--
+<!-- 
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">Input required Information in the fields below</p>
                 </div> -->
@@ -95,7 +96,7 @@
                           <div class="form-group row">
                             <label for="PhoneNumber" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.defaultMobile" placeholder="Phone Number" required>
+                              <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.phoneNumber" placeholder="Phone Number" required>
                               <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
                                 <div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
                               </div>
@@ -219,10 +220,10 @@
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
                 <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" *ngIf="createNewEmployee.id">
                   <nb-icon icon="edit-2-outline" status="primary"></nb-icon> Edit
-
+                
                   </div>
             </div>
-
+            
             <div *ngIf="!createNewEmployee.id" style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
                 <p class="smalltext">No Contract Record Found</p>
                 </div>
@@ -245,21 +246,21 @@
             </div>
 
 
-                <div style="padding-top:1.5rem;">
+                <div style="padding-top:1.5rem;">             
                   <ngx-default-content
                   *ngIf="documentEmpty"
                   pageHeader="No Document Found"
-                  pageDescription=""
-                  [loading]="documentloading"
+                  pageDescription=""                  
+                  [loading]="documentloading"               
                 >
                 </ngx-default-content>
-                  <ngx-tablecomponent
-                  *ngIf="!documentEmpty"
+                  <ngx-tablecomponent  
+                  *ngIf="!documentEmpty"              
                   [showActions]="true"
                   [showFilter]="false"
                   (actionClick)="documenttableActionClicked($event)"
-                  [actions]="documenttableActions"
-                  [userData]="createNewEmployee.documents"
+                  [actions]="documenttableActions" 
+                  [userData]="createNewEmployee.documents" 
                   [tableColum]="documenttableColumns"
                   [totalItems]="documenttotalItems"
                   [currentPage]="documentcurrentPage"
@@ -277,32 +278,32 @@
                 </div>
           </div>
 
-
+         
                 <div style="padding-top:1.5rem;">
-
+                           
                     <ngx-default-content
                     *ngIf="qualificationEmpty"
                     pageHeader="Add your first Qualification"
                     pageDescription="Click on the button to add Qualification"
                     buttonValue="Add Qualification"
                     [loading]="qualificationloading"
-                    (buttonClick)="showQualificationModal = true"
+                    (buttonClick)="showQualificationModal = true"              
                   >
                   </ngx-default-content>
-                    <ngx-tablecomponent
-                    *ngIf="!qualificationEmpty"
+                    <ngx-tablecomponent  
+                    *ngIf="!qualificationEmpty"              
                     [showActions]="true"
                     [showFilter]="false"
                     (actionClick)="qualificationtableActionClicked($event)"
-                    [actions]="qualificationtableActions"
-                    [userData]="createNewEmployee.qualifications"
+                    [actions]="qualificationtableActions" 
+                    [userData]="createNewEmployee.qualifications" 
                     [tableColum]="qualificationtableColumns"
                     [totalItems]="qualificationtotalItems"
                     [currentPage]="qualificationcurrentPage"
                     [loading]="qualificationloading"
                     >
                 </ngx-tablecomponent>
-
+              
                 </div>
         </div>
         <!--Bank-->
@@ -322,16 +323,16 @@
                   pageDescription="Click on the button to add Bank Details"
                   buttonValue="Add Bank"
                   [loading]="EmpBankloading"
-                  (buttonClick)="showbankModal = true"
+                  (buttonClick)="showbankModal = true"              
                 >
                 </ngx-default-content>
-                  <ngx-tablecomponent
-                  *ngIf="!EmpBankEmpty"
+                  <ngx-tablecomponent  
+                  *ngIf="!EmpBankEmpty"              
                   [showActions]="true"
                   [showFilter]="false"
                   (actionClick)="embBanktableActionClicked($event)"
-                  [actions]="EmpBanktableActions"
-                  [userData]="createNewEmployee.banks"
+                  [actions]="EmpBanktableActions" 
+                  [userData]="createNewEmployee.banks" 
                   [tableColum]="EmpBanktableColumns"
                   [totalItems]="EmpBanktotalItems"
                   [currentPage]="EmpBankcurrentPage"
@@ -349,37 +350,37 @@
 
                 <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
                     <div style="padding-top:1.5rem;">
-                        <form>
+                        <form id="nxtKinForm" name="nxtKinForm" #nxtKinForm="ngForm">
                           <div class="row" style="padding-top:10px">
                             <div class="col-sm-6 form-group">
                               <label>First Name</label>
-                              <input type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
-
+                              <input #nok_first_name="ngModel" id="nok_first_name" name="nok_first_name" [(ngModel)]="createNewEmployee.nexkOfKin.nok_first_name" type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
+                           
                             </div>
                             <div class="col-sm-6 form-group">
                               <label>Last Name</label>
-                              <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Last Name"  required>
-
+                              <input #nok_last_name="ngModel" id="nok_last_name" name="nok_last_name" [(ngModel)]="createNewEmployee.nexkOfKin.nok_last_name" type="text" fullWidth class="form-control" nbInput placeholder="Enter Last Name"  required>
+                           
                             </div>
                             <div class="col-sm-6 form-group">
                               <label>Phone Number</label>
-                              <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Phone Number"  required>
-
+                              <input #nok_phone="ngModel" id="nok_phone" name="nok_phone" [(ngModel)]="createNewEmployee.nexkOfKin.nok_phone" type="text" fullWidth class="form-control" nbInput placeholder="Enter Phone Number"  required>
+                           
                             </div>
                             <div class="col-sm-6 form-group">
                               <label>Relationship with Next of Kin</label>
-                              <input type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
-
+                              <input #nok_relationship="ngModel" id="nok_relationship" name="nok_relationship" [(ngModel)]="createNewEmployee.nexkOfKin.nok_relationship" type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
+                           
                             </div>
                             <div class="col-sm-12 form-group">
                               <label>Next of Kin Address</label>
-                              <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
-
+                              <input #nok_address="ngModel" id="nok_address" name="nok_address" [(ngModel)]="createNewEmployee.nexkOfKin.nok_address" type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                           
                             </div>
                           </div>
                               <div class="form-group row">
                                 <div class="col-sm-12">
-                                  <button type="submit" nbButton status="primary" >Submit</button>
+                                  <button type="submit" nbButton status="primary" [disabled]="nxtKinForm.invalid"  (click)="nextPanel()" >Next</button>
                                 </div>
                               </div>
                         </form>
@@ -399,36 +400,38 @@
                         <div class="col-sm-6 form-group">
                           <label>Address Type</label>
                           <input type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
-
+                       
                         </div>
                         <div class="col-sm-6 form-group">
                           <label>Country</label>
                           <select class="form-control"  required >
                             <option value="">--Select Country--</option>
-
+                         
                         </select>
                         </div>
                         <div class="col-sm-6 form-group">
                           <label>State</label>
                           <select class="form-control"  required >
                             <option value="">--Select State--</option>
-
+                         
                         </select>
                         </div>
                         <div class="col-sm-6 form-group">
                           <label>Local Government Area (LGA)</label>
                           <input type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
-
+                       
                         </div>
                         <div class="col-sm-12 form-group">
-                          <label>Address 1</label>
+                          <label>Address Line 1</label>
                           <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
-                          <nb-checkbox>Primary Account</nb-checkbox>
                         </div>
                         <div class="col-sm-12 form-group">
-                          <label>Address 2</label>
+                          <label>Address Line 2</label>
                           <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
-                          <nb-checkbox>Primary Account</nb-checkbox>
+                    
+                        </div>
+                        <div class="col-sm-12 form-group">
+                           <nb-checkbox>Primary Account</nb-checkbox>
                         </div>
                       </div>
                           <div class="form-group row">
@@ -445,7 +448,7 @@
                 <div style="padding-bottom: 5px;">
                   <p class="header6-medium">{{selectedPanel.label}}</p>
               </div>
-
+  
               <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
                   <div style="padding-top:1.5rem;">
                       <form>
@@ -453,19 +456,19 @@
                           <div class="col-sm-6 form-group">
                             <label>Pensioner File No.</label>
                             <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Pensioner File No"  required>
-
+                         
                           </div>
                           <div class="col-sm-6 form-group">
                             <label>PFA Name</label>
                             <input type="text" fullWidth class="form-control" nbInput placeholder="Enter PFA Name"  required>
-
+                         
                           </div>
                           <div class="col-sm-6 form-group">
                             <label>RSA Number</label>
                             <input type="text" fullWidth class="form-control" nbInput placeholder="Enter RSA Number"  required>
-
+                         
                           </div>
-
+                        
                         </div>
                             <div class="form-group row">
                               <div class="col-sm-12">
@@ -495,7 +498,7 @@
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
                             <th scope="col">Action</th>
-
+                       
                           </tr>
                         </thead>
                         <tbody>
@@ -504,11 +507,11 @@
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>
+                            <td>Otto</td>             
+                            <td>Otto</td>          
                             <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
                           </tr>
-
+                         
                         </tbody>
                       </table>
                     </div>
@@ -529,16 +532,16 @@
                           <th scope="col">Category</th>
                           <th scope="col">Skill</th>
                           <th scope="col">Action</th>
-
+                     
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <th scope="row">Name</th>
-                          <td>Mark</td>
+                          <td>Mark</td>                              
                           <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
                         </tr>
-
+                       
                       </tbody>
                     </table>
                   </div>
@@ -561,19 +564,19 @@
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Action</th>
-
+           
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">Name</th>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
+                <td>Mark</td>                
+                <td>Mark</td>    
+                <td>Mark</td>    
+                <td>Mark</td>                  
                 <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
               </tr>
-
+             
             </tbody>
           </table>
         </div>
@@ -596,19 +599,19 @@
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Action</th>
-
+           
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">Name</th>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Mark</td>
+                <td>Mark</td>                
+                <td>Mark</td>    
+                <td>Mark</td>    
+                <td>Mark</td>                  
                 <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
               </tr>
-
+             
             </tbody>
           </table>
         </div>
@@ -629,7 +632,7 @@
 
  <!--Add New Certification-->
  <ngx-side-modal [(show)]='showCertificationModal' style="width: 500px; height: 1000px;">
-
+    
   <div modal-header>Add Certification <br> <small>Fill in Below Details</small></div>
   <div modal-body>
     <form id="certificationForm" name="certificationForm" #certificationForm="ngForm">
@@ -639,46 +642,46 @@
           <label>Category</label>
           <select class="form-control"  required >
             <option value="">--Select Category--</option>
-
+         
         </select>
-
+       
         </div>
         <div class="col-sm-6 form-group">
           <label>Name of Certification</label>
           <select class="form-control"  required >
             <option value="">--Select Title--</option>
-
+         
         </select>
-
+       
         </div>
-
+      
         <div class="col-sm-6 form-group">
           <label>Vendor</label>
           <select class="form-control"  required >
             <option value="">--Select Title--</option>
-
+         
         </select>
-
+       
         </div>
         <div class="col-sm-12 form-group">
           <label>Start Date</label>
           <ngx-date ></ngx-date>
-
+        
         </div>
         <div class="col-sm-12 form-group">
           <label>End Date</label>
           <ngx-date ></ngx-date>
-
+        
         </div>
       </div>
-
-
+   
+    
     </form>
   </div>
   <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
     <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
     <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-
+    
 
 </div>
 <div style="margin-top: 10px;"></div>
@@ -686,7 +689,7 @@
 
  <!--Add New Training-->
  <ngx-side-modal [(show)]='showTrainingModal' style="width: 500px; height: 1000px;">
-
+    
   <div modal-header>Add Training <br> <small>Fill in Below Details</small></div>
   <div modal-body>
     <form id="trainingForm" name="trainingForm" #trainingForm="ngForm">
@@ -696,47 +699,47 @@
           <label>Category</label>
           <select class="form-control"  required >
             <option value="">--Select Category--</option>
-
+         
         </select>
-
+       
         </div>
 
         <div class="col-sm-6 form-group">
           <label>Name of Training</label>
           <select class="form-control"  required >
             <option value="">--Select Title--</option>
-
+         
         </select>
-
+       
         </div>
-
+   
         <div class="col-sm-6 form-group">
           <label>Vendor</label>
           <select class="form-control"  required >
             <option value="">--Select Title--</option>
-
+         
         </select>
-
+       
         </div>
         <div class="col-sm-12 form-group">
           <label>Start Date</label>
           <ngx-date ></ngx-date>
-
+        
         </div>
         <div class="col-sm-12 form-group">
           <label>End Date</label>
           <ngx-date ></ngx-date>
-
+        
         </div>
       </div>
-
-
+   
+    
     </form>
   </div>
   <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
     <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
     <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-
+    
 
 </div>
 <div style="margin-top: 10px;"></div>
@@ -744,99 +747,99 @@
 
       <!--Add New Skill -->
       <ngx-side-modal [(show)]='showSkillModal' style="width: 500px; height: 1000px;">
-
+    
         <div modal-header>Add New Skill <br> <small>Fill in Below Details</small></div>
         <div modal-body>
           <form id="skillForm" name="skillForm" #skillForm="ngForm">
-
+    
             <div class="row" style="padding-top:10px">
               <div class="col-sm-12 form-group">
                 <label>Category</label>
                 <select class="form-control"  required >
                   <option value="">--Select Category--</option>
-
+               
               </select>
-
+             
               </div>
               <div class="col-sm-12 form-group">
                 <label>Skill</label>
           <ngx-multi-select></ngx-multi-select>
-
+             
               </div>
-
+           
             </div>
-
-
+         
+          
           </form>
         </div>
         <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
           <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
           <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-
-
+          
+  
       </div>
       <div style="margin-top: 10px;"></div>
       </ngx-side-modal>
 
     <!--Add New Employment History-->
     <ngx-side-modal [(show)]='showEmpHistoryModal' style="width: 500px; height: 1000px;">
-
+    
       <div modal-header>Add Employment History <br> <small>Fill in Below Details</small></div>
       <div modal-body>
         <form id="EmHistoryForm" name="EmHistoryForm" #EmHistoryForm="ngForm">
-
+  
           <div class="row" style="padding-top:10px">
             <div class="col-sm-6 form-group">
               <label>Job Title</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Department</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Grade</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Salary Scale</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-12 form-group">
               <label>Start Date</label>
               <ngx-date ></ngx-date>
-
+            
             </div>
             <div class="col-sm-12 form-group">
               <label>End Date</label>
               <ngx-date ></ngx-date>
-
+            
             </div>
           </div>
-
-
+       
+        
         </form>
       </div>
       <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
         <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
         <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-
+        
 
     </div>
     <div style="margin-top: 10px;"></div>
@@ -844,12 +847,12 @@
 
       <!--Add New Bank Details-->
       <ngx-side-modal [(show)]='showbankModal' style="width: 500px; height: 1000px;">
-
+    
         <div modal-header>Add New Bank <br> <small>Fill in Below Details</small></div>
         <div modal-body>
           <form id="bankForm" name="bankForm" #bankForm="ngForm">
             <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
-
+           
             <div class="row" style="padding-top:10px">
               <div class="col-sm-6 form-group">
                 <label>Bank Name</label>
@@ -857,12 +860,12 @@
                   <option value="">--Select Bank--</option>
                   <option *ngFor="let bank of bankList" value="{{bank.option_value}}">{{bank.option_text}}</option>
               </select>
-
+             
               </div>
               <div class="col-sm-6 form-group">
                 <label>Account Numer</label>
                 <input type="text" (keyup)="inputNumberValidation($event)"  class="form-control" #account_no="ngModel" [(ngModel)]="indVEmpBanks.account_no" id="account_no" name="account_no">
-
+               
               </div>
               <div class="col-sm-6 form-group">
                 <label>Account Type</label>
@@ -870,7 +873,7 @@
                   <option value="">--Select Type--</option>
                   <option *ngFor="let accounttype of accounttypes" value="{{accounttype.id}}">{{accounttype.text}}</option>
               </select>
-
+             
               </div>
               <div class="col-sm-6 form-group">
                 <label>Sort Code</label>
@@ -879,28 +882,29 @@
               <div class="col-sm-12 form-group">
                 <nb-checkbox #is_primary="ngModel" [(ngModel)]="indVEmpBanks.is_primary" id="is_primary" name="is_primary">
                   Primary Account</nb-checkbox>
-
+              
               </div>
-
+            
             </div>
-
-
+         
+          
           </form>
           <div style="padding-top: 5px;">
             <div class="row">
-<div class="col-sm-6"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
+<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
   <div class="cbadge">{{getbankname(tempbank.id_bank)}}&nbsp;|&nbsp;{{tempbank.numb_account}}&nbsp;<i class="fa fa-times" (click)="removefromBank(i)" style="color:#EB5757;cursor: pointer;"></i></div>
 </div>
             </div>
-
+           
           </div>
         </div>
         <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
-          <ngx-loadable-button [loading]="EmpBankloading" [disabled]="tempEmpBanksList.length < 1" >
-          </ngx-loadable-button>
+          <ngx-loadable-button [loading]="EmpBankloading" [disabled]="tempEmpBanksList.length < 1" (click)="submitbank()" >
+            Submit
+          </ngx-loadable-button>           
           <div style="padding-left: 15px;">
             <button [disabled]="!disableaddBank" outline="true" (click)="addtopbank(indVEmpBanks)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
-
+         
           </div>
       </div>
       <div style="margin-top: 10px;"></div>
@@ -908,64 +912,64 @@
 
     <!--Add New Qualification-->
     <ngx-side-modal [(show)]='showQualificationModal' style="width: 500px; height: 1000px;">
-
+    
       <div modal-header>Add Qualification <br> <small>Fill in Below Details</small></div>
       <div modal-body>
         <form id="qualificationForm" name="qualificationForm" #qualificationForm="ngForm">
-
+  
           <div class="row" style="padding-top:10px">
             <div class="col-sm-6 form-group">
               <label>Name of Qualification</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Type</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Course</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Institution</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
             <div class="col-sm-12 form-group">
               <label>Start Date</label>
               <ngx-date ></ngx-date>
-
+            
             </div>
             <div class="col-sm-12 form-group">
               <label>End Date</label>
               <ngx-date ></ngx-date>
-
+            
             </div>
           </div>
-
-
+       
+        
         </form>
         <div class="cbadge" >4</div>
       </div>
       <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
         <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
         <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-
+        
 
     </div>
     <div style="margin-top: 10px;"></div>
@@ -974,28 +978,28 @@
 
      <!--Add New Document-->
     <ngx-side-modal [(show)]='showdocumentUploadModal' style="width: 500px; height: 1000px;">
-
+    
       <div modal-header>Upload Document <br> <small>Fill in Below Details</small></div>
       <div modal-body>
         <form id="documentUploadtForm" name="documentUploadtForm" #documentUploadtForm="ngForm">
-
+  
           <div class="row" style="padding-top:10px">
             <div class="col-sm-6 form-group">
               <label>File Name</label>
               <input type="text"  class="form-control" nbInput placeholder="Enter File Name"  required>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>File Type</label>
               <select class="form-control"  required >
                 <option value="">--Select Title--</option>
-
+             
             </select>
-
+           
             </div>
           </div>
           <div class="form-group">
-            <div style="width: 100%;display: flex;flex-direction: row;"  flow-init
+            <div style="width: 100%;display: flex;flex-direction: row;"  flow-init     
             flowDrop
             [flow]="flowBasic.flowJs"
             (drop)="onDropFileceived(flowBasic)"
@@ -1012,9 +1016,9 @@
                  <div style="flex: auto;">{{transfer.name}}</div>
                  &nbsp;&nbsp;
                  <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
-
+              
                 </div>
-
+                
                  </div>
             </div>
             </div>
@@ -1022,13 +1026,13 @@
           <div class="form-group">
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Comment</label>
             <textarea rows="5"  id="comment" name="comment"  nbInput fullWidth   placeholder="Enter Comment"></textarea>
-          </div>
+          </div> 
         </form>
       </div>
       <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
         <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
         <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-
+        
 
     </div>
     <div style="margin-top: 10px;"></div>
@@ -1037,120 +1041,120 @@
 
      <!--Employee Contract Record-->
     <ngx-side-modal [(show)]='showEmployeeContractModal' style="width: 500px; height: 1000px;">
-
+    
       <div modal-header>Edit Contract <br> <small>Fill in Below Details</small></div>
       <div modal-body>
-
+       
           <form id="contractForm" name="contractForm" #contractForm="ngForm">
-
+  
                 <div class="row" style="padding-top:10px">
                   <div class="col-sm-6 form-group">
                     <label>Employee Name</label>
                     <input type="text"  class="form-control" readonly  required>
-
+                 
                   </div>
                   <div class="col-sm-6 form-group">
                       <label>Department</label>
                       <select class="form-control"   >
                           <option value="">--Select Department--</option>
-
+                       
                       </select>
-
+                 
                   </div>
                 <div class="col-sm-6 form-group">
                <label for="Employee Name" style="font-size: small;font-weight: bold;">Supervisor:</label>
                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
-
+               
                 </div>
                 <div class="col-sm-6 form-group">
                   <label>Job Title</label>
                   <select class="form-control"   >
                       <option value="">--Select Title--</option>
-
+                   
                   </select>
-
+             
               </div>
               <div class="col-sm-6 form-group">
                 <label>Position</label>
                 <select class="form-control"   >
                     <option value="">--Select Position--</option>
-
+                 
                 </select>
-
+           
             </div>
             <div class="col-sm-6 form-group">
               <label>Location</label>
               <select class="form-control"   >
                   <option value="">--Select Location--</option>
-
+               
               </select>
-
+         
           </div>
             <div class="col-sm-12 form-group">
               <label>Date of Confirmation</label>
               <ngx-date ></ngx-date>
-
+         
           </div>
 
           <div class="col-sm-12 form-group">
             <label>Date of Appointment</label>
             <ngx-date ></ngx-date>
-
+       
         </div>
         <div class="col-sm-12 form-group">
           <label>Date of Conversion</label>
           <ngx-date ></ngx-date>
-
+     
       </div>
       <div class="col-sm-6 form-group">
         <label>Payroll Type</label>
         <select class="form-control"   >
             <option value="">--Select Location--</option>
-
+         
         </select>
-
+   
     </div>
     <div class="col-sm-6 form-group">
       <label>Employement Type</label>
       <select class="form-control"   >
           <option value="">--Select Type--</option>
-
+       
       </select>
-
+  
   </div>
   <div class="col-sm-12 form-group">
     <label>Contract End Date</label>
     <ngx-date ></ngx-date>
-
+  
   </div>
   <div class="col-sm-6 form-group">
     <label>Salary Scale</label>
     <select class="form-control"   >
         <option value="">--Select Scale--</option>
-
+     
     </select>
-
+  
   </div>
   <div class="col-sm-6 form-group">
     <label>Grade</label>
     <select class="form-control"   >
         <option value="">--Select Scale--</option>
-
+     
     </select>
-
+  
   </div>
   <div class="col-sm-12 form-group">
     <label>Date of Employment</label>
     <ngx-date ></ngx-date>
-
+  
   </div>
   <div class="col-sm-6 form-group">
     <label>Grade Step</label>
     <select class="form-control"   >
         <option value="">--Select Scale--</option>
-
+     
     </select>
-
+  
   </div>
 
         </div>
@@ -1158,18 +1162,19 @@
 
       </form>
                 </div>
-
-
-
-
-
-
+         
+            
+     
+  
+  
+  
       <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
           <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
           <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Save Changes</button>
-
+     
 
       </div>
       <div style="margin-top: 10px;"></div>
-
+  
   </ngx-side-modal>
+  
