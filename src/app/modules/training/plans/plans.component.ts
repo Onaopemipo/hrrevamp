@@ -61,7 +61,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
   formConfig: FormConfig = {
     fields: [
       {name: 'type', label: 'Training Type', type: FORM_TYPES.select},
-      {name: 'range', label: 'Date Range', type: FORM_TYPES.date_range}
+      {name: 'range', label: 'Date Range', type: FORM_TYPES.date_range},
       {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
       // {name: 'a', label: 'Attachment', type: FORM_TYPES.att}
       {name: 'description', label: 'Beneficiary', type: FORM_TYPES.employee},
