@@ -1,6 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormConfig } from '../custom-form/custom-form.component';
 
+export interface EmptyConfig {
+  pageHeader?: string;
+  pageDescription?: string;
+  buttonValue?: string;
+  actionName?: string;
+}
 @Component({
   selector: 'ngx-page',
   templateUrl: './page.component.html',

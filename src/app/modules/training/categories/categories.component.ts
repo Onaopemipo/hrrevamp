@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'app/components/base/base.component';
 import { FormConfig, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
+import { EmptyConfig } from 'app/components/page/page.component';
 import { ColumnTypes } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
@@ -39,13 +40,18 @@ export class CategoriesComponent extends BaseComponent<ModelType, FilterType, Mo
     {name: 'name', title: 'Status', type: ColumnTypes.Status},
   ]
   pageTitle = 'Training Categories';
-  requiredButton = [{name: 'newTraining', label: 'New Category', icon: 'plus'}];
+  requiredButton = [{name: 'newTraining', label: 'New Specialization', icon: 'plus'}];
   formConfig: FormConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text}
     ]
   };
-  formTitle = 'Add new Category';
+  formTitle = 'Add new Specialization';
+  emptyConfig: EmptyConfig = {
+    pageHeader: 'Create your first Specialization',
+    pageDescription: '',
+    buttonValue: 'Create Specialization',
+  }
   constructor(
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,

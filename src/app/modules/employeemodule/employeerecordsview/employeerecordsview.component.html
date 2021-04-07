@@ -1,6 +1,12 @@
-<ngx-componentsheader [pageName]="title" >
-
+<ngx-componentsheader [pageName]="title"  >
+<div headerButton>
+  <button (click)="modal('submit')" nbButton status="primary" >
+ Submit
+</button>
+</div>
 </ngx-componentsheader>
+
+
 <div class="row">
     <div class="col-md-4 col-xxl-4">
     <nb-card>
@@ -55,7 +61,7 @@
                </div>
                
                 </div>
-                  <h6>Maximum size allowed is 600kb of PNG,JPEG,JPG</h6>
+                  <h6 style="font-size: small !important;">Maximum size allowed is 600kb of PNG,JPEG,JPG</h6>
                  </div>
                   </div>
                   <div style="display: flex;justify-content: flex-end;">
@@ -211,21 +217,19 @@
         <div class="fmContainer" *ngSwitchCase="'contract_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
-                <div style="cursor: pointer;" (click)="showEmployeeContractModal = true">
+                <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" *ngIf="createNewEmployee.id">
                   <nb-icon icon="edit-2-outline" status="primary"></nb-icon> Edit
-                    <!-- <nb-select selected="1" status="primary">
-                      <nb-option value="1">Actions</nb-option>
-                      <nb-option value="2">Option 2</nb-option>
-                    </nb-select> -->
+                
                   </div>
             </div>
-<!-- 
-            <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
-                <p class="smalltext">Input required Information in the fields below</p>
-                </div> -->
-                <div style="padding-top:1.5rem;">
+            
+            <div *ngIf="!createNewEmployee.id" style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
+                <p class="smalltext">No Contract Record Found</p>
+                </div>
+
+                <div style="padding-top:1.5rem;" *ngIf="createNewEmployee.id">
                 <div style="display: flex;flex-direction: row;">
-                <div style="text-transform:capitalize;" class="header6-medium">assignment no</div>
+                <div style="text-transform:capitalize;" class="header6-medium">assignment no: </div>
                 <div style="padding-left: 20px" class="header6-medium">ADMIN-1</div>
                 </div>
                 </div>
@@ -235,33 +239,33 @@
          <div class="fmContainer" *ngSwitchCase="'document_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
-                <div>
+                <div *ngIf="createNewEmployee.id">
                   <button nbButton status="primary"  (click)="showdocumentUploadModal = true">Add New</button>
                   </div>
             </div>
 
 
                 <div style="padding-top:1.5rem;">             
-                  
-                  <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Document Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Last Modified Date</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Name</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
+                  <ngx-default-content
+                  *ngIf="documentEmpty"
+                  pageHeader="No Document Found"
+                  pageDescription=""                  
+                  [loading]="documentloading"               
+                >
+                </ngx-default-content>
+                  <ngx-tablecomponent  
+                  *ngIf="!documentEmpty"              
+                  [showActions]="true"
+                  [showFilter]="false"
+                  (actionClick)="documenttableActionClicked($event)"
+                  [actions]="documenttableActions" 
+                  [userData]="createNewEmployee.documents" 
+                  [tableColum]="documenttableColumns"
+                  [totalItems]="documenttotalItems"
+                  [currentPage]="documentcurrentPage"
+                  [loading]="documentloading"
+                  >
+              </ngx-tablecomponent>
                 </div>
         </div>
           <!--Medical Info-->
@@ -275,31 +279,29 @@
 
          
                 <div style="padding-top:1.5rem;">
-                  <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Name of Qualification</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Institution</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Name</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                        <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
+                           
+                    <ngx-default-content
+                    *ngIf="qualificationEmpty"
+                    pageHeader="Add your first Qualification"
+                    pageDescription="Click on the button to add Qualification"
+                    buttonValue="Add Qualification"
+                    [loading]="qualificationloading"
+                    (buttonClick)="showQualificationModal = true"              
+                  >
+                  </ngx-default-content>
+                    <ngx-tablecomponent  
+                    *ngIf="!qualificationEmpty"              
+                    [showActions]="true"
+                    [showFilter]="false"
+                    (actionClick)="qualificationtableActionClicked($event)"
+                    [actions]="qualificationtableActions" 
+                    [userData]="createNewEmployee.qualifications" 
+                    [tableColum]="qualificationtableColumns"
+                    [totalItems]="qualificationtotalItems"
+                    [currentPage]="qualificationcurrentPage"
+                    [loading]="qualificationloading"
+                    >
+                </ngx-tablecomponent>
               
                 </div>
         </div>
@@ -314,30 +316,28 @@
                 </div>
           </div>
                 <div style="padding-top:1.5rem;">
-                  <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Bank Name</th>
-                        <th scope="col">Account No</th>
-                        <th scope="col">Account Name</th>
-                        <th scope="col">Account Type</th>
-                        <th scope="col">Primary</th>
-                        <th scope="col">Action</th>
-                   
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Name</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>Mark</td>
-                        <td>Otto</td>                  
-                        <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
+                  <ngx-default-content
+                  *ngIf="EmpBankEmpty"
+                  pageHeader="Add your first Bank Details"
+                  pageDescription="Click on the button to add Bank Details"
+                  buttonValue="Add Bank"
+                  [loading]="EmpBankloading"
+                  (buttonClick)="showbankModal = true"              
+                >
+                </ngx-default-content>
+                  <ngx-tablecomponent  
+                  *ngIf="!EmpBankEmpty"              
+                  [showActions]="true"
+                  [showFilter]="false"
+                  (actionClick)="embBanktableActionClicked($event)"
+                  [actions]="EmpBanktableActions" 
+                  [userData]="createNewEmployee.banks" 
+                  [tableColum]="EmpBanktableColumns"
+                  [totalItems]="EmpBanktotalItems"
+                  [currentPage]="EmpBankcurrentPage"
+                  [loading]="EmpBankloading"
+                  >
+              </ngx-tablecomponent>
                 </div>
         </div>
 
@@ -848,35 +848,37 @@
         <div modal-header>Add New Bank <br> <small>Fill in Below Details</small></div>
         <div modal-body>
           <form id="bankForm" name="bankForm" #bankForm="ngForm">
-    
+            <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
+           
             <div class="row" style="padding-top:10px">
               <div class="col-sm-6 form-group">
                 <label>Bank Name</label>
-                <select class="form-control"  required >
+                <select class="form-control" #bank_id="ngModel" [(ngModel)]="indVEmpBanks.bank_id" id="bank_id" name="bank_id" >
                   <option value="">--Select Bank--</option>
-               
+                  <option *ngFor="let bank of bankList" value="{{bank.option_value}}">{{bank.option_text}}</option>
               </select>
              
               </div>
               <div class="col-sm-6 form-group">
                 <label>Account Numer</label>
-                <input type="text"  class="form-control" required>
-             
+                <input type="text"  class="form-control" #account_no="ngModel" [(ngModel)]="indVEmpBanks.account_no" id="account_no" name="account_no">
+               
               </div>
               <div class="col-sm-6 form-group">
                 <label>Account Type</label>
-                <select class="form-control"  required >
+                <select class="form-control" #account_typeId="ngModel" [(ngModel)]="indVEmpBanks.account_typeId" id="account_typeId" name="account_typeId" >
                   <option value="">--Select Type--</option>
-               
+                  <option *ngFor="let accounttype of accounttypes" value="{{accounttype.id}}">{{accounttype.text}}</option>
               </select>
              
               </div>
               <div class="col-sm-6 form-group">
                 <label>Sort Code</label>
-                <input type="text"  class="form-control" required>
+                <input type="text"  class="form-control" #account_typeId="ngModel" [(ngModel)]="indVEmpBanks.account_typeId" id="account_typeId" name="account_typeId">
               </div>
               <div class="col-sm-12 form-group">
-                <nb-checkbox>Primary Account</nb-checkbox>
+                <nb-checkbox #is_primary="ngModel" [(ngModel)]="indVEmpBanks.is_primary" id="is_primary" name="is_primary">
+                  Primary Account</nb-checkbox>
               
               </div>
             
@@ -884,10 +886,13 @@
          
           
           </form>
+          <div style="padding-top: 5px;">
+            <div class="cbadge" *ngFor="let tempbank of tempEmpBanksList">{{tempbank.account_no}}</div>
+          </div>
         </div>
         <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
           <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
+          <button *ngIf="!btnContractSubmitted" (click)="submitbank(indVEmpBanks)"  nbButton status="primary" class="d-flex column" >Submit</button>
           
   
       </div>
@@ -948,6 +953,7 @@
        
         
         </form>
+        <div class="cbadge" >4</div>
       </div>
       <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
         <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>

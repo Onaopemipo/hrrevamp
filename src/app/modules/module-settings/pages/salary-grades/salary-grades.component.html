@@ -6,10 +6,11 @@
 <div class="main-page-container">
 <ngx-default-content
     *ngIf="showEmpty"
-    pageHeader="Create your first Salary Scale"
-    pageDescription="Click on the button to create a Salary Scale"
-    buttonValue="Create Salary Scale"
+    pageHeader="Create your first Salary Grade"
+    pageDescription="Click on the button to create a Salary Grade"
+    buttonValue="Create Salary Grade"
     (buttonClick)="createNewClicked()"
+    [loading]="loading"
   >
   </ngx-default-content>
   <ngx-tablecomponent
@@ -24,7 +25,7 @@
   ></ngx-tablecomponent>
 </div>
 <ngx-side-modal [(show)]="showModal" (closed)="clearEditingData()">
-  <div modal-header>Add New Salary Scale</div>
+  <div modal-header>Add New Salary Grade</div>
   <div modal-body>
     <div class="my-form">
       <div class="form-group">
@@ -46,6 +47,7 @@
           <input
             class="form-control"
             placeholder="Name"
+            type="number"
             [(ngModel)]="editingData.noOfLeaveDays"
         />
         <ng-template [ngIf]="errors['noOfLeaveDays']">
@@ -59,6 +61,7 @@
           <input
             class="form-control"
             placeholder="Name"
+            type="number"
             [(ngModel)]="editingData.promotion_min_years"
         />
         <ng-template [ngIf]="errors['promotion_min_years']">

@@ -89,7 +89,9 @@ import {   SearchEmployeesServiceProxy,
   SalaryscaleServiceProxy,
   GetLocationByIdServiceProxy,
   TrainingServiceProxy,
-  CommonServiceProxy} from '../_services/service-proxies';
+  CommonServiceProxy,
+  CreateLeavePlanServiceProxy,
+} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { PageComponent } from './page/page.component';
@@ -225,7 +227,8 @@ import { CreateleaveRequestComponent } from './createleave-request/createleave-r
     LocationService,
     DepartmentsService,
     TrainingServiceProxy,
-    CommonServiceProxy
+    CommonServiceProxy,
+    CreateLeavePlanServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,

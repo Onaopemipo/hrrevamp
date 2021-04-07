@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { Grade, VwGradeSteps } from 'app/_services/service-proxies';
+import { Grade, GradeLevelStepServiceProxy, GradestepCreatePayload, GradestepDTO, VwGradeSteps } from 'app/_services/service-proxies';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 
-export class MyGradeStep extends VwGradeSteps implements IStatus {
+export class MyGradeStep extends GradestepDTO implements IStatus {
 
-  public constructor(salaryGrade: VwGradeSteps = new VwGradeSteps()) {
+  public constructor(salaryGrade: GradestepDTO = new GradestepDTO()) {
     super(salaryGrade);
   }
 
@@ -23,14 +24,20 @@ export class MyGradeStep extends VwGradeSteps implements IStatus {
   }
 
   toManage() {
-    // return new ManageDepartmentDTO();
+    return new GradestepCreatePayload({
+      id: this.id,
+      grade_id: this.grade_id,
+      step_no: this.step_no,
+      gradeName: '',
+      stepName: this.name
+    });
   }
 }
 
 export interface GradeStepFilter extends BaseFilter{
-  location_name?: string;
-  state_id?: number;
-  lga_id?: number;
+  grade_name?: boolean;
+  step_name?: boolean;
+  grade_id?: number;
 }
 
 @Injectable({
@@ -40,23 +47,20 @@ export class GradeStepService implements CrudService<GradeStepFilter, MyGradeSte
 
   pageSize = DEFAULT_PAGE_SIZE;
   constructor(
+    private api: GradeLevelStepServiceProxy,
   ) { }
 
   list(filter: GradeStepFilter) {
-    const subject = new Subject<ListResult<any>>();
-    window.setTimeout(()=> {
-      subject.next({data: [new MyGradeStep()], length: 10});
-    }, 2000);
-    return subject.asObservable();
+    return this.api.getAllGradeLevelSteps(filter.grade_name, filter.step_name, 10, filter.page, 0).pipe(map(res => {
+      return {
+        data: res.result.map(grade => new MyGradeStep(grade)),
+        length: res.totalRecord,
+      };
+    }));
   }
 
   create(data: MyGradeStep) {
-    const subject = new Subject<any>();
-    window.setTimeout(() => {
-      subject.next();
-      subject.complete();
-    }, 2000);
-    return subject.asObservable();
+    return this.api.addUpdateGradeLevelStep(data.toManage());
   }
 
   init() {}

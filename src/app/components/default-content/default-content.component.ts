@@ -7,10 +7,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DefaultContentComponent implements OnInit {
 
-  @Input() loading = false;
+
   @Input() pageHeader: string;
   @Input() pageDescription: string;
   @Input() buttonValue: string;
+  @Input() loading: boolean = false;
   @Output() buttonClick = new EventEmitter();
   constructor() { }
 

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { AddUpdateEventsServiceProxy, AddUpdateLocationServiceProxy, DeleteEventsServiceProxy, GetAllEventsServiceProxy, GetAllLocationsServiceProxy, GetAllRequestTypeServiceProxy, GetEventsByIdServiceProxy, GetLocationByIdServiceProxy, IMessageOut, LocationDTO, ManageEventDTO, ManageLocationDTO } from 'app/_services/service-proxies';
+import { AddUpdateEventsServiceProxy, AddUpdateLocationServiceProxy, DeleteEventsServiceProxy,
+  EventDTO,
+  GetAllEventsServiceProxy, GetAllLocationsServiceProxy, GetAllRequestTypeServiceProxy,
+  GetEventsByIdServiceProxy, GetLocationByIdServiceProxy, IMessageOut,
+  LocationDTO, ManageEventDTO, ManageLocationDTO
+} from 'app/_services/service-proxies';
 import { of, Subject } from 'rxjs';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 
@@ -9,11 +14,12 @@ export class MyEvent implements IStatus {
   Title: string;
   isSystem: boolean;
   Notify_Employee: boolean;
-
   id: number;
 
-
-  public constructor(event = {}) {
+  public constructor(event = new EventDTO()) {
+    this.Title = event.title;
+    this.isSystem = event.isSystem;
+    this.Notify_Employee = event.notify_Employee;
   }
 
   // get id() {
@@ -28,12 +34,19 @@ export class MyEvent implements IStatus {
     return 'Active';
   }
 
+  eventTypeId = 0;
+  startDate = new Date();
+  endDate = new Date();
+  description = '';
   toManage() {
     return new ManageEventDTO({
       id: this.id,
       title: this.Title,
       notify_Employee: this.Notify_Employee,
-      file: null,
+      eventTypeId: this.eventTypeId,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      description: this.description,
     });
   }
 }
