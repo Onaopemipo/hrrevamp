@@ -1,7 +1,7 @@
 import { BudgetItemDTO, FetchAllBudgetItemsServiceProxy, FetchGetBudgetServiceProxy, FetchBudgetItemsServiceProxy, FetchGetBudgetItemServiceProxy } from './../../../../_services/service-proxies';
 import { Department } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { MyBudgetItemDepartment } from './../../services/budget-item.service';
+// import { MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateItemComponent implements OnInit {
 
-  departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
+  // departments: MyBudgetItemDepartment = new MyBudgetItemDepartment;
   allDepartments: Department [] = [];
   myBudgetItem: BudgetItemDTO;
   id;
