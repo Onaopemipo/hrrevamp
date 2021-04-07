@@ -7000,7 +7000,7 @@ export class BulkMasterServiceProxy {
      * @param bulkFile (optional) 
      * @return Success
      */
-    bulkUploadId(processId: number | undefined, bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
+    bulkUpload(processId: number | undefined, bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/BulkMaster/BulkUpload";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7022,11 +7022,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUploadID(response_);
+            return this.processBulkUpload(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUploadID(<any>response_);
+                    return this.processBulkUpload(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7035,7 +7035,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUploadID(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
