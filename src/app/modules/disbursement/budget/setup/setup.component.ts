@@ -28,7 +28,7 @@ export class SetupComponent implements OnInit {
   }
 get disableSubmitbtn(){
   let resp = true;
-  if(this.budget.totalBudgetAmount == 0 && this.budget.financialYearStartDate ) return false;
+  if(this.budget.totalBudgetAmount == 0 && !this.budget.financialYearStartDate && !this.budget.financialYearEndDate) resp= false;
   return resp;
 }
   async addBudget(){
