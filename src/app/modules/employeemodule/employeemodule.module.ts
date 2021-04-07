@@ -15,7 +15,8 @@ import {
   NbSelectModule,
   NbUserModule,
   NbPopoverModule,
-  NbDialogModule
+  NbDialogModule,
+  NbAlertModule
 } from '@nebular/theme';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'app/components/components.module';
@@ -104,7 +105,8 @@ import { ExitRequestService } from './services/exit-request.service';
     NbTabsetModule,
     NbPopoverModule,
     NbDialogModule,
-    NgxFlowModule
+    NgxFlowModule,
+    NbAlertModule
 
   ],
   providers: [
