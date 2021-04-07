@@ -10569,6 +10569,537 @@ export class CommonServiceProxy {
 }
 
 @Injectable()
+export class CommunicationServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+    }
+
+    /**
+     * API for adding/updating EmailSettings
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateEmailSetting(body: EmailSetting | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/Add-Update-EmailSetting";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateEmailSetting(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateEmailSetting(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateEmailSetting(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * API to Fetch TemplateTypes (Promotion, Account Creation etc.) for Dropdowns
+    while adding Email Template
+     * @return Success
+     */
+    getAllTemplateTypes(): Observable<IDTextViewModelListApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/GetAllTemplateTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllTemplateTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllTemplateTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllTemplateTypes(response: HttpResponseBase): Observable<IDTextViewModelListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelListApiResult>(<any>null);
+    }
+
+    /**
+     * API for adding/updating EmailTemplate
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateEmailTemplate(body: ManageMailTemplateDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/Add-Update-EmailTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateEmailTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateEmailTemplate(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateEmailTemplate(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * API to Fetch Email Templates.
+    Note: all filter are optional
+     * @return Success
+     */
+    getAllEmailTemplates(): Observable<MailTemplateDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/GetAllEmailTemplates";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllEmailTemplates(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllEmailTemplates(<any>response_);
+                } catch (e) {
+                    return <Observable<MailTemplateDTOListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MailTemplateDTOListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllEmailTemplates(response: HttpResponseBase): Observable<MailTemplateDTOListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MailTemplateDTOListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MailTemplateDTOListApiResult>(<any>null);
+    }
+
+    /**
+     * API to get EmailTemplate by id and can be used for update, details etc
+     * @param id (optional) 
+     * @return Success
+     */
+    getEmailTemplate(id: number | undefined): Observable<MailTemplateDTOApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/GetEmailTemplate?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmailTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmailTemplate(<any>response_);
+                } catch (e) {
+                    return <Observable<MailTemplateDTOApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MailTemplateDTOApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmailTemplate(response: HttpResponseBase): Observable<MailTemplateDTOApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MailTemplateDTOApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MailTemplateDTOApiResult>(<any>null);
+    }
+
+    /**
+     * API for retrieving all Email Logs by email log filtering parameter
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param emailTo (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getEmailLogs(startDate: Date | null | undefined, endDate: Date | null | undefined, emailTo: string | null | undefined, pageSize: number | undefined): Observable<EmailLogDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/GetEmailLogs?";
+        if (startDate !== undefined && startDate !== null)
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&";
+        if (endDate !== undefined && endDate !== null)
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&";
+        if (emailTo !== undefined && emailTo !== null)
+            url_ += "EmailTo=" + encodeURIComponent("" + emailTo) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmailLogs(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmailLogs(<any>response_);
+                } catch (e) {
+                    return <Observable<EmailLogDTOIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<EmailLogDTOIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmailLogs(response: HttpResponseBase): Observable<EmailLogDTOIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = EmailLogDTOIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<EmailLogDTOIListApiResult>(<any>null);
+    }
+
+    /**
+     * API for getting Single EmailLog Details by id for CRUD Operation
+     * @param id (optional) 
+     * @return Success
+     */
+    getEmailLogById(id: number | undefined): Observable<EmailLogDTOApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/GetEmailLogById?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetEmailLogById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetEmailLogById(<any>response_);
+                } catch (e) {
+                    return <Observable<EmailLogDTOApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<EmailLogDTOApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetEmailLogById(response: HttpResponseBase): Observable<EmailLogDTOApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = EmailLogDTOApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<EmailLogDTOApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class AddUpdateCompensationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -11901,6 +12432,7 @@ export class DataServiceProxy {
     10: title
     12: gender
     14: pfa
+    16: address_type
     27: Sectors
      * @param dropDownName (optional) 
      * @return Success
@@ -11983,6 +12515,7 @@ export class DataServiceProxy {
     title: 10
     gender: 12
     pension fund administrator: 14
+    address_type: 16 
     sectors: 27
      * @param dropDownId (optional) 
      * @return Success
@@ -14278,359 +14811,6 @@ export class SingleDisbursementServiceProxy {
     }
 
     protected processPostSingleDisbursement(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class FetchEmailLogsServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
-
-    /**
-     * API for retrieving all Email Logs by email log filtering parameter
-     * @param startDate (optional) 
-     * @param endDate (optional) 
-     * @param emailTo (optional) 
-     * @param pageSize (optional) 
-     * @return Success
-     */
-    getEmailLogs(startDate: Date | null | undefined, endDate: Date | null | undefined, emailTo: string | null | undefined, pageSize: number | undefined): Observable<EmailLogDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/EmailLog/FetchEmailLogs/GetEmailLogs?";
-        if (startDate !== undefined && startDate !== null)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&";
-        if (endDate !== undefined && endDate !== null)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&";
-        if (emailTo !== undefined && emailTo !== null)
-            url_ += "EmailTo=" + encodeURIComponent("" + emailTo) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetEmailLogs(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetEmailLogs(<any>response_);
-                } catch (e) {
-                    return <Observable<EmailLogDTOIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<EmailLogDTOIListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetEmailLogs(response: HttpResponseBase): Observable<EmailLogDTOIListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = EmailLogDTOIListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<EmailLogDTOIListApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class FetchEmailLogByIdServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
-
-    /**
-     * API for getting Single EmailLog Details by id for CRUD Operation
-     * @param id (optional) 
-     * @return Success
-     */
-    getEmailLogById(id: number | undefined): Observable<EmailLogDTOApiResult> {
-        let url_ = this.baseUrl + "/api/EmailLog/FetchEmailLogById/GetEmailLogById?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetEmailLogById(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetEmailLogById(<any>response_);
-                } catch (e) {
-                    return <Observable<EmailLogDTOApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<EmailLogDTOApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetEmailLogById(response: HttpResponseBase): Observable<EmailLogDTOApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = EmailLogDTOApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<EmailLogDTOApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class FetchEmailTemplateByIdServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
-
-    /**
-     * API for getting Email Template by id for CRUD Operation
-     * @param id (optional) 
-     * @return Success
-     */
-    getEmailTemplateById(id: number | undefined): Observable<EmailTemplateDTOApiResult> {
-        let url_ = this.baseUrl + "/api/EmailTemplate/FetchEmailTemplateById/GetEmailTemplateById?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetEmailTemplateById(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetEmailTemplateById(<any>response_);
-                } catch (e) {
-                    return <Observable<EmailTemplateDTOApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<EmailTemplateDTOApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetEmailTemplateById(response: HttpResponseBase): Observable<EmailTemplateDTOApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = EmailTemplateDTOApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<EmailTemplateDTOApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class UpdateEmailTemplateServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
-
-    /**
-     * API for updating Email Template
-     * @param body (optional) 
-     * @return Success
-     */
-    updateEmailTemplate(body: EmailTemplateDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/EmailTemplate/UpdateEmailTemplate/UpdateEmailTemplate";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUpdateEmailTemplate(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processUpdateEmailTemplate(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processUpdateEmailTemplate(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -50993,6 +51173,946 @@ export interface IRetirementTypeIListApiResult {
     totalRecord: number;
 }
 
+export class EmailSetting implements IEmailSetting {
+    emailUserName!: string | undefined;
+    emailHost!: string | undefined;
+    emailPort!: number;
+    emailPassword!: string | undefined;
+    enableSSLForEmail!: boolean;
+    emailFromAddress!: string | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IEmailSetting) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.emailUserName = _data["emailUserName"];
+            this.emailHost = _data["emailHost"];
+            this.emailPort = _data["emailPort"];
+            this.emailPassword = _data["emailPassword"];
+            this.enableSSLForEmail = _data["enableSSLForEmail"];
+            this.emailFromAddress = _data["emailFromAddress"];
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): EmailSetting {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailSetting();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["emailUserName"] = this.emailUserName;
+        data["emailHost"] = this.emailHost;
+        data["emailPort"] = this.emailPort;
+        data["emailPassword"] = this.emailPassword;
+        data["enableSSLForEmail"] = this.enableSSLForEmail;
+        data["emailFromAddress"] = this.emailFromAddress;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): EmailSetting {
+        const json = this.toJSON();
+        let result = new EmailSetting();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailSetting {
+    emailUserName: string | undefined;
+    emailHost: string | undefined;
+    emailPort: number;
+    emailPassword: string | undefined;
+    enableSSLForEmail: boolean;
+    emailFromAddress: string | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class IDTextViewModel implements IIDTextViewModel {
+    id!: number;
+    text!: string | undefined;
+
+    constructor(data?: IIDTextViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.text = _data["text"];
+        }
+    }
+
+    static fromJS(data: any): IDTextViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new IDTextViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["text"] = this.text;
+        return data; 
+    }
+
+    clone(): IDTextViewModel {
+        const json = this.toJSON();
+        let result = new IDTextViewModel();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IIDTextViewModel {
+    id: number;
+    text: string | undefined;
+}
+
+export class IDTextViewModelListApiResult implements IIDTextViewModelListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: IDTextViewModel[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IIDTextViewModelListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(IDTextViewModel.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): IDTextViewModelListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new IDTextViewModelListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): IDTextViewModelListApiResult {
+        const json = this.toJSON();
+        let result = new IDTextViewModelListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IIDTextViewModelListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: IDTextViewModel[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ManageMailTemplateDTO implements IManageMailTemplateDTO {
+    id!: number;
+    emailTemplateTypeId!: number;
+    subject!: string;
+    body!: string;
+
+    constructor(data?: IManageMailTemplateDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.emailTemplateTypeId = _data["emailTemplateTypeId"];
+            this.subject = _data["subject"];
+            this.body = _data["body"];
+        }
+    }
+
+    static fromJS(data: any): ManageMailTemplateDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageMailTemplateDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["emailTemplateTypeId"] = this.emailTemplateTypeId;
+        data["subject"] = this.subject;
+        data["body"] = this.body;
+        return data; 
+    }
+
+    clone(): ManageMailTemplateDTO {
+        const json = this.toJSON();
+        let result = new ManageMailTemplateDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageMailTemplateDTO {
+    id: number;
+    emailTemplateTypeId: number;
+    subject: string;
+    body: string;
+}
+
+export class MailTemplateDTO implements IMailTemplateDTO {
+    id!: number;
+    emailTemplateTypeId!: number;
+    templateType!: string | undefined;
+    subject!: string | undefined;
+    body!: string | undefined;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IMailTemplateDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.emailTemplateTypeId = _data["emailTemplateTypeId"];
+            this.templateType = _data["templateType"];
+            this.subject = _data["subject"];
+            this.body = _data["body"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): MailTemplateDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new MailTemplateDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["emailTemplateTypeId"] = this.emailTemplateTypeId;
+        data["templateType"] = this.templateType;
+        data["subject"] = this.subject;
+        data["body"] = this.body;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): MailTemplateDTO {
+        const json = this.toJSON();
+        let result = new MailTemplateDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMailTemplateDTO {
+    id: number;
+    emailTemplateTypeId: number;
+    templateType: string | undefined;
+    subject: string | undefined;
+    body: string | undefined;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class MailTemplateDTOListApiResult implements IMailTemplateDTOListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: MailTemplateDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IMailTemplateDTOListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(MailTemplateDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): MailTemplateDTOListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new MailTemplateDTOListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): MailTemplateDTOListApiResult {
+        const json = this.toJSON();
+        let result = new MailTemplateDTOListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMailTemplateDTOListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: MailTemplateDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class MailTemplateDTOApiResult implements IMailTemplateDTOApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: MailTemplateDTO;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IMailTemplateDTOApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? MailTemplateDTO.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): MailTemplateDTOApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new MailTemplateDTOApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): MailTemplateDTOApiResult {
+        const json = this.toJSON();
+        let result = new MailTemplateDTOApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMailTemplateDTOApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: MailTemplateDTO;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class EmailLog implements IEmailLog {
+    sender!: string | undefined;
+    receiver!: string | undefined;
+    cc!: string | undefined;
+    bcc!: string | undefined;
+    subject!: string | undefined;
+    messageBody!: string | undefined;
+    hasAttachment!: boolean;
+    isSent!: boolean;
+    retires!: number;
+    dateSent!: Date | undefined;
+    dateToSend!: Date | undefined;
+    emailAttachments!: EmailLogAttachment[] | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IEmailLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.sender = _data["sender"];
+            this.receiver = _data["receiver"];
+            this.cc = _data["cc"];
+            this.bcc = _data["bcc"];
+            this.subject = _data["subject"];
+            this.messageBody = _data["messageBody"];
+            this.hasAttachment = _data["hasAttachment"];
+            this.isSent = _data["isSent"];
+            this.retires = _data["retires"];
+            this.dateSent = _data["dateSent"] ? new Date(_data["dateSent"].toString()) : <any>undefined;
+            this.dateToSend = _data["dateToSend"] ? new Date(_data["dateToSend"].toString()) : <any>undefined;
+            if (Array.isArray(_data["emailAttachments"])) {
+                this.emailAttachments = [] as any;
+                for (let item of _data["emailAttachments"])
+                    this.emailAttachments!.push(EmailLogAttachment.fromJS(item));
+            }
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): EmailLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["sender"] = this.sender;
+        data["receiver"] = this.receiver;
+        data["cc"] = this.cc;
+        data["bcc"] = this.bcc;
+        data["subject"] = this.subject;
+        data["messageBody"] = this.messageBody;
+        data["hasAttachment"] = this.hasAttachment;
+        data["isSent"] = this.isSent;
+        data["retires"] = this.retires;
+        data["dateSent"] = this.dateSent ? this.dateSent.toISOString() : <any>undefined;
+        data["dateToSend"] = this.dateToSend ? this.dateToSend.toISOString() : <any>undefined;
+        if (Array.isArray(this.emailAttachments)) {
+            data["emailAttachments"] = [];
+            for (let item of this.emailAttachments)
+                data["emailAttachments"].push(item.toJSON());
+        }
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): EmailLog {
+        const json = this.toJSON();
+        let result = new EmailLog();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailLog {
+    sender: string | undefined;
+    receiver: string | undefined;
+    cc: string | undefined;
+    bcc: string | undefined;
+    subject: string | undefined;
+    messageBody: string | undefined;
+    hasAttachment: boolean;
+    isSent: boolean;
+    retires: number;
+    dateSent: Date | undefined;
+    dateToSend: Date | undefined;
+    emailAttachments: EmailLogAttachment[] | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class EmailLogAttachment implements IEmailLogAttachment {
+    id!: number;
+    emailLogID!: number;
+    emailLog!: EmailLog;
+    folderOnServer!: string | undefined;
+    fileNameOnServer!: string | undefined;
+    emailFileName!: string | undefined;
+    dateCreated!: Date;
+
+    constructor(data?: IEmailLogAttachment) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.emailLogID = _data["emailLogID"];
+            this.emailLog = _data["emailLog"] ? EmailLog.fromJS(_data["emailLog"]) : <any>undefined;
+            this.folderOnServer = _data["folderOnServer"];
+            this.fileNameOnServer = _data["fileNameOnServer"];
+            this.emailFileName = _data["emailFileName"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): EmailLogAttachment {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailLogAttachment();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["emailLogID"] = this.emailLogID;
+        data["emailLog"] = this.emailLog ? this.emailLog.toJSON() : <any>undefined;
+        data["folderOnServer"] = this.folderOnServer;
+        data["fileNameOnServer"] = this.fileNameOnServer;
+        data["emailFileName"] = this.emailFileName;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        return data; 
+    }
+
+    clone(): EmailLogAttachment {
+        const json = this.toJSON();
+        let result = new EmailLogAttachment();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailLogAttachment {
+    id: number;
+    emailLogID: number;
+    emailLog: EmailLog;
+    folderOnServer: string | undefined;
+    fileNameOnServer: string | undefined;
+    emailFileName: string | undefined;
+    dateCreated: Date;
+}
+
+export class EmailLogDTO implements IEmailLogDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    sender!: string | undefined;
+    receiver!: string | undefined;
+    cc!: string | undefined;
+    bcc!: string | undefined;
+    subject!: string | undefined;
+    messageBody!: string | undefined;
+    hasAttachment!: boolean;
+    isSent!: boolean;
+    retires!: number;
+    dateSent!: Date | undefined;
+    dateToSend!: Date | undefined;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+    emailAttachments!: EmailLogAttachment[] | undefined;
+
+    constructor(data?: IEmailLogDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.sender = _data["sender"];
+            this.receiver = _data["receiver"];
+            this.cc = _data["cc"];
+            this.bcc = _data["bcc"];
+            this.subject = _data["subject"];
+            this.messageBody = _data["messageBody"];
+            this.hasAttachment = _data["hasAttachment"];
+            this.isSent = _data["isSent"];
+            this.retires = _data["retires"];
+            this.dateSent = _data["dateSent"] ? new Date(_data["dateSent"].toString()) : <any>undefined;
+            this.dateToSend = _data["dateToSend"] ? new Date(_data["dateToSend"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+            if (Array.isArray(_data["emailAttachments"])) {
+                this.emailAttachments = [] as any;
+                for (let item of _data["emailAttachments"])
+                    this.emailAttachments!.push(EmailLogAttachment.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): EmailLogDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailLogDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["sender"] = this.sender;
+        data["receiver"] = this.receiver;
+        data["cc"] = this.cc;
+        data["bcc"] = this.bcc;
+        data["subject"] = this.subject;
+        data["messageBody"] = this.messageBody;
+        data["hasAttachment"] = this.hasAttachment;
+        data["isSent"] = this.isSent;
+        data["retires"] = this.retires;
+        data["dateSent"] = this.dateSent ? this.dateSent.toISOString() : <any>undefined;
+        data["dateToSend"] = this.dateToSend ? this.dateToSend.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        if (Array.isArray(this.emailAttachments)) {
+            data["emailAttachments"] = [];
+            for (let item of this.emailAttachments)
+                data["emailAttachments"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): EmailLogDTO {
+        const json = this.toJSON();
+        let result = new EmailLogDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailLogDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    sender: string | undefined;
+    receiver: string | undefined;
+    cc: string | undefined;
+    bcc: string | undefined;
+    subject: string | undefined;
+    messageBody: string | undefined;
+    hasAttachment: boolean;
+    isSent: boolean;
+    retires: number;
+    dateSent: Date | undefined;
+    dateToSend: Date | undefined;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+    emailAttachments: EmailLogAttachment[] | undefined;
+}
+
+export class EmailLogDTOIListApiResult implements IEmailLogDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: EmailLogDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IEmailLogDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(EmailLogDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): EmailLogDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailLogDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): EmailLogDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new EmailLogDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailLogDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: EmailLogDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class EmailLogDTOApiResult implements IEmailLogDTOApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: EmailLogDTO;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IEmailLogDTOApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? EmailLogDTO.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): EmailLogDTOApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailLogDTOApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): EmailLogDTOApiResult {
+        const json = this.toJSON();
+        let result = new EmailLogDTOApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailLogDTOApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: EmailLogDTO;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class CompensationDTO implements ICompensationDTO {
     id!: number;
     compensationName!: string | undefined;
@@ -51860,53 +52980,6 @@ export interface IDashboardDTOApiResult {
     result: DashboardDTO;
     totalCount: number;
     totalRecord: number;
-}
-
-export class IDTextViewModel implements IIDTextViewModel {
-    id!: number;
-    text!: string | undefined;
-
-    constructor(data?: IIDTextViewModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.text = _data["text"];
-        }
-    }
-
-    static fromJS(data: any): IDTextViewModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new IDTextViewModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["text"] = this.text;
-        return data; 
-    }
-
-    clone(): IDTextViewModel {
-        const json = this.toJSON();
-        let result = new IDTextViewModel();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IIDTextViewModel {
-    id: number;
-    text: string | undefined;
 }
 
 export class IDTextViewModelIListApiResult implements IIDTextViewModelIListApiResult {
@@ -53501,587 +54574,6 @@ export interface ISingleDisbursementPostDTO {
     description: string;
     startDate: Date | undefined;
     endDate: Date | undefined;
-}
-
-export class EmailLog implements IEmailLog {
-    sender!: string | undefined;
-    receiver!: string | undefined;
-    cc!: string | undefined;
-    bcc!: string | undefined;
-    subject!: string | undefined;
-    messageBody!: string | undefined;
-    hasAttachment!: boolean;
-    isSent!: boolean;
-    retires!: number;
-    dateSent!: Date | undefined;
-    dateToSend!: Date | undefined;
-    emailAttachments!: EmailLogAttachment[] | undefined;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: IEmailLog) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.sender = _data["sender"];
-            this.receiver = _data["receiver"];
-            this.cc = _data["cc"];
-            this.bcc = _data["bcc"];
-            this.subject = _data["subject"];
-            this.messageBody = _data["messageBody"];
-            this.hasAttachment = _data["hasAttachment"];
-            this.isSent = _data["isSent"];
-            this.retires = _data["retires"];
-            this.dateSent = _data["dateSent"] ? new Date(_data["dateSent"].toString()) : <any>undefined;
-            this.dateToSend = _data["dateToSend"] ? new Date(_data["dateToSend"].toString()) : <any>undefined;
-            if (Array.isArray(_data["emailAttachments"])) {
-                this.emailAttachments = [] as any;
-                for (let item of _data["emailAttachments"])
-                    this.emailAttachments!.push(EmailLogAttachment.fromJS(item));
-            }
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): EmailLog {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailLog();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["sender"] = this.sender;
-        data["receiver"] = this.receiver;
-        data["cc"] = this.cc;
-        data["bcc"] = this.bcc;
-        data["subject"] = this.subject;
-        data["messageBody"] = this.messageBody;
-        data["hasAttachment"] = this.hasAttachment;
-        data["isSent"] = this.isSent;
-        data["retires"] = this.retires;
-        data["dateSent"] = this.dateSent ? this.dateSent.toISOString() : <any>undefined;
-        data["dateToSend"] = this.dateToSend ? this.dateToSend.toISOString() : <any>undefined;
-        if (Array.isArray(this.emailAttachments)) {
-            data["emailAttachments"] = [];
-            for (let item of this.emailAttachments)
-                data["emailAttachments"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): EmailLog {
-        const json = this.toJSON();
-        let result = new EmailLog();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailLog {
-    sender: string | undefined;
-    receiver: string | undefined;
-    cc: string | undefined;
-    bcc: string | undefined;
-    subject: string | undefined;
-    messageBody: string | undefined;
-    hasAttachment: boolean;
-    isSent: boolean;
-    retires: number;
-    dateSent: Date | undefined;
-    dateToSend: Date | undefined;
-    emailAttachments: EmailLogAttachment[] | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class EmailLogAttachment implements IEmailLogAttachment {
-    id!: number;
-    emailLogID!: number;
-    emailLog!: EmailLog;
-    folderOnServer!: string | undefined;
-    fileNameOnServer!: string | undefined;
-    emailFileName!: string | undefined;
-    dateCreated!: Date;
-
-    constructor(data?: IEmailLogAttachment) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.emailLogID = _data["emailLogID"];
-            this.emailLog = _data["emailLog"] ? EmailLog.fromJS(_data["emailLog"]) : <any>undefined;
-            this.folderOnServer = _data["folderOnServer"];
-            this.fileNameOnServer = _data["fileNameOnServer"];
-            this.emailFileName = _data["emailFileName"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): EmailLogAttachment {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailLogAttachment();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["emailLogID"] = this.emailLogID;
-        data["emailLog"] = this.emailLog ? this.emailLog.toJSON() : <any>undefined;
-        data["folderOnServer"] = this.folderOnServer;
-        data["fileNameOnServer"] = this.fileNameOnServer;
-        data["emailFileName"] = this.emailFileName;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        return data; 
-    }
-
-    clone(): EmailLogAttachment {
-        const json = this.toJSON();
-        let result = new EmailLogAttachment();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailLogAttachment {
-    id: number;
-    emailLogID: number;
-    emailLog: EmailLog;
-    folderOnServer: string | undefined;
-    fileNameOnServer: string | undefined;
-    emailFileName: string | undefined;
-    dateCreated: Date;
-}
-
-export class EmailLogDTO implements IEmailLogDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    sender!: string | undefined;
-    receiver!: string | undefined;
-    cc!: string | undefined;
-    bcc!: string | undefined;
-    subject!: string | undefined;
-    messageBody!: string | undefined;
-    hasAttachment!: boolean;
-    isSent!: boolean;
-    retires!: number;
-    dateSent!: Date | undefined;
-    dateToSend!: Date | undefined;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-    emailAttachments!: EmailLogAttachment[] | undefined;
-
-    constructor(data?: IEmailLogDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.sender = _data["sender"];
-            this.receiver = _data["receiver"];
-            this.cc = _data["cc"];
-            this.bcc = _data["bcc"];
-            this.subject = _data["subject"];
-            this.messageBody = _data["messageBody"];
-            this.hasAttachment = _data["hasAttachment"];
-            this.isSent = _data["isSent"];
-            this.retires = _data["retires"];
-            this.dateSent = _data["dateSent"] ? new Date(_data["dateSent"].toString()) : <any>undefined;
-            this.dateToSend = _data["dateToSend"] ? new Date(_data["dateToSend"].toString()) : <any>undefined;
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-            if (Array.isArray(_data["emailAttachments"])) {
-                this.emailAttachments = [] as any;
-                for (let item of _data["emailAttachments"])
-                    this.emailAttachments!.push(EmailLogAttachment.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): EmailLogDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailLogDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["sender"] = this.sender;
-        data["receiver"] = this.receiver;
-        data["cc"] = this.cc;
-        data["bcc"] = this.bcc;
-        data["subject"] = this.subject;
-        data["messageBody"] = this.messageBody;
-        data["hasAttachment"] = this.hasAttachment;
-        data["isSent"] = this.isSent;
-        data["retires"] = this.retires;
-        data["dateSent"] = this.dateSent ? this.dateSent.toISOString() : <any>undefined;
-        data["dateToSend"] = this.dateToSend ? this.dateToSend.toISOString() : <any>undefined;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        if (Array.isArray(this.emailAttachments)) {
-            data["emailAttachments"] = [];
-            for (let item of this.emailAttachments)
-                data["emailAttachments"].push(item.toJSON());
-        }
-        return data; 
-    }
-
-    clone(): EmailLogDTO {
-        const json = this.toJSON();
-        let result = new EmailLogDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailLogDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    sender: string | undefined;
-    receiver: string | undefined;
-    cc: string | undefined;
-    bcc: string | undefined;
-    subject: string | undefined;
-    messageBody: string | undefined;
-    hasAttachment: boolean;
-    isSent: boolean;
-    retires: number;
-    dateSent: Date | undefined;
-    dateToSend: Date | undefined;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-    emailAttachments: EmailLogAttachment[] | undefined;
-}
-
-export class EmailLogDTOIListApiResult implements IEmailLogDTOIListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: EmailLogDTO[] | undefined;
-    totalCount!: number;
-    readonly totalRecord!: number;
-
-    constructor(data?: IEmailLogDTOIListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(EmailLogDTO.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-            (<any>this).totalRecord = _data["totalRecord"];
-        }
-    }
-
-    static fromJS(data: any): EmailLogDTOIListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailLogDTOIListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        data["totalRecord"] = this.totalRecord;
-        return data; 
-    }
-
-    clone(): EmailLogDTOIListApiResult {
-        const json = this.toJSON();
-        let result = new EmailLogDTOIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailLogDTOIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: EmailLogDTO[] | undefined;
-    totalCount: number;
-    totalRecord: number;
-}
-
-export class EmailLogDTOApiResult implements IEmailLogDTOApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: EmailLogDTO;
-    totalCount!: number;
-    readonly totalRecord!: number;
-
-    constructor(data?: IEmailLogDTOApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            this.result = _data["result"] ? EmailLogDTO.fromJS(_data["result"]) : <any>undefined;
-            this.totalCount = _data["totalCount"];
-            (<any>this).totalRecord = _data["totalRecord"];
-        }
-    }
-
-    static fromJS(data: any): EmailLogDTOApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailLogDTOApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        data["totalRecord"] = this.totalRecord;
-        return data; 
-    }
-
-    clone(): EmailLogDTOApiResult {
-        const json = this.toJSON();
-        let result = new EmailLogDTOApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailLogDTOApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: EmailLogDTO;
-    totalCount: number;
-    totalRecord: number;
-}
-
-export class EmailTemplateDTO implements IEmailTemplateDTO {
-    id!: number;
-    name!: string | undefined;
-    subject!: string;
-    text!: string;
-    emailTemplateCol!: IDTextViewModel[] | undefined;
-
-    constructor(data?: IEmailTemplateDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.subject = _data["subject"];
-            this.text = _data["text"];
-            if (Array.isArray(_data["emailTemplateCol"])) {
-                this.emailTemplateCol = [] as any;
-                for (let item of _data["emailTemplateCol"])
-                    this.emailTemplateCol!.push(IDTextViewModel.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): EmailTemplateDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailTemplateDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["subject"] = this.subject;
-        data["text"] = this.text;
-        if (Array.isArray(this.emailTemplateCol)) {
-            data["emailTemplateCol"] = [];
-            for (let item of this.emailTemplateCol)
-                data["emailTemplateCol"].push(item.toJSON());
-        }
-        return data; 
-    }
-
-    clone(): EmailTemplateDTO {
-        const json = this.toJSON();
-        let result = new EmailTemplateDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailTemplateDTO {
-    id: number;
-    name: string | undefined;
-    subject: string;
-    text: string;
-    emailTemplateCol: IDTextViewModel[] | undefined;
-}
-
-export class EmailTemplateDTOApiResult implements IEmailTemplateDTOApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: EmailTemplateDTO;
-    totalCount!: number;
-    readonly totalRecord!: number;
-
-    constructor(data?: IEmailTemplateDTOApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            this.result = _data["result"] ? EmailTemplateDTO.fromJS(_data["result"]) : <any>undefined;
-            this.totalCount = _data["totalCount"];
-            (<any>this).totalRecord = _data["totalRecord"];
-        }
-    }
-
-    static fromJS(data: any): EmailTemplateDTOApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmailTemplateDTOApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
-        data["totalCount"] = this.totalCount;
-        data["totalRecord"] = this.totalRecord;
-        return data; 
-    }
-
-    clone(): EmailTemplateDTOApiResult {
-        const json = this.toJSON();
-        let result = new EmailTemplateDTOApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmailTemplateDTOApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: EmailTemplateDTO;
-    totalCount: number;
-    totalRecord: number;
 }
 
 export class ManageEmployeeDTO implements IManageEmployeeDTO {
