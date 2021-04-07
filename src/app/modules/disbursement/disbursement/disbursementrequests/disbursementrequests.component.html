@@ -1,7 +1,11 @@
-<ngx-componentsheader
+<!-- <ngx-componentsheader
   pageName="Disbursement Requests"
   [requiredButton]="[]"
-></ngx-componentsheader>
+></ngx-componentsheader> -->
+<ngx-componentsheader pageName='Disbursement Requests' [requiredButton]="topActionButtons"
+    (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
 <div class="main-page-container">
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="All Requests" [tabId]="TABS.ALL_REQUESTS">

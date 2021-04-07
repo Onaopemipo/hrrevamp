@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+import { IStatus, MyColor } from 'app/components/status/models';
 import { createSubscription, FAKER_CONFIG, getCreateResponse, IFaker, myClassFaker, myPropertyFaker } from 'app/modules/career-succession/services/base';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
 import { Observable } from 'rxjs';
 
 
 @myClassFaker
-export class MyDisbursement implements IFaker {
+export class MyDisbursement implements IFaker, IStatus {
+  getStatusLabel(): string {
+    return 'active'
+  }
+  getStatusColor(): MyColor {
+    return new MyColor(100, 100, 100);
+  }
   getFake() {
     return this;
   }

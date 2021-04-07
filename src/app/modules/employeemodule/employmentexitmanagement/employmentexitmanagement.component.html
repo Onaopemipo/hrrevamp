@@ -22,7 +22,7 @@
             
         </ngx-tableheader>
         <input [(ngModel)]='filter.id'/>
-        <button (click)='loadData()'>kk</button>
+        <button (click)='loadData()'></button>
         <ngx-tablecomponent [userData]='data' [tableColum]="tableColumns" [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
 
