@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-existrequest',
@@ -10,9 +11,10 @@ export class ExistrequestComponent implements OnInit {
 
   selectedOption: string = '';
 
-  constructor() { }
+  constructor(private activatedRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
+   
   }
 
  // checked = false;
@@ -22,3 +24,4 @@ export class ExistrequestComponent implements OnInit {
   }
 
 }
+

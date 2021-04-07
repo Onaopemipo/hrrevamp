@@ -41031,7 +41031,8 @@ export interface IVwConfirmationDTO {
     confirmationDate: Date | undefined;
 }
 
-export class VwConfirmationDTOIListApiResult implements IVwConfirmationDTOIListApiResult {
+export class 
+VwConfirmationDTOIListApiResult implements IVwConfirmationDTOIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
     result!: VwConfirmationDTO[] | undefined;
@@ -42158,7 +42159,9 @@ export interface ICreateDeploymentViewModel {
     ministries: IdNameObj[] | undefined;
 }
 
-export class CreateDeploymentViewModelIListApiResult implements ICreateDeploymentViewModelIListApiResult {
+export class 
+
+CreateDeploymentViewModelIListApiResult implements ICreateDeploymentViewModelIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
     result!: CreateDeploymentViewModel[] | undefined;

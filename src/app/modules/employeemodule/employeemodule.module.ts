@@ -1,4 +1,4 @@
-import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy } from './../../_services/service-proxies';
+import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy,RetirementServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -53,6 +53,11 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { ExitRequestService } from './services/exit-request.service';
+import { EmployeeDeploymentServiceProxy } from '../../_services/service-proxies';
+import {  GetConfirmationsByDetailsServiceProxy,FetchEmployeeByIdServiceProxy,SaveConfirmationServiceProxy } from '../../_services/service-proxies';
+import { ReactiveFormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms'
+
 
 
 
@@ -104,7 +109,9 @@ import { ExitRequestService } from './services/exit-request.service';
     NbTabsetModule,
     NbPopoverModule,
     NbDialogModule,
-    NgxFlowModule
+    NgxFlowModule,
+    ReactiveFormsModule,
+    FormsModule
 
   ],
   providers: [
@@ -117,6 +124,11 @@ import { ExitRequestService } from './services/exit-request.service';
     FetchAllEmployeesServiceProxy,
     DataServiceProxy,
     ExitRequestService,
+    RetirementServiceProxy,
+    EmployeeDeploymentServiceProxy,
+    GetConfirmationsByDetailsServiceProxy,
+    FetchEmployeeByIdServiceProxy,
+    SaveConfirmationServiceProxy
 ]
 })
 export class EmployeemoduleModule { }

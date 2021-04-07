@@ -43,7 +43,7 @@ export class ProfileDetailsComponent implements OnInit {
   }
 
   addPlan() {
-   // this.data.location_name
+    // this.data.location_name
     this.data.skills[0].point
   }
 }

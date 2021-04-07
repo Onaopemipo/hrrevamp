@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DisbursementService } from '../../services/disbursement.service';
 
 enum TABS {
   SINGLE, BULK
@@ -10,10 +11,13 @@ enum TABS {
   styleUrls: ['./create-disbursement.component.scss']
 })
 export class CreateDisbursementComponent implements OnInit {
+  channel:string='';
+  disburse_from:number=1;
+  budget_item_name:string=''
 
   selectedTab = TABS.SINGLE;
   TABS = TABS;
-  constructor() { }
+  constructor(private disbursement: DisbursementService ) { }
 
   ngOnInit(): void {
   }
