@@ -62,6 +62,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   addbtnText: string = "Add Employee";
   btnContractSubmitted: boolean = false;
   files: Transfer[] = [];
+  errorMsg: string = "";
   alldocTypes: IDTextViewModel[] = [];
   reqEmployee = new ManageEmployeeDTO().clone();
 
@@ -106,7 +107,7 @@ export class EmployeerecordsviewComponent implements OnInit {
 
 
   tempEmpBanksList: EmployeeBankDTO[] = [];
-  indVEmpBanks : EmployeeBankDTO;
+  indVEmpBanks = new EmployeeBankDTO().clone();
   EmpBanktotalItems = 0;
   EmpBankcurrentPage = 1;
   get EmpBankEmpty() {
@@ -176,9 +177,25 @@ export class EmployeerecordsviewComponent implements OnInit {
         })
       }
        }
-  
-  
-  
+  addtopbank(bank:EmployeeBankDTO) {
+    let searchResult = this.tempEmpBanksList.find(x => x.account_no == bank.account_no);
+    if (searchResult) {
+      this.errorMsg = "Account Exist on the List";
+      this.removeErrorMsg();
+    } else {
+      this.tempEmpBanksList.push(bank)
+    }
+  }
+  removefromBank(i) {
+    this.tempEmpBanksList.splice(i, 1);
+  }
+  submitbank(bank:EmployeeBankDTO) {
+    if (!this.createNewEmployee.id) {
+      this.addtopbank(bank);
+    } else {
+      
+    }
+  }
   
  async getBankList() {
     let response = await this.myDropdown.getDropDownValuesById(3).toPromise();
@@ -189,7 +206,11 @@ export class EmployeerecordsviewComponent implements OnInit {
     let response = await this.myDropdown.getAccountTypes().toPromise();
     this.accounttypes = response.result;
   }
-  
+  removeErrorMsg() {
+    setTimeout(() => {
+      this.errorMsg = '';
+    }, 3000);
+  }
   topActionButtons = [
     { name: 'submit', label: 'Submit', 'icon': '', outline: false },
   ];
