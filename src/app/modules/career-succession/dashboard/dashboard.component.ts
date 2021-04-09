@@ -1,3 +1,4 @@
+import { CommonServiceProxy } from './../../../_services/service-proxies';
  import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -21,10 +22,13 @@ export class DashboardComponent implements OnInit {
   myPieOptions: any = {};
   barcolorSchemeOrange: any;
   lineOption: any = {};
+  allJobRoles: number;
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
+
+
 
   single = [
     {
@@ -172,7 +176,7 @@ export class DashboardComponent implements OnInit {
   ];
   customizePieOption: any = {};
   customizedlineoptions: any = {};
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: NbThemeService, private commonService: CommonServiceProxy) {
 
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
@@ -555,6 +559,8 @@ this.myPieOptions = {
       days.push(day);
     }
     this.weekdays = days;
+
+    this.getJobRoles();
     }
 
     openModal() {
@@ -567,5 +573,11 @@ this.myPieOptions = {
 
 
 
-
+  async getJobRoles(){
+    const data = await this.commonService.getJobRoles().toPromise();
+    if(!data.hasError){
+      this.allJobRoles = data.totalRecord;
+      console.log('Yo boss', this.allJobRoles)
+    }
+  }
 }

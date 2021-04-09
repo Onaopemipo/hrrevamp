@@ -99,4 +99,8 @@ export class GridboxComponent implements OnInit {
     this.data = await this.nineBoxGrid.fetchSummary().toPromise();
   }
 
+  getBoxCount(){
+
+  }
+
 }

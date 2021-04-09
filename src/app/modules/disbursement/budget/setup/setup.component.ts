@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
-import { BudgetDTO, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO } from './../../../../_services/service-proxies';
+import { BudgetDTO, DisbursementBudgetItem, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, DisbursementBudgetItemAllocation } from './../../../../_services/service-proxies';
 import { MyBudgetItem, MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { MyBudget, BudgetService } from './../../services/budget.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,8 +15,9 @@ export class SetupComponent implements OnInit {
 
   budget: ManageBudgetDTO = new ManageBudgetDTO;
   budgetItem: ManageBudgetItemDTO = new ManageBudgetItemDTO;
+  disBudgetItem: DisbursementBudgetItem []= [];
   allDepartments: Department [] = [];
-  departments: Department = new Department().clone();
+  departments: DisbursementBudgetItemAllocation = new DisbursementBudgetItemAllocation().clone();
 
   constructor(private budgetService: AddUpdateBudgetServiceProxy, private alertMe: AlertserviceService,
     private alert: AlertserviceService, private common: CommonServiceProxy, private updateItem: AddUpdateBudgetItemServiceProxy) { }
@@ -43,17 +44,19 @@ export class SetupComponent implements OnInit {
   this.alert.openModalAlert('Budget Created', 'Budget Added Successfully', 'Dismiss');
   this.page = 2;
   } else {
-    this.alert.openModalAlert('Failed', 'Budget could not be added', 'Dismiss');
+    // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
+    console.error();
+
   }
   }
 
   addDepartment(){
-    let myDepartment = new Department();
-    myDepartment.code = this.departments.code;
-    myDepartment.name = this.departments.name;
+    let myDepartment = new DisbursementBudgetItemAllocation();
+    // myDepartment.code = this.departments.code;
+    // myDepartment.name = this.departments.name;
     // myDepartment.
     // this.alertMe.alertMessage
-    console.log(myDepartment);
+    console.log('yshdhdh', this.departments);
   }
 
   async fetchDepartments(){

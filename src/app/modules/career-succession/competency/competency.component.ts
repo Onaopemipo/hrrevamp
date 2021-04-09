@@ -1,3 +1,5 @@
+import { GradeLevelServiceProxy, GradeLevelDTO } from './../../../_services/service-proxies';
+import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -20,9 +22,17 @@ export class CompetencyComponent implements OnInit {
     { title: 'Role', label: 'Role', status: 'Active' },
     { title: 'Position', label: 'Position', status: 'Inactive' }
   ];
-  constructor() { }
+
+  allDepartments: DepartmentDTO [] = [];
+  allJobRoles: JobRole [] = [];
+  allGradeLevels: GradeLevelDTO [] = [];
+
+  constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,private levels: GradeLevelServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchAllDepartments();
+    this.fetchAllJobRoles();
+    this.fetchAllLevels();
   }
 
   addNewRole(){
@@ -38,6 +48,28 @@ export class CompetencyComponent implements OnInit {
     this.competencyChecklist[i].status = 'Active';
     this.selectedCase = this.competencyChecklist[i].title;
 
+  }
+
+  async fetchAllDepartments(){
+    const data = await this.department.getAllDepartments(10,1).toPromise();
+    if(!data.hasError){
+      this.allDepartments = data.result;
+    }
+  }
+
+  async fetchAllLevels(){
+    const data = await this.levels.getAllGradeLevel(10,1,1,1).toPromise();
+    if(!data.hasError){
+      this.allGradeLevels = data.result;
+    }
+  }
+
+  async fetchAllJobRoles(){
+    const data = await this.commonService.getJobRoles().toPromise();
+    if(!data.hasError){
+      this.allJobRoles = data.result;
+      console.log('Yo boss', this.allJobRoles)
+    }
   }
 
   toggleScoreCard(event) {

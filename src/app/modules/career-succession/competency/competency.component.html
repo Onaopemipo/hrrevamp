@@ -3,8 +3,7 @@
 <ngx-componentsheader *ngIf="newRole && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
 
 <div *ngIf="!newRole" style="background-color: #ffffff;">
-  <nb-card style="min-height: 100vh; display: flex; flex-direction: row; align-content: center;
-  align-self: center; align-items: center; justify-content:center;">
+  <nb-card>
     <nb-card-body>
       <div><br>
         <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
@@ -51,74 +50,63 @@
               <form>
                 <span class="title" *ngIf="selectedCase=='Role_Details'">Add a Role</span>
                 <span class="title" *ngIf="selectedCase=='Cadre'">Add a Cadre</span>
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="roleName" #roleName="ngModel" placeholder="Role Name">
+                    <select type="text" class="form-control" name="roleName" placeholder="Role Name">
+                      <option value="">--Select Role--</option>
+                      <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
+                    </select>
                   </div>
                 </div>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="roleDescription" #roleDescription="ngModel" placeholder="Descripion">
-                  </div>
+                    <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>                  </div>
                 </div>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="department" #department="ngModel" required>
-                      <option value="">Select </option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="custom-select" name="department" required>
+                      <option value="">--Select Department--</option>
+                      <option *ngFor="let department of allDepartment" value="department.id">{{ department.name }}</option>
                     </select>
                   </div>
                 </div>
 
-                <span class="title">Unit/Division</span>
-                <div class="form-group row mydiv">
-                  <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
+                <!-- <div class="form-group row ">
+                  <label for="Country" class="col-sm-3 col-form-label mylabel">Unit/Division</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="unit" #unit="ngModel"  required>
-                      <option value="">Select </option>
+                    <select class="custom-select" name="unit" required>
+                      <option value="">--Select Unit/Division--</option>
                       <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Region" class="col-sm-3 col-form-label mylabel">Level</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="level" #level="ngModel" required>
-                      <option value="">Select </option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="custom-select" name="level"  required>
+                      <option value="">--Select Level--</option>
+                      <option *ngFor="let level of allGradeLevels" value="level.id">{{ level.name }}</option>
                     </select>
                   </div>
                 </div>
 
                 <span class="title">Qualification</span>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" class="form-control" id="Title" placeholder="Title">
                   </div>
                 </div>
 
-                <div class="form-group row mydiv">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
-                  </div>
-                </div>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
@@ -127,21 +115,14 @@
 
                 <span class="title">Certifications</span>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="certTitle" #certTitle="ngModel" placeholder="Title">
+                    <input type="text" class="form-control" name="certTitle" placeholder="Title">
                   </div>
                 </div>
 
-                <div class="form-group row mydiv">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
-                  </div>
-                </div>
-
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
@@ -150,21 +131,14 @@
 
                 <span class="title">Skills</span>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="skillTitle" #skillTitle="ngModel" placeholder="Title">
+                    <input type="text" class="form-control" name="skillTitle" placeholder="Title">
                   </div>
                 </div>
 
-                <div class="form-group row mydiv">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="title" #title="ngModel" placeholder="Title">
-                  </div>
-                </div>
-
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
@@ -173,21 +147,21 @@
 
                 <span class="title">Abilities</span>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="abilityTitle" #abilityTitle="ngModel" placeholder="Title">
+                    <input type="text" class="form-control" name="abilityTitle" placeholder="Title">
                   </div>
                 </div>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <input type="text" class="form-control" id="Title" placeholder="Title">
                   </div>
                 </div>
 
-                <div class="form-group row mydiv">
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>

@@ -65,10 +65,6 @@ export class OverallBudgetComponent implements OnInit {
 
   }
 
-  checkEmpty(){
-
-  }
-
  async fetAllBudgetItems(){
     const data = await this.budgetItemService.getAllBudgetItems().toPromise();
     this.allBudgetItems = data.result
