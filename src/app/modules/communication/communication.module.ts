@@ -22,7 +22,7 @@ import {
     NbIconModule
   ],
   providers: [
-    ApiService
+    ApiService,
   ]
 })
 export class CommunicationModule { }

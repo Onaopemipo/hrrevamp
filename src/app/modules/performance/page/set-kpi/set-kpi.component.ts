@@ -9,7 +9,7 @@ import { MyKPI } from '../../services/kpi.service';
   styleUrls: ['./set-kpi.component.scss']
 })
 export class SetKpiComponent implements OnInit {
-
+  editingData: any = {};
   constructor(
     private KraService: KeyResultAreaService,
     private activatedRoute: ActivatedRoute,

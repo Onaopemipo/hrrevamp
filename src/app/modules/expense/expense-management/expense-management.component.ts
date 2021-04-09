@@ -143,7 +143,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   }
 
   getProjects() {
-    this.getmyproject.getExpenseProject(1, '', '', true, '', '', 1, 1).subscribe(data => {
+    this.getmyproject.getExpenseProject(0, '', '', true, '', '', 1, 10).subscribe(data => {
       // if(!data.){
       this.myProjects = data;
       console.log('Hey See here', this.myProjects);
@@ -152,7 +152,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   }
 
   getTypes() {
-    this.getmytype.getExpenseTypes(0, '', '', '', '', '', 1, 1).subscribe(data => {
+    this.getmytype.getExpenseTypes(0, '', '', '', '', '', 1, 10).subscribe(data => {
       if (!data.hasError) {
         this.myTypes = data.result;
         console.log('Hey See here', this.myTypes);

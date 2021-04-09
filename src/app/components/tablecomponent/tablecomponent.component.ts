@@ -91,10 +91,11 @@ export class TablecomponentComponent implements OnInit {
   constructor() { }
 
   customActionClicked(col, data){
+    alert(7);
     this.actionClick.emit({
       name: col.name,
       data,
-    })
+    });
   }
 
   onSort({column, direction}: SortEvent) {

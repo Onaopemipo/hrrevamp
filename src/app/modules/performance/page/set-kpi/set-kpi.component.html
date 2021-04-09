@@ -64,15 +64,42 @@
             </tbody>
         </table>
     </div>
+</div>
 
-    <ngx-workflow></ngx-workflow>
-    <div class="linear-form">
-        <div class="form-group">
-            <label></label>
-            <div>
-                <button nbButton status='primary'>Save</button>
-                <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
+<ngx-side-modal>
+    <div header>
+        Add KPI
+    </div>
+    <div modal-body>
+        <div class="form">
+            <div class="form-group">
+                <label>KPI</label>
+                <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+            </div>
+            <div class="form-group">
+                <label>KPI</label>
+                <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+            </div>
+            <div class="form-group">
+                <label>KPI</label>
+                <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+            </div>
+            <div class="form-group">
+                <label>KPI</label>
+                <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
             </div>
         </div>
     </div>
-</div>
+    <div modal-footer>
+        <div class="linear-form">
+            <div class="form-group">
+                <label>
+                </label>
+                <div>
+                    <button nbButton status='primary'>Save</button>
+                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ngx-side-modal>
