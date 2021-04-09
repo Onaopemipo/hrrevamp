@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
-import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, PromotionListServiceProxy, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
+import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TOP_ACTIONS {
@@ -34,11 +34,11 @@ export class PromotioneligibilityComponent implements OnInit {
   promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
   eligibilityList: Sp_FetchEligibleEmployees [] = [];
 
-  constructor(private promotion: AddUpdateEligibleBucketServiceProxy, private eligibilty: PromotionListServiceProxy,
+  constructor(private promotion: AddUpdateEligibleBucketServiceProxy,
     private alert: AlertserviceService) { }
 
   ngOnInit(): void {
-    this.fetchEligibility();
+  //  this.fetchEligibility();
   }
 
   async addToEligibilityList(){
@@ -49,18 +49,18 @@ export class PromotioneligibilityComponent implements OnInit {
     }
   }
 
-  async fetchEligibility(){
-    const data = await this.eligibilty.promotionList(1,1).toPromise();
-    if(!data.hasError){
-      this.alert.openModalAlert('error','Data failure','Relaod')
-      this.eligibilityList = data.result;
-      console.log(this.eligibilityList)
-    }
-    else {
-      console.log('Error has occured')
-    }
+  // async fetchEligibility(){
+  //   const data = await this.eligibilty.promotionList(1,1).toPromise();
+  //   if(!data.hasError){
+  //     this.alert.openModalAlert('error','Data failure','Relaod')
+  //     this.eligibilityList = data.result;
+  //     console.log(this.eligibilityList)
+  //   }
+  //   else {
+  //     console.log('Error has occured')
+  //   }
 
-  }
+  // }
 
   modal(buttion) {
     if (buttion === TOP_ACTIONS.ADD_NEW) {

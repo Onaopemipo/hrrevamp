@@ -54,6 +54,7 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { ExitRequestService } from './services/exit-request.service';
+import { FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy, RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy } from 'app/_services/service-proxies';
 
 
 
@@ -119,7 +120,11 @@ import { ExitRequestService } from './services/exit-request.service';
     FetchAllEmployeesServiceProxy,
     DataServiceProxy,
     ExitRequestService,
-    FetchEmployeeByIdServiceProxy
+    FetchEmployeeByIdServiceProxy,
+    GetAllProfessionalBodiesServiceProxy,
+    RecruitmentSettingServiceProxy,
+    FileUploadServiceProxy,
+    UploadProfileImageServiceProxy
 ]
 })
 export class EmployeemoduleModule { }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { Grade, GradeLevelStepServiceProxy, GradestepCreatePayload, GradestepDTO, VwGradeSteps } from 'app/_services/service-proxies';
+import { Grade, GradeLevelStepServiceProxy, GradestepCreatePayload, GradestepDTO } from 'app/_services/service-proxies';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';

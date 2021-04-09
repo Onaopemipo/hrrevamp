@@ -36,28 +36,28 @@
         <div class="fmContainer" *ngSwitchCase="'profile_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: column;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
-                <div style="display: flex;flex-direction: row;">
+                <div style="display: flex;flex-direction: row;" *ngIf="createNewEmployee.id">
                  <div >
-                  <img src="assets/icons/camera.jpg" onError="this.src='assets/icons/camera.jpg'" style="border-radius: 50%; height: 7em;width: 7rem;">
+                  <img [src]="createNewEmployee.profilePic"  onError="this.src='assets/icons/camera.jpg'" style="border-radius: 50%; height: 7em;width: 7rem;">
                  </div>
                  <div style="display: flex;flex-direction: column;justify-content: center;padding-left: 15px;"
                  flow-init     
                  flowDrop
                  [flow]="flowBasic.flowJs"
-                 (drop)="onDropFileceived(flowBasic)"
-                 (dragover)="onDragOver($event)"
+                 (drop)="profileonDropFileceived(flowBasic)"
+                 (dragover)="profileonDragOver($event)"
           
                  >
-                 <div (change)="filereceived(flowBasic)">
+                 <div (change)="profilefilereceived(flowBasic)">
                   <a flowButton
                   [flow]="flowBasic.flowJs" style="cursor: pointer;text-decoration: underline;color: #4847E0;">Change display picture</a>
                 </div>
-                <div *ngFor="let transfer of files; let i = index" style="color: blue; display: flex;">
+                <div *ngFor="let transfer of profilefiles; let i = index" style="color: blue; display: flex;">
                <div *ngIf="i == 0" style=" display: flex;flex-direction: row">
                 <nb-icon nbPrefix icon="checkmark-outline" pack="eva"></nb-icon> &nbsp;&nbsp;
                 <div style="flex: auto;">{{transfer.name}}</div>
                 &nbsp;&nbsp;
-                <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
+                <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="profileremoveFile(flowBasic, transfer)">Remove</span>
              
                </div>
                
@@ -65,8 +65,10 @@
                   <h6 style="font-size: small !important;">Maximum size allowed is 600kb of PNG,JPEG,JPG</h6>
                  </div>
                   </div>
-                  <div style="display: flex;justify-content: flex-end;">
-                  <small>Activate Self Service</small>
+                  <div style="display: flex;justify-content: flex-end;flex-direction: row;">
+                    <small>Activate Self Service</small>
+                   <div style="padding-left: 5px;"> <nb-checkbox name="selfServiceStatus" id="selfServiceStatus" #selfServiceStatus="ngModel" [(ngModel)]="createNewEmployee.selfServiceStatus"></nb-checkbox></div>
+                  
                   </div>
             </div>
 <!-- 
@@ -213,30 +215,44 @@
                 </div>
         </div>
 
-        <!--Work Info-->
+        <!--Contract Info-->
 
         <div class="fmContainer" *ngSwitchCase="'contract_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
-                <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" *ngIf="createNewEmployee.id">
+                <!-- <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" >
                   <nb-icon icon="edit-2-outline" status="primary"></nb-icon> Edit
                 
-                  </div>
+                  </div> -->
             </div>
             
-            <div *ngIf="!createNewEmployee.id" style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;">
-                <p class="smalltext">No Contract Record Found</p>
-                </div>
-
-                <div style="padding-top:1.5rem;" *ngIf="createNewEmployee.id">
-                <div style="display: flex;flex-direction: row;">
-                <div style="text-transform:capitalize;" class="header6-medium">assignment no: </div>
-                <div style="padding-left: 20px" class="header6-medium">ADMIN-1</div>
-                </div>
+                <div style="padding-top:1.5rem;" >
+                  <ngx-default-content
+                  *ngIf="EmpContractEmpty"
+                  pageHeader="No Contract Record Found"
+                  pageDescription=""
+                  buttonValue=""
+                  [loading]="EmpContractloading"
+                       
+                >
+                </ngx-default-content>
+                  <ngx-tablecomponent  
+                  *ngIf="!EmpContractEmpty"              
+                  [showActions]="true"
+                  [showFilter]="false"
+                  (actionClick)="empContracttableActionClicked($event)"
+                  [actions]="EmpContracttableActions" 
+                  [userData]="createNewEmployee.contracts" 
+                  [tableColum]="EmpContracttableColumns"
+                  [totalItems]="EmpContracttotalItems"
+                  [currentPage]="EmpContractcurrentPage"
+                  [loading]="EmpContractloading"
+                  >
+              </ngx-tablecomponent>
                 </div>
         </div>
 
-         <!--Payment-->
+         <!--Document-->
          <div class="fmContainer" *ngSwitchCase="'document_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
@@ -269,7 +285,7 @@
               </ngx-tablecomponent>
                 </div>
         </div>
-          <!--Medical Info-->
+          <!--Qualification Info-->
           <div class="fmContainer" *ngSwitchCase="'qualification_Info'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
               <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
@@ -380,7 +396,7 @@
                           </div>
                               <div class="form-group row">
                                 <div class="col-sm-12">
-                                  <button type="submit" nbButton status="primary" [disabled]="nxtKinForm.invalid"  (click)="nextPanel()" >Next</button>
+                                  <button type="button" nbButton status="primary" [disabled]="nxtKinForm.invalid"  (click)="submitNextOfKin()" >Next</button>
                                 </div>
                               </div>
                         </form>
@@ -395,51 +411,97 @@
 
             <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
                 <div style="padding-top:1.5rem;">
-                    <form>
+                    <form id="contactForm" name="contactForm" #contactForm="ngForm">
                       <div class="row" style="padding-top:10px">
                         <div class="col-sm-6 form-group">
                           <label>Address Type</label>
-                          <input type="text" fullWidth class="form-control" nbInput placeholder="Enter First Name"  required>
-                       
+                          <select class="form-control" name="address_type" id="address_type" #address_type="ngModel" [(ngModel)]="indvEmpContact.address_type"  required >
+                            <option value="">--Select Address Type--</option>  
+                            <option *ngFor="let addt of alladdressType" [value]="addt.option_value">{{addt.option_text}}</option>                      
+                        </select>
+                        <div *ngIf="address_type.invalid && (address_type.dirty || address_type.touched)" class="error">
+                          <div *ngIf="address_type.errors.required">Address Type is required</div>
+                        </div>
                         </div>
                         <div class="col-sm-6 form-group">
                           <label>Country</label>
-                          <select class="form-control"  required >
-                            <option value="">--Select Country--</option>
-                         
+                          <select (change)="getStatebyCountryId(country_id.value)" name="country_id" id="country_id" #country_id="ngModel" [(ngModel)]="indvEmpContact.country_id" class="form-control"  required >
+                            <option value="">--Select Country--</option>     
+                            <option *ngFor="let addCount of allCountries" [value]="addCount.id">{{addCount.name}}</option>                     
                         </select>
+                        <div *ngIf="country_id.invalid && (country_id.dirty || country_id.touched)" class="error">
+                          <div *ngIf="country_id.errors.required">Country is required</div>
+                        </div>
                         </div>
                         <div class="col-sm-6 form-group">
                           <label>State</label>
-                          <select class="form-control"  required >
+                          <select (change)="getlgaByStateId(state_id.value)" name="state_id" id="state_id" #state_id="ngModel" [(ngModel)]="indvEmpContact.state_id"  class="form-control"  required >
                             <option value="">--Select State--</option>
-                         
+                            <option *ngFor="let addStates of allStates" [value]="addStates.id">{{addStates.state_name}}</option>  
                         </select>
+                        <div *ngIf="state_id.invalid && (state_id.dirty || state_id.touched)" class="error">
+                          <div *ngIf="state_id.errors.required">State is required</div>
+                        </div>
                         </div>
                         <div class="col-sm-6 form-group">
                           <label>Local Government Area (LGA)</label>
-                          <input type="text" fullWidth  class="form-control" nbInput placeholder="Enter Relationship"  required>
-                       
+                          <select  name="lga_id" id="lga_id" #lga_id="ngModel" [(ngModel)]="indvEmpContact.lga_id"  class="form-control"  required >
+                            <option value="">--Select LGA--</option>
+                            <option *ngFor="let addlga of alllgaByStates" [value]="addlga.id">{{addlga.lga_name}}</option>  
+                        </select>
+                        <div *ngIf="lga_id.invalid && (lga_id.dirty || lga_id.touched)" class="error">
+                          <div *ngIf="lga_id.errors.required">LGA is required</div>
+                        </div>
                         </div>
                         <div class="col-sm-12 form-group">
                           <label>Address Line 1</label>
-                          <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                          <input name="address1" id="address1" #address1="ngModel" [(ngModel)]="indvEmpContact.address1" type="text"  class="form-control" nbInput placeholder="Enter Address Line 1" fullWidth  required>
+                          <div *ngIf="address1.invalid && (address1.dirty || address1.touched)" class="error">
+                            <div *ngIf="address1.errors.required">Address 1 is required</div>
+                          </div>
                         </div>
                         <div class="col-sm-12 form-group">
                           <label>Address Line 2</label>
-                          <input type="text"  class="form-control" nbInput placeholder="Enter Relationship" fullWidth  required>
+                          <input name="address2" id="address2" #address2="ngModel" [(ngModel)]="indvEmpContact.address2" type="text"  class="form-control" nbInput placeholder="Enter Address Line 2" fullWidth >
                     
                         </div>
                         <div class="col-sm-12 form-group">
-                           <nb-checkbox>Primary Account</nb-checkbox>
+                           <nb-checkbox name="is_primary_address" id="is_primary_address" #is_primary_address="ngModel" [(ngModel)]="indvEmpContact.is_primary_address">Primary Account</nb-checkbox>
                         </div>
                       </div>
+
+                      <div style="padding-top: 5px;padding-bottom: 10px;">
+                        <nb-alert status="danger" *ngIf="errorMsg">{{errorMsg}}</nb-alert>
+                        <div class="row">
+            <div class="col-sm-12" style="padding-top: 10px;"  *ngFor="let tempCont of tempEmpContactList;let i = index">
+              <div class="cbadge">{{getAddresstypename(tempCont.add_type)}}&nbsp;|&nbsp;{{tempCont.add1}}&nbsp;<i class="fa fa-times" (click)="removefromContact(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+            </div>
+                        </div>
+                       
+                      </div>
                           <div class="form-group row">
-                            <div class="col-sm-12">
-                              <button type="submit" nbButton status="primary" >Submit</button>
+                            <div class="col-sm-12" style="display: flex;flex-direction: row;">
+                              <button [disabled]="tempEmpContactList.length < 1" (click)="submitContact()" type="button" nbButton status="primary" >Save Changes</button>
+                              <div style="padding-left: 12px;">
+                                <button [disabled]="contactForm.invalid" (click)="addtoContact(indvEmpContact)" type="button" outline="true" nbButton status="primary" > <i class="fa fa-plus"></i> Add Address</button>
+                              </div>
                             </div>
                           </div>
+
+                        
                     </form>
+                    <ngx-tablecomponent                                
+                    [showActions]="true"
+                    [showFilter]="false"
+                    (actionClick)="empContacttableActionClicked($event)"
+                    [actions]="EmpContacttableActions" 
+                    [userData]="createNewEmployee.addresses" 
+                    [tableColum]="EmpContacttableColumns"
+                    [totalItems]="EmpContacttotalItems"
+                    [currentPage]="EmpContactcurrentPage"
+                    [loading]="EmpContactloading"
+                    >
+                </ngx-tablecomponent>
                 </div>
             </div>
 
@@ -451,28 +513,37 @@
   
               <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
                   <div style="padding-top:1.5rem;">
-                      <form>
+                      <form name="pensionForm" id="pensionForm" #pensionForm="ngForm">
                         <div class="row" style="padding-top:10px">
                           <div class="col-sm-6 form-group">
                             <label>Pensioner File No.</label>
-                            <input type="text" fullWidth class="form-control" nbInput placeholder="Enter Pensioner File No"  required>
-                         
+                            <input [(ngModel)]="createNewEmployee.pension.pensionerFileNo" name="pensionerFileNo" id="pensionerFileNo" #pensionerFileNo="ngModel" type="text" fullWidth class="form-control" nbInput placeholder="Enter Pensioner File No"  required>
+                            <div *ngIf="pensionerFileNo.invalid && (pensionerFileNo.dirty || pensionerFileNo.touched)" class="error">
+                              <div *ngIf="pensionerFileNo.errors.required">Pensioner File No is required</div>
+                            </div>
                           </div>
                           <div class="col-sm-6 form-group">
                             <label>PFA Name</label>
-                            <input type="text" fullWidth class="form-control" nbInput placeholder="Enter PFA Name"  required>
-                         
+                            <select  name="pfaId" id="pfaId" #pfaId="ngModel" [(ngModel)]="createNewEmployee.pension.pfaId"   class="form-control"  required >
+                              <option value="">--Select PFA--</option>
+                              <option *ngFor="let pfal of pfaList" [value]="pfal.option_value">{{pfal.option_text}}</option>  
+                          </select>
+                          <div *ngIf="pfaId.invalid && (pfaId.dirty || pfaId.touched)" class="error">
+                            <div *ngIf="pfaId.errors.required">PFA Name is required</div>
+                          </div>
                           </div>
                           <div class="col-sm-6 form-group">
                             <label>RSA Number</label>
-                            <input type="text" fullWidth class="form-control" nbInput placeholder="Enter RSA Number"  required>
-                         
+                            <input id="rsaNumber" name="rsaNumber" #rsaNumber="ngModel" [(ngModel)]="createNewEmployee.pension.rsaNumber" type="text" fullWidth class="form-control" nbInput placeholder="Enter RSA Number"  required>
+                            <div *ngIf="rsaNumber.invalid && (rsaNumber.dirty || rsaNumber.touched)" class="error">
+                              <div *ngIf="rsaNumber.errors.required">PFA Name is required</div>
+                            </div>
                           </div>
                         
                         </div>
                             <div class="form-group row">
                               <div class="col-sm-12">
-                                <button type="submit" nbButton status="primary" >Save Changes</button>
+                                <button type="button" [disabled]="pensionForm.invalid" nbButton status="primary" (click)="submitPension()">Next</button>
                               </div>
                             </div>
                       </form>
@@ -488,32 +559,28 @@
                     </div>
               </div>
                     <div style="padding-top:1.5rem;">
-                      <table class="table">
-                        <thead class="thead-light">
-                          <tr>
-                            <th scope="col">Job Title</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Grade</th>
-                            <th scope="col">Salary Grade</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Action</th>
-                       
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">Name</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Mark</td>
-                            <td>Otto</td>             
-                            <td>Otto</td>          
-                            <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-                          </tr>
-                         
-                        </tbody>
-                      </table>
+                      <ngx-default-content
+                      *ngIf="EmpHistoryEmpty"
+                      pageHeader="Add your first Job History"
+                      pageDescription="Click on the button to add Job History"
+                      buttonValue="Add History"
+                      [loading]="EmpHistoryloading"
+                      (buttonClick)="showEmpHistoryModal = true"              
+                    >
+                    </ngx-default-content>
+                      <ngx-tablecomponent  
+                      *ngIf="!EmpHistoryEmpty"              
+                      [showActions]="true"
+                      [showFilter]="false"
+                      (actionClick)="embHistorytableActionClicked($event)"
+                      [actions]="EmpHistorytableActions" 
+                      [userData]="createNewEmployee.employmentHistories" 
+                      [tableColum]="EmpHistorytableColumns"
+                      [totalItems]="EmpHistorytotalItems"
+                      [currentPage]="EmpHistorycurrentPage"
+                      [loading]="EmpHistoryloading"
+                      >
+                  </ngx-tablecomponent>
                     </div>
             </div>
 
@@ -526,24 +593,28 @@
                   </div>
             </div>
                   <div style="padding-top:1.5rem;">
-                    <table class="table">
-                      <thead class="thead-light">
-                        <tr>
-                          <th scope="col">Category</th>
-                          <th scope="col">Skill</th>
-                          <th scope="col">Action</th>
-                     
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Name</th>
-                          <td>Mark</td>                              
-                          <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-                        </tr>
-                       
-                      </tbody>
-                    </table>
+                    <ngx-default-content
+                    *ngIf="EmpSkillEmpty"
+                    pageHeader="Add your first Skill"
+                    pageDescription="Click on the button to add Skill"
+                    buttonValue="Add Skill"
+                    [loading]="EmpSkillloading"
+                    (buttonClick)="showSkillModal = true"              
+                  >
+                  </ngx-default-content>
+                    <ngx-tablecomponent  
+                    *ngIf="!EmpSkillEmpty"              
+                    [showActions]="true"
+                    [showFilter]="false"
+                    (actionClick)="empSkilltableActionClicked($event)"
+                    [actions]="EmpSkilltableActions" 
+                    [userData]="createNewEmployee.skills" 
+                    [tableColum]="EmpSkilltableColumns"
+                    [totalItems]="EmpSkilltotalItems"
+                    [currentPage]="EmpSkillcurrentPage"
+                    [loading]="EmpSkillloading"
+                    >
+                </ngx-tablecomponent>
                   </div>
             </div>
   <!--Training-->
@@ -590,30 +661,28 @@
         </div>
   </div>
         <div style="padding-top:1.5rem;">
-          <table class="table">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name of Certificate</th>
-                <th scope="col">Category</th>
-                <th scope="col">Vendor</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Action</th>
-           
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Name</th>
-                <td>Mark</td>                
-                <td>Mark</td>    
-                <td>Mark</td>    
-                <td>Mark</td>                  
-                <td><nb-icon icon="more-horizontal-outline"></nb-icon></td>
-              </tr>
-             
-            </tbody>
-          </table>
+          <ngx-default-content
+          *ngIf="EmpCertEmpty"
+          pageHeader="Add your first Certification"
+          pageDescription="Click on the button to add Certification"
+          buttonValue="Add Certification"
+          [loading]="EmpCertloading"
+          (buttonClick)="showCertificationModal = true"              
+        >
+        </ngx-default-content>
+          <ngx-tablecomponent  
+          *ngIf="!EmpCertEmpty"              
+          [showActions]="true"
+          [showFilter]="false"
+          (actionClick)="empCerttableActionClicked($event)"
+          [actions]="EmpCerttableActions" 
+          [userData]="createNewEmployee.certification" 
+          [tableColum]="EmpCerttableColumns"
+          [totalItems]="EmpCerttotalItems"
+          [currentPage]="EmpCertcurrentPage"
+          [loading]="EmpCertloading"
+          >
+      </ngx-tablecomponent>
         </div>
 </div>
               <!--Custom Form-->
@@ -638,50 +707,61 @@
     <form id="certificationForm" name="certificationForm" #certificationForm="ngForm">
 
       <div class="row" style="padding-top:10px">
-        <div class="col-sm-6 form-group">
-          <label>Category</label>
-          <select class="form-control"  required >
-            <option value="">--Select Category--</option>
-         
-        </select>
-       
-        </div>
-        <div class="col-sm-6 form-group">
+        <div class="col-sm-12 form-group">
           <label>Name of Certification</label>
-          <select class="form-control"  required >
+          <select [(ngModel)]="indvEmpCert.certificationId" name="certificationId" id="certificationId" #certificationId="ngModel" class="form-control"  required >
             <option value="">--Select Title--</option>
-         
+            <option *ngFor="let cert of allCertfications" [value]="cert.id">{{cert.name}}</option>
         </select>
-       
+        <div *ngIf="certificationId.invalid && (certificationId.dirty || certificationId.touched)" class="error">
+          <div *ngIf="certificationId.errors.required">Certification is required</div>
         </div>
-      
-        <div class="col-sm-6 form-group">
-          <label>Vendor</label>
-          <select class="form-control"  required >
-            <option value="">--Select Title--</option>
-         
-        </select>
-       
         </div>
         <div class="col-sm-12 form-group">
+          <label>Professional Body</label>
+          <select [(ngModel)]="indvEmpCert.institution" name="institution" id="institution" #institution="ngModel" class="form-control"  required >
+            <option value="">--Select Category--</option>
+            <option *ngFor="let certbody of allProfessionalBodes" [value]="certbody.id">{{certbody.name}}</option>
+        </select>
+        <div *ngIf="institution.invalid && (institution.dirty || institution.touched)" class="error">
+          <div *ngIf="institution.errors.required">Professional Body is required</div>
+        </div>
+        </div>
+     
+      
+        <div class="col-sm-12 form-group">
           <label>Start Date</label>
-          <ngx-date ></ngx-date>
+          <ngx-date [(value)]="indvEmpCert.startDate" id="startDate" name="startDate" [max]="indvEmpCert.endDate"></ngx-date>
         
         </div>
         <div class="col-sm-12 form-group">
           <label>End Date</label>
-          <ngx-date ></ngx-date>
+          <ngx-date [(value)]="indvEmpCert.endDate" id="endDate" name="endDate" [min]="indvEmpCert.startDate"></ngx-date>
         
         </div>
       </div>
    
     
     </form>
+    <div style="padding-top: 5px;">
+      <div class="row">
+<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempCert of tempEmpCertList;let i = index">
+<div class="cbadge">{{getEmpCertName(tempCert.certificationId)}}&nbsp;|&nbsp;{{tempCert.no_exp}}&nbsp;<i class="fa fa-times" (click)="removefromCert(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+</div>
+      </div>
+     
+    </div>
   </div>
   <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-    <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-    <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-    
+    <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+      <ngx-loadable-button [loading]="EmpCertloading" [disabled]="tempEmpCertList.length < 1" (click)="submitEmpCert()" >
+        Submit
+      </ngx-loadable-button>           
+      <div style="padding-left: 15px;">
+        <button [disabled]="!disableaddCert" outline="true" (click)="addtoCert(indvEmpCert)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add Certificate</button>
+     
+      </div>
+  </div>
 
 </div>
 <div style="margin-top: 10px;"></div>
@@ -754,29 +834,46 @@
     
             <div class="row" style="padding-top:10px">
               <div class="col-sm-12 form-group">
-                <label>Category</label>
-                <select class="form-control"  required >
-                  <option value="">--Select Category--</option>
-               
+                <label>Skill</label>
+                <select [(ngModel)]="indvEmpSkill.skillId" name="skillId" id="skillId" #skillId="ngModel" class="form-control"  required >
+                  <option value="">--Select Skill--</option>
+                  <option *ngFor="let sk of allskills" [value]="sk.id">{{sk.name}}</option>
               </select>
-             
+              <div *ngIf="skillId.invalid && (skillId.dirty || skillId.touched)" class="error">
+                <div *ngIf="skillId.errors.required">Skill is required</div>
+              </div>
               </div>
               <div class="col-sm-12 form-group">
-                <label>Skill</label>
-          <ngx-multi-select></ngx-multi-select>
-             
+                <label>Start Date</label>
+                <ngx-date [(value)]="indvEmpSkill.startDate" id="startDate" name="startDate" ></ngx-date>
+            
+              </div>
+              <div class="col-sm-12 form-group">
+                <label>Experience In Month</label>
+                <!-- {{getSkillExperince}} -->
               </div>
            
             </div>
          
           
           </form>
+          <div style="padding-top: 5px;">
+            <div class="row">
+  <div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempSkill of tempEmpSkillList;let i = index">
+  <div class="cbadge">{{getEmpSkillName(tempSkill.id_skill)}}&nbsp;|&nbsp;{{tempSkill.no_exp}}&nbsp;<i class="fa fa-times" (click)="removefromSkill(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+  </div>
+            </div>
+           
+          </div>
         </div>
-        <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-          <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-          
-  
+        <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+          <ngx-loadable-button [loading]="EmpSkillloading" [disabled]="tempEmpSkillList.length < 1" (click)="submitEmpSkills()" >
+            Submit
+          </ngx-loadable-button>           
+          <div style="padding-left: 15px;">
+            <button [disabled]="!disableaddSkill" outline="true" (click)="addtoSkills(indvEmpSkill)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add Skill</button>
+         
+          </div>
       </div>
       <div style="margin-top: 10px;"></div>
       </ngx-side-modal>
@@ -791,56 +888,69 @@
           <div class="row" style="padding-top:10px">
             <div class="col-sm-6 form-group">
               <label>Job Title</label>
-              <select class="form-control"  required >
-                <option value="">--Select Title--</option>
-             
+              <select class="form-control"  required [(ngModel)]="indvEmpHistory.jobTitleId" name="jobTitleId" id="jobTitleId" #jobTitleId="ngModel">
+                <option value="">--Select Title--</option> 
+                <option *ngFor="let jTitle of allPositions" [value]="jTitle.id">{{jTitle.title}}</option>            
             </select>
-           
+            <div *ngIf="jobTitleId.invalid && (jobTitleId.dirty || jobTitleId.touched)" class="error">
+              <div *ngIf="jobTitleId.errors.required">Job Title is required</div>
+            </div>
             </div>
             <div class="col-sm-6 form-group">
               <label>Department</label>
-              <select class="form-control"  required >
-                <option value="">--Select Title--</option>
-             
+              <select class="form-control" [(ngModel)]="indvEmpHistory.departmentId" name="departmentId" id="departmentId" #departmentId="ngModel" required >
+                <option value="">--Select Title--</option> 
+                <option *ngFor="let dep of alldepartments" [value]="dep.option_value">{{dep.option_text}}</option>               
             </select>
-           
+            <div *ngIf="departmentId.invalid && (departmentId.dirty || departmentId.touched)" class="error">
+              <div *ngIf="departmentId.errors.required">Department is required</div>
             </div>
-            <div class="col-sm-6 form-group">
-              <label>Grade</label>
-              <select class="form-control"  required >
-                <option value="">--Select Title--</option>
-             
-            </select>
-           
             </div>
-            <div class="col-sm-6 form-group">
-              <label>Salary Scale</label>
-              <select class="form-control"  required >
-                <option value="">--Select Title--</option>
-             
-            </select>
-           
+            <div class="col-sm-12 form-group">
+              <label>Designation</label>
+              <input fullWidth [(ngModel)]="indvEmpHistory.designation" name="designation" id="designation" #designation="ngModel" type="text"  class="form-control" nbInput placeholder="Enter Designation"  required>
+              <div *ngIf="designation.invalid && (designation.dirty || designation.touched)" class="error">
+                <div *ngIf="designation.errors.required">Designation is required</div>
+              </div>
+            </div>
+            <div class="col-sm-12 form-group">
+              <label>Employer Address</label>
+              <textarea rows="5" [(ngModel)]="indvEmpHistory.employerAddress" #employerAddress="ngModel"  id="employerAddress" name="employerAddress"  nbInput fullWidth   placeholder="Enter Employer Address"></textarea>
+              <div *ngIf="employerAddress.invalid && (employerAddress.dirty || employerAddress.touched)" class="error">
+                <div *ngIf="employerAddress.errors.required">Employer Address is required</div>
+              </div>
             </div>
             <div class="col-sm-12 form-group">
               <label>Start Date</label>
-              <ngx-date ></ngx-date>
+              <ngx-date [(value)]="indvEmpHistory.startDate" id="startDate" name="startDate" [max]="indvEmpHistory.endDate"></ngx-date>
             
             </div>
             <div class="col-sm-12 form-group">
               <label>End Date</label>
-              <ngx-date ></ngx-date>
+              <ngx-date [(value)]="indvEmpHistory.endDate" id="endDate" name="endDate" [min]="indvEmpHistory.startDate"></ngx-date>
             
             </div>
           </div>
        
         
         </form>
+        <div style="padding-top: 5px;">
+          <div class="row">
+<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempHist of tempEmpHistoryList;let i = index">
+<div class="cbadge">{{getEmpJobTitle(tempHist.title_job)}}&nbsp;|&nbsp;{{tempHist.h_designation}}&nbsp;<i class="fa fa-times" (click)="removefromBank(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+</div>
+          </div>
+         
+        </div>
       </div>
-      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-        <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-        <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-        
-
+      <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+        <ngx-loadable-button [loading]="EmpHistoryloading" [disabled]="tempEmpHistoryList.length < 1" (click)="submitEmpHistory()" >
+          Submit
+        </ngx-loadable-button>           
+        <div style="padding-left: 15px;">
+          <button [disabled]="!disableaddHistory" outline="true" (click)="addtoEmpHistory(indvEmpHistory)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
+       
+        </div>
     </div>
     <div style="margin-top: 10px;"></div>
     </ngx-side-modal>
@@ -986,14 +1096,14 @@
           <div class="row" style="padding-top:10px">
             <div class="col-sm-6 form-group">
               <label>File Name</label>
-              <input type="text"  class="form-control" nbInput placeholder="Enter File Name"  required>
+              <input type="text" [(ngModel)]="indVDocuments.name" #name="ngModel" name="name" id="name" class="form-control" nbInput placeholder="Enter File Name"  required>
            
             </div>
             <div class="col-sm-6 form-group">
               <label>File Type</label>
-              <select class="form-control"  required >
+              <select class="form-control" [(ngModel)]="indVDocuments.docType" #docType="ngModel" name="docType" id="docType"  required >
                 <option value="">--Select Title--</option>
-             
+             <option *ngFor="let dType of allfiletypes" [value]="dType.text">{{dType.text}}</option>
             </select>
            
             </div>
@@ -1025,15 +1135,15 @@
           </div>
           <div class="form-group">
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Comment</label>
-            <textarea rows="5"  id="comment" name="comment"  nbInput fullWidth   placeholder="Enter Comment"></textarea>
+            <textarea [(ngModel)]="indVDocuments.comment" #comment="ngModel" name="comment" id="comment" rows="5"  nbInput fullWidth   placeholder="Enter Comment"></textarea>
           </div> 
         </form>
       </div>
-      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-        <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-        <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-        
-
+      <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+        <ngx-loadable-button [loading]="documentloading" [disabled]="!disableDocumentbtn" (click)="submitDocument(indVDocuments)" >
+          Submit
+        </ngx-loadable-button>           
+     
     </div>
     <div style="margin-top: 10px;"></div>
     </ngx-side-modal>
@@ -1050,14 +1160,14 @@
                 <div class="row" style="padding-top:10px">
                   <div class="col-sm-6 form-group">
                     <label>Employee Name</label>
-                    <input type="text"  class="form-control" readonly  required>
+                    <input type="text" [(ngModel)]="indvemployeeContract.fullName" name="fullName" id="fullName"  class="form-control" readonly  required>
                  
                   </div>
                   <div class="col-sm-6 form-group">
                       <label>Department</label>
-                      <select class="form-control"   >
+                      <select class="form-control" #departmentId="ngModel" [(ngModel)]="indvemployeeContract.departmentId" name="departmentId" id="departmentId" required  >
                           <option value="">--Select Department--</option>
-                       
+                       <option *ngFor="let dep of alldepartments" [value]="dep.option_value">{{dep.option_text}}</option>
                       </select>
                  
                   </div>
@@ -1068,112 +1178,107 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label>Job Title</label>
-                  <select class="form-control"   >
+                  <select class="form-control" #jobId="ngModel" [(ngModel)]="indvemployeeContract.jobId" name="jobId" id="jobId" required   >
                       <option value="">--Select Title--</option>
-                   
+                      <option *ngFor="let jb of alljobRoles" [value]="jb.id">{{jb.name}}</option>
                   </select>
              
               </div>
               <div class="col-sm-6 form-group">
                 <label>Position</label>
-                <select class="form-control"   >
+                <select class="form-control" #positionId="ngModel" [(ngModel)]="indvemployeeContract.positionId" name="positionId" id="positionId" required  >
                     <option value="">--Select Position--</option>
-                 
+                    <option *ngFor="let ps of allPositions" [value]="ps.id">{{ps.title}}</option>
                 </select>
            
             </div>
             <div class="col-sm-6 form-group">
               <label>Location</label>
-              <select class="form-control"   >
+              <select class="form-control" #locationId="ngModel" [(ngModel)]="indvemployeeContract.locationId" name="locationId" id="locationId" required   >
                   <option value="">--Select Location--</option>
-               
+                  <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
               </select>
          
           </div>
             <div class="col-sm-12 form-group">
               <label>Date of Confirmation</label>
-              <ngx-date ></ngx-date>
+              <ngx-date  [(value)]="indvemployeeContract.dateOfConfirmation" name="dateOfConfirmation" id="dateOfConfirmation"></ngx-date>
          
           </div>
 
           <div class="col-sm-12 form-group">
             <label>Date of Appointment</label>
-            <ngx-date ></ngx-date>
+            <ngx-date  [(value)]="indvemployeeContract.dateOfAppointment" name="dateOfAppointment" id="dateOfAppointment"></ngx-date>
        
         </div>
         <div class="col-sm-12 form-group">
           <label>Date of Conversion</label>
-          <ngx-date ></ngx-date>
+          <ngx-date [(value)]="indvemployeeContract.dateOfConversion" name="dateOfConversion" id="dateOfConversion"></ngx-date>
      
       </div>
       <div class="col-sm-6 form-group">
         <label>Payroll Type</label>
-        <select class="form-control"   >
+        <select class="form-control" #payRollTypeId="ngModel"  [(ngModel)]="indvemployeeContract.payRollTypeId" name="payRollTypeId" id="payRollTypeId" required>
             <option value="">--Select Location--</option>
-         
+            <option *ngFor="let pr of allpayrolltypes" [value]="pr.id">{{pr.name}}</option>
         </select>
    
     </div>
     <div class="col-sm-6 form-group">
       <label>Employement Type</label>
-      <select class="form-control"   >
+      <select class="form-control" #employmentTypeId="ngModel"  [(ngModel)]="indvemployeeContract.employmentTypeId" name="employmentTypeId" id="employmentTypeId"  required >
           <option value="">--Select Type--</option>
-       
+          <option *ngFor="let ep of allemploymenttypes" [value]="ep.id">{{ep.text}}</option>
       </select>
   
   </div>
   <div class="col-sm-12 form-group">
     <label>Contract End Date</label>
-    <ngx-date ></ngx-date>
+    <ngx-date  [(value)]="indvemployeeContract.contractEndDate" name="contractEndDate" id="contractEndDate"></ngx-date>
   
   </div>
   <div class="col-sm-6 form-group">
     <label>Salary Scale</label>
-    <select class="form-control"   >
+    <select class="form-control" #salaryScaleId="ngModel"  [(ngModel)]="indvemployeeContract.salaryScaleId" name="salaryScaleId" id="salaryScaleId"  required   >
         <option value="">--Select Scale--</option>
-     
+        <option *ngFor="let ssc of allSalaryScale" [value]="ssc.id">{{ssc.name}}</option>
     </select>
   
   </div>
   <div class="col-sm-6 form-group">
     <label>Grade</label>
-    <select class="form-control"   >
-        <option value="">--Select Scale--</option>
-     
+    <select class="form-control" #gradeId="ngModel"  [(ngModel)]="indvemployeeContract.gradeId" name="gradeId" id="gradeId"  required   >
+        <option value="">--Select Grade--</option>
+        <option *ngFor="let gr of allgrades" [value]="gr.id">{{gr.name}}</option>
+    </select>
+  
+  </div>
+  <div class="col-sm-12 form-group">
+    <label>Grade Step</label>
+    <select class="form-control"  #gradeStepId="ngModel"  [(ngModel)]="indvemployeeContract.gradeStepId" name="gradeStepId" id="gradeStepId"  required    >
+        <option value="">--Select Grade Step--</option>
+        <option *ngFor="let grst of allGradeSteps" [value]="grst.id">{{grst.name}}</option>
     </select>
   
   </div>
   <div class="col-sm-12 form-group">
     <label>Date of Employment</label>
-    <ngx-date ></ngx-date>
+    <ngx-date  ></ngx-date>
   
   </div>
-  <div class="col-sm-6 form-group">
-    <label>Grade Step</label>
-    <select class="form-control"   >
-        <option value="">--Select Scale--</option>
-     
-    </select>
-  
-  </div>
+ 
 
         </div>
 
 
       </form>
-                </div>
-         
-            
-     
-  
-  
-  
-      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-          <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-          <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Save Changes</button>
-     
-
-      </div>
+                </div>    
+                <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+                  <ngx-loadable-button [loading]="EmpContractloading" [disabled]="!disableaddContract" (click)="submitContract(indvemployeeContract)" >
+                    Submit
+                  </ngx-loadable-button>           
+               
+              </div>
       <div style="margin-top: 10px;"></div>
   
   </ngx-side-modal>

@@ -1,6 +1,6 @@
 import { DataServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { FetchEmployeeByIdServiceProxy, EmployeeDTO, PromotionListServiceProxy, Sp_FetchEligibleEmployees, FetchEmployeeContractByEmployeeIdServiceProxy, EmployeeContractAssignmentDTO } from './../../../_services/service-proxies';
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, Sp_FetchEligibleEmployees, FetchEmployeeContractByEmployeeIdServiceProxy, EmployeeContractAssignmentDTO } from './../../../_services/service-proxies';
 import { EmployeesService } from './../../career-succession/services/employees.service';
 import { Component, OnInit } from '@angular/core';
 

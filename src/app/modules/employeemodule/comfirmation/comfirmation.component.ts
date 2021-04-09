@@ -52,7 +52,7 @@ export class ComfirmationComponent implements OnInit {
   ]
   getConfirmationDetails() {
     this.loading == true
-    this.ConfirmationService.getConfirmationsByDetails(this.startDate, this.endDate, this.log_status, this._PageSize)
+    this.ConfirmationService.getConfirmationsByDetails(this.startDate, this.endDate, this.log_status,1, this._PageSize)
       .toPromise().then(comfirmationData => {
         this.data = comfirmationData.result
         this.loading == false

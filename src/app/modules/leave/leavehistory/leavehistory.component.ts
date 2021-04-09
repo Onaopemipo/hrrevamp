@@ -5,12 +5,40 @@ import {
   LeaveYearDTO,
   GetLeaveYearServiceProxy,
   GetLeaveTypesServiceProxy,
-  GetLeaveYearsServiceProxy
+  GetLeaveYearsServiceProxy,
+  GetLeaveRequestServiceProxy,
+  LeaveReportListDTO
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { database } from 'faker';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+import { ColumnTypes, TableAction, TableActionEvent,ACTIONS } from 'app/components/tablecomponent/models';
+import { IStatus, MyColor } from 'app/components/status/models';
 
+export class LeaveHistoryWithStatus extends LeaveReportListDTO implements IStatus {
+  leaveHistroy: LeaveReportListDTO;
+  aloowedGenderName: string
+  constructor(leaveHistroy: LeaveReportListDTO) {
+    super(leaveHistroy);
+    this.leaveHistroy = leaveHistroy;
+
+  }
+  get status() {
+    return this.leaveHistroy.approvalStatus;
+}
+getStatusLabel() {
+  if (this.leaveHistroy.approvalStatus === 'Pending') return 'Pending';
+  if (this.leaveHistroy.approvalStatus === 'Approved') return 'Approved';
+  if (this.leaveHistroy.approvalStatus === 'Rejected') return 'Rejected';
+
+}
+getStatusColor() {
+  if (this.leaveHistroy.approvalStatus === 'Pending') return new MyColor(242, 153, 74);
+  if (this.leaveHistroy.approvalStatus === 'Approved') return new MyColor(0, 153, 74);
+  if (this.leaveHistroy.approvalStatus === 'Rejected') return new MyColor(253, 238, 238);
+  return new MyColor(242, 0, 74);
+}
+ }
 enum TOP_ACTIONS {
   APPLY_FOR_LEAVE,
   ADD_PLAN
@@ -31,45 +59,67 @@ export class LeavehistoryComponent implements OnInit {
 
 
   tableColumns = [
-    { name: 'a', title: 'Name' },
-    { name: 'b', title: 'Leave Type' },
-    { name: 'c', title: 'Start Date' },
-    { name: 'd', title: 'End Date' },
-    { name: 'd', title: 'Number of Days' },
-    { name: 'd', title: 'Days Remaining' },
+    { name: 'fullName', title: 'Name',type: ColumnTypes.Text },
+    { name: 'leaveType', title: 'Leave Type',type: ColumnTypes.Text},
+    { name: 'startDate', title: 'Start Date',type: ColumnTypes.Date },
+    { name: 'enddate', title: 'End Date',type: ColumnTypes.Date },
+    { name: 'noOfDays', title: 'Number of Days',type: ColumnTypes.Text },
+    { name: 'daysRem', title: 'Days Remaining',type: ColumnTypes.Text },
+    { name: 'approvalStatus', title: 'Approval Status' ,type: ColumnTypes.Status},
   ];
 
 
   LeaveHistory: string = 'Leave History';
-  leavePlanModel: LeavePlanDTO = new LeavePlanDTO().clone();
-
-  allPlans:{} = {};
-  thisDay: Date = new Date();
-  allLeaveYear;
-  allLeaveType;
-  startYearDate = new Date();
-  endYearDate = new Date();
-  startDate: Date = this.leavePlanModel.startDate;
-  endDate: Date;
-
   leaveRequestModel: any = ''
-  constructor(private leaveyear: GetLeaveYearsServiceProxy, private leavetype: GetLeaveTypesServiceProxy,
-  private alertService: AlertserviceService) { }
-
-  ngOnInit(): void {
-    // this.updateCalcs;
-  //  console.log(this.allLeaveYear);
-   // this.fetchLeaveYear();
-    this.fetchLeaveType();
-    window.globalThis.a = this;
-    console.log(this.allLeaveType)
-    this.getEndDate();
+  filter = {
+    DepartmentId: undefined,
+    LeaveYearId: undefined,
+    LeaveTypeId: undefined,
+    LocationId: undefined,
+    pageSize: 10,
+    pageNumber: 1
   }
+  loading: boolean = false;
+  allleaveHistory = [];
+  totalItems = 0;
+  currentPage = 1;
+  constructor(private GetLeaveRequestService:GetLeaveRequestServiceProxy,
+  private alertService: AlertserviceService) { }
+  get showEmpty() {
+    return this.allleaveHistory.length === 0;
+  }
+  ngOnInit(): void {
+    this.getLeaveRequestReport();
+ 
+  }
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    this.getLeaveRequestReport();
+  }
+  getLeaveRequestReport() {
+    this.loading = true;
+    this.GetLeaveRequestService.getLeaveReports(this.filter.DepartmentId, this.filter.LeaveTypeId, this.filter.LeaveTypeId, this.filter.LocationId, this.filter.pageSize, this.filter.pageNumber)
+      .subscribe(data => {
+        this.loading = false;
+        if (!data.hasError) {
+          var lvHist = data.result.map(lvHist => new LeaveHistoryWithStatus(lvHist));
+          this.allleaveHistory = lvHist;
+         
+          this.totalItems = data.totalRecord;
+         
+        }
+        else {
+          
+        }
 
+      }, (error) => {
+        console.log(error);
+      })
+}
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
       this.showAddPlanModal = true;
-      this.fetchLeaveYear()
+
     }
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
       this.showLeavePlanModal = true;
@@ -79,60 +129,7 @@ export class LeavehistoryComponent implements OnInit {
   showLeavePlanModal = false;
 
 
-  updateCalcs(event){
-    console.log(event);
-  }
 
-  toggle(checked: boolean) {
-    // this.checked = checked;
-    // }
-  }
 
-  getHistory(){
-    // this.newLeave.createleavebyadmin()
-  }
-
-  createLeavePlan(){
-    // this.plan.createleaveplan(this.leavePlanModel)._subscribe(data => {
-    //   this.allPlans = data.result;
-    // })
-  }
-
-  getEndDate(){
-    if(this.leavePlanModel.startDate && this.leavePlanModel.noOfDays){
-      this.leavePlanModel.endDate = new Date(this.leavePlanModel.startDate.getTime()+ this.leavePlanModel.noOfDays*24*60*60*1000);
-      // this.leavePlanModel.endDate = this.endDate;
-      console.log('Yo it is this date', this.leavePlanModel.endDate);
-    }
-
-  }
-
-  // GetMy() => {
-  //   return new Date(${startDate.getFullYear()},
-  //     ${startDate.getMonth()},
-  //     ${startDate.getDate()} + ${days})
-  //  }
-
-  fetchLeaveYear(){
-    this.leaveyear.getLeaveYears(this.startYearDate,'',this.endYearDate,0,1,10).subscribe(data => {
-      // if(!data.hasError){
-        this.allLeaveYear = data.result;
-        console.log(this.allLeaveYear);
-      // }
-    }, error => {
-  console.log(error);
-    })
-  }
-
-  fetchLeaveType(){
-    this.leavetype.getLeaveTypes(true,0,false,0,1,10).subscribe(data => {
-      // if(!data.hasError){
-        this.allLeaveType = data.result;
-        console.log(data);
-      // }
-    }, (error) => {
-      console.log(error)
-    })
-  }
 }
 
