@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Comfirmation'>
+<ngx-componentsheader pageName='Confirmation'>
 
 </ngx-componentsheader>
 
@@ -7,26 +7,35 @@
     <nb-card-body>
 
         <nb-tabset>
-            <nb-tab tabTitle="Due">
+            <nb-tab tabTitle="Due" (click)="setFilterStatus(0)">
 
             </nb-tab>
-            <nb-tab tabTitle="Pending">
-
+            <nb-tab tabTitle="Pending" (click)="setStatus(1)">
+               
             </nb-tab>
 
-            <nb-tab tabTitle="Approved">
-
+            <nb-tab tabTitle="Approved" (click)="setStatusApproved(2)">
+            
             </nb-tab>
-            <nb-tab tabTitle="Declined">
-
+            <nb-tab tabTitle="Declined" (click)="setStatusDeclined(3)">
+                {{Declined}}
             </nb-tab>
             <nb-tab tabTitle="Extended">
 
             </nb-tab>
         </nb-tabset>
-        <ngx-tableheader></ngx-tableheader>
+        
+<!-- 
+        <ngx-tablecomponent [userData]="data" [tableColum]="tableColumns"></ngx-tablecomponent> -->
 
-        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+        <ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Leave Year"
+        pageDescription="Click on the button to " buttonValue="Create confirmation"
+        (buttonClick)="modal('Confirmation')">
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showFilter]="true"
+        (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="data"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      </ngx-tablecomponent>
     </nb-card-body>
 
 

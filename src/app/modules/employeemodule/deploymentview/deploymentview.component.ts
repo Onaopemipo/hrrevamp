@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel } from '../../../_services/service-proxies';
 
 @Component({
   selector: 'ngx-deploymentview',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deploymentview.component.scss']
 })
 export class DeploymentviewComponent implements OnInit {
-
+ AllEmployee: CreateDeploymentViewModel[] = []
   selectedCase: string = 'personal_Info';
   selectedPanel: any = { title: 'personal_Info', label: 'Personal Information', status: 'Active' };
   employeeviewlist = [
@@ -14,7 +15,7 @@ export class DeploymentviewComponent implements OnInit {
     { title: 'promotion_info', label: 'Promotion Information', status: 'Inactive' ,iconname:'volume-down'},
   
   ];
-  constructor() { }
+  constructor(private EmployeeDeploymentServiceProxy:EmployeeDeploymentServiceProxy) { }
   selectPanel(hiringlist, i) {
     this.selectedPanel = hiringlist;
     
@@ -23,6 +24,7 @@ export class DeploymentviewComponent implements OnInit {
     })
     this.employeeviewlist[i].status = 'Active';
     this.selectedCase = this.employeeviewlist[i].title; 
+   
   }
   ngOnInit(): void {
   }

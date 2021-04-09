@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel } from '../../../_services/service-proxies';
 
 @Component({
   selector: 'ngx-deploymentapplication',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeploymentapplicationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private EmployeeDeploymentServiceProxy: EmployeeDeploymentServiceProxy) { }
 
   ngOnInit(): void {
   }

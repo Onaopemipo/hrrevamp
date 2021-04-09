@@ -4,38 +4,46 @@
 
 <div class="row">
     <div class="col-md-4 col-xxl-4">
-    <nb-card>
-    <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
-        <div class="fmContainer">
-            <div style="padding-bottom: 0;">
-<div style="display: flex;align-items: center;justify-content: center;">
-<div class="employee-avatar">
-<img src="assets/icons/camera.jpg"> 
-</div>
-</div>
+        <nb-card>
+            <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
+                <div class="fmContainer">
+                    <div style="padding-bottom: 0;">
+                        <div style="display: flex;align-items: center;justify-content: center;">
+                            <div class="employee-avatar">
+                                <img src="assets/icons/camera.jpg">
+                            </div>
+                        </div>
 
-                <div style="text-align: center; padding: 10px;">
-                    <p class="header6-medium" style="margin-bottom: 1rem !important;">Kelvin Jeff</p>
-                    <p style="color: #95A8B8 !important;">software developer</p>
+                        <div style="text-align: center; padding: 10px;">
+                            <p class="header6-medium" style="margin-bottom: 1rem !important;">Kelvin Jeff</p>
+                            <p style="color: #95A8B8 !important;">software developer</p>
+                        </div>
+
+                    </div>
+
+
                 </div>
-             
+            </nb-card-body>
+            <div style.height="{{(scase.offsetHeight < 402)?380 : (scase.offsetHeight - 210) }}px">
+                <div #linklist style="display: flex;flex-direction: column;"
+                    *ngFor="let hiringlist of employeeviewlist; let i = index">
+
+                    <div (click)="selectPanel(hiringlist,i)"
+                        [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}"
+                        style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
+                        <div style="padding-left: 1rem;">
+                            <nb-icon icon="{{hiringlist.iconname}}"
+                                status="{{hiringlist.status == 'Active'? 'primary': 'none'}}"></nb-icon>
+                        </div>
+                        <div style="padding-left: 0.625rem;"><span
+                                [ngClass]="{'listtextActive': hiringlist.status == 'Active','listtextInactive': hiringlist.status != 'Active'}">{{hiringlist.label}}
+                            </span> </div>
+                    </div>
+
+                </div>
             </div>
-    
-    
-        </div>
-    </nb-card-body>
-    <div  style.height="{{(scase.offsetHeight < 402)?380 : (scase.offsetHeight - 210) }}px" >
-        <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of employeeviewlist; let i = index">
-    
-            <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
-            <div style="padding-left: 1rem;"><nb-icon icon="{{hiringlist.iconname}}" status="{{hiringlist.status == 'Active'? 'primary': 'none'}}"></nb-icon></div>
-            <div style="padding-left: 0.625rem;"><span [ngClass]="{'listtextActive': hiringlist.status == 'Active','listtextInactive': hiringlist.status != 'Active'}" >{{hiringlist.label}} </span> </div>
-            </div>
-            
-      </div>
-    </div>
-    
-    </nb-card>
+
+        </nb-card>
     </div>
     <div class="col-md-8 col-xxl-8">
         <nb-card>
@@ -45,22 +53,22 @@
                         <nb-tabset>
                             <nb-tab tabTitle="Personal information">
                                 <nb-card-header style="margin-bottom: 4rem;">
-            
-            
+
+
                                     <div style="display: flex; flex-direction: row; align-items: center;">
-            
+
                                         <div>
                                             <p style="font-weight: bold;">Personal Information</p>
                                         </div>
-            
-            
+
+
                                     </div>
-            
+
                                 </nb-card-header>
-            
-            
-            
-            
+
+
+
+
                                 <div *ngFor="let i of [0,1,2,3,4,5,6,7,8]" style="font-weight: bold; padding: 2rem;">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -71,28 +79,28 @@
                                         </div>
                                     </div>
                                 </div>
-            
-            
-            
-            
-            
+
+
+
+
+
                                 <br>
-            
+
                             </nb-tab>
                             <nb-tab tabTitle="Qualifications">
                                 <nb-card-header>
                                     <h6>Qualifications</h6>
-            
+
                                 </nb-card-header>
-            
+
                                 <br>
-            
-                              
+
+
                                 <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
-            
-            
-            
-                            </nb-tab>        
+
+
+
+                            </nb-tab>
                         </nb-tabset>
                     </div>
                     <div class="fmContainer" *ngSwitchCase="'promotion_info'">
@@ -100,12 +108,12 @@
                             <nb-tab tabTitle="Promotional Information">
                                 <nb-card-header>
                                     <h6>Promotional Promotion</h6>
-            
+
                                 </nb-card-header>
-            
+
                                 <br>
-            
-            
+
+
                                 <div *ngFor="let i of [0,1,2,3,4,5,6,7,8]" style="font-weight: bold; padding: 2rem;">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -116,34 +124,34 @@
                                         </div>
                                     </div>
                                 </div>
-                              
-            
-            
+
+
+
                                 <div class="row">
                                     <div class="col-md-4" style="display: flex;align-items:center">
                                         <div class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
-            
+
                                             <button nbButton status="primary" class="d-flex column">Approve</button>
                                             <button nbButton outline status="primary" class="d-flex column"
                                                 style="background-color: white; margin-left: 10px;">Discard</button>
-                                               
-                                              
+
+
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-xxl-8 ">
-            
-                                        
-            
+
+
+
                                     </div>
                                 </div>
-            
-            
+
+
                             </nb-tab>
-            
-            
+
+
                         </nb-tabset>
                     </div>
-           
+
                 </div>
             </nb-card-body>
         </nb-card>

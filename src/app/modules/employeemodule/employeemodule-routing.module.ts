@@ -76,7 +76,7 @@ const routes: Routes = [
         },
 
         {
-          path: 'comfirmation',
+          path: 'confirmation',
           component: ComfirmationComponent
         },
 

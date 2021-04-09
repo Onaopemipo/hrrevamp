@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel } from '../../../_services/service-proxies';
+
 
 enum TOP_ACTIONS {
   
@@ -20,17 +22,20 @@ export class EmployeedeploymentmanagementComponent implements OnInit {
   tableColumns =[
     { name: 'a', title: 'S/N' },
     { name: 'b', title: 'EMPLOYEE' },
-    { name: 'c', title: 'STAFF NO' },
-    { name: 'd', title: 'APPOINTMENT DATE' },
+    { name: 'refNo', title: 'STAFF NO' },
+    { name: 'effective_date', title: 'APPOINTMENT DATE' },
     { name: 'e', title: 'PROBATION PERIOD' },
-    { name: 'f', title: 'REQUESTED BY' },
-    { name: 'g', title: 'REQUESTED STATUS' },
+    { name: 'request_by', title: 'REQUESTED BY' },
+    { name: 'log_status', title: 'REQUESTED STATUS' },
   ]
 
-
-  constructor() { }
+  data:CreateDeploymentViewModel[] = []
+  constructor(private EmployeeDeploymentServiceProxy:EmployeeDeploymentServiceProxy) { }
 
   ngOnInit(): void {
+    this.EmployeeDeploymentServiceProxy.employeeDeployment().toPromise().then(
+      deployment => {this.data= deployment.result}
+    )
   }
 
   getuploadedfile(event){
