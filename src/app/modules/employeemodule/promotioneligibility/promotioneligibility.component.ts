@@ -86,7 +86,7 @@ export class PromotioneligibilityComponent implements OnInit {
         this.modificationStatus = true;
       }
       if (event.name == "2") {
-     this.router.navigate(['/employeemodule/promotion'],{queryParams:{data:JSON.stringify(event.data.eligibles)}})
+     this.router.navigate(['/employeemodule/promotion'],{queryParams:{data:JSON.stringify(event.data)}})
       }
        }
     filterUpdated(filter: any) {
