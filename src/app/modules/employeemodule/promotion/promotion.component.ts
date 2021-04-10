@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { CommonServiceProxy, GetEligibilityListServiceProxy, GetPromotionEligibilityListsServiceProxy, Position, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
+import { CommonServiceProxy, GetEligibilityListServiceProxy, GetPromotionEligibilityListsServiceProxy, Position, PromotionEligibilityViewModel, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class PromotionComponent implements OnInit {
   ];
 
 
-
+  promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
   promotionList: Sp_FetchEligibleEmployees [] = [];
   submitList: boolean = false;
   saveList: boolean = false;
@@ -80,7 +80,8 @@ export class PromotionComponent implements OnInit {
       if (data) {
         if (data.data) {
           this.eligibilityBucket = true;
-          this.promotionList = JSON.parse(data.data);
+          this.promotionBucketList = JSON.parse(data.data);
+          this.promotionList = this.promotionBucketList.eligibles;
           this.showTableAction = true;
           this.tableActions = [
             { name: ACTIONS.VIEW, label: 'View' },
