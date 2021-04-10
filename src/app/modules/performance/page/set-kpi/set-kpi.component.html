@@ -6,7 +6,7 @@
             <!-- <div class="card-info" style=";"> -->
                 <div>
                     <div>Key Result Area</div>
-                    <div>Seamless Customer Onboarding</div>
+                    <div>{{kra.section_name}}</div>
                 </div>
                 <div>
                     <div>Strategy</div>
@@ -14,11 +14,11 @@
                 </div>
                 <div>
                     <div>Score</div>
-                    <div>20</div>
+                    <div>{{kra.maximum_score_obtainable}}</div>
                 </div>
                 <div>
                     <div>Weight</div>
-                    <div>5%</div>
+                    <div>{{kra.weight}}</div>
                 </div>
             <!-- </div> -->
         </div>
@@ -55,11 +55,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>This is a Key performance indicator.</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr *ngFor="let kpi of data">
+                    <td>{{kpi.section_name}}</td>
+                    <td>{{kpi.unitOfMeasurement}}</td>
+                    <td>{{kpi.sectionTotalScore}}</td>
+                    <td>{{kpi.canComment}}</td>
                 </tr>
             </tbody>
         </table>

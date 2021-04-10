@@ -32,6 +32,15 @@ export class MyPosition extends PositionDTO implements IStatus {
     return new ManagePositionDTO({...this, selectedQualifications: this.selectedQualifications,
       selectedCertifications: this.selectedCertifications });
   }
+
+  get selectValue() {
+    return this.id;
+  }
+
+  get selectLabel() {
+    // console.log(this);
+    return this.title;
+  }
 }
 
 export interface PositionFilter extends BaseFilter {

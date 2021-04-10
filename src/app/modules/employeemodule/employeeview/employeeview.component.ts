@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EmployeeDTOApiResult, EmployeeDTO,VwConfirmationDTO } from '../../../_services/service-proxies';
+import { SaveConfirmationServiceProxy, FetchEmployeeByIdServiceProxy, } from '../../../_services/service-proxies';
+
+
 
 
 enum TOP_ACTIONS {
@@ -12,6 +17,14 @@ enum TOP_ACTIONS {
   styleUrls: ['./employeeview.component.scss']
 })
 export class EmployeeviewComponent implements OnInit {
+  employee: EmployeeDTO = new EmployeeDTO(); 
+  mgr_feedback: string = '';
+  mgr_advice: string = '';
+  body = {
+    mgr_feedback: this.mgr_feedback,
+    mgr_advice: this.mgr_feedback
+  }
+
 
   topActionButtons = [
     { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Add', 'icon': 'plus', outline: true },
@@ -19,22 +32,24 @@ export class EmployeeviewComponent implements OnInit {
   ];
 
   tableColumns = [
-    { name: 'a', title: 'NAME OF QUALIFICATION' },
-    { name: 'b', title: 'TYPE' },
-    { name: 'c', title: 'COURSE' },
-    { name: 'd', title: 'INSTITUTION' },
-    { name: 'e', title: 'START DATE' },
-    { name: 'f', title: 'END DATE' },
+    { name: '', title: ' Qualification Name' },
+    { name: '', title: 'Qualification Type' },
+    { name: '', title: 'Course Name' },
+    { name: '', title: 'Institution' },
+    { name: '', title: 'Start Date' },
+    { name: '', title: 'End Date' },
   ];
   selectedCase: string = 'personal_Info';
   selectedPanel: any = { title: 'personal_Info', label: 'Personal Information', status: 'Active' };
   employeeviewlist = [
     { title: 'personal_Info', label: 'Personal Information', status: 'Active', iconname: 'person' },
-    { title: 'confrimation_info', label: 'Confirmation Information', status: 'Inactive' , iconname: 'inbox'},
+    { title: 'confrimation_info', label: 'Confirmation Information', status: 'Inactive', iconname: 'inbox' },
     { title: 'approval_log', label: 'Approval Log', status: 'Inactive', iconname: 'file-text' },
 
   ];
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private FetchEmployeeByIdServiceProx: FetchEmployeeByIdServiceProxy,
+    private SaveConfirmation:SaveConfirmationServiceProxy ) { }
   selectPanel(hiringlist, i) {
     this.selectedPanel = hiringlist;
 
@@ -45,8 +60,23 @@ export class EmployeeviewComponent implements OnInit {
     this.selectedCase = this.employeeviewlist[i].title;
   }
   ngOnInit(): void {
-  }
+  
+    this.activatedRoute.paramMap.subscribe(params => {
+      const employee_id= params.get('employee_id');
+       const id = Number(employee_id)
+      console.log(id)
+       this.FetchEmployeeByIdServiceProx.getEmployeeById(id).toPromise().then(
+        a => this.employee = a.result
+       )
 
+    }
+    );
+  }
+  onSubmit(body:VwConfirmationDTO) {
+    this.SaveConfirmation.saveConfirmation(body).toPromise().then(
+      feedback => alert(feedback)
+    )
+  }
 
   modal(buttion) {
     // if (buttion === TOP_ACTIONS.ADD_LEAVE_TYPE) {
@@ -55,6 +85,15 @@ export class EmployeeviewComponent implements OnInit {
     // }
 
   }
+  data=[
+    { name: '', title: ' Qualification Name' },
+    { name: '', title: 'Qualification Type' },
+    { name: '', title: 'Course Name' },
+    { name: '', title: 'Institution' },
+    { name: '', title: 'Start Date' },
+    { name: '', title: 'End Date' },
+   ,
+  ]
 
 }
 

@@ -1,11 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChoiceName } from '../multi-select/multi-select.component';
 
 export enum FORM_TYPES {
-  text, amount, number, wysiwyg, select,
+  text, amount, number, wysiwyg, select, file, employee, radio, date_range
 }
 
 export class FormValidator{
   required: boolean = false;
+}
+
+export interface ISelectItem{
+  selectValue: any;
+  selectLabel: string;
 }
 export class FormField {
   name: string;
@@ -14,6 +20,11 @@ export class FormField {
   validators?: FormValidator;
   optional?: boolean = false;
   placeholder?: string = 'place';
+  choice_name?: ChoiceName;
+  singleSelection?: boolean = true;
+  disabled?: boolean;
+  selectOptions?: ISelectItem[];
+  hide?: boolean;
 }
 
 export class FormConfig {
@@ -28,6 +39,7 @@ export class CustomFormComponent implements OnInit {
 
   FIELD_TYPES = FORM_TYPES;
   data: object = {};
+  tempData: object = {};
   errors: Record<string, string[]> = {};
   @Input() formConfig: FormConfig = {
     fields: [
@@ -63,6 +75,22 @@ export class CustomFormComponent implements OnInit {
     if (this.validate()) {
       this.onCompleted.emit(this.data);
       this.valueChange.emit(this.data);
+    }
+  }
+
+  employeeChange(field: FormField, event) {
+    if (field.singleSelection) {
+      this.data[field.name] = event[0];
+    } else {
+      this.data[field.name] = event;
+    }
+  }
+  selectChange(field: FormField, event) {
+    const ids = event.map(data => data.selectValue);
+    if (field.singleSelection) {
+      this.data[field.name] = ids[0];
+    } else {
+      this.data[field.name] = ids;
     }
   }
 }

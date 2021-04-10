@@ -8,13 +8,33 @@
 
 <nb-card>
     <nb-card-body>
-        <nb-tabset>
-            <nb-tab tabTitle="Approved"></nb-tab>
-            <nb-tab tabTitle="Pending"></nb-tab>
-            <nb-tab tabTitle="Rejected"></nb-tab>
+        <nb-tabset #tset (click)="filterLeavePlan(tset.tabs._results)">
+            <nb-tab tabTitle="Approved"  ></nb-tab>
+            <nb-tab tabTitle="Pending" ></nb-tab>
+            <nb-tab tabTitle="Rejected" ></nb-tab>
         </nb-tabset>
-        <ngx-tableheader></ngx-tableheader>
-<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+        <ngx-default-content
+        *ngIf="showEmpty"
+        pageHeader="Create your first Leave Plan"
+        pageDescription="Click on the button to create a Leave Plan"
+        buttonValue="Create Leave Plan"
+        [loading]="loading"
+        (buttonClick)="showAddPlanModal = true;"
+    
+      >
+      </ngx-default-content>
+        <ngx-tablecomponent  
+        *ngIf="!showEmpty"
+        (filterChange)="filterUpdated($event)"
+        [showActions]="false"
+        [showFilter]="true"
+        [userData]="LeaveData" 
+        [tableColum]="tableColumns"
+        [totalItems]="totalItems"
+        [currentPage]="currentPage"
+        [loading]="loading"
+        >
+    </ngx-tablecomponent>
     </nb-card-body>
 </nb-card>
 

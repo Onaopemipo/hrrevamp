@@ -82,12 +82,26 @@ import { ConfirmBoxServiceComponent } from 'app/_services/confirm-box.service';
 import { LoadableButtonComponent } from './loadable-button/loadable-button.component';
 
 import {   SearchEmployeesServiceProxy,
+  GetAllDepartmentsServiceProxy,
+  GradeLevelServiceProxy,
+  GetAllJobRolesServiceProxy,
+  GetAllLocationsServiceProxy,
+  SalaryscaleServiceProxy,
+  GetLocationByIdServiceProxy,
+  TrainingServiceProxy,
   CommonServiceProxy,
-  CreateLeavePlanServiceProxy} from '../_services/service-proxies';
+  CreateLeavePlanServiceProxy,
+} from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { PageComponent } from './page/page.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
+import { LocationService } from 'app/modules/module-settings/services/location.service';
+import { TrainingCategoryService } from 'app/modules/training/services/training-category.service';
+import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
+import { TypesService } from 'app/modules/training/services/types.service';
+import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/module-settings-providers.module';
 import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.component';
 import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
 @NgModule({
@@ -184,6 +198,7 @@ import { CreateleaveRequestComponent } from './createleave-request/createleave-r
     NbInputModule,
     NbContextMenuModule,
     NgMultiSelectDropDownModule,
+    ModuleSettingsProvidersModule,
   ],
   providers: [
     {
@@ -195,6 +210,23 @@ import { CreateleaveRequestComponent } from './createleave-request/createleave-r
     NbMenuService,
     NbDatepickerDirective,
     SearchEmployeesServiceProxy,
+    GetAllDepartmentsServiceProxy,
+    GradeLevelServiceProxy,
+    GetAllJobRolesServiceProxy,
+    GetAllLocationsServiceProxy,
+    SalaryscaleServiceProxy,
+    CommonServiceProxy,
+    LocationService,
+    DepartmentsService,
+    TrainingCategoryService,
+    TrainingSpecializationService,
+    GetAllDepartmentsServiceProxy,
+    GetAllLocationsServiceProxy,
+    GetLocationByIdServiceProxy,
+    TypesService,
+    LocationService,
+    DepartmentsService,
+    TrainingServiceProxy,
     CommonServiceProxy,
     CreateLeavePlanServiceProxy
   ],
@@ -238,9 +270,10 @@ import { CreateleaveRequestComponent } from './createleave-request/createleave-r
     ConfirmBoxServiceComponent,
     LoadableButtonComponent,
     PageComponent,
+    MultiSelectComponent,
     CreateleavePlanComponent,
     CreateleaveRequestComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
   ],
 })
 export class ComponentsModule { }

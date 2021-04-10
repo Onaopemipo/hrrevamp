@@ -5,6 +5,7 @@
 ></ngx-componentsheader>
 <div class="main-page-container">
   <ngx-default-content
+    [loading]="loading"
     *ngIf="showEmpty"
     pageHeader="Create your first Salary Scale"
     pageDescription="Click on the button to create a Salary Scale"

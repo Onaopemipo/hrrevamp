@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { AddUpdateLocationServiceProxy, GetAllLocationsServiceProxy, GetLocationByIdServiceProxy, IMessageOut, LocationDTO, ManageLocationDTO } from 'app/_services/service-proxies';
+import { AddRequestViewModel, AddUpdateRequestTypeServiceProxy, DeleteRequestTypeServiceProxy, GetAllRequestTypeServiceProxy, GetRequestTypeByIdServiceProxy, IMessageOut, LocationDTO, ManageEventDTO, ManageLocationDTO, ManageRequestTypeDTO, Request, RequestTypeDTO } from 'app/_services/service-proxies';
 import { of, Subject } from 'rxjs';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
+import { MyEvent } from './events.service';
 
 export class MyRequest implements IStatus {
-   Request: LocationDTO;
+   request: RequestTypeDTO;
    Name: string;
-   Code: string
+   Code: string;
    Approval: string;
-   Enable_Notification: boolean
-   is_Active : string
-   Date_Created: Date
+   Enable_Notification: boolean;
+   is_Active: boolean;
+   Date_Created: Date;
    id: number;
    Enable_Step: boolean;
-   isSystem: boolean
+   isSystem: boolean;
   // location: LocationDTO;
   //   Title: string;
   //   isSystem: boolean;
@@ -24,7 +25,16 @@ export class MyRequest implements IStatus {
 
 
 
-  public constructor(Request = {}) {
+  public constructor(request = new RequestTypeDTO()) {
+    this.request = request;
+    this.Name = request.name;
+    this.Code = request.code;
+    this.Approval = request.approval;
+    this.Enable_Notification = request.enable_step_notify;
+    this.is_Active = request.isActive;
+    this.id = request.id;
+    this.isSystem = request.is_system_requirement;
+    this.Date_Created = request.dateCreated;
   }
 
   // get id() {
@@ -39,8 +49,23 @@ export class MyRequest implements IStatus {
     return 'Active';
   }
 
+  fromObj(obj: object) {
+    Object.assign(this, obj);
+    return this;
+  }
+
   toManage() {
-    // return new ManageDepartmentDTO();
+    return new AddRequestViewModel({
+      name: this.Name,
+      id: this.id,
+      code: this.Code,
+      enable_step_notify: this.Enable_Step,
+      is_system_requirement: this.isSystem,
+      typeId: '',
+      approval: '',
+      processid: 0,
+      // act: this.is_Active
+    });
   }
 }
 
@@ -48,9 +73,9 @@ export interface RequestFilter extends BaseFilter {
  
   Name?: string;
   Approval?: string;
-  Enable_Notification?: boolean
-  is_Active? : string
-  Date_Created?: Date
+  Enable_Notification?: boolean;
+  is_Active?: string;
+  Date_Created?: Date;
   id?: number;
 
 }
@@ -62,39 +87,34 @@ export class RequestService implements CrudService<RequestFilter, MyRequest, MyR
 
   pageSize = DEFAULT_PAGE_SIZE;
   constructor(
-    private api_get: GetLocationByIdServiceProxy,
-    private api_create: AddUpdateLocationServiceProxy,
-    private api_list: GetAllLocationsServiceProxy,
+    private api_get: GetRequestTypeByIdServiceProxy,
+    private api_create: AddUpdateRequestTypeServiceProxy,
+    private api_list: GetAllRequestTypeServiceProxy,
+    private api_delete: DeleteRequestTypeServiceProxy,
   ) { }
 
   list(filter: RequestFilter) {
     const subject = new Subject<ListResult<any>>();
-    // this.api_list.getAllLocations(this.pageSize, filter.page ? filter.page : 1, filter.lga_id, filter.state_id).subscribe(data => {
-    //   subject.next({
-    //     data: data.result.map(location => new MyEvent(location)),
-    //     length: data.totalCount,
-    //   });
-    //   subject.complete();
-    // });
-    window.setTimeout(() => {
+    this.api_list.getAllRequestType(this.pageSize, filter.page ? filter.page : 1).subscribe(data => {
       subject.next({
-        data: [
-          new MyRequest(), new MyRequest()
-        ], length: 10
-      })
-      subject.complete()
-    }, 1000)
+        data: data.result.map(event => new MyRequest(event)),
+        length: data.totalCount,
+      });
+      subject.complete();
+    });
+    // window.setTimeout(() => {
+    //   subject.next({
+    //     data: [
+    //       new MyRequest(), new MyRequest()
+    //     ], length: 10
+    //   })
+    //   subject.complete()
+    // }, 1000)
     return subject.asObservable();
   }
 
   create(data: MyRequest) {
-    const subject = new Subject<any>();
-    window.setTimeout(() => {
-      subject.next({})
-      subject.complete()
-    }, 1000)
-    return subject.asObservable();
-    return of() //this.api_create.addUpdateLocation(new ManageLocationDTO(data));
+    return this.api_create.addUpdateRequestType(data.toManage());
   }
 
   init() { }

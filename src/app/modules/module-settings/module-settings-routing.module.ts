@@ -50,7 +50,7 @@ const routes: Routes = [
         component: SalaryGradesComponent,
       },
       {
-        path: 'salary-grade-step',
+        path: 'salery-grade/:id/steps',
         component: GradeStepComponent,
       },
       {

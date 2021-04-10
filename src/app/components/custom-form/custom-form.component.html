@@ -1,20 +1,27 @@
 <form>
-    {{data|json}}
+    <!-- {{data|json}} -->
     <div class="form-group" *ngFor="let field of formFields">
-        <label>{{field.label}}<span *ngIf="field.optional">(Optional)</span></label>
-        <div>
-            <input class="form-control" *ngIf="field.type===FIELD_TYPES.text" [placeholder]="field.placeholder" [(ngModel)]="data[field.name]" [name]="field.name"/>
-            <app-amount-input *ngIf="field.type===FIELD_TYPES.amount" [(value)]="data[field.name]"></app-amount-input>
-            <input class="form-control" type='number' *ngIf="field.type===FIELD_TYPES.number" [placeholder]="field.placeholder" [(ngModel)]="data[field.name]" [name]="field.name"/>
-            <ngx-wysisyg-input *ngIf="field.type===FIELD_TYPES.wysiwyg" [(value)]="data[field.name]"></ngx-wysisyg-input>
-            <ngx-multi-select *ngIf="field.type===FIELD_TYPES.select" [(value)]="data[field.name]"></ngx-multi-select>
-            <div *ngIf="errors[field.name]">
-                <div *ngFor="let error of errors[field.name]">
-                    {{error}}
+        <!-- <ng-template [ngIf]="!field.hide"> -->
+            <label>{{field.label}}<span *ngIf="field.optional">(Optional)</span></label>
+            <div>
+                <input class="form-control" *ngIf="field.type===FIELD_TYPES.text" [(ngModel)]="data[field.name]" [name]="field.name"/>
+                <app-amount-input [disabled]="field.disabled" *ngIf="field.type===FIELD_TYPES.amount" [(value)]="data[field.name]"></app-amount-input>
+                <input class="form-control" type='number' *ngIf="field.type===FIELD_TYPES.number" [(ngModel)]="data[field.name]" [name]="field.name"/>
+                <ngx-file-upload *ngIf="field.type===FIELD_TYPES.file" [(value)]="data[field.name]"></ngx-file-upload>
+                <ngx-wysisyg-input *ngIf="field.type===FIELD_TYPES.wysiwyg" [(value)]="data[field.name]"></ngx-wysisyg-input>
+                <ngx-radio-button [(value)]="data[field.name]" [items]="field.selectOptions"></ngx-radio-button>
+                <ngx-date-range *ngIf="field.type===FIELD_TYPES.date_range" [(value)]="data[field.name]"></ngx-date-range>
+                <ngx-employee-master-search *ngIf="field.type===FIELD_TYPES.employee" [(value)]="data[field.name]" [allowmultipleselection]="!field.singleSelection" (valueChange)="employeeChange(field, $event)"></ngx-employee-master-search>
+                <ngx-multi-select *ngIf="field.type===FIELD_TYPES.select" [(value)]="tempData[field.name]" (valueChange)="selectChange(field, $event)" [choice_name]="field.choice_name"
+                    [singleSelection]="field.singleSelection"></ngx-multi-select>
+                <div *ngIf="errors[field.name]">
+                    <div *ngFor="let error of errors[field.name]">
+                        {{error}}
+                    </div>
                 </div>
             </div>
-        </div>
-      </div>
+        <!-- </ng-template> -->
+    </div>
 
       <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
       <button (click)="cancel()" nbButton outline>Cancel</button>

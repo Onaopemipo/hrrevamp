@@ -7,9 +7,10 @@ pageName="Request"
 <div class="main-page-container">
 <ngx-default-content
   *ngIf="showEmpty"
-  pageHeader="Create your first Department"
-  pageDescription="Click on the button to create a Department"
-  buttonValue="Create Department"
+  [loading]="loading"
+  pageHeader="Create your first Request type"
+  pageDescription="Click on the button to create a request ty[e"
+  buttonValue="Create Request type"
   (buttonClick)="createNewClicked()"
 >
 </ngx-default-content>

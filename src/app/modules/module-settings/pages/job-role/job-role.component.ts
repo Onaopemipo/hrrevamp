@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'app/components/base/base.component';
 import { FormConfig, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
+import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 import { ColumnTypes } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
@@ -18,6 +19,12 @@ type FilterType = {};
 })
 export class JobRoleComponent extends BaseComponent<ModelType, FilterType, ModelType> {
   filter: {} = {};
+  emptyConfig = {
+    pageHeader: 'Create your first Job Role',
+    pageDescription: 'Click on the button to create a Job Role',
+    buttonValue: 'Create Job Role',
+    actionName: '1',
+  };
   data: ModelType[] = [];
   getData(): Observable<ListResult<ModelType>> {
     return this.api.list(this.filter);
@@ -44,8 +51,9 @@ export class JobRoleComponent extends BaseComponent<ModelType, FilterType, Model
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
       {name: 'code', label: 'Code', type: FORM_TYPES.text},
-      {name: '', label: 'Basic Salary for this Job role', type: FORM_TYPES.amount},
-      {name: '', label: 'Parent Positions', type: FORM_TYPES.select}
+      {name: 'amount', label: 'Basic Salary for this Job role', type: FORM_TYPES.amount},
+      {name: 'parentPositionId', label: 'Parent Positions', singleSelection: true,
+        type: FORM_TYPES.select, choice_name: ChoiceName.positions}
     ]
   };
   formTitle = 'Add new Job role';

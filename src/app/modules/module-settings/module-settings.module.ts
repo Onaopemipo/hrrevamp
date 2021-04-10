@@ -9,7 +9,15 @@ import { DepartmentListComponent } from './pages/department-list/department-list
 import { AddUpdateDepartmentServiceProxy,     AddUpdatePositionServiceProxy,
   GetAllPositionsServiceProxy, AddUpdateLocationServiceProxy, DataServiceProxy,
   GetAllDepartmentsServiceProxy, GetAllLocationsServiceProxy,
-  GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy, GetAllJobRolesServiceProxy, AddUpdateJobRolesServiceProxy, DeleteJobRoleServiceProxy, SalaryscaleServiceProxy } from 'app/_services/service-proxies';
+  GetRequestTypeByIdServiceProxy,
+    AddUpdateRequestTypeServiceProxy,
+    GetAllRequestTypeServiceProxy,
+    DeleteRequestTypeServiceProxy,
+    GetEventsByIdServiceProxy,
+    AddUpdateEventsServiceProxy,
+    GetAllEventsServiceProxy,
+    DeleteEventsServiceProxy,
+  GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy, GetAllJobRolesServiceProxy, AddUpdateJobRolesServiceProxy, DeleteJobRoleServiceProxy, SalaryscaleServiceProxy, GradeLevelStepServiceProxy } from 'app/_services/service-proxies';
 import { ApiService } from './services/api.service';
 import { PageService } from './services/page.service';
 // import { BaseComponent } from './base/base.component';
@@ -35,6 +43,7 @@ import { GenericService } from './services/generic.service';
 import { SystemOptionService } from './services/systemoptionservice';
 import { PositionService } from './services/position.service';
 import { JobRoleService } from './services/job-role.service';
+import { DepartmentsService } from './services/departments.service';
 
 
 // import { SalaryScaleComponent } from './pages/salary-scale/department-list.component';
@@ -79,6 +88,7 @@ import { JobRoleService } from './services/job-role.service';
     AlertserviceService,
     ConfirmBoxService,
     LocationService,
+    DepartmentsService,
     DataServiceProxy,
     GetAllLocationsServiceProxy,
     GetLocationByIdServiceProxy,
@@ -96,6 +106,15 @@ import { JobRoleService } from './services/job-role.service';
     DeleteJobRoleServiceProxy,
     JobRoleService,
     SalaryscaleServiceProxy,
+    GetRequestTypeByIdServiceProxy,
+    AddUpdateRequestTypeServiceProxy,
+    GetAllRequestTypeServiceProxy,
+    DeleteRequestTypeServiceProxy,
+    GetEventsByIdServiceProxy,
+    AddUpdateEventsServiceProxy,
+    GetAllEventsServiceProxy,
+    DeleteEventsServiceProxy,
+    GradeLevelStepServiceProxy,
   ]
 })
 export class ModuleSettingsModule { }

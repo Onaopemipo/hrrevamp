@@ -74,6 +74,8 @@ employeeResultTotal = 0;
 @Input() allowmultipleselection: boolean = false;
   @Input() selectionHeader = 'Select Employees';
   @Output() masterSubmitted = new EventEmitter<EmployeeDTO[]>();
+  @Input() value = [];
+  @Output() valueChange = new EventEmitter<number[]>();
  
   constructor(private allemployeeServices: SearchEmployeesServiceProxy,
   private CommonService: CommonServiceProxy) { }
@@ -198,7 +200,9 @@ if(!data.hasError){
   okMasterSearch() {
     if (!this.allowmultipleselection){ this.selectedEmployees = []; this.selectedEmployees.push(this.selectedEmployeeRecord);}
     this.masterSubmitted.emit(this.selectedEmployees);
-  this.showModal = false;
+    this.valueChange.emit(this.selectedEmployees.map(employee => employee.id));
+    console.log(99999);
+    this.showModal = false;
 }
 cancelMasterSearch(){
   this.selectedEmployees = [];

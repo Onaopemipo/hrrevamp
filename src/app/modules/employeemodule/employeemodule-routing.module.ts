@@ -76,7 +76,7 @@ const routes: Routes = [
         },
 
         {
-          path: 'comfirmation',
+          path: 'confirmation',
           component: ComfirmationComponent
         },
 
@@ -100,10 +100,10 @@ const routes: Routes = [
           component: PromotioneligibilityComponent,
         },
 
-        {
-          path: 'eligiblexx',
-          component: EligibilityxxComponent
-        },
+        // {
+        //   path: 'eligiblexx',
+        //   component: EligibilityxxComponent
+        // },
 
         {
           path: 'eligiblelist',

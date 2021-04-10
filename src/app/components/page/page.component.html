@@ -1,13 +1,20 @@
-<ngx-componentsheader actions="actions" [pageName]="pageTitle" [requiredButton]="requiredButton" (buttonClick)="topActionButtonClicked($event)"></ngx-componentsheader>
+<ngx-componentsheader *ngIf='!tab' actions="actions" [pageName]="pageTitle" [requiredButton]="requiredButton" (buttonClick)="topActionButtonClicked($event)"></ngx-componentsheader>
 
 <div style="padding: 10px;"></div>
 <div class="container" style="background-color: #ffffff; height: 1000px;">
-  <nb-tabset>
+  <!-- <nb-tabset *ngIf='!tab'>
     <nb-tab [tabTitle]="tab.label" [tabId]="tab.name" *ngFor="let tab of tabs"></nb-tab>   
-  </nb-tabset>
-    <ngx-default-content></ngx-default-content>
-    <ngx-tableheader></ngx-tableheader>
-    <ngx-tablecomponent [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
+  </nb-tabset> -->
+    <ngx-default-content
+        *ngIf="isEmpty"
+        [loading]="loading"
+        [pageHeader]="emptyConfig.pageHeader"
+        [pageDescription]="emptyConfig.pageDescription"
+        [buttonValue]="emptyConfig.buttonValue"
+        (buttonClick)="topActionButtonClicked(emptyConfig.actionName)"
+        > </ngx-default-content>
+    <ngx-tableheader *ngIf=!isEmpty></ngx-tableheader>
+    <ngx-tablecomponent *ngIf=!isEmpty [loading]="loading" [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
 </div>
 <ngx-side-modal [(show)]="showModal">
     <div modal-header>

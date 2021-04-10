@@ -11,6 +11,7 @@ import { InputvalidationService } from '../../_services/inputvalidation.service'
 export class AmountInputComponent implements OnInit {
   innerValue: string;
   invalid = false;
+  @Input() disabled = false;
   @Input() set value(val) {
     // this.innerValue = val
   }

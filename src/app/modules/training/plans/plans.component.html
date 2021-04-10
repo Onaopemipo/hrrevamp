@@ -1,0 +1,17 @@
+{{editingData|json}}
+<ngx-page
+  (topActionClicked)="pageActionClicked($event)"
+  [(showModal)]="showModal"
+  [pageTitle]="pageTitle"
+  [requiredButton]="requiredButton"
+  [formConfig]="formConfig"
+  [(value)]="editingData"
+  (formCompleted)="submitForm()"
+  (formCancelled)="hideModal()"
+  [tableData]="data"
+  [tableColumns]="tableColumns"
+  [loadingSave]="loadingSave"
+  [formTitle]="formTitle"
+  [loading]="loading"
+  [emptyConfig]="emptyConfig"
+></ngx-page>

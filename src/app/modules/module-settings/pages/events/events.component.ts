@@ -17,11 +17,6 @@ const SUCCESS_MESSAGES = {
 };
 
 
-// enum TOP_ACTIONS {
-//   ADD_EVENT,
-
-// }
-
 @Component({
   selector: 'ngx-events',
   templateUrl: './events.component.html',
@@ -39,7 +34,7 @@ EventFilter, MyEvent> implements OnInit {
   TOP_ACTIONS = TOP_ACTIONS;
 
   tableColumns = [
-    { name: 'name', title: 'Title' },
+    { name: 'Title', title: 'Title' },
     { name: 'status', title: 'Status', type: ColumnTypes.Status },
   ];
 

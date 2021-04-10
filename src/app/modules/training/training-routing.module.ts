@@ -6,51 +6,57 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CategoriesComponent } from './categories/categories.component';
 import { SpecializationComponent } from './specialization/specialization.component';
+import { TrainingComponent } from './training/training.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
-  },
-  {
-    path: 'administration',
-    component: AdministrationComponent
-  },
+    component: TrainingComponent,
+    children: [
+      {
+        path: '',
+        component: DashboardComponent,
+      },
+      {
+        path: 'administration',
+        component: AdministrationComponent
+      },
 
-  {
-    path: 'categories',
-    component: CategoriesComponent
-  },
+      {
+        path: 'categories',
+        component: CategoriesComponent
+      },
 
-  {
-    path: 'specializations',
-    component: SpecializationComponent
-  },
+      {
+        path: 'specializations',
+        component: SpecializationComponent
+      },
 
-  {
-    path: 'plans',
-    component: PlansComponent
-  },
+      {
+        path: 'plans',
+        component: PlansComponent
+      },
 
-  {
-    path: 'requests',
-    component: RequestsComponent
-  },
+      {
+        path: 'requests',
+        component: RequestsComponent
+      },
 
-  {
-    path: 'administration',
-    component: AdministrationComponent
+      {
+        path: 'administration',
+        component: AdministrationComponent
+      },
+      {
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full',
+      },
+      {
+        path: '**',
+        component: DashboardComponent,
+      },
+    ]
   },
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
-    path: '**',
-    component: DashboardComponent,
-  },
-
 ];
 
 const config: ExtraOptions = {

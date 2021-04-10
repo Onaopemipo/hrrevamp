@@ -48,6 +48,7 @@ export class VendorService extends CrudService<MyVendor, {}, MyVendor> {
   }
 
   create(vendor: MyVendor) {
+    console.log(vendor);
     return this.api.createvendor(vendor);
   }
 

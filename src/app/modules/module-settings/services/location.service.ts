@@ -39,6 +39,15 @@ export class MyLocation implements IStatus {
   toManage() {
     // return new ManageDepartmentDTO();
   }
+
+  get selectValue() {
+    return this.id;
+  }
+
+  get selectLabel() {
+    console.log(this);
+    return this.location_name;
+  }
 }
 
 export interface LocationFilter extends BaseFilter{

@@ -16,6 +16,10 @@ import { RatingComponent } from './page/rating/rating.component';
 import { PerformanceReviewsComponent } from './pages/performance-reviews/performance-reviews.component';
 import { PerformanceMatrixComponent } from './pages/performance-matrix/performance-matrix.component';
 import { AppraisalComponent } from './pages/appraisal/appraisal.component';
+import { PerformanceManagementService } from './services/performance-management.service';
+import { AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy } from 'app/_services/service-proxies';
+import { KeyResultAreaService } from './services/key-result-area.service';
+import { AppraisalService } from './services/appraisal.service';
 
 
 
@@ -34,6 +38,18 @@ import { AppraisalComponent } from './pages/appraisal/appraisal.component';
     SetKpiComponent,
     ScoreCardComponent,
     WorkflowComponent,
+  ],
+  providers: [
+    PerformanceManagementService,
+    FetchPerformanceCyclesServiceProxy,
+    AddUpdatePerformanceCycleServiceProxy,
+    CreateKeyResultAreaServiceProxy,
+    FetchKeyResultAreasServiceProxy,
+    FetchKeyResultAreaServiceProxy,
+    SubordinateAppraisalsServiceProxy,
+    AssignKRAServiceProxy,
+    KeyResultAreaService,
+    AppraisalService,
   ],
   imports: [
     CommonModule,

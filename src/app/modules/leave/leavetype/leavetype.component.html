@@ -1,69 +1,107 @@
-
 <ngx-componentsheader [pageName]='LeaveType' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 
 </ngx-componentsheader>
 <div id="calendar"></div>
-<ngx-tableheader></ngx-tableheader>
-<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
 
+<nb-card>
+  <nb-card-body>
+    <ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="Create your first Leave Type"
+    pageDescription="Click on the button to create a Leave Type"
+    buttonValue="Create Leave Type"
+    [loading]="loading"
+    (buttonClick)="showLeaveTypeModal = true"
+  >
+  </ngx-default-content>
+    <ngx-tablecomponent  
+    *ngIf="!showEmpty"
+    (filterChange)="filterUpdated($event)"
+    [showActions]="true"
+    [showFilter]="true"
+    (actionClick)="tableActionClicked($event)"
+    [actions]="tableActions" 
+    [userData]="leaveTypeList" 
+    [tableColum]="tableColumns"
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [loading]="loading"
+    >
+</ngx-tablecomponent>
 <ngx-side-modal [(show)]='showLeaveTypeModal' style="width: 500px; height: 1000px;">
-    <div modal-header>Add Leave Type</div>
-    <div modal-body>
-        <form #myForm="ngForm" name="myForm">
-            <div class="form-group">
-                <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Leave Type Name:</label>
-                <input type="text" class="form-control" placeholder="Enter Leave Type Name" name="leaveTypeName" #leaveTypeName="ngModel" [(ngModel)]="leaveTypeModel.id" required>
-                <div *ngIf="leaveTypeName.invalid && (leaveTypeName.dirty || leaveTypeName.touched)" class="error">
-                  <div *ngIf="leaveTypeName.errors.required">Leave Type name is required</div>
-              </div>
-            </div>
-            <div class="form-group">
-                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Minimum Number Of Days:</label>
-                <input type="number" class="form-control" placeholder="Enter Minimum Number Of Days" min="1" name="minDays" #minDays="ngModel" [(ngModel)]="leaveTypeModel.minDays" required>
-                <div *ngIf="minDays.invalid && (minDays.dirty || minDays.touched)" class="error">
-                  <div *ngIf="minDays.errors.required">Minimum days is required</div>
-              </div>
-              </div>
+  <div modal-header>Add Leave Type</div>
+  <div modal-body>
+    <form #myForm="ngForm" name="myForm" id="myForm">
+     
+      <div class="form-group">
+        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Leave Type Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Leave Type Name" name="name"
+          #name="ngModel" [(ngModel)]="leaveTypeModel.name" required>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+          <div *ngIf="name.errors.required">Leave Type name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Minimum Number Of Days:</label>
+        <input type="number" class="form-control" placeholder="Enter Minimum Number Of Days" min="1"  name="minDays"
+          #minDays="ngModel" [(ngModel)]="leaveTypeModel.minDays" required>
+        <div *ngIf="minDays.invalid && (minDays.dirty || minDays.touched)" class="error">
+          <div *ngIf="minDays.errors.required">Minimum days is required</div>
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="Maximum Number Of Days" style="font-size: small;font-weight: bold;">Maximum Number Of Days:</label>
-                <input type="number" class="form-control" placeholder="Enter  Maximum Number Of Days"  min="1" name="maxDays" #maxDays="ngModel" [(ngModel)]="leaveTypeModel.maxDays" required>
-                <div *ngIf="maxDays.invalid && (maxDays.dirty || maxDays.touched)" class="error">
-                  <div *ngIf="maxDays.errors.required">Maximum days is required</div>
-              </div>
-              </div>
+      <div class="form-group">
+        <label for="Maximum Number Of Days" style="font-size: small;font-weight: bold;">Maximum Number Of Days:</label>
+        <input type="number" class="form-control" placeholder="Enter  Maximum Number Of Days" min="1" name="maxDays"
+          #maxDays="ngModel" [(ngModel)]="leaveTypeModel.maxDays" required>
+        <div *ngIf="maxDays.invalid && (maxDays.dirty || maxDays.touched)" class="error">
+          <div *ngIf="maxDays.errors.required">Maximum days is required</div>
+        </div>
+        <div class="error" *ngIf="getMinMax">{{getMinMax}}</div>
+      </div>
 
-            <div class="form-group">
-                <label for="Max Number Of Application In A Year" style="font-size: small;font-weight: bold;">Max Number Of Application In A Year:</label>
-                <input type="text" class="form-control" placeholder="Enter Start Date" name="maxApplication" #maxApplication="ngModel" [(ngModel)]="leaveTypeModel.maxNoofYearlyApplication" required>
-                <div *ngIf="maxApplication.invalid && (maxApplication.dirty || maxApplication.touched)" class="error">
-                  <div *ngIf="maxApplication.errors.required">Maximum application is required</div>
-              </div>
-              </div>
-            <div class="form-group">
-                <label for="Maximum Number of Count" style="font-size: small;font-weight: bold;">Maximum Number of Count:</label>
-                <input type="number" class="form-control" placeholder="Maximum Number of Count"  min="1" name="maxCount" #maxCount="ngModel" [(ngModel)]="leaveTypeModel.maxNoofPossibleApplication" required>
-                <div *ngIf="maxCount.invalid && (maxCount.dirty || maxCount.touched)" class="error">
-                  <div *ngIf="maxCount.errors.required">Maximum count is required</div>
-              </div>
-              </div>
+      <div class="form-group">
+        <label for="Max Number Of Application In A Year" style="font-size: small;font-weight: bold;">Max Number Of
+          Application In A Year:</label>
+        <input type="number" class="form-control" placeholder="Enter Max Number Of Application" name="maxApplication"
+          #maxApplication="ngModel" [(ngModel)]="leaveTypeModel.maxNoofYearlyApplication" required>
+        <div *ngIf="maxApplication.invalid && (maxApplication.dirty || maxApplication.touched)" class="error">
+          <div *ngIf="maxApplication.errors.required">Maximum application is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Maximum Number of Count" style="font-size: small;font-weight: bold;">Maximum Number of
+          Count:</label>
+        <input type="number" class="form-control" placeholder="Maximum Number of Count" min="1" name="maxCount"
+          #maxCount="ngModel" [(ngModel)]="leaveTypeModel.maxNoofPossibleApplication" required>
+        <div *ngIf="maxCount.invalid && (maxCount.dirty || maxCount.touched)" class="error">
+          <div *ngIf="maxCount.errors.required">Maximum count is required</div>
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="Allow Gender" style="font-size: small;font-weight: bold;">Allowed Gender</label>
-                <select class="custom-select" name="allowedGender" #allowedGender="ngModel" [(ngModel)]="leaveTypeModel.allowedGender" required required>
-                  <option value="">Select </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
+      <div class="form-group">
+        <label for="Allow Gender" style="font-size: small;font-weight: bold;">Allowed Gender</label>
+        <select class="form-control" name="allowedGender" #allowedGender="ngModel"
+          [(ngModel)]="leaveTypeModel.allowedGender" required>
+          <option value="">--Select Gender--</option>
+          <option *ngFor="let gen of genderValues" [value]="gen.option_value">{{gen.option_text}} </option>
+     
+        </select>
+      </div>
 
-        </form>
+    </form>
+  </div>
+  <div modal-actions class="d-flex"
+    style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+    <ngx-loadable-button [loading]="submitbtnPressed" [disabled]="!disableForm" (click)="createNewLeaveType()" >
+      Submit 
+    </ngx-loadable-button>  
+    <div style="padding-left: 15px;">
+      <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
     </div>
-    <div modal-actions class="d-flex" style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
-        <button nbButton status="primary" class="d-flex column">Submit</button>
-        <button nbButton outline status="primary" class="d-flex column"
-          style="background-color: white;">Discard</button>
-    </div>
-    <div style="margin-top: 10px;"></div>
+   
+  </div>
+  <div style="margin-top: 10px;"></div>
 </ngx-side-modal>
+</nb-card-body>
+</nb-card>
