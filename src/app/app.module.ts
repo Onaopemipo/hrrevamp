@@ -16,6 +16,8 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DecimalPipe } from '@angular/common';
+import {FetchDashboardDataServiceProxy} from './_services/service-proxies'
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -152,7 +154,8 @@ FullCalendarModule.registerPlugins([
     GetTokenServiceProxy,
     ConfirmBoxService,
     NbDialogService,
-    AlertserviceService
+    AlertserviceService,
+    FetchDashboardDataServiceProxy
   ],
 })
 export class AppModule {

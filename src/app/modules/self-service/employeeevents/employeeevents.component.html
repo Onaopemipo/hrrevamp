@@ -1,10 +1,117 @@
 <nb-card>
+    <!-- <ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="Create your Event"
+    pageDescription="Click on the button to create a Leave Year"
+    buttonValue="Create Leave Year"
+    [loading]="loading"
+    (buttonClick)="modal('add_leave_year')"
+  >
+  </ngx-default-content>
+    <ngx-tablecomponent  
+    *ngIf="!showEmpty"
+    (filterChange)="filterUpdated($event)"
+    [showActions]="true"
+    [showFilter]="true"
+    (actionClick)="tableActionClicked($event)"
+    [actions]="tableActions" 
+    [userData]="LeaveYear" 
+    [tableColum]="tableColumns"
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [loading]="loading"
+    >
+</ngx-tablecomponent>  -->
+
+
     <nb-card-body style="height: 43vh;">
+        <ngx-componentsheader pageName='Events' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+        </ngx-componentsheader>
         <div style="width: 100%; position: relative;">
-            <ngx-cal></ngx-cal>
-            <button nbButton [nbPopover]="formcomponent" style="position: fixed; top: 50%; left: 50%;;"></button>
-            <ngx-calender style="background-color: white; height: 700px;"></ngx-calender>
-            <!-- <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar> -->
+            <!-- <ngx-cal></ngx-cal> -->
+            <button nbButton [nbPopover]="formcomponent" (addEvent)="addEvent($event)"
+                style="position: fixed; top: 50%; left: 50%;;"></button>
+            <!-- <ngx-calender style="background-color: white; height: 700px;"></ngx-calender>  -->
+             <ngx-cal (dateClicked)="dateClicked($event)"></ngx-cal> 
+            <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar>
+         
         </div>
+
+
+
+        <ngx-side-modal [(show)]='showEvent' style="width: 500px;">
+            <div modal-header>Create new Events</div>
+            <div modal-body>
+
+                <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+                    <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+                    margin-left: 10px;">create new events</h6>
+                    <div style="margin: 20px;">
+                        <div class="form-group">
+                            <label for="title">title:</label>
+                            <input type="text" class="form-control" placeholder="Enter title" id="title"
+                                #title="ngModel" name="title" [(ngModel)]="Event.title" rrequired>
+
+                            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                                <div *ngIf="title.errors.required">title is required</div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="StartDate">Start Date:</label>
+                            <ngx-date [(value)]='Event.startDate' [max]="Event.startDate" #startDate name="startDate"
+                                id="endDate">
+                            </ngx-date>
+
+                            <div *ngIf="!validatestartdate" class="error">
+                                <div>Start Date is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="End  Date">End Date:</label>
+                            <ngx-date [(value)]='Event.endDate' [max]="Event.endDate" #startDate name="endDate"
+                                id="endDate"></ngx-date>
+
+                            <div *ngIf="!validateenddate" class="error">
+                                <div>End Date is required</div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <textarea type="textarea" class="form-control" placeholder="Enter Description"
+                                id="description" name="description" #description="ngModel"
+                                [(ngModel)]="Event.description"></textarea>
+
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                class="error">
+                                <div *ngIf="description.errors.required">Description is required</div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <!-- <button type="submit" class="btn btn-primary" *ngIf="submitbtnPressed" nbButton status="primary"
+                                [disabled]="disableEvent">Submit</button> -->
+                            <!-- <button *ngIf="submitbtnPressed" nbButton status="primary" disabled]="disableEvent"
+                                class="d-flex column">Processing &nbsp;
+                                <i class="fa fa-spin fa-spinner">
+                                </i> Submit</button> -->
+                        </div>
+
+                        <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                            <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                                    class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                            <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                                [disabled]="!disableEvent" (click)="SubmitEvent(Event)">Submit</button>
+
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </ngx-side-modal>
     </nb-card-body>
 </nb-card>

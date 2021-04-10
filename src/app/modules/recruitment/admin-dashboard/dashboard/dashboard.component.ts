@@ -1,6 +1,7 @@
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import {FetchDashboardDataServiceProxy } from '../../../../_services/service-proxies';
 
 const no_of_ms_in_a_day = 24 * 60 * 60 * 1000;
 @Component({
@@ -172,7 +173,8 @@ export class DashboardComponent implements OnInit {
   ];
   customizePieOption: any = {};
   customizedlineoptions: any = {};
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: NbThemeService,
+              private FetchDashboard: FetchDashboardDataServiceProxy) {
     // this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
     //   const colors: any = config.variables;
@@ -209,6 +211,7 @@ export class DashboardComponent implements OnInit {
     //   };
     // });
 
+    this.FetchDashboard.fetchDashboardData()
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
