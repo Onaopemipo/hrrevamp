@@ -1,10 +1,4 @@
 import {
-<<<<<<< HEAD
-  EmployeeDTO,
-  IEmployeeDTO, CreateEmployeeServiceProxy,
-  FetchEmployeeByIdServiceProxy,
-  DropdownValue, EmployeeBankDTO, DropdownValueDTO, DataServiceProxy, ManageEmployeeDTO, IDTextViewModel, EmployeeQualificationDTO, Document, NextOfKin
-=======
   EmployeeDTO, CreateEmployeeServiceProxy,RecruitmentSettingServiceProxy,
   FetchEmployeeByIdServiceProxy,Location,SalaryScale,Grade,
   DropdownValue, EmployeeBankDTO, DataServiceProxy, ManageEmployeeDTO, IDTextViewModel,
@@ -12,7 +6,6 @@ import {
   EmployeeHistoryDTO, CommonServiceProxy, Position, EmployeeSkill, EmployeeCertificationDTO,
   Skill, GetAllProfessionalBodiesServiceProxy, ProfessionalBodyDTO, Certification, EmployeeContractAssignmentDTO,
   JobRole, PayrollType,GradeStep,FileUploadServiceProxy, FileParameter,UploadProfileImageServiceProxy, EmployeeSkillDTO,
->>>>>>> 3249514651eac7fae78ac850553c176c3571b9e9
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -46,7 +39,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     { title: 'History_panel', label: 'History', status: 'Inactive' },
     { title: 'skills_panel', label: 'Skills', status: 'Inactive' },   
     { title: 'certification_panel', label: 'Certifications', status: 'Inactive' },
-    { title:g 'qualification_Info', label: 'Qualification', status: 'Inactive' },
+    { title:'qualification_Info', label: 'Qualification', status: 'Inactive' },
     { title: 'training_panel', label: 'Training', status: 'Inactive' },
     { title: 'custom_panel', label: 'Employee Custom Form', status: 'Inactive'},
   ];
@@ -76,8 +69,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   employmentStatusValues: DropdownValue[] = [];
   alladdressType: DropdownValue[] = [];
   alldepartments: DropdownValue[] = [];
-  religionValues: DropdownValue[]  = [];
-  employmentStatusValues: DropdownValue[]  = [];
+
   // allgender: string [] = [];
   showEmployeeContractModal: boolean = false;
   showdocumentUploadModal: boolean = false;
@@ -129,7 +121,6 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
 
   tempDocumentList: Document[] = [];
-  indVDocuments: Document;
   indVDocuments = new Document().clone();
   documenttotalItems = 0;
   documentcurrentPage = 1;
@@ -550,22 +541,8 @@ export class EmployeerecordsviewComponent implements OnInit {
       })
     }
   }
-     }
-     embBanktableActionClicked(event: TableActionEvent) {
-      if (event.name == "1") {
-        this.indVEmpBanks = event.data;
-        this.showbankModal = true;
-        
-      }
-      if (event.name == "2") {
-        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
-          if (data == "closed") {
-       //Delete Document Record
-          }
-    
-        })
-      }
-  }
+     
+ 
   empSkilltableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
       this.indvEmpSkill = event.data;
@@ -751,7 +728,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     return this.bankList.find(x => x.option_value == bankid).option_text;
   }
 
-  async getBankList() {
+
   getEmpJobTitle(position_id) {
     return this.allPositions.find(x => x.id == position_id).title;
   }

@@ -123,10 +123,6 @@ import {
     FetchAllEmployeesServiceProxy,
     DataServiceProxy,
     ExitRequestService,
-<<<<<<< HEAD
-    FetchEmployeeByIdServiceProxy
-  ]
-=======
     FetchEmployeeByIdServiceProxy,
     GetAllProfessionalBodiesServiceProxy,
     RecruitmentSettingServiceProxy,
@@ -136,8 +132,9 @@ import {
     AddUpdateEligibleBucketServiceProxy,
     FetchApprovalProcessServiceProxy,
     GetPromotionEligibilityListsServiceProxy
+  ]
+   
     
-]
->>>>>>> 3249514651eac7fae78ac850553c176c3571b9e9
+
 })
 export class EmployeemoduleModule { }
