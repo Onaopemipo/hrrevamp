@@ -5,7 +5,7 @@ import {
   EmployeeQualificationDTO, Document, NextOfKin, AddressDTO, Country, State, LGA, Pension,
   EmployeeHistoryDTO, CommonServiceProxy, Position, EmployeeSkill, EmployeeCertificationDTO,
   Skill, GetAllProfessionalBodiesServiceProxy, ProfessionalBodyDTO, Certification, EmployeeContractAssignmentDTO,
-  JobRole, PayrollType,GradeStep,FileUploadServiceProxy, FileParameter,UploadProfileImageServiceProxy,
+  JobRole, PayrollType,GradeStep,FileUploadServiceProxy, FileParameter,UploadProfileImageServiceProxy, EmployeeSkillDTO,
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -19,6 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './employeerecordsview.component.html',
   styleUrls: ['./employeerecordsview.component.scss']
 })
+
 export class EmployeerecordsviewComponent implements OnInit {
   pensionForm: FormGroup;
   nxtKinForm: FormGroup;
@@ -798,11 +799,12 @@ export class EmployeerecordsviewComponent implements OnInit {
   pushUpdateSkill() {
     if (this.tempEmpSkillList.length > 0) {
       this.tempEmpSkillList.forEach(value => {
-        let newSkillObject = new EmployeeSkill().clone();
+        let newSkillObject = new EmployeeSkillDTO().clone();
         newSkillObject.skillId = value.id_skill;
         newSkillObject.numberOfExperienceInMonth = value.no_exp;
         newSkillObject.startDate = value.sk_startdate;
         newSkillObject.employeeId = this.createNewEmployee.id;
+
         this.createNewEmployee.skills.push(newSkillObject);
       });
     }

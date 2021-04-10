@@ -1,15 +1,45 @@
-<ngx-componentsheader pageName='Promotion List' [requiredButton]="rButton" (buttonClick)="onTopActionClick($event)">
+<ngx-componentsheader [pageName]='pageName' >
+<div headerButton style="display: flex; flex-direction: row;">
+  <div *ngIf="!eligibilityBucket" style="display: flex; flex-direction: row;">
+    <div><button  nbButton status="primary"  class="d-flex column">Submit List</button></div>
+    <div style="padding-left: 5px;"> <button  nbButton status="primary"  class="d-flex column">Save List</button></div>
+    <div style="padding-left: 5px;">
+      <button outline="true"  nbButton status="primary" (click)="updateEligibilityList()" class="d-flex column">Update List</button>
+    </div> 
+  </div>
+  <div *ngIf="!eligibilityBucket" style="padding-left: 5px;">
+    <button  nbButton status="primary" (click)="gotoelegibilitybucket()"  class="d-flex column">Eligibility Bucket</button>
+  </div>
 
+</div>
 </ngx-componentsheader>
 
 
 <nb-card style="margin-top: 15px;">
     <nb-card-body>
-
-
-        <ngx-tableheader></ngx-tableheader>
-
-        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+      <ngx-default-content
+      *ngIf="showEmpty"
+      pageHeader="No Record Found"
+      pageDescription=""
+      buttonValue=""
+      [loading]="loading"
+     
+    >
+    </ngx-default-content>
+      <ngx-tablecomponent  
+      *ngIf="!showEmpty"
+      (filterChange)="filterUpdated($event)"
+      [showActions]="showTableAction"
+      [showFilter]="true"
+      (actionClick)="tableActionClicked($event)"
+      [actions]="tableActions" 
+      [userData]="promotionList" 
+      [tableColum]="tableColumns"
+      [totalItems]="totalItems"
+      [currentPage]="currentPage"
+      [loading]="loading"
+      >
+  </ngx-tablecomponent>
     </nb-card-body>
 </nb-card>
 
@@ -20,7 +50,7 @@
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Channel" class="col-form-label mylabel"></label>
-                <ngx-employee-master-search></ngx-employee-master-search>
+                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
               </div>
             </div>
     </nb-card>
@@ -28,17 +58,4 @@
   </div>
 </ngx-side-modal>
 
-<ngx-side-modal [(show)]='submitList' style="width: 500px;">
-  <div modal-header>Add to List</div>
-  <div modal-body>
-    <nb-card>
-            <div class="form-group row mydiv">
-              <div class="col">
-                <label for="Channel" class="col-form-label mylabel"></label>
-                <ngx-employee-master-search [addbtnText]="Submit"></ngx-employee-master-search>
-              </div>
-            </div>
-    </nb-card>
 
-  </div>
-</ngx-side-modal>

@@ -28,4 +28,4 @@ export interface TableActionEvent<T=any> {
     data: T;
 }
 
-export enum ACTIONS { EDIT = '1', DELETE = '2' }
+export enum ACTIONS { EDIT = '1', DELETE = '2' , VIEW = '3'}

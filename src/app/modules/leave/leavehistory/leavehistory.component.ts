@@ -72,10 +72,13 @@ export class LeavehistoryComponent implements OnInit {
   LeaveHistory: string = 'Leave History';
   leaveRequestModel: any = ''
   filter = {
-    DepartmentId: undefined,
     LeaveYearId: undefined,
     LeaveTypeId: undefined,
-    LocationId: undefined,
+    employeeName: null,
+    startDate: undefined,
+    endDate: undefined,
+    noOfDays: undefined,
+    remainingDays: undefined,
     pageSize: 10,
     pageNumber: 1
   }
@@ -98,7 +101,9 @@ export class LeavehistoryComponent implements OnInit {
   }
   getLeaveRequestReport() {
     this.loading = true;
-    this.GetLeaveRequestService.getLeaveReports(this.filter.DepartmentId, this.filter.LeaveTypeId, this.filter.LeaveTypeId, this.filter.LocationId, this.filter.pageSize, this.filter.pageNumber)
+    this.GetLeaveRequestService.getLeaveReports(this.filter.LeaveTypeId, this.filter.LeaveYearId,
+      this.filter.startDate, this.filter.endDate, this.filter.employeeName, this.filter.noOfDays,
+      this.filter.remainingDays, this.filter.pageSize, this.filter.pageNumber)
       .subscribe(data => {
         this.loading = false;
         if (!data.hasError) {
