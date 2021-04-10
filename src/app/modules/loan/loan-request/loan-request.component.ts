@@ -1,4 +1,4 @@
-import { LoanRequestDTO } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -24,7 +24,7 @@ export class LoanRequestComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(private loanService: UpdateLoanRequestServiceProxy, private loan: AddUpdateLoanTypeServiceProxy) { }
 
   ngOnInit(): void {
   }
@@ -52,7 +52,12 @@ export class LoanRequestComponent implements OnInit {
 
   }
 
-  makeLoanRequest(){
+  async makeLoanRequest(){
+  //  const data = await this.loanService.updateLoanRequest(this.loanModel).toPromise();
+  // const data = await this.loan.addUpdateLoanType(this.loanModel).toPromise();
+  }
+
+  getAllLoans(){
 
   }
 

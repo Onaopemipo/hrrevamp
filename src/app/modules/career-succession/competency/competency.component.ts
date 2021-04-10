@@ -9,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetencyComponent implements OnInit {
 
-  myPlanHeader: string = 'Add a Role';
-  myPlanDesc: string = 'You will be able to set competenies after adding a role.';
+  myPlanHeader: string = 'Create Competency';
+  myPlanDesc: string = 'Click the button below to add a competency';
 
-  myButton: string = 'Add a Role';
+  myButton: string = 'Create Competency';
   scoreCardClick: boolean = false;
   newRole: boolean = false;
   myPanel: string = '';
@@ -37,6 +37,22 @@ export class CompetencyComponent implements OnInit {
 
   addNewRole(){
     this.newRole = !this.newRole;
+  }
+
+  addAbility(){
+
+  }
+
+  addSkill(){
+
+  }
+
+  addCertification(){
+
+  }
+
+  addQualification(){
+
   }
 
   selectPanel(rolelist, i) {

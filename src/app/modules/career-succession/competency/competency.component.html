@@ -50,6 +50,17 @@
               <form>
                 <span class="title" *ngIf="selectedCase=='Role_Details'">Add a Role</span>
                 <span class="title" *ngIf="selectedCase=='Cadre'">Add a Cadre</span>
+
+                <div class="form-group row ">
+                  <label for="Role" class="col-sm-3 col-form-label mylabel">Competency Title </label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select type="text" class="form-control" name="compencyTitle" placeholder="Role Name">
+                      <option value="">--Select Role--</option>
+                      <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
@@ -109,7 +120,7 @@
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                    <button nbButton (click)="addQualification()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
 
@@ -125,7 +136,7 @@
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                    <button nbButton (click)="addCertification()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
 
@@ -141,7 +152,7 @@
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                    <button nbButton (click)="addSkill()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
 
@@ -155,16 +166,9 @@
                 </div>
 
                 <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
-                  </div>
-                </div>
-
-                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                    <button nbButton (click)="addAbility()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
               </form>
