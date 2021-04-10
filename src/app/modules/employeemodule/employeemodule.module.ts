@@ -1,4 +1,4 @@
-import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, FetchEmployeeByIdServiceProxy } from './../../_services/service-proxies';
+import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -54,6 +54,10 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { ExitRequestService } from './services/exit-request.service';
+import {
+  GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy 
+} from 'app/_services/service-proxies';
 
 
 
@@ -119,7 +123,21 @@ import { ExitRequestService } from './services/exit-request.service';
     FetchAllEmployeesServiceProxy,
     DataServiceProxy,
     ExitRequestService,
+<<<<<<< HEAD
     FetchEmployeeByIdServiceProxy
   ]
+=======
+    FetchEmployeeByIdServiceProxy,
+    GetAllProfessionalBodiesServiceProxy,
+    RecruitmentSettingServiceProxy,
+    FileUploadServiceProxy,
+    UploadProfileImageServiceProxy,
+    GetEligibilityListServiceProxy,
+    AddUpdateEligibleBucketServiceProxy,
+    FetchApprovalProcessServiceProxy,
+    GetPromotionEligibilityListsServiceProxy
+    
+]
+>>>>>>> 3249514651eac7fae78ac850553c176c3571b9e9
 })
 export class EmployeemoduleModule { }

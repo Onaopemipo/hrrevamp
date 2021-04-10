@@ -149,7 +149,7 @@ export class LeaveyearComponent implements OnInit {
   }
   createleaveYear() {
     this.submitbtnPressed = true;
-    this.CreateLeaveYearService.createLeaveYear(this.newleaveYear).subscribe(response => {
+    this.CreateLeaveYearService.createLeaveYear(this.newleaveYear).subscribe((response) => {
       if (!response.hasError) {
         this.getleaveYear();
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
