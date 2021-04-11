@@ -1,4 +1,5 @@
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
+import { TableColumn } from './../../../components/tablecomponent/models';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, NewLoanRequestDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,6 +15,7 @@ export class LoanRequestComponent implements OnInit {
   pageNo: number = 1;
 
   loanModel: LoanRequestDTO = new LoanRequestDTO;
+  loanRequest: NewLoanRequestDTO = new NewLoanRequestDTO;
 
   selectedCase: string = 'request';
   selectedPanel: any = { title: 'request', label: 'Loan Request', status: 'Active'};
@@ -21,6 +23,17 @@ export class LoanRequestComponent implements OnInit {
     { title: 'request', label: 'Loan Request', status: 'Active' },
     { title: 'documents', label: 'Related Documents', status: 'Inactive' },
     { title: 'guarantor', label: 'Guarantor List', status: 'Inactive' }
+  ];
+
+  loanRequestTable: TableColumn [] = [
+    {name: 'sn', title: 'SN'},
+    {name: 'refNo', title: 'Ref No.'},
+    {name: 'employeeId', title: 'Staff No.'},
+    {name: 'employeeName', title: 'Employee Name'},
+    {name: ' loanAmount', title: 'Loan Amount'},
+    {name: ' amountRepaid', title: 'Amount Repaid'},
+    {name: ' status', title: 'Status'},
+
   ];
 
 
@@ -53,8 +66,8 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async makeLoanRequest(){
-  //  const data = await this.loanService.updateLoanRequest(this.loanModel).toPromise();
-  // const data = await this.loan.addUpdateLoanType(this.loanModel).toPromise();
+  //  const data = await this.loanService.updateLoanRequest(this.loanRequest).toPromise();
+  // const data = await this.loan.(this.loanModel).toPromise();
   }
 
   getAllLoans(){
