@@ -30,6 +30,9 @@ import { ApplicantSelectionComponent } from './applicant-selection/applicant-sel
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
+import {FetchDashboardDataServiceProxy } from '../../_services/service-proxies';
+import Flow from '@flowjs/flow.js';
+import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 
 @NgModule({
@@ -52,6 +55,15 @@ import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component'
     NbRadioModule,
     NbProgressBarModule,
     NbCheckboxModule
+  ],
+  providers: [
+    {
+      provide: FlowInjectionToken,
+      useValue: Flow,
+    },
+
+    FetchDashboardDataServiceProxy
   ]
+  
 })
 export class RecruitmentModule { }

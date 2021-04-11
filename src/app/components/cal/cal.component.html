@@ -1,16 +1,31 @@
+<div style="display: flex; flex-direction: row;flex-wrap: wrap;">
+    <div>
+        <button (click)="prevMonth()">Prev</button><button (click)="nextMonth()">Next</button>
+        <span> 
+            <button (click)="gotoThisMonth()">Today</button></span>
+    </div>
+    <div style="margin-left: 7rem; font-weight: bolder; font-size: larger;" >
 
-{{monthLabel}} - {{year}} <button (click)="prevMonth()">Prev</button><button (click)="nextMonth()">Next</button>
-<button (click)="gotoThisMonth()">Today</button>
-<table>
-    <tr>
+        {{monthLabel}} - {{year}}
+    </div>
+
+</div>
+
+
+<table style="padding: 2rem;">
+    <tr style="padding: 4px;
+    position: relative; ">
         <th *ngFor="let day of days">
-            {{day.name}}
+            <div style="padding: 10px; border: 1px solid black;">
+                {{day.name}}
+            </div>
+           
         </th>
     </tr>
 
     <tbody>
-        <tr *ngFor="let week of weeks" >
-            <td *ngFor="let day of week" [class]="{'other-month': day.getMonth() !== month}">
+        <tr *ngFor="let week of weeks">
+            <td *ngFor="let day of week" (click)='dateClicked(day)' [class]="{'other-month': day.getMonth() !== month}">
                 {{day.getDate()}}
             </td>
         </tr>

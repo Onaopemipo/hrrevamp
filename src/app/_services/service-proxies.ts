@@ -10774,6 +10774,76 @@ export class CommunicationServiceProxy {
     }
 
     /**
+     * API to Fetch Email Settings.
+    Note: all filter are optional
+     * @return Success
+     */
+    getAllEmailSettings(): Observable<EmailSettingListApiResult> {
+        let url_ = this.baseUrl + "/api/Communication/GetAllEmailSettings";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllEmailSettings(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllEmailSettings(<any>response_);
+                } catch (e) {
+                    return <Observable<EmailSettingListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<EmailSettingListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllEmailSettings(response: HttpResponseBase): Observable<EmailSettingListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = EmailSettingListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<EmailSettingListApiResult>(<any>null);
+    }
+
+    /**
      * API to get EmailSetting by id and can be used for update, details etc
      * @param id (optional) 
      * @return Success
@@ -55224,6 +55294,73 @@ export interface IEmailSetting {
     createdById: number;
     dateModified: Date | undefined;
     modifiedById: number | undefined;
+}
+
+export class EmailSettingListApiResult implements IEmailSettingListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: EmailSetting[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IEmailSettingListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(EmailSetting.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): EmailSettingListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmailSettingListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): EmailSettingListApiResult {
+        const json = this.toJSON();
+        let result = new EmailSettingListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmailSettingListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: EmailSetting[] | undefined;
+    totalCount: number;
+    totalRecord: number;
 }
 
 export class EmailSettingApiResult implements IEmailSettingApiResult {

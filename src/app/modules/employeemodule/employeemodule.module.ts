@@ -56,7 +56,8 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
 import { ExitRequestService } from './services/exit-request.service';
 import {
   GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy 
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy,
+  FetchEmployeeContractByEmployeeIdServiceProxy,GetConfirmationsByDetailsServiceProxy,SaveConfirmationServiceProxy 
 } from 'app/_services/service-proxies';
 
 
@@ -64,32 +65,32 @@ import {
 @NgModule({
   declarations:
     [
-    HiringchecklistComponent,
-    EmployeeonboardingdashboardComponent,
-    EmploymentexitmanagementComponent,
-    ManagementexistComponent,
-    ExistrequestComponent,
-    RetirementComponent,
-    RetirementformComponent,
-    ExitwarningComponent,
-    ComfirmationComponent,
-    EmployeeviewComponent,
-    PromotionComponent,
-    PromotioninfoComponent,
-    OnboardingemployeesComponent,
-    EmployeemoduleComponent,
-    EmployeepersonalinformationComponent,
-    PromotioneligibilityComponent,
-    EligibilityxxComponent,
-    AnothereligibilitylistComponent,
-    EmployeedeploymentmanagementComponent,
-    DeploymentviewComponent,
-    ManagementviewComponent,
-    DeploymentapplicationComponent,
-    EmployeerecordsComponent,
-    EmployeerecordsviewComponent,
-    EmployeerbulkaddComponent,
-    CardComponent],
+      HiringchecklistComponent,
+      EmployeeonboardingdashboardComponent,
+      EmploymentexitmanagementComponent,
+      ManagementexistComponent,
+      ExistrequestComponent,
+      RetirementComponent,
+      RetirementformComponent,
+      ExitwarningComponent,
+      ComfirmationComponent,
+      EmployeeviewComponent,
+      PromotionComponent,
+      PromotioninfoComponent,
+      OnboardingemployeesComponent,
+      EmployeemoduleComponent,
+      EmployeepersonalinformationComponent,
+      PromotioneligibilityComponent,
+      EligibilityxxComponent,
+      AnothereligibilitylistComponent,
+      EmployeedeploymentmanagementComponent,
+      DeploymentviewComponent,
+      ManagementviewComponent,
+      DeploymentapplicationComponent,
+      EmployeerecordsComponent,
+      EmployeerecordsviewComponent,
+      EmployeerbulkaddComponent,
+      CardComponent],
   imports: [
     CommonModule,
     EmployeemoduleRoutingModule,
@@ -131,8 +132,13 @@ import {
     GetEligibilityListServiceProxy,
     AddUpdateEligibleBucketServiceProxy,
     FetchApprovalProcessServiceProxy,
-    GetPromotionEligibilityListsServiceProxy
+    GetPromotionEligibilityListsServiceProxy,
+    FetchEmployeeContractByEmployeeIdServiceProxy,
+    GetConfirmationsByDetailsServiceProxy,
+    SaveConfirmationServiceProxy 
+  ]
+   
     
-]
+
 })
 export class EmployeemoduleModule { }

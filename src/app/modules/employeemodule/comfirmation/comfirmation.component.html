@@ -18,7 +18,6 @@
             
             </nb-tab>
             <nb-tab tabTitle="Declined" (click)="setStatusDeclined(3)">
-                {{Declined}}
             </nb-tab>
             <nb-tab tabTitle="Extended">
 
@@ -28,12 +27,12 @@
 <!-- 
         <ngx-tablecomponent [userData]="data" [tableColum]="tableColumns"></ngx-tablecomponent> -->
 
-        <ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Leave Year"
-        pageDescription="Click on the button to " buttonValue="Create confirmation"
-        (buttonClick)="modal('Confirmation')">
+        <ngx-default-content *ngIf="showEmpty" pageHeader="No Confirmation Record Found"
+        pageDescription="" buttonValue=""
+    >
       </ngx-default-content>
       <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showFilter]="true"
-        (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="data"
+        (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="comfirmationData"
         [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
       </ngx-tablecomponent>
     </nb-card-body>

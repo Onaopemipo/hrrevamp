@@ -10,12 +10,12 @@
         <div style="padding-bottom: 0;">
           <div style="display: flex;align-items: center;justify-content: center;">
           <div class="employee-avatar">
-          <img src="assets/icons/camera.jpg">
+          <img [src]="newPromotion.profile_pic" onError="this.src='assets/icons/camera.jpg'">
           </div>
           </div>
         <div style="text-align: center; padding: 10px;">
-            <p class="header6-medium" style="margin-bottom: 1rem !important;">Kelvin Jeff</p>
-    <p style="color: #95A8B8 !important;">{{contractDetails.jobName}}</p>
+            <p class="header6-medium" style="margin-bottom: 1rem !important;">{{newPromotion.first_name}}{{newPromotion.last_name}}</p>
+    <p style="color: #95A8B8 !important;">{{getPositionName(newPromotion.current_position_id)}}</p>
         </div>
         </div>
         </div>
@@ -47,7 +47,7 @@
                                             <span>First Name</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>{{contractDetails.firstName}}</span>
+                                            <span>{{newPromotion.first_name}}</span>
                                         </div>
                                     </div>
 
@@ -56,7 +56,7 @@
                                           <span>Last Name</span>
                                       </div>
                                       <div class="col-sm-8">
-                                          <span>{{contractDetails.lastName}}</span>
+                                          <span>{{newPromotion.last_name}}</span>
                                       </div>
                                   </div>
 
@@ -65,25 +65,25 @@
                                         <span>Employee ID</span>
                                     </div>
                                     <div class="col-sm-8">
-                                        <span>{{contractDetails.employeeId}}</span>
+                                        <span>{{newPromotion.employee_contract_id}}</span>
                                     </div>
                                 </div>
 
-                                <div class="row" style="padding-bottom: 20px;">
+                                <!-- <div class="row" style="padding-bottom: 20px;">
                                   <div class="col-sm-4">
                                       <span>Email Address</span>
                                   </div>
                                   <div class="col-sm-8">
-                                      <span>{{employeeDetails.userEmail}}</span>
+                                      <span>{{newPromotion.userEmail}}</span>
                                   </div>
-                              </div>
+                              </div> -->
 
                               <div class="row" style="padding-bottom: 20px;">
                                 <div class="col-sm-4">
                                     <span>Position</span>
                                 </div>
                                 <div class="col-sm-8">
-                                    <span>{{contractDetails.firstName}}</span>
+                                    <span>{{getPositionName(newPromotion.current_position_id)}}</span>
                                 </div>
                             </div>
 
@@ -92,27 +92,27 @@
                                   <span>Department</span>
                               </div>
                               <div class="col-sm-8">
-                                  <span>{{contractDetails.firstName}}</span>
+                                  <span>{{newPromotion.department}}</span>
                               </div>
                           </div>
 
-                          <div class="row" style="padding-bottom: 20px;">
+                          <!-- <div class="row" style="padding-bottom: 20px;">
                             <div class="col-sm-4">
                                 <span>Residential LGA</span>
                             </div>
                             <div class="col-sm-8">
-                                <span>{{employeeDetails.residentialLga}}</span>
+                                <span>{{newPromotion.residentialLga}}</span>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="row" style="padding-bottom: 20px;">
+                        <!-- <div class="row" style="padding-bottom: 20px;">
                           <div class="col-sm-4">
                               <span>Residential State</span>
                           </div>
                           <div class="col-sm-8">
-                              <span>{{employeeDetails.residentialState}}</span>
+                              <span>{{newPromotion.residentialState}}</span>
                           </div>
-                      </div>
+                      </div> -->
 
                                 </div>
 
@@ -136,7 +136,7 @@
                                             <span>Appointment Date</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>24/08/2021</span>
+                                            <span>{{newPromotion.date_of_appointment | date}}</span>
                                         </div>
                                     </div>
 
@@ -145,7 +145,7 @@
                                           <span>Confirmation Date</span>
                                       </div>
                                       <div class="col-sm-8">
-                                          <span>24/08/2021</span>
+                                       <span>{{newPromotion.date_of_confirmation | date}}</span>
                                       </div>
                                   </div>
 
@@ -154,7 +154,7 @@
                                         <span>Last Promotion Date</span>
                                     </div>
                                     <div class="col-sm-8">
-                                        <span>24/08/2021</span>
+                                       <span>{{newPromotion.last_promotion_date | date}}</span>
                                     </div>
                                 </div>
 
@@ -163,7 +163,7 @@
                                       <span>Effective Date</span>
                                   </div>
                                   <div class="col-sm-8">
-                                      <span>24/08/2021</span>
+                                   <span>{{newPromotion.effective_date | date}}</span>
                                   </div>
                               </div>
 
@@ -172,7 +172,7 @@
                                     <span>Current Level</span>
                                 </div>
                                 <div class="col-sm-8">
-                                    <span>Level 15</span>
+                                   <span>{{getPositionName(newPromotion.current_position_id)}}</span>
                                 </div>
                             </div>
 
@@ -181,7 +181,7 @@
                                   <span>Duration in Grade</span>
                               </div>
                               <div class="col-sm-8">
-                                  <span>12 Months</span>
+                                  <span>{{newPromotion.period_in_current_grade}}</span>
                               </div>
                           </div>
 
@@ -190,7 +190,7 @@
                                 <span>Professional Qualifications</span>
                             </div>
                             <div class="col-sm-8">
-                                <span>9</span>
+                               <span>{{newPromotion.professional_qualifications}}</span>
                             </div>
                         </div>
 
@@ -199,13 +199,13 @@
                               <span>Next Level</span>
                           </div>
                           <div class="col-sm-8">
-                              <span>Senior UX Manager</span>
+                             <span>{{getPositionName(newPromotion.next_position_id)}}</span>
                           </div>
                       </div>
 
                                 </div>
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-4" style="display: flex;align-items:center">
                                         <div class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
                                           <button nbButton status="primary" class="d-flex column">Approve</button>
@@ -218,7 +218,7 @@
                                     <div class="col-md-8 col-xxl-8 ">
 
                                     </div>
-                                </div>
+                                </div> -->
                     </div>
 
                 </div>

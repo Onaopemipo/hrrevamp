@@ -10,7 +10,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
-import { ColumnTypes, TableAction, TableActionEvent,ACTIONS } from 'app/components/tablecomponent/models';
+import { ColumnTypes, TableAction, TableActionEvent, ACTIONS } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -27,7 +27,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   loading: boolean = false;
   title: string = "Employee Profile"
   selectedCase: string = 'profile_panel';
-  selectedPanel: any ={ title: 'profile_panel', label: 'Profile', status: 'Active' };
+  selectedPanel: any = { title: 'profile_panel', label: 'Profile', status: 'Active' };
   hiringChecklist = [
     { title: 'profile_panel', label: 'Profile', status: 'Active' },
     { title: 'contract_panel', label: 'Contract', status: 'Inactive' },
@@ -39,7 +39,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     { title: 'History_panel', label: 'History', status: 'Inactive' },
     { title: 'skills_panel', label: 'Skills', status: 'Inactive' },   
     { title: 'certification_panel', label: 'Certifications', status: 'Inactive' },
-    { title: 'qualification_Info', label: 'Qualification', status: 'Inactive' },
+    { title:'qualification_Info', label: 'Qualification', status: 'Inactive' },
     { title: 'training_panel', label: 'Training', status: 'Inactive' },
     { title: 'custom_panel', label: 'Employee Custom Form', status: 'Inactive'},
   ];
@@ -65,10 +65,11 @@ export class EmployeerecordsviewComponent implements OnInit {
   maritalStatusValues: DropdownValue[] = [];
   allfiletypes: IDTextViewModel[] = [];
   genderValues: DropdownValue[] = [];
+  religionValues: DropdownValue[] = [];
+  employmentStatusValues: DropdownValue[] = [];
   alladdressType: DropdownValue[] = [];
   alldepartments: DropdownValue[] = [];
-  religionValues: DropdownValue[]  = [];
-  employmentStatusValues: DropdownValue[]  = [];
+
   // allgender: string [] = [];
   showEmployeeContractModal: boolean = false;
   showdocumentUploadModal: boolean = false;
@@ -112,7 +113,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
   qualificationtableColumns = [
     { name: 'name', title: 'Name of Qualification', type: ColumnTypes.Text },
-    { name: 'type', title: 'Type', type: ColumnTypes.Text},
+    { name: 'type', title: 'Type', type: ColumnTypes.Text },
     { name: 'courseName', title: 'Course', type: ColumnTypes.Text },
     { name: 'institution', title: 'Institution', type: ColumnTypes.Text },
     { name: 'startDate', title: 'Start Date', type: ColumnTypes.Date },
@@ -133,7 +134,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
   documenttableColumns = [
     { name: 'name', title: 'Document Name', type: ColumnTypes.Text },
-    { name: 'docType', title: 'Document Type', type: ColumnTypes.Text},
+    { name: 'docType', title: 'Document Type', type: ColumnTypes.Text },
     { name: 'lastModifiedDate', title: 'Last Modified Date', type: ColumnTypes.Date },
   ];
   get disableDocumentbtn() {
@@ -173,28 +174,28 @@ export class EmployeerecordsviewComponent implements OnInit {
   }
   get disableaddBank() {
     let resp: boolean = true;
-    
+
     let nullable = [
       'account_name', 'account_type', 'bank_name', 'companyID',
-    'createdById',
-'dateCreated',
-'dateModified',
-'employee_id',
-'id',
-'isActive',
-'isDeleted',
-'is_primary',
-'modifiedById',
-'subID',
-  ]
+      'createdById',
+      'dateCreated',
+      'dateModified',
+      'employee_id',
+      'id',
+      'isActive',
+      'isDeleted',
+      'is_primary',
+      'modifiedById',
+      'subID',
+    ]
 
-    Object.entries(this.indVEmpBanks).map(([key, value], index) => {      
-      if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
+    Object.entries(this.indVEmpBanks).map(([key, value], index) => {
+      if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {
         resp = false;
       }
-      if(key == 'account_no' && !this.accountNumberValidate)resp = false;
+      if (key == 'account_no' && !this.accountNumberValidate) resp = false;
     });
-    
+
     return resp;
   }
   EmpBankloading: boolean = false;
@@ -204,11 +205,11 @@ export class EmployeerecordsviewComponent implements OnInit {
   ];
   EmpBanktableColumns = [
     { name: 'bank_name', title: 'Bank Name', type: ColumnTypes.Text },
-    { name: 'account_no', title: 'Account No', type: ColumnTypes.Text},
+    { name: 'account_no', title: 'Account No', type: ColumnTypes.Text },
     { name: 'account_name', title: 'Account Name', type: ColumnTypes.Text },
     { name: 'account_type', title: 'Account Type', type: ColumnTypes.Text },
     { name: 'is_primary', title: 'Primary', type: ColumnTypes.Text },
-   
+
   ];
   accountNumberValidate: boolean = false;
   bankList: DropdownValue[] = [];
@@ -498,48 +499,50 @@ export class EmployeerecordsviewComponent implements OnInit {
     if (event.name == "1") {
       this.indVDocuments = event.data;
       this.showdocumentUploadModal = true;
- 
+
     }
     if (event.name == "2") {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
         if (data == "closed") {
-     //Delete Document Record
+          //Delete Document Record
         }
-  
+
       })
     }
   }
-  
+
   qualificationtableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
       this.indvQualifications = event.data;
       this.showQualificationModal = true;
-      
+
     }
     if (event.name == "2") {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
         if (data == "closed") {
-     //Delete Document Record
+          //Delete Document Record
         }
-  
+
       })
     }
-     }
-     embBanktableActionClicked(event: TableActionEvent) {
-      if (event.name == "1") {
-        this.indVEmpBanks = event.data;
-        this.showbankModal = true;
-        
-      }
-      if (event.name == "2") {
-        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
-          if (data == "closed") {
-       //Delete Document Record
-          }
-    
-        })
-      }
   }
+  embBanktableActionClicked(event: TableActionEvent) {
+    if (event.name == "1") {
+      this.indVEmpBanks = event.data;
+      this.showbankModal = true;
+
+    }
+    if (event.name == "2") {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
+        if (data == "closed") {
+          //Delete Document Record
+        }
+
+      })
+    }
+  }
+     
+ 
   empSkilltableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
       this.indvEmpSkill = event.data;
@@ -687,11 +690,11 @@ export class EmployeerecordsviewComponent implements OnInit {
         numb_account: bank.account_no,
         type_account: bank.account_typeId,
         code_sort: bank.bank_sort_code,
-        pry_is:bank.is_primary
+        pry_is: bank.is_primary
       }
       this.tempEmpBanksList.push(newbnkObj)
     }
-   // console.log(this.tempEmpBanksList)
+    // console.log(this.tempEmpBanksList)
   }
   removefromBank(i) {
     this.tempEmpBanksList.splice(i, 1);
@@ -718,12 +721,14 @@ export class EmployeerecordsviewComponent implements OnInit {
   }
 
   functionAutoMap(pObject, objectB) {
-    const newObj = {...pObject, ...objectB };   
+    const newObj = { ...pObject, ...objectB };
     return newObj;
-}
+  }
   getbankname(bankid) {
     return this.bankList.find(x => x.option_value == bankid).option_text;
   }
+
+
   getEmpJobTitle(position_id) {
     return this.allPositions.find(x => x.id == position_id).title;
   }
@@ -774,9 +779,9 @@ export class EmployeerecordsviewComponent implements OnInit {
         newBankObject.employee_id = this.createNewEmployee.id;
         this.createNewEmployee.banks.push(newBankObject);
       });
-     
+
     }
-   
+
   }
 
   pushUpdateHistory() {
@@ -825,7 +830,7 @@ export class EmployeerecordsviewComponent implements OnInit {
 
   }
   inputNumberValidation(event) {
-    var inputentry =  event.target.value;
+    var inputentry = event.target.value;
 
     var reg = new RegExp('^[-,-.0-9]+$');
     if (inputentry && reg.test(inputentry)) {
@@ -838,18 +843,18 @@ export class EmployeerecordsviewComponent implements OnInit {
         this.accountNumberValidate = true;
         return true;
       }
-      
+
     } else {
-      if(event.key == "Backspace" || event.key == "Delete" || event.key == "ArrowLeft" || event.key == "ArrowRight"){
+      if (event.key == "Backspace" || event.key == "Delete" || event.key == "ArrowLeft" || event.key == "ArrowRight") {
 
       } else {
-        this.errorMsg="please input number only";
-        this.removeErrorMsg();        
-        event.target.value = inputentry.slice(0,-1);
+        this.errorMsg = "please input number only";
+        this.removeErrorMsg();
+        event.target.value = inputentry.slice(0, -1);
         return false;
       }
-    
-    
+
+
     }
   }
 
@@ -870,10 +875,10 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
       if (!data.hasError) {
         this.createNewEmployee = data.result;
-    }
+      }
     });
-}
- async getProfileOperation() {
+  }
+  async getProfileOperation() {
     let response = await this.myDropdown.employeeProfileOperation().toPromise();
     this.profileOperations = response.result;
   }
@@ -891,14 +896,14 @@ export class EmployeerecordsviewComponent implements OnInit {
   }
 
 
-  async getDropDownValue(id, variable: DropdownValue[]){
+  async getDropDownValue(id, variable: DropdownValue[]) {
     let response = await this.myDropdown.getDropDownValuesById(4).toPromise();
     variable = response.result;
   }
 
-  getMaritalStatus(){
+  getMaritalStatus() {
     this.myDropdown.getDropDownValuesById(4).subscribe(data => {
-      if(!data.hasError){
+      if (!data.hasError) {
         this.maritalStatusValues = data.result;
         console.log(this.maritalStatusValues)
       }
@@ -908,12 +913,13 @@ export class EmployeerecordsviewComponent implements OnInit {
     })
   }
   getSelectedEmployee(event) {
+
     console.log(event);
     this.indvemployeeContract.supervisorId = event[0].id
   }
   getDocumentType() {
     this.myDropdown.getDocumentTypes().subscribe(typedata => {
-      if(!typedata.hasError){
+      if (!typedata.hasError) {
         this.alldocTypes = typedata.result;
       }
       else {
@@ -921,9 +927,9 @@ export class EmployeerecordsviewComponent implements OnInit {
       }
     })
   }
-  getEmploymentStatus(){
+  getEmploymentStatus() {
     this.myDropdown.getDropDownValuesById(1).subscribe(data => {
-      if(!data.hasError){
+      if (!data.hasError) {
         this.employmentStatusValues = data.result;
         console.log(this.employmentStatusValues)
       }
@@ -933,9 +939,9 @@ export class EmployeerecordsviewComponent implements OnInit {
     })
   }
 
-  getReligion(){
+  getReligion() {
     this.myDropdown.getDropDownValuesById(8).subscribe(data => {
-      if(!data.hasError){
+      if (!data.hasError) {
         this.religionValues = data.result;
       }
       else {
@@ -945,10 +951,10 @@ export class EmployeerecordsviewComponent implements OnInit {
   }
 
 
-  getGender(){
+  getGender() {
     this.myDropdown.getDropDownValuesById(12).subscribe(data => {
-      if(!data.hasError){
-         this.genderValues = data.result;
+      if (!data.hasError) {
+        this.genderValues = data.result;
       }
       else {
         console.log('There was an error')
@@ -956,18 +962,18 @@ export class EmployeerecordsviewComponent implements OnInit {
     })
   }
 
-  nextPanel() {    
+  nextPanel() {
     var pos = this.hiringChecklist.findIndex(x => x.title == this.selectedPanel.title);
     var newPos = parseInt(String(pos)) + parseInt(String(1));
-  
+
     if (newPos) {
       this.selectPanel(this.hiringChecklist[newPos], newPos);
-    }    
+    }
   }
-  submitbank() {    
+  submitbank() {
     if (this.createNewEmployee.id) {
       this.reqEmployee.profileOperation = this.profileOperations.find(x => x.text == "Bank").id;
-      this.createEmployee();      
+      this.createEmployee();
     }
     this.showbankModal = false;
     this.nextPanel();
@@ -1040,6 +1046,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   createEmployee() {
     this.loading = true;
     this.pushUpdateBank();
+    this.reqEmployee = this.functionAutoMap(this.reqEmployee, this.createNewEmployee);
     this.pushUpdateConatct();
     this.pushUpdateHistory();
     this.pushUpdateSkill();
@@ -1056,7 +1063,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.reqEmployee.documents = JSON.stringify(this.createNewEmployee.documents);
 
     this.newEmployee.addEmployee(this.reqEmployee).subscribe(data => {
-      if(data.hasError){
+      if (data.hasError) {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, "ok");
         this.getEmployeebyId(this.createNewEmployee.id);
       }
@@ -1064,12 +1071,12 @@ export class EmployeerecordsviewComponent implements OnInit {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
           if (this.createNewEmployee.id) {
             this.getEmployeebyId(this.createNewEmployee.id);
-            this.selectPanel(this.hiringChecklist[0],0)
+            this.selectPanel(this.hiringChecklist[0], 0)
           } else {
             this.router.navigate(['/employeemodule/employeerecords'])
           }
         });
-        
+
         this.tempEmpBanksList = [];
         console.log(data.message)
       }
@@ -1163,6 +1170,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
   }
+
   profileonDragOver(event) {
     event.stopPropagation();
     event.preventDefault();

@@ -59,15 +59,16 @@ export class EmployeeviewComponent implements OnInit {
     this.employeeviewlist[i].status = 'Active';
     this.selectedCase = this.employeeviewlist[i].title;
   }
+
   ngOnInit(): void {
   
-    this.activatedRoute.paramMap.subscribe(params => {
-      const employee_id= params.get('employee_id');
-       const id = Number(employee_id)
-      console.log(id)
-       this.FetchEmployeeByIdServiceProx.getEmployeeById(id).toPromise().then(
-        a => this.employee = a.result
-       )
+    this.activatedRoute.queryParams.subscribe(data => {
+      if (data.data) {
+        let confInfo = data.data; 
+        this.FetchEmployeeByIdServiceProx.getEmployeeById(confInfo.employee_id).toPromise().then(
+          a => this.employee = a.result
+         )
+      } 
 
     }
     );

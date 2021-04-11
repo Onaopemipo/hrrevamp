@@ -14,6 +14,8 @@ import {NbPopoverModule} from '@nebular/theme';
 import { ModalformComponent } from './modalform/modalform.component';
 import { ThemeModule } from '../../@theme/theme.module';
 import { ProfileComponent } from './profile/profile.component';
+import { AddUpdateEventsServiceProxy,GetAllEventsServiceProxy} from '../../_services/service-proxies'
+import { AlertserviceService, } from '../../_services/alertservice.service'
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -32,6 +34,9 @@ FullCalendarModule.registerPlugins([
       ThemeModule,
     ],
     providers: [
+      AddUpdateEventsServiceProxy,
+      AlertserviceService,
+      GetAllEventsServiceProxy
     ]
   })
   export class SelfServiceModule { }

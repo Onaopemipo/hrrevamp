@@ -13,12 +13,11 @@ enum TABLE_ACTION {
   styleUrls: ['./comfirmation.component.scss']
 })
 export class ComfirmationComponent implements OnInit {
-  showEmpty: boolean = false
+
   loading: boolean = false
   totalItems = 0;
   currentPage = 0;
   tableColumns = [
-    { name: 'a', title: 'S/N' },
     { name: 'employee_name', title: 'EMPLOYEE' },
     { name: 'staff_no', title: 'STAFF NO' },
     { name: 'effective_date', title: 'APPOINTMENT DATE' },
@@ -26,61 +25,69 @@ export class ComfirmationComponent implements OnInit {
     { name: 'request_by', title: 'REQUESTED BY' },
     { name: 'log_status', title: 'REQUESTED STATUS' },
   ];
-  id?: number = 0
-  startDate?: Date = new Date();
-  endDate?: Date = new Date();
-  log_status?: number = 0;
-  _PageSize?: number = 0;
 
-  data: VwConfirmationDTO[] = [];
+
+  comfirmationData: VwConfirmationDTO[] = [];
   AllPending: VwConfirmationDTO[] = [];
   Approved: VwConfirmationDTO[] = [];
   Declined: VwConfirmationDTO[] = [];
-
+  filter = {
+    id: undefined,
+    startDate: null,
+    endDate: null,
+    log_status: undefined,
+    _PageSize: undefined
+}
 
   constructor(private ConfirmationService: GetConfirmationsByDetailsServiceProxy,
     private route: Router,
     private singleEmployee: FetchEmployeeByIdServiceProxy) { }
-
+get   showEmpty(){
+  return this.comfirmationData.length === 0;
+}
   ngOnInit(): void {
     this.getConfirmationDetails();
 
   }
-
+  filterUpdated(filter: any) {
+    this.filter = { ...this.filter, ...filter };
+    this.getConfirmationDetails();
+  }
   tableActions: TableAction[] = [
     { name: TABLE_ACTION.VIEW, label: 'View' },
   ]
   getConfirmationDetails() {
     this.loading == true
-    this.ConfirmationService.getConfirmationsByDetails(this.startDate, this.endDate, this.log_status,1, this._PageSize)
-      .toPromise().then(comfirmationData => {
-        this.data = comfirmationData.result
+    this.ConfirmationService.getConfirmationsByDetails(this.filter.startDate,
+      this.filter.endDate, this.filter.log_status, this.filter.id, this.filter._PageSize)
+      .toPromise().then(data => {
+        this.comfirmationData = data.result
         this.loading == false
       })
 
   }
   setFilterStatus(statusId) {
-    this.log_status = statusId;
+    this.filter.log_status = statusId;
     this.getConfirmationDetails();
   }
   setStatus(status) {
-    this.log_status == status;
+    this.filter.log_status == status;
     this.getConfirmationDetails()
   }
   setStatusApproved(statusApproved) {
-    this.log_status == statusApproved;
+    this.filter.log_status == statusApproved;
     this.getConfirmationDetails()
   }
 
   setStatusDeclined(statusDeclined) {
-    this.log_status == statusDeclined;
+    this.filter.log_status == statusDeclined;
     this.getConfirmationDetails()
 
   }
 
   tableActionClicked(event: TableActionEvent) {
     if (event.name == TABLE_ACTION.VIEW) {
-      this.route.navigateByUrl('/employeemodule/confirmation/employeeview/' + event.data.employee_id)
+      this.route.navigate(['/employeemodule/confirmation/employeeview'],{queryParams:{data:event.data}} )
     }
 
   }

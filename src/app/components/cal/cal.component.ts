@@ -1,7 +1,53 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
+enum DAYS {
+  MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+}
+
+const allDays = [
+  DAYS.MONDAY, DAYS.TUESDAY, DAYS.WEDNESDAY, DAYS.THURSDAY, DAYS.FRIDAY, DAYS.SATURDAY, DAYS.SUNDAY
+]
+const weekDays = [
+  DAYS.MONDAY, DAYS.TUESDAY, DAYS.WEDNESDAY, DAYS.THURSDAY, DAYS.FRIDAY,
+]
+export interface ICalendarEvent{
+  start: Date;
+  end?: Date;
+  title?: string;
+  description?: string;
+  id: number;
+  days?: DAYS[];
+  skip_weekends?: boolean;
+  type?: string;
+  allday?: boolean;
+}
+export class CalendarEvent{
+  start: Date;
+  end: Date;
+  title: string;
+  description: string;
+  id: number;
+  days: DAYS[];
+  type: string;
+
+  static getDayEnd(date: Date){
+    date.setHours(23);
+    date.setMinutes(59);
+    return date;
+  }
+
+  constructor(obj: ICalendarEvent){
+    this.start = obj.start
+    this.end = obj.allday ? CalendarEvent.getDayEnd(obj.start) : obj.end;
+    this.days = obj.skip_weekends ? weekDays : allDays;
+    this.title = obj.title;
+    this.id = obj.id;
+    this.description = obj.description;
+    this.type = obj.type;
+  }
+}
 @Component({
   selector: 'ngx-cal',
   templateUrl: './cal.component.html',
@@ -77,6 +123,16 @@ export class CalComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadCalendar();
+  }
+
+  @Output() dateClick = new EventEmitter<Date>();
+  dateClicked(day: Date){
+    this.dateClick.emit(day);
+  }
+
+  _events: CalendarEvent[] = [];
+  @Input() set calendarEvents(events: CalendarEvent[]) {
+    this._events = events;
   }
 
 }
