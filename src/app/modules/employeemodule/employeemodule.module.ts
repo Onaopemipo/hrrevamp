@@ -56,7 +56,8 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
 import { ExitRequestService } from './services/exit-request.service';
 import {
   GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy 
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy,
+  FetchEmployeeContractByEmployeeIdServiceProxy,GetConfirmationsByDetailsServiceProxy,SaveConfirmationServiceProxy 
 } from 'app/_services/service-proxies';
 
 
@@ -131,7 +132,10 @@ import {
     GetEligibilityListServiceProxy,
     AddUpdateEligibleBucketServiceProxy,
     FetchApprovalProcessServiceProxy,
-    GetPromotionEligibilityListsServiceProxy
+    GetPromotionEligibilityListsServiceProxy,
+    FetchEmployeeContractByEmployeeIdServiceProxy,
+    GetConfirmationsByDetailsServiceProxy,
+    SaveConfirmationServiceProxy 
   ]
    
     

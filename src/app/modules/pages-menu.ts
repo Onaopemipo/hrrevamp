@@ -64,7 +64,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Confirmation',
-        link: '/employeemodule/comfirmation',
+        link: '/employeemodule/confirmation',
       },
       {
         title: 'Promotion',
