@@ -32,8 +32,8 @@
             <button nbButton [nbPopover]="formcomponent" (addEvent)="addEvent($event)"
                 style="position: fixed; top: 50%; left: 50%;;"></button>
             <!-- <ngx-calender style="background-color: white; height: 700px;"></ngx-calender>  -->
-             <ngx-cal (dateClicked)="dateClicked($event)"></ngx-cal> 
-            <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar>
+             <ngx-cal (dateClick)="dateClick($event)" [calendarEvents]="calendarEvents"></ngx-cal> 
+            <!-- <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar> -->
          
         </div>
 
