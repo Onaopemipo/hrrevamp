@@ -59,6 +59,7 @@ export class ModalformComponent implements OnInit {
       }
     }
     this.submitbtnPressed = false
+    this.Event= null
   }
 
 }

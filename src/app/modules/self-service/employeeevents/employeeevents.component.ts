@@ -8,7 +8,8 @@ import { ManageEventDTO, AddUpdateEventsServiceProxy, GetAllEventsServiceProxy, 
 import { AlertserviceService } from '../../../_services/alertservice.service'
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { FormGroup } from '@angular/forms';
-import { date } from 'faker';
+import { date } from 'faker'
+import {CalendarEvent} from '../../../../../src/app/components/cal/cal.component'
 
 enum TOP_ACTIONS {
   ADD_Event,
@@ -35,52 +36,50 @@ export class EmployeeeventsComponent implements AfterViewInit {
   showEvent: boolean = false
   dat = new Date()
   EventList: EventDTO[]
-
+  
 
   topActionButtons = [
     { name: TOP_ACTIONS.ADD_Event, label: 'Add Event', 'icon': 'plus', outline: false },
 
   ];
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,listWeek',
-
-
-    },
+  // calendarOptions: CalendarOptions = {
+  //   initialView: 'dayGridMonth',
+  //   headerToolbar: {
+  //     left: 'prev,next today',
+  //     center: 'title',
+  //     right: 'dayGridMonth,listWeek',
+  //   },
 
 
 
-    dayMaxEvents: true, // allow "more" link when too many events
-    events: [
-      {
-        id: 'a',
-        title: 'my event',
-        start: '2018-09-01'
-      }
-    ],
+    // dayMaxEvents: true, // allow "more" link when too many events
+    // events: [
+    //   {
+    //     id: 'a',
+    //     title: 'my event',
+    //     start: '2018-09-01'
+    //   }
+    // ],
 
-    dateClick: (date) => {
-      // this.showEvent = true;
-      // i
-      const eventData = this.AllEvents.filter(dayEvent => {
-        if (dayEvent.startDate==date.date) {
-          return true;
-          
-        }
-        return false;
-      })
-      this.popOver.show();
-    }
+    // dateClick: (date) => {
+    //   // this.showEvent = true;
+    //   // i
+    //   const eventData = this.AllEvents.filter(dayEvent => {
+    //     if (dayEvent.startDate == date.date) {
+    //       return true;
 
-  };
-  async addEvent(event: ManageEventDTO) {
-    const response = await this.AddUpdateEvent.addUpdateEvent(event).toPromise
-    console.log(response)
+    //     }
+    //     return false;
+    //   })
+    //   this.popOver.show();
+    // }
 
-  }
+  // };
+  // async addEvent(event: ManageEventDTO) {
+  //   const response = await this.AddUpdateEvent.addUpdateEvent(event).toPromise()
+  //   console.log(response)
+
+  // }
   constructor(private AddUpdateEvent: AddUpdateEventsServiceProxy, private getall: GetAllEventsServiceProxy,
     private alertservice: AlertserviceService) { }
 
@@ -99,7 +98,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
   // }
   modal(event: any) {
     if (event == TOP_ACTIONS.ADD_Event) {
-      this.showEvent == true
+      this.showEvent = true
     }
   }
 
@@ -118,10 +117,13 @@ export class EmployeeeventsComponent implements AfterViewInit {
         return {
           id: myEvent.id,
           title: myEvent.title,
-          start: myEvent.startDate
+          start: myEvent.startDate,
+          end:myEvent.endDate,
+          description: myEvent.description
+  
         }
       })
-      this.calendarOptions.events == newEvent
+      this.calEvents == newEvent
     }
 
     (error) => {
@@ -131,6 +133,9 @@ export class EmployeeeventsComponent implements AfterViewInit {
       }
     }
   }
+  //events from calcomponent
+  calEvents: CalendarEvent[]=[]
+
   get validatestartdate() {
     if (this.Event.startDate) return true;
     return false;
@@ -174,11 +179,13 @@ export class EmployeeeventsComponent implements AfterViewInit {
     }
     this.submitbtnPressed = false
   }
-   today = new Date()
-   Day = this.today.getDay()
-  dateClicked(day){
-    if(day==this.Day)
+  today = new Date()
+  Day = this.today.getDay()
+
+  dateClick(day) {
+    this.popOver.show();
+    this.showEvent = true
     alert('hello')
   }
-
+  
 }
