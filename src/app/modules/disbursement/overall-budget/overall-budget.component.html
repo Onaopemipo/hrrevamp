@@ -154,15 +154,15 @@
                   margin-right: 0.3rem;
                 "
               ></div>
-              <div style="font-size: 18px; font-weight: 500;">{{budget.departments[0].department_name}}</div>
+              <div style="font-size: 18px; font-weight: 500;">{{budget.departments.department_name}}</div>
             </div>
             <div style="display: flex" class="budget-item-department">
               <div style="flex: auto">
-                <span>{{budget.departments[0].amount | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departments.amount | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
               </div>
               <div>
-                <span>{{budget.departments[0].spent | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departments.spent | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
               </div>
             </div>
@@ -219,7 +219,7 @@
               <label>Department</label>
               <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.code" required>
                 <option value="1">Select Department</option>
-                <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.Department[0]}}</option>
+                <option *ngFor="let dep of allDepartments" value="dep.code">{{dep.name}}</option>
               </select>
             </div>
             </div>

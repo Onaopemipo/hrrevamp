@@ -1,3 +1,5 @@
+import { GradeLevelServiceProxy, GradeLevelDTO } from './../../../_services/service-proxies';
+import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetencyComponent implements OnInit {
 
-  myPlanHeader: string = 'Add a Role';
-  myPlanDesc: string = 'You will be able to set competenies after adding a role.';
+  myPlanHeader: string = 'Create Competency';
+  myPlanDesc: string = 'Click the button below to add a competency';
 
-  myButton: string = 'Add a Role';
+  myButton: string = 'Create New';
   scoreCardClick: boolean = false;
   newRole: boolean = false;
   myPanel: string = '';
@@ -20,13 +22,55 @@ export class CompetencyComponent implements OnInit {
     { title: 'Role', label: 'Role', status: 'Active' },
     { title: 'Position', label: 'Position', status: 'Inactive' }
   ];
-  constructor() { }
+
+  allDepartments: DepartmentDTO [] = [];
+  allJobRoles: JobRole [] = [];
+  allGradeLevels: GradeLevelDTO [] = [];
+
+  constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,private levels: GradeLevelServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchAllDepartments();
+    this.fetchAllJobRoles();
+    this.fetchAllLevels();
   }
 
   addNewRole(){
     this.newRole = !this.newRole;
+  }
+
+  addExperience(){
+
+  }
+
+  fetchExperience(){
+
+  }
+
+
+
+  addSkills(){
+
+  }
+
+  fetchSkills(){
+
+  }
+
+  addCertification(){
+
+  }
+
+  fetchCertifications(){
+
+  }
+
+  addQualification(){
+
+  }
+
+  fetchQualifications(){
+
   }
 
   selectPanel(rolelist, i) {
@@ -38,6 +82,28 @@ export class CompetencyComponent implements OnInit {
     this.competencyChecklist[i].status = 'Active';
     this.selectedCase = this.competencyChecklist[i].title;
 
+  }
+
+  async fetchAllDepartments(){
+    const data = await this.department.getAllDepartments(10,1).toPromise();
+    if(!data.hasError){
+      this.allDepartments = data.result;
+    }
+  }
+
+  async fetchAllLevels(){
+    const data = await this.levels.getAllGradeLevel(10,1,1,1).toPromise();
+    if(!data.hasError){
+      this.allGradeLevels = data.result;
+    }
+  }
+
+  async fetchAllJobRoles(){
+    const data = await this.commonService.getJobRoles().toPromise();
+    if(!data.hasError){
+      this.allJobRoles = data.result;
+      console.log('Yo boss', this.allJobRoles)
+    }
   }
 
   toggleScoreCard(event) {

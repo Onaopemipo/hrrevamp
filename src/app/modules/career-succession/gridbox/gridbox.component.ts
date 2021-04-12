@@ -1,3 +1,4 @@
+import { GetGridBoxCountServiceProxy, GridBoxCountDTO, GetEmployeeebyGridBoxServiceProxy, NineGridBoxDTO } from './../../../_services/service-proxies';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { NineBoxGridService, NINE_BOX_GRID } from '../services/nine-box-grid.service';
@@ -86,17 +87,34 @@ export class GridboxComponent implements OnInit {
   NINE_BOX_GRID = NINE_BOX_GRID;
   data = {};
 
+  boxCount: GridBoxCountDTO []= [];
+  employeeGrid: NineGridBoxDTO [] = [];
+
   boxSelected(type: NINE_BOX_GRID) {
     this.router.navigate(['career-succession/gridbox/', type]);
   }
 
   constructor(
-    private nineBoxGrid: NineBoxGridService,
-    private router: Router,
+    private nineBoxGrid: NineBoxGridService, private gridService: GetGridBoxCountServiceProxy,
+    private router: Router, private employeeGridBox: GetEmployeeebyGridBoxServiceProxy,
   ) { }
 
   async ngOnInit() {
     this.data = await this.nineBoxGrid.fetchSummary().toPromise();
+  }
+
+  async getBoxCount(){
+    // const data = await this.gridService.getGridBoxCount().toPromise();
+    // if(!data.hasError){
+    //   this.boxCount = data.result;
+    // }
+  }
+
+  async getEmployeeGrid(){
+    // const data = await this.employeeGridBox.getEmployeebyGridBox().toPromise();
+    // if(!data.hasError){
+    //   this.employeeGrid = data.result;
+    // }
   }
 
 }

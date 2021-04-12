@@ -102,6 +102,12 @@ const routes: Routes = [{
       .then(m => m.ModuleSettingsModule)
     },
 
+    {
+      path: 'loan',
+      loadChildren: () => import('./loan/loan.module')
+      .then(m => m.LoanModule)
+    },
+
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },
   ],
