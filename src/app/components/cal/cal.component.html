@@ -1,22 +1,26 @@
 <div style="display: flex; flex-direction: row;flex-wrap: wrap;">
+    <div style="margin-right: 0.3rem; font-weight: bolder; font-size: larger;" >
+
+        {{monthLabel}} - {{year}}
+    </div>
+
     <div>
         <button (click)="prevMonth()">Prev</button><button (click)="nextMonth()">Next</button>
         <span> 
             <button (click)="gotoThisMonth()">Today</button></span>
     </div>
-    <div style="margin-left: 7rem; font-weight: bolder; font-size: larger;" >
-
-        {{monthLabel}} - {{year}}
-    </div>
-
+ 
 </div>
 
-
-<table style="padding: 2rem;">
-    <tr style="padding: 4px;
-    position: relative; ">
-        <th *ngFor="let day of days">
-            <div style="padding: 10px; border: 1px solid black;">
+<nb-card>
+    <nb-card-body>
+        
+<table style="padding: 2rem; margin-top: 2rem;  border-collapse: collapse;
+border-spacing: 0;
+font-size: 1em; " >
+    <tr>
+        <th *ngFor="let day of days" style="box-sizing: border-box;">
+            <div style="padding: 2px; border: 1px solid black; ">
                 {{day.name}}
             </div>
            
@@ -26,8 +30,15 @@
     <tbody>
         <tr *ngFor="let week of weeks">
             <td *ngFor="let day of week" (click)='dateClicked(day)' [class]="{'other-month': day.getMonth() !== month}">
-                {{day.getDate()}}
+                
+                <div style=" border: 1px solid black; 
+                 min-height: 100%; padding: 4px;position: relative;z-index: 4; vertical-align: top;    display: flex;
+    flex-direction: row-reverse; " >
+                    {{day.getDate()}}
+                </div>
             </td>
         </tr>
     </tbody>
 </table>
+    </nb-card-body>
+</nb-card>

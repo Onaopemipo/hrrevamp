@@ -7005,11 +7005,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUploadid(response_);
+            return this.processBulkUploadId(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUploadid(<any>response_);
+                    return this.processBulkUploadId(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7018,7 +7018,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUploadId(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7503,145 +7503,10 @@ export class GetGridBoxCountServiceProxy {
     /**
      * API to Fetch by Grid Box counts.
     Note: all filter are optional
-     * @param user_id (optional) 
-     * @param employee_id (optional) 
-     * @param employee_number (optional) 
-     * @param employee_contract_id (optional) 
-     * @param grade_id (optional) 
-     * @param confirmation_date (optional) 
-     * @param serial_no (optional) 
-     * @param first_name (optional) 
-     * @param last_name (optional) 
-     * @param full_name (optional) 
-     * @param other_name (optional) 
-     * @param department (optional) 
-     * @param department_id (optional) 
-     * @param email (optional) 
-     * @param phone_number (optional) 
-     * @param email_confirmed (optional) 
-     * @param session_token (optional) 
-     * @param jwt_token (optional) 
-     * @param user_token (optional) 
-     * @param company_id (optional) 
-     * @param licenseUsuage (optional) 
-     * @param licenseCount (optional) 
-     * @param company_name (optional) 
-     * @param sub_id (optional) 
-     * @param isAdmin (optional) 
-     * @param isSuperAdmin (optional) 
-     * @param isTenantAdmin (optional) 
-     * @param isActiveBySysOrAdmin (optional) 
-     * @param lstPermissions (optional) 
-     * @param message (optional) 
-     * @param isSuccessful (optional) 
-     * @param retId (optional) 
-     * @param htmlData (optional) 
-     * @param redirectUrl (optional) 
-     * @param errors (optional) 
      * @return Success
      */
-    getGridBoxCount(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, htmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<GridBoxCountDTOListApiResult> {
-        let url_ = this.baseUrl + "/api/CareerSuccession/GetGridBoxCount/GetGridBoxCount?";
-        if (user_id === null)
-            throw new Error("The parameter 'user_id' cannot be null.");
-        else if (user_id !== undefined)
-            url_ += "user_id=" + encodeURIComponent("" + user_id) + "&";
-        if (employee_id === null)
-            throw new Error("The parameter 'employee_id' cannot be null.");
-        else if (employee_id !== undefined)
-            url_ += "employee_id=" + encodeURIComponent("" + employee_id) + "&";
-        if (employee_number !== undefined && employee_number !== null)
-            url_ += "employee_number=" + encodeURIComponent("" + employee_number) + "&";
-        if (employee_contract_id === null)
-            throw new Error("The parameter 'employee_contract_id' cannot be null.");
-        else if (employee_contract_id !== undefined)
-            url_ += "employee_contract_id=" + encodeURIComponent("" + employee_contract_id) + "&";
-        if (grade_id !== undefined && grade_id !== null)
-            url_ += "grade_id=" + encodeURIComponent("" + grade_id) + "&";
-        if (confirmation_date !== undefined && confirmation_date !== null)
-            url_ += "confirmation_date=" + encodeURIComponent(confirmation_date ? "" + confirmation_date.toJSON() : "") + "&";
-        if (serial_no !== undefined && serial_no !== null)
-            url_ += "serial_no=" + encodeURIComponent("" + serial_no) + "&";
-        if (first_name !== undefined && first_name !== null)
-            url_ += "first_name=" + encodeURIComponent("" + first_name) + "&";
-        if (last_name !== undefined && last_name !== null)
-            url_ += "last_name=" + encodeURIComponent("" + last_name) + "&";
-        if (full_name !== undefined && full_name !== null)
-            url_ += "full_name=" + encodeURIComponent("" + full_name) + "&";
-        if (other_name !== undefined && other_name !== null)
-            url_ += "other_name=" + encodeURIComponent("" + other_name) + "&";
-        if (department !== undefined && department !== null)
-            url_ += "department=" + encodeURIComponent("" + department) + "&";
-        if (department_id === null)
-            throw new Error("The parameter 'department_id' cannot be null.");
-        else if (department_id !== undefined)
-            url_ += "department_id=" + encodeURIComponent("" + department_id) + "&";
-        if (email !== undefined && email !== null)
-            url_ += "email=" + encodeURIComponent("" + email) + "&";
-        if (phone_number !== undefined && phone_number !== null)
-            url_ += "phone_number=" + encodeURIComponent("" + phone_number) + "&";
-        if (email_confirmed === null)
-            throw new Error("The parameter 'email_confirmed' cannot be null.");
-        else if (email_confirmed !== undefined)
-            url_ += "email_confirmed=" + encodeURIComponent("" + email_confirmed) + "&";
-        if (session_token !== undefined && session_token !== null)
-            url_ += "session_token=" + encodeURIComponent("" + session_token) + "&";
-        if (jwt_token !== undefined && jwt_token !== null)
-            url_ += "jwt_token=" + encodeURIComponent("" + jwt_token) + "&";
-        if (user_token !== undefined && user_token !== null)
-            url_ += "user_token=" + encodeURIComponent("" + user_token) + "&";
-        if (company_id === null)
-            throw new Error("The parameter 'company_id' cannot be null.");
-        else if (company_id !== undefined)
-            url_ += "company_id=" + encodeURIComponent("" + company_id) + "&";
-        if (licenseUsuage === null)
-            throw new Error("The parameter 'licenseUsuage' cannot be null.");
-        else if (licenseUsuage !== undefined)
-            url_ += "LicenseUsuage=" + encodeURIComponent("" + licenseUsuage) + "&";
-        if (licenseCount === null)
-            throw new Error("The parameter 'licenseCount' cannot be null.");
-        else if (licenseCount !== undefined)
-            url_ += "LicenseCount=" + encodeURIComponent("" + licenseCount) + "&";
-        if (company_name !== undefined && company_name !== null)
-            url_ += "company_name=" + encodeURIComponent("" + company_name) + "&";
-        if (sub_id === null)
-            throw new Error("The parameter 'sub_id' cannot be null.");
-        else if (sub_id !== undefined)
-            url_ += "sub_id=" + encodeURIComponent("" + sub_id) + "&";
-        if (isAdmin === null)
-            throw new Error("The parameter 'isAdmin' cannot be null.");
-        else if (isAdmin !== undefined)
-            url_ += "IsAdmin=" + encodeURIComponent("" + isAdmin) + "&";
-        if (isSuperAdmin === null)
-            throw new Error("The parameter 'isSuperAdmin' cannot be null.");
-        else if (isSuperAdmin !== undefined)
-            url_ += "IsSuperAdmin=" + encodeURIComponent("" + isSuperAdmin) + "&";
-        if (isTenantAdmin === null)
-            throw new Error("The parameter 'isTenantAdmin' cannot be null.");
-        else if (isTenantAdmin !== undefined)
-            url_ += "IsTenantAdmin=" + encodeURIComponent("" + isTenantAdmin) + "&";
-        if (isActiveBySysOrAdmin === null)
-            throw new Error("The parameter 'isActiveBySysOrAdmin' cannot be null.");
-        else if (isActiveBySysOrAdmin !== undefined)
-            url_ += "IsActiveBySysOrAdmin=" + encodeURIComponent("" + isActiveBySysOrAdmin) + "&";
-        if (lstPermissions !== undefined && lstPermissions !== null)
-            lstPermissions && lstPermissions.forEach(item => { url_ += "lstPermissions=" + encodeURIComponent("" + item) + "&"; });
-        if (message !== undefined && message !== null)
-            url_ += "Message=" + encodeURIComponent("" + message) + "&";
-        if (isSuccessful === null)
-            throw new Error("The parameter 'isSuccessful' cannot be null.");
-        else if (isSuccessful !== undefined)
-            url_ += "IsSuccessful=" + encodeURIComponent("" + isSuccessful) + "&";
-        if (retId === null)
-            throw new Error("The parameter 'retId' cannot be null.");
-        else if (retId !== undefined)
-            url_ += "RetId=" + encodeURIComponent("" + retId) + "&";
-        if (htmlData !== undefined && htmlData !== null)
-            url_ += "HtmlData=" + encodeURIComponent("" + htmlData) + "&";
-        if (redirectUrl !== undefined && redirectUrl !== null)
-            url_ += "RedirectUrl=" + encodeURIComponent("" + redirectUrl) + "&";
-        if (errors !== undefined && errors !== null)
-            errors && errors.forEach(item => { url_ += "Errors=" + encodeURIComponent("" + item) + "&"; });
+    getGridBoxCount(): Observable<GridBoxCountDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/GetGridBoxCount/GetGridBoxCount";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -11986,6 +11851,92 @@ export class DeleteEmployeeCompensationServiceProxy {
 }
 
 @Injectable()
+export class CompetencyServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+    }
+
+    /**
+     * API for adding/updating Competency
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateCompetency(body: ManageCompetencyDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Competency/Add-Update-Competency";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateCompetency(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class SaveConfirmationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -14341,6 +14292,75 @@ export class DataServiceProxy {
         }
         return _observableOf<IDTextViewModelIListApiResult>(<any>null);
     }
+
+    /**
+     * Api for getting list of Qualification for CareerSuccessionService that can be used as dropdowns
+     * @return Success
+     */
+    getQuilificationCategory(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/GetQuilificationCategory";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetQuilificationCategory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetQuilificationCategory(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetQuilificationCategory(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
 }
 
 @Injectable()
@@ -15257,21 +15277,61 @@ export class FetchDeploymentServiceProxy {
     }
 
     /**
-     * @param body (optional) 
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param employeeContractid (optional) 
+     * @param name (optional) 
+     * @param iD (optional) 
+     * @param strStartDate (optional) 
+     * @param strEndDate (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
-    fetchDeployment(body: SearchDeploymentDto | undefined): Observable<CreateDeploymentViewModelIListApiResult> {
-        let url_ = this.baseUrl + "/api/Deployment/FetchDeployment/FetchDeployment";
+    fetchDeployment(companyID: number | undefined, subID: number | undefined, employeeContractid: number | undefined, name: string | null | undefined, iD: number | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<CreateDeploymentViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Deployment/FetchDeployment/FetchDeployment?";
+        if (companyID === null)
+            throw new Error("The parameter 'companyID' cannot be null.");
+        else if (companyID !== undefined)
+            url_ += "CompanyID=" + encodeURIComponent("" + companyID) + "&";
+        if (subID === null)
+            throw new Error("The parameter 'subID' cannot be null.");
+        else if (subID !== undefined)
+            url_ += "SubID=" + encodeURIComponent("" + subID) + "&";
+        if (employeeContractid === null)
+            throw new Error("The parameter 'employeeContractid' cannot be null.");
+        else if (employeeContractid !== undefined)
+            url_ += "employeeContractid=" + encodeURIComponent("" + employeeContractid) + "&";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (strStartDate !== undefined && strStartDate !== null)
+            url_ += "strStartDate=" + encodeURIComponent("" + strStartDate) + "&";
+        if (strEndDate !== undefined && strEndDate !== null)
+            url_ += "strEndDate=" + encodeURIComponent("" + strEndDate) + "&";
+        if (referenceId !== undefined && referenceId !== null)
+            url_ += "ReferenceId=" + encodeURIComponent("" + referenceId) + "&";
+        if (code !== undefined && code !== null)
+            url_ += "Code=" + encodeURIComponent("" + code) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
-
         let options_ : any = {
-            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -25304,7 +25364,7 @@ export class ManpowerServiceProxy {
      * @return Success
      */
     fetchBaseYear(pageNumber: number | undefined, pageSize: number | undefined): Observable<BaseYearDTOListApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/FetchBaseYear?";
+        let url_ = this.baseUrl + "/api/Manpower/Fetch-Base-Year?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -25479,7 +25539,7 @@ export class ManpowerServiceProxy {
      * @return Success
      */
     fetchProjectionActivities(actitvityTypeId: number | null | undefined, deptId: number | undefined, status: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentManPowerActivityDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/FetchProjectionActivities?";
+        let url_ = this.baseUrl + "/api/Manpower/Fetch-Projection-Activities?";
         if (actitvityTypeId !== undefined && actitvityTypeId !== null)
             url_ += "actitvityTypeId=" + encodeURIComponent("" + actitvityTypeId) + "&";
         if (deptId === null)
@@ -25568,8 +25628,8 @@ export class ManpowerServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    fetch_Projection_Task_Project(tasktype: number | undefined, activityYear: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Fetch Projection Task Project?";
+    fetchProjectionTaskProject(tasktype: number | undefined, activityYear: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Fetch-Projection-Task-Project?";
         if (tasktype === null)
             throw new Error("The parameter 'tasktype' cannot be null.");
         else if (tasktype !== undefined)
@@ -25597,11 +25657,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFetch_Projection_Task_Project(response_);
+            return this.processFetchProjectionTaskProject(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFetch_Projection_Task_Project(<any>response_);
+                    return this.processFetchProjectionTaskProject(<any>response_);
                 } catch (e) {
                     return <Observable<DepartmentActivityDTOIListApiResult>><any>_observableThrow(e);
                 }
@@ -25610,7 +25670,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processFetch_Projection_Task_Project(response: HttpResponseBase): Observable<DepartmentActivityDTOIListApiResult> {
+    protected processFetchProjectionTaskProject(response: HttpResponseBase): Observable<DepartmentActivityDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -25654,8 +25714,8 @@ export class ManpowerServiceProxy {
      * @param activitymodel (optional) 
      * @return Success
      */
-    submit_Requirment_Review(activitymodel: string | null | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Submit_Requirment_Review?";
+    submitRequirmentReview(activitymodel: string | null | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Submit-Requirment-Review?";
         if (activitymodel !== undefined && activitymodel !== null)
             url_ += "activitymodel=" + encodeURIComponent("" + activitymodel) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -25669,11 +25729,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processSubmit_Requirment_Review(response_);
+            return this.processSubmitRequirmentReview(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processSubmit_Requirment_Review(<any>response_);
+                    return this.processSubmitRequirmentReview(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -25682,7 +25742,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processSubmit_Requirment_Review(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processSubmitRequirmentReview(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -25731,8 +25791,8 @@ export class ManpowerServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    fetch_Projection_Activity(activityTypeId: number | undefined, deptId: number | undefined, status: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Fetch Projection_Activity?";
+    fetchProjectionActivity(activityTypeId: number | undefined, deptId: number | undefined, status: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Fetch-Projection-Activity?";
         if (activityTypeId === null)
             throw new Error("The parameter 'activityTypeId' cannot be null.");
         else if (activityTypeId !== undefined)
@@ -25764,11 +25824,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFetch_Projection_Activity(response_);
+            return this.processFetchProjectionActivity(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFetch_Projection_Activity(<any>response_);
+                    return this.processFetchProjectionActivity(<any>response_);
                 } catch (e) {
                     return <Observable<DepartmentActivityDTOIListApiResult>><any>_observableThrow(e);
                 }
@@ -25777,7 +25837,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processFetch_Projection_Activity(response: HttpResponseBase): Observable<DepartmentActivityDTOIListApiResult> {
+    protected processFetchProjectionActivity(response: HttpResponseBase): Observable<DepartmentActivityDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -25830,8 +25890,8 @@ export class ManpowerServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    fetch_Projection_Requirment(baseYear: number | undefined, year: number | undefined, activityName: string | null | undefined, jobCategory: string | null | undefined, deptId: number | null | undefined, status: number | null | undefined, tastType: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentManPowerActivityDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Fetch Projection_Requirment?";
+    fetchProjectionRequirment(baseYear: number | undefined, year: number | undefined, activityName: string | null | undefined, jobCategory: string | null | undefined, deptId: number | null | undefined, status: number | null | undefined, tastType: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentManPowerActivityDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Fetch-Projection-Requirment?";
         if (baseYear === null)
             throw new Error("The parameter 'baseYear' cannot be null.");
         else if (baseYear !== undefined)
@@ -25869,11 +25929,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFetch_Projection_Requirment(response_);
+            return this.processFetchProjectionRequirment(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFetch_Projection_Requirment(<any>response_);
+                    return this.processFetchProjectionRequirment(<any>response_);
                 } catch (e) {
                     return <Observable<DepartmentManPowerActivityDTOIListApiResult>><any>_observableThrow(e);
                 }
@@ -25882,7 +25942,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processFetch_Projection_Requirment(response: HttpResponseBase): Observable<DepartmentManPowerActivityDTOIListApiResult> {
+    protected processFetchProjectionRequirment(response: HttpResponseBase): Observable<DepartmentManPowerActivityDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -25926,8 +25986,8 @@ export class ManpowerServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    add_Requirement_ToPlan(body: DepartmentManPowerActivityDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Add_Requirement_ToPlan";
+    addRequirementToPlan(body: DepartmentManPowerActivityDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Add-Requirement-ToPlan";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -25943,11 +26003,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAdd_Requirement_ToPlan(response_);
+            return this.processAddRequirementToPlan(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processAdd_Requirement_ToPlan(<any>response_);
+                    return this.processAddRequirementToPlan(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -25956,7 +26016,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processAdd_Requirement_ToPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processAddRequirementToPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -25999,8 +26059,8 @@ export class ManpowerServiceProxy {
      * @param requirementId (optional) 
      * @return Success
      */
-    remove_Requirement_ToPlan(requirementId: number | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Remove_Requirement_ToPlan?";
+    removeRequirementToPlan(requirementId: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Remove-Requirement-ToPlan?";
         if (requirementId === null)
             throw new Error("The parameter 'requirementId' cannot be null.");
         else if (requirementId !== undefined)
@@ -26016,11 +26076,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processRemove_Requirement_ToPlan(response_);
+            return this.processRemoveRequirementToPlan(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processRemove_Requirement_ToPlan(<any>response_);
+                    return this.processRemoveRequirementToPlan(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -26029,7 +26089,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processRemove_Requirement_ToPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processRemoveRequirementToPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -26078,8 +26138,8 @@ export class ManpowerServiceProxy {
      * @param isActive (optional) 
      * @return Success
      */
-    fetch_Asset_Report(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/Manpower/Fetch Asset_Report?";
+    fetchAssetReport(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Manpower/Fetch-Asset-Report?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -26107,11 +26167,11 @@ export class ManpowerServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFetch_Asset_Report(response_);
+            return this.processFetchAssetReport(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processFetch_Asset_Report(<any>response_);
+                    return this.processFetchAssetReport(<any>response_);
                 } catch (e) {
                     return <Observable<AssetDTOIListApiResult>><any>_observableThrow(e);
                 }
@@ -26120,7 +26180,7 @@ export class ManpowerServiceProxy {
         }));
     }
 
-    protected processFetch_Asset_Report(response: HttpResponseBase): Observable<AssetDTOIListApiResult> {
+    protected processFetchAssetReport(response: HttpResponseBase): Observable<AssetDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -56571,6 +56631,85 @@ export interface IEmployeeCompensationDTO {
     isActive: boolean;
 }
 
+export class ManageCompetencyDTO implements IManageCompetencyDTO {
+    id!: number;
+    competencyTitle!: string;
+    jobRoleId!: number;
+    positionId!: number;
+    description!: string;
+    departmentId!: number;
+    selectedQualifications!: string | undefined;
+    selectedSkills!: string | undefined;
+    selectedAbilities!: string | undefined;
+    selectedCertifications!: string | undefined;
+
+    constructor(data?: IManageCompetencyDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.competencyTitle = _data["competencyTitle"];
+            this.jobRoleId = _data["jobRoleId"];
+            this.positionId = _data["positionId"];
+            this.description = _data["description"];
+            this.departmentId = _data["departmentId"];
+            this.selectedQualifications = _data["selectedQualifications"];
+            this.selectedSkills = _data["selectedSkills"];
+            this.selectedAbilities = _data["selectedAbilities"];
+            this.selectedCertifications = _data["selectedCertifications"];
+        }
+    }
+
+    static fromJS(data: any): ManageCompetencyDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageCompetencyDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["competencyTitle"] = this.competencyTitle;
+        data["jobRoleId"] = this.jobRoleId;
+        data["positionId"] = this.positionId;
+        data["description"] = this.description;
+        data["departmentId"] = this.departmentId;
+        data["selectedQualifications"] = this.selectedQualifications;
+        data["selectedSkills"] = this.selectedSkills;
+        data["selectedAbilities"] = this.selectedAbilities;
+        data["selectedCertifications"] = this.selectedCertifications;
+        return data; 
+    }
+
+    clone(): ManageCompetencyDTO {
+        const json = this.toJSON();
+        let result = new ManageCompetencyDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageCompetencyDTO {
+    id: number;
+    competencyTitle: string;
+    jobRoleId: number;
+    positionId: number;
+    description: string;
+    departmentId: number;
+    selectedQualifications: string | undefined;
+    selectedSkills: string | undefined;
+    selectedAbilities: string | undefined;
+    selectedCertifications: string | undefined;
+}
+
 export class VwConfirmationDTO implements IVwConfirmationDTO {
     id!: number;
     company_id!: number;
@@ -58496,89 +58635,6 @@ export interface IDeploymentLogIListApiResult {
     result: DeploymentLog[] | undefined;
     totalCount: number;
     totalRecord: number;
-}
-
-export class SearchDeploymentDto implements ISearchDeploymentDto {
-    companyID!: number;
-    subID!: number;
-    employeeContractid!: number;
-    name!: string | undefined;
-    id!: number;
-    strStartDate!: string | undefined;
-    strEndDate!: string | undefined;
-    referenceId!: string | undefined;
-    code!: string | undefined;
-    pageNumber!: number;
-    pageSize!: number;
-
-    constructor(data?: ISearchDeploymentDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.employeeContractid = _data["employeeContractid"];
-            this.name = _data["name"];
-            this.id = _data["id"];
-            this.strStartDate = _data["strStartDate"];
-            this.strEndDate = _data["strEndDate"];
-            this.referenceId = _data["referenceId"];
-            this.code = _data["code"];
-            this.pageNumber = _data["pageNumber"];
-            this.pageSize = _data["pageSize"];
-        }
-    }
-
-    static fromJS(data: any): SearchDeploymentDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new SearchDeploymentDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeContractid"] = this.employeeContractid;
-        data["name"] = this.name;
-        data["id"] = this.id;
-        data["strStartDate"] = this.strStartDate;
-        data["strEndDate"] = this.strEndDate;
-        data["referenceId"] = this.referenceId;
-        data["code"] = this.code;
-        data["pageNumber"] = this.pageNumber;
-        data["pageSize"] = this.pageSize;
-        return data; 
-    }
-
-    clone(): SearchDeploymentDto {
-        const json = this.toJSON();
-        let result = new SearchDeploymentDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISearchDeploymentDto {
-    companyID: number;
-    subID: number;
-    employeeContractid: number;
-    name: string | undefined;
-    id: number;
-    strStartDate: string | undefined;
-    strEndDate: string | undefined;
-    referenceId: string | undefined;
-    code: string | undefined;
-    pageNumber: number;
-    pageSize: number;
 }
 
 export class IdNameObj implements IIdNameObj {

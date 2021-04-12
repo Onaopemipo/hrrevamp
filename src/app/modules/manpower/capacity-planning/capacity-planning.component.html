@@ -1,0 +1,73 @@
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<nb-card>
+    <nb-card-body>
+      <ngx-default-content
+      *ngIf="showEmpty"
+      pageHeader="Capacity Planning"
+      pageDescription="Click on the button to create a Capacity Plan"
+      buttonValue="Create Plan"
+      [loading]="loading"
+      (buttonClick)="showAddPlanModal = true"
+    >
+    </ngx-default-content>
+      <ngx-tablecomponent  
+      *ngIf="!showEmpty"
+      (filterChange)="filterUpdated($event)"
+      [showActions]="true"
+      [showFilter]="true"
+      (actionClick)="tableActionClicked($event)"
+      [actions]="tableActions" 
+      [userData]="allCapacityPlan" 
+      [tableColum]="tableColumns"
+      [totalItems]="totalItems"
+      [currentPage]="currentPage"
+      [loading]="loading"
+      >
+      <div tableObject>
+        <span class="mb-0" *ngFor="let req of allCapacityPlan.requirements; let i = index">
+
+            <span class="badge" *ngIf="req.gradeName">
+              {{req.jobCategoryName}} | {{req.gradeName}} - {{req.numberOfResource}}
+            </span>
+            <span class="badge" *ngIf="req.jobRoleName">
+              {{req.jobCategoryName}} | {{req.jobRoleName}} - {{req.numberOfResource}}
+            </span>
+            <span class="badge" *ngIf="req.positionName">
+              {{req.jobCategoryName}} | {{req.positionName}} - {{req.numberOfResource}}
+            </span>
+
+          </span>
+      </div>
+  </ngx-tablecomponent>
+  <ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px; height: 1000px;">
+    <div modal-header>Add Plan</div>
+    <div modal-body>
+ <form id="caplanForm" name="caplanForm" #caplanForm="ngForm" >
+    <div class="form-group">
+        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Activity Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Activity Name" name="activityName"
+          #activityName="ngModel" [(ngModel)]="newcaplan.activityName" required>
+
+        <div *ngIf="activityName.invalid && (activityName.dirty || activityName.touched)" class="error">
+          <div *ngIf="activityName.errors.required">Leave Year name is required</div>
+        </div>
+      </div>
+ </form>
+    </div>
+    <div modal-actions class="d-flex"
+      style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+      <ngx-loadable-button [loading]="loading"  >
+        Submit 
+      </ngx-loadable-button>  
+      <div style="padding-left: 15px;">
+        <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
+      </div>
+     
+    </div>
+    <div style="margin-top: 10px;"></div>
+  </ngx-side-modal>
+  </nb-card-body>
+  </nb-card>

@@ -16,7 +16,7 @@ export class ComfirmationComponent implements OnInit {
 
   loading: boolean = false
   totalItems = 0;
-  currentPage = 0;
+  currentPage = 1;
   tableColumns = [
     { name: 'employee_name', title: 'EMPLOYEE' },
     { name: 'staff_no', title: 'STAFF NO' },
@@ -87,7 +87,7 @@ get   showEmpty(){
 
   tableActionClicked(event: TableActionEvent) {
     if (event.name == TABLE_ACTION.VIEW) {
-      this.route.navigate(['/employeemodule/confirmation/employeeview'],{queryParams:{data:event.data}} )
+      this.route.navigate(['/employeemodule/confirmation/employeeview'],{queryParams:{data:JSON.stringify(event.data)}} )
     }
 
   }
