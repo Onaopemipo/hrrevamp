@@ -213,6 +213,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Events',
+    icon: 'assets/icons/TimeandAttendance.jpg',
+    link: '/self-service/employeeevents'
+  },
+  {
     title: 'CAREERS',
     group: true,
   },
