@@ -10,6 +10,7 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { FormGroup } from '@angular/forms';
 import { date } from 'faker'
 import {CalendarEvent} from '../../../../../src/app/components/cal/cal.component'
+import { divIcon } from 'leaflet';
 
 enum TOP_ACTIONS {
   ADD_Event,
@@ -108,6 +109,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
   async getallaEvent() {
     const response = await this.getall.getAllEvents(this.PageSize, this.pageNumber).toPromise()
     this.loading = false
+    
     if (!response.hasError) {
       this.loading = true
       this.AllEvents = response.result
@@ -123,7 +125,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
   
         }
       })
-      this.calEvents == newEvent
+      this.calendarEvents == newEvent
     }
 
     (error) => {
@@ -134,7 +136,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
     }
   }
   //events from calcomponent
-  calEvents: CalendarEvent[]=[]
+  calendarEvents: CalendarEvent[]=[]
 
   get validatestartdate() {
     if (this.Event.startDate) return true;
@@ -185,7 +187,9 @@ export class EmployeeeventsComponent implements AfterViewInit {
   dateClick(day) {
     this.popOver.show();
     this.showEvent = true
-    alert('hello')
+    
   }
-  
+   addEvent(event){
+   alert('God is the greatest')
+   }
 }

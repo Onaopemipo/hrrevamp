@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import * as Chart from 'chart.js';
-import { FetchDashboardDataServiceProxy,DashboardDTOApiResult,DashboardDTO,DashboardData,DashboardData2} from '../../_services/service-proxies'
+import { FetchDashboardDataServiceProxy,DashboardDTOApiResult,VwDashboard,DashboardDTO,DashboardData,DashboardData2} from '../../_services/service-proxies'
 
 
 
@@ -18,26 +18,26 @@ export class DashboardComponent implements OnInit {
   show_modal = false;
   
   single = [
-    {
-      name: 'Germany',
-      value: 8940000,
-    },
-    {
-      name: 'USA',
-      value: 5000000,
-    },
-    {
-      name: 'France',
-      value: 7200000,
-    },
-    {
-      name: 'Canada',
-      value: 820000,
-    },
-    {
-      name: 'Nigeria',
-      value: 7300000,
-    },
+    // {
+    //   name: 'Germany',
+    //   value: 8940000,
+    // },
+    // {
+    //   name: 'USA',
+    //   value: 5000000,
+    // },
+    // {
+    //   name: 'France',
+    //   value: 7200000,
+    // },
+    // {
+    //   name: 'Canada',
+    //   value: 820000,
+    // },
+    // {
+    //   name: 'Nigeria',
+    //   value: 7300000,
+    // },
   ];
   colorScheme: any;
   barcolorScheme: any;
@@ -129,10 +129,10 @@ export class DashboardComponent implements OnInit {
             borderRadius: 8
           },
           data: [
-            { value: 50, name: 'Admin' },
-            { value: 40, name: 'Finance' },
-            { value: 32, name: 'HR' },
-            { value: 28, name: 'Engineering' },
+            // { value: 50, name: 'Admin' },
+            // { value: 40, name: 'Finance' },
+            // { value: 32, name: 'HR' },
+            // { value: 28, name: 'Engineering' },
 
           ]
         }
@@ -374,6 +374,8 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy(): void {
     // this.themeSubscription.unsubscribe();
   }
+
+  aggregateData?:VwDashboard
   Gender:DashboardData[]=[]
   Department:DashboardData[]=[]
   Location:DashboardData[]=[]
@@ -396,7 +398,9 @@ export class DashboardComponent implements OnInit {
        this.UpcomingBirthday= data.result.lstUpcomingBirthdayData
        this.Announcement= data.result.lstAnnouncementData
        this.UpcomingLeave= data.result.lstUpcomingLeaveData
+       this.aggregateData = data.result.aggregateData
        console.log('my dash data', this.Dash)
+       console.log('Event',this.Event)
     }
   }
   onClick(){
