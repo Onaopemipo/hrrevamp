@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { createSubscription, FAKER_CONFIG, getCreateResponse, IFaker, MessageOut, myClassFaker, myPropertyFaker } from 'app/modules/career-succession/services/base';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { AssetCategoryDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO } from 'app/_services/service-proxies';
+import { AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO } from 'app/_services/service-proxies';
 import { date } from 'faker';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -248,6 +248,7 @@ export class MyAssetSubType extends AssetApiModelClass<
     return new AssetSubTypeDTO({
       id: this.id,
       name: this.name,
+      assetTypeName: this.name,
       description: this.description,
       dateCreated: new Date(),
       companyID: 0,
@@ -255,7 +256,6 @@ export class MyAssetSubType extends AssetApiModelClass<
       isActive: this.isActive,
       isDeleted: this.isDeleted,
       assetTypeId: this.assetTypeId,
-      assetid: 0,
       code: 0,
     });
   }
@@ -267,7 +267,7 @@ export class MyAssetSubType extends AssetApiModelClass<
 export class AssetSubTypeService extends AssetBaseService<MyAssetSubType, MyAssetSubTypeFilter> {
 
   list_api(filter: MyAssetSubTypeFilter): Observable<any> {
-    return this.api.getAssetSubType(1, 10, '', false, false);
+    return this.api.getAssetSubType(filter.type_id, 1, 10);
   }
 
   toData(obj: any): MyAssetSubType {
@@ -377,6 +377,81 @@ export class MyAssetModel extends AssetApiModelClass<
   providedIn: 'root'
 })
 export class AssetModelService extends AssetBaseService<MyAssetModel, MyAssetModelFilter> {
+
+  list_api(filter: MyAssetModelFilter): Observable<any> {
+    return this.api.getAssetModel(1, 10, '', false, false);
+  }
+
+  toData(obj: any): MyAssetModel {
+    return new MyAssetModel().fromApi(obj);
+  }
+
+  fetch(id: number) {
+    throw new Error('Method not implemented.');
+  }
+
+  create(data: MyAssetModel) {
+    return this.api.assetModel(data.toManage());
+  }
+
+  delete(id: number) {
+    return createSubscription(new MessageOut('Deleted successfully', true));
+  }
+
+  constructor(
+    private api: AssetManagementServiceProxy
+  ) {
+    super();
+  }
+}
+
+
+export class MyAssetFilter{
+  assetMakeId?: number;
+}
+export class MyAsset extends AssetDTO {
+  generateEmptyFilter(obj: any): MyAssetFilter {
+    return {};
+  }
+  assetMakeId: number;
+  assetTypeName: string;
+
+  fromApi(data: AssetDTO) {
+    this.id = data.id;
+    this.name = data.name;
+    this.description = data.description;
+    this.isActive = data.isActive;
+    this.isDeleted = data.isDeleted;
+    this.dateCreated = data.dateCreated;
+    this.assetMakeId = data.assetMakeId;
+    // this.assetTypeName = data.assetTypeName;
+    return this;
+  }
+  referenceNumber: string;
+  // toManage(): AssetDTO {
+  //   console.log(this);
+  //   return new AssetDTO({
+  //     id: this.id,
+  //     name: this.name,
+  //     description: this.description,
+  //     dateCreated: new Date(),
+  //     companyID: 0,
+  //     subID: 0,
+  //     isActive: this.isActive,
+  //     isDeleted: this.isDeleted,
+  //     assetMakeId: this.assetMakeId,
+  //     assetid: 0,
+  //     referenceNumber: this.referenceNumber,
+  //     employeeFullName: '',
+
+  //   });
+  // };
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MyAssetService extends AssetBaseService<MyAssetModel, MyAssetModelFilter> {
 
   list_api(filter: MyAssetModelFilter): Observable<any> {
     return this.api.getAssetModel(1, 10, '', false, false);
