@@ -52,14 +52,14 @@ export class KeyResultAreaService extends CrudService<MyKeyResultAreaFilter, MyK
     throw new Error('Method not implemented.');
   }
 
-  assignObj(kra: MyKeyResultArea) {
+  assignObj(kra: MyKeyResultArea, reviewerId, employees) {
     const obj = new AssignKraDto({
       cycleId: kra.id,
       krAs: String(kra.id),
-      reviewerId: 1,
-      employeeContractIds: '',
-    })
-    this.assign_api.assignKRA(obj);
+      reviewerId: reviewerId,
+      employeeContractIds: employees,
+    });
+    return this.assign_api.assignKRA(obj);
   }
 
   constructor(

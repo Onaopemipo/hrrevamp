@@ -158,4 +158,14 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
     });
   }
 
+  createNewClicked() {
+    this.editingData = this.getNewEditingData();
+    console.log(this.editingData)
+    this.showModal = true;
+  }
+  pageActionClicked(page) {
+    this.editingData = this.getNewEditingData();
+    console.log(this.editingData)
+    this.showModal = true;
+  }
 }

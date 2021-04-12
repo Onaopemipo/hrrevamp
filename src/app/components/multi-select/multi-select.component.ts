@@ -33,7 +33,23 @@ export class MultiSelectComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   @Input() choice_name: ChoiceName = null;
   @Input() singleSelection = true;
-  @Input() items: [] = null;
+  _items: any[] = [];
+  get items(): any[] {
+    return this._items;
+  }
+  @Input() set items(val: any[]) {
+    this._items = val;
+    this.dropdownList = this.items;
+    this.dropdownSettings = {
+      singleSelection: this.singleSelection,
+      idField: 'name',
+      textField: 'label',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+    };
+  };
 
   constructor(
     private trainingCategoryService: TrainingCategoryService,

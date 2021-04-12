@@ -14,7 +14,12 @@
         (buttonClick)="topActionButtonClicked(emptyConfig.actionName)"
         > </ngx-default-content>
     <ngx-tableheader *ngIf=!isEmpty></ngx-tableheader>
-    <ngx-tablecomponent *ngIf=!isEmpty [loading]="loading" [tableColum]="tableColumns" [userData]="tableData"></ngx-tablecomponent>
+    <ngx-tablecomponent *ngIf=!isEmpty
+        [loading]="loading"
+        [tableColum]="tableColumns"
+        [userData]="tableData"
+        [actions]="tableActions"
+        (actionClick)="tableActionClick($event)"></ngx-tablecomponent>
 </div>
 <ngx-side-modal [(show)]="showModal">
     <div modal-header>
