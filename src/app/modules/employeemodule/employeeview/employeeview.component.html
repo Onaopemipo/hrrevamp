@@ -10,13 +10,13 @@
                     <div style="padding-bottom: 0;">
                         <div style="display: flex;align-items: center;justify-content: center;">
                             <div class="employee-avatar">
-                                <img src="assets/icons/camera.jpg">
+                                <img [src]="employee.profilePic" onError="this.src='assets/icons/camera.jpg'">
                             </div>
                         </div>
 
                         <div style="text-align: center; padding: 10px;">
-                            <p class="header6-medium" style="margin-bottom: 1rem !important;">Kelvin Jeff</p>
-                            <p style="color: #95A8B8 !important;">software developer</p>
+                            <p class="header6-medium" style="margin-bottom: 1rem !important;">{{employee.firstName}}&nbsp;{{employee.lastName}}</p>
+                            <p style="color: #95A8B8 !important;">{{jobName}}</p>
                         </div>
 
                     </div>
@@ -124,7 +124,7 @@
                                             <span>Department</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>{{employee.subjectSpecialization}}</span>
+                                            <span>{{departmentName}}</span>
                                         </div>
                                     </div>
                                     <br>
@@ -167,18 +167,24 @@
                                 <br>
 
                             </nb-tab>
+                          
                             <nb-tab tabTitle="Qualifications">
-                                <nb-card-header>
-                                    <h6>Qualifications</h6>
-
-                                </nb-card-header>
-
-                                <br>
-
-                                <ngx-tablecomponent [tableColum]="tableColumns" [userData]="data"></ngx-tablecomponent>
-
-
-
+                                <nb-card>
+                                    <nb-card-header>
+                                        <h6>Qualifications</h6>
+    
+                                    </nb-card-header>
+    <nb-card-body>
+        <ngx-default-content *ngIf="showEmptyQualifications" pageHeader="No Qualification Record Found"
+        pageDescription="" buttonValue=""
+    >
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmptyQualifications" [showFilter]="false"
+         [userData]="employee.qualifications"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" >
+      </ngx-tablecomponent>
+    </nb-card-body>
+                                </nb-card>             
 
                             </nb-tab>
                         </nb-tabset>
@@ -200,7 +206,7 @@
                                             <span>Requested Date</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>24/02/2021</span>
+                                            <span>{{comfirmationData.request_date | date}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +217,7 @@
                                             <span>Appointment Date</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>24/02/2021</span>
+                                            <span>{{comfirmationData.appointment_date | date}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +229,7 @@
                                             <span>Probation Period</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>24/02/2021</span>
+                                            <span>{{comfirmationData.probation_period}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +240,7 @@
                                             <span>Effective Date</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>24/02/2021</span>
+                                            <span>{{comfirmationData.effective_date | date}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -251,14 +257,17 @@
 
                                 </nb-card-header> -->
                                 <br>
-                                <form action="">
+                                <form id="feedbackForm" name="feedbackForm" #feedbackForm="ngForm">
 
                                     <div class="form-group row">
                                         <label for="FeedBack"
                                             class="label col-sm-4 col-form-label listsubheader">FeedBack</label>
                                         <div class="col-sm-8">
-                                            <textarea type="text" nbInput fullWidth placeholder="Enter FeedBack"
-                                                name="mgr_feedback" ([ngModel])="name"> </textarea>
+                                            <textarea rows="5" type="text" nbInput fullWidth placeholder="Enter FeedBack"
+                                            #mgr_feedback="ngModel" name="mgr_feedback" id="mgr_feedback" [(ngModel)]="comfirmationData.mgr_feedback" required> </textarea>
+                                            <div *ngIf="mgr_feedback.invalid && (mgr_feedback.dirty || mgr_feedback.touched)" class="error">
+                                                <div *ngIf="mgr_feedback.errors.required">Feedback is required</div>
+                                              </div>
                                         </div>
                                     </div>
 
@@ -266,17 +275,20 @@
                                         <label for="Advice"
                                             class="label col-sm-4 col-form-label listsubheader">Advice</label>
                                         <div class="col-sm-8">
-                                            <textarea type="text" nbInput fullWidth name="mgr_advice" ([ngModel])="name"
-                                                placeholder="Enter Advice"> </textarea>
+                                            <textarea rows="5" type="text" nbInput fullWidth #mgr_advice="ngModel" id="mgr_advice" name="mgr_advice" [(ngModel)]="comfirmationData.mgr_advice"
+                                                placeholder="Enter Advice" required> </textarea>
+                                                <div *ngIf="mgr_advice.invalid && (mgr_advice.dirty || mgr_advice.touched)" class="error">
+                                                    <div *ngIf="mgr_advice.errors.required">Advice is required</div>
+                                                  </div>
                                         </div>
                                     </div>
                                     
                                     <div
                                         style="display: flex;justify-content: center; margin-top: 3rem; margin-bottom: 3rem;">
-                                        <button nbButton status="primary"
+                                        <button [disabled]="feedbackForm.invalid" nbButton status="primary"
                                             style="display: flex; justify-content: center;"
-                                            (ngSubmit)="onSubmit(body)">Proceed</button>
-                                    </div> -->
+                                            (click)="onSubmit(comfirmationData)">Submit Feedback</button>
+                                    </div> 
 
                                 </form>
 

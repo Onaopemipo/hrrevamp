@@ -12,6 +12,7 @@ const routes: Routes = [{
       path: 'dashboard',
       component: DashboardComponent,
       canLoad: [AuthGuard],
+
     },
     {
       path: 'complaints',
@@ -104,6 +105,12 @@ const routes: Routes = [{
       path: 'asset',
       loadChildren: () => import('./asset-management/asset-management.module')
       .then(m => m.AssetManagementModule)
+    },
+
+    {
+      path: 'loan',
+      loadChildren: () => import('./loan/loan.module')
+      .then(m => m.LoanModule)
     },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

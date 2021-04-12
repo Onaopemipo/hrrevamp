@@ -1,3 +1,5 @@
+import { GradeLevelServiceProxy } from './../../_services/service-proxies';
+import { GetAllDepartmentsServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -48,6 +50,9 @@ import { SucessionPlanCreateComponent } from './sucession-plan-create/sucession-
     EmployeesService,
     NineBoxGridService,
     SuccessionPlanService,
+    GetAllDepartmentsServiceProxy,
+    CommonServiceProxy,
+    GradeLevelServiceProxy,
   ],
   imports: [
     CommonModule,

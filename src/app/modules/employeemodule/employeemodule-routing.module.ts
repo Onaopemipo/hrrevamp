@@ -100,10 +100,10 @@ const routes: Routes = [
           component: PromotioneligibilityComponent,
         },
 
-        {
-          path: 'eligiblexx',
-          component: EligibilityxxComponent
-        },
+        // {
+        //   path: 'eligiblexx',
+        //   component: EligibilityxxComponent
+        // },
 
         {
           path: 'eligiblelist',

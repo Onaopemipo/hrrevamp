@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import  * as Chart from 'chart.js';
+import * as Chart from 'chart.js';
+import { FetchDashboardDataServiceProxy,DashboardDTOApiResult,VwDashboard,DashboardDTO,DashboardData,DashboardData2} from '../../_services/service-proxies'
 
 
 
@@ -15,27 +16,28 @@ const no_of_ms_in_a_day = 24 * 60 * 60 * 1000;
 export class DashboardComponent implements OnInit {
   src: string = 'assets/icons/camera.jpg';
   show_modal = false;
+  
   single = [
-    {
-      name: 'Germany',
-      value: 8940000,
-    },
-    {
-      name: 'USA',
-      value: 5000000,
-    },
-    {
-      name: 'France',
-      value: 7200000,
-    },
-    {
-      name: 'Canada',
-      value: 820000,
-    },
-    {
-      name: 'Nigeria',
-      value: 7300000,
-    },
+    // {
+    //   name: 'Germany',
+    //   value: 8940000,
+    // },
+    // {
+    //   name: 'USA',
+    //   value: 5000000,
+    // },
+    // {
+    //   name: 'France',
+    //   value: 7200000,
+    // },
+    // {
+    //   name: 'Canada',
+    //   value: 820000,
+    // },
+    // {
+    //   name: 'Nigeria',
+    //   value: 7300000,
+    // },
   ];
   colorScheme: any;
   barcolorScheme: any;
@@ -79,7 +81,7 @@ export class DashboardComponent implements OnInit {
   ];
   customizePieOption: any = {};
   customizedlineoptions: any = {};
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: NbThemeService, private Fetchdashboard: FetchDashboardDataServiceProxy) {
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };
@@ -89,204 +91,209 @@ export class DashboardComponent implements OnInit {
       domain: ['#2E9CDA', '#2E9CDA', '#2E9CDA', '#2E9CDA', '#2E9CDA'],
     };
   }
+  Dash:DashboardDTO = new DashboardDTO
+  onInit() {
 
+      alert('Yoooo!')
+     this.fetchDash();
+  }
   @ViewChild('pieChart') ctx: ElementRef;
   ngAfterViewInit() {
     this.customizePieOption = {
       color: [
-'#5655CA',
-'#E2D136',
-'#2E9CDA',
-'#2CD9C5',
+        '#5655CA',
+        '#E2D136',
+        '#2E9CDA',
+        '#2CD9C5',
       ],
       legend: {
-          top: 'bottom'
+        top: 'bottom'
       },
       toolbox: {
-          show: true,
-          feature: {
-              mark: {show: true},
-              dataView: {show: false, readOnly: false},
-              restore: {show: false},
-              saveAsImage: {show: false}
-          }
+        show: true,
+        feature: {
+          mark: { show: true },
+          dataView: { show: false, readOnly: false },
+          restore: { show: false },
+          saveAsImage: { show: false }
+        }
       },
       series: [
-          {
-              name: 'Customized Pie',
-              type: 'pie',
-              radius: '55%',
-              center: ['50%', '50%'],
-              roseType: 'radius',
-              itemStyle: {
-                  borderRadius: 8
-              },
-              data: [
-                  {value: 50, name: 'Admin'},
-                  {value: 40, name: 'Finance'},
-                  {value: 32, name: 'HR'},
-                  {value: 28, name: 'Engineering'},
+        {
+          name: 'Customized Pie',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          roseType: 'radius',
+          itemStyle: {
+            borderRadius: 8
+          },
+          data: [
+            // { value: 50, name: 'Admin' },
+            // { value: 40, name: 'Finance' },
+            // { value: 32, name: 'HR' },
+            // { value: 28, name: 'Engineering' },
 
-              ]
-          }
+          ]
+        }
       ]
-  };
-  this.customizedlineoptions = {
-    backgroundColor: echarts.bg,
-    color: ['#2F9CDA', '#764F7D'],
-    tooltip: {
-      trigger: 'none',
-      axisPointer: {
-        type: 'cross',
-      },
-    },
-    // legend: {
-
-    //   data: ['Previous Growth ', 'Current Growth'],
-    //   textStyle: {
-    //     color: '#343A40',
-    //   },
-    // },
-    grid: {
-      top: 70,
-      bottom: 50,
-    },
-    xAxis: [
-
-      {
-
-        type: 'category',
-        axisTick: {
-          alignWithLabel: true,
-        },
-        axisLine: {
-          onZero: false,
-          lineStyle: {
-            color: '#343A40',
-          },
-        },
-
-        axisLabel: {
-          textStyle: {
-            color: '#343A40',
-          },
-        },
+    };
+    this.customizedlineoptions = {
+      backgroundColor: echarts.bg,
+      color: ['#2F9CDA', '#764F7D'],
+      tooltip: {
+        trigger: 'none',
         axisPointer: {
-          label: {
-            formatter: params => {
-              return (
-                'Current Growth  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
-              );
+          type: 'cross',
+        },
+      },
+      // legend: {
+
+      //   data: ['Previous Growth ', 'Current Growth'],
+      //   textStyle: {
+      //     color: '#343A40',
+      //   },
+      // },
+      grid: {
+        top: 70,
+        bottom: 50,
+      },
+      xAxis: [
+
+        {
+
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisLine: {
+            onZero: false,
+            lineStyle: {
+              color: '#343A40',
+            },
+          },
+
+          axisLabel: {
+            textStyle: {
+              color: '#343A40',
+            },
+          },
+          axisPointer: {
+            label: {
+              formatter: params => {
+                return (
+                  'Current Growth  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                );
+              },
+            },
+          },
+          data: [
+            '2010',
+            '2011',
+            '2012',
+            '2013',
+            '2014',
+            '2015',
+            '2016',
+            '2017',
+            '2018',
+
+          ],
+        },
+        {
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisLine: {
+            onZero: false,
+            lineStyle: {
+              color: '#E9EBF1',
+            },
+          },
+
+          axisLabel: {
+            textStyle: {
+              color: '#343A40',
+            },
+          },
+          axisPointer: {
+            label: {
+              formatter: params => {
+                return (
+                  'Previous Growth  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                );
+              },
+            },
+          },
+          // data: [
+          //   '2015-1',
+          //   '2015-2',
+          //   '2015-3',
+          //   '2015-4',
+          //   '2015-5',
+          //   '2015-6',
+          //   '2015-7',
+          //   '2015-8',
+          //   '2015-9',
+          //   '2015-10',
+          //   '2015-11',
+          //   '2015-12',
+          // ],
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#343A40',
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#E9EBF1',
+              type: 'dashed'
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#343A40',
             },
           },
         },
-        data: [
-          '2010',
-          '2011',
-          '2012',
-          '2013',
-          '2014',
-          '2015',
-          '2016',
-          '2017',
-          '2018',
 
-        ],
-      },
-      {
-        type: 'category',
-        axisTick: {
-          alignWithLabel: true,
-        },
-        axisLine: {
-          onZero: false,
-          lineStyle: {
-            color: '#E9EBF1',
-          },
-        },
 
-        axisLabel: {
-          textStyle: {
-            color: '#343A40',
-          },
-        },
-        axisPointer: {
-          label: {
-            formatter: params => {
-              return (
-                'Previous Growth  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
-              );
+        {
+          type: 'category',
+          axisLine: {
+            onZero: false,
+            lineStyle: {
+              color: '#E9EBF1',
             },
           },
-        },
-        // data: [
-        //   '2015-1',
-        //   '2015-2',
-        //   '2015-3',
-        //   '2015-4',
-        //   '2015-5',
-        //   '2015-6',
-        //   '2015-7',
-        //   '2015-8',
-        //   '2015-9',
-        //   '2015-10',
-        //   '2015-11',
-        //   '2015-12',
-        // ],
-      },
-    ],
-    yAxis: [
-      {
-        type: 'value',
-        axisLine: {
-          lineStyle: {
-            color: '#343A40',
-          },
-        },
-        splitLine: {
-          lineStyle: {
-            color: '#E9EBF1',
-            type: 'dashed'
-          },
-        },
-        axisLabel: {
-          textStyle: {
-            color: '#343A40',
-          },
-        },
-      },
+        }
+      ],
+      series: [
+        {
+          name: 'Previous Growth',
+          type: 'line',
+          xAxisIndex: 1,
+          smooth: true,
+          data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7],
+          showSymbol: false,
 
-
-      {
-        type: 'category',
-        axisLine: {
-          onZero: false,
-          lineStyle: {
-            color: '#E9EBF1',
-          },
         },
-      }
-    ],
-    series: [
-      {
-        name: 'Previous Growth',
-        type: 'line',
-        xAxisIndex: 1,
-        smooth: true,
-        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7],
-        showSymbol: false,
+        {
+          name: 'Current Growth',
+          type: 'line',
+          smooth: true,
+          data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4],
+          showSymbol: false,
 
-      },
-      {
-        name: 'Current Growth',
-        type: 'line',
-        smooth: true,
-        data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4],
-        showSymbol: false,
-
-      },
-    ],
-  };
+        },
+      ],
+    };
     this.options = {
       backgroundColor: '#fff',
       color: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
@@ -342,17 +349,18 @@ export class DashboardComponent implements OnInit {
 
   }
   ngOnInit(): void {
-  // Events
-  const today = this.today;
-  const day_of_week = today.getDay();
-  const start_of_week = Number(today) - day_of_week * no_of_ms_in_a_day;
-  const days = [];
-  for (let day_no = 1; day_no <= 5; day_no++) {
-    const day_in_ms = start_of_week + day_no * no_of_ms_in_a_day;
-    const day = new Date(day_in_ms);
-    days.push(day);
-  }
-  this.weekdays = days;
+    // Events
+    const today = this.today;
+    const day_of_week = today.getDay();
+    const start_of_week = Number(today) - day_of_week * no_of_ms_in_a_day;
+    const days = [];
+    for (let day_no = 1; day_no <= 5; day_no++) {
+      const day_in_ms = start_of_week + day_no * no_of_ms_in_a_day;
+      const day = new Date(day_in_ms);
+      days.push(day);
+    }
+    this.weekdays = days;
+    this.fetchDash()
   }
 
   openModal() {
@@ -365,5 +373,38 @@ export class DashboardComponent implements OnInit {
 
   ngOnDestroy(): void {
     // this.themeSubscription.unsubscribe();
+  }
+
+  aggregateData?:VwDashboard
+  Gender:DashboardData[]=[]
+  Department:DashboardData[]=[]
+  Location:DashboardData[]=[]
+  Event:DashboardData2[]=[]
+  Request:DashboardData2[]=[]
+  Retention:DashboardData[]=[]
+  UpcomingBirthday:DashboardData2[]=[]
+  Announcement:DashboardData2[]=[]
+  UpcomingLeave:DashboardData2[]=[]
+  async fetchDash(){
+    const data = await this.Fetchdashboard.fetchDashboardData().toPromise();
+    if(!data.hasError){
+      this.Dash = data.result;
+      this.Gender=data.result.lstGenderData
+       this.Department= data.result.lstDepartmentData
+       this.Location= data.result.lstLocationData
+       this.Event= data.result.lstUpcomingEventData
+       this.Request=data.result.lstRequestComplaintData
+       this.Retention= data.result.lstRetentionData
+       this.UpcomingBirthday= data.result.lstUpcomingBirthdayData
+       this.Announcement= data.result.lstAnnouncementData
+       this.UpcomingLeave= data.result.lstUpcomingLeaveData
+       this.aggregateData = data.result.aggregateData
+       console.log('my dash data', this.Dash)
+       console.log('Event',this.Event)
+    }
+  }
+  onClick(){
+    // alert('hello')
+    
   }
 }

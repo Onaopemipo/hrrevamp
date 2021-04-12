@@ -10,13 +10,13 @@
                     <div style="padding-bottom: 0;">
                         <div style="display: flex;align-items: center;justify-content: center;">
                             <div class="employee-avatar">
-                                <img src="assets/icons/camera.jpg">
+                                <img [src]="employee.profilePic" onError="this.src='assets/icons/camera.jpg'">
                             </div>
                         </div>
 
                         <div style="text-align: center; padding: 10px;">
-                            <p class="header6-medium" style="margin-bottom: 1rem !important;">Kelvin Jeff</p>
-                            <p style="color: #95A8B8 !important;">software developer</p>
+                            <p class="header6-medium" style="margin-bottom: 1rem !important;">{{employee.firstName}}&nbsp;{{employee.lastName}}</p>
+                            <p style="color: #95A8B8 !important;">{{jobName}}</p>
                         </div>
 
                     </div>
@@ -63,19 +63,99 @@
 
 
                                     </div>
-
                                 </nb-card-header>
-
-
-
-
-                                <div *ngFor="let i of [0,1,2,3,4,5,6,7,8]" style="font-weight: bold; padding: 2rem;">
+                                <div style="font-weight: bold; padding: 1rem;">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <span>First Name</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>Abiodun</span>
+                                            <span>{{employee.firstname}}</span>
+                                        </div>
+
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Last Name</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{employee.lastname}}</span>
+                                        </div>
+
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Employee No</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{employee.staffNo}}</span>
+                                        </div>
+
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Email Address</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{employee.personalEmail}}</span>
+                                        </div>
+
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Marital Status</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{employee.maritalStatusId}}</span>
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Department</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{departmentName}}</span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Address</span>
+                                        </div>
+                                        <div class="col-sm-8" *ngFor="let add of employee.addresses">
+                                            <span>{{add.address1}}</span>
+                                            <span>{{add.address2}}</span>
+                                            <span>{{add.address_type}}</span>
+
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Residential L.G.A</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{employee.lgaOfOrigin}}</span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Residential State</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{employee.residentialState}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +167,151 @@
                                 <br>
 
                             </nb-tab>
+                          
                             <nb-tab tabTitle="Qualifications">
+                                <nb-card>
+                                    <nb-card-header>
+                                        <h6>Qualifications</h6>
+    
+                                    </nb-card-header>
+    <nb-card-body>
+        <ngx-default-content *ngIf="showEmptyQualifications" pageHeader="No Qualification Record Found"
+        pageDescription="" buttonValue=""
+    >
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmptyQualifications" [showFilter]="false"
+         [userData]="employee.qualifications"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" >
+      </ngx-tablecomponent>
+    </nb-card-body>
+                                </nb-card>             
+
+                            </nb-tab>
+                        </nb-tabset>
+                    </div>
+
+                    <div class="fmContainer" *ngSwitchCase="'deployment_info'">
+                        <nb-tabset>
+
+                            <nb-tab tabTitle="Details">
+                                <nb-card-header>
+                                    <h6>Deployment Information</h6>
+
+                                </nb-card-header>
+
+                                <br>
+                                <div style="font-weight: bold; padding: 2rem;">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Current Location</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{comfirmationData.request_date | date}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="font-weight: bold; padding: 2rem;">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Current LGA</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{comfirmationData.appointment_date | date}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div style="font-weight: bold; padding: 2rem;">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Current State</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{comfirmationData.probation_period}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="font-weight: bold; padding: 2rem;">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Last Deployment Date</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{comfirmationData.effective_date | date}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-weight: bold; padding: 2rem;">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span>Requested Location</span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <span>{{comfirmationData.effective_date | date}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </nb-tab>
+
+
+                            <nb-tab tabTitle="Feedback">
+                                <!-- <nb-card-header>
+                                    <h6>Fe</h6>
+
+                                </nb-card-header> -->
+                                <br>
+                                <form id="feedbackForm" name="feedbackForm" #feedbackForm="ngForm">
+
+                                    <div class="form-group row">
+                                        <label for="FeedBack"
+                                            class="label col-sm-4 col-form-label listsubheader">Effective Date</label>
+                                        <div class="col-sm-8">
+                                            <ngx-date></ngx-date>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="Advice"
+                                            class="label col-sm-4 col-form-label listsubheader">Comment</label>
+                                        <div class="col-sm-8">
+                                            <textarea rows="5" type="text" nbInput fullWidth #mgr_advice="ngModel" id="mgr_advice" name="mgr_advice" [(ngModel)]="comfirmationData.mgr_advice"
+                                                placeholder="Enter Advice" required> </textarea>
+                                                <div *ngIf="mgr_advice.invalid && (mgr_advice.dirty || mgr_advice.touched)" class="error">
+                                                    <div *ngIf="mgr_advice.errors.required">Advice is required</div>
+                                                  </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div
+                                        style="display: flex;justify-content: center; margin-top: 3rem; margin-bottom: 3rem;">
+                                        <ngx-loadable-button [loading]="loading"   >
+                                            Submit
+                                          </ngx-loadable-button>           
+                                        <div style="padding-left: 15px;">
+                                            <button nbButton outline status="primary"  class="d-flex column"
+                                            style="background-color: white;">Discard</button> 
+                                        </div>
+                                 
+                                    </div> 
+
+                                </form>
+
+
+                            </nb-tab>
+
+
+                        </nb-tabset>
+                    </div>
+                    <!-- <div class="fmContainer" *ngSwitchCase="'approval_log'">
+                        <nb-tabset>
+                            <nb-tab tabTitle="Approval Log Info">
                                 <nb-card-header>
                                     <h6>Qualifications</h6>
 
@@ -96,62 +320,94 @@
                                 <br>
 
 
-                                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+
+                                <form style="margin-top: 15px;">
 
 
-
-                            </nb-tab>
-                        </nb-tabset>
-                    </div>
-                    <div class="fmContainer" *ngSwitchCase="'promotion_info'">
-                        <nb-tabset>
-                            <nb-tab tabTitle="Promotional Information">
-                                <nb-card-header>
-                                    <h6>Promotional Promotion</h6>
-
-                                </nb-card-header>
-
-                                <br>
-
-
-                                <div *ngFor="let i of [0,1,2,3,4,5,6,7,8]" style="font-weight: bold; padding: 2rem;">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <span>Appointment Date</span>
-                                        </div>
+                                    <div class="form-group row">
+                                        <label for="Title" class="label col-sm-4 col-form-label listsubheader">Title
+                                        </label>
                                         <div class="col-sm-8">
-                                            <span>24/08/2021</span>
+                                            <input type="text" nbInput fullWidth placeholder="Title">
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="form-group row">
+                                        <label for="Contact number"
+                                            class="label col-sm-4 col-form-label listsubheader">Status
+                                            number</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" nbInput fullWidth placeholder="Enter status">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="Comment"
+                                            class="label col-sm-4 col-form-label listsubheader">Comment</label>
+                                        <div class="col-sm-8">
+                                            <textarea name="" id="" cols="30" rows="10" type="text" nbInput fullWidth
+                                                placeholder="Enter Comment"></textarea>
+
+                                        </div>
+                                    </div>
 
 
 
-                                <div class="row">
-                                    <div class="col-md-4" style="display: flex;align-items:center">
-                                        <div class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
 
-                                            <button nbButton status="primary" class="d-flex column">Approve</button>
-                                            <button nbButton outline status="primary" class="d-flex column"
-                                                style="background-color: white; margin-left: 10px;">Discard</button>
+                                    <div class="form-group row">
+                                        <div class="col-md-4" style="display: flex;align-items:center">
+                                            <label for="">Upload Document</label>
+                                        </div>
+                                        <div class="col-md-8 col-xxl-8 ">
+                                            <div style="display: flex;flex-direction: row;">
+                                                <div>
+                                                    <ngx-file-upload class="form-control"></ngx-file-upload>
+                                                </div>
+                                                <div
+                                                    style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
+                                                    Not More than 1 mb
+                                                </div>
+                                            </div>
 
 
                                         </div>
                                     </div>
-                                    <div class="col-md-8 col-xxl-8 ">
 
 
+                                    <br>
 
+
+                                    <div class="form-group row">
+                                        <div class="col-md-4" style="display: flex;align-items:center">
+
+                                        </div>
+                                        <div class="col-md-8 col-xxl-8 ">
+
+                                            <div class="d-flex" style="margin-top: 40px; margin-bottom: 60px;">
+
+                                                <button nbButton status="primary" class="d-flex column">Submit</button>
+                                                <button nbButton outline status="primary" class="d-flex column"
+                                                    style="background-color: white; margin-left: 10px;">Rejected</button>
+                                                <button nbButton outline status="primary" class="d-flex column"
+                                                    style="background-color: white; margin-left: 10px; border: none;">Re-assign</button>
+
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
+
+
+
+                                </form>
+
+
+
 
 
                             </nb-tab>
+                            <nb-tab tabTitle="Flow">
 
-
+                            </nb-tab>
                         </nb-tabset>
-                    </div>
-
+                    </div> -->
                 </div>
             </nb-card-body>
         </nb-card>

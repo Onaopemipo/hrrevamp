@@ -16,6 +16,7 @@ export class AuthGuardService implements CanLoad {
   canLoad(routes: Route): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.auth.isAuthenticated().then(data => {
+        console.log(data)
         localStorage.setItem('returnUrl', this.router.url);  
         if (!data) {
           this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
@@ -27,6 +28,7 @@ export class AuthGuardService implements CanLoad {
           resolve(false);
         } else {
           this.AuthenService.getuser().then((usersdata: IVwUserObj[]) => {
+            console.log(usersdata)
             if (usersdata.length > 0) {
               const route = this.router.url.split('?')[0];
               if (usersdata[0]) {

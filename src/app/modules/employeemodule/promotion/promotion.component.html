@@ -1,44 +1,97 @@
-<ngx-componentsheader pageName='Promotion List' [requiredButton]="rButton" (buttonClick)="onTopActionClick($event)">
+<ngx-componentsheader [pageName]='pageName' >
+<div headerButton style="display: flex; flex-direction: row;">
+  <div *ngIf="eligibilityBucket" style="display: flex; flex-direction: row;">
+    <div><button  nbButton status="primary"  class="d-flex column">Submit List</button></div>
+    <div style="padding-left: 5px;"> <button  nbButton status="primary"  class="d-flex column">Save List</button></div>
+    <div style="padding-left: 5px;">
+      <button outline="true"  nbButton status="primary" (click)="updateEligibilityList()" class="d-flex column">Update List</button>
+    </div> 
+  </div>
+  <div *ngIf="!eligibilityBucket" style="padding-left: 5px;">
+    <button  nbButton status="primary" (click)="gotoelegibilitybucket()"  class="d-flex column">Eligibility Bucket</button>
+  </div>
 
+</div>
 </ngx-componentsheader>
 
 
 <nb-card style="margin-top: 15px;">
     <nb-card-body>
-
-
-        <ngx-tableheader></ngx-tableheader>
-
-        <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+      <ngx-default-content
+      *ngIf="showEmpty"
+      pageHeader="No Record Found"
+      pageDescription=""
+      buttonValue=""
+      [loading]="loading"
+     
+    >
+    </ngx-default-content>
+      <ngx-tablecomponent  
+      *ngIf="!showEmpty"
+      (filterChange)="filterUpdated($event)"
+      [showActions]="showTableAction"
+      [showFilter]="true"
+      (actionClick)="tableActionClicked($event)"
+      [actions]="tableActions" 
+      [userData]="promotionList" 
+      [tableColum]="tableColumns"
+      [totalItems]="totalItems"
+      [currentPage]="currentPage"
+      [loading]="loading"
+      >
+  </ngx-tablecomponent>
     </nb-card-body>
 </nb-card>
 
 <ngx-side-modal [(show)]='submitList' style="width: 500px;">
   <div modal-header>Add to List</div>
   <div modal-body>
-    <nb-card>
-            <div class="form-group row mydiv">
-              <div class="col">
-                <label for="Channel" class="col-form-label mylabel"></label>
-                <ngx-employee-master-search></ngx-employee-master-search>
-              </div>
-            </div>
+    <nb-card style="border: none;">
+      <div class="row" style="padding-top:10px">
+        <div class="col-sm-6 form-group">
+          <label>Follow Promotion Rule</label>
+          <select class="form-control" [(ngModel)]="gOptions.promotionRuleId" name="promotionRuleId" id="promotionRuleId" #promotionRuleId="ngModel" >
+            <option value="">--Select Rule--</option> 
+                 
+        </select>
+  
+        </div>
+        <div class="col-sm-6 form-group">
+          <label>Promotion Category</label>
+          <select class="form-control" [(ngModel)]="gOptions.promotionCategoryId" name="promotionCategoryId" id="promotionCategoryId" #promotionCategoryId="ngModel" >
+            <option value="">--Select Category--</option> 
+               
+        </select>
+  
+        </div>
+        <div class="col-sm-12 form-group">
+          <label>Target Position</label>
+          <select class="form-control"  required [(ngModel)]="gOptions.promotionTargetId" name="promotionTargetId" id="promotionTargetId" #promotionTargetId="ngModel">
+            <option value="">--Select Title--</option> 
+            <option *ngFor="let jTitle of allPositions" [value]="jTitle.id">{{jTitle.title}}</option>            
+        </select>
+        <div *ngIf="promotionTargetId.invalid && (promotionTargetId.dirty || promotionTargetId.touched)" class="error">
+          <div *ngIf="promotionTargetId.errors.required">Job Title is required</div>
+        </div>
+        </div>
+        <div class="col-sm-12 form-group">
+          <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee:</label>
+         <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+      </div>
+      </div>
+         
     </nb-card>
 
   </div>
+  <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+    <ngx-loadable-button [loading]="loading"  (click)="addEmployeetoBucketList()" >
+      Update List
+    </ngx-loadable-button>           
+    <div style="padding-left: 15px;">
+      <button  outline="true" (click)="submitList = false"  nbButton status="primary" class="d-flex column" >Discard</button>
+   
+    </div>
+</div>
 </ngx-side-modal>
 
-<ngx-side-modal [(show)]='submitList' style="width: 500px;">
-  <div modal-header>Add to List</div>
-  <div modal-body>
-    <nb-card>
-            <div class="form-group row mydiv">
-              <div class="col">
-                <label for="Channel" class="col-form-label mylabel"></label>
-                <ngx-employee-master-search [addbtnText]="Submit"></ngx-employee-master-search>
-              </div>
-            </div>
-    </nb-card>
 
-  </div>
-</ngx-side-modal>

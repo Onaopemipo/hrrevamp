@@ -5,7 +5,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Home',
-    icon: '/assets/icons/home.jpg',
+    icon: 'assets/icons/home.jpg',
     link: '/dashboard',
 
 
@@ -18,7 +18,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Employee Self Service',
-    icon: '/assets/icons/EmployeeManagement.jpg',
+    icon: 'assets/icons/EmployeeManagement.jpg',
     children: [
       {
         title: 'Self Service Dashboard',
@@ -40,31 +40,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Exit Process',
         link: '/employeemodule/exitrequest',
       },
+      {
+        title: 'Deployment Application',
+        link: '/employeemodule/deploymentapplication',
+      },
     ],
   },
   {
     title: 'Employee Management',
-    icon: '/assets/icons/EmployeeManagement.jpg',
-    children: [
-      {
-        title: 'Onboarding Dashboard',
-        link: '/employeemodule',
-      },
-      {
-        title: 'Onboarding Employees',
-        link: '/employeemodule/allemployees',
-      },
-      {
-        title: 'Exit Management',
-        link: '/employeemodule/exitmanagement',
-      },
-      {
-        title: 'Retirements',
-        link: '/employeemodule/retirement',
-      },
+    icon: 'assets/icons/EmployeeManagement.jpg',
+    children: [    
+   
       {
         title: 'Confirmation',
-        link: '/employeemodule/comfirmation',
+        link: '/employeemodule/confirmation',
       },
       {
         title: 'Promotion',
@@ -76,7 +65,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Employee Deployment',
-        link: '/employeemodule/deploymentview',
+        link: '/employeemodule/employeedeployment',
       },
 
     ]
@@ -84,7 +73,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Career Succession',
-    icon: '/assets/icons/career.jpg',
+    icon: 'assets/icons/career.jpg',
     children: [
       {
         title: 'Dashboard',
@@ -125,7 +114,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Leave Management',
-    icon: '/assets/icons/LeaveManagement.jpg',
+    icon: 'assets/icons/LeaveManagement.jpg',
     children: [
       {
         title: 'Leave Plan',
@@ -148,7 +137,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Performance Management',
     link: '/',
-    icon: '/assets/icons/PerformanceAppraisals.jpg',
+    icon: 'assets/icons/PerformanceAppraisals.jpg',
     children: [
       {
         title: 'Dashboard',
@@ -179,7 +168,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Disciplinary Management',
     link: '/',
-    icon: '/assets/icons/DisciplinaryManagement.jpg',
+    icon: 'assets/icons/DisciplinaryManagement.jpg',
     children: [
       {
         title: 'Settings',
@@ -193,12 +182,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Onboarding',
-    link: '/',
-    icon: '/assets/icons/Onboarding.jpg',
+    icon: 'assets/icons/Onboarding.jpg',
+    children: [
+      {
+        title: 'Onboarding Dashboard',
+        link: '/employeemodule',
+      },
+      {
+        title: 'Onboarding Employees',
+        link: '/employeemodule/allemployees',
+      },
+    ]
   },
   {
     title: 'Time and Attendance',
-    icon: '/assets/icons/TimeandAttendance.jpg',
+    icon: 'assets/icons/TimeandAttendance.jpg',
     children: [
       {
         title: 'Analytics',
@@ -215,22 +213,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Events',
+    icon: 'assets/icons/TimeandAttendance.jpg',
+    link: '/self-service/employeeevents'
+  },
+  {
     title: 'CAREERS',
     group: true,
   },
   {
     title: 'Recruitment',
     link: '/',
-    icon: '/assets/icons/recruitment.jpg',
+    icon: 'assets/icons/recruitment.jpg',
   },
   {
     title: 'Career Succession',
     link: '/',
-    icon: '/assets/icons/EmployeeManagement.jpg',
+    icon: 'assets/icons/EmployeeManagement.jpg',
   },
   {
     title: 'Training',
-    icon: '/assets/icons/Training.jpg',
+    icon: 'assets/icons/Training.jpg',
     children: [
       {
         title: 'Training Dashboard',
@@ -260,18 +263,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Exit and Retirement',
-    link: '/',
-    icon: '/assets/icons/ExitandRetirement.jpg',
+    icon: 'assets/icons/ExitandRetirement.jpg',
+    children: [
+      {
+        title: 'Exit',
+        link: '/employeemodule/exitmanagement',
+      },
+      {
+        title: 'Retirements',
+        link: '/employeemodule/retirement',
+      },
+    ]
   },
   {
     title: 'Talent Management',
     link: '/',
-    icon: '/assets/icons/TalentManagement.jpg',
+    icon: 'assets/icons/TalentManagement.jpg',
   },
   {
     title: 'Manpower',
     link: '/',
-    icon: '/assets/icons/Manpower.jpg',
+    icon: 'assets/icons/Manpower.jpg',
   },
   {
     title: 'MESSAGING',
@@ -279,7 +291,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Communications',
-    icon: '/assets/icons/Communications.jpg',
+    icon: 'assets/icons/Communications.jpg',
     children: [
       {
         title: 'Email Log',
@@ -300,7 +312,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Request & Complaints',
     link: '/complaints',
-    icon: '/assets/icons/RequestComplaints.jpg',
+    icon: 'assets/icons/RequestComplaints.jpg',
   },
   {
     title: 'OPERATIONS',
@@ -308,7 +320,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Payroll',
-    icon: '/assets/icons/Payroll.jpg',
+    icon: 'assets/icons/Payroll.jpg',
     children: [
       {
         title: 'Institution Management',
@@ -338,7 +350,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Expenses',
-    icon: '/assets/icons/Expenses.jpg',
+    icon: 'assets/icons/Expenses.jpg',
     children: [
       {
         title: 'Expense Management',
@@ -362,11 +374,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Loan & Disbursement',
     link: '/',
-    icon: '/assets/icons/LoanDisbursement.jpg',
+    icon: 'assets/icons/LoanDisbursement.jpg',
   },
   {
     title: 'Disbursement',
-    icon: '/assets/icons/Disbursement.jpg',
+    icon: 'assets/icons/Disbursement.jpg',
     children: [
       {
         title: 'Analytics',
@@ -389,7 +401,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Benefit Administration',
     link: '/',
-    icon: '/assets/icons/BenefitAdministration.jpg',
+    icon: 'assets/icons/BenefitAdministration.jpg',
   },
   {
     title: 'ACCOUNT & SETTINGS',
@@ -398,7 +410,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Settings',
     link: '/',
-    icon: '/assets/icons/settings.jpg',
+    icon: 'assets/icons/settings.jpg',
     children: [
       {title: 'Department', link: '/setup/department'},
       {title: 'Location', link: '/setup/location'},

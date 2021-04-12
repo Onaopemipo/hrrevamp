@@ -16,6 +16,8 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DecimalPipe } from '@angular/common';
+import {FetchDashboardDataServiceProxy} from './_services/service-proxies'
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -75,6 +77,7 @@ import listPlugin from '@fullcalendar/list';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ConfirmBoxService } from './_services/confirm-box.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+// import{CalComponent} from '../app/components/cal/cal.component'
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -138,6 +141,7 @@ FullCalendarModule.registerPlugins([
     NbDatepickerModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     ComponentsModule,
+    
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -152,7 +156,8 @@ FullCalendarModule.registerPlugins([
     GetTokenServiceProxy,
     ConfirmBoxService,
     NbDialogService,
-    AlertserviceService
+    AlertserviceService,
+    FetchDashboardDataServiceProxy
   ],
 })
 export class AppModule {
