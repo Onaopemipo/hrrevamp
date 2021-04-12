@@ -26,7 +26,7 @@ export class SetupComponent implements OnInit {
     this.fetchDepartments();
   }
 
-  page = 1;
+  page = 2;
 
   budgetForm: NgForm;
 

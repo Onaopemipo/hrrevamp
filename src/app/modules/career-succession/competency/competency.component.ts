@@ -1,5 +1,6 @@
-import { GradeLevelServiceProxy, GradeLevelDTO } from './../../../_services/service-proxies';
-import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole } from 'app/_services/service-proxies';
+import { title } from 'process';
+import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification } from './../../../_services/service-proxies';
+import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -16,61 +17,80 @@ export class CompetencyComponent implements OnInit {
   scoreCardClick: boolean = false;
   newRole: boolean = false;
   myPanel: string = '';
-  selectedCase: string = 'Role_Details';
-  selectedPanel: any = { title: 'Role_Details', label: 'Role Details', status: 'Active'};
+  selectedCase: string = 'Role';
+  selectedPanel: any = { title: 'Role', label: 'Role', status: 'Active'};
   competencyChecklist = [
     { title: 'Role', label: 'Role', status: 'Active' },
     { title: 'Position', label: 'Position', status: 'Inactive' }
   ];
 
+  requirementList = [
+    { title: 'Skill', label: 'Skills'},
+    { title: 'training', label: 'Training'},
+    { title: 'qualfication', label: 'Qualfication'},
+    { title: 'certification', label: 'Certification'},
+    { title: 'experience', label: 'Experience'},
+
+  ];
+
   allDepartments: DepartmentDTO [] = [];
   allJobRoles: JobRole [] = [];
   allGradeLevels: GradeLevelDTO [] = [];
+  skillData: Skill [] = [];
+  certificationData: Certification [] = [];
+  qualificationData: Qualification [] = [];
+  requirement: string = 'Skills';
 
-  constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,private levels: GradeLevelServiceProxy) { }
+  constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
+    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchAllDepartments();
     this.fetchAllJobRoles();
     this.fetchAllLevels();
+    this.fetchCertifications();
+    this.fetchQualifications();
+    this.fetchSkills();
   }
 
-  addNewRole(){
-    this.newRole = !this.newRole;
+  toggleRequirement(e){
+    this.requirement = e;
   }
 
-  addExperience(){
-
-  }
-
-  fetchExperience(){
-
-  }
-
-
-
-  addSkills(){
+  createCompetency(){
 
   }
 
-  fetchSkills(){
-
+  async fetchSkills(){
+    const data = await this.commonService.getSkills().toPromise();
+    if(!data.hasError){
+      this.skillData = data.result;
+      console.log('Skills:', this.skillData);
+    }
   }
 
   addCertification(){
 
   }
 
-  fetchCertifications(){
-
+  async fetchCertifications(){
+    const data = await this.commonService.getCertifications().toPromise();
+    if(!data.hasError){
+      this.certificationData = data.result;
+      console.log('Certifications:', this.certificationData)
+    }
   }
 
   addQualification(){
 
   }
 
-  fetchQualifications(){
-
+  async fetchQualifications(){
+    const data = await this.commonService.getQualifications().toPromise();
+    if(!data.hasError){
+      this.qualificationData = data.result;
+      console.log('qualification:', this.qualificationData)
+    }
   }
 
   selectPanel(rolelist, i) {

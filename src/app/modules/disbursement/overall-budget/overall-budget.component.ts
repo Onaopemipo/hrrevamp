@@ -20,7 +20,7 @@ export class OverallBudgetComponent implements OnInit {
   editBudgetModal: boolean = false;
   addItemModal: boolean = false;
   editItem: boolean = false;
-  defaultPage: number = 0;
+  defaultPage: number = 3;
   budget: BudgetDTO = new BudgetDTO;
   budgetItem: BudgetItemDTO = new BudgetItemDTO;
   departments: any = '';
