@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
+import { CommunicationServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
 import { ApiService } from '../../api.service';
 import { Email } from '../models';
 
@@ -31,9 +32,11 @@ export class EmailLogComponent implements OnInit {
   ];
   data = {};
   emails: Email[] = [];
+  templateTypes: IDTextViewModel[] = [];
   loading = false;
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private comService: CommunicationServiceProxy,
   ) { }
 
   currentPage = 1;
@@ -45,13 +48,15 @@ export class EmailLogComponent implements OnInit {
       if (this.currentPage === 1) {
         this.data = {};
       }
-      this.data[currentPage] = data.map(iEmail => new Email(iEmail));
+      this.data[currentPage] = data;
       this.emails = this.data[currentPage];
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loadData();
+    const res = await this.comService.getAllTemplateTypes().toPromise();
+    this.templateTypes = res.result;
   }
 
   showCreateModel = false;

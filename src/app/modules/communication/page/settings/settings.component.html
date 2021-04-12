@@ -4,46 +4,48 @@
 ></ngx-componentsheader>
 <div class="main-page-container">
   <div class="row">
-    <div class="col-sm-6 linear-form">
-      <div class="form-group">
-        <label>Username</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Host</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Port</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Default mail address</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input class="form-control" />
-      </div>
-      <div class="form-group">
-        <label>SSL</label>
-        <input class="form-control" type="checkbox" />
-      </div>
-      <div class="form-group">
-        <label>Files</label>
-        <ngx-file-upload class="form-control"></ngx-file-upload>
-      </div>
-      <div class="form-group">
-        <label>Allow sending of mails</label>
-        <input type="checkbox" />
-      </div>
-      <div class="form-group" style="margin-top: 20px">
-        <label></label>
-        <button nbButton status="primary">Submit</button>
-      </div>
+    <div class="col-sm-6">
+
+
     </div>
   </div>
 </div>
 
-<ngx-employee-master-search></ngx-employee-master-search>
-<ngx-file-upload></ngx-file-upload>
+<ngx-side-modal>
+  <div class="form-group">
+    <label>Username</label>
+    <input class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Host</label>
+    <input class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Port</label>
+    <input class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Default mail address</label>
+    <input class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>SSL</label>
+    <input class="form-control" type="checkbox" />
+  </div>
+  <div class="form-group">
+    <label>Files</label>
+    <ngx-file-upload class="form-control"></ngx-file-upload>
+  </div>
+  <div class="form-group">
+    <label>Allow sending of mails</label>
+    <input type="checkbox" class="form-control" />
+  </div>
+  <div class="form-group" style="margin-top: 20px">
+    <label></label>
+    <button nbButton status="primary">Submit</button>
+  </div>
+</ngx-side-modal>

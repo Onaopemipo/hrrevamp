@@ -1,5 +1,5 @@
 import { D } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/components/base/base.component';
 import { FormConfig, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
@@ -14,19 +14,20 @@ import { AssetApiModelClass, AssetBaseService, AssetCategoryService, AssetSubTyp
 enum DEFAULT_TABLE_ACTIONS{ edit = 'edit', delete = 'delete' }
 
 
-export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extends BaseComponent<D, F, D> {
+@Component({
+  template: ''
+})
+export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extends BaseComponent<D, F, D> implements AfterViewInit{
   data: D[] = [];
   protected abstract api: AssetBaseService<D, F>;
   protected abstract confirmBoxService: ConfirmBoxService;
   protected abstract alertService: AlertserviceService;
   abstract objectName: string;
   getData(): Observable<ListResult<D>> {
-    console.log(1)
     return this.api.list(this.filter);
   }
   saveData(e: D): Observable<any> {
     const obj = this.getNewEditingData();
-    console.log(obj);
     Object.assign(obj, e);
     return this.api.create(obj);
   }
@@ -51,11 +52,22 @@ export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extend
   //   {name: 'dateCreated', title: 'Date Modified', type: ColumnTypes.Date},
   //   {name: 'name', title: 'Status', type: ColumnTypes.Status},
   // ];
+  tableActions: TableAction[] = [];
+  // get tableActions(): TableAction[] {
+  //   console.log(888);
+  //   return [
+  //     {name: DEFAULT_TABLE_ACTIONS.edit, label: 'Update'},
+  //     {name: DEFAULT_TABLE_ACTIONS.delete, label: 'Delete'},
+  //   ];
+  // }
   getTableActions(): TableAction[] {
     return [
       {name: DEFAULT_TABLE_ACTIONS.edit, label: 'Update'},
       {name: DEFAULT_TABLE_ACTIONS.delete, label: 'Delete'},
     ];
+  }
+  setTableActions() {
+    this.tableActions = this.getTableActions();
   }
   getPageTitle() {
     return this.objectName;
@@ -72,7 +84,7 @@ export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extend
   // };
 
   abstract getFormConfig(): FormConfig;
-  getFormTitle(){
+  getFormTitle() {
     return `Add new ${this.objectName}`;
   }
   edit(data: MyAssetCategory) {
@@ -91,6 +103,10 @@ export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extend
     }
     return false;
   }
+
+  ngAfterViewInit() {
+    this.setTableActions();
+  }
 }
 
 @Component({
@@ -106,7 +122,7 @@ export class AssetCategoryComponent extends AssetBaseComponent<MyAssetCategoryFi
   ) {
     super(confirmBoxService);
   }
-  objectName: 'Asset Category';
+  objectName = 'Asset Category';
   getTableColumns(): TableColumn[] {
     return [
       {name: 'name', title: 'Name'},
@@ -152,7 +168,7 @@ export class MyAssetTypeComponent extends AssetBaseComponent<MyAssetCategoryFilt
   ) {
     super(confirmBoxService);
   }
-  objectName: 'Asset Type';
+  objectName = 'Asset Type';
   getTableColumns(): TableColumn[] {
     return [
       {name: 'name', title: 'Name'},
@@ -207,7 +223,7 @@ export class MyAssetSubTypeComponent extends AssetBaseComponent<MyAssetSubTypeFi
   ) {
     super(confirmBoxService);
   }
-  objectName: 'Asset Subtype';
+  objectName = 'Asset Subtype';
   getTableColumns(): TableColumn[] {
     return [
       {name: 'name', title: 'Name'},
@@ -262,7 +278,7 @@ export class MyAssetMakeComponent extends AssetBaseComponent<MyAssetCategoryFilt
   ) {
     super(confirmBoxService);
   }
-  objectName: 'Asset Make';
+  objectName = 'Asset Make';
   getTableColumns(): TableColumn[] {
     return [
       {name: 'name', title: 'Name'},
@@ -317,7 +333,7 @@ export class MyAssetModelComponent extends AssetBaseComponent<MyAssetModelFilter
   ) {
     super(confirmBoxService);
   }
-  objectName: 'Asset Model';
+  objectName = 'Asset Model';
   getTableColumns(): TableColumn[] {
     return [
       {name: 'name', title: 'Name'},

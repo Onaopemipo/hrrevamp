@@ -29,7 +29,7 @@
         <div class="form-group">
           <label>Review Purpose</label>
           <!-- <select class="form-control" [(ngModel)]="editingData.reviewPurposeId"></select> -->
-          <ngx-multi-select [(idValue)]="editingData.reviewPurposeId" [singleSelection]="true" [items]="reviewTypes"></ngx-multi-select>
+          <ngx-multi-select [(idValue)]="editingData.reviewPurposeId" [singleSelection]="true" [items]="reviewPurposes"></ngx-multi-select>
         </div>
 
         <div class="form-group">
@@ -44,12 +44,12 @@
 
         <div class="form-group">
           <label>Appraisal Period Date</label>
-          <ngx-date-range></ngx-date-range>
+          <ngx-date-range [(start)]="editingData.startDate" [(end)]="editingData.endDate"></ngx-date-range>
         </div>
 
         <div class="form-group">
           <label>Appraisal Due Date</label>
-          <ngx-date></ngx-date>
+          <ngx-date [(value)]="editingData.dueDate"></ngx-date>
         </div>
 
         <div class="form-group">
@@ -60,7 +60,7 @@
         <div class="form-group">
           <label>Appraisal Type</label>
           <ngx-radio-button
-            [items]="['Self Appraisal', '180 Appraisal', '360 Appraisal']"
+            [items]="appraisalTypes"
             [(value)]="editingData.appraisalTypeId"
           ></ngx-radio-button>
         </div>
@@ -68,12 +68,13 @@
         <div class="form-group">
           <label>Rating Type</label>
           <ngx-radio-button
-            [items]="['Open Ended', 'Close Ended']"
+            [items]="ratingTypes"
             [(value)]="editingData.ratingTypeId"
           ></ngx-radio-button>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" 
+          *ngIf="editingData.ratingTypeId==RATING_TYPE_VALUES.OPEN_ENDED">
           <label>Close Ended</label>
           <div style="display: flex;">
             <input class="form-control" [(ngModel)]="editingData.minRating" />
@@ -101,17 +102,19 @@
           <label>Mark as Active</label>
           <input type="checkbox" [(ngModel)]="editingData.isActive" />
         </div>
-
-        <hr />
-        <h4>Approval Workflow</h4>
-        <ngx-workflow></ngx-workflow>
+        <div class="form-group">
+          <label></label>
+          <div>
+            <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+            <button nbButton status="primary" outline style="background: transparent">
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div modal-actions>
-      <button nbButton status="primary" (click)="submitForm()">Save</button>
-      <button nbButton status="primary" outline style="background: transparent">
-        Cancel
-      </button>
+
     </div>
   </div>
 </div>

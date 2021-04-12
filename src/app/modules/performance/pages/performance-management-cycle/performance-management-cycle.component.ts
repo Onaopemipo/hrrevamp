@@ -8,9 +8,14 @@ import { ListResult } from 'app/_services/base-api.service';
 import { Observable } from 'rxjs';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { ChoiceName } from 'app/components/multi-select/multi-select.component';
+import { ISelectable } from 'app/components/radio-button/radio-button.component';
 
 
 enum TOP_ACTIONS { ADD__NEW__CYCLE, };
+
+enum RATING_TYPE_VALUES{
+  OPEN_ENDED = '1', CLOSED_ENDED = '2',
+}
 
 
 
@@ -56,4 +61,22 @@ export class PerformanceManagementCycleComponent extends BaseComponent<MyPerform
     protected api: PerformanceManagementService) {
     super(confirmBox);
   }
+
+  reviewPurposes: any[] = [
+    {label: 'Confirmation', name: '1'},
+    {label: 'Promotion', name: '2'},
+    {label: 'Pay Review', name: '3'},
+    {label: 'General', name: '4'},
+  ];
+
+  appraisalTypes: ISelectable[] = [
+    {selectLabel: 'Self Appraisal', selectValue: '1'},
+    {selectLabel: '180 Appraisal', selectValue: '2'},
+    {selectLabel: '360 Appraisal', selectValue: '3'},
+  ];
+  RATING_TYPE_VALUES = RATING_TYPE_VALUES;
+  ratingTypes: ISelectable[] = [
+    {selectLabel: 'Open Ended', selectValue: RATING_TYPE_VALUES.OPEN_ENDED},
+    {selectLabel: 'Closed Ended', selectValue: RATING_TYPE_VALUES.CLOSED_ENDED},
+  ];
 }
