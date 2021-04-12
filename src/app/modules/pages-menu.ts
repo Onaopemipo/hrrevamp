@@ -272,8 +272,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Manpower',
-    link: '/',
     icon: 'assets/icons/Manpower.jpg',
+    children: [
+      {
+        title: 'Capacity Planning',
+        link: '/manpower/capacityplanning'
+      },
+      {
+        title: 'Projection Report',
+        link: '/manpower/projectionreport'
+      }
+    ]
   },
   {
     title: 'MESSAGING',

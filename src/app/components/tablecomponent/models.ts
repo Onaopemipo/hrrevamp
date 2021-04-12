@@ -6,7 +6,7 @@ export interface TableData {
 }
 
 export enum ColumnTypes {
-    Text, Status, Date, Link
+    Text, Status, Date, Link,Object
 }
 
 export interface TableColumn {
