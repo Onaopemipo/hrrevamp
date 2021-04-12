@@ -71,46 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
 
-  {
-    title: 'Career Succession',
-    icon: 'assets/icons/career.jpg',
-    children: [
-      {
-        title: 'Dashboard',
-        link: 'career-succession/dashbaord',
-      },
-
-      {
-        title: 'Competency',
-        link: 'career-succession/competency',
-      },
-
-      {
-        title: 'Succession Plans',
-        link: 'career-succession/planning',
-      },
-
-      {
-        title: 'Talent Pool',
-        link: 'career-succession/talent-pool',
-      },
-
-      {
-        title: '9 Box Grid Appraisal',
-        link: 'career-succession/gridbox',
-      },
-
-      {
-        title: 'Roles',
-        link: 'career-succession/roles',
-      },
-
-      {
-        title: 'Report',
-        link: 'career-succession/report',
-      },
-    ]
-  },
+  
 
   {
     title: 'Leave Management',
@@ -227,11 +188,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'assets/icons/recruitment.jpg',
   },
   {
-    title: 'Career Succession',
-    link: '/',
-    icon: 'assets/icons/EmployeeManagement.jpg',
-  },
-  {
     title: 'Training',
     icon: 'assets/icons/Training.jpg',
     children: [
@@ -276,8 +232,42 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Career Succession',
+    icon: 'assets/icons/career.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: 'career-succession/dashbaord',
+      },
+
+      {
+        title: 'Competency',
+        link: 'career-succession/competency',
+      },
+
+      {
+        title: 'Succession Plans',
+        link: 'career-succession/planning',
+      },
+      {
+        title: '9 Box Grid Appraisal',
+        link: 'career-succession/gridbox',
+      },
+
+      {
+        title: 'Roles',
+        link: 'career-succession/roles',
+      },
+
+      {
+        title: 'Report',
+        link: 'career-succession/report',
+      },
+    ]
+  },
+  {
     title: 'Talent Management',
-    link: '/',
+    link: '/career-succession/talent-pool',
     icon: 'assets/icons/TalentManagement.jpg',
   },
   {
@@ -372,9 +362,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
-    title: 'Loan & Disbursement',
-    link: '/',
+    title: 'Loan',
     icon: 'assets/icons/LoanDisbursement.jpg',
+    children: [
+      { title: 'Loan Request', link: "/loan" },
+      {title: 'Loan Type',link:"/loan/loan-type"},
+    ]
   },
   {
     title: 'Disbursement',
