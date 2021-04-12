@@ -12,7 +12,7 @@ export class CompetencyComponent implements OnInit {
   myPlanHeader: string = 'Create Competency';
   myPlanDesc: string = 'Click the button below to add a competency';
 
-  myButton: string = 'Create Competency';
+  myButton: string = 'Create New';
   scoreCardClick: boolean = false;
   newRole: boolean = false;
   myPanel: string = '';
@@ -39,11 +39,21 @@ export class CompetencyComponent implements OnInit {
     this.newRole = !this.newRole;
   }
 
-  addAbility(){
+  addExperience(){
 
   }
 
-  addSkill(){
+  fetchExperience(){
+
+  }
+
+
+
+  addSkills(){
+
+  }
+
+  fetchSkills(){
 
   }
 
@@ -51,7 +61,15 @@ export class CompetencyComponent implements OnInit {
 
   }
 
+  fetchCertifications(){
+
+  }
+
   addQualification(){
+
+  }
+
+  fetchQualifications(){
 
   }
 

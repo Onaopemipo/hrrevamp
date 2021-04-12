@@ -107,15 +107,33 @@
                   </div>
                 </div>
 
+                <hr>
+
                 <span class="title">Qualification</span>
 
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                    <input type="text" class="form-control" name="qualificationTitle" placeholder="Title">
                   </div>
                 </div>
 
+                <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="qualificationCategory"  required>
+                      <option value="">--Select Level--</option>
+                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Qualification Weight</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="number" class="form-control"  name="qualificationWeight" placeholder="Weight">
+                  </div>
+                </div>
 
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
@@ -123,6 +141,8 @@
                     <button nbButton (click)="addQualification()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
+
+                <hr>
 
                 <span class="title">Certifications</span>
 
@@ -134,11 +154,30 @@
                 </div>
 
                 <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="certTittle"  required>
+                      <option value="">--Select Level--</option>
+                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Certification Weight</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="number" class="form-control" name="certWeight" placeholder="Weight">
+                  </div>
+                </div>
+
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <button nbButton (click)="addCertification()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
+
+                <hr>
 
                 <span class="title">Skills</span>
 
@@ -150,18 +189,55 @@
                 </div>
 
                 <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="skillCategory"  required>
+                      <option value="">--Select Level--</option>
+                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="number" class="form-control" name="skillWeight" placeholder="Weight">
+                  </div>
+                </div>
+
+
+                <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
                     <button nbButton (click)="addSkill()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
 
-                <span class="title">Abilities</span>
+                <hr>
+
+                <span class="title">Experience</span>
 
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
                   <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="abilityTitle" placeholder="Title">
+                    <input type="text" class="form-control" name="experienceTitle" placeholder="Title">
+                  </div>
+                </div>
+
+                <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class="custom-select" name="experienceCategory"  required>
+                      <option value="">--Select Level--</option>
+                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row ">
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="number" class="form-control" name="experienceWeight" placeholder="Weight">
                   </div>
                 </div>
 

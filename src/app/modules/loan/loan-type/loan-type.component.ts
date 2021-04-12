@@ -28,6 +28,10 @@ export class LoanTypeComponent implements OnInit {
     if(!data.hasError){
       this.alertMe.openModalAlert('Success', 'Loan Type has been created!', 'Dismiss')
     }
+
+    else {
+      this.alertMe.openModalAlert('Failure!', 'could not add typle', 'Dismiss')
+    }
   }
 
   async getGrades(){

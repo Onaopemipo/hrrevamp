@@ -1,3 +1,5 @@
+import { UpdateLoanComponent } from './update-loan/update-loan.component';
+import { ProcessRequestComponent } from './process-request/process-request.component';
 import { LoanComponent } from './loan.component';
 import { LoanTypeComponent } from './loan-type/loan-type.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +19,16 @@ const routes: Routes = [
     {
       path: 'loan-type',
       component: LoanTypeComponent,
+    },
+
+    {
+      path: 'process-loan',
+      component: ProcessRequestComponent,
+    },
+
+    {
+      path: 'update-loan',
+      component: UpdateLoanComponent,
     },
 
     { path: '', redirectTo: 'request', pathMatch: 'full' },

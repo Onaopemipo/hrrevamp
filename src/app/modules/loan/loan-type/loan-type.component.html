@@ -64,7 +64,7 @@
 
           <div class="col-sm-6">
             <input type="number" class="form-control" name="guarantorNo" #guarantorNo="ngModel"
-            [(ngModel)]="loanTypeModel.guarantorNo" placeholder="Required Number of Guarantor">
+            [(ngModel)]="loanTypeModel.requiredNoOfGuarantors" placeholder="Required Number of Guarantor">
             <div *ngIf="guarantorNo.invalid && (guarantorNo.dirty || guarantorNo.touched)" class="error">
               <div *ngIf="guarantorNo.errors.required">Number of guarantor is required</div>
             </div>
@@ -91,9 +91,14 @@
           </div>
 
           <div class="col-sm-6">
-            <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" placeholder="Select all Eligible Grades">
+            <!-- <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
               <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
-            </nb-select>
+              <nb-option value="2">Grade 2</nb-option>
+            </nb-select> -->
+            <select [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades">
+              <option value="">--Select all Eligible Grades--</option>
+              <option value="1">Grade 2</option>
+            </select>
           </div>
         </div>
 

@@ -1,5 +1,6 @@
+import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, NewLoanRequestDTO } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, NewLoanRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, IdNameObj, UpdateLoadRequestDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoanRequestComponent implements OnInit {
   button: string = 'Click to request';
   pageNo: number = 1;
 
-  loanModel: LoanRequestDTO = new LoanRequestDTO;
+  loanModel: NewLoanRequestDTO = new NewLoanRequestDTO;
   loanRequest: NewLoanRequestDTO = new NewLoanRequestDTO;
 
   selectedCase: string = 'request';
@@ -36,8 +37,15 @@ export class LoanRequestComponent implements OnInit {
 
   ];
 
+  allLoansData: LoanRequestDTO [] = [];
+  loanSummary: IdNameObj [] = [];
+  updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
+  viewLoanModal: boolean = false;
 
-  constructor(private loanService: UpdateLoanRequestServiceProxy, private loan: AddUpdateLoanTypeServiceProxy) { }
+
+  constructor(private loanService: UpdateLoanRequestServiceProxy, private loan: AddUpdateLoanTypeServiceProxy,
+    private alertMe: AlertserviceService, private allLoans: GetLoanRequestsServiceProxy,
+    private summary: GetLoanSummaryServiceProxy, private loanUpdate: UpdateLoanRequestServiceProxy) { }
 
   ngOnInit(): void {
   }
@@ -66,12 +74,37 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async makeLoanRequest(){
-  //  const data = await this.loanService.updateLoanRequest(this.loanRequest).toPromise();
-  // const data = await this.loan.(this.loanModel).toPromise();
+  const data = await this.loan.addUpdateLoanRequest(this.loanModel).toPromise();
+  if(!data.hasError){
+    this.alertMe.openModalAlert('Success', 'Request Created', 'Dismiss');
+  }
+  else{
+    console.log('Failure', data.message);
+  }
   }
 
-  getAllLoans(){
-
+  async getAllLoans(){
+    const data = await this.allLoans.getLoanRequests(1,1,null,null,1,1,'',1,1).toPromise();
+    if(!data.hasError){
+      this.allLoansData = data.result;
+    }
   }
 
+  async getLoanSummary(){
+    const data = await this.summary.getLoanSummary('').toPromise();
+    if(!data.hasError){
+      this.loanSummary = data.result;
+    }
+  }
+
+  async updateLoan(){
+    const data = await this.loanUpdate.updateLoanRequest(this.updateLoanPayment).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert('Success', 'Loan Updated!', 'Dismiss')
+    }
+  }
+
+  showModal(){
+    this.viewLoanModal = !this.viewLoanModal;
+  }
 }
