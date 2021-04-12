@@ -11986,6 +11986,92 @@ export class DeleteEmployeeCompensationServiceProxy {
 }
 
 @Injectable()
+export class CompetencyServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+    }
+
+    /**
+     * API for adding/updating Competency
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateCompetency(body: ManageCompetencyDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Competency/Add-Update-Competency";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateCompetency(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class SaveConfirmationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -14341,6 +14427,75 @@ export class DataServiceProxy {
         }
         return _observableOf<IDTextViewModelIListApiResult>(<any>null);
     }
+
+    /**
+     * Api for getting list of Qualification for CareerSuccessionService that can be used as dropdowns
+     * @return Success
+     */
+    getQuilificationCategory(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/GetQuilificationCategory";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetQuilificationCategory(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetQuilificationCategory(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetQuilificationCategory(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
 }
 
 @Injectable()
@@ -15257,21 +15412,61 @@ export class FetchDeploymentServiceProxy {
     }
 
     /**
-     * @param body (optional) 
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param employeeContractid (optional) 
+     * @param name (optional) 
+     * @param iD (optional) 
+     * @param strStartDate (optional) 
+     * @param strEndDate (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
-    fetchDeployment(body: SearchDeploymentDto | undefined): Observable<CreateDeploymentViewModelIListApiResult> {
-        let url_ = this.baseUrl + "/api/Deployment/FetchDeployment/FetchDeployment";
+    fetchDeployment(companyID: number | undefined, subID: number | undefined, employeeContractid: number | undefined, name: string | null | undefined, iD: number | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<CreateDeploymentViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Deployment/FetchDeployment/FetchDeployment?";
+        if (companyID === null)
+            throw new Error("The parameter 'companyID' cannot be null.");
+        else if (companyID !== undefined)
+            url_ += "CompanyID=" + encodeURIComponent("" + companyID) + "&";
+        if (subID === null)
+            throw new Error("The parameter 'subID' cannot be null.");
+        else if (subID !== undefined)
+            url_ += "SubID=" + encodeURIComponent("" + subID) + "&";
+        if (employeeContractid === null)
+            throw new Error("The parameter 'employeeContractid' cannot be null.");
+        else if (employeeContractid !== undefined)
+            url_ += "employeeContractid=" + encodeURIComponent("" + employeeContractid) + "&";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (strStartDate !== undefined && strStartDate !== null)
+            url_ += "strStartDate=" + encodeURIComponent("" + strStartDate) + "&";
+        if (strEndDate !== undefined && strEndDate !== null)
+            url_ += "strEndDate=" + encodeURIComponent("" + strEndDate) + "&";
+        if (referenceId !== undefined && referenceId !== null)
+            url_ += "ReferenceId=" + encodeURIComponent("" + referenceId) + "&";
+        if (code !== undefined && code !== null)
+            url_ += "Code=" + encodeURIComponent("" + code) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
-
         let options_ : any = {
-            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -56571,6 +56766,85 @@ export interface IEmployeeCompensationDTO {
     isActive: boolean;
 }
 
+export class ManageCompetencyDTO implements IManageCompetencyDTO {
+    id!: number;
+    competencyTitle!: string;
+    jobRoleId!: number;
+    positionId!: number;
+    description!: string;
+    departmentId!: number;
+    selectedQualifications!: string | undefined;
+    selectedSkills!: string | undefined;
+    selectedAbilities!: string | undefined;
+    selectedCertifications!: string | undefined;
+
+    constructor(data?: IManageCompetencyDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.competencyTitle = _data["competencyTitle"];
+            this.jobRoleId = _data["jobRoleId"];
+            this.positionId = _data["positionId"];
+            this.description = _data["description"];
+            this.departmentId = _data["departmentId"];
+            this.selectedQualifications = _data["selectedQualifications"];
+            this.selectedSkills = _data["selectedSkills"];
+            this.selectedAbilities = _data["selectedAbilities"];
+            this.selectedCertifications = _data["selectedCertifications"];
+        }
+    }
+
+    static fromJS(data: any): ManageCompetencyDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageCompetencyDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["competencyTitle"] = this.competencyTitle;
+        data["jobRoleId"] = this.jobRoleId;
+        data["positionId"] = this.positionId;
+        data["description"] = this.description;
+        data["departmentId"] = this.departmentId;
+        data["selectedQualifications"] = this.selectedQualifications;
+        data["selectedSkills"] = this.selectedSkills;
+        data["selectedAbilities"] = this.selectedAbilities;
+        data["selectedCertifications"] = this.selectedCertifications;
+        return data; 
+    }
+
+    clone(): ManageCompetencyDTO {
+        const json = this.toJSON();
+        let result = new ManageCompetencyDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageCompetencyDTO {
+    id: number;
+    competencyTitle: string;
+    jobRoleId: number;
+    positionId: number;
+    description: string;
+    departmentId: number;
+    selectedQualifications: string | undefined;
+    selectedSkills: string | undefined;
+    selectedAbilities: string | undefined;
+    selectedCertifications: string | undefined;
+}
+
 export class VwConfirmationDTO implements IVwConfirmationDTO {
     id!: number;
     company_id!: number;
@@ -58496,89 +58770,6 @@ export interface IDeploymentLogIListApiResult {
     result: DeploymentLog[] | undefined;
     totalCount: number;
     totalRecord: number;
-}
-
-export class SearchDeploymentDto implements ISearchDeploymentDto {
-    companyID!: number;
-    subID!: number;
-    employeeContractid!: number;
-    name!: string | undefined;
-    id!: number;
-    strStartDate!: string | undefined;
-    strEndDate!: string | undefined;
-    referenceId!: string | undefined;
-    code!: string | undefined;
-    pageNumber!: number;
-    pageSize!: number;
-
-    constructor(data?: ISearchDeploymentDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.employeeContractid = _data["employeeContractid"];
-            this.name = _data["name"];
-            this.id = _data["id"];
-            this.strStartDate = _data["strStartDate"];
-            this.strEndDate = _data["strEndDate"];
-            this.referenceId = _data["referenceId"];
-            this.code = _data["code"];
-            this.pageNumber = _data["pageNumber"];
-            this.pageSize = _data["pageSize"];
-        }
-    }
-
-    static fromJS(data: any): SearchDeploymentDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new SearchDeploymentDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeContractid"] = this.employeeContractid;
-        data["name"] = this.name;
-        data["id"] = this.id;
-        data["strStartDate"] = this.strStartDate;
-        data["strEndDate"] = this.strEndDate;
-        data["referenceId"] = this.referenceId;
-        data["code"] = this.code;
-        data["pageNumber"] = this.pageNumber;
-        data["pageSize"] = this.pageSize;
-        return data; 
-    }
-
-    clone(): SearchDeploymentDto {
-        const json = this.toJSON();
-        let result = new SearchDeploymentDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISearchDeploymentDto {
-    companyID: number;
-    subID: number;
-    employeeContractid: number;
-    name: string | undefined;
-    id: number;
-    strStartDate: string | undefined;
-    strEndDate: string | undefined;
-    referenceId: string | undefined;
-    code: string | undefined;
-    pageNumber: number;
-    pageSize: number;
 }
 
 export class IdNameObj implements IIdNameObj {

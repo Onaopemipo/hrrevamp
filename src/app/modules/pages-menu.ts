@@ -40,28 +40,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Exit Process',
         link: '/employeemodule/exitrequest',
       },
+      {
+        title: 'Deployment Application',
+        link: '/employeemodule/deploymentapplication',
+      },
     ],
   },
   {
     title: 'Employee Management',
     icon: 'assets/icons/EmployeeManagement.jpg',
-    children: [
-      {
-        title: 'Onboarding Dashboard',
-        link: '/employeemodule',
-      },
-      {
-        title: 'Onboarding Employees',
-        link: '/employeemodule/allemployees',
-      },
-      {
-        title: 'Exit Management',
-        link: '/employeemodule/exitmanagement',
-      },
-      {
-        title: 'Retirements',
-        link: '/employeemodule/retirement',
-      },
+    children: [    
+   
       {
         title: 'Confirmation',
         link: '/employeemodule/confirmation',
@@ -76,7 +65,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Employee Deployment',
-        link: '/employeemodule/deploymentview',
+        link: '/employeemodule/employeedeployment',
       },
 
     ]
@@ -193,8 +182,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Onboarding',
-    link: '/',
     icon: 'assets/icons/Onboarding.jpg',
+    children: [
+      {
+        title: 'Onboarding Dashboard',
+        link: '/employeemodule',
+      },
+      {
+        title: 'Onboarding Employees',
+        link: '/employeemodule/allemployees',
+      },
+    ]
   },
   {
     title: 'Time and Attendance',
@@ -260,8 +258,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Exit and Retirement',
-    link: '/',
     icon: 'assets/icons/ExitandRetirement.jpg',
+    children: [
+      {
+        title: 'Exit',
+        link: '/employeemodule/exitmanagement',
+      },
+      {
+        title: 'Retirements',
+        link: '/employeemodule/retirement',
+      },
+    ]
   },
   {
     title: 'Talent Management',

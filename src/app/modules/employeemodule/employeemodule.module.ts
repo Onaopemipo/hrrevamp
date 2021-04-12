@@ -1,4 +1,4 @@
-import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeployentServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -135,7 +135,9 @@ import {
     GetPromotionEligibilityListsServiceProxy,
     FetchEmployeeContractByEmployeeIdServiceProxy,
     GetConfirmationsByDetailsServiceProxy,
-    SaveConfirmationServiceProxy 
+    SaveConfirmationServiceProxy,
+    EmployeeDeploymentServiceProxy,
+    AddUpdateDeployentServiceProxy
   ]
    
     
