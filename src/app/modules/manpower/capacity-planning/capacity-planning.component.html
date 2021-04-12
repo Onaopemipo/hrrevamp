@@ -48,11 +48,11 @@
  <form id="caplanForm" name="caplanForm" #caplanForm="ngForm" >
     <div class="form-group">
         <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Activity Name:</label>
-        <input type="text" class="form-control" placeholder="Enter Leave Year Name" name="yearName"
-          #yearName="ngModel" [(ngModel)]="newleaveYear.yearName" required>
-          
-        <div *ngIf="yearName.invalid && (yearName.dirty || yearName.touched)" class="error">
-          <div *ngIf="yearName.errors.required">Leave Year name is required</div>
+        <input type="text" class="form-control" placeholder="Enter Activity Name" name="activityName"
+          #activityName="ngModel" [(ngModel)]="newcaplan.activityName" required>
+
+        <div *ngIf="activityName.invalid && (activityName.dirty || activityName.touched)" class="error">
+          <div *ngIf="activityName.errors.required">Leave Year name is required</div>
         </div>
       </div>
  </form>
