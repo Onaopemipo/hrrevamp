@@ -1,4 +1,4 @@
-import { LoadRepaymentScheduleServiceProxy, LoanRepaymentLog, SimulatePaymentServiceProxy } from './../../../_services/service-proxies';
+import { ServiceProxy, LoanRepaymentLog } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -23,21 +23,21 @@ export class ProcessRequestComponent implements OnInit {
   repaymentData: LoanRepaymentLog [] = [];
   simulationData: LoanRepaymentLog [] = [];
 
-  constructor(private loanRepayment: LoadRepaymentScheduleServiceProxy, private simulation: SimulatePaymentServiceProxy) { }
+  constructor(private service: ServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchRepayment();
   }
 
   async fetchRepayment(){
-    const data = await this.loanRepayment.loadRepaymentSchedule(1,1).toPromise();
+    const data = await this.service.loadRepaymentSchedule(1,1).toPromise();
     if(!data.hasError){
       this.repaymentData = data.result;
     }
   }
 
   async simulateLoan(){
-    const data = await this.simulation.simulatePayment(1,1,1,1,'').toPromise();
+    const data = await this.service.simulatePayment(1,1,1,1,'').toPromise();
     if(!data.hasError){
       this.simulationData = data.result;
     }
