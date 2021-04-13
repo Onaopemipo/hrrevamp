@@ -42,7 +42,7 @@
               align-items: center;
             "
           >
-          <span style="font-size: 18px; font-weight: 500;">{{finYear.spent | currency:'NGN':'symbol'}}</span>
+          <span style="font-size: 18px; font-weight: 500;">NGN {{finYear?.spent | number:'.2'}}</span>
           <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
         </div>
           <div>
@@ -67,7 +67,7 @@
                 "
               >
                 <span class="gray-1">Total budget</span>
-                <span class="header5-bold">{{finYear.totalBudgetAmount | currency:'NGN':'symbol'}}</span>
+                <span class="header5-bold">NGN{{finYear?.totalBudgetAmount | number:'.2'}}</span>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
               "
             >
               <span class="gray-1">Financial year</span>
-              <span class="header5-bold">{{finYear.financialYearStartDate | date : 'longDate'}} - {{finYear.financialYearEndDate | date : 'longDate'}}</span>
+              <span class="header5-bold">{{finYear?.financialYearStartDate | date : 'longDate'}} - {{finYear?.financialYearEndDate | date : 'longDate'}}</span>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
           "
         >
           <h5>{{budget.name}}</h5>
-          <div style="font-size: 1.3rem">{{budget.totalBudget | currency:'NGN':'symbol'}}</div>
+          <div style="font-size: 1.3rem">{{budget?.totalBudget | currency:'NGN':'symbol'}}</div>
           <div style="text-align: right; font-size: 1rem" class="grey">
             {{budget.totalBudget | currency:'NGN':'symbol'}} spent
           </div>
@@ -162,7 +162,7 @@
                 <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
               </div>
               <div>
-                <span>{{budget.departments.spent | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departments?.spent | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
               </div>
             </div>
@@ -191,12 +191,11 @@
       <div modal-header>Add Budget Item</div>
       <div modal-body>
         <div>
-
           <div class="row">
             <div class="form-group col">
               <label>Budget</label>
-              <select name="budget" id="">
-                <option *ngFor="let budget of myBudget" [value]="budget.id">{{item.financialYearStartDate	 | date : 'longDate'}} - {{item.financialYearEndDate | date : 'longDate'}}</option>
+              <select name="budget"class="form-control">
+                <option *ngFor="let budget of myBudget" [value]="budget.id">{{item?.financialYearStartDate	 | date : 'longDate'}} - {{item?.financialYearEndDate | date : 'longDate'}}</option>
               </select>
             </div>
           </div>
@@ -261,8 +260,8 @@
       <!-- <div style="margin-top: 15px;"></div> -->
   </ngx-side-modal>
   </div>
-
-  <ngx-side-modal [(show)]='addItemModal' style="width: 500px;">
+<!--
+  <ngx-side-modal style="width: 500px;">
     <div modal-header>Update Budget Item</div>
     <div modal-body>
       <form #editItem="ngForm" name="editItem">
@@ -299,8 +298,7 @@
           <div class="form-group row">
             <div class="col">
               <label>Allocated amount</label>
-              <app-amount-input [(value)]="departments.amount"></app-amount-input>
-            <!-- <input class="form-control"  name="allocatedAmount" #allocatedAmount="ngModel" [(ngModel)]="departments.amount"> -->
+              <app-amount-input></app-amount-input>
             </div>
           </div>
 
@@ -323,7 +321,7 @@
           </div>
         </form>
     </div>
-  </ngx-side-modal>
+  </ngx-side-modal> -->
 
   <ngx-side-modal [(show)]='editBudgetModal' style="width: 500px;">
   <h4 modal-header>Set up your overall budget</h4>
@@ -332,14 +330,14 @@
       <div class="form-group row">
         <div class="col">
           <label>Financial Year</label>
-        <ngx-date-range style="width: 60%;" [(start)]="finYear.financialYearStartDate" [(end)]="finYear.financialYearEndDate"></ngx-date-range>
+        <ngx-date-range style="width: 60%;"></ngx-date-range>
         </div>
 
       </div>
       <div class="form-group row">
        <div class="col">
         <label>Total amount</label>
-        <app-amount-input [(value)]="finYear.totalBudgetAmount"></app-amount-input>
+        <app-amount-input></app-amount-input>
        </div>
       </div>
       <div class="form-group row" style="margin-top: 20px">

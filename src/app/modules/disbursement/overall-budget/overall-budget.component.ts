@@ -46,7 +46,7 @@ export class OverallBudgetComponent implements OnInit {
 
   allDepartments: Department [] = [];
   overallBudget: MyBudget = new MyBudget;
-  myBudget: BudgetDTO [] = [];
+  myBudget: BudgetDTO[] = [];
   currentFinancialYear;
   dataIndex: number = 20781;
   finYear: BudgetDTO = new BudgetDTO;
@@ -57,12 +57,12 @@ export class OverallBudgetComponent implements OnInit {
   allItems: MyBudgetItem []= [];
 
   addBudgetItem(){
-    this.router.navigateByUrl('/disbursement/budget/setup');
+
+    // this.router.navigateByUrl('/disbursement/budget/setup');
   }
 
   modalShow(){
     this.addItemModal = !this.addItemModal;
-
   }
 
  async fetAllBudgetItems(){
@@ -84,8 +84,8 @@ export class OverallBudgetComponent implements OnInit {
 
   updateBudgetItem(id){
     this.editBudgetModal = !this.editBudgetModal;
-    let index = this.myBudget.indexOf(id)
-    console.log('this is the ID',index)
+    // let index = this.myBudget.indexOf(id)
+    // console.log('this is the ID',index)
     console.log('Here is your Budget', this.myBudget)
   }
 
