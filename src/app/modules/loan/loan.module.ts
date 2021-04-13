@@ -1,4 +1,4 @@
-import { AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, LoadRepaymentScheduleServiceProxy, SimulatePaymentServiceProxy, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateLoanTypeServiceProxy, ServiceProxy } from './../../_services/service-proxies';
 import { LoanComponent } from './loan.component';
 import { NbCardModule, NbCheckboxModule, NbSelectModule, NbToggleModule } from '@nebular/theme';
 import { ThemeModule } from './../../@theme/theme.module';
@@ -28,12 +28,7 @@ import { UpdateLoanComponent } from './update-loan/update-loan.component';
 
   providers: [
     AddUpdateLoanTypeServiceProxy,
-    LoadRepaymentScheduleServiceProxy,
-    UpdateLoanRequestServiceProxy,
-    SimulatePaymentServiceProxy,
-    GetLoanRequestsServiceProxy,
-    GetLoanSummaryServiceProxy,
-    UpdateLoanRequestServiceProxy,
+    ServiceProxy,
   ]
 })
 export class LoanModule { }
