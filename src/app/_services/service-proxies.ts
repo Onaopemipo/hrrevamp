@@ -7005,11 +7005,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUploadId(response_);
+            return this.processBulkUploadid(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUploadId(<any>response_);
+                    return this.processBulkUploadid(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7018,7 +7018,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUploadId(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -8055,12 +8055,13 @@ export class GetTalentPoolServiceProxy {
      * @param message (optional) 
      * @param isSuccessful (optional) 
      * @param retId (optional) 
-     * @param htmlData (optional) 
+     * @param bulkUploadId (optional) 
+     * @param bulkUploadHtmlData (optional) 
      * @param redirectUrl (optional) 
      * @param errors (optional) 
      * @return Success
      */
-    fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, htmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
+    fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
         let url_ = this.baseUrl + "/api/CareerSuccession/GetTalentPool/FetchTalentPool?";
         if (user_id === null)
             throw new Error("The parameter 'user_id' cannot be null.");
@@ -8156,8 +8157,12 @@ export class GetTalentPoolServiceProxy {
             throw new Error("The parameter 'retId' cannot be null.");
         else if (retId !== undefined)
             url_ += "RetId=" + encodeURIComponent("" + retId) + "&";
-        if (htmlData !== undefined && htmlData !== null)
-            url_ += "HtmlData=" + encodeURIComponent("" + htmlData) + "&";
+        if (bulkUploadId === null)
+            throw new Error("The parameter 'bulkUploadId' cannot be null.");
+        else if (bulkUploadId !== undefined)
+            url_ += "BulkUploadId=" + encodeURIComponent("" + bulkUploadId) + "&";
+        if (bulkUploadHtmlData !== undefined && bulkUploadHtmlData !== null)
+            url_ += "BulkUploadHtmlData=" + encodeURIComponent("" + bulkUploadHtmlData) + "&";
         if (redirectUrl !== undefined && redirectUrl !== null)
             url_ += "RedirectUrl=" + encodeURIComponent("" + redirectUrl) + "&";
         if (errors !== undefined && errors !== null)
@@ -17849,79 +17854,6 @@ export class AddUpdateLoanTypeServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    addUpdateLoanRequest(body: NewLoanRequestDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/AddUpdateLoanType/Add-Update-Loan-Request";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddUpdateLoanRequest(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processAddUpdateLoanRequest(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processAddUpdateLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
-
-    /**
-     * @param body (optional) 
-     * @return Success
-     */
     addUpdateLoanType(body: LoanTypeDTO | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LoanType/AddUpdateLoanType/Add-Update-LoanType";
         url_ = url_.replace(/[?&]$/, "");
@@ -23837,7 +23769,7 @@ export class GetLeaveYearServiceProxy {
 }
 
 @Injectable()
-export class PostFullRepaymentServiceProxy {
+export class ServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -23851,8 +23783,81 @@ export class PostFullRepaymentServiceProxy {
      * @param body (optional) 
      * @return Success
      */
+    addUpdateLoanRequest(body: NewLoanRequestDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/Add-Update-Loan-Request";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateLoanRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateLoanRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
     postFullRepayment(body: PostLoanDto | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/PostFullRepayment/Post-Full-Repayment";
+        let url_ = this.baseUrl + "/Post-Full-Repayment";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -23919,18 +23924,6 @@ export class PostFullRepaymentServiceProxy {
         }
         return _observableOf<MessageOutApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class SimulatePaymentServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param principal (optional) 
@@ -23941,7 +23934,7 @@ export class SimulatePaymentServiceProxy {
      * @return Success
      */
     simulatePayment(principal: number | undefined, interestType: number | undefined, tenor: number | undefined, interestRate: number | undefined, effectiveDate: string | null | undefined): Observable<LoanRepaymentLogIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/SimulatePayment/SimulatePayment?";
+        let url_ = this.baseUrl + "/SimulatePayment?";
         if (principal === null)
             throw new Error("The parameter 'principal' cannot be null.");
         else if (principal !== undefined)
@@ -24022,18 +24015,6 @@ export class SimulatePaymentServiceProxy {
         }
         return _observableOf<LoanRepaymentLogIListApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class GetLoanRequestsServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param userid (optional) 
@@ -24048,7 +24029,7 @@ export class GetLoanRequestsServiceProxy {
      * @return Success
      */
     getLoanRequests(userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/GetLoanRequests/GetLoanRequests?";
+        let url_ = this.baseUrl + "/GetLoanRequests?";
         if (userid === null)
             throw new Error("The parameter 'userid' cannot be null.");
         else if (userid !== undefined)
@@ -24145,25 +24126,13 @@ export class GetLoanRequestsServiceProxy {
         }
         return _observableOf<LoanRequestDTOIListApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class GetLoanSummaryServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param loanId (optional) 
      * @return Success
      */
     getLoanSummary(loanId: string | null | undefined): Observable<IdNameObjIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/GetLoanSummary/GetLoanSummary?";
+        let url_ = this.baseUrl + "/GetLoanSummary?";
         if (loanId !== undefined && loanId !== null)
             url_ += "LoanId=" + encodeURIComponent("" + loanId) + "&";
         url_ = url_.replace(/[?&]$/, "");
@@ -24228,25 +24197,13 @@ export class GetLoanSummaryServiceProxy {
         }
         return _observableOf<IdNameObjIListApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class UpdateLoanRequestServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param body (optional) 
      * @return Success
      */
     updateLoanRequest(body: UpdateLoadRequestDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/UpdateLoanRequest/UpdateLoanRequest";
+        let url_ = this.baseUrl + "/UpdateLoanRequest";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -24313,18 +24270,6 @@ export class UpdateLoanRequestServiceProxy {
         }
         return _observableOf<MessageOutApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class LoadRepaymentScheduleServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param loanId (optional) 
@@ -24332,7 +24277,7 @@ export class LoadRepaymentScheduleServiceProxy {
      * @return Success
      */
     loadRepaymentSchedule(loanId: number | undefined, recompute: number | undefined): Observable<LoanRepaymentLogIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/LoadRepaymentSchedule/LoadRepaymentSchedule?";
+        let url_ = this.baseUrl + "/LoadRepaymentSchedule?";
         if (loanId === null)
             throw new Error("The parameter 'loanId' cannot be null.");
         else if (loanId !== undefined)
@@ -24403,18 +24348,6 @@ export class LoadRepaymentScheduleServiceProxy {
         }
         return _observableOf<LoanRepaymentLogIListApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class FetchLoanRequestsServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param userid (optional) 
@@ -24429,7 +24362,7 @@ export class FetchLoanRequestsServiceProxy {
      * @return Success
      */
     fetchLoanRequests(userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/FetchLoanRequests/FetchLoanRequests?";
+        let url_ = this.baseUrl + "/FetchLoanRequests?";
         if (userid === null)
             throw new Error("The parameter 'userid' cannot be null.");
         else if (userid !== undefined)
@@ -24526,18 +24459,6 @@ export class FetchLoanRequestsServiceProxy {
         }
         return _observableOf<LoanRequestDTOIListApiResult>(<any>null);
     }
-}
-
-@Injectable()
-export class GetLoanRequestServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
-    }
 
     /**
      * @param companyId (optional) 
@@ -24546,7 +24467,7 @@ export class GetLoanRequestServiceProxy {
      * @return Success
      */
     getLoanRequest(companyId: number | undefined, loanreqId: number | undefined, userid: number | undefined): Observable<LoanRequestApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/GetLoanRequest/GetLoanRequest?";
+        let url_ = this.baseUrl + "/GetLoanRequest?";
         if (companyId === null)
             throw new Error("The parameter 'companyId' cannot be null.");
         else if (companyId !== undefined)
@@ -34132,12 +34053,13 @@ export class RetirementServiceProxy {
      * @param message (optional) 
      * @param isSuccessful (optional) 
      * @param retId (optional) 
-     * @param htmlData (optional) 
+     * @param bulkUploadId (optional) 
+     * @param bulkUploadHtmlData (optional) 
      * @param redirectUrl (optional) 
      * @param errors (optional) 
      * @return Success
      */
-    getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, htmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
+    getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/GetRetirmentByEmployeeId?";
         if (user_id === null)
             throw new Error("The parameter 'user_id' cannot be null.");
@@ -34233,8 +34155,12 @@ export class RetirementServiceProxy {
             throw new Error("The parameter 'retId' cannot be null.");
         else if (retId !== undefined)
             url_ += "RetId=" + encodeURIComponent("" + retId) + "&";
-        if (htmlData !== undefined && htmlData !== null)
-            url_ += "HtmlData=" + encodeURIComponent("" + htmlData) + "&";
+        if (bulkUploadId === null)
+            throw new Error("The parameter 'bulkUploadId' cannot be null.");
+        else if (bulkUploadId !== undefined)
+            url_ += "BulkUploadId=" + encodeURIComponent("" + bulkUploadId) + "&";
+        if (bulkUploadHtmlData !== undefined && bulkUploadHtmlData !== null)
+            url_ += "BulkUploadHtmlData=" + encodeURIComponent("" + bulkUploadHtmlData) + "&";
         if (redirectUrl !== undefined && redirectUrl !== null)
             url_ += "RedirectUrl=" + encodeURIComponent("" + redirectUrl) + "&";
         if (errors !== undefined && errors !== null)
@@ -40459,7 +40385,8 @@ export class VwUserObj implements IVwUserObj {
     message!: string | undefined;
     isSuccessful!: boolean;
     retId!: number;
-    htmlData!: string | undefined;
+    bulkUploadId!: number;
+    bulkUploadHtmlData!: string | undefined;
     redirectUrl!: string | undefined;
     errors!: string[] | undefined;
 
@@ -40510,7 +40437,8 @@ export class VwUserObj implements IVwUserObj {
             this.message = _data["message"];
             this.isSuccessful = _data["isSuccessful"];
             this.retId = _data["retId"];
-            this.htmlData = _data["htmlData"];
+            this.bulkUploadId = _data["bulkUploadId"];
+            this.bulkUploadHtmlData = _data["bulkUploadHtmlData"];
             this.redirectUrl = _data["redirectUrl"];
             if (Array.isArray(_data["errors"])) {
                 this.errors = [] as any;
@@ -40565,7 +40493,8 @@ export class VwUserObj implements IVwUserObj {
         data["message"] = this.message;
         data["isSuccessful"] = this.isSuccessful;
         data["retId"] = this.retId;
-        data["htmlData"] = this.htmlData;
+        data["bulkUploadId"] = this.bulkUploadId;
+        data["bulkUploadHtmlData"] = this.bulkUploadHtmlData;
         data["redirectUrl"] = this.redirectUrl;
         if (Array.isArray(this.errors)) {
             data["errors"] = [];
@@ -40616,7 +40545,8 @@ export interface IVwUserObj {
     message: string | undefined;
     isSuccessful: boolean;
     retId: number;
-    htmlData: string | undefined;
+    bulkUploadId: number;
+    bulkUploadHtmlData: string | undefined;
     redirectUrl: string | undefined;
     errors: string[] | undefined;
 }
@@ -40684,7 +40614,8 @@ export class MessageOut implements IMessageOut {
     message!: string | undefined;
     isSuccessful!: boolean;
     retId!: number;
-    htmlData!: string | undefined;
+    bulkUploadId!: number;
+    bulkUploadHtmlData!: string | undefined;
     redirectUrl!: string | undefined;
     errors!: string[] | undefined;
 
@@ -40702,7 +40633,8 @@ export class MessageOut implements IMessageOut {
             this.message = _data["message"];
             this.isSuccessful = _data["isSuccessful"];
             this.retId = _data["retId"];
-            this.htmlData = _data["htmlData"];
+            this.bulkUploadId = _data["bulkUploadId"];
+            this.bulkUploadHtmlData = _data["bulkUploadHtmlData"];
             this.redirectUrl = _data["redirectUrl"];
             if (Array.isArray(_data["errors"])) {
                 this.errors = [] as any;
@@ -40724,7 +40656,8 @@ export class MessageOut implements IMessageOut {
         data["message"] = this.message;
         data["isSuccessful"] = this.isSuccessful;
         data["retId"] = this.retId;
-        data["htmlData"] = this.htmlData;
+        data["bulkUploadId"] = this.bulkUploadId;
+        data["bulkUploadHtmlData"] = this.bulkUploadHtmlData;
         data["redirectUrl"] = this.redirectUrl;
         if (Array.isArray(this.errors)) {
             data["errors"] = [];
@@ -40746,7 +40679,8 @@ export interface IMessageOut {
     message: string | undefined;
     isSuccessful: boolean;
     retId: number;
-    htmlData: string | undefined;
+    bulkUploadId: number;
+    bulkUploadHtmlData: string | undefined;
     redirectUrl: string | undefined;
     errors: string[] | undefined;
 }

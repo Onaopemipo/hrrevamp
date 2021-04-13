@@ -4,6 +4,14 @@ import { IStatus,MyColor } from 'app/components/status/models';
 import { ColumnTypes, TableActionEvent ,TableAction, ACTIONS} from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { DataServiceProxy, DepartmentActivityDTO, ManpowerServiceProxy } from 'app/_services/service-proxies';
+export interface planRequirement{
+  ID?: number,
+  jobCategory?: string,
+  categorytypeName?: string,
+  categoryType?: any,
+  numberOfStaff?: number,
+  costPerResource?: number
+}
 
 export class ActivityWithStatus extends DepartmentActivityDTO implements IStatus {
   activity: DepartmentActivityDTO;
@@ -58,7 +66,7 @@ export class CapacityPlanningComponent implements OnInit {
   totalItems = 0;
   currentPage = 1;
   tableColumns = [
-    {name: 'activityName', title: 'Activity Name',type: ColumnTypes.Text},
+    {name: 'activityTypeName', title: 'Activity Name',type: ColumnTypes.Text},
     {name: 'activityTypeName', title: 'Task Type',type: ColumnTypes.Text},
     {name: 'description', title: 'Justification',type: ColumnTypes.Text},
     { name: 'requirements', title: 'Requirements', type: ColumnTypes.Object},
@@ -69,6 +77,13 @@ export class CapacityPlanningComponent implements OnInit {
     { name: ACTIONS.VIEW, label: 'View' },
     { name: ACTIONS.EDIT, label: 'Edit' },
   ];
+  projecttask: boolean = false;
+  todaysDate: Date;
+  planrequirement: planRequirement = {};
+  JcategoryType = [];
+jobRole = []
+Jobgrade =  []
+JobPosition = []
   constructor(private alertservice: AlertserviceService,private myDropdown: DataServiceProxy,private ManpowerService: ManpowerServiceProxy) { }
 
   get showEmpty() {
@@ -95,7 +110,16 @@ export class CapacityPlanningComponent implements OnInit {
     }
 
   }
+  get validateStartdate() {
+    if (this.newcaplan.startDate) {return true;}
+    return false;
+  }
+  get validateEnddate() {
+    if (this.newcaplan.endDate) {return true;}
+    return false;
+  }
   createPlan() {
+    this.newcaplan
     this.ManpowerService.addUpdateDepartmentActivity(this.newcaplan).subscribe(data => {
       
     })
@@ -112,8 +136,38 @@ export class CapacityPlanningComponent implements OnInit {
         }
       })
   }
+  
+  getdate(event){
+    var item = event.srcElement.value;
+    this.projecttask =  item == 2 ? true: false;
+    if(this.projecttask){
+      this.todaysDate = new Date();
+    }
+    this.newcaplan.year = 0;
+  }
+  loadselected(event){
+    var jcat = event.srcElement.value;
+    if(jcat == "Job Role"){
+this.JcategoryType = this.jobRole;
+    }
+    if(jcat == "Position"){
+      this.JcategoryType=[];
+      this.JobPosition.forEach(value=>{
+        let newObj = {
+          ID: value.ID,
+          name: value.title
+        }
+        this.JcategoryType.push(newObj)
+      });
+          }
+          if(jcat == "Grade"){
+            this.JcategoryType = this.Jobgrade;
+                }
+  }
   ngOnInit(): void {
     this.getallCaplan();
+    this.newcaplan.startDate = new Date();
+    this.newcaplan.endDate = new Date();
   }
 
 }

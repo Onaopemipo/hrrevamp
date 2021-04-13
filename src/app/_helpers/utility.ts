@@ -4,13 +4,11 @@ export const Util = {
 
 
         if (env === 'local') {
-            return 'https://localhost:44381';
+   
         }
 
         if (env === 'development') {
-            // tslint:disable-next-line: no-shadowed-variable
-            const baseURL = JSON.parse(localStorage.getItem('baseUrl'));
-            return baseURL;
+            return 'http://51.124.39.23:8008';
         }
 
         if (env === 'companydevelopment') {
@@ -26,17 +24,16 @@ export const Util = {
         }
 
         if (env === 'production') {
-            const baseURL = JSON.parse(localStorage.getItem('baseUrl'));
-            return baseURL;
+            return 'http://51.124.39.23:8008';
         }
 
 
         if (env === 'localmain') {
-            return 'http://localhost:8000/api/';
+       
         }
 
         if (env === 'developmentmain') {
-            return 'https://qatestbed.azurewebsites.net/api/mobile/';
+        
         }
 
         if (env === 'companydevelopmentmain') {

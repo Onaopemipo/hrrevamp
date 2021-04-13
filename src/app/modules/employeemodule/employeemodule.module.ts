@@ -1,4 +1,4 @@
-import { AddUpdateDeployentServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeployentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -54,6 +54,7 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { ExitRequestService } from './services/exit-request.service';
+import { CustomServiceService  } from '../../_services/custom-service.service';
 import {
   GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
   RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy,
@@ -137,7 +138,9 @@ import {
     GetConfirmationsByDetailsServiceProxy,
     SaveConfirmationServiceProxy,
     EmployeeDeploymentServiceProxy,
-    AddUpdateDeployentServiceProxy
+    AddUpdateDeployentServiceProxy,
+    BulkMasterServiceProxy,
+    CustomServiceService
   ]
    
     
