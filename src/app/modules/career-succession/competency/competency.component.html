@@ -1,20 +1,20 @@
-<ngx-componentsheader *ngIf="!newRole" pageName='Competency'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="newRole && selectedCase=='Role_Details'" [requiredButton]="[{name:'newRole', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="newRole && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="!newCompetency" pageName='Competency'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newCompetency && selectedCase=='Role_Details'" [requiredButton]="[{name:'newCompetency', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newCompetency && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
 
-<div *ngIf="!newRole" style="background-color: #ffffff;">
+<div *ngIf="!newCompetency" style="background-color: #ffffff;">
   <nb-card>
     <nb-card-body>
       <div><br>
         <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="addNewRole()"></ngx-default-content>
+          (buttonClick)="addNew()"></ngx-default-content>
       </div>
     </nb-card-body>
   </nb-card>
 
 </div>
 
-<div *ngIf="newRole" class="row">
+<div *ngIf="newCompetency" class="row">
   <div class="col-lg-3 col-md-3 col-xxl-3">
     <nb-card>
     <div>
@@ -133,17 +133,41 @@
                   <div class="col-sm-3"></div>
                   <div class="col-sm-8">
                     <div class="row" style="display: flex; justify-content: space-between; flex-direction: row;">
-                      <div class="col-sm-6">
+                      <div *ngIf="requirement =='skills'"  class="col-sm-6">
                         <label for="">Skill Type</label>
-                        <select class="custom-select" name="qualificationCategory" (change)="toggleRequirement($event.target.value)" required>
+                        <select class="custom-select" name="skills" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='training'" class="col-sm-6">
+                        <label for="">Training Type</label>
+                        <select class="custom-select" name="training" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='experience'" class="col-sm-6">
+                        <label for="">Certification Type</label>
+                        <select class="custom-select" name="certification" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='qualification'" class="col-sm-6">
+                        <label for="">Qualification Type</label>
+                        <select class="custom-select" name="qualification"  required>
                         <option value="">--Select Level--</option>
                         <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
                       </select>
                       </div>
 
                       <div class="col-sm-6">
-                        <label for="">Experience (Months) </label>
-                        <input type="number" class="form-control" name="qualificationCategory" placeholder="12" required>
+                        <label for="">Experience (Months)</label>
+                        <input type="number" class="form-control" name="experienceValue" placeholder="Months">
                       </div>
                     </div>
 
@@ -154,14 +178,14 @@
                   <div class="col-sm-3"></div>
                   <div class="col-sm-8">
                     <div class="row" style="display: flex; justify-content: space-between; flex-direction: row;">
-                      <div class="col-sm-6">
+                      <div *ngIf="requirement =='skills'" class="col-sm-6">
                         <label for="">Skill Weight</label>
                         <input type="number" class="form-control" name="skillWeight" placeholder="Points" required>
                       </div>
 
                       <div *ngIf="requirement =='training'" class="col-sm-6">
                         <label for="">Training Weight</label>
-                        <input type="number" class="form-control" name="skillWeight" placeholder="Points" required>
+                        <input type="number" class="form-control" name="trainingWeight" placeholder="Points" required>
                       </div>
 
                       <div *ngIf="requirement =='qualification'" class="col-sm-6">
@@ -169,14 +193,14 @@
                         <input type="number" class="form-control" name="qualificationWeight" placeholder="Points" required>
                       </div>
 
-                      <div *ngIf="requirement =='qualification'" class="col-sm-6">
+                      <div *ngIf="requirement =='certification'" class="col-sm-6">
                         <label for="">Certification Weight</label>
                         <input type="number" class="form-control" name="certificationWeight" placeholder="Points" required>
                       </div>
 
                       <div class="col-sm-6">
                         <label for="">Experience Weight</label>
-                        <input type="number" class="form-control" name="qualificationCategory" placeholder="12" required>
+                        <input type="number" class="form-control" name="experienceWeight" placeholder="12" required>
                       </div>
                     </div>
 

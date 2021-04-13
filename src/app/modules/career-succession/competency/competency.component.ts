@@ -15,7 +15,7 @@ export class CompetencyComponent implements OnInit {
 
   myButton: string = 'Create New';
   scoreCardClick: boolean = false;
-  newRole: boolean = false;
+  newCompetency: boolean = false;
   myPanel: string = '';
   selectedCase: string = 'Role';
   selectedPanel: any = { title: 'Role', label: 'Role', status: 'Active'};
@@ -27,7 +27,7 @@ export class CompetencyComponent implements OnInit {
   requirementList = [
     { title: 'Skill', label: 'Skills'},
     { title: 'training', label: 'Training'},
-    { title: 'qualfication', label: 'Qualfication'},
+    { title: 'qualification', label: 'Qualification'},
     { title: 'certification', label: 'Certification'},
     { title: 'experience', label: 'Experience'},
 
@@ -39,7 +39,7 @@ export class CompetencyComponent implements OnInit {
   skillData: Skill [] = [];
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
-  requirement: string = 'Skills';
+  requirement: string = 'skills';
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy) { }
@@ -59,6 +59,10 @@ export class CompetencyComponent implements OnInit {
 
   createCompetency(){
 
+  }
+
+  addNew(){
+    this.newCompetency = !this.newCompetency;
   }
 
   async fetchSkills(){
