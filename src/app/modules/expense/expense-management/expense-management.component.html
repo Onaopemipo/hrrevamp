@@ -1,213 +1,344 @@
 <ng-template [ngIf]="!showModal">
   <ngx-componentsheader
-  pageName="Expense Management"
-  [requiredButton]="topActionButtons"
-  (buttonClick)="pageActionClicked($event)"
-></ngx-componentsheader>
-<div class="main-page-container">
-  <nb-tabset (changeTab)="selectTab($event)">
-    <nb-tab tabTitle="Projects" [tabId]="TABS.PROJECTS"> </nb-tab
-    ><nb-tab tabTitle="Types" [tabId]="TABS.TYPES"> </nb-tab>
-  </nb-tabset>
-  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
-  ><ngx-default-content
-    *ngIf="showEmpty"
-    pageHeader="let's set up your expenses"
-    pageDescription="Start your setup by creating a project"
-    buttonValue="Create Project"
-    (buttonClick)="createNewClicked()"
-  >
-  </ngx-default-content>
-  <ngx-tablecomponent
-    *ngIf="!showEmpty"
-    [tableColum]="_tableColumns"
-    [userData]="tableData"
-    [loading]="loading"
-    (pageChange)="loadNewPage($event)"
-  ></ngx-tablecomponent>
-</div>
+    pageName="Expense Management"
+    [requiredButton]="topActionButtons"
+    (buttonClick)="pageActionClicked($event)"
+  ></ngx-componentsheader>
+  <div class="main-page-container">
+    <nb-tabset (changeTab)="selectTab($event)">
+      <nb-tab tabTitle="Projects" [tabId]="TABS.PROJECTS"> </nb-tab
+      ><nb-tab tabTitle="Types" [tabId]="TABS.TYPES"> </nb-tab>
+    </nb-tabset>
+    <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+    ><ngx-default-content
+      *ngIf="showEmpty"
+      pageHeader="let's set up your expenses"
+      pageDescription="Start your setup by creating a project"
+      buttonValue="Create Project"
+      (buttonClick)="createNewClicked()"
+    >
+    </ngx-default-content>
+    <ngx-tablecomponent
+      *ngIf="!showEmpty"
+      [tableColum]="_tableColumns"
+      [userData]="tableData"
+      [loading]="loading"
+      (pageChange)="loadNewPage($event)"
+    ></ngx-tablecomponent>
+  </div>
 </ng-template>
 
 <div *ngIf="showModal && selectedTab === TABS.PROJECTS">
-  <div modal-header>Add Project</div>
-  <form *ngIf="uploadType =='manual'" #projectForm="ngForm" name="projectForm">
-    <div modal-body>
+  <h4 modal-header>Add Project</h4>
+  <form *ngIf="uploadType == 'manual'" #projectForm="ngForm" name="projectForm">
+    <div modal-body style="background-color: white;">
       <div class="my-form">
         <h4>Add Manually</h4>
 
         <div class="form-group row">
           <label class="col-sm-3" for="Name" class="col-sm-3">Name</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" placeholder="Name" name="name" #name="ngModel" [(ngModel)]="allProjects.name">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              name="name"
+              #name="ngModel"
+              [(ngModel)]="allProjects.name"
+            />
           </div>
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="error"
+          >
             <div *ngIf="name.errors.required">Name is required</div>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-3" for="Name" class="col-sm-3">Reference Id</label>
+          <label class="col-sm-3" for="Name" class="col-sm-3"
+            >Reference Id</label
+          >
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <input type="text" class="form-control" placeholder="Name" name="referenceId" #referenceId="ngModel" [(ngModel)]="allProjects.referenceId">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              name="referenceId"
+              #referenceId="ngModel"
+              [(ngModel)]="allProjects.referenceId"
+            />
           </div>
-          <div *ngIf="name.invalid && (referenceId.dirty || referenceId.touched)" class="error">
-            <div *ngIf="referenceId.errors.required">Reference Id is required</div>
+          <div
+            *ngIf="name.invalid && (referenceId.dirty || referenceId.touched)"
+            class="error"
+          >
+            <div *ngIf="referenceId.errors.required">
+              Reference Id is required
+            </div>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-3" for="Start Date">Start Date:</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <ngx-date [max]="allProjects.endDate" [(value)]="allProjects.startDate"></ngx-date>
+            <ngx-date
+              [max]="allProjects.endDate"
+              [(value)]="allProjects.startDate"
+            ></ngx-date>
           </div>
         </div>
 
-      <div class="form-group row">
+        <div class="form-group row">
           <label class="col-sm-3" for="End Date">End Date:</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <ngx-date [(value)]="allProjects.endDate" [min]="allProjects.startDate"></ngx-date>
+            <ngx-date
+              [(value)]="allProjects.endDate"
+              [min]="allProjects.startDate"
+            ></ngx-date>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-3">Description</label>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <ngx-wysisyg-input [(value)]="allProjects.description"></ngx-wysisyg-input>
+            <ngx-wysisyg-input
+              [(value)]="allProjects.description"
+            ></ngx-wysisyg-input>
           </div>
         </div>
-
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-      <div  class="col-sm-6 col-md-6 col-lg-6">
-        <button nbButton status="primary" (click)="createProject()">Save</button>
-        <span style="padding: 8px;"></span>
-        <button nbButton style="color: #4847E0;">Cancel</button>
+      <label class="col-sm-3 col-form-label" style="font-weight: bold"></label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <button nbButton status="primary" (click)="createProject()">
+          Save
+        </button>
+        <span style="padding: 8px"></span>
+        <button nbButton style="color: #4847e0">Cancel</button>
       </div>
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-      <div  class="col-sm-6 col-md-6 col-lg-6">
-        <button nbButton style="color: #4847E0;" (click)="changeUploadType('bulk')">Upload Excel Instead</button>
+      <label class="col-sm-3 col-form-label" style="font-weight: bold"></label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <button
+          nbButton
+          style="color: #4847e0"
+          (click)="changeUploadType('bulk')"
+        >
+          Upload Excel Instead
+        </button>
       </div>
     </div>
   </form>
 
-  <form *ngIf="uploadType =='bulk'">
+  <form *ngIf="uploadType == 'bulk'">
     <div class="form-group row mydiv">
-      <label for="website" class="col-sm-3 col-form-label mylabel">Upload Excel Document</label>
+      <label for="website" class="col-sm-3 col-form-label mylabel"
+        >Upload Excel Document</label
+      >
 
       <ngx-file-upload></ngx-file-upload>
 
       <div class="col-md-4 col-lg-4 col-sm-4">
-        <i class="fa fa-download" style="color: #4847E0; padding: 10px;" aria-hidden="true"></i>
-        <span style="color: #4847E0; padding: 10px;" >Download Template</span>
+        <i
+          class="fa fa-download"
+          style="color: #4847e0; padding: 10px"
+          aria-hidden="true"
+        ></i>
+        <span style="color: #4847e0; padding: 10px">Download Template</span>
       </div>
     </div>
 
-        <div class="form-group row">
-          <label for="save" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-          <div class="col-md-4 col-lg-4 col-sm-4" style="padding-left: 0px;">
-            <button nbButton status="primary">Save</button>
-            <div style="padding: 10px 10px 10px 0px;"><span>
-              <a (click)="changeUploadType('manual')" style="cursor: pointer; color: #4847E0; text-decoration: underline;">Add Project Manually</a></span></div>
-
-          </div>
+    <div class="form-group row">
+      <label
+        for="save"
+        class="col-sm-3 col-form-label"
+        style="font-weight: bold"
+      ></label>
+      <div class="col-md-4 col-lg-4 col-sm-4" style="padding-left: 0px">
+        <button nbButton status="primary">Save</button>
+        <div style="padding: 10px 10px 10px 0px">
+          <span>
+            <a
+              (click)="changeUploadType('manual')"
+              style="
+                cursor: pointer;
+                color: #4847e0;
+                text-decoration: underline;
+              "
+              >Add Project Manually</a
+            ></span
+          >
         </div>
-      </form>
+      </div>
+    </div>
+  </form>
 </div>
 
 <div *ngIf="showModal && selectedTab === TABS.TYPES">
   <div modal-header>Add Expense Type</div>
-<form *ngIf="uploadType =='manual'" #expenseTypeForm="ngForm" name="expenseTypeForm">
-  <div modal-body>
-    <div class="my-form">
-      <h4>Add Manually</h4>
+  <form
+    *ngIf="uploadType == 'manual'"
+    #expenseTypeForm="ngForm"
+    name="expenseTypeForm"
+  >
+    <div modal-body style="background-color: white;">
+      <div class="my-form">
+        <h4>Add Manually</h4>
 
-      <div class="form-group row">
-        <label class="col-sm-3">Budget code<span style="font-weight: 300">(optional)</span></label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <input type="text" class="form-control" placeholder="Budget Code" name="projectCode" #projectCode="ngModel" [(ngModel)]="myexpenseType.code">
+        <div class="form-group row">
+          <label class="col-sm-3"
+            >Budget code<span style="font-weight: 300">(optional)</span></label
+          >
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Budget Code"
+              name="projectCode"
+              #projectCode="ngModel"
+              [(ngModel)]="myexpenseType.code"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="Name" class="col-sm-3">Name</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <input type="text" class="form-control" placeholder="Name" name="name" #name="ngModel" [(ngModel)]="myexpenseType.name">
+        <div class="form-group row">
+          <label for="Name" class="col-sm-3">Name</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              name="name"
+              #name="ngModel"
+              [(ngModel)]="myexpenseType.name"
+            />
+          </div>
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="error"
+          >
+            <div *ngIf="name.errors.required">Name is required</div>
+          </div>
         </div>
-        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-          <div *ngIf="name.errors.required">Name is required</div>
-        </div>
-      </div>
 
-      <div class="form-group row">
-        <label class="col-sm-3" for="Name" class="col-sm-3">Reference Id</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <input type="text" class="form-control" placeholder="Name" name="referenceId" #referenceId="ngModel" [(ngModel)]="myexpenseType.referenceId">
-        </div>
-        <div *ngIf="name.invalid && (referenceId.dirty || referenceId.touched)" class="error">
-          <div *ngIf="referenceId.errors.required">Reference Id is required</div>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label class="col-sm-3">Sub-type<span style="font-weight: 300">(optional)</span></label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <input type="text" class="form-control" placeholder="Sub-Type" name="subType" #subType="ngModel" [(ngModel)]="myexpenseType.subID">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label class="col-sm-3">Description</label>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <ngx-wysisyg-input [(value)]="myexpenseType.description"></ngx-wysisyg-input>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-    <div  class="col-sm-6 col-md-6 col-lg-6">
-      <button nbButton status="primary" (click)="createTypes()">Save</button>
-      <span style="padding: 8px;"></span>
-      <button nbButton style="color: #4847E0;">Cancel</button>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-    <div  class="col-sm-6 col-md-6 col-lg-6">
-      <button nbButton style="color: #4847E0;" (click)="changeUploadType('bulk')" #bulk>Upload Excel Instead</button>
-    </div>
-  </div>
-</form>
-
-<form *ngIf="uploadType =='bulk'">
-      <div class="form-group row mydiv">
-        <label for="website" class="col-sm-3 col-form-label mylabel">Upload Excel Document</label>
-
-        <ngx-file-upload></ngx-file-upload>
-
-        <div class="col-md-4 col-lg-4 col-sm-4">
-          <i class="fa fa-download" style="color: #4847E0; padding: 10px;" aria-hidden="true"></i>
-          <span style="color: #4847E0; padding: 10px;" >Download Template</span>
-        </div>
-      </div>
-
-          <div class="form-group row">
-            <label for="save" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-            <div class="col-md-4 col-lg-4 col-sm-4" style="padding-left: 0px;">
-              <button nbButton status="primary" (click)="uploadVendor()">Save</button>
-              <div style="padding: 10px 10px 10px 0px;"><span>
-                <a (click)="changeUploadType('manually')" style="cursor: pointer; color: #4847E0; text-decoration: underline;">Add Expense Type Manually</a></span></div>
-
+        <div class="form-group row"> 
+          <label class="col-sm-3" for="Name" class="col-sm-3"
+            >Reference Id</label
+          >
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              name="referenceId"
+              #referenceId="ngModel"
+              [(ngModel)]="myexpenseType.referenceId"
+            />
+          </div>
+          <div
+            *ngIf="name.invalid && (referenceId.dirty || referenceId.touched)"
+            class="error"
+          >
+            <div *ngIf="referenceId.errors.required">
+              Reference Id is required
             </div>
           </div>
-        </form>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3"
+            >Sub-type<span style="font-weight: 300">(optional)</span></label
+          >
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Sub-Type"
+              name="subType"
+              #subType="ngModel"
+              [(ngModel)]="myexpenseType.subID"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3">Description</label>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <ngx-wysisyg-input
+              [(value)]="myexpenseType.description"
+            ></ngx-wysisyg-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" style="font-weight: bold"></label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <button nbButton status="primary" (click)="createTypes()">Save</button>
+        <span style="padding: 8px"></span>
+        <button nbButton style="color: #4847e0">Cancel</button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" style="font-weight: bold"></label>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+        <button
+          nbButton
+          style="color: #4847e0"
+          (click)="changeUploadType('bulk')"
+          #bulk
+        >
+          Upload Excel Instead
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <form *ngIf="uploadType == 'bulk'">
+    <div class="form-group row mydiv">
+      <label for="website" class="col-sm-3 col-form-label mylabel"
+        >Upload Excel Document</label
+      >
+
+      <ngx-file-upload></ngx-file-upload>
+
+      <div class="col-md-4 col-lg-4 col-sm-4">
+        <i
+          class="fa fa-download"
+          style="color: #4847e0; padding: 10px"
+          aria-hidden="true"
+        ></i>
+        <span style="color: #4847e0; padding: 10px">Download Template</span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label
+        for="save"
+        class="col-sm-3 col-form-label"
+        style="font-weight: bold"
+      ></label>
+      <div class="col-md-4 col-lg-4 col-sm-4" style="padding-left: 0px">
+        <button nbButton status="primary" (click)="uploadVendor()">Save</button>
+        <div style="padding: 10px 10px 10px 0px">
+          <span>
+            <a
+              (click)="changeUploadType('manually')"
+              style="
+                cursor: pointer;
+                color: #4847e0;
+                text-decoration: underline;
+              "
+              >Add Expense Type Manually</a
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
-
-

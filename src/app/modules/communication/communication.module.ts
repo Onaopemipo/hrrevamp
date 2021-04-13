@@ -7,6 +7,7 @@ import { TemplatesComponent } from './page/templates/templates.component';
 import { SettingsComponent } from './page/settings/settings.component';
 import { ApiService } from './api.service';
 import { MailDetailComponent } from './page/mail-detail/mail-detail.component';
+import { CommunicationServiceProxy } from 'app/_services/service-proxies';
 
 import {
   NbIconModule,
@@ -22,7 +23,8 @@ import {
     NbIconModule
   ],
   providers: [
-    ApiService
+    ApiService,
+    CommunicationServiceProxy
   ]
 })
 export class CommunicationModule { }

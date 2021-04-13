@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 enum TOP_ACTIONS { ADD__KEY__RESULT__AREAS, };
 enum ACTIONS {
-  edit = '1', delete = '2', view_kpi = '3'
+  edit = '1', delete = '2', view_kpi = '3', assign = '4'
 }
 
 
@@ -55,12 +55,16 @@ export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKey
   ];
   tableActions: TableAction[] = [
     {name: ACTIONS.view_kpi, label: 'View Kpi'},
+    {name: ACTIONS.assign, label: 'Assign KRA'},
     {name: ACTIONS.edit, label: 'Edit'},
     {name: ACTIONS.delete, label: 'Delete'},
   ];
   tableActionClicked(event: TableActionEvent<MyKeyResultArea>) {
     if (event.name === ACTIONS.view_kpi) {
       this.router.navigateByUrl(`/performance/kra/${event.data.id}/kpi`);
+    }
+    if (event.name === ACTIONS.assign) {
+      this.router.navigateByUrl(`/performance/kra/${event.data.id}/assign`);
     }
   }
   constructor(

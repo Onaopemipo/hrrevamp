@@ -32,7 +32,7 @@
 
     <div style="margin-bottom: 0.5rem;">
         <div style="display: flex; justify-content: flex-end;" class="table-buttons">
-            <button nbButton outline text-button  status='primary'>
+            <button nbButton outline text-button  status='primary' (click)="createNewClicked()">
                 <nb-icon icon='plus'></nb-icon>
                 Add KPI
             </button>
@@ -64,15 +64,61 @@
             </tbody>
         </table>
     </div>
+</div>
 
-    <ngx-workflow></ngx-workflow>
-    <div class="linear-form">
-        <div class="form-group">
-            <label></label>
-            <div>
-                <button nbButton status='primary'>Save</button>
-                <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
+<ngx-side-modal [(show)]="showModal">
+    <div header>
+        Add KPI
+    </div>
+    <div modal-body>
+        <div class="form">
+            <div class="form-group">
+                <label>Name</label>
+                <input [(ngModel)]="editingData.title" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Unit of Measurement</label>
+                <ngx-multi-select [singleSelection]="true" [items]="unitsOfMeasurement" [(idValue)]="editingData.unit_of_measurement_id"></ngx-multi-select>
+            </div>
+            <div class="form-group">
+                <label>Score</label>
+                <input [(ngModel)]="editingData.score" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Allow Comment</label>
+                <input type="checkbox" [(ngModel)]="editingData.canComment"  class="form-control"/>
+                <!-- <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input> -->
+            </div>
+
+
+            <div class="form-group">
+                <label></label>
+                <div style="display: flex">
+                  <button nbButton status="primary" (click)="submitForm()">save</button>
+                  <div class="m-1"></div>
+                  <button
+                    nbButton
+                    status="primary"
+                    outline
+                    style="background: transparent"
+                  >
+                    cancel
+                  </button>
+                </div>
+              </div>
+            
+        </div>
+    </div>
+    <div modal-footer>
+        <div class="linear-form">
+            <div class="form-group">
+                <label>
+                </label>
+                <div>
+                    <button nbButton status='primary'>Save</button>
+                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</ngx-side-modal>
