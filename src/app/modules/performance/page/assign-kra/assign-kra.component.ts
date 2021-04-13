@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { KeyResultAreaService, MyKeyResultArea } from '../../services/key-result-area.service';
 
 @Component({
@@ -7,16 +8,24 @@ import { KeyResultAreaService, MyKeyResultArea } from '../../services/key-result
   styleUrls: ['./assign-kra.component.scss']
 })
 export class AssignKraComponent implements OnInit {
-
+  reviewer = [];
+  employees = [];
+  kra_id = 0;
+  kra: MyKeyResultArea;
   constructor(
-    private kra: KeyResultAreaService
+    private activatedRoute: ActivatedRoute,
+    private kraService: KeyResultAreaService
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(async (data) => {
+      this.kra_id = Number(data.get('id'));
+      this.kra = await this.kraService.fetch(this.kra_id).toPromise();
+    });
   }
 
   assignKra() {
-    this.kra.assignObj(new MyKeyResultArea());
+    this.kraService.assignObj(this.kra, this.reviewer.join(','), this.employees.join(',')).toPromise();
   }
 
 }

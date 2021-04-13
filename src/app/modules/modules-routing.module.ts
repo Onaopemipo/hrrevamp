@@ -101,6 +101,11 @@ const routes: Routes = [{
       loadChildren: () => import('./module-settings/module-settings.module')
       .then(m => m.ModuleSettingsModule)
     },
+    {
+      path: 'asset',
+      loadChildren: () => import('./asset-management/asset-management.module')
+      .then(m => m.AssetManagementModule)
+    },
 
     {
       path: 'loan',

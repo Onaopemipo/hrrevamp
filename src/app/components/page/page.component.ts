@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormConfig } from '../custom-form/custom-form.component';
+import { TableAction, TableActionEvent } from '../tablecomponent/models';
 
 export interface EmptyConfig {
   pageHeader?: string;
@@ -21,6 +22,8 @@ export class PageComponent implements OnInit {
     actionName: '1',
   };
   data = {};
+  @Input() tableActions: TableAction[] = [];
+  @Output() tableActionClicked = new EventEmitter<TableActionEvent>();
   @Input() set emptyConfig(val) {
     this._emptyConfig = {...this._emptyConfig, ...val};
   }
@@ -90,5 +93,10 @@ export class PageComponent implements OnInit {
 
   get isEmpty() {
     return this.tableData.length === 0;
+  }
+
+  tableActionClick(event: TableActionEvent) {
+    alert(4);
+    this.tableActionClicked.emit(event);
   }
 }

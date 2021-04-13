@@ -68,6 +68,7 @@ import { JwtInterceptor } from './_services/jwt.interceptor';
 import { InputvalidationService } from './_services/inputvalidation.service';
 import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+import { CustomServiceService  } from 'app/_services/custom-service.service';
 import { ComponentsModule } from 'app/components/components.module';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -157,7 +158,8 @@ FullCalendarModule.registerPlugins([
     ConfirmBoxService,
     NbDialogService,
     AlertserviceService,
-    FetchDashboardDataServiceProxy
+    FetchDashboardDataServiceProxy,
+    CustomServiceService
   ],
 })
 export class AppModule {

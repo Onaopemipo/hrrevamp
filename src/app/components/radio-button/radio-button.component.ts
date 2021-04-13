@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+export interface ISelectable{
+  selectValue: string;
+  selectLabel: string;
+}
 @Component({
   selector: 'ngx-radio-button',
   templateUrl: './radio-button.component.html',
@@ -9,7 +13,7 @@ export class RadioButtonComponent implements OnInit {
 
   @Input() horizontal = false;
   // @Output() changed = new EventEmitter<string>();
-  @Input() items: [] = [];
+  @Input() items: ISelectable[] = [];
   selected = '';
   @Input() set value(val) {
     this.selected = val;
