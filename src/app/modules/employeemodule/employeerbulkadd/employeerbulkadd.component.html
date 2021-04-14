@@ -1,10 +1,22 @@
 <ngx-componentsheader pageName="Bulk Upload" >
-
+    <div headerButton>
+        <div style="display: flex;flex-direction: row;">
+            <div style="padding-right: 10px;">
+                <button outline="true" (click)="discardProcess()" *ngIf="initialUploadResp.bulkUploadHtmlData" style="text-transform: none !important;width: 144px;"  type="button" nbButton status="primary" >Discard</button>
+            </div>
+            <ngx-loadable-button [loading]="loading" *ngIf="initialUploadResp.bulkUploadHtmlData" (click)="processBulkUpload()" >
+                Process
+              </ngx-loadable-button> 
+        </div>
+      
+       
+      
+    </div>
 </ngx-componentsheader>
 
 <nb-card >
     <nb-card-body>
-  <div class="row">
+  <div class="row" *ngIf="!initialUploadResp.bulkUploadHtmlData">
 <div class="col-md-3 col-xxl-3">
 <h6 class="listsubheader">Add File</h6>
 <p class="smalltext">Upload an excel file with all the the information of the Employees. Download the sample excel file to know the required format.</p>
@@ -55,7 +67,10 @@ flowDrop
     <div style="padding-top:1.5rem;">
         <div class="row">    
           <div class="col-sm-12">
-              <button (click)="uploadBulkEmployee()" [disabled]="files.length < 1" style="text-transform: none !important;width: 144px;"  type="button" nbButton status="primary" >Submit</button>
+            <ngx-loadable-button [loading]="loading" (click)="uploadBulkEmployee()" [disabled]="files.length < 1" >
+                Submit
+              </ngx-loadable-button> 
+             
           </div>
       </div>
         </div>
@@ -64,6 +79,10 @@ flowDrop
     </div>
 </div>
   </div>
-
+  <div class="row" *ngIf="initialUploadResp.bulkUploadHtmlData">
+    <div class="col-md-12 col-xxl-12">
+        <div [innerHTML]="initialUploadResp.bulkUploadHtmlData"></div>
+        </div>
+        </div>
         </nb-card-body>
         </nb-card>

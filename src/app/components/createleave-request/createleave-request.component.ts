@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { NbDateService } from '@nebular/theme';
 import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
 import { CommonServiceProxy, CreateLeaveByAdminServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearsServiceProxy, ManageLeaveRequestDTO, PostServiceProxy } from 'app/_services/service-proxies';
@@ -10,7 +10,7 @@ import { CommonServiceProxy, CreateLeaveByAdminServiceProxy, GetLeaveTypesServic
 })
 export class CreateleaveRequestComponent implements OnInit {
   @Input() showModalRequest: boolean = false;
-
+  @Output() closed = new EventEmitter<boolean>();
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
@@ -28,7 +28,10 @@ export class CreateleaveRequestComponent implements OnInit {
     private alertService: AlertserviceService,
     private CreateLeaveByAdminService: CreateLeaveByAdminServiceProxy) { }
 
-  
+    modalClosed(event) {
+      // console.log(event)
+       this.closed.emit(false);
+     }
   createLeaveRequest() {
     this.btnSubmitted = true;
       this.CreateLeaveByAdminService.createLeaveByAdmin(this.leaveReq).subscribe(resp => {
@@ -54,23 +57,33 @@ export class CreateleaveRequestComponent implements OnInit {
   
     get disableApplyLeave() {
       let resp: boolean = true;
+      let nullable = [
+        'id',      
+        'file',
+        'startDate'
+      ]
+
       Object.entries(this.leaveReq).map(([key, value], index) => {      
-        if ((value == "" || value == null || value == undefined) && key != 'file') { 
+        if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {
           resp = false;
-        }
+        }     
       });
+
+      if (!this.leaveReq.startDate) {
+        resp = false;
+      }
       
       return resp;
     }
     getAllLeaveType() {
-      this.GetLeaveTypesService.getLeaveTypes(true, 0, false, 0,1,10).subscribe(res => {
+      this.GetLeaveTypesService.getLeaveTypes(undefined, null, undefined, undefined,1,10).subscribe(res => {
         if (!res.hasError) {
           this.allLeavetypes = res.result;
         }
       })
     }
     getAllLeaveYear() {
-      this.GetLeaveYearsService.getLeaveYears(new Date('01/01/2000'),'',new Date(),0,1,10).subscribe(res => {
+      this.GetLeaveYearsService.getLeaveYears(undefined,null,undefined,undefined,1,10).subscribe(res => {
         if (!res.hasError) {
           this.allLeaveYears = res.result;
         }
@@ -82,8 +95,10 @@ export class CreateleaveRequestComponent implements OnInit {
     }
     getSelectedEmployee(event,selectType) {
      //console.log(event)
-      if(selectType == 'employee')this.leaveReq.employeeNumber = event.employeeContractId;
-      if(selectType == 'relief')this.leaveReq.reliefOfficerStaffNo = event.employeeContractId;
+      if(selectType == 'employee')this.leaveReq.employeeNumber = event[0].employeeContractId;
+      if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeContractId;
+      
+      //console.log(selectType, event)
    }
   ngOnInit(): void {
     this.getAllLeaveType();

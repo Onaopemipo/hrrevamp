@@ -5,7 +5,7 @@ import {
   EmployeeQualificationDTO, Document, NextOfKin, AddressDTO, Country, State, LGA, Pension,
   EmployeeHistoryDTO, CommonServiceProxy, Position, EmployeeSkill, EmployeeCertificationDTO,
   Skill, GetAllProfessionalBodiesServiceProxy, ProfessionalBodyDTO, Certification, EmployeeContractAssignmentDTO,
-  JobRole, PayrollType,GradeStep,FileUploadServiceProxy, FileParameter,UploadProfileImageServiceProxy, EmployeeSkillDTO,
+  JobRole, PayrollType,GradeStep,FileUploadServiceProxy, FileParameter,UploadProfileImageServiceProxy, EmployeeSkillDTO, Qualification, Course, Institution,
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -47,6 +47,10 @@ export class EmployeerecordsviewComponent implements OnInit {
   newEmployeeForm: NgForm;
   createNewEmployee: EmployeeDTO = new EmployeeDTO().clone();
 
+  allInstitution: Institution[] = [];
+  allCourses: Course[] = [];
+  allQulificationType: IDTextViewModel[] = [];
+  allQualifications: Qualification[] = [];
   allGradeSteps: GradeStep[] = [];
   allgrades: Grade[] = [];
   allSalaryScale: SalaryScale[] = [];
@@ -99,8 +103,8 @@ export class EmployeerecordsviewComponent implements OnInit {
   newNextofKin = new NextOfKin().clone();
   profileOperations = [];
 
-  tempQualificationList: EmployeeQualificationDTO[] = [];
-  indvQualifications: EmployeeQualificationDTO;
+  tempQualificationList = [];
+  indvQualifications = new EmployeeQualificationDTO().clone();
   qualificationtotalItems = 0;
   qualificationcurrentPage = 1;
   get qualificationEmpty() {
@@ -119,6 +123,35 @@ export class EmployeerecordsviewComponent implements OnInit {
     { name: 'startDate', title: 'Start Date', type: ColumnTypes.Date },
     { name: 'endDate', title: 'End Date', type: ColumnTypes.Date },
   ];
+  get disableaddQualification() {
+    let resp: boolean = true;
+    let nullable = [
+      'id',
+      'companyID',
+      'subID',
+      'employeeId',
+      'name',
+      'qualificationGradeId',
+      'institution',
+      'courseName',
+      'type',
+      'grade',
+      'isActive',
+      'isDeleted',
+      'dateCreated',
+      'createdById',
+      'dateModified',
+      'modifiedById',
+    ]
+    
+    Object.entries(this.indvQualifications).map(([key, value], index) => {      
+      if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
+        resp = false;
+      }
+ 
+    });
+    return resp;
+  }
 
   tempDocumentList: Document[] = [];
   indVDocuments = new Document().clone();
@@ -155,6 +188,7 @@ export class EmployeerecordsviewComponent implements OnInit {
       'dateModified',
       'modifiedById',
     ]
+    
     Object.entries(this.indVDocuments).map(([key, value], index) => {      
       if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
         resp = false;
@@ -298,7 +332,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     { name: 'numberOfExperienceInMonth', title: 'Experience In Month', type: ColumnTypes.Text },
       
   ];
-  get getSkillExperince() {
+  getSkillExperince() {
     let today = new Date();
     this.indvEmpSkill.numberOfExperienceInMonth = Math.floor(this.dateDiffInDays(this.indvEmpSkill.startDate, today) / 30);
     return this.indvEmpSkill.numberOfExperienceInMonth;
@@ -699,6 +733,26 @@ export class EmployeerecordsviewComponent implements OnInit {
   removefromBank(i) {
     this.tempEmpBanksList.splice(i, 1);
   }
+  addtoQualification(indvQualifications: EmployeeQualificationDTO) {
+    let searchResult = this.tempQualificationList.find(x => x.qual_id == indvQualifications.qualificationId);
+    if (searchResult) {
+      this.errorMsg = "Account Exist on the List";
+      this.removeErrorMsg();
+    } else {
+      let newQualObj = {
+        qual_id:  indvQualifications.qualificationId,
+        qualtype_id: indvQualifications.typeId,
+        qual_course_id: indvQualifications.courseId,
+        qual_institution_id: indvQualifications.institutionId,
+        start_date: indvQualifications.startDate,
+        end_date:indvQualifications.endDate
+      }
+      this.tempQualificationList.push(newQualObj)
+    }
+  }
+  removefromQualification(i) {
+    this.tempQualificationList.splice(i, 1);
+  }
   addtoEmpHistory(Hist: EmployeeHistoryDTO) {
     let searchResult = this.tempEmpHistoryList.find(x => x.numb_account == Hist.jobTitleId);
     if (searchResult) {
@@ -723,6 +777,12 @@ export class EmployeerecordsviewComponent implements OnInit {
   functionAutoMap(pObject, objectB) {
     const newObj = { ...pObject, ...objectB };
     return newObj;
+  }
+  getInstitutionName(Inst_id) {
+    return this.allInstitution.find(x => x.id == Inst_id).name;
+  }
+  getQualificationName(qual_id) {
+    return this.allQualifications.find(x => x.id == qual_id).name;
   }
   getbankname(bankid) {
     return this.bankList.find(x => x.option_value == bankid).option_text;
@@ -783,7 +843,21 @@ export class EmployeerecordsviewComponent implements OnInit {
     }
 
   }
-
+  pushUpdateQualification() {
+    if (this.tempQualificationList.length > 0) {
+      this.tempQualificationList.forEach(value => {
+        let newQualObject = new EmployeeQualificationDTO().clone();
+        newQualObject.qualificationId = value.qual_id;
+        newQualObject.typeId = value.qualtype_id;
+        newQualObject.courseId = value.qual_course_id;
+        newQualObject.institutionId = value.qual_institution_id;
+        newQualObject.startDate = value.start_date;
+        newQualObject.endDate = value.end_date;
+        newQualObject.employeeId = this.createNewEmployee.id;
+        this.createNewEmployee.qualifications.push(newQualObject);
+       })
+    }
+}
   pushUpdateHistory() {
     if (this.tempEmpHistoryList.length > 0) {
       this.tempEmpHistoryList.forEach(value => {
@@ -875,6 +949,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
       if (!data.hasError) {
         this.createNewEmployee = data.result;
+        this.createNewEmployee.nexkOfKin = this.createNewEmployee.nexkOfKin? this.createNewEmployee.nexkOfKin : new NextOfKin().clone();
       }
     });
   }
@@ -1043,6 +1118,14 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.showCertificationModal = false;
     this.nextPanel();
   }
+  submitQualification() {
+    if (this.createNewEmployee.id) {
+      this.reqEmployee.profileOperation = this.profileOperations.find(x => x.text == "Qualification").id;
+      this.createEmployee();      
+    }
+    this.showQualificationModal = false;
+    this.nextPanel();
+  }
   createEmployee() {
     this.loading = true;
     this.pushUpdateBank();
@@ -1051,21 +1134,25 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.pushUpdateHistory();
     this.pushUpdateSkill();
     this.pushUpdateCerti();
+    this.pushUpdateQualification();
     this.reqEmployee = this.functionAutoMap(this.reqEmployee, this.createNewEmployee);  
-    this.reqEmployee.banks = JSON.stringify(this.createNewEmployee.banks);
+    this.reqEmployee.banks =this.createNewEmployee.banks.length > 0? JSON.stringify(this.createNewEmployee.banks):"";
     this.reqEmployee.nexkOfKin = JSON.stringify(this.createNewEmployee.nexkOfKin);
     this.reqEmployee.pension = JSON.stringify(this.createNewEmployee.pension);
-    this.reqEmployee.addresses = JSON.stringify(this.createNewEmployee.addresses);
-    this.reqEmployee.employmentHistories = JSON.stringify(this.createNewEmployee.employmentHistories);
-    this.reqEmployee.skills = JSON.stringify(this.createNewEmployee.skills);
-    this.reqEmployee.certifications = JSON.stringify(this.createNewEmployee.certifications);
-    this.reqEmployee.contracts = JSON.stringify(this.createNewEmployee.contracts);
-    this.reqEmployee.documents = JSON.stringify(this.createNewEmployee.documents);
+    this.reqEmployee.addresses = this.createNewEmployee.addresses.length > 0? JSON.stringify(this.createNewEmployee.addresses):"";
+    this.reqEmployee.employmentHistories =this.createNewEmployee.employmentHistories.length > 0? JSON.stringify(this.createNewEmployee.employmentHistories):"";
+    this.reqEmployee.skills =this.createNewEmployee.skills.length > 0? JSON.stringify(this.createNewEmployee.skills):"";
+    this.reqEmployee.certifications =this.createNewEmployee.certifications.length > 0? JSON.stringify(this.createNewEmployee.certifications):"";
+    this.reqEmployee.contracts =this.createNewEmployee.contracts.length > 0? JSON.stringify(this.createNewEmployee.contracts):"";
+    this.reqEmployee.documents = this.createNewEmployee.documents.length > 0?JSON.stringify(this.createNewEmployee.documents):"";
+    this.reqEmployee.qualifications = this.createNewEmployee.qualifications.length > 0?JSON.stringify(this.createNewEmployee.qualifications):"";
+
 
     this.newEmployee.addEmployee(this.reqEmployee).subscribe(data => {
       if (data.hasError) {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, "ok");
-        this.getEmployeebyId(this.createNewEmployee.id);
+        if(this.createNewEmployee.id)this.getEmployeebyId(this.createNewEmployee.id);
+        
       }
       else {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
@@ -1083,6 +1170,7 @@ export class EmployeerecordsviewComponent implements OnInit {
       this.loading = false;
     }, (error) => {
       this.loading = false;
+      if(this.createNewEmployee.id)this.getEmployeebyId(this.createNewEmployee.id);
       if (error.status == 400) {
         this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
       }
@@ -1332,6 +1420,40 @@ async  getAllfilestypes() {
     let response = await this.myDropdown.getDocumentTypes().toPromise();
     this.allfiletypes = response.result;
   }
+  async  getAllQualifications() {
+    this.CommonService.getQualifications().subscribe(data => {
+      if (!data.hasError) {
+        this.allQualifications = data.result;
+      }else{}
+      
+    })
+  }
+  async  getAllQualificationsType() {
+    this.myDropdown.getQuilificationCategory().subscribe(data => {
+      if(!data.hasError){
+         this.allQulificationType = data.result;
+      }
+      else {
+        console.log('There was an error')
+      }
+    })
+  }
+  async  getAllQualificationsCourses() {
+    this.CommonService.getCourses().subscribe(data => {
+      if (!data.hasError) {
+        this.allCourses = data.result;
+      }else{}
+      
+    })
+  }
+  async  getAllInstitutions() {
+    this.CommonService.getInstitutions().subscribe(data => {
+      if (!data.hasError) {
+        this.allInstitution = data.result;
+      }else{}
+      
+    })
+  }
   ngOnInit(): void {
     this.createNewEmployee.documents = [];
     this.createNewEmployee.qualifications = [];
@@ -1362,6 +1484,10 @@ async  getAllfilestypes() {
     this.getJobRole();
     this.getalllocations();
     this.getAllfilestypes();
+    this.getAllQualifications();
+    this.getAllQualificationsType();
+    this.getAllQualificationsCourses();
+    this.getAllInstitutions();
     this.activatedroute.queryParams.subscribe(data => {
       if (data) {
         if (data.employee_id) {

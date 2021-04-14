@@ -220,7 +220,7 @@
         <div class="fmContainer" *ngSwitchCase="'contract_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
-                <!-- <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" >
+                <!-- <div style="cursor: pointer;" (click)="showEmployeeContractModal = true" *ngIf="createNewEmployee.id">
                   <nb-icon icon="edit-2-outline" status="primary"></nb-icon> Edit
                 
                   </div> -->
@@ -845,12 +845,12 @@
               </div>
               <div class="col-sm-12 form-group">
                 <label>Start Date</label>
-                <ngx-date [(value)]="indvEmpSkill.startDate" id="startDate" name="startDate" ></ngx-date>
+                <ngx-date [(value)]="indvEmpSkill.startDate" (valueChange)="getSkillExperince()" id="startDate" name="startDate" ></ngx-date>
             
               </div>
               <div class="col-sm-12 form-group">
                 <label>Experience In Month</label>
-                <!-- {{getSkillExperince}} -->
+                {{this.indvEmpSkill.numberOfExperienceInMonth}}
               </div>
            
             </div>
@@ -1001,7 +1001,7 @@
           </form>
           <div style="padding-top: 5px;">
             <div class="row">
-<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
+<div class="col-sm-12" style="padding-top: 10px;"  *ngFor="let tempbank of tempEmpBanksList;let i = index">
   <div class="cbadge">{{getbankname(tempbank.id_bank)}}&nbsp;|&nbsp;{{tempbank.numb_account}}&nbsp;<i class="fa fa-times" (click)="removefromBank(i)" style="color:#EB5757;cursor: pointer;"></i></div>
 </div>
             </div>
@@ -1030,59 +1030,75 @@
           <div class="row" style="padding-top:10px">
             <div class="col-sm-6 form-group">
               <label>Name of Qualification</label>
-              <select class="form-control"  required >
+              <select class="form-control" [(ngModel)]="indvQualifications.qualificationId" #qualificationId="ngModel" id="qualificationId" name="qualificationId"  required >
                 <option value="">--Select Title--</option>
-             
+                <option *ngFor="let q of allQualifications" [value]="q.id">{{q.name}}</option>
+                <div *ngIf="qualificationId.invalid && (qualificationId.dirty || qualificationId.touched)" class="error">
+                  <div *ngIf="qualificationId.errors.required">Qualification is required</div>
+                </div>
             </select>
            
             </div>
             <div class="col-sm-6 form-group">
               <label>Type</label>
-              <select class="form-control"  required >
+              <select class="form-control" [(ngModel)]="indvQualifications.typeId" #typeId="ngModel" id="typeId" name="typeId" required >
                 <option value="">--Select Title--</option>
-             
+                <option *ngFor="let qt of allQulificationType" [value]="qt.id">{{qt.text}}</option>
+
             </select>
-           
+            <div *ngIf="typeId.invalid && (typeId.dirty || typeId.touched)" class="error">
+                  <div *ngIf="typeId.errors.required">Qualification is required</div>
+                </div>
             </div>
             <div class="col-sm-6 form-group">
               <label>Course</label>
-              <select class="form-control"  required >
+              <select class="form-control" [(ngModel)]="indvQualifications.courseId" #courseId="ngModel" id="courseId" name="courseId"  required >
                 <option value="">--Select Title--</option>
-             
+                <option *ngFor="let c of allCourses" [value]="c.id">{{c.name}}</option>
             </select>
            
             </div>
             <div class="col-sm-6 form-group">
               <label>Institution</label>
-              <select class="form-control"  required >
+              <select class="form-control" [(ngModel)]="indvQualifications.institutionId" #institutionId="ngModel" id="institutionId" name="institutionId"  required >
                 <option value="">--Select Title--</option>
-             
+                <option *ngFor="let i of allInstitution" [value]="i.id">{{i.name}}</option>
             </select>
            
             </div>
             <div class="col-sm-12 form-group">
               <label>Start Date</label>
-              <ngx-date ></ngx-date>
+              <ngx-date [(ngModel)]="indvQualifications.startDate" #startDate name="startDate" id="startDate" ></ngx-date>
             
             </div>
             <div class="col-sm-12 form-group">
               <label>End Date</label>
-              <ngx-date ></ngx-date>
+              <ngx-date [(ngModel)]="indvQualifications.endDate" name="endDate" #endDate id="endDate" ></ngx-date>
             
             </div>
           </div>
        
         
         </form>
-        <div class="cbadge" >4</div>
+        <div style="padding-top: 5px;">
+          <div class="row">
+<div class="col-sm-12" style="padding-top: 10px;"  *ngFor="let tempQual of tempQualificationList;let i = index">
+<div class="cbadge">{{getQualificationName(tempQual.qual_id)}}&nbsp;|&nbsp;{{getInstitutionName(tempQual.qual_institution_id)}}&nbsp;<i class="fa fa-times" (click)="removefromQualification(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+</div>
+          </div>
+         
+        </div>
       </div>
-      <div modal-actions class="d-flex" style="margin-top: 20px; margin-bottom: 30px;">
-        <button *ngIf="btnContractSubmitted"  nbButton status="primary" class="d-flex column" ><i class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-        <button *ngIf="!btnContractSubmitted"  nbButton status="primary" class="d-flex column" >Submit</button>
-        
-
+      <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+        <ngx-loadable-button [loading]="qualificationloading" [disabled]="tempQualificationList.length < 1" (click)="submitQualification()" >
+          Submit
+        </ngx-loadable-button>           
+        <div style="padding-left: 15px;">
+          <button [disabled]="!disableaddQualification" outline="true" (click)="addtoQualification(indvQualifications)"  nbButton status="primary" class="d-flex column" >  <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
+       
+        </div>
     </div>
-    <div style="margin-top: 10px;"></div>
+    <div style="margin-top: 5px;"></div>
     </ngx-side-modal>
 
 
@@ -1263,7 +1279,7 @@
   </div>
   <div class="col-sm-12 form-group">
     <label>Date of Employment</label>
-    <ngx-date  ></ngx-date>
+    <ngx-date  [(value)]="indvemployeeContract.dateofPresentAppointment" name="dateofPresentAppointment" id="dateofPresentAppointment"></ngx-date>
   
   </div>
  

@@ -6571,10 +6571,15 @@ export class FetchAllBudgetItemsServiceProxy {
 
     /**
      * API for retrieving All BudgetItems for further CRUD operation
+     * @param budgetId (optional) 
      * @return Success
      */
-    getAllBudgetItems(): Observable<BudgetItemDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/Budget/FetchAllBudgetItems/GetAllBudgetItems";
+    getAllBudgetItems(budgetId: number | undefined): Observable<BudgetItemDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Budget/FetchAllBudgetItems/GetAllBudgetItems?";
+        if (budgetId === null)
+            throw new Error("The parameter 'budgetId' cannot be null.");
+        else if (budgetId !== undefined)
+            url_ += "budgetId=" + encodeURIComponent("" + budgetId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -6652,10 +6657,15 @@ export class FetchBudgetItemsServiceProxy {
 
     /**
      * API for getting BudgetItems that can be use for dropdowns
+     * @param budgetId (optional) 
      * @return Success
      */
-    getBudgetItems(): Observable<DisbursementBudgetItemIListApiResult> {
-        let url_ = this.baseUrl + "/api/Budget/FetchBudgetItems/GetBudgetItems";
+    getBudgetItems(budgetId: number | undefined): Observable<DisbursementBudgetItemIListApiResult> {
+        let url_ = this.baseUrl + "/api/Budget/FetchBudgetItems/GetBudgetItems?";
+        if (budgetId === null)
+            throw new Error("The parameter 'budgetId' cannot be null.");
+        else if (budgetId !== undefined)
+            url_ += "budgetId=" + encodeURIComponent("" + budgetId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -10629,6 +10639,75 @@ export class CommonServiceProxy {
             }));
         }
         return _observableOf<RetirementTypeIListApiResult>(<any>null);
+    }
+
+    /**
+     * API for getting Positions that can be use for dropdowns
+     * @return Success
+     */
+    getCompetency(): Observable<CompetencyIListApiResult> {
+        let url_ = this.baseUrl + "/api/Common/GetCompetency";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<CompetencyIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<CompetencyIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetCompetency(response: HttpResponseBase): Observable<CompetencyIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = CompetencyIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<CompetencyIListApiResult>(<any>null);
     }
 }
 
@@ -46040,6 +46119,7 @@ export interface IBudgetDTOApiResult {
 
 export class ManageBudgetItemDTO implements IManageBudgetItemDTO {
     id!: number;
+    budgetID!: number;
     name!: string | undefined;
     code!: string | undefined;
     totalBudget!: number;
@@ -46058,6 +46138,7 @@ export class ManageBudgetItemDTO implements IManageBudgetItemDTO {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.budgetID = _data["budgetID"];
             this.name = _data["name"];
             this.code = _data["code"];
             this.totalBudget = _data["totalBudget"];
@@ -46076,6 +46157,7 @@ export class ManageBudgetItemDTO implements IManageBudgetItemDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["budgetID"] = this.budgetID;
         data["name"] = this.name;
         data["code"] = this.code;
         data["totalBudget"] = this.totalBudget;
@@ -46094,11 +46176,356 @@ export class ManageBudgetItemDTO implements IManageBudgetItemDTO {
 
 export interface IManageBudgetItemDTO {
     id: number;
+    budgetID: number;
     name: string | undefined;
     code: string | undefined;
     totalBudget: number;
     spent: number | undefined;
     budgetAllocations: string | undefined;
+}
+
+export class DisbursementBudgetItemAllocationDTO implements IDisbursementBudgetItemAllocationDTO {
+    id!: number;
+    disbursementBudgetItemId!: number;
+    departmentId!: number;
+    department!: string | undefined;
+    allocatedAmount!: number;
+
+    constructor(data?: IDisbursementBudgetItemAllocationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.disbursementBudgetItemId = _data["disbursementBudgetItemId"];
+            this.departmentId = _data["departmentId"];
+            this.department = _data["department"];
+            this.allocatedAmount = _data["allocatedAmount"];
+        }
+    }
+
+    static fromJS(data: any): DisbursementBudgetItemAllocationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new DisbursementBudgetItemAllocationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["disbursementBudgetItemId"] = this.disbursementBudgetItemId;
+        data["departmentId"] = this.departmentId;
+        data["department"] = this.department;
+        data["allocatedAmount"] = this.allocatedAmount;
+        return data; 
+    }
+
+    clone(): DisbursementBudgetItemAllocationDTO {
+        const json = this.toJSON();
+        let result = new DisbursementBudgetItemAllocationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDisbursementBudgetItemAllocationDTO {
+    id: number;
+    disbursementBudgetItemId: number;
+    departmentId: number;
+    department: string | undefined;
+    allocatedAmount: number;
+}
+
+export class BudgetItemDTO implements IBudgetItemDTO {
+    id!: number;
+    budgetID!: number;
+    financialYearStartDate!: Date;
+    financialYearEndDate!: Date;
+    name!: string | undefined;
+    code!: string | undefined;
+    totalBudget!: number;
+    spent!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+    budgetItemAllocations!: DisbursementBudgetItemAllocationDTO[] | undefined;
+
+    constructor(data?: IBudgetItemDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.budgetID = _data["budgetID"];
+            this.financialYearStartDate = _data["financialYearStartDate"] ? new Date(_data["financialYearStartDate"].toString()) : <any>undefined;
+            this.financialYearEndDate = _data["financialYearEndDate"] ? new Date(_data["financialYearEndDate"].toString()) : <any>undefined;
+            this.name = _data["name"];
+            this.code = _data["code"];
+            this.totalBudget = _data["totalBudget"];
+            this.spent = _data["spent"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+            if (Array.isArray(_data["budgetItemAllocations"])) {
+                this.budgetItemAllocations = [] as any;
+                for (let item of _data["budgetItemAllocations"])
+                    this.budgetItemAllocations!.push(DisbursementBudgetItemAllocationDTO.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): BudgetItemDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new BudgetItemDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["budgetID"] = this.budgetID;
+        data["financialYearStartDate"] = this.financialYearStartDate ? this.financialYearStartDate.toISOString() : <any>undefined;
+        data["financialYearEndDate"] = this.financialYearEndDate ? this.financialYearEndDate.toISOString() : <any>undefined;
+        data["name"] = this.name;
+        data["code"] = this.code;
+        data["totalBudget"] = this.totalBudget;
+        data["spent"] = this.spent;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        if (Array.isArray(this.budgetItemAllocations)) {
+            data["budgetItemAllocations"] = [];
+            for (let item of this.budgetItemAllocations)
+                data["budgetItemAllocations"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): BudgetItemDTO {
+        const json = this.toJSON();
+        let result = new BudgetItemDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBudgetItemDTO {
+    id: number;
+    budgetID: number;
+    financialYearStartDate: Date;
+    financialYearEndDate: Date;
+    name: string | undefined;
+    code: string | undefined;
+    totalBudget: number;
+    spent: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+    budgetItemAllocations: DisbursementBudgetItemAllocationDTO[] | undefined;
+}
+
+export class BudgetItemDTOIListApiResult implements IBudgetItemDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: BudgetItemDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IBudgetItemDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(BudgetItemDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): BudgetItemDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new BudgetItemDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): BudgetItemDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new BudgetItemDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBudgetItemDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: BudgetItemDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class DisbursementBudget implements IDisbursementBudget {
+    financialYearStartDate!: Date;
+    financialYearEndDate!: Date;
+    totalBudgetAmount!: number;
+    spent!: number | undefined;
+    disbursementBudgetItems!: DisbursementBudgetItem[] | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IDisbursementBudget) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.financialYearStartDate = _data["financialYearStartDate"] ? new Date(_data["financialYearStartDate"].toString()) : <any>undefined;
+            this.financialYearEndDate = _data["financialYearEndDate"] ? new Date(_data["financialYearEndDate"].toString()) : <any>undefined;
+            this.totalBudgetAmount = _data["totalBudgetAmount"];
+            this.spent = _data["spent"];
+            if (Array.isArray(_data["disbursementBudgetItems"])) {
+                this.disbursementBudgetItems = [] as any;
+                for (let item of _data["disbursementBudgetItems"])
+                    this.disbursementBudgetItems!.push(DisbursementBudgetItem.fromJS(item));
+            }
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): DisbursementBudget {
+        data = typeof data === 'object' ? data : {};
+        let result = new DisbursementBudget();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["financialYearStartDate"] = this.financialYearStartDate ? this.financialYearStartDate.toISOString() : <any>undefined;
+        data["financialYearEndDate"] = this.financialYearEndDate ? this.financialYearEndDate.toISOString() : <any>undefined;
+        data["totalBudgetAmount"] = this.totalBudgetAmount;
+        data["spent"] = this.spent;
+        if (Array.isArray(this.disbursementBudgetItems)) {
+            data["disbursementBudgetItems"] = [];
+            for (let item of this.disbursementBudgetItems)
+                data["disbursementBudgetItems"].push(item.toJSON());
+        }
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): DisbursementBudget {
+        const json = this.toJSON();
+        let result = new DisbursementBudget();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDisbursementBudget {
+    financialYearStartDate: Date;
+    financialYearEndDate: Date;
+    totalBudgetAmount: number;
+    spent: number | undefined;
+    disbursementBudgetItems: DisbursementBudgetItem[] | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
 }
 
 export class Department implements IDepartment {
@@ -46201,6 +46628,101 @@ export interface IDepartment {
     headOfDepartment: number;
     scheduleOfDuties: string | undefined;
     disbursementBudgetItemAllocations: DisbursementBudgetItemAllocation[] | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class DisbursementBudgetItemAllocation implements IDisbursementBudgetItemAllocation {
+    disbursementBudgetItemId!: number;
+    departmentId!: number;
+    allocatedAmount!: number;
+    department!: Department;
+    disbursementBudgetItem!: DisbursementBudgetItem;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IDisbursementBudgetItemAllocation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.disbursementBudgetItemId = _data["disbursementBudgetItemId"];
+            this.departmentId = _data["departmentId"];
+            this.allocatedAmount = _data["allocatedAmount"];
+            this.department = _data["department"] ? Department.fromJS(_data["department"]) : <any>undefined;
+            this.disbursementBudgetItem = _data["disbursementBudgetItem"] ? DisbursementBudgetItem.fromJS(_data["disbursementBudgetItem"]) : <any>undefined;
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): DisbursementBudgetItemAllocation {
+        data = typeof data === 'object' ? data : {};
+        let result = new DisbursementBudgetItemAllocation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["disbursementBudgetItemId"] = this.disbursementBudgetItemId;
+        data["departmentId"] = this.departmentId;
+        data["allocatedAmount"] = this.allocatedAmount;
+        data["department"] = this.department ? this.department.toJSON() : <any>undefined;
+        data["disbursementBudgetItem"] = this.disbursementBudgetItem ? this.disbursementBudgetItem.toJSON() : <any>undefined;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): DisbursementBudgetItemAllocation {
+        const json = this.toJSON();
+        let result = new DisbursementBudgetItemAllocation();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDisbursementBudgetItemAllocation {
+    disbursementBudgetItemId: number;
+    departmentId: number;
+    allocatedAmount: number;
+    department: Department;
+    disbursementBudgetItem: DisbursementBudgetItem;
     id: number;
     companyID: number;
     subID: number;
@@ -46714,10 +47236,12 @@ export interface IFundDisbursement {
 }
 
 export class DisbursementBudgetItem implements IDisbursementBudgetItem {
+    disbursementBudgetId!: number;
     name!: string | undefined;
     code!: string | undefined;
     totalBudget!: number;
     spent!: number | undefined;
+    disbursementBudget!: DisbursementBudget;
     disbursementBudgetItemAllocations!: DisbursementBudgetItemAllocation[] | undefined;
     fundDisbursements!: FundDisbursement[] | undefined;
     id!: number;
@@ -46741,10 +47265,12 @@ export class DisbursementBudgetItem implements IDisbursementBudgetItem {
 
     init(_data?: any) {
         if (_data) {
+            this.disbursementBudgetId = _data["disbursementBudgetId"];
             this.name = _data["name"];
             this.code = _data["code"];
             this.totalBudget = _data["totalBudget"];
             this.spent = _data["spent"];
+            this.disbursementBudget = _data["disbursementBudget"] ? DisbursementBudget.fromJS(_data["disbursementBudget"]) : <any>undefined;
             if (Array.isArray(_data["disbursementBudgetItemAllocations"])) {
                 this.disbursementBudgetItemAllocations = [] as any;
                 for (let item of _data["disbursementBudgetItemAllocations"])
@@ -46776,10 +47302,12 @@ export class DisbursementBudgetItem implements IDisbursementBudgetItem {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["disbursementBudgetId"] = this.disbursementBudgetId;
         data["name"] = this.name;
         data["code"] = this.code;
         data["totalBudget"] = this.totalBudget;
         data["spent"] = this.spent;
+        data["disbursementBudget"] = this.disbursementBudget ? this.disbursementBudget.toJSON() : <any>undefined;
         if (Array.isArray(this.disbursementBudgetItemAllocations)) {
             data["disbursementBudgetItemAllocations"] = [];
             for (let item of this.disbursementBudgetItemAllocations)
@@ -46811,10 +47339,12 @@ export class DisbursementBudgetItem implements IDisbursementBudgetItem {
 }
 
 export interface IDisbursementBudgetItem {
+    disbursementBudgetId: number;
     name: string | undefined;
     code: string | undefined;
     totalBudget: number;
     spent: number | undefined;
+    disbursementBudget: DisbursementBudget;
     disbursementBudgetItemAllocations: DisbursementBudgetItemAllocation[] | undefined;
     fundDisbursements: FundDisbursement[] | undefined;
     id: number;
@@ -46826,271 +47356,6 @@ export interface IDisbursementBudgetItem {
     createdById: number;
     dateModified: Date | undefined;
     modifiedById: number | undefined;
-}
-
-export class DisbursementBudgetItemAllocation implements IDisbursementBudgetItemAllocation {
-    disbursementBudgetItemId!: number;
-    departmentId!: number;
-    allocatedAmount!: number;
-    department!: Department;
-    disbursementBudgetItem!: DisbursementBudgetItem;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: IDisbursementBudgetItemAllocation) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.disbursementBudgetItemId = _data["disbursementBudgetItemId"];
-            this.departmentId = _data["departmentId"];
-            this.allocatedAmount = _data["allocatedAmount"];
-            this.department = _data["department"] ? Department.fromJS(_data["department"]) : <any>undefined;
-            this.disbursementBudgetItem = _data["disbursementBudgetItem"] ? DisbursementBudgetItem.fromJS(_data["disbursementBudgetItem"]) : <any>undefined;
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): DisbursementBudgetItemAllocation {
-        data = typeof data === 'object' ? data : {};
-        let result = new DisbursementBudgetItemAllocation();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["disbursementBudgetItemId"] = this.disbursementBudgetItemId;
-        data["departmentId"] = this.departmentId;
-        data["allocatedAmount"] = this.allocatedAmount;
-        data["department"] = this.department ? this.department.toJSON() : <any>undefined;
-        data["disbursementBudgetItem"] = this.disbursementBudgetItem ? this.disbursementBudgetItem.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): DisbursementBudgetItemAllocation {
-        const json = this.toJSON();
-        let result = new DisbursementBudgetItemAllocation();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IDisbursementBudgetItemAllocation {
-    disbursementBudgetItemId: number;
-    departmentId: number;
-    allocatedAmount: number;
-    department: Department;
-    disbursementBudgetItem: DisbursementBudgetItem;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class BudgetItemDTO implements IBudgetItemDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    name!: string | undefined;
-    code!: string | undefined;
-    totalBudget!: number;
-    spent!: number | undefined;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-    budgetItemAllocations!: DisbursementBudgetItemAllocation[] | undefined;
-
-    constructor(data?: IBudgetItemDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.name = _data["name"];
-            this.code = _data["code"];
-            this.totalBudget = _data["totalBudget"];
-            this.spent = _data["spent"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-            if (Array.isArray(_data["budgetItemAllocations"])) {
-                this.budgetItemAllocations = [] as any;
-                for (let item of _data["budgetItemAllocations"])
-                    this.budgetItemAllocations!.push(DisbursementBudgetItemAllocation.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): BudgetItemDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new BudgetItemDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["name"] = this.name;
-        data["code"] = this.code;
-        data["totalBudget"] = this.totalBudget;
-        data["spent"] = this.spent;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        if (Array.isArray(this.budgetItemAllocations)) {
-            data["budgetItemAllocations"] = [];
-            for (let item of this.budgetItemAllocations)
-                data["budgetItemAllocations"].push(item.toJSON());
-        }
-        return data; 
-    }
-
-    clone(): BudgetItemDTO {
-        const json = this.toJSON();
-        let result = new BudgetItemDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IBudgetItemDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    name: string | undefined;
-    code: string | undefined;
-    totalBudget: number;
-    spent: number | undefined;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-    budgetItemAllocations: DisbursementBudgetItemAllocation[] | undefined;
-}
-
-export class BudgetItemDTOIListApiResult implements IBudgetItemDTOIListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: BudgetItemDTO[] | undefined;
-    totalCount!: number;
-    readonly totalRecord!: number;
-
-    constructor(data?: IBudgetItemDTOIListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(BudgetItemDTO.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-            (<any>this).totalRecord = _data["totalRecord"];
-        }
-    }
-
-    static fromJS(data: any): BudgetItemDTOIListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new BudgetItemDTOIListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        data["totalRecord"] = this.totalRecord;
-        return data; 
-    }
-
-    clone(): BudgetItemDTOIListApiResult {
-        const json = this.toJSON();
-        let result = new BudgetItemDTOIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IBudgetItemDTOIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: BudgetItemDTO[] | undefined;
-    totalCount: number;
-    totalRecord: number;
 }
 
 export class DisbursementBudgetItemIListApiResult implements IDisbursementBudgetItemIListApiResult {
@@ -48376,7 +48641,7 @@ export class AddTalentPoolDTO implements IAddTalentPoolDTO {
     dateCreated!: Date;
     isDeleted!: boolean;
     isActive!: boolean;
-    stringtalentPoolRequirement!: string | undefined;
+    competencyId!: number;
     talentPoolRequirement!: TalentpoolrequirementDTO[] | undefined;
 
     constructor(data?: IAddTalentPoolDTO) {
@@ -48401,7 +48666,7 @@ export class AddTalentPoolDTO implements IAddTalentPoolDTO {
             this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
             this.isDeleted = _data["isDeleted"];
             this.isActive = _data["isActive"];
-            this.stringtalentPoolRequirement = _data["stringtalentPoolRequirement"];
+            this.competencyId = _data["competencyId"];
             if (Array.isArray(_data["talentPoolRequirement"])) {
                 this.talentPoolRequirement = [] as any;
                 for (let item of _data["talentPoolRequirement"])
@@ -48430,7 +48695,7 @@ export class AddTalentPoolDTO implements IAddTalentPoolDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        data["stringtalentPoolRequirement"] = this.stringtalentPoolRequirement;
+        data["competencyId"] = this.competencyId;
         if (Array.isArray(this.talentPoolRequirement)) {
             data["talentPoolRequirement"] = [];
             for (let item of this.talentPoolRequirement)
@@ -48459,7 +48724,7 @@ export interface IAddTalentPoolDTO {
     dateCreated: Date;
     isDeleted: boolean;
     isActive: boolean;
-    stringtalentPoolRequirement: string | undefined;
+    competencyId: number;
     talentPoolRequirement: TalentpoolrequirementDTO[] | undefined;
 }
 
@@ -55191,6 +55456,303 @@ export interface IRetirementTypeIListApiResult {
     totalRecord: number;
 }
 
+export class CompetencyRequirments implements ICompetencyRequirments {
+    competencyId!: number;
+    requirementCategory!: string | undefined;
+    skillId!: number | undefined;
+    trainingId!: number | undefined;
+    certificationId!: number | undefined;
+    qualificationId!: number | undefined;
+    points!: number;
+    experience!: string | undefined;
+    yearsofExperience!: number;
+    experienceWeight!: number | undefined;
+    skillWeight!: number | undefined;
+    competences!: Competency;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: ICompetencyRequirments) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.competencyId = _data["competencyId"];
+            this.requirementCategory = _data["requirementCategory"];
+            this.skillId = _data["skillId"];
+            this.trainingId = _data["trainingId"];
+            this.certificationId = _data["certificationId"];
+            this.qualificationId = _data["qualificationId"];
+            this.points = _data["points"];
+            this.experience = _data["experience"];
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.skillWeight = _data["skillWeight"];
+            this.competences = _data["competences"] ? Competency.fromJS(_data["competences"]) : <any>undefined;
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): CompetencyRequirments {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompetencyRequirments();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["competencyId"] = this.competencyId;
+        data["requirementCategory"] = this.requirementCategory;
+        data["skillId"] = this.skillId;
+        data["trainingId"] = this.trainingId;
+        data["certificationId"] = this.certificationId;
+        data["qualificationId"] = this.qualificationId;
+        data["points"] = this.points;
+        data["experience"] = this.experience;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["skillWeight"] = this.skillWeight;
+        data["competences"] = this.competences ? this.competences.toJSON() : <any>undefined;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): CompetencyRequirments {
+        const json = this.toJSON();
+        let result = new CompetencyRequirments();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetencyRequirments {
+    competencyId: number;
+    requirementCategory: string | undefined;
+    skillId: number | undefined;
+    trainingId: number | undefined;
+    certificationId: number | undefined;
+    qualificationId: number | undefined;
+    points: number;
+    experience: string | undefined;
+    yearsofExperience: number;
+    experienceWeight: number | undefined;
+    skillWeight: number | undefined;
+    competences: Competency;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class Competency implements ICompetency {
+    competencyTitle!: string | undefined;
+    jobRoleId!: number;
+    positionId!: number;
+    description!: string | undefined;
+    departmentId!: number;
+    competencesRequirements!: CompetencyRequirments[] | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: ICompetency) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.competencyTitle = _data["competencyTitle"];
+            this.jobRoleId = _data["jobRoleId"];
+            this.positionId = _data["positionId"];
+            this.description = _data["description"];
+            this.departmentId = _data["departmentId"];
+            if (Array.isArray(_data["competencesRequirements"])) {
+                this.competencesRequirements = [] as any;
+                for (let item of _data["competencesRequirements"])
+                    this.competencesRequirements!.push(CompetencyRequirments.fromJS(item));
+            }
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): Competency {
+        data = typeof data === 'object' ? data : {};
+        let result = new Competency();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["competencyTitle"] = this.competencyTitle;
+        data["jobRoleId"] = this.jobRoleId;
+        data["positionId"] = this.positionId;
+        data["description"] = this.description;
+        data["departmentId"] = this.departmentId;
+        if (Array.isArray(this.competencesRequirements)) {
+            data["competencesRequirements"] = [];
+            for (let item of this.competencesRequirements)
+                data["competencesRequirements"].push(item.toJSON());
+        }
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): Competency {
+        const json = this.toJSON();
+        let result = new Competency();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetency {
+    competencyTitle: string | undefined;
+    jobRoleId: number;
+    positionId: number;
+    description: string | undefined;
+    departmentId: number;
+    competencesRequirements: CompetencyRequirments[] | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class CompetencyIListApiResult implements ICompetencyIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: Competency[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: ICompetencyIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(Competency.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): CompetencyIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompetencyIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): CompetencyIListApiResult {
+        const json = this.toJSON();
+        let result = new CompetencyIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetencyIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: Competency[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class EmailSetting implements IEmailSetting {
     emailUserName!: string | undefined;
     emailHost!: string | undefined;
@@ -56565,6 +57127,89 @@ export interface IEmployeeCompensationDTO {
     isActive: boolean;
 }
 
+export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
+    competencyId!: number;
+    requirementCategory!: string | undefined;
+    skillId!: number | undefined;
+    trainingId!: number | undefined;
+    certificationId!: number | undefined;
+    qualificationId!: number | undefined;
+    points!: number;
+    experience!: string | undefined;
+    yearsofExperience!: number;
+    experienceWeight!: number | undefined;
+    skillWeight!: number | undefined;
+
+    constructor(data?: ICompetencyRequirmentsDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.competencyId = _data["competencyId"];
+            this.requirementCategory = _data["requirementCategory"];
+            this.skillId = _data["skillId"];
+            this.trainingId = _data["trainingId"];
+            this.certificationId = _data["certificationId"];
+            this.qualificationId = _data["qualificationId"];
+            this.points = _data["points"];
+            this.experience = _data["experience"];
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.skillWeight = _data["skillWeight"];
+        }
+    }
+
+    static fromJS(data: any): CompetencyRequirmentsDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompetencyRequirmentsDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["competencyId"] = this.competencyId;
+        data["requirementCategory"] = this.requirementCategory;
+        data["skillId"] = this.skillId;
+        data["trainingId"] = this.trainingId;
+        data["certificationId"] = this.certificationId;
+        data["qualificationId"] = this.qualificationId;
+        data["points"] = this.points;
+        data["experience"] = this.experience;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["skillWeight"] = this.skillWeight;
+        return data; 
+    }
+
+    clone(): CompetencyRequirmentsDTO {
+        const json = this.toJSON();
+        let result = new CompetencyRequirmentsDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetencyRequirmentsDTO {
+    competencyId: number;
+    requirementCategory: string | undefined;
+    skillId: number | undefined;
+    trainingId: number | undefined;
+    certificationId: number | undefined;
+    qualificationId: number | undefined;
+    points: number;
+    experience: string | undefined;
+    yearsofExperience: number;
+    experienceWeight: number | undefined;
+    skillWeight: number | undefined;
+}
+
 export class ManageCompetencyDTO implements IManageCompetencyDTO {
     id!: number;
     competencyTitle!: string;
@@ -56576,6 +57221,7 @@ export class ManageCompetencyDTO implements IManageCompetencyDTO {
     selectedSkills!: string | undefined;
     selectedAbilities!: string | undefined;
     selectedCertifications!: string | undefined;
+    competencesRequirementsDTO!: CompetencyRequirmentsDTO[] | undefined;
 
     constructor(data?: IManageCompetencyDTO) {
         if (data) {
@@ -56598,6 +57244,11 @@ export class ManageCompetencyDTO implements IManageCompetencyDTO {
             this.selectedSkills = _data["selectedSkills"];
             this.selectedAbilities = _data["selectedAbilities"];
             this.selectedCertifications = _data["selectedCertifications"];
+            if (Array.isArray(_data["competencesRequirementsDTO"])) {
+                this.competencesRequirementsDTO = [] as any;
+                for (let item of _data["competencesRequirementsDTO"])
+                    this.competencesRequirementsDTO!.push(CompetencyRequirmentsDTO.fromJS(item));
+            }
         }
     }
 
@@ -56620,6 +57271,11 @@ export class ManageCompetencyDTO implements IManageCompetencyDTO {
         data["selectedSkills"] = this.selectedSkills;
         data["selectedAbilities"] = this.selectedAbilities;
         data["selectedCertifications"] = this.selectedCertifications;
+        if (Array.isArray(this.competencesRequirementsDTO)) {
+            data["competencesRequirementsDTO"] = [];
+            for (let item of this.competencesRequirementsDTO)
+                data["competencesRequirementsDTO"].push(item.toJSON());
+        }
         return data; 
     }
 
@@ -56642,6 +57298,7 @@ export interface IManageCompetencyDTO {
     selectedSkills: string | undefined;
     selectedAbilities: string | undefined;
     selectedCertifications: string | undefined;
+    competencesRequirementsDTO: CompetencyRequirmentsDTO[] | undefined;
 }
 
 export class VwConfirmationDTO implements IVwConfirmationDTO {

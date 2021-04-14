@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IStatus,MyColor } from 'app/components/status/models';
-import { ColumnTypes, TableActionEvent ,TableAction, ACTIONS} from 'app/components/tablecomponent/models';
-import { AlertserviceService } from 'app/_services/alertservice.service';
-import { DataServiceProxy, DepartmentActivityDTO, ManpowerServiceProxy } from 'app/_services/service-proxies';
+import { IStatus,MyColor } from '../../../components/status/models';
+import { ColumnTypes, TableActionEvent ,TableAction, ACTIONS} from '../../../components/tablecomponent/models';
+import { AlertserviceService } from '../../../_services/alertservice.service';
+import { DataServiceProxy, DepartmentActivityDTO, ManpowerServiceProxy } from '../../../_services/service-proxies';
 export interface planRequirement{
   ID?: number,
   jobCategory?: string,

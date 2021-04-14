@@ -1,4 +1,4 @@
-<ngx-side-modal [(show)]='showModalRequest' style="width: 500px;">
+<ngx-side-modal [(show)]='showModalRequest' (closed)="modalClosed($event)" style="width: 500px;">
     <div modal-header>Apply For Leave</div>
     <div modal-body>
         <form action="">
@@ -57,7 +57,12 @@
             <div class="form-group">
                 <label for="Contact Contact-info" style="font-size: small;font-weight: bold;">Contact Info On
                     Leave:</label>
-                <input type="number" class="form-control" placeholder="Enter Contact-info" id="Contact Info">
+                <input type="number"  [(ngModel)]="leaveReq.contactInfoOnLeave" id="contactInfoOnLeave" name="contactInfoOnLeave" #contactInfoOnLeave="ngModel" class="form-control" placeholder="Enter Contact-info" required>
+                <div *ngIf="contactInfoOnLeave.invalid && (contactInfoOnLeave.dirty || contactInfoOnLeave.touched)" class="error">
+                    <div *ngIf="contactInfoOnLeave.errors.required">
+                        Contact Info On Leave is required
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Reflief Officer:</label>
@@ -74,7 +79,7 @@
         <button *ngIf="!btnSubmitted" [disabled]="!disableApplyLeave" nbButton status="primary" (click)="createLeaveRequest()" class="d-flex column">Submit</button>
         <button nbButton outline status="primary" class="d-flex column" (click)="showModalRequest = false">Discard</button>
         <button class="d-flex column Attach">
-            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 5px;margin-right: 10px;">
+            <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 2px;margin-right: 5px;">
             Attach</button>
 
     </div>

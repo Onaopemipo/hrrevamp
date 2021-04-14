@@ -12,16 +12,17 @@ export class CustomServiceService {
 
     let endPoint: string = this.Urlbase + '/api/BulkMaster/DownloadSampleTemplate?processId=' + processId;
     let options_ : any = {
-      observe: "response",
-      responseType: "arrayBuffer",
-      headers: new HttpHeaders({
-          "Accept": "text/plain"
-      })
+      responseType: "arrayBuffer", 
   };
  
     var _result = this.http.get( endPoint,options_);
     return _result;
- 
   
+  }
+  downloadFile(data: any,datatype) {
+    const blob = new Blob([data], { type: datatype });
+    const url= window.URL.createObjectURL(blob);
+    window.open(url);
+
   }
 }
