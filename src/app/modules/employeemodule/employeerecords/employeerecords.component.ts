@@ -68,9 +68,9 @@ export class EmployeerecordsComponent implements OnInit {
   }
   tableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
-      this.router.navigate(['/employeemodule/viewemployeerecords'])
+      this.router.navigate(['/employeemodule/viewemployeerecords'],{queryParams:{employee_id:event.data.id}})
     }
-    if (event.name == "2") {
+    if (event.name == "4") {
       this.router.navigate(['/employeemodule/viewemployeerecords'])
     }
   }
