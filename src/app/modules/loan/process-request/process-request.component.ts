@@ -36,7 +36,7 @@ export class ProcessRequestComponent implements OnInit {
     }
   }
 
-  async simulateLoan(){
+  async simulateLoanRepayment(){
     const data = await this.service.simulatePayment(1,1,1,1,'').toPromise();
     if(!data.hasError){
       this.simulationData = data.result;

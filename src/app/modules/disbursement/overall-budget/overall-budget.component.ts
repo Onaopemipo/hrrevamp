@@ -70,7 +70,7 @@ export class OverallBudgetComponent implements OnInit {
   }
 
  async fetAllBudgetItems(){
-    const data = await this.budgetItemService.getAllBudgetItems().toPromise();
+    const data = await this.budgetItemService.getAllBudgetItems(this.dataIndex).toPromise();
     this.allBudgetItems = data.result
     console.log('Yo boss', this.allBudgetItems)
   }

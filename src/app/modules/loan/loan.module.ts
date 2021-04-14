@@ -11,10 +11,11 @@ import { LoanRequestComponent } from './loan-request/loan-request.component';
 import { LoanTypeComponent } from './loan-type/loan-type.component';
 import { ProcessRequestComponent } from './process-request/process-request.component';
 import { UpdateLoanComponent } from './update-loan/update-loan.component';
+import { AllLoansComponent } from './all-loans/all-loans.component';
 
 
 @NgModule({
-  declarations: [LoanComponent, LoanRequestComponent, LoanTypeComponent, ProcessRequestComponent, UpdateLoanComponent],
+  declarations: [LoanComponent, LoanRequestComponent, LoanTypeComponent, ProcessRequestComponent, UpdateLoanComponent, AllLoansComponent],
   imports: [
     CommonModule,
     LoanRoutingModule,

@@ -1,5 +1,6 @@
+import { AlertserviceService } from './../../../_services/alertservice.service';
 import { title } from 'process';
-import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification } from './../../../_services/service-proxies';
+import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, Competency, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO } from './../../../_services/service-proxies';
 import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
@@ -63,10 +64,12 @@ export class CompetencyComponent implements OnInit {
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
-  compRequirements
+  myCompetency: ManageCompetencyDTO = new ManageCompetencyDTO().clone();
+  competencyRequirement: CompetencyRequirmentsDTO [] = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
-    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy) { }
+    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,
+    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
     this.fetchAllDepartments();
@@ -81,8 +84,12 @@ export class CompetencyComponent implements OnInit {
     this.requirement = e;
   }
 
-  createCompetency(){
-
+  async createCompetency(){
+    this.myCompetency.competencesRequirementsDTO = this.competencyRequirement;
+    const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert('Success', 'Competency Added!', 'Dismiss')
+    }
   }
 
   async getCompetency(){

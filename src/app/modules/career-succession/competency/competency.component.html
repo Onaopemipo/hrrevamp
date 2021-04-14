@@ -54,16 +54,18 @@
                 <div class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Competency Title </label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <input type="text" class="form-control" name="competencyTitle" placeholder="Title">
+                    <input type="text" class="form-control" name="competencyTitle" #competencyTitle="ngModel"
+                    [(ngModel)]="myCompetency.competencyTitle"  placeholder="Title">
                   </div>
                 </div>
 
                 <div *ngIf="selectedCase=='Role'" class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <select type="text" class="form-control" name="roleName" placeholder="Role Name">
+                    <select type="text" class="form-control" name="roleName" #roleName="ngModel"
+                    [(ngModel)]="myCompetency.jobRoleId"  placeholder="Role Name">
                       <option value="">--Select Role--</option>
-                      <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
+                      <option *ngFor="let role of AllJobRoles" [value]="role.id">{{ role.name }}</option>
                     </select>
                   </div>
                 </div>
@@ -71,7 +73,8 @@
                 <div *ngIf="selectedCase=='Position'" class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Position Name</label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <select type="text" class="form-control" name="roleName" placeholder="Role Name">
+                    <select type="text" class="form-control" name="positionName" #positionName="ngModel"
+                    [(ngModel)]="myCompetency.positionId" placeholder="Role Name">
                       <option value="">--Select Role--</option>
                       <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
                     </select>
@@ -81,15 +84,16 @@
                 <div class="form-group row ">
                   <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>                  </div>
+                    <ngx-wysisyg-input style="padding-left: -10px;"  [(value)]="myCompetency.description" ></ngx-wysisyg-input>                  </div>
                 </div>
 
                 <div class="form-group row ">
                   <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <select class="custom-select" name="department" required>
+                    <select class="custom-select" name="departmentName" #departmentName="ngModel"
+                    [(ngModel)]="myCompetency.departmentId" required>
                       <option value="">--Select Department--</option>
-                      <option *ngFor="let department of allDepartment" value="department.id">{{ department.name }}</option>
+                      <option *ngFor="let department of allDepartment" [value]="department.id">{{ department.name }}</option>
                     </select>
                   </div>
                 </div>
@@ -104,22 +108,23 @@
                   </div>
                 </div> -->
 
-                <div class="form-group row ">
+                <!-- <div class="form-group row ">
                   <label for="Region" class="col-sm-3 col-form-label mylabel">Level</label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <select class="custom-select" name="level"  required>
+                    <select class="custom-select" name="levelName" #levelName="ngModel"
+                    [(ngModel)]="myCompetency.departmentId"  required>
                       <option value="">--Select Level--</option>
                       <option *ngFor="let level of allGradeLevels" value="level.id">{{ level.name }}</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
 
                 <span class="title">Requirements</span>
 
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel">Requirement Type</label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <select class="custom-select" name="requirementCategory" #requirementCategory="ngModel" [(ngModel)]="comRequirement.requirementCategory" (change)="toggleRequirement($event.target.value)" required>
+                    <select class="custom-select" name="requirementCategory" #requirementCategory="ngModel" [(ngModel)]="competencyRequirement.requirementCategory" (change)="toggleRequirement($event.target.value)" required>
                       <option value="">--Select Level--</option>
                       <option *ngFor="let req of requirementList" [value]="req.title">{{req.label}}</option>
                     </select>
@@ -132,7 +137,7 @@
                     <div class="row" style="display: flex; justify-content: space-between; flex-direction: row;">
                       <div *ngIf="requirement =='skill'"  class="col-sm-6">
                         <label for="">Skill Type</label>
-                        <select class="custom-select" name="skillType" #skillType="ngModel" [(ngModel)]="comRequirement.skillId" required>
+                        <select class="custom-select" name="skillType" #skillType="ngModel" [(ngModel)]="competencyRequirement.skillId" required>
                         <option value="">--Select Level--</option>
                         <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
                       </select>
@@ -140,15 +145,15 @@
 
                       <div *ngIf="requirement =='training'" class="col-sm-6">
                         <label for="">Training Type</label>
-                        <select class="custom-select" name="training" #training="ngModel" [(ngModel)]="comRequirement.trainingId" required>
+                        <select class="custom-select" name="trainingType" #trainingType="ngModel" [(ngModel)]="competencyRequirement.trainingId" required>
                         <option value="">--Select Level--</option>
-                        <option *ngFor="let mytraining of trainingData" [value]="mytraining.title">{{mytraining.name}}</option>
+                        <option *ngFor="let training of trainingData" [value]="training.title">{{training.name}}</option>
                       </select>
                       </div>
 
                       <div *ngIf="requirement =='certification'" class="col-sm-6">
                         <label for="">Certification Type</label>
-                        <select class="custom-select" name="certification" #certification="ngModel" [(ngModel)]="comRequirement.certificationId" required>
+                        <select class="custom-select" name="certification" #certification="ngModel" [(ngModel)]="competencyRequirement.certificationId" required>
                         <option value="">--Select Level--</option>
                         <option *ngFor="let cert of certificationData" [value]="cert.title">{{cert.name}}</option>
                       </select>
@@ -156,7 +161,7 @@
 
                       <div *ngIf="requirement =='qualification'" class="col-sm-6">
                         <label for="">Qualification Type</label>
-                        <select class="custom-select" name="qualification" #qualification="ngModel" [(ngModel)]="comRequirement.qualificationId"  required>
+                        <select class="custom-select" name="qualification" #qualification="ngModel" [(ngModel)]="competencyRequirement.qualificationId"  required>
                         <option value="">--Select Level--</option>
                         <option *ngFor="let myqualification of qualificationData" [value]="myqualification.title">{{myqualification.name}}</option>
                       </select>
@@ -164,7 +169,7 @@
 
                       <div *ngIf="requirement =='experience'" class="col-sm-6">
                         <label for="">Experience Type</label>
-                        <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="comRequirement.experienceId" required>
+                        <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="competencyRequirement.experienceId" required>
                         <option value="">--Select Level--</option>
                         <option *ngFor="let exp of experienceData" [value]="exp.title">{{exp.name}}</option>
                       </select>
@@ -172,7 +177,8 @@
 
                       <div class="col-sm-6">
                         <label for="">Experience (Months)</label>
-                        <input type="number" class="form-control" name="experienceValue" placeholder="Months">
+                        <input type="number" class="form-control" name="experienceValue" #experienceValue="ngModel"
+                        [(ngModel)]="competencyRequirement.yearsofExperience" placeholder="Months">
                       </div>
                     </div>
 
@@ -183,25 +189,26 @@
                   <div class="col-sm-3"></div>
                   <div class="col-sm-8">
                     <div class="row" style="display: flex; justify-content: space-between; flex-direction: row;">
-                      <div *ngIf="requirement =='skill'" class="col-sm-6">
-                        <label for="">Skill Weight</label>
-                        <input type="number" class="form-control" name="skillWeight" placeholder="Points" required>
+                      <div class="col-sm-6">
+                        <label for="">Weight</label>
+                        <input type="number" class="form-control" name="skillWeight" #skillWeight="ngModel"
+                        [(ngModel)]="competencyRequirement.skillWeight" placeholder="Points" required>
                       </div>
 
-                      <div *ngIf="requirement =='training'" class="col-sm-6">
+                      <!-- <div *ngIf="requirement =='training'" class="col-sm-6">
                         <label for="">Training Weight</label>
                         <input type="number" class="form-control" name="trainingWeight" placeholder="Points" required>
-                      </div>
+                      </div> -->
 
-                      <div *ngIf="requirement =='qualification'" class="col-sm-6">
+                      <!-- <div *ngIf="requirement =='qualification'" class="col-sm-6">
                         <label for="">Qualification Weight</label>
                         <input type="number" class="form-control" name="qualificationWeight" placeholder="Points" required>
-                      </div>
+                      </div> -->
 
-                      <div *ngIf="requirement =='certification'" class="col-sm-6">
+                      <!-- <div *ngIf="requirement =='certification'" class="col-sm-6">
                         <label for="">Certification Weight</label>
                         <input type="number" class="form-control" name="certificationWeight" placeholder="Points" required>
-                      </div>
+                      </div> -->
 
                       <div class="col-sm-6">
                         <label for="">Experience Weight</label>
