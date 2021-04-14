@@ -63,7 +63,7 @@ export class CompetencyComponent implements OnInit {
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
-  // compRequirem
+  compRequirements
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy) { }
