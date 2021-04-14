@@ -3,6 +3,25 @@ import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification } from './
 import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
+
+export interface competencyRequirement{
+  ID?: number,
+  requirementCategory?: string,
+  skillId?: number,
+  skillName?: string,
+  trainingId?: number,
+  trainingName?: string,
+  certificationId?: number,
+  certificationName?:string,
+  qualificationId?: number,
+  qualificationName?: string,
+  experienceId?: any,
+  experienceName?: any,
+  abilityId?: number,
+  abilityName?: string,
+  experience?: string,
+  YearsofExperience?: number,
+}
 @Component({
   selector: 'ngx-competency',
   templateUrl: './competency.component.html',
@@ -17,6 +36,7 @@ export class CompetencyComponent implements OnInit {
   scoreCardClick: boolean = false;
   newCompetency: boolean = false;
   myPanel: string = '';
+
   selectedCase: string = 'Role';
   selectedPanel: any = { title: 'Role', label: 'Role', status: 'Active'};
   competencyChecklist = [
@@ -25,7 +45,7 @@ export class CompetencyComponent implements OnInit {
   ];
 
   requirementList = [
-    { title: 'Skill', label: 'Skills'},
+    { title: 'skill', label: 'Skills'},
     { title: 'training', label: 'Training'},
     { title: 'qualification', label: 'Qualification'},
     { title: 'certification', label: 'Certification'},
@@ -33,13 +53,17 @@ export class CompetencyComponent implements OnInit {
 
   ];
 
+  comRequirement: competencyRequirement [] = [];
+
+
   allDepartments: DepartmentDTO [] = [];
   allJobRoles: JobRole [] = [];
   allGradeLevels: GradeLevelDTO [] = [];
   skillData: Skill [] = [];
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
-  requirement: string = 'skills';
+  requirement: string = 'skill';
+  // compRequirem
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy) { }
@@ -53,11 +77,19 @@ export class CompetencyComponent implements OnInit {
     this.fetchSkills();
   }
 
-  toggleRequirement(e){
+  toggleRequirement(e:string){
     this.requirement = e;
   }
 
   createCompetency(){
+
+  }
+
+  async getCompetency(){
+    // const data = await this.commonService.getC
+  }
+
+  addRequirement(){
 
   }
 
