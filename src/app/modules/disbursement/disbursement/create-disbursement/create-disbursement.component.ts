@@ -37,6 +37,8 @@ export class CreateDisbursementComponent implements OnInit {
 
   AllCategories: IDTextViewModel [] = [];
 
+  dataIndex: number = 1;
+
   disbursement: SingleDisbursementPostDTO = new SingleDisbursementPostDTO;
 
   constructor(private disbursementService: SingleDisbursementServiceProxy, private alert: AlertserviceService,
@@ -77,7 +79,7 @@ benefiary(event){
 }
 
 async fetAllBudgetItems(){
-  const data = await this.budgetItemService.getAllBudgetItems().toPromise();
+  const data = await this.budgetItemService.getAllBudgetItems(this.dataIndex).toPromise();
   if(!data.hasError){
     this.allBudgetItems = data.result;
     console.log('Yo boss,, I am here', this.allBudgetItems)

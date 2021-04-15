@@ -1,4 +1,4 @@
-import { BudgetItemDTO, FetchAllBudgetItemsServiceProxy, FetchGetBudgetServiceProxy, FetchBudgetItemsServiceProxy, FetchGetBudgetItemServiceProxy, DisbursementBudgetItemAllocation, IDepartmentDTO } from './../../../../_services/service-proxies';
+import { BudgetItemDTO, FetchAllBudgetItemsServiceProxy, FetchBudgetItemsServiceProxy, DisbursementBudgetItemAllocation, IDepartmentDTO, FetchBudgetItemServiceProxy } from './../../../../_services/service-proxies';
 import { Department, DepartmentDTO, CommonServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 // import { MyBudgetItemDepartment } from './../../services/budget-item.service';
@@ -19,7 +19,7 @@ export class UpdateItemComponent implements OnInit {
   id;
 
 
-  constructor(private alertMe: AlertserviceService, private budgetItemService: FetchGetBudgetItemServiceProxy, private common: CommonServiceProxy) { }
+  constructor(private alertMe: AlertserviceService, private budgetItemService: FetchBudgetItemServiceProxy, private common: CommonServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchDepartments();
@@ -38,7 +38,7 @@ export class UpdateItemComponent implements OnInit {
   }
 
   async fetchBudgetItem(){
-    const data = await this.budgetItemService.getGetBudgetItem(this.id).toPromise();
+    const data = await this.budgetItemService.getBudgetItem(this.id).toPromise();
     this.myBudgetItem = data.result
     console.log('Yo boss', this.myBudgetItem)
   }

@@ -1,0 +1,25 @@
+<ngx-componentsheader
+  pageName="All Loan Request"
+  [requiredButton]="[]"
+></ngx-componentsheader>
+
+<div *ngIf="dataVal < 1" style="background-color: #ffffff;">
+  <nb-card>
+    <nb-card-body>
+      <div><br>
+        <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addRequest()">
+        </ngx-default-content>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+</div>
+
+<div *ngIf="dataVal > 0">
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='loading' [tableColum]="repaymentTable"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div>

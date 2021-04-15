@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
-import { BudgetDTO, DisbursementBudgetItem, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, DisbursementBudgetItemAllocation } from './../../../../_services/service-proxies';
+import { BudgetDTO, DisbursementBudgetItem, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, DisbursementBudgetItemAllocation, FetchAllBudgetsServiceProxy } from './../../../../_services/service-proxies';
 import { MyBudgetItem, MyBudgetItemDepartment } from './../../services/budget-item.service';
 import { MyBudget, BudgetService } from './../../services/budget.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,16 +17,18 @@ export class SetupComponent implements OnInit {
   budgetItem: ManageBudgetItemDTO = new ManageBudgetItemDTO;
   disBudgetItem: DisbursementBudgetItem []= [];
   allDepartments: Department [] = [];
+  myBudget: BudgetDTO[] = [];
   departments: DisbursementBudgetItemAllocation = new DisbursementBudgetItemAllocation().clone();
 
-  constructor(private budgetService: AddUpdateBudgetServiceProxy, private alertMe: AlertserviceService,
+  constructor(private budgetService: AddUpdateBudgetServiceProxy, private allBudgets: FetchAllBudgetsServiceProxy,  private alertMe: AlertserviceService,
     private alert: AlertserviceService, private common: CommonServiceProxy, private updateItem: AddUpdateBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchDepartments();
+    this.fetAllBudget();
   }
 
-  page = 2;
+  page = 1;
 
   budgetForm: NgForm;
 
@@ -58,6 +60,14 @@ export class SetupComponent implements OnInit {
     // this.alertMe.alertMessage
     console.log('yshdhdh', this.departments);
   }
+
+  async fetAllBudget(){
+    const data = await this.allBudgets.getAllBudgets().toPromise();
+    if(!data.hasError){
+     this.myBudget = data.result;
+     console.log('All Bugdet Items', this.myBudget)
+    }
+   }
 
   async fetchDepartments(){
     const data = await this.common.getDepartments().toPromise();

@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, ServiceProxy } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -43,7 +43,9 @@ export class LoanRequestComponent implements OnInit {
   viewLoanModal: boolean = false;
 
 
-  constructor(private alertMe: AlertserviceService, private service: ServiceProxy) { }
+  constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
+     private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
+     private updateService: UpdateLoanRequestServiceProxy) { }
 
   ngOnInit(): void {
   }
@@ -72,7 +74,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async makeLoanRequest(){
-  const data = await this.service.addUpdateLoanRequest(this.loanModel).toPromise();
+  const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
     this.alertMe.openModalAlert('Success', 'Request Created', 'Dismiss');
   }
@@ -82,21 +84,21 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getAllLoans(){
-    const data = await this.service.getLoanRequests(1,1,null,null,1,1,'',1,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(1,1,null,null,1,1,'',1,1).toPromise();
     if(!data.hasError){
       this.allLoansData = data.result;
     }
   }
 
   async getLoanSummary(){
-    const data = await this.service.getLoanSummary('').toPromise();
+    const data = await this.loanSummaryService.getLoanSummary(0).toPromise();
     if(!data.hasError){
       this.loanSummary = data.result;
     }
   }
 
   async updateLoan(){
-    const data = await this.service.updateLoanRequest(this.updateLoanPayment).toPromise();
+    const data = await this.updateService.updateLoanRequest(this.updateLoanPayment).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert('Success', 'Loan Updated!', 'Dismiss')
     }
