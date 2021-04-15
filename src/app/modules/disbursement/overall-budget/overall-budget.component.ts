@@ -1,4 +1,4 @@
-import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchGetBudgetServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO } from './../../../_services/service-proxies';
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, BudgetItemService } from './../services/budget-item.service';
@@ -30,7 +30,7 @@ export class OverallBudgetComponent implements OnInit {
   button: string = 'Add Budget Item';
 
   constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
-    private budgetService: FetchAllBudgetsServiceProxy, private budgetServices: FetchGetBudgetServiceProxy,
+    private budgetService: FetchAllBudgetsServiceProxy, private singleBudget: FetchBudgetServiceProxy,
     private alertMe: AlertserviceService, private common: CommonServiceProxy, private budgetItemUpdate: AddUpdateBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
@@ -115,7 +115,7 @@ export class OverallBudgetComponent implements OnInit {
     this.finLoading = true;
     this.dataIndex = budgetId;
     // alert(budgetId)
-    const data = await this.budgetServices.getGetBudget(budgetId).toPromise();
+    const data = await this.singleBudget.getBudget(budgetId).toPromise();
     if(!data.hasError){
       this.finYear = data.result;
       this.finLoading = false;

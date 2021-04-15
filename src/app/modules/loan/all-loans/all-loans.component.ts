@@ -1,8 +1,7 @@
 import { TableColumn } from 'app/components/tablecomponent/models';
-import { LoanRequestDTO } from './../../../_services/service-proxies';
+import { LoanRequestDTO, GetLoanRequestsServiceProxy } from './../../../_services/service-proxies';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ServiceProxy } from 'app/_services/service-proxies';
 
 @Component({
   selector: 'ngx-all-loans',
@@ -29,7 +28,7 @@ export class AllLoansComponent implements OnInit {
   ];
 
   loading:boolean = true;
-  constructor(private router: Router, private loanService: ServiceProxy) { }
+  constructor(private router: Router, private loanService: GetLoanRequestsServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchLoans();
@@ -40,7 +39,7 @@ export class AllLoansComponent implements OnInit {
   }
 
   async fetchLoans(){
-    const data = await this.loanService.fetchLoanRequests(0,0,null,null,0,0,'',0,0).toPromise();
+    const data = await this.loanService.getLoanRequests(0,0,null,null,0,0,'',0,0).toPromise();
     if(!data.hasError){
       this.allLoans = data.result;
       console.log('all loans', this.allLoans)
