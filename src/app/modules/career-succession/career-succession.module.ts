@@ -1,4 +1,4 @@
-import { GradeLevelServiceProxy, CompetencyServiceProxy } from './../../_services/service-proxies';
+import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy } from './../../_services/service-proxies';
 import { GetAllDepartmentsServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -54,6 +54,7 @@ import { SucessionPlanCreateComponent } from './sucession-plan-create/sucession-
     CommonServiceProxy,
     GradeLevelServiceProxy,
     CompetencyServiceProxy,
+    FetchEmployeeByIdServiceProxy
   ],
   imports: [
     CommonModule,

@@ -9,36 +9,37 @@
     <nb-card-body>
       <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
         <div class="col-md">
-          <img src="assets/icons/department.jpg" style="width:3rem;">
+          <!-- <img src="assets/icons/department.jpg" style="width:3rem;"> -->
+          <img src="{{ employeeData.profilePic }}" style="width:3rem;">
         </div>
 
         <div class="col-md-11">
           <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Name:</span><span>{{data.employee_name}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Name:</span><span>{{employeeData.firstName}}  {{employeeData.lastName}}</span>
             </div>
 
             <div class="col-md-4 col-lg-4 col-sm-6">
               <span
-                style="font-weight: 600; padding-right:25px;">Department:</span><span>{{data.department_name}}</span>
+                style="font-weight: 600; padding-right:25px;">Department:</span><span>{{employeeData.contracts.departmentName}}</span>
             </div>
 
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{data.level}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{employeeData.contracts.gradeName}}</span>
             </div>
           </div>
 
           <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{data.job_role_name}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{employeeData.contracts.jobId }}</span>
             </div>
 
-            <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Unit/Division:</span><span>{{data.unit_name}}</span>
-            </div>
+            <!-- <div class="col-md-4 col-lg-4 col-sm-6">
+              <span style="font-weight: 600; padding-right:25px;">Unit/Division:</span><span>{{employeeData.unit_name}}</span>
+            </div> -->
 
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{data.location_name}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{employeeData.contracts.locationId}}</span>
             </div>
           </div>
         </div>
@@ -52,69 +53,51 @@
 <nb-card>
   <nb-card-header style="font-size: large; font-weight: bold;">Role Competencies</nb-card-header>
   <nb-card-body>
-    
+
       <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
         <div class="col-md-6">
 
           <span class="title" style="font-size: large; font-weight: bold;">Qualifications</span>
-          <div *ngFor="let qualification of data.qualifications">
+          <div *ngFor="let qualification of employeeData.qualifications">
             <div style="padding: 5px;"></div>
             <div style="display: flex; flex-direction: column; justify-self: center;">
               <span class="title">{{qualification.name}}</span>
-              <span class="date">From {{qualification.startdate|date:'MMM d, y'}} - {{qualification.stopdate|date:'MMM
+              <span class="date">From {{qualification.startDate | date:'MMM d, y'}} - {{qualification.endDate | date:'MMM
                 d, y'}}</span>
             </div>
           </div>
 
           <!-- <div style="padding: 15px;"></div> -->
-
-
-
-
         </div>
-  
 
-
-
-        
         <div class="col-md-6">
           <span class="title" style="font-size: large; font-weight: bold;">Certifications</span>
           <div style="padding: 5px;"></div>
           <div style="display: flex; flex-direction: column; justify-self: center;"
-            *ngFor="let certification of data.certification">
+            *ngFor="let certification of employeeData.certifications">
             <span><i class="fas fa-circle"
                 style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>{{certification.name}}</span>
-            <span><i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Microsoft
-              Azure Certification</span>
-            <span><i class="fas fa-circle" style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Asp.Net
-              Certification</span>
           </div>
         </div>
       </div>
 
-    
+
     <div class="row" style="display: flex; flex-direction: row; align-items: flex-start;
      margin-top: 4rem;margin-bottom: 7rem;" >
-     
-      <div class="col-sm-6">
+
+      <!-- <div class="col-sm-6">
         <span class="title" style="font-size: large; font-weight: bold;">Abilities</span>
         <div style="padding: 5px;"></div>
-        <div *ngFor="let ability of data.abilities">
-          <p style="font-size: 14px;">{{ability.name}}</p>
-          <!-- <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
-        <p style="font-size: 14px;">Ability to create financial reports and audits.</p>
-        <p style="font-size: 14px;">Ability to create financial reports and audits.</p> -->
+        <div *ngFor="let ability of employeeData.abilities">
+          <p style="font-size: 14px;">{{ ability.name }}</p>
         </div>
-
-      </div>
+      </div> -->
       <div class="col-sm-6">
         <span class="title" style="font-size: large; font-weight: bold;">Skills</span>
         <div style="padding: 5px;"></div>
-        <div style="display: flex; flex-direction: column; justify-self: center;" *ngFor="let skill of data.skills">
+        <div style="display: flex; flex-direction: column; justify-self: center;" *ngFor="let skill of employeeData.skills">
           <span>{{skill.name}}</span>
           <nb-progress-bar [value]="skill.point" size="tiny" status="primary"></nb-progress-bar>
-
-
         </div>
 
       </div>
