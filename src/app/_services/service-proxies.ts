@@ -19000,21 +19000,61 @@ export class FileStorageManagerServiceProxy {
 
     /**
      * API to upload documents for Employee on the system.
-     * @param body (optional) 
+     * @param id (optional) 
+     * @param employee_id (optional) 
+     * @param employeeNo (optional) 
+     * @param name (optional) 
+     * @param directory (optional) 
+     * @param lastModifiedDate (optional) 
+     * @param docUrl (optional) 
+     * @param file (optional) 
+     * @param docType (optional) 
+     * @param comment (optional) 
      * @return Success
      */
-    uploadDocuments(body: ManageDocumentDTO | undefined): Observable<MessageOutApiResult> {
+    uploadDocuments(id: number | undefined, employee_id: number | undefined, employeeNo: string | undefined, name: string | undefined, directory: string | null | undefined, lastModifiedDate: Date | undefined, docUrl: string | null | undefined, file: FileParameter | null | undefined, docType: string | undefined, comment: string | null | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/FileStorageManager/UploadDocuments";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
+        const content_ = new FormData();
+        if (id === null || id === undefined)
+            throw new Error("The parameter 'id' cannot be null.");
+        else
+            content_.append("id", id.toString());
+        if (employee_id === null || employee_id === undefined)
+            throw new Error("The parameter 'employee_id' cannot be null.");
+        else
+            content_.append("employee_id", employee_id.toString());
+        if (employeeNo === null || employeeNo === undefined)
+            throw new Error("The parameter 'employeeNo' cannot be null.");
+        else
+            content_.append("EmployeeNo", employeeNo.toString());
+        if (name === null || name === undefined)
+            throw new Error("The parameter 'name' cannot be null.");
+        else
+            content_.append("Name", name.toString());
+        if (directory !== null && directory !== undefined)
+            content_.append("Directory", directory.toString());
+        if (lastModifiedDate === null || lastModifiedDate === undefined)
+            throw new Error("The parameter 'lastModifiedDate' cannot be null.");
+        else
+            content_.append("LastModifiedDate", lastModifiedDate.toJSON());
+        if (docUrl !== null && docUrl !== undefined)
+            content_.append("DocUrl", docUrl.toString());
+        if (file !== null && file !== undefined)
+            content_.append("File", file.data, file.fileName ? file.fileName : "File");
+        if (docType === null || docType === undefined)
+            throw new Error("The parameter 'docType' cannot be null.");
+        else
+            content_.append("docType", docType.toString());
+        if (comment !== null && comment !== undefined)
+            content_.append("comment", comment.toString());
 
         let options_ : any = {
             body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -64613,85 +64653,6 @@ export interface IExpenseTypeIListApiResult {
     result: ExpenseType[] | undefined;
     totalCount: number;
     totalRecord: number;
-}
-
-export class ManageDocumentDTO implements IManageDocumentDTO {
-    id!: number;
-    employee_id!: number;
-    employeeNo!: string;
-    name!: string;
-    directory!: string | undefined;
-    lastModifiedDate!: Date;
-    docUrl!: string | undefined;
-    file!: string | undefined;
-    docType!: string;
-    comment!: string | undefined;
-
-    constructor(data?: IManageDocumentDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.employee_id = _data["employee_id"];
-            this.employeeNo = _data["employeeNo"];
-            this.name = _data["name"];
-            this.directory = _data["directory"];
-            this.lastModifiedDate = _data["lastModifiedDate"] ? new Date(_data["lastModifiedDate"].toString()) : <any>undefined;
-            this.docUrl = _data["docUrl"];
-            this.file = _data["file"];
-            this.docType = _data["docType"];
-            this.comment = _data["comment"];
-        }
-    }
-
-    static fromJS(data: any): ManageDocumentDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new ManageDocumentDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["employee_id"] = this.employee_id;
-        data["employeeNo"] = this.employeeNo;
-        data["name"] = this.name;
-        data["directory"] = this.directory;
-        data["lastModifiedDate"] = this.lastModifiedDate ? this.lastModifiedDate.toISOString() : <any>undefined;
-        data["docUrl"] = this.docUrl;
-        data["file"] = this.file;
-        data["docType"] = this.docType;
-        data["comment"] = this.comment;
-        return data; 
-    }
-
-    clone(): ManageDocumentDTO {
-        const json = this.toJSON();
-        let result = new ManageDocumentDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IManageDocumentDTO {
-    id: number;
-    employee_id: number;
-    employeeNo: string;
-    name: string;
-    directory: string | undefined;
-    lastModifiedDate: Date;
-    docUrl: string | undefined;
-    file: string | undefined;
-    docType: string;
-    comment: string | undefined;
 }
 
 export class AzureDocs implements IAzureDocs {
