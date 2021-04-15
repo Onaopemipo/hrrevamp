@@ -93,6 +93,9 @@
           </div> 
           <div class="col-md-12">
             <label style="font-size: small;font-weight: bold;">Requirements:</label>
+            <div *ngIf="addRequirementError" class="error">
+                <div>{{addRequirementError}}</div>
+            </div> 
           </div> 
           <div class="col-md-6" >
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Select Job Category</label>
@@ -100,22 +103,28 @@
                 <option value="">--select--</option>
                 <option value="Job Role">Job Role</option>
                 <option value="Position">Position</option>
-                <option value="Grade">Grade</option>
+           
               </select>
           </div>
           <div class="col-md-6" >
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Select {{planrequirement.jobCategory}} type</label>
-          
+            <option *ngFor="let cty of JcategoryType;let i = index" value="{{i}}">{{cty.name}}</option>
           </div>
           <div class="col-md-6" >
-            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
-          
+            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Required number of staff:</label>
+            <input   name="numberOfStaff" id="numberOfStaff" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="number" class="form-control" placeholder="number of staff">
           </div>
           <div class="col-md-6" >
-            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
-          
-          </div>
-
+            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Cost per Resource:</label>
+            <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
+            <div *ngIf="staffCostError" class="error">
+                <div>{{staffCostError}}</div>
+            </div> 
+            
+        </div>
+        <div class="col-md-12" >
+            <button (click)="addrequirement(planrequirement)" nbButton outline status="primary" class="d-flex column" style="background-color: white;">Add Requirement</button>
+        </div>
 
       </div>
  </form>

@@ -1,4 +1,4 @@
-import { AddUpdateDeployentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -56,7 +56,7 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
 import { ExitRequestService } from './services/exit-request.service';
 import { CustomServiceService  } from '../../_services/custom-service.service';
 import {
-  GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
+  GetEligibilityListServiceProxy, FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,
   RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy,
   FetchEmployeeContractByEmployeeIdServiceProxy,GetConfirmationsByDetailsServiceProxy,SaveConfirmationServiceProxy 
 } from 'app/_services/service-proxies';
@@ -128,7 +128,7 @@ import {
     FetchEmployeeByIdServiceProxy,
     GetAllProfessionalBodiesServiceProxy,
     RecruitmentSettingServiceProxy,
-    FileUploadServiceProxy,
+    FileStorageManagerServiceProxy,
     UploadProfileImageServiceProxy,
     GetEligibilityListServiceProxy,
     AddUpdateEligibleBucketServiceProxy,
@@ -138,7 +138,7 @@ import {
     GetConfirmationsByDetailsServiceProxy,
     SaveConfirmationServiceProxy,
     EmployeeDeploymentServiceProxy,
-    AddUpdateDeployentServiceProxy,
+    AddUpdateDeploymentServiceProxy,
     BulkMasterServiceProxy,
     CustomServiceService
   ]

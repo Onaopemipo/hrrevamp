@@ -3,7 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { EmployeeDeploymentServiceProxy,DeploymentRegistrationPayLoad, CreateDeploymentViewModel, DataServiceProxy, CommonServiceProxy, LGA, State,Location, AddUpdateDeployentServiceProxy } from '../../../_services/service-proxies';
+import {
+  EmployeeDeploymentServiceProxy, DeploymentRegistrationPayLoad, CreateDeploymentViewModel,
+  DataServiceProxy, CommonServiceProxy, LGA, State, Location, AddUpdateDeploymentServiceProxy
+} from '../../../_services/service-proxies';
 
 enum TOP_ACTIONS {
   
@@ -45,7 +48,7 @@ export class DeploymentapplicationComponent implements OnInit {
   DeploymentRegistration = new DeploymentRegistrationPayLoad().clone();
   modificationStatus: boolean = false;
   constructor(private EmployeeDeploymentServiceProxy: EmployeeDeploymentServiceProxy, private router: Router,private alertservice: AlertserviceService,
-    private myDropdown: DataServiceProxy,private CommonService: CommonServiceProxy, private AddUpdateDeployentService: AddUpdateDeployentServiceProxy) { }
+    private myDropdown: DataServiceProxy,private CommonService: CommonServiceProxy, private AddUpdateDeployentService: AddUpdateDeploymentServiceProxy) { }
   
   tableActionClicked(event: TableActionEvent) {
     if (event.name == "3") {

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { IStatus,MyColor } from '../../../components/status/models';
 import { ColumnTypes, TableActionEvent ,TableAction, ACTIONS} from '../../../components/tablecomponent/models';
 import { AlertserviceService } from '../../../_services/alertservice.service';
-import { DataServiceProxy, DepartmentActivityDTO, ManpowerServiceProxy } from '../../../_services/service-proxies';
+import { CommonServiceProxy, DataServiceProxy, DepartmentActivityDTO, ManpowerServiceProxy } from '../../../_services/service-proxies';
 export interface planRequirement{
   ID?: number,
   jobCategory?: string,
@@ -83,8 +83,13 @@ export class CapacityPlanningComponent implements OnInit {
   JcategoryType = [];
 jobRole = []
 Jobgrade =  []
-JobPosition = []
-  constructor(private alertservice: AlertserviceService,private myDropdown: DataServiceProxy,private ManpowerService: ManpowerServiceProxy) { }
+  JobPosition = [];
+  validCost: boolean = false;
+  staffCostError = '';
+  allreqPlan = [];
+  addRequirementError = '';
+  constructor(private alertservice: AlertserviceService, private myDropdown: DataServiceProxy,
+    private ManpowerService: ManpowerServiceProxy,private CommonService: CommonServiceProxy,) { }
 
   get showEmpty() {
     return this.allCapacityPlan.length === 0;
@@ -160,12 +165,81 @@ this.JcategoryType = this.jobRole;
         this.JcategoryType.push(newObj)
       });
           }
-          if(jcat == "Grade"){
-            this.JcategoryType = this.Jobgrade;
-                }
+       
+  }
+  validatenumber(costvalue){
+    var inputentry =  costvalue;
+    var reg = new RegExp('^[0-9]+$');
+    //console.log(reg.test(inputentry));
+    if(inputentry && reg.test(inputentry) ){
+      this.validCost = true;
+      this.staffCostError = '';
+    }else{
+      this.validCost = false;
+      this.staffCostError = 'Input Only Number';
+  
+   }
+  }
+  addrequirement(planrequirement){
+    if(this.validCost){
+    if(planrequirement.categoryType && planrequirement.jobCategory){
+
+      var cJtypeName = this.JcategoryType[planrequirement.categoryType].name;
+      var Jtype = this.JcategoryType[planrequirement.categoryType].ID;
+      let obj = this.allreqPlan.find(x => x.cJtypeName.toLowerCase() === cJtypeName.toLowerCase())
+      if (obj) {
+        this.addRequirementError = `Error - ${cJtypeName} exist`;
+      setTimeout(() => {
+        this.addRequirementError = '';
+      }, 3000);
+
+      }else{
+        var reqObj = {
+          cJtypeName: cJtypeName,
+          Ctype: planrequirement.jobCategory,
+          Jtype: Jtype,
+          Nstaff: planrequirement.numberOfStaff,
+          RCost: planrequirement.costPerResource
+        }
+
+        this.allreqPlan.push(reqObj);
+        
+
+      }
+    } else {
+      this.addRequirementError = `Error - please select Job Category`;
+      setTimeout(() => {
+        this.addRequirementError = '';
+      }, 3000);
+   }
+    } else {
+      this.addRequirementError = `Please input valid Resource Cost - Numbers Only`;
+      setTimeout(() => {
+        this.addRequirementError = '';
+      }, 3000);
+  }
+  }
+  getJobRoles() {
+    this.CommonService.getJobRoles().subscribe(data => {
+      if (!data.hasError) {
+        this.jobRole = data.result;
+      }else{}
+      
+    })
+  }
+
+  getPositions() {
+    this.CommonService.getPositions().subscribe(data => {
+      if (!data.hasError) {
+        this.JobPosition = data.result;
+      }else{}
+      
+    })
   }
   ngOnInit(): void {
     this.getallCaplan();
+    this.getJobRoles();
+    this.getPositions();
     this.newcaplan.startDate = new Date();
     this.newcaplan.endDate = new Date();
   }
