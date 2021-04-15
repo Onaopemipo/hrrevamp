@@ -5,7 +5,8 @@ import {
   EmployeeQualificationDTO, Document, NextOfKin, AddressDTO, Country, State, LGA, Pension,
   EmployeeHistoryDTO, CommonServiceProxy, Position, EmployeeSkill, EmployeeCertificationDTO,
   Skill, GetAllProfessionalBodiesServiceProxy, ProfessionalBodyDTO, Certification, EmployeeContractAssignmentDTO,
-  JobRole, PayrollType,GradeStep,FileUploadServiceProxy, FileParameter,UploadProfileImageServiceProxy, EmployeeSkillDTO, Qualification, Course, Institution,
+  JobRole, PayrollType, GradeStep, FileStorageManagerServiceProxy, FileParameter, UploadProfileImageServiceProxy,
+  EmployeeSkillDTO, Qualification, Course, Institution, ManageDocumentDTO,
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -505,7 +506,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     private activatedroute: ActivatedRoute, private router: Router, private CommonService: CommonServiceProxy,
     private GetAllProfessionalBodiesService: GetAllProfessionalBodiesServiceProxy,
     private RecruitmentSettingService: RecruitmentSettingServiceProxy,private UploadProfileImageService: UploadProfileImageServiceProxy,
-  private FileUploadService:FileUploadServiceProxy) { }
+  private FileUploadService:FileStorageManagerServiceProxy) { }
   
     dateDiffInDays(a: Date, b:Date):number {
       const _MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -1236,23 +1237,23 @@ export class EmployeerecordsviewComponent implements OnInit {
     });
   }
   filereceived(event: FlowDirective) {
-    event.transfers$.subscribe(value => {
-      this.files = value.transfers;
-      let file = this.files[0].flowFile.file;
-      let filepList: FileParameter[] = [];
-      let filep: FileParameter ={
-        data:file,
-       fileName:file.name
-      };
+    // event.transfers$.subscribe(value => {
+    //   this.files = value.transfers;
+    //   let file = this.files[0].flowFile.file;
+    //   let filepList: ManageDocumentDTO[] = [];
+    //   let filep: ManageDocumentDTO ={
+    //     file:file,
+    //    fileName:file.name
+    //   };
      
-      filepList.push(filep)
-      this.FileUploadService.uploadFiles(filepList).subscribe((data: any) => {
-        this.indVDocuments.docUrl = data.filePath;
-        this.indVDocuments.directory = data.filePath;
-        console.log(this.indVDocuments)
-      })
+    //   filepList.push(filep)
+    //   this.FileUploadService.uploadDocuments(filepList).subscribe((data: any) => {
+    //     this.indVDocuments.docUrl = data.filePath;
+    //     this.indVDocuments.directory = data.filePath;
+    //     console.log(this.indVDocuments)
+    //   })
       
-    });
+    // });
   }
   onDragOver(event) {
     event.stopPropagation();
