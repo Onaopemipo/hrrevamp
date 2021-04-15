@@ -6,6 +6,8 @@ import {customConfig} from "../custumConfig";
 })
 export class CustomServiceService {
   Urlbase: string = customConfig.baseUrl;
+  nextTenYears = [];
+  prevTenYears = [];
   constructor( public http: HttpClient,) { }
 
   downloadSampleTemplate(processId: number | undefined){
@@ -25,4 +27,31 @@ export class CustomServiceService {
     window.open(url);
 
   }
+
+  getnxttenyears(){
+    this.nextTenYears = [];
+    var thisyear = new Date().getFullYear();
+    var nxttenyrs = [];
+    nxttenyrs.push(thisyear);
+    for(var i=0; i<=10;i++){
+      thisyear +=1;
+      nxttenyrs.push(thisyear);
+    }
+this.nextTenYears= nxttenyrs;
+//console.log(this.nextTenYears);
+  }
+
+  getprevtenyears(){
+    this.prevTenYears = [];
+    var thisyear = new Date().getFullYear();
+    var prevtenyrs = [];
+    prevtenyrs.push(thisyear);
+    for(var i=0; i<=10;i++){
+      thisyear -=1;
+      prevtenyrs.push(thisyear);
+    }
+this.prevTenYears= prevtenyrs;
+//console.log(this.nextTenYears);
+  }
+
 }

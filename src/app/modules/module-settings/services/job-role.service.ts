@@ -21,7 +21,7 @@ export class MyJobRole extends JobRolesDTO  implements IStatus{
   }
 
   toManage() {
-    return new ManageJobRoleDTO({...this, amount: this.amount, parentPositionId: this.parentPositionId});
+    return new ManageJobRoleDTO({...this, amount: this.amount, parentPositionId: this.parentPositionId,parentJobRoleId:0});
   }
 }
 
