@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { TableColumn, TableAction, TableActionEvent } from './../../../components/tablecomponent/models';
-import { FetchAllEmployeesServiceProxy, EmployeeDTO, CareerSuccessionServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, EmployeeDTO, CareerSuccessionServiceProxy, ManageCareerSuccessionDto } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -58,7 +58,7 @@ export class SuccessionDashboardComponent implements OnInit {
   allEmployeesData: EmployeeDTO [] = [];
   newPlan: boolean = false;
   successingCandidates
-  newSuccessionPlan: CareerSuccessionDTO = new CareerSuccessionDTO;
+  newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
 
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
