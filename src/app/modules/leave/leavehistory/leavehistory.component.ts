@@ -134,7 +134,14 @@ export class LeavehistoryComponent implements OnInit {
   showLeavePlanModal = false;
 
 
-
+  leaveRequestmodalClosed(event) {
+    console.log(event)
+    this.showAddPlanModal = event;
+  }
+  leavePlanmodalClosed(event) {
+    console.log(event)
+    this.showLeavePlanModal = event;
+  }
 
 }
 

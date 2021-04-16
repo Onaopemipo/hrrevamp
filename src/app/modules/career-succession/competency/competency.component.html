@@ -1,20 +1,20 @@
-<ngx-componentsheader *ngIf="!newRole" pageName='Competency'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="newRole && selectedCase=='Role_Details'" [requiredButton]="[{name:'newRole', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="newRole && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="!newCompetency" pageName='Competency'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newCompetency && selectedCase=='Role_Details'" [requiredButton]="[{name:'newCompetency', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newCompetency && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
 
-<div *ngIf="!newRole" style="background-color: #ffffff;">
+<div *ngIf="!newCompetency" style="background-color: #ffffff;">
   <nb-card>
     <nb-card-body>
       <div><br>
         <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="addNewRole()"></ngx-default-content>
+          (buttonClick)="addNew()"></ngx-default-content>
       </div>
     </nb-card-body>
   </nb-card>
 
 </div>
 
-<div *ngIf="newRole" class="row">
+<div *ngIf="newCompetency" class="row">
   <div class="col-lg-3 col-md-3 col-xxl-3">
     <nb-card>
     <div>
@@ -48,23 +48,33 @@
         <nb-card>
             <nb-card-body>
               <form>
-                <span class="title" *ngIf="selectedCase=='Role_Details'">Add a Role</span>
-                <span class="title" *ngIf="selectedCase=='Cadre'">Add a Cadre</span>
+                <span class="title" *ngIf="selectedCase=='Role'">Add a Role</span>
+                <span class="title" *ngIf="selectedCase=='Position'">Add a Position</span>
 
                 <div class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Competency Title </label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select type="text" class="form-control" name="compencyTitle" placeholder="Role Name">
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <input type="text" class="form-control" name="competencyTitle" #competencyTitle="ngModel"
+                    [(ngModel)]="myCompetency.competencyTitle"  placeholder="Title">
+                  </div>
+                </div>
+
+                <div *ngIf="selectedCase=='Role'" class="form-group row ">
+                  <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <select type="text" class="form-control" name="roleName" #roleName="ngModel"
+                    [(ngModel)]="myCompetency.jobRoleId"  placeholder="Role Name">
                       <option value="">--Select Role--</option>
-                      <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
+                      <option *ngFor="let role of AllJobRoles" [value]="role.id">{{ role.name }}</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="form-group row ">
-                  <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select type="text" class="form-control" name="roleName" placeholder="Role Name">
+                <div *ngIf="selectedCase=='Position'" class="form-group row ">
+                  <label for="Role" class="col-sm-3 col-form-label mylabel">Position Name</label>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <select type="text" class="form-control" name="positionName" #positionName="ngModel"
+                    [(ngModel)]="myCompetency.positionId" placeholder="Role Name">
                       <option value="">--Select Role--</option>
                       <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
                     </select>
@@ -73,23 +83,24 @@
 
                 <div class="form-group row ">
                   <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>                  </div>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <ngx-wysisyg-input style="padding-left: -10px;"  [(value)]="myCompetency.description" ></ngx-wysisyg-input>                  </div>
                 </div>
 
                 <div class="form-group row ">
                   <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="department" required>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <select class="custom-select" name="departmentName" #departmentName="ngModel"
+                    [(ngModel)]="myCompetency.departmentId" required>
                       <option value="">--Select Department--</option>
-                      <option *ngFor="let department of allDepartment" value="department.id">{{ department.name }}</option>
+                      <option *ngFor="let department of allDepartment" [value]="department.id">{{ department.name }}</option>
                     </select>
                   </div>
                 </div>
 
                 <!-- <div class="form-group row ">
                   <label for="Country" class="col-sm-3 col-form-label mylabel">Unit/Division</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
                     <select class="custom-select" name="unit" required>
                       <option value="">--Select Unit/Division--</option>
                       <option value="1">One</option>
@@ -97,154 +108,129 @@
                   </div>
                 </div> -->
 
-                <div class="form-group row ">
+                <!-- <div class="form-group row ">
                   <label for="Region" class="col-sm-3 col-form-label mylabel">Level</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="level"  required>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <select class="custom-select" name="levelName" #levelName="ngModel"
+                    [(ngModel)]="myCompetency.departmentId"  required>
                       <option value="">--Select Level--</option>
                       <option *ngFor="let level of allGradeLevels" value="level.id">{{ level.name }}</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
 
-                <hr>
-
-                <span class="title">Qualification</span>
+                <span class="title">Requirements</span>
 
                 <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="qualificationTitle" placeholder="Title">
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="qualificationCategory"  required>
+                  <label for="Title" class="col-sm-3 col-form-label mylabel">Requirement Type</label>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <select class="custom-select" name="requirementCategory" #requirementCategory="ngModel" [(ngModel)]="competencyRequirement.requirementCategory" (change)="toggleRequirement($event.target.value)" required>
                       <option value="">--Select Level--</option>
-                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
+                      <option *ngFor="let req of requirementList" [value]="req.title">{{req.label}}</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Qualification Weight</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="number" class="form-control"  name="qualificationWeight" placeholder="Weight">
+                <div class="form-group row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-8">
+                    <div class="row" style="display: flex; justify-content: space-between; flex-direction: row;">
+                      <div *ngIf="requirement =='skill'"  class="col-sm-6">
+                        <label for="">Skill Type</label>
+                        <select class="custom-select" name="skillType" #skillType="ngModel" [(ngModel)]="competencyRequirement.skillId" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='training'" class="col-sm-6">
+                        <label for="">Training Type</label>
+                        <select class="custom-select" name="trainingType" #trainingType="ngModel" [(ngModel)]="competencyRequirement.trainingId" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let training of trainingData" [value]="training.title">{{training.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='certification'" class="col-sm-6">
+                        <label for="">Certification Type</label>
+                        <select class="custom-select" name="certification" #certification="ngModel" [(ngModel)]="competencyRequirement.certificationId" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let cert of certificationData" [value]="cert.title">{{cert.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='qualification'" class="col-sm-6">
+                        <label for="">Qualification Type</label>
+                        <select class="custom-select" name="qualification" #qualification="ngModel" [(ngModel)]="competencyRequirement.qualificationId"  required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let myqualification of qualificationData" [value]="myqualification.title">{{myqualification.name}}</option>
+                      </select>
+                      </div>
+
+                      <div *ngIf="requirement =='experience'" class="col-sm-6">
+                        <label for="">Experience Type</label>
+                        <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="competencyRequirement.experienceId" required>
+                        <option value="">--Select Level--</option>
+                        <option *ngFor="let exp of experienceData" [value]="exp.title">{{exp.name}}</option>
+                      </select>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <label for="">Experience (Months)</label>
+                        <input type="number" class="form-control" name="experienceValue" #experienceValue="ngModel"
+                        [(ngModel)]="competencyRequirement.yearsofExperience" placeholder="Months">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-8">
+                    <div class="row" style="display: flex; justify-content: space-between; flex-direction: row;">
+                      <div class="col-sm-6">
+                        <label for="">Weight</label>
+                        <input type="number" class="form-control" name="skillWeight" #skillWeight="ngModel"
+                        [(ngModel)]="competencyRequirement.skillWeight" placeholder="Points" required>
+                      </div>
+
+                      <!-- <div *ngIf="requirement =='training'" class="col-sm-6">
+                        <label for="">Training Weight</label>
+                        <input type="number" class="form-control" name="trainingWeight" placeholder="Points" required>
+                      </div> -->
+
+                      <!-- <div *ngIf="requirement =='qualification'" class="col-sm-6">
+                        <label for="">Qualification Weight</label>
+                        <input type="number" class="form-control" name="qualificationWeight" placeholder="Points" required>
+                      </div> -->
+
+                      <!-- <div *ngIf="requirement =='certification'" class="col-sm-6">
+                        <label for="">Certification Weight</label>
+                        <input type="number" class="form-control" name="certificationWeight" placeholder="Points" required>
+                      </div> -->
+
+                      <div class="col-sm-6">
+                        <label for="">Experience Weight</label>
+                        <input type="number" class="form-control" name="experienceWeight" placeholder="12" required>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group row ">
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton (click)="addQualification()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  <div class="col-sm-8 col-md- 8 col-lg-8">
+                    <button nbButton (click)="addRequirement()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
                   </div>
                 </div>
 
-                <hr>
-
-                <span class="title">Certifications</span>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="certTitle" placeholder="Title">
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label></label>
                   </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="certTittle"  required>
-                      <option value="">--Select Level--</option>
-                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Certification Weight</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="number" class="form-control" name="certWeight" placeholder="Weight">
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton (click)="addCertification()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
-                  </div>
-                </div>
-
-                <hr>
-
-                <span class="title">Skills</span>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="skillTitle" placeholder="Title">
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="skillCategory"  required>
-                      <option value="">--Select Level--</option>
-                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="number" class="form-control" name="skillWeight" placeholder="Weight">
-                  </div>
-                </div>
-
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton (click)="addSkill()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
-                  </div>
-                </div>
-
-                <hr>
-
-                <span class="title">Experience</span>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Title</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="experienceTitle" placeholder="Title">
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Category</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <select class="custom-select" name="experienceCategory"  required>
-                      <option value="">--Select Level--</option>
-                      <option *ngFor="let level of allGradeLevels" value="1">Category 1</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel">Skill Weight</label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="number" class="form-control" name="experienceWeight" placeholder="Weight">
-                  </div>
-                </div>
-
-                <div class="form-group row ">
-                  <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
-                  <div class="col-sm-6 col-md-6 col-lg-6">
-                    <button nbButton (click)="addAbility()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  <div class="col-sm-8">
+                    <button nbButton status="primary" (click)="createCompetency()">Submit</button>
                   </div>
                 </div>
               </form>

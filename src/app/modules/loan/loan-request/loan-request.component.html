@@ -1,6 +1,11 @@
-<ngx-componentsheader
+<ngx-componentsheader *ngIf="pageNo == 1"
   pageName="Loan Request"
   [requiredButton]="[]"
+></ngx-componentsheader>
+
+<ngx-componentsheader *ngIf="pageNo == 2"
+  pageName="Loan Request"
+  [requiredButton]="[{name:'submit', label:'Submit'}]" (buttonClick)="addRole()"
 ></ngx-componentsheader>
 
 <div *ngIf="pageNo == 1">
@@ -138,10 +143,6 @@
                 <div class="col-sm-3">
                   <label for=""></label>
                 </div>
-
-                <div class="col-sm-6">
-                  <button nbButton status="primary" (click)="makeLoanRequest()">Submit</button>
-                </div>
               </div>
 
             </nb-card-body>
@@ -166,7 +167,7 @@
               <label for=""></label>
             </div>
             <div class="col-sm-6">
-              <button nbButton status="primary" (click)="uploadFile()">Submit</button>
+              <button nbButton status="primary" (click)="addGuarantor()">Add Guarrantor</button>
             </div>
           </div>
       </nb-card-body>

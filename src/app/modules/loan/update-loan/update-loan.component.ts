@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { LoanRepaymentLog, UpdateLoanRequestServiceProxy, UpdateLoadRequestDTO } from './../../../_services/service-proxies';
+import { LoanRepaymentLog, UpdateLoadRequestDTO, UpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,14 +13,14 @@ export class UpdateLoanComponent implements OnInit {
   simulationData: LoanRepaymentLog [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
 
-  constructor(private loanUpdate: UpdateLoanRequestServiceProxy, private alertMe: AlertserviceService) { }
+  constructor(private updateService: UpdateLoanRequestServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
   }
 
 
   async updateLoan(){
-    const data = await this.loanUpdate.updateLoanRequest(this.updateLoanPayment).toPromise();
+    const data = await this.updateService.updateLoanRequest(this.updateLoanPayment).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert('Success', 'Loan Updated!', 'Dismiss')
     }

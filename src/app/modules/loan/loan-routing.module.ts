@@ -1,3 +1,4 @@
+import { AllLoansComponent } from './all-loans/all-loans.component';
 import { UpdateLoanComponent } from './update-loan/update-loan.component';
 import { ProcessRequestComponent } from './process-request/process-request.component';
 import { LoanComponent } from './loan.component';
@@ -29,6 +30,12 @@ const routes: Routes = [
     {
       path: 'update-loan',
       component: UpdateLoanComponent,
+    },
+
+    {
+      path: 'all-loans',
+      component: AllLoansComponent,
+
     },
 
     { path: '', redirectTo: 'request', pathMatch: 'full' },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
-import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel, AddUpdateDeployentServiceProxy } from '../../../_services/service-proxies';
+import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel } from '../../../_services/service-proxies';
 
 
 enum TOP_ACTIONS {

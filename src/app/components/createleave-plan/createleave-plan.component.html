@@ -1,4 +1,4 @@
-<ngx-side-modal [(show)]='showModal' style="width: 500px; height: 1000px;">
+<ngx-side-modal [(show)]='showModal' (closed)="modalClosed($event)" style="width: 500px; height: 1000px;">
     
     <div modal-header>Add New Leave Plan</div>
     <div modal-body>
@@ -97,3 +97,5 @@
     <div style="margin-top: 10px;"></div>
 
 </ngx-side-modal>
+
+{{showModal}}

@@ -67,7 +67,9 @@ export class JwtInterceptor implements HttpInterceptor {
         }
         const started = Date.now();
         let ok: any;
-        return next.handle(request);
+        
+        
+        return this.reqHandler(next,request);
         //     .pipe(tap(
         //     (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
         //     (error: HttpErrorResponse) => ok = error
@@ -99,6 +101,17 @@ export class JwtInterceptor implements HttpInterceptor {
             // );
     }
 
+    protected  reqHandler(next, request): any {
+        this.sleep(1000);   
+        return next.handle(request);
+    }
+    protected sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+          currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+      }
     protected processResponse(response: HttpResponseBase): Observable<any> {
         alert(6)
     console.log(response)
@@ -185,6 +198,8 @@ function blobToText(blob: any): Observable<string> {
             reader.readAsText(blob);
         }
     });
+
+
 }
 
 function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
@@ -193,3 +208,4 @@ function throwException(message: string, status: number, response: string, heade
     else
         return _observableThrow(new ApiException(message, status, response, headers, null));
 }
+

@@ -102,13 +102,22 @@ export class LeavePlanComponent implements OnInit {
   selectedOption = '1';
   b = 'mmm';
   value = 'aaaa';
-
+  leaveRequestmodalClosed(event) {
+    console.log(event)
+    this.showAddPlanModal = event;
+  }
+  leavePlanmodalClosed(event) {
+    console.log(event)
+    this.showLeavePlanModal = event;
+  }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
       this.showAddPlanModal = true;
+      console.log(this.showAddPlanModal);
     }
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
       this.showLeavePlanModal = true;
+      console.log(this.showLeavePlanModal);
     }
   }
   tableActions: TableAction[] = [

@@ -1,3 +1,4 @@
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -22,17 +23,20 @@ export class ProfileDetailsComponent implements OnInit {
     { name: 'certification', title: 'certification' },
   ];
 
+  employeeData: EmployeeDTO = new EmployeeDTO;
+  employeeId: number = 0;
+
   constructor(private navCtrl: Location,
     private activatedRoute: ActivatedRoute,
-    private employeeService: EmployeesService) { }
+    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy) { }
 
   async ngOnInit() {
     let subscription: Subscription = null;
     subscription = this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get('id');
+      this.employeeId = parseInt(params.get('id'));
 
       // subscription.unsubscribe();
-      this.employeeService.fetch(id).toPromise().then(response => {
+      this.employeeService.fetch(this.employeeId).toPromise().then(response => {
         this.data = response;
       })
     });
@@ -40,6 +44,14 @@ export class ProfileDetailsComponent implements OnInit {
 
   goback() {
     this.navCtrl.back();
+  }
+
+  async fetchProfile(){
+    const data = await this.employee.getEmployeeById(1).toPromise();
+    if(!data.hasError){
+      this.employeeData = data.result;
+      console.log('My Details', this.employeeData)
+    }
   }
 
   addPlan() {
