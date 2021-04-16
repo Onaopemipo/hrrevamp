@@ -1,4 +1,4 @@
-import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy } from './../../../_services/service-proxies';
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, BudgetItemService } from './../services/budget-item.service';
@@ -17,11 +17,13 @@ export class OverallBudgetComponent implements OnInit {
   myHeader: string = 'You have not created any budget';
   myDescription: string = 'Start your setup by clicking the button below';
   myButton: string = 'Create Budget'
-  editBudgetModal: boolean = false;
+  editBudget: boolean = false;
+  addBudget: boolean = false;
   addItemModal: boolean = false;
   editItem: boolean = false;
   defaultPage: number = 3;
   budget: BudgetDTO = new BudgetDTO;
+  newBudget: ManageBudgetDTO = new ManageBudgetDTO;
   budgetItem: BudgetItemDTO = new BudgetItemDTO().clone();
   departments: DisbursementBudgetItemAllocation = new DisbursementBudgetItemAllocation().clone();
 
@@ -31,7 +33,8 @@ export class OverallBudgetComponent implements OnInit {
 
   constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
     private budgetService: FetchAllBudgetsServiceProxy, private singleBudget: FetchBudgetServiceProxy,
-    private alertMe: AlertserviceService, private common: CommonServiceProxy, private budgetItemUpdate: AddUpdateBudgetItemServiceProxy) { }
+    private alertMe: AlertserviceService, private common: CommonServiceProxy,
+     private budgetItemUpdate: AddUpdateBudgetItemServiceProxy, private addBudgetService: AddUpdateBudgetServiceProxy,) { }
 
   ngOnInit(): void {
     this.fetAllBudget();
@@ -52,9 +55,10 @@ export class OverallBudgetComponent implements OnInit {
   overallBudget: MyBudget = new MyBudget;
   myBudget: BudgetDTO[] = [];
   currentFinancialYear;
-  dataIndex: number = 20781;
+  dataIndex: number = 0;
+  budgetId:number = 0;
   finYear: BudgetDTO = new BudgetDTO;
-  // loader:boolean = false;
+  singleBudgetUpdate: ManageBudgetDTO = new ManageBudgetDTO().clone();
   finLoading: boolean = false;
   editBudgetItem: MyBudgetItem = new MyBudgetItem;
   allBudgetItems: BudgetItemDTO []= [];
@@ -75,22 +79,41 @@ export class OverallBudgetComponent implements OnInit {
     console.log('Yo boss', this.allBudgetItems)
   }
 
-  editModal(){
+  editbudgetItemModal(){
     this.editItem = !this.editItem;
   }
 
-  // addDepartment(){
-  //   let myDepartment = [];
-  //   myDepartment.push(this.departments)
-  //   this.alertMe.alertMessage
-  //   console.log(myDepartment);
-  // }
+  async editBudgetModal(event:number){
+    this.budgetId = event;
+    const data = await this.singleBudget.getBudget(this.budgetId).toPromise();
+    if(!data.hasError){
+      this.singleBudgetUpdate = data.result;
+    }
+    this.editBudget = !this.editBudget;
+  }
 
-  updateBudgetItem(id){
-    this.editBudgetModal = !this.editBudgetModal;
-    // let index = this.myBudget.indexOf(id)
-    // console.log('this is the ID',index)
-    console.log('Here is your Budget', this.myBudget)
+  addBudgetModal(){
+    this.addBudget = !this.addBudget;
+  }
+
+
+ async fetchSingleBudget(){
+  const data = await this.singleBudget.getBudget(this.budgetId).toPromise();
+  if(!data.hasError){
+    this.singleBudgetUpdate = data.result;
+    console.log('I have been fetched', this.singleBudgetUpdate);
+
+  }
+  }
+
+ async updateSingleBudget(){
+    const data = await this.addBudgetService.addUpdateBudget(this.singleBudgetUpdate).toPromise();
+    if(!data.hasError){
+    this.alertMe.openModalAlert('Budget Created', 'Budget updated Successfully', 'Dismiss');
+    } else {
+      console.error();
+
+    }
   }
 
   async fetchDepartments(){
@@ -105,7 +128,7 @@ export class OverallBudgetComponent implements OnInit {
    const data = await this.budgetService.getAllBudgets().toPromise();
    if(!data.hasError){
     this.myBudget = data.result;
-    this.defaultPage = data.totalRecord
+    this.defaultPage = data.totalRecord;
     console.log('All Bugdet Items', this.myBudget)
    }
   }
@@ -124,6 +147,17 @@ export class OverallBudgetComponent implements OnInit {
       this.finLoading = false;
     }
   }
+
+  async addNewBudget(){
+    const data = await this.addBudgetService.addUpdateBudget(this.newBudget).toPromise();
+    if(!data.hasError){
+    this.alertMe.openModalAlert('Budget Created', 'Budget Created Successfully', 'Dismiss');
+    } else {
+      // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
+      console.error();
+
+    }
+    }
 
 
   async addBudgetItem(){

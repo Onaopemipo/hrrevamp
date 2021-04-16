@@ -102,8 +102,14 @@
         </div>
       </div>
     </div>
-    <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
-      <button nbButton type="outline" status="primary" outline style="border: none;" (click)="updateBudgetItem(finYear.id)">Edit budget</button>
+    <div style="display: flex; flex-direction: row; justify-content: space-between; padding-top: 30px;">
+      <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+        <button nbButton type="outline" status="primary" style="border: none;" (click)="addBudgetModal(finYear.id)">Add New budget</button>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+        <button nbButton type="outline" status="primary" outline style="border: none;" (click)="editBudgetModal(finYear.id)">Edit budget</button>
+      </div>
     </div>
   </div>
 
@@ -334,28 +340,52 @@
     </div>
   </ngx-side-modal> -->
 
-  <ngx-side-modal [(show)]='editBudgetModal' style="width: 500px;">
+  <ngx-side-modal [(show)]='editBudget' style="width: 500px;">
   <div modal-header>Update budget</div>
   <div class="row" modal-body>
       <div class="form-group row">
         <div class="col">
           <label>Financial Year</label>
-          <ngx-date-range></ngx-date-range>
+          <ngx-date-range [(start)]="singleBudgetUpdate.financialYearStartDate" [(end)]="singleBudgetUpdate.financialYearEndDate"></ngx-date-range>
         </div>
       </div>
 
       <div class="form-group row">
        <div class="col">
         <label>Total amount</label>
-        <app-amount-input></app-amount-input>
+        <app-amount-input [(value)]="singleBudgetUpdate.totalBudgetAmount"></app-amount-input>
        </div>
       </div>
       <div class="form-group row" style="margin-top: 20px">
        <div class="col">
-        <button nbButton status="primary" (click)="addBudget()">Update Budget</button>
+        <button nbButton status="primary" (click)="updateSingleBudget()">Modify</button>
        </div>
       </div>
   </div>
   </ngx-side-modal>
+
+  <ngx-side-modal [(show)]='addBudget' style="width: 500px;">
+    <div modal-header>Add New budget</div>
+    <div class="row" modal-body>
+        <div class="form-group row">
+          <div class="col">
+            <label>Financial Year</label>
+            <ngx-date-range [(start)]="newBudget.financialYearStartDate" [(end)]="newBudget.financialYearEndDate"></ngx-date-range>
+          </div>
+        </div>
+
+        <div class="form-group row">
+         <div class="col">
+          <label>Total amount</label>
+          <app-amount-input [(value)]="newBudget.totalBudgetAmount"></app-amount-input>
+         </div>
+        </div>
+        <div class="form-group row" style="margin-top: 20px">
+         <div class="col">
+          <button nbButton status="primary" (click)="addNewBudget()">Submit</button>
+         </div>
+        </div>
+    </div>
+    </ngx-side-modal>
 
 </div>

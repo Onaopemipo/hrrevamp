@@ -1,3 +1,4 @@
+import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -29,10 +30,11 @@ export class PlanningComponent implements OnInit {
     {name: 'department_name', title: 'Department'},
     {name: 'unit_name', title: 'Unit'},
     {name: ' level', title: 'Level'},
-   
+
   ];
-   
+
   loading = false;
+  allPans: CareerSuccession [] = [];
 
   // id: number;
   // position_name: string;
@@ -44,7 +46,7 @@ export class PlanningComponent implements OnInit {
   // picture: string;
 
  data: MyEmployeeDatail[] = []
-  
+
   // tableColumn =[
   //   { name: 'Name', title: 'NAME' },
   //   { name: 'PaymentType', title: 'PAYMENT TYPE' },
@@ -55,19 +57,25 @@ export class PlanningComponent implements OnInit {
   //   { name: 'f', title: 'AMOUNT' },
   //   { name: 'g', title: 'INSTITUTION' },
   // ];
-   
+
   topActionButtons = [
     {name: TOP_ACTIONS.ADD_MORE, label: 'Add More', 'icon': 'plus', outline: false},
 
   ];
-  newPlan: boolean = false;
+
+  myPlanHeader: string = 'Nothing to see';
+  myPlanDesc: string = 'No succession plan has been set up, click the button below to add one';
+  myButton: string = 'Add New Plan';
+
+  planDataCount: number = 0;
 
   constructor(
     private navCtrl: Location,
     private api: EmployeesService,
-    private router:Router
+    private router:Router,
+    private planService: FetchSuccessionPlanServiceProxy,
   ) { }
-  
+
   tableActionClicked(event: TableActionEvent){
     // if(event.name==TABLE_ACTION.DELETE){
     //   this.showdeleteModal = true
@@ -90,13 +98,23 @@ export class PlanningComponent implements OnInit {
       [...this.data ]= response.data;
       this.loading = false;
     });
+
+    this.fetchAllPlans();
   }
 
   goback() {
     this.navCtrl.back();
   }
   addPlan(){
-    this.newPlan = !this.newPlan;
+    // this.newPlan = !this.newPlan;
+  }
+
+  async fetchAllPlans(){
+    const data = await this.planService.getCareerSuccessionPlan().toPromise();
+    if(data.hasError){
+      this.allPans = data.result;
+      this.planDataCount = data.totalRecord;
+    }
   }
 
 }

@@ -97,7 +97,10 @@ export class CompetencyComponent implements OnInit {
   }
 
   addRequirement(){
-
+    let newRequirements: CompetencyRequirmentsDTO [] = [];
+    // newRequirements.experience = this.competencyRequirement.experience
+    this.competencyRequirement.push();
+    console.log('Competency Added', this.competencyRequirement);
   }
 
   addNew(){
