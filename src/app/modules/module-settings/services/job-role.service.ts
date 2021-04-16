@@ -20,6 +20,10 @@ export class MyJobRole extends JobRolesDTO  implements IStatus{
     return 'Active';
   }
 
+  // toManage() {
+  //   return new ManageJobRoleDTO({...this, amount: this.amount, parentPositionId: this.parentPositionId});
+  // }
+
   toManage() {
     return new ManageJobRoleDTO({
       salary: this.amount,

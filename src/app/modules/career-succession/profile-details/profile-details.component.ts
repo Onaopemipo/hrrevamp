@@ -1,4 +1,4 @@
-import { FetchEmployeeByIdServiceProxy, EmployeeDTO } from './../../../_services/service-proxies';
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -24,11 +24,12 @@ export class ProfileDetailsComponent implements OnInit {
   ];
 
   employeeData: EmployeeDTO = new EmployeeDTO;
+  employeeContractData: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO
   employeeId: number = 0;
 
   constructor(private navCtrl: Location,
     private activatedRoute: ActivatedRoute,
-    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy) { }
+    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy, private allEmployees: FetchAllEmployeesServiceProxy) { }
 
   async ngOnInit() {
     let subscription: Subscription = null;
@@ -40,6 +41,9 @@ export class ProfileDetailsComponent implements OnInit {
         this.data = response;
       })
     });
+
+    this.fetchAllEmployees();
+    this.fetchProfile();
   }
 
   goback() {
@@ -50,7 +54,16 @@ export class ProfileDetailsComponent implements OnInit {
     const data = await this.employee.getEmployeeById(1).toPromise();
     if(!data.hasError){
       this.employeeData = data.result;
-      console.log('My Details', this.employeeData)
+     this.employeeData.contracts.forEach(() => this.employeeContractData );
+      console.log('My Details', this.employeeData);
+      console.log('My Contract', this.employeeContractData);
+    }
+  }
+
+  async fetchAllEmployees(){
+    const data = await this.allEmployees.getAllEmployees('',0,10,1).toPromise();
+    if(!data.hasError){
+      console.log(data.result);
     }
   }
 

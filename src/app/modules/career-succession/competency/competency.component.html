@@ -65,7 +65,7 @@
                     <select type="text" class="form-control" name="roleName" #roleName="ngModel"
                     [(ngModel)]="myCompetency.jobRoleId"  placeholder="Role Name">
                       <option value="">--Select Role--</option>
-                      <option *ngFor="let role of AllJobRoles" [value]="role.id">{{ role.name }}</option>
+                      <option *ngFor="let role of allJobRoles" [value]="role.id">{{ role.name }}</option>
                     </select>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
                     <select type="text" class="form-control" name="positionName" #positionName="ngModel"
                     [(ngModel)]="myCompetency.positionId" placeholder="Role Name">
                       <option value="">--Select Role--</option>
-                      <option *ngFor="let role of AllJobRoles" value="">{{ role.name }}</option>
+                      <option *ngFor="let position of allPositions" value="">{{ position.name }}</option>
                     </select>
                   </div>
                 </div>
