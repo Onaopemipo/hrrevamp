@@ -20,9 +20,17 @@ export class MyVendor extends TrainingVendor{
   clone() {
     return new MyVendor(this);
   }
+
+  get selectValue() {
+    return this.id;
+  }
+
+  get selectLabel() {
+    return this.name;
+  }
 }
 
-export class VendorFilter{
+export class VendorFilter {
   name?: string;
   specializationId?: number;
   trainingTag?: string;

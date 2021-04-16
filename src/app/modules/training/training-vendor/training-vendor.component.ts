@@ -111,7 +111,7 @@ export class TrainingVendorComponent extends BaseComponent<MyVendor, {}, MyVendo
       {name: 'phoneNo', label: 'Phone No', type: FORM_TYPES.text},
       {name: 'email', label: 'Email', type: FORM_TYPES.text},
       {name: 'website', label: 'Website', type: FORM_TYPES.text},
-      {name: 'specialization', label: 'Specialization',
+      {name: 'trainingSpecializationId', label: 'Specialization',
           type: FORM_TYPES.select,
           choice_name: ChoiceName.trainingSpecialization, singleSelection: true},
     ]

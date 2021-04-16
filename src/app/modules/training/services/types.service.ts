@@ -18,7 +18,18 @@ export class MyTrainingType extends TrainingTypeResource {
   }
 
   toManage() {
-  return new TrainingTypePayload();
+  return new TrainingTypePayload({
+    costPer_Head: this.cost_per_head,
+    no_Of_Trainees: this.number_of_trainees,
+    overAll_Budget: this.overall_budget_cost,
+    trainingVendorId: this.trainingVendorId,
+    trainingCategoryId: this.trainingCategoryId,
+    trainingTypeId: 0,
+    employeeId: this.resource_person_id,
+    trainingSpecializationId: this.trainingSpecializationId,
+    name: this.name,
+    file: null
+  });
   }
 }
 @Injectable({
