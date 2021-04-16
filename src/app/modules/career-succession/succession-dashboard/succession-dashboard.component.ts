@@ -1,13 +1,27 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { TableColumn, TableAction, TableActionEvent } from './../../../components/tablecomponent/models';
-import { FetchAllEmployeesServiceProxy, EmployeeDTO, CareerSuccessionServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, EmployeeDTO, CareerSuccessionServiceProxy, ManageCareerSuccessionDto } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
 enum TABLE_ACTION {
   VIEW = '1',
   CREATEPLAN = '3'
+}
+
+class MyEmployeeDTO extends EmployeeDTO{
+  get position_name(){
+    return this.contracts[0].positionName;
+  }
+
+  get department_name(){
+    return this.contracts[0].departmentName;
+  }
+
+  get level(){
+    return this.contracts[0].gradeName;
+  }
 }
 
 @Component({
@@ -18,18 +32,18 @@ enum TABLE_ACTION {
 export class SuccessionDashboardComponent implements OnInit {
 
   dashboardTable: TableColumn [] = [
-    {name: 'position_name', title: 'Stage One'},
-    {name: ' employee_name', title: 'Stage Two'},
-    {name: 'department_name', title: 'Stage Three'},
-    {name: 'unit_name', title: 'Stage Four'},
+    {name: 'employeeNumber', title: 'Employee No.'},
+    {name: 'firstName', title: 'First Name'},
+    {name: 'lastName', title: 'Last Name'},
+    {name: 'workEmail', title: 'Work Email'},
 
   ];
 
   readinessToStart = [
-    {name: 'stage1', title: 'position'},
-    {name: ' stage2', title: 'Employee'},
-    {name: 'stage3', title: 'Department'},
-    {name: 'stage4', title: 'Unit'},
+    {name: 'stage1', title: 'Stage One'},
+    {name: ' stage2', title: 'Stage Two'},
+    {name: 'stage3', title: 'Stage Three'},
+    {name: 'stage4', title: 'Stage Four'},
 
   ];
 
@@ -40,10 +54,11 @@ export class SuccessionDashboardComponent implements OnInit {
   myPlanDesc: string = 'No succession plan has been set up, click the button below to add one';
   myButton: string = 'Add New Plan';
 
-  employeeDataCount: number = 10;
+  employeeDataCount: number = 0;
   allEmployeesData: EmployeeDTO [] = [];
   newPlan: boolean = false;
-  newSuccessionPlan: CareerSuccessionDTO = new CareerSuccessionDTO;
+  successingCandidates
+  newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
 
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
@@ -69,15 +84,21 @@ export class SuccessionDashboardComponent implements OnInit {
          }
   }
   ngOnInit(): void {
+    this.fetchAllEmployees();
   }
 
-
   async fetchAllEmployees(){
-    const data = await this.allEmployees.getAllEmployees('',0,10,1).toPromise();
+    const data = await this.allEmployees.getAllEmployees(undefined,undefined,10,1).toPromise();
     if(!data.hasError){
       this.allEmployeesData = data.result;
+      // .map(data => new MyEmployeeDTO(data));
+      this.employeeDataCount = data.totalRecord;
       console.log(data.result);
     }
+  }
+
+  async fetchSuccessingCandidate(){
+    // const data = await this.
   }
 
   toggleToCreatePlan(){

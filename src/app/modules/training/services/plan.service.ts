@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Transfer } from '@flowjs/ngx-flow';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { ManageTrainingDTO, TrainingDTO, TrainingServiceProxy } from 'app/_services/service-proxies';
+import {  TrainingDTO, TrainingServiceProxy } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { transferToFile } from './types.service';
@@ -13,21 +13,7 @@ export class MyTrainingPlan extends TrainingDTO{
     super(plan);
   }
   toManage() {
-    return new ManageTrainingDTO({
-      id: this.id,
-      name: this.name,
-      description: this.description,
-      selectedEmployees: this.selectedEmployees,
-      trainingTypeId: this.trainingTypeId,
-      status: true,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      specializationId: this.specializationId,
-      vendorId: this.vendorId,
-      totalCost: this.totalCost,
-      costPerEmployee: this.costPerEmployee,
-      attachment: '' //transferToFile(this.attachment),
-    });
+    return {};
   }
 
   static fromForm(form: object){
@@ -72,7 +58,7 @@ export class TrainingPlanService extends CrudService<ITrainingFilterDTO, MyTrain
     throw new Error('Method not implemented.');
   }
   create(data: MyTrainingPlan) {
-    return this.api.addUpdateTrainingPlan(data.toManage());
+    return true//this.api.addUpdateTrainingPlan(data.toManage());
   }
   delete(id: number) {
     return this.api.deleteTrainingPlan(id);
