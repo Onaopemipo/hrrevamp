@@ -61,52 +61,28 @@ export class TrainingTypeComponent  extends BaseComponent<ModelType, FilterType,
   getFields(){
     return [
       {name: 'name', label: 'Title', type: FORM_TYPES.text},
-      {name: 'trainingSpecializationId', label: 'Specialization', 
+      {name: 'trainingSpecializationId', label: 'Specialization',
           type: FORM_TYPES.select,
           choice_name: ChoiceName.trainingSpecialization, singleSelection: true
       },
-      {name: 'category', label: 'Category', type: FORM_TYPES.radio,
+      {name: 'trainingCategoryId', label: 'Category', type: FORM_TYPES.radio,
         selectOptions: [
           {selectValue: 1, selectLabel: 'Internal'},
           {selectValue: 2, selectLabel: 'External'},
         ]
       },
-      {name: 'vendor_id', label: 'Vendor', type: FORM_TYPES.select,
-        choice_name: ChoiceName.trainingType, singleSelection: true, hide: this.editingData.category === 1},
+      {name: 'trainingVendorId', label: 'Vendor', type: FORM_TYPES.select,
+        choice_name: ChoiceName.trainingVendor, singleSelection: true, hide: this.editingData.category === 1},
       {name: 'cost_per_head', label: 'Cost per head', type: FORM_TYPES.number},
       {name: 'number_of_trainees', label: 'No of Trainees', type: FORM_TYPES.number},
       {name: 'overall_budget_cost', label: 'Overall budget cost', type: FORM_TYPES.number},
       {name: 'content', label: 'Content', type: FORM_TYPES.file, hide: this.editingData.category === 2},
       {name: 'resource_person_id', label: 'Resource person', type: FORM_TYPES.employee, singleSelection: true, hide: this.editingData.category === 2},
-    ]
+    ];
   }
   formConfig: FormConfig = {
     fields: this.getFields(),
   };
-  get formConfiga(): FormConfig {
-    return {
-      fields: [
-        {name: 'name', label: 'Title', type: FORM_TYPES.text},
-        {name: 'trainingSpecializationId', label: 'Specialization', 
-            type: FORM_TYPES.select,
-            choice_name: ChoiceName.trainingSpecialization, singleSelection: true
-        },
-        {name: 'category', label: 'Category', type: FORM_TYPES.radio,
-          selectOptions: [
-            {selectValue: 1, selectLabel: 'Internal'},
-            {selectValue: 2, selectLabel: 'External'},
-          ]
-        },
-        {name: 'vendor_id', label: 'Vendor', type: FORM_TYPES.select,
-          choice_name: ChoiceName.trainingType, singleSelection: true, hide: this.editingData.category === 1},
-        {name: 'cost_per_head', label: 'Cost per head', type: FORM_TYPES.number},
-        {name: 'number_of_trainees', label: 'No of Trainees', type: FORM_TYPES.number},
-        {name: 'overall_budget_cost', label: 'Overall budget cost', type: FORM_TYPES.number},
-        {name: 'content', label: 'Content', type: FORM_TYPES.file, hide: this.editingData.category === 2},
-        {name: 'resource_person_id', label: 'Resource person', type: FORM_TYPES.employee, singleSelection: true, hide: this.editingData.category === 2},
-      ]
-    };
-  }
 
   formTitle = 'Add new Type';
 

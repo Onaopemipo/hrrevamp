@@ -46,6 +46,11 @@
     <div modal-header>Add Plan</div>
     <div modal-body>
  <form id="caplanForm" name="caplanForm" #caplanForm="ngForm" >
+     <div *ngIf="submitRequirementError">
+        <div class="error" style="padding: 10px 0;">
+            <div>{{submitRequirementError}}</div>
+        </div> 
+     </div>
     <div class="form-group">
         <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Activity Name:</label>
         <input type="text" class="form-control" placeholder="Enter Activity Name" name="activityName"
@@ -81,7 +86,7 @@
           </div>
           <div class="col-md-6" *ngIf="projecttask">
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
-            <ngx-date  [(value)]='newcaplan.endDate'  #endDate [min]="newcaplan.startDate" name="endDate" id="endDate"></ngx-date>
+            <ngx-date (valueChange)="onDateSelection($event)"  [(value)]='newcaplan.endDate'  #endDate [min]="newcaplan.startDate" name="endDate" id="endDate"></ngx-date>
             <div *ngIf="!validateEnddate" class="error">
                 <div>Plan End Date is required</div>
             </div>  
@@ -108,10 +113,13 @@
           </div>
           <div class="col-md-6" >
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Select {{planrequirement.jobCategory}} type</label>
+            <select class="form-control" name="categoryType" id="categoryType" [(ngModel)]="planrequirement.categoryType" #categoryType="ngModel">
+                <option value="">--select--</option>
             <option *ngFor="let cty of JcategoryType;let i = index" value="{{i}}">{{cty.name}}</option>
+            </select>
           </div>
           <div class="col-md-6" >
-            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Required number of staff:</label>
+            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Required Numb of staff:</label>
             <input   name="numberOfStaff" id="numberOfStaff" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="number" class="form-control" placeholder="number of staff">
           </div>
           <div class="col-md-6" >
@@ -122,16 +130,45 @@
             </div> 
             
         </div>
-        <div class="col-md-12" >
+        <div class="offset-md-6 col-md-12" style="padding:10px 0 ;" >
             <button (click)="addrequirement(planrequirement)" nbButton outline status="primary" class="d-flex column" style="background-color: white;">Add Requirement</button>
         </div>
+        <div style="padding-top: 5px;" *ngIf="allreqPlan.length">
+            <div class="row">
+  <div class="col-sm-12" style="padding-top: 10px;"  *ngFor="let req of allreqPlan;let i = index">
+  <div class="cbadge">
+    {{req.Ctype}}&nbsp;|&nbsp;{{req.cJtypeName}} - {{req.Nstaff}}&nbsp;
+    <i class="fa fa-times" (click)="removerequirement(i)" style="color:#EB5757;cursor: pointer;"></i>
+</div>
+  </div>
+            </div>
+           
+          </div>
 
+          <div class="col-md-12" >
+            <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Calendar Year</label>
+            <div  *ngIf="newcaplan.activityTypeId == 1">
+                <select name="year" id="year" [(ngModel)]="newcaplan.year" #year="ngModel" class="form-control" >
+                  <option value="">select calendar year</option>
+                  <option *ngFor="let yr of CustomService.nextTenYears;" value="{{yr}}">{{yr}}</option>
+      
+                </select>
+                <div *ngIf="year.invalid && (year.dirty || year.touched) " class="error">
+                    <div *ngIf="(year.errors.required || year.errors)">
+                      calendar year is required
+                    </div>
+                  </div>
+            </div>
+            <div *ngIf="newcaplan.activityTypeId == 2">
+                {{newcaplan.year}}
+           </div>
+          </div>
       </div>
  </form>
     </div>
     <div modal-actions class="d-flex"
       style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
-      <ngx-loadable-button [loading]="loading"  >
+      <ngx-loadable-button [loading]="loading"  (click)="submitnewplan(newcaplan,allreqPlan)">
         Submit 
       </ngx-loadable-button>  
       <div style="padding-left: 15px;">

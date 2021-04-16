@@ -5,11 +5,13 @@ import { PositionService } from 'app/modules/module-settings/services/position.s
 import { TrainingCategoryService } from 'app/modules/training/services/training-category.service';
 import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
 import { TypesService } from 'app/modules/training/services/types.service';
+import { VendorService } from 'app/modules/training/services/vendor.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 export enum ChoiceName {
   trainingCategory,
   trainingSpecialization,
+  trainingVendor,
   trainingType,
   departments,
   positions,
@@ -25,7 +27,7 @@ export class MultiSelectComponent implements OnInit {
   @Input() set value(val) {
     this.selectedItems = val;
   }
-  @Input() set idValue(val){
+  @Input() set idValue(val) {
 
   }
   @Output() idValueChange = new EventEmitter();
@@ -39,21 +41,24 @@ export class MultiSelectComponent implements OnInit {
   }
   @Input() set items(val: any[]) {
     this._items = val;
-    this.dropdownList = this.items;
-    this.dropdownSettings = {
-      singleSelection: this.singleSelection,
-      idField: 'name',
-      textField: 'label',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true,
-    };
-  };
+    if (this.choice_name === null) {
+      this.dropdownList = this.items;
+      this.dropdownSettings = {
+        singleSelection: this.singleSelection,
+        idField: 'name',
+        textField: 'label',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+      };
+    }
+  }
 
   constructor(
     private trainingCategoryService: TrainingCategoryService,
     private trainingSpecializationService: TrainingSpecializationService,
+    private vendorService: VendorService,
     private trainingTypeService: TypesService,
     private locationService: LocationService,
     private departmentService: DepartmentsService,
@@ -66,26 +71,39 @@ export class MultiSelectComponent implements OnInit {
   async ngOnInit() {
     console.log(this.choice_name);
     if (this.choice_name === null) {
-      this.dropdownList = [
-        { item_id: 1, item_text: 'Mumbai' },
-        { item_id: 2, item_text: 'Bangaluru' },
-        { item_id: 3, item_text: 'Pune' },
-        { item_id: 4, item_text: 'Navsari' },
-        { item_id: 5, item_text: 'New Delhi' }
-      ];
-      this.selectedItems = [
-        { item_id: 3, item_text: 'Pune' },
-        { item_id: 4, item_text: 'Navsari' }
-      ];
-      this.dropdownSettings = {
-        singleSelection: this.singleSelection,
-        idField: 'item_id',
-        textField: 'item_text',
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 3,
-        allowSearchFilter: true,
-      };
+      if (this.items) {
+        this.dropdownList = this.items;
+        this.dropdownSettings = {
+          singleSelection: this.singleSelection,
+          idField: 'name',
+          textField: 'label',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          itemsShowLimit: 3,
+          allowSearchFilter: true,
+        };
+      } else {
+        this.dropdownList = [
+          { item_id: 1, item_text: 'Mumbai' },
+          { item_id: 2, item_text: 'Bangaluru' },
+          { item_id: 3, item_text: 'Pune' },
+          { item_id: 4, item_text: 'Navsari' },
+          { item_id: 5, item_text: 'New Delhi' }
+        ];
+        this.selectedItems = [
+          { item_id: 3, item_text: 'Pune' },
+          { item_id: 4, item_text: 'Navsari' }
+        ];
+        this.dropdownSettings = {
+          singleSelection: this.singleSelection,
+          idField: 'item_id',
+          textField: 'item_text',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          itemsShowLimit: 3,
+          allowSearchFilter: true,
+        };
+      }
     } else {
       const config = {};
       console.log(1);
@@ -95,25 +113,14 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.locations] = this.locationService;
       config[ChoiceName.departments] = this.departmentService;
       config[ChoiceName.positions] = this.positionService;
+      config[ChoiceName.trainingVendor] = this.vendorService;
       this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;
-      console.log(this.dropdownList)
+      console.log('aaa', this.dropdownList, this.choice_name, config[this.choice_name]);
       //1 this.dropdownList = (await this.trainingSpecializationService.list({}).toPromise()).data;
       this.dropdownSettings = {
         singleSelection: this.singleSelection,
         idField: 'selectValue',
         textField: 'selectLabel',
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 3,
-        allowSearchFilter: true,
-      };
-    }
-    if (this.items) {
-      this.dropdownList = this.items;
-      this.dropdownSettings = {
-        singleSelection: this.singleSelection,
-        idField: 'name',
-        textField: 'label',
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
         itemsShowLimit: 3,

@@ -3,7 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { IStatus,MyColor } from '../../../components/status/models';
 import { ColumnTypes, TableActionEvent ,TableAction, ACTIONS} from '../../../components/tablecomponent/models';
 import { AlertserviceService } from '../../../_services/alertservice.service';
-import { CommonServiceProxy, DataServiceProxy, DepartmentActivityDTO, ManpowerServiceProxy } from '../../../_services/service-proxies';
+import { CommonServiceProxy, DataServiceProxy, DepartmentActivityDTO, DepartmentManPowerActivityDTO, ManpowerServiceProxy } from '../../../_services/service-proxies';
+import { CustomServiceService } from '../../../_services/custom-service.service';
+import { Observable, forkJoin } from 'rxjs';
 export interface planRequirement{
   ID?: number,
   jobCategory?: string,
@@ -88,8 +90,12 @@ Jobgrade =  []
   staffCostError = '';
   allreqPlan = [];
   addRequirementError = '';
+  nextTenYears = [];
+  endYear: any = "";
+  startYear: any = "";
+  submitRequirementError = "";
   constructor(private alertservice: AlertserviceService, private myDropdown: DataServiceProxy,
-    private ManpowerService: ManpowerServiceProxy,private CommonService: CommonServiceProxy,) { }
+    private ManpowerService: ManpowerServiceProxy,private CommonService: CommonServiceProxy,public CustomService: CustomServiceService) { }
 
   get showEmpty() {
     return this.allCapacityPlan.length === 0;
@@ -152,14 +158,22 @@ Jobgrade =  []
   }
   loadselected(event){
     var jcat = event.srcElement.value;
-    if(jcat == "Job Role"){
-this.JcategoryType = this.jobRole;
+    if (jcat == "Job Role") {
+      this.JcategoryType = [];
+      this.jobRole.forEach(value => {
+        let newObj = {
+          ID: value.id,
+          name: value.name
+        }
+        this.JcategoryType.push(newObj)
+      })
+
     }
     if(jcat == "Position"){
       this.JcategoryType=[];
       this.JobPosition.forEach(value=>{
         let newObj = {
-          ID: value.ID,
+          ID: value.id,
           name: value.title
         }
         this.JcategoryType.push(newObj)
@@ -186,7 +200,7 @@ this.JcategoryType = this.jobRole;
 
       var cJtypeName = this.JcategoryType[planrequirement.categoryType].name;
       var Jtype = this.JcategoryType[planrequirement.categoryType].ID;
-      let obj = this.allreqPlan.find(x => x.cJtypeName.toLowerCase() === cJtypeName.toLowerCase())
+      let obj = this.allreqPlan.find(x => x.cJtypeName.toLowerCase() === cJtypeName.toLowerCase());
       if (obj) {
         this.addRequirementError = `Error - ${cJtypeName} exist`;
       setTimeout(() => {
@@ -219,6 +233,36 @@ this.JcategoryType = this.jobRole;
       }, 3000);
   }
   }
+  removerequirement(index){
+    // 
+    this.allreqPlan.splice(index,1);
+    this.addRequirementError = `requirement removed`;
+    setTimeout(() => {
+      this.addRequirementError = '';
+    }, 3000);
+
+
+  }
+  onDateSelection(date: Date){
+    if(this.newcaplan.startDate){
+       if(this.newcaplan.startDate.getFullYear() != date.getFullYear()){
+this.startYear = this.newcaplan.startDate.getFullYear();
+         this.endYear = date.getFullYear();
+         let alertMsg = `Project End Year Spill Over to Another Year, Click Yes to set Project Year End to ${this.endYear} and No to set ${this.startYear} as Project Year`
+this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alertMsg, 'Yes').subscribe(data => {
+  if (data == "closed") {
+    this.newcaplan.year = this.endYear
+  } else {
+    this.newcaplan.year = this.startYear
+  }
+
+})
+       }else{
+        this.newcaplan.year = date.getFullYear();
+       }
+
+    }    
+  }
   getJobRoles() {
     this.CommonService.getJobRoles().subscribe(data => {
       if (!data.hasError) {
@@ -229,6 +273,7 @@ this.JcategoryType = this.jobRole;
   }
 
   getPositions() {
+
     this.CommonService.getPositions().subscribe(data => {
       if (!data.hasError) {
         this.JobPosition = data.result;
@@ -236,10 +281,104 @@ this.JcategoryType = this.jobRole;
       
     })
   }
+  submitnewplan(newplan: DepartmentActivityDTO, requirement) {
+  
+    if (this.allreqPlan.length > 0) {
+      if (newplan.activityTypeId == 2) {
+        if (!newplan.startDate || !newplan.endDate  || newplan.startDate == null || newplan.endDate == null) {
+          this.submitRequirementError = `Error - please fill project start and project end date`;
+          setTimeout(() => {
+            this.addRequirementError = '';
+          }, 3000);
+         
+          return false;
+        }else{
+          var startdate = new Date(newplan.startDate.getFullYear(),(newplan.startDate.getMonth())-1,(newplan.startDate.getDate())+1);
+          var enddate = new Date(newplan.endDate.getFullYear(),(newplan.endDate.getMonth())-1,(newplan.endDate.getDay())+1);
+  
+
+        }
+      }
+      if (!newplan.year) {
+        this.submitRequirementError = `Error - please select a valid year`;
+        setTimeout(() => {
+          this.addRequirementError = '';
+        }, 3000);
+
+          return false;
+}
+        newplan.requirements = [];
+      var newplanrqmnt = [];
+      
+        requirement.forEach(value=>{
+          var JobRoleId = value.Ctype == "Job Role"? value.Jtype: null;
+          var PostionId = value.Ctype == "Position"? value.Jtype: null;
+         if(JobRoleId){
+           var newObj = new DepartmentManPowerActivityDTO().clone();
+        
+           newObj.jobCategoryName = value.Ctype;
+           newObj.jobRoleId = JobRoleId;
+           newObj.numberOfResource= value.Nstaff
+           newObj.costPerResource= value.RCost
+         
+          newplan.requirements.push(newObj);
+         }
+          if (PostionId) {
+           
+          var PnewObj = new DepartmentManPowerActivityDTO().clone();
+           PnewObj.jobCategoryName = value.Ctype;
+           PnewObj.postionId = PostionId;
+             PnewObj.numberOfResource = value.Nstaff;
+           PnewObj.costPerResource = value.RCost;
+          
+          newplan.requirements.push(PnewObj);
+         }
+         console.log(newplan)
+
+        });
+
+       // newplan.planrequirement = newplanrqmnt;
+       this.loading = true;
+        this.ManpowerService.addUpdateDepartmentActivity(newplan)
+          .subscribe((result) => {
+            this.loading = false;
+       var respData = result;
+          if (!respData.hasError) {   
+            this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
+        this.getallCaplan();
+        this.newcaplan = new DepartmentActivityDTO().clone() ;
+        this.planrequirement = {};
+        this.allreqPlan = [];
+        this.planrequirement.numberOfStaff = 0;
+        this.newcaplan.status = 0;
+      
+      }else{
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK')     
+          }
+        }, (error) => {
+          this.loading = false;
+          if (error.status == 400) {
+            this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+          }
+        });
+   
+    } else {
+      this.submitRequirementError = `Please Add Requirements`;
+      setTimeout(() => {
+        this.addRequirementError = '';
+      }, 3000);
+        return false;
+    }
+  }
+
   ngOnInit(): void {
+    this.planrequirement.numberOfStaff = 0;
+    this.newcaplan.requirements = [];
+    this.newcaplan.status = 0;   
     this.getallCaplan();
     this.getJobRoles();
     this.getPositions();
+    this.CustomService.getnxttenyears();
     this.newcaplan.startDate = new Date();
     this.newcaplan.endDate = new Date();
   }

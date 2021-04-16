@@ -1,4 +1,19 @@
-<ngx-componentsheader pageName='Exit Management' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
-</ngx-componentsheader>
 
-<ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+<ngx-page
+  (topActionClicked)="pageActionClicked($event)"
+  [(showModal)]="showModal"
+  [pageTitle]="getPageTitle()"
+  [requiredButton]="getRequiredButton()"
+  [formConfig]="formConfig"
+  [(value)]="editingData"
+  (formCompleted)="submitForm()"
+  (formCancelled)="hideModal()"
+  [tableData]="data"
+  [tableColumns]="getTableColumns()"
+  [loadingSave]="loadingSave"
+  [formTitle]="getFormTitle()"
+  [emptyConfig]="emptyConfig"
+  [loading]="loading"
+  [tableActions]="tableActions"
+  (tableActionClicked)="tableActionClick($event)"
+></ngx-page>

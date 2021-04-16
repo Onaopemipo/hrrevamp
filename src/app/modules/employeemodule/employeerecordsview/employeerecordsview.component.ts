@@ -6,7 +6,7 @@ import {
   EmployeeHistoryDTO, CommonServiceProxy, Position, EmployeeSkill, EmployeeCertificationDTO,
   Skill, GetAllProfessionalBodiesServiceProxy, ProfessionalBodyDTO, Certification, EmployeeContractAssignmentDTO,
   JobRole, PayrollType, GradeStep, FileStorageManagerServiceProxy, FileParameter, UploadProfileImageServiceProxy,
-  EmployeeSkillDTO, Qualification, Course, Institution, ManageDocumentDTO,
+  EmployeeSkillDTO, Qualification, Course, Institution,
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -1111,10 +1111,35 @@ export class EmployeerecordsviewComponent implements OnInit {
   }
   submitDocument(indVDocuments:Document) {
     if (this.createNewEmployee.id) {
-      this.reqEmployee.profileOperation = this.profileOperations.find(x => x.text == "Document").id;
-      indVDocuments.employee_Id = this.createNewEmployee.id;
-      this.createNewEmployee.documents.push(indVDocuments)
-      this.createEmployee();      
+      let file = this.files[0].flowFile.file;     
+      let filep ={
+        id: undefined,
+        employee_id: this.createNewEmployee.id,
+        employeeNo: this.createNewEmployee.employeeNumber,
+        name: this.createNewEmployee.fullName,
+        directory: undefined,
+        lastModifiedDate: undefined,
+        docUrl:  undefined,
+        file: {
+          data: file,
+          fileName: file.name
+        },
+        docType: indVDocuments.docType,
+        comment: indVDocuments.comment
+      };
+     
+     
+      this.FileUploadService.uploadDocuments(filep.id, filep.employee_id, filep.employeeNo, filep.name, filep.directory, filep.lastModifiedDate,
+        filep.docUrl, filep.file, filep.docType, filep.comment).subscribe((data) => {
+          if (!data.hasError) {
+            this.getEmployeebyId(this.createNewEmployee.id);
+          }
+
+        });
+      // this.reqEmployee.profileOperation = this.profileOperations.find(x => x.text == "Document").id;
+      // indVDocuments.employee_Id = this.createNewEmployee.id;
+      // this.createNewEmployee.documents.push(indVDocuments)
+      // this.createEmployee();      
     }
     this.showCertificationModal = false;
     this.nextPanel();
@@ -1237,23 +1262,9 @@ export class EmployeerecordsviewComponent implements OnInit {
     });
   }
   filereceived(event: FlowDirective) {
-    // event.transfers$.subscribe(value => {
-    //   this.files = value.transfers;
-    //   let file = this.files[0].flowFile.file;
-    //   let filepList: ManageDocumentDTO[] = [];
-    //   let filep: ManageDocumentDTO ={
-    //     file:file,
-    //    fileName:file.name
-    //   };
-     
-    //   filepList.push(filep)
-    //   this.FileUploadService.uploadDocuments(filepList).subscribe((data: any) => {
-    //     this.indVDocuments.docUrl = data.filePath;
-    //     this.indVDocuments.directory = data.filePath;
-    //     console.log(this.indVDocuments)
-    //   })
-      
-    // });
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;      
+    });
   }
   onDragOver(event) {
     event.stopPropagation();

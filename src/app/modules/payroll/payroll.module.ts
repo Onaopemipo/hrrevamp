@@ -39,10 +39,31 @@ import { PayrollanalysisComponent } from './payrollanalysis/payrollanalysis.comp
 import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.component';
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
+import { MyPayrollInstitutionService } from './services/common.service';
+import { AddUpdatePaymentInstitutionServiceProxy, GetAllPaymentInstitutionsServiceProxy } from 'app/_services/service-proxies';
 
 
 @NgModule({
-  declarations: [PayrollComponent, PayrollcomponentComponent, PaymentcreateComponent, InstitutionalmanagementComponent, PaymenysetupComponent, PayelementComponent, EditpaymentformComponent, PayscalesetupComponent, PayscaletableComponent, ViewpayscaleComponent, QuickypayrollComponent, AssignpayscaleComponent, PayrollreportComponent, ReviewpayrollComponent, PayrollanalysisComponent, AnalysistestpayComponent, DetailsTestPayComponent, PayrollRunLogComponent],
+  declarations: [
+    PayrollComponent,
+    PayrollcomponentComponent,
+    PaymentcreateComponent,
+    InstitutionalmanagementComponent,
+    PaymenysetupComponent,
+    PayelementComponent,
+    EditpaymentformComponent,
+    PayscalesetupComponent,
+    PayscaletableComponent,
+    ViewpayscaleComponent,
+    QuickypayrollComponent,
+    AssignpayscaleComponent,
+    PayrollreportComponent,
+    ReviewpayrollComponent,
+    PayrollanalysisComponent,
+    AnalysistestpayComponent,
+    DetailsTestPayComponent,
+    PayrollRunLogComponent,
+  ],
   imports: [
     ComponentsModule,
     CommonModule,
@@ -63,6 +84,11 @@ import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.compon
     ngFormsModule,
     ComponentsModule,
     ThemeModule,
-  ]
+  ],
+  providers: [
+    MyPayrollInstitutionService,
+    AddUpdatePaymentInstitutionServiceProxy,
+    GetAllPaymentInstitutionsServiceProxy,
+  ],
 })
 export class PayrollModule { }
