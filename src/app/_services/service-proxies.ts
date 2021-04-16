@@ -39610,21 +39610,76 @@ export class TrainingServiceProxy {
 
     /**
      * API for adding/updating Training Plan.
-     * @param body (optional) 
+     * @param id (optional) 
+     * @param name (optional) 
+     * @param description (optional) 
+     * @param status (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param trainingTypeId (optional) 
+     * @param specializationId (optional) 
+     * @param vendorId (optional) 
+     * @param totalCost (optional) 
+     * @param costPerEmployee (optional) 
+     * @param selectedEmployees (optional) 
+     * @param attachment (optional) 
      * @return Success
      */
-    addUpdateTrainingPlan(body: ManageTrainingDTO | undefined): Observable<MessageOutApiResult> {
+    addUpdateTrainingPlan(id: number | undefined, name: string | undefined, description: string | undefined, status: boolean | undefined, startDate: Date | undefined, endDate: Date | undefined, trainingTypeId: number | undefined, specializationId: number | undefined, vendorId: number | undefined, totalCost: number | null | undefined, costPerEmployee: number | null | undefined, selectedEmployees: string | null | undefined, attachment: FileParameter | null | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/Training/Add-Update-TrainingPlan";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
+        const content_ = new FormData();
+        if (id === null || id === undefined)
+            throw new Error("The parameter 'id' cannot be null.");
+        else
+            content_.append("Id", id.toString());
+        if (name === null || name === undefined)
+            throw new Error("The parameter 'name' cannot be null.");
+        else
+            content_.append("Name", name.toString());
+        if (description === null || description === undefined)
+            throw new Error("The parameter 'description' cannot be null.");
+        else
+            content_.append("Description", description.toString());
+        if (status === null || status === undefined)
+            throw new Error("The parameter 'status' cannot be null.");
+        else
+            content_.append("Status", status.toString());
+        if (startDate === null || startDate === undefined)
+            throw new Error("The parameter 'startDate' cannot be null.");
+        else
+            content_.append("StartDate", startDate.toJSON());
+        if (endDate === null || endDate === undefined)
+            throw new Error("The parameter 'endDate' cannot be null.");
+        else
+            content_.append("EndDate", endDate.toJSON());
+        if (trainingTypeId === null || trainingTypeId === undefined)
+            throw new Error("The parameter 'trainingTypeId' cannot be null.");
+        else
+            content_.append("TrainingTypeId", trainingTypeId.toString());
+        if (specializationId === null || specializationId === undefined)
+            throw new Error("The parameter 'specializationId' cannot be null.");
+        else
+            content_.append("SpecializationId", specializationId.toString());
+        if (vendorId === null || vendorId === undefined)
+            throw new Error("The parameter 'vendorId' cannot be null.");
+        else
+            content_.append("VendorId", vendorId.toString());
+        if (totalCost !== null && totalCost !== undefined)
+            content_.append("TotalCost", totalCost.toString());
+        if (costPerEmployee !== null && costPerEmployee !== undefined)
+            content_.append("CostPerEmployee", costPerEmployee.toString());
+        if (selectedEmployees !== null && selectedEmployees !== undefined)
+            content_.append("SelectedEmployees", selectedEmployees.toString());
+        if (attachment !== null && attachment !== undefined)
+            content_.append("Attachment", attachment.data, attachment.fileName ? attachment.fileName : "Attachment");
 
         let options_ : any = {
             body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -90243,97 +90298,6 @@ export interface ITrainingSpecializationDTOApiResult {
     result: TrainingSpecializationDTO;
     totalCount: number;
     totalRecord: number;
-}
-
-export class ManageTrainingDTO implements IManageTrainingDTO {
-    id!: number;
-    name!: string;
-    description!: string;
-    status!: boolean;
-    startDate!: Date;
-    endDate!: Date;
-    trainingTypeId!: number;
-    specializationId!: number;
-    vendorId!: number;
-    totalCost!: number | undefined;
-    costPerEmployee!: number | undefined;
-    selectedEmployees!: string | undefined;
-    attachment!: string | undefined;
-
-    constructor(data?: IManageTrainingDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-            this.status = _data["status"];
-            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
-            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.trainingTypeId = _data["trainingTypeId"];
-            this.specializationId = _data["specializationId"];
-            this.vendorId = _data["vendorId"];
-            this.totalCost = _data["totalCost"];
-            this.costPerEmployee = _data["costPerEmployee"];
-            this.selectedEmployees = _data["selectedEmployees"];
-            this.attachment = _data["attachment"];
-        }
-    }
-
-    static fromJS(data: any): ManageTrainingDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new ManageTrainingDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["status"] = this.status;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["trainingTypeId"] = this.trainingTypeId;
-        data["specializationId"] = this.specializationId;
-        data["vendorId"] = this.vendorId;
-        data["totalCost"] = this.totalCost;
-        data["costPerEmployee"] = this.costPerEmployee;
-        data["selectedEmployees"] = this.selectedEmployees;
-        data["attachment"] = this.attachment;
-        return data; 
-    }
-
-    clone(): ManageTrainingDTO {
-        const json = this.toJSON();
-        let result = new ManageTrainingDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IManageTrainingDTO {
-    id: number;
-    name: string;
-    description: string;
-    status: boolean;
-    startDate: Date;
-    endDate: Date;
-    trainingTypeId: number;
-    specializationId: number;
-    vendorId: number;
-    totalCost: number | undefined;
-    costPerEmployee: number | undefined;
-    selectedEmployees: string | undefined;
-    attachment: string | undefined;
 }
 
 export class TrainingDTO implements ITrainingDTO {
