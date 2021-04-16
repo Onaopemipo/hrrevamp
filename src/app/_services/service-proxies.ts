@@ -22,7 +22,7 @@ export class GetTokenServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -107,7 +107,7 @@ export class ValidateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -190,7 +190,7 @@ export class ForgotPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -273,7 +273,7 @@ export class ResetPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -358,7 +358,7 @@ export class ConfirmEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -444,7 +444,7 @@ export class FetchActivityLogServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -545,7 +545,7 @@ export class PostServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1142,7 +1142,7 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1334,7 +1334,7 @@ export class SubordinateAppraisalsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1420,7 +1420,7 @@ export class GetEmployeePerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1521,7 +1521,7 @@ export class SubmitEmployeeAppraisalReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1608,7 +1608,7 @@ export class EmployeePerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1709,7 +1709,7 @@ export class SubmitPerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1795,7 +1795,7 @@ export class GetEmployeeAppraisalHistoriesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1881,7 +1881,7 @@ export class FetchApprovalProcessServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -1967,7 +1967,7 @@ export class FetchApprovalProcessStepsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2058,7 +2058,7 @@ export class FetchPendingItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2150,7 +2150,7 @@ export class SaveApprovalProcessServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2236,7 +2236,7 @@ export class SaveApprovalProcessStepServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2322,7 +2322,7 @@ export class RemoveApprovalProcessStepServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2408,7 +2408,7 @@ export class FetchApprovalLogViewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2498,7 +2498,7 @@ export class PostApprovalLogServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -2583,7 +2583,7 @@ export class AssetManagementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5309,7 +5309,7 @@ export class AddUpdateBenefitPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5394,7 +5394,7 @@ export class DeleteBenefitPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5479,7 +5479,7 @@ export class GetBenefitPlanByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5577,7 +5577,7 @@ export class AddUpdateEmployeeCoverageBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5662,7 +5662,7 @@ export class FetchEmployeeCoverageBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5785,7 +5785,7 @@ export class DeleteEmployeeCoverageBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5870,7 +5870,7 @@ export class AddUpdateCoverageServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -5955,7 +5955,7 @@ export class FetchCoveragePlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6061,7 +6061,7 @@ export class DeleteCoveragePlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6146,7 +6146,7 @@ export class AddUpdateEligibilityTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6231,7 +6231,7 @@ export class GetEligibilityTypeByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6329,7 +6329,7 @@ export class DeleteEligibilityTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6414,7 +6414,7 @@ export class AddUpdateBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6500,7 +6500,7 @@ export class FetchAllBudgetsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6581,7 +6581,7 @@ export class FetchBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6667,7 +6667,7 @@ export class DeleteBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6753,7 +6753,7 @@ export class AddUpdateBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6839,7 +6839,7 @@ export class FetchAllBudgetItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -6925,7 +6925,7 @@ export class FetchBudgetItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7011,7 +7011,7 @@ export class FetchBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7097,7 +7097,7 @@ export class DeleteBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7183,7 +7183,7 @@ export class BulkMasterServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7430,7 +7430,7 @@ export class AddUpdateEmployeetoNineBoxGridServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7516,7 +7516,7 @@ export class MoveEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7602,7 +7602,7 @@ export class RemoveEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7688,7 +7688,7 @@ export class GetEmployeeebyGridBoxServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7780,7 +7780,7 @@ export class GetGridBoxCountServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7862,7 +7862,7 @@ export class AddUpdateEmployeetoTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -7948,7 +7948,7 @@ export class AddUpdateRequirmentstoTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8037,7 +8037,7 @@ export class CareerSuccessionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8123,7 +8123,7 @@ export class CareerPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8209,7 +8209,7 @@ export class DeleteEmployeefromTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8300,7 +8300,7 @@ export class GetTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8522,7 +8522,7 @@ export class FetchSuccessionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8603,7 +8603,7 @@ export class RemoveEmployeeFromSuccessorServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8692,7 +8692,7 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8778,7 +8778,7 @@ export class AddUpdateCertificationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8864,7 +8864,7 @@ export class GetAllCertificationsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -8961,7 +8961,7 @@ export class GetCertificationByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -9047,7 +9047,7 @@ export class CommonServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -11073,7 +11073,7 @@ export class CommunicationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -11748,7 +11748,7 @@ export class AddUpdateCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -11833,7 +11833,7 @@ export class FetchCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -11936,7 +11936,7 @@ export class DeleteCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12021,7 +12021,7 @@ export class AddUpdateEmployeeCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12106,7 +12106,7 @@ export class FetchEmployeeCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12211,7 +12211,7 @@ export class DeleteEmployeeCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12296,7 +12296,7 @@ export class CompetencyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12382,7 +12382,7 @@ export class SaveConfirmationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12467,7 +12467,7 @@ export class GetConfirmationsByDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12568,7 +12568,7 @@ export class CourseServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12808,7 +12808,7 @@ export class FetchDashboardDataServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -12889,7 +12889,7 @@ export class DataServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -14809,7 +14809,7 @@ export class AddUpdateDepartmentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -14895,7 +14895,7 @@ export class GetAllDepartmentsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -14987,7 +14987,7 @@ export class GetDepartmentByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15073,7 +15073,7 @@ export class AddUpdateDependantServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15158,7 +15158,7 @@ export class DeleteDependantServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15243,7 +15243,7 @@ export class GetDependantByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15353,7 +15353,7 @@ export class GetAllDependantByCompanyIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15448,7 +15448,7 @@ export class GetAllDependantByEmployeeIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15543,7 +15543,7 @@ export class AddUpdateDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15628,7 +15628,7 @@ export class FetchDeploymentByReferenceNoServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15711,7 +15711,7 @@ export class FetchDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15836,7 +15836,7 @@ export class EmployeeDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15916,7 +15916,7 @@ export class TenantDisbursementChannelsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -15997,7 +15997,7 @@ export class SingleDisbursementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16083,7 +16083,7 @@ export class CreateEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16169,7 +16169,7 @@ export class UploadProfileImageServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16258,7 +16258,7 @@ export class FetchEmployeesDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16359,7 +16359,7 @@ export class FetchEmployeesByName_IdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16446,7 +16446,7 @@ export class FetchEmployeeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16532,7 +16532,7 @@ export class SearchEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16661,7 +16661,7 @@ export class FetchAllEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16760,7 +16760,7 @@ export class FetchEmployeeContractByEmployeeIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16846,7 +16846,7 @@ export class AddUpdateEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -16932,7 +16932,7 @@ export class GetAllEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17024,7 +17024,7 @@ export class GetEventsByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17110,7 +17110,7 @@ export class DeleteEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17196,7 +17196,7 @@ export class AddUpdateExpenseGroupServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17281,7 +17281,7 @@ export class ToggleExpenseGroupServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17364,7 +17364,7 @@ export class GetExpenseGroupsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17478,7 +17478,7 @@ export class AddUpdateExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17563,7 +17563,7 @@ export class ToggleExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17646,7 +17646,7 @@ export class GetExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17762,7 +17762,7 @@ export class AddUpdateExpenseServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17847,7 +17847,7 @@ export class ToggleExpenseRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -17930,7 +17930,7 @@ export class FetchExpensesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18059,7 +18059,7 @@ export class FetchExpensesDetailedServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18207,7 +18207,7 @@ export class AddUpdateLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18438,7 +18438,7 @@ export class ToggleExpenseTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18521,7 +18521,7 @@ export class GetExpenseTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18631,7 +18631,7 @@ export class AddExpenseSubTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18716,7 +18716,7 @@ export class ToggleExpenseSubTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18802,7 +18802,7 @@ export class GetExpenseTypeNameServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18885,7 +18885,7 @@ export class GetExpenseSubTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -18995,7 +18995,7 @@ export class FileStorageManagerServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -19267,7 +19267,7 @@ export class GradeLevelServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -19513,7 +19513,7 @@ export class GradeLevelBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -19827,7 +19827,7 @@ export class GradeLevelStepServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20156,7 +20156,7 @@ export class InstitutionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20396,7 +20396,7 @@ export class AddUpdateJobRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20482,7 +20482,7 @@ export class GetAllJobRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20574,7 +20574,7 @@ export class GetJobRoleByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20660,7 +20660,7 @@ export class DeleteJobRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20746,7 +20746,7 @@ export class FetchKeyResultAreasServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20854,7 +20854,7 @@ export class FetchKRAsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -20935,7 +20935,7 @@ export class FetchKeyResultAreaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21021,7 +21021,7 @@ export class CreateKeyResultAreaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21109,7 +21109,7 @@ export class AssignKRAServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21197,7 +21197,7 @@ export class AddUpdateKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21283,7 +21283,7 @@ export class AddUpdateEmployeeKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21369,7 +21369,7 @@ export class FetchKPIsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21455,7 +21455,7 @@ export class FetchKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21541,7 +21541,7 @@ export class FetchEmployeeKPIsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -21627,7 +21627,7 @@ export class LeaveEntitlementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22009,7 +22009,7 @@ export class AddUpdateHolidayServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22095,7 +22095,7 @@ export class HolidayDatesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22181,7 +22181,7 @@ export class GetByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22267,7 +22267,7 @@ export class DeleteServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22575,7 +22575,7 @@ export class CreateLeavePlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22661,7 +22661,7 @@ export class FetchLeavePlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22767,7 +22767,7 @@ export class LeavePlanEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22851,7 +22851,7 @@ export class ApproveOrRejectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -22938,7 +22938,7 @@ export class PostReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23025,7 +23025,7 @@ export class CreateLeaveByAdminServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23111,7 +23111,7 @@ export class GetLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23311,7 +23311,7 @@ export class CancelLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23397,7 +23397,7 @@ export class GetLeaveTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23505,7 +23505,7 @@ export class DeleteLeaveTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23591,7 +23591,7 @@ export class GetLeaveTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23677,7 +23677,7 @@ export class LeaveWorkFlowServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -23980,7 +23980,7 @@ export class GetLeaveYearsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24085,7 +24085,7 @@ export class CreateLeaveYearServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24171,7 +24171,7 @@ export class GetLeaveYearServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24257,7 +24257,7 @@ export class PostFullRepaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24342,7 +24342,7 @@ export class SimulatePaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24445,7 +24445,7 @@ export class GetLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24568,7 +24568,7 @@ export class GetLoanSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24653,7 +24653,7 @@ export class UpdateLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24738,7 +24738,7 @@ export class LoadRepaymentScheduleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24828,7 +24828,7 @@ export class FetchLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -24951,7 +24951,7 @@ export class GetLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25046,7 +25046,7 @@ export class ToggleLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25131,7 +25131,7 @@ export class GetLoanTypesByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25255,7 +25255,7 @@ export class FetchLoanTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25345,7 +25345,7 @@ export class AddUpdateLocationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25431,7 +25431,7 @@ export class GetAllLocationsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25533,7 +25533,7 @@ export class GetLocationByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -25619,7 +25619,7 @@ export class ManpowerServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -26643,7 +26643,7 @@ export class FetchOnboardingPersonnalDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -26738,7 +26738,7 @@ export class FetchOnboardingDocummentDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -26838,7 +26838,7 @@ export class FetchOnboardingMedicalDisclosureDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -26938,7 +26938,7 @@ export class FetchOnboardingPaymentDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27038,7 +27038,7 @@ export class FetchOnboardingTaxDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27138,7 +27138,7 @@ export class FetchEmployeeOnboardingDataDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27228,7 +27228,7 @@ export class AddUpdatePayElementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27314,7 +27314,7 @@ export class GetAllPayElementsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27426,7 +27426,7 @@ export class GetPayElementByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27512,7 +27512,7 @@ export class AddUpdatePaymentInstitutionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27598,7 +27598,7 @@ export class GetAllPaymentInstitutionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27695,7 +27695,7 @@ export class GetPaymentInstitutionByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27781,7 +27781,7 @@ export class GetPayslipAnalysisServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27867,7 +27867,7 @@ export class GetPayrollAnalysisServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -27958,7 +27958,7 @@ export class GetBankScheduleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28044,7 +28044,7 @@ export class GetEarningsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28130,7 +28130,7 @@ export class GetDeductionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28216,7 +28216,7 @@ export class GetAllElementsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28302,7 +28302,7 @@ export class GetDeductionSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28388,7 +28388,7 @@ export class GetPaymentSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28474,7 +28474,7 @@ export class GetTaxDetailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28560,7 +28560,7 @@ export class GetTaxSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28646,7 +28646,7 @@ export class GetPensionDetailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28732,7 +28732,7 @@ export class GetPensionSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28818,7 +28818,7 @@ export class FetchPayrollServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28904,7 +28904,7 @@ export class FetchPayslipsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -28995,7 +28995,7 @@ export class FetchPayslipItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29081,7 +29081,7 @@ export class AddUpdatePayScaleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29167,7 +29167,7 @@ export class GetAllPayrollTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29264,7 +29264,7 @@ export class GetPayrollTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29351,7 +29351,7 @@ export class FetchPerformanceCyclesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29464,7 +29464,7 @@ export class FetchPerformanceCycleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29550,7 +29550,7 @@ export class AddUpdatePerformanceCycleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29638,7 +29638,7 @@ export class AddUpdatePositionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29724,7 +29724,7 @@ export class GetAllPositionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29831,7 +29831,7 @@ export class GetPositionByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -29917,7 +29917,7 @@ export class AddUpdateProfessionalBodyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30003,7 +30003,7 @@ export class GetAllProfessionalBodiesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30100,7 +30100,7 @@ export class GetProfessionalBodyByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30186,7 +30186,7 @@ export class AddUpdateEligibleBucketServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30271,7 +30271,7 @@ export class GetEligibilityListServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30372,7 +30372,7 @@ export class GetEligibilityEmployeeListsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30467,7 +30467,7 @@ export class GetPromotionEligibilityListsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30568,7 +30568,7 @@ export class QualificationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30813,7 +30813,7 @@ export class FetchRatingsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30894,7 +30894,7 @@ export class AddUpdateRatingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -30978,7 +30978,7 @@ export class DeleteRatingRecordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -31064,7 +31064,7 @@ export class RecruitmentJobServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -31442,7 +31442,7 @@ export class RecruitmentJobApplicationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -31869,7 +31869,7 @@ export class RecruitmentQuizServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -32238,7 +32238,7 @@ export class RecruitmentSettingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33405,7 +33405,7 @@ export class AddUpdateRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33491,7 +33491,7 @@ export class GetAllRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33603,7 +33603,7 @@ export class GetRequestByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33689,7 +33689,7 @@ export class CreateUpdateRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33775,7 +33775,7 @@ export class GetAllRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33867,7 +33867,7 @@ export class GetRequestTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -33953,7 +33953,7 @@ export class DeleteRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -34038,7 +34038,7 @@ export class RetirementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -34805,7 +34805,7 @@ export class AddUpdateRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -34890,7 +34890,7 @@ export class GetAllRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -34986,7 +34986,7 @@ export class RequestDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35069,7 +35069,7 @@ export class RequestTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35149,7 +35149,7 @@ export class FetchRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35230,7 +35230,7 @@ export class FetchAllRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35312,7 +35312,7 @@ export class FetchRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35399,7 +35399,7 @@ export class CreateRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35486,7 +35486,7 @@ export class FetchRolePermissionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35566,7 +35566,7 @@ export class FetchRolePermissionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35651,7 +35651,7 @@ export class RolePermissionMappingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -35736,7 +35736,7 @@ export class SalaryscaleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36050,7 +36050,7 @@ export class AddSkillsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36136,7 +36136,7 @@ export class GetAllSkillsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36233,7 +36233,7 @@ export class GetSkillByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36319,7 +36319,7 @@ export class CreateSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36404,7 +36404,7 @@ export class FetchSubscriptionPlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36484,7 +36484,7 @@ export class FetchSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36569,7 +36569,7 @@ export class FetchSubscriptionPlanModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36654,7 +36654,7 @@ export class TalentManagementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -36967,7 +36967,7 @@ export class VerifySubscriptionPaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37055,7 +37055,7 @@ export class TenantSignUpServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37141,7 +37141,7 @@ export class ConfirmTenantEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37229,7 +37229,7 @@ export class RegisterCompanyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37314,7 +37314,7 @@ export class FetchAllTenantsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37413,7 +37413,7 @@ export class FetchTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37494,7 +37494,7 @@ export class UpdateTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37578,7 +37578,7 @@ export class AddTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -37662,7 +37662,7 @@ export class TrainingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -38042,21 +38042,65 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to create  or update  training type.  if it is update, training vendour Id is required
-     * @param body (optional) 
+     * @param costPer_Head (optional) 
+     * @param no_Of_Trainees (optional) 
+     * @param overAll_Budget (optional) 
+     * @param trainingTypeId (optional) 
+     * @param employeeId (optional) 
+     * @param trainingVendorId (optional) 
+     * @param trainingSpecializationId (optional) 
+     * @param name (optional) 
+     * @param file (optional) 
+     * @param trainingCategoryId (optional) 
      * @return Success
      */
-    createtype(body: TrainingTypePayload | undefined): Observable<MessageOutApiResult> {
+    createtype(costPer_Head: number | undefined, no_Of_Trainees: number | undefined, overAll_Budget: number | undefined, trainingTypeId: number | undefined, employeeId: number | undefined, trainingVendorId: number | undefined, trainingSpecializationId: number | undefined, name: string | null | undefined, file: FileParameter | null | undefined, trainingCategoryId: number | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/Training/createtype";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
+        const content_ = new FormData();
+        if (costPer_Head === null || costPer_Head === undefined)
+            throw new Error("The parameter 'costPer_Head' cannot be null.");
+        else
+            content_.append("CostPer_Head", costPer_Head.toString());
+        if (no_Of_Trainees === null || no_Of_Trainees === undefined)
+            throw new Error("The parameter 'no_Of_Trainees' cannot be null.");
+        else
+            content_.append("No_Of_Trainees", no_Of_Trainees.toString());
+        if (overAll_Budget === null || overAll_Budget === undefined)
+            throw new Error("The parameter 'overAll_Budget' cannot be null.");
+        else
+            content_.append("OverAll_Budget", overAll_Budget.toString());
+        if (trainingTypeId === null || trainingTypeId === undefined)
+            throw new Error("The parameter 'trainingTypeId' cannot be null.");
+        else
+            content_.append("TrainingTypeId", trainingTypeId.toString());
+        if (employeeId === null || employeeId === undefined)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else
+            content_.append("EmployeeId", employeeId.toString());
+        if (trainingVendorId === null || trainingVendorId === undefined)
+            throw new Error("The parameter 'trainingVendorId' cannot be null.");
+        else
+            content_.append("TrainingVendorId", trainingVendorId.toString());
+        if (trainingSpecializationId === null || trainingSpecializationId === undefined)
+            throw new Error("The parameter 'trainingSpecializationId' cannot be null.");
+        else
+            content_.append("TrainingSpecializationId", trainingSpecializationId.toString());
+        if (name !== null && name !== undefined)
+            content_.append("Name", name.toString());
+        if (file !== null && file !== undefined)
+            content_.append("File", file.data, file.fileName ? file.fileName : "File");
+        if (trainingCategoryId === null || trainingCategoryId === undefined)
+            throw new Error("The parameter 'trainingCategoryId' cannot be null.");
+        else
+            content_.append("TrainingCategoryId", trainingCategoryId.toString());
 
         let options_ : any = {
             body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -40543,7 +40587,7 @@ export class RegisterUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -40628,7 +40672,7 @@ export class UpdateUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -40713,7 +40757,7 @@ export class FetchAllUsersServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "http://51.124.39.23:8008";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
     }
 
     /**
@@ -87893,85 +87937,6 @@ export interface ITrainingVendorResourceApiResult {
     totalRecord: number;
 }
 
-export class TrainingTypePayload implements ITrainingTypePayload {
-    costPer_Head!: number;
-    no_Of_Trainees!: number;
-    overAll_Budget!: number;
-    trainingTypeId!: number;
-    employeeId!: number;
-    trainingVendorId!: number;
-    trainingSpecializationId!: number;
-    name!: string | undefined;
-    file!: string | undefined;
-    trainingCategoryId!: number;
-
-    constructor(data?: ITrainingTypePayload) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.costPer_Head = _data["costPer_Head"];
-            this.no_Of_Trainees = _data["no_Of_Trainees"];
-            this.overAll_Budget = _data["overAll_Budget"];
-            this.trainingTypeId = _data["trainingTypeId"];
-            this.employeeId = _data["employeeId"];
-            this.trainingVendorId = _data["trainingVendorId"];
-            this.trainingSpecializationId = _data["trainingSpecializationId"];
-            this.name = _data["name"];
-            this.file = _data["file"];
-            this.trainingCategoryId = _data["trainingCategoryId"];
-        }
-    }
-
-    static fromJS(data: any): TrainingTypePayload {
-        data = typeof data === 'object' ? data : {};
-        let result = new TrainingTypePayload();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["costPer_Head"] = this.costPer_Head;
-        data["no_Of_Trainees"] = this.no_Of_Trainees;
-        data["overAll_Budget"] = this.overAll_Budget;
-        data["trainingTypeId"] = this.trainingTypeId;
-        data["employeeId"] = this.employeeId;
-        data["trainingVendorId"] = this.trainingVendorId;
-        data["trainingSpecializationId"] = this.trainingSpecializationId;
-        data["name"] = this.name;
-        data["file"] = this.file;
-        data["trainingCategoryId"] = this.trainingCategoryId;
-        return data; 
-    }
-
-    clone(): TrainingTypePayload {
-        const json = this.toJSON();
-        let result = new TrainingTypePayload();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ITrainingTypePayload {
-    costPer_Head: number;
-    no_Of_Trainees: number;
-    overAll_Budget: number;
-    trainingTypeId: number;
-    employeeId: number;
-    trainingVendorId: number;
-    trainingSpecializationId: number;
-    name: string | undefined;
-    file: string | undefined;
-    trainingCategoryId: number;
-}
-
 export class TrainingVendor implements ITrainingVendor {
     id!: number;
     name!: string;
@@ -88201,11 +88166,11 @@ export class TrainingType implements ITrainingType {
     outline!: string | undefined;
     contentUrl!: string | undefined;
     name!: string | undefined;
-    maxCount!: number;
-    remainingCount!: number;
-    maxDays!: number;
-    remainingDays!: number;
-    isLocalTraining!: boolean;
+    maxCount!: number | undefined;
+    remainingCount!: number | undefined;
+    maxDays!: number | undefined;
+    remainingDays!: number | undefined;
+    isLocalTraining!: boolean | undefined;
     tags!: string | undefined;
     costPer_Head!: number;
     no_Of_Trainees!: number;
@@ -88214,6 +88179,7 @@ export class TrainingType implements ITrainingType {
     trainingVendorId!: number;
     trainingSpecializationId!: number;
     trainingCategoryId!: number;
+    attachment!: string | undefined;
     trainings!: Training[] | undefined;
     trainingSpecialization!: TrainingSpecialization;
     trainingCategory!: TrainingCategory;
@@ -88258,6 +88224,7 @@ export class TrainingType implements ITrainingType {
             this.trainingVendorId = _data["trainingVendorId"];
             this.trainingSpecializationId = _data["trainingSpecializationId"];
             this.trainingCategoryId = _data["trainingCategoryId"];
+            this.attachment = _data["attachment"];
             if (Array.isArray(_data["trainings"])) {
                 this.trainings = [] as any;
                 for (let item of _data["trainings"])
@@ -88306,6 +88273,7 @@ export class TrainingType implements ITrainingType {
         data["trainingVendorId"] = this.trainingVendorId;
         data["trainingSpecializationId"] = this.trainingSpecializationId;
         data["trainingCategoryId"] = this.trainingCategoryId;
+        data["attachment"] = this.attachment;
         if (Array.isArray(this.trainings)) {
             data["trainings"] = [];
             for (let item of this.trainings)
@@ -88341,11 +88309,11 @@ export interface ITrainingType {
     outline: string | undefined;
     contentUrl: string | undefined;
     name: string | undefined;
-    maxCount: number;
-    remainingCount: number;
-    maxDays: number;
-    remainingDays: number;
-    isLocalTraining: boolean;
+    maxCount: number | undefined;
+    remainingCount: number | undefined;
+    maxDays: number | undefined;
+    remainingDays: number | undefined;
+    isLocalTraining: boolean | undefined;
     tags: string | undefined;
     costPer_Head: number;
     no_Of_Trainees: number;
@@ -88354,6 +88322,7 @@ export interface ITrainingType {
     trainingVendorId: number;
     trainingSpecializationId: number;
     trainingCategoryId: number;
+    attachment: string | undefined;
     trainings: Training[] | undefined;
     trainingSpecialization: TrainingSpecialization;
     trainingCategory: TrainingCategory;
