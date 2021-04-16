@@ -1,264 +1,368 @@
 <div class="container">
 
-    <div class="row">
-     <div class="col-md-12">
-         <div style="padding: 15px;"></div>
-         <ngx-componentsheader [pageName]="title"></ngx-componentsheader>
-         <div style="padding: 15px;"></div>
-         <div ></div>
-         <div class="row" >
-             <div class="col-md-8" style="margin: 5px;"  [ngSwitch]="selectedPanel">
-                 <!--Personal Information Panel ////////////////////////////////-->
-                 <div class="fmContainer" *ngSwitchCase="'personalInfoPanel'">
-                     <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
-                    <p class="listsubheader"> {{subtitle}}</p>
-                    <p class="listsubheader">Input required Information in the fields below</p>
+  <div class="row">
+    <div class="col-md-12">
+      <div style="padding: 15px;"></div>
+      <ngx-componentsheader [pageName]="title"></ngx-componentsheader>
+      <div style="padding: 15px;"></div>
+      <div></div>
+      <div class="row">
+        <div class="col-md-8" style="margin: 5px;" [ngSwitch]="selectedPanel">
+          <!--Personal Information Panel ////////////////////////////////-->
+          <div class="fmContainer" *ngSwitchCase="'personalInfoPanel'">
+            <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+              <p class="listsubheader"> {{subtitle}}</p>
+              <p class="listsubheader">Input required Information in the fields below</p>
+            </div>
+
+            <div style="padding-top:3rem;">
+              <form id="onBoardingForm" name="onBoardingForm" #onBoardingForm='ngForm'>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">First Name</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="First Name" name="Firstname" #firstName="ngModel"
+                      [(ngModel)]="InformationData.firstName" required>
+                    <div *ngIf="firstName.invalid && (firstName.dirty ||firstName.touched)" class="error">
+                      <div *ngIf="firstName.errors.required">Firstname name is required</div>
                     </div>
-                 
-                    <div style="padding-top:3rem;">
-                     <form>
-                         <div class="form-group row">
-                           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">First Name</label>
-                           <div class="col-sm-8">
-                             <input type="text" nbInput fullWidth  placeholder="First Name">
-                           </div>
-                         </div>
-                         <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
-                             <div class="col-sm-8">
-                               <input type="text" nbInput fullWidth  placeholder="Last Name">
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
-                             <div class="col-sm-8">
-                               <input type="text" nbInput fullWidth  placeholder="Phone Number">
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
-                             <div class="col-sm-8">
-                               <input type="text" nbInput fullWidth  placeholder="Date of Birth">
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Email Address</label>
-                             <div class="col-sm-8">
-                               <input type="email" nbInput fullWidth  placeholder="Email Address">
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
-                             <div class="col-sm-8">
-                               <input type="email" nbInput fullWidth  placeholder="Gender">
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
-                             <div class="col-sm-8">
-                                <textarea rows="5" nbInput fullWidth   placeholder="Address"></textarea>        
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">State</label>
-                             <div class="col-sm-8">
-                               <input type="text" nbInput fullWidth  placeholder="State">
-                             </div>
-                           </div>
-                           <div class="form-group row">
-                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Country</label>
-                             <div class="col-sm-8">
-                                 <textarea rows="5" nbInput fullWidth   placeholder="Country"></textarea>
-                             </div>
-                           </div>
-                      
-                         <div class="form-group row">
-                           <div class="offset-sm-4 col-sm-8">
-                             <button type="submit" nbButton status="primary" (click)="proceedtoworkInfo()">Proceed</button>
-                           </div>
-                         </div>
-                       </form>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="Last Name" name="lastName" #lastName="ngModel"
+                      [(ngModel)]="InformationData.lastName" required>
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
+                      <div *ngIf="lastName.errors.required">Lastname is required</div>
                     </div>
-                
- 
- 
+                  </div>
+
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="phoneNumber" name="phoneNumber"
+                      #phoneNumber="ngModel" [(ngModel)]="InformationData.phoneNumber" required>
+                    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                      <div *ngIf="phoneNumber.errors.required">phone number is required</div>
                     </div>
- 
-    <!--Work Information Panel ////////////////////////////////-->
-    <div class="fmContainer" *ngSwitchCase="'workInfoPanel'">
-        <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
-       <p class="listsubheader"> {{subtitle}}</p>
-       <p class="listsubheader">Input required Information in the fields below</p>
-       </div>
-    
-       <div style="padding-top:3rem;">
-        <form>
-            <div class="form-group row">
-              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
-              <div class="col-sm-8">
-                <input type="text" nbInput fullWidth  placeholder="Hire Date">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
+                  <div class="col-sm-8">
+                    <ngx-date [(value)]='InformationData.dateOfBirth' #dateOfBirth name="dateOfBirth" id="dateOfBirth">
+                    </ngx-date>
+                    <div *ngIf="!validatedate" class="error">
+                      <div> Date is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Email Address</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="Enter Email" name="personalEmail"
+                      #personalEmail="ngModel" [(ngModel)]="InformationData.personalEmail" required>
+                    <div *ngIf="personalEmail.invalid && (personalEmail.dirty ||  personalEmail.touched)" class="error">
+                      <div *ngIf="personalEmail.errors.required">Email is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
+                  <div class="col-sm-8">
+                    <select placeholder="Select Gender" name="genderId" #genderId="ngModel"
+                      [(ngModel)]="InformationData.genderId" required>
+                      <option value="">--Select Gender---</option>
+                      <option *ngFor="let gend of allGender" [value]="gend.option_value">{{gend.option_text}}</option>
+                    </select>
+
+                    <div *ngIf="genderId.invalid && (genderId.dirty || genderId.touched)" class="error">
+                      <div *ngIf="genderId.errors.required">Gender is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
+                  <div class="col-sm-8">
+                    <textarea rows="5" [(ngModel)]="InformationData.residentialAddress" nbInput fullWidth
+                      placeholder="Address" name="residentialAddress" #residentialAddress="ngModel"></textarea>
+                    <div *ngIf="residentialAddress.invalid && (residentialAddress.dirty || residentialAddress.touched)"
+                      class="error">
+                      <div *ngIf="residentialAddress.required">Address is required</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">State</label>
+                  <div class="col-sm-8">
+                    <select  placeholder="Select State" name="Gender" #Gender="ngModel" [(ngModel)]="InfoData.Gender" >
+                      <option value="">--Select State--</option>
+                      <option  *ngFor="let state of allState" [value]="state.id">{{state.state_name}}> </option>
+                    </select> 
+                  </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Country</label>
+                  <div class="col-sm-8">
+                    <textarea rows="5" nbInput fullWidth placeholder="Country"></textarea>
+                  </div>
+                </div> -->
+
+                <div class="form-group row">
+                  <div class="offset-sm-4 col-sm-8">
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
+                      <i class="fa fa-spin fa-spinner"></i></button>
+                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed" [disabled]="!formvalidate"
+                      (click)="proceedtoworkInfo()">Proceed {{formvalidate}}</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+
+          </div>
+
+          <!--Work Information Panel ////////////////////////////////-->
+          <div class="fmContainer" *ngSwitchCase="'workInfoPanel'">
+            <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+              <p class="listsubheader"> {{subtitle}}</p>
+              <p class="listsubheader">Input required Information in the fields below</p>
+            </div>
+
+            <div style="padding-top:3rem;">
+              <form>
+                <!-- <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="Hire Date">
+                  </div>
+                </div> -->
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of joining</label>
+                  <div class="col-sm-8">
+                    <ngx-date [(value)]='workData.dateofJoining' #dateofJoining name="dateofJoining" id="dateofJoining">
+                    </ngx-date>
+                    <div *ngIf="!validdate" class="error">
+                      <div> Date is required</div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Salary per annum</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter salaryPerAnnum" name="salaryPerAnnum"
+                      #salaryPerAnnum="ngModel" [(ngModel)]="workData.salaryPerAnnum" required>
+                    <div *ngIf="salaryPerAnnum.invalid && (salaryPerAnnum.dirty || salaryPerAnnum.touched)"
+                      class="error">
+                      <div *ngIf="salaryPerAnnum.errors.required">salaryPerAnnum is required</div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter salaryPerAnnum" name="desginationId"
+                      #desginationId="ngModel" [(ngModel)]="workData.desginationId" required>
+                    <div *ngIf="desginationId.invalid && (desginationId.dirty || desginationId.touched)" class="error">
+                      <div *ngIf="desginationId.errors.required">desginationId is required</div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Employee type</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter  employeeTypeId " name=" employeeTypeId"
+                      #employeeTypeId="ngModel" [(ngModel)]="workData.employeeTypeId" required>
+                    <div *ngIf=" employeeTypeId.invalid && (employeeTypeId.dirty ||  employeeTypeId.touched)"
+                      class="error">
+                      <div *ngIf=" employeeTypeId.errors.required"> employeeTypeId is required</div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter departmentId " name="departmentId"
+                      #departmentId="ngModel" [(ngModel)]="workData.departmentId" required>
+                    <div *ngIf="departmentId.invalid && ( departmentId.dirty ||departmentId.touched)" class="error">
+                      <div *ngIf="departmentId.errors.required"> departmentId is required</div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reporting Manager</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter reportingManagerId"
+                      name="reportingManagerId" #reportingManagerId="ngModel" [(ngModel)]="workData.reportingManagerId"
+                      required>
+                    <div *ngIf="reportingManagerId.invalid && ( reportingManagerId.dirty ||reportingManagerId.touched)"
+                      class="error">
+                      <div *ngIf="reportingManagerId.errors.required"> reportingManagerId is required</div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Location</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter location" name="location"
+                      #location="ngModel" [(ngModel)]="workData.location" required>
+                    <div *ngIf="location.invalid && (location.dirty ||location.touched)" class="error">
+                      <div *ngIf="location.errors.required"> location is required</div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Offer Letter</label>
+                  <div class="col-sm-8">
+                    <input rows="5" nbInput fullWidth placeholder="Offer Letter">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Offer Expires on</label>
+                  <div class="col-sm-8">
+                    <input rows="5" nbInput fullWidth placeholder="Offer Expires on">
+                  </div>
+                </div> -->
+                <div class="form-group row">
+                  <div class="offset-sm-4 col-sm-8">
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
+                      <i class="fa fa-spin fa-spinner"></i></button>
+                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed" [disabled]="!formvalidate"
+                      (click)="proceedtoofferLetter()">Proceed</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+
+          </div>
+
+          <!--Offer Letter Panel ////////////////////////////////-->
+          <div *ngSwitchCase="'offerletterPanel'">
+
+            <div class="fmContainer">
+              <div style="display: flex; flex-direction: row;">
+                <div
+                  style="border:  0.800000011920929px solid #CED4DA; padding: 10px;display: flex;align-items: center; border-radius: 5px;">
+                  <img src="assets/icons/smartaceLogo.png" style="width:10.8125rem">
+                </div>
+                <div style="display: flex;align-items: center;padding-left:10px;">
+                  <span class="a-normal" style="cursor: pointer;">Change Logo</span>
+                </div>
+              </div>
+
+              <div [innerHTML]="sanitizewysiwyg">
               </div>
             </div>
-            <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of joining</label>
-                <div class="col-sm-8">
-                  <input type="text" nbInput fullWidth  placeholder="Date of joining">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Salary per annum</label>
-                <div class="col-sm-8">
-                  <input type="text" nbInput fullWidth  placeholder="Salary per annum">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
-                <div class="col-sm-8">
-                  <input type="text" nbInput fullWidth  placeholder="Designation">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Employee type</label>
-                <div class="col-sm-8">
-                  <input type="email" nbInput fullWidth  placeholder="Employee type">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
-                <div class="col-sm-8">
-                  <input type="email" nbInput fullWidth  placeholder="Department">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reporting Manager</label>
-                <div class="col-sm-8">
-                   <input rows="5" nbInput fullWidth   placeholder="Reporting Manager">       
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Location</label>
-                <div class="col-sm-8">
-                  <input type="text" nbInput fullWidth  placeholder="Location">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Offer Letter</label>
-                <div class="col-sm-8">
-                    <input rows="5" nbInput fullWidth   placeholder="Offer Letter">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Offer Expires on</label>
-                <div class="col-sm-8">
-                    <input rows="5" nbInput fullWidth   placeholder="Offer Expires on">
-                </div>
-              </div>
-            <div class="form-group row">
-              <div class="offset-sm-4 col-sm-8">
-                <button type="submit" nbButton status="primary" (click)="proceedtoofferLetter()">Proceed</button>
-              </div>
-            </div>
-          </form>
-       </div>
-   
-
-
-       </div>
- 
-    <!--Offer Letter Panel ////////////////////////////////-->
-    <div *ngSwitchCase="'offerletterPanel'">
-        <div class="fmContainer" >
-<div style="display: flex; flex-direction: row;">
-<div style="border:  0.800000011920929px solid #CED4DA; padding: 10px;display: flex;align-items: center; border-radius: 5px;">
-<img src="assets/icons/smartaceLogo.png" style="width:10.8125rem">
-</div>
-<div style="display: flex;align-items: center;padding-left:10px;">
-    <span class="a-normal" style="cursor: pointer;">Change Logo</span>
-</div>
-</div>
-
-<div [innerHTML]="sanitizewysiwyg">
-</div>
-        </div>
-<div style="background-color:#EDF1F7 ;padding: 20px;"></div>
-        <div class="fmContainer" >
-            <div style="padding-bottom: 10px;">              
+            <div style="background-color:#EDF1F7 ;padding: 20px;"></div>
+            <div class="fmContainer">
+              <div style="padding-bottom: 10px;">
                 <p class="listsubheader">Email Message</p>
-            </div>
+              </div>
 
-            <form>
+              <form>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Recipient Address</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth  placeholder="Recipient Address">
+                    <input type="text" nbInput fullWidth placeholder="Recipient Address">
                   </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Subject</label>
-                    <div class="col-sm-8">
-                      <input type="text" nbInput fullWidth  placeholder="Subject">
-                    </div>
+                  <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Subject</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="Subject">
                   </div>
-                  <div class="form-group row">
-                    <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Body</label>
-                    <div class="col-sm-9">
-                        <ngx-wysisyg-input  [(value)]="messageBody"></ngx-wysisyg-input>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Body</label>
+                  <div class="col-sm-9">
+                    <ngx-wysisyg-input [(value)]="messageBody"></ngx-wysisyg-input>
                   </div>
-                  <div class="form-group row">
-                    <div class="offset-sm-3 col-sm-8">
-                      <button type="submit" nbButton status="primary" (click)="proceedtoofferLetter()">Send Offer</button>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <div class="offset-sm-3 col-sm-8">
+                    <button type="submit" nbButton status="primary" (click)="proceedtoofferLetter()">Send Offer</button>
                   </div>
-            </form>
+                </div>
+              </form>
+            </div>
+          </div>
+
         </div>
+        <div class="col-md-3" style="margin: 5px;">
+          <div class="fmContainer" style="padding:4rem 2rem 4rem 2rem;">
+            <div style="padding-bottom: 10px;">
+              <p class="header6-medium">Account Setup</p>
+            </div>
+            <div class="row">
+              <div class="col-md-12 " style="display: flex;flex-direction: column;">
+                <div style="display:flex;padding-bottom: 35px;">
+                  <div
+                    [ngClass]="{'q-connector': selectedPanel == 'personalInfoPanel','q-connector-inactive': selectedPanel != 'personalInfoPanel'}"
+                    style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+
+                  </div>
+                  <div (click)="gotoPanel('personalInfoPanel','Personal Information')"
+                    style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                    Personal Information
+                  </div>
+                </div>
+
+                <div style="display:flex;padding-bottom: 35px;">
+                  <div
+                    [ngClass]="{'q-connector': selectedPanel == 'workInfoPanel','q-connector-inactive': selectedPanel != 'workInfoPanel'}"
+                    style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+
+                  </div>
+                  <div (click)="gotoPanel('workInfoPanel','Work Information')"
+                    style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                    Work Information
+                  </div>
+                </div>
+                <div style="display:flex;padding-bottom: 35px;">
+                  <div
+                    [ngClass]="{'last-q-connector': selectedPanel == 'offerletterPanel','last-q-connector-inactive': selectedPanel != 'offerletterPanel'}"
+                    style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+
+                  </div>
+                  <div (click)="gotoPanel('offerletterPanel','Offer Letter')"
+                    style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                    Offer Letter
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
-    
-             </div>
-             <div class="col-md-3" style="margin: 5px;">
-                 <div class="fmContainer" style="padding:4rem 2rem 4rem 2rem;">
-                     <div style="padding-bottom: 10px;">
-                         <p class="header6-medium">Account Setup</p>
-                     </div>
-                     <div class="row">
-                         <div class="col-md-12 " style="display: flex;flex-direction: column;">
-                             <div style="display:flex;padding-bottom: 35px;" >
-                                 <div [ngClass]="{'q-connector': selectedPanel == 'personalInfoPanel','q-connector-inactive': selectedPanel != 'personalInfoPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
-                             
-                                 </div>
-                                   <div (click)="gotoPanel('personalInfoPanel','Personal Information')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
-                                   Personal Information
-                                   </div>
-                             </div>
- 
-                             <div style="display:flex;padding-bottom: 35px;" >
-                                 <div [ngClass]="{'q-connector': selectedPanel == 'workInfoPanel','q-connector-inactive': selectedPanel != 'workInfoPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
-                                
-                                 </div>
-                                   <div  (click)="gotoPanel('workInfoPanel','Work Information')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
-                                  Work Information
-                                   </div>
-                             </div>
-                             <div style="display:flex;padding-bottom: 35px;" >
-                                 <div [ngClass]="{'last-q-connector': selectedPanel == 'offerletterPanel','last-q-connector-inactive': selectedPanel != 'offerletterPanel'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
-                                
-                                 </div>
-                                   <div (click)="gotoPanel('offerletterPanel','Offer Letter')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
-                                Offer Letter
-                                 
-                                   </div>
-                             </div>
-                          
-                         </div>
-                     </div>
-                     
-                 </div>
-             </div>
-         </div>
-         
-        
-       
-     </div>
-    
-    </div>
- </div>
+
+  </div>
+</div>

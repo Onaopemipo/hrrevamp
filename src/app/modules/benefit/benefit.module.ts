@@ -11,7 +11,10 @@ import { CreateBenefitComponent } from './pages/create-benefit/create-benefit.co
 import { BenefitViewComponent } from './pages/benefit-view/benefit-view.component';
 import { EligibilityListComponent } from './pages/eligibility-list/eligibility-list.component';
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
+import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/service-proxies'
 
+import Flow from '@flowjs/flow.js';
+import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 
 @NgModule({
@@ -30,6 +33,13 @@ import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee
     ComponentsModule,
     BenefitRoutingModule,
     ThemeModule,
+  ],
+  providers: [
+    {
+      provide: FlowInjectionToken,
+      useValue: Flow,
+    },
+    FetchEmployeeCoverageBenefitServiceProxy
   ]
 })
 export class BenefitModule { }

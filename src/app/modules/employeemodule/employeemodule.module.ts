@@ -56,8 +56,11 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
 import { ExitRequestService } from './services/exit-request.service';
 import {
   GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy 
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, CommonServiceProxy,PostServiceProxy,AddUpdateEligibleBucketServiceProxy,FetchEmployeeOnboardingDataDetailsServiceProxy
 } from 'app/_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+// import{ FetchEmployeeOnboardingDataDetailsServiceProxy} from '../../_services/service-proxies'
+// import { FormsModule } from '@angular/forms';
 
 
 
@@ -89,6 +92,7 @@ import {
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
+    
       CardComponent],
   imports: [
     CommonModule,
@@ -110,7 +114,7 @@ import {
     NbPopoverModule,
     NbDialogModule,
     NgxFlowModule,
-    NbAlertModule
+    NbAlertModule,
 
   ],
   providers: [
@@ -131,7 +135,11 @@ import {
     GetEligibilityListServiceProxy,
     AddUpdateEligibleBucketServiceProxy,
     FetchApprovalProcessServiceProxy,
-    GetPromotionEligibilityListsServiceProxy
+    GetPromotionEligibilityListsServiceProxy,
+    FetchEmployeeOnboardingDataDetailsServiceProxy,
+    PostServiceProxy,
+    CommonServiceProxy,
+    AlertserviceService
   ]
    
     

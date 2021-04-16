@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import {
+  PostServiceProxy, MessageOut, OnboardingPersonalDTO,
+  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State
+} from '../../../_services/service-proxies';
+
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { DataServiceProxy } from '../../../_services/service-proxies'
+import { from } from 'rxjs';
 
 @Component({
   selector: 'ngx-employeepersonalinformation',
@@ -18,8 +27,19 @@ export class EmployeepersonalinformationComponent implements OnInit {
     { title: 'document_Info', label: 'Documents', status: 'Inactive' },
 
   ];
+  AdminForm:FormGroup
+  InformationData = new OnboardingPersonalDTO().clone();
+  allGender: DropdownValue[] = [];
 
-  constructor() { }
+  constructor(private DataService : DataServiceProxy) { }
+  async getGender() {
+    const data = await this.DataService.getDropDownValuesById(10).toPromise()
+    if (!data.hasError) {
+
+      this.allGender = data.result;
+      this.allGender[0].option_text
+    }
+  }
   selectPanel(hiringlist, i) {
     this.selectedPanel = hiringlist;
 

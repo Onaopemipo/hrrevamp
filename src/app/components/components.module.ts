@@ -104,6 +104,7 @@ import { TypesService } from 'app/modules/training/services/types.service';
 import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/module-settings-providers.module';
 import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.component';
 import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
+import {DeleteEventsServiceProxy} from '../_services/service-proxies'
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -228,7 +229,8 @@ import { CreateleaveRequestComponent } from './createleave-request/createleave-r
     DepartmentsService,
     TrainingServiceProxy,
     CommonServiceProxy,
-    CreateLeavePlanServiceProxy
+    CreateLeavePlanServiceProxy,
+    DeleteEventsServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,
