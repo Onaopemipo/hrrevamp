@@ -95,7 +95,7 @@
               <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
               <nb-option value="2">Grade 2</nb-option>
             </nb-select> -->
-            <select [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades">
+            <select [(ngModel)]="loanTypeModel.eligibleGrades" class="form-control" name="eligibleGrades">
               <option value="">--Select all Eligible Grades--</option>
               <option value="1">Grade 2</option>
             </select>

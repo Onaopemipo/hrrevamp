@@ -1,4 +1,6 @@
-<ngx-componentsheader [requiredButton]="[{name:'plan', label:'Create succession plan'}]" (buttonClick)="addPlan()"
+<ngx-componentsheader *ngIf="planStatus == false" [requiredButton]="[{name:'plan', label:'Create succession plan'}]" (buttonClick)="addPlan()"
+  pageName='Roles'></ngx-componentsheader>
+  <ngx-componentsheader *ngIf="planStatus == true"  [requiredButton]="[{name:'plan', label:'Add Successor'}]" (buttonClick)="addPlan()"
   pageName='Roles'></ngx-componentsheader>
 <div style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
   <span><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px;">Back</a></span>
@@ -21,17 +23,17 @@
 
             <div class="col-md-4 col-lg-4 col-sm-6">
               <span
-                style="font-weight: 600; padding-right:25px;">Department:</span><span>{{employeeContractData.departmentName}}</span>
+                style="font-weight: 600; padding-right:25px;">Department:</span><span>{{employeeData.departmentName}}</span>
             </div>
 
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{employeeContractData.gradeName}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{employeeData.gradeName}}</span>
             </div>
           </div>
 
           <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{employeeContractData.jobId }}</span>
+              <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{employeeData.jobName }}</span>
             </div>
 
             <!-- <div class="col-md-4 col-lg-4 col-sm-6">
@@ -39,7 +41,7 @@
             </div> -->
 
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{employeeContractData.locationId}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{employeeData.locationName}}</span>
             </div>
           </div>
         </div>
@@ -58,7 +60,7 @@
         <div class="col-md-6">
 
           <span class="title" style="font-size: large; font-weight: bold;">Qualifications</span>
-          <div *ngFor="let qualification of employeeData.qualifications">
+          <div *ngFor="let qualification of myQualifications">
             <div style="padding: 5px;"></div>
             <div style="display: flex; flex-direction: column; justify-self: center;">
               <span class="title">{{qualification.name}}</span>
@@ -74,9 +76,9 @@
           <span class="title" style="font-size: large; font-weight: bold;">Certifications</span>
           <div style="padding: 5px;"></div>
           <div style="display: flex; flex-direction: column; justify-self: center;"
-            *ngFor="let certification of employeeData.certifications">
+            *ngFor="let certification of myCertifications">
             <span><i class="fas fa-circle"
-                style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>{{certification.name}}</span>
+                style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>{{certification.professionalBodyId}}</span>
           </div>
         </div>
       </div>
@@ -95,7 +97,7 @@
       <div class="col-sm-6">
         <span class="title" style="font-size: large; font-weight: bold;">Skills</span>
         <div style="padding: 5px;"></div>
-        <div style="display: flex; flex-direction: column; justify-self: center;" *ngFor="let skill of employeeData.skills">
+        <div style="display: flex; flex-direction: column; justify-self: center;" *ngFor="let skill of mySkills">
           <span>{{skill.name}}</span>
           <nb-progress-bar [value]="skill.point" size="tiny" status="primary"></nb-progress-bar>
         </div>

@@ -1,3 +1,5 @@
+import { Certification } from 'app/_services/service-proxies';
+import { map } from 'rxjs/operators';
 import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +9,43 @@ import { Subscription } from 'rxjs';
 import { EmployeesService, MyEmployeeDatail, } from '../services/employees.service';
 import { throwIfAlreadyLoaded } from 'app/@core/module-import-guard';
 
+
+class MyEmployeeDTO extends EmployeeDTO{
+  get position_name(){
+    return this.contracts[0].positionName;
+  }
+
+  get departmentName(){
+    return this.contracts[0].departmentName;
+  }
+
+  get jobName(){
+    return this.contracts[0].jobName;
+  }
+
+  get locationName(){
+    return this.contracts[0].locationName;
+  }
+  get gradeName(){
+    return this.contracts[0].gradeName;
+  }
+
+  get myCertifications(){
+    return this.certifications[0]
+  }
+
+  get mySkills(){
+    return this.skills[0];
+  }
+
+  myCertification
+
+  get myQualifications(){
+    return this.qualifications[0] ;
+  }
+
+
+}
 @Component({
   selector: 'ngx-profile-details',
   templateUrl: './profile-details.component.html',
@@ -23,9 +62,10 @@ export class ProfileDetailsComponent implements OnInit {
     { name: 'certification', title: 'certification' },
   ];
 
-  employeeData: EmployeeDTO = new EmployeeDTO;
+  employeeData: MyEmployeeDTO = new MyEmployeeDTO;
   employeeContractData: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO
   employeeId: number = 0;
+  planStatus: boolean = false;
 
   constructor(private navCtrl: Location,
     private activatedRoute: ActivatedRoute,
@@ -51,17 +91,17 @@ export class ProfileDetailsComponent implements OnInit {
   }
 
   async fetchProfile(){
-    const data = await this.employee.getEmployeeById(1).toPromise();
+    const data = await this.employee.getEmployeeById(this.employeeId).toPromise();
     if(!data.hasError){
-      this.employeeData = data.result;
-     this.employeeData.contracts.forEach(() => this.employeeContractData );
+      this.employeeData = new MyEmployeeDTO(data.result);
+    //  this.employeeData.contracts
       console.log('My Details', this.employeeData);
       console.log('My Contract', this.employeeContractData);
     }
   }
 
   async fetchAllEmployees(){
-    const data = await this.allEmployees.getAllEmployees('',0,10,1).toPromise();
+    const data = await this.allEmployees.getAllEmployees('',1,10,1).toPromise();
     if(!data.hasError){
       console.log(data.result);
     }

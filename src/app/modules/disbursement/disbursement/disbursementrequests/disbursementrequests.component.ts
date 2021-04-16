@@ -18,6 +18,7 @@ export class DisbursementrequestsComponent implements OnInit {
 
   tableActions = [{}];
   myHeader: string = 'No request found';
+  requestCounter: number = 0;
   constructor(private disbursement: DisbursementService, private alert: AlertserviceService,
     private request: FetchExpensesServiceProxy) { }
 
@@ -92,6 +93,7 @@ getTableActions (){
     const data = await this.request.fetchExpenses(0,0,0,0,0,'','','',0,0,0).toPromise();
     if(!data.hasError){
       this.allDisbursements = data.result;
+      this.requestCounter = data.totalRecord;
       console.log('Hello!', this.allDisbursementRequest)
     }
   }
