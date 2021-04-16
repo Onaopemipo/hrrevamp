@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Transfer } from '@flowjs/ngx-flow';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { TrainingServiceProxy, TrainingType, TrainingTypePayload, TrainingTypeResource, TrainingTypeResourceListApiResult } from 'app/_services/service-proxies';
+import { TrainingServiceProxy, TrainingType, TrainingTypeResource, TrainingTypeResourceListApiResult } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -18,18 +18,7 @@ export class MyTrainingType extends TrainingTypeResource {
   }
 
   toManage() {
-  return new TrainingTypePayload({
-    costPer_Head: this.cost_per_head,
-    no_Of_Trainees: this.number_of_trainees,
-    overAll_Budget: this.overall_budget_cost,
-    trainingVendorId: this.trainingVendorId,
-    trainingCategoryId: this.trainingCategoryId,
-    trainingTypeId: 0,
-    employeeId: this.resource_person_id,
-    trainingSpecializationId: this.trainingSpecializationId,
-    name: this.name,
-    file: null
-  });
+    throw new Error('Method not implemented.');
   }
 }
 @Injectable({
@@ -49,7 +38,8 @@ export class TypesService extends CrudService<MyTrainingType, {}, MyTrainingType
     throw new Error('Method not implemented.');
   }
   create(data: MyTrainingType) {
-    return this.api.createtype(data.toManage());
+    return this.api.createtype(data.cost_per_head, data.number_of_trainees, data.overall_budget_cost, 0, data.employeeId, data.trainingVendorId,
+      data.trainingSpecializationId, data.name, null, data.trainingCategoryId);
   }
   delete(id: number) {
     return this.api.deleteTrainingType(id);
