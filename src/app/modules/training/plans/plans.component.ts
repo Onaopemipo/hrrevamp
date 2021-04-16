@@ -38,7 +38,8 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
   }
   saveData(e: ModelType): Observable<any> {
     const data = MyTrainingPlan.fromForm(e);
-    return this.api.create(data);
+    let newdata: any = '';
+    return newdata// this.api.create(data);
   }
   getNewEditingData(): ModelType {
     return new MyTrainingPlan();

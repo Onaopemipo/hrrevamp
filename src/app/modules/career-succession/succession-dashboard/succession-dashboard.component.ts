@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { TableColumn, TableAction, TableActionEvent } from './../../../components/tablecomponent/models';
-import { FetchAllEmployeesServiceProxy, EmployeeDTO, CareerSuccessionServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, EmployeeDTO, CareerSuccessionServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -43,7 +43,7 @@ export class SuccessionDashboardComponent implements OnInit {
   employeeDataCount: number = 10;
   allEmployeesData: EmployeeDTO [] = [];
   newPlan: boolean = false;
-  newSuccessionPlan: CareerSuccessionDTO = new CareerSuccessionDTO;
+//  newSuccessionPlan: CareerSuccessionDTO = new CareerSuccessionDTO;
 
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
@@ -85,11 +85,11 @@ export class SuccessionDashboardComponent implements OnInit {
 
   }
 
- async createSuccessionPlan(){
-  const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
-  if(!data.hasError){
-    this.alertMe.openModalAlert('success', 'Plan created successfully', 'Dismiss')
-  }
-  }
+//  async createSuccessionPlan(){
+//   const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
+//   if(!data.hasError){
+//     this.alertMe.openModalAlert('success', 'Plan created successfully', 'Dismiss')
+//   }
+//   }
 
 }
