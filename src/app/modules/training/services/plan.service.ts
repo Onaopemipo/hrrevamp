@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Transfer } from '@flowjs/ngx-flow';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
 import { ManageTrainingDTO, TrainingDTO, TrainingServiceProxy } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { transferToFile } from './types.service';
 
 export class MyTrainingPlan extends TrainingDTO{
   selectedEmployees: string;
+  attachment: Transfer;
   constructor(plan = new TrainingDTO()) {
     super(plan);
   }
@@ -23,17 +26,19 @@ export class MyTrainingPlan extends TrainingDTO{
       vendorId: this.vendorId,
       totalCost: this.totalCost,
       costPerEmployee: this.costPerEmployee,
-      attachment: '',
+      attachment: '' //transferToFile(this.attachment),
     });
   }
 
   static fromForm(form: object){
     const obj = new MyTrainingPlan();
+    console.log('lll');
     obj.trainingTypeId = form['type'];
-    obj.startDate = form['range'].start;
+    obj.startDate = form['date_range'].start;
     obj.endDate = form['date_range'].end;
     obj.description = form['description'];
     obj.selectedEmployees = form['beneficiaries'];
+    obj.attachment = form['attachment']
     return obj;
   }
 }

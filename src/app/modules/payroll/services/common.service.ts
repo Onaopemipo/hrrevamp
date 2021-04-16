@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { createSubscription, FAKER_CONFIG, getCreateResponse, IFaker, MessageOut, myClassFaker, myPropertyFaker } from 'app/modules/career-succession/services/base';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { AddUpdatePaymentInstitutionServiceProxy, AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO, GetAllPaymentInstitutionsServiceProxy, Institution, ManagePayInstitutionDTO, PayInstitutionDTO } from 'app/_services/service-proxies';
+import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, Institution, ManagePayElementDTO, ManagePayInstitutionDTO, PayElementDTO, PayInstitutionDTO } from 'app/_services/service-proxies';
 import { date } from 'faker';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -109,6 +109,94 @@ export class MyPayrollInstitutionService extends CommonBaseService<MyPayrollInst
   }
   create(data: MyPayrollInstutionModel): Observable<any> {
     return this.create_api.addUpdatePaymentInstitution(data.toManage());
+  }
+  delete(id: number): Observable<any> {
+    throw new Error('Method not implemented.');
+  }
+}
+
+export class MyPayrollElementFilter extends BaseFilter {
+  categoryId?: number;
+}
+
+export class MyPayrollElementModel extends PayrollApiModelClass<PayElementDTO, ManagePayElementDTO>{
+  name: string;
+  type: number;
+  element_name: string;
+  element_category_id: number;
+  element_category: string;
+  element_type_id: number;
+  element_type: string;
+  amount: number;
+  institution_id: number;
+  institution: string;
+  payroll_item_id: number;
+  pay_type_id: number;
+  is_reocurring: boolean;
+  is_tax_deduct: boolean;
+  is_variable: boolean;
+  fromApi(data: PayElementDTO) {
+    this.name = data.name;
+    this.type = data.payTypeId;
+    this.element_category_id = data.elementCategoryId;
+    this.element_type_id = data.elementTypeId;
+    this.amount = data.amount;
+    this.institution_id = data.paymentInstitutionId;
+    this.element_category = data.elementCategory;
+    this.element_type = data.elementType;
+    this.institution = data.paymentInstitution;
+    this.pay_type_id = data.payTypeId;
+    this.payroll_item_id = data.payrollItemId;
+    this.is_reocurring = data.is_reoccurring;
+    this.is_tax_deduct = data.isTaxDeduct;
+    this.is_variable = data.is_variable;
+    return this;
+  }
+  toManage(): ManagePayElementDTO {
+    return new ManagePayElementDTO({
+      id: this.id,
+      elementCategoryId: this.element_category_id,
+      payrollItemId: this.payroll_item_id,
+      payTypeId: this.pay_type_id,
+      paymentInstitutionId: this.institution_id,
+      name: this.name,
+      elementTypeId: this.element_type_id,
+      is_reoccurring: this.is_reocurring,
+      isTaxDeduct: this.is_tax_deduct,
+      amount: this.amount,
+      is_variable: this.is_variable,
+      ratio: 1,
+      taxPercentage: 1,
+      hourlyPay: 1,
+      noOfWorkHours: 1,
+      start_date: new Date(),
+      end_date: new Date()
+    })
+  }
+}
+
+export interface PayElementFilter extends BaseFilter{
+  payTypeId: number;
+  institutionId: number;
+  elementTypeId: number;
+  elementCategoryId: number;
+}
+@Injectable({
+  providedIn: 'root'
+})
+export class MyPayElementService extends CommonBaseService<MyPayrollElementModel, PayElementFilter>{
+  constructor(
+    private create_api: AddUpdatePayElementServiceProxy,
+    private list_api_call: GetAllPayElementsServiceProxy,
+  ){
+    super();
+  }
+  list(filter: PayElementFilter): Observable<ListResult<MyPayrollElementModel>>{
+    const res = this.list_api_call.getAllPayElements(filter.pageSize, filter.pageNumber, filter.payTypeId, filter.institutionId, filter.elementTypeId, filter.elementCategoryId);
+    return res.pipe(map(x => this.getData(x, y => new MyPayrollElementModel().fromApi(y))));
+  }
+  create(data: MyPayrollElementModel): Observable<any> {
+    return this.create_api.addUpdatePayElement(data.toManage());
   }
   delete(id: number): Observable<any> {
     throw new Error('Method not implemented.');

@@ -67,7 +67,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
         choice_name: ChoiceName.trainingType},
       {name: 'date_range', label: 'Date Range', type: FORM_TYPES.date_range},
       {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
-      // {name: 'a', label: 'Attachment', type: FORM_TYPES.att}
+      {name: 'attachment', label: 'Attachment', type: FORM_TYPES.file},
       {name: 'beneficiaries', label: 'Beneficiary', type: FORM_TYPES.employee},
     ]
   };

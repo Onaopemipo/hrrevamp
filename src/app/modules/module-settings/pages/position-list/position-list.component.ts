@@ -2,6 +2,7 @@ import { Position } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { StateService } from 'app/@core/utils';
 import { FormConfig, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
+import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
@@ -100,11 +101,11 @@ PositionFilter, MyPosition> implements OnInit {
       {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
       {name: 'promotion_min_years', label: 'Promotion Minimium Years', type: FORM_TYPES.number},
       {name: 'amount', label: 'Basic Salary', type: FORM_TYPES.amount},
-      {name: 'parent_id', label: 'Parent Position', type: FORM_TYPES.select},
-      {name: 'next_position_id', label: 'Next Position', type: FORM_TYPES.select},
+      {name: 'parent_id', label: 'Parent Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions},
+      {name: 'next_position_id', label: 'Next Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions},
 
-      {name: 'qualifications', label: 'Qualifications', type: FORM_TYPES.select},
-      {name: 'certifications', label: 'Certifications', type: FORM_TYPES.select},
+      {name: 'qualifications', label: 'Qualifications', type: FORM_TYPES.select, choice_name: ChoiceName.qualifications},
+      {name: 'certifications', label: 'Certifications', type: FORM_TYPES.select, choice_name: ChoiceName.certifications},
       {name: 'min_years_experience', label: 'Minimium Years of Experience', type: FORM_TYPES.number},
     ]
   };

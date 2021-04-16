@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
+import { JobRoleService } from 'app/modules/module-settings/services/job-role.service';
 import { LocationService } from 'app/modules/module-settings/services/location.service';
 import { PositionService } from 'app/modules/module-settings/services/position.service';
 import { TrainingCategoryService } from 'app/modules/training/services/training-category.service';
 import { TrainingSpecializationService } from 'app/modules/training/services/training-specialization.service';
 import { TypesService } from 'app/modules/training/services/types.service';
 import { VendorService } from 'app/modules/training/services/vendor.service';
+import { CertificationService, QualificationService } from 'app/_services/common.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 export enum ChoiceName {
@@ -17,6 +19,10 @@ export enum ChoiceName {
   positions,
   locations,
   units,
+  jobRoles,
+  certifications,
+  qualifications,
+  skills,
 }
 @Component({
   selector: 'ngx-multi-select',
@@ -63,6 +69,9 @@ export class MultiSelectComponent implements OnInit {
     private locationService: LocationService,
     private departmentService: DepartmentsService,
     private positionService: PositionService,
+    private jobRoleService: JobRoleService,
+    private certificationService: CertificationService,
+    private qualificationService: QualificationService,
   ) {}
 
   dropdownList = [];
@@ -114,6 +123,9 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.departments] = this.departmentService;
       config[ChoiceName.positions] = this.positionService;
       config[ChoiceName.trainingVendor] = this.vendorService;
+      config[ChoiceName.jobRoles] = this.jobRoleService;
+      config[ChoiceName.certifications] = this.certificationService;
+      config[ChoiceName.qualifications] = this.qualificationService;
       this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;
       console.log('aaa', this.dropdownList, this.choice_name, config[this.choice_name]);
       //1 this.dropdownList = (await this.trainingSpecializationService.list({}).toPromise()).data;
