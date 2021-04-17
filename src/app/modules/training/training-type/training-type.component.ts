@@ -77,7 +77,8 @@ export class TrainingTypeComponent  extends BaseComponent<ModelType, FilterType,
       {name: 'number_of_trainees', label: 'No of Trainees', type: FORM_TYPES.number},
       {name: 'overall_budget_cost', label: 'Overall budget cost', type: FORM_TYPES.number},
       {name: 'content', label: 'Content', type: FORM_TYPES.file, hide: this.editingData.category === 2},
-      {name: 'resource_person_id', label: 'Resource person', type: FORM_TYPES.employee, singleSelection: true, hide: this.editingData.category === 2},
+      {name: 'resource_person_id', label: 'Resource person',
+        type: FORM_TYPES.employee, singleSelection: true, hide: this.editingData.category === 2},
     ];
   }
   formConfig: FormConfig = {
