@@ -84,7 +84,9 @@ export class ProjectionReportComponent implements OnInit {
 
     }else{
     //  console.log(newQuery);
+    var mode = "";
       newQuery.BaseYear = this.baseYear;
+      if(newQuery.jobCategory)mode = newQuery.jobCategory == "Job Role"?"jobrole":(newQuery.jobCategory == "Position"? "position":(newQuery.jobCategory == "Grade"? "grade" : ""))
       this.ManpowerService.fetchProjectionRequirment(this.baseYear, newQuery.activityYear, newQuery.activityName, newQuery.jobCategory,
         newQuery.departments, newQuery.status, newQuery.taskType, 1, 10).subscribe(data => {
           if (!data.hasError) {
