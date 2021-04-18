@@ -20,6 +20,7 @@
           </td>
           <td *ngFor="let col of tableColum">
             <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === NULL">{{ data[col.name] }}</span>
+            <span *ngIf="col.type === COLUMN_TYPES.Number">{{ data[col.name] | number: '.2'}}</span>
             <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
             <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
             <span *ngIf="col.type === COLUMN_TYPES.Link">

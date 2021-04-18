@@ -1,1 +1,135 @@
-<p>projection-report works!</p>
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+<nb-card>
+    <nb-card-body>
+        <ngx-default-content
+        *ngIf="showEmpty"
+        pageHeader="Projection Report"
+        pageDescription="Filter to get projection report"
+  
+        [loading]="loading"
+
+      >
+      </ngx-default-content>
+        <ngx-tablecomponent  
+        *ngIf="!showEmpty"
+        (filterChange)="filterUpdated($event)"
+        [showActions]="true"
+        [showFilter]="true"
+        (actionClick)="tableActionClicked($event)"
+        [actions]="tableActions" 
+        [userData]="allCapacityPlan" 
+        [tableColum]="tableColumns"
+        [totalItems]="totalItems"
+        [currentPage]="currentPage"
+        [loading]="loading"
+        >
+        <div tableObject>
+          <span class="mb-0" *ngFor="let req of allCapacityPlan.requirements; let i = index">
+  
+              <span class="badge" *ngIf="req.gradeName">
+                {{req.jobCategoryName}} | {{req.gradeName}} - {{req.numberOfResource}}
+              </span>
+              <span class="badge" *ngIf="req.jobRoleName">
+                {{req.jobCategoryName}} | {{req.jobRoleName}} - {{req.numberOfResource}}
+              </span>
+              <span class="badge" *ngIf="req.positionName">
+                {{req.jobCategoryName}} | {{req.positionName}} - {{req.numberOfResource}}
+              </span>
+  
+            </span>
+        </div>
+    </ngx-tablecomponent>
+    </nb-card-body>
+</nb-card>
+<ngx-side-modal [(show)]='showFilterModal' style="width: 500px; height: 1000px;">
+    <div modal-header>Projection Report Filter</div>
+    <div modal-body>
+ <form id="filterReportForm" name="filterReportForm" #filterReportForm="ngForm" >
+ <div class="row">
+    <div class="col-sm-12 form-group">
+        <label>Job category</label>
+        <select Placeholder="Job category" id="jobCategory" name="jobCategory" [(ngModel)]="newQuery.jobCategory" #jobCategory="ngModel" (change)="updateJobCategoty($event)" class="form-control" required >
+            <option value="">--Job category--</option>
+            <option value="Job Role">Job Role</option>
+            <option value="Position">Position</option>
+            <option value="Grade">Grade</option>    
+               
+          </select>  
+    </div>
+    <div class="col-sm-12 form-group">
+        <span class="help-block">Activity Calendar year</span>     
+        <select (change)="nulltasktype()" id="activityYear" name="activityYear" [(ngModel)]="newQuery.activityYear" #activityYear="ngModel" required class="form-control" >
+          <option value="">--Activity Year--</option>
+          <option *ngFor="let yr of CustomService.nextTenYears;" value="{{yr}}">{{yr}}</option>     
+        </select>
+        
+        <div *ngIf="activityYear.invalid && (activityYear.dirty || activityYear.touched) " class="error">
+          <div *ngIf="(activityYear.errors.required || activityYear.errors)">
+            activity calendar year is required
+          </div>
+        </div>        
+      </div>
+      <div class="col-sm-6 form-group">
+        <span class="help-block">Department</span> 
+        <select id="departments" name="departments" [(ngModel)]="newQuery.departments" #departments="ngModel" class="form-control" >
+          <option value="">--Departmants--</option>
+          <option *ngFor="let dep of alldepartments" [value]="dep.option_value">{{dep.option_text}}</option>
+         
+        </select> 
+                
+      </div>
+      <div class="col-sm-6 form-group">
+        <span class="help-block">Status</span> 
+        <select id="status" name="status" [(ngModel)]="newQuery.status" #status="ngModel" class="form-control" >
+          <option value="">--Status--</option>
+          <option value="2">Approved</option>
+          <option value="3">Rejected</option>
+          <option value="1">Pending</option>      
+        </select>   
+                
+      </div>
+      <div class="col-sm-12 form-group">
+        <span class="help-block">Base year</span>    
+          <select id="baseYear" name="baseYear" [(ngModel)]="baseYear" class="form-control" >
+            <option value="">--Base Year--</option>
+         <option *ngFor="let yr of CustomService.prevTenYears;" value="{{yr}}">{{yr}}</option> 
+                </select>                
+      </div>
+      <div class="col-sm-6 form-group">
+        <span class="help-block">Task Type</span> 
+        <select [disabled]="!newQuery.activityYear" Placeholder="Task Type" id="taskType" name="taskType" [(ngModel)]="newQuery.taskType" #taskType="ngModel" (change)="getTaskCategorytype($event)"  class="form-control" >
+            <option value="">--Task Type--</option>
+            <option value="1">Task</option>
+            <option value="2">Project</option>            
+               
+          </select>  
+                
+      </div>
+      <div class="col-sm-6 form-group">
+        <span class="help-block">
+            <span *ngIf="newQuery.taskType == 1">Project</span>
+            <span *ngIf="newQuery.taskType == 2">Task</span>&nbsp;Activity Name
+        </span> 
+        <select [disabled]="!newQuery.taskType" id="taskProject" name="taskProject" [(ngModel)]="newQuery.taskProject" #taskProject="ngModel"  class="form-control" >
+            <option value="">--Task/Project--</option>
+            <option *ngFor="let type of alltasktype;" value="{{type.ActivtyName}}">{{type.ActivtyName}}</option>     
+          </select>
+                
+      </div>
+ </div>
+ </form>
+    </div>
+    <div modal-actions class="d-flex"
+      style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+      <ngx-loadable-button [loading]="loading" (click)="getRequirement(newQuery)">
+        Submit 
+      </ngx-loadable-button>  
+      <div style="padding-left: 15px;">
+        <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
+      </div>
+     
+    </div>
+    <div style="margin-top: 10px;"></div>
+  </ngx-side-modal>
