@@ -169,21 +169,24 @@ if(!data.hasError){
 
   updateSelectedEmployee(i) {
   let employeContId = this.allEmployees[i].employeeContractId;
-  this.allEmployees.map(x => {
-    x.checkInputValue = false;
-    return x;
-  });
+
   if (this.allowmultipleselection) {
     let emploExistChk = this.selectedEmployees.find(e => e.employeeContractId == employeContId);
     if (emploExistChk) {
-      this.selectedEmployees.splice(i, 1);
+      let empPost = this.selectedEmployees.findIndex(e => e.employeeContractId == employeContId);
+      this.selectedEmployees.splice(empPost, 1);
       this.selectedEmployeeRecord = this.emptyRecord;
+      this.allEmployees[i].checkInputValue = false;
     } else {
       this.selectedEmployees.push(this.allEmployees[i]);
       this.selectedEmployeeRecord = this.emptyRecord;   
       this.allEmployees[i].checkInputValue = true;
     }
   } else {
+    this.allEmployees.map(x => {
+      x.checkInputValue = false;
+      return x;
+    });
     if (this.selectedEmployeeRecord && this.selectedEmployeeRecord.employeeContractId == employeContId) {
       this.selectedEmployeeRecord = this.emptyRecord;
       this.selectedEmployees = [];
@@ -201,7 +204,6 @@ if(!data.hasError){
     if (!this.allowmultipleselection){ this.selectedEmployees = []; this.selectedEmployees.push(this.selectedEmployeeRecord);}
     this.masterSubmitted.emit(this.selectedEmployees);
     this.valueChange.emit(this.selectedEmployees.map(employee => employee.id));
-    console.log(99999);
     this.showModal = false;
 }
 cancelMasterSearch(){

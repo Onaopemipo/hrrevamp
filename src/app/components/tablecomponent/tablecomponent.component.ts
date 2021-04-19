@@ -89,12 +89,15 @@ export class TablecomponentComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
   constructor() { }
+  test() {
+    alert(112);
+  }
 
   customActionClicked(col, data){
     this.actionClick.emit({
       name: col.name,
       data,
-    })
+    });
   }
 
   onSort({column, direction}: SortEvent) {

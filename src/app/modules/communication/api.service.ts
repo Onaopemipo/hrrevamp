@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { IEmail } from './page/models';
+import { Email, IEmail } from './page/models';
 import IEmailFactory from './page/factory';
+import { CommunicationServiceProxy } from '../../_services/service-proxies';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -9,13 +11,17 @@ import IEmailFactory from './page/factory';
 })
 export class ApiService {
   fetch_emails(emailType, page) {
-    const subject = new Subject<IEmail[]>();
-    window.setTimeout(() => {
-      console.log(emailType);
-      subject.next(IEmailFactory.buildList(10, {status_id: emailType}));
-      subject.complete();
-    }, 3000);
-    return subject;
+    return this.api.getEmailLogs(null, null, '', 10).pipe(map(res => res.result.map(email => new Email({
+      id: email.id,
+      subject: email.subject,
+      recipient: email.receiver,
+      cc_recipient: '',
+      content: email.messageBody,
+      date_sent: email.dateSent,
+      status_id: 1
+    }))));
   }
-  constructor() { }
+  constructor(
+    private api: CommunicationServiceProxy,
+  ) { }
 }

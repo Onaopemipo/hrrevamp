@@ -1,8 +1,9 @@
-import { DataServiceProxy } from 'app/_services/service-proxies';
+import { CommonServiceProxy, DataServiceProxy, Position } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { FetchEmployeeByIdServiceProxy, EmployeeDTO, Sp_FetchEligibleEmployees, FetchEmployeeContractByEmployeeIdServiceProxy, EmployeeContractAssignmentDTO } from './../../../_services/service-proxies';
 import { EmployeesService } from './../../career-succession/services/employees.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-promotioninfo',
@@ -32,9 +33,13 @@ export class PromotioninfoComponent implements OnInit {
   employeeDetails: EmployeeDTO = new EmployeeDTO().clone();
   contractDetails: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO;
 
-
-  constructor(private employee: FetchEmployeeByIdServiceProxy, private alert: AlertserviceService,
-     private contract: FetchEmployeeContractByEmployeeIdServiceProxy, private dataService: DataServiceProxy) { }
+  newPromotion = new Sp_FetchEligibleEmployees().clone();
+  allPositions: Position[] = [];
+  constructor(private employee: FetchEmployeeByIdServiceProxy, private activatedroute: ActivatedRoute,
+    private router: Router,private CommonService: CommonServiceProxy,
+    private alert: AlertserviceService,
+    private contract: FetchEmployeeContractByEmployeeIdServiceProxy,
+    private dataService: DataServiceProxy) { }
 
 
   selectPanel(hiringlist, i) {
@@ -46,29 +51,35 @@ export class PromotioninfoComponent implements OnInit {
     this.employeeviewlist[i].status = 'Active';
     this.selectedCase = this.employeeviewlist[i].title;
   }
+  getPositions() {
+    this.CommonService.getPositions().subscribe(data => {
+      if (!data.hasError) {
+        this.allPositions = data.result;
+      }else{}
+      
+    })
+  }
+  getPositionName(position_id) {
+    let ptitle = "";
+    if(this.allPositions.length > 0){
+      ptitle = this.allPositions.find(x => x.id == position_id).title;
+    }
+    return ptitle;
+
+  }
   ngOnInit(): void {
-    this.getEmployeeInfo();
-    this.getContractDetails();
+    this.activatedroute.queryParams.subscribe(data => {
+ 
+      if (data) {
+        if (data.data) {
+    this.newPromotion = data.data
+    }else {
+        this.router.navigate(['/employeemodule/promotion']);
+  }
+      } 
+})
   }
 
-  async getEmployeeInfo(){
-    const data = await this.employee.getEmployeeById(0).toPromise();
-    if(!data.hasError){
-      this.employeeDetails = data.result;
-      console.log('Success', this.employeeDetails)
-    }
-  }
-
-  async getContractDetails(){
-    const data = await this.contract.fetchEmployeeContractByEmployeeId(0).toPromise();
-    if(!data.hasError){
-      this.contractDetails = data.result;
-    }
-  }
-
-  async getQualifications(){
-    // const data = await this.dataService.employeeProfileOperation()
-  }
 
 
 }

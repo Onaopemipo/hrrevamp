@@ -40,31 +40,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Exit Process',
         link: '/employeemodule/exitrequest',
       },
+      {
+        title: 'Deployment Application',
+        link: '/employeemodule/deploymentapplication',
+      },
     ],
   },
   {
     title: 'Employee Management',
     icon: 'assets/icons/EmployeeManagement.jpg',
-    children: [
-      {
-        title: 'Onboarding Dashboard',
-        link: '/employeemodule',
-      },
-      {
-        title: 'Onboarding Employees',
-        link: '/employeemodule/allemployees',
-      },
-      {
-        title: 'Exit Management',
-        link: '/employeemodule/exitmanagement',
-      },
-      {
-        title: 'Retirements',
-        link: '/employeemodule/retirement',
-      },
+    children: [    
+   
       {
         title: 'Confirmation',
-        link: '/employeemodule/comfirmation',
+        link: '/employeemodule/confirmation',
       },
       {
         title: 'Promotion',
@@ -76,52 +65,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Employee Deployment',
-        link: '/employeemodule/deploymentview',
+        link: '/employeemodule/employeedeployment',
       },
 
     ]
   },
 
-  {
-    title: 'Career Succession',
-    icon: 'assets/icons/career.jpg',
-    children: [
-      {
-        title: 'Dashboard',
-        link: 'career-succession/dashbaord',
-      },
-
-      {
-        title: 'Competency',
-        link: 'career-succession/competency',
-      },
-
-      {
-        title: 'Succession Plans',
-        link: 'career-succession/planning',
-      },
-
-      {
-        title: 'Talent Pool',
-        link: 'career-succession/talent-pool',
-      },
-
-      {
-        title: '9 Box Grid Appraisal',
-        link: 'career-succession/gridbox',
-      },
-
-      {
-        title: 'Roles',
-        link: 'career-succession/roles',
-      },
-
-      {
-        title: 'Report',
-        link: 'career-succession/report',
-      },
-    ]
-  },
+  
 
   {
     title: 'Leave Management',
@@ -193,8 +143,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Onboarding',
-    link: '/',
     icon: 'assets/icons/Onboarding.jpg',
+    children: [
+      {
+        title: 'Onboarding Dashboard',
+        link: '/employeemodule',
+      },
+      {
+        title: 'Onboarding Employees',
+        link: '/employeemodule/allemployees',
+      },
+    ]
   },
   {
     title: 'Time and Attendance',
@@ -215,6 +174,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Events',
+    icon: 'assets/icons/TimeandAttendance.jpg',
+    link: '/self-service/employeeevents'
+  },
+  {
     title: 'CAREERS',
     group: true,
   },
@@ -222,11 +186,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Recruitment',
     link: '/',
     icon: 'assets/icons/recruitment.jpg',
-  },
-  {
-    title: 'Career Succession',
-    link: '/',
-    icon: 'assets/icons/EmployeeManagement.jpg',
   },
   {
     title: 'Training',
@@ -260,18 +219,70 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Exit and Retirement',
-    link: '/',
     icon: 'assets/icons/ExitandRetirement.jpg',
+    children: [
+      {
+        title: 'Exit',
+        link: '/employeemodule/exitmanagement',
+      },
+      {
+        title: 'Retirements',
+        link: '/employeemodule/retirement',
+      },
+    ]
+  },
+  {
+    title: 'Career Succession',
+    icon: 'assets/icons/career.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: 'career-succession/dashbaord',
+      },
+
+      {
+        title: 'Competency',
+        link: 'career-succession/competency',
+      },
+
+      {
+        title: 'Succession Plans',
+        link: 'career-succession/planning',
+      },
+      {
+        title: '9 Box Grid Appraisal',
+        link: 'career-succession/gridbox',
+      },
+
+      {
+        title: 'Roles',
+        link: 'career-succession/roles',
+      },
+
+      {
+        title: 'Report',
+        link: 'career-succession/report',
+      },
+    ]
   },
   {
     title: 'Talent Management',
-    link: '/',
+    link: '/career-succession/talent-pool',
     icon: 'assets/icons/TalentManagement.jpg',
   },
   {
     title: 'Manpower',
-    link: '/',
     icon: 'assets/icons/Manpower.jpg',
+    children: [
+      {
+        title: 'Capacity Planning',
+        link: '/manpower/capacityplanning'
+      },
+      {
+        title: 'Projection Report',
+        link: '/manpower/projectionreport'
+      }
+    ]
   },
   {
     title: 'MESSAGING',
@@ -312,7 +323,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Institution Management',
-        link:'/'
+        link: 'payrpll/institutionalmanagement'
       },
       {
         title: 'Pay Elements',
@@ -360,9 +371,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
-    title: 'Loan & Disbursement',
-    link: '/',
+    title: 'Loan',
     icon: 'assets/icons/LoanDisbursement.jpg',
+    children: [
+      { title: 'Loan Request', link: "/loan" },
+      {title: 'Loan Type',link:"/loan/loan-type"},
+    ]
   },
   {
     title: 'Disbursement',

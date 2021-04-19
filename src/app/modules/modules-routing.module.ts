@@ -101,6 +101,22 @@ const routes: Routes = [{
       loadChildren: () => import('./module-settings/module-settings.module')
       .then(m => m.ModuleSettingsModule)
     },
+    {
+      path: 'asset',
+      loadChildren: () => import('./asset-management/asset-management.module')
+      .then(m => m.AssetManagementModule)
+    },
+
+    {
+      path: 'loan',
+      loadChildren: () => import('./loan/loan.module')
+      .then(m => m.LoanModule)
+    },
+    {
+      path: 'manpower',
+      loadChildren: () => import('./manpower/manpower.module')
+      .then(m => m.ManpowerModule)
+    },
 
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard' },

@@ -27,6 +27,7 @@ export class HiringchecklistComponent implements OnInit {
   submitbtnPressed: boolean = false;
   allGender: DropdownValue[] = [];
   allState: State[] = []
+  allDepartment: DropdownValue[] = [];
 
 
   constructor(private sanitizer: DomSanitizer, private common: CommonServiceProxy, private PostService: PostServiceProxy, private alertservice: AlertserviceService,
@@ -39,6 +40,16 @@ export class HiringchecklistComponent implements OnInit {
       this.allGender[0].option_text
     }
   }
+
+  async getDepartment() {
+    const data = await this.DataService.getDropDownValuesById(2).toPromise()
+    if (!data.hasError) {
+
+      this.allDepartment = data.result;
+      this.allDepartment[0].option_text
+    }
+  }
+
   async GetStates() {
     const data = await this.DataService.getStates().toPromise()
     if (!data.hasError) {
@@ -93,9 +104,47 @@ export class HiringchecklistComponent implements OnInit {
   ngOnInit(): void {
     this.getGender()
     this.GetStates()
+    this.getDepartment()
   }
 
   get formvalidate() {
+    let resp: boolean = true;
+    let nullable = [
+      'id',
+      'titleId',
+      'companyId',
+      'subID',
+      'otherNames',
+      'maritalStatusId',
+      'defaultMobile',
+      'religionId',
+      'martialStatusId',
+      'fieldOfStudy',
+      'degree',
+      'dateofCompletion',
+      'cgpa',
+      'institutionId',
+      'nextOfKinFullName',
+      'netofKinRelationship',
+      'nextofKinPhoneNumber',
+      'nextofKinAddress',
+      'isActive',
+      'isDeleted',
+      'dateCreated',
+      'createdById',
+      'userId',
+      'created_by'
+    ]
+    Object.entries(this.InformationData).map(([key, value], index) => {
+      if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {
+        resp = false;
+      }
+    })
+
+    return resp;
+  }
+
+  get formvalid() {
     let resp: boolean = true;
     let nullable = [
       'id',

@@ -31,7 +31,6 @@ export class LeaveTypeWithStatus extends LeaveTypeDTO implements IStatus {
  }
 enum TOP_ACTIONS {
   ADD_LEAVE_TYPE,
-
 }
 
 @Component({

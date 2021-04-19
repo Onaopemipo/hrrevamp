@@ -1,3 +1,4 @@
+import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
 // import { TalentPoolModel } from './../../../_models/careers.model';
@@ -32,7 +33,7 @@ export class TalentPoolComponent implements OnInit {
     {name: 'certification', title: 'certification'},
     {name: 'skills', title: 'Skills'},
   ];
-  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService) { }
+  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
     this.fetchPool();
@@ -46,10 +47,11 @@ export class TalentPoolComponent implements OnInit {
     this.viewPoolModal = !this.viewPoolModal;
   }
 
-  createTalentPool(){
+  async createTalentPool(){
     let poolRecord = this.poolModel;
     this.poolservice.create(this.poolModel).subscribe(data => {
       if(data.isSuccessful){
+        this.alertMe.openModalAlert('Success', 'Successful', 'Dismiss')
         console.log('Congrats, pool created successfully')
       }
       else {

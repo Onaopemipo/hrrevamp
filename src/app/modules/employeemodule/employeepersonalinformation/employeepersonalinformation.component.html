@@ -59,7 +59,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">First Name</label>
                   <div class="col-sm-8">
                     <input type="text" nbInput fullWidth placeholder="First Name" name="Firstname" #firstName="ngModel"
-                      [(ngModel)]="InformationData.firstName" required>
+                      [(ngModel)]="UserData.firstName" required>
                     <div *ngIf="firstName.invalid && (firstName.dirty ||firstName.touched)" class="error">
                       <div *ngIf="firstName.errors.required">Firstname name is required</div>
                     </div>
@@ -69,7 +69,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Last Name</label>
                   <div class="col-sm-8">
                     <input type="text" nbInput fullWidth placeholder="Last Name" name="lastName" #lastName="ngModel"
-                      [(ngModel)]="InformationData.lastName" required>
+                      [(ngModel)]="UserData.lastName" required>
                     <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
                       <div *ngIf="lastName.errors.required">Lastname is required</div>
                     </div>
@@ -82,7 +82,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                   <div class="col-sm-8">
                     <input type="text" nbInput fullWidth placeholder="phoneNumber" name="phoneNumber"
-                      #phoneNumber="ngModel" [(ngModel)]="InformationData.phoneNumber" required>
+                      #phoneNumber="ngModel" [(ngModel)]="UserData.phoneNumber" required>
                     <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
                       <div *ngIf="phoneNumber.errors.required">phone number is required</div>
                     </div>
@@ -91,9 +91,9 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Birth</label>
                   <div class="col-sm-8">
-                    <ngx-date [(value)]='InformationData.dateOfBirth' #dateOfBirth name="dateOfBirth" id="dateOfBirth">
+                    <ngx-date [(value)]='UserData.dateOfBirth' #dateOfBirth name="dateOfBirth" id="dateOfBirth">
                     </ngx-date>
-                    <div *ngIf="!validatedate" class="error">
+                    <div *ngIf="!validated" class="error">
                       <div> Date is required</div>
                     </div>
                   </div>
@@ -101,28 +101,51 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Marital Status">
+
+                    <select placeholder="Select martialStatus" name="martialStatusId" #martialStatusId="ngModel"
+                      [(ngModel)]="UserData.martialStatusId" required>
+                      <option value="">--Select Marital Status---</option>
+                      <option *ngFor="let stat of Marital" [value]="stat.option_value">{{stat.option_text}}
+                      </option>
+                    </select>
+                    <div *ngIf="martialStatusId.invalid && (martialStatusId.dirty || martialStatusId.touched)"
+                      class="error">
+                      <div *ngIf="martialStatusId.errors.required">Gender is required</div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
                   <div class="col-sm-8">
                     <select placeholder="Select Gender" name="genderId" #genderId="ngModel"
-                      [(ngModel)]="InformationData.genderId" required>
+                      [(ngModel)]="UserData.genderId" required>
                       <option value="">--Select Gender---</option>
-                      <option *ngFor="let gend of allGender" [value]="gend.option_value">{{gend.option_text}}</option>
+                      <option *ngFor="let gender of Gender" [value]="gender.option_value">{{gender.option_text}}
+                      </option>
                     </select>
                     <div *ngIf="genderId.invalid && (genderId.dirty || genderId.touched)" class="error">
                       <div *ngIf="genderId.errors.required">Gender is required</div>
                     </div>
                   </div>
                 </div>
-                
+
+
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Email Address</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="Enter Email" name="personalEmail"
+                      #personalEmail="ngModel" [(ngModel)]="UserData.personalEmail" required>
+                    <div *ngIf="personalEmail.invalid && (personalEmail.dirty ||  personalEmail.touched)" class="error">
+                      <div *ngIf="personalEmail.errors.required">Email is required</div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
                   <div class="col-sm-8">
-                    <textarea rows="5" [(ngModel)]="InformationData.residentialAddress" nbInput fullWidth
-                      placeholder="Address" name="residentialAddress" #residentialAddress="ngModel"></textarea>
+                    <textarea rows="5" [(ngModel)]="UserData.residentialAddress" nbInput fullWidth placeholder="Address"
+                      name="residentialAddress" #residentialAddress="ngModel"></textarea>
                     <div *ngIf="residentialAddress.invalid && (residentialAddress.dirty || residentialAddress.touched)"
                       class="error">
                       <div *ngIf="residentialAddress.required">Address is required</div>
@@ -135,67 +158,128 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Field of Study</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Field of Study">
+                    <input type="text" nbInput fullWidth placeholder="fieldOfStudy" name="fieldOfStudy"
+                      #fieldOfStudy="ngModel" [(ngModel)]="UserData.fieldOfStudy" required>
+                    <div *ngIf="fieldOfStudy.invalid && (fieldOfStudy.dirty || fieldOfStudy.touched)" class="error">
+                      <div *ngIf="fieldOfStudy.errors.required">fieldOfStudy is required</div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Degree</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Degree">
+                    <input type="text" nbInput fullWidth placeholder="Degree" name="degree" #degree="ngModel"
+                      [(ngModel)]="UserData.degree" required>
+                    <div *ngIf="degree.invalid && (degree.dirty || degree.touched)" class="error">
+                      <div *ngIf="degree.errors.required">Degree is required</div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of
                     Completion</label>
+
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Date of Completion">
+                    <ngx-date [(value)]='UserData.dateofCompletion' #dateofCompletion name="date of Completion"
+                      id="dateofCompletion">
+                    </ngx-date>
+                    <div *ngIf="!validatedata" class="error">
+                      <div> Date is required</div>
+                    </div>
                   </div>
+
                 </div>
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">CGPA</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="CGPA">
+                    <input type="text" nbInput fullWidth placeholder="Enter cgpa" name="cgpa" #cgpa="ngModel"
+                      [(ngModel)]="UserData.cgpa" required>
+                    <div *ngIf="cgpa.invalid && (cgpa.dirty || cgpa.touched)" class="error">
+                      <div *ngIf="cgpa.errors.required">cgpa is required</div>
+                    </div>
+
                   </div>
                 </div>
+
+
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Institution</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Institution">
+                    <select placeholder="Select institution" name="institutionId" #institutionId="ngModel"
+                      [(ngModel)]="UserData.institutionId" required>
+                      <option value="">--Select Institution---</option>
+                      <option *ngFor="let institute of Institution" [value]="institute.id">{{institute.name}}
+                      </option>
+                    </select>
+                    <div *ngIf="institutionId.invalid && (institutionId.dirty || institutionId.touched)" class="error">
+                      <div *ngIf="institutionId.errors.required">Institution is required</div>
+                    </div>
                   </div>
                 </div>
+
                 <div style="padding-top: 1rem;"></div>
                 <p class="header6-medium">Next of Kin</p>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Full Name</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Full Name">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter Next Of Kin" name="nextOfKinFullName"
+                      #nextOfKinFullName="ngModel" [(ngModel)]="UserData.nextOfKinFullName" required>
+                    <div *ngIf="nextOfKinFullName.invalid && (nextOfKinFullName.dirty || nextOfKinFullName.touched)"
+                      class="error">
+                      <div *ngIf="nextOfKinFullName.errors.required">nextOfKinFullName is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Relationship</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Relationship">
+                    <input type="text" nbInput fullWidth placeholder="Enter Next Of Kin" name="netofKinRelationship"
+                      #netofKinRelationship="ngModel" [(ngModel)]="UserData.netofKinRelationship" required>
+                    <div
+                      *ngIf="netofKinRelationship.invalid && (netofKinRelationship.dirty || netofKinRelationship.touched)"
+                      class="error">
+                      <div *ngIf="netofKinRelationship.errors.required">netofKinRelationship is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Phone Number">
+                    <input type="text" nbInput fullWidth placeholder="Enter next of nextofKinPhoneNumber"
+                      name="nextofKinPhoneNumber" #nextofKinPhoneNumber="ngModel"
+                      [(ngModel)]="UserData.nextofKinPhoneNumber" required>
+                    <div
+                      *ngIf="nextofKinPhoneNumber.invalid && (nextofKinPhoneNumber.dirty || nextofKinPhoneNumber.touched)"
+                      class="error">
+                      <div *ngIf="phoneNumber.errors.required">phone number is required</div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Address</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Address">
+                    <input type="text" nbInput fullWidth placeholder="Enter next of nextofKinAddress"
+                      name="nextofKinAddress" #nextofKinAddress="ngModel" [(ngModel)]="UserData.nextofKinAddress"
+                      required>
+                    <div *ngIf="nextofKinAddress.invalid && (nextofKinAddress.dirty || nextofKinAddress.touched)"
+                      class="error">
+                      <div *ngIf="nextofKinAddress.errors.required">next of Kin is required</div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" nbButton status="primary">Update Changes</button>
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                        class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed" [disabled]="!formvalidate"
+                      (click)="onSubmit()">Update Changes</button>
                   </div>
                 </div>
               </form>
@@ -299,33 +383,78 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Bank Name</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Bank Name">
+                    <select placeholder="Select institution" name="bankNameId" #bankNameId="ngModel"
+                      [(ngModel)]="paymentData.bankNameId" required>
+                      <option value="">--Select Bank---</option>
+                      <option *ngFor="let bank of BankName" [value]="bank.option_value">{{bank.option_text}}
+                      </option>
+                    </select>
+                    <div *ngIf="bankNameId.invalid && (bankNameId.dirty || bankNameId.touched)" class="error">
+                      <div *ngIf="bankNameId.errors.required">Bank name is required</div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Name</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Account Name">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter Next Of Kin" name="accountName"
+                      #accountName="ngModel" [(ngModel)]=" paymentData.accountName" required>
+                    <div *ngIf="accountName.invalid && (accountName.dirty || accountName.touched)" class="error">
+                      <div *ngIf="accountName.errors.required">accountName is required</div>
+                    </div>
+
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Number</label>
                   <div class="col-sm-8">
-                    <input type="tel" nbInput fullWidth placeholder="Account Number">
+                    <input type="text" nbInput fullWidth placeholder="Enter Next Of Kin" name="accountNumber"
+                      #accountNumber="ngModel" [(ngModel)]=" paymentData.accountNumber" required>
+                    <div *ngIf="accountNumber.invalid && (accountNumber.dirty || accountNumber.touched)" class="error">
+                      <div *ngIf="accountNumber.errors.required">accountNumber is required</div>
+                    </div>
+
                   </div>
                 </div>
 
+                
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Onboarding Id
+                  </label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="Enter onboardingId" name="onboardingId"
+                      #onboardingId="ngModel" [(ngModel)]=" paymentData.onboardingId" required>
+                    <div *ngIf="onboardingId.invalid && (onboardingId.dirty || onboardingId.touched)" class="error">
+                      <div *ngIf="onboardingId.errors.required">accountNumber is required</div>
+                    </div>
+
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Type</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Account Type">
+                    <select placeholder="Select institution" name="accountTypeId" #accountTypeId="ngModel"
+                      [(ngModel)]=" paymentData.accountTypeId" required>
+                      <option value="">--Select Account Type---</option>
+                      <option *ngFor="let type of BankType" [value]="type.id">{{type.text}}
+                      </option>
+                    </select>
+                    <div *ngIf="accountTypeId.invalid && (accountTypeId.dirty || accountTypeId.touched)" class="error">
+                      <div *ngIf="accountTypeId.errors.required">Institution is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" nbButton status="primary">Update Changes</button>
+
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                        class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed" [disabled]=""
+                      (click)="Submit()">Update Changes</button>
                   </div>
                 </div>
               </form>

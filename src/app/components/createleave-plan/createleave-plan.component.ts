@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NbDateService } from '@nebular/theme';
 import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
 import { CommonServiceProxy, CreateLeavePlanServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearsServiceProxy, LeavePlanDTO, LeavePlanResource, PostServiceProxy } from 'app/_services/service-proxies';
+
 
 @Component({
   selector: 'ngx-createleave-plan',
@@ -12,7 +13,7 @@ import { CommonServiceProxy, CreateLeavePlanServiceProxy, GetLeaveTypesServicePr
 export class CreateleavePlanComponent implements OnInit {
   leavePlan: FormGroup;
   @Input() showModal: boolean = false;
-
+  @Output() closed = new EventEmitter<boolean>();
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
@@ -23,6 +24,7 @@ export class CreateleavePlanComponent implements OnInit {
   allLocation = [];
   noOfDaysError: string = '';
   btnSubmitted: boolean = false;
+  
   constructor(
     private PostServiceProxy: PostServiceProxy,
     public dateService: NbDateService<Date>,
@@ -42,6 +44,10 @@ export class CreateleavePlanComponent implements OnInit {
     });
     
     return resp;
+  }
+  modalClosed(event) {
+   // console.log(event)
+    this.closed.emit(false);
   }
   createLeavePlan() {
     this.btnSubmitted = true;
@@ -159,14 +165,14 @@ export class CreateleavePlanComponent implements OnInit {
   
    
    getAllLeaveType() {
-     this.GetLeaveTypesService.getLeaveTypes(true, 0, false, 0,1,10).subscribe(res => {
+     this.GetLeaveTypesService.getLeaveTypes(undefined, null, undefined, null,1,100).subscribe(res => {
        if (!res.hasError) {
          this.allLeavetypes = res.result;
        }
      })
    }
    getAllLeaveYear() {
-     this.GetLeaveYearsService.getLeaveYears(new Date('01/01/2000'),'',new Date(),0,1,10).subscribe(res => {
+     this.GetLeaveYearsService.getLeaveYears(undefined,null,undefined,undefined,1,100).subscribe(res => {
        if (!res.hasError) {
          this.allLeaveYears = res.result;
        }
@@ -178,6 +184,7 @@ export class CreateleavePlanComponent implements OnInit {
     this.leaveD.employeeContractId = event.employeeContractId;
   }
   ngOnInit(): void {
+ //   console.log(this.showModal);
     this.getAllLocation();
     this.getAllLeaveType();
     this.getAllLeaveYear();

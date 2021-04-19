@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel } from '../../../_services/service-proxies';
 
 
@@ -14,12 +16,7 @@ enum TOP_ACTIONS {
 })
 export class EmployeedeploymentmanagementComponent implements OnInit {
 
-  topActionButtons = [
-    
-    { name: TOP_ACTIONS.BATCH_DEPLOYMENT, label: 'BATCH DEPLOYMENT', 'icon': 'plus', outline: false },
-  ];
-
-  tableColumns =[
+  tableColumns = [
     { name: 'a', title: 'S/N' },
     { name: 'b', title: 'EMPLOYEE' },
     { name: 'refNo', title: 'STAFF NO' },
@@ -27,23 +24,52 @@ export class EmployeedeploymentmanagementComponent implements OnInit {
     { name: 'e', title: 'PROBATION PERIOD' },
     { name: 'request_by', title: 'REQUESTED BY' },
     { name: 'log_status', title: 'REQUESTED STATUS' },
-  ]
+  ];
 
-  data:CreateDeploymentViewModel[] = []
-  constructor(private EmployeeDeploymentServiceProxy:EmployeeDeploymentServiceProxy) { }
+  tableActions: TableAction[] = [
+    { name: ACTIONS.VIEW, label: 'View' },
+  ];
 
-  ngOnInit(): void {
-    this.EmployeeDeploymentServiceProxy.employeeDeployment().toPromise().then(
-      deployment => {this.data= deployment.result}
-    )
+  data: CreateDeploymentViewModel[] = []
+  filter = {}
+  allDeployment = [];
+  loading: boolean = false;
+  totalItems = 0;
+  currentPage = 1;
+
+  constructor(private EmployeeDeploymentServiceProxy: EmployeeDeploymentServiceProxy,
+    private router: Router,) { }
+
+  
+  tableActionClicked(event: TableActionEvent) {
+    if (event.name == "3") {
+  this.router.navigate(['/employeemodule/deploymentview'],{queryParams:{data:JSON.stringify(event.data)}})
+    }
+
+  }
+  filterUpdated(filter: any) {
+    this.filter = { ...this.filter, ...filter };
+    this.getallDeploymentRequest();
+  }
+  get showEmpty() {
+    return this.allDeployment.length === 0;
   }
 
+  ngOnInit(): void {
+    this.getallDeploymentRequest();
+  }
+  getallDeploymentRequest() {
+    this.loading = true;
+    this.EmployeeDeploymentServiceProxy.employeeDeployment().toPromise().then(
+      deployment => {
+        this.data = deployment.result;
+        this.loading = false;
+      }
+      
+    )
+}
   getuploadedfile(event){
     console.log('event')
   }
-modal(buttion) {
-  if(buttion === TOP_ACTIONS.BATCH_DEPLOYMENT){
 
-  }
-}
 }

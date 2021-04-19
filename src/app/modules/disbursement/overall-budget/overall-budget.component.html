@@ -16,7 +16,7 @@
   </ngx-componentsheader>
 
 
-  <div style="background-color: white; min-height: 10vh">
+  <div style="background-color: white; min-height: 10vh; margin-bottom: 10px;">
     <div class="row" style="padding-top: 1rem; padding-bottom: 1rem">
       <div class="col-sm-6">
         <div
@@ -42,7 +42,7 @@
               align-items: center;
             "
           >
-          <span style="font-size: 18px; font-weight: 500;">{{finYear.spent | currency:'NGN':'symbol'}}</span>
+          <span style="font-size: 18px; font-weight: 500;">NGN {{finYear?.spent | number:'.2'}}</span>
           <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
         </div>
           <div>
@@ -67,7 +67,7 @@
                 "
               >
                 <span class="gray-1">Total budget</span>
-                <span class="header5-bold">{{finYear.totalBudgetAmount | currency:'NGN':'symbol'}}</span>
+                <span class="header5-bold">NGN{{finYear?.totalBudgetAmount | number:'.2'}}</span>
               </div>
             </div>
           </div>
@@ -96,14 +96,20 @@
               "
             >
               <span class="gray-1">Financial year</span>
-              <span class="header5-bold">{{finYear.financialYearStartDate | date : 'longDate'}} - {{finYear.financialYearEndDate | date : 'longDate'}}</span>
+              <span class="header5-bold">{{finYear?.financialYearStartDate | date : 'longDate'}} - {{finYear?.financialYearEndDate | date : 'longDate'}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
-      <button nbButton type="outline" status="primary" outline style="border: none;" (click)="updateBudgetItem(finYear.id)">Edit budget</button>
+    <div style="display: flex; flex-direction: row; justify-content: space-between; padding-top: 30px;">
+      <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+        <button nbButton type="outline" status="primary" style="border: none;" (click)="addBudgetModal(finYear.id)">Add New budget</button>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+        <button nbButton type="outline" status="primary" outline style="border: none;" (click)="editBudgetModal(finYear.id)">Edit budget</button>
+      </div>
     </div>
   </div>
 
@@ -112,9 +118,10 @@
     pageName="Budget Items"
     [requiredButton]="topActionButtons"
     (buttonClick)="modalShow()"
-  ></ngx-componentsheader>
+    style="padding-top: 10px;"
+   ></ngx-componentsheader>
 
-  <ngx-template *ngIf="finLoading == false">
+  <ngx-template *ngIf="finLoading == false && finYear.length > 0">
     <div class="row">
       <div class="col-sm-4"  *ngFor="let budget of allBudgetItems">
         <div
@@ -127,7 +134,7 @@
           "
         >
           <h5>{{budget.name}}</h5>
-          <div style="font-size: 1.3rem">{{budget.totalBudget | currency:'NGN':'symbol'}}</div>
+          <div style="font-size: 1.3rem">{{budget?.totalBudget | currency:'NGN':'symbol'}}</div>
           <div style="text-align: right; font-size: 1rem" class="grey">
             {{budget.totalBudget | currency:'NGN':'symbol'}} spent
           </div>
@@ -154,15 +161,15 @@
                   margin-right: 0.3rem;
                 "
               ></div>
-              <div style="font-size: 18px; font-weight: 500;">{{budget.departments[0].department_name}}</div>
+              <div style="font-size: 18px; font-weight: 500;">{{budget.departments.department_name}}</div>
             </div>
             <div style="display: flex" class="budget-item-department">
               <div style="flex: auto">
-                <span>{{budget.departments[0].amount | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departments.amount | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
               </div>
               <div>
-                <span>{{budget.departments[0].spent | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departments?.spent | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
               </div>
             </div>
@@ -178,19 +185,37 @@
     </div>
   </ngx-template>
 
-  <!-- <ngx-template *ngIf="finLoading == true">
+  <ngx-template *ngIf="finLoading == false && finYear.length < 0">
+    <div>
+      <nb-card>
+        <ngx-default-content [pageHeader]="noBudgetItem" [pageDescription]="noBudget" [buttonValue]="button" (buttonClick) = "modalShow()">
+        </ngx-default-content>
+      </nb-card>
+    </div>
+  </ngx-template>
+
+  <ngx-template *ngIf="finLoading == true">
     <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
       <div style="font-size: 32px;">
         <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
       </div>
     </div>
-  </ngx-template> -->
+  </ngx-template>
 
   <div>
     <ngx-side-modal [(show)]='addItemModal' style="width: 500px;">
       <div modal-header>Add Budget Item</div>
       <div modal-body>
         <div>
+          <div class="row">
+            <div class="form-group col">
+              <label>Budget</label>
+              <select name="budget" #budget="ngModel" [(ngModel)]="myBudget.id" class="form-control">
+                <option value=""> Select Budget Financial Year</option>
+                <option *ngFor="let budget of myBudget" [value]="budget.id">{{budget.financialYearStartDate	 | date : 'longDate'}} - {{budget.financialYearEndDate | date : 'longDate'}}</option>
+              </select>
+            </div>
+          </div>
             <div class="row">
               <div class="form-group col">
                 <label>Budget Item</label>
@@ -218,8 +243,8 @@
             <div class="col">
               <label>Department</label>
               <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.code" required>
-                <option value="1">Select Department</option>
-                <option *ngFor="let dep of allDepartments" value=dep.code>{{dep.Department[0]}}</option>
+                <option value="">Select Department</option>
+                <option *ngFor="let dep of allDepartments" [value]="dep.code">{{dep.name}}</option>
               </select>
             </div>
             </div>
@@ -245,15 +270,15 @@
               <label></label>
               <div>
                   <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-                  <button nbButton status="primary">Save</button>
+                  <button nbButton status="primary" (click)="addBudgetItem()">Save</button>
               </div>
             </div>
         </div>
       <!-- <div style="margin-top: 15px;"></div> -->
   </ngx-side-modal>
   </div>
-
-  <ngx-side-modal [(show)]='addItemModal' style="width: 500px;">
+<!--
+  <ngx-side-modal style="width: 500px;">
     <div modal-header>Update Budget Item</div>
     <div modal-body>
       <form #editItem="ngForm" name="editItem">
@@ -290,8 +315,7 @@
           <div class="form-group row">
             <div class="col">
               <label>Allocated amount</label>
-              <app-amount-input [(value)]="departments.amount"></app-amount-input>
-            <!-- <input class="form-control"  name="allocatedAmount" #allocatedAmount="ngModel" [(ngModel)]="departments.amount"> -->
+              <app-amount-input></app-amount-input>
             </div>
           </div>
 
@@ -314,31 +338,54 @@
           </div>
         </form>
     </div>
-  </ngx-side-modal>
+  </ngx-side-modal> -->
 
-  <ngx-side-modal [(show)]='editBudgetModal' style="width: 500px;">
-  <h4 modal-header>Set up your overall budget</h4>
+  <ngx-side-modal [(show)]='editBudget' style="width: 500px;">
+  <div modal-header>Update budget</div>
   <div class="row" modal-body>
-    <div class="col-sm-6 linear-form">
       <div class="form-group row">
         <div class="col">
           <label>Financial Year</label>
-        <ngx-date-range style="width: 60%;" [(start)]="finYear.financialYearStartDate" [(end)]="finYear.financialYearEndDate"></ngx-date-range>
+          <ngx-date-range [(start)]="singleBudgetUpdate.financialYearStartDate" [(end)]="singleBudgetUpdate.financialYearEndDate"></ngx-date-range>
         </div>
-
       </div>
+
       <div class="form-group row">
        <div class="col">
         <label>Total amount</label>
-        <app-amount-input [(value)]="finYear.totalBudgetAmount"></app-amount-input>
+        <app-amount-input [(value)]="singleBudgetUpdate.totalBudgetAmount"></app-amount-input>
        </div>
       </div>
       <div class="form-group row" style="margin-top: 20px">
-        <label></label>
-        <button nbButton status="primary" (click)="addBudget()">Save and Continue</button>
+       <div class="col">
+        <button nbButton status="primary" (click)="updateSingleBudget()">Modify</button>
+       </div>
       </div>
-    </div>
   </div>
   </ngx-side-modal>
+
+  <ngx-side-modal [(show)]='addBudget' style="width: 500px;">
+    <div modal-header>Add New budget</div>
+    <div class="row" modal-body>
+        <div class="form-group row">
+          <div class="col">
+            <label>Financial Year</label>
+            <ngx-date-range [(start)]="newBudget.financialYearStartDate" [(end)]="newBudget.financialYearEndDate"></ngx-date-range>
+          </div>
+        </div>
+
+        <div class="form-group row">
+         <div class="col">
+          <label>Total amount</label>
+          <app-amount-input [(value)]="newBudget.totalBudgetAmount"></app-amount-input>
+         </div>
+        </div>
+        <div class="form-group row" style="margin-top: 20px">
+         <div class="col">
+          <button nbButton status="primary" (click)="addNewBudget()">Submit</button>
+         </div>
+        </div>
+    </div>
+    </ngx-side-modal>
 
 </div>

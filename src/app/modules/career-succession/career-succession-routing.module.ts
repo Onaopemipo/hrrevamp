@@ -1,3 +1,4 @@
+import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
 import { GridboxComponent } from './gridbox/gridbox.component';
 import { TestpoolComponent } from './testpool/testpool.component';
 import { CompareCompetencyComponent } from './compare-competency/compare-competency.component';
@@ -69,6 +70,13 @@ const routes: Routes = [
         component: TestpoolComponent
 
       },
+
+      {
+        path: 'succession-dashboard',
+        component: SuccessionDashboardComponent
+
+      },
+
 
       {
         path: 'gridbox',

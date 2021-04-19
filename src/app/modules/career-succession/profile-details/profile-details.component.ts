@@ -1,3 +1,4 @@
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -22,24 +23,48 @@ export class ProfileDetailsComponent implements OnInit {
     { name: 'certification', title: 'certification' },
   ];
 
+  employeeData: EmployeeDTO = new EmployeeDTO;
+  employeeContractData: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO
+  employeeId: number = 0;
+
   constructor(private navCtrl: Location,
     private activatedRoute: ActivatedRoute,
-    private employeeService: EmployeesService) { }
+    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy, private allEmployees: FetchAllEmployeesServiceProxy) { }
 
   async ngOnInit() {
     let subscription: Subscription = null;
     subscription = this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get('id');
+      this.employeeId = parseInt(params.get('id'));
 
       // subscription.unsubscribe();
-      this.employeeService.fetch(id).toPromise().then(response => {
+      this.employeeService.fetch(this.employeeId).toPromise().then(response => {
         this.data = response;
       })
     });
+
+    this.fetchAllEmployees();
+    this.fetchProfile();
   }
 
   goback() {
     this.navCtrl.back();
+  }
+
+  async fetchProfile(){
+    const data = await this.employee.getEmployeeById(1).toPromise();
+    if(!data.hasError){
+      this.employeeData = data.result;
+     this.employeeData.contracts.forEach(() => this.employeeContractData );
+      console.log('My Details', this.employeeData);
+      console.log('My Contract', this.employeeContractData);
+    }
+  }
+
+  async fetchAllEmployees(){
+    const data = await this.allEmployees.getAllEmployees('',0,10,1).toPromise();
+    if(!data.hasError){
+      console.log(data.result);
+    }
   }
 
   addPlan() {

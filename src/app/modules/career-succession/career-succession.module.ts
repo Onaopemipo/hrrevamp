@@ -1,3 +1,5 @@
+import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy } from './../../_services/service-proxies';
+import { GetAllDepartmentsServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -25,7 +27,7 @@ import { NineBoxGridService } from './services/nine-box-grid.service';
 import { NineGridBoxEmployeeComponent } from './nine-grid-box-employee/nine-grid-box-employee.component';
 import { SuccessionPlanService } from './services/succession-plan.service';
 import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
-import { SucessionPlanCreateComponent } from './sucession-plan-create/sucession-plan-create.component';
+import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
 
 
 @NgModule({
@@ -42,12 +44,20 @@ import { SucessionPlanCreateComponent } from './sucession-plan-create/sucession-
     CompareCompetencyComponent,
     GridboxComponent,
     TestpoolComponent,
-    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SucessionPlanCreateComponent],
+    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SuccessionDashboardComponent],
   providers: [
     TalentPoolService,
     EmployeesService,
     NineBoxGridService,
     SuccessionPlanService,
+    GetAllDepartmentsServiceProxy,
+    CommonServiceProxy,
+    GradeLevelServiceProxy,
+    CompetencyServiceProxy,
+    FetchEmployeeByIdServiceProxy,
+    FetchAllEmployeesServiceProxy,
+    FetchSuccessionPlanServiceProxy,
+    CareerSuccessionServiceProxy,
   ],
   imports: [
     CommonModule,

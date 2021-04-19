@@ -2,7 +2,7 @@
 <ngx-componentsheader pageName='Employee Deployment Management'>
 
 <div headerButton>
-<ngx-bulk-upload btnoutline="false" (buttonClick)="getuploadedfile($event)"></ngx-bulk-upload>
+<ngx-bulk-upload btnoutline="false" [btnLabel]="'Batch Deployment'" (buttonClick)="getuploadedfile($event)"></ngx-bulk-upload>
 </div>
 </ngx-componentsheader>
 
@@ -24,13 +24,16 @@
             <nb-tab tabTitle="Declined">
 
             </nb-tab>
-            <nb-tab tabTitle="Extended">
-
-            </nb-tab>
         </nb-tabset>
-        <ngx-tableheader></ngx-tableheader>
+        <ngx-default-content *ngIf="showEmpty" pageHeader="No Deployment Record"
+        pageDescription="Click on the button above to Upload Batch Deployemnt" [loading]="loading"
+        >
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+        [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allDeployment"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      </ngx-tablecomponent>
 
-        <ngx-tablecomponent [tableColum]="tableColumns" [userData]='data'></ngx-tablecomponent>
     </nb-card-body>
 
 

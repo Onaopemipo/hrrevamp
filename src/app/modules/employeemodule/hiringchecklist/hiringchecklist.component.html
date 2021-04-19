@@ -196,10 +196,14 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
                   <div class="col-sm-8">
 
-                    <input type="text" nbInput fullWidth placeholder="Enter departmentId " name="departmentId"
-                      #departmentId="ngModel" [(ngModel)]="workData.departmentId" required>
-                    <div *ngIf="departmentId.invalid && ( departmentId.dirty ||departmentId.touched)" class="error">
-                      <div *ngIf="departmentId.errors.required"> departmentId is required</div>
+                    <select placeholder="Select Gender" name="departmentId" #departmentId="ngModel"
+                      [(ngModel)]="InformationData.departmentId" required>
+                      <option value="">--Select Department---</option>
+                      <option *ngFor="let dept of allDepartment" [value]="dept.option_value">{{dept.option_text}}</option>
+                    </select>
+
+                    <div *ngIf="departmentId.invalid && (departmentId.dirty || departmentId.touched)" class="error">
+                      <div *ngIf="departmentId.errors.required">Gender is required</div>
                     </div>
 
 
@@ -247,7 +251,7 @@
                   <div class="offset-sm-4 col-sm-8">
                     <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
                       <i class="fa fa-spin fa-spinner"></i></button>
-                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed" [disabled]="!formvalidate"
+                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed" [disabled]="!formvalid"
                       (click)="proceedtoofferLetter()">Proceed</button>
                   </div>
                 </div>

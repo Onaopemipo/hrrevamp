@@ -8,6 +8,7 @@ export enum ALERT_TYPES {
   FAILED = 'danger',
   COPIED = 'copied',
   CONFIRM = 'confirm',
+  ANYCONFIRM="anyconfirm"
 }
 @Component({
   selector: 'ngx-alertModalComponent',
@@ -25,6 +26,7 @@ export enum ALERT_TYPES {
    <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.FAILED">Failed!</span>
    <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.COPIED">Copied!</span>
    <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.CONFIRM">Confirmation</span>
+   <span class="header4-bold" *ngIf="alertType == ALERT_TYPES.ANYCONFIRM">Confirmation</span>
    </div>
    <div style="padding:10px">
    <span *ngIf="alertType != ALERT_TYPES.CONFIRM"  class="listsubheader">{{alertMessage}}!</span>
@@ -45,7 +47,7 @@ export enum ALERT_TYPES {
  >{{alertButtonMessage}}</button>
  </div>
 
- <div  *ngIf="alertType == ALERT_TYPES.CONFIRM" style="padding-left:10px">
+ <div  *ngIf="alertType == ALERT_TYPES.CONFIRM || alertType == ALERT_TYPES.ANYCONFIRM" style="padding-left:10px">
    <button nbButton  type="button" (click)="cancel()"
    style="background-color: #EB57571A;
    border-color: #EB57571A;

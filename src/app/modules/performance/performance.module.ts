@@ -17,9 +17,10 @@ import { PerformanceReviewsComponent } from './pages/performance-reviews/perform
 import { PerformanceMatrixComponent } from './pages/performance-matrix/performance-matrix.component';
 import { AppraisalComponent } from './pages/appraisal/appraisal.component';
 import { PerformanceManagementService } from './services/performance-management.service';
-import { AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateKPIServiceProxy, AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, FetchKPIsServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy } from 'app/_services/service-proxies';
 import { KeyResultAreaService } from './services/key-result-area.service';
 import { AppraisalService } from './services/appraisal.service';
+import { KpiService } from './services/kpi.service';
 
 
 
@@ -49,6 +50,9 @@ import { AppraisalService } from './services/appraisal.service';
     SubordinateAppraisalsServiceProxy,
     AssignKRAServiceProxy,
     KeyResultAreaService,
+    KpiService,
+    AddUpdateKPIServiceProxy,
+    FetchKPIsServiceProxy,
     AppraisalService,
   ],
   imports: [

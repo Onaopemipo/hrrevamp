@@ -32,8 +32,7 @@
     <div class="form-group">
       <label>Template</label>
       <select class="form-control">
-        <option value="5">Complaint</option>
-        <option value="6">Request</option>
+        <option [value]="type.id" *ngFor="let type of templateTypes">{{type.id}}</option>
       </select>
     </div>
     <div class="form-group">
@@ -48,6 +47,6 @@
   <div modal-actions>
     <button nbButton status="primary">Submit</button>
     <button nbButton outline status="primary">Discard</button>
-    <button>Attach</button>
+    <!-- <button>Attach</button> -->
   </div>
 </ngx-side-modal>

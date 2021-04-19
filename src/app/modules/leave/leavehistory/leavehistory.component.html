@@ -27,11 +27,15 @@
 </ngx-tablecomponent>
 
 
+<ngx-createleave-request *ngIf="showAddPlanModal" (closed)="leaveRequestmodalClosed($event)" [showModalRequest]="showAddPlanModal">
 
 
-<ngx-createleave-request [showModalRequest]="showAddPlanModal"></ngx-createleave-request>
+</ngx-createleave-request>
 
-<ngx-createleave-plan [showModal]="showLeavePlanModal"></ngx-createleave-plan>
+<ngx-createleave-plan *ngIf="showLeavePlanModal" (closed)="leavePlanmodalClosed($event)"  [showModal]="showLeavePlanModal">
+
+</ngx-createleave-plan>
 
   </nb-card-body>
+
 </nb-card>

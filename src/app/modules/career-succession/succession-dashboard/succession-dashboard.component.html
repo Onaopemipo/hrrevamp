@@ -1,0 +1,78 @@
+<ngx-componentsheader pageName='Succession Dashboard'></ngx-componentsheader>
+<div>
+  <nb-card *ngIf="employeeDataCount < 1">
+    <nb-card-body>
+      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
+          (buttonClick)="addNew()"></ngx-default-content>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card *ngIf="employeeDataCount > 0">
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='loading' [tableColum]="dashboardTable" [userData]='allEmployeesData' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+
+<ngx-side-modal [(show)]='newPlan' style="width: 500px;">
+  <div modal-header>Create Succession Plan</div>
+  <div class="row" modal-body>
+      <div class="form-group row">
+        <div class="col">
+          <label>Title</label>
+          <!-- <input type="text" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.title" disabled> -->
+        </div>
+      </div>
+
+      <div class="form-group row">
+       <div class="col">
+        <label>Employee</label>
+        <!-- <input type="text" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.employeeName" disabled> -->
+       </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col">
+         <label>Position</label>
+         <!-- <input type="text" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionName" disabled> -->
+        </div>
+       </div>
+
+       <div class="form-group row">
+        <div class="col">
+         <label>Successing Candidate</label>
+         <!-- <input type="text" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successingCandidate" disabled> -->
+        </div>
+       </div>
+
+       <div class="form-group row">
+        <div class="col">
+         <label>Readiness to start</label>
+         <select type="text" name="readiness" disabled>
+           <option value="">--Select--</option>
+           <option *ngFor="let readiness of readinessToStart" [value]="readiness.label">{{ readiness.title }}</option>
+         </select>
+        </div>
+       </div>
+
+
+       <div class="form-group row">
+        <div class="col">
+         <label>Purpose</label>
+         <select type="text" name="purpose" disabled>
+          <option value="">--Select--</option>
+          <option value=""></option>
+        </select>
+        </div>
+       </div>
+
+      <div class="form-group row" style="margin-top: 20px">
+       <div class="col">
+        <button nbButton status="primary" (click)="createSuccessionPlan()">Modify</button>
+       </div>
+      </div>
+  </div>
+  </ngx-side-modal>
+

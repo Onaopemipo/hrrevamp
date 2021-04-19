@@ -19,7 +19,7 @@
         pageDescription="Click on the button to create a Leave Plan"
         buttonValue="Create Leave Plan"
         [loading]="loading"
-        (buttonClick)="showAddPlanModal = true;"
+        (buttonClick)="showLeavePlanModal = true;"
     
       >
       </ngx-default-content>
@@ -42,6 +42,11 @@
 
 
 
-<ngx-createleave-request [showModalRequest]="showAddPlanModal"></ngx-createleave-request>
+<ngx-createleave-request *ngIf="showAddPlanModal" (closed)="leaveRequestmodalClosed($event)" [showModalRequest]="showAddPlanModal">
 
-<ngx-createleave-plan [showModal]="showLeavePlanModal"></ngx-createleave-plan>
+
+</ngx-createleave-request>
+
+<ngx-createleave-plan *ngIf="showLeavePlanModal" (closed)="leavePlanmodalClosed($event)"  [showModal]="showLeavePlanModal">
+
+</ngx-createleave-plan>

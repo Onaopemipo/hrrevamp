@@ -1,4 +1,4 @@
-import { CreateEmployeeServiceProxy, DataServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 
@@ -54,9 +54,11 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { ExitRequestService } from './services/exit-request.service';
+import { CustomServiceService } from '../../_services/custom-service.service';
 import {
-  GetEligibilityListServiceProxy, FileUploadServiceProxy, GetAllProfessionalBodiesServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, CommonServiceProxy,PostServiceProxy,AddUpdateEligibleBucketServiceProxy,FetchEmployeeOnboardingDataDetailsServiceProxy
+  GetEligibilityListServiceProxy, FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy,
+  FetchEmployeeContractByEmployeeIdServiceProxy, GetConfirmationsByDetailsServiceProxy, SaveConfirmationServiceProxy, PostServiceProxy
 } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 // import{ FetchEmployeeOnboardingDataDetailsServiceProxy} from '../../_services/service-proxies'
@@ -92,7 +94,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
-    
+
       CardComponent],
   imports: [
     CommonModule,
@@ -130,19 +132,23 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     FetchEmployeeByIdServiceProxy,
     GetAllProfessionalBodiesServiceProxy,
     RecruitmentSettingServiceProxy,
-    FileUploadServiceProxy,
+    FileStorageManagerServiceProxy,
     UploadProfileImageServiceProxy,
     GetEligibilityListServiceProxy,
     AddUpdateEligibleBucketServiceProxy,
     FetchApprovalProcessServiceProxy,
     GetPromotionEligibilityListsServiceProxy,
-    FetchEmployeeOnboardingDataDetailsServiceProxy,
-    PostServiceProxy,
-    CommonServiceProxy,
-    AlertserviceService
+    FetchEmployeeContractByEmployeeIdServiceProxy,
+    GetConfirmationsByDetailsServiceProxy,
+    SaveConfirmationServiceProxy,
+    EmployeeDeploymentServiceProxy,
+    AddUpdateDeploymentServiceProxy,
+    BulkMasterServiceProxy,
+    CustomServiceService,
+    PostServiceProxy
   ]
-   
-    
+
+
 
 })
 export class EmployeemoduleModule { }
