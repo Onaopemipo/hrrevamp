@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 export class MyJobRole extends JobRolesDTO  implements IStatus{
   amount: number;
-  parentPositionId: number;
+  parent_job_role_id: number;
   constructor(role: JobRolesDTO = new JobRolesDTO()) {
     super(role);
     Object.assign(this, role);
@@ -25,7 +25,22 @@ export class MyJobRole extends JobRolesDTO  implements IStatus{
   // }
 
   toManage() {
-    return new ManageJobRoleDTO({...this, amount: this.amount, parentPositionId: this.parentPositionId,parentJobRoleId:0});
+    return new ManageJobRoleDTO({
+      salary: this.amount,
+      name: this.name,
+      code: this.code,
+      parentJobRoleId: this.parent_job_role_id,
+      id: this.id,
+    });
+  }
+
+  get selectValue() {
+    return this.id;
+  }
+
+  get selectLabel() {
+    // console.log(this);
+    return this.name;
   }
 }
 
@@ -48,7 +63,6 @@ export class JobRoleService extends CrudService<JobRoleFilter, MyJobRole, MyJobR
     throw new Error('Method not implemented.');
   }
   create(data: MyJobRole): Observable<any> {
-    console.log(data);
     return this.create_api.addUpdateJobRoles(data.toManage());
   }
   delete(id: number): Observable<any> {
