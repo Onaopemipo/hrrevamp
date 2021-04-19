@@ -26,7 +26,8 @@ class MyEmployeeDTO extends EmployeeDTO{
 
 @Component({
   selector: 'ngx-succession-dashboard',
-  templateUrl: './succession-dashboard.component.html',
+  template: '',
+  // templateUrl: './succession-dashboard.component.html',
   styleUrls: ['./succession-dashboard.component.scss']
 })
 export class SuccessionDashboardComponent implements OnInit {

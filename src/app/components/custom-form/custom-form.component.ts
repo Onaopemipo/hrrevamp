@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChoiceName } from '../multi-select/multi-select.component';
 
 export enum FORM_TYPES {
-  text, amount, number, wysiwyg, select, file, employee, radio, date_range
+  text, amount, number, wysiwyg, select, file, employee, radio, date_range, date, checkbox
 }
 
 export class FormValidator{

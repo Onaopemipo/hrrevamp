@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { createSubscription, FAKER_CONFIG, getCreateResponse, IFaker, MessageOut, myClassFaker, myPropertyFaker } from 'app/modules/career-succession/services/base';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, Institution, ManagePayElementDTO, ManagePayInstitutionDTO, PayElementDTO, PayInstitutionDTO } from 'app/_services/service-proxies';
+import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, Institution, ManagePayElementDTO, ManagePayInstitutionDTO, ManagePayrollTypeDTO, PayElementDTO, PayInstitutionDTO, PayrollTypeDTO } from 'app/_services/service-proxies';
 // import { AddUpdatePaymentInstitutionServiceProxy, AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO, GetAllPaymentInstitutionsServiceProxy, Institution, ManagePayInstitutionDTO, PayInstitutionDTO } from 'app/_services/service-proxies';
 import { date } from 'faker';
 import { Observable } from 'rxjs';
@@ -89,7 +89,7 @@ export class MyPayrollInstutionModel extends PayrollApiModelClass<PayInstitution
       accountNumber: this.account_number,
       accountName: this.account_name,
       bankId: this.bank_id
-    })
+    });
   }
 }
 
@@ -172,16 +172,52 @@ export class MyPayrollElementModel extends PayrollApiModelClass<PayElementDTO, M
       noOfWorkHours: 1,
       start_date: new Date(),
       end_date: new Date()
-    })
+    });
   }
 }
 
 export interface PayElementFilter extends BaseFilter{
-  payTypeId: number;
-  institutionId: number;
-  elementTypeId: number;
-  elementCategoryId: number;
+  payTypeId?: number;
+  institutionId?: number;
+  elementTypeId?: number;
+  elementCategoryId?: number;
 }
+
+export class MyPayrollType extends PayrollApiModelClass<PayrollTypeDTO, ManagePayrollTypeDTO>{
+  name: string;
+  frequencyRuleId: number;
+  frequencyRuleName: string;
+  firstPeriodEndDate: Date;
+  noOfYears: number;
+  noOfEmployees: number;
+  effectiveDate: Date;
+  negativePaymentAllowed: boolean;
+  code: string;
+  fromApi(data: PayrollTypeDTO) {
+    this.name = data.name;
+    this.frequencyRuleId = data.frequencyRuleId;
+    this.firstPeriodEndDate = data.firstPeriodEndDate;
+    this.noOfYears = data.noOfYears;
+    this.noOfYears = data.noOfYears;
+    this.negativePaymentAllowed = data.negativePaymentAllowed;
+    this.code = data.code;
+    this.frequencyRuleName = data.frequencyRule;
+    return this;
+  }
+  toManage(): ManagePayrollTypeDTO {
+    return new ManagePayrollTypeDTO({
+      id: this.id,
+      name: this.name,
+      frequencyRuleId: this.frequencyRuleId,
+      firstPeriodEndDate: this.firstPeriodEndDate,
+      noOfYears: this.noOfYears,
+      effectiveDate: this.effectiveDate,
+      negativePaymentAllowed: this.negativePaymentAllowed,
+      code: this.code,
+    });
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -198,6 +234,33 @@ export class MyPayElementService extends CommonBaseService<MyPayrollElementModel
   }
   create(data: MyPayrollElementModel): Observable<any> {
     return this.create_api.addUpdatePayElement(data.toManage());
+  }
+  delete(id: number): Observable<any> {
+    throw new Error('Method not implemented.');
+  }
+}
+
+export class PayrollTypeFilter extends BaseFilter{
+  frequencyRuleId?: number;
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MyPayrollTypeService extends CommonBaseService<MyPayrollType, PayrollTypeFilter> {
+  constructor(
+    private create_api: AddUpdatePayScaleServiceProxy,
+    private list_api_call: GetAllPayrollTypesServiceProxy,
+  ) {
+    super();
+  }
+  list(filter: PayrollTypeFilter): Observable<ListResult<MyPayrollType>>{
+    const res = this.list_api_call.getAllPayrollTypes(filter.pageSize, filter.pageNumber, filter.frequencyRuleId);
+    return res.pipe(map(x => this.getData(x, y => new MyPayrollType().fromApi(y))));
+  }
+  create(data: MyPayrollType): Observable<any> {
+    return this.create_api.addUpdatePayScale(data.toManage());
   }
   delete(id: number): Observable<any> {
     throw new Error('Method not implemented.');
