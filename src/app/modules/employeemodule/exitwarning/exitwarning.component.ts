@@ -14,5 +14,8 @@ export class ExitwarningComponent implements OnInit {
   }
 onClick() {
 this.router.navigateByUrl('/employeemodule/exitrequest');
-}
+  }
+  gohome() {
+    this.router.navigateByUrl('/');
+  }
 }

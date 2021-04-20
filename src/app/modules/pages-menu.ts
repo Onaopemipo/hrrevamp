@@ -38,7 +38,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Exit Process',
-        link: '/employeemodule/exitrequest',
+        link: '/employeemodule/exitwarning',
       },
       {
         title: 'Deployment Application',
@@ -223,11 +223,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Exit',
-        link: '/employeemodule/exitmanagement',
+        link: '/employeemodule/exitmanagement/exit',
       },
       {
         title: 'Retirements',
-        link: '/employeemodule/retirement',
+        link: '/employeemodule/exitmanagement/retirement',
       },
     ]
   },

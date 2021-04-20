@@ -27,13 +27,14 @@ export class MyExitRequest {
 }
 
 export class MyExitRequestFilter {
-  pageNo?: number;
+  PageSize?: number;
   id?: number;
   fullName?: string;
   dateRequested?: string;
   endDate?: string;
   type?: string;
   status?: number;
+  PageNumber?: number
 }
 @Injectable({
   providedIn: 'root'
