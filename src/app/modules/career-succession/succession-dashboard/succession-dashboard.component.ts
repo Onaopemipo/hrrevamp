@@ -47,6 +47,13 @@ export class SuccessionDashboardComponent implements OnInit {
 
   ];
 
+  allPurposes = [
+    {name: 'retirement', title: 'Retirement'},
+    {name: 'firing', title: 'Firing'},
+    {name: 'position', title: 'Change of Position'},
+    {name: 'exit', title: 'Exit'},
+  ]
+
 
 
   loading:boolean = true;

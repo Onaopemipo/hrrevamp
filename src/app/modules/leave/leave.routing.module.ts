@@ -6,6 +6,8 @@ import { LeavePlanComponent } from './leave-plan/leave-plan.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 import { LeaveyearComponent } from './leaveyear/leaveyear.component';
+import { LeaveentitlementsComponent } from './leaveentitlements/leaveentitlements.component';
+import { LeaveenholidayComponent } from './leaveholidays/leaveholidays.component';
 import { AuthGuardService as AuthGuard } from '../../_services/auth-guard.service';
 const routes: Routes = [
     {
@@ -30,6 +32,14 @@ const routes: Routes = [
           {
             path: 'leaveyear',
             component: LeaveyearComponent
+          },
+          {
+            path: 'leaveholidays',
+            component: LeaveenholidayComponent
+          },
+          {
+            path: 'leaveentitlement',
+            component: LeaveentitlementsComponent
           },
           {
             path: '',

@@ -93,6 +93,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Leave Year',
         link: '/leave/leaveyear',
       },
+      {
+        title: 'Leave Entitlement',
+        link: '/leave/leaveentitlement',
+      },
+      {
+        title: 'Leave Holiday',
+        link: '/leave/leaveholidays',
+      },
     ]
   },
   {

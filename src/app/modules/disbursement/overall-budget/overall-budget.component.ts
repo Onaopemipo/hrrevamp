@@ -21,11 +21,12 @@ export class OverallBudgetComponent implements OnInit {
   addBudget: boolean = false;
   addItemModal: boolean = false;
   editItem: boolean = false;
-  defaultPage: number = 3;
+  defaultPage: number = 0;
   budget: BudgetDTO = new BudgetDTO;
   newBudget: ManageBudgetDTO = new ManageBudgetDTO;
   budgetItem: BudgetItemDTO = new BudgetItemDTO().clone();
   departments: DisbursementBudgetItemAllocation = new DisbursementBudgetItemAllocation().clone();
+  budgetItemsCounter; number = 0;
 
   noBudgetItem: string = 'No Budget Item Found';
   noBudget: string = 'There is no budget item yet, click the button below to add budget item';
@@ -75,7 +76,8 @@ export class OverallBudgetComponent implements OnInit {
 
  async fetAllBudgetItems(){
     const data = await this.budgetItemService.getAllBudgetItems(this.dataIndex).toPromise();
-    this.allBudgetItems = data.result
+    this.allBudgetItems = data.result;
+    this.budgetItemsCounter = data.totalRecord;
     console.log('Yo boss', this.allBudgetItems)
   }
 
@@ -96,6 +98,10 @@ export class OverallBudgetComponent implements OnInit {
     this.addBudget = !this.addBudget;
   }
 
+  getGridBox(){
+
+  }
+
 
  async fetchSingleBudget(){
   const data = await this.singleBudget.getBudget(this.budgetId).toPromise();
@@ -109,7 +115,7 @@ export class OverallBudgetComponent implements OnInit {
  async updateSingleBudget(){
     const data = await this.addBudgetService.addUpdateBudget(this.singleBudgetUpdate).toPromise();
     if(!data.hasError){
-    this.alertMe.openModalAlert('Budget Created', 'Budget updated Successfully', 'Dismiss');
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss');
     } else {
       console.error();
 
@@ -151,7 +157,9 @@ export class OverallBudgetComponent implements OnInit {
   async addNewBudget(){
     const data = await this.addBudgetService.addUpdateBudget(this.newBudget).toPromise();
     if(!data.hasError){
-    this.alertMe.openModalAlert('Budget Created', 'Budget Created Successfully', 'Dismiss');
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget Created Successfully', 'Dismiss').subscribe(data=>{
+      this.addBudget = false;
+    })
     } else {
       // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
       console.error();

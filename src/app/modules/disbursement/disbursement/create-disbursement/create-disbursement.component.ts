@@ -136,7 +136,7 @@ get disableSubmitbtn(){
 
 async getProjects(){
   const data = await this.project.getExpenseProject(0,'','',false,'','',1,10).toPromise();
-  this.allProjects = data;
+  this.allProjects = data.result;
   console.log('this is project:',this.allProjects)
 }
 
