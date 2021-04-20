@@ -147,17 +147,23 @@ export class MultiSelectComponent implements OnInit {
     }
   }
   onItemSelect(item: any) {
-    console.log(item);
     this.valueChange.emit(this.selectedItems);
     const idValues = this.selectedItems.map(data => data[this.dropdownSettings.idField]);
     if (this.singleSelection) {
       this.idValueChange.emit(idValues.length > 0 ? idValues[0] : null);
     } else {
+      console.log(idValues);
       this.idValueChange.emit(idValues);
     }
   }
   onSelectAll(items: any) {
-    console.log(items);
     this.valueChange.emit(this.selectedItems);
+    const idValues = this.selectedItems.map(data => data[this.dropdownSettings.idField]);
+    if (this.singleSelection) {
+      this.idValueChange.emit(idValues.length > 0 ? idValues[0] : null);
+    } else {
+      console.log(idValues);
+      this.idValueChange.emit(idValues);
+    }
   }
 }
