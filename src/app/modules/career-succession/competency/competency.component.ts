@@ -64,6 +64,7 @@ export class CompetencyComponent implements OnInit {
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
+  allCompetencies: Competency [] = [];
   myCompetency: ManageCompetencyDTO = new ManageCompetencyDTO().clone();
   allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
   competencyRequirement = new CompetencyRequirmentsDTO;
@@ -80,6 +81,7 @@ export class CompetencyComponent implements OnInit {
     this.fetchCertifications();
     this.fetchQualifications();
     this.fetchSkills();
+    this.getCompetency();
   }
 
   toggleRequirement(e:string){
@@ -95,7 +97,11 @@ export class CompetencyComponent implements OnInit {
   }
 
   async getCompetency(){
-    // const data = await this.commonService.getC
+    const data = await this.commonService.getCompetency().toPromise();
+    if(!data.hasError){
+      this.allCompetencies = data.result;
+      console.log('All competencies', this.allCompetencies)
+    }
   }
 
   addRequirement(){
@@ -165,6 +171,7 @@ export class CompetencyComponent implements OnInit {
     const data = await this.department.getAllDepartments(10,1).toPromise();
     if(!data.hasError){
       this.allDepartments = data.result;
+      console.log('All Departments:',this.allDepartments)
     }
   }
 

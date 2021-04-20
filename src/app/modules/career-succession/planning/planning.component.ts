@@ -149,7 +149,7 @@ export class PlanningComponent implements OnInit {
   async createSuccessionPlan(){
     const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('success', 'Plan created successfully', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Plan created successfully', 'Dismiss')
     }
     }
 

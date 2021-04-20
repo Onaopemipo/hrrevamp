@@ -100,6 +100,8 @@ export class GridboxComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.getBoxCount();
+    this.getEmployeeGrid();
     this.data = await this.nineBoxGrid.fetchSummary().toPromise();
   }
 

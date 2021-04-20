@@ -99,6 +99,9 @@
               <option value="">--Select all Eligible Grades--</option>
               <option value="1">Grade 2</option>
             </select>
+            <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
+              <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
+            </div>
           </div>
         </div>
 
@@ -111,9 +114,15 @@
           <div class="col-sm-6" style="display: flex; justify-content: space-between;">
             <input class="form-control" type="number" name="minTtenor" #minTtenor="ngModel"
             [(ngModel)]="loanTypeModel.minTenor" placeholder="Minimum Tenor" required>
+            <div *ngIf="minTtenor.invalid && (minTtenor.dirty || minTtenor.touched)" class="error">
+              <div *ngIf="minTtenor.errors.required">Minimum Tenor is required</div>
+            </div>
             <span style="padding: 8px;"></span>
             <input class="form-control" type="number" name="maxTenor" #maxTenor="ngModel"
             [(ngModel)]="loanTypeModel.maxTenor" placeholder="Maximum Tenor" required>
+            <div *ngIf="maxTenor.invalid && (maxTenor.dirty || maxTenor.touched)" class="error">
+              <div *ngIf="maxTenor.errors.required">Maximum Tenor is required</div>
+            </div>
           </div>
         </div>
 
@@ -143,10 +152,13 @@
             </div>
 
             <div class="col-sm-6">
-              <nb-select placeholder="Select Interest Type" name="loanType" #typeName="ngModel"
+              <nb-select placeholder="Select Interest Type" name="interestType" #interestType="ngModel"
               [(ngModel)]="loanTypeModel.interestType">
                 <nb-option value="1">Option 1</nb-option>
               </nb-select>
+              <div *ngIf="interestType.invalid && (interestType.dirty || interestType.touched)" class="error">
+                <div *ngIf="interestType.errors.required">Interest Type is required</div>
+              </div>
             </div>
         </div>
 
