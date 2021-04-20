@@ -86,6 +86,7 @@ export class HiringchecklistComponent implements OnInit {
     this.subtitle = 'Offer Letter';
     this.selectedPanel = 'offerletterPanel';
     this.submitbtnPressed = true
+    console.log('workdata', this.workData)
     const data = await this.PostService.addUpdateOnboardingWorkData(this.workData).toPromise()
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
@@ -107,6 +108,15 @@ export class HiringchecklistComponent implements OnInit {
     this.getDepartment()
   }
 
+  get formvalidation(){
+    if(this.workData.hireDate && this.workData.dateofJoining && this.workData.salaryPerAnnum && this.workData.desginationId && this.workData.employeeTypeId
+      && this.workData.departmentId && this.workData.reportingManagerId && this.workData.workEmail && this.workData.location) return true; 
+      return false
+  }
+
+  get validdating(){
+    if(this.workData.hireDate) return true ; return false
+  }
   get formvalidate() {
     let resp: boolean = true;
     let nullable = [

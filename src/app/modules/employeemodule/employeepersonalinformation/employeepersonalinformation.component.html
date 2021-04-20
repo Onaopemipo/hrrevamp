@@ -98,6 +98,17 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Default Mobile</label>
+                  <div class="col-sm-8">
+                    <input type="text" nbInput fullWidth placeholder="defaultMobile" name="defaultMobile"
+                      #defaultMobile="ngModel" [(ngModel)]="UserData.defaultMobile" required>
+                    <div *ngIf="defaultMobile.invalid && (defaultMobile.dirty || defaultMobile.touched)" class="error">
+                      <div *ngIf="defaultMobile.errors.required"> Default phone number is required</div>
+                    </div>
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
                   <div class="col-sm-8">
@@ -110,7 +121,23 @@
                     </select>
                     <div *ngIf="martialStatusId.invalid && (martialStatusId.dirty || martialStatusId.touched)"
                       class="error">
-                      <div *ngIf="martialStatusId.errors.required">Gender is required</div>
+                      <div *ngIf="martialStatusId.errors.required">Marital status is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Religion</label>
+                  <div class="col-sm-8">
+
+                    <select placeholder="Select religion" name="religionId" #religionId="ngModel"
+                      [(ngModel)]="UserData.religionId" required>
+                      <option value="">--Select Marital Status---</option>
+                      <option *ngFor="let religion of Religion" [value]="religion.option_value">{{religion.option_text}}
+                      </option>
+                    </select>
+                    <div *ngIf="religionId.invalid && (religionId.dirty || martialStatusId.touched)" class="error">
+                      <div *ngIf="religionId.errors.required">Gender is required</div>
                     </div>
                   </div>
                 </div>
@@ -303,62 +330,146 @@
               <p class="smalltext">Input required Information in the fields below</p>
             </div>
             <div style="padding-top:3rem;">
+             
+
               <form>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
                   <div class="col-sm-8">
                     <input type="text" nbInput fullWidth placeholder="Hire Date">
                   </div>
-                </div>
+                </div> -->
 
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
+                  <div class="col-sm-8">
+
+                    <ngx-date [(value)]='workData.hireDate' #dateofJoining name="hireDate" id="hireDate">
+                    </ngx-date>
+                    <div *ngIf="!validdating" class="error">
+                      <div> Date is required</div>
+                    </div>
+
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of joining</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Date of joining">
+                    <ngx-date [(value)]='workData.dateofJoining' #dateofJoining name="dateofJoining" id="dateofJoining">
+                    </ngx-date>
+                    <div *ngIf="!validdate" class="error">
+                      <div> Date is required</div>
+                    </div>
+
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Salary per annum</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Salary per annum">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter salaryPerAnnum" name="salaryPerAnnum"
+                      #salaryPerAnnum="ngModel" [(ngModel)]="workData.salaryPerAnnum" required>
+                    <div *ngIf="salaryPerAnnum.invalid && (salaryPerAnnum.dirty || salaryPerAnnum.touched)"
+                      class="error">
+                      <div *ngIf="salaryPerAnnum.errors.required">salaryPerAnnum is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Designation">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter salaryPerAnnum" name="desginationId"
+                      #desginationId="ngModel" [(ngModel)]="workData.desginationId" required>
+                    <div *ngIf="desginationId.invalid && (desginationId.dirty || desginationId.touched)" class="error">
+                      <div *ngIf="desginationId.errors.required">desginationId is required</div>
+                    </div>
+
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Employee type</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Employee type">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter  employeeTypeId " name=" employeeTypeId"
+                      #employeeTypeId="ngModel" [(ngModel)]="workData.employeeTypeId" required>
+                    <div *ngIf=" employeeTypeId.invalid && (employeeTypeId.dirty ||  employeeTypeId.touched)"
+                      class="error">
+                      <div *ngIf=" employeeTypeId.errors.required"> employeeTypeId is required</div>
+                    </div>
+
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Department">
+
+                    <select placeholder="Select Gender" name="departmentId" #departmentId="ngModel"
+                      [(ngModel)]="workData.departmentId" required>
+                      <option value="">--Select Department---</option>
+                      <option *ngFor="let dept of allDepartment" [value]="dept.option_value">{{dept.option_text}}
+                      </option>
+                    </select>
+
+                    <div *ngIf="departmentId.invalid && (departmentId.dirty || departmentId.touched)" class="error">
+                      <div *ngIf="departmentId.errors.required">Department is required</div>
+                    </div>
+
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reporting Manager</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Reporting Manager">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter reportingManagerId"
+                      name="reportingManagerId" #reportingManagerId="ngModel" [(ngModel)]="workData.reportingManagerId"
+                      required>
+                    <div *ngIf="reportingManagerId.invalid && ( reportingManagerId.dirty ||reportingManagerId.touched)"
+                      class="error">
+                      <div *ngIf="reportingManagerId.errors.required"> reportingManagerId is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Location</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Location">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter location" name="location"
+                      #location="ngModel" [(ngModel)]="workData.location" required>
+                    <div *ngIf="location.invalid && (location.dirty ||location.touched)" class="error">
+                      <div *ngIf="location.errors.required"> location is required</div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Work Email</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter location" name="workEmail"
+                      #workEmail="ngModel" [(ngModel)]="workData.workEmail" required>
+                    <div *ngIf="workEmail.invalid && (workEmail.dirty ||workEmail.touched)" class="error">
+                      <div *ngIf="workEmail.errors.required"> location is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" nbButton status="primary">Update Changes</button>
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
+                      <i class="fa fa-spin fa-spinner"></i></button>
+                    <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed"
+                      (click)="proceedtoofferLetter()" [disabled]="!formvalidation">Proceed</button>
                   </div>
                 </div>
               </form>
+
             </div>
           </div>
 
@@ -420,7 +531,7 @@
                   </div>
                 </div>
 
-                
+
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Onboarding Id
                   </label>
@@ -474,25 +585,39 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Genotype</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Genotype">
+                    <div class="col-sm-8">
+                      <input type="text" nbInput fullWidth placeholder="Enter Genotype" name="genotype"
+                        #genotype="ngModel" [(ngModel)]="medicalData.genotype" required>
+                      <div *ngIf="genotype.invalid && (genotype.dirty || genotype.touched)" class="error">
+                        <div *ngIf="genotype.errors.required">genotype is required</div>
+                      </div>
+
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Blood Group</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Blood Group">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter Blood Group" name="bloodGroup"
+                      #bloodGroup="ngModel" [(ngModel)]="medicalData.bloodGroup" required>
+                    <div *ngIf="bloodGroup.invalid && (bloodGroup.dirty || bloodGroup.touched)" class="error">
+                      <div *ngIf="bloodGroup.errors.required">bloodGroup is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Any pre-existing
                     injury?</label>
                   <div class="col-sm-8">
-                    <nb-radio-group [(value)]="radioGroupValue">
-                      <nb-radio [value]="'This is value 1'">
-                        Yes
+                    <nb-radio-group [(value)]="medicalData.anyPreInjury" name="anyPreInjury">
+                      <nb-radio [value]="false">
+                        false
                       </nb-radio>
-                      <nb-radio [value]="'This is value 2'">
-                        No
+                      <nb-radio [value]="true">
+                        true
                       </nb-radio>
 
                     </nb-radio-group>
@@ -502,13 +627,21 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Please State it</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Please State it">
+
+
+                    <input type="text" nbInput fullWidth placeholder="Enter statePreInjury" name="statePreInjury"
+                      #statePreInjury="ngModel" [(ngModel)]="medicalData.statePreInjury" required>
+                    <div *ngIf="statePreInjury.invalid && (statePreInjury.dirty || statePreInjury.touched)"
+                      class="error">
+                      <div *ngIf="statePreInjury.errors.required">genotype is required</div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" nbButton status="primary">Update Changes</button>
+                    <button type="submit" nbButton status="primary" (click)="SubmitMedicalData()">Update
+                      Changes</button>
                   </div>
                 </div>
               </form>
@@ -530,19 +663,25 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Tax ID</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Tax ID">
+                    <input type="text" nbInput fullWidth placeholder="Enter taxId" name="taxId" #taxId="ngModel"
+                      [(ngModel)]="taxData.taxId" required>
+                    <div *ngIf="taxId.invalid && (taxId.dirty || taxId.touched)" class="error">
+                      <div *ngIf="taxId.errors.required">taxID is required</div>
+                    </div>
                   </div>
+
                 </div>
+
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Are you Nigerian?</label>
                   <div class="col-sm-8">
-                    <nb-radio-group [(value)]="radioGroupValue">
-                      <nb-radio [value]="'This is value 1'">
-                        Yes
+                    <nb-radio-group [(value)]="taxData.nationality_Nigeria">
+                      <nb-radio [value]="nationality_Nigeria">
+                        true
                       </nb-radio>
-                      <nb-radio [value]="'This is value 2'">
-                        No
+                      <nb-radio [value]="nationality_Nigeria">
+                        false
                       </nb-radio>
 
                     </nb-radio-group>
@@ -551,20 +690,43 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Passport Number</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Passport Number">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter taxId" name="passportNumber"
+                      #passportNumber="ngModel" [(ngModel)]="taxData.passportNumber" required>
+                    <div *ngIf="passportNumber.invalid && (passportNumber.dirty || passportNumber.touched)"
+                      class="error">
+                      <div *ngIf="passportNumber.errors.required">passportNumber is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Passport Expiry
                     Date</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Passport Expiry Date">
+
+                    <ngx-date [(value)]='taxData.passportExpiryDate' #passportExpiryDate name="passportExpiryDate"
+                      id="passportExpiryDate">
+                    </ngx-date>
+                    <div *ngIf="!val" class="error">
+                      <div> Date is required</div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Country</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Country">
+
+                    <select placeholder="Select institution" name="countryId" #countryId="ngModel"
+                      [(ngModel)]=" taxData.countryId" required>
+                      <option value="">--Select country---</option>
+                      <option *ngFor="let country of countries" [value]="country.code">{{country.name}}
+                      </option>
+                    </select>
+                    <div *ngIf="countryId.invalid && (countryId.dirty || countryId.touched)" class="error">
+                      <div *ngIf="countryId.errors.required">Institution is required</div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group row">
@@ -576,8 +738,17 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Visa Expiry Date</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Visa Expiry Date">
+
+
+
+                    <ngx-date [(value)]='taxData.passportExpiryDate' #passportExpiryDate name="visaExpiryDate"
+                      id="visaExpiryDate">
+                    </ngx-date>
+                    <div *ngIf="!vali" class="error">
+                      <div> visaExpiryDate is required</div>
+                    </div>
                   </div>
+
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
@@ -603,7 +774,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"
                     style="display: flex;align-items: center;">NYSC Certificate</label>
                   <div class="col-sm-5">
-                    <ngx-file-upload></ngx-file-upload>
+                    <ngx-file-upload (valueChange)="valueChange($event)" ></ngx-file-upload>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -629,7 +800,7 @@
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" nbButton status="primary">Update Changes</button>
+                    <button type="submit" nbButton status="primary" (click)="SubmitMedical()">Update Changes</button>
                   </div>
                 </div>
               </form>

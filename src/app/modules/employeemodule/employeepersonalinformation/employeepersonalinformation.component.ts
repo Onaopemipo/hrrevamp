@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   PostServiceProxy, MessageOut, OnboardingPersonalDTO,
-  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State, Institution, IDTextViewModel, OnboardingBankDTO
+  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State,
+  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, OnboardingBankDTO, Country, OnboardingTaxDTO
 
 } from '../../../_services/service-proxies';
 
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { DataServiceProxy } from '../../../_services/service-proxies'
 import { from } from 'rxjs';
+import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 
 @Component({
   selector: 'ngx-employeepersonalinformation',
@@ -30,13 +32,19 @@ export class EmployeepersonalinformationComponent implements OnInit {
 
   ];
   AdminForm: FormGroup
+  anyPreInjury:boolean= false
   UserData = new OnboardingPersonalDTO().clone();
   Gender: DropdownValue[] = [];
   Marital: DropdownValue[] = [];
-  Institution: Institution[] = []
+  Institution: Institution[] = [];
   BankName: DropdownValue[] = [];
   BankType: IDTextViewModel[] = [];
-  paymentData = new OnboardingBankDTO().clone()
+  paymentData = new OnboardingBankDTO().clone();
+  medicalData = new  OnboardingMedicalDisclosureDTO().clone();
+  Religion : DropdownValue[] = [];
+  taxData = new  OnboardingTaxDTO().clone();
+  workData = new OnboardingWorkDTO().clone();
+  countries: Country[]= []
 
 
   constructor(private DataService: DataServiceProxy, private common: CommonServiceProxy, private PostService: PostServiceProxy,
@@ -44,17 +52,37 @@ export class EmployeepersonalinformationComponent implements OnInit {
   async getGender() {
     const data = await this.DataService.getDropDownValuesById(10).toPromise()
     if (!data.hasError) {
-      console.log('gender', data.result)
+   
       this.Gender = data.result;
+      
+    }
+  }
+
+  async getreligion() {
+    const data = await this.DataService.getDropDownValuesById(8).toPromise()
+    if (!data.hasError) {
+   
+      this.Religion= data.result;
+   
       this.Gender[0].option_text
     }
   }
+
+  async getCountry() {
+    const data = await this.DataService.getCountries().toPromise()
+    if (!data.hasError) {
+   
+      this.countries= data.result;
+      console.log('countries',this.countries)
+      this.Gender[0].option_text
+    }
+  }
+
   async getMaritalStatus() {
     const data = await this.DataService.getDropDownValuesById(4).toPromise();
     if (!data.hasError) {
-      console.log('gender', data.result)
       this.Marital = data.result;
-      this.Gender[0].option_text
+
     }
   }
 
@@ -64,7 +92,7 @@ export class EmployeepersonalinformationComponent implements OnInit {
     if (!data.hasError) {
       console.log('gender', data.result)
       this.BankName = data.result;
-      console.log('bankname',this.BankName)
+      // console.log('bankname',this.BankName)
       // this.Gender[0].option_text
     }
   }
@@ -84,21 +112,48 @@ export class EmployeepersonalinformationComponent implements OnInit {
     }
   }
 
+   async SubmitMedicalData(){
+    this.submitbtnPressed= true
+    console.log('userdata', this.medicalData)
+
+    this.submitbtnPressed = true
+    const data = await this.PostService.addUpdateOnboardingMedicalDisclosureData(this.medicalData).toPromise()
+    if (!data.hasError) {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+  
+
+    } else {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+    }
+
+  }
+
+  SubmitMedical(){
+    alert('hello medical')
+  }
+
   get validated() {
     if (this.UserData.dateOfBirth) return true;
     return false
   }
+  get val(){
+    if (this.taxData.passportExpiryDate) return true; return false
+  }
 
+  get vali () {
+    if(this.taxData.visaExpiryDate) return true ; return  false
+  }
   get validatedata() {
     if (this.UserData.dateofCompletion) return true;
     return false
   }
 
-  get formvalidateb () {
+  get formvalidate () {
 
     if (this.UserData.firstName && this.UserData.lastName && this.UserData.phoneNumber && this.UserData.dateOfBirth
       && this.UserData.martialStatusId && this.UserData.genderId && this.UserData.residentialAddress && this.UserData.fieldOfStudy
-      && this.UserData.institutionId && this.UserData.nextOfKinFullName && this.UserData.nextofKinAddress && this.UserData.dateofCompletion
+      && this.UserData.institutionId && this.UserData.nextOfKinFullName && this.UserData.nextofKinAddress && this.UserData.dateofCompletion && this.UserData.religionId
+      && this.UserData.defaultMobile
       && this.UserData.degree) return true;
     return false;
   }
@@ -110,12 +165,13 @@ export class EmployeepersonalinformationComponent implements OnInit {
   }
 
   async onSubmit() {
-    alert('hello')
+    console.log('userdata', this.UserData)
 
     this.submitbtnPressed = true
     const data = await this.PostService.addUpdateOnboardingPersonnalData(this.UserData).toPromise()
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+  
 
     } else {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
@@ -149,6 +205,12 @@ export class EmployeepersonalinformationComponent implements OnInit {
     this.getInstitution();
     this.getBank();
     this.getAccountType()
+    this.getreligion();
+    this.getCountry();
+  }
+
+  valueChange(files:Transfer) {
+
   }
 
 }
