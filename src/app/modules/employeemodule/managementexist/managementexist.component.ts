@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {  MyExitRequest } from '../services/exit-request.service';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { FormGroup } from '@angular/forms'
-import { CommonServiceProxy, DataServiceProxy, RetirementServiceProxy, RetirementType, RetirmentDTO } from 'app/_services/service-proxies';
+import { CommonServiceProxy, DataServiceProxy, RetirementServiceProxy, RetirementType, RetirmentDTO,IDTextViewModel } from 'app/_services/service-proxies';
 import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
+import { CustomServiceService } from 'app/_services/custom-service.service';
 
 
 
@@ -44,13 +45,15 @@ export class ManagementexistComponent implements OnInit {
   loading: boolean = false;
   RetirmentBody = new RetirmentDTO().clone();
   uploadOption: number = 1;
+  allbulkProcesses: IDTextViewModel[] = [];
   constructor(
     private router: Router,
     private DataService: DataServiceProxy,
 private CommonService: CommonServiceProxy,
     private activatedRoute: ActivatedRoute,
     private RetirementService: RetirementServiceProxy,
-    private alertService: AlertserviceService
+    private alertService: AlertserviceService,
+    private CustomService: CustomServiceService,
 
   ) {
 
@@ -58,7 +61,7 @@ private CommonService: CommonServiceProxy,
 
   ngOnInit(): void {
     this.getRetirementsTypes();
-
+this.getProccessId()
     this.activatedRoute.queryParams.subscribe(params => {
       if (params) {
         if (params.type) {
@@ -69,6 +72,21 @@ private CommonService: CommonServiceProxy,
       }
     }
     );
+  }
+  getProccessId() {
+    this.DataService.getBulkUploadProcesses().subscribe(data => {
+      if (!data.hasError) {
+        this.allbulkProcesses = data.result;
+      }
+    })
+  }
+  downloadSampleFile() {
+    let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
+    this.CustomService.downloadSampleTemplate(processId).subscribe((data) => {
+      const dtype = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      this.CustomService.downloadFile(data, dtype);
+
+    })
   }
   getRetirementsTypes() {
     this.CommonService.getRetirmentType().subscribe(data => {
