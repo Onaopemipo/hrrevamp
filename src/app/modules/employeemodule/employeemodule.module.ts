@@ -1,7 +1,8 @@
-import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-
+import { FormsModule as ngFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   NbButtonModule,
   NbCardModule,
@@ -18,7 +19,7 @@ import {
   NbDialogModule,
   NbAlertModule
 } from '@nebular/theme';
-import { FormsModule as ngFormsModule } from '@angular/forms';
+
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from '../../@theme/theme.module';
 
@@ -101,6 +102,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     EmployeemoduleRoutingModule,
     ThemeModule,
     ngFormsModule,
+    ReactiveFormsModule,
     NbButtonModule,
     NbCardModule,
     NbCheckboxModule,
@@ -145,7 +147,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     AddUpdateDeploymentServiceProxy,
     BulkMasterServiceProxy,
     CustomServiceService,
-    PostServiceProxy
+    RetirementServiceProxy
   ]
 
 

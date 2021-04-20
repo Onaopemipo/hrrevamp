@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Exit Management' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader [pageName]='ExitManagement' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 
 </ngx-componentsheader>
 
@@ -18,12 +18,14 @@
                 
             </nb-tab>
         </nb-tabset>
-        <ngx-tableheader>
-            
-        </ngx-tableheader>
-        <input [(ngModel)]='filter.id'/>
-        <button (click)='loadData()'></button>
-        <ngx-tablecomponent [userData]='data' [tableColum]="tableColumns" [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+        <ngx-default-content *ngIf="showEmpty" [pageHeader]="ExitManagement"
+        pageDescription="Click on below button to iniate a new Exit Request" [buttonValue]="topActionButtons[0].label" [loading]="loading"
+        (buttonClick)="modal(0)">
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+        [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allExitRequest"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      </ngx-tablecomponent>
     </nb-card-body>
 
 

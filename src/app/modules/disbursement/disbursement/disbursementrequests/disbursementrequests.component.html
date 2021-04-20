@@ -4,24 +4,24 @@
 <div class="main-page-container">
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="All Requests" [tabId]="TABS.ALL_REQUESTS">
-      <div *ngIf="allDisbursements.length < 1">
+      <div *ngIf="requestCounter < 1">
       <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
       </ngx-default-content>
       </div>
 
-      <div *ngIf="allDisbursements.length < 0">
+      <div *ngIf="requestCounter < 0">
         <ngx-tableheader></ngx-tableheader>
        <ngx-tablecomponent [tableColum]="AllRequest" [userData]="tableData" [showActions]="tableActions"></ngx-tablecomponent>
       </div>
     </nb-tab>
 
     <nb-tab tabTitle="Disbursed" [tabId]="TABS.DISBURSED">
-      <div *ngIf="allDisbursements.length < 1">
+      <div *ngIf="requestCounter < 1">
         <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
         </ngx-default-content>
         </div>
 
-      <div *ngIf="allDisbursements.length > 0">
+      <div *ngIf="requestCounter > 0">
         <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [tableColum]="Disbursed" [userData]="tableData" [showActions]="true" [actions]="tableActions"></ngx-tablecomponent>
       </div>
@@ -30,22 +30,22 @@
 
     <nb-tab tabTitle="Pending" [tabId]="TABS.PENDING">
 
-      <div *ngIf="allDisbursements.length < 1">
+      <div *ngIf="requestCounter < 1">
         <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
         </ngx-default-content>
         </div>
 
-      <div *ngIf="allDisbursements.length > 0">
+      <div *ngIf="requestCounter > 0">
         <ngx-tableheader></ngx-tableheader>
        <ngx-tablecomponent [tableColum]="Pending" [userData]="tableData"></ngx-tablecomponent>
       </div>
     </nb-tab>
     <nb-tab tabTitle="Failed" [tabId]="TABS.FAILED">
-      <div *ngIf="allDisbursements.length < 1">
+      <div *ngIf="requestCounter < 1">
         <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
         </ngx-default-content>
         </div>
-      <div *ngIf="allDisbursements.length > 1">
+      <div *ngIf="requestCounter > 0">
         <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [tableColum]="Failed" [userData]="tableData"></ngx-tablecomponent>
       </div>

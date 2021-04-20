@@ -22,7 +22,7 @@ export class GetTokenServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -107,7 +107,7 @@ export class ValidateServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -190,7 +190,7 @@ export class ForgotPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -273,7 +273,7 @@ export class ResetPasswordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -358,7 +358,7 @@ export class ConfirmEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -444,7 +444,7 @@ export class FetchActivityLogServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -545,7 +545,7 @@ export class PostServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1061,6 +1061,124 @@ export class PostServiceProxy {
     }
 
     /**
+     * @param iD (optional) 
+     * @param companyId (optional) 
+     * @param subID (optional) 
+     * @param onboardingId (optional) 
+     * @param nyscCertificate (optional) 
+     * @param birthCertificate (optional) 
+     * @param driverLicense (optional) 
+     * @param addtionalDocument (optional) 
+     * @param createdById (optional) 
+     * @param userId (optional) 
+     * @param passport (optional) 
+     * @return Success
+     */
+    addUpdateOnboardingDocummentData(iD: number | undefined, companyId: number | undefined, subID: number | undefined, onboardingId: number | undefined, nyscCertificate: string | null | undefined, birthCertificate: string | undefined, driverLicense: string | null | undefined, addtionalDocument: string | null | undefined, createdById: number | undefined, userId: number | undefined, passport: FileParameter | null | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Onboarding/Post/AddUpdateOnboardingDocummentData";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (iD === null || iD === undefined)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else
+            content_.append("ID", iD.toString());
+        if (companyId === null || companyId === undefined)
+            throw new Error("The parameter 'companyId' cannot be null.");
+        else
+            content_.append("CompanyId", companyId.toString());
+        if (subID === null || subID === undefined)
+            throw new Error("The parameter 'subID' cannot be null.");
+        else
+            content_.append("SubID", subID.toString());
+        if (onboardingId === null || onboardingId === undefined)
+            throw new Error("The parameter 'onboardingId' cannot be null.");
+        else
+            content_.append("OnboardingId", onboardingId.toString());
+        if (nyscCertificate !== null && nyscCertificate !== undefined)
+            content_.append("NyscCertificate", nyscCertificate.toString());
+        if (birthCertificate === null || birthCertificate === undefined)
+            throw new Error("The parameter 'birthCertificate' cannot be null.");
+        else
+            content_.append("BirthCertificate", birthCertificate.toString());
+        if (driverLicense !== null && driverLicense !== undefined)
+            content_.append("DriverLicense", driverLicense.toString());
+        if (addtionalDocument !== null && addtionalDocument !== undefined)
+            content_.append("AddtionalDocument", addtionalDocument.toString());
+        if (createdById === null || createdById === undefined)
+            throw new Error("The parameter 'createdById' cannot be null.");
+        else
+            content_.append("CreatedById", createdById.toString());
+        if (userId === null || userId === undefined)
+            throw new Error("The parameter 'userId' cannot be null.");
+        else
+            content_.append("UserId", userId.toString());
+        if (passport !== null && passport !== undefined)
+            content_.append("Passport", passport.data, passport.fileName ? passport.fileName : "Passport");
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateOnboardingDocummentData(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateOnboardingDocummentData(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateOnboardingDocummentData(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
      * @param body (optional) 
      * @return Success
      */
@@ -1142,7 +1260,7 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1334,7 +1452,7 @@ export class SubordinateAppraisalsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1420,7 +1538,7 @@ export class GetEmployeePerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1521,7 +1639,7 @@ export class SubmitEmployeeAppraisalReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1608,7 +1726,7 @@ export class EmployeePerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1709,7 +1827,7 @@ export class SubmitPerformanceReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1795,7 +1913,7 @@ export class GetEmployeeAppraisalHistoriesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1881,7 +1999,7 @@ export class FetchApprovalProcessServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -1967,7 +2085,7 @@ export class FetchApprovalProcessStepsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2058,7 +2176,7 @@ export class FetchPendingItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2150,7 +2268,7 @@ export class SaveApprovalProcessServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2236,7 +2354,7 @@ export class SaveApprovalProcessStepServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2322,7 +2440,7 @@ export class RemoveApprovalProcessStepServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2408,7 +2526,7 @@ export class FetchApprovalLogViewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2498,7 +2616,7 @@ export class PostApprovalLogServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -2583,7 +2701,7 @@ export class AssetManagementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5309,7 +5427,7 @@ export class AddUpdateBenefitPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5394,7 +5512,7 @@ export class DeleteBenefitPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5479,7 +5597,7 @@ export class GetBenefitPlanByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5577,7 +5695,7 @@ export class AddUpdateEmployeeCoverageBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5662,7 +5780,7 @@ export class FetchEmployeeCoverageBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5785,7 +5903,7 @@ export class DeleteEmployeeCoverageBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5870,7 +5988,7 @@ export class AddUpdateCoverageServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -5955,7 +6073,7 @@ export class FetchCoveragePlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6061,7 +6179,7 @@ export class DeleteCoveragePlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6146,7 +6264,7 @@ export class AddUpdateEligibilityTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6231,7 +6349,7 @@ export class GetEligibilityTypeByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6329,7 +6447,7 @@ export class DeleteEligibilityTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6414,7 +6532,7 @@ export class AddUpdateBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6500,7 +6618,7 @@ export class FetchAllBudgetsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6581,7 +6699,7 @@ export class FetchBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6667,7 +6785,7 @@ export class DeleteBudgetServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6753,7 +6871,7 @@ export class AddUpdateBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6839,7 +6957,7 @@ export class FetchAllBudgetItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -6925,7 +7043,7 @@ export class FetchBudgetItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7011,7 +7129,7 @@ export class FetchBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7097,7 +7215,7 @@ export class DeleteBudgetItemServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7183,7 +7301,7 @@ export class BulkMasterServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7288,11 +7406,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUploadid(response_);
+            return this.processBulkUploadId(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUploadid(<any>response_);
+                    return this.processBulkUploadId(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7301,7 +7419,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUploadId(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7430,7 +7548,7 @@ export class AddUpdateEmployeetoNineBoxGridServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7509,6 +7627,92 @@ export class AddUpdateEmployeetoNineBoxGridServiceProxy {
 }
 
 @Injectable()
+export class AddUpdateEmployeetoNineBoxGridBoxbyAppersialScoreServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for adding/updating Employee to ninebox Grid
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateEmployeetoBoxBasedonAppersailScore(body: NineGridBoxDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/AddUpdateEmployeetoNineBoxGridBoxbyAppersialScore/Add-Update-EmployeetoBox-basedonAppersailScore";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateEmployeetoBoxBasedonAppersailScore(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateEmployeetoBoxBasedonAppersailScore(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateEmployeetoBoxBasedonAppersailScore(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class MoveEmployeeServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -7516,7 +7720,7 @@ export class MoveEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7602,7 +7806,7 @@ export class RemoveEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7688,7 +7892,7 @@ export class GetEmployeeebyGridBoxServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7780,7 +7984,7 @@ export class GetGridBoxCountServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7862,7 +8066,7 @@ export class AddUpdateEmployeetoTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -7948,7 +8152,7 @@ export class AddUpdateRequirmentstoTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8037,7 +8241,7 @@ export class CareerSuccessionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8045,7 +8249,7 @@ export class CareerSuccessionServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    careerSuccession(body: CareerSuccessionDTO | undefined): Observable<MessageOutApiResult> {
+    careerSuccession(body: ManageCareerSuccessionDto | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/CareerSuccession/CareerSuccession/CareerSuccession";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8123,7 +8327,7 @@ export class CareerPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8209,7 +8413,7 @@ export class DeleteEmployeefromTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8300,7 +8504,7 @@ export class GetTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8522,7 +8726,7 @@ export class FetchSuccessionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8603,7 +8807,7 @@ export class RemoveEmployeeFromSuccessorServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8692,7 +8896,7 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8770,6 +8974,95 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
     }
 }
 
+
+
+@Injectable()
+export class CompareCompetencyServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API to Fetch Talent ManagementsPools.
+    Note: all filter are optional
+     * @param body (optional) 
+     * @return Success
+     */
+    competency(body: ManageCompareDTO | undefined): Observable<VmListComparismListApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/CompareCompetency/competency";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<VmListComparismListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VmListComparismListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCompetency(response: HttpResponseBase): Observable<VmListComparismListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VmListComparismListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VmListComparismListApiResult>(<any>null);
+    }
+}
+
 @Injectable()
 export class AddUpdateCertificationServiceProxy {
     private http: HttpClient;
@@ -8778,7 +9071,7 @@ export class AddUpdateCertificationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8864,7 +9157,7 @@ export class GetAllCertificationsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -8961,7 +9254,7 @@ export class GetCertificationByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -9047,7 +9340,145 @@ export class CommonServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for getting Element Types that can be use for dropdowns
+     * @return Success
+     */
+    getElementTypes(): Observable<ElementTypeDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Common/GetElementTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetElementTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetElementTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<ElementTypeDTOIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ElementTypeDTOIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetElementTypes(response: HttpResponseBase): Observable<ElementTypeDTOIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ElementTypeDTOIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ElementTypeDTOIListApiResult>(<any>null);
+    }
+
+    /**
+     * API for getting Element Categories that can be use for dropdowns
+     * @return Success
+     */
+    getElementCategories(): Observable<ElementCategoryDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/Common/GetElementCategories";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetElementCategories(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetElementCategories(<any>response_);
+                } catch (e) {
+                    return <Observable<ElementCategoryDTOIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ElementCategoryDTOIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetElementCategories(response: HttpResponseBase): Observable<ElementCategoryDTOIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ElementCategoryDTOIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ElementCategoryDTOIListApiResult>(<any>null);
     }
 
     /**
@@ -11073,7 +11504,7 @@ export class CommunicationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -11748,7 +12179,7 @@ export class AddUpdateCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -11833,7 +12264,7 @@ export class FetchCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -11936,7 +12367,7 @@ export class DeleteCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12021,7 +12452,7 @@ export class AddUpdateEmployeeCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12106,7 +12537,7 @@ export class FetchEmployeeCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12211,7 +12642,7 @@ export class DeleteEmployeeCompensationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12296,7 +12727,7 @@ export class CompetencyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12382,7 +12813,7 @@ export class SaveConfirmationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12467,7 +12898,7 @@ export class GetConfirmationsByDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12568,7 +12999,7 @@ export class CourseServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12808,7 +13239,7 @@ export class FetchDashboardDataServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -12889,7 +13320,77 @@ export class DataServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for getting Document Entity Types i.e.
+    {'TRAINING, CONFIRMATION, OTHERS' }
+     * @return Success
+     */
+    docEntityTypes(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/DocEntityTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDocEntityTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDocEntityTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDocEntityTypes(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
     }
 
     /**
@@ -14730,75 +15231,6 @@ export class DataServiceProxy {
         }
         return _observableOf<IDTextViewModelIListApiResult>(<any>null);
     }
-
-    /**
-     * Api for getting list of Qualification for CareerSuccessionService that can be used as dropdowns
-     * @return Success
-     */
-    getQuilificationCategory(): Observable<IDTextViewModelIListApiResult> {
-        let url_ = this.baseUrl + "/api/Data/GetQuilificationCategory";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetQuilificationCategory(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetQuilificationCategory(<any>response_);
-                } catch (e) {
-                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetQuilificationCategory(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
-    }
 }
 
 @Injectable()
@@ -14809,7 +15241,7 @@ export class AddUpdateDepartmentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -14895,7 +15327,7 @@ export class GetAllDepartmentsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -14987,7 +15419,7 @@ export class GetDepartmentByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15073,7 +15505,7 @@ export class AddUpdateDependantServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15158,7 +15590,7 @@ export class DeleteDependantServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15243,7 +15675,7 @@ export class GetDependantByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15353,7 +15785,7 @@ export class GetAllDependantByCompanyIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15448,7 +15880,7 @@ export class GetAllDependantByEmployeeIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15543,7 +15975,7 @@ export class AddUpdateDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15628,7 +16060,7 @@ export class FetchDeploymentByReferenceNoServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15711,7 +16143,7 @@ export class FetchDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15836,7 +16268,7 @@ export class EmployeeDeploymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15916,7 +16348,7 @@ export class TenantDisbursementChannelsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -15997,7 +16429,7 @@ export class SingleDisbursementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16083,7 +16515,7 @@ export class CreateEmployeeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16169,7 +16601,7 @@ export class UploadProfileImageServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16258,7 +16690,7 @@ export class FetchEmployeesDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16359,7 +16791,7 @@ export class FetchEmployeesByName_IdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16446,7 +16878,7 @@ export class FetchEmployeeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16532,7 +16964,7 @@ export class SearchEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16661,7 +17093,7 @@ export class FetchAllEmployeesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16760,7 +17192,7 @@ export class FetchEmployeeContractByEmployeeIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16846,7 +17278,7 @@ export class AddUpdateEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -16932,7 +17364,7 @@ export class GetAllEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17024,7 +17456,7 @@ export class GetEventsByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17110,7 +17542,7 @@ export class DeleteEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17196,7 +17628,7 @@ export class AddUpdateExpenseGroupServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17281,7 +17713,7 @@ export class ToggleExpenseGroupServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17364,7 +17796,7 @@ export class GetExpenseGroupsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17478,7 +17910,7 @@ export class AddUpdateExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17563,7 +17995,7 @@ export class ToggleExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17646,7 +18078,7 @@ export class GetExpenseProjectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17660,7 +18092,7 @@ export class GetExpenseProjectServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    getExpenseProject(iD: number | undefined, name: string | null | undefined, description: string | null | undefined, ban: boolean | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseProject[]> {
+    getExpenseProject(iD: number | undefined, name: string | null | undefined, description: string | null | undefined, ban: boolean | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseProjectIListApiResult> {
         let url_ = this.baseUrl + "/api/ExpenseProject/GetExpenseProject/GetExpenseProject?";
         if (iD === null)
             throw new Error("The parameter 'iD' cannot be null.");
@@ -17703,14 +18135,14 @@ export class GetExpenseProjectServiceProxy {
                 try {
                     return this.processGetExpenseProject(<any>response_);
                 } catch (e) {
-                    return <Observable<ExpenseProject[]>><any>_observableThrow(e);
+                    return <Observable<ExpenseProjectIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ExpenseProject[]>><any>_observableThrow(response_);
+                return <Observable<ExpenseProjectIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetExpenseProject(response: HttpResponseBase): Observable<ExpenseProject[]> {
+    protected processGetExpenseProject(response: HttpResponseBase): Observable<ExpenseProjectIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -17721,11 +18153,7 @@ export class GetExpenseProjectServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(ExpenseProject.fromJS(item));
-            }
+            result200 = ExpenseProjectIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -17750,7 +18178,291 @@ export class GetExpenseProjectServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExpenseProject[]>(<any>null);
+        return _observableOf<ExpenseProjectIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class AddUpdateProjectActivityServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateProjectActivity(body: ExpenseProjectActivityDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/ExpenseProjectActivity/AddUpdateProjectActivity/Add-Update-ProjectActivity";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateProjectActivity(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateProjectActivity(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateProjectActivity(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class ToggleProjectActivityServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    toggleLoanType(body: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/ExpenseProjectActivity/ToggleProjectActivity/Toggle-Loan-Type";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processToggleLoanType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processToggleLoanType(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processToggleLoanType(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetProjectActivityServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param name (optional) 
+     * @param iD (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getProjectActivity(companyID: number | undefined, subID: number | undefined, name: string | null | undefined, iD: number | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseProjectActivityIListApiResult> {
+        let url_ = this.baseUrl + "/api/ExpenseProjectActivity/GetProjectActivity/GetProjectActivity?";
+        if (companyID === null)
+            throw new Error("The parameter 'companyID' cannot be null.");
+        else if (companyID !== undefined)
+            url_ += "CompanyID=" + encodeURIComponent("" + companyID) + "&";
+        if (subID === null)
+            throw new Error("The parameter 'subID' cannot be null.");
+        else if (subID !== undefined)
+            url_ += "SubID=" + encodeURIComponent("" + subID) + "&";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (referenceId !== undefined && referenceId !== null)
+            url_ += "ReferenceId=" + encodeURIComponent("" + referenceId) + "&";
+        if (code !== undefined && code !== null)
+            url_ += "Code=" + encodeURIComponent("" + code) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetProjectActivity(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetProjectActivity(<any>response_);
+                } catch (e) {
+                    return <Observable<ExpenseProjectActivityIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ExpenseProjectActivityIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetProjectActivity(response: HttpResponseBase): Observable<ExpenseProjectActivityIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExpenseProjectActivityIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ExpenseProjectActivityIListApiResult>(<any>null);
     }
 }
 
@@ -17762,7 +18474,7 @@ export class AddUpdateExpenseServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17847,7 +18559,7 @@ export class ToggleExpenseRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -17930,7 +18642,7 @@ export class FetchExpensesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18059,7 +18771,7 @@ export class FetchExpensesDetailedServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18207,7 +18919,7 @@ export class AddUpdateLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18438,7 +19150,7 @@ export class ToggleExpenseTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18521,7 +19233,7 @@ export class GetExpenseTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18631,7 +19343,7 @@ export class AddExpenseSubTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18716,7 +19428,7 @@ export class ToggleExpenseSubTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18802,7 +19514,7 @@ export class GetExpenseTypeNameServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18885,7 +19597,7 @@ export class GetExpenseSubTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -18995,7 +19707,7 @@ export class FileStorageManagerServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -19267,7 +19979,7 @@ export class GradeLevelServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -19513,7 +20225,7 @@ export class GradeLevelBenefitServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -19827,7 +20539,7 @@ export class GradeLevelStepServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20156,7 +20868,7 @@ export class InstitutionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20389,6 +21101,286 @@ export class InstitutionServiceProxy {
 }
 
 @Injectable()
+export class AddUpdateInterestRateServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateIntrestRate(body: InterestRateDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/InterestRate/AddUpdateInterestRate/Add-Update-IntrestRate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateIntrestRate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateIntrestRate(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateIntrestRate(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class ToggleInterestRateServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    toggleInterestRate(body: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/InterestRate/ToggleInterestRate/Toggle-Interest-Rate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processToggleInterestRate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processToggleInterestRate(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processToggleInterestRate(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetInterestRateServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param iD (optional) 
+     * @param rate (optional) 
+     * @param companyID (optional) 
+     * @param subId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getInterestRate(iD: number | undefined, rate: number | undefined, companyID: number | undefined, subId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<InterestRateIListApiResult> {
+        let url_ = this.baseUrl + "/api/InterestRate/GetInterestRate/GetInterestRate?";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (rate === null)
+            throw new Error("The parameter 'rate' cannot be null.");
+        else if (rate !== undefined)
+            url_ += "Rate=" + encodeURIComponent("" + rate) + "&";
+        if (companyID === null)
+            throw new Error("The parameter 'companyID' cannot be null.");
+        else if (companyID !== undefined)
+            url_ += "CompanyID=" + encodeURIComponent("" + companyID) + "&";
+        if (subId === null)
+            throw new Error("The parameter 'subId' cannot be null.");
+        else if (subId !== undefined)
+            url_ += "SubId=" + encodeURIComponent("" + subId) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetInterestRate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetInterestRate(<any>response_);
+                } catch (e) {
+                    return <Observable<InterestRateIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<InterestRateIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetInterestRate(response: HttpResponseBase): Observable<InterestRateIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = InterestRateIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<InterestRateIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class AddUpdateJobRolesServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -20396,7 +21388,7 @@ export class AddUpdateJobRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20482,7 +21474,7 @@ export class GetAllJobRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20574,7 +21566,7 @@ export class GetJobRoleByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20660,7 +21652,7 @@ export class DeleteJobRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20746,7 +21738,7 @@ export class FetchKeyResultAreasServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20854,7 +21846,7 @@ export class FetchKRAsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -20935,7 +21927,7 @@ export class FetchKeyResultAreaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21021,7 +22013,7 @@ export class CreateKeyResultAreaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21109,7 +22101,7 @@ export class AssignKRAServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21197,7 +22189,7 @@ export class AddUpdateKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21283,7 +22275,7 @@ export class AddUpdateEmployeeKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21369,7 +22361,7 @@ export class FetchKPIsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21455,7 +22447,7 @@ export class FetchKPIServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21541,7 +22533,7 @@ export class FetchEmployeeKPIsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -21627,7 +22619,7 @@ export class LeaveEntitlementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22009,7 +23001,7 @@ export class AddUpdateHolidayServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22095,26 +23087,31 @@ export class HolidayDatesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
      * this method is used to fetch all or by Id. no param for now
-     * @param body (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
-    getHolidayDates(body: LeaveFilterDTO | undefined): Observable<LeaveHolidayDTOListApiResult> {
-        let url_ = this.baseUrl + "/api/LeaveHolidayDate/HolidayDates/GetHolidayDates";
+    getHolidayDates(pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveHolidayDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/LeaveHolidayDate/HolidayDates/GetHolidayDates?";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
-
         let options_ : any = {
-            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -22181,7 +23178,7 @@ export class GetByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22267,7 +23264,7 @@ export class DeleteServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22575,7 +23572,7 @@ export class CreateLeavePlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22661,7 +23658,7 @@ export class FetchLeavePlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22767,7 +23764,7 @@ export class LeavePlanEventsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22851,7 +23848,7 @@ export class ApproveOrRejectServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -22938,7 +23935,7 @@ export class PostReviewServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23025,7 +24022,7 @@ export class CreateLeaveByAdminServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23111,7 +24108,7 @@ export class GetLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23311,7 +24308,7 @@ export class CancelLeaveRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23397,7 +24394,7 @@ export class GetLeaveTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23505,7 +24502,7 @@ export class DeleteLeaveTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23591,7 +24588,7 @@ export class GetLeaveTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23677,7 +24674,7 @@ export class LeaveWorkFlowServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -23980,7 +24977,7 @@ export class GetLeaveYearsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24085,7 +25082,7 @@ export class CreateLeaveYearServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24171,7 +25168,7 @@ export class GetLeaveYearServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24257,7 +25254,7 @@ export class PostFullRepaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24342,7 +25339,7 @@ export class SimulatePaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24445,7 +25442,7 @@ export class GetLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24568,7 +25565,7 @@ export class GetLoanSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24653,7 +25650,7 @@ export class UpdateLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24738,7 +25735,7 @@ export class LoadRepaymentScheduleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24828,7 +25825,7 @@ export class FetchLoanRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -24951,7 +25948,7 @@ export class GetLoanRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25046,7 +26043,7 @@ export class ToggleLoanTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25131,7 +26128,7 @@ export class GetLoanTypesByCriteriaServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25255,7 +26252,7 @@ export class FetchLoanTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25345,7 +26342,7 @@ export class AddUpdateLocationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25431,7 +26428,7 @@ export class GetAllLocationsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25533,7 +26530,7 @@ export class GetLocationByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -25619,7 +26616,7 @@ export class ManpowerServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -26636,6 +27633,274 @@ export class ManpowerServiceProxy {
 }
 
 @Injectable()
+export class AddUpateOfferLetterTemplateServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateOfferletterTemplate(body: OfferLetterTemplateDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/OfferLetter/AddUpateOfferLetterTemplate/Add-Update-OfferletterTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateOfferletterTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateOfferletterTemplate(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateOfferletterTemplate(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class ToggleOfferLetterTempleteServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    toggleOfferLetterTemplate(body: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/OfferLetter/ToggleOfferLetterTemplete/Toggle-Offer-Letter-Template";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processToggleOfferLetterTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processToggleOfferLetterTemplate(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processToggleOfferLetterTemplate(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class FetchOfferLetterTemplateServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param iD (optional) 
+     * @param offerTitle (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    fetchOfferLetterTemplate(iD: number | undefined, offerTitle: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeIListApiResult> {
+        let url_ = this.baseUrl + "/api/OfferLetter/FetchOfferLetterTemplate/FetchOfferLetterTemplate?";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (offerTitle !== undefined && offerTitle !== null)
+            url_ += "OfferTitle=" + encodeURIComponent("" + offerTitle) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFetchOfferLetterTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFetchOfferLetterTemplate(<any>response_);
+                } catch (e) {
+                    return <Observable<LoanTypeIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<LoanTypeIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFetchOfferLetterTemplate(response: HttpResponseBase): Observable<LoanTypeIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = LoanTypeIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<LoanTypeIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class FetchOnboardingPersonnalDataByIdServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -26643,7 +27908,7 @@ export class FetchOnboardingPersonnalDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -26738,7 +28003,7 @@ export class FetchOnboardingDocummentDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -26838,7 +28103,7 @@ export class FetchOnboardingMedicalDisclosureDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -26938,7 +28203,7 @@ export class FetchOnboardingPaymentDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27038,7 +28303,7 @@ export class FetchOnboardingTaxDataByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27138,7 +28403,7 @@ export class FetchEmployeeOnboardingDataDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27228,7 +28493,7 @@ export class AddUpdatePayElementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27314,7 +28579,7 @@ export class GetAllPayElementsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27426,7 +28691,7 @@ export class GetPayElementByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27512,7 +28777,7 @@ export class AddUpdatePaymentInstitutionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27598,7 +28863,7 @@ export class GetAllPaymentInstitutionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27695,7 +28960,7 @@ export class GetPaymentInstitutionByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27781,7 +29046,7 @@ export class GetPayslipAnalysisServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27867,7 +29132,7 @@ export class GetPayrollAnalysisServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -27958,7 +29223,7 @@ export class GetBankScheduleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28044,7 +29309,7 @@ export class GetEarningsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28130,7 +29395,7 @@ export class GetDeductionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28216,7 +29481,7 @@ export class GetAllElementsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28302,7 +29567,7 @@ export class GetDeductionSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28388,7 +29653,7 @@ export class GetPaymentSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28474,7 +29739,7 @@ export class GetTaxDetailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28560,7 +29825,7 @@ export class GetTaxSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28646,7 +29911,7 @@ export class GetPensionDetailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28732,7 +29997,7 @@ export class GetPensionSummaryServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28818,7 +30083,7 @@ export class FetchPayrollServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28904,7 +30169,7 @@ export class FetchPayslipsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -28995,7 +30260,7 @@ export class FetchPayslipItemsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29081,7 +30346,7 @@ export class AddUpdatePayScaleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29167,7 +30432,7 @@ export class GetAllPayrollTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29264,7 +30529,7 @@ export class GetPayrollTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29351,7 +30616,7 @@ export class FetchPerformanceCyclesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29464,7 +30729,7 @@ export class FetchPerformanceCycleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29550,7 +30815,7 @@ export class AddUpdatePerformanceCycleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29638,7 +30903,7 @@ export class AddUpdatePositionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29724,7 +30989,7 @@ export class GetAllPositionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29831,7 +31096,7 @@ export class GetPositionByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -29917,7 +31182,7 @@ export class AddUpdateProfessionalBodyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30003,7 +31268,7 @@ export class GetAllProfessionalBodiesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30100,7 +31365,7 @@ export class GetProfessionalBodyByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30186,7 +31451,7 @@ export class AddUpdateEligibleBucketServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30271,7 +31536,7 @@ export class GetEligibilityListServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30372,7 +31637,7 @@ export class GetEligibilityEmployeeListsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30467,7 +31732,7 @@ export class GetPromotionEligibilityListsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30568,7 +31833,7 @@ export class QualificationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30813,7 +32078,7 @@ export class FetchRatingsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30894,7 +32159,7 @@ export class AddUpdateRatingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -30978,7 +32243,7 @@ export class DeleteRatingRecordServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -31064,7 +32329,7 @@ export class RecruitmentJobServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -31442,7 +32707,7 @@ export class RecruitmentJobApplicationServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -31869,7 +33134,7 @@ export class RecruitmentQuizServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -32238,7 +33503,7 @@ export class RecruitmentSettingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33405,7 +34670,7 @@ export class AddUpdateRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33491,7 +34756,7 @@ export class GetAllRequestServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33603,7 +34868,7 @@ export class GetRequestByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33689,7 +34954,7 @@ export class CreateUpdateRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33775,7 +35040,7 @@ export class GetAllRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33867,7 +35132,7 @@ export class GetRequestTypeByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -33953,7 +35218,7 @@ export class DeleteRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -34038,7 +35303,7 @@ export class RetirementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -34232,44 +35497,37 @@ export class RetirementServiceProxy {
     /**
      * API to Fetch Retireee.
     Note: all filter are optional
-     * @param startdte (optional) 
-     * @param enddte (optional) 
-     * @param searchText (optional) 
-     * @param searchType (optional) 
-     * @param page (optional) 
-     * @param _selected (optional) 
-     * @param startdate (optional) 
-     * @param endate (optional) 
-     * @param pageSize (optional) 
-     * @param pageNumber (optional) 
+     * @param iD (optional) 
+     * @param fullName (optional) 
+     * @param dateRequested (optional) 
+     * @param type (optional) 
+     * @param status (optional) 
+     * @param isCleared (optional) 
+     * @param retirmentTypeid (optional) 
      * @return Success
      */
-    getRetirees(startdte: string | null | undefined, enddte: string | null | undefined, searchText: string | null | undefined, searchType: number | null | undefined, page: number | null | undefined, _selected: string | null | undefined, startdate: Date | null | undefined, endate: Date | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
+    getRetirees(iD: number | undefined, fullName: string | null | undefined, dateRequested: Date | null | undefined, type: string | null | undefined, status: string | null | undefined, isCleared: boolean | undefined, retirmentTypeid: number | undefined): Observable<RetirmentDTOListApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/GetRetirees?";
-        if (startdte !== undefined && startdte !== null)
-            url_ += "startdte=" + encodeURIComponent("" + startdte) + "&";
-        if (enddte !== undefined && enddte !== null)
-            url_ += "enddte=" + encodeURIComponent("" + enddte) + "&";
-        if (searchText !== undefined && searchText !== null)
-            url_ += "searchText=" + encodeURIComponent("" + searchText) + "&";
-        if (searchType !== undefined && searchType !== null)
-            url_ += "searchType=" + encodeURIComponent("" + searchType) + "&";
-        if (page !== undefined && page !== null)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (_selected !== undefined && _selected !== null)
-            url_ += "_selected=" + encodeURIComponent("" + _selected) + "&";
-        if (startdate !== undefined && startdate !== null)
-            url_ += "startdate=" + encodeURIComponent(startdate ? "" + startdate.toJSON() : "") + "&";
-        if (endate !== undefined && endate !== null)
-            url_ += "endate=" + encodeURIComponent(endate ? "" + endate.toJSON() : "") + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (fullName !== undefined && fullName !== null)
+            url_ += "FullName=" + encodeURIComponent("" + fullName) + "&";
+        if (dateRequested !== undefined && dateRequested !== null)
+            url_ += "DateRequested=" + encodeURIComponent(dateRequested ? "" + dateRequested.toJSON() : "") + "&";
+        if (type !== undefined && type !== null)
+            url_ += "Type=" + encodeURIComponent("" + type) + "&";
+        if (status !== undefined && status !== null)
+            url_ += "Status=" + encodeURIComponent("" + status) + "&";
+        if (isCleared === null)
+            throw new Error("The parameter 'isCleared' cannot be null.");
+        else if (isCleared !== undefined)
+            url_ += "IsCleared=" + encodeURIComponent("" + isCleared) + "&";
+        if (retirmentTypeid === null)
+            throw new Error("The parameter 'retirmentTypeid' cannot be null.");
+        else if (retirmentTypeid !== undefined)
+            url_ += "retirmentTypeid=" + encodeURIComponent("" + retirmentTypeid) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -34805,7 +36063,7 @@ export class AddUpdateRequestTypeServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -34890,7 +36148,7 @@ export class GetAllRequestsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -34986,7 +36244,7 @@ export class RequestDetailsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35069,7 +36327,7 @@ export class RequestTypesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35149,7 +36407,7 @@ export class FetchRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35230,7 +36488,7 @@ export class FetchAllRolesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35312,7 +36570,7 @@ export class FetchRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35399,7 +36657,7 @@ export class CreateRoleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35486,7 +36744,7 @@ export class FetchRolePermissionsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35566,7 +36824,7 @@ export class FetchRolePermissionServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35651,7 +36909,7 @@ export class RolePermissionMappingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -35736,7 +36994,7 @@ export class SalaryscaleServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36050,7 +37308,7 @@ export class AddSkillsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36136,7 +37394,7 @@ export class GetAllSkillsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36233,7 +37491,7 @@ export class GetSkillByIdServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36319,7 +37577,7 @@ export class CreateSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36404,7 +37662,7 @@ export class FetchSubscriptionPlansServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36484,7 +37742,7 @@ export class FetchSubscriptionPlanServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36569,7 +37827,7 @@ export class FetchSubscriptionPlanModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36654,7 +37912,7 @@ export class TalentManagementServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -36882,19 +38140,14 @@ export class TalentManagementServiceProxy {
     /**
      * API for  Delete  Employee from Talent Management Pool
      * @param talentPoolId (optional) 
-     * @param employeeId (optional) 
      * @return Success
      */
-    deleteEmployeeFromTalentManagmentPool(talentPoolId: number | undefined, employeeId: number | undefined): Observable<MessageOutApiResult> {
+    deleteEmployeeFromTalentManagmentPool(talentPoolId: number | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/TalentManagement/DeleteEmployeeFromTalentManagmentPool?";
         if (talentPoolId === null)
             throw new Error("The parameter 'talentPoolId' cannot be null.");
         else if (talentPoolId !== undefined)
             url_ += "TalentPoolId=" + encodeURIComponent("" + talentPoolId) + "&";
-        if (employeeId === null)
-            throw new Error("The parameter 'employeeId' cannot be null.");
-        else if (employeeId !== undefined)
-            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -36957,6 +38210,76 @@ export class TalentManagementServiceProxy {
         }
         return _observableOf<MessageOutApiResult>(<any>null);
     }
+
+    /**
+     * API to Fetch Talent ManagementsPools.
+    Note: all filter are optional
+     * @return Success
+     */
+    fetchTalentManagementPool(): Observable<AddTalentMangementDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/TalentManagement/FetchTalentManagementPool";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFetchTalentManagementPool(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFetchTalentManagementPool(<any>response_);
+                } catch (e) {
+                    return <Observable<AddTalentMangementDTOListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AddTalentMangementDTOListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFetchTalentManagementPool(response: HttpResponseBase): Observable<AddTalentMangementDTOListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AddTalentMangementDTOListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AddTalentMangementDTOListApiResult>(<any>null);
+    }
 }
 
 @Injectable()
@@ -36967,7 +38290,7 @@ export class VerifySubscriptionPaymentServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37055,7 +38378,7 @@ export class TenantSignUpServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37141,7 +38464,7 @@ export class ConfirmTenantEmailServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37229,7 +38552,7 @@ export class RegisterCompanyServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37314,7 +38637,7 @@ export class FetchAllTenantsServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37413,7 +38736,7 @@ export class FetchTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37494,7 +38817,7 @@ export class UpdateTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37578,7 +38901,7 @@ export class AddTenantModulesServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -37662,7 +38985,7 @@ export class TrainingServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -38050,11 +39373,11 @@ export class TrainingServiceProxy {
      * @param trainingVendorId (optional) 
      * @param trainingSpecializationId (optional) 
      * @param name (optional) 
-     * @param file (optional) 
+     * @param tempRef (optional) 
      * @param trainingCategoryId (optional) 
      * @return Success
      */
-    createtype(costPer_Head: number | undefined, no_Of_Trainees: number | undefined, overAll_Budget: number | undefined, trainingTypeId: number | undefined, employeeId: number | undefined, trainingVendorId: number | undefined, trainingSpecializationId: number | undefined, name: string | null | undefined, file: FileParameter | null | undefined, trainingCategoryId: number | undefined): Observable<MessageOutApiResult> {
+    createtype(costPer_Head: number | undefined, no_Of_Trainees: number | undefined, overAll_Budget: number | undefined, trainingTypeId: number | undefined, employeeId: number | undefined, trainingVendorId: number | undefined, trainingSpecializationId: number | undefined, name: string | null | undefined, tempRef: string | null | undefined, trainingCategoryId: number | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/Training/createtype";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -38089,8 +39412,8 @@ export class TrainingServiceProxy {
             content_.append("TrainingSpecializationId", trainingSpecializationId.toString());
         if (name !== null && name !== undefined)
             content_.append("Name", name.toString());
-        if (file !== null && file !== undefined)
-            content_.append("File", file.data, file.fileName ? file.fileName : "File");
+        if (tempRef !== null && tempRef !== undefined)
+            content_.append("TempRef", tempRef.toString());
         if (trainingCategoryId === null || trainingCategoryId === undefined)
             throw new Error("The parameter 'trainingCategoryId' cannot be null.");
         else
@@ -39045,21 +40368,76 @@ export class TrainingServiceProxy {
 
     /**
      * API for adding/updating Training Plan.
-     * @param body (optional) 
+     * @param id (optional) 
+     * @param name (optional) 
+     * @param description (optional) 
+     * @param status (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param trainingTypeId (optional) 
+     * @param specializationId (optional) 
+     * @param vendorId (optional) 
+     * @param totalCost (optional) 
+     * @param costPerEmployee (optional) 
+     * @param selectedEmployees (optional) 
+     * @param tempRef (optional) 
      * @return Success
      */
-    addUpdateTrainingPlan(body: ManageTrainingDTO | undefined): Observable<MessageOutApiResult> {
+    addUpdateTrainingPlan(id: number | undefined, name: string | undefined, description: string | undefined, status: boolean | undefined, startDate: Date | undefined, endDate: Date | undefined, trainingTypeId: number | undefined, specializationId: number | undefined, vendorId: number | undefined, totalCost: number | null | undefined, costPerEmployee: number | null | undefined, selectedEmployees: string | null | undefined, tempRef: string | null | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/Training/Add-Update-TrainingPlan";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
+        const content_ = new FormData();
+        if (id === null || id === undefined)
+            throw new Error("The parameter 'id' cannot be null.");
+        else
+            content_.append("Id", id.toString());
+        if (name === null || name === undefined)
+            throw new Error("The parameter 'name' cannot be null.");
+        else
+            content_.append("Name", name.toString());
+        if (description === null || description === undefined)
+            throw new Error("The parameter 'description' cannot be null.");
+        else
+            content_.append("Description", description.toString());
+        if (status === null || status === undefined)
+            throw new Error("The parameter 'status' cannot be null.");
+        else
+            content_.append("Status", status.toString());
+        if (startDate === null || startDate === undefined)
+            throw new Error("The parameter 'startDate' cannot be null.");
+        else
+            content_.append("StartDate", startDate.toJSON());
+        if (endDate === null || endDate === undefined)
+            throw new Error("The parameter 'endDate' cannot be null.");
+        else
+            content_.append("EndDate", endDate.toJSON());
+        if (trainingTypeId === null || trainingTypeId === undefined)
+            throw new Error("The parameter 'trainingTypeId' cannot be null.");
+        else
+            content_.append("TrainingTypeId", trainingTypeId.toString());
+        if (specializationId === null || specializationId === undefined)
+            throw new Error("The parameter 'specializationId' cannot be null.");
+        else
+            content_.append("SpecializationId", specializationId.toString());
+        if (vendorId === null || vendorId === undefined)
+            throw new Error("The parameter 'vendorId' cannot be null.");
+        else
+            content_.append("VendorId", vendorId.toString());
+        if (totalCost !== null && totalCost !== undefined)
+            content_.append("TotalCost", totalCost.toString());
+        if (costPerEmployee !== null && costPerEmployee !== undefined)
+            content_.append("CostPerEmployee", costPerEmployee.toString());
+        if (selectedEmployees !== null && selectedEmployees !== undefined)
+            content_.append("SelectedEmployees", selectedEmployees.toString());
+        if (tempRef !== null && tempRef !== undefined)
+            content_.append("TempRef", tempRef.toString());
 
         let options_ : any = {
             body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -40580,6 +41958,204 @@ export class TrainingServiceProxy {
 }
 
 @Injectable()
+export class UploadDocumentServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API to upload document(s) in all any part of the system.
+     * @param userId (optional) 
+     * @param title (optional) 
+     * @param itemId (optional) 
+     * @param entityId (optional) 
+     * @param isReadOnly (optional) 
+     * @param tempRef (optional) 
+     * @param files (optional) 
+     * @return Success
+     */
+    uploadDocs(userId: number | undefined, title: string | null | undefined, itemId: number | undefined, entityId: number | undefined, isReadOnly: boolean | undefined, tempRef: string | undefined, files: FileParameter[] | null | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/UploadDocument/UploadDocs";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (userId === null || userId === undefined)
+            throw new Error("The parameter 'userId' cannot be null.");
+        else
+            content_.append("UserId", userId.toString());
+        if (title !== null && title !== undefined)
+            content_.append("Title", title.toString());
+        if (itemId === null || itemId === undefined)
+            throw new Error("The parameter 'itemId' cannot be null.");
+        else
+            content_.append("ItemId", itemId.toString());
+        if (entityId === null || entityId === undefined)
+            throw new Error("The parameter 'entityId' cannot be null.");
+        else
+            content_.append("EntityId", entityId.toString());
+        if (isReadOnly === null || isReadOnly === undefined)
+            throw new Error("The parameter 'isReadOnly' cannot be null.");
+        else
+            content_.append("IsReadOnly", isReadOnly.toString());
+        if (tempRef === null || tempRef === undefined)
+            throw new Error("The parameter 'tempRef' cannot be null.");
+        else
+            content_.append("TempRef", tempRef.toString());
+        if (files !== null && files !== undefined)
+            files.forEach(item_ => content_.append("Files", item_.data, item_.fileName ? item_.fileName : "Files") );
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUploadDocs(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUploadDocs(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processUploadDocs(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * Fetch Document's File List for a specific type of Document or all.
+    By supplying EntityId which represent the Document entity container
+    (e.g. TRAINING, CONFIRMATION, OTHERS, etc Documents)
+    or ItemId which can represent EmployeeId, Other record Id that was added along with docs.
+    ItemId is optional but EntityId is required.
+    All Doc. EntityType list will be available on Data controller endpoints
+     * @param itemId (optional) 
+     * @return Success
+     */
+    loadDocumentFiles(entityId: number, itemId: number | undefined): Observable<DocFileDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/UploadDocument/LoadDocumentFiles?";
+        if (entityId === undefined || entityId === null)
+            throw new Error("The parameter 'entityId' must be defined and cannot be null.");
+        else
+            url_ += "EntityId=" + encodeURIComponent("" + entityId) + "&";
+        if (itemId === null)
+            throw new Error("The parameter 'itemId' cannot be null.");
+        else if (itemId !== undefined)
+            url_ += "ItemId=" + encodeURIComponent("" + itemId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLoadDocumentFiles(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLoadDocumentFiles(<any>response_);
+                } catch (e) {
+                    return <Observable<DocFileDTOListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<DocFileDTOListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processLoadDocumentFiles(response: HttpResponseBase): Observable<DocFileDTOListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = DocFileDTOListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<DocFileDTOListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class RegisterUserServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -40587,7 +42163,7 @@ export class RegisterUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -40672,7 +42248,7 @@ export class UpdateUserServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -40757,7 +42333,7 @@ export class FetchAllUsersServiceProxy {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net/";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
     }
 
     /**
@@ -40840,6 +42416,284 @@ export class FetchAllUsersServiceProxy {
             }));
         }
         return _observableOf<ApplicationUserDTOIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class AddUpdateVisaTypeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateVisaType(body: VisaTypeDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/VisaType/AddUpdateVisaType/Add-Update-VisaType";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateVisaType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateVisaType(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateVisaType(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class ToggleVisaTypeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    toggleVisaType(body: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/VisaType/ToggleVisaType/Toggle-Visa-Type";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processToggleVisaType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processToggleVisaType(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processToggleVisaType(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetVisaTypeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param iD (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
+     * @param visaName (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getVisaType(iD: number | undefined, companyId: number | undefined, subId: number | undefined, visaName: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<VisaTypeIListApiResult> {
+        let url_ = this.baseUrl + "/api/VisaType/GetVisaType/GetVisaType?";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (companyId === null)
+            throw new Error("The parameter 'companyId' cannot be null.");
+        else if (companyId !== undefined)
+            url_ += "CompanyId=" + encodeURIComponent("" + companyId) + "&";
+        if (subId === null)
+            throw new Error("The parameter 'subId' cannot be null.");
+        else if (subId !== undefined)
+            url_ += "SubId=" + encodeURIComponent("" + subId) + "&";
+        if (visaName !== undefined && visaName !== null)
+            url_ += "VisaName=" + encodeURIComponent("" + visaName) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetVisaType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetVisaType(<any>response_);
+                } catch (e) {
+                    return <Observable<VisaTypeIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VisaTypeIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetVisaType(response: HttpResponseBase): Observable<VisaTypeIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VisaTypeIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VisaTypeIListApiResult>(<any>null);
     }
 }
 
@@ -49111,20 +50965,22 @@ export interface ICareerSuccessorDTO {
     isActive: boolean;
 }
 
-export class CareerSuccessionDTO implements ICareerSuccessionDTO {
+export class ManageCareerSuccessionDto implements IManageCareerSuccessionDto {
     id!: number;
     companyID!: number;
     subID!: number;
-    categoryType!: string;
-    planJustification!: string;
+    planTitle!: string;
+    holderId!: number;
+    positionId!: number;
+    competencyId!: number;
+    startDate!: Date;
+    purpose!: string;
+    isActive!: boolean;
+    readinessToStart!: number;
     stringSuccessionEmployee!: string | undefined;
     successionEmployee!: CareerSuccessorDTO[] | undefined;
-    holderId!: number;
-    dateCreated!: Date;
-    isDeleted!: boolean;
-    isActive!: boolean;
 
-    constructor(data?: ICareerSuccessionDTO) {
+    constructor(data?: IManageCareerSuccessionDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -49138,24 +50994,26 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
-            this.categoryType = _data["categoryType"];
-            this.planJustification = _data["planJustification"];
+            this.planTitle = _data["planTitle"];
+            this.holderId = _data["holderId"];
+            this.positionId = _data["positionId"];
+            this.competencyId = _data["competencyId"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.purpose = _data["purpose"];
+            this.isActive = _data["isActive"];
+            this.readinessToStart = _data["readinessToStart"];
             this.stringSuccessionEmployee = _data["stringSuccessionEmployee"];
             if (Array.isArray(_data["successionEmployee"])) {
                 this.successionEmployee = [] as any;
                 for (let item of _data["successionEmployee"])
                     this.successionEmployee!.push(CareerSuccessorDTO.fromJS(item));
             }
-            this.holderId = _data["holderId"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.isDeleted = _data["isDeleted"];
-            this.isActive = _data["isActive"];
         }
     }
 
-    static fromJS(data: any): CareerSuccessionDTO {
+    static fromJS(data: any): ManageCareerSuccessionDto {
         data = typeof data === 'object' ? data : {};
-        let result = new CareerSuccessionDTO();
+        let result = new ManageCareerSuccessionDto();
         result.init(data);
         return result;
     }
@@ -49165,41 +51023,45 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
-        data["categoryType"] = this.categoryType;
-        data["planJustification"] = this.planJustification;
+        data["planTitle"] = this.planTitle;
+        data["holderId"] = this.holderId;
+        data["positionId"] = this.positionId;
+        data["competencyId"] = this.competencyId;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["purpose"] = this.purpose;
+        data["isActive"] = this.isActive;
+        data["readinessToStart"] = this.readinessToStart;
         data["stringSuccessionEmployee"] = this.stringSuccessionEmployee;
         if (Array.isArray(this.successionEmployee)) {
             data["successionEmployee"] = [];
             for (let item of this.successionEmployee)
                 data["successionEmployee"].push(item.toJSON());
         }
-        data["holderId"] = this.holderId;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
         return data; 
     }
 
-    clone(): CareerSuccessionDTO {
+    clone(): ManageCareerSuccessionDto {
         const json = this.toJSON();
-        let result = new CareerSuccessionDTO();
+        let result = new ManageCareerSuccessionDto();
         result.init(json);
         return result;
     }
 }
 
-export interface ICareerSuccessionDTO {
+export interface IManageCareerSuccessionDto {
     id: number;
     companyID: number;
     subID: number;
-    categoryType: string;
-    planJustification: string;
+    planTitle: string;
+    holderId: number;
+    positionId: number;
+    competencyId: number;
+    startDate: Date;
+    purpose: string;
+    isActive: boolean;
+    readinessToStart: number;
     stringSuccessionEmployee: string | undefined;
     successionEmployee: CareerSuccessorDTO[] | undefined;
-    holderId: number;
-    dateCreated: Date;
-    isDeleted: boolean;
-    isActive: boolean;
 }
 
 export class TalentpoolrequirementDTO implements ITalentpoolrequirementDTO {
@@ -49729,6 +51591,11 @@ export class CareerSuccession implements ICareerSuccession {
     categoryType!: string | undefined;
     planJustification!: string | undefined;
     holderId!: number;
+    title!: string | undefined;
+    positionId!: number;
+    purpose!: string | undefined;
+    startDate!: Date;
+    competencyId!: number;
     careerSuccessors!: CareerSuccessor[] | undefined;
     id!: number;
     companyID!: number;
@@ -49754,6 +51621,11 @@ export class CareerSuccession implements ICareerSuccession {
             this.categoryType = _data["categoryType"];
             this.planJustification = _data["planJustification"];
             this.holderId = _data["holderId"];
+            this.title = _data["title"];
+            this.positionId = _data["positionId"];
+            this.purpose = _data["purpose"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.competencyId = _data["competencyId"];
             if (Array.isArray(_data["careerSuccessors"])) {
                 this.careerSuccessors = [] as any;
                 for (let item of _data["careerSuccessors"])
@@ -49783,6 +51655,11 @@ export class CareerSuccession implements ICareerSuccession {
         data["categoryType"] = this.categoryType;
         data["planJustification"] = this.planJustification;
         data["holderId"] = this.holderId;
+        data["title"] = this.title;
+        data["positionId"] = this.positionId;
+        data["purpose"] = this.purpose;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["competencyId"] = this.competencyId;
         if (Array.isArray(this.careerSuccessors)) {
             data["careerSuccessors"] = [];
             for (let item of this.careerSuccessors)
@@ -49812,6 +51689,11 @@ export interface ICareerSuccession {
     categoryType: string | undefined;
     planJustification: string | undefined;
     holderId: number;
+    title: string | undefined;
+    positionId: number;
+    purpose: string | undefined;
+    startDate: Date;
+    competencyId: number;
     careerSuccessors: CareerSuccessor[] | undefined;
     id: number;
     companyID: number;
@@ -49889,6 +51771,623 @@ export interface ICareerSuccessionIListApiResult {
     result: CareerSuccession[] | undefined;
     totalCount: number;
     totalRecord: number;
+}
+
+export class CompareSkillDTO implements ICompareSkillDTO {
+    id!: number;
+    employeeId!: number;
+    skillId!: number;
+    skillName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeSkillPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredSkillId!: number;
+    requiredSkillName!: string | undefined;
+    requiredSkillPoint!: number;
+    requiredSkillYearsofExperience!: number;
+    experienceWeight!: number;
+    skillWeight!: number;
+    employeeSkillStatus!: boolean;
+
+    constructor(data?: ICompareSkillDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.skillId = _data["skillId"];
+            this.skillName = _data["skillName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeSkillPoint = _data["employeeSkillPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredSkillId = _data["requiredSkillId"];
+            this.requiredSkillName = _data["requiredSkillName"];
+            this.requiredSkillPoint = _data["requiredSkillPoint"];
+            this.requiredSkillYearsofExperience = _data["requiredSkillYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.skillWeight = _data["skillWeight"];
+            this.employeeSkillStatus = _data["employeeSkillStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareSkillDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareSkillDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["skillId"] = this.skillId;
+        data["skillName"] = this.skillName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeSkillPoint"] = this.employeeSkillPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredSkillId"] = this.requiredSkillId;
+        data["requiredSkillName"] = this.requiredSkillName;
+        data["requiredSkillPoint"] = this.requiredSkillPoint;
+        data["requiredSkillYearsofExperience"] = this.requiredSkillYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["skillWeight"] = this.skillWeight;
+        data["employeeSkillStatus"] = this.employeeSkillStatus;
+        return data; 
+    }
+
+    clone(): CompareSkillDTO {
+        const json = this.toJSON();
+        let result = new CompareSkillDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareSkillDTO {
+    id: number;
+    employeeId: number;
+    skillId: number;
+    skillName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeSkillPoint: number;
+    employeeExperiencePoint: number;
+    requiredSkillId: number;
+    requiredSkillName: string | undefined;
+    requiredSkillPoint: number;
+    requiredSkillYearsofExperience: number;
+    experienceWeight: number;
+    skillWeight: number;
+    employeeSkillStatus: boolean;
+}
+
+export class CompareQualificationDTO implements ICompareQualificationDTO {
+    id!: number;
+    employeeId!: number;
+    qualificationId!: number;
+    qualificationCategoryId!: number;
+    qualificationName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeQualificationPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredQualificationId!: number;
+    requiredQualificationName!: string | undefined;
+    requiredQualificationPoint!: number;
+    requiredQualificationYearsofExperience!: number;
+    experienceWeight!: number;
+    qualificationWeight!: number;
+    employeeQualificationStatus!: boolean;
+
+    constructor(data?: ICompareQualificationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.qualificationId = _data["qualificationId"];
+            this.qualificationCategoryId = _data["qualificationCategoryId"];
+            this.qualificationName = _data["qualificationName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeQualificationPoint = _data["employeeQualificationPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredQualificationId = _data["requiredQualificationId"];
+            this.requiredQualificationName = _data["requiredQualificationName"];
+            this.requiredQualificationPoint = _data["requiredQualificationPoint"];
+            this.requiredQualificationYearsofExperience = _data["requiredQualificationYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.qualificationWeight = _data["qualificationWeight"];
+            this.employeeQualificationStatus = _data["employeeQualificationStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareQualificationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareQualificationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["qualificationId"] = this.qualificationId;
+        data["qualificationCategoryId"] = this.qualificationCategoryId;
+        data["qualificationName"] = this.qualificationName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeQualificationPoint"] = this.employeeQualificationPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredQualificationId"] = this.requiredQualificationId;
+        data["requiredQualificationName"] = this.requiredQualificationName;
+        data["requiredQualificationPoint"] = this.requiredQualificationPoint;
+        data["requiredQualificationYearsofExperience"] = this.requiredQualificationYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["qualificationWeight"] = this.qualificationWeight;
+        data["employeeQualificationStatus"] = this.employeeQualificationStatus;
+        return data; 
+    }
+
+    clone(): CompareQualificationDTO {
+        const json = this.toJSON();
+        let result = new CompareQualificationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareQualificationDTO {
+    id: number;
+    employeeId: number;
+    qualificationId: number;
+    qualificationCategoryId: number;
+    qualificationName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeQualificationPoint: number;
+    employeeExperiencePoint: number;
+    requiredQualificationId: number;
+    requiredQualificationName: string | undefined;
+    requiredQualificationPoint: number;
+    requiredQualificationYearsofExperience: number;
+    experienceWeight: number;
+    qualificationWeight: number;
+    employeeQualificationStatus: boolean;
+}
+
+export class CompareCertificationDTO implements ICompareCertificationDTO {
+    id!: number;
+    employeeId!: number;
+    certificationId!: number;
+    certificationName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeCertificationPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredCertificationId!: number;
+    requiredCertificationName!: string | undefined;
+    requiredCertificationPoint!: number;
+    requiredCertificationYearsofExperience!: number;
+    experienceWeight!: number;
+    certificationWeight!: number;
+    employeeCertificationStatus!: boolean;
+
+    constructor(data?: ICompareCertificationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.certificationId = _data["certificationId"];
+            this.certificationName = _data["certificationName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeCertificationPoint = _data["employeeCertificationPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredCertificationId = _data["requiredCertificationId"];
+            this.requiredCertificationName = _data["requiredCertificationName"];
+            this.requiredCertificationPoint = _data["requiredCertificationPoint"];
+            this.requiredCertificationYearsofExperience = _data["requiredCertificationYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.certificationWeight = _data["certificationWeight"];
+            this.employeeCertificationStatus = _data["employeeCertificationStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareCertificationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareCertificationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["certificationId"] = this.certificationId;
+        data["certificationName"] = this.certificationName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeCertificationPoint"] = this.employeeCertificationPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredCertificationId"] = this.requiredCertificationId;
+        data["requiredCertificationName"] = this.requiredCertificationName;
+        data["requiredCertificationPoint"] = this.requiredCertificationPoint;
+        data["requiredCertificationYearsofExperience"] = this.requiredCertificationYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["certificationWeight"] = this.certificationWeight;
+        data["employeeCertificationStatus"] = this.employeeCertificationStatus;
+        return data; 
+    }
+
+    clone(): CompareCertificationDTO {
+        const json = this.toJSON();
+        let result = new CompareCertificationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareCertificationDTO {
+    id: number;
+    employeeId: number;
+    certificationId: number;
+    certificationName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeCertificationPoint: number;
+    employeeExperiencePoint: number;
+    requiredCertificationId: number;
+    requiredCertificationName: string | undefined;
+    requiredCertificationPoint: number;
+    requiredCertificationYearsofExperience: number;
+    experienceWeight: number;
+    certificationWeight: number;
+    employeeCertificationStatus: boolean;
+}
+
+export class CompareTraningDTO implements ICompareTraningDTO {
+    id!: number;
+    employeeId!: number;
+    trainingId!: number;
+    trainingName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeTrainingPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredTrainingId!: number;
+    requiredTrainingName!: string | undefined;
+    requiredTrainingPoint!: number;
+    requiredTrainingYearsofExperience!: number;
+    experienceWeight!: number;
+    trainingWeight!: number;
+    employeeTrainingStatus!: boolean;
+
+    constructor(data?: ICompareTraningDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.trainingId = _data["trainingId"];
+            this.trainingName = _data["trainingName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeTrainingPoint = _data["employeeTrainingPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredTrainingId = _data["requiredTrainingId"];
+            this.requiredTrainingName = _data["requiredTrainingName"];
+            this.requiredTrainingPoint = _data["requiredTrainingPoint"];
+            this.requiredTrainingYearsofExperience = _data["requiredTrainingYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.trainingWeight = _data["trainingWeight"];
+            this.employeeTrainingStatus = _data["employeeTrainingStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareTraningDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareTraningDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["trainingId"] = this.trainingId;
+        data["trainingName"] = this.trainingName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeTrainingPoint"] = this.employeeTrainingPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredTrainingId"] = this.requiredTrainingId;
+        data["requiredTrainingName"] = this.requiredTrainingName;
+        data["requiredTrainingPoint"] = this.requiredTrainingPoint;
+        data["requiredTrainingYearsofExperience"] = this.requiredTrainingYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["trainingWeight"] = this.trainingWeight;
+        data["employeeTrainingStatus"] = this.employeeTrainingStatus;
+        return data; 
+    }
+
+    clone(): CompareTraningDTO {
+        const json = this.toJSON();
+        let result = new CompareTraningDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareTraningDTO {
+    id: number;
+    employeeId: number;
+    trainingId: number;
+    trainingName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeTrainingPoint: number;
+    employeeExperiencePoint: number;
+    requiredTrainingId: number;
+    requiredTrainingName: string | undefined;
+    requiredTrainingPoint: number;
+    requiredTrainingYearsofExperience: number;
+    experienceWeight: number;
+    trainingWeight: number;
+    employeeTrainingStatus: boolean;
+}
+
+export class VmListComparism implements IVmListComparism {
+    listEmployeeSkills!: CompareSkillDTO[] | undefined;
+    listEmployeeQualification!: CompareQualificationDTO[] | undefined;
+    listEmployeeCertification!: CompareCertificationDTO[] | undefined;
+    listEmployeeTrainings!: CompareTraningDTO[] | undefined;
+
+    constructor(data?: IVmListComparism) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["listEmployeeSkills"])) {
+                this.listEmployeeSkills = [] as any;
+                for (let item of _data["listEmployeeSkills"])
+                    this.listEmployeeSkills!.push(CompareSkillDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["listEmployeeQualification"])) {
+                this.listEmployeeQualification = [] as any;
+                for (let item of _data["listEmployeeQualification"])
+                    this.listEmployeeQualification!.push(CompareQualificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["listEmployeeCertification"])) {
+                this.listEmployeeCertification = [] as any;
+                for (let item of _data["listEmployeeCertification"])
+                    this.listEmployeeCertification!.push(CompareCertificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["listEmployeeTrainings"])) {
+                this.listEmployeeTrainings = [] as any;
+                for (let item of _data["listEmployeeTrainings"])
+                    this.listEmployeeTrainings!.push(CompareTraningDTO.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): VmListComparism {
+        data = typeof data === 'object' ? data : {};
+        let result = new VmListComparism();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.listEmployeeSkills)) {
+            data["listEmployeeSkills"] = [];
+            for (let item of this.listEmployeeSkills)
+                data["listEmployeeSkills"].push(item.toJSON());
+        }
+        if (Array.isArray(this.listEmployeeQualification)) {
+            data["listEmployeeQualification"] = [];
+            for (let item of this.listEmployeeQualification)
+                data["listEmployeeQualification"].push(item.toJSON());
+        }
+        if (Array.isArray(this.listEmployeeCertification)) {
+            data["listEmployeeCertification"] = [];
+            for (let item of this.listEmployeeCertification)
+                data["listEmployeeCertification"].push(item.toJSON());
+        }
+        if (Array.isArray(this.listEmployeeTrainings)) {
+            data["listEmployeeTrainings"] = [];
+            for (let item of this.listEmployeeTrainings)
+                data["listEmployeeTrainings"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): VmListComparism {
+        const json = this.toJSON();
+        let result = new VmListComparism();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVmListComparism {
+    listEmployeeSkills: CompareSkillDTO[] | undefined;
+    listEmployeeQualification: CompareQualificationDTO[] | undefined;
+    listEmployeeCertification: CompareCertificationDTO[] | undefined;
+    listEmployeeTrainings: CompareTraningDTO[] | undefined;
+}
+
+export class VmListComparismListApiResult implements IVmListComparismListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: VmListComparism[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IVmListComparismListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(VmListComparism.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): VmListComparismListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new VmListComparismListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): VmListComparismListApiResult {
+        const json = this.toJSON();
+        let result = new VmListComparismListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVmListComparismListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: VmListComparism[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ManageCompareDTO implements IManageCompareDTO {
+    employeeId!: number;
+    competencyId!: number;
+
+    constructor(data?: IManageCompareDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employeeId = _data["employeeId"];
+            this.competencyId = _data["competencyId"];
+        }
+    }
+
+    static fromJS(data: any): ManageCompareDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageCompareDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employeeId"] = this.employeeId;
+        data["competencyId"] = this.competencyId;
+        return data; 
+    }
+
+    clone(): ManageCompareDTO {
+        const json = this.toJSON();
+        let result = new ManageCompareDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageCompareDTO {
+    employeeId: number;
+    competencyId: number;
 }
 
 export class ManageCertificationDTO implements IManageCertificationDTO {
@@ -50171,6 +52670,234 @@ export interface ICertificationDTOApiResult {
     totalRecord: number;
 }
 
+export class ElementTypeDTO implements IElementTypeDTO {
+    id!: number;
+    name!: string | undefined;
+
+    constructor(data?: IElementTypeDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): ElementTypeDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ElementTypeDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        return data; 
+    }
+
+    clone(): ElementTypeDTO {
+        const json = this.toJSON();
+        let result = new ElementTypeDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IElementTypeDTO {
+    id: number;
+    name: string | undefined;
+}
+
+export class ElementTypeDTOIListApiResult implements IElementTypeDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: ElementTypeDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IElementTypeDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(ElementTypeDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): ElementTypeDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ElementTypeDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): ElementTypeDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new ElementTypeDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IElementTypeDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: ElementTypeDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ElementCategoryDTO implements IElementCategoryDTO {
+    id!: number;
+    name!: string | undefined;
+
+    constructor(data?: IElementCategoryDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): ElementCategoryDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ElementCategoryDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        return data; 
+    }
+
+    clone(): ElementCategoryDTO {
+        const json = this.toJSON();
+        let result = new ElementCategoryDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IElementCategoryDTO {
+    id: number;
+    name: string | undefined;
+}
+
+export class ElementCategoryDTOIListApiResult implements IElementCategoryDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: ElementCategoryDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IElementCategoryDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(ElementCategoryDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): ElementCategoryDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ElementCategoryDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): ElementCategoryDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new ElementCategoryDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IElementCategoryDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: ElementCategoryDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class PayslipCategory implements IPayslipCategory {
     name!: string | undefined;
     elements!: Element[] | undefined;
@@ -50386,8 +53113,8 @@ export interface IElementClassification {
 }
 
 export class Element implements IElement {
-    payrollItemId!: number;
-    payTypeId!: number;
+    payrollItemId!: number | undefined;
+    payTypeId!: number | undefined;
     paymentInstitutionId!: number;
     name!: string | undefined;
     proirity_id!: number;
@@ -50533,8 +53260,8 @@ export class Element implements IElement {
 }
 
 export interface IElement {
-    payrollItemId: number;
-    payTypeId: number;
+    payrollItemId: number | undefined;
+    payTypeId: number | undefined;
     paymentInstitutionId: number;
     name: string | undefined;
     proirity_id: number;
@@ -64235,6 +66962,259 @@ export interface IExpenseProject {
     modifiedById: number | undefined;
 }
 
+export class ExpenseProjectIListApiResult implements IExpenseProjectIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: ExpenseProject[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IExpenseProjectIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(ExpenseProject.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): ExpenseProjectIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExpenseProjectIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): ExpenseProjectIListApiResult {
+        const json = this.toJSON();
+        let result = new ExpenseProjectIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExpenseProjectIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: ExpenseProject[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ExpenseProjectActivityDTO implements IExpenseProjectActivityDTO {
+    id!: number;
+    expenseProjectId!: number;
+    companyID!: number;
+    subID!: number;
+    name!: string;
+    description!: string;
+    startDate!: Date | undefined;
+    endDate!: Date | undefined;
+    closedEnded!: boolean | undefined;
+    ban!: boolean;
+    referenceId!: string;
+    code!: string | undefined;
+    isDefault!: boolean;
+    dateCreated!: Date;
+    isDeleted!: boolean;
+    isActive!: boolean;
+    actionTitle!: string | undefined;
+    readonly startDateString!: string | undefined;
+    readonly endDateString!: string | undefined;
+    readonly status!: string | undefined;
+
+    constructor(data?: IExpenseProjectActivityDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.expenseProjectId = _data["expenseProjectId"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
+            this.closedEnded = _data["closedEnded"];
+            this.ban = _data["ban"];
+            this.referenceId = _data["referenceId"];
+            this.code = _data["code"];
+            this.isDefault = _data["isDefault"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.isDeleted = _data["isDeleted"];
+            this.isActive = _data["isActive"];
+            this.actionTitle = _data["actionTitle"];
+            (<any>this).startDateString = _data["startDateString"];
+            (<any>this).endDateString = _data["endDateString"];
+            (<any>this).status = _data["status"];
+        }
+    }
+
+    static fromJS(data: any): ExpenseProjectActivityDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExpenseProjectActivityDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["expenseProjectId"] = this.expenseProjectId;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
+        data["closedEnded"] = this.closedEnded;
+        data["ban"] = this.ban;
+        data["referenceId"] = this.referenceId;
+        data["code"] = this.code;
+        data["isDefault"] = this.isDefault;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["isDeleted"] = this.isDeleted;
+        data["isActive"] = this.isActive;
+        data["actionTitle"] = this.actionTitle;
+        data["startDateString"] = this.startDateString;
+        data["endDateString"] = this.endDateString;
+        data["status"] = this.status;
+        return data; 
+    }
+
+    clone(): ExpenseProjectActivityDTO {
+        const json = this.toJSON();
+        let result = new ExpenseProjectActivityDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExpenseProjectActivityDTO {
+    id: number;
+    expenseProjectId: number;
+    companyID: number;
+    subID: number;
+    name: string;
+    description: string;
+    startDate: Date | undefined;
+    endDate: Date | undefined;
+    closedEnded: boolean | undefined;
+    ban: boolean;
+    referenceId: string;
+    code: string | undefined;
+    isDefault: boolean;
+    dateCreated: Date;
+    isDeleted: boolean;
+    isActive: boolean;
+    actionTitle: string | undefined;
+    startDateString: string | undefined;
+    endDateString: string | undefined;
+    status: string | undefined;
+}
+
+export class ExpenseProjectActivityIListApiResult implements IExpenseProjectActivityIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: ExpenseProjectActivity[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IExpenseProjectActivityIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(ExpenseProjectActivity.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): ExpenseProjectActivityIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExpenseProjectActivityIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): ExpenseProjectActivityIListApiResult {
+        const json = this.toJSON();
+        let result = new ExpenseProjectActivityIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExpenseProjectActivityIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: ExpenseProjectActivity[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class ExpenseDTO implements IExpenseDTO {
     id!: number;
     companyID!: number;
@@ -65867,6 +68847,207 @@ export interface IInstitutionApiResult {
     hasError: boolean;
     message: string | undefined;
     result: Institution;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class InterestRateDTO implements IInterestRateDTO {
+    id!: number;
+    rate!: number;
+    companyID!: number;
+    subId!: number;
+
+    constructor(data?: IInterestRateDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.rate = _data["rate"];
+            this.companyID = _data["companyID"];
+            this.subId = _data["subId"];
+        }
+    }
+
+    static fromJS(data: any): InterestRateDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestRateDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["rate"] = this.rate;
+        data["companyID"] = this.companyID;
+        data["subId"] = this.subId;
+        return data; 
+    }
+
+    clone(): InterestRateDTO {
+        const json = this.toJSON();
+        let result = new InterestRateDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IInterestRateDTO {
+    id: number;
+    rate: number;
+    companyID: number;
+    subId: number;
+}
+
+export class InterestRate implements IInterestRate {
+    rate!: number;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IInterestRate) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.rate = _data["rate"];
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): InterestRate {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestRate();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["rate"] = this.rate;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): InterestRate {
+        const json = this.toJSON();
+        let result = new InterestRate();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IInterestRate {
+    rate: number;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class InterestRateIListApiResult implements IInterestRateIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: InterestRate[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IInterestRateIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(InterestRate.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): InterestRateIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new InterestRateIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): InterestRateIListApiResult {
+        const json = this.toJSON();
+        let result = new InterestRateIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IInterestRateIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: InterestRate[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -67617,53 +70798,6 @@ export interface IManageLeaveHolidayDTO {
     leaveYearId: number;
 }
 
-export class LeaveFilterDTO implements ILeaveFilterDTO {
-    pageNumber!: number;
-    pageSize!: number;
-
-    constructor(data?: ILeaveFilterDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.pageNumber = _data["pageNumber"];
-            this.pageSize = _data["pageSize"];
-        }
-    }
-
-    static fromJS(data: any): LeaveFilterDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new LeaveFilterDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["pageNumber"] = this.pageNumber;
-        data["pageSize"] = this.pageSize;
-        return data; 
-    }
-
-    clone(): LeaveFilterDTO {
-        const json = this.toJSON();
-        let result = new LeaveFilterDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILeaveFilterDTO {
-    pageNumber: number;
-    pageSize: number;
-}
-
 export class LeaveHolidayDTO implements ILeaveHolidayDTO {
     id!: number;
     companyID!: number;
@@ -68200,6 +71334,7 @@ export class ManageLeaveRequestDTO implements IManageLeaveRequestDTO {
     noOfDays!: number;
     contactInfoOnLeave!: string;
     reliefOfficerStaffNo!: string;
+    tempRef!: string | undefined;
     file!: string | undefined;
 
     constructor(data?: IManageLeaveRequestDTO) {
@@ -68221,6 +71356,7 @@ export class ManageLeaveRequestDTO implements IManageLeaveRequestDTO {
             this.noOfDays = _data["noOfDays"];
             this.contactInfoOnLeave = _data["contactInfoOnLeave"];
             this.reliefOfficerStaffNo = _data["reliefOfficerStaffNo"];
+            this.tempRef = _data["tempRef"];
             this.file = _data["file"];
         }
     }
@@ -68242,6 +71378,7 @@ export class ManageLeaveRequestDTO implements IManageLeaveRequestDTO {
         data["noOfDays"] = this.noOfDays;
         data["contactInfoOnLeave"] = this.contactInfoOnLeave;
         data["reliefOfficerStaffNo"] = this.reliefOfficerStaffNo;
+        data["tempRef"] = this.tempRef;
         data["file"] = this.file;
         return data; 
     }
@@ -68263,6 +71400,7 @@ export interface IManageLeaveRequestDTO {
     noOfDays: number;
     contactInfoOnLeave: string;
     reliefOfficerStaffNo: string;
+    tempRef: string | undefined;
     file: string | undefined;
 }
 
@@ -72779,6 +75917,57 @@ export interface IDepartmentActivityDTOIListApiResult {
     totalRecord: number;
 }
 
+export class OfferLetterTemplateDTO implements IOfferLetterTemplateDTO {
+    id!: number;
+    offerTitle!: string | undefined;
+    offerContent!: string | undefined;
+
+    constructor(data?: IOfferLetterTemplateDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.offerTitle = _data["offerTitle"];
+            this.offerContent = _data["offerContent"];
+        }
+    }
+
+    static fromJS(data: any): OfferLetterTemplateDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new OfferLetterTemplateDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["offerTitle"] = this.offerTitle;
+        data["offerContent"] = this.offerContent;
+        return data; 
+    }
+
+    clone(): OfferLetterTemplateDTO {
+        const json = this.toJSON();
+        let result = new OfferLetterTemplateDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IOfferLetterTemplateDTO {
+    id: number;
+    offerTitle: string | undefined;
+    offerContent: string | undefined;
+}
+
 export class OnboardingPersonalDTO implements IOnboardingPersonalDTO {
     id!: number;
     companyId!: number;
@@ -72811,6 +76000,9 @@ export class OnboardingPersonalDTO implements IOnboardingPersonalDTO {
     createdById!: number;
     userId!: number;
     created_by!: string | undefined;
+    countryId!: number;
+    stateId!: number;
+    regionId!: number;
 
     constructor(data?: IOnboardingPersonalDTO) {
         if (data) {
@@ -72854,6 +76046,9 @@ export class OnboardingPersonalDTO implements IOnboardingPersonalDTO {
             this.createdById = _data["createdById"];
             this.userId = _data["userId"];
             this.created_by = _data["created_by"];
+            this.countryId = _data["countryId"];
+            this.stateId = _data["stateId"];
+            this.regionId = _data["regionId"];
         }
     }
 
@@ -72897,6 +76092,9 @@ export class OnboardingPersonalDTO implements IOnboardingPersonalDTO {
         data["createdById"] = this.createdById;
         data["userId"] = this.userId;
         data["created_by"] = this.created_by;
+        data["countryId"] = this.countryId;
+        data["stateId"] = this.stateId;
+        data["regionId"] = this.regionId;
         return data; 
     }
 
@@ -72940,6 +76138,9 @@ export interface IOnboardingPersonalDTO {
     createdById: number;
     userId: number;
     created_by: string | undefined;
+    countryId: number;
+    stateId: number;
+    regionId: number;
 }
 
 export class OnboardingBankDTO implements IOnboardingBankDTO {
@@ -73376,7 +76577,7 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
     firstName!: string | undefined;
     lastName!: string | undefined;
     phoneNumber!: string | undefined;
-    dateofBirth!: Date;
+    dateofBirth!: Date | undefined;
     martialStatus!: number;
     genderId!: number;
     residentialAddress!: string | undefined;
@@ -73384,7 +76585,7 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
     degree!: string | undefined;
     defaultMobile!: string | undefined;
     personalEmail!: string | undefined;
-    dateofCompletion!: Date;
+    dateofCompletion!: Date | undefined;
     cgpa!: string | undefined;
     institutionId!: number;
     nextOfKinFullName!: string | undefined;
@@ -73392,7 +76593,15 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
     nextofKinPhoneNumber!: string | undefined;
     nextofKinAddress!: string | undefined;
     martialStatusId!: number;
+    countryId!: number;
+    stateId!: number;
+    regionId!: number;
     completedOnboarding!: boolean;
+    offerId!: number;
+    offerStatus!: boolean;
+    replyOfferDate!: Date | undefined;
+    country!: Country;
+    state!: State;
     id!: number;
     companyID!: number;
     subID!: number;
@@ -73435,7 +76644,15 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
             this.nextofKinPhoneNumber = _data["nextofKinPhoneNumber"];
             this.nextofKinAddress = _data["nextofKinAddress"];
             this.martialStatusId = _data["martialStatusId"];
+            this.countryId = _data["countryId"];
+            this.stateId = _data["stateId"];
+            this.regionId = _data["regionId"];
             this.completedOnboarding = _data["completedOnboarding"];
+            this.offerId = _data["offerId"];
+            this.offerStatus = _data["offerStatus"];
+            this.replyOfferDate = _data["replyOfferDate"] ? new Date(_data["replyOfferDate"].toString()) : <any>undefined;
+            this.country = _data["country"] ? Country.fromJS(_data["country"]) : <any>undefined;
+            this.state = _data["state"] ? State.fromJS(_data["state"]) : <any>undefined;
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
@@ -73478,7 +76695,15 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
         data["nextofKinPhoneNumber"] = this.nextofKinPhoneNumber;
         data["nextofKinAddress"] = this.nextofKinAddress;
         data["martialStatusId"] = this.martialStatusId;
+        data["countryId"] = this.countryId;
+        data["stateId"] = this.stateId;
+        data["regionId"] = this.regionId;
         data["completedOnboarding"] = this.completedOnboarding;
+        data["offerId"] = this.offerId;
+        data["offerStatus"] = this.offerStatus;
+        data["replyOfferDate"] = this.replyOfferDate ? this.replyOfferDate.toISOString() : <any>undefined;
+        data["country"] = this.country ? this.country.toJSON() : <any>undefined;
+        data["state"] = this.state ? this.state.toJSON() : <any>undefined;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -73505,7 +76730,7 @@ export interface IOnboardingPersonalInfo {
     firstName: string | undefined;
     lastName: string | undefined;
     phoneNumber: string | undefined;
-    dateofBirth: Date;
+    dateofBirth: Date | undefined;
     martialStatus: number;
     genderId: number;
     residentialAddress: string | undefined;
@@ -73513,7 +76738,7 @@ export interface IOnboardingPersonalInfo {
     degree: string | undefined;
     defaultMobile: string | undefined;
     personalEmail: string | undefined;
-    dateofCompletion: Date;
+    dateofCompletion: Date | undefined;
     cgpa: string | undefined;
     institutionId: number;
     nextOfKinFullName: string | undefined;
@@ -73521,7 +76746,15 @@ export interface IOnboardingPersonalInfo {
     nextofKinPhoneNumber: string | undefined;
     nextofKinAddress: string | undefined;
     martialStatusId: number;
+    countryId: number;
+    stateId: number;
+    regionId: number;
     completedOnboarding: boolean;
+    offerId: number;
+    offerStatus: boolean;
+    replyOfferDate: Date | undefined;
+    country: Country;
+    state: State;
     id: number;
     companyID: number;
     subID: number;
@@ -74420,8 +77653,6 @@ export interface IEmployeeOnboardingPersonalDataListApiResult {
 
 export class ManagePayElementDTO implements IManagePayElementDTO {
     id!: number;
-    payrollItemId!: number;
-    payTypeId!: number;
     paymentInstitutionId!: number;
     name!: string | undefined;
     elementTypeId!: number;
@@ -74449,8 +77680,6 @@ export class ManagePayElementDTO implements IManagePayElementDTO {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.payrollItemId = _data["payrollItemId"];
-            this.payTypeId = _data["payTypeId"];
             this.paymentInstitutionId = _data["paymentInstitutionId"];
             this.name = _data["name"];
             this.elementTypeId = _data["elementTypeId"];
@@ -74478,8 +77707,6 @@ export class ManagePayElementDTO implements IManagePayElementDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["payrollItemId"] = this.payrollItemId;
-        data["payTypeId"] = this.payTypeId;
         data["paymentInstitutionId"] = this.paymentInstitutionId;
         data["name"] = this.name;
         data["elementTypeId"] = this.elementTypeId;
@@ -74507,8 +77734,6 @@ export class ManagePayElementDTO implements IManagePayElementDTO {
 
 export interface IManagePayElementDTO {
     id: number;
-    payrollItemId: number;
-    payTypeId: number;
     paymentInstitutionId: number;
     name: string | undefined;
     elementTypeId: number;
@@ -74529,8 +77754,6 @@ export class PayElementDTO implements IPayElementDTO {
     id!: number;
     company_id!: number;
     sub_id!: number;
-    payrollItemId!: number;
-    payTypeId!: number;
     paymentInstitutionId!: number;
     paymentInstitution!: string | undefined;
     name!: string | undefined;
@@ -74555,7 +77778,6 @@ export class PayElementDTO implements IPayElementDTO {
     updated_by!: string | undefined;
     date_created!: Date;
     last_update_created!: Date | undefined;
-    readonly payType!: string | undefined;
 
     constructor(data?: IPayElementDTO) {
         if (data) {
@@ -74571,8 +77793,6 @@ export class PayElementDTO implements IPayElementDTO {
             this.id = _data["id"];
             this.company_id = _data["company_id"];
             this.sub_id = _data["sub_id"];
-            this.payrollItemId = _data["payrollItemId"];
-            this.payTypeId = _data["payTypeId"];
             this.paymentInstitutionId = _data["paymentInstitutionId"];
             this.paymentInstitution = _data["paymentInstitution"];
             this.name = _data["name"];
@@ -74597,7 +77817,6 @@ export class PayElementDTO implements IPayElementDTO {
             this.updated_by = _data["updated_by"];
             this.date_created = _data["date_created"] ? new Date(_data["date_created"].toString()) : <any>undefined;
             this.last_update_created = _data["last_update_created"] ? new Date(_data["last_update_created"].toString()) : <any>undefined;
-            (<any>this).payType = _data["payType"];
         }
     }
 
@@ -74613,8 +77832,6 @@ export class PayElementDTO implements IPayElementDTO {
         data["id"] = this.id;
         data["company_id"] = this.company_id;
         data["sub_id"] = this.sub_id;
-        data["payrollItemId"] = this.payrollItemId;
-        data["payTypeId"] = this.payTypeId;
         data["paymentInstitutionId"] = this.paymentInstitutionId;
         data["paymentInstitution"] = this.paymentInstitution;
         data["name"] = this.name;
@@ -74639,7 +77856,6 @@ export class PayElementDTO implements IPayElementDTO {
         data["updated_by"] = this.updated_by;
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        data["payType"] = this.payType;
         return data; 
     }
 
@@ -74655,8 +77871,6 @@ export interface IPayElementDTO {
     id: number;
     company_id: number;
     sub_id: number;
-    payrollItemId: number;
-    payTypeId: number;
     paymentInstitutionId: number;
     paymentInstitution: string | undefined;
     name: string | undefined;
@@ -74681,7 +77895,6 @@ export interface IPayElementDTO {
     updated_by: string | undefined;
     date_created: Date;
     last_update_created: Date | undefined;
-    payType: string | undefined;
 }
 
 export class PayElementDTOListApiResult implements IPayElementDTOListApiResult {
@@ -87036,6 +90249,73 @@ export interface IEmployeeTalentManagementDTO {
     employeeTalentMangementPoolHistoriesDTO: EmployeeTalentMangementPoolHistoryDTO[] | undefined;
 }
 
+export class AddTalentMangementDTOListApiResult implements IAddTalentMangementDTOListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: AddTalentMangementDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IAddTalentMangementDTOListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(AddTalentMangementDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): AddTalentMangementDTOListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddTalentMangementDTOListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): AddTalentMangementDTOListApiResult {
+        const json = this.toJSON();
+        let result = new AddTalentMangementDTOListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddTalentMangementDTOListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: AddTalentMangementDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class CompanySignUpDTO implements ICompanySignUpDTO {
     email!: string;
     phoneNumber!: string;
@@ -89298,97 +92578,6 @@ export interface ITrainingSpecializationDTOApiResult {
     totalRecord: number;
 }
 
-export class ManageTrainingDTO implements IManageTrainingDTO {
-    id!: number;
-    name!: string;
-    description!: string;
-    status!: boolean;
-    startDate!: Date;
-    endDate!: Date;
-    trainingTypeId!: number;
-    specializationId!: number;
-    vendorId!: number;
-    totalCost!: number | undefined;
-    costPerEmployee!: number | undefined;
-    selectedEmployees!: string | undefined;
-    attachment!: string | undefined;
-
-    constructor(data?: IManageTrainingDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.description = _data["description"];
-            this.status = _data["status"];
-            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
-            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.trainingTypeId = _data["trainingTypeId"];
-            this.specializationId = _data["specializationId"];
-            this.vendorId = _data["vendorId"];
-            this.totalCost = _data["totalCost"];
-            this.costPerEmployee = _data["costPerEmployee"];
-            this.selectedEmployees = _data["selectedEmployees"];
-            this.attachment = _data["attachment"];
-        }
-    }
-
-    static fromJS(data: any): ManageTrainingDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new ManageTrainingDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["description"] = this.description;
-        data["status"] = this.status;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["trainingTypeId"] = this.trainingTypeId;
-        data["specializationId"] = this.specializationId;
-        data["vendorId"] = this.vendorId;
-        data["totalCost"] = this.totalCost;
-        data["costPerEmployee"] = this.costPerEmployee;
-        data["selectedEmployees"] = this.selectedEmployees;
-        data["attachment"] = this.attachment;
-        return data; 
-    }
-
-    clone(): ManageTrainingDTO {
-        const json = this.toJSON();
-        let result = new ManageTrainingDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IManageTrainingDTO {
-    id: number;
-    name: string;
-    description: string;
-    status: boolean;
-    startDate: Date;
-    endDate: Date;
-    trainingTypeId: number;
-    specializationId: number;
-    vendorId: number;
-    totalCost: number | undefined;
-    costPerEmployee: number | undefined;
-    selectedEmployees: string | undefined;
-    attachment: string | undefined;
-}
-
 export class TrainingDTO implements ITrainingDTO {
     id!: number;
     name!: string | undefined;
@@ -90054,7 +93243,7 @@ export class AssignTrainingToEmpPayload implements IAssignTrainingToEmpPayload {
     selectedEmpIds!: string;
     trainingId!: number;
     training!: string | undefined;
-    file!: string | undefined;
+    tempRef!: string | undefined;
 
     constructor(data?: IAssignTrainingToEmpPayload) {
         if (data) {
@@ -90070,7 +93259,7 @@ export class AssignTrainingToEmpPayload implements IAssignTrainingToEmpPayload {
             this.selectedEmpIds = _data["selectedEmpIds"];
             this.trainingId = _data["trainingId"];
             this.training = _data["training"];
-            this.file = _data["file"];
+            this.tempRef = _data["tempRef"];
         }
     }
 
@@ -90086,7 +93275,7 @@ export class AssignTrainingToEmpPayload implements IAssignTrainingToEmpPayload {
         data["selectedEmpIds"] = this.selectedEmpIds;
         data["trainingId"] = this.trainingId;
         data["training"] = this.training;
-        data["file"] = this.file;
+        data["tempRef"] = this.tempRef;
         return data; 
     }
 
@@ -90102,7 +93291,7 @@ export interface IAssignTrainingToEmpPayload {
     selectedEmpIds: string;
     trainingId: number;
     training: string | undefined;
-    file: string | undefined;
+    tempRef: string | undefined;
 }
 
 export class EmpTrainingResource implements IEmpTrainingResource {
@@ -90577,6 +93766,140 @@ export interface IEmployeeTrainingDTO {
     age: number | undefined;
     yearsOfService: number | undefined;
     hasAttended: boolean | undefined;
+}
+
+export class DocFileDTO implements IDocFileDTO {
+    id!: number;
+    title!: string | undefined;
+    fileName!: string | undefined;
+    filePath!: string | undefined;
+    uploadedBy!: string | undefined;
+    dateUploaded!: Date;
+    docFileOcrId!: number | undefined;
+
+    constructor(data?: IDocFileDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.title = _data["title"];
+            this.fileName = _data["fileName"];
+            this.filePath = _data["filePath"];
+            this.uploadedBy = _data["uploadedBy"];
+            this.dateUploaded = _data["dateUploaded"] ? new Date(_data["dateUploaded"].toString()) : <any>undefined;
+            this.docFileOcrId = _data["docFileOcrId"];
+        }
+    }
+
+    static fromJS(data: any): DocFileDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new DocFileDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["title"] = this.title;
+        data["fileName"] = this.fileName;
+        data["filePath"] = this.filePath;
+        data["uploadedBy"] = this.uploadedBy;
+        data["dateUploaded"] = this.dateUploaded ? this.dateUploaded.toISOString() : <any>undefined;
+        data["docFileOcrId"] = this.docFileOcrId;
+        return data; 
+    }
+
+    clone(): DocFileDTO {
+        const json = this.toJSON();
+        let result = new DocFileDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDocFileDTO {
+    id: number;
+    title: string | undefined;
+    fileName: string | undefined;
+    filePath: string | undefined;
+    uploadedBy: string | undefined;
+    dateUploaded: Date;
+    docFileOcrId: number | undefined;
+}
+
+export class DocFileDTOListApiResult implements IDocFileDTOListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: DocFileDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IDocFileDTOListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(DocFileDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): DocFileDTOListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new DocFileDTOListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): DocFileDTOListApiResult {
+        const json = this.toJSON();
+        let result = new DocFileDTOListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDocFileDTOListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: DocFileDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
 }
 
 export class ApplicationPermission implements IApplicationPermission {
@@ -91104,6 +94427,207 @@ export interface IApplicationUserDTOIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: ApplicationUserDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class VisaTypeDTO implements IVisaTypeDTO {
+    id!: number;
+    companyId!: number;
+    subId!: number;
+    visaName!: string | undefined;
+
+    constructor(data?: IVisaTypeDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyId = _data["companyId"];
+            this.subId = _data["subId"];
+            this.visaName = _data["visaName"];
+        }
+    }
+
+    static fromJS(data: any): VisaTypeDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new VisaTypeDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyId"] = this.companyId;
+        data["subId"] = this.subId;
+        data["visaName"] = this.visaName;
+        return data; 
+    }
+
+    clone(): VisaTypeDTO {
+        const json = this.toJSON();
+        let result = new VisaTypeDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVisaTypeDTO {
+    id: number;
+    companyId: number;
+    subId: number;
+    visaName: string | undefined;
+}
+
+export class VisaType implements IVisaType {
+    visaName!: string | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IVisaType) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.visaName = _data["visaName"];
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): VisaType {
+        data = typeof data === 'object' ? data : {};
+        let result = new VisaType();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["visaName"] = this.visaName;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): VisaType {
+        const json = this.toJSON();
+        let result = new VisaType();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVisaType {
+    visaName: string | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class VisaTypeIListApiResult implements IVisaTypeIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: VisaType[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IVisaTypeIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(VisaType.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): VisaTypeIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new VisaTypeIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): VisaTypeIListApiResult {
+        const json = this.toJSON();
+        let result = new VisaTypeIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVisaTypeIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: VisaType[] | undefined;
     totalCount: number;
     totalRecord: number;
 }

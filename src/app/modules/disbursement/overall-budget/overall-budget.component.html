@@ -345,7 +345,7 @@
   <div class="row" modal-body>
       <div class="form-group row">
         <div class="col">
-          <label>Financial Year</label>
+          <label>Financial Year</label> {{  singleBudgetUpdate.financialYearStartDate  }} {{  singleBudgetUpdate.financialYearEndDate  }}
           <ngx-date-range [(start)]="singleBudgetUpdate.financialYearStartDate" [(end)]="singleBudgetUpdate.financialYearEndDate"></ngx-date-range>
         </div>
       </div>

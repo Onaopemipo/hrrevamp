@@ -62,7 +62,7 @@ export class EmployeedeploymentmanagementComponent implements OnInit {
     this.loading = true;
     this.EmployeeDeploymentServiceProxy.employeeDeployment().toPromise().then(
       deployment => {
-        this.data = deployment.result;
+        this.allDeployment = deployment.result[0].lstLocations;
         this.loading = false;
       }
       

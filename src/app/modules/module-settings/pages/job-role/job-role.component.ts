@@ -52,8 +52,8 @@ export class JobRoleComponent extends BaseComponent<ModelType, FilterType, Model
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
       {name: 'code', label: 'Code', type: FORM_TYPES.text},
       {name: 'amount', label: 'Basic Salary for this Job role', type: FORM_TYPES.amount},
-      {name: 'parentPositionId', label: 'Parent Positions', singleSelection: true,
-        type: FORM_TYPES.select, choice_name: ChoiceName.positions}
+      {name: 'parent_job_role_id', label: 'Parent Job Role', singleSelection: true,
+        type: FORM_TYPES.select, choice_name: ChoiceName.jobRoles}
     ]
   };
   formTitle = 'Add new Job role';

@@ -65,7 +65,9 @@ export class CompetencyComponent implements OnInit {
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
   myCompetency: ManageCompetencyDTO = new ManageCompetencyDTO().clone();
-  competencyRequirement: CompetencyRequirmentsDTO [] = [];
+  allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
+  competencyRequirement = new CompetencyRequirmentsDTO;
+
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,
@@ -85,7 +87,7 @@ export class CompetencyComponent implements OnInit {
   }
 
   async createCompetency(){
-    this.myCompetency.competencesRequirementsDTO = this.competencyRequirement;
+    this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert('Success', 'Competency Added!', 'Dismiss')
@@ -97,10 +99,19 @@ export class CompetencyComponent implements OnInit {
   }
 
   addRequirement(){
-    let newRequirements: CompetencyRequirmentsDTO [] = [];
-    // newRequirements.experience = this.competencyRequirement.experience
-    this.competencyRequirement.push();
+    let newRequirements = new CompetencyRequirmentsDTO;
+    newRequirements.experience = this.competencyRequirement.experience;
+    newRequirements.experienceWeight = this.competencyRequirement.experienceWeight;
+    newRequirements.skillId = this.competencyRequirement.skillId;
+    newRequirements.skillWeight = this.competencyRequirement.skillWeight;
+    newRequirements.yearsofExperience = this.competencyRequirement.yearsofExperience;
+    newRequirements.trainingId = this.competencyRequirement.trainingId;
+    newRequirements.certificationId = this.competencyRequirement.certificationId;
+    newRequirements.requirementCategory = this.competencyRequirement.requirementCategory;
+    newRequirements.points = this.competencyRequirement.points;
+    this.allCompetencyRequirements.push(newRequirements);
     console.log('Competency Added', this.competencyRequirement);
+    newRequirements = new CompetencyRequirmentsDTO;
   }
 
   addNew(){
