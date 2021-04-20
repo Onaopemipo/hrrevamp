@@ -11,6 +11,7 @@ import { NbAlertModule, NbCheckboxModule, NbDatepickerModule, NbSelectModule, } 
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
 import { LeaveentitlementsComponent } from './leaveentitlements/leaveentitlements.component';
+import { LeaveenholidayComponent } from './leaveholidays/leaveholidays.component';
 import {
   LeaveEntitlementServiceProxy,
   LeavePlanEventsServiceProxy,
@@ -21,7 +22,8 @@ import { LeaveyearComponent } from './leaveyear/leaveyear.component';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { DeleteLeaveTypeServiceProxy } from 'app/_services/service-proxies';
 @NgModule({
-  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent, LeaveComponent,LeaveyearComponent,LeaveentitlementsComponent],
+  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent, LeaveComponent,
+    LeaveyearComponent, LeaveentitlementsComponent,LeaveenholidayComponent],
   imports: [
     CommonModule,
     ComponentsModule,

@@ -167,7 +167,10 @@ export class LeaveenholidayComponent implements OnInit {
       }
       );
   }
-
+  get validateStartdate() {
+    if (this.newleaveHolidays.holidayDate) return true;
+    return false;
+  }
   getleaveYear() {
     this.loading = true;
     this.GetLeaveYearServiceProxy.getLeaveYears(this.leaveYearfilter.yearStartDate, this.leaveYearfilter.yearName,
