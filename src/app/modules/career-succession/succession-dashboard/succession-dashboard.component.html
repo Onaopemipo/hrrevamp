@@ -62,7 +62,7 @@
        </div>
 
 
-       <div class="form-group row">
+       <!-- <div class="form-group row">
         <div class="col">
          <label>Purpose</label>
          <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
@@ -70,13 +70,13 @@
           <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
         </select>
         </div>
-       </div>
+       </div> -->
 
       <div class="form-group row" style="margin-top: 20px">
        <div class="col">
         <button nbButton status="primary" (click)="createSuccessionPlan()">Modify</button>
        </div>
       </div>
-  </div>
+  </div> 
   </ngx-side-modal>
 

@@ -66,7 +66,7 @@
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,
-      "serviceHost": "https://hrv2-api.azurewebsites.net/",
+      "serviceHost": "https://hrv2-api.azurewebsites.net",
       "serviceSchemes": null,
       "output": "../src/app/_services/service-proxies.ts",
       "newLineBehavior": "Auto"

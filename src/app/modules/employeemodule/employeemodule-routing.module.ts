@@ -49,7 +49,7 @@ const routes: Routes = [
           component: HiringchecklistComponent
         },
         {
-          path: 'exitmanagement',
+          path: 'exitmanagement/:type',
           component: EmploymentexitmanagementComponent
         },
         {

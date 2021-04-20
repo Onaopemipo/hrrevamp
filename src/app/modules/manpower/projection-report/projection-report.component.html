@@ -92,7 +92,7 @@
       </div>
       <div class="col-sm-12 form-group">
         <span class="help-block">Base year</span>    
-          <select id="baseYear" name="baseYear" [(ngModel)]="baseYear" class="form-control" >
+          <select id="baseYear" name="baseYear" [(ngModel)]="baseYear" (change)="compareyearlycost($event)" class="form-control" >
             <option value="">--Base Year--</option>
          <option *ngFor="let yr of CustomService.prevTenYears;" value="{{yr}}">{{yr}}</option> 
                 </select>                
@@ -133,3 +133,117 @@
     </div>
     <div style="margin-top: 10px;"></div>
   </ngx-side-modal>
+
+  <ngx-side-modal [(show)]='showHRReviewModal' position="Center" style="width: 500px; height: 1000px;">
+    <div modal-header>HR Action</div>
+    <div modal-body>
+        <div class="modal-body">  
+            <div *ngIf="newQuery.departments && newQuery.departments != 'All'">
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label>Department</label>
+                        {{projectionplan.deptmntName}}
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label>Head of Department</label>
+                        {{projectionplan.HeadofDepartmentName}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label>Resource Count</label>
+                    {{projectionplan.JobRoleCount}}
+                    </div>
+            </div>
+       
+            <div class="form-group row">
+              <label class="col-md-12 control-label" for="example-email">Resource</label>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-12" >  
+                <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr style="background-color: #d7d0e6;">
+                    <th scope="col" style="font-size: 12px; font-weight: normal">Activity Name</th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">Role Name</th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">Requested Resource</th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">
+                      Cost Per Resource
+                    </th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">
+                      Total Resource Cost
+                    </th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">
+                      Approved Resource
+                    </th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">Decision</th>
+                    <th scope="col" style="font-size: 12px; font-weight: normal">Comment</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngIf="projectionplan.newRequirement.length < 1">
+                    <td colspan="8">No Record Found</td>
+                  </tr>
+                  <tr *ngFor="let req of projectionplan.newRequirement;let i = index">                
+                    <td>{{req.ActivityName}}</td>
+                    <td>
+                      <span *ngIf="req.GradeId">{{req.GradeName}}</span>
+                      <span *ngIf="req.JobRoleId">{{req.JobRoleName}}</span>
+                      <span *ngIf="req.PostionId">{{req.PositionName}}</span>
+                      </td>
+                    <td><span>{{req.NumberOfResource}}</span></td> 
+                    <td><span>{{req.costPerResource | number: '.2'}}</span></td>
+                    <td><span>{{req.NumberOfResource * req.costPerResource | number: '.2'}}</span></td>               
+                    <td>   
+                      <span *ngIf="req.Status == 2 || req.Status == 3 || req.Status == 0">{{req.ApprovedResource}}</span>
+                                 
+                      <input *ngIf="req.Status == 1" required  type="text"  class="form-control" (keyup)="setApprovedResource($event,req)">
+                       </td>
+                    <td > 
+                      <span class="mb-0" *ngIf="req.Status == 2 || req.Status == 3 || req.Status == 0">                
+                        <span class="badge" style="background-color: #EF5350;width: 80px;" *ngIf="req.Status == 3">
+                          {{req.Decision}}d
+                        </span>
+                        <span class="badge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 2">
+                          {{req.Decision}}d
+                        </span>
+                        <span class="badge" style="background-color: #d99700;width: 80px;" *ngIf="req.Status == 0">
+                          {{req.Decision}}d
+                        </span>
+                      </span>       
+                      <select *ngIf="req.Status == 1 " class="form-control" (change)="setdecision($event,req)">
+                        <option value="">--select--</option>
+                        <option value="Return">Return</option>
+                        <option value="Approve">Approve</option>
+                        <option value="Decline">Decline</option>        
+                      </select>
+                     </td>
+                    <td>     
+                      <span *ngIf="req.Status == 2 || req.Status == 3 || req.Status == 0">{{req.HRComment}}</span>
+                               
+                      <input *ngIf="req.Status == 1"  type="text"  class="form-control" (keyup)="setcomment($event,req)"  >
+                     </td>
+                  </tr>
+                  </tbody>
+                </table>   
+              </div>
+            </div>
+            </div>
+       
+      
+          </div>
+   </div>
+   <div modal-actions class="d-flex"
+   style="display: flex; flex-direction: row; justify-content: flex-end;align-items: flex-end; margin-top: 10px; margin-bottom: 20px;">
+   <ngx-loadable-button [loading]="loading" (click)="getRequirement(newQuery)">
+     Submit 
+   </ngx-loadable-button>  
+   <div style="padding-left: 15px;">
+     <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
+   </div>
+  
+ </div>
+ <div style="margin-top: 5px;"></div>
+    </ngx-side-modal>

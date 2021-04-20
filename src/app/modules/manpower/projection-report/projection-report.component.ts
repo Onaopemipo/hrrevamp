@@ -4,19 +4,11 @@ import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/compone
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { CustomServiceService } from 'app/_services/custom-service.service';
 import { CommonServiceProxy, DataServiceProxy, DepartmentManPowerActivityDTO, DropdownValue, ManpowerServiceProxy } from 'app/_services/service-proxies';
+import { projectionReport,searchQuery} from '../manpower.model';
 enum TOP_ACTIONS {
   FILTER,
 }
-export interface searchQuery{
-  jobCategory?: string,
-  activityYear?: number,
-  activityName?: string,
-  departments?: any,
-  status?: number,
-  taskType?: number,
-  taskProject?: string
-  BaseYear?: any;
-}
+
 @Component({
   selector: 'ngx-projection-report',
   templateUrl: './projection-report.component.html',
@@ -37,13 +29,22 @@ export class ProjectionReportComponent implements OnInit {
   totalItems = 0;
   currentPage = 1;
   tableColumns = [
-    {name: 'activityTypeName', title: 'Activity Name',type: ColumnTypes.Text},
-    {name: 'activityTypeName', title: 'Task Type',type: ColumnTypes.Text},
-    {name: 'description', title: 'Justification',type: ColumnTypes.Text},
-    { name: 'requirements', title: 'Requirements', type: ColumnTypes.Object},
-    { name: 'year', title: 'Calendar Year',type: ColumnTypes.Text },
-    {name: 'statusName', title: 'Status',type: ColumnTypes.Status},
+    {name: 'activityTypeName', title: 'Department Name',type: ColumnTypes.Text},
+    {name: 'activityTypeName', title: 'Role(s)',type: ColumnTypes.Text},
+    {name: 'description', title: 'Base Year',type: ColumnTypes.Text},
+    { name: 'requirements', title: 'Base Year Employee Count', type: ColumnTypes.Object},
+    { name: 'year', title: 'Base Year Cost Per Employee',type: ColumnTypes.Text },
+    { name: 'statusName', title: 'Base Year Employee Cost', type: ColumnTypes.Status },
+    { name: 'activityTypeName', title: 'Projection Year', type: ColumnTypes.Text },
+    {name: 'activityTypeName', title: 'Projection Year Employee Count',type: ColumnTypes.Text},
+    {name: 'description', title: 'Projection Year Employee Cost',type: ColumnTypes.Text},
+    { name: 'requirements', title: 'Approved Resource', type: ColumnTypes.Object},
+    { name: 'year', title: '% Change',type: ColumnTypes.Text },
+    { name: 'statusName', title: 'Cost Implication', type: ColumnTypes.Status },
+    { name: 'year', title: 'Current Employee Count',type: ColumnTypes.Text },
+    {name: 'statusName', title: 'Total Employee Count',type: ColumnTypes.Status},
   ];
+
   tableActions: TableAction[] = [
     { name: ACTIONS.VIEW, label: 'View' },
     { name: ACTIONS.EDIT, label: 'Edit' },
@@ -56,6 +57,13 @@ export class ProjectionReportComponent implements OnInit {
   modificationStatus: boolean = false;
   showHRReviewModal: boolean = false;
   selectedCategory: string = "Job Role";
+  projectionplan: projectionReport = {};
+  departmentRequirements = [];
+objrequirement: projectionReport = {};
+newHRrequirement = [];
+submitRequirement = [];
+unlockDecision: string = "";
+unlockComment: string = "";
   constructor(public CustomService: CustomServiceService, private myDropdown: DataServiceProxy,private CommonService: CommonServiceProxy,
     private ManpowerService: ManpowerServiceProxy, private alertservice: AlertserviceService,) { }
     nulltasktype(){
@@ -76,7 +84,15 @@ export class ProjectionReportComponent implements OnInit {
       }
        }
  
-  
+       setcomment(event,requiremnt){
+        this.newHRrequirement = this.projectionplan.newRequirement;
+        var inputentry = event.srcElement.value;
+        if(inputentry){
+         var n = this.newHRrequirement.findIndex(x => x.ID == requiremnt.ID);
+         this.projectionplan.newRequirement[n].HRComment= inputentry;
+        // console.log(this.projectionplan.newRequirement[n])
+        }
+      }
   
   getRequirement(newQuery:searchQuery){
     this.loading = true;
@@ -91,15 +107,49 @@ export class ProjectionReportComponent implements OnInit {
         newQuery.departments, newQuery.status, newQuery.taskType, 1, 10).subscribe(data => {
           if (!data.hasError) {
             this.DepartmentManPowerActivities = data.result;
+            
           }
         });
     }
 
     }
-  
+    setdecision(event,requiremnt){
+      this.newHRrequirement = this.projectionplan.newRequirement;
+      var inputentry = event.srcElement.value;
+      if(inputentry){     
+       var n = this.newHRrequirement.findIndex(x => x.ID == requiremnt.ID);
+       this.projectionplan.newRequirement[n].Decision= inputentry;
+      // console.log(this.projectionplan.newRequirement[n])
+      }else{
+       
+
+      }
+  }
+  compareyearlycost(event)
+{
+var sYear = event.srcElement.value;
+this.baseYear= sYear;
+if(sYear != "" || sYear != null)
+{
+
+}
+    }
+  setApprovedResource(event, requiremnt){
+    this.newHRrequirement = this.projectionplan.newRequirement;
+    var inputentry =  event.target.value;
+    var reg = new RegExp('^[0-9]+$');
+    //console.log(reg.test(inputentry));
+    if(inputentry && reg.test(inputentry) ){
+     var n = this.newHRrequirement.findIndex(x => x.ID == requiremnt.ID);
+     this.projectionplan.newRequirement[n].ApprovedResource= inputentry;
+   //console.log(this.projectionplan.newRequirement[n])
+    }else{
+    // this.toastService.show('input only number',{ classname: 'bg-danger text-light', delay: 3000 });
+   }
+       }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.FILTER) {
-     this.showFilterModal = true;
+     this.showHRReviewModal = true;
 
     }
 
@@ -164,7 +214,7 @@ export class ProjectionReportComponent implements OnInit {
     this.getJobRoles();
     this.getPositions();
     this.getdepartments();
-    
+    this.projectionplan.newRequirement = [];
     this.newQuery.jobCategory = "";
     this.newQuery.taskProject = "";
   }

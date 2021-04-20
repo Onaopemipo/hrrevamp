@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ExitRequestService, MyExitRequest } from '../services/exit-request.service';
+import {  MyExitRequest } from '../services/exit-request.service';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms'
+import { FormGroup } from '@angular/forms'
+import { CommonServiceProxy, DataServiceProxy, RetirementServiceProxy, RetirementType, RetirmentDTO } from 'app/_services/service-proxies';
+import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
 
 
 
@@ -19,14 +20,14 @@ enum TOP_ACTIONS {
   styleUrls: ['./managementexist.component.scss']
 })
 export class ManagementexistComponent implements OnInit {
-  ExitManagement: string = 'Exit Management';
-  messageForm: FormGroup
+  pageName: string = '';
+  exitForm: FormGroup
   inputText: string = 'Attach';
   // creatingExit:MyExitRequest[]=[]
   order: boolean = false;
   success: boolean = false;
   topActionButtons = [
-    { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Cancel resignation', 'icon': 'plus', outline: true },
+    { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Cancel Request', 'icon': 'plus', outline: true },
 
   ];
   ReasonForLeaving: string = ''
@@ -39,68 +40,71 @@ export class ManagementexistComponent implements OnInit {
   AdditionalComment: string = ''
 
   ExitRequest: MyExitRequest
-
+  allRetirementType: RetirementType[] = [];
+  loading: boolean = false;
+  RetirmentBody = new RetirmentDTO().clone();
+  uploadOption: number = 1;
   constructor(
     private router: Router,
-    private api: ExitRequestService,
+    private DataService: DataServiceProxy,
+private CommonService: CommonServiceProxy,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private RetirementService: RetirementServiceProxy,
+    private alertService: AlertserviceService
+
   ) {
-    this.messageForm = this.formBuilder.group({
-      ReasonForLeaving: ['', Validators.required],
-      subReason: ['', Validators.required],
-      SourceOfInitiation: ['', Validators.required],
-      DateOfExit: ['', Validators.required],
-      selectedOption: ['', Validators.required],
-      FileUpload: ['', Validators.required],
-      DocUpload: ['', Validators.required],
-      AdditionalComment: ['', Validators.required]
-    })
+
   }
 
   ngOnInit(): void {
+    this.getRetirementsTypes();
+
     this.activatedRoute.queryParams.subscribe(params => {
-      const a = params.a
-      this.order = a
+      if (params) {
+        if (params.type) {
+          let pnam = params.type;
+          this.pageName = pnam == 'Retirement' ? "Retirement" : "Exit Management"
+ 
+        }
+      }
     }
     );
   }
-
+  getRetirementsTypes() {
+    this.CommonService.getRetirmentType().subscribe(data => {
+      if (!data.hasError) {
+        this.allRetirementType = data.result;
+     }
+  })
+  }
+  submitRetirement() {
+    this.loading = true;
+    this.RetirementService.postRetireee(1, 0, this.RetirmentBody).subscribe(data => {
+      this.loading = false;
+      if (!data.hasError) {
+        this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
+          this.RetirmentBody = new RetirmentDTO().clone();
+       
+        });
+      }else {
+        this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {
+ 
+         });
+      }
+    }, (error) => {
+      this.loading = false;
+      if (error.status == 400) {
+        this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+      }
+    })
+  }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
       this.router.navigateByUrl('/employeemodule/exitmanagement');
     }
 
   }
-  async onSubmit() {
-    if (this.messageForm.invalid) {
-      return
-      //if it is invalid it should return nothing but if it is valid it should turn success to true
-    }
-    else {
-      const InitializeExit: MyExitRequest = {
-        reason: this.ReasonForLeaving,
-        subReason: this.subReason,
-        sourceOfInitiation: this.SourceOfInitiation,
-        exitDate: this.DateOfExit,
-        uploadUnsupportingDocument: this.FileUpload,
-        comment: this.AdditionalComment
-      }
-      const res = await this.api.create(InitializeExit).toPromise();
 
-    }
-
-
-    if (this.order == false) {
-      alert('Exit succesfully initiated')
-      this.router.navigateByUrl('/employeemodule/exitmanagement');
-    }
-    if (this.order == true) {
-      alert('Retirement succesfully initiated')
-      this.router.navigateByUrl('/employeemodule/retirement')
-    }
-
-  }
 
 
 }
