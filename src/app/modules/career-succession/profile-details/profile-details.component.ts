@@ -31,7 +31,7 @@ class MyEmployeeDTO extends EmployeeDTO{
   }
 
   get myCertifications(){
-    return this.certifications[0]
+    return this.certifications
   }
 
   get mySkills(){
@@ -72,6 +72,9 @@ export class ProfileDetailsComponent implements OnInit {
     private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy, private allEmployees: FetchAllEmployeesServiceProxy) { }
 
   async ngOnInit() {
+    this.employeeData.certifications = [];
+    this.employeeData.skills = [];
+    this.employeeData.qualifications = [];
     let subscription: Subscription = null;
     subscription = this.activatedRoute.paramMap.subscribe(params => {
       this.employeeId = parseInt(params.get('id'));

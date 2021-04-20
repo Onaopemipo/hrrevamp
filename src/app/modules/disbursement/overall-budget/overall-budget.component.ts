@@ -21,7 +21,7 @@ export class OverallBudgetComponent implements OnInit {
   addBudget: boolean = false;
   addItemModal: boolean = false;
   editItem: boolean = false;
-  defaultPage: number = 3;
+  defaultPage: number = 0;
   budget: BudgetDTO = new BudgetDTO;
   newBudget: ManageBudgetDTO = new ManageBudgetDTO;
   budgetItem: BudgetItemDTO = new BudgetItemDTO().clone();
@@ -94,6 +94,10 @@ export class OverallBudgetComponent implements OnInit {
 
   addBudgetModal(){
     this.addBudget = !this.addBudget;
+  }
+
+  getGridBox(){
+
   }
 
 

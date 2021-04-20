@@ -3,14 +3,18 @@
   <nb-card *ngIf="employeeDataCount < 1">
     <nb-card-body>
       <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="addNew()"></ngx-default-content>
+          (buttonClick)="toggleToCreatePlan()"></ngx-default-content>
     </nb-card-body>
   </nb-card>
 
   <nb-card *ngIf="employeeDataCount > 0">
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="dashboardTable" [userData]='allEmployeesData' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      <ngx-tablecomponent [loading]='loading'
+      [tableColum]="dashboardTable"
+      [userData]='allEmployeesData'
+      [actions]='tableActions'
+      (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 </div>
@@ -18,41 +22,41 @@
 
 <ngx-side-modal [(show)]='newPlan' style="width: 500px;">
   <div modal-header>Create Succession Plan</div>
-  <div class="row" modal-body>
+  <div class="row" modal-body style="padding: 5px;">
       <div class="form-group row">
         <div class="col">
           <label>Title</label>
-          <!-- <input type="text" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.title" disabled> -->
+          <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
         </div>
       </div>
 
       <div class="form-group row">
        <div class="col">
         <label>Employee</label>
-        <input type="text" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" disabled>
+        <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" required>
        </div>
       </div>
 
       <div class="form-group row">
         <div class="col">
          <label>Position</label>
-         <!-- <input type="text" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionName" disabled> -->
+         <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionId" required>
         </div>
        </div>
 
        <div class="form-group row">
         <div class="col">
          <label>Successing Candidate</label>
-         <!-- <input type="text" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successingCandidate" disabled> -->
+         <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successionEmployee" required>
         </div>
        </div>
 
        <div class="form-group row">
         <div class="col">
          <label>Readiness to start</label>
-         <select type="text" name="readiness" disabled>
+         <select type="text" class="custom-select" name="readiness" required>
            <option value="">--Select--</option>
-           <option *ngFor="let readiness of readinessToStart" [value]="readiness.label">{{ readiness.title }}</option>
+           <option *ngFor="let readiness of readinessToStart" [value]="readiness.name">{{ readiness.title }}</option>
          </select>
         </div>
        </div>
@@ -61,9 +65,9 @@
        <div class="form-group row">
         <div class="col">
          <label>Purpose</label>
-         <select type="text" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.planJustification" disabled>
+         <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
           <option value="">--Select--</option>
-          <option value=""></option>
+          <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
         </select>
         </div>
        </div>

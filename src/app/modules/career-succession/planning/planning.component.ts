@@ -1,4 +1,5 @@
-import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession } from './../../../_services/service-proxies';
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -58,6 +59,23 @@ export class PlanningComponent implements OnInit {
   //   { name: 'g', title: 'INSTITUTION' },
   // ];
 
+
+  readinessToStart = [
+    {name: 'stage1', title: 'Stage One'},
+    {name: ' stage2', title: 'Stage Two'},
+    {name: 'stage3', title: 'Stage Three'},
+    {name: 'stage4', title: 'Stage Four'},
+
+  ];
+
+  allPurposes = [
+    {name: 'retirement', title: 'Retirement'},
+    {name: 'firing', title: 'Firing'},
+    {name: 'position', title: 'Change of Position'},
+    {name: 'exit', title: 'Exit'},
+  ]
+
+
   topActionButtons = [
     {name: TOP_ACTIONS.ADD_MORE, label: 'Add More', 'icon': 'plus', outline: false},
 
@@ -66,14 +84,19 @@ export class PlanningComponent implements OnInit {
   myPlanHeader: string = 'Nothing to see';
   myPlanDesc: string = 'No succession plan has been set up, click the button below to add one';
   myButton: string = 'Add New Plan';
+  newPlan: boolean = false;
 
   planDataCount: number = 0;
+  newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
 
   constructor(
     private navCtrl: Location,
     private api: EmployeesService,
     private router:Router,
     private planService: FetchSuccessionPlanServiceProxy,
+    private succession: CareerSuccessionServiceProxy,
+    private alertMe: AlertserviceService,
+
   ) { }
 
   tableActionClicked(event: TableActionEvent){
@@ -105,6 +128,12 @@ export class PlanningComponent implements OnInit {
   goback() {
     this.navCtrl.back();
   }
+
+  toggleToCreatePlan(){
+    this.newPlan = !this.newPlan
+
+  }
+
   addPlan(){
     // this.newPlan = !this.newPlan;
   }
@@ -116,5 +145,12 @@ export class PlanningComponent implements OnInit {
       this.planDataCount = data.totalRecord;
     }
   }
+
+  async createSuccessionPlan(){
+    const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert('success', 'Plan created successfully', 'Dismiss')
+    }
+    }
 
 }
