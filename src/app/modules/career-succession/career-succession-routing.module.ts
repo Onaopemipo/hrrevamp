@@ -92,6 +92,9 @@ const routes: Routes = [
         path: 'gridbox/:id',
         component: NineGridBoxEmployeeComponent
       },
+
+      { path: '', redirectTo: 'request', pathMatch: 'full' },
+    { path: '**', redirectTo: 'request' },
     ]
   }
 ];

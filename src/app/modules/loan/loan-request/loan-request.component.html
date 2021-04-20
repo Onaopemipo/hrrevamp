@@ -44,106 +44,122 @@
   <div *ngIf="selectedCase=='request'" class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
         <nb-card>
             <nb-card-body>
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Employee Name</label>
-                </div>
+              <form name="loanForm" #loanForm="ngForm">
 
-                <div class="col-sm-6">
-                  <ngx-employee-master-search></ngx-employee-master-search>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Loan Type</label>
-                </div>
-
-                <div class="col-sm-6">
-                  <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeName">
-                    <option value="">--Select Loan Type--</option>
-                  </select>
-                </div>
-              </div>
-
-                <!-- <div class="form-group row">
+                <div class="form-group row">
                   <div class="col-sm-3">
-                    <label for="">Interest Type</label>
+                    <label for="">Employee Name</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <select class="form-control" name="loanType" [(ngModel)]="loanModel.">
-                      <option value="">--Select Interest Type--</option>
+                    <ngx-employee-master-search></ngx-employee-master-search>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Loan Type</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeName">
+                      <option value="">--Select Loan Type--</option>
+                      <option *ngFor="let myType of allLoanTypes" [value]="myType.code">{{ myTpe.name }}</option>
                     </select>
                   </div>
-              </div> -->
-
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Effective Date</label>
-                </div>
-                <div class="col-sm-6">
-                  <ngx-date [(value)]="loanModel.effectiveDate"></ngx-date>
                 </div>
 
-              </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <label for="">Interest Type</label>
+                    </div>
 
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Requested Amount</label>
-                </div>
-                <div class="col-sm-6">
-                  <app-amount-input [(value)]="loanModel.requestedAmount"></app-amount-input>
-                </div>
-
-              </div>
-
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Requested Tenor (Months)</label>
+                    <div class="col-sm-6">
+                      <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeName">
+                        <option value="">--Select Interest Type--</option>
+                        <option value="1">Type One</option>
+                      </select>
+                    </div>
                 </div>
 
-                <div class="col-sm-6">
-                  <input class="form-control" type="number" name="tenor" #tenor="ngModel" [(ngModel)]="loanModel.requestedTenor" placeholder="12">
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Effective Date</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <ngx-date [(value)]="loanModel.effectiveDate"></ngx-date>
+                  </div>
+
                 </div>
 
-              </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Requested Amount</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <app-amount-input [(value)]="loanModel.requestedAmount"></app-amount-input>
+                  </div>
 
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Maturity Date</label>
-                </div>
-                <div class="col-sm-6">
-                  <ngx-date [(value)]="loanModel.strMaturityDate"></ngx-date>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Custom Question</label>
                 </div>
 
-                <div class="col-sm-6">
-                  <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Requested Tenor (Months)</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <input class="form-control" type="number" name="tenor" #tenor="ngModel" [(ngModel)]="loanModel.requestedTenor" placeholder="12">
+                  </div>
+
                 </div>
 
-              </div>
-
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Loan Justification</label>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Maturity Date</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <ngx-date [(value)]="loanModel.strMaturityDate"></ngx-date>
+                  </div>
                 </div>
 
-                <div class="col-sm-6">
-                  <ngx-wysisyg-input [(value)]="loanModel.justification" style="padding-left: -10px;" ></ngx-wysisyg-input>
-                </div>
-              </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Custom Question</label>
+                  </div>
 
-              <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for=""></label>
+                  <div class="col-sm-6">
+                    <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                  </div>
+
                 </div>
-              </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Custom Answer</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                  </div>
+
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for="">Loan Justification</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <ngx-wysisyg-input [(value)]="loanModel.justification" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label for=""></label>
+                  </div>
+                </div>
+              </form>
 
             </nb-card-body>
         </nb-card>
@@ -201,7 +217,7 @@
               <label></label>
             </div>
             <div class="col-sm-6">
-              <button nbButton status="primary" (click)="uploadFile()">Submit</button>
+              <button nbButton status="primary" (click)="uploadFile()">Upload</button>
             </div>
           </div>
 

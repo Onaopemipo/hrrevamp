@@ -1,6 +1,7 @@
+import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -41,13 +42,16 @@ export class LoanRequestComponent implements OnInit {
   loanSummary: IdNameObj [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
+  loanForm: NgForm;
+  allLoanTypes: LoanType [] = [];
 
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
-     private updateService: UpdateLoanRequestServiceProxy) { }
+     private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy) { }
 
   ngOnInit(): void {
+    this.getLoanTypes();
   }
 
   selectPanel(rolelist, i) {
@@ -67,6 +71,7 @@ export class LoanRequestComponent implements OnInit {
 
   uploadFile(){
 
+
   }
 
   addGuarantor(){
@@ -77,6 +82,7 @@ export class LoanRequestComponent implements OnInit {
   const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
     this.alertMe.openModalAlert('Success', 'Request Created', 'Dismiss');
+    this.loanForm.resetForm();
   }
   else{
     console.log('Failure', data.message);
@@ -101,6 +107,14 @@ export class LoanRequestComponent implements OnInit {
     const data = await this.updateService.updateLoanRequest(this.updateLoanPayment).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert('Success', 'Loan Updated!', 'Dismiss')
+    }
+  }
+
+  async getLoanTypes(){
+    const data = await this.loanType.fetchLoanTypeById(1,1).toPromise();
+    if(!data.hasError){
+      this.allLoanTypes = data.result;
+      console.log('Here are the types', this.allLoanTypes)
     }
   }
 

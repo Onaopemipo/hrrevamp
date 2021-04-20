@@ -1,4 +1,5 @@
-import { LoanRepaymentLog, LoadRepaymentScheduleServiceProxy, SimulatePaymentServiceProxy } from './../../../_services/service-proxies';
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { LoanRepaymentLog, LoadRepaymentScheduleServiceProxy, SimulatePaymentServiceProxy, PostFullRepaymentServiceProxy, GetLoanSummaryServiceProxy, IdNameObj, PostLoanDto } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -22,8 +23,14 @@ export class ProcessRequestComponent implements OnInit {
 
   repaymentData: LoanRepaymentLog [] = [];
   simulationData: LoanRepaymentLog [] = [];
+  allRepaymentSchedule: LoanRepaymentLog [] = [];
+  loanId: number = 0;
+  loanSummary: IdNameObj [] = [];
+  loanData: PostLoanDto = new PostLoanDto().clone()
 
-  constructor(private repaymentService: LoadRepaymentScheduleServiceProxy, private simulateService: SimulatePaymentServiceProxy) { }
+  constructor(private repaymentService: LoadRepaymentScheduleServiceProxy, private simulateService: SimulatePaymentServiceProxy,
+    private summaryService: GetLoanSummaryServiceProxy, private fullpaymentService: PostFullRepaymentServiceProxy,
+    private alertMe: AlertserviceService,) { }
 
   ngOnInit(): void {
     this.fetchRepayment();
@@ -40,6 +47,37 @@ export class ProcessRequestComponent implements OnInit {
     const data = await this.simulateService.simulatePayment(1,1,1,1,'').toPromise();
     if(!data.hasError){
       this.simulationData = data.result;
+    }
+  }
+
+  async fetchRepaymentSchedule(){
+    const data = await this.repaymentService.loadRepaymentSchedule(0,0).toPromise();
+    if(!data.hasError){
+      this.allRepaymentSchedule = data.result;
+      console.log(data.message)
+    } else {
+      console.log(data.message)
+    }
+  }
+
+  async fetchSimulateRepayment(){
+    const data = await this.simulateService.simulatePayment(0,0,0,0,'').toPromise();
+    if(!data.hasError){
+      this.simulationData = data.result;
+    }
+  }
+
+  async fetchLoanSummary(){
+    const data = await this.summaryService.getLoanSummary(this.loanId).toPromise();
+    if(!data.hasError){
+      this.loanSummary = data.result;
+    }
+  }
+
+  async postFullPayment(){
+    const data = await this.fullpaymentService.postFullRepayment(this.loanData).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'Dismiss')
     }
   }
 

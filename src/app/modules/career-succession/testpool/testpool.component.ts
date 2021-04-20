@@ -50,7 +50,7 @@ poolTypes: any = [];
   {name: 'requirement', label: 'Add Requiremnt', icon: 'plus'},
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
 ]
-  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService, private navCtrl: Location) { }
+  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,  private navCtrl: Location) { }
 
   ngOnInit(): void {
     console.log(this.channel);
