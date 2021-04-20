@@ -51,11 +51,11 @@ export class RetirementComponent implements OnInit {
       .then(result =>{this.data = result.result} )
   }
    getRetiree(){
-     this.RetirementServiceProxy.getRetirees(this.startdte,this.enddte,this.searchText,this.searchType,this.page,
-      this._selected,this.startdate,this.endate,this.pageSize,this.pageNumber).toPromise()
-      .then(res =>{
-        alert('success')
-      })
+    //  this.RetirementServiceProxy.getRetirees(this.startdte,this.enddte,this.searchText,this.searchType,this.page,
+    //   this._selected,this.startdate,this.endate,this.pageSize,this.pageNumber).toPromise()
+    //   .then(res =>{
+    //     alert('success')
+    //   })
    }
   modal(buttion) {
     // (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
