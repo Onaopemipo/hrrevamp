@@ -95,7 +95,7 @@ export class LeaveentitlementsComponent implements OnInit {
     return this.LeaveEntitlement.length === 0;
   }
   modal(buttion) {
-    if (buttion === 'add_leave_year') {
+    if (buttion === 'add_entitlement') {
       this.showLeaveYearModal = true;
       this.modificationStatus = false;
     }
