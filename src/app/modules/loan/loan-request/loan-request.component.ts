@@ -43,7 +43,7 @@ export class LoanRequestComponent implements OnInit {
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
   loanForm: NgForm;
-  allloanTypes: LoanType [] = [];
+  allLoanTypes: LoanType [] = [];
 
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
@@ -51,6 +51,7 @@ export class LoanRequestComponent implements OnInit {
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy) { }
 
   ngOnInit(): void {
+    this.getLoanTypes();
   }
 
   selectPanel(rolelist, i) {
@@ -112,7 +113,8 @@ export class LoanRequestComponent implements OnInit {
   async getLoanTypes(){
     const data = await this.loanType.fetchLoanTypeById(1,1).toPromise();
     if(!data.hasError){
-      this.allloanTypes = data.result;
+      this.allLoanTypes = data.result;
+      console.log('Here are the types', this.allLoanTypes)
     }
   }
 
