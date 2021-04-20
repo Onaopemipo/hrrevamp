@@ -1,4 +1,4 @@
-import { CreateLeaveByAdminServiceProxy, CreateLeaveYearServiceProxy, DataServiceProxy, DeleteServiceProxy, GetLeaveRequestServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearServiceProxy, GetLeaveYearsServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateHolidayServiceProxy, CreateLeaveByAdminServiceProxy, CreateLeaveYearServiceProxy, DataServiceProxy, DeleteServiceProxy, GetLeaveRequestServiceProxy, GetLeaveTypesServiceProxy, GetLeaveYearServiceProxy, GetLeaveYearsServiceProxy, HolidayDatesServiceProxy } from './../../_services/service-proxies';
 import { ThemeModule } from './../../@theme/theme.module';
 import { LeaveComponent } from './leave.component';
 import { NgModule } from '@angular/core';
@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { NbAlertModule, NbCheckboxModule, NbDatepickerModule, NbSelectModule, } from '@nebular/theme';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { LeavehistoryComponent } from './leavehistory/leavehistory.component';
+import { LeaveentitlementsComponent } from './leaveentitlements/leaveentitlements.component';
 import {
   LeaveEntitlementServiceProxy,
   LeavePlanEventsServiceProxy,
@@ -20,7 +21,7 @@ import { LeaveyearComponent } from './leaveyear/leaveyear.component';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { DeleteLeaveTypeServiceProxy } from 'app/_services/service-proxies';
 @NgModule({
-  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent, LeaveComponent,LeaveyearComponent],
+  declarations: [LeavePlanComponent, LeavetypeComponent, LeavehistoryComponent, LeaveComponent,LeaveyearComponent,LeaveentitlementsComponent],
   imports: [
     CommonModule,
     ComponentsModule,
@@ -48,7 +49,9 @@ import { DeleteLeaveTypeServiceProxy } from 'app/_services/service-proxies';
     DeleteLeaveTypeServiceProxy,
     DataServiceProxy,
     GetLeaveRequestServiceProxy,
-    DeleteServiceProxy
+    DeleteServiceProxy,
+    AddUpdateHolidayServiceProxy,
+    HolidayDatesServiceProxy
     
    ]
 })

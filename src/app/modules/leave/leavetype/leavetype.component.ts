@@ -189,12 +189,13 @@ export class LeavetypeComponent implements OnInit {
         {
           var lvtype = data.result.map(lvtype => {
             let newlT = new LeaveTypeWithStatus(lvtype);
-            newlT.aloowedGenderName = this.genderValues.find(x => x.option_value == newlT.allowedGender).option_text;
+            let sRes = this.genderValues.find(x => x.option_value == newlT.allowedGender);
+            newlT.aloowedGenderName = sRes ? sRes.option_text : '';
             return newlT
           });
          
           this.leaveTypeList = lvtype;
-         
+          console.log(this.leaveTypeList);
           this.totalItems = data.totalRecord;
          
         } else {

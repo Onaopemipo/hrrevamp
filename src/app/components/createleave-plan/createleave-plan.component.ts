@@ -37,12 +37,13 @@ export class CreateleavePlanComponent implements OnInit {
 
   get disableSubmitbtn() {
     let resp: boolean = true;
+
     Object.entries(this.leaveD).map(([key, value], index) => {      
       if ((value == "" || value == null || value == undefined)) { 
         resp = false;
       }
     });
-    
+   // console.log(this.leaveD);
     return resp;
   }
   modalClosed(event) {
@@ -181,7 +182,7 @@ export class CreateleavePlanComponent implements OnInit {
  
    getSelectedEmployee(event) {
     //console.log(event)
-    this.leaveD.employeeContractId = event.employeeContractId;
+    this.leaveD.employeeContractId = event[0].employeeContractId;
   }
   ngOnInit(): void {
  //   console.log(this.showModal);
