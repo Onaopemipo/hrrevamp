@@ -61,7 +61,8 @@ export class CreateleaveRequestComponent implements OnInit {
         'id',      
         'file',
         'startDate',
-        'tempRef'
+        'tempRef',
+        'employeeNumber'
       ]
 
       Object.entries(this.leaveReq).map(([key, value], index) => {      
@@ -96,8 +97,8 @@ export class CreateleaveRequestComponent implements OnInit {
     }
     getSelectedEmployee(event,selectType) {
      console.log(event)
-      if(selectType == 'employee')this.leaveReq.employeeNumber = event[0].employeeContractId;
-      if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeContractId;
+      if(selectType == 'employee')this.leaveReq.employeeNumber = event[0].employeeNumber;
+      if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
       
       //console.log(selectType, event)
    }

@@ -99,10 +99,13 @@ export class PromotioneligibilityComponent implements OnInit {
   ngOnInit(): void {
     this.fetchEligibility();
     this.getApprovalProcesses();
+    this.promotionBucketList.is_closed = false;
+    this.promotionBucketList.noOfMembers = 0;
   }
 
   async addToEligibilityList() {
     this.loading = true;
+    console.log(this.promotionBucketList)
     this.promotion.addUpdateEligibleBucket(this.promotionBucketList).subscribe(data => {
     if(!data.hasError){
       this.fetchEligibility();
@@ -136,7 +139,7 @@ export class PromotioneligibilityComponent implements OnInit {
 
   }
  async getApprovalProcesses() {
-   const data = await this.FetchApprovalProcessService.fetchApprovalProcess(1).toPromise();
+   const data = await this.FetchApprovalProcessService.fetchApprovalProcess(undefined).toPromise();
    if(!data.hasError){
     this.approvalProcesses = data.result;
     console.log(this.eligibilityList)
