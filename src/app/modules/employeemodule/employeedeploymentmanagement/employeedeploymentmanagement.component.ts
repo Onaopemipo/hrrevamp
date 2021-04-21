@@ -1,8 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
-import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel } from '../../../_services/service-proxies';
+import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel, FetchDeploymentServiceProxy, DeploymentLog } from '../../../_services/service-proxies';
+import { IStatus, MyColor } from 'app/components/status/models';
+export class deploymentWithStatus extends DeploymentLog implements IStatus {
+  deploymnt: DeploymentLog;
 
+  constructor(deploymnt: DeploymentLog) {
+    super(deploymnt);
+    this.deploymnt = deploymnt;
+
+  }
+  get status() {
+    return this.deploymnt.log_status;
+  }
+  getStatusLabel() {
+    if (this.deploymnt.log_status === 0) return 'Due';
+    if (this.deploymnt.log_status === 1) return 'Pending';
+    if (this.deploymnt.log_status === 2) return 'Approved';
+    if (this.deploymnt.log_status === 3) return 'Declined';
+  }
+  getStatusColor() {
+    if (this.deploymnt.log_status === 0) return new MyColor(242, 153, 74);
+    if (this.deploymnt.log_status === 1) return new MyColor(0, 153, 74);
+    if (this.deploymnt.log_status === 2) return new MyColor(253, 238, 238);
+    return new MyColor(242, 0, 74);
+  }
+}
 
 enum TOP_ACTIONS {
   
@@ -17,11 +41,10 @@ enum TOP_ACTIONS {
 export class EmployeedeploymentmanagementComponent implements OnInit {
 
   tableColumns = [
-    { name: 'a', title: 'S/N' },
-    { name: 'b', title: 'EMPLOYEE' },
-    { name: 'refNo', title: 'STAFF NO' },
-    { name: 'effective_date', title: 'APPOINTMENT DATE' },
-    { name: 'e', title: 'PROBATION PERIOD' },
+    { name: 'employeeContractid', title: 'EMPLOYEE' },
+    { name: 'employeeContractid', title: 'STAFF NO' },
+    { name: 'employeeContractid', title: 'APPOINTMENT DATE' },
+    { name: 'employeeContractid', title: 'PROBATION PERIOD' },
     { name: 'request_by', title: 'REQUESTED BY' },
     { name: 'log_status', title: 'REQUESTED STATUS' },
   ];
@@ -31,14 +54,27 @@ export class EmployeedeploymentmanagementComponent implements OnInit {
   ];
 
   data: CreateDeploymentViewModel[] = []
-  filter = {}
-  allDeployment = [];
+  filter = {
+    CompanyID: undefined,
+    SubID: undefined,
+    employeeContractid: undefined,
+    Name: null,
+    ID: undefined,
+    strStartDate: undefined,
+    strEndDate: undefined,
+    ReferenceId: undefined,
+    Code: null,
+    pageNumber: 1,
+    pageSize: 10
+
+  }
+  allDeployment= [];
   loading: boolean = false;
   totalItems = 0;
   currentPage = 1;
 
   constructor(private EmployeeDeploymentServiceProxy: EmployeeDeploymentServiceProxy,
-    private router: Router,) { }
+    private router: Router,private FetchDeploymentService: FetchDeploymentServiceProxy) { }
 
   
   tableActionClicked(event: TableActionEvent) {
@@ -60,9 +96,12 @@ export class EmployeedeploymentmanagementComponent implements OnInit {
   }
   getallDeploymentRequest() {
     this.loading = true;
-    this.EmployeeDeploymentServiceProxy.employeeDeployment().toPromise().then(
-      deployment => {
-        this.allDeployment = deployment.result[0].lstLocations;
+    this.FetchDeploymentService.fetchDeployment(this.filter.CompanyID, this.filter.SubID, this.filter.employeeContractid,
+      this.filter.Name, this.filter.ID, this.filter.strStartDate, this.filter.strEndDate, this.filter.ReferenceId, this.filter.Code,
+    this.filter.pageNumber,this.filter.pageSize).toPromise().then(
+      (deployment) => {
+        var lvyr = deployment.result.map(lvyr => new deploymentWithStatus(lvyr));
+        this.allDeployment = lvyr;
         this.loading = false;
       }
       
@@ -71,5 +110,14 @@ export class EmployeedeploymentmanagementComponent implements OnInit {
   getuploadedfile(event){
     console.log('event')
   }
-
+  filtertabConf(is_approved = []) {   
+    let tabtittle = "";
+    is_approved.forEach(value => {
+      if (value.activeValue) tabtittle = value.tabTitle;
+    });
+   // console.log(tabtittle);
+    this.filter.Code = tabtittle == 'Due' ? 0 :
+      (tabtittle == 'Pending' ? 1 : (tabtittle == 'Approved' ? 2 : (tabtittle == 'Declined' ? 3 : 4)));
+    this.getallDeploymentRequest();
+  }
 }

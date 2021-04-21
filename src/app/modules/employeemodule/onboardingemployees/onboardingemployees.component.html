@@ -1,9 +1,33 @@
 <ngx-componentsheader [pageName]="title" >   
 </ngx-componentsheader>
-<div class="row">
+<div *ngIf="dataValue < 1" class="row">
     <div class="col-md-12 col-xxl-12">
     <nb-card>
     <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
+
+        <ngx-default-content pageHeader="Create Employee On-Boarding"
+        pageDescription="Click on the button to create an Employee On-Boarding" buttonValue="Create Employee On-Boarding" [loading]="loading"
+        (buttonClick)="modal('add_leave_year')">
+      </ngx-default-content>
+    </nb-card-body>
+    </nb-card>
+</div>
+</div>
+
+<div class="row" *ngIf="dataValue > 0" >
+    <div class="col-md-12 col-xxl-12">
+    <nb-card>
+    <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
+
+        <ngx-default-content pageHeader="Create your first Leave Year"
+        pageDescription="Click on the button to create a Leave Year" buttonValue="Create Leave Year" [loading]="loading"
+        (buttonClick)="modal('add_leave_year')">
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+        [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="Data"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      </ngx-tablecomponent>
+
         <ngx-tableheader></ngx-tableheader>
         <ngx-tablecomponent [tableColum]="columns" [userData]="employeeData"></ngx-tablecomponent>
     </nb-card-body>

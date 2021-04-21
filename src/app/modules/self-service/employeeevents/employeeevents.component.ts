@@ -103,8 +103,8 @@ export class EmployeeeventsComponent implements AfterViewInit {
     }
   }
 
-  PageSize: number = 10
-  pageNumber: number = 10
+  PageSize: number = 1000
+  pageNumber: number = 1
   AllEvents: EventDTO[]
   async getallaEvent() {
     const response = await this.getall.getAllEvents(this.PageSize, this.pageNumber).toPromise()
@@ -113,7 +113,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
     if (!response.hasError) {
       this.loading = true
       this.AllEvents = response.result
-      console.log(response.result)
+      console.log('responseData', response.result)
       // this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
       const newEvent = this.AllEvents.map(myEvent => {
         return {
@@ -121,11 +121,13 @@ export class EmployeeeventsComponent implements AfterViewInit {
           title: myEvent.title,
           start: myEvent.startDate,
           end:myEvent.endDate,
-          description: myEvent.description
-  
+          description: myEvent.description,
+          days: [],
+          type: '',
         }
       })
-      this.calendarEvents == newEvent
+      this.calendarEvents = newEvent
+      console.log('calendar', this.calendarEvents)
     }
 
     (error) => {
@@ -162,7 +164,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
       }
       // if (key == 'account_no' && !this.accountNumberValidate) resp = false;
     });
-    console.log(this.Event)
+    // console.log(this.Event)
     return resp;
   }
 

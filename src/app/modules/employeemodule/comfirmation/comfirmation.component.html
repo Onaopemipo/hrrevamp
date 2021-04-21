@@ -6,18 +6,18 @@
 <nb-card style="margin-top: 15px;">
     <nb-card-body>
 
-        <nb-tabset>
-            <nb-tab tabTitle="Due" (click)="setFilterStatus(0)">
+        <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">
+            <nb-tab tabTitle="Due">
 
             </nb-tab>
-            <nb-tab tabTitle="Pending" (click)="setStatus(1)">
+            <nb-tab tabTitle="Pending" >
                
             </nb-tab>
 
-            <nb-tab tabTitle="Approved" (click)="setStatusApproved(2)">
+            <nb-tab tabTitle="Approved" >
             
             </nb-tab>
-            <nb-tab tabTitle="Declined" (click)="setStatusDeclined(3)">
+            <nb-tab tabTitle="Declined" >
             </nb-tab>
             <nb-tab tabTitle="Extended">
 
