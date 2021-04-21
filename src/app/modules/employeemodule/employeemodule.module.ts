@@ -55,12 +55,15 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { ExitRequestService } from './services/exit-request.service';
-import { CustomServiceService  } from '../../_services/custom-service.service';
+import { CustomServiceService } from '../../_services/custom-service.service';
 import {
   GetEligibilityListServiceProxy, FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy,AddUpdateEligibleBucketServiceProxy,
-  FetchEmployeeContractByEmployeeIdServiceProxy,GetConfirmationsByDetailsServiceProxy,SaveConfirmationServiceProxy 
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy,
+  FetchEmployeeContractByEmployeeIdServiceProxy, GetConfirmationsByDetailsServiceProxy, SaveConfirmationServiceProxy, PostServiceProxy
 } from 'app/_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+// import{ FetchEmployeeOnboardingDataDetailsServiceProxy} from '../../_services/service-proxies'
+// import { FormsModule } from '@angular/forms';
 
 
 
@@ -92,6 +95,7 @@ import {
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
+
       CardComponent],
   imports: [
     CommonModule,
@@ -145,9 +149,11 @@ import {
     CustomServiceService,
     RetirementServiceProxy,
     FetchDeploymentServiceProxy
+    CustomServiceService,
+    PostServiceProxy
   ]
-   
-    
+
+
 
 })
 export class EmployeemoduleModule { }

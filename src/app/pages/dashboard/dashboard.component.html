@@ -12,7 +12,7 @@
             </span>
           </div>
           <div style="padding:5px">
-            <!-- <span class="header5-bold">{{Dash.aggregateData.totalNoOfEmployees}}</span> -->
+             <span class="header5-bold">{{Dash.aggregateData?.totalNoOfEmployees}}</span> 
           </div>
         </div>
       </div>
@@ -88,8 +88,8 @@
           </div>
           <div *ngFor="let gender of  Gender">
             <nb-select selected="1">
-              <nb-option value="1">{{gender.name}}</nb-option>
-              <nb-option value="2">{{gender.value}}</nb-option>
+              <nb-option value="gender.value">{{gender.name}}</nb-option>
+              <nb-option value="gender.value">{{gender.name}}</nb-option>
             </nb-select>
           </div>
         </div>
@@ -112,8 +112,8 @@
           </div>
           <div *ngFor="let department of Department">
             <nb-select selected="1">
-              <nb-option value="1">{{department.name}}</nb-option>
-              <nb-option value="2">{{department.value}}</nb-option>
+              <nb-option value="department.value">{{department.name}}</nb-option>
+              <nb-option value="department.value">{{department.name}}</nb-option>
             </nb-select>
           </div>
         </div>
@@ -139,8 +139,8 @@
           </div>
           <div *ngFor="let location of Location">
             <nb-select selected="1">
-              <nb-option value="1">{{location.name}}</nb-option>
-              <nb-option value="2">{{location.value}}</nb-option>
+              <nb-option value="location.value">{{location.name}}</nb-option>
+              <nb-option value="location.value">{{location.name}}</nb-option>
             </nb-select>
           </div>
         </div>
@@ -208,8 +208,8 @@
           </div>
           <div *ngFor="let retention of Retention">
             <nb-select selected="1">
-              <nb-option value="1">{{retention.name}}</nb-option>
-              <nb-option value="2">{{retention.value}}</nb-option>
+              <nb-option value="retention.value">{{retention.name}}</nb-option>
+              <nb-option value="retention.value">{{retention.name}}</nb-option>
             </nb-select>
           </div>
         </div>
