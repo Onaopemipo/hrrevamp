@@ -163,7 +163,7 @@
                         <label for="">Qualification Type</label>
                         <select class="custom-select" name="qualification" #qualification="ngModel" [(ngModel)]="competencyRequirement.qualificationId"  required>
                         <option value="">--Select Level--</option>
-                        <option *ngFor="let myqualification of qualificationData" [value]="myqualification.title">{{myqualification.name}}</option>
+                        <option *ngFor="let myqualification of qualificationData" [value]="myqualification.id">{{myqualification.name}}</option>
                       </select>
                       </div>
 
