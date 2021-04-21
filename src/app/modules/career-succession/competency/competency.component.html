@@ -2,7 +2,7 @@
 <ngx-componentsheader *ngIf="newCompetency && selectedCase=='Role_Details'" [requiredButton]="[{name:'newCompetency', label:'Add Role', icon: 'plus'}]" (buttonClick)="addRole()" pageName='Role Management'></ngx-componentsheader>
 <ngx-componentsheader *ngIf="newCompetency && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader>
 
-<div *ngIf="!newCompetency" style="background-color: #ffffff;">
+<div *ngIf="competencyCounter < 1" style="background-color: #ffffff;">
   <nb-card>
     <nb-card-body>
       <div><br>
@@ -11,10 +11,23 @@
       </div>
     </nb-card-body>
   </nb-card>
-
 </div>
 
-<div *ngIf="newCompetency" class="row">
+
+<div *ngIf="competencyCounter > 0">
+  <nb-card *ngFor="let myCompetency of allCompetencies">
+    <nb-card-header>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(pool.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(pool.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+      </div>
+    </nb-card-header>
+    <!-- <nb-card-body>
+      <h4>{{ myCompetency.description }}</h4>
+    </nb-card-body> -->
+  </nb-card>
+</div>
+
+<div class="row">
   <div class="col-lg-3 col-md-3 col-xxl-3">
     <nb-card>
     <div>
@@ -34,17 +47,6 @@
   <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
     <div  class="fmContainer" style="background-color: transparent;">
       <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
-        <nb-card *ngFor="let myCompetency of allCompetencies">
-        <nb-card-header>
-          <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(pool.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(pool.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <h4>{{ myCompetency.description }}</h4>
-        </nb-card-body>
-      </nb-card>
-
         <nb-card>
             <nb-card-body>
               <form>
@@ -168,7 +170,7 @@
                       </div>
 
                       <div *ngIf="requirement =='experience'" class="col-sm-6">
-                        <label for="">Experience Type</label>
+                        <label for="">General Experience</label>
                         <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="competencyRequirement.experienceId" required>
                         <option value="">--Select Level--</option>
                         <option *ngFor="let exp of experienceData" [value]="exp.title">{{exp.name}}</option>

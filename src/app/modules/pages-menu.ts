@@ -49,8 +49,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Employee Management',
     icon: 'assets/icons/EmployeeManagement.jpg',
-    children: [    
-   
+    children: [
+
       {
         title: 'Confirmation',
         link: '/employeemodule/confirmation',
@@ -71,7 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
 
-  
+
 
   {
     title: 'Leave Management',
@@ -382,8 +382,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Loan',
     icon: 'assets/icons/LoanDisbursement.jpg',
     children: [
-      { title: 'Loan Request', link: "/loan" },
-      {title: 'Loan Type',link:"/loan/loan-type"},
+      {
+        title: 'Loan Request',
+        link: "/loan"
+      },
+
+      {
+        title: 'Loan Type',
+        link:"/loan/loan-type"
+      },
     ]
   },
   {
