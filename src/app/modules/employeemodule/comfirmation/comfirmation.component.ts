@@ -85,6 +85,16 @@ get   showEmpty(){
 
   }
 
+  filtertabConf(is_approved = []) {   
+    let tabtittle = "";
+    is_approved.forEach(value => {
+      if (value.activeValue) tabtittle = value.tabTitle;
+    });
+   // console.log(tabtittle);
+    this.filter.log_status = tabtittle == 'Due' ? 0 :
+      (tabtittle == 'Pending' ? 1 : (tabtittle == 'Approved' ? 2 : (tabtittle == 'Declined' ? 3 : 4)));
+    this.getConfirmationDetails();
+  }
   tableActionClicked(event: TableActionEvent) {
     if (event.name == TABLE_ACTION.VIEW) {
       this.route.navigate(['/employeemodule/confirmation/employeeview'],{queryParams:{data:JSON.stringify(event.data)}} )

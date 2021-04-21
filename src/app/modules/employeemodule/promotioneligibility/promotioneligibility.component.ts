@@ -136,7 +136,7 @@ export class PromotioneligibilityComponent implements OnInit {
 
   }
  async getApprovalProcesses() {
-   const data = await this.FetchApprovalProcessService.fetchApprovalProcess(undefined).toPromise();
+   const data = await this.FetchApprovalProcessService.fetchApprovalProcess(1).toPromise();
    if(!data.hasError){
     this.approvalProcesses = data.result;
     console.log(this.eligibilityList)
