@@ -194,7 +194,11 @@ export class CompetencyComponent implements OnInit {
     this.scoreCardClick = !this.scoreCardClick;
   }
 
-  addRole(){
+  updateCompetency(){
+
+  }
+
+  deleteCompetency(){
 
   }
 

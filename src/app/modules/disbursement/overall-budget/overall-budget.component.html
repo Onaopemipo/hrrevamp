@@ -8,7 +8,7 @@
 <div *ngIf="defaultPage > 0">
   <ngx-componentsheader pageName="Overall Budget" [requiredButton]="">
     <div headerButton>
-      <select class="form-control" name="financialYear" (change)="onChangeYear($event.target.value)">
+      <select class="form-control" name="financialYear" (change)="onChangeYear($event.target.value); fetAllBudgetItems($event.target.value)">
         <option value="">Select Financial Year</option>
         <option *ngFor="let item of myBudget" [value]="item.id">{{item.financialYearStartDate	 | date : 'longDate'}} - {{item.financialYearEndDate | date : 'longDate'}}</option>
       </select>
@@ -165,11 +165,11 @@
             </div>
             <div style="display: flex" class="budget-item-department">
               <div style="flex: auto">
-                <span>{{budget.departments.amount | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departmentsdepartments[0].amount | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
               </div>
               <div>
-                <span>{{budget.departments?.spent | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departmentsdepartments[0]?.spent | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
               </div>
             </div>
@@ -345,7 +345,7 @@
   <div class="row" modal-body>
       <div class="form-group row">
         <div class="col">
-          <label>Financial Year</label> {{  singleBudgetUpdate.financialYearStartDate  }} {{  singleBudgetUpdate.financialYearEndDate  }}
+          <label>Financial Year</label>
           <ngx-date-range [(start)]="singleBudgetUpdate.financialYearStartDate" [(end)]="singleBudgetUpdate.financialYearEndDate"></ngx-date-range>
         </div>
       </div>
@@ -358,7 +358,7 @@
       </div>
       <div class="form-group row" style="margin-top: 20px">
        <div class="col">
-        <button nbButton status="primary" (click)="updateSingleBudget()">Modify</button>
+        <button nbButton status="primary" (click)="updateSingleBudget()">Update</button>
        </div>
       </div>
   </div>

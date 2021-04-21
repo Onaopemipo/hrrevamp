@@ -40,7 +40,7 @@ export class OverallBudgetComponent implements OnInit {
   ngOnInit(): void {
     this.fetAllBudget();
     this.onChangeYear(this.dataIndex);
-    this.fetAllBudgetItems();
+    // this.fetAllBudgetItems();
     this.fetchDepartments();
   }
 
@@ -56,7 +56,7 @@ export class OverallBudgetComponent implements OnInit {
   overallBudget: MyBudget = new MyBudget;
   myBudget: BudgetDTO[] = [];
   currentFinancialYear;
-  dataIndex: number = 0;
+  dataIndex: number = 1;
   budgetId:number = 0;
   finYear: BudgetDTO = new BudgetDTO;
   singleBudgetUpdate: ManageBudgetDTO = new ManageBudgetDTO().clone();
@@ -74,7 +74,9 @@ export class OverallBudgetComponent implements OnInit {
     this.addItemModal = !this.addItemModal;
   }
 
- async fetAllBudgetItems(){
+ async fetAllBudgetItems(num:number){
+    this.dataIndex = num;
+    // alert(this.dataIndex)
     const data = await this.budgetItemService.getAllBudgetItems(this.dataIndex).toPromise();
     this.allBudgetItems = data.result;
     this.budgetItemsCounter = data.totalRecord;
@@ -143,6 +145,7 @@ export class OverallBudgetComponent implements OnInit {
     // this.loader = !this.loader;
     this.finLoading = true;
     this.dataIndex = budgetId;
+    // alert(this.dataIndex)
     // alert(budgetId)
     const data = await this.singleBudget.getBudget(budgetId).toPromise();
     if(!data.hasError){
@@ -177,10 +180,12 @@ export class OverallBudgetComponent implements OnInit {
     budgetItemUpdate.totalBudget = this.budgetItem.totalBudget
     const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Item Added!', 'Dismiss');
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
+        console.log(data);
+      });
     }
     else {
-      this.alertMe.openModalAlert('Error', 'Error Adding Item', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Error Adding Item', 'Dismiss')
     }
   }
 s
