@@ -37,7 +37,7 @@
         <nb-card *ngFor="let myCompetency of allCompetencies">
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+            <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(pool.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(pool.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
           </div>
         </nb-card-header>
         <nb-card-body>
