@@ -193,6 +193,7 @@ export class LeaveenholidayComponent implements OnInit {
   ngOnInit(): void {
     this.getleaveYear();
     this.getleaveHolidays();
+    this.newleaveHolidays.holidayDate = new Date();
   }
 
 }
