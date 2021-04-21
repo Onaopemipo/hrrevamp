@@ -1441,7 +1441,7 @@ async  getAllfilestypes() {
     })
   }
   async  getAllQualificationsType() {
-    this.myDropdown.getQuilificationCategory().subscribe(data => {
+    this.myDropdown.qualificationCategories().subscribe(data => {
       if(!data.hasError){
          this.allQulificationType = data.result;
       }

@@ -145,7 +145,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   getProjects() {
     this.getmyproject.getExpenseProject(0, '', '', true, '', '', 1, 10).subscribe(data => {
       // if(!data.){
-      this.myProjects = data;
+      this.myProjects = data.result;
       console.log('Hey See here', this.myProjects);
       // }
     });
