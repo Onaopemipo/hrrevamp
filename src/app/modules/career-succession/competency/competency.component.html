@@ -195,21 +195,6 @@
                         [(ngModel)]="competencyRequirement.skillWeight" placeholder="Points" required>
                       </div>
 
-                      <!-- <div *ngIf="requirement =='training'" class="col-sm-6">
-                        <label for="">Training Weight</label>
-                        <input type="number" class="form-control" name="trainingWeight" placeholder="Points" required>
-                      </div> -->
-
-                      <!-- <div *ngIf="requirement =='qualification'" class="col-sm-6">
-                        <label for="">Qualification Weight</label>
-                        <input type="number" class="form-control" name="qualificationWeight" placeholder="Points" required>
-                      </div> -->
-
-                      <!-- <div *ngIf="requirement =='certification'" class="col-sm-6">
-                        <label for="">Certification Weight</label>
-                        <input type="number" class="form-control" name="certificationWeight" placeholder="Points" required>
-                      </div> -->
-
                       <div class="col-sm-6">
                         <label for="">Experience Weight</label>
                         <input type="number" class="form-control" name="experienceWeight" placeholder="12" required>
@@ -222,6 +207,13 @@
                   <label for="Title" class="col-sm-3 col-form-label mylabel"></label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
                     <button nbButton (click)="addRequirement()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+                  </div>
+                </div>
+
+                <div class="form-group row" *ngIf="allCompetencyRequirements.length > 0" style="border: #4847E0 3px;">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-8">
+                    <span class="badge" style="background-color: #4847E0;" *ngFor="let requirement of allCompetencyRequirements">{{ requirement.requirementCategory }} <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></span>
                   </div>
                 </div>
 

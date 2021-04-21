@@ -165,7 +165,7 @@
             </div>
             <div style="display: flex" class="budget-item-department">
               <div style="flex: auto">
-                <span>{{budget.departmentsdepartments[0].amount | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.departments.departments[0].amount | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
               </div>
               <div>
@@ -265,6 +265,12 @@
                     Add department
                   </button>
               </div>
+            </div>
+
+            <div *ngIf="addedDepartment.length > 0">
+
+              <h1 *ngFor="let dept of addedDepartment">Added</h1>
+
             </div>
             <div class="form-group" style="margin-top: 20px">
               <label></label>

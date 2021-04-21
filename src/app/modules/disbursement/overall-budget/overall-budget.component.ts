@@ -100,10 +100,9 @@ export class OverallBudgetComponent implements OnInit {
     this.addBudget = !this.addBudget;
   }
 
-  getGridBox(){
+  addDepartment() {
 
   }
-
 
  async fetchSingleBudget(){
   const data = await this.singleBudget.getBudget(this.budgetId).toPromise();

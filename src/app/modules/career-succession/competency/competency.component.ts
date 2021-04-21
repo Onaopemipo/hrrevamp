@@ -68,6 +68,7 @@ export class CompetencyComponent implements OnInit {
   myCompetency: ManageCompetencyDTO = new ManageCompetencyDTO().clone();
   allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
   competencyRequirement = new CompetencyRequirmentsDTO;
+  addedRequirements: [] = [];
 
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
@@ -132,9 +133,6 @@ export class CompetencyComponent implements OnInit {
     }
   }
 
-  addCertification(){
-
-  }
 
   async fetchCertifications(){
     const data = await this.commonService.getCertifications().toPromise();
@@ -142,10 +140,6 @@ export class CompetencyComponent implements OnInit {
       this.certificationData = data.result;
       console.log('Certifications:', this.certificationData)
     }
-  }
-
-  addQualification(){
-
   }
 
   async fetchQualifications(){
