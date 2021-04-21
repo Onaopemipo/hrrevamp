@@ -148,8 +148,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     BulkMasterServiceProxy,
     CustomServiceService,
     RetirementServiceProxy,
-    FetchDeploymentServiceProxy
-    CustomServiceService,
+    FetchDeploymentServiceProxy,
     PostServiceProxy
   ]
 
