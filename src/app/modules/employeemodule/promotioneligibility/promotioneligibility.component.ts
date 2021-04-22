@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
-import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, Sp_FetchEligibleEmployees, GetEligibilityListServiceProxy, FetchApprovalProcessServiceProxy, ApprovalProcess } from './../../../_services/service-proxies';
+import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, Sp_FetchEligibleEmployees, GetPromotionEligibilityListsServiceProxy, FetchApprovalProcessServiceProxy, ApprovalProcess } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { IStatus, MyColor } from 'app/components/status/models';
@@ -58,7 +58,7 @@ export class PromotioneligibilityComponent implements OnInit {
 
   promotionBucket: NgForm;
   promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
-  eligibilityList: PromotionEligibilityViewModel[] = [];
+  eligibilityList: Sp_FetchEligibleEmployees[] = [];
   approvalProcesses: ApprovalProcess[] = [];
   filter = {
     end: null,
@@ -76,7 +76,7 @@ export class PromotioneligibilityComponent implements OnInit {
   loading: boolean = false;
   modificationStatus: boolean = false;
   constructor(private promotion: AddUpdateEligibleBucketServiceProxy,private FetchApprovalProcessService:FetchApprovalProcessServiceProxy,
-    private alert: AlertserviceService, private GetEligibilityListService: GetEligibilityListServiceProxy,
+    private alert: AlertserviceService, private GetEligibilityListService: GetPromotionEligibilityListsServiceProxy,
   private router: Router) { }
   
     tableActionClicked(event: TableActionEvent) {
@@ -127,7 +127,7 @@ export class PromotioneligibilityComponent implements OnInit {
   }
 
   async fetchEligibility(){
-    const data = await this.GetEligibilityListService.getEligibilityList(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
+    const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
     if(!data.hasError){
       this.eligibilityList = data.result;
 
