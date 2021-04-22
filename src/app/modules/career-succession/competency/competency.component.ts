@@ -1,3 +1,4 @@
+import { TableColumn, TableAction } from 'app/components/tablecomponent/models';
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { title } from 'process';
@@ -6,6 +7,10 @@ import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonService
 import { Component, OnInit } from '@angular/core';
 
 
+enum TABLE_ACTION {
+  VIEW = '1',
+  DELETEcOMPETENCY = '3'
+}
 export interface competencyRequirement{
   ID?: number,
   requirementCategory?: string,
@@ -31,6 +36,12 @@ export interface competencyRequirement{
 })
 export class CompetencyComponent implements OnInit {
 
+  tableActions: TableAction[] = [
+    {name: TABLE_ACTION.VIEW, label: 'View'},
+    {name: TABLE_ACTION.DELETEcOMPETENCY, label: 'Delete'},
+
+  ]
+
   myPlanHeader: string = 'Create Competency';
   myPlanDesc: string = 'Click the button below to add a competency';
 
@@ -52,7 +63,14 @@ export class CompetencyComponent implements OnInit {
     { title: 'training', label: 'Training'},
     { title: 'qualification', label: 'Qualification'},
     { title: 'certification', label: 'Certification'},
-    { title: 'experience', label: 'Experience'},
+    { title: 'experience', label: 'General Experience'},
+
+  ];
+
+  competencyTable: TableColumn [] = [
+    {name: 'competencyTitle', title: 'Competency Title'},
+    // {name: 'departmentId', title: 'Department'},
+    {name: 'description', title: 'Description'},
 
   ];
 
@@ -103,6 +121,7 @@ tempTrainReq = [];
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert('Success', 'Competency Added!', 'Dismiss')
+      this.myCompetency = new ManageCompetencyDTO().clone();
     }
   }
 
@@ -204,16 +223,11 @@ tempTrainReq = [];
     this.scoreCardClick = !this.scoreCardClick;
   }
 
-  updateCompetency(){
-
+  updateCompetency(event:any){
+    alert(event);
   }
 
-  deleteCompetency(){
-
+  deleteCompetency(event:any){
+    alert(event)
   }
-
-  addCadre(){
-
-  }
-
 }

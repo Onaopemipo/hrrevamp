@@ -14,16 +14,16 @@
     <div modal-body>
       <form #editItem="ngForm" name="editItem">
           <div class="row">
-            <div class="form-group col">
-              <label>Interest Name</label>
-              <input type="text" class="form-control" name="rateTitle" #rateTitle="ngModel" [(ngModel)]="rateModel.rate" required>
-            </div>
-          </div>
-
-          <div class="row">
           <div class="form-group col">
             <label>Interest Rate</label>
             <input type="number" class="form-control" name="rateAmount" #rateAmount="ngModel" [(ngModel)]="rateModel.rate" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col">
+            <label>Descripion</label>
+            <input type="text" class="form-control" name="description" #description="ngModel" [(ngModel)]="rateModel.description" required>
           </div>
         </div>
 

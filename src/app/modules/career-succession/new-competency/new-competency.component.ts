@@ -75,6 +75,10 @@ tempTrainReq = [];
     this.requirement = e;
   }
 
+  removeRequirement(){
+    alert('Deleted!')
+  }
+
   async createCompetency(){
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
     this.myCompetency.selectedCertifications = JSON.stringify(this.tempCertReq);
@@ -85,9 +89,11 @@ tempTrainReq = [];
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(data => {
         if(data == 'closed'){
-          this.newCompetency = false;
+          this.myCompetency = new ManageCompetencyDTO().clone();
         }
       })
+      this.myCompetency = new ManageCompetencyDTO().clone();
+      this.competencyRequirement = new CompetencyRequirmentsDTO().clone();
     }
   }
 
@@ -123,7 +129,7 @@ tempTrainReq = [];
   }
 
   addNew(){
-    this.newCompetency = !this.newCompetency;
+    this.newCompetency = !true;
   }
 
   async fetchSkills(){

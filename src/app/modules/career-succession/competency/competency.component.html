@@ -1,5 +1,5 @@
 <ngx-componentsheader *ngIf="competencyCounter < 1" pageName='Competency'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="competencyCounter > 0" [requiredButton]="[{name:'newCompetency', label:'Add New', icon: 'plus'}]" (buttonClick)="addNewCompetency()" pageName='Role Management'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="competencyCounter > 0" [requiredButton]="[{name:'newCompetency', label:'Add New', icon: 'plus'}]" (buttonClick)="addNewCompetency()" pageName='All Competencies'></ngx-componentsheader>
 <!-- <ngx-componentsheader *ngIf="newCompetency && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader> -->
 
 <div *ngIf="competencyCounter < 1" style="background-color: #ffffff;">
@@ -9,6 +9,19 @@
         <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
           (buttonClick)="addNewCompetency()"></ngx-default-content>
       </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="competencyCounter > 0">
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='loading'
+      [tableColum]="competencyTable"
+      [userData]='allCompetencies'
+      [actions]='tableActions'
+      (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 </div>
@@ -30,50 +43,43 @@
     </nb-card>
     </div>
 
-  <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
+  <!-- <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
     <div  class="fmContainer" style="background-color: transparent;">
       <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
         <nb-card>
             <nb-card-body>
 
                 <div *ngIf="selectedCase=='Role'" class="form-group row ">
-                  <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <div *ngIf="competencyCounter > 0">
-                      <nb-card *ngFor="let myCompetency of allCompetencies">
+                    <div class="col" *ngIf="competencyCounter > 0">
+                      <nb-card *ngFor="let compt of allCompetencies">
                         <nb-card-header>
                           <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                            <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(pool.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(pool.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                            <span>{{ compt.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(compt.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(compt.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
                           </div>
                         </nb-card-header>
-                        <!-- <nb-card-body>
+                        <nb-card-body>
                           <h4>{{ myCompetency.description }}</h4>
-                        </nb-card-body> -->
+                        </nb-card-body>
                       </nb-card>
                     </div>
-                  </div>
                 </div>
 
                 <div *ngIf="selectedCase=='Position'" class="form-group row ">
-                  <div class="col-sm-8 col-md- 8 col-lg-8">
-                    <div *ngIf="competencyCounter > 0">
-                      <nb-card *ngFor="let myCompetency of allCompetencies">
+                    <div class="col" *ngIf="competencyCounter > 0">
+                      <nb-card *ngFor="let compt of allCompetencies">
                         <nb-card-header>
                           <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                            <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(pool.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(pool.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                            <span>{{ compt.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(compt.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(compt.id)" style="padding: 10px; color:#EB5757;">Delete</a></span>
                           </div>
                         </nb-card-header>
-                        <!-- <nb-card-body>
-                          <h4>{{ myCompetency.description }}</h4>
-                        </nb-card-body> -->
                       </nb-card>
                     </div>
-                  </div>
                 </div>
             </nb-card-body>
         </nb-card>
 
     </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
