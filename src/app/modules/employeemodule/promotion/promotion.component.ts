@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { AddUpdateEligibleBucketServiceProxy, CommonServiceProxy, EmployeeDTO, GetEligibilityListServiceProxy, GetPromotionEligibilityListsServiceProxy, Position, PromotionEligibilityViewModel, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
+import { AddUpdateEligibleBucketServiceProxy, CommonServiceProxy, EmployeeDTO, GetPromotionEligibilityListsServiceProxy, Position, PromotionEligibilityViewModel, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -53,7 +53,7 @@ export class PromotionComponent implements OnInit {
     promotionCategoryId: 0,
     promotionTargetId: 0
   }
-  constructor(private promotion: GetEligibilityListServiceProxy, private alert: AlertserviceService,private router:Router,
+  constructor(private alert: AlertserviceService,private router:Router,
     private activatedroute: ActivatedRoute, private GetPromotionEligibilityListsService: GetPromotionEligibilityListsServiceProxy,
     private CommonService: CommonServiceProxy,private updateEligibility: AddUpdateEligibleBucketServiceProxy) { }
   tableActionClicked(event: TableActionEvent) {
