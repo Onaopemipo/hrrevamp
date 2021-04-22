@@ -19,7 +19,7 @@
             <tr>
                 <th *ngFor="let day of days" style="box-sizing: border-box;">
                     <div style="padding: 4px; border: 1px solid gray; min-height: 100% ;border-spacing: 3rem ; display: flex;
-                 border-width: 3rem;" >
+                 border-width: 3rem;">
                         {{day.name}}
                     </div>
 
@@ -31,19 +31,20 @@
                     <td *ngFor="let day of week" (click)='dateClicked(day)'
                         [class]="{'other-month': day.getMonth() !== month, today: day.isToday, selectedDay: day == selectedDay}">
 
-                        <div style=" border: 1px solid black; 
+                        <div
+                            style=" border: 1px solid black; 
                  min-height: 100%; padding: 4px;position: relative;z-index: 4; vertical-align: top; display: flex; flex-direction: row-reverse; ">
                             {{day.getDate()}}
                             <span *ngIf='day.hasEvent'>
-                            <div class="" style="font-weight: bolder;font-size: larger; color: red;" >
-                                ..
-                            </div>
+                                <div class="" style="font-weight: bolder;font-size: larger; color: red;">
+                                    ..
+                                </div>
                             </span>
                         </div>
                     </td>
                 </tr>
-                
-                    <!-- <td colspan="10">
+
+                <!-- <td colspan="10">
                         <div *ngIf='selectedDay'>
                             <div style="display: flex; text-align: center; justify-content: center; font-size: larger; font-weight: bold;
                             margin-top: 2rem;">
@@ -91,60 +92,61 @@
 
 
 
-                        <td colspan="10">
-                            <div class="row " *ngIf='selectedDay'>
-                                <div class="col s12 m6">
-                                    <div style="display: flex; text-align: center; justify-content: center; font-size: larger; font-weight: bold;
+                <td colspan="10">
+                    <div class="row " *ngIf='selectedDay'>
+                        <div class="col s12 m6">
+                            <div style="display: flex; text-align: center; justify-content: center; font-size: larger; font-weight: bold;
                                     margin-top: 2rem;margin-bottom: 2rem;">
-                                        Created Events
-                                    </div>
-                                    <table class="responsive-table">
-                                        <thead>
-                                            
-                                                <tr>
-                                                    <th>Title</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date</th>
-                                                    <th>Description</th>
-            
-                                                </tr>
-    
-                                            
-                                        </thead>
-    
-                                        <tbody>
-                                            
-                                                
-                                                <tr *ngFor='let event of selectedDay.events; index as i' style="padding: 0.5rem;">
-                                                    <td style="margin-right: 0.5rem;">
-                                                        {{event.title}}
-            
-                                                    </td>
-                                                    <td>
-                                                 {{event.start | date:'medium'}}
-            
-                                                    </td>
-                                                    <td> 
-                                                         {{event.end | date:'medium'}}
-            
-                                                    </td>
-                                                    <td>
-                                                         {{event.description}}
-                                                    </td>
-                                                    <a class="action-btn">
-                                                        <i class="far fa-trash-alt" style="cursor: pointer; " (click)="deleteEvent(event.id)"></i>
-                                                    </a>
-                                                </tr>
-                                            
-    
-                                        </tbody>
-                                    </table>
-                                </div>
+                                Created Events
                             </div>
-                        </td>
-                        
-                    
-                        <!-- 
+                            <table class="responsive-table">
+                                <thead>
+
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Description</th>
+
+                                    </tr>
+
+
+                                </thead>
+
+                                <tbody>
+
+
+                                    <tr *ngFor='let event of selectedDay.events; index as i' style="padding: 0.5rem;">
+                                        <td style="margin-right: 0.5rem;">
+                                            {{event.title}}
+
+                                        </td>
+                                        <td>
+                                            {{event.start | date:'medium'}}
+
+                                        </td>
+                                        <td>
+                                            {{event.end | date:'medium'}}
+
+                                        </td>
+                                        <td>
+                                            {{event.description}}
+                                        </td>
+                                        <a class="action-btn">
+                                            <i class="far fa-trash-alt" style="cursor: pointer; "
+                                                (click)="deleteEvent(event.id)"></i>
+                                        </a>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+
+
+                <!-- 
                             <li *ngFor='let event of selectedDay.events; index as i'>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -166,8 +168,8 @@
                                 {{event|json}}
                             </li> -->
 
-                    
-                
+
+
             </tbody>
         </table>
     </nb-card-body>

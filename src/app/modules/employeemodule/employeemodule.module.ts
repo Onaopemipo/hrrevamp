@@ -28,11 +28,11 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 import { EmployeemoduleRoutingModule } from './employeemodule-routing.module';
 import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
-import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
+ import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
 import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
 import { EmployeemoduleComponent } from './employeemodule.component';
 import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
-
+import { EmployeeofferComponent } from './employeeoffer/employeeoffer.component';
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
 import { ExistrequestComponent } from './existrequest/existrequest.component';
@@ -95,6 +95,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
+     
 
       CardComponent],
   imports: [
@@ -147,7 +148,8 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     AddUpdateDeploymentServiceProxy,
     BulkMasterServiceProxy,
     CustomServiceService,
-    RetirementServiceProxy
+    RetirementServiceProxy,
+    PostServiceProxy
   ]
 
 

@@ -331,7 +331,6 @@
             </div>
             <div style="padding-top:3rem;">
              
-
               <form>
                 <!-- <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
@@ -380,13 +379,16 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
                   <div class="col-sm-8">
+                    <select placeholder="Select desginationId" name="desginationId" #desginationId="ngModel"
+                      [(ngModel)]="workData.desginationId" required>
+                      <option value="">--Select Designation---</option>
+                      <option *ngFor="let des of Designation" [value]="des.id">{{des.title}}
+                      </option>
+                    </select>
 
-                    <input type="text" nbInput fullWidth placeholder="Enter salaryPerAnnum" name="desginationId"
-                      #desginationId="ngModel" [(ngModel)]="workData.desginationId" required>
                     <div *ngIf="desginationId.invalid && (desginationId.dirty || desginationId.touched)" class="error">
-                      <div *ngIf="desginationId.errors.required">desginationId is required</div>
+                      <div *ngIf="departmentId.errors.required">Designation is required</div>
                     </div>
-
 
                   </div>
                 </div>
@@ -469,6 +471,9 @@
                   </div>
                 </div>
               </form>
+
+
+
 
             </div>
           </div>
