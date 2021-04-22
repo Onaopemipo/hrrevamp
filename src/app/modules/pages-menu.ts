@@ -268,6 +268,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
 
       {
+        title: 'Succcession Dashboard',
+        link: 'career-succession/succession-dashboard',
+      },
+
+      {
         title: 'Report',
         link: 'career-succession/report',
       },
@@ -390,6 +395,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Loan Type',
         link:"/loan/loan-type"
+      },
+
+      {
+        title: 'Interest Type',
+        link:"/loan/interest-type"
       },
     ]
   },

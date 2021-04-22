@@ -1,3 +1,4 @@
+import { NewCompetencyComponent } from './new-competency/new-competency.component';
 import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
 import { GridboxComponent } from './gridbox/gridbox.component';
 import { TestpoolComponent } from './testpool/testpool.component';
@@ -91,6 +92,11 @@ const routes: Routes = [
       {
         path: 'gridbox/:id',
         component: NineGridBoxEmployeeComponent
+      },
+
+      {
+        path: 'new-competency',
+        component: NewCompetencyComponent
       },
 
       { path: '', redirectTo: 'request', pathMatch: 'full' },

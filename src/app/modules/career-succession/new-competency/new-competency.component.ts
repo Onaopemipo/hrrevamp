@@ -1,35 +1,16 @@
-import { Router } from '@angular/router';
-import { AlertserviceService } from './../../../_services/alertservice.service';
-import { title } from 'process';
-import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, Competency, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO } from './../../../_services/service-proxies';
-import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill } from 'app/_services/service-proxies';
+import { competencyRequirement } from './../competency/competency.component';
+import { DataServiceProxy, GetAllDepartmentsServiceProxy, GradeLevelServiceProxy, CommonServiceProxy, DepartmentDTO, JobRole, Skill, Certification, Competency } from 'app/_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { CompetencyRequirmentsDTO, CompetencyServiceProxy, GradeLevelDTO, Qualification, ManageCompetencyDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
-
-export interface competencyRequirement{
-  ID?: number,
-  requirementCategory?: string,
-  skillId?: number,
-  skillName?: string,
-  trainingId?: number,
-  trainingName?: string,
-  certificationId?: number,
-  certificationName?:string,
-  qualificationId?: number,
-  qualificationName?: string,
-  experienceId?: any,
-  experienceName?: any,
-  abilityId?: number,
-  abilityName?: string,
-  experience?: string,
-  YearsofExperience?: number,
-}
 @Component({
-  selector: 'ngx-competency',
-  templateUrl: './competency.component.html',
-  styleUrls: ['./competency.component.scss']
+  selector: 'ngx-new-competency',
+  templateUrl: './new-competency.component.html',
+  styleUrls: ['./new-competency.component.scss']
 })
-export class CompetencyComponent implements OnInit {
+export class NewCompetencyComponent implements OnInit {
+
 
   myPlanHeader: string = 'Create Competency';
   myPlanDesc: string = 'Click the button below to add a competency';
@@ -77,7 +58,7 @@ tempCertReq = [];
 tempTrainReq = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
-    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,   private navCtrl: Router,
+    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,
     private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
@@ -102,7 +83,11 @@ tempTrainReq = [];
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Competency Added!', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(data => {
+        if(data == 'closed'){
+          this.newCompetency = false;
+        }
+      })
     }
   }
 
@@ -133,12 +118,12 @@ tempTrainReq = [];
     if(this.competencyRequirement.certificationId) this.tempCertReq.push(newRequirements);
     if(this.competencyRequirement.qualificationId) this.tempQualReq.push(newRequirements);
     console.log('Competency Added', this.competencyRequirement);
-    console.log('Certification Added', this.tempCertReq);
-    newRequirements = new CompetencyRequirmentsDTO;
+    console.log('Cert', this.tempCertReq);
+    this.competencyRequirement = new CompetencyRequirmentsDTO().clone();
   }
 
-  addNewCompetency(){
-    this.navCtrl.navigateByUrl('/career-succession/new-competency')
+  addNew(){
+    this.newCompetency = !this.newCompetency;
   }
 
   async fetchSkills(){
@@ -209,10 +194,6 @@ tempTrainReq = [];
   }
 
   deleteCompetency(){
-
-  }
-
-  addCadre(){
 
   }
 

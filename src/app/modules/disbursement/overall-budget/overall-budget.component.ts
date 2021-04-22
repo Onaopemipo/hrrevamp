@@ -1,4 +1,4 @@
-import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO } from './../../../_services/service-proxies';
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO, DisbursementBudgetItemAllocationDTO } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, BudgetItemService } from './../services/budget-item.service';
@@ -53,10 +53,11 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   allDepartments: Department [] = [];
+  addedDepartments: DisbursementBudgetItemAllocation [] = [];
   overallBudget: MyBudget = new MyBudget;
   myBudget: BudgetDTO[] = [];
   currentFinancialYear;
-  dataIndex: number = 1;
+  dataIndex: number = 0;
   budgetId:number = 0;
   finYear: BudgetDTO = new BudgetDTO;
   singleBudgetUpdate: ManageBudgetDTO = new ManageBudgetDTO().clone();
@@ -64,6 +65,7 @@ export class OverallBudgetComponent implements OnInit {
   editBudgetItem: MyBudgetItem = new MyBudgetItem;
   allBudgetItems: BudgetItemDTO []= [];
   allItems: MyBudgetItem []= [];
+  editBudgetItemModal: boolean = false;
 
   // addBudgetItem(){
 
@@ -72,6 +74,10 @@ export class OverallBudgetComponent implements OnInit {
 
   modalShow(){
     this.addItemModal = !this.addItemModal;
+  }
+
+  viewBudgetItemModal(){
+    this.editBudgetItemModal = !this.editBudgetItemModal;
   }
 
  async fetAllBudgetItems(num:number){
@@ -100,8 +106,12 @@ export class OverallBudgetComponent implements OnInit {
     this.addBudget = !this.addBudget;
   }
 
-  addDepartment() {
-
+  addDepartmentAllocations() {
+    let myAllocations = new DisbursementBudgetItemAllocation;
+    myAllocations.departmentId = this.departments.departmentId;
+    myAllocations.allocatedAmount = this.departments.allocatedAmount;
+    this.addedDepartments.push(myAllocations)
+    this.departments = new DisbursementBudgetItemAllocation().clone();
   }
 
  async fetchSingleBudget(){
@@ -149,6 +159,7 @@ export class OverallBudgetComponent implements OnInit {
     const data = await this.singleBudget.getBudget(budgetId).toPromise();
     if(!data.hasError){
       this.finYear = data.result;
+      console.log('My Values:', this.finYear)
       this.finLoading = false;
     }
     else {
@@ -169,13 +180,17 @@ export class OverallBudgetComponent implements OnInit {
     }
     }
 
+    budgetSetup(){
+      this.router.navigateByUrl('/budget/setup');
+    }
 
   async addBudgetItem(){
     let budgetItemUpdate = new ManageBudgetItemDTO
+    budgetItemUpdate.budgetID = this.budgetItem.budgetID;
     budgetItemUpdate.name = this.budgetItem.name;
     budgetItemUpdate.spent = 0;
     budgetItemUpdate.code = this.budgetItem.code;
-    budgetItemUpdate.budgetAllocations = JSON.stringify(this.departments);
+    budgetItemUpdate.budgetAllocations = JSON.stringify(this.addDepartmentAllocations);
     budgetItemUpdate.totalBudget = this.budgetItem.totalBudget
     const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
     if(!data.hasError){
@@ -187,22 +202,4 @@ export class OverallBudgetComponent implements OnInit {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Error Adding Item', 'Dismiss')
     }
   }
-s
-  async loadBudgetItems(event:number){
-    // this.loader = !this.loader
-    // this.finLoading = true;
-    // this.dataIndex = event;
-    // const data = await this.budgetItemService.fetch(event)
-    // this.allItems = data.;
-    // this.finLoading = false;
-  }
-
-  // async fetchBudget(){
-  //   const data = await this.budgetService.fetch(this.dataIndex).toPromise();
-  //   this.finYear = data;
-  // }
-
-  // budgetModal(){
-  //   this.editBudgetModal = !this.editBudgetModal;
-  // }
 }

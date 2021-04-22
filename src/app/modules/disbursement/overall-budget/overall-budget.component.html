@@ -1,7 +1,6 @@
 
 <div *ngIf="defaultPage < 1">
-
-<ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
+<ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="budgetSetup()">
 </ngx-default-content>
 </div>
 
@@ -9,12 +8,11 @@
   <ngx-componentsheader pageName="Overall Budget" [requiredButton]="">
     <div headerButton>
       <select class="form-control" name="financialYear" (change)="onChangeYear($event.target.value); fetAllBudgetItems($event.target.value)">
-        <option value="">Select Financial Year</option>
+        <option value="dataIndex">Select Financial Year</option>
         <option *ngFor="let item of myBudget" [value]="item.id">{{item.financialYearStartDate	 | date : 'longDate'}} - {{item.financialYearEndDate | date : 'longDate'}}</option>
       </select>
     </div>
   </ngx-componentsheader>
-
 
   <div style="background-color: white; min-height: 10vh; margin-bottom: 10px;">
     <div class="row" style="padding-top: 1rem; padding-bottom: 1rem">
@@ -161,21 +159,21 @@
                   margin-right: 0.3rem;
                 "
               ></div>
-              <div style="font-size: 18px; font-weight: 500;">{{budget.departments.department_name}}</div>
+              <div style="font-size: 18px; font-weight: 500;">{{budget.name}}</div>
             </div>
             <div style="display: flex" class="budget-item-department">
               <div style="flex: auto">
-                <span>{{budget.departments.departments[0].amount | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.amount | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount allocated</span>
               </div>
               <div>
-                <span>{{budget.departmentsdepartments[0]?.spent | currency:'NGN':'symbol'}}</span>
+                <span>{{budget.spent | currency:'NGN':'symbol'}}</span>
                 <span style="margin-top: 0.2rem" class="grey-2">Amount spent</span>
               </div>
             </div>
           </div>
           <div style="display: flex; justify-content: flex-end;">
-            <button (click)="editModal()" nbButton type="outline" status="primary" outline style="border: none;">
+            <button (click)="viewBudgetItemModal()" nbButton type="outline" status="primary" outline style="border: none;">
               view
               <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left: 0.5rem;"></i>
             </button>
@@ -184,11 +182,11 @@
       </div>
     </div>
   </ngx-template>
-
+{{budgetItemsCounter}}
   <ngx-template *ngIf="finLoading == false && budgetItemsCounter < 1">
     <div>
       <nb-card>
-        <ngx-default-content [pageHeader]="noBudgetItem" [pageDescription]="noBudget" [buttonValue]="button" (buttonClick) = "modalShow()">
+        <ngx-default-content [pageHeader]="noBudgetItem" [pageDescription]="noBudget">
         </ngx-default-content>
       </nb-card>
     </div>
@@ -210,7 +208,7 @@
           <div class="row">
             <div class="form-group col">
               <label>Budget</label>
-              <select name="budget" #budget="ngModel" [(ngModel)]="myBudget.id" class="form-control">
+              <select name="budget" #budget="ngModel" [(ngModel)]="budgetItem.budgetID" class="form-control">
                 <option value=""> Select Budget Financial Year</option>
                 <option *ngFor="let budget of myBudget" [value]="budget.id">{{budget.financialYearStartDate	 | date : 'longDate'}} - {{budget.financialYearEndDate | date : 'longDate'}}</option>
               </select>
@@ -242,16 +240,16 @@
             <div class="form-group row">
             <div class="col">
               <label>Department</label>
-              <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.code" required>
+              <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.departmentId" required>
                 <option value="">Select Department</option>
-                <option *ngFor="let dep of allDepartments" [value]="dep.code">{{dep.name}}</option>
+                <option *ngFor="let dep of allDepartments" [value]="dep.id">{{dep.name}}</option>
               </select>
             </div>
             </div>
             <div class="form-group row">
               <div class="col">
                 <label>Allocated amount</label>
-                <app-amount-input [(value)]="departments.amount"></app-amount-input>
+                <app-amount-input [(value)]="departments.allocatedAmount" [max]="budgetItem.totalBudget"></app-amount-input>
               <!-- <input class="form-control"  name="allocatedAmount" #allocatedAmount="ngModel" [(ngModel)]="departments.amount"> -->
               </div>
 
@@ -267,11 +265,21 @@
               </div>
             </div>
 
-            <div *ngIf="addedDepartment.length > 0">
 
-              <h1 *ngFor="let dept of addedDepartment">Added</h1>
+            <div *ngIf="addedDepartments.length > 0">
+
+              <h1 *ngFor="let dept of addedDepartments">Added</h1>
 
             </div>
+
+            <div class="form-group row" *ngIf="addedDepartments.length > 0" style="border: #4847E0 3px;">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-8">
+                <span class="cbadge"  *ngFor="let req of addedDepartments" style="margin: 5px;">{{ req.requirementCategory }} &nbsp;
+                  <i class="fa fa-times" style="cursor: pointer;color: red;"></i></span>
+              </div>
+            </div>
+
             <div class="form-group" style="margin-top: 20px">
               <label></label>
               <div>
@@ -280,11 +288,10 @@
               </div>
             </div>
         </div>
-      <!-- <div style="margin-top: 15px;"></div> -->
   </ngx-side-modal>
   </div>
-<!--
-  <ngx-side-modal style="width: 500px;">
+
+  <ngx-side-modal [(show)]='editBudgetItemModal' style="width: 500px;">
     <div modal-header>Update Budget Item</div>
     <div modal-body>
       <form #editItem="ngForm" name="editItem">
@@ -344,7 +351,7 @@
           </div>
         </form>
     </div>
-  </ngx-side-modal> -->
+  </ngx-side-modal>
 
   <ngx-side-modal [(show)]='editBudget' style="width: 500px;">
   <div modal-header>Update budget</div>

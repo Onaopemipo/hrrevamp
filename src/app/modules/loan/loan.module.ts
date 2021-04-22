@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../_services/alertservice.service';
 import { CommonServiceProxy } from 'app/_services/service-proxies';
-import { AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, LoadRepaymentScheduleServiceProxy, GetLoanRequestsServiceProxy, FetchLoanTypeByIdServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, LoadRepaymentScheduleServiceProxy, GetLoanRequestsServiceProxy, FetchLoanTypeByIdServiceProxy, AddUpdateInterestRateServiceProxy } from './../../_services/service-proxies';
 import { LoanComponent } from './loan.component';
 import { NbCardModule, NbCheckboxModule, NbSelectModule, NbToggleModule } from '@nebular/theme';
 import { ThemeModule } from './../../@theme/theme.module';
@@ -14,10 +14,11 @@ import { LoanTypeComponent } from './loan-type/loan-type.component';
 import { ProcessRequestComponent } from './process-request/process-request.component';
 import { UpdateLoanComponent } from './update-loan/update-loan.component';
 import { AllLoansComponent } from './all-loans/all-loans.component';
+import { InterestTypeComponent } from './interest-type/interest-type.component';
 
 
 @NgModule({
-  declarations: [LoanComponent, LoanRequestComponent, LoanTypeComponent, ProcessRequestComponent, UpdateLoanComponent, AllLoansComponent],
+  declarations: [LoanComponent, LoanRequestComponent, LoanTypeComponent, ProcessRequestComponent, UpdateLoanComponent, AllLoansComponent, InterestTypeComponent],
   imports: [
     CommonModule,
     LoanRoutingModule,
@@ -40,6 +41,7 @@ import { AllLoansComponent } from './all-loans/all-loans.component';
     PostFullRepaymentServiceProxy,
     GetLoanRequestsServiceProxy,
     FetchLoanTypeByIdServiceProxy,
+    AddUpdateInterestRateServiceProxy,
   ]
 })
 export class LoanModule { }
