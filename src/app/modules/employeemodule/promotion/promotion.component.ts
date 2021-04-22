@@ -138,17 +138,17 @@ export class PromotionComponent implements OnInit {
             { name: ACTIONS.VIEW, label: 'View' },
             { name: ACTIONS.DELETE, label: 'Delete' },
             
+          ];
+          this.loading = false;
+        }else {
+          this.eligibilityBucket = false;
+          this.showTableAction = true;
+          this.tableActions =[
+            { name: ACTIONS.VIEW, label: 'View' },
           ]
-        }
-        this.loading = false;
-      } else {
-        this.eligibilityBucket = false;
-        this.showTableAction = true;
-        this.tableActions =[
-          { name: ACTIONS.VIEW, label: 'View' },
-        ]
-        this.getPList();
-      }
+          this.getPList();
+        }        
+      } 
     });
  
   }

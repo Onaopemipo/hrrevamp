@@ -63,7 +63,7 @@ export class PromotioneligibilityComponent implements OnInit {
   filter = {
     end: null,
     start: null,
-    is_closed: 1,
+    is_closed: 0,
     _PageSize: 10,
     _PageNumber: 1
   }
@@ -164,7 +164,7 @@ export class PromotioneligibilityComponent implements OnInit {
       if (value.activeValue) tabtittle = value.tabTitle;
     });
     console.log(tabtittle);
-     this.filter.is_closed = tabtittle == 'Open'? 1 : 0;
+     this.filter.is_closed = tabtittle == 'Open'? 0 : 1;
     this.fetchEligibility();
   }
 }
