@@ -8960,6 +8960,7 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
     }
 }
 
+
 @Injectable()
 export class CompareCompetencyServiceProxy {
     private http: HttpClient;
@@ -21270,11 +21271,12 @@ export class GetInterestRateServiceProxy {
      * @param rate (optional) 
      * @param companyID (optional) 
      * @param subId (optional) 
+     * @param description (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
      * @return Success
      */
-    getInterestRate(iD: number | undefined, rate: number | undefined, companyID: number | undefined, subId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<InterestRateIListApiResult> {
+    getInterestRate(iD: number | undefined, rate: number | undefined, companyID: number | undefined, subId: number | undefined, description: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<InterestRateIListApiResult> {
         let url_ = this.baseUrl + "/api/InterestRate/GetInterestRate/GetInterestRate?";
         if (iD === null)
             throw new Error("The parameter 'iD' cannot be null.");
@@ -21292,6 +21294,8 @@ export class GetInterestRateServiceProxy {
             throw new Error("The parameter 'subId' cannot be null.");
         else if (subId !== undefined)
             url_ += "SubId=" + encodeURIComponent("" + subId) + "&";
+        if (description !== undefined && description !== null)
+            url_ += "Description=" + encodeURIComponent("" + description) + "&";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -35281,10 +35285,32 @@ export class RetirementServiceProxy {
      * API for adding/updating Post Retirement
      * @param adminMode (optional) 
      * @param saveNsubmit (optional) 
-     * @param body (optional) 
+     * @param iD (optional) 
+     * @param comment (optional) 
+     * @param retirementTypeId (optional) 
+     * @param retirementUserId (optional) 
+     * @param requriesBenefits (optional) 
+     * @param personalEmail (optional) 
+     * @param personalPhoneNumber (optional) 
+     * @param lastWorkingDate (optional) 
+     * @param exitDate (optional) 
+     * @param exitChoice (optional) 
+     * @param tempref (optional) 
+     * @param clearance (optional) 
+     * @param survey (optional) 
+     * @param dOB (optional) 
+     * @param appointmentDate (optional) 
+     * @param effectiveDate (optional) 
+     * @param strEffectiveDate (optional) 
+     * @param reviewedBy (optional) 
+     * @param reviewerComment (optional) 
+     * @param dateReviewed (optional) 
+     * @param age (optional) 
+     * @param employeeId (optional) 
+     * @param employeeContractId (optional) 
      * @return Success
      */
-    postRetireee(adminMode: number | undefined, saveNsubmit: number | undefined, body: RetirmentDTO | undefined): Observable<MessageOutApiResult> {
+    postRetireee(adminMode: number | undefined, saveNsubmit: number | undefined, iD: number | undefined, comment: string | null | undefined, retirementTypeId: number | null | undefined, retirementUserId: number | null | undefined, requriesBenefits: boolean | null | undefined, personalEmail: string | null | undefined, personalPhoneNumber: string | null | undefined, lastWorkingDate: Date | undefined, exitDate: Date | undefined, exitChoice: string | null | undefined, tempref: string | null | undefined, clearance: string | null | undefined, survey: string | null | undefined, dOB: Date | null | undefined, appointmentDate: Date | null | undefined, effectiveDate: Date | null | undefined, strEffectiveDate: string | null | undefined, reviewedBy: string | null | undefined, reviewerComment: string | null | undefined, dateReviewed: Date | null | undefined, age: number | undefined, employeeId: number | undefined, employeeContractId: number | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/PostRetireee?";
         if (adminMode === null)
             throw new Error("The parameter 'adminMode' cannot be null.");
@@ -35296,14 +35322,71 @@ export class RetirementServiceProxy {
             url_ += "saveNsubmit=" + encodeURIComponent("" + saveNsubmit) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
+        const content_ = new FormData();
+        if (iD === null || iD === undefined)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else
+            content_.append("ID", iD.toString());
+        if (comment !== null && comment !== undefined)
+            content_.append("Comment", comment.toString());
+        if (retirementTypeId !== null && retirementTypeId !== undefined)
+            content_.append("RetirementTypeId", retirementTypeId.toString());
+        if (retirementUserId !== null && retirementUserId !== undefined)
+            content_.append("RetirementUserId", retirementUserId.toString());
+        if (requriesBenefits !== null && requriesBenefits !== undefined)
+            content_.append("RequriesBenefits", requriesBenefits.toString());
+        if (personalEmail !== null && personalEmail !== undefined)
+            content_.append("PersonalEmail", personalEmail.toString());
+        if (personalPhoneNumber !== null && personalPhoneNumber !== undefined)
+            content_.append("PersonalPhoneNumber", personalPhoneNumber.toString());
+        if (lastWorkingDate === null || lastWorkingDate === undefined)
+            throw new Error("The parameter 'lastWorkingDate' cannot be null.");
+        else
+            content_.append("LastWorkingDate", lastWorkingDate.toJSON());
+        if (exitDate === null || exitDate === undefined)
+            throw new Error("The parameter 'exitDate' cannot be null.");
+        else
+            content_.append("ExitDate", exitDate.toJSON());
+        if (exitChoice !== null && exitChoice !== undefined)
+            content_.append("ExitChoice", exitChoice.toString());
+        if (tempref !== null && tempref !== undefined)
+            content_.append("Tempref", tempref.toString());
+        if (clearance !== null && clearance !== undefined)
+            content_.append("Clearance", clearance.toString());
+        if (survey !== null && survey !== undefined)
+            content_.append("Survey", survey.toString());
+        if (dOB !== null && dOB !== undefined)
+            content_.append("DOB", dOB.toJSON());
+        if (appointmentDate !== null && appointmentDate !== undefined)
+            content_.append("AppointmentDate", appointmentDate.toJSON());
+        if (effectiveDate !== null && effectiveDate !== undefined)
+            content_.append("EffectiveDate", effectiveDate.toJSON());
+        if (strEffectiveDate !== null && strEffectiveDate !== undefined)
+            content_.append("strEffectiveDate", strEffectiveDate.toString());
+        if (reviewedBy !== null && reviewedBy !== undefined)
+            content_.append("ReviewedBy", reviewedBy.toString());
+        if (reviewerComment !== null && reviewerComment !== undefined)
+            content_.append("ReviewerComment", reviewerComment.toString());
+        if (dateReviewed !== null && dateReviewed !== undefined)
+            content_.append("DateReviewed", dateReviewed.toJSON());
+        if (age === null || age === undefined)
+            throw new Error("The parameter 'age' cannot be null.");
+        else
+            content_.append("Age", age.toString());
+        if (employeeId === null || employeeId === undefined)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else
+            content_.append("EmployeeId", employeeId.toString());
+        if (employeeContractId === null || employeeContractId === undefined)
+            throw new Error("The parameter 'employeeContractId' cannot be null.");
+        else
+            content_.append("EmployeeContractId", employeeContractId.toString());
 
         let options_ : any = {
             body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -58991,14 +59074,6 @@ export class Retirement implements IRetirement {
     loggedDate!: Date;
     createdBy!: string | undefined;
     requriesBenefits!: boolean;
-    personalEmail!: string | undefined;
-    personalPhoneNumber!: string | undefined;
-    lastWorkingDate!: Date;
-    exitDate!: Date;
-    exitChoice!: string | undefined;
-    tempref!: string | undefined;
-    clearance!: string | undefined;
-    survey!: string | undefined;
     retirmentDocAttachments!: RetirementDocAttachment[] | undefined;
 
     constructor(data?: IRetirement) {
@@ -59020,14 +59095,6 @@ export class Retirement implements IRetirement {
             this.loggedDate = _data["loggedDate"] ? new Date(_data["loggedDate"].toString()) : <any>undefined;
             this.createdBy = _data["createdBy"];
             this.requriesBenefits = _data["requriesBenefits"];
-            this.personalEmail = _data["personalEmail"];
-            this.personalPhoneNumber = _data["personalPhoneNumber"];
-            this.lastWorkingDate = _data["lastWorkingDate"] ? new Date(_data["lastWorkingDate"].toString()) : <any>undefined;
-            this.exitDate = _data["exitDate"] ? new Date(_data["exitDate"].toString()) : <any>undefined;
-            this.exitChoice = _data["exitChoice"];
-            this.tempref = _data["tempref"];
-            this.clearance = _data["clearance"];
-            this.survey = _data["survey"];
             if (Array.isArray(_data["retirmentDocAttachments"])) {
                 this.retirmentDocAttachments = [] as any;
                 for (let item of _data["retirmentDocAttachments"])
@@ -59053,14 +59120,6 @@ export class Retirement implements IRetirement {
         data["loggedDate"] = this.loggedDate ? this.loggedDate.toISOString() : <any>undefined;
         data["createdBy"] = this.createdBy;
         data["requriesBenefits"] = this.requriesBenefits;
-        data["personalEmail"] = this.personalEmail;
-        data["personalPhoneNumber"] = this.personalPhoneNumber;
-        data["lastWorkingDate"] = this.lastWorkingDate ? this.lastWorkingDate.toISOString() : <any>undefined;
-        data["exitDate"] = this.exitDate ? this.exitDate.toISOString() : <any>undefined;
-        data["exitChoice"] = this.exitChoice;
-        data["tempref"] = this.tempref;
-        data["clearance"] = this.clearance;
-        data["survey"] = this.survey;
         if (Array.isArray(this.retirmentDocAttachments)) {
             data["retirmentDocAttachments"] = [];
             for (let item of this.retirmentDocAttachments)
@@ -59086,14 +59145,6 @@ export interface IRetirement {
     loggedDate: Date;
     createdBy: string | undefined;
     requriesBenefits: boolean;
-    personalEmail: string | undefined;
-    personalPhoneNumber: string | undefined;
-    lastWorkingDate: Date;
-    exitDate: Date;
-    exitChoice: string | undefined;
-    tempref: string | undefined;
-    clearance: string | undefined;
-    survey: string | undefined;
     retirmentDocAttachments: RetirementDocAttachment[] | undefined;
 }
 
@@ -63506,7 +63557,7 @@ export class ManageEmployeeDTO implements IManageEmployeeDTO {
     otherNames!: string | undefined;
     staffNo!: string | undefined;
     employeeNumber!: string;
-    dateOfBirth!: Date | undefined;
+    dateOfBirth!: Date;
     maritalStatusId!: number;
     genderId!: number;
     personalEmail!: string | undefined;
@@ -63588,7 +63639,7 @@ export class ManageEmployeeDTO implements IManageEmployeeDTO {
         data["otherNames"] = this.otherNames;
         data["staffNo"] = this.staffNo;
         data["employeeNumber"] = this.employeeNumber;
-        data["dateOfBirth"] = this.dateOfBirth ? this.dateOfBirth.toISOString() : <any>undefined;
+        data["dateOfBirth"] = this.dateOfBirth ? formatDate(this.dateOfBirth) : <any>undefined;
         data["maritalStatusId"] = this.maritalStatusId;
         data["genderId"] = this.genderId;
         data["personalEmail"] = this.personalEmail;
@@ -63629,7 +63680,7 @@ export interface IManageEmployeeDTO {
     otherNames: string | undefined;
     staffNo: string | undefined;
     employeeNumber: string;
-    dateOfBirth: Date | undefined;
+    dateOfBirth: Date;
     maritalStatusId: number;
     genderId: number;
     personalEmail: string | undefined;
@@ -68853,6 +68904,7 @@ export interface IInstitutionApiResult {
 export class InterestRateDTO implements IInterestRateDTO {
     id!: number;
     rate!: number;
+    description!: string | undefined;
     companyID!: number;
     subId!: number;
 
@@ -68869,6 +68921,7 @@ export class InterestRateDTO implements IInterestRateDTO {
         if (_data) {
             this.id = _data["id"];
             this.rate = _data["rate"];
+            this.description = _data["description"];
             this.companyID = _data["companyID"];
             this.subId = _data["subId"];
         }
@@ -68885,6 +68938,7 @@ export class InterestRateDTO implements IInterestRateDTO {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["rate"] = this.rate;
+        data["description"] = this.description;
         data["companyID"] = this.companyID;
         data["subId"] = this.subId;
         return data; 
@@ -68901,12 +68955,14 @@ export class InterestRateDTO implements IInterestRateDTO {
 export interface IInterestRateDTO {
     id: number;
     rate: number;
+    description: string | undefined;
     companyID: number;
     subId: number;
 }
 
 export class InterestRate implements IInterestRate {
     rate!: number;
+    description!: string | undefined;
     id!: number;
     companyID!: number;
     subID!: number;
@@ -68929,6 +68985,7 @@ export class InterestRate implements IInterestRate {
     init(_data?: any) {
         if (_data) {
             this.rate = _data["rate"];
+            this.description = _data["description"];
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
@@ -68951,6 +69008,7 @@ export class InterestRate implements IInterestRate {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["rate"] = this.rate;
+        data["description"] = this.description;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -68973,6 +69031,7 @@ export class InterestRate implements IInterestRate {
 
 export interface IInterestRate {
     rate: number;
+    description: string | undefined;
     id: number;
     companyID: number;
     subID: number;
@@ -94764,6 +94823,12 @@ export interface IVisaTypeIListApiResult {
     result: VisaType[] | undefined;
     totalCount: number;
     totalRecord: number;
+}
+
+function formatDate(d: Date) {
+    return d.getFullYear() + '-' + 
+        (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
+        (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }
 
 export interface FileParameter {
