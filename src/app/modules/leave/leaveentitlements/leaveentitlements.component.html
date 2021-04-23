@@ -1,0 +1,73 @@
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<nb-card>
+  <nb-card-body>
+    <ngx-default-content *ngIf="showEmpty" pageHeader="Leave Entitlement"
+      pageDescription="Click on the button to create a Leave Entitlement" buttonValue="Create Entitlement" [loading]="loading"
+      (buttonClick)="modal('add_entitlement')">
+    </ngx-default-content>
+    <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+      [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="LeaveEntitlement"
+      [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+    </ngx-tablecomponent>
+
+    <ngx-side-modal [(show)]='showLeaveYearModal' style="width: 500px; height: 1000px;">
+      <div modal-header>Add Leave Entitlements</div>
+      <div modal-body>
+        <form #leavEntitlementForm="ngForm" name="leavEntitlementForm" id="leavEntitlementForm">
+          <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Leave Entitlement:</label>
+            <input type="number" class="form-control" placeholder="Enter Leave Entitlement" name="entitlement"
+              #entitlement="ngModel" [(ngModel)]="newleaveEntitlement.entitlement" required>
+            <div *ngIf="entitlement.invalid && (entitlement.dirty || entitlement.touched)" class="error">
+              <div *ngIf="entitlement.errors.required">Leave Entitlement is required</div>
+            </div>
+          </div>
+     
+          <div class="col-sm-12 form-group">
+            <label>Leave Type</label>
+            <select class="form-control" #leaveTypeID="ngModel"  id="leaveTypeID" name="leaveTypeID"  [(ngModel)]="newleaveEntitlement.leaveTypeID" required>
+                <option value="">--Select Type--</option>
+                <option *ngFor="let leavetype of leaveTypeList;" [value]="leavetype.id">{{leavetype.name}}</option>
+            </select>
+            <div *ngIf="leaveTypeID.invalid && (leaveTypeID.dirty || leaveTypeID.touched)" class="error">
+                <div *ngIf="leaveTypeID.errors.required">
+                  Leave Type is required
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 form-group">
+            <label>Grade</label>
+            <select class="form-control" #gradeID="ngModel"  id="gradeID" name="gradeID"  [(ngModel)]="newleaveEntitlement.gradeID" required>
+                <option value="">--Select Grade--</option>
+                <option *ngFor="let gradetype of allGrades;" [value]="gradetype.id">{{gradetype.name}}</option>
+            </select>
+            <div *ngIf="gradeID.invalid && (gradeID.dirty || gradeID.touched)" class="error">
+                <div *ngIf="gradeID.errors.required">
+                    Grade is required
+                </div>
+            </div>
+        </div>
+      </div>
+        </form>
+      </div>
+      <div modal-actions class="d-flex"
+        style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
+        <button *ngIf="!submitbtnPressed" [disabled]="leavEntitlementForm.invalid" nbButton status="primary"
+          (click)="createleaveEntitlement()" class="d-flex column"><span *ngIf="!modificationStatus">Submit</span>
+          <span *ngIf="modificationStatus">Modify</span>
+        </button>
+        <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp; <i
+            class="fa fa-spin fa-spinner"></i></button>
+        <button nbButton outline status="primary" (click)="showLeaveYearModal = false" class="d-flex column"
+          style="background-color: white;">Discard</button>
+      </div>
+      <div style="margin-top: 10px;"></div>
+    </ngx-side-modal>
+
+
+  </nb-card-body>
+</nb-card>

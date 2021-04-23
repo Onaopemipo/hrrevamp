@@ -29,6 +29,7 @@ import { CardComponent } from './card/card.component';
 import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
+import { EmployeeofferComponent } from './employeeoffer/employeeoffer.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
           component: HiringchecklistComponent
         },
         {
-          path: 'exitmanagement',
+          path: 'exitmanagement/:type',
           component: EmploymentexitmanagementComponent
         },
         {
@@ -153,7 +154,11 @@ const routes: Routes = [
         {
           path: 'employeepersonalinformation',
              component:EmployeepersonalinformationComponent
-           },
+        },
+        {
+          path: 'employeeoffer',
+          component: EmployeeofferComponent
+        },
         {
           path: '',
           redirectTo: 'dashboard',

@@ -34,14 +34,14 @@
   <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
     <div  class="fmContainer" style="background-color: transparent;">
       <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
-        <nb-card>
+        <nb-card *ngFor="let myCompetency of allCompetencies">
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
-            <span>Applied</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+            <span>{{ myCompetency.competencyTitle }}</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
           </div>
         </nb-card-header>
-        <nb-card-body *ngIf="cardClick=='applied'">
-          <h4>I am here</h4>
+        <nb-card-body>
+          <h4>{{ myCompetency.description }}</h4>
         </nb-card-body>
       </nb-card>
 
@@ -93,7 +93,7 @@
                     <select class="custom-select" name="departmentName" #departmentName="ngModel"
                     [(ngModel)]="myCompetency.departmentId" required>
                       <option value="">--Select Department--</option>
-                      <option *ngFor="let department of allDepartment" [value]="department.id">{{ department.name }}</option>
+                      <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
                     </select>
                   </div>
                 </div>

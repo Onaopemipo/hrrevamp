@@ -52,7 +52,7 @@ export class TypesService extends CrudService<MyTrainingType, {}, MyTrainingType
   }
   create(data: MyTrainingType) {
     return this.api.createtype(data.cost_per_head, data.number_of_trainees, data.overall_budget_cost, 0, data.resource_person_id, data.trainingVendorId,
-      data.trainingSpecializationId, data.name, transferToFile(data.content), data.trainingCategoryId);
+      data.trainingSpecializationId, data.name, 'transferToFile(data.content)', data.trainingCategoryId);
     // return this.api.createtype(data.cost_per_head, data.number_of_trainees, data.overall_budget_cost, 0, data.employeeId, data.trainingVendorId,
     //   data.trainingSpecializationId, data.name, null, data.trainingCategoryId);
   }

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import {DeleteEventsServiceProxy} from '../../_services/service-proxies'
 
 enum DAYS {
   MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
@@ -48,6 +49,50 @@ export class CalendarEvent{
     this.type = obj.type;
   }
 }
+
+class MyCalendarEvent extends CalendarEvent{
+  dateString?: string;
+}
+
+const availableDays = {};
+class MyDay{
+  hasEvent = false;
+  isToday = false;
+  private constructor(date: Date){
+    this.date = date;
+    this.isToday = date.toDateString() === new Date().toDateString();
+  }
+  static availableDays = new Map<string, MyDay>();
+  static create(date: Date){
+    let newDate = MyDay.availableDays.get(date.toDateString());
+    if(!newDate){
+      newDate = new MyDay(date);
+      MyDay.availableDays.set(date.toDateString(), newDate);
+    }
+    return newDate;
+  }
+  static setEventToDate(date: Date, event: CalendarEvent){
+    const myDate = MyDay.create(date);
+    myDate.setEvent(event);
+  }
+  events = [];
+  date: Date;
+
+  setEvent(event: CalendarEvent){
+    this.events.push(event);
+    this.hasEvent = true;
+  }
+
+  getMonth(){
+    return this.date.getMonth();
+  }
+
+  getDate(){
+    return this.date.getDate()
+  }
+
+}
+
 @Component({
   selector: 'ngx-cal',
   templateUrl: './cal.component.html',
@@ -58,7 +103,7 @@ export class CalComponent implements AfterViewInit {
   @Input() year = 2020;
   @Input() month = 1;
   @Input() day = 1;
-  weeks = [];
+  weeks: MyDay[][] = [];
 
   days = [
     {name: 'SUN', val: 0},
@@ -72,7 +117,7 @@ export class CalComponent implements AfterViewInit {
 
   dates = [];
   @ViewChild('calendar') calendar: ElementRef;
-  constructor() { }
+  constructor( private DeleteEventsServiceProxy:DeleteEventsServiceProxy) { }
 
   get monthLabel() {
     const months = [
@@ -80,6 +125,8 @@ export class CalComponent implements AfterViewInit {
     ];
     return months[this.month];
   }
+  today = new Date();
+  selectedDay?: MyDay;
 
   gotoThisMonth() {
     const today = new Date();
@@ -117,22 +164,44 @@ export class CalComponent implements AfterViewInit {
     const dayNo = firstDayOfMonth.getDay();
     const firstDayOfCalendar = Number(firstDayOfMonth) - dayNo * 24 * 60 * 60 * 1000;
     this.weeks = [0, 1, 2, 3, 4, 5].map(week_no => this.days.map(day => {
-      return new Date(Number(firstDayOfCalendar) + (week_no * 7 + day.val) * 24 * 60 * 60 * 1000);
+      return MyDay.create(new Date(Number(firstDayOfCalendar) + (week_no * 7 + day.val) * 24 * 60 * 60 * 1000));
     }));
   }
 
   ngAfterViewInit(): void {
-    this.loadCalendar();
+    this.gotoThisMonth()
   }
 
   @Output() dateClick = new EventEmitter<Date>();
-  dateClicked(day: Date){
-    this.dateClick.emit(day);
+  dateClicked(day: MyDay){
+    this.selectedDay = day;
+    // this.dateClick.emit(day);
   }
 
+  day_events: Map<Date, CalendarEvent[]> = new Map<Date, CalendarEvent[]>();
   _events: CalendarEvent[] = [];
   @Input() set calendarEvents(events: CalendarEvent[]) {
     this._events = events;
+    // const newEvents = this._events.map(event => {
+    //   const newEvent = new MyCalendarEvent(event);
+    //   newEvent.dateString = new Date(event.start.getFullYear(), event.start.getMonth(), event.start.getDate()).toUTCString();
+    //   return newEvent;
+    // })
+    events.forEach(event => {
+      MyDay.setEventToDate(event.start, event);
+    })
+    console.log(this._events)
+    console.log(MyDay.availableDays)
   }
 
+  // setSelectedDay(day: MyDay) {
+  //   this.selectedDay = day;
+  // }
+   async deleteEvent(id){
+    alert(id)
+    setInterval(function(){ alert("Are you sure you want to delete events"); }, 3000);
+
+    const res = await this.DeleteEventsServiceProxy.deleteEvents(id).toPromise()
+    console.log('delete',res)
+  }
 }

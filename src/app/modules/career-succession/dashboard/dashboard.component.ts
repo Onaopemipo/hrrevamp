@@ -1,4 +1,4 @@
-import { CommonServiceProxy } from './../../../_services/service-proxies';
+import { CommonServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession } from './../../../_services/service-proxies';
  import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   barcolorSchemeOrange: any;
   lineOption: any = {};
   allJobRoles: number;
+  allPans: CareerSuccession [] = [];
+  planDataCount: number = 0;
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
@@ -176,7 +178,8 @@ export class DashboardComponent implements OnInit {
   ];
   customizePieOption: any = {};
   customizedlineoptions: any = {};
-  constructor(private theme: NbThemeService, private commonService: CommonServiceProxy) {
+  constructor(private theme: NbThemeService, private commonService: CommonServiceProxy,
+    private planService: FetchSuccessionPlanServiceProxy) {
 
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
@@ -578,6 +581,14 @@ this.myPieOptions = {
     if(!data.hasError){
       this.allJobRoles = data.totalRecord;
       console.log('Yo boss', this.allJobRoles)
+    }
+  }
+
+  async fetchAllPlans(){
+    const data = await this.planService.getCareerSuccessionPlan().toPromise();
+    if(data.hasError){
+      this.allPans = data.result;
+      this.planDataCount = data.totalRecord;
     }
   }
 }

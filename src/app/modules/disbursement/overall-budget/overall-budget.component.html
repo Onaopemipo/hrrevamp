@@ -121,7 +121,7 @@
     style="padding-top: 10px;"
    ></ngx-componentsheader>
 
-  <ngx-template *ngIf="finLoading == false && finYear.length > 0">
+  <ngx-template *ngIf="finLoading == false && budgetItemsCounter > 0">
     <div class="row">
       <div class="col-sm-4"  *ngFor="let budget of allBudgetItems">
         <div
@@ -185,7 +185,7 @@
     </div>
   </ngx-template>
 
-  <ngx-template *ngIf="finLoading == false && finYear.length < 0">
+  <ngx-template *ngIf="finLoading == false && budgetItemsCounter < 1">
     <div>
       <nb-card>
         <ngx-default-content [pageHeader]="noBudgetItem" [pageDescription]="noBudget" [buttonValue]="button" (buttonClick) = "modalShow()">

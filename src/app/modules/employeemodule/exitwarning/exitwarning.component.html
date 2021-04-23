@@ -5,9 +5,9 @@
             <div style="margin-top: 2rem;margin-bottom: 1.5rem;">
                 <p style="font-weight: bolder; font-size: large; ">Warning !</p>
             </div>
-            <div style="margin-top: 1rem;">
+            <div style="margin-top: 1rem;text-align: center;">
                 <p>
-                    You are about to begin a process that will terminate our employment with this organization.
+                    You are about to begin a process that will terminate your employment with this organization.
     
                 </p>
                 <p>click on proceed if you have discussed with your supervisor and intend to continue with the process</p>
@@ -18,7 +18,7 @@
             <div class="d-flex" style="margin-top: 0.5rem;padding: 3rem;">
                 <button nbButton status="primary" class="d-flex column" (click)="onClick()">Proceed</button>
                 <button nbButton outline status="primary" class="d-flex column"
-                    style="background-color: white; margin-left: 1rem;">Go back</button>
+                    style="background-color: white; margin-left: 1rem;" (click)="gohome()">Go back</button>
             </div>
         </div>
 

@@ -96,25 +96,29 @@ export class GridboxComponent implements OnInit {
 
   constructor(
     private nineBoxGrid: NineBoxGridService, private gridService: GetGridBoxCountServiceProxy,
-    private router: Router, private employeeGridBox: GetEmployeeebyGridBoxServiceProxy,
+    private router: Router, private gridBox: GetEmployeeebyGridBoxServiceProxy,
   ) { }
 
   async ngOnInit() {
+    this.getBoxCount();
+    this.getEmployeeGrid();
     this.data = await this.nineBoxGrid.fetchSummary().toPromise();
   }
 
   async getBoxCount(){
-    // const data = await this.gridService.getGridBoxCount().toPromise();
-    // if(!data.hasError){
-    //   this.boxCount = data.result;
-    // }
+    const data = await this.gridService.getGridBoxCount().toPromise();
+    if(!data.hasError){
+      this.boxCount = data.result;
+      console.log('counterrr', this.boxCount)
+    }
   }
 
   async getEmployeeGrid(){
-    // const data = await this.employeeGridBox.getEmployeebyGridBox().toPromise();
-    // if(!data.hasError){
-    //   this.employeeGrid = data.result;
-    // }
+    const data = await this.gridBox.getEmployeebyGridBox(1,0).toPromise();
+    if(!data.hasError){
+      this.employeeGrid = data.result;
+      console.log('Employee Grid:', this.employeeGrid)
+    }
   }
 
 }

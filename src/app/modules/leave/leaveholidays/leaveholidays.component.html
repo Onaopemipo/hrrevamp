@@ -1,0 +1,67 @@
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<nb-card>
+  <nb-card-body>
+    <ngx-default-content *ngIf="showEmpty" pageHeader="Leave Holidays"
+      pageDescription="Click on the button to create a Leave Holiday" buttonValue="Create Holiday" [loading]="loading"
+      (buttonClick)="modal('add_holiday')">
+    </ngx-default-content>
+    <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+      [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="LeaveHolidays"
+      [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+    </ngx-tablecomponent>
+
+    <ngx-side-modal [(show)]='showLeaveYearModal' style="width: 500px; height: 1000px;">
+      <div modal-header>Add Leave Holiday</div>
+      <div modal-body>
+        <form #leavEntitlementForm="ngForm" name="leavEntitlementForm" id="leavEntitlementForm">
+            <div class="row">
+            <div class="col-sm-12 form-group">
+            <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Holiday Date:</label>
+            <ngx-date [(value)]='newleaveHolidays.holidayDate' #holidayDate
+            name="holidayDate" id="holidayDate"></ngx-date>
+
+          <div *ngIf="!validateStartdate" class="error">
+            <div>Leave Year Start Date is required</div>
+          </div>
+          </div>
+     
+          <div class="col-sm-12 form-group">
+            <label>Leave Year</label>
+            <select class="form-control" #leaveYearId="ngModel"  id="leaveYearId" name="leaveYearId"  [(ngModel)]="newleaveHolidays.leaveYearId" required>
+                <option value="">--Select Year--</option>
+                <option *ngFor="let leaveyr of LeaveYear;" [value]="leaveyr.id">{{leaveyr.yearName}}</option>
+            </select>
+            <div *ngIf="leaveYearId.invalid && (leaveYearId.dirty || leaveYearId.touched)" class="error">
+                <div *ngIf="leaveYearId.errors.required">
+                  Leave Year is required
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 form-group">
+            <label>Description</label>
+            <textarea rows="5" class="form-control" placeholder="Enter Description" #description="ngModel"  id="description" name="description"  [(ngModel)]="newleaveHolidays.description"></textarea>
+        
+        </div>
+    </div>
+        </form>
+      </div>
+      <div modal-actions class="d-flex"
+        style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
+        <button *ngIf="!submitbtnPressed"  nbButton status="primary"
+          (click)="createleaveHolidays()" class="d-flex column"><span *ngIf="!modificationStatus">Submit</span>
+          <span *ngIf="modificationStatus">Modify</span>
+        </button>
+        <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp; <i
+            class="fa fa-spin fa-spinner"></i></button>
+        <button nbButton outline status="primary" (click)="showLeaveYearModal = false" class="d-flex column"
+          style="background-color: white;">Discard</button>
+      </div>
+      <div style="margin-top: 10px;"></div>
+    </ngx-side-modal>
+
+
+  </nb-card-body>
+</nb-card>
