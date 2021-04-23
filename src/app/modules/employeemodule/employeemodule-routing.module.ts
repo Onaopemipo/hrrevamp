@@ -158,7 +158,11 @@ const routes: Routes = [
         {
           path: 'employeepersonalinformation',
              component:EmployeepersonalinformationComponent
-           },
+        },
+        {
+          path: 'employeeoffer',
+          component: EmployeeofferComponent
+        },
         {
           path: '',
           redirectTo: 'dashboard',

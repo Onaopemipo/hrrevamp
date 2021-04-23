@@ -121,7 +121,7 @@ export class LeaveentitlementsComponent implements OnInit {
     });
 
   }
-  createleaveYear() {
+  createleaveEntitlement() {
     this.submitbtnPressed = true;
     this.LeaveEntitlementService.addLeaveEntitlement(this.newleaveEntitlement).subscribe((response) => {
       if (!response.hasError) {

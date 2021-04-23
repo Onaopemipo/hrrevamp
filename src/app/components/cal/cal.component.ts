@@ -176,7 +176,7 @@ export class CalComponent implements AfterViewInit {
   @Output() dateClick = new EventEmitter<any>();
   dateClicked(day: MyDay) {
     this.selectedDay = day;
-   this.dateClick.emit(day);
+    this.dateClick.emit(day);
   }
 
   day_events: Map<Date, CalendarEvent[]> = new Map<Date, CalendarEvent[]>();
@@ -200,9 +200,11 @@ export class CalComponent implements AfterViewInit {
   // }
   async deleteEvent(id) {
     alert(id)
-    setInterval(function () { alert("Are you sure you want to delete events"); }, 3000);
+    alert('are you sure you want to delete this event')
 
-    const res = await this.DeleteEventsServiceProxy.deleteEvents(id).toPromise()
+    const res = await this.DeleteEventsServiceProxy.deleteEvents(id).toPromise();
+    this.selectedDay.events.filter(delEvent =>
+      delEvent.id = !id)
     console.log('delete', res)
   }
 }

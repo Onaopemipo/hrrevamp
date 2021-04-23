@@ -105,7 +105,7 @@ import { ModuleSettingsProvidersModule } from 'app/modules/module-settings/modul
 import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.component';
 import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
 import { VendorService } from 'app/modules/training/services/vendor.service';
-import { CertificationService, QualificationService, } from 'app/_services/common.service';
+import { CertificationService, QualificationService } from '../_services/common.service';
 import {DeleteEventsServiceProxy} from '../_services/service-proxies'
 @NgModule({
   declarations: [
@@ -232,10 +232,10 @@ import {DeleteEventsServiceProxy} from '../_services/service-proxies'
     TrainingServiceProxy,
     CommonServiceProxy,
     CreateLeavePlanServiceProxy,
-    DeleteEventsServiceProxy,
     VendorService,
     CertificationService,
     QualificationService,
+    DeleteEventsServiceProxy
   ],
   exports: [
     ComponentsheaderComponent,

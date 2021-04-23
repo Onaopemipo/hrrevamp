@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
-import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, Sp_FetchEligibleEmployees, GetEligibilityListServiceProxy, FetchApprovalProcessServiceProxy, ApprovalProcess } from './../../../_services/service-proxies';
+import { PromotionEligibilityViewModel, AddUpdateEligibleBucketServiceProxy, Sp_FetchEligibleEmployees, GetPromotionEligibilityListsServiceProxy, FetchApprovalProcessServiceProxy, ApprovalProcess } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { IStatus, MyColor } from 'app/components/status/models';
@@ -58,12 +58,12 @@ export class PromotioneligibilityComponent implements OnInit {
 
   promotionBucket: NgForm;
   promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
-  eligibilityList: PromotionEligibilityViewModel[] = [];
+  eligibilityList: Sp_FetchEligibleEmployees[] = [];
   approvalProcesses: ApprovalProcess[] = [];
   filter = {
     end: null,
     start: null,
-    is_closed: 1,
+    is_closed: 0,
     _PageSize: 10,
     _PageNumber: 1
   }
@@ -76,7 +76,7 @@ export class PromotioneligibilityComponent implements OnInit {
   loading: boolean = false;
   modificationStatus: boolean = false;
   constructor(private promotion: AddUpdateEligibleBucketServiceProxy,private FetchApprovalProcessService:FetchApprovalProcessServiceProxy,
-    private alert: AlertserviceService, private GetEligibilityListService: GetEligibilityListServiceProxy,
+    private alert: AlertserviceService, private GetEligibilityListService: GetPromotionEligibilityListsServiceProxy,
   private router: Router) { }
   
     tableActionClicked(event: TableActionEvent) {
@@ -99,10 +99,13 @@ export class PromotioneligibilityComponent implements OnInit {
   ngOnInit(): void {
     this.fetchEligibility();
     this.getApprovalProcesses();
+    this.promotionBucketList.is_closed = false;
+    this.promotionBucketList.noOfMembers = 0;
   }
 
   async addToEligibilityList() {
     this.loading = true;
+    console.log(this.promotionBucketList)
     this.promotion.addUpdateEligibleBucket(this.promotionBucketList).subscribe(data => {
     if(!data.hasError){
       this.fetchEligibility();
@@ -124,7 +127,7 @@ export class PromotioneligibilityComponent implements OnInit {
   }
 
   async fetchEligibility(){
-    const data = await this.GetEligibilityListService.getEligibilityList(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
+    const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
     if(!data.hasError){
       this.eligibilityList = data.result;
 
@@ -161,7 +164,7 @@ export class PromotioneligibilityComponent implements OnInit {
       if (value.activeValue) tabtittle = value.tabTitle;
     });
     console.log(tabtittle);
-     this.filter.is_closed = tabtittle == 'Open'? 1 : 0;
+     this.filter.is_closed = tabtittle == 'Open'? 0 : 1;
     this.fetchEligibility();
   }
 }

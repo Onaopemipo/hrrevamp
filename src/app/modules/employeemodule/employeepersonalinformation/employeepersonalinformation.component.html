@@ -338,6 +338,20 @@
                     <input type="text" nbInput fullWidth placeholder="Hire Date">
                   </div>
                 </div> -->
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">OnBoarding Id</label>
+                  <div class="col-sm-8">
+
+                    <input type="text" nbInput fullWidth placeholder="Enter  onboardingId " name="onboardingId"
+                      #onboardingId="ngModel" [(ngModel)]="workData.onboardingId" required>
+                    <div *ngIf="onboardingId.invalid && (onboardingId.dirty ||  onboardingId.touched)"
+                      class="error">
+                      <div *ngIf="onboardingId.errors.required"> onboardingId is required</div>
+                    </div>
+
+
+                  </div>
+                </div>
 
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Hire Date</label>
@@ -779,33 +793,35 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"
                     style="display: flex;align-items: center;">NYSC Certificate</label>
                   <div class="col-sm-5">
-                    <ngx-file-upload (valueChange)="valueChange($event)" ></ngx-file-upload>
+                    <ngx-file-upload (valueChange)="selectedFile($event,'NYSC Certificate')" ></ngx-file-upload>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"
                     style="display: flex;align-items: center;">Birth Certificate</label>
                   <div class="col-sm-5">
-                    <ngx-file-upload></ngx-file-upload>
+                    <ngx-file-upload (valueChange)="selectedFile($event,'Birth Certificate')" ></ngx-file-upload>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"
                     style="display: flex;align-items: center;">Driver’s License</label>
                   <div class="col-sm-5">
-                    <ngx-file-upload></ngx-file-upload>
+                    <ngx-file-upload (valueChange)="selectedFile($event,'Driver’s License')" ></ngx-file-upload>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader"
                     style="display: flex;align-items: center;">Additional Document</label>
                   <div class="col-sm-5">
-                    <ngx-file-upload></ngx-file-upload>
+                    <ngx-file-upload (valueChange)="selectedFile($event,'Additional Document')" ></ngx-file-upload>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-4 col-sm-8">
-                    <button type="submit" nbButton status="primary" (click)="SubmitMedical()">Update Changes</button>
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                      class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                    <button type="submit" nbButton status="primary" (click)="Submitdoc()" *ngIf="!submitbtnPressed">Update Changes</button>
                   </div>
                 </div>
               </form>

@@ -17,7 +17,8 @@
       <div modal-header>Add Leave Entitlements</div>
       <div modal-body>
         <form #leavEntitlementForm="ngForm" name="leavEntitlementForm" id="leavEntitlementForm">
-          <div class="form-group">
+          <div class="row">
+          <div class="col-sm-12 form-group">
             <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Leave Entitlement:</label>
             <input type="number" class="form-control" placeholder="Enter Leave Entitlement" name="entitlement"
               #entitlement="ngModel" [(ngModel)]="newleaveEntitlement.entitlement" required>
@@ -38,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 form-group">
+        <div class="col-sm-12 form-group">
             <label>Grade</label>
             <select class="form-control" #gradeID="ngModel"  id="gradeID" name="gradeID"  [(ngModel)]="newleaveEntitlement.gradeID" required>
                 <option value="">--Select Grade--</option>
@@ -50,12 +51,13 @@
                 </div>
             </div>
         </div>
+      </div>
         </form>
       </div>
       <div modal-actions class="d-flex"
         style="display: flex; flex-direction: row; justify-content: center; margin-top: 40px; margin-bottom: 60px;">
-        <button *ngIf="!submitbtnPressed" [disabled]="!formvalidate" nbButton status="primary"
-          (click)="createleaveYear()" class="d-flex column"><span *ngIf="!modificationStatus">Submit</span>
+        <button *ngIf="!submitbtnPressed" [disabled]="leavEntitlementForm.invalid" nbButton status="primary"
+          (click)="createleaveEntitlement()" class="d-flex column"><span *ngIf="!modificationStatus">Submit</span>
           <span *ngIf="modificationStatus">Modify</span>
         </button>
         <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp; <i

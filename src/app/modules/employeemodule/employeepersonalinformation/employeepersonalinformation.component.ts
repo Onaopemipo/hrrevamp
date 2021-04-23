@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import {
   PostServiceProxy, MessageOut, OnboardingPersonalDTO,
   OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State,
-  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, OnboardingBankDTO, Country, OnboardingTaxDTO, Position
+  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, FileParameter, OnboardingBankDTO, Country, OnboardingTaxDTO, Position, UploadDocumentServiceProxy
 
 } from '../../../_services/service-proxies';
 
@@ -47,10 +47,19 @@ export class EmployeepersonalinformationComponent implements OnInit {
   countries: Country[] = []
   Designation: Position[] = [];
   allDepartment: DropdownValue[] = [];
-
+  Entity: IDTextViewModel[] = []
+  tempRef:any=''
+  entityId = 0;
+  userId:number = 0
+  isReadOnly?: boolean= false
+  files:Transfer
+  // itemId?:FileParameter[]=[];
+  itemId:any= 0;
+  OnboardingId: number = 1;
+  id?: number = 1
 
   constructor(private DataService: DataServiceProxy, private common: CommonServiceProxy, private PostService: PostServiceProxy,
-    private alertservice: AlertserviceService) { }
+    private alertservice: AlertserviceService, private UploadDocumentService: UploadDocumentServiceProxy) { }
   async getGender() {
     const data = await this.DataService.getDropDownValuesById(10).toPromise()
     if (!data.hasError) {
@@ -59,7 +68,16 @@ export class EmployeepersonalinformationComponent implements OnInit {
 
     }
   }
-
+  async getEntity() {
+    const data = await this.DataService.docEntityTypes().toPromise()
+    if (!data.hasError) {
+      this.Entity = data.result
+      console.log('doc', this.Entity)
+    }
+    else {
+      return data.hasError[0]
+    }
+  }
 
   async proceedtoofferLetter() {
     // this.subtitle = 'Offer Letter';
@@ -119,13 +137,14 @@ export class EmployeepersonalinformationComponent implements OnInit {
   async getAccountType() {
     const data = await this.DataService.getAccountTypes().toPromise()
     if (!data.hasError) {
-      console.log('gender', data.result)
+
       this.BankType = data.result;
       // this.Gender[0].option_text
     }
   }
   async getInstitution() {
     const data = await this.common.getInstitutions().toPromise()
+
     if (!data.hasError) {
       this.Institution = data.result
 
@@ -167,7 +186,7 @@ export class EmployeepersonalinformationComponent implements OnInit {
 
   SubmitMedical() {
     alert('hello medical')
-    
+
 
   }
 
@@ -254,7 +273,8 @@ export class EmployeepersonalinformationComponent implements OnInit {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
     }
   }
-  ngOnInit(): void {
+  ngOnInit() {
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getGender();
     this.getMaritalStatus();
     this.getInstitution();
@@ -264,11 +284,46 @@ export class EmployeepersonalinformationComponent implements OnInit {
     this.getCountry();
     this.getDesignation()
     this.getDepartment();
+    this.getEntity()
+  }
+  createdById?: number = 1;
+  companyId?: number = 1;
+  subId?: string = ''
+
+  async Submitdoc() {
+    alert('checking')
+    this.submitbtnPressed = true
+    const data = await this.PostService.addUpdateOnboardingDocummentData(this.OnboardingId, this.tempRef, this.userId, this.id, this.createdById, this.companyId, this.subId)
+      .toPromise();
+    if (!data.hasError) {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+      this.submitbtnPressed = false
+    } else {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+    }
   }
 
-  valueChange(files: Transfer) {
+  selectedFile(files: Transfer, title) {
     console.log('flow file', files.flowFile.file)
-
+    if (this.Entity.length > 0) {
+      let srchR = this.Entity.find(f => f.text == "EMPLOYEE_DOC");
+      this.entityId = srchR.id;
+    }
+     const refNumber =  this.tempRef
+    console.log('temp ref', this.tempRef)
+    // this.files = files.flowFile.file
+    this.UploadDocumentService.uploadDocs(this.userId,title,this.itemId,this.entityId,this.isReadOnly,refNumber,files.flowFile.file[0]).subscribe(data => {
+      if (!data.hasError) {
+        console.log('ref',this.tempRef)
+        console.log('datarseee', data.result)
+        if (!data.hasError) {
+          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+          this.submitbtnPressed = false
+        } else {
+          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+        }
+      }
+    });
   }
 
 }
