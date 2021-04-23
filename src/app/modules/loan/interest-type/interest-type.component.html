@@ -16,7 +16,7 @@
           <div class="row">
           <div class="form-group col">
             <label>Interest Rate</label>
-            <input type="number" class="form-control" name="rateAmount" #rateAmount="ngModel" [(ngModel)]="rateModel.rate" required>
+            <input type="number" class="form-control" name="rateAmount" #rateAmount="ngModel" [minlength]="0" [maxlength]="100" [(ngModel)]="rateModel.rate" required>
           </div>
         </div>
 
@@ -31,8 +31,8 @@
           <div class="form-group" style="margin-top: 20px">
             <label></label>
             <div>
-                <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-                <button nbButton status="primary" (click)="createType()">Update</button>
+                <button nbButton status="primary" outline class="white-background mr-2" style="margin: 3px;">Cancel</button>
+                <button nbButton status="primary" (click)="createType()">Create</button>
             </div>
           </div>
         </form>

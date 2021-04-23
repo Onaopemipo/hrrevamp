@@ -24,7 +24,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent
+        component: SuccessionDashboardComponent
+
       },
       {
         path: 'profiledetails/:id',
@@ -71,13 +72,6 @@ const routes: Routes = [
         component: TestpoolComponent
 
       },
-
-      {
-        path: 'succession-dashboard',
-        component: SuccessionDashboardComponent
-
-      },
-
 
       {
         path: 'gridbox',

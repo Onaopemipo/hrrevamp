@@ -1,15 +1,15 @@
-import { TableColumn, TableAction } from 'app/components/tablecomponent/models';
+import { TableColumn, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { title } from 'process';
-import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, Competency, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO } from './../../../_services/service-proxies';
-import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill } from 'app/_services/service-proxies';
+import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, Competency, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
+import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill, GetAllPositionsServiceProxy, PositionDTO } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
 enum TABLE_ACTION {
   VIEW = '1',
-  DELETEcOMPETENCY = '3'
+  DELETECOMPETENCY = '3'
 }
 export interface competencyRequirement{
   ID?: number,
@@ -38,9 +38,20 @@ export class CompetencyComponent implements OnInit {
 
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
-    {name: TABLE_ACTION.DELETEcOMPETENCY, label: 'Delete'},
+    {name: TABLE_ACTION.DELETECOMPETENCY, label: 'Delete'},
 
   ]
+
+  tableActionClicked(event: TableActionEvent){
+    if(event.name==TABLE_ACTION.VIEW){
+     this.router.navigateByUrl('/roles' + event.data.id)
+      }
+
+      else if(event.name==TABLE_ACTION.DELETECOMPETENCY){
+       this.router.navigateByUrl('' + event.data.id)
+
+        }
+ }
 
   myPlanHeader: string = 'Create Competency';
   myPlanDesc: string = 'Click the button below to add a competency';
@@ -93,10 +104,12 @@ tempQualReq = [];
 tempSkillReq = [];
 tempCertReq = [];
 tempTrainReq = [];
+allPositions: PositionDTO [] = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
-    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,   private navCtrl: Router,
-    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService) { }
+    private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy, private positionService: GetAllPositionsServiceProxy,
+    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService, private router: Router,
+    ) { }
 
   ngOnInit(): void {
     this.fetchAllDepartments();
@@ -157,7 +170,7 @@ tempTrainReq = [];
   }
 
   addNewCompetency(){
-    this.navCtrl.navigateByUrl('/career-succession/new-competency')
+    this.router.navigateByUrl('/career-succession/new-competency')
   }
 
   async fetchSkills(){
@@ -167,7 +180,6 @@ tempTrainReq = [];
       console.log('Skills:', this.skillData);
     }
   }
-
 
   async fetchCertifications(){
     const data = await this.commonService.getCertifications().toPromise();
@@ -216,6 +228,14 @@ tempTrainReq = [];
     if(!data.hasError){
       this.allJobRoles = data.result;
       console.log('Yo boss', this.allJobRoles)
+    }
+  }
+
+  async fetchAllPositions(){
+    const data = await this.positionService.getAllPositions(1,10,0,0,0).toPromise();
+    if(!data.hasError){
+      this.allPositions = data.result;
+      console.log('Yo boss', this.allPositions)
     }
   }
 

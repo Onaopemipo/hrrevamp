@@ -106,6 +106,10 @@
       </div>
 
       <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+        <button nbButton type="outline" status="primary" style="border: none; background-color: transparent; color: red;" (click)="deleteMyBudget(finYear.id)">Delete Budget</button>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
         <button nbButton type="outline" status="primary" outline style="border: none;" (click)="editBudgetModal(finYear.id)">Edit budget</button>
       </div>
     </div>
@@ -172,7 +176,11 @@
               </div>
             </div>
           </div>
-          <div style="display: flex; justify-content: flex-end;">
+          <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <button (click)="deleteMyBudgetItem(budget.id)" nbButton type="outline" status="primary" outline style="border: none; background-color: transparent; color: red;">
+              Delete
+            </button>
+
             <button (click)="viewBudgetItemModal()" nbButton type="outline" status="primary" outline style="border: none;">
               view
               <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left: 0.5rem;"></i>
@@ -182,7 +190,7 @@
       </div>
     </div>
   </ngx-template>
-{{budgetItemsCounter}}
+
   <ngx-template *ngIf="finLoading == false && budgetItemsCounter < 1">
     <div>
       <nb-card>
@@ -245,6 +253,7 @@
                 <option *ngFor="let dep of allDepartments" [value]="dep.id">{{dep.name}}</option>
               </select>
             </div>
+
             </div>
             <div class="form-group row">
               <div class="col">
@@ -258,27 +267,29 @@
             <div class="form-group" style="margin-top: 20px">
               <label></label>
               <div>
-                  <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
+                  <button nbButton status="primary" class="border-none" (click)="addDepartmentAllocations()" outline>
                     <nb-icon icon="plus-outline"></nb-icon>
                     Add department
                   </button>
               </div>
             </div>
 
-
-            <div *ngIf="addedDepartments.length > 0">
-
-              <h1 *ngFor="let dept of addedDepartments">Added</h1>
-
-            </div>
-
+            {{ addedDepartments }}
             <div class="form-group row" *ngIf="addedDepartments.length > 0" style="border: #4847E0 3px;">
               <div class="col-sm-3"></div>
               <div class="col-sm-8">
-                <span class="cbadge"  *ngFor="let req of addedDepartments" style="margin: 5px;">{{ req.requirementCategory }} &nbsp;
-                  <i class="fa fa-times" style="cursor: pointer;color: red;"></i></span>
+                <span class="cbadge"  *ngFor="let dept of addedDepartments" style="margin: 5px;">{{dept.department}} &nbsp;
+                  <i class="fa fa-times" (click)="removeDepartment(dept.id)" style="cursor: pointer;color: red;"></i></span>
               </div>
             </div>
+
+            <!-- <div class="form-group row" *ngIf="addedDepartments.length > 0" style="border: #4847E0 3px;">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-8">
+                <span class="cbadge"  *ngFor="let adddpt of addedDepartments" style="margin: 5px;">{{ req.requirementCategory }} &nbsp;
+                  <i class="fa fa-times" style="cursor: pointer;color: red;"></i></span>
+              </div>
+            </div> -->
 
             <div class="form-group" style="margin-top: 20px">
               <label></label>

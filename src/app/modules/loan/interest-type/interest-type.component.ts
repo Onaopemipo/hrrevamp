@@ -1,4 +1,5 @@
-import { AddUpdateInterestRateServiceProxy, InterestRateDTO } from './../../../_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { AddUpdateInterestRateServiceProxy, InterestRateDTO,InterestRate, GetInterestRateServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,8 +15,10 @@ export class InterestTypeComponent implements OnInit {
   defaultPage: number = 0;
   interestModal: boolean = false;
   rateModel: InterestRateDTO = new InterestRateDTO;
+  allInterestRates: InterestRate [] = [];
 
-  constructor(private rateService: AddUpdateInterestRateServiceProxy) { }
+  constructor(private rateService: AddUpdateInterestRateServiceProxy, private alertMe: AlertserviceService,
+    private getRateService: GetInterestRateServiceProxy) { }
 
   ngOnInit(): void {
   }
@@ -24,8 +27,23 @@ export class InterestTypeComponent implements OnInit {
     this.interestModal = true;
   }
 
-  createType(){
+  async createType(){
+    const data = await this.rateService.addUpdateIntrestRate(this.rateModel).toPromise();
+    if(data.result.isSuccessful == true){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Added Successfully', 'Dismiss').subscribe(data => {
+        if(data == 'closed'){
+          this.interestModal = false;
+        }
+      });
+    }
+  }
 
+
+  async getAllInterests(){
+    const data = await this.getRateService.getInterestRate(1,1,1,1,'',1,1).toPromise();
+    if(!data.hasError){
+      this.allInterestRates = data.result;
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO, DisbursementBudgetItemAllocationDTO } from './../../../_services/service-proxies';
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO, DisbursementBudgetItemAllocationDTO, DeleteBudgetServiceProxy, DeleteBudgetItemServiceProxy } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, BudgetItemService } from './../services/budget-item.service';
@@ -34,13 +34,14 @@ export class OverallBudgetComponent implements OnInit {
 
   constructor(private router: Router, private budgetItemService: FetchAllBudgetItemsServiceProxy,
     private budgetService: FetchAllBudgetsServiceProxy, private singleBudget: FetchBudgetServiceProxy,
-    private alertMe: AlertserviceService, private common: CommonServiceProxy,
-     private budgetItemUpdate: AddUpdateBudgetItemServiceProxy, private addBudgetService: AddUpdateBudgetServiceProxy,) { }
+    private alertMe: AlertserviceService, private common: CommonServiceProxy, private deleteBudget: DeleteBudgetServiceProxy,
+     private budgetItemUpdate: AddUpdateBudgetItemServiceProxy, private addBudgetService: AddUpdateBudgetServiceProxy,
+     private deleteItem: DeleteBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
     this.fetAllBudget();
     this.onChangeYear(this.dataIndex);
-    // this.fetAllBudgetItems();
+    this.fetAllBudgetItems(this.budgetId);
     this.fetchDepartments();
   }
 
@@ -73,7 +74,7 @@ export class OverallBudgetComponent implements OnInit {
   // }
 
   modalShow(){
-    this.addItemModal = !this.addItemModal;
+    this.addItemModal = true;
   }
 
   viewBudgetItemModal(){
@@ -111,7 +112,12 @@ export class OverallBudgetComponent implements OnInit {
     myAllocations.departmentId = this.departments.departmentId;
     myAllocations.allocatedAmount = this.departments.allocatedAmount;
     this.addedDepartments.push(myAllocations)
+    console.log('Hey guys',this.addedDepartments)
     this.departments = new DisbursementBudgetItemAllocation().clone();
+  }
+
+  removeDepartment(id){
+    alert(id);
   }
 
  async fetchSingleBudget(){
@@ -123,10 +129,38 @@ export class OverallBudgetComponent implements OnInit {
   }
   }
 
+  deleteMyBudget(id:number){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you wish to delete?', 'Yes').subscribe(dataAction => {
+     if(dataAction == 'closed'){
+      this.deleteBudget.deleteBudget(id).subscribe(data => {
+        if(!data.hasError && data.result.isSuccessful == true){
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget has been deleted', 'Dismiss')
+        }
+      });
+     }
+    });
+  }
+
+  deleteMyBudgetItem(id:number){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you wish to delete budget item?', 'Yes').subscribe(dataAction => {
+     if(dataAction == 'closed'){
+      this.deleteItem.deleteBudgetItem(id).subscribe(data => {
+        if(!data.hasError && data.result.isSuccessful == true){
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget item has been deleted', 'Dismiss')
+        }
+      });
+     }
+    });
+  }
+
  async updateSingleBudget(){
     const data = await this.addBudgetService.addUpdateBudget(this.singleBudgetUpdate).toPromise();
     if(!data.hasError){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss');
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss').subscribe(data => {
+      if(data == 'closed'){
+        this.addItemModal = false;
+      }
+    });
     } else {
       console.error();
 
@@ -195,7 +229,7 @@ export class OverallBudgetComponent implements OnInit {
     const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
-        console.log(data);
+        this.addItemModal = false;
       });
     }
     else {
