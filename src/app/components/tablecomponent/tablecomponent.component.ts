@@ -122,12 +122,12 @@ export class TablecomponentComponent implements OnInit {
   ngOnInit(): void {
     this.tableData = this.userData;
 
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
+    // setTimeout(() => {
+    //   this.loading = false;
+    // }, 3000);
   }
 
-  filter = {}
+  filter = {};
   pageClicked(pageNo: number) {
     this.pageChange.emit(pageNo);
     this.filter = {...this.filter, ...{page: pageNo, } };

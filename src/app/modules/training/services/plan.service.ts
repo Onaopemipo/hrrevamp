@@ -18,13 +18,17 @@ export class MyTrainingPlan extends TrainingDTO{
 
   static fromForm(form: object){
     const obj = new MyTrainingPlan();
-    console.log('lll');
+    obj.name = form['name'];
     obj.trainingTypeId = form['type'];
+    obj.specializationId = form['specialization'];
+    obj.vendorId = form['vendor'];
     obj.startDate = form['date_range'].start;
     obj.endDate = form['date_range'].end;
     obj.description = form['description'];
     obj.selectedEmployees = form['beneficiaries'];
-    obj.attachment = form['attachment']
+    obj.costPerEmployee = form['costPerEmployee'];
+    obj.totalCost = form['totalCost'];
+    obj.attachment = form['attachment'];
     return obj;
   }
 }
@@ -58,7 +62,9 @@ export class TrainingPlanService extends CrudService<ITrainingFilterDTO, MyTrain
     throw new Error('Method not implemented.');
   }
   create(data: MyTrainingPlan) {
-    return true//this.api.addUpdateTrainingPlan(data.toManage());
+    return this.api.addUpdateTrainingPlan(data.id ? data.id : 0, data.name, data.description, true, data.startDate, data.endDate,
+      data.trainingTypeId, data.specializationId,
+      data.vendorId, data.totalCost, data.costPerEmployee, data.selectedEmployees, transferToFile(data.attachment));
   }
   delete(id: number) {
     return this.api.deleteTrainingPlan(id);

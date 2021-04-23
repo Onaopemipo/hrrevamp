@@ -44,12 +44,12 @@ export class EmailLogComponent implements OnInit {
     this.loading = true;
     const currentPage = this.currentPage;
     this.api.fetch_emails(this.selectedTab, currentPage).subscribe(data => {
-      this.loading = false;
       if (this.currentPage === 1) {
         this.data = {};
       }
       this.data[currentPage] = data;
       this.emails = this.data[currentPage];
+      this.loading = false;
     });
   }
 

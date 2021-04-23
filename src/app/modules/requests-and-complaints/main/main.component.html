@@ -29,7 +29,7 @@
                         <div class="complaint-detail-section">
                             <span class="complainer-name">{{complaint.complainerName}}</span>
                             <div class="complaint-title">{{complaint.title | maxStringLength:30}}</div>
-                            <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div>
+                            <!-- <div class="complaint-detail">{{complaint.description | maxStringLength:50}}</div> -->
                             <ngx-status [data]="complaint"></ngx-status>
                         </div>
                         <div style="flex-direction: column; display: flex; align-items: flex-end;">
@@ -55,29 +55,56 @@
     <div modal-body>
         <div class="form-group">
             <label>Title</label>
-            <input [(ngModel)]="newComplaint.title" class="form-control"/>
+            <div>
+                <input [(ngModel)]="newComplaint.title" class="form-control"/>
+                <div *ngIf="errors.title">
+                    <div *ngFor="let error of errors.title" class="error">
+                        {{error}}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label>Type</label>
-            <select [(ngModel)]="newComplaint.requestTypeId" class="form-control">
-                <option [value]="type.id" *ngFor="let type of requestTypes">{{type.name}}</option>
-                <!-- <option value="6">Request</option> -->
-            </select>
+            <div>
+                <select [(ngModel)]="newComplaint.requestTypeId" class="form-control">
+                    <option [value]="TABS.COMPLAINT">Complaint</option>
+                    <option [value]="TABS.REQUEST">Request</option>
+                </select>
+                <div *ngIf="errors.requestTypeId">
+                    <div *ngFor="let error of errors.requestTypeId" class="error">
+                        {{error}}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
-            <label>Reciepent</label>
-            <ngx-employee-master-search [(value)]="newComplaint.employeeId"></ngx-employee-master-search>
-            {{newComplaint.employeeId}}
+            <label>Receipent</label>
+            <div>
+                <ngx-employee-master-search [(value)]="newComplaint.employeeId"></ngx-employee-master-search>
+                <div *ngIf="errors.employeeId">
+                    <div *ngFor="let error of errors.employeeId" class="error">
+                        {{error}}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label>Description</label>
-            <ngx-wysisyg-input [(value)]="newComplaint.description"></ngx-wysisyg-input>
+            <div>
+                <ngx-wysisyg-input [(value)]="newComplaint.description"></ngx-wysisyg-input>
+                <div *ngIf="errors.description">
+                    <div *ngFor="let error of errors.description" class="error">
+                        {{error}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div modal-actions>
         <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Submit</ngx-loadable-button>
         <!-- <button nbButton status="primary"></button> -->
         <button nbButton outline status="primary">Discard</button>
-        <button>Attach</button>
+        <!-- <button>Attach</button> -->
     </div>
 </ngx-side-modal>
