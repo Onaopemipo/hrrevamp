@@ -1,3 +1,4 @@
+import { InterestTypeComponent } from './interest-type/interest-type.component';
 import { AllLoansComponent } from './all-loans/all-loans.component';
 import { UpdateLoanComponent } from './update-loan/update-loan.component';
 import { ProcessRequestComponent } from './process-request/process-request.component';
@@ -35,6 +36,12 @@ const routes: Routes = [
     {
       path: 'all-loans',
       component: AllLoansComponent,
+
+    },
+
+    {
+      path: 'interest-type',
+      component: InterestTypeComponent,
 
     },
 

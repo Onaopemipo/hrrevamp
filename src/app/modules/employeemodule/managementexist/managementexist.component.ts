@@ -67,7 +67,7 @@ this.getProccessId()
         if (params.type) {
           let pnam = params.type;
           this.pageName = pnam == 'Retirement' ? "Retirement" : "Exit Management"
- 
+
         }
       }
     }
@@ -102,11 +102,11 @@ this.getProccessId()
     //   if (!data.hasError) {
     //     this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
     //       this.RetirmentBody = new RetirmentDTO().clone();
-       
+
     //     });
     //   }else {
     //     this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {
- 
+
     //      });
     //   }
     // }, (error) => {
