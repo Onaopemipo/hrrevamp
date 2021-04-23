@@ -97,24 +97,24 @@ this.getProccessId()
   }
   submitRetirement() {
     this.loading = true;
-    this.RetirementService.postRetireee(1, 0, this.RetirmentBody).subscribe(data => {
-      this.loading = false;
-      if (!data.hasError) {
-        this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
-          this.RetirmentBody = new RetirmentDTO().clone();
+    // this.RetirementService.postRetireee(1, 0, this.RetirmentBody).subscribe(data => {
+    //   this.loading = false;
+    //   if (!data.hasError) {
+    //     this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
+    //       this.RetirmentBody = new RetirmentDTO().clone();
        
-        });
-      }else {
-        this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {
+    //     });
+    //   }else {
+    //     this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {
  
-         });
-      }
-    }, (error) => {
-      this.loading = false;
-      if (error.status == 400) {
-        this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
-      }
-    })
+    //      });
+    //   }
+    // }, (error) => {
+    //   this.loading = false;
+    //   if (error.status == 400) {
+    //     this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+    //   }
+   // })
   }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {

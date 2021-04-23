@@ -8960,94 +8960,6 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
     }
 }
 
-
-@Injectable()
-export class CompareCompetencyServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
-    }
-
-    /**
-     * API to Fetch Talent ManagementsPools.
-    Note: all filter are optional
-     * @param body (optional) 
-     * @return Success
-     */
-    competency(body: ManageCompareDTO | undefined): Observable<VmListComparismListApiResult> {
-        let url_ = this.baseUrl + "/api/CareerSuccession/CompareCompetency/competency";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCompetency(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCompetency(<any>response_);
-                } catch (e) {
-                    return <Observable<VmListComparismListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<VmListComparismListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCompetency(response: HttpResponseBase): Observable<VmListComparismListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = VmListComparismListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<VmListComparismListApiResult>(<any>null);
-    }
-}
-
 @Injectable()
 export class AddUpdateCertificationServiceProxy {
     private http: HttpClient;
@@ -12751,6 +12663,158 @@ export class CompetencyServiceProxy {
     }
 
     protected processAddUpdateCompetency(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * @param employeeId (optional) 
+     * @param competencyId (optional) 
+     * @return Success
+     */
+    competency(employeeId: number | undefined, competencyId: number | undefined): Observable<VmListComparismListApiResult> {
+        let url_ = this.baseUrl + "/api/Competency/Competency?";
+        if (employeeId === null)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else if (employeeId !== undefined)
+            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
+        if (competencyId === null)
+            throw new Error("The parameter 'competencyId' cannot be null.");
+        else if (competencyId !== undefined)
+            url_ += "CompetencyId=" + encodeURIComponent("" + competencyId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<VmListComparismListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VmListComparismListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCompetency(response: HttpResponseBase): Observable<VmListComparismListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VmListComparismListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VmListComparismListApiResult>(<any>null);
+    }
+
+    /**
+     * API for  Deleting Competency
+     * @param iD (optional) 
+     * @return Success
+     */
+    deleteCompetency(iD: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Competency/Delete-Competency?";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteCompetency(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -21267,43 +21331,10 @@ export class GetInterestRateServiceProxy {
     }
 
     /**
-     * @param iD (optional) 
-     * @param rate (optional) 
-     * @param companyID (optional) 
-     * @param subId (optional) 
-     * @param description (optional) 
-     * @param pageNumber (optional) 
-     * @param pageSize (optional) 
      * @return Success
      */
-    getInterestRate(iD: number | undefined, rate: number | undefined, companyID: number | undefined, subId: number | undefined, description: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<InterestRateIListApiResult> {
-        let url_ = this.baseUrl + "/api/InterestRate/GetInterestRate/GetInterestRate?";
-        if (iD === null)
-            throw new Error("The parameter 'iD' cannot be null.");
-        else if (iD !== undefined)
-            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
-        if (rate === null)
-            throw new Error("The parameter 'rate' cannot be null.");
-        else if (rate !== undefined)
-            url_ += "Rate=" + encodeURIComponent("" + rate) + "&";
-        if (companyID === null)
-            throw new Error("The parameter 'companyID' cannot be null.");
-        else if (companyID !== undefined)
-            url_ += "CompanyID=" + encodeURIComponent("" + companyID) + "&";
-        if (subId === null)
-            throw new Error("The parameter 'subId' cannot be null.");
-        else if (subId !== undefined)
-            url_ += "SubId=" + encodeURIComponent("" + subId) + "&";
-        if (description !== undefined && description !== null)
-            url_ += "Description=" + encodeURIComponent("" + description) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+    getInterestRate(): Observable<InterestRateIListApiResult> {
+        let url_ = this.baseUrl + "/api/InterestRate/GetInterestRate/GetInterestRate";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -23653,6 +23684,7 @@ export class FetchLeavePlanServiceProxy {
      * this method is used fetch leave plans. all filter are optional
      * @param isApproved (optional) 
      * @param leaveYearId (optional) 
+     * @param leaveTypeId (optional) 
      * @param empno (optional) 
      * @param strStartDate (optional) 
      * @param strEndDate (optional) 
@@ -23660,18 +23692,20 @@ export class FetchLeavePlanServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    fetchLeavePlans(isApproved: number | null | undefined, leaveYearId: number | null | undefined, empno: string | null | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeavePlanResourceListApiResult> {
+    fetchLeavePlans(isApproved: number | null | undefined, leaveYearId: number | null | undefined, leaveTypeId: number | null | undefined, empno: string | null | undefined, strStartDate: Date | null | undefined, strEndDate: Date | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeavePlanResourceListApiResult> {
         let url_ = this.baseUrl + "/api/LeavePlan/FetchLeavePlan/FetchLeavePlans?";
         if (isApproved !== undefined && isApproved !== null)
             url_ += "IsApproved=" + encodeURIComponent("" + isApproved) + "&";
         if (leaveYearId !== undefined && leaveYearId !== null)
             url_ += "LeaveYearId=" + encodeURIComponent("" + leaveYearId) + "&";
+        if (leaveTypeId !== undefined && leaveTypeId !== null)
+            url_ += "LeaveTypeId=" + encodeURIComponent("" + leaveTypeId) + "&";
         if (empno !== undefined && empno !== null)
             url_ += "Empno=" + encodeURIComponent("" + empno) + "&";
         if (strStartDate !== undefined && strStartDate !== null)
-            url_ += "StrStartDate=" + encodeURIComponent("" + strStartDate) + "&";
+            url_ += "StrStartDate=" + encodeURIComponent(strStartDate ? "" + strStartDate.toJSON() : "") + "&";
         if (strEndDate !== undefined && strEndDate !== null)
-            url_ += "StrEndDate=" + encodeURIComponent("" + strEndDate) + "&";
+            url_ += "StrEndDate=" + encodeURIComponent(strEndDate ? "" + strEndDate.toJSON() : "") + "&";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -25434,10 +25468,6 @@ export class GetLoanRequestsServiceProxy {
     }
 
     /**
-     * @param userid (optional) 
-     * @param companyid (optional) 
-     * @param startDate (optional) 
-     * @param endDate (optional) 
      * @param searchType (optional) 
      * @param page (optional) 
      * @param searchText (optional) 
@@ -25445,24 +25475,8 @@ export class GetLoanRequestsServiceProxy {
      * @param pageNumber (optional) 
      * @return Success
      */
-    getLoanRequests(userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
+    getLoanRequests(searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/LoanRequest/GetLoanRequests/GetLoanRequests?";
-        if (userid === null)
-            throw new Error("The parameter 'userid' cannot be null.");
-        else if (userid !== undefined)
-            url_ += "userid=" + encodeURIComponent("" + userid) + "&";
-        if (companyid === null)
-            throw new Error("The parameter 'companyid' cannot be null.");
-        else if (companyid !== undefined)
-            url_ += "companyid=" + encodeURIComponent("" + companyid) + "&";
-        if (startDate === null)
-            throw new Error("The parameter 'startDate' cannot be null.");
-        else if (startDate !== undefined)
-            url_ += "startDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&";
-        if (endDate === null)
-            throw new Error("The parameter 'endDate' cannot be null.");
-        else if (endDate !== undefined)
-            url_ += "endDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&";
         if (searchType === null)
             throw new Error("The parameter 'searchType' cannot be null.");
         else if (searchType !== undefined)
@@ -25817,10 +25831,6 @@ export class FetchLoanRequestsServiceProxy {
     }
 
     /**
-     * @param userid (optional) 
-     * @param companyid (optional) 
-     * @param startDate (optional) 
-     * @param endDate (optional) 
      * @param searchType (optional) 
      * @param page (optional) 
      * @param searchText (optional) 
@@ -25828,24 +25838,8 @@ export class FetchLoanRequestsServiceProxy {
      * @param pageNumber (optional) 
      * @return Success
      */
-    fetchLoanRequests(userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
+    fetchLoanRequests(searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/LoanRequest/FetchLoanRequests/FetchLoanRequests?";
-        if (userid === null)
-            throw new Error("The parameter 'userid' cannot be null.");
-        else if (userid !== undefined)
-            url_ += "userid=" + encodeURIComponent("" + userid) + "&";
-        if (companyid === null)
-            throw new Error("The parameter 'companyid' cannot be null.");
-        else if (companyid !== undefined)
-            url_ += "companyid=" + encodeURIComponent("" + companyid) + "&";
-        if (startDate === null)
-            throw new Error("The parameter 'startDate' cannot be null.");
-        else if (startDate !== undefined)
-            url_ += "startDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&";
-        if (endDate === null)
-            throw new Error("The parameter 'endDate' cannot be null.");
-        else if (endDate !== undefined)
-            url_ += "endDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&";
         if (searchType === null)
             throw new Error("The parameter 'searchType' cannot be null.");
         else if (searchType !== undefined)
@@ -35285,32 +35279,10 @@ export class RetirementServiceProxy {
      * API for adding/updating Post Retirement
      * @param adminMode (optional) 
      * @param saveNsubmit (optional) 
-     * @param iD (optional) 
-     * @param comment (optional) 
-     * @param retirementTypeId (optional) 
-     * @param retirementUserId (optional) 
-     * @param requriesBenefits (optional) 
-     * @param personalEmail (optional) 
-     * @param personalPhoneNumber (optional) 
-     * @param lastWorkingDate (optional) 
-     * @param exitDate (optional) 
-     * @param exitChoice (optional) 
-     * @param tempref (optional) 
-     * @param clearance (optional) 
-     * @param survey (optional) 
-     * @param dOB (optional) 
-     * @param appointmentDate (optional) 
-     * @param effectiveDate (optional) 
-     * @param strEffectiveDate (optional) 
-     * @param reviewedBy (optional) 
-     * @param reviewerComment (optional) 
-     * @param dateReviewed (optional) 
-     * @param age (optional) 
-     * @param employeeId (optional) 
-     * @param employeeContractId (optional) 
+     * @param body (optional) 
      * @return Success
      */
-    postRetireee(adminMode: number | undefined, saveNsubmit: number | undefined, iD: number | undefined, comment: string | null | undefined, retirementTypeId: number | null | undefined, retirementUserId: number | null | undefined, requriesBenefits: boolean | null | undefined, personalEmail: string | null | undefined, personalPhoneNumber: string | null | undefined, lastWorkingDate: Date | undefined, exitDate: Date | undefined, exitChoice: string | null | undefined, tempref: string | null | undefined, clearance: string | null | undefined, survey: string | null | undefined, dOB: Date | null | undefined, appointmentDate: Date | null | undefined, effectiveDate: Date | null | undefined, strEffectiveDate: string | null | undefined, reviewedBy: string | null | undefined, reviewerComment: string | null | undefined, dateReviewed: Date | null | undefined, age: number | undefined, employeeId: number | undefined, employeeContractId: number | undefined): Observable<MessageOutApiResult> {
+    postRetireee(adminMode: number | undefined, saveNsubmit: number | undefined, body: ManageRetirementDTO | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/PostRetireee?";
         if (adminMode === null)
             throw new Error("The parameter 'adminMode' cannot be null.");
@@ -35322,71 +35294,14 @@ export class RetirementServiceProxy {
             url_ += "saveNsubmit=" + encodeURIComponent("" + saveNsubmit) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = new FormData();
-        if (iD === null || iD === undefined)
-            throw new Error("The parameter 'iD' cannot be null.");
-        else
-            content_.append("ID", iD.toString());
-        if (comment !== null && comment !== undefined)
-            content_.append("Comment", comment.toString());
-        if (retirementTypeId !== null && retirementTypeId !== undefined)
-            content_.append("RetirementTypeId", retirementTypeId.toString());
-        if (retirementUserId !== null && retirementUserId !== undefined)
-            content_.append("RetirementUserId", retirementUserId.toString());
-        if (requriesBenefits !== null && requriesBenefits !== undefined)
-            content_.append("RequriesBenefits", requriesBenefits.toString());
-        if (personalEmail !== null && personalEmail !== undefined)
-            content_.append("PersonalEmail", personalEmail.toString());
-        if (personalPhoneNumber !== null && personalPhoneNumber !== undefined)
-            content_.append("PersonalPhoneNumber", personalPhoneNumber.toString());
-        if (lastWorkingDate === null || lastWorkingDate === undefined)
-            throw new Error("The parameter 'lastWorkingDate' cannot be null.");
-        else
-            content_.append("LastWorkingDate", lastWorkingDate.toJSON());
-        if (exitDate === null || exitDate === undefined)
-            throw new Error("The parameter 'exitDate' cannot be null.");
-        else
-            content_.append("ExitDate", exitDate.toJSON());
-        if (exitChoice !== null && exitChoice !== undefined)
-            content_.append("ExitChoice", exitChoice.toString());
-        if (tempref !== null && tempref !== undefined)
-            content_.append("Tempref", tempref.toString());
-        if (clearance !== null && clearance !== undefined)
-            content_.append("Clearance", clearance.toString());
-        if (survey !== null && survey !== undefined)
-            content_.append("Survey", survey.toString());
-        if (dOB !== null && dOB !== undefined)
-            content_.append("DOB", dOB.toJSON());
-        if (appointmentDate !== null && appointmentDate !== undefined)
-            content_.append("AppointmentDate", appointmentDate.toJSON());
-        if (effectiveDate !== null && effectiveDate !== undefined)
-            content_.append("EffectiveDate", effectiveDate.toJSON());
-        if (strEffectiveDate !== null && strEffectiveDate !== undefined)
-            content_.append("strEffectiveDate", strEffectiveDate.toString());
-        if (reviewedBy !== null && reviewedBy !== undefined)
-            content_.append("ReviewedBy", reviewedBy.toString());
-        if (reviewerComment !== null && reviewerComment !== undefined)
-            content_.append("ReviewerComment", reviewerComment.toString());
-        if (dateReviewed !== null && dateReviewed !== undefined)
-            content_.append("DateReviewed", dateReviewed.toJSON());
-        if (age === null || age === undefined)
-            throw new Error("The parameter 'age' cannot be null.");
-        else
-            content_.append("Age", age.toString());
-        if (employeeId === null || employeeId === undefined)
-            throw new Error("The parameter 'employeeId' cannot be null.");
-        else
-            content_.append("EmployeeId", employeeId.toString());
-        if (employeeContractId === null || employeeContractId === undefined)
-            throw new Error("The parameter 'employeeContractId' cannot be null.");
-        else
-            content_.append("EmployeeContractId", employeeContractId.toString());
+        const content_ = JSON.stringify(body);
 
         let options_ : any = {
             body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -51827,623 +51742,6 @@ export interface ICareerSuccessionIListApiResult {
     totalRecord: number;
 }
 
-export class CompareSkillDTO implements ICompareSkillDTO {
-    id!: number;
-    employeeId!: number;
-    skillId!: number;
-    skillName!: string | undefined;
-    point!: number;
-    dateCreated!: Date;
-    yearsofExperience!: number;
-    employeeSkillPoint!: number;
-    employeeExperiencePoint!: number;
-    requiredSkillId!: number;
-    requiredSkillName!: string | undefined;
-    requiredSkillPoint!: number;
-    requiredSkillYearsofExperience!: number;
-    experienceWeight!: number;
-    skillWeight!: number;
-    employeeSkillStatus!: boolean;
-
-    constructor(data?: ICompareSkillDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.employeeId = _data["employeeId"];
-            this.skillId = _data["skillId"];
-            this.skillName = _data["skillName"];
-            this.point = _data["point"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.yearsofExperience = _data["yearsofExperience"];
-            this.employeeSkillPoint = _data["employeeSkillPoint"];
-            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
-            this.requiredSkillId = _data["requiredSkillId"];
-            this.requiredSkillName = _data["requiredSkillName"];
-            this.requiredSkillPoint = _data["requiredSkillPoint"];
-            this.requiredSkillYearsofExperience = _data["requiredSkillYearsofExperience"];
-            this.experienceWeight = _data["experienceWeight"];
-            this.skillWeight = _data["skillWeight"];
-            this.employeeSkillStatus = _data["employeeSkillStatus"];
-        }
-    }
-
-    static fromJS(data: any): CompareSkillDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompareSkillDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["employeeId"] = this.employeeId;
-        data["skillId"] = this.skillId;
-        data["skillName"] = this.skillName;
-        data["point"] = this.point;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["employeeSkillPoint"] = this.employeeSkillPoint;
-        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
-        data["requiredSkillId"] = this.requiredSkillId;
-        data["requiredSkillName"] = this.requiredSkillName;
-        data["requiredSkillPoint"] = this.requiredSkillPoint;
-        data["requiredSkillYearsofExperience"] = this.requiredSkillYearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["skillWeight"] = this.skillWeight;
-        data["employeeSkillStatus"] = this.employeeSkillStatus;
-        return data; 
-    }
-
-    clone(): CompareSkillDTO {
-        const json = this.toJSON();
-        let result = new CompareSkillDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompareSkillDTO {
-    id: number;
-    employeeId: number;
-    skillId: number;
-    skillName: string | undefined;
-    point: number;
-    dateCreated: Date;
-    yearsofExperience: number;
-    employeeSkillPoint: number;
-    employeeExperiencePoint: number;
-    requiredSkillId: number;
-    requiredSkillName: string | undefined;
-    requiredSkillPoint: number;
-    requiredSkillYearsofExperience: number;
-    experienceWeight: number;
-    skillWeight: number;
-    employeeSkillStatus: boolean;
-}
-
-export class CompareQualificationDTO implements ICompareQualificationDTO {
-    id!: number;
-    employeeId!: number;
-    qualificationId!: number;
-    qualificationCategoryId!: number;
-    qualificationName!: string | undefined;
-    point!: number;
-    dateCreated!: Date;
-    yearsofExperience!: number;
-    employeeQualificationPoint!: number;
-    employeeExperiencePoint!: number;
-    requiredQualificationId!: number;
-    requiredQualificationName!: string | undefined;
-    requiredQualificationPoint!: number;
-    requiredQualificationYearsofExperience!: number;
-    experienceWeight!: number;
-    qualificationWeight!: number;
-    employeeQualificationStatus!: boolean;
-
-    constructor(data?: ICompareQualificationDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.employeeId = _data["employeeId"];
-            this.qualificationId = _data["qualificationId"];
-            this.qualificationCategoryId = _data["qualificationCategoryId"];
-            this.qualificationName = _data["qualificationName"];
-            this.point = _data["point"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.yearsofExperience = _data["yearsofExperience"];
-            this.employeeQualificationPoint = _data["employeeQualificationPoint"];
-            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
-            this.requiredQualificationId = _data["requiredQualificationId"];
-            this.requiredQualificationName = _data["requiredQualificationName"];
-            this.requiredQualificationPoint = _data["requiredQualificationPoint"];
-            this.requiredQualificationYearsofExperience = _data["requiredQualificationYearsofExperience"];
-            this.experienceWeight = _data["experienceWeight"];
-            this.qualificationWeight = _data["qualificationWeight"];
-            this.employeeQualificationStatus = _data["employeeQualificationStatus"];
-        }
-    }
-
-    static fromJS(data: any): CompareQualificationDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompareQualificationDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["employeeId"] = this.employeeId;
-        data["qualificationId"] = this.qualificationId;
-        data["qualificationCategoryId"] = this.qualificationCategoryId;
-        data["qualificationName"] = this.qualificationName;
-        data["point"] = this.point;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["employeeQualificationPoint"] = this.employeeQualificationPoint;
-        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
-        data["requiredQualificationId"] = this.requiredQualificationId;
-        data["requiredQualificationName"] = this.requiredQualificationName;
-        data["requiredQualificationPoint"] = this.requiredQualificationPoint;
-        data["requiredQualificationYearsofExperience"] = this.requiredQualificationYearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["qualificationWeight"] = this.qualificationWeight;
-        data["employeeQualificationStatus"] = this.employeeQualificationStatus;
-        return data; 
-    }
-
-    clone(): CompareQualificationDTO {
-        const json = this.toJSON();
-        let result = new CompareQualificationDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompareQualificationDTO {
-    id: number;
-    employeeId: number;
-    qualificationId: number;
-    qualificationCategoryId: number;
-    qualificationName: string | undefined;
-    point: number;
-    dateCreated: Date;
-    yearsofExperience: number;
-    employeeQualificationPoint: number;
-    employeeExperiencePoint: number;
-    requiredQualificationId: number;
-    requiredQualificationName: string | undefined;
-    requiredQualificationPoint: number;
-    requiredQualificationYearsofExperience: number;
-    experienceWeight: number;
-    qualificationWeight: number;
-    employeeQualificationStatus: boolean;
-}
-
-export class CompareCertificationDTO implements ICompareCertificationDTO {
-    id!: number;
-    employeeId!: number;
-    certificationId!: number;
-    certificationName!: string | undefined;
-    point!: number;
-    dateCreated!: Date;
-    yearsofExperience!: number;
-    employeeCertificationPoint!: number;
-    employeeExperiencePoint!: number;
-    requiredCertificationId!: number;
-    requiredCertificationName!: string | undefined;
-    requiredCertificationPoint!: number;
-    requiredCertificationYearsofExperience!: number;
-    experienceWeight!: number;
-    certificationWeight!: number;
-    employeeCertificationStatus!: boolean;
-
-    constructor(data?: ICompareCertificationDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.employeeId = _data["employeeId"];
-            this.certificationId = _data["certificationId"];
-            this.certificationName = _data["certificationName"];
-            this.point = _data["point"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.yearsofExperience = _data["yearsofExperience"];
-            this.employeeCertificationPoint = _data["employeeCertificationPoint"];
-            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
-            this.requiredCertificationId = _data["requiredCertificationId"];
-            this.requiredCertificationName = _data["requiredCertificationName"];
-            this.requiredCertificationPoint = _data["requiredCertificationPoint"];
-            this.requiredCertificationYearsofExperience = _data["requiredCertificationYearsofExperience"];
-            this.experienceWeight = _data["experienceWeight"];
-            this.certificationWeight = _data["certificationWeight"];
-            this.employeeCertificationStatus = _data["employeeCertificationStatus"];
-        }
-    }
-
-    static fromJS(data: any): CompareCertificationDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompareCertificationDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["employeeId"] = this.employeeId;
-        data["certificationId"] = this.certificationId;
-        data["certificationName"] = this.certificationName;
-        data["point"] = this.point;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["employeeCertificationPoint"] = this.employeeCertificationPoint;
-        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
-        data["requiredCertificationId"] = this.requiredCertificationId;
-        data["requiredCertificationName"] = this.requiredCertificationName;
-        data["requiredCertificationPoint"] = this.requiredCertificationPoint;
-        data["requiredCertificationYearsofExperience"] = this.requiredCertificationYearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["certificationWeight"] = this.certificationWeight;
-        data["employeeCertificationStatus"] = this.employeeCertificationStatus;
-        return data; 
-    }
-
-    clone(): CompareCertificationDTO {
-        const json = this.toJSON();
-        let result = new CompareCertificationDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompareCertificationDTO {
-    id: number;
-    employeeId: number;
-    certificationId: number;
-    certificationName: string | undefined;
-    point: number;
-    dateCreated: Date;
-    yearsofExperience: number;
-    employeeCertificationPoint: number;
-    employeeExperiencePoint: number;
-    requiredCertificationId: number;
-    requiredCertificationName: string | undefined;
-    requiredCertificationPoint: number;
-    requiredCertificationYearsofExperience: number;
-    experienceWeight: number;
-    certificationWeight: number;
-    employeeCertificationStatus: boolean;
-}
-
-export class CompareTraningDTO implements ICompareTraningDTO {
-    id!: number;
-    employeeId!: number;
-    trainingId!: number;
-    trainingName!: string | undefined;
-    point!: number;
-    dateCreated!: Date;
-    yearsofExperience!: number;
-    employeeTrainingPoint!: number;
-    employeeExperiencePoint!: number;
-    requiredTrainingId!: number;
-    requiredTrainingName!: string | undefined;
-    requiredTrainingPoint!: number;
-    requiredTrainingYearsofExperience!: number;
-    experienceWeight!: number;
-    trainingWeight!: number;
-    employeeTrainingStatus!: boolean;
-
-    constructor(data?: ICompareTraningDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.employeeId = _data["employeeId"];
-            this.trainingId = _data["trainingId"];
-            this.trainingName = _data["trainingName"];
-            this.point = _data["point"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.yearsofExperience = _data["yearsofExperience"];
-            this.employeeTrainingPoint = _data["employeeTrainingPoint"];
-            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
-            this.requiredTrainingId = _data["requiredTrainingId"];
-            this.requiredTrainingName = _data["requiredTrainingName"];
-            this.requiredTrainingPoint = _data["requiredTrainingPoint"];
-            this.requiredTrainingYearsofExperience = _data["requiredTrainingYearsofExperience"];
-            this.experienceWeight = _data["experienceWeight"];
-            this.trainingWeight = _data["trainingWeight"];
-            this.employeeTrainingStatus = _data["employeeTrainingStatus"];
-        }
-    }
-
-    static fromJS(data: any): CompareTraningDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompareTraningDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["employeeId"] = this.employeeId;
-        data["trainingId"] = this.trainingId;
-        data["trainingName"] = this.trainingName;
-        data["point"] = this.point;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["employeeTrainingPoint"] = this.employeeTrainingPoint;
-        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
-        data["requiredTrainingId"] = this.requiredTrainingId;
-        data["requiredTrainingName"] = this.requiredTrainingName;
-        data["requiredTrainingPoint"] = this.requiredTrainingPoint;
-        data["requiredTrainingYearsofExperience"] = this.requiredTrainingYearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["trainingWeight"] = this.trainingWeight;
-        data["employeeTrainingStatus"] = this.employeeTrainingStatus;
-        return data; 
-    }
-
-    clone(): CompareTraningDTO {
-        const json = this.toJSON();
-        let result = new CompareTraningDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompareTraningDTO {
-    id: number;
-    employeeId: number;
-    trainingId: number;
-    trainingName: string | undefined;
-    point: number;
-    dateCreated: Date;
-    yearsofExperience: number;
-    employeeTrainingPoint: number;
-    employeeExperiencePoint: number;
-    requiredTrainingId: number;
-    requiredTrainingName: string | undefined;
-    requiredTrainingPoint: number;
-    requiredTrainingYearsofExperience: number;
-    experienceWeight: number;
-    trainingWeight: number;
-    employeeTrainingStatus: boolean;
-}
-
-export class VmListComparism implements IVmListComparism {
-    listEmployeeSkills!: CompareSkillDTO[] | undefined;
-    listEmployeeQualification!: CompareQualificationDTO[] | undefined;
-    listEmployeeCertification!: CompareCertificationDTO[] | undefined;
-    listEmployeeTrainings!: CompareTraningDTO[] | undefined;
-
-    constructor(data?: IVmListComparism) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            if (Array.isArray(_data["listEmployeeSkills"])) {
-                this.listEmployeeSkills = [] as any;
-                for (let item of _data["listEmployeeSkills"])
-                    this.listEmployeeSkills!.push(CompareSkillDTO.fromJS(item));
-            }
-            if (Array.isArray(_data["listEmployeeQualification"])) {
-                this.listEmployeeQualification = [] as any;
-                for (let item of _data["listEmployeeQualification"])
-                    this.listEmployeeQualification!.push(CompareQualificationDTO.fromJS(item));
-            }
-            if (Array.isArray(_data["listEmployeeCertification"])) {
-                this.listEmployeeCertification = [] as any;
-                for (let item of _data["listEmployeeCertification"])
-                    this.listEmployeeCertification!.push(CompareCertificationDTO.fromJS(item));
-            }
-            if (Array.isArray(_data["listEmployeeTrainings"])) {
-                this.listEmployeeTrainings = [] as any;
-                for (let item of _data["listEmployeeTrainings"])
-                    this.listEmployeeTrainings!.push(CompareTraningDTO.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): VmListComparism {
-        data = typeof data === 'object' ? data : {};
-        let result = new VmListComparism();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.listEmployeeSkills)) {
-            data["listEmployeeSkills"] = [];
-            for (let item of this.listEmployeeSkills)
-                data["listEmployeeSkills"].push(item.toJSON());
-        }
-        if (Array.isArray(this.listEmployeeQualification)) {
-            data["listEmployeeQualification"] = [];
-            for (let item of this.listEmployeeQualification)
-                data["listEmployeeQualification"].push(item.toJSON());
-        }
-        if (Array.isArray(this.listEmployeeCertification)) {
-            data["listEmployeeCertification"] = [];
-            for (let item of this.listEmployeeCertification)
-                data["listEmployeeCertification"].push(item.toJSON());
-        }
-        if (Array.isArray(this.listEmployeeTrainings)) {
-            data["listEmployeeTrainings"] = [];
-            for (let item of this.listEmployeeTrainings)
-                data["listEmployeeTrainings"].push(item.toJSON());
-        }
-        return data; 
-    }
-
-    clone(): VmListComparism {
-        const json = this.toJSON();
-        let result = new VmListComparism();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IVmListComparism {
-    listEmployeeSkills: CompareSkillDTO[] | undefined;
-    listEmployeeQualification: CompareQualificationDTO[] | undefined;
-    listEmployeeCertification: CompareCertificationDTO[] | undefined;
-    listEmployeeTrainings: CompareTraningDTO[] | undefined;
-}
-
-export class VmListComparismListApiResult implements IVmListComparismListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: VmListComparism[] | undefined;
-    totalCount!: number;
-    readonly totalRecord!: number;
-
-    constructor(data?: IVmListComparismListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(VmListComparism.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-            (<any>this).totalRecord = _data["totalRecord"];
-        }
-    }
-
-    static fromJS(data: any): VmListComparismListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new VmListComparismListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        data["totalRecord"] = this.totalRecord;
-        return data; 
-    }
-
-    clone(): VmListComparismListApiResult {
-        const json = this.toJSON();
-        let result = new VmListComparismListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IVmListComparismListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: VmListComparism[] | undefined;
-    totalCount: number;
-    totalRecord: number;
-}
-
-export class ManageCompareDTO implements IManageCompareDTO {
-    employeeId!: number;
-    competencyId!: number;
-
-    constructor(data?: IManageCompareDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.employeeId = _data["employeeId"];
-            this.competencyId = _data["competencyId"];
-        }
-    }
-
-    static fromJS(data: any): ManageCompareDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new ManageCompareDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["employeeId"] = this.employeeId;
-        data["competencyId"] = this.competencyId;
-        return data; 
-    }
-
-    clone(): ManageCompareDTO {
-        const json = this.toJSON();
-        let result = new ManageCompareDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IManageCompareDTO {
-    employeeId: number;
-    competencyId: number;
-}
-
 export class ManageCertificationDTO implements IManageCertificationDTO {
     id!: number;
     professionalBodyId!: number;
@@ -57393,9 +56691,9 @@ export class Event implements IEvent {
     title!: string | undefined;
     isSystem!: boolean;
     notify_Employee!: boolean;
+    description!: string | undefined;
     startDate!: Date;
     endDate!: Date;
-    description!: string | undefined;
     id!: number;
     companyID!: number;
     subID!: number;
@@ -57421,9 +56719,9 @@ export class Event implements IEvent {
             this.title = _data["title"];
             this.isSystem = _data["isSystem"];
             this.notify_Employee = _data["notify_Employee"];
+            this.description = _data["description"];
             this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
             this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.description = _data["description"];
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
@@ -57449,9 +56747,9 @@ export class Event implements IEvent {
         data["title"] = this.title;
         data["isSystem"] = this.isSystem;
         data["notify_Employee"] = this.notify_Employee;
+        data["description"] = this.description;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["description"] = this.description;
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
@@ -57477,9 +56775,9 @@ export interface IEvent {
     title: string | undefined;
     isSystem: boolean;
     notify_Employee: boolean;
+    description: string | undefined;
     startDate: Date;
     endDate: Date;
-    description: string | undefined;
     id: number;
     companyID: number;
     subID: number;
@@ -61192,6 +60490,576 @@ export interface IManageCompetencyDTO {
     selectedExperience: string | undefined;
     competencyRequirmentAllocations: string | undefined;
     competencesRequirementsDTO: CompetencyRequirmentsDTO[] | undefined;
+}
+
+export class CompareSkillDTO implements ICompareSkillDTO {
+    id!: number;
+    employeeId!: number;
+    skillId!: number;
+    skillName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeSkillPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredSkillId!: number;
+    requiredSkillName!: string | undefined;
+    requiredSkillPoint!: number;
+    requiredSkillYearsofExperience!: number;
+    experienceWeight!: number;
+    skillWeight!: number;
+    employeeSkillStatus!: boolean;
+
+    constructor(data?: ICompareSkillDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.skillId = _data["skillId"];
+            this.skillName = _data["skillName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeSkillPoint = _data["employeeSkillPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredSkillId = _data["requiredSkillId"];
+            this.requiredSkillName = _data["requiredSkillName"];
+            this.requiredSkillPoint = _data["requiredSkillPoint"];
+            this.requiredSkillYearsofExperience = _data["requiredSkillYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.skillWeight = _data["skillWeight"];
+            this.employeeSkillStatus = _data["employeeSkillStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareSkillDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareSkillDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["skillId"] = this.skillId;
+        data["skillName"] = this.skillName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeSkillPoint"] = this.employeeSkillPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredSkillId"] = this.requiredSkillId;
+        data["requiredSkillName"] = this.requiredSkillName;
+        data["requiredSkillPoint"] = this.requiredSkillPoint;
+        data["requiredSkillYearsofExperience"] = this.requiredSkillYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["skillWeight"] = this.skillWeight;
+        data["employeeSkillStatus"] = this.employeeSkillStatus;
+        return data; 
+    }
+
+    clone(): CompareSkillDTO {
+        const json = this.toJSON();
+        let result = new CompareSkillDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareSkillDTO {
+    id: number;
+    employeeId: number;
+    skillId: number;
+    skillName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeSkillPoint: number;
+    employeeExperiencePoint: number;
+    requiredSkillId: number;
+    requiredSkillName: string | undefined;
+    requiredSkillPoint: number;
+    requiredSkillYearsofExperience: number;
+    experienceWeight: number;
+    skillWeight: number;
+    employeeSkillStatus: boolean;
+}
+
+export class CompareQualificationDTO implements ICompareQualificationDTO {
+    id!: number;
+    employeeId!: number;
+    qualificationId!: number;
+    qualificationCategoryId!: number;
+    qualificationName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeQualificationPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredQualificationId!: number;
+    requiredQualificationName!: string | undefined;
+    requiredQualificationPoint!: number;
+    requiredQualificationYearsofExperience!: number;
+    experienceWeight!: number;
+    qualificationWeight!: number;
+    employeeQualificationStatus!: boolean;
+
+    constructor(data?: ICompareQualificationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.qualificationId = _data["qualificationId"];
+            this.qualificationCategoryId = _data["qualificationCategoryId"];
+            this.qualificationName = _data["qualificationName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeQualificationPoint = _data["employeeQualificationPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredQualificationId = _data["requiredQualificationId"];
+            this.requiredQualificationName = _data["requiredQualificationName"];
+            this.requiredQualificationPoint = _data["requiredQualificationPoint"];
+            this.requiredQualificationYearsofExperience = _data["requiredQualificationYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.qualificationWeight = _data["qualificationWeight"];
+            this.employeeQualificationStatus = _data["employeeQualificationStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareQualificationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareQualificationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["qualificationId"] = this.qualificationId;
+        data["qualificationCategoryId"] = this.qualificationCategoryId;
+        data["qualificationName"] = this.qualificationName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeQualificationPoint"] = this.employeeQualificationPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredQualificationId"] = this.requiredQualificationId;
+        data["requiredQualificationName"] = this.requiredQualificationName;
+        data["requiredQualificationPoint"] = this.requiredQualificationPoint;
+        data["requiredQualificationYearsofExperience"] = this.requiredQualificationYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["qualificationWeight"] = this.qualificationWeight;
+        data["employeeQualificationStatus"] = this.employeeQualificationStatus;
+        return data; 
+    }
+
+    clone(): CompareQualificationDTO {
+        const json = this.toJSON();
+        let result = new CompareQualificationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareQualificationDTO {
+    id: number;
+    employeeId: number;
+    qualificationId: number;
+    qualificationCategoryId: number;
+    qualificationName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeQualificationPoint: number;
+    employeeExperiencePoint: number;
+    requiredQualificationId: number;
+    requiredQualificationName: string | undefined;
+    requiredQualificationPoint: number;
+    requiredQualificationYearsofExperience: number;
+    experienceWeight: number;
+    qualificationWeight: number;
+    employeeQualificationStatus: boolean;
+}
+
+export class CompareCertificationDTO implements ICompareCertificationDTO {
+    id!: number;
+    employeeId!: number;
+    certificationId!: number;
+    certificationName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeCertificationPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredCertificationId!: number;
+    requiredCertificationName!: string | undefined;
+    requiredCertificationPoint!: number;
+    requiredCertificationYearsofExperience!: number;
+    experienceWeight!: number;
+    certificationWeight!: number;
+    employeeCertificationStatus!: boolean;
+
+    constructor(data?: ICompareCertificationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.certificationId = _data["certificationId"];
+            this.certificationName = _data["certificationName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeCertificationPoint = _data["employeeCertificationPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredCertificationId = _data["requiredCertificationId"];
+            this.requiredCertificationName = _data["requiredCertificationName"];
+            this.requiredCertificationPoint = _data["requiredCertificationPoint"];
+            this.requiredCertificationYearsofExperience = _data["requiredCertificationYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.certificationWeight = _data["certificationWeight"];
+            this.employeeCertificationStatus = _data["employeeCertificationStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareCertificationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareCertificationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["certificationId"] = this.certificationId;
+        data["certificationName"] = this.certificationName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeCertificationPoint"] = this.employeeCertificationPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredCertificationId"] = this.requiredCertificationId;
+        data["requiredCertificationName"] = this.requiredCertificationName;
+        data["requiredCertificationPoint"] = this.requiredCertificationPoint;
+        data["requiredCertificationYearsofExperience"] = this.requiredCertificationYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["certificationWeight"] = this.certificationWeight;
+        data["employeeCertificationStatus"] = this.employeeCertificationStatus;
+        return data; 
+    }
+
+    clone(): CompareCertificationDTO {
+        const json = this.toJSON();
+        let result = new CompareCertificationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareCertificationDTO {
+    id: number;
+    employeeId: number;
+    certificationId: number;
+    certificationName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeCertificationPoint: number;
+    employeeExperiencePoint: number;
+    requiredCertificationId: number;
+    requiredCertificationName: string | undefined;
+    requiredCertificationPoint: number;
+    requiredCertificationYearsofExperience: number;
+    experienceWeight: number;
+    certificationWeight: number;
+    employeeCertificationStatus: boolean;
+}
+
+export class CompareTraningDTO implements ICompareTraningDTO {
+    id!: number;
+    employeeId!: number;
+    trainingId!: number;
+    trainingName!: string | undefined;
+    point!: number;
+    dateCreated!: Date;
+    yearsofExperience!: number;
+    employeeTrainingPoint!: number;
+    employeeExperiencePoint!: number;
+    requiredTrainingId!: number;
+    requiredTrainingName!: string | undefined;
+    requiredTrainingPoint!: number;
+    requiredTrainingYearsofExperience!: number;
+    experienceWeight!: number;
+    trainingWeight!: number;
+    employeeTrainingStatus!: boolean;
+
+    constructor(data?: ICompareTraningDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.employeeId = _data["employeeId"];
+            this.trainingId = _data["trainingId"];
+            this.trainingName = _data["trainingName"];
+            this.point = _data["point"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.employeeTrainingPoint = _data["employeeTrainingPoint"];
+            this.employeeExperiencePoint = _data["employeeExperiencePoint"];
+            this.requiredTrainingId = _data["requiredTrainingId"];
+            this.requiredTrainingName = _data["requiredTrainingName"];
+            this.requiredTrainingPoint = _data["requiredTrainingPoint"];
+            this.requiredTrainingYearsofExperience = _data["requiredTrainingYearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.trainingWeight = _data["trainingWeight"];
+            this.employeeTrainingStatus = _data["employeeTrainingStatus"];
+        }
+    }
+
+    static fromJS(data: any): CompareTraningDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompareTraningDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["employeeId"] = this.employeeId;
+        data["trainingId"] = this.trainingId;
+        data["trainingName"] = this.trainingName;
+        data["point"] = this.point;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["employeeTrainingPoint"] = this.employeeTrainingPoint;
+        data["employeeExperiencePoint"] = this.employeeExperiencePoint;
+        data["requiredTrainingId"] = this.requiredTrainingId;
+        data["requiredTrainingName"] = this.requiredTrainingName;
+        data["requiredTrainingPoint"] = this.requiredTrainingPoint;
+        data["requiredTrainingYearsofExperience"] = this.requiredTrainingYearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["trainingWeight"] = this.trainingWeight;
+        data["employeeTrainingStatus"] = this.employeeTrainingStatus;
+        return data; 
+    }
+
+    clone(): CompareTraningDTO {
+        const json = this.toJSON();
+        let result = new CompareTraningDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompareTraningDTO {
+    id: number;
+    employeeId: number;
+    trainingId: number;
+    trainingName: string | undefined;
+    point: number;
+    dateCreated: Date;
+    yearsofExperience: number;
+    employeeTrainingPoint: number;
+    employeeExperiencePoint: number;
+    requiredTrainingId: number;
+    requiredTrainingName: string | undefined;
+    requiredTrainingPoint: number;
+    requiredTrainingYearsofExperience: number;
+    experienceWeight: number;
+    trainingWeight: number;
+    employeeTrainingStatus: boolean;
+}
+
+export class VmListComparism implements IVmListComparism {
+    listEmployeeSkills!: CompareSkillDTO[] | undefined;
+    listEmployeeQualification!: CompareQualificationDTO[] | undefined;
+    listEmployeeCertification!: CompareCertificationDTO[] | undefined;
+    listEmployeeTrainings!: CompareTraningDTO[] | undefined;
+
+    constructor(data?: IVmListComparism) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["listEmployeeSkills"])) {
+                this.listEmployeeSkills = [] as any;
+                for (let item of _data["listEmployeeSkills"])
+                    this.listEmployeeSkills!.push(CompareSkillDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["listEmployeeQualification"])) {
+                this.listEmployeeQualification = [] as any;
+                for (let item of _data["listEmployeeQualification"])
+                    this.listEmployeeQualification!.push(CompareQualificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["listEmployeeCertification"])) {
+                this.listEmployeeCertification = [] as any;
+                for (let item of _data["listEmployeeCertification"])
+                    this.listEmployeeCertification!.push(CompareCertificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["listEmployeeTrainings"])) {
+                this.listEmployeeTrainings = [] as any;
+                for (let item of _data["listEmployeeTrainings"])
+                    this.listEmployeeTrainings!.push(CompareTraningDTO.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): VmListComparism {
+        data = typeof data === 'object' ? data : {};
+        let result = new VmListComparism();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.listEmployeeSkills)) {
+            data["listEmployeeSkills"] = [];
+            for (let item of this.listEmployeeSkills)
+                data["listEmployeeSkills"].push(item.toJSON());
+        }
+        if (Array.isArray(this.listEmployeeQualification)) {
+            data["listEmployeeQualification"] = [];
+            for (let item of this.listEmployeeQualification)
+                data["listEmployeeQualification"].push(item.toJSON());
+        }
+        if (Array.isArray(this.listEmployeeCertification)) {
+            data["listEmployeeCertification"] = [];
+            for (let item of this.listEmployeeCertification)
+                data["listEmployeeCertification"].push(item.toJSON());
+        }
+        if (Array.isArray(this.listEmployeeTrainings)) {
+            data["listEmployeeTrainings"] = [];
+            for (let item of this.listEmployeeTrainings)
+                data["listEmployeeTrainings"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): VmListComparism {
+        const json = this.toJSON();
+        let result = new VmListComparism();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVmListComparism {
+    listEmployeeSkills: CompareSkillDTO[] | undefined;
+    listEmployeeQualification: CompareQualificationDTO[] | undefined;
+    listEmployeeCertification: CompareCertificationDTO[] | undefined;
+    listEmployeeTrainings: CompareTraningDTO[] | undefined;
+}
+
+export class VmListComparismListApiResult implements IVmListComparismListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: VmListComparism[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IVmListComparismListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(VmListComparism.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): VmListComparismListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new VmListComparismListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): VmListComparismListApiResult {
+        const json = this.toJSON();
+        let result = new VmListComparismListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVmListComparismListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: VmListComparism[] | undefined;
+    totalCount: number;
+    totalRecord: number;
 }
 
 export class VwConfirmationDTO implements IVwConfirmationDTO {
@@ -73348,9 +73216,9 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
     totalPrincipalRepaid!: number;
     approvalProcessId!: number;
     requestedTenor!: number;
+    tempRef!: string | undefined;
     strRequestedAmount!: string | undefined;
     strEffectiveDate!: string | undefined;
-    tempRef!: string | undefined;
     strGuarantorIds!: string | undefined;
     effectiveDate!: Date | undefined;
     requestedAmount!: number;
@@ -73386,9 +73254,9 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
             this.totalPrincipalRepaid = _data["totalPrincipalRepaid"];
             this.approvalProcessId = _data["approvalProcessId"];
             this.requestedTenor = _data["requestedTenor"];
+            this.tempRef = _data["tempRef"];
             this.strRequestedAmount = _data["strRequestedAmount"];
             this.strEffectiveDate = _data["strEffectiveDate"];
-            this.tempRef = _data["tempRef"];
             this.strGuarantorIds = _data["strGuarantorIds"];
             this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
             this.requestedAmount = _data["requestedAmount"];
@@ -73424,9 +73292,9 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
         data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
         data["approvalProcessId"] = this.approvalProcessId;
         data["requestedTenor"] = this.requestedTenor;
+        data["tempRef"] = this.tempRef;
         data["strRequestedAmount"] = this.strRequestedAmount;
         data["strEffectiveDate"] = this.strEffectiveDate;
-        data["tempRef"] = this.tempRef;
         data["strGuarantorIds"] = this.strGuarantorIds;
         data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
         data["requestedAmount"] = this.requestedAmount;
@@ -73462,9 +73330,9 @@ export interface INewLoanRequestDTO {
     totalPrincipalRepaid: number;
     approvalProcessId: number;
     requestedTenor: number;
+    tempRef: string | undefined;
     strRequestedAmount: string | undefined;
     strEffectiveDate: string | undefined;
-    tempRef: string | undefined;
     strGuarantorIds: string | undefined;
     effectiveDate: Date | undefined;
     requestedAmount: number;
@@ -87925,6 +87793,157 @@ export interface IRequestTypeDTOApiResult {
     result: RequestTypeDTO;
     totalCount: number;
     totalRecord: number;
+}
+
+export class ManageRetirementDTO implements IManageRetirementDTO {
+    id!: number;
+    causeOfLeaving!: string | undefined;
+    comment!: string | undefined;
+    subReason!: string | undefined;
+    sourceofInitiation!: string | undefined;
+    retirementTypeId!: number | undefined;
+    retirementUserId!: number | undefined;
+    requriesBenefits!: boolean | undefined;
+    personalEmail!: string | undefined;
+    personalPhoneNumber!: string | undefined;
+    log_status!: number;
+    lastWorkingDate!: Date;
+    exitDate!: Date;
+    exitChoice!: string | undefined;
+    tempref!: string | undefined;
+    clearance!: string | undefined;
+    survey!: string | undefined;
+    employeee!: string | undefined;
+    dob!: Date | undefined;
+    appointmentDate!: Date | undefined;
+    effectiveDate!: Date | undefined;
+    strEffectiveDate!: string | undefined;
+    reviewedBy!: string | undefined;
+    reviewerComment!: string | undefined;
+    dateReviewed!: Date | undefined;
+    age!: number;
+    employeeId!: number;
+    employeeContractId!: number;
+
+    constructor(data?: IManageRetirementDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.causeOfLeaving = _data["causeOfLeaving"];
+            this.comment = _data["comment"];
+            this.subReason = _data["subReason"];
+            this.sourceofInitiation = _data["sourceofInitiation"];
+            this.retirementTypeId = _data["retirementTypeId"];
+            this.retirementUserId = _data["retirementUserId"];
+            this.requriesBenefits = _data["requriesBenefits"];
+            this.personalEmail = _data["personalEmail"];
+            this.personalPhoneNumber = _data["personalPhoneNumber"];
+            this.log_status = _data["log_status"];
+            this.lastWorkingDate = _data["lastWorkingDate"] ? new Date(_data["lastWorkingDate"].toString()) : <any>undefined;
+            this.exitDate = _data["exitDate"] ? new Date(_data["exitDate"].toString()) : <any>undefined;
+            this.exitChoice = _data["exitChoice"];
+            this.tempref = _data["tempref"];
+            this.clearance = _data["clearance"];
+            this.survey = _data["survey"];
+            this.employeee = _data["employeee"];
+            this.dob = _data["dob"] ? new Date(_data["dob"].toString()) : <any>undefined;
+            this.appointmentDate = _data["appointmentDate"] ? new Date(_data["appointmentDate"].toString()) : <any>undefined;
+            this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
+            this.strEffectiveDate = _data["strEffectiveDate"];
+            this.reviewedBy = _data["reviewedBy"];
+            this.reviewerComment = _data["reviewerComment"];
+            this.dateReviewed = _data["dateReviewed"] ? new Date(_data["dateReviewed"].toString()) : <any>undefined;
+            this.age = _data["age"];
+            this.employeeId = _data["employeeId"];
+            this.employeeContractId = _data["employeeContractId"];
+        }
+    }
+
+    static fromJS(data: any): ManageRetirementDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageRetirementDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["causeOfLeaving"] = this.causeOfLeaving;
+        data["comment"] = this.comment;
+        data["subReason"] = this.subReason;
+        data["sourceofInitiation"] = this.sourceofInitiation;
+        data["retirementTypeId"] = this.retirementTypeId;
+        data["retirementUserId"] = this.retirementUserId;
+        data["requriesBenefits"] = this.requriesBenefits;
+        data["personalEmail"] = this.personalEmail;
+        data["personalPhoneNumber"] = this.personalPhoneNumber;
+        data["log_status"] = this.log_status;
+        data["lastWorkingDate"] = this.lastWorkingDate ? this.lastWorkingDate.toISOString() : <any>undefined;
+        data["exitDate"] = this.exitDate ? this.exitDate.toISOString() : <any>undefined;
+        data["exitChoice"] = this.exitChoice;
+        data["tempref"] = this.tempref;
+        data["clearance"] = this.clearance;
+        data["survey"] = this.survey;
+        data["employeee"] = this.employeee;
+        data["dob"] = this.dob ? this.dob.toISOString() : <any>undefined;
+        data["appointmentDate"] = this.appointmentDate ? this.appointmentDate.toISOString() : <any>undefined;
+        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
+        data["strEffectiveDate"] = this.strEffectiveDate;
+        data["reviewedBy"] = this.reviewedBy;
+        data["reviewerComment"] = this.reviewerComment;
+        data["dateReviewed"] = this.dateReviewed ? this.dateReviewed.toISOString() : <any>undefined;
+        data["age"] = this.age;
+        data["employeeId"] = this.employeeId;
+        data["employeeContractId"] = this.employeeContractId;
+        return data; 
+    }
+
+    clone(): ManageRetirementDTO {
+        const json = this.toJSON();
+        let result = new ManageRetirementDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageRetirementDTO {
+    id: number;
+    causeOfLeaving: string | undefined;
+    comment: string | undefined;
+    subReason: string | undefined;
+    sourceofInitiation: string | undefined;
+    retirementTypeId: number | undefined;
+    retirementUserId: number | undefined;
+    requriesBenefits: boolean | undefined;
+    personalEmail: string | undefined;
+    personalPhoneNumber: string | undefined;
+    log_status: number;
+    lastWorkingDate: Date;
+    exitDate: Date;
+    exitChoice: string | undefined;
+    tempref: string | undefined;
+    clearance: string | undefined;
+    survey: string | undefined;
+    employeee: string | undefined;
+    dob: Date | undefined;
+    appointmentDate: Date | undefined;
+    effectiveDate: Date | undefined;
+    strEffectiveDate: string | undefined;
+    reviewedBy: string | undefined;
+    reviewerComment: string | undefined;
+    dateReviewed: Date | undefined;
+    age: number;
+    employeeId: number;
+    employeeContractId: number;
 }
 
 export class RetirmentDTO implements IRetirmentDTO {
