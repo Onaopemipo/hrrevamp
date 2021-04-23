@@ -3,7 +3,10 @@ import { NbIconLibraries } from '@nebular/theme';
 import { PaystackOptions } from 'angular4-paystack';
 import { AlertserviceService } from '../../../_services/alertservice.service';
 import { Router } from '@angular/router';
-import { CommonServiceProxy, CompanyDTO, FetchSubscriptionPlansServiceProxy, FrequencyRule, RegisterCompanyServiceProxy, SubscriptionPlan } from 'app/_services/service-proxies';
+import {
+  CommonServiceProxy,
+  CompanyDTO, DataServiceProxy, FetchSubscriptionPlansServiceProxy, FileParameter, FrequencyRule, IDTextViewModel, RegisterCompanyServiceProxy, SubscriptionPlan, UploadDocumentServiceProxy, VerifySubscriptionPaymentServiceProxy
+} from 'app/_services/service-proxies';
 import { FormGroup } from '@angular/forms';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 @Component({
@@ -26,10 +29,23 @@ export class OnboardingsetupComponent implements OnInit {
   files: Transfer[] = [];
   selectedPlan = new SubscriptionPlan().clone();
   selectedPlanModule = [];
-  allFrequncy: FrequencyRule[] = []
+  allFrequncy: FrequencyRule[] = [];
+  tempRef = '';
+  IDTextView: IDTextViewModel[] = [];
+  allfileObj: FileParameter[]=[]
+  fileObj = {
+    userId: 0,
+    title: '',
+    itemId: 0,
+    entityId: 0,
+    isReadOnly: undefined,
+    tempRef: '',
+    files: this.allfileObj
+  }
   constructor(iconsLibrary: NbIconLibraries, private alertController: AlertserviceService, private router: Router,
     private FetchSubscriptionPlansService: FetchSubscriptionPlansServiceProxy,private CommonService:CommonServiceProxy,
-    private RegisterCompanyService: RegisterCompanyServiceProxy) {
+    private RegisterCompanyService: RegisterCompanyServiceProxy, private UploadDocumentService: UploadDocumentServiceProxy,
+  private DataService:DataServiceProxy, private VerifySubscriptionPaymentService: VerifySubscriptionPaymentServiceProxy) {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
@@ -76,9 +92,13 @@ export class OnboardingsetupComponent implements OnInit {
     });
 }
 
-  paymentInit() {  }
+  paymentInit() {
+    this.registerCompany();
+   }
   paymentCancel() {}
-  paymentDone() { }
+  paymentDone() {
+    this.verifyPayment()
+  }
   registerCompany() {
     this.RegisterCompanyService.registerCompany(this.companyDTO).subscribe(data => {
       
@@ -97,6 +117,7 @@ export class OnboardingsetupComponent implements OnInit {
   filereceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
+
       console.log(this.files)
     });
   }
@@ -115,6 +136,40 @@ export class OnboardingsetupComponent implements OnInit {
     this.files = this.files.filter(file => file.name !== mFile.name);
     event.cancelFile(mFile);
   }
+  getdocumentEntity() {
+    this.DataService.docEntityTypes().subscribe(data => {
+      if (!data.hasError) {
+        this.IDTextView = data.result;
+   }
+ })
+  }
+
+  documentUpload() {
+    var newfilObj:FileParameter = {
+      data: this.files[0].flowFile.file,
+      fileName: this.files[0].flowFile.name
+    }
+    this.fileObj.entityId = this.IDTextView.find(e => e.text == "OTHERS").id;
+    this.fileObj.files.push(newfilObj);
+    this.fileObj.tempRef = this.tempRef;
+    this.fileObj.title ="Company Logo";
+    this.UploadDocumentService.uploadDocs(this.fileObj.userId, this.fileObj.title, this.fileObj.itemId, this.fileObj.entityId, this.fileObj.isReadOnly, this.fileObj.tempRef, this.fileObj.files)
+      .subscribe(data => {
+      if (!data.hasError) {
+        console.log('file success');
+      }
+    });
+  }
+  verifyPayment() {
+    let userId = '';
+    this.VerifySubscriptionPaymentService.verifySubscriptionPayment(userId, this.reference).subscribe(data => {
+      if (!data.hasError) {
+        this.alertController.openModalAlert(this.alertController.ALERT_TYPES.SUCCESS, data.message, 'OK');
+      } else {
+        this.alertController.openModalAlert(this.alertController.ALERT_TYPES.FAILED, "Payment Failed, Please try again", 'OK');
+    }
+  })
+}
   
   filterLeavePlan(is_approved = []) {
    
@@ -136,7 +191,9 @@ export class OnboardingsetupComponent implements OnInit {
   ngOnInit(): void {
     this.getSubscriptionplan();
     this.getfrequency();
+    this.getdocumentEntity();
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.companyDTO = JSON.parse(localStorage.getItem('tenantSetup'));
     if (!this.companyDTO) {
       this.router.navigate(['/auth/signup']);
