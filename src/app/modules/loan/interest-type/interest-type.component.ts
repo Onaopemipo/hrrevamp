@@ -40,7 +40,7 @@ export class InterestTypeComponent implements OnInit {
 
 
   async getAllInterests(){
-    const data = await this.getRateService.getInterestRate(1,1,1,1,'',1,1).toPromise();
+    const data = await this.getRateService.getInterestRate().toPromise();
     if(!data.hasError){
       this.allInterestRates = data.result;
     }

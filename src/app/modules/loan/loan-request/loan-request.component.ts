@@ -115,7 +115,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getAllLoans(){
-    const data = await this.getLoans.getLoanRequests(1,1,null,null,1,1,'',1,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(1,1,'',10,1).toPromise();
     if(!data.hasError){
       this.allLoansData = data.result;
       this.loansCounter = data.totalRecord;
@@ -145,7 +145,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getInterest(){
-    const data = await this.interestService.getInterestRate(1,1,1,1,'',1,1).toPromise();
+    const data = await this.interestService.getInterestRate().toPromise();
     if(!data.hasError){
       this.allInterestRates = data.result;
     }

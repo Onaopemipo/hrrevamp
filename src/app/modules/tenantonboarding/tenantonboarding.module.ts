@@ -26,6 +26,9 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { environment } from 'app/environment';
 import { EmployeeofferComponent } from '../employeemodule/employeeoffer/employeeoffer.component';
 import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/employeeonboardingprofile.component';
+import { CommonServiceProxy, FetchSubscriptionPlansServiceProxy, RegisterCompanyServiceProxy } from 'app/_services/service-proxies';
+import Flow from '@flowjs/flow.js';
+import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 @NgModule({
     declarations: [TenantonboardingComponent, OnboardingsetupComponent, EmployeeofferComponent, EmployeeonboardingprofileComponent],
@@ -49,8 +52,14 @@ import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/
     NbTabsetModule,
     NbPopoverModule,
     NbDialogModule,
+    NgxFlowModule,
     Angular4PaystackModule.forRoot(environment.paystackToken)
   ],
-  providers: [AlertserviceService]
+  providers: [
+      {
+        provide: FlowInjectionToken,
+        useValue: Flow,
+      },
+    , AlertserviceService, FetchSubscriptionPlansServiceProxy, RegisterCompanyServiceProxy,CommonServiceProxy]
 })
 export class TenantonboardingModule { }
