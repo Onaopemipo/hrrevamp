@@ -6,6 +6,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { of } from 'rxjs';
 import { MyExpenseRequest, ExpenseRequestService } from '../services/expense-request.service';
+import { GetExpenseProjectServiceProxy, GetExpenseTypesServiceProxy } from 'app/_services/service-proxies';
 
 
 enum TABS { ALL__REQUESTS, APPROVED, PENDING, DECLINED, }
@@ -43,6 +44,8 @@ export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, Obj
     protected alertService: AlertserviceService,
     protected confirmBox: ConfirmBoxService,
     private api: ExpenseRequestService,
+    private projectApi: GetExpenseProjectServiceProxy,
+    private typeApi: GetExpenseTypesServiceProxy,
   ) {
     super(confirmBox);
   }
@@ -61,6 +64,7 @@ export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, Obj
    }
 
   saveData() {
+    this.editingData.expenseProjectId = 1;
     return this.api.create(this.editingData);
   }
 
@@ -75,5 +79,16 @@ export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, Obj
   }
 
   successMessage = "Hello";
+
+  ngOnInit(){
+    this.projectApi.getExpenseProject(0, '', '', false, '', '', 1, 100).subscribe(data => {
+      console.log(data);
+      this.projects = data;
+    });
+    this.typeApi.getExpenseTypes(0, '', '', '', '', '', 1, 100).subscribe(data => {
+      this.types = data.result;
+    });
+    super.ngOnInit();
+  }
 
 }

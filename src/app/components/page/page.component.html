@@ -26,7 +26,8 @@
         {{formTitle}}
     </div>
     <div modal-body>
-        <ngx-custom-form [loadingSave]="loadingSave" [formConfig]="formConfig" [(value)]="data" (valueChange)="dataChanged($event)" (onCancel)="onFormCancelled()"></ngx-custom-form>
+        {{errors|json}}
+        <ngx-custom-form [loadingSave]="loadingSave" [formErrors]="errors" [formConfig]="formConfig" [(value)]="data" (valueChange)="dataChanged($event)" (onCancel)="onFormCancelled()"></ngx-custom-form>
     </div>
     <div modal-footer>
         <!-- YYY -->

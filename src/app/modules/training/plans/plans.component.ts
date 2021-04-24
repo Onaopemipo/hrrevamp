@@ -39,7 +39,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
   saveData(e: ModelType): Observable<any> {
     const data = MyTrainingPlan.fromForm(e);
     let newdata: any = '';
-    return newdata// this.api.create(data);
+    return this.api.create(data);
   }
   getNewEditingData(): ModelType {
     return new MyTrainingPlan();
@@ -63,11 +63,20 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
   requiredButton = [{name: 'newTraining', label: 'New Plan', icon: 'plus'}];
   formConfig: FormConfig = {
     fields: [
+      {name: 'name', label: 'Name', type: FORM_TYPES.text},
       {name: 'type', label: 'Training Type',
         type: FORM_TYPES.select, singleSelection: true,
         choice_name: ChoiceName.trainingType},
+      {name: 'specialization', label: 'Training Specialization',
+        type: FORM_TYPES.select, singleSelection: true,
+        choice_name: ChoiceName.trainingSpecialization},
+      {name: 'vendor', label: 'Training Vendor',
+        type: FORM_TYPES.select, singleSelection: true,
+        choice_name: ChoiceName.trainingVendor},
       {name: 'date_range', label: 'Date Range', type: FORM_TYPES.date_range},
       {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'costPerEmployee', label: 'Cost per employee', type: FORM_TYPES.amount},
+      {name: 'totalCost', label: 'Total Cost', type: FORM_TYPES.amount},
       {name: 'attachment', label: 'Attachment', type: FORM_TYPES.file},
       {name: 'beneficiaries', label: 'Beneficiary', type: FORM_TYPES.employee},
     ]

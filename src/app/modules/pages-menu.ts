@@ -445,7 +445,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {title: 'Job Role', link: '/setup/job-role'},
       {title: 'Salary Scale', link: '/setup/salary-scale'},
       {title: 'Request Type', link: '/setup/request'},
-      {title: 'Events', link: '/setup/event'},
+      // {title: 'Events', link: '/setup/event'},
     ]
   },
 
