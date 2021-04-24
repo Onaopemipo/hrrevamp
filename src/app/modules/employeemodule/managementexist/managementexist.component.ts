@@ -46,6 +46,9 @@ export class ManagementexistComponent implements OnInit {
   RetirmentBody = new RetirmentDTO().clone();
   uploadOption: number = 1;
   allbulkProcesses: IDTextViewModel[] = [];
+  allowmultipleselection: boolean = true;
+  selectionHeader = "Select Employee";
+  addbtnText = "Add Employee"
   constructor(
     private router: Router,
     private DataService: DataServiceProxy,
@@ -115,6 +118,10 @@ this.getProccessId()
     //     this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
     //   }
    // })
+  }
+  getSelectedEmployee(event) {
+    console.log(event)
+    
   }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
