@@ -408,7 +408,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'assets/icons/Disbursement.jpg',
     children: [
       {
-        title: 'Analytics',
+        title: 'Disbursement',
         link: '/disbursement',
       },
       {

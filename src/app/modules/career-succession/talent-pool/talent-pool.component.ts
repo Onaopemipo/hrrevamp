@@ -29,6 +29,7 @@ export class TalentPoolComponent implements OnInit {
   poolModel: AddTalentMangementDTO =  new AddTalentMangementDTO;
   competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
   allCompetencies: Competency [] = [];
+  allTalentPools: AddTalentMangementDTO [] = [];
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -44,6 +45,7 @@ export class TalentPoolComponent implements OnInit {
   ngOnInit(): void {
     this.fetchPool();
     this.getCompetency();
+    this.fetchAllPools();
   }
 
   addNewPool(){
@@ -69,15 +71,23 @@ export class TalentPoolComponent implements OnInit {
   // }
 
   async createTalentPool(){
-    this.poolModel.talentManagementRequirmentsDTOs = this. competencyRequirementModel;
+    this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss')
       console.log('Congrats, pool created successfully')
     }
     else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Successful', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Failed', 'Dismiss')
       console.log('Try again please')
+    }
+  }
+
+  async fetchAllPools(){
+    const data = await this.newPoolService.fetchTalentManagementPool().toPromise();
+    if(!data.hasError){
+      this.allTalentPools = data.result;
+      console.log('See my pools', this.allTalentPools)
     }
   }
 
