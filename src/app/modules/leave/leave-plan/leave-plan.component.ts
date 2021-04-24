@@ -56,6 +56,7 @@ export class LeavePlanComponent implements OnInit {
   addbtnText: string = "Add Employee";
   filter = {
     is_approved: 1,
+    leavetypeId: null,
     year_id: null,
     empno: null,
     start_date: null,
@@ -169,6 +170,7 @@ export class LeavePlanComponent implements OnInit {
     this.FetchLeavePlanServiceProxy.fetchLeavePlans(
       this.filter.is_approved,
       this.filter.year_id,
+      this.filter.leavetypeId,
       this.filter.empno,
       this.filter.start_date,
       this.filter.end_date,

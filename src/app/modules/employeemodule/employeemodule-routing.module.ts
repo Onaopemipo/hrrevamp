@@ -50,6 +50,10 @@ const routes: Routes = [
           component: HiringchecklistComponent
         },
         {
+          path: 'employeeoffer',
+          component: EmployeeofferComponent
+        },
+        {
           path: 'exitmanagement/:type',
           component: EmploymentexitmanagementComponent
         },

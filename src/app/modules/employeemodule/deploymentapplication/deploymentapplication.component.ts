@@ -5,9 +5,9 @@ import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomp
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import {
   EmployeeDeploymentServiceProxy, DeploymentRegistrationPayLoad, CreateDeploymentViewModel,
-  DataServiceProxy, CommonServiceProxy, LGA, State, Location, AddUpdateDeploymentServiceProxy
+  DataServiceProxy, CommonServiceProxy, LGA, State, Location, AddUpdateDeploymentServiceProxy, IDTextViewModel
 } from '../../../_services/service-proxies';
-
+import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 enum TOP_ACTIONS {
   
   DEPLOYMENT_APPLICATION
@@ -47,8 +47,11 @@ export class DeploymentapplicationComponent implements OnInit {
   allStates: State[] = [];
   DeploymentRegistration = new DeploymentRegistrationPayLoad().clone();
   modificationStatus: boolean = false;
+  _files: Transfer[] = [];
+  IDTextView: IDTextViewModel[] = [];
   constructor(private EmployeeDeploymentServiceProxy: EmployeeDeploymentServiceProxy, private router: Router,private alertservice: AlertserviceService,
-    private myDropdown: DataServiceProxy,private CommonService: CommonServiceProxy, private AddUpdateDeployentService: AddUpdateDeploymentServiceProxy) { }
+    private myDropdown: DataServiceProxy,
+    private CommonService: CommonServiceProxy, private AddUpdateDeployentService: AddUpdateDeploymentServiceProxy) { }
   
   tableActionClicked(event: TableActionEvent) {
     if (event.name == "3") {
@@ -76,6 +79,7 @@ export class DeploymentapplicationComponent implements OnInit {
   }
   applyForLeave() {
     this.loading = true;
+
     this.AddUpdateDeployentService.addUpdateDeployment(this.DeploymentRegistration).subscribe(data => {
       if (!data.hasError) {
         this.getallDeploymentRequest();
@@ -83,6 +87,7 @@ export class DeploymentapplicationComponent implements OnInit {
         this.DeploymentRegistration = new DeploymentRegistrationPayLoad().clone();
         this.showDeploymentApplicationModal = false;
         this.modificationStatus = false;
+        this.DeploymentRegistration.is_new = true;
       }  else {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
       }
@@ -129,13 +134,21 @@ export class DeploymentapplicationComponent implements OnInit {
       }
     })
   }
+  getdocumentEntity() {
+    this.myDropdown.docEntityTypes().subscribe(data => {
+      if (!data.hasError) {
+        this.IDTextView = data.result;
+   }
+ })
+  }
   getUploadedFile(event) {
-    console.log(event)
+    this._files = event;    
   }
   ngOnInit(): void {
     this.getStatebyCountryId();
     this.getalllocations();
     this.getallDeploymentRequest();
+    this.DeploymentRegistration.is_new = true;
   }
   
 

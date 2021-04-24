@@ -4,13 +4,14 @@ import { NbPopoverComponent, NbPopoverDirective } from '@nebular/theme';
 import { MENU_ITEMS } from 'app/modules/pages-menu';
 import { ModalformComponent } from '../modalform/modalform.component';
 import { CalenderComponent } from 'app/components/calender/calender.component';
-import { ManageEventDTO, AddUpdateEventsServiceProxy, GetAllEventsServiceProxy, EventDTOListApiResult, EventDTO } from '../../../_services/service-proxies'
+import { ManageEventDTO, IDTextViewModel, AddUpdateEventsServiceProxy, GetAllEventsServiceProxy, DataServiceProxy, EventDTOListApiResult, EventDTO } from '../../../_services/service-proxies'
 import { AlertserviceService } from '../../../_services/alertservice.service'
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { FormGroup } from '@angular/forms';
 import { date } from 'faker'
-import {CalendarEvent} from '../../../../../src/app/components/cal/cal.component'
+import { CalendarEvent } from '../../../../../src/app/components/cal/cal.component'
 import { divIcon } from 'leaflet';
+import { runInThisContext } from 'vm';
 
 enum TOP_ACTIONS {
   ADD_Event,
@@ -24,7 +25,6 @@ enum TOP_ACTIONS {
 })
 export class EmployeeeventsComponent implements AfterViewInit {
   @ViewChild(CalenderComponent) calendar: CalenderComponent;
-  @Input() Events: string = 'Events';
   submitbtnPressed: boolean = false;
   Event: ManageEventDTO = new ManageEventDTO().clone()
   EventForm: FormGroup;
@@ -37,7 +37,8 @@ export class EmployeeeventsComponent implements AfterViewInit {
   showEvent: boolean = false
   dat = new Date()
   EventList: EventDTO[]
-  
+  EventTypes: IDTextViewModel[] = []
+
 
   topActionButtons = [
     { name: TOP_ACTIONS.ADD_Event, label: 'Add Event', 'icon': 'plus', outline: false },
@@ -53,27 +54,27 @@ export class EmployeeeventsComponent implements AfterViewInit {
 
 
 
-    // dayMaxEvents: true, // allow "more" link when too many events
-    // events: [
-    //   {
-    //     id: 'a',
-    //     title: 'my event',
-    //     start: '2018-09-01'
-    //   }
-    // ],
+  // dayMaxEvents: true, // allow "more" link when too many events
+  // events: [
+  //   {
+  //     id: 'a',
+  //     title: 'my event',
+  //     start: '2018-09-01'
+  //   }
+  // ],
 
-    // dateClick: (date) => {
-    //   // this.showEvent = true;
-    //   // i
-    //   const eventData = this.AllEvents.filter(dayEvent => {
-    //     if (dayEvent.startDate == date.date) {
-    //       return true;
+  // dateClick: (date) => {
+  //   // this.showEvent = true;
+  //   // i
+  //   const eventData = this.AllEvents.filter(dayEvent => {
+  //     if (dayEvent.startDate == date.date) {
+  //       return true;
 
-    //     }
-    //     return false;
-    //   })
-    //   this.popOver.show();
-    // }
+  //     }
+  //     return false;
+  //   })
+  //   this.popOver.show();
+  // }
 
   // };
   // async addEvent(event: ManageEventDTO) {
@@ -81,11 +82,21 @@ export class EmployeeeventsComponent implements AfterViewInit {
   //   console.log(response)
 
   // }
-  constructor(private AddUpdateEvent: AddUpdateEventsServiceProxy, private getall: GetAllEventsServiceProxy,
+  constructor(private AddUpdateEvent: AddUpdateEventsServiceProxy, private getall: GetAllEventsServiceProxy, private DataServiceProxy: DataServiceProxy,
     private alertservice: AlertserviceService) { }
 
   ngOnInit(): void {
     this.getallaEvent()
+    this.getEventType()
+  }
+
+  //EventType
+  async getEventType() {
+    const data = await this.DataServiceProxy.getEventType().toPromise()
+    if (!data.hasError) {
+      this.EventTypes = data.result;
+      console.log('dataEvent', data.result)
+    }
   }
   onClick() {
   }
@@ -109,18 +120,18 @@ export class EmployeeeventsComponent implements AfterViewInit {
   async getallaEvent() {
     const response = await this.getall.getAllEvents(this.PageSize, this.pageNumber).toPromise()
     this.loading = false
-    
+
     if (!response.hasError) {
       this.loading = true
       this.AllEvents = response.result
-      console.log('responseData', response.result)
+      // console.log('responseData', response.result)
       // this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
       const newEvent = this.AllEvents.map(myEvent => {
         return {
           id: myEvent.id,
           title: myEvent.title,
           start: myEvent.startDate,
-          end:myEvent.endDate,
+          end: myEvent.endDate,
           description: myEvent.description,
           days: [],
           type: '',
@@ -138,7 +149,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
     }
   }
   //events from calcomponent
-  calendarEvents: CalendarEvent[]=[]
+  calendarEvents: CalendarEvent[] = []
 
   get validatestartdate() {
     if (this.Event.startDate) return true;
@@ -168,12 +179,13 @@ export class EmployeeeventsComponent implements AfterViewInit {
     return resp;
   }
 
-  async SubmitEvent(Event: ManageEventDTO) {
+  async SubmitEvent() {
     this.submitbtnPressed = true
-    const response = await this.AddUpdateEvent.addUpdateEvent(Event).toPromise()
+    const response = await this.AddUpdateEvent.addUpdateEvent(this.Event).toPromise()
     if (!response.hasError) {
+      console.log(response)
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
-      // console.log(response.result)
+      console.log(response.result)
     }
     (error) => {
 
@@ -187,11 +199,22 @@ export class EmployeeeventsComponent implements AfterViewInit {
   Day = this.today.getDay()
 
   dateClick(day) {
-    this.popOver.show();
-    this.showEvent = true
+    //   this.popOver.show();
     
+    if(day.hasEvent){
+      this.showEvent= false
+    }
+    
+    if (day.date){
+      this.Event.startDate = new Date(day.date);
+      this.showEvent = true
+      console.log('day', day);
+    }
+     
+
+
   }
-   addEvent(event){
-   alert('God is the greatest')
-   }
+  addEvent(event) {
+    alert('God is the greatest')
+  }
 }

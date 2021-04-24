@@ -1,46 +1,25 @@
-<nb-card>
-    <!-- <ngx-default-content
-    *ngIf="showEmpty"
-    pageHeader="Create your Event"
-    pageDescription="Click on the button to create a Leave Year"
-    buttonValue="Create Leave Year"
-    [loading]="loading"
-    (buttonClick)="modal('add_leave_year')"
-  >
-  </ngx-default-content>
-    <ngx-tablecomponent  
-    *ngIf="!showEmpty"
-    (filterChange)="filterUpdated($event)"
-    [showActions]="true"
-    [showFilter]="true"
-    (actionClick)="tableActionClicked($event)"
-    [actions]="tableActions" 
-    [userData]="LeaveYear" 
-    [tableColum]="tableColumns"
-    [totalItems]="totalItems"
-    [currentPage]="currentPage"
-    [loading]="loading"
-    >
-</ngx-tablecomponent>  -->
 
-
-    <nb-card-body style="height: 43vh;">
         <ngx-componentsheader pageName='Events' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
         </ngx-componentsheader>
+<nb-card>
+    <nb-card-body style="height: 43vh;">
+
         <div style="width: 100%; position: relative;">
             <!-- <ngx-cal></ngx-cal> -->
             <button nbButton [nbPopover]="formcomponent" (addEvent)="addEvent($event)"
                 style="position: fixed; top: 50%; left: 50%;;"></button>
             <!-- <ngx-calender style="background-color: white; height: 700px;"></ngx-calender>  -->
-             <ngx-cal (dateClick)="dateClick($event)" [calendarEvents]="calendarEvents"></ngx-cal> 
+            <ngx-cal (dateClick)="dateClick($event)" [calendarEvents]="calendarEvents"></ngx-cal>
             <!-- <full-calendar style="display: none;" [options]="calendarOptions" style="margin-top: 50px;"></full-calendar> -->
-         
+
         </div>
 
 
 
         <ngx-side-modal [(show)]='showEvent' style="width: 500px;">
-            <div modal-header style="font-size: larger; font-weight: bold;"    >Create new Events</div>
+            <div modal-header style="font-size: larger; font-weight: bold;">
+                Create new Events - {{Event.startDate | date:'medium'}}
+               <span></span> </div>
             <div modal-body>
 
                 <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
@@ -60,7 +39,7 @@
 
                         <div class="form-group">
                             <label for="StartDate">Start Date:</label>
-                            <ngx-date [(value)]='Event.startDate' [max]="Event.startDate" #startDate name="startDate"
+                            <ngx-date [(value)]='Event.startDate' [min]="Event.startDate" #startDate name="startDate"
                                 id="endDate">
                             </ngx-date>
 
@@ -70,13 +49,30 @@
                         </div>
                         <div class="form-group">
                             <label for="End  Date">End Date:</label>
-                            <ngx-date [(value)]='Event.endDate' [max]="Event.endDate" #startDate name="endDate"
+                            <ngx-date [(value)]='Event.endDate' [max]="Event.endDate" #endDate name="endDate"
                                 id="endDate"></ngx-date>
 
                             <div *ngIf="!validateenddate" class="error">
                                 <div>End Date is required</div>
                             </div>
 
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Event
+                                Type</label>
+                            <div class="col-sm-8">
+                                <select placeholder="Select Gender" name="eventTypeId" #eventTypeId="ngModel"
+                                    [(ngModel)]="Event.eventTypeId" required>
+                                    <option value="">--Select Event---</option>
+                                    <option *ngFor="let evo of EventTypes" [value]="evo.id">{{evo.text}}</option>
+                                </select>
+
+                                <div *ngIf="eventTypeId.invalid && (eventTypeId.dirty || eventTypeId.touched)"
+                                    class="error">
+                                    <div *ngIf="eventTypeId.errors.required">eventType is required</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="Description">Description</label>
@@ -103,7 +99,7 @@
                             <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
                                     class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
                             <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
-                                [disabled]="!disableEvent" (click)="SubmitEvent(Event)">Submit</button>
+                                [disabled]="!disableEvent" (click)="SubmitEvent()">Submit</button>
 
 
                         </div>

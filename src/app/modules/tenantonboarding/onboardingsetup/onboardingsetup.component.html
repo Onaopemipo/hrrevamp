@@ -256,8 +256,8 @@
           <div class="row">
             <div class="col-sm-12">
               <button  angular4-paystack
-              [email]="'test@test.com'"
-              [amount]="500 * 100"
+              [email]="companyDTO.email"
+              [amount]="selectedPlan.amount * 100"
               [ref]="reference"
               (paymentInit)="paymentInit()"
               (close)="paymentCancel()"
