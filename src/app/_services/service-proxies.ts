@@ -8500,6 +8500,22 @@ export class GetTalentPoolServiceProxy {
      * @param employee_id (optional) 
      * @param employee_number (optional) 
      * @param employee_contract_id (optional) 
+     * @param companyProfile_Id (optional) 
+     * @param companyProfile_UserId (optional) 
+     * @param companyProfile_RCNo (optional) 
+     * @param companyProfile_LogoName (optional) 
+     * @param companyProfile_ShortText (optional) 
+     * @param companyProfile_FirstName (optional) 
+     * @param companyProfile_LastName (optional) 
+     * @param companyProfile_Address (optional) 
+     * @param companyProfile_DomainName (optional) 
+     * @param companyProfile_AuditorEmail (optional) 
+     * @param companyProfile_MaxEmployeeCount (optional) 
+     * @param companyProfile_SubscriptionPlanId (optional) 
+     * @param companyProfile_SubscriptionPlanName (optional) 
+     * @param companyProfile_FrequencyId (optional) 
+     * @param companyProfile_TempRef (optional) 
+     * @param companyProfile_ReferenceNumber (optional) 
      * @param grade_id (optional) 
      * @param confirmation_date (optional) 
      * @param serial_no (optional) 
@@ -8531,10 +8547,11 @@ export class GetTalentPoolServiceProxy {
      * @param bulkUploadId (optional) 
      * @param bulkUploadHtmlData (optional) 
      * @param redirectUrl (optional) 
+     * @param referenceNumber (optional) 
      * @param errors (optional) 
      * @return Success
      */
-    fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
+    fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
         let url_ = this.baseUrl + "/api/CareerSuccession/GetTalentPool/FetchTalentPool?";
         if (user_id === null)
             throw new Error("The parameter 'user_id' cannot be null.");
@@ -8550,6 +8567,68 @@ export class GetTalentPoolServiceProxy {
             throw new Error("The parameter 'employee_contract_id' cannot be null.");
         else if (employee_contract_id !== undefined)
             url_ += "employee_contract_id=" + encodeURIComponent("" + employee_contract_id) + "&";
+        if (companyProfile_Id === null)
+            throw new Error("The parameter 'companyProfile_Id' cannot be null.");
+        else if (companyProfile_Id !== undefined)
+            url_ += "CompanyProfile.Id=" + encodeURIComponent("" + companyProfile_Id) + "&";
+        if (companyProfile_UserId === null)
+            throw new Error("The parameter 'companyProfile_UserId' cannot be null.");
+        else if (companyProfile_UserId !== undefined)
+            url_ += "CompanyProfile.UserId=" + encodeURIComponent("" + companyProfile_UserId) + "&";
+        if (companyProfile_Name === undefined || companyProfile_Name === null)
+            throw new Error("The parameter 'companyProfile_Name' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.Name=" + encodeURIComponent("" + companyProfile_Name) + "&";
+        if (companyProfile_RCNo !== undefined && companyProfile_RCNo !== null)
+            url_ += "CompanyProfile.RCNo=" + encodeURIComponent("" + companyProfile_RCNo) + "&";
+        if (companyProfile_LogoName !== undefined && companyProfile_LogoName !== null)
+            url_ += "CompanyProfile.LogoName=" + encodeURIComponent("" + companyProfile_LogoName) + "&";
+        if (companyProfile_ShortText !== undefined && companyProfile_ShortText !== null)
+            url_ += "CompanyProfile.ShortText=" + encodeURIComponent("" + companyProfile_ShortText) + "&";
+        if (companyProfile_Email === undefined || companyProfile_Email === null)
+            throw new Error("The parameter 'companyProfile_Email' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.Email=" + encodeURIComponent("" + companyProfile_Email) + "&";
+        if (companyProfile_PhoneNumber === undefined || companyProfile_PhoneNumber === null)
+            throw new Error("The parameter 'companyProfile_PhoneNumber' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.PhoneNumber=" + encodeURIComponent("" + companyProfile_PhoneNumber) + "&";
+        if (companyProfile_FirstName !== undefined && companyProfile_FirstName !== null)
+            url_ += "CompanyProfile.FirstName=" + encodeURIComponent("" + companyProfile_FirstName) + "&";
+        if (companyProfile_LastName !== undefined && companyProfile_LastName !== null)
+            url_ += "CompanyProfile.LastName=" + encodeURIComponent("" + companyProfile_LastName) + "&";
+        if (companyProfile_Address !== undefined && companyProfile_Address !== null)
+            url_ += "CompanyProfile.Address=" + encodeURIComponent("" + companyProfile_Address) + "&";
+        if (companyProfile_AdministratorEmail === undefined || companyProfile_AdministratorEmail === null)
+            throw new Error("The parameter 'companyProfile_AdministratorEmail' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.AdministratorEmail=" + encodeURIComponent("" + companyProfile_AdministratorEmail) + "&";
+        if (companyProfile_DomainName !== undefined && companyProfile_DomainName !== null)
+            url_ += "CompanyProfile.DomainName=" + encodeURIComponent("" + companyProfile_DomainName) + "&";
+        if (companyProfile_AuditorEmail !== undefined && companyProfile_AuditorEmail !== null)
+            url_ += "CompanyProfile.AuditorEmail=" + encodeURIComponent("" + companyProfile_AuditorEmail) + "&";
+        if (companyProfile_MaxEmployeeCount === null)
+            throw new Error("The parameter 'companyProfile_MaxEmployeeCount' cannot be null.");
+        else if (companyProfile_MaxEmployeeCount !== undefined)
+            url_ += "CompanyProfile.MaxEmployeeCount=" + encodeURIComponent("" + companyProfile_MaxEmployeeCount) + "&";
+        if (companyProfile_SubscriptionPlanId === null)
+            throw new Error("The parameter 'companyProfile_SubscriptionPlanId' cannot be null.");
+        else if (companyProfile_SubscriptionPlanId !== undefined)
+            url_ += "CompanyProfile.SubscriptionPlanId=" + encodeURIComponent("" + companyProfile_SubscriptionPlanId) + "&";
+        if (companyProfile_SubscriptionPlanName !== undefined && companyProfile_SubscriptionPlanName !== null)
+            url_ += "CompanyProfile.SubscriptionPlanName=" + encodeURIComponent("" + companyProfile_SubscriptionPlanName) + "&";
+        if (companyProfile_Password === undefined || companyProfile_Password === null)
+            throw new Error("The parameter 'companyProfile_Password' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.Password=" + encodeURIComponent("" + companyProfile_Password) + "&";
+        if (companyProfile_FrequencyId === null)
+            throw new Error("The parameter 'companyProfile_FrequencyId' cannot be null.");
+        else if (companyProfile_FrequencyId !== undefined)
+            url_ += "CompanyProfile.FrequencyId=" + encodeURIComponent("" + companyProfile_FrequencyId) + "&";
+        if (companyProfile_TempRef !== undefined && companyProfile_TempRef !== null)
+            url_ += "CompanyProfile.TempRef=" + encodeURIComponent("" + companyProfile_TempRef) + "&";
+        if (companyProfile_ReferenceNumber !== undefined && companyProfile_ReferenceNumber !== null)
+            url_ += "CompanyProfile.ReferenceNumber=" + encodeURIComponent("" + companyProfile_ReferenceNumber) + "&";
         if (grade_id !== undefined && grade_id !== null)
             url_ += "grade_id=" + encodeURIComponent("" + grade_id) + "&";
         if (confirmation_date !== undefined && confirmation_date !== null)
@@ -8638,6 +8717,8 @@ export class GetTalentPoolServiceProxy {
             url_ += "BulkUploadHtmlData=" + encodeURIComponent("" + bulkUploadHtmlData) + "&";
         if (redirectUrl !== undefined && redirectUrl !== null)
             url_ += "RedirectUrl=" + encodeURIComponent("" + redirectUrl) + "&";
+        if (referenceNumber !== undefined && referenceNumber !== null)
+            url_ += "ReferenceNumber=" + encodeURIComponent("" + referenceNumber) + "&";
         if (errors !== undefined && errors !== null)
             errors && errors.forEach(item => { url_ += "Errors=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
@@ -13370,6 +13451,146 @@ export class DataServiceProxy {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for getting Loan Eligible Status i.e.
+    {'ALL_EMPLOYEES=0, FULL-TIME_EMPLOYEES=1, PART-TIME_EMPLOYEES=2' }
+     * @return Success
+     */
+    loanEligibleStatus(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/LoanEligibleStatus";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLoanEligibleStatus(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLoanEligibleStatus(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processLoanEligibleStatus(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
+
+    /**
+     * API for getting Interest Types i.e.
+    {'NONE=0, FIXED RATE=1, REDUCING BALANCE=2' }
+     * @return Success
+     */
+    interestTypes(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/InterestTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processInterestTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processInterestTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processInterestTypes(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
     }
 
     /**
@@ -19121,7 +19342,7 @@ export class AddUpdateLoanTypeServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    addUpdateLoanType(body: LoanTypeDTO | undefined): Observable<MessageOutApiResult> {
+    addUpdateLoanType(body: ManageLoanTypeDTO | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LoanType/AddUpdateLoanType/Add-Update-LoanType";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -26018,6 +26239,297 @@ export class GetLoanRequestServiceProxy {
 }
 
 @Injectable()
+export class GetLoanTypesByCriteriaServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for retrieving All Loan Types for further CRUD operation
+     * @param iD (optional) 
+     * @param code (optional) 
+     * @param ledgerNo (optional) 
+     * @param name (optional) 
+     * @param minTenor (optional) 
+     * @param maxTenor (optional) 
+     * @param minAmount (optional) 
+     * @param maxAmount (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getLoanTypesByCriteria(iD: number | undefined, code: string | null | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, minTenor: number | undefined, maxTenor: number | undefined, minAmount: number | undefined, maxAmount: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/LoanType/GetLoanTypesByCriteria/GetLoanTypesByCriteria?";
+        if (iD === null)
+            throw new Error("The parameter 'iD' cannot be null.");
+        else if (iD !== undefined)
+            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
+        if (code !== undefined && code !== null)
+            url_ += "Code=" + encodeURIComponent("" + code) + "&";
+        if (ledgerNo !== undefined && ledgerNo !== null)
+            url_ += "LedgerNo=" + encodeURIComponent("" + ledgerNo) + "&";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+        if (minTenor === null)
+            throw new Error("The parameter 'minTenor' cannot be null.");
+        else if (minTenor !== undefined)
+            url_ += "MinTenor=" + encodeURIComponent("" + minTenor) + "&";
+        if (maxTenor === null)
+            throw new Error("The parameter 'maxTenor' cannot be null.");
+        else if (maxTenor !== undefined)
+            url_ += "MaxTenor=" + encodeURIComponent("" + maxTenor) + "&";
+        if (minAmount === null)
+            throw new Error("The parameter 'minAmount' cannot be null.");
+        else if (minAmount !== undefined)
+            url_ += "MinAmount=" + encodeURIComponent("" + minAmount) + "&";
+        if (maxAmount === null)
+            throw new Error("The parameter 'maxAmount' cannot be null.");
+        else if (maxAmount !== undefined)
+            url_ += "MaxAmount=" + encodeURIComponent("" + maxAmount) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetLoanTypesByCriteria(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetLoanTypesByCriteria(<any>response_);
+                } catch (e) {
+                    return <Observable<LoanTypeDTOIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<LoanTypeDTOIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetLoanTypesByCriteria(response: HttpResponseBase): Observable<LoanTypeDTOIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = LoanTypeDTOIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<LoanTypeDTOIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetLoanTypesServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for getting LoanTypes that can be use for dropdowns
+     * @return Success
+     */
+    getLoanTypes(): Observable<LoanTypeIListApiResult> {
+        let url_ = this.baseUrl + "/api/LoanType/GetLoanTypes/GetLoanTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetLoanTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetLoanTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<LoanTypeIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<LoanTypeIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetLoanTypes(response: HttpResponseBase): Observable<LoanTypeIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = LoanTypeIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<LoanTypeIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class FetchLoanTypeByIdServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    fetchLoanTypeById(id: number | undefined): Observable<LoanTypeDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/LoanType/FetchLoanTypeById/FetchLoanTypeById?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFetchLoanTypeById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFetchLoanTypeById(<any>response_);
+                } catch (e) {
+                    return <Observable<LoanTypeDTOIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<LoanTypeDTOIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFetchLoanTypeById(response: HttpResponseBase): Observable<LoanTypeDTOIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = LoanTypeDTOIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<LoanTypeDTOIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class ToggleLoanTypeServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -26029,21 +26541,21 @@ export class ToggleLoanTypeServiceProxy {
     }
 
     /**
-     * @param body (optional) 
+     * @param id (optional) 
      * @return Success
      */
-    toggleLoanType(body: LoadTypeById | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LoanType/ToggleLoanType/Toggle-Loan-Type";
+    toggleLoanType(id: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/LoanType/ToggleLoanType/Toggle-Loan-Type?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
-
         let options_ : any = {
-            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
                 "Accept": "text/plain"
             })
         };
@@ -26099,220 +26611,6 @@ export class ToggleLoanTypeServiceProxy {
             }));
         }
         return _observableOf<MessageOutApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class GetLoanTypesByCriteriaServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
-    }
-
-    /**
-     * @param iD (optional) 
-     * @param code (optional) 
-     * @param ledgerNo (optional) 
-     * @param name (optional) 
-     * @param minTenor (optional) 
-     * @param maxTenor (optional) 
-     * @param minAmount (optional) 
-     * @param maxAmount (optional) 
-     * @param pageNumber (optional) 
-     * @param pageSize (optional) 
-     * @return Success
-     */
-    getLoanTypesByCriteria(iD: number | undefined, code: string | null | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, minTenor: number | undefined, maxTenor: number | undefined, minAmount: number | undefined, maxAmount: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanType/GetLoanTypesByCriteria/GetLoanTypesByCriteria?";
-        if (iD === null)
-            throw new Error("The parameter 'iD' cannot be null.");
-        else if (iD !== undefined)
-            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
-        if (code !== undefined && code !== null)
-            url_ += "Code=" + encodeURIComponent("" + code) + "&";
-        if (ledgerNo !== undefined && ledgerNo !== null)
-            url_ += "LedgerNo=" + encodeURIComponent("" + ledgerNo) + "&";
-        if (name !== undefined && name !== null)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&";
-        if (minTenor === null)
-            throw new Error("The parameter 'minTenor' cannot be null.");
-        else if (minTenor !== undefined)
-            url_ += "MinTenor=" + encodeURIComponent("" + minTenor) + "&";
-        if (maxTenor === null)
-            throw new Error("The parameter 'maxTenor' cannot be null.");
-        else if (maxTenor !== undefined)
-            url_ += "MaxTenor=" + encodeURIComponent("" + maxTenor) + "&";
-        if (minAmount === null)
-            throw new Error("The parameter 'minAmount' cannot be null.");
-        else if (minAmount !== undefined)
-            url_ += "MinAmount=" + encodeURIComponent("" + minAmount) + "&";
-        if (maxAmount === null)
-            throw new Error("The parameter 'maxAmount' cannot be null.");
-        else if (maxAmount !== undefined)
-            url_ += "MaxAmount=" + encodeURIComponent("" + maxAmount) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetLoanTypesByCriteria(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetLoanTypesByCriteria(<any>response_);
-                } catch (e) {
-                    return <Observable<LoanTypeIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<LoanTypeIListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetLoanTypesByCriteria(response: HttpResponseBase): Observable<LoanTypeIListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = LoanTypeIListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<LoanTypeIListApiResult>(<any>null);
-    }
-}
-
-@Injectable()
-export class FetchLoanTypeByIdServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
-    }
-
-    /**
-     * @param iD (optional) 
-     * @param companyID (optional) 
-     * @return Success
-     */
-    fetchLoanTypeById(iD: number | undefined, companyID: number | undefined): Observable<LoanTypeIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanType/FetchLoanTypeById/FetchLoanTypeById?";
-        if (iD === null)
-            throw new Error("The parameter 'iD' cannot be null.");
-        else if (iD !== undefined)
-            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
-        if (companyID === null)
-            throw new Error("The parameter 'companyID' cannot be null.");
-        else if (companyID !== undefined)
-            url_ += "CompanyID=" + encodeURIComponent("" + companyID) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFetchLoanTypeById(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processFetchLoanTypeById(<any>response_);
-                } catch (e) {
-                    return <Observable<LoanTypeIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<LoanTypeIListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processFetchLoanTypeById(response: HttpResponseBase): Observable<LoanTypeIListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = LoanTypeIListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<LoanTypeIListApiResult>(<any>null);
     }
 }
 
@@ -26681,7 +26979,7 @@ export class ManpowerServiceProxy {
      * @param reqId (optional) 
      * @return Success
      */
-    getRequirmentsDetails(reqId: number | undefined): Observable<MessageOutListApiResult> {
+    getRequirmentsDetails(reqId: number | undefined): Observable<DepartmentManPowerActivityDTOListApiResult> {
         let url_ = this.baseUrl + "/api/Manpower/Get-Requirments-Details?";
         if (reqId === null)
             throw new Error("The parameter 'reqId' cannot be null.");
@@ -26704,14 +27002,14 @@ export class ManpowerServiceProxy {
                 try {
                     return this.processGetRequirmentsDetails(<any>response_);
                 } catch (e) {
-                    return <Observable<MessageOutListApiResult>><any>_observableThrow(e);
+                    return <Observable<DepartmentManPowerActivityDTOListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<MessageOutListApiResult>><any>_observableThrow(response_);
+                return <Observable<DepartmentManPowerActivityDTOListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetRequirmentsDetails(response: HttpResponseBase): Observable<MessageOutListApiResult> {
+    protected processGetRequirmentsDetails(response: HttpResponseBase): Observable<DepartmentManPowerActivityDTOListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -26722,7 +27020,7 @@ export class ManpowerServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutListApiResult.fromJS(resultData200);
+            result200 = DepartmentManPowerActivityDTOListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -26747,7 +27045,7 @@ export class ManpowerServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<MessageOutListApiResult>(<any>null);
+        return _observableOf<DepartmentManPowerActivityDTOListApiResult>(<any>null);
     }
 
     /**
@@ -35746,6 +36044,22 @@ export class RetirementServiceProxy {
      * @param employee_id (optional) 
      * @param employee_number (optional) 
      * @param employee_contract_id (optional) 
+     * @param companyProfile_Id (optional) 
+     * @param companyProfile_UserId (optional) 
+     * @param companyProfile_RCNo (optional) 
+     * @param companyProfile_LogoName (optional) 
+     * @param companyProfile_ShortText (optional) 
+     * @param companyProfile_FirstName (optional) 
+     * @param companyProfile_LastName (optional) 
+     * @param companyProfile_Address (optional) 
+     * @param companyProfile_DomainName (optional) 
+     * @param companyProfile_AuditorEmail (optional) 
+     * @param companyProfile_MaxEmployeeCount (optional) 
+     * @param companyProfile_SubscriptionPlanId (optional) 
+     * @param companyProfile_SubscriptionPlanName (optional) 
+     * @param companyProfile_FrequencyId (optional) 
+     * @param companyProfile_TempRef (optional) 
+     * @param companyProfile_ReferenceNumber (optional) 
      * @param grade_id (optional) 
      * @param confirmation_date (optional) 
      * @param serial_no (optional) 
@@ -35777,10 +36091,11 @@ export class RetirementServiceProxy {
      * @param bulkUploadId (optional) 
      * @param bulkUploadHtmlData (optional) 
      * @param redirectUrl (optional) 
+     * @param referenceNumber (optional) 
      * @param errors (optional) 
      * @return Success
      */
-    getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
+    getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/GetRetirmentByEmployeeId?";
         if (user_id === null)
             throw new Error("The parameter 'user_id' cannot be null.");
@@ -35796,6 +36111,68 @@ export class RetirementServiceProxy {
             throw new Error("The parameter 'employee_contract_id' cannot be null.");
         else if (employee_contract_id !== undefined)
             url_ += "employee_contract_id=" + encodeURIComponent("" + employee_contract_id) + "&";
+        if (companyProfile_Id === null)
+            throw new Error("The parameter 'companyProfile_Id' cannot be null.");
+        else if (companyProfile_Id !== undefined)
+            url_ += "CompanyProfile.Id=" + encodeURIComponent("" + companyProfile_Id) + "&";
+        if (companyProfile_UserId === null)
+            throw new Error("The parameter 'companyProfile_UserId' cannot be null.");
+        else if (companyProfile_UserId !== undefined)
+            url_ += "CompanyProfile.UserId=" + encodeURIComponent("" + companyProfile_UserId) + "&";
+        if (companyProfile_Name === undefined || companyProfile_Name === null)
+            throw new Error("The parameter 'companyProfile_Name' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.Name=" + encodeURIComponent("" + companyProfile_Name) + "&";
+        if (companyProfile_RCNo !== undefined && companyProfile_RCNo !== null)
+            url_ += "CompanyProfile.RCNo=" + encodeURIComponent("" + companyProfile_RCNo) + "&";
+        if (companyProfile_LogoName !== undefined && companyProfile_LogoName !== null)
+            url_ += "CompanyProfile.LogoName=" + encodeURIComponent("" + companyProfile_LogoName) + "&";
+        if (companyProfile_ShortText !== undefined && companyProfile_ShortText !== null)
+            url_ += "CompanyProfile.ShortText=" + encodeURIComponent("" + companyProfile_ShortText) + "&";
+        if (companyProfile_Email === undefined || companyProfile_Email === null)
+            throw new Error("The parameter 'companyProfile_Email' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.Email=" + encodeURIComponent("" + companyProfile_Email) + "&";
+        if (companyProfile_PhoneNumber === undefined || companyProfile_PhoneNumber === null)
+            throw new Error("The parameter 'companyProfile_PhoneNumber' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.PhoneNumber=" + encodeURIComponent("" + companyProfile_PhoneNumber) + "&";
+        if (companyProfile_FirstName !== undefined && companyProfile_FirstName !== null)
+            url_ += "CompanyProfile.FirstName=" + encodeURIComponent("" + companyProfile_FirstName) + "&";
+        if (companyProfile_LastName !== undefined && companyProfile_LastName !== null)
+            url_ += "CompanyProfile.LastName=" + encodeURIComponent("" + companyProfile_LastName) + "&";
+        if (companyProfile_Address !== undefined && companyProfile_Address !== null)
+            url_ += "CompanyProfile.Address=" + encodeURIComponent("" + companyProfile_Address) + "&";
+        if (companyProfile_AdministratorEmail === undefined || companyProfile_AdministratorEmail === null)
+            throw new Error("The parameter 'companyProfile_AdministratorEmail' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.AdministratorEmail=" + encodeURIComponent("" + companyProfile_AdministratorEmail) + "&";
+        if (companyProfile_DomainName !== undefined && companyProfile_DomainName !== null)
+            url_ += "CompanyProfile.DomainName=" + encodeURIComponent("" + companyProfile_DomainName) + "&";
+        if (companyProfile_AuditorEmail !== undefined && companyProfile_AuditorEmail !== null)
+            url_ += "CompanyProfile.AuditorEmail=" + encodeURIComponent("" + companyProfile_AuditorEmail) + "&";
+        if (companyProfile_MaxEmployeeCount === null)
+            throw new Error("The parameter 'companyProfile_MaxEmployeeCount' cannot be null.");
+        else if (companyProfile_MaxEmployeeCount !== undefined)
+            url_ += "CompanyProfile.MaxEmployeeCount=" + encodeURIComponent("" + companyProfile_MaxEmployeeCount) + "&";
+        if (companyProfile_SubscriptionPlanId === null)
+            throw new Error("The parameter 'companyProfile_SubscriptionPlanId' cannot be null.");
+        else if (companyProfile_SubscriptionPlanId !== undefined)
+            url_ += "CompanyProfile.SubscriptionPlanId=" + encodeURIComponent("" + companyProfile_SubscriptionPlanId) + "&";
+        if (companyProfile_SubscriptionPlanName !== undefined && companyProfile_SubscriptionPlanName !== null)
+            url_ += "CompanyProfile.SubscriptionPlanName=" + encodeURIComponent("" + companyProfile_SubscriptionPlanName) + "&";
+        if (companyProfile_Password === undefined || companyProfile_Password === null)
+            throw new Error("The parameter 'companyProfile_Password' must be defined and cannot be null.");
+        else
+            url_ += "CompanyProfile.Password=" + encodeURIComponent("" + companyProfile_Password) + "&";
+        if (companyProfile_FrequencyId === null)
+            throw new Error("The parameter 'companyProfile_FrequencyId' cannot be null.");
+        else if (companyProfile_FrequencyId !== undefined)
+            url_ += "CompanyProfile.FrequencyId=" + encodeURIComponent("" + companyProfile_FrequencyId) + "&";
+        if (companyProfile_TempRef !== undefined && companyProfile_TempRef !== null)
+            url_ += "CompanyProfile.TempRef=" + encodeURIComponent("" + companyProfile_TempRef) + "&";
+        if (companyProfile_ReferenceNumber !== undefined && companyProfile_ReferenceNumber !== null)
+            url_ += "CompanyProfile.ReferenceNumber=" + encodeURIComponent("" + companyProfile_ReferenceNumber) + "&";
         if (grade_id !== undefined && grade_id !== null)
             url_ += "grade_id=" + encodeURIComponent("" + grade_id) + "&";
         if (confirmation_date !== undefined && confirmation_date !== null)
@@ -35884,6 +36261,8 @@ export class RetirementServiceProxy {
             url_ += "BulkUploadHtmlData=" + encodeURIComponent("" + bulkUploadHtmlData) + "&";
         if (redirectUrl !== undefined && redirectUrl !== null)
             url_ += "RedirectUrl=" + encodeURIComponent("" + redirectUrl) + "&";
+        if (referenceNumber !== undefined && referenceNumber !== null)
+            url_ += "ReferenceNumber=" + encodeURIComponent("" + referenceNumber) + "&";
         if (errors !== undefined && errors !== null)
             errors && errors.forEach(item => { url_ += "Errors=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
@@ -38037,7 +38416,7 @@ export class TalentManagementServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    addUpdateEmployeetoTalentManagementPool(body: EmployeeTalentManagementDTO | undefined): Observable<MessageOutApiResult> {
+    addUpdateEmployeetoTalentManagementPool(body: AddEmployyeetoPoolDTO | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/TalentManagement/Add-Update-EmployeetoTalentManagementPool";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -42713,11 +43092,135 @@ export interface IUserLoginDTO {
     password: string | undefined;
 }
 
+export class CompanyDTO implements ICompanyDTO {
+    id!: number;
+    userId!: number;
+    name!: string;
+    rcNo!: string | undefined;
+    logoName!: string | undefined;
+    shortText!: string | undefined;
+    email!: string;
+    phoneNumber!: string;
+    firstName!: string | undefined;
+    lastName!: string | undefined;
+    address!: string | undefined;
+    administratorEmail!: string;
+    domainName!: string | undefined;
+    auditorEmail!: string | undefined;
+    maxEmployeeCount!: number;
+    subscriptionPlanId!: number;
+    subscriptionPlanName!: string | undefined;
+    password!: string;
+    frequencyId!: number;
+    tempRef!: string | undefined;
+    referenceNumber!: string | undefined;
+
+    constructor(data?: ICompanyDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userId = _data["userId"];
+            this.name = _data["name"];
+            this.rcNo = _data["rcNo"];
+            this.logoName = _data["logoName"];
+            this.shortText = _data["shortText"];
+            this.email = _data["email"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.address = _data["address"];
+            this.administratorEmail = _data["administratorEmail"];
+            this.domainName = _data["domainName"];
+            this.auditorEmail = _data["auditorEmail"];
+            this.maxEmployeeCount = _data["maxEmployeeCount"];
+            this.subscriptionPlanId = _data["subscriptionPlanId"];
+            this.subscriptionPlanName = _data["subscriptionPlanName"];
+            this.password = _data["password"];
+            this.frequencyId = _data["frequencyId"];
+            this.tempRef = _data["tempRef"];
+            this.referenceNumber = _data["referenceNumber"];
+        }
+    }
+
+    static fromJS(data: any): CompanyDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompanyDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userId"] = this.userId;
+        data["name"] = this.name;
+        data["rcNo"] = this.rcNo;
+        data["logoName"] = this.logoName;
+        data["shortText"] = this.shortText;
+        data["email"] = this.email;
+        data["phoneNumber"] = this.phoneNumber;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["address"] = this.address;
+        data["administratorEmail"] = this.administratorEmail;
+        data["domainName"] = this.domainName;
+        data["auditorEmail"] = this.auditorEmail;
+        data["maxEmployeeCount"] = this.maxEmployeeCount;
+        data["subscriptionPlanId"] = this.subscriptionPlanId;
+        data["subscriptionPlanName"] = this.subscriptionPlanName;
+        data["password"] = this.password;
+        data["frequencyId"] = this.frequencyId;
+        data["tempRef"] = this.tempRef;
+        data["referenceNumber"] = this.referenceNumber;
+        return data; 
+    }
+
+    clone(): CompanyDTO {
+        const json = this.toJSON();
+        let result = new CompanyDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompanyDTO {
+    id: number;
+    userId: number;
+    name: string;
+    rcNo: string | undefined;
+    logoName: string | undefined;
+    shortText: string | undefined;
+    email: string;
+    phoneNumber: string;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    address: string | undefined;
+    administratorEmail: string;
+    domainName: string | undefined;
+    auditorEmail: string | undefined;
+    maxEmployeeCount: number;
+    subscriptionPlanId: number;
+    subscriptionPlanName: string | undefined;
+    password: string;
+    frequencyId: number;
+    tempRef: string | undefined;
+    referenceNumber: string | undefined;
+}
+
 export class VwUserObj implements IVwUserObj {
     user_id!: number;
     employee_id!: number;
     employee_number!: string | undefined;
     employee_contract_id!: number;
+    companyProfile!: CompanyDTO;
     grade_id!: number | undefined;
     confirmation_date!: Date | undefined;
     serial_no!: string | undefined;
@@ -42749,6 +43252,7 @@ export class VwUserObj implements IVwUserObj {
     bulkUploadId!: number;
     bulkUploadHtmlData!: string | undefined;
     redirectUrl!: string | undefined;
+    referenceNumber!: string | undefined;
     errors!: string[] | undefined;
 
     constructor(data?: IVwUserObj) {
@@ -42766,6 +43270,7 @@ export class VwUserObj implements IVwUserObj {
             this.employee_id = _data["employee_id"];
             this.employee_number = _data["employee_number"];
             this.employee_contract_id = _data["employee_contract_id"];
+            this.companyProfile = _data["companyProfile"] ? CompanyDTO.fromJS(_data["companyProfile"]) : <any>undefined;
             this.grade_id = _data["grade_id"];
             this.confirmation_date = _data["confirmation_date"] ? new Date(_data["confirmation_date"].toString()) : <any>undefined;
             this.serial_no = _data["serial_no"];
@@ -42801,6 +43306,7 @@ export class VwUserObj implements IVwUserObj {
             this.bulkUploadId = _data["bulkUploadId"];
             this.bulkUploadHtmlData = _data["bulkUploadHtmlData"];
             this.redirectUrl = _data["redirectUrl"];
+            this.referenceNumber = _data["referenceNumber"];
             if (Array.isArray(_data["errors"])) {
                 this.errors = [] as any;
                 for (let item of _data["errors"])
@@ -42822,6 +43328,7 @@ export class VwUserObj implements IVwUserObj {
         data["employee_id"] = this.employee_id;
         data["employee_number"] = this.employee_number;
         data["employee_contract_id"] = this.employee_contract_id;
+        data["companyProfile"] = this.companyProfile ? this.companyProfile.toJSON() : <any>undefined;
         data["grade_id"] = this.grade_id;
         data["confirmation_date"] = this.confirmation_date ? this.confirmation_date.toISOString() : <any>undefined;
         data["serial_no"] = this.serial_no;
@@ -42857,6 +43364,7 @@ export class VwUserObj implements IVwUserObj {
         data["bulkUploadId"] = this.bulkUploadId;
         data["bulkUploadHtmlData"] = this.bulkUploadHtmlData;
         data["redirectUrl"] = this.redirectUrl;
+        data["referenceNumber"] = this.referenceNumber;
         if (Array.isArray(this.errors)) {
             data["errors"] = [];
             for (let item of this.errors)
@@ -42878,6 +43386,7 @@ export interface IVwUserObj {
     employee_id: number;
     employee_number: string | undefined;
     employee_contract_id: number;
+    companyProfile: CompanyDTO;
     grade_id: number | undefined;
     confirmation_date: Date | undefined;
     serial_no: string | undefined;
@@ -42909,6 +43418,7 @@ export interface IVwUserObj {
     bulkUploadId: number;
     bulkUploadHtmlData: string | undefined;
     redirectUrl: string | undefined;
+    referenceNumber: string | undefined;
     errors: string[] | undefined;
 }
 
@@ -42978,6 +43488,7 @@ export class MessageOut implements IMessageOut {
     bulkUploadId!: number;
     bulkUploadHtmlData!: string | undefined;
     redirectUrl!: string | undefined;
+    referenceNumber!: string | undefined;
     errors!: string[] | undefined;
 
     constructor(data?: IMessageOut) {
@@ -42997,6 +43508,7 @@ export class MessageOut implements IMessageOut {
             this.bulkUploadId = _data["bulkUploadId"];
             this.bulkUploadHtmlData = _data["bulkUploadHtmlData"];
             this.redirectUrl = _data["redirectUrl"];
+            this.referenceNumber = _data["referenceNumber"];
             if (Array.isArray(_data["errors"])) {
                 this.errors = [] as any;
                 for (let item of _data["errors"])
@@ -43020,6 +43532,7 @@ export class MessageOut implements IMessageOut {
         data["bulkUploadId"] = this.bulkUploadId;
         data["bulkUploadHtmlData"] = this.bulkUploadHtmlData;
         data["redirectUrl"] = this.redirectUrl;
+        data["referenceNumber"] = this.referenceNumber;
         if (Array.isArray(this.errors)) {
             data["errors"] = [];
             for (let item of this.errors)
@@ -43043,6 +43556,7 @@ export interface IMessageOut {
     bulkUploadId: number;
     bulkUploadHtmlData: string | undefined;
     redirectUrl: string | undefined;
+    referenceNumber: string | undefined;
     errors: string[] | undefined;
 }
 
@@ -74210,16 +74724,172 @@ export interface ILoanRequestApiResult {
     totalRecord: number;
 }
 
+export class ManageLoanTypeDTO implements IManageLoanTypeDTO {
+    id!: number;
+    code!: string | undefined;
+    name!: string | undefined;
+    description!: string | undefined;
+    requiresGuarantor!: boolean;
+    requiredNoOfGuarantors!: number;
+    eligibleGrades!: string | undefined;
+    ledgerNo!: string | undefined;
+    approvalProcessId!: number;
+    interestRate!: number;
+    minTenor!: number;
+    maxTenor!: number;
+    minAmount!: number;
+    maxAmount!: number;
+    interestType!: number;
+    eligibleEmploymentStatus!: number;
+    customQuestion!: string | undefined;
+    maxLoanRepaytPercent!: number;
+
+    constructor(data?: IManageLoanTypeDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.code = _data["code"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.requiresGuarantor = _data["requiresGuarantor"];
+            this.requiredNoOfGuarantors = _data["requiredNoOfGuarantors"];
+            this.eligibleGrades = _data["eligibleGrades"];
+            this.ledgerNo = _data["ledgerNo"];
+            this.approvalProcessId = _data["approvalProcessId"];
+            this.interestRate = _data["interestRate"];
+            this.minTenor = _data["minTenor"];
+            this.maxTenor = _data["maxTenor"];
+            this.minAmount = _data["minAmount"];
+            this.maxAmount = _data["maxAmount"];
+            this.interestType = _data["interestType"];
+            this.eligibleEmploymentStatus = _data["eligibleEmploymentStatus"];
+            this.customQuestion = _data["customQuestion"];
+            this.maxLoanRepaytPercent = _data["maxLoanRepaytPercent"];
+        }
+    }
+
+    static fromJS(data: any): ManageLoanTypeDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageLoanTypeDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["code"] = this.code;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["requiresGuarantor"] = this.requiresGuarantor;
+        data["requiredNoOfGuarantors"] = this.requiredNoOfGuarantors;
+        data["eligibleGrades"] = this.eligibleGrades;
+        data["ledgerNo"] = this.ledgerNo;
+        data["approvalProcessId"] = this.approvalProcessId;
+        data["interestRate"] = this.interestRate;
+        data["minTenor"] = this.minTenor;
+        data["maxTenor"] = this.maxTenor;
+        data["minAmount"] = this.minAmount;
+        data["maxAmount"] = this.maxAmount;
+        data["interestType"] = this.interestType;
+        data["eligibleEmploymentStatus"] = this.eligibleEmploymentStatus;
+        data["customQuestion"] = this.customQuestion;
+        data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
+        return data; 
+    }
+
+    clone(): ManageLoanTypeDTO {
+        const json = this.toJSON();
+        let result = new ManageLoanTypeDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageLoanTypeDTO {
+    id: number;
+    code: string | undefined;
+    name: string | undefined;
+    description: string | undefined;
+    requiresGuarantor: boolean;
+    requiredNoOfGuarantors: number;
+    eligibleGrades: string | undefined;
+    ledgerNo: string | undefined;
+    approvalProcessId: number;
+    interestRate: number;
+    minTenor: number;
+    maxTenor: number;
+    minAmount: number;
+    maxAmount: number;
+    interestType: number;
+    eligibleEmploymentStatus: number;
+    customQuestion: string | undefined;
+    maxLoanRepaytPercent: number;
+}
+
+export class EligibleGradeDTO implements IEligibleGradeDTO {
+    loanTypeID!: number;
+    gradeID!: number;
+    gradeName!: string | undefined;
+
+    constructor(data?: IEligibleGradeDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.loanTypeID = _data["loanTypeID"];
+            this.gradeID = _data["gradeID"];
+            this.gradeName = _data["gradeName"];
+        }
+    }
+
+    static fromJS(data: any): EligibleGradeDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new EligibleGradeDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["loanTypeID"] = this.loanTypeID;
+        data["gradeID"] = this.gradeID;
+        data["gradeName"] = this.gradeName;
+        return data; 
+    }
+
+    clone(): EligibleGradeDTO {
+        const json = this.toJSON();
+        let result = new EligibleGradeDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEligibleGradeDTO {
+    loanTypeID: number;
+    gradeID: number;
+    gradeName: string | undefined;
+}
+
 export class LoanTypeDTO implements ILoanTypeDTO {
     id!: number;
     companyID!: number;
     subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
     code!: string | undefined;
     ledgerNo!: string | undefined;
     name!: string | undefined;
@@ -74237,9 +74907,15 @@ export class LoanTypeDTO implements ILoanTypeDTO {
     eligibleEmploymentStatus!: number;
     customQuestion!: string | undefined;
     maxLoanRepaytPercent!: number;
-    strMinAmount!: string | undefined;
-    strMaxAmount!: string | undefined;
-    strRequiresGuarantor!: string | undefined;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+    readonly eligibleEmployeeStatus!: string | undefined;
+    readonly interestTypeName!: string | undefined;
+    eligibleGradeList!: EligibleGradeDTO[] | undefined;
 
     constructor(data?: ILoanTypeDTO) {
         if (data) {
@@ -74255,12 +74931,6 @@ export class LoanTypeDTO implements ILoanTypeDTO {
             this.id = _data["id"];
             this.companyID = _data["companyID"];
             this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
             this.code = _data["code"];
             this.ledgerNo = _data["ledgerNo"];
             this.name = _data["name"];
@@ -74278,9 +74948,19 @@ export class LoanTypeDTO implements ILoanTypeDTO {
             this.eligibleEmploymentStatus = _data["eligibleEmploymentStatus"];
             this.customQuestion = _data["customQuestion"];
             this.maxLoanRepaytPercent = _data["maxLoanRepaytPercent"];
-            this.strMinAmount = _data["strMinAmount"];
-            this.strMaxAmount = _data["strMaxAmount"];
-            this.strRequiresGuarantor = _data["strRequiresGuarantor"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+            (<any>this).eligibleEmployeeStatus = _data["eligibleEmployeeStatus"];
+            (<any>this).interestTypeName = _data["interestTypeName"];
+            if (Array.isArray(_data["eligibleGradeList"])) {
+                this.eligibleGradeList = [] as any;
+                for (let item of _data["eligibleGradeList"])
+                    this.eligibleGradeList!.push(EligibleGradeDTO.fromJS(item));
+            }
         }
     }
 
@@ -74296,12 +74976,6 @@ export class LoanTypeDTO implements ILoanTypeDTO {
         data["id"] = this.id;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
         data["code"] = this.code;
         data["ledgerNo"] = this.ledgerNo;
         data["name"] = this.name;
@@ -74319,9 +74993,19 @@ export class LoanTypeDTO implements ILoanTypeDTO {
         data["eligibleEmploymentStatus"] = this.eligibleEmploymentStatus;
         data["customQuestion"] = this.customQuestion;
         data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
-        data["strMinAmount"] = this.strMinAmount;
-        data["strMaxAmount"] = this.strMaxAmount;
-        data["strRequiresGuarantor"] = this.strRequiresGuarantor;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        data["eligibleEmployeeStatus"] = this.eligibleEmployeeStatus;
+        data["interestTypeName"] = this.interestTypeName;
+        if (Array.isArray(this.eligibleGradeList)) {
+            data["eligibleGradeList"] = [];
+            for (let item of this.eligibleGradeList)
+                data["eligibleGradeList"].push(item.toJSON());
+        }
         return data; 
     }
 
@@ -74337,12 +75021,6 @@ export interface ILoanTypeDTO {
     id: number;
     companyID: number;
     subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
     code: string | undefined;
     ledgerNo: string | undefined;
     name: string | undefined;
@@ -74360,16 +75038,25 @@ export interface ILoanTypeDTO {
     eligibleEmploymentStatus: number;
     customQuestion: string | undefined;
     maxLoanRepaytPercent: number;
-    strMinAmount: string | undefined;
-    strMaxAmount: string | undefined;
-    strRequiresGuarantor: string | undefined;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+    eligibleEmployeeStatus: string | undefined;
+    interestTypeName: string | undefined;
+    eligibleGradeList: EligibleGradeDTO[] | undefined;
 }
 
-export class LoadTypeById implements ILoadTypeById {
-    id!: number;
-    companyID!: number;
+export class LoanTypeDTOIListApiResult implements ILoanTypeDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: LoanTypeDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
 
-    constructor(data?: ILoadTypeById) {
+    constructor(data?: ILoanTypeDTOIListApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -74380,36 +75067,53 @@ export class LoadTypeById implements ILoadTypeById {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(LoanTypeDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): LoadTypeById {
+    static fromJS(data: any): LoanTypeDTOIListApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new LoadTypeById();
+        let result = new LoanTypeDTOIListApiResult();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
         return data; 
     }
 
-    clone(): LoadTypeById {
+    clone(): LoanTypeDTOIListApiResult {
         const json = this.toJSON();
-        let result = new LoadTypeById();
+        let result = new LoanTypeDTOIListApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface ILoadTypeById {
-    id: number;
-    companyID: number;
+export interface ILoanTypeDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: LoanTypeDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
 }
 
 export class LoanType implements ILoanType {
@@ -74951,6 +75655,7 @@ export class DepartmentManPowerActivityDTO implements IDepartmentManPowerActivit
     loggedByUserName!: string | undefined;
     approvedBy!: number | undefined;
     approvedByName!: string | undefined;
+    requirment!: string | undefined;
     apporvedDate!: Date | undefined;
     readonly statusName!: string | undefined;
     readonly activityTypeName!: string | undefined;
@@ -74998,6 +75703,7 @@ export class DepartmentManPowerActivityDTO implements IDepartmentManPowerActivit
             this.loggedByUserName = _data["loggedByUserName"];
             this.approvedBy = _data["approvedBy"];
             this.approvedByName = _data["approvedByName"];
+            this.requirment = _data["requirment"];
             this.apporvedDate = _data["apporvedDate"] ? new Date(_data["apporvedDate"].toString()) : <any>undefined;
             (<any>this).statusName = _data["statusName"];
             (<any>this).activityTypeName = _data["activityTypeName"];
@@ -75045,6 +75751,7 @@ export class DepartmentManPowerActivityDTO implements IDepartmentManPowerActivit
         data["loggedByUserName"] = this.loggedByUserName;
         data["approvedBy"] = this.approvedBy;
         data["approvedByName"] = this.approvedByName;
+        data["requirment"] = this.requirment;
         data["apporvedDate"] = this.apporvedDate ? this.apporvedDate.toISOString() : <any>undefined;
         data["statusName"] = this.statusName;
         data["activityTypeName"] = this.activityTypeName;
@@ -75092,6 +75799,7 @@ export interface IDepartmentManPowerActivityDTO {
     loggedByUserName: string | undefined;
     approvedBy: number | undefined;
     approvedByName: string | undefined;
+    requirment: string | undefined;
     apporvedDate: Date | undefined;
     statusName: string | undefined;
     activityTypeName: string | undefined;
@@ -75264,14 +75972,14 @@ export interface IDepartmentActivityDTO {
     requirements: DepartmentManPowerActivityDTO[] | undefined;
 }
 
-export class MessageOutListApiResult implements IMessageOutListApiResult {
+export class DepartmentManPowerActivityDTOListApiResult implements IDepartmentManPowerActivityDTOListApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: MessageOut[] | undefined;
+    result!: DepartmentManPowerActivityDTO[] | undefined;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: IMessageOutListApiResult) {
+    constructor(data?: IDepartmentManPowerActivityDTOListApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -75287,16 +75995,16 @@ export class MessageOutListApiResult implements IMessageOutListApiResult {
             if (Array.isArray(_data["result"])) {
                 this.result = [] as any;
                 for (let item of _data["result"])
-                    this.result!.push(MessageOut.fromJS(item));
+                    this.result!.push(DepartmentManPowerActivityDTO.fromJS(item));
             }
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): MessageOutListApiResult {
+    static fromJS(data: any): DepartmentManPowerActivityDTOListApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new MessageOutListApiResult();
+        let result = new DepartmentManPowerActivityDTOListApiResult();
         result.init(data);
         return result;
     }
@@ -75315,18 +76023,18 @@ export class MessageOutListApiResult implements IMessageOutListApiResult {
         return data; 
     }
 
-    clone(): MessageOutListApiResult {
+    clone(): DepartmentManPowerActivityDTOListApiResult {
         const json = this.toJSON();
-        let result = new MessageOutListApiResult();
+        let result = new DepartmentManPowerActivityDTOListApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface IMessageOutListApiResult {
+export interface IDepartmentManPowerActivityDTOListApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: MessageOut[] | undefined;
+    result: DepartmentManPowerActivityDTO[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -89757,7 +90465,9 @@ export interface IModular {
 export class SubscriptionPlanModule implements ISubscriptionPlanModule {
     id!: number;
     subscriptionPlanId!: number;
+    subscriptionPlanName!: string | undefined;
     modularId!: number;
+    modularName!: string | undefined;
     lastDateModified!: Date | undefined;
     modularDefaultEnabled!: boolean;
     subscriptionPlan!: SubscriptionPlan;
@@ -89776,7 +90486,9 @@ export class SubscriptionPlanModule implements ISubscriptionPlanModule {
         if (_data) {
             this.id = _data["id"];
             this.subscriptionPlanId = _data["subscriptionPlanId"];
+            this.subscriptionPlanName = _data["subscriptionPlanName"];
             this.modularId = _data["modularId"];
+            this.modularName = _data["modularName"];
             this.lastDateModified = _data["lastDateModified"] ? new Date(_data["lastDateModified"].toString()) : <any>undefined;
             this.modularDefaultEnabled = _data["modularDefaultEnabled"];
             this.subscriptionPlan = _data["subscriptionPlan"] ? SubscriptionPlan.fromJS(_data["subscriptionPlan"]) : <any>undefined;
@@ -89795,7 +90507,9 @@ export class SubscriptionPlanModule implements ISubscriptionPlanModule {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["subscriptionPlanId"] = this.subscriptionPlanId;
+        data["subscriptionPlanName"] = this.subscriptionPlanName;
         data["modularId"] = this.modularId;
+        data["modularName"] = this.modularName;
         data["lastDateModified"] = this.lastDateModified ? this.lastDateModified.toISOString() : <any>undefined;
         data["modularDefaultEnabled"] = this.modularDefaultEnabled;
         data["subscriptionPlan"] = this.subscriptionPlan ? this.subscriptionPlan.toJSON() : <any>undefined;
@@ -89814,7 +90528,9 @@ export class SubscriptionPlanModule implements ISubscriptionPlanModule {
 export interface ISubscriptionPlanModule {
     id: number;
     subscriptionPlanId: number;
+    subscriptionPlanName: string | undefined;
     modularId: number;
+    modularName: string | undefined;
     lastDateModified: Date | undefined;
     modularDefaultEnabled: boolean;
     subscriptionPlan: SubscriptionPlan;
@@ -90366,21 +91082,20 @@ export interface IEmployeeTalentMangementPoolHistoryDTO {
     isActive: boolean;
 }
 
-export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO {
+export class AddEmployyeetoPoolDTO implements IAddEmployyeetoPoolDTO {
     id!: number;
-    companyID!: number;
-    subID!: number;
-    talentPoolId!: number;
-    talentPoolName!: string | undefined;
+    name!: string | undefined;
     employeeId!: number;
-    talentPoints!: number;
-    recommendations!: string | undefined;
+    department!: string | undefined;
+    purpose!: string | undefined;
+    division!: string | undefined;
     dateCreated!: Date;
     isDeleted!: boolean;
     isActive!: boolean;
+    talentPoolId!: number;
     employeeTalentMangementPoolHistoriesDTO!: EmployeeTalentMangementPoolHistoryDTO[] | undefined;
 
-    constructor(data?: IEmployeeTalentManagementDTO) {
+    constructor(data?: IAddEmployyeetoPoolDTO) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -90392,16 +91107,15 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.talentPoolId = _data["talentPoolId"];
-            this.talentPoolName = _data["talentPoolName"];
+            this.name = _data["name"];
             this.employeeId = _data["employeeId"];
-            this.talentPoints = _data["talentPoints"];
-            this.recommendations = _data["recommendations"];
+            this.department = _data["department"];
+            this.purpose = _data["purpose"];
+            this.division = _data["division"];
             this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
             this.isDeleted = _data["isDeleted"];
             this.isActive = _data["isActive"];
+            this.talentPoolId = _data["talentPoolId"];
             if (Array.isArray(_data["employeeTalentMangementPoolHistoriesDTO"])) {
                 this.employeeTalentMangementPoolHistoriesDTO = [] as any;
                 for (let item of _data["employeeTalentMangementPoolHistoriesDTO"])
@@ -90410,9 +91124,9 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
         }
     }
 
-    static fromJS(data: any): EmployeeTalentManagementDTO {
+    static fromJS(data: any): AddEmployyeetoPoolDTO {
         data = typeof data === 'object' ? data : {};
-        let result = new EmployeeTalentManagementDTO();
+        let result = new AddEmployyeetoPoolDTO();
         result.init(data);
         return result;
     }
@@ -90420,16 +91134,15 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["talentPoolId"] = this.talentPoolId;
-        data["talentPoolName"] = this.talentPoolName;
+        data["name"] = this.name;
         data["employeeId"] = this.employeeId;
-        data["talentPoints"] = this.talentPoints;
-        data["recommendations"] = this.recommendations;
+        data["department"] = this.department;
+        data["purpose"] = this.purpose;
+        data["division"] = this.division;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
+        data["talentPoolId"] = this.talentPoolId;
         if (Array.isArray(this.employeeTalentMangementPoolHistoriesDTO)) {
             data["employeeTalentMangementPoolHistoriesDTO"] = [];
             for (let item of this.employeeTalentMangementPoolHistoriesDTO)
@@ -90438,26 +91151,25 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
         return data; 
     }
 
-    clone(): EmployeeTalentManagementDTO {
+    clone(): AddEmployyeetoPoolDTO {
         const json = this.toJSON();
-        let result = new EmployeeTalentManagementDTO();
+        let result = new AddEmployyeetoPoolDTO();
         result.init(json);
         return result;
     }
 }
 
-export interface IEmployeeTalentManagementDTO {
+export interface IAddEmployyeetoPoolDTO {
     id: number;
-    companyID: number;
-    subID: number;
-    talentPoolId: number;
-    talentPoolName: string | undefined;
+    name: string | undefined;
     employeeId: number;
-    talentPoints: number;
-    recommendations: string | undefined;
+    department: string | undefined;
+    purpose: string | undefined;
+    division: string | undefined;
     dateCreated: Date;
     isDeleted: boolean;
     isActive: boolean;
+    talentPoolId: number;
     employeeTalentMangementPoolHistoriesDTO: EmployeeTalentMangementPoolHistoryDTO[] | undefined;
 }
 
@@ -90579,113 +91291,6 @@ export interface ICompanySignUpDTO {
     password: string;
 }
 
-export class CompanyDTO implements ICompanyDTO {
-    id!: number;
-    userId!: number;
-    name!: string;
-    rcNo!: string | undefined;
-    logoName!: string | undefined;
-    shortText!: string | undefined;
-    email!: string;
-    phoneNumber!: string;
-    firstName!: string | undefined;
-    lastName!: string | undefined;
-    address!: string | undefined;
-    administratorEmail!: string;
-    domainName!: string | undefined;
-    auditorEmail!: string | undefined;
-    maxEmployeeCount!: number;
-    subscriptionPlanId!: number;
-    password!: string | undefined;
-
-    constructor(data?: ICompanyDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.userId = _data["userId"];
-            this.name = _data["name"];
-            this.rcNo = _data["rcNo"];
-            this.logoName = _data["logoName"];
-            this.shortText = _data["shortText"];
-            this.email = _data["email"];
-            this.phoneNumber = _data["phoneNumber"];
-            this.firstName = _data["firstName"];
-            this.lastName = _data["lastName"];
-            this.address = _data["address"];
-            this.administratorEmail = _data["administratorEmail"];
-            this.domainName = _data["domainName"];
-            this.auditorEmail = _data["auditorEmail"];
-            this.maxEmployeeCount = _data["maxEmployeeCount"];
-            this.subscriptionPlanId = _data["subscriptionPlanId"];
-            this.password = _data["password"];
-        }
-    }
-
-    static fromJS(data: any): CompanyDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompanyDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["userId"] = this.userId;
-        data["name"] = this.name;
-        data["rcNo"] = this.rcNo;
-        data["logoName"] = this.logoName;
-        data["shortText"] = this.shortText;
-        data["email"] = this.email;
-        data["phoneNumber"] = this.phoneNumber;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["address"] = this.address;
-        data["administratorEmail"] = this.administratorEmail;
-        data["domainName"] = this.domainName;
-        data["auditorEmail"] = this.auditorEmail;
-        data["maxEmployeeCount"] = this.maxEmployeeCount;
-        data["subscriptionPlanId"] = this.subscriptionPlanId;
-        data["password"] = this.password;
-        return data; 
-    }
-
-    clone(): CompanyDTO {
-        const json = this.toJSON();
-        let result = new CompanyDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompanyDTO {
-    id: number;
-    userId: number;
-    name: string;
-    rcNo: string | undefined;
-    logoName: string | undefined;
-    shortText: string | undefined;
-    email: string;
-    phoneNumber: string;
-    firstName: string | undefined;
-    lastName: string | undefined;
-    address: string | undefined;
-    administratorEmail: string;
-    domainName: string | undefined;
-    auditorEmail: string | undefined;
-    maxEmployeeCount: number;
-    subscriptionPlanId: number;
-    password: string | undefined;
-}
-
 export class Company implements ICompany {
     id!: number;
     name!: string | undefined;
@@ -90711,6 +91316,8 @@ export class Company implements ICompany {
     colorBackGround!: string | undefined;
     domainName!: string | undefined;
     isTrial!: boolean;
+    frequencyId!: number | undefined;
+    referenceNumber!: string | undefined;
 
     constructor(data?: ICompany) {
         if (data) {
@@ -90747,6 +91354,8 @@ export class Company implements ICompany {
             this.colorBackGround = _data["colorBackGround"];
             this.domainName = _data["domainName"];
             this.isTrial = _data["isTrial"];
+            this.frequencyId = _data["frequencyId"];
+            this.referenceNumber = _data["referenceNumber"];
         }
     }
 
@@ -90783,6 +91392,8 @@ export class Company implements ICompany {
         data["colorBackGround"] = this.colorBackGround;
         data["domainName"] = this.domainName;
         data["isTrial"] = this.isTrial;
+        data["frequencyId"] = this.frequencyId;
+        data["referenceNumber"] = this.referenceNumber;
         return data; 
     }
 
@@ -90819,6 +91430,8 @@ export interface ICompany {
     colorBackGround: string | undefined;
     domainName: string | undefined;
     isTrial: boolean;
+    frequencyId: number | undefined;
+    referenceNumber: string | undefined;
 }
 
 export class CompanyIListApiResult implements ICompanyIListApiResult {
