@@ -76,6 +76,7 @@ export class LoanRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoanTypes();
+    this.getInterestRate();
 
   }
 
@@ -106,7 +107,7 @@ export class LoanRequestComponent implements OnInit {
   async makeLoanRequest(){
   const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
-    this.alertMe.openModalAlert('Success', 'Request Created', 'Dismiss');
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
     this.loanForm.resetForm();
   }
   else{
@@ -137,14 +138,14 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getLoanTypes(){
-    const data = await this.loanType.fetchLoanTypeById(1,1).toPromise();
+    const data = await this.loanType.fetchLoanTypeById(0,1).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       console.log('Here are the types', this.allLoanTypes)
     }
   }
 
-  async getInterest(){
+  async getInterestRate(){
     const data = await this.interestService.getInterestRate().toPromise();
     if(!data.hasError){
       this.allInterestRates = data.result;

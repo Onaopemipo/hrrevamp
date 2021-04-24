@@ -18,10 +18,14 @@ export class SetupComponent implements OnInit {
   disBudgetItem: DisbursementBudgetItem []= [];
   allDepartments: Department [] = [];
   myBudget: BudgetDTO[] = [];
+  addItemModal: boolean = false;
+  addedDepartments: DisbursementBudgetItemAllocation [] = [];
   departments: DisbursementBudgetItemAllocation = new DisbursementBudgetItemAllocation().clone();
+  // addedDepartments: DisbursementBudgetItemAllocation [] = [];
 
   constructor(private budgetService: AddUpdateBudgetServiceProxy, private allBudgets: FetchAllBudgetsServiceProxy,  private alertMe: AlertserviceService,
-    private alert: AlertserviceService, private common: CommonServiceProxy, private updateItem: AddUpdateBudgetItemServiceProxy) { }
+    private alert: AlertserviceService, private common: CommonServiceProxy,
+    private budgetItemUpdate: AddUpdateBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchDepartments();
@@ -53,12 +57,12 @@ export class SetupComponent implements OnInit {
   }
 
   addDepartment(){
-    let myDepartment = new DisbursementBudgetItemAllocation();
-    // myDepartment.code = this.departments.code;
-    // myDepartment.name = this.departments.name;
-    // myDepartment.
-    // this.alertMe.alertMessage
-    console.log('yshdhdh', this.departments);
+    let myAllocations = new DisbursementBudgetItemAllocation;
+    myAllocations.departmentId = this.departments.departmentId;
+    myAllocations.allocatedAmount = this.departments.allocatedAmount;
+    this.addedDepartments.push(myAllocations)
+    console.log('Hey guys',this.addedDepartments)
+    this.departments = new DisbursementBudgetItemAllocation().clone();
   }
 
   async fetAllBudget(){
@@ -78,7 +82,50 @@ export class SetupComponent implements OnInit {
   }
 
   async updateBudgetItem(){
-    const data = await this.updateItem.addUpdateBudgetItem(this.budgetItem).toPromise()
+    let budgetItemUpdate = new ManageBudgetItemDTO
+    budgetItemUpdate.budgetID = this.budgetItem.budgetID;
+    budgetItemUpdate.name = this.budgetItem.name;
+    budgetItemUpdate.spent = 0;
+    budgetItemUpdate.code = this.budgetItem.code;
+    budgetItemUpdate.budgetAllocations = JSON.stringify(this.addDepartment);
+    budgetItemUpdate.totalBudget = this.budgetItem.totalBudget
+    const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
+        this.addItemModal = false;
+      });
+    }
+    else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Error Adding Item', 'Dismiss')
+    }
+  }
+
+  addDepartmentAllocations() {
+    let myAllocations = new DisbursementBudgetItemAllocation;
+    myAllocations.departmentId = this.departments.departmentId;
+    myAllocations.allocatedAmount = this.departments.allocatedAmount;
+    this.addedDepartments.push(myAllocations)
+    console.log('Hey guys',this.addedDepartments)
+    this.departments = new DisbursementBudgetItemAllocation().clone();
+  }
+
+  async addBudgetItem(){
+    let budgetItemUpdate = new ManageBudgetItemDTO
+    budgetItemUpdate.budgetID = this.budgetItem.budgetID;
+    budgetItemUpdate.name = this.budgetItem.name;
+    budgetItemUpdate.spent = 0;
+    budgetItemUpdate.code = this.budgetItem.code;
+    budgetItemUpdate.budgetAllocations = JSON.stringify(this.addDepartmentAllocations);
+    budgetItemUpdate.totalBudget = this.budgetItem.totalBudget
+    const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
+        this.addItemModal = false;
+      });
+    }
+    else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Error Adding Item', 'Dismiss')
+    }
   }
 
 

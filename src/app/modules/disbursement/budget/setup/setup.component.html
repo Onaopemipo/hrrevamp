@@ -89,7 +89,7 @@
               <label>Allocated amount</label>
             </div>
             <div class="col-sm-5">
-              <app-amount-input [(value)]="departments.amount"></app-amount-input>
+              <app-amount-input [(value)]="departments.amount" [(max)]="disBudgetItem.totalBudget"></app-amount-input>
             </div>
           </div>
 
@@ -98,7 +98,7 @@
               <label></label>
             </div>
             <div class="col-sm-5">
-                <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
+                <button nbButton status="primary" class="border-none" (click)="addDepartmentAllocations()" outline>
                   <nb-icon icon="plus-outline"></nb-icon>
                   Add department
                 </button>
@@ -111,7 +111,7 @@
             </div>
             <div class="col-sm-5">
                 <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-                <button nbButton status="primary" (click)="updateBudgetItem()">Save</button>
+                <button nbButton status="primary" (click)="addBudgetItem()">Save</button>
             </div>
           </div>
         </form>

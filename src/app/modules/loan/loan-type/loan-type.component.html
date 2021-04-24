@@ -1,9 +1,9 @@
 <ngx-componentsheader
   pageName="Loan Type"
-  [requiredButton]="[{name:'newtype', label:'Add New'}]" (buttonClick)="createLoanType()"
+  [requiredButton]="[{name:'newtype', label:'Add New'}]" (buttonClick)="createNewType()"
 ></ngx-componentsheader>
 
-<div *ngIf="dataCounter < 1">
+<div *ngIf="createType == true">
   <nb-card>
       <nb-card-body>
         <form #loanType="ngForm" name="loanType">
@@ -95,9 +95,9 @@
               <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
               <nb-option value="2">Grade 2</nb-option>
             </nb-select> -->
-            <select [(ngModel)]="loanTypeModel.eligibleGrades" class="form-control" name="eligibleGrades">
+            <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
               <option value="">--Select all Eligible Grades--</option>
-              <option value="1">Grade 2</option>
+              <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
             </select>
             <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
               <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
@@ -146,7 +146,7 @@
           </div>
         </div>
 
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <div class="col-sm-3">
               <label for="">Interest Type</label>
             </div>
@@ -154,13 +154,14 @@
             <div class="col-sm-6">
               <nb-select placeholder="Select Interest Type" name="interestType" #interestType="ngModel"
               [(ngModel)]="loanTypeModel.interestType">
-                <nb-option value="1">Option 1</nb-option>
+                <nb-option value="1">--Select Interest Rate--</nb-option>
+                <nb-option *ngFor="let all interest of allInterestRates" [value]="interest.rate">{{interest.description}}</nb-option>
               </nb-select>
               <div *ngIf="interestType.invalid && (interestType.dirty || interestType.touched)" class="error">
                 <div *ngIf="interestType.errors.required">Interest Type is required</div>
               </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="form-group row">
           <div class="col-sm-3">
@@ -206,7 +207,7 @@
 <nb-card>
   <nb-card-body>
     <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allLoanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allloanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
   </nb-card-body>
 </nb-card>
 </div>

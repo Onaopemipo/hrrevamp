@@ -1,8 +1,8 @@
 import { TableColumn, TableAction } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
-import { Grade, LoanRepaymentLog, LoanType } from 'app/_services/service-proxies';
-import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, FetchLoanTypeByIdServiceProxy } from './../../../_services/service-proxies';
+import { Grade, InterestRate, LoanRepaymentLog, LoanType } from 'app/_services/service-proxies';
+import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, FetchLoanTypeByIdServiceProxy, GetInterestRateServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -44,11 +44,13 @@ export class LoanTypeComponent implements OnInit {
   loanSummary: IdNameObj [] = [];
   loanData: PostLoanDto = new PostLoanDto().clone();
   allloanTypes: LoanType [] = [];
+  createType: boolean = false;
+  allInterestRates: InterestRate [] = [];
 
   constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService, private repaymentService: LoadRepaymentScheduleServiceProxy,
     private updateLoanService: AddUpdateLoanTypeServiceProxy, private simulateService: SimulatePaymentServiceProxy,
     private summaryService: GetLoanSummaryServiceProxy, private fullpaymentService: PostFullRepaymentServiceProxy,
-    private loanTypeService: FetchLoanTypeByIdServiceProxy,) { }
+    private loanTypeService: FetchLoanTypeByIdServiceProxy,private interestService: GetInterestRateServiceProxy) { }
 
   ngOnInit(): void {
     this.getGrades();
@@ -57,15 +59,21 @@ export class LoanTypeComponent implements OnInit {
     this.getLoanTypes();
   }
 
+
+  createNewType(){
+    this.createType = true;
+  }
+
   async createLoanType(){
     const data = await this.updateLoanService.addUpdateLoanType(this.loanTypeModel).toPromise();
+    console.log(data)
     if(!data.hasError && data.result.isSuccessful){
-      this.alertMe.openModalAlert('Success', 'Loan Type has been created!', 'Dismiss');
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss');
       this.loanType.resetForm()
     }
 
     else {
-      this.alertMe.openModalAlert('Failure!', 'could not add typle', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Could not add Loan Type', 'Dismiss')
     }
   }
 
@@ -100,6 +108,13 @@ export class LoanTypeComponent implements OnInit {
     }
   }
 
+  async getInterestRate(){
+    const data = await this.interestService.getInterestRate().toPromise();
+    if(!data.hasError){
+      this.allInterestRates = data.result;
+    }
+  }
+
   async postFullPayment(){
     const data = await this.fullpaymentService.postFullRepayment(this.loanData).toPromise();
     if(!data.hasError){
@@ -112,7 +127,7 @@ export class LoanTypeComponent implements OnInit {
     if(!data.hasError){
       this.allloanTypes = data.result;
       this.dataCounter = data.totalRecord;
-      console.log(this.dataCounter)
+      console.log(this.dataCounter, this.allloanTypes)
     }
   }
 
