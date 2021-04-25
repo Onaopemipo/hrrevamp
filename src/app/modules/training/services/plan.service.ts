@@ -64,7 +64,7 @@ export class TrainingPlanService extends CrudService<ITrainingFilterDTO, MyTrain
   create(data: MyTrainingPlan) {
     return this.api.addUpdateTrainingPlan(data.id ? data.id : 0, data.name, data.description, true, data.startDate, data.endDate,
       data.trainingTypeId, data.specializationId,
-      data.vendorId, data.totalCost, data.costPerEmployee, data.selectedEmployees, transferToFile(data.attachment));
+      data.vendorId, data.totalCost, data.costPerEmployee, data.selectedEmployees, "");
   }
   delete(id: number) {
     return this.api.deleteTrainingPlan(id);

@@ -81,7 +81,7 @@ export class ExpenseRequestComponent extends BaseComponent<MyExpenseRequest, Obj
   successMessage = "Hello";
 
   ngOnInit(){
-    this.projectApi.getExpenseProject(0, '', '', false, '', '', 1, 100).subscribe(data => {
+    this.projectApi.getExpenseProject(0, '', '', false, '', '', 1, 100).subscribe((data:any) => {
       console.log(data);
       this.projects = data;
     });

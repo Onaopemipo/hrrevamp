@@ -5,15 +5,18 @@ import { ACTIONS, TableAction, TableActionEvent,ColumnTypes } from 'app/componen
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import {
   EmployeeDeploymentServiceProxy, DeploymentRegistrationPayLoad, CreateDeploymentViewModel,
-  DataServiceProxy, CommonServiceProxy, LGA, State, Location, AddUpdateDeploymentServiceProxy, IDTextViewModel, FileParameter, UploadDocumentServiceProxy, FetchDeploymentServiceProxy, DeploymentLog, IVwUserObj
+  DataServiceProxy, CommonServiceProxy, LGA, State, Location, AddUpdateDeploymentServiceProxy, IDTextViewModel, FileParameter, UploadDocumentServiceProxy, FetchDeploymentServiceProxy, DeploymentLog, IVwUserObj, DeploymentLogDTO
 } from '../../../_services/service-proxies';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { AuthenticationService } from 'app/_services/authentication.service';
-export class DeploymentWithStatus extends DeploymentLog implements IStatus {
-  deploymentList: DeploymentLog;
+import { inherits } from 'util';
 
-  constructor(leaveYear: DeploymentLog) {
+
+export class DeploymentWithStatus extends DeploymentLogDTO implements IStatus {
+  deploymentList: DeploymentLogDTO;
+
+  constructor(leaveYear: DeploymentLogDTO) {
     super(leaveYear);
     this.deploymentList = leaveYear;
 
@@ -48,7 +51,7 @@ export class DeploymentapplicationComponent implements OnInit {
   tableColumns = [
     { name: 'employeeName', title: 'EMPLOYEE' },
     { name: 'staffNumber', title: 'STAFF NO' },
-    { name: 'appointmentDate', title: 'APPOINTMENT DATE' ,type: ColumnTypes.Status},
+    { name: 'appointmentDate', title: 'APPOINTMENT DATE' ,type: ColumnTypes.Date},
     { name: 'request_by', title: 'REQUESTED BY' },
     { name: 'log_status', title: 'REQUESTED STATUS', type: ColumnTypes.Status },
   ];
@@ -85,7 +88,7 @@ export class DeploymentapplicationComponent implements OnInit {
     strStartDate: undefined,
     strEndDate: undefined,
     ReferenceId: undefined,
-    Code: null,
+    Code: "1",
     pageNumber: 1,
     pageSize: 10
 
@@ -222,23 +225,40 @@ export class DeploymentapplicationComponent implements OnInit {
     this._files = event;
     this.documentUpload();
   }
-  ngOnInit(): void {
-    this.getStatebyCountryId();
-    this.getalllocations();
-    this.getallDeploymentRequest();
-    this.getdocumentEntity();
-    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
-    this.DeploymentRegistration.is_new = true;
+  getUsersDetails() {
     this.AuthenService.getuser().then((usersdata: IVwUserObj[]) => {
       console.log(usersdata)
       if (usersdata.length > 0) {
         this.filterObj.employeeContractid = usersdata[0].employee_contract_id;
+        //console.log(this.filterObj)
+        this.getallDeploymentRequest();
       } else {
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
           this.AuthenService.clearusers();
         });
       }
     });
+  }
+  filtertabConf(is_approved = []) {   
+    let tabtittle = "";
+    is_approved.forEach(value => {
+      if (value.activeValue) tabtittle = value.tabTitle;
+    });
+   // console.log(tabtittle);
+    this.filterObj.Code = tabtittle == 'Due' ? "0" :
+      (tabtittle == 'Pending' ? "1" : (tabtittle == 'Approved' ? "2" : (tabtittle == 'Declined' ? "3" : "4")));
+    this.getallDeploymentRequest();
+  }
+
+  ngOnInit(): void {
+    this.getUsersDetails()
+    this.getStatebyCountryId();
+    this.getalllocations();
+  
+    this.getdocumentEntity();
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
+    this.DeploymentRegistration.is_new = true;
+
   }
   
 

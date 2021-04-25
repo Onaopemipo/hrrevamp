@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
-import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel, FetchDeploymentServiceProxy, DeploymentLog } from '../../../_services/service-proxies';
+import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { EmployeeDeploymentServiceProxy, CreateDeploymentViewModel, FetchDeploymentServiceProxy, DeploymentLog, DeploymentLogDTO } from '../../../_services/service-proxies';
 import { IStatus, MyColor } from 'app/components/status/models';
-export class deploymentWithStatus extends DeploymentLog implements IStatus {
-  deploymnt: DeploymentLog;
+export class deploymentWithStatus extends DeploymentLogDTO implements IStatus {
+  deploymnt: DeploymentLogDTO;
 
-  constructor(deploymnt: DeploymentLog) {
+  constructor(deploymnt: DeploymentLogDTO) {
     super(deploymnt);
     this.deploymnt = deploymnt;
 
@@ -41,12 +41,11 @@ enum TOP_ACTIONS {
 export class EmployeedeploymentmanagementComponent implements OnInit {
 
   tableColumns = [
-    { name: 'employeeContractid', title: 'EMPLOYEE' },
-    { name: 'employeeContractid', title: 'STAFF NO' },
-    { name: 'employeeContractid', title: 'APPOINTMENT DATE' },
-    { name: 'employeeContractid', title: 'PROBATION PERIOD' },
+    { name: 'employeeName', title: 'EMPLOYEE' },
+    { name: 'staffNumber', title: 'STAFF NO' },
+    { name: 'appointmentDate', title: 'APPOINTMENT DATE' ,type: ColumnTypes.Date},
     { name: 'request_by', title: 'REQUESTED BY' },
-    { name: 'log_status', title: 'REQUESTED STATUS' },
+    { name: 'log_status', title: 'REQUESTED STATUS', type: ColumnTypes.Status },
   ];
 
   tableActions: TableAction[] = [

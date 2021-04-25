@@ -3,7 +3,7 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, LoanTypeDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TABLE_ACTION {
@@ -64,7 +64,7 @@ export class LoanRequestComponent implements OnInit {
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
   loanForm: NgForm;
-  allLoanTypes: LoanType [] = [];
+  allLoanTypes: LoanTypeDTO [] = [];
   allInterestRates: InterestRate [] = [];
   loansCounter: number = 1;
   loading: boolean = true;
@@ -137,7 +137,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getLoanTypes(){
-    const data = await this.loanType.fetchLoanTypeById(1,1).toPromise();
+    const data = await this.loanType.fetchLoanTypeById(1).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       console.log('Here are the types', this.allLoanTypes)

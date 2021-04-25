@@ -8513,6 +8513,11 @@ export class GetTalentPoolServiceProxy {
      * @param companyProfile_MaxEmployeeCount (optional) 
      * @param companyProfile_SubscriptionPlanId (optional) 
      * @param companyProfile_SubscriptionPlanName (optional) 
+     * @param companyProfile_LastBillingDate (optional) 
+     * @param companyProfile_LastPaymentDate (optional) 
+     * @param companyProfile_LicenseUsage (optional) 
+     * @param companyProfile_IsActiveByAdmin (optional) 
+     * @param companyProfile_IsTrial (optional) 
      * @param companyProfile_FrequencyId (optional) 
      * @param companyProfile_TempRef (optional) 
      * @param companyProfile_ReferenceNumber (optional) 
@@ -8551,7 +8556,7 @@ export class GetTalentPoolServiceProxy {
      * @param errors (optional) 
      * @return Success
      */
-    fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
+    fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_LastBillingDate: Date | null | undefined, companyProfile_LastPaymentDate: Date | null | undefined, companyProfile_LicenseUsage: number | undefined, companyProfile_IsActiveByAdmin: boolean | undefined, companyProfile_IsTrial: boolean | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
         let url_ = this.baseUrl + "/api/CareerSuccession/GetTalentPool/FetchTalentPool?";
         if (user_id === null)
             throw new Error("The parameter 'user_id' cannot be null.");
@@ -8617,6 +8622,22 @@ export class GetTalentPoolServiceProxy {
             url_ += "CompanyProfile.SubscriptionPlanId=" + encodeURIComponent("" + companyProfile_SubscriptionPlanId) + "&";
         if (companyProfile_SubscriptionPlanName !== undefined && companyProfile_SubscriptionPlanName !== null)
             url_ += "CompanyProfile.SubscriptionPlanName=" + encodeURIComponent("" + companyProfile_SubscriptionPlanName) + "&";
+        if (companyProfile_LastBillingDate !== undefined && companyProfile_LastBillingDate !== null)
+            url_ += "CompanyProfile.LastBillingDate=" + encodeURIComponent(companyProfile_LastBillingDate ? "" + companyProfile_LastBillingDate.toJSON() : "") + "&";
+        if (companyProfile_LastPaymentDate !== undefined && companyProfile_LastPaymentDate !== null)
+            url_ += "CompanyProfile.LastPaymentDate=" + encodeURIComponent(companyProfile_LastPaymentDate ? "" + companyProfile_LastPaymentDate.toJSON() : "") + "&";
+        if (companyProfile_LicenseUsage === null)
+            throw new Error("The parameter 'companyProfile_LicenseUsage' cannot be null.");
+        else if (companyProfile_LicenseUsage !== undefined)
+            url_ += "CompanyProfile.LicenseUsage=" + encodeURIComponent("" + companyProfile_LicenseUsage) + "&";
+        if (companyProfile_IsActiveByAdmin === null)
+            throw new Error("The parameter 'companyProfile_IsActiveByAdmin' cannot be null.");
+        else if (companyProfile_IsActiveByAdmin !== undefined)
+            url_ += "CompanyProfile.IsActiveByAdmin=" + encodeURIComponent("" + companyProfile_IsActiveByAdmin) + "&";
+        if (companyProfile_IsTrial === null)
+            throw new Error("The parameter 'companyProfile_IsTrial' cannot be null.");
+        else if (companyProfile_IsTrial !== undefined)
+            url_ += "CompanyProfile.IsTrial=" + encodeURIComponent("" + companyProfile_IsTrial) + "&";
         if (companyProfile_Password === undefined || companyProfile_Password === null)
             throw new Error("The parameter 'companyProfile_Password' must be defined and cannot be null.");
         else
@@ -16430,7 +16451,7 @@ export class FetchDeploymentServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    fetchDeployment(companyID: number | undefined, subID: number | undefined, employeeContractid: number | undefined, name: string | null | undefined, iD: number | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DeploymentLogIListApiResult> {
+    fetchDeployment(companyID: number | undefined, subID: number | undefined, employeeContractid: number | undefined, name: string | null | undefined, iD: number | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DeploymentLogDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/Deployment/FetchDeployment/FetchDeployment?";
         if (companyID === null)
             throw new Error("The parameter 'companyID' cannot be null.");
@@ -16483,14 +16504,14 @@ export class FetchDeploymentServiceProxy {
                 try {
                     return this.processFetchDeployment(<any>response_);
                 } catch (e) {
-                    return <Observable<DeploymentLogIListApiResult>><any>_observableThrow(e);
+                    return <Observable<DeploymentLogDTOIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<DeploymentLogIListApiResult>><any>_observableThrow(response_);
+                return <Observable<DeploymentLogDTOIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processFetchDeployment(response: HttpResponseBase): Observable<DeploymentLogIListApiResult> {
+    protected processFetchDeployment(response: HttpResponseBase): Observable<DeploymentLogDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -16501,7 +16522,7 @@ export class FetchDeploymentServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = DeploymentLogIListApiResult.fromJS(resultData200);
+            result200 = DeploymentLogDTOIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -16526,7 +16547,7 @@ export class FetchDeploymentServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<DeploymentLogIListApiResult>(<any>null);
+        return _observableOf<DeploymentLogDTOIListApiResult>(<any>null);
     }
 }
 
@@ -36057,6 +36078,11 @@ export class RetirementServiceProxy {
      * @param companyProfile_MaxEmployeeCount (optional) 
      * @param companyProfile_SubscriptionPlanId (optional) 
      * @param companyProfile_SubscriptionPlanName (optional) 
+     * @param companyProfile_LastBillingDate (optional) 
+     * @param companyProfile_LastPaymentDate (optional) 
+     * @param companyProfile_LicenseUsage (optional) 
+     * @param companyProfile_IsActiveByAdmin (optional) 
+     * @param companyProfile_IsTrial (optional) 
      * @param companyProfile_FrequencyId (optional) 
      * @param companyProfile_TempRef (optional) 
      * @param companyProfile_ReferenceNumber (optional) 
@@ -36095,7 +36121,7 @@ export class RetirementServiceProxy {
      * @param errors (optional) 
      * @return Success
      */
-    getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
+    getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_LastBillingDate: Date | null | undefined, companyProfile_LastPaymentDate: Date | null | undefined, companyProfile_LicenseUsage: number | undefined, companyProfile_IsActiveByAdmin: boolean | undefined, companyProfile_IsTrial: boolean | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/GetRetirmentByEmployeeId?";
         if (user_id === null)
             throw new Error("The parameter 'user_id' cannot be null.");
@@ -36161,6 +36187,22 @@ export class RetirementServiceProxy {
             url_ += "CompanyProfile.SubscriptionPlanId=" + encodeURIComponent("" + companyProfile_SubscriptionPlanId) + "&";
         if (companyProfile_SubscriptionPlanName !== undefined && companyProfile_SubscriptionPlanName !== null)
             url_ += "CompanyProfile.SubscriptionPlanName=" + encodeURIComponent("" + companyProfile_SubscriptionPlanName) + "&";
+        if (companyProfile_LastBillingDate !== undefined && companyProfile_LastBillingDate !== null)
+            url_ += "CompanyProfile.LastBillingDate=" + encodeURIComponent(companyProfile_LastBillingDate ? "" + companyProfile_LastBillingDate.toJSON() : "") + "&";
+        if (companyProfile_LastPaymentDate !== undefined && companyProfile_LastPaymentDate !== null)
+            url_ += "CompanyProfile.LastPaymentDate=" + encodeURIComponent(companyProfile_LastPaymentDate ? "" + companyProfile_LastPaymentDate.toJSON() : "") + "&";
+        if (companyProfile_LicenseUsage === null)
+            throw new Error("The parameter 'companyProfile_LicenseUsage' cannot be null.");
+        else if (companyProfile_LicenseUsage !== undefined)
+            url_ += "CompanyProfile.LicenseUsage=" + encodeURIComponent("" + companyProfile_LicenseUsage) + "&";
+        if (companyProfile_IsActiveByAdmin === null)
+            throw new Error("The parameter 'companyProfile_IsActiveByAdmin' cannot be null.");
+        else if (companyProfile_IsActiveByAdmin !== undefined)
+            url_ += "CompanyProfile.IsActiveByAdmin=" + encodeURIComponent("" + companyProfile_IsActiveByAdmin) + "&";
+        if (companyProfile_IsTrial === null)
+            throw new Error("The parameter 'companyProfile_IsTrial' cannot be null.");
+        else if (companyProfile_IsTrial !== undefined)
+            url_ += "CompanyProfile.IsTrial=" + encodeURIComponent("" + companyProfile_IsTrial) + "&";
         if (companyProfile_Password === undefined || companyProfile_Password === null)
             throw new Error("The parameter 'companyProfile_Password' must be defined and cannot be null.");
         else
@@ -43110,6 +43152,11 @@ export class CompanyDTO implements ICompanyDTO {
     maxEmployeeCount!: number;
     subscriptionPlanId!: number;
     subscriptionPlanName!: string | undefined;
+    lastBillingDate!: Date | undefined;
+    lastPaymentDate!: Date | undefined;
+    licenseUsage!: number;
+    isActiveByAdmin!: boolean;
+    isTrial!: boolean;
     password!: string;
     frequencyId!: number;
     tempRef!: string | undefined;
@@ -43143,6 +43190,11 @@ export class CompanyDTO implements ICompanyDTO {
             this.maxEmployeeCount = _data["maxEmployeeCount"];
             this.subscriptionPlanId = _data["subscriptionPlanId"];
             this.subscriptionPlanName = _data["subscriptionPlanName"];
+            this.lastBillingDate = _data["lastBillingDate"] ? new Date(_data["lastBillingDate"].toString()) : <any>undefined;
+            this.lastPaymentDate = _data["lastPaymentDate"] ? new Date(_data["lastPaymentDate"].toString()) : <any>undefined;
+            this.licenseUsage = _data["licenseUsage"];
+            this.isActiveByAdmin = _data["isActiveByAdmin"];
+            this.isTrial = _data["isTrial"];
             this.password = _data["password"];
             this.frequencyId = _data["frequencyId"];
             this.tempRef = _data["tempRef"];
@@ -43176,6 +43228,11 @@ export class CompanyDTO implements ICompanyDTO {
         data["maxEmployeeCount"] = this.maxEmployeeCount;
         data["subscriptionPlanId"] = this.subscriptionPlanId;
         data["subscriptionPlanName"] = this.subscriptionPlanName;
+        data["lastBillingDate"] = this.lastBillingDate ? this.lastBillingDate.toISOString() : <any>undefined;
+        data["lastPaymentDate"] = this.lastPaymentDate ? this.lastPaymentDate.toISOString() : <any>undefined;
+        data["licenseUsage"] = this.licenseUsage;
+        data["isActiveByAdmin"] = this.isActiveByAdmin;
+        data["isTrial"] = this.isTrial;
         data["password"] = this.password;
         data["frequencyId"] = this.frequencyId;
         data["tempRef"] = this.tempRef;
@@ -43209,6 +43266,11 @@ export interface ICompanyDTO {
     maxEmployeeCount: number;
     subscriptionPlanId: number;
     subscriptionPlanName: string | undefined;
+    lastBillingDate: Date | undefined;
+    lastPaymentDate: Date | undefined;
+    licenseUsage: number;
+    isActiveByAdmin: boolean;
+    isTrial: boolean;
     password: string;
     frequencyId: number;
     tempRef: string | undefined;
@@ -63483,6 +63545,212 @@ export interface IDeploymentLogIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: DeploymentLog[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class DeploymentLogDTO implements IDeploymentLogDTO {
+    employeeContractid!: number;
+    employeeid!: number;
+    employeeName!: string | undefined;
+    staffNumber!: number;
+    appointmentDate!: Date;
+    probationPeriod!: string | undefined;
+    refNo!: string | undefined;
+    comment!: string | undefined;
+    request_by!: string | undefined;
+    is_new!: boolean;
+    last_deployment_date!: Date;
+    current_location_id!: number;
+    current_school_id!: number;
+    current_ministry_id!: number;
+    justification!: string | undefined;
+    requested_location_id!: number;
+    requested_school_id!: number;
+    requested_ministry_id!: number;
+    log_status!: number;
+    bulkaction_id!: number;
+    request_date!: Date;
+    effective_date!: Date;
+    is_treated!: boolean;
+    fileName!: string | undefined;
+    filePath!: string | undefined;
+
+    constructor(data?: IDeploymentLogDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employeeContractid = _data["employeeContractid"];
+            this.employeeid = _data["employeeid"];
+            this.employeeName = _data["employeeName"];
+            this.staffNumber = _data["staffNumber"];
+            this.appointmentDate = _data["appointmentDate"] ? new Date(_data["appointmentDate"].toString()) : <any>undefined;
+            this.probationPeriod = _data["probationPeriod"];
+            this.refNo = _data["refNo"];
+            this.comment = _data["comment"];
+            this.request_by = _data["request_by"];
+            this.is_new = _data["is_new"];
+            this.last_deployment_date = _data["last_deployment_date"] ? new Date(_data["last_deployment_date"].toString()) : <any>undefined;
+            this.current_location_id = _data["current_location_id"];
+            this.current_school_id = _data["current_school_id"];
+            this.current_ministry_id = _data["current_ministry_id"];
+            this.justification = _data["justification"];
+            this.requested_location_id = _data["requested_location_id"];
+            this.requested_school_id = _data["requested_school_id"];
+            this.requested_ministry_id = _data["requested_ministry_id"];
+            this.log_status = _data["log_status"];
+            this.bulkaction_id = _data["bulkaction_id"];
+            this.request_date = _data["request_date"] ? new Date(_data["request_date"].toString()) : <any>undefined;
+            this.effective_date = _data["effective_date"] ? new Date(_data["effective_date"].toString()) : <any>undefined;
+            this.is_treated = _data["is_treated"];
+            this.fileName = _data["fileName"];
+            this.filePath = _data["filePath"];
+        }
+    }
+
+    static fromJS(data: any): DeploymentLogDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new DeploymentLogDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employeeContractid"] = this.employeeContractid;
+        data["employeeid"] = this.employeeid;
+        data["employeeName"] = this.employeeName;
+        data["staffNumber"] = this.staffNumber;
+        data["appointmentDate"] = this.appointmentDate ? this.appointmentDate.toISOString() : <any>undefined;
+        data["probationPeriod"] = this.probationPeriod;
+        data["refNo"] = this.refNo;
+        data["comment"] = this.comment;
+        data["request_by"] = this.request_by;
+        data["is_new"] = this.is_new;
+        data["last_deployment_date"] = this.last_deployment_date ? this.last_deployment_date.toISOString() : <any>undefined;
+        data["current_location_id"] = this.current_location_id;
+        data["current_school_id"] = this.current_school_id;
+        data["current_ministry_id"] = this.current_ministry_id;
+        data["justification"] = this.justification;
+        data["requested_location_id"] = this.requested_location_id;
+        data["requested_school_id"] = this.requested_school_id;
+        data["requested_ministry_id"] = this.requested_ministry_id;
+        data["log_status"] = this.log_status;
+        data["bulkaction_id"] = this.bulkaction_id;
+        data["request_date"] = this.request_date ? this.request_date.toISOString() : <any>undefined;
+        data["effective_date"] = this.effective_date ? this.effective_date.toISOString() : <any>undefined;
+        data["is_treated"] = this.is_treated;
+        data["fileName"] = this.fileName;
+        data["filePath"] = this.filePath;
+        return data; 
+    }
+
+    clone(): DeploymentLogDTO {
+        const json = this.toJSON();
+        let result = new DeploymentLogDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDeploymentLogDTO {
+    employeeContractid: number;
+    employeeid: number;
+    employeeName: string | undefined;
+    staffNumber: number;
+    appointmentDate: Date;
+    probationPeriod: string | undefined;
+    refNo: string | undefined;
+    comment: string | undefined;
+    request_by: string | undefined;
+    is_new: boolean;
+    last_deployment_date: Date;
+    current_location_id: number;
+    current_school_id: number;
+    current_ministry_id: number;
+    justification: string | undefined;
+    requested_location_id: number;
+    requested_school_id: number;
+    requested_ministry_id: number;
+    log_status: number;
+    bulkaction_id: number;
+    request_date: Date;
+    effective_date: Date;
+    is_treated: boolean;
+    fileName: string | undefined;
+    filePath: string | undefined;
+}
+
+export class DeploymentLogDTOIListApiResult implements IDeploymentLogDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: DeploymentLogDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IDeploymentLogDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(DeploymentLogDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): DeploymentLogDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new DeploymentLogDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): DeploymentLogDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new DeploymentLogDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IDeploymentLogDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: DeploymentLogDTO[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
