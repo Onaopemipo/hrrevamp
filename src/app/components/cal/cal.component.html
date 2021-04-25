@@ -89,10 +89,11 @@
                             </table>
                         </div> -->
 
-
+                        <!-- (addEvent)="addEvent($event)" -->
 
 
                 <td colspan="10">
+                    <button nbButton [nbPopover]="selectedDay" ></button>
                     <div class="row " *ngIf='selectedDay'>
                         <div class="col s12 m6">
                             <div style="display: flex; text-align: center; justify-content: center; font-size: larger; font-weight: bold;
@@ -114,7 +115,7 @@
                                 </thead>
 
                                 <tbody>
-
+                                  
 
                                     <tr *ngFor='let event of selectedDay.events; index as i' style="padding: 0.5rem;">
                                         <td style="margin-right: 0.5rem;">
