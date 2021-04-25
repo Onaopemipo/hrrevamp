@@ -28,7 +28,7 @@ export class PromotionComponent implements OnInit {
 
   newPromotion = new Sp_FetchEligibleEmployees().clone();
   promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
-  promotionList: Sp_FetchEligibleEmployees [] = [];
+  promotionList: PromotionEligibilityViewModel [] = [];
   submitList: boolean = false;
   saveList: boolean = false;
   Submit: string = "Submit";
@@ -132,7 +132,7 @@ export class PromotionComponent implements OnInit {
         if (data.data) {
           this.eligibilityBucket = true;
           this.promotionBucketList = JSON.parse(data.data);
-          this.promotionList = this.promotionBucketList.eligibles;
+       //   this.promotionList = this.promotionBucketList.eligibles;
           this.showTableAction = true;
           this.tableActions = [
             { name: ACTIONS.VIEW, label: 'View' },
