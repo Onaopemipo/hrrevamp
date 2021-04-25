@@ -129,7 +129,7 @@ export class PromotioneligibilityComponent implements OnInit {
   async fetchEligibility(){
     const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
     if(!data.hasError){
-      this.eligibilityList = data.result;
+     // this.eligibilityList = data.result;
 
       console.log(this.eligibilityList)
     }
