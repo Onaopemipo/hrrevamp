@@ -29,7 +29,7 @@ MyRequest>implements OnInit {
   
 
   topActionButtons = [
-    { name: TOP_ACTIONS.ADD_DEPARTMENT, label: 'Add Request Type', icon: '', outline: false },
+    { name: TOP_ACTIONS.ADD_DEPARTMENT, label: 'Add New Request Type', icon: '', outline: false },
   ];
 
   TOP_ACTIONS = TOP_ACTIONS;

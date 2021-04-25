@@ -164,6 +164,40 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Asset Management',
+    icon: 'assets/icons/TimeandAttendance.jpg',
+    children: [
+      {
+        title: 'Asset Categories',
+        link: ''
+      },
+      {
+        title: 'Asset Types',
+        link: ''
+      },
+      {
+        title: 'Asset Make',
+        link: ''
+      },
+      {
+        title: 'Asset Status',
+        link: ''
+      },
+      {
+        title: 'Asset',
+        link: ''
+      },
+      {
+        title: 'Asset Request',
+        link: ''
+      },
+      {
+        title: 'Asset Request(Admin)',
+        link: ''
+      }
+    ]
+  },
+  {
     title: 'Time and Attendance',
     icon: 'assets/icons/TimeandAttendance.jpg',
     children: [
@@ -445,7 +479,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {title: 'Job Role', link: '/setup/job-role'},
       {title: 'Salary Scale', link: '/setup/salary-scale'},
       {title: 'Request Type', link: '/setup/request'},
-      {title: 'Events', link: '/setup/event'},
+      // {title: 'Events', link: '/setup/event'},
     ]
   },
 

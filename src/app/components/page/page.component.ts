@@ -22,6 +22,7 @@ export class PageComponent implements OnInit {
     actionName: '1',
   };
   data = {};
+  @Input() errors = {};
   @Input() tableActions: TableAction[] = [];
   @Output() tableActionClicked = new EventEmitter<TableActionEvent>();
   @Input() set emptyConfig(val) {

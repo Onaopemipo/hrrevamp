@@ -17,7 +17,7 @@ import { AddUpdateDepartmentServiceProxy,     AddUpdatePositionServiceProxy,
     AddUpdateEventsServiceProxy,
     GetAllEventsServiceProxy,
     DeleteEventsServiceProxy,
-  GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy, GetAllJobRolesServiceProxy, AddUpdateJobRolesServiceProxy, DeleteJobRoleServiceProxy, SalaryscaleServiceProxy, GradeLevelStepServiceProxy } from 'app/_services/service-proxies';
+  GetDepartmentByIdServiceProxy, GetLocationByIdServiceProxy, GetAllJobRolesServiceProxy, AddUpdateJobRolesServiceProxy, DeleteJobRoleServiceProxy, SalaryscaleServiceProxy, GradeLevelStepServiceProxy, CreateUpdateRequestTypeServiceProxy } from 'app/_services/service-proxies';
 import { ApiService } from './services/api.service';
 import { PageService } from './services/page.service';
 // import { BaseComponent } from './base/base.component';
@@ -93,6 +93,7 @@ import { DepartmentsService } from './services/departments.service';
     GetAllLocationsServiceProxy,
     GetLocationByIdServiceProxy,
     AddUpdateLocationServiceProxy,
+    CreateUpdateRequestTypeServiceProxy,
     SalaryScaleService,
     SalaryGradeService,
     GradeStepService,

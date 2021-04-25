@@ -13,7 +13,7 @@
         <nb-card style="margin-top: 15px;">
             <nb-card-body>
         
-                <nb-tabset>
+                <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">
                     <nb-tab tabTitle="Due">
         
                     </nb-tab>

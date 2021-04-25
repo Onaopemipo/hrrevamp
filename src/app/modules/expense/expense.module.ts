@@ -31,6 +31,7 @@ import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, Fetc
     GetExpenseTypesServiceProxy,
     GetExpenseProjectServiceProxy,
     GetExpenseProjectServiceProxy,
+    ExpenseRequestService,
   ],
   imports: [
     CommonModule,

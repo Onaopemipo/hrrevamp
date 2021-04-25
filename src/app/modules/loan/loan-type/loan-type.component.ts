@@ -3,7 +3,9 @@ import { TableColumn, TableAction, TableActionEvent } from './../../../component
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
 import { Grade, InterestRate, LoanRepaymentLog, LoanType, DataServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
-import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, FetchLoanTypeByIdServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, IDTextViewModelIListApiResult } from './../../../_services/service-proxies';
+import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy,
+  SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy,
+  FetchLoanTypeByIdServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, IDTextViewModelIListApiResult } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -34,18 +36,12 @@ export class LoanTypeComponent implements OnInit {
   ]
 
   tableActionClicked(event: TableActionEvent){
-    // if(event.name==TABLE_ACTION.DELETE){
-    //   this.showdeleteModal = true
-    //   }
-    //   if(event.name==TABLE_ACTION.EDIT){
-    //     this.router.navigateByUrl('/payroll/editpayment')
-    //   }
      if(event.name==TABLE_ACTION.VIEW){
-      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id)
+      this.router.navigateByUrl('/' + event.data.id)
        }
 
-       else if(event.name==TABLE_ACTION.VIEW){
-        this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id)
+       else if(event.name==TABLE_ACTION.EDIT){
+        this.router.navigateByUrl('/' + event.data.id)
          }
   }
 
@@ -64,6 +60,7 @@ export class LoanTypeComponent implements OnInit {
   allLoanTypes: LoanType [] = [];
   createType: boolean = false;
   allInterestRates: IDTextViewModel [] = [];
+  eligibilityStatus: IDTextViewModel [] = [];
 
   constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService, private repaymentService: LoadRepaymentScheduleServiceProxy,
     private updateLoanService: AddUpdateLoanTypeServiceProxy, private simulateService: SimulatePaymentServiceProxy,
@@ -82,6 +79,18 @@ export class LoanTypeComponent implements OnInit {
 
   createNewType(){
     this.createType = true;
+  }
+
+  loanEligibility(e){
+    // alert(e.target.value);
+    console.log(e.target.value);
+  }
+
+  async fetchEligibilityStatus(){
+    const data = await this.dataService.loanEligibleStatus().toPromise();
+    if(!data.hasError){
+      this.eligibilityStatus = data.result;
+    }
   }
 
   async createLoanType(){

@@ -95,13 +95,18 @@
               <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
               <nb-option value="2">Grade 2</nb-option>
             </nb-select> -->
-            <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
+            <!-- <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
               <option value="">--Select all Eligible Grades--</option>
               <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
             </select>
             <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
               <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
-            </div>
+            </div> -->
+            <nb-radio-group name="eligibleGrades" #eligibleGrades="ngModel" [(ngModel)]="loanTypeModel.eligibleGrades" (valueChange)="loanEligibility($event)">
+              <nb-radio [value]="planA">All Grades</nb-radio>
+              <nb-radio [value]="planB">Selected Grades</nb-radio>
+            </nb-radio-group>
+
           </div>
         </div>
 

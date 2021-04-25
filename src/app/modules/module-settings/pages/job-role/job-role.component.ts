@@ -49,7 +49,7 @@ export class JobRoleComponent extends BaseComponent<ModelType, FilterType, Model
   requiredButton = [{name: 'newTraining', label: 'New Job Role', icon: 'plus'}];
   formConfig: FormConfig = {
     fields: [
-      {name: 'name', label: 'Name', type: FORM_TYPES.text},
+      {name: 'name', label: 'Name', type: FORM_TYPES.text, validator: {presence: true}},
       {name: 'code', label: 'Code', type: FORM_TYPES.text},
       {name: 'amount', label: 'Basic Salary for this Job role', type: FORM_TYPES.amount},
       {name: 'parent_job_role_id', label: 'Parent Job Role', singleSelection: true,

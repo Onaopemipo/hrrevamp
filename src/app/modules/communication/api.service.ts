@@ -17,8 +17,8 @@ export class ApiService {
       recipient: email.receiver,
       cc_recipient: '',
       content: email.messageBody,
-      date_sent: email.dateSent,
-      status_id: 1
+      date_sent: email.dateToSend,
+      status_id: email.isActive === true ? 1 : 0
     }))));
   }
   constructor(

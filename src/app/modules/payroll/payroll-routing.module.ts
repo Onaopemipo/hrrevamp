@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PayrollcomponentComponent } from './payrollcomponent/payrollcomponent.component';
 import { PaymentcreateComponent } from './paymentcreate/paymentcreate.component';
-import { InstitutionalmanagementComponent } from './institutionalmanagement/institutionalmanagement.component';
+import { InstitutionalmanagementComponent, PayrollElementComponent, PayrollTypeComponent } from './institutionalmanagement/institutionalmanagement.component';
 import { PaymenysetupComponent } from './paymenysetup/paymenysetup.component';
 import { PayelementComponent } from './payelement/payelement.component';
 import { PayrollComponent } from './payroll.component';
@@ -29,6 +29,10 @@ const routes: Routes = [
     component: PayrollComponent,
     children: [
       {
+        path: 'types',
+        component: PayrollTypeComponent,
+      },
+      {
         path: 'payee', component:PayrollcomponentComponent  
       },
       {
@@ -41,7 +45,7 @@ const routes: Routes = [
         path: 'paymentsetup', component:PaymenysetupComponent
       },
       {
-        path: 'payelement', component:PayelementComponent
+        path: 'payelement', component: PayrollElementComponent
       }
       ,
       {

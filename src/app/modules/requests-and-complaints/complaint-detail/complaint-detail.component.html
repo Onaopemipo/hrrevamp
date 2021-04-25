@@ -29,7 +29,7 @@
     </div>
   </div>
   <h5>{{ selectedComplaint.title }}</h5>
-  <div>{{ selectedComplaint.description }}</div>
+  <div [innerHTML]="selectedComplaint.description"></div>
   <!-- <div class="actions">
     <a (click)="replyComplaint()">Reply</a>
     <a (click)="approveComplaint()">Approve</a>

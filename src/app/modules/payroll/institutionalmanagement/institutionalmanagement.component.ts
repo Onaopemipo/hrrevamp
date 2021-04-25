@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'app/components/base/base.component';
-import { FormConfig, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
+import { FormConfig, FormField, FORM_TYPES } from 'app/components/custom-form/custom-form.component';
+import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 import { ColumnTypes, TableAction, TableActionEvent, TableColumn } from 'app/components/tablecomponent/models';
 import { MyAssetCategory } from 'app/modules/asset-management/services/asset-category.service';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ListResult } from 'app/_services/base-api.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { Observable } from 'rxjs';
-import { CommonBaseService, MyPayrollInstitutionFilter, MyPayrollInstitutionService, MyPayrollInstutionModel, PayrollApiModelClass } from '../services/common.service';
+import { CommonBaseService, MyPayElementService, MyPayrollElementModel, MyPayrollInstitutionFilter, MyPayrollInstitutionService, MyPayrollInstutionModel, MyPayrollType, MyPayrollTypeService, PayElementFilter, PayrollApiModelClass, PayrollTypeFilter } from '../services/common.service';
 
 enum DEFAULT_TABLE_ACTIONS{ edit = 'edit', delete = 'delete' }
 
@@ -148,6 +149,111 @@ export class InstitutionalmanagementComponent extends PayrollBaseComponent<
   filter: MyPayrollInstitutionFilter = {};
   getNewEditingData(): MyPayrollInstutionModel {
     return new MyPayrollInstutionModel();
+  }
+
+}
+
+
+@Component({
+  selector: 'ngx-institutionalmanagemen',
+  templateUrl: './institutionalmanagement.component.html',
+  styleUrls: ['./institutionalmanagement.component.scss']
+})
+export class PayrollTypeComponent extends PayrollBaseComponent<
+    PayrollTypeFilter, MyPayrollType> {
+  getFormConfig(): FormConfig {
+    throw new Error('Method not implemented.');
+  }
+  constructor(
+    protected api: MyPayrollTypeService,
+    protected confirmBoxService: ConfirmBoxService,
+    protected alertService: AlertserviceService,
+  ) {
+    super(confirmBoxService);
+  }
+  objectName = 'Payroll Type';
+  getTableColumns(): TableColumn[] {
+    return [
+      { name: 'name', title: 'NAME' },
+      { name: 'frequencyRule', title: 'Frequency' },
+      { name: 'firstPeriodEndDate', title: 'Period' },
+      { name: 'noOfYears', title: 'No of years' },
+      { name: 'effectiveDate', title: 'Effective Date' },
+      { name: 'negativePaymentAllowed', title: 'Negative Payment Allowed' },
+      { name: 'code', title: 'Code' },
+      // {name: 'name', title: 'Name'},
+      // {name: 'dateCreated', title: 'Date Modified', type: ColumnTypes.Date},
+      // {name: 'name', title: 'Status', type: ColumnTypes.Status},
+    ];
+  }
+  formConfig: FormConfig = {
+    fields: [
+      {name: 'name', label: 'Name', type: FORM_TYPES.text},
+      {name: 'frequencyRuleId', label: 'Frequency', type: FORM_TYPES.select, choice_name: ChoiceName.payrollFrequencies, singleSelection: true},
+      {name: 'firstPeriodEndDate', label: 'First Period Date', type: FORM_TYPES.date},
+      {name: 'noOfYears', label: 'No of Years', type: FORM_TYPES.text},
+      {name: 'effectiveDate', label: 'Effected Date', type: FORM_TYPES.date},
+      {name: 'negativePaymentAllowed', label: 'Negative Payment Allowed', type: FORM_TYPES.checkbox},
+      {name: 'code', label: 'Code', type: FORM_TYPES.text},
+    ]
+  };
+  filter: PayrollTypeFilter = {};
+  getNewEditingData(): MyPayrollType {
+    return new MyPayrollType();
+  }
+
+}
+
+@Component({
+  selector: 'ngx-institutionalmanagemenl',
+  templateUrl: './institutionalmanagement.component.html',
+  styleUrls: ['./institutionalmanagement.component.scss']
+})
+export class PayrollElementComponent extends PayrollBaseComponent<
+PayElementFilter, MyPayrollElementModel> {
+  getFormConfig(): FormConfig {
+    throw new Error('Method not implemented.');
+  }
+  constructor(
+    protected api: MyPayElementService,
+    protected confirmBoxService: ConfirmBoxService,
+    protected alertService: AlertserviceService,
+  ) {
+    super(confirmBoxService);
+  }
+  objectName = 'Payroll Element';
+  getTableColumns(): TableColumn[] {
+    return [
+      { name: 'name', title: 'NAME' },
+      { name: 'frequencyRule', title: 'Frequency' },
+      { name: 'firstPeriodEndDate', title: 'Period' },
+      { name: 'noOfYears', title: 'No of years' },
+      { name: 'effectiveDate', title: 'Effective Date' },
+      { name: 'negativePaymentAllowed', title: 'Negative Payment Allowed' },
+      { name: 'code', title: 'Code' },
+      // {name: 'name', title: 'Name'},
+      // {name: 'dateCreated', title: 'Date Modified', type: ColumnTypes.Date},
+      // {name: 'name', title: 'Status', type: ColumnTypes.Status},
+    ];
+  }
+  formConfig: FormConfig = {
+    fields: [
+      {name: 'name', label: 'Name', type: FORM_TYPES.text},
+      {name: 'element_category_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
+      {name: 'institution_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
+      {name: 'is_reocurring', label: 'Is Reocurring', type: FORM_TYPES.checkbox},
+      {name: 'is_tax_deduct', label: 'Is Tax Deduct', type: FORM_TYPES.checkbox},
+      {name: 'is_variable', label: 'Is Variable', type: FORM_TYPES.checkbox},
+      {name: 'amount', label: 'Amount', type: FORM_TYPES.amount},
+      {name: 'amount', label: 'Amount', type: FORM_TYPES.amount},
+      {name: 'amount', label: 'Amount', type: FORM_TYPES.number},
+      {name: 'amount', label: 'Amount', type: FORM_TYPES.number},
+      // {name: 'range', label: 'Date', type: FORM_TYPES.date_range,}
+    ]
+  };
+  filter: PayElementFilter = {};
+  getNewEditingData(): MyPayrollElementModel {
+    return new MyPayrollElementModel();
   }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
-import { AddRequestViewModel, AddUpdateRequestTypeServiceProxy, DeleteRequestTypeServiceProxy, GetAllRequestTypeServiceProxy, GetRequestTypeByIdServiceProxy, IMessageOut, LocationDTO, ManageEventDTO, ManageLocationDTO, ManageRequestTypeDTO, Request, RequestTypeDTO } from 'app/_services/service-proxies';
+import { AddRequestViewModel, AddUpdateRequestTypeServiceProxy, CreateUpdateRequestTypeServiceProxy, DeleteRequestTypeServiceProxy, GetAllRequestTypeServiceProxy, GetRequestTypeByIdServiceProxy, IMessageOut, LocationDTO, ManageEventDTO, ManageLocationDTO, ManageRequestTypeDTO, Request, RequestTypeDTO } from 'app/_services/service-proxies';
 import { of, Subject } from 'rxjs';
 import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.service';
 import { MyEvent } from './events.service';
@@ -55,15 +55,14 @@ export class MyRequest implements IStatus {
   }
 
   toManage() {
-    return new AddRequestViewModel({
+    return new ManageRequestTypeDTO({
       name: this.Name,
       id: this.id,
       code: this.Code,
-      enable_step_notify: this.Enable_Step,
-      is_system_requirement: this.isSystem,
-      typeId: '',
-      approval: '',
-      processid: 0,
+      // enable_step_notify: this.Enable_Step,
+      is_SystemRequirment: this.isSystem,
+      isActive: true,
+      is_StepNotify: true,
       // act: this.is_Active
     });
   }
@@ -88,7 +87,7 @@ export class RequestService implements CrudService<RequestFilter, MyRequest, MyR
   pageSize = DEFAULT_PAGE_SIZE;
   constructor(
     private api_get: GetRequestTypeByIdServiceProxy,
-    private api_create: AddUpdateRequestTypeServiceProxy,
+    private api_create: CreateUpdateRequestTypeServiceProxy,
     private api_list: GetAllRequestTypeServiceProxy,
     private api_delete: DeleteRequestTypeServiceProxy,
   ) { }
@@ -114,7 +113,7 @@ export class RequestService implements CrudService<RequestFilter, MyRequest, MyR
   }
 
   create(data: MyRequest) {
-    return this.api_create.addUpdateRequestType(data.toManage());
+    return this.api_create.createUpdateRequestType(data.toManage());
   }
 
   init() { }
