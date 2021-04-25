@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Department, CommonServiceProxy } from 'app/_services/service-proxies';
 import { BudgetDTO, DisbursementBudgetItem, AddUpdateBudgetServiceProxy, ManageBudgetDTO, BudgetItemDTO, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, DisbursementBudgetItemAllocation, FetchAllBudgetsServiceProxy } from './../../../../_services/service-proxies';
@@ -14,8 +15,8 @@ import { NgForm } from '@angular/forms';
 export class SetupComponent implements OnInit {
 
   budget: ManageBudgetDTO = new ManageBudgetDTO;
-  budgetItem: ManageBudgetItemDTO = new ManageBudgetItemDTO;
-  disBudgetItem: DisbursementBudgetItem []= [];
+  budgetItem: BudgetItemDTO = new BudgetItemDTO;
+  // disBudgetItem: DisbursementBudgetItem []= [];
   allDepartments: Department [] = [];
   myBudget: BudgetDTO[] = [];
   addItemModal: boolean = false;
@@ -24,7 +25,7 @@ export class SetupComponent implements OnInit {
   // addedDepartments: DisbursementBudgetItemAllocation [] = [];
 
   constructor(private budgetService: AddUpdateBudgetServiceProxy, private allBudgets: FetchAllBudgetsServiceProxy,  private alertMe: AlertserviceService,
-    private alert: AlertserviceService, private common: CommonServiceProxy,
+    private alert: AlertserviceService, private common: CommonServiceProxy, private router: Router,
     private budgetItemUpdate: AddUpdateBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
@@ -46,8 +47,8 @@ export class SetupComponent implements OnInit {
 }
   async addBudget(){
   const data = await this.budgetService.addUpdateBudget(this.budget).toPromise();
-  if(!data.hasError){
-  this.alert.openModalAlert('Budget Created', 'Budget Added Successfully', 'Dismiss');
+  if(!data.hasError && data.result.isSuccessful == true){
+  this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss');
   this.page = 2;
   } else {
     // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
@@ -100,6 +101,15 @@ export class SetupComponent implements OnInit {
     }
   }
 
+  // addDepartmentAllocations() {
+  //   let myAllocations = new DisbursementBudgetItemAllocation;
+  //   myAllocations.departmentId = this.departments.departmentId;
+  //   myAllocations.allocatedAmount = this.departments.allocatedAmount;
+  //   this.addedDepartments.push(myAllocations)
+  //   console.log('Hey guys',this.addedDepartments)
+  //   this.departments = new DisbursementBudgetItemAllocation().clone();
+  // }
+
   addDepartmentAllocations() {
     let myAllocations = new DisbursementBudgetItemAllocation;
     myAllocations.departmentId = this.departments.departmentId;
@@ -108,6 +118,7 @@ export class SetupComponent implements OnInit {
     console.log('Hey guys',this.addedDepartments)
     this.departments = new DisbursementBudgetItemAllocation().clone();
   }
+
 
   async addBudgetItem(){
     let budgetItemUpdate = new ManageBudgetItemDTO
@@ -121,6 +132,7 @@ export class SetupComponent implements OnInit {
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
         this.addItemModal = false;
+        this.router.navigateByUrl('/disbursement')
       });
     }
     else {

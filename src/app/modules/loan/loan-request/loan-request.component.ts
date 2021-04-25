@@ -3,7 +3,7 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TABLE_ACTION {
@@ -68,15 +68,18 @@ export class LoanRequestComponent implements OnInit {
   allInterestRates: InterestRate [] = [];
   loansCounter: number = 1;
   loading: boolean = true;
+  allloanTypes: LoanType [] = [];
+  dataCounter: number = 0;
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
-     private interestService: GetInterestRateServiceProxy, private router: Router) { }
+     private interestService: GetInterestRateServiceProxy, private router: Router, private loanTypeService: GetLoanTypesServiceProxy) { }
 
   ngOnInit(): void {
-    this.getLoanTypes();
+    // this.getLoanTypes();
     this.getInterestRate();
+    this.fetchAllLoanTypes();
 
   }
 
@@ -137,13 +140,23 @@ export class LoanRequestComponent implements OnInit {
     }
   }
 
-  async getLoanTypes(){
-    const data = await this.loanType.fetchLoanTypeById(0,1).toPromise();
+  // async getLoanTypes(){
+  //   const data = await this.loanType.fetchLoanTypeById(0,1).toPromise();
+  //   if(!data.hasError){
+  //     this.allLoanTypes = data.result;
+  //     console.log('Here are the types', this.allLoanTypes)
+  //   }
+  // }
+
+  async fetchAllLoanTypes(){
+    const data = await this.loanTypeService.getLoanTypes().toPromise();
     if(!data.hasError){
-      this.allLoanTypes = data.result;
-      console.log('Here are the types', this.allLoanTypes)
-    }
+      this.allloanTypes = data.result;
+      this.dataCounter = data.totalRecord;
+      console.log(this.dataCounter, this.allloanTypes)
   }
+
+}
 
   async getInterestRate(){
     const data = await this.interestService.getInterestRate().toPromise();

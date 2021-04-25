@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-
+<!--
         <div class="form-group row">
           <div class="col-sm-3">
             <label for="">Is Active? </label>
@@ -44,7 +44,7 @@
               <nb-checkbox status="basic" name="isActive" #isActive="ngModel"
               [(ngModel)]="loanTypeModel.isActive" [(checked)]="isActiveState"></nb-checkbox>&nbsp;&nbsp;
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group row">
           <div class="col-sm-3">
@@ -146,7 +146,7 @@
           </div>
         </div>
 
-          <!-- <div class="form-group row">
+          <div class="form-group row">
             <div class="col-sm-3">
               <label for="">Interest Type</label>
             </div>
@@ -155,13 +155,13 @@
               <nb-select placeholder="Select Interest Type" name="interestType" #interestType="ngModel"
               [(ngModel)]="loanTypeModel.interestType">
                 <nb-option value="1">--Select Interest Rate--</nb-option>
-                <nb-option *ngFor="let all interest of allInterestRates" [value]="interest.rate">{{interest.description}}</nb-option>
+                <nb-option *ngFor="let interest of allInterestRates" [value]="interest.id">{{interest.text}}</nb-option>
               </nb-select>
               <div *ngIf="interestType.invalid && (interestType.dirty || interestType.touched)" class="error">
                 <div *ngIf="interestType.errors.required">Interest Type is required</div>
               </div>
             </div>
-        </div> -->
+        </div>
 
         <div class="form-group row">
           <div class="col-sm-3">
@@ -203,11 +203,11 @@
   </nb-card>
 </div>
 
-<div *ngIf="dataCounter > 0">
+<div>
 <nb-card>
   <nb-card-body>
     <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allloanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allLoanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
   </nb-card-body>
 </nb-card>
 </div>

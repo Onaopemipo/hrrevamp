@@ -229,6 +229,7 @@ export class OverallBudgetComponent implements OnInit {
     const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
+        this.router.navigateByUrl('/disbursement');
         this.addItemModal = false;
       });
     }
