@@ -55,7 +55,7 @@ export class LeavePlanComponent implements OnInit {
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
   filter = {
-    is_approved: 1,
+    is_approved: null,
     leavetypeId: null,
     year_id: null,
     empno: null,
@@ -202,7 +202,7 @@ export class LeavePlanComponent implements OnInit {
       if (value.activeValue) tabtittle = value.tabTitle;
     });
     console.log(tabtittle);
-     this.filter.is_approved = tabtittle == 'Pending'? 0 : (tabtittle == 'Approved'?1 : 2);
+     this.filter.is_approved = tabtittle == 'Pending'? 1 : (tabtittle == 'Approved'?2 : 3);
     this.getleavePlan();
   }
 

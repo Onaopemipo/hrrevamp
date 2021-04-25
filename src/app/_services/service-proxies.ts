@@ -12804,84 +12804,6 @@ export class CompetencyServiceProxy {
     }
 
     /**
-     * @param employeeId (optional) 
-     * @param competencyId (optional) 
-     * @return Success
-     */
-    competency(employeeId: number | undefined, competencyId: number | undefined): Observable<VmListComparismListApiResult> {
-        let url_ = this.baseUrl + "/api/Competency/Competency?";
-        if (employeeId === null)
-            throw new Error("The parameter 'employeeId' cannot be null.");
-        else if (employeeId !== undefined)
-            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
-        if (competencyId === null)
-            throw new Error("The parameter 'competencyId' cannot be null.");
-        else if (competencyId !== undefined)
-            url_ += "CompetencyId=" + encodeURIComponent("" + competencyId) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCompetency(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCompetency(<any>response_);
-                } catch (e) {
-                    return <Observable<VmListComparismListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<VmListComparismListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processCompetency(response: HttpResponseBase): Observable<VmListComparismListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = VmListComparismListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<VmListComparismListApiResult>(<any>null);
-    }
-
-    /**
      * API for  Deleting Competency
      * @param iD (optional) 
      * @return Success
@@ -12953,6 +12875,84 @@ export class CompetencyServiceProxy {
             }));
         }
         return _observableOf<MessageOutApiResult>(<any>null);
+    }
+
+    /**
+     * @param employeeId (optional) 
+     * @param competencyId (optional) 
+     * @return Success
+     */
+    compareCompetency(employeeId: number | undefined, competencyId: number | undefined): Observable<VmListComparismApiResult> {
+        let url_ = this.baseUrl + "/api/Competency/Compare-Competency?";
+        if (employeeId === null)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else if (employeeId !== undefined)
+            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
+        if (competencyId === null)
+            throw new Error("The parameter 'competencyId' cannot be null.");
+        else if (competencyId !== undefined)
+            url_ += "CompetencyId=" + encodeURIComponent("" + competencyId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCompareCompetency(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCompareCompetency(<any>response_);
+                } catch (e) {
+                    return <Observable<VmListComparismApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VmListComparismApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCompareCompetency(response: HttpResponseBase): Observable<VmListComparismApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VmListComparismApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VmListComparismApiResult>(<any>null);
     }
 }
 
@@ -32031,7 +32031,7 @@ export class GetPromotionEligibilityListsServiceProxy {
      * @param end (optional) 
      * @return Success
      */
-    getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
+    getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<PromotionEligibilityViewModelIListApiResult> {
         let url_ = this.baseUrl + "/api/Promotion/GetPromotionEligibilityLists/GetPromotionEligibilityLists?";
         if (_PageSize === null)
             throw new Error("The parameter '_PageSize' cannot be null.");
@@ -32066,6 +32066,101 @@ export class GetPromotionEligibilityListsServiceProxy {
                 try {
                     return this.processGetPromotionEligibilityLists(<any>response_);
                 } catch (e) {
+                    return <Observable<PromotionEligibilityViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PromotionEligibilityViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetPromotionEligibilityLists(response: HttpResponseBase): Observable<PromotionEligibilityViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PromotionEligibilityViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PromotionEligibilityViewModelIListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetPromotionListsServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param eligibilityId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @return Success
+     */
+    getPromotionLists(eligibilityId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
+        let url_ = this.baseUrl + "/api/Promotion/GetPromotionLists/GetPromotionLists?";
+        if (eligibilityId === null)
+            throw new Error("The parameter 'eligibilityId' cannot be null.");
+        else if (eligibilityId !== undefined)
+            url_ += "EligibilityId=" + encodeURIComponent("" + eligibilityId) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPromotionLists(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPromotionLists(<any>response_);
+                } catch (e) {
                     return <Observable<Sp_FetchEligibleEmployeesIListApiResult>><any>_observableThrow(e);
                 }
             } else
@@ -32073,7 +32168,7 @@ export class GetPromotionEligibilityListsServiceProxy {
         }));
     }
 
-    protected processGetPromotionEligibilityLists(response: HttpResponseBase): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
+    protected processGetPromotionLists(response: HttpResponseBase): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -35877,6 +35972,76 @@ export class RetirementServiceProxy {
             }));
         }
         return _observableOf<RetirmentDTOListApiResult>(<any>null);
+    }
+
+    /**
+     * API to Fetch post Retireee.
+    Note: all filter are optional
+     * @return Success
+     */
+    getPostRetirees(): Observable<RetirementLogListApiResult> {
+        let url_ = this.baseUrl + "/api/Retirement/Get-Post-Retirees";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPostRetirees(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPostRetirees(<any>response_);
+                } catch (e) {
+                    return <Observable<RetirementLogListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<RetirementLogListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetPostRetirees(response: HttpResponseBase): Observable<RetirementLogListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = RetirementLogListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<RetirementLogListApiResult>(<any>null);
     }
 
     /**
@@ -61571,14 +61736,14 @@ export interface IVmListComparism {
     listEmployeeTrainings: CompareTraningDTO[] | undefined;
 }
 
-export class VmListComparismListApiResult implements IVmListComparismListApiResult {
+export class VmListComparismApiResult implements IVmListComparismApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: VmListComparism[] | undefined;
+    result!: VmListComparism;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: IVmListComparismListApiResult) {
+    constructor(data?: IVmListComparismApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -61591,19 +61756,15 @@ export class VmListComparismListApiResult implements IVmListComparismListApiResu
         if (_data) {
             this.hasError = _data["hasError"];
             this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(VmListComparism.fromJS(item));
-            }
+            this.result = _data["result"] ? VmListComparism.fromJS(_data["result"]) : <any>undefined;
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): VmListComparismListApiResult {
+    static fromJS(data: any): VmListComparismApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new VmListComparismListApiResult();
+        let result = new VmListComparismApiResult();
         result.init(data);
         return result;
     }
@@ -61612,28 +61773,24 @@ export class VmListComparismListApiResult implements IVmListComparismListApiResu
         data = typeof data === 'object' ? data : {};
         data["hasError"] = this.hasError;
         data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
 
-    clone(): VmListComparismListApiResult {
+    clone(): VmListComparismApiResult {
         const json = this.toJSON();
-        let result = new VmListComparismListApiResult();
+        let result = new VmListComparismApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface IVmListComparismListApiResult {
+export interface IVmListComparismApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: VmListComparism[] | undefined;
+    result: VmListComparism;
     totalCount: number;
     totalRecord: number;
 }
@@ -83158,7 +83315,9 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
     current_grade_id!: number | undefined;
     current_grade!: string | undefined;
     salaryScale!: string | undefined;
+    comments!: string | undefined;
     id!: number | undefined;
+    employee_id!: number | undefined;
     employee_contract_id!: number;
     eligiblility_id!: number | undefined;
     date_of_appointment!: Date | undefined;
@@ -83213,7 +83372,9 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
             this.current_grade_id = _data["current_grade_id"];
             this.current_grade = _data["current_grade"];
             this.salaryScale = _data["salaryScale"];
+            this.comments = _data["comments"];
             this.id = _data["id"];
+            this.employee_id = _data["employee_id"];
             this.employee_contract_id = _data["employee_contract_id"];
             this.eligiblility_id = _data["eligiblility_id"];
             this.date_of_appointment = _data["date_of_appointment"] ? new Date(_data["date_of_appointment"].toString()) : <any>undefined;
@@ -83268,7 +83429,9 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
         data["current_grade_id"] = this.current_grade_id;
         data["current_grade"] = this.current_grade;
         data["salaryScale"] = this.salaryScale;
+        data["comments"] = this.comments;
         data["id"] = this.id;
+        data["employee_id"] = this.employee_id;
         data["employee_contract_id"] = this.employee_contract_id;
         data["eligiblility_id"] = this.eligiblility_id;
         data["date_of_appointment"] = this.date_of_appointment ? this.date_of_appointment.toISOString() : <any>undefined;
@@ -83323,7 +83486,9 @@ export interface ISp_FetchEligibleEmployees {
     current_grade_id: number | undefined;
     current_grade: string | undefined;
     salaryScale: string | undefined;
+    comments: string | undefined;
     id: number | undefined;
+    employee_id: number | undefined;
     employee_contract_id: number;
     eligiblility_id: number | undefined;
     date_of_appointment: Date | undefined;
@@ -83373,6 +83538,7 @@ export class PromotionEligibilityViewModel implements IPromotionEligibilityViewM
     is_active!: boolean;
     approvalProcessId!: number | undefined;
     actionTitle!: string | undefined;
+    eligiblesEmployees!: string | undefined;
     approvalWorkFlows!: SelectListItem[] | undefined;
     eligibles!: Sp_FetchEligibleEmployees[] | undefined;
     readonly strDateGenerated!: string | undefined;
@@ -83405,6 +83571,7 @@ export class PromotionEligibilityViewModel implements IPromotionEligibilityViewM
             this.is_active = _data["is_active"];
             this.approvalProcessId = _data["approvalProcessId"];
             this.actionTitle = _data["actionTitle"];
+            this.eligiblesEmployees = _data["eligiblesEmployees"];
             if (Array.isArray(_data["approvalWorkFlows"])) {
                 this.approvalWorkFlows = [] as any;
                 for (let item of _data["approvalWorkFlows"])
@@ -83445,6 +83612,7 @@ export class PromotionEligibilityViewModel implements IPromotionEligibilityViewM
         data["is_active"] = this.is_active;
         data["approvalProcessId"] = this.approvalProcessId;
         data["actionTitle"] = this.actionTitle;
+        data["eligiblesEmployees"] = this.eligiblesEmployees;
         if (Array.isArray(this.approvalWorkFlows)) {
             data["approvalWorkFlows"] = [];
             for (let item of this.approvalWorkFlows)
@@ -83485,6 +83653,7 @@ export interface IPromotionEligibilityViewModel {
     is_active: boolean;
     approvalProcessId: number | undefined;
     actionTitle: string | undefined;
+    eligiblesEmployees: string | undefined;
     approvalWorkFlows: SelectListItem[] | undefined;
     eligibles: Sp_FetchEligibleEmployees[] | undefined;
     strDateGenerated: string | undefined;
@@ -83738,6 +83907,73 @@ export interface IPromotionLogIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: PromotionLog[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class PromotionEligibilityViewModelIListApiResult implements IPromotionEligibilityViewModelIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: PromotionEligibilityViewModel[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IPromotionEligibilityViewModelIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(PromotionEligibilityViewModel.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): PromotionEligibilityViewModelIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new PromotionEligibilityViewModelIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): PromotionEligibilityViewModelIListApiResult {
+        const json = this.toJSON();
+        let result = new PromotionEligibilityViewModelIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPromotionEligibilityViewModelIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: PromotionEligibilityViewModel[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -89136,6 +89372,256 @@ export interface IRetirmentDTOListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: RetirmentDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class RetirementLog implements IRetirementLog {
+    refNo!: string | undefined;
+    employeeId!: number;
+    employeeContractId!: number;
+    dob!: Date;
+    appointmentDate!: Date | undefined;
+    age!: number;
+    yearsOfService!: number;
+    effectiveDate!: Date;
+    retirementTypeId!: number;
+    causeOfLeaving!: string | undefined;
+    otherComments!: string | undefined;
+    submittedBy!: string | undefined;
+    log_status!: number;
+    isAccepted!: boolean;
+    reviewedBy!: string | undefined;
+    reviewDate!: Date | undefined;
+    reviewComment!: string | undefined;
+    subReason!: string | undefined;
+    sourceofInitiation!: string | undefined;
+    personalEmail!: string | undefined;
+    personalPhoneNumber!: string | undefined;
+    lastWorkingDate!: Date;
+    exitDate!: Date;
+    exitChoice!: string | undefined;
+    tempref!: string | undefined;
+    clearance!: string | undefined;
+    survey!: string | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IRetirementLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.refNo = _data["refNo"];
+            this.employeeId = _data["employeeId"];
+            this.employeeContractId = _data["employeeContractId"];
+            this.dob = _data["dob"] ? new Date(_data["dob"].toString()) : <any>undefined;
+            this.appointmentDate = _data["appointmentDate"] ? new Date(_data["appointmentDate"].toString()) : <any>undefined;
+            this.age = _data["age"];
+            this.yearsOfService = _data["yearsOfService"];
+            this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
+            this.retirementTypeId = _data["retirementTypeId"];
+            this.causeOfLeaving = _data["causeOfLeaving"];
+            this.otherComments = _data["otherComments"];
+            this.submittedBy = _data["submittedBy"];
+            this.log_status = _data["log_status"];
+            this.isAccepted = _data["isAccepted"];
+            this.reviewedBy = _data["reviewedBy"];
+            this.reviewDate = _data["reviewDate"] ? new Date(_data["reviewDate"].toString()) : <any>undefined;
+            this.reviewComment = _data["reviewComment"];
+            this.subReason = _data["subReason"];
+            this.sourceofInitiation = _data["sourceofInitiation"];
+            this.personalEmail = _data["personalEmail"];
+            this.personalPhoneNumber = _data["personalPhoneNumber"];
+            this.lastWorkingDate = _data["lastWorkingDate"] ? new Date(_data["lastWorkingDate"].toString()) : <any>undefined;
+            this.exitDate = _data["exitDate"] ? new Date(_data["exitDate"].toString()) : <any>undefined;
+            this.exitChoice = _data["exitChoice"];
+            this.tempref = _data["tempref"];
+            this.clearance = _data["clearance"];
+            this.survey = _data["survey"];
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): RetirementLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new RetirementLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["refNo"] = this.refNo;
+        data["employeeId"] = this.employeeId;
+        data["employeeContractId"] = this.employeeContractId;
+        data["dob"] = this.dob ? this.dob.toISOString() : <any>undefined;
+        data["appointmentDate"] = this.appointmentDate ? this.appointmentDate.toISOString() : <any>undefined;
+        data["age"] = this.age;
+        data["yearsOfService"] = this.yearsOfService;
+        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
+        data["retirementTypeId"] = this.retirementTypeId;
+        data["causeOfLeaving"] = this.causeOfLeaving;
+        data["otherComments"] = this.otherComments;
+        data["submittedBy"] = this.submittedBy;
+        data["log_status"] = this.log_status;
+        data["isAccepted"] = this.isAccepted;
+        data["reviewedBy"] = this.reviewedBy;
+        data["reviewDate"] = this.reviewDate ? this.reviewDate.toISOString() : <any>undefined;
+        data["reviewComment"] = this.reviewComment;
+        data["subReason"] = this.subReason;
+        data["sourceofInitiation"] = this.sourceofInitiation;
+        data["personalEmail"] = this.personalEmail;
+        data["personalPhoneNumber"] = this.personalPhoneNumber;
+        data["lastWorkingDate"] = this.lastWorkingDate ? this.lastWorkingDate.toISOString() : <any>undefined;
+        data["exitDate"] = this.exitDate ? this.exitDate.toISOString() : <any>undefined;
+        data["exitChoice"] = this.exitChoice;
+        data["tempref"] = this.tempref;
+        data["clearance"] = this.clearance;
+        data["survey"] = this.survey;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): RetirementLog {
+        const json = this.toJSON();
+        let result = new RetirementLog();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IRetirementLog {
+    refNo: string | undefined;
+    employeeId: number;
+    employeeContractId: number;
+    dob: Date;
+    appointmentDate: Date | undefined;
+    age: number;
+    yearsOfService: number;
+    effectiveDate: Date;
+    retirementTypeId: number;
+    causeOfLeaving: string | undefined;
+    otherComments: string | undefined;
+    submittedBy: string | undefined;
+    log_status: number;
+    isAccepted: boolean;
+    reviewedBy: string | undefined;
+    reviewDate: Date | undefined;
+    reviewComment: string | undefined;
+    subReason: string | undefined;
+    sourceofInitiation: string | undefined;
+    personalEmail: string | undefined;
+    personalPhoneNumber: string | undefined;
+    lastWorkingDate: Date;
+    exitDate: Date;
+    exitChoice: string | undefined;
+    tempref: string | undefined;
+    clearance: string | undefined;
+    survey: string | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class RetirementLogListApiResult implements IRetirementLogListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: RetirementLog[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IRetirementLogListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(RetirementLog.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): RetirementLogListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new RetirementLogListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): RetirementLogListApiResult {
+        const json = this.toJSON();
+        let result = new RetirementLogListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IRetirementLogListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: RetirementLog[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
