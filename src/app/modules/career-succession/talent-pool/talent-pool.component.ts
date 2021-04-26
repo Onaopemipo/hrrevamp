@@ -96,10 +96,17 @@ export class TalentPoolComponent implements OnInit {
   }
 
   async deleteTalentPool(){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Dismiss').subscribe(data => {
-      // if(data == 'yes')
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Yes').subscribe(data => {
+      if(data == 'closed'){
+        this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).subscribe(dataAction => {
+          if(!dataAction.hasError){
+            this.fetchAllPools();
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Pool Deleted Successfully', 'Dismiss')
+          }
+        });
+      }
     });
-    const data = await this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).toPromise();
+
   }
 
   async fetchPool(){

@@ -1,7 +1,8 @@
-<ngx-componentsheader (buttonClick)="addPlan()"
+<ngx-componentsheader *ngIf="planDataCount < 1" (buttonClick)="addPlan()"
   pageName='Succession Plans'></ngx-componentsheader>
-<!-- <ngx-componentsheader pageName='Career Succession Plan'></ngx-componentsheader> -->
+<ngx-componentsheader *ngIf="planDataCount > 0" pageName='Succession Plans'  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="addPlan()"></ngx-componentsheader>
 <div>
+
   <nb-card *ngIf="planDataCount < 1">
     <nb-card-body>
       <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
