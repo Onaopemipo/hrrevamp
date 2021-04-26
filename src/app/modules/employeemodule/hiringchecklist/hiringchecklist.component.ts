@@ -122,7 +122,7 @@ export class HiringchecklistComponent implements OnInit {
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
       console.log('user', this.UserData)
-      this.OnboardingId=data.result.retId
+      this.OnboardingId=data.retId
       console.log( 'onid',this.OnboardingId)
       this.submitbtnPressed = false
     } else {
