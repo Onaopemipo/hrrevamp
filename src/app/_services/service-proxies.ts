@@ -32022,12 +32022,13 @@ export class GetPromotionEligibilityListsServiceProxy {
     /**
      * @param _PageSize (optional) 
      * @param _PageNumber (optional) 
+     * @param eligibilityId (optional) 
      * @param is_closed (optional) 
      * @param start (optional) 
      * @param end (optional) 
      * @return Success
      */
-    getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<PromotionEligibilityViewModelIListApiResult> {
+    getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, eligibilityId: number | null | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<PromotionEligibilityViewModelIListApiResult> {
         let url_ = this.baseUrl + "/api/Promotion/GetPromotionEligibilityLists/GetPromotionEligibilityLists?";
         if (_PageSize === null)
             throw new Error("The parameter '_PageSize' cannot be null.");
@@ -32037,6 +32038,8 @@ export class GetPromotionEligibilityListsServiceProxy {
             throw new Error("The parameter '_PageNumber' cannot be null.");
         else if (_PageNumber !== undefined)
             url_ += "_PageNumber=" + encodeURIComponent("" + _PageNumber) + "&";
+        if (eligibilityId !== undefined && eligibilityId !== null)
+            url_ += "EligibilityId=" + encodeURIComponent("" + eligibilityId) + "&";
         if (is_closed === null)
             throw new Error("The parameter 'is_closed' cannot be null.");
         else if (is_closed !== undefined)
@@ -83314,6 +83317,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
     comments!: string | undefined;
     id!: number | undefined;
     employee_id!: number | undefined;
+    employee_name!: string | undefined;
     employee_contract_id!: number;
     eligiblility_id!: number | undefined;
     date_of_appointment!: Date | undefined;
@@ -83371,6 +83375,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
             this.comments = _data["comments"];
             this.id = _data["id"];
             this.employee_id = _data["employee_id"];
+            this.employee_name = _data["employee_name"];
             this.employee_contract_id = _data["employee_contract_id"];
             this.eligiblility_id = _data["eligiblility_id"];
             this.date_of_appointment = _data["date_of_appointment"] ? new Date(_data["date_of_appointment"].toString()) : <any>undefined;
@@ -83428,6 +83433,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
         data["comments"] = this.comments;
         data["id"] = this.id;
         data["employee_id"] = this.employee_id;
+        data["employee_name"] = this.employee_name;
         data["employee_contract_id"] = this.employee_contract_id;
         data["eligiblility_id"] = this.eligiblility_id;
         data["date_of_appointment"] = this.date_of_appointment ? this.date_of_appointment.toISOString() : <any>undefined;
@@ -83485,6 +83491,7 @@ export interface ISp_FetchEligibleEmployees {
     comments: string | undefined;
     id: number | undefined;
     employee_id: number | undefined;
+    employee_name: string | undefined;
     employee_contract_id: number;
     eligiblility_id: number | undefined;
     date_of_appointment: Date | undefined;

@@ -134,6 +134,7 @@ export class PromotionComponent implements OnInit {
         if (data.data) {
           this.eligibilityBucket = true;
           this.promotionBucketList = JSON.parse(data.data);
+          this.pageName = this.promotionBucketList.name + " Employee List";
        //   this.promotionList = this.promotionBucketList.eligibles;
           this.showTableAction = true;
           this.tableActions = [
