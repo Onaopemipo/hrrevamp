@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { DeleteEventsServiceProxy } from '../../_services/service-proxies'
-
+import { NbPopoverComponent, NbPopoverDirective } from '@nebular/theme';
 enum DAYS {
   MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }
@@ -117,6 +117,7 @@ export class CalComponent implements AfterViewInit {
 
   dates = [];
   @ViewChild('calendar') calendar: ElementRef;
+  @ViewChild(NbPopoverDirective) popOver: NbPopoverDirective;
   constructor(private DeleteEventsServiceProxy: DeleteEventsServiceProxy) { }
 
   get monthLabel() {
@@ -176,7 +177,10 @@ export class CalComponent implements AfterViewInit {
   @Output() dateClick = new EventEmitter<any>();
   dateClicked(day: MyDay) {
     this.selectedDay = day;
+    this.popOver.show
     this.dateClick.emit(day);
+    
+    
   }
 
   day_events: Map<Date, CalendarEvent[]> = new Map<Date, CalendarEvent[]>();

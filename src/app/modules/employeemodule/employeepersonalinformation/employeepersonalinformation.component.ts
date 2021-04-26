@@ -143,6 +143,7 @@ export class EmployeepersonalinformationComponent implements OnInit {
     }
   }
   async getInstitution() {
+     
     const data = await this.common.getInstitutions().toPromise()
 
     if (!data.hasError) {
