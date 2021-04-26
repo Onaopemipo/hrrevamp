@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { createSubscription, FAKER_CONFIG, getCreateResponse, IFaker, MessageOut, myClassFaker, myPropertyFaker } from 'app/modules/career-succession/services/base';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetSubTypeDTO } from 'app/_services/service-proxies';
+import { AssetCategoryDTO, AssetDTO, AssetManagementServiceProxy, AssetModelDTO, AssetStatusDTO, AssetSubTypeDTO } from 'app/_services/service-proxies';
 import { date } from 'faker';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -137,8 +137,6 @@ export abstract class AssetBaseService<D, F> extends CrudService<F, D, D>  {
   abstract toData(obj: any): D;
   list(filter: F): Observable<ListResult<D>> {
     console.log('aaa');
-    // this.list_api(filter).subscribe(data => {console.log(data);})
-    // return createSubscription({data: [], length: 0});
     return this.list_api(filter).pipe(map(res => {
       console.log(res);
       return {
@@ -469,6 +467,35 @@ export class MyAssetService extends AssetBaseService<MyAssetModel, MyAssetModelF
     return this.api.assetModel(data.toManage());
   }
 
+  delete(id: number) {
+    return createSubscription(new MessageOut('Deleted successfully', true));
+  }
+
+  constructor(
+    private api: AssetManagementServiceProxy
+  ) {
+    super();
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AssetStatusService extends AssetBaseService<MyAssetCategory, MyAssetCategoryFilter> {
+  list_api(filter: MyAssetCategoryFilter): Observable<any> {
+    return this.api.getAssetStatus(1, 10, '', false, false);
+  }
+  toData(obj: any): MyAssetCategory {
+    return new MyAssetCategory().fromApi(obj);
+  }
+  fetch(id: number) {
+    throw new Error('Method not implemented.');
+  }
+  create(data: MyAssetCategory) {
+    return this.api.assetStatus(
+      new AssetStatusDTO({...data, assetid: 0, statusName: data.name, companyID: 0, subID: 0})
+    );
+  }
   delete(id: number) {
     return createSubscription(new MessageOut('Deleted successfully', true));
   }

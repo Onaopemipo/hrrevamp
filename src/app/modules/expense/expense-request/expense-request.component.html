@@ -1,96 +1,68 @@
-<ngx-componentsheader
-  pageName="Expense Request"
-  [requiredButton]="topActionButtons"
-  (buttonClick)="pageActionClicked($event)"
-></ngx-componentsheader>
-<div class="main-page-container">
-  <nb-tabset (changeTab)="selectTab($event)">
-    <nb-tab tabTitle="All Requests" [tabId]="TABS.ALL__REQUESTS"> </nb-tab
-    ><nb-tab tabTitle="Approved" [tabId]="TABS.APPROVED"> </nb-tab
-    ><nb-tab tabTitle="Pending" [tabId]="TABS.PENDING"> </nb-tab
-    ><nb-tab tabTitle="Declined" [tabId]="TABS.DECLINED"> </nb-tab>
-  </nb-tabset>
-  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
-  ><ngx-default-content
-    *ngIf="showEmpty"
-    pageHeader="let's set up your expenses"
-    pageDescription="Now, you can add your request"
-    buttonValue="Add expense request"
-    (buttonClick)="createNewClicked()"
-  >
-  </ngx-default-content>
-  <ngx-tablecomponent
-    *ngIf="!showEmpty"
-    [tableColum]="tableColumns"
-    [actions]="tableActions"
-    [userData]="tableData"
-    [loading]="loading"
-    (pageChange)="loadNewPage($event)"
-    (actionClick)="tableActionClicked($event)"
-  ></ngx-tablecomponent>
-</div>
-<ngx-side-modal [(show)]="showModal">
-  <div modal-header>Add expense request</div>
-  <div modal-body>
-    <div class="my-form">
-      <h4></h4>
-
-      <!-- <div class="form-group">
-        <label>Employee Name</label>
-        <input class="form-control" placeholder="1" [(ngModel)]="editingData."/>
-      </div> -->
-
-      <div class="form-group">
-        <label>Employee</label>
-        <div>
-          <ngx-employee-master-search [(value)]="editingData.loggedForEmployeeId"></ngx-employee-master-search>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Project</label>
-        <select [(ngModel)]="editingData.expenseProjectId" class="form-control">
-          <option *ngFor="let project of projects" [value]="project.id"> {{project.name}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Expense Type<span>(Optional)</span></label>
-        <select [(ngModel)]="editingData.expenseProjectId" class="form-control">
-          <option *ngFor="let type of types" [value]="type.id"> {{type.name}}</option>
-        </select>
-        <!-- <input class="form-control" placeholder="1" /> -->
-      </div>
-
-      <div class="form-group">
-        <label>Expense sub-type<span>(Optional)</span></label>
-        <input class="form-control" placeholder="1" [(ngModel)]="editingData.expenseSubTypeId"/>
-      </div>
-
-      <div class="form-group">
-        <label>Amount</label>
-        <app-amount-input [(value)]="editingData.requestedAmount"></app-amount-input>
-      </div>
-
-      <div class="form-group">
-        <label>Date incurred</label>
-        <ngx-date [(value)]="editingData.dateIncurred"></ngx-date>
-      </div>
-
-      <div class="form-group">
-        <label>Description<span>(Optional)</span></label>
-        <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
-      </div>
-
-      <div class="form-group">
-        <label>Attachment</label>
-        <ngx-file-upload></ngx-file-upload>
-      </div>
+<ngx-page
+  (topActionClicked)="pageActionClicked($event)"
+  [(showModal)]="showModal"
+  [pageTitle]="getPageTitle()"
+  [requiredButton]="getRequiredButton()"
+  [formConfig]="formConfig"
+  [(value)]="editingData"
+  (formCompleted)="submitForm()"
+  (formCancelled)="hideModal()"
+  [tableData]="data"
+  [tableColumns]="getTableColumns()"
+  [loadingSave]="loadingSave"
+  [formTitle]="getFormTitle()"
+  [emptyConfig]="emptyConfig"
+  [loading]="loading"
+  [tableActions]="tableActions"
+  (tableActionClicked)="tableActionClick($event)"
+>
+<div custom-form>
+  <div class="form-group">
+    <label>Employee</label>
+    <div>
+      <ngx-employee-master-search [(value)]="editingData.loggedForEmployeeId"></ngx-employee-master-search>
     </div>
   </div>
-  <div modal-actions>
-    <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
-    <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
-    <button nbButton status="primary" outline (click)="hideModal()">Cancel </button>
+
+  <div class="form-group">
+    <label>Project</label>
+    <select [(ngModel)]="editingData.expenseProjectId" class="form-control">
+      <option *ngFor="let project of projects" [value]="project.id"> {{project.name}}</option>
+    </select>
   </div>
-</ngx-side-modal>
+
+  <div class="form-group">
+    <label>Expense Type<span>(Optional)</span></label>
+    <select [(ngModel)]="editingData.expenseProjectId" class="form-control">
+      <option *ngFor="let type of types" [value]="type.id"> {{type.name}}</option>
+    </select>
+    <!-- <input class="form-control" placeholder="1" /> -->
+  </div>
+
+  <div class="form-group">
+    <label>Expense sub-type<span>(Optional)</span></label>
+    <input class="form-control" placeholder="1" [(ngModel)]="editingData.expenseSubTypeId"/>
+  </div>
+
+  <div class="form-group">
+    <label>Amount</label>
+    <app-amount-input [(value)]="editingData.requestedAmount"></app-amount-input>
+  </div>
+
+  <div class="form-group">
+    <label>Date incurred</label>
+    <ngx-date [(value)]="editingData.dateIncurred"></ngx-date>
+  </div>
+
+  <div class="form-group">
+    <label>Description<span>(Optional)</span></label>
+    <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+  </div>
+
+  <div class="form-group">
+    <label>Attachment</label>
+    <ngx-file-upload></ngx-file-upload>
+  </div>
+
+</div>
+</ngx-page>

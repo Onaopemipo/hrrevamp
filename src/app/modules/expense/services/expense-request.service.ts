@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
 import { AddUpdateExpenseServiceProxy, ExpenseDTO, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
-import { of, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 enum ACTIONS {EDIT = '1', DELETE = '2'}
 
@@ -34,6 +34,13 @@ export class ExpenseRequestService extends CrudService<MyExpenseRequest, Expense
 
   fetch() {
     return of();
+  }
+
+  list_api(filter: any): Observable<ListResult<MyExpenseRequest>> {
+    throw 'Not Implemented';
+  }
+  toData(): MyExpenseRequest {
+    throw 'Not Implemented';
   }
 
   list(filter: ExpenseRequestFilter) {
