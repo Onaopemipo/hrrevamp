@@ -46,6 +46,9 @@ export class ManagementexistComponent implements OnInit {
   RetirmentBody = new RetirmentDTO().clone();
   uploadOption: number = 1;
   allbulkProcesses: IDTextViewModel[] = [];
+  allowmultipleselection: boolean = true;
+  selectionHeader = "Select Employee";
+  addbtnText = "Add Employee"
   constructor(
     private router: Router,
     private DataService: DataServiceProxy,
@@ -67,7 +70,7 @@ this.getProccessId()
         if (params.type) {
           let pnam = params.type;
           this.pageName = pnam == 'Retirement' ? "Retirement" : "Exit Management"
- 
+
         }
       }
     }
@@ -95,27 +98,31 @@ this.getProccessId()
      }
   })
   }
-  // submitRetirement() {
-  //   this.loading = true;
-  //   this.RetirementService.postRetireee(1, 0, this.RetirmentBody).subscribe(data => {
-  //     this.loading = false;
-  //     if (!data.hasError) {
-  //       this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
-  //         this.RetirmentBody = new RetirmentDTO().clone();
-       
-  //       });
-  //     }else {
-  //       this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {
- 
-  //        });
-  //     }
-  //   }, (error) => {
-  //     this.loading = false;
-  //     if (error.status == 400) {
-  //       this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
-  //     }
-  //   })
-  // }
+  submitRetirement() {
+    this.loading = true;
+    // this.RetirementService.postRetireee(1, 0, this.RetirmentBody).subscribe(data => {
+    //   this.loading = false;
+    //   if (!data.hasError) {
+    //     this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
+    //       this.RetirmentBody = new RetirmentDTO().clone();
+
+    //     });
+    //   }else {
+    //     this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {
+
+    //      });
+    //   }
+    // }, (error) => {
+    //   this.loading = false;
+    //   if (error.status == 400) {
+    //     this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+    //   }
+   // })
+  }
+  getSelectedEmployee(event) {
+    console.log(event)
+    
+  }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
       this.router.navigateByUrl('/employeemodule/exitmanagement');

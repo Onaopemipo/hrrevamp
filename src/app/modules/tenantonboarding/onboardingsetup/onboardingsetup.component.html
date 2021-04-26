@@ -32,83 +32,131 @@
         <div ></div>
         <div class="row" >
             <div class="col-md-8" style="margin: 5px;"  [ngSwitch]="selectedPanel">
+              <ng-container #flowBasic="flow" [flowConfig]="{ target: '/' }"></ng-container>
                 <!--Company Panel ////////////////////////////////-->
                 <div class="fmContainer" *ngSwitchCase="'companyPanel'">
                     <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
                    <p class="listsubheader">Input Company’s Information in the fields below</p>
                    </div>
-                   <div style="display: flex; padding-top: 2rem;">
-                       <div class="circular--portrait">
+                   <div style="display: flex; padding-top: 2rem;" 
+                   flow-init     
+                   flowDrop
+                   [flow]="flowBasic.flowJs"
+                   (drop)="onDropFileceived(flowBasic)"
+                   (dragover)="onDragOver($event)"
+                   >
+                       <div class="circular--portrait" >
                            <img src="{{src}}" alt="" title="" itemprop="image">
                        </div>
-                       <div style="display:flex;align-items: center;padding:2rem">
+                       <div style="display:flex;align-items: center;padding:2rem; flex-direction: column;">
                            <span>
-                           <a href="javascript:void(0)">Add Company Logo</a>
+                           <a href="javascript:void(0)" flowButton (change)="filereceived(flowBasic)"
+                           [flow]="flowBasic.flowJs">Add Company Logo</a>
                            <p class="p-normal">Maximum size allowed is 600kb of PNG,JPEG,JPG</p>
                            </span>
+                           <div *ngFor="let transfer of files; let i = index" style="color: blue; display: flex;">
+                            <div *ngIf="i == 0" style=" display: flex;flex-direction: row">
+                             <nb-icon nbPrefix icon="checkmark-outline" pack="eva"></nb-icon> &nbsp;&nbsp;
+                             <div style="flex: auto;">{{transfer.name}}</div>
+                             &nbsp;&nbsp;
+                             <span class="smalltext" style="color: red !important;cursor: pointer;" (click)="removeFile(flowBasic, transfer)">Remove</span>
+                          
+                            </div>
+                            
+                             </div>
                        </div>
                    </div>
 
                    <div style="padding-top:3rem;">
-                    <form>
+                    <form id="companysForm" name="companysForm" #companysForm="ngForm" >
                         <div class="form-group row">
                           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Company RC-Number</label>
                           <div class="col-sm-8">
-                            <input type="text" nbInput fullWidth  placeholder="Company RC-Number">
+                            <input id="rcNo" name="rcNo" [(ngModel)]="companyDTO.rcNo" #rcNo="ngModel" type="text" nbInput fullWidth  placeholder="Company RC-Number" required>
+                            <div *ngIf="companyDTO.invalid && (companyDTO.dirty || companyDTO.touched)" class="error">
+                              <div *ngIf="companyDTO.errors.required">
+                                Company RC-Number is required
+                              </div>
+                          </div>
                           </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Company Email</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Company Email">
+                              <input readonly id="email" name="email" [(ngModel)]="companyDTO.email" #email="ngModel" type="text" nbInput fullWidth  placeholder="Company Email" required>
+                              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                                <div *ngIf="email.errors.required">
+                                  Email is required
+                                </div>
+                            </div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Phone Number">
+                              <input readonly id="phoneNumber" name="phoneNumber" [(ngModel)]="companyDTO.phoneNumber" #phoneNumber="ngModel" type="text" nbInput fullWidth  placeholder="Phone Number" required>
+                              <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                                <div *ngIf="phoneNumber.errors.required">
+                                  Phone Number is required
+                                </div>
+                            </div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Domain Name</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Domain Name">
+                              <input id="domainName" name="domainName" [(ngModel)]="companyDTO.domainName" #domainName="ngModel" type="text" nbInput fullWidth  placeholder="Domain Name" >
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Auditor Email</label>
                             <div class="col-sm-8">
-                              <input type="email" nbInput fullWidth  placeholder="Auditor Email">
+                              <input id="auditorEmail" name="auditorEmail" [(ngModel)]="companyDTO.auditorEmail" #auditorEmail="ngModel" type="email" nbInput fullWidth  placeholder="Auditor Email" >
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Administrator Email</label>
                             <div class="col-sm-8">
-                              <input type="email" nbInput fullWidth  placeholder="Administrator Email">
+                              <input id="administratorEmail" name="administratorEmail" [(ngModel)]="companyDTO.administratorEmail" #administratorEmail="ngModel" type="email" nbInput fullWidth  placeholder="Administrator Email" required>
+                              <div *ngIf="administratorEmail.invalid && (administratorEmail.dirty || administratorEmail.touched)" class="error">
+                                <div *ngIf="administratorEmail.errors.required">
+                                  Administrator Email is required
+                                </div>
+                            </div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Max Employee Count</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Max Employee Count">
+                              <input id="maxEmployeeCount" name="maxEmployeeCount" [(ngModel)]="companyDTO.maxEmployeeCount" #maxEmployeeCount="ngModel" type="number" nbInput fullWidth  placeholder="Max Employee Count" required>
+                              <div *ngIf="maxEmployeeCount.invalid && (maxEmployeeCount.dirty || maxEmployeeCount.touched)" class="error">
+                                <div *ngIf="maxEmployeeCount.errors.required">
+                                  Max Employee Count is required
+                                </div>
+                            </div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Company Address</label>
                             <div class="col-sm-8">
-                              <input type="text" nbInput fullWidth  placeholder="Company Address">
+                              <textarea id="address" name="address" [(ngModel)]="companyDTO.address" #address="ngModel" rows="5" type="text" nbInput fullWidth  placeholder="Company Address" required></textarea>
+                              <div *ngIf="address.invalid && (address.dirty || address.touched)" class="error">
+                                <div *ngIf="address.errors.required">
+                                  Address is required
+                                </div>
+                            </div>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">About Company</label>
                             <div class="col-sm-8">
-                                <textarea rows="5" nbInput fullWidth   placeholder="Text Area"></textarea>
+                                <textarea id="shortText" name="shortText" [(ngModel)]="companyDTO.shortText" #shortText="ngModel" rows="5" nbInput fullWidth   placeholder="About Company"></textarea>
                             </div>
                           </div>
 
                         <div class="form-group row">
                           <div class="offset-sm-4 col-sm-8">
-                            <button type="submit" nbButton status="primary" (click)="proceedtosubcription()">Proceed</button>
+                            <button [disabled]="companysForm.invalid" type="submit" nbButton status="primary" (click)="proceedtosubcription()">Proceed</button>
                           </div>
                         </div>
                       </form>
@@ -126,55 +174,38 @@
    <p class="listsubheader">Select your preferred package</p>
    </div>
 <div style="padding-top:.5rem;">
-    <nb-tabset>
+    <nb-tabset  #tset (click)="filterLeavePlan(tset.tabs._results)">
         <nb-tab tabTitle="Smartace Basic">
-        <div style="padding-top:1.5rem">
-
-        <div style="padding: 1rem; box-shadow: 0px 3px 6px #CCCCCC33;
-        border: 0.5px solid #CCCCCC;
-        border-radius: 4px;
-        opacity: 1;">
-            <h6 class="header6-medium">SmartAce Basic Online Plan A</h6>
-            <p class="p-normal">Maximum Employee: 10</p>
-            <p class="p-normal"><nb-icon icon="info" status="primary" style="cursor: pointer !important;" (click)="showSubscribedModule()"></nb-icon>&nbsp;Minimal Access To The System Modules</p>
-            <div class="row">
-                <div class="col-md-8">
-                    <h5 class="header6-bold">#3,000</h5>
-                </div>
-                <div class="col-md-4">
-                    <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling()">Subscribe</button>
-                </div>
-            </div>
-
-        </div>
-
-        </div>
+   
         </nb-tab>
         <nb-tab tabTitle="Smartace Lite">
-          <div style="padding-top:1.5rem">
-
-            <div style="padding: 1rem; box-shadow: 0px 3px 6px #CCCCCC33;
-            border: 0.5px solid #CCCCCC;
-            border-radius: 4px;
-            opacity: 1;">
-                <h6 class="header6-medium">SmartAce Lite Online Plan A</h6>
-                <p class="p-normal">Maximum Employee: 10</p>
-                <p class="p-normal"><nb-icon icon="info" status="primary" style="cursor: pointer !important;" (click)="showSubscribedModule()"></nb-icon>&nbsp;Minimal Access To The System Modules</p>
-                <div class="row">
-                    <div class="col-md-8">
-                        <h5 class="header6-bold">#3,000</h5>
-                    </div>
-                    <div class="col-md-4">
-                        <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling()">Subscribe</button>
-                    </div>
-                </div>
-
-            </div>
-
-            </div>
+       
         </nb-tab>
 
       </nb-tabset>
+      <div style="padding-top:1.5rem" >
+
+        <div style="padding: 1rem;margin: .5rem; box-shadow: 0px 3px 6px #CCCCCC33;
+        border: 0.5px solid #CCCCCC;
+        border-radius: 4px;
+        opacity: 1;" *ngFor="let plan of subPlan; let i= index">
+            <h6 class="header6-medium">{{plan.name}}</h6>
+            <p class="p-normal">Maximum Employee: {{plan.licenseCount}}</p>
+            <p class="p-normal">
+              <nb-icon icon="info" status="primary" style="cursor: pointer !important;" (click)="showSubscribedModule(plan.subscriptionPlanModules)">
+              </nb-icon>&nbsp;Minimal Access To The System Modules</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="header6-bold">#{{plan.amount | number: '.2'}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <button style="text-transform: none !important;" type="submit" nbButton status="primary" (click)="proceedtobilling(plan)">Subscribe</button>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
 </div>
    </div>
 
@@ -191,7 +222,7 @@
 <div class="col-sm-6">
   <div class="form-group">
     <label for="exampleInputEmail1" class="label listsubheader">Subscription Type</label>
-    <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Subscription Type">
+    <input readonly [(ngModel)]="selectedPlan.name" type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Subscription Type">
   </div>
 </div>
 <div class="col-sm-6"></div>
@@ -200,7 +231,9 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label for="exampleInputEmail1" class="label listsubheader">Billing Type</label>
-        <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Billing Type">
+       <select class="form-control" >
+<option *ngFor="let freq of allFrequncy" [value]="freq.id">{{freq.name}}</option>
+       </select>
       </div>
     </div>
     <div class="col-sm-6">
@@ -214,7 +247,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="exampleInputEmail1" class="label listsubheader">Amount</label>
-            <app-amount-input></app-amount-input>
+            <input readonly [(ngModel)]="selectedPlan.amount" type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Subscription Type">
 
           </div>
         </div>
@@ -223,8 +256,8 @@
           <div class="row">
             <div class="col-sm-12">
               <button  angular4-paystack
-              [email]="'test@test.com'"
-              [amount]="500 * 100"
+              [email]="companyDTO.email"
+              [amount]="selectedPlan.amount * 100"
               [ref]="reference"
               (paymentInit)="paymentInit()"
               (close)="paymentCancel()"
@@ -352,23 +385,12 @@
 <ngx-side-modal [(show)]="showModulesModal" [position]="modalPosition">
   <div modal-header>Modules</div>
   <div modal-body>
-    <div style="display: flex;flex-direction: column; width: 100%;">
+    <div style="display: flex;flex-direction: column; width: 100%;" *ngFor="let sPlan of selectedPlanModule">
       <div class="p-normal" style="display: flex;padding: 10px;">
         <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
-        <div style="padding: 1.5px 0 0 20px;">Employee Management</div>
+        <div style="padding: 1.5px 0 0 20px;">{{sPlan.modular.name}}</div>
       </div>
-      <div class="p-normal" style="display: flex;padding: 10px;">
-        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
-        <div style="padding: 1.5px 0 0 20px;">Leave Management</div>
-      </div>
-      <div class="p-normal" style="display: flex;padding: 10px;">
-        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
-        <div style="padding: 1.5px 0 0 20px;">Query Management</div>
-      </div>
-      <div class="p-normal" style="display: flex;padding: 10px;">
-        <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
-        <div style="padding: 1.5px 0 0 20px;">Expense Management</div>
-      </div>
+     
     </div>
   </div>
   <div modal-actions>

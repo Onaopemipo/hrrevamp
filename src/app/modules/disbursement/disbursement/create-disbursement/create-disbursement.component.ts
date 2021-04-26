@@ -63,20 +63,20 @@ export class CreateDisbursementComponent implements OnInit {
 
   changeDisburse(event){
       this.budgetItem = event;
-}
+  }
 
 changeRecipient(event){
   this.myrecipient = event;
   // alert(event)
-}
+  }
 
 toggle(event){
   this.recurrence = event;
-}
+  }
 
 benefiary(event){
   this.saveBeneficiary = event;
-}
+  }
 
 async fetAllBudgetItems(){
   const data = await this.budgetItemService.getAllBudgetItems(this.dataIndex).toPromise();
@@ -99,7 +99,7 @@ async getFrequencies(){
 async createDisbursement(){
   const data = await this.disbursementService.postSingleDisbursement(this.disbursement).toPromise();
   if(!data.hasError){
-    this.alert.openModalAlert('Budget Created', 'Budget Added Successfully', 'Dismiss');
+    this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss');
   } else {
     console.log(data.message)
   }

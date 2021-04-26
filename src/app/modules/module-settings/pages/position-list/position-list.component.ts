@@ -54,13 +54,15 @@ PositionFilter, MyPosition> implements OnInit {
   getNewEditingData() { return new MyPosition(); }
 
   saveData(data: MyPosition) {
-    console.log(1000)
+    console.log(data)
     if (this.editingData.id) {
       this.successMessage = SUCCESS_MESSAGES.edit;
     } else {
       this.successMessage = SUCCESS_MESSAGES.create;
     }
-    return this.api.create(this.editingData);
+    const new_data = this.getNewEditingData();
+    Object.assign(new_data, data);
+    return this.api.create(new_data);
   }
 
   getData() {
@@ -97,17 +99,26 @@ PositionFilter, MyPosition> implements OnInit {
   requiredButton = [{name: 'newTraining', label: 'New Position', icon: 'plus'}];
   formConfig: FormConfig = {
     fields: [
-      {name: 'title', label: 'Title', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'title', label: 'Title', type: FORM_TYPES.text, validator: {presence: true}},
+      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg, validator: {presence: true}},
       {name: 'promotion_min_years', label: 'Promotion Minimium Years', type: FORM_TYPES.number},
       {name: 'amount', label: 'Basic Salary', type: FORM_TYPES.amount},
-      {name: 'parent_id', label: 'Parent Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions},
-      {name: 'next_position_id', label: 'Next Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions},
+      {name: 'parent_id', label: 'Parent Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions, singleSelection: true},
+      {name: 'next_position_id', label: 'Next Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions, singleSelection: true},
 
-      {name: 'qualifications', label: 'Qualifications', type: FORM_TYPES.select, choice_name: ChoiceName.qualifications},
-      {name: 'certifications', label: 'Certifications', type: FORM_TYPES.select, choice_name: ChoiceName.certifications},
+      {name: 'selectedQualifications', label: 'Qualifications', type: FORM_TYPES.select, choice_name: ChoiceName.qualifications},
+      {name: 'selectedCertifications', label: 'Certifications', type: FORM_TYPES.select, choice_name: ChoiceName.certifications},
       {name: 'min_years_experience', label: 'Minimium Years of Experience', type: FORM_TYPES.number},
     ]
   };
   formTitle = 'Add new Position';
+
+  validator = {
+    // title: {
+    //   presence: true,
+    // },
+    // description: {
+    //   presence: true
+    // }
+  };
 }

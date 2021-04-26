@@ -57,8 +57,8 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
 import { ExitRequestService } from './services/exit-request.service';
 import { CustomServiceService } from '../../_services/custom-service.service';
 import {
-  FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,FetchEmployeesByName_IdServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy,
+  FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,FetchEmployeesByName_IdServiceProxy, GetVisaTypeServiceProxy,
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy, AddUpateOfferLetterTemplateServiceProxy,PrepareOfferLetterEmailServiceProxy,
   FetchEmployeeContractByEmployeeIdServiceProxy, GetConfirmationsByDetailsServiceProxy, SaveConfirmationServiceProxy, PostServiceProxy, UploadDocumentServiceProxy
 } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
@@ -95,6 +95,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
+      EmployeeofferComponent,
      
 
       CardComponent],
@@ -151,7 +152,12 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     FetchDeploymentServiceProxy,
     PostServiceProxy,
     UploadDocumentServiceProxy,
-    FetchEmployeesByName_IdServiceProxy
+    FetchEmployeesByName_IdServiceProxy,
+    GetVisaTypeServiceProxy,
+    AddUpateOfferLetterTemplateServiceProxy,
+    PrepareOfferLetterEmailServiceProxy
+    
+  
   ]
 
 

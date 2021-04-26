@@ -1,17 +1,23 @@
-<ngx-componentsheader
-  pageName="Settings"
-  [requiredButton]="[]"
-></ngx-componentsheader>
-<div class="main-page-container">
-  <div class="row">
-    <div class="col-sm-6">
+<ngx-page
+  (topActionClicked)="pageActionClicked($event)"
+  [(showModal)]="showModal"
+  pageTitle="Email Settings"
+  [requiredButton]="topActionButtons"
+  [formConfig]="formConfig"
+  [(value)]="editingData"
+  (formCompleted)="submitForm()"
+  (formCancelled)="hideModal()"
+  [tableData]="data"
+  [tableColumns]="tableColumns"
+  [loadingSave]="loadingSave"
+  formTitle="Settings"
+  [emptyConfig]="emptyConfig"
+  [loading]="loading"
+  [tableActions]="tableActions"
+  (tableActionClicked)="tableActionClick($event)"
+></ngx-page>
 
-
-    </div>
-  </div>
-</div>
-
-<ngx-side-modal [(show)]="showModal">
+<!-- <ngx-side-modal [(show)]="showModal">
   <div class="form-group">
     <label>Username</label>
     <input class="form-control" />
@@ -48,4 +54,4 @@
     <label></label>
     <button nbButton status="primary">Submit</button>
   </div>
-</ngx-side-modal>
+</ngx-side-modal> -->

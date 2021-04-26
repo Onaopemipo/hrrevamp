@@ -505,7 +505,8 @@ export class EmployeerecordsviewComponent implements OnInit {
     private alertservice: AlertserviceService, private FetchEmployeeByIdService: FetchEmployeeByIdServiceProxy,
     private activatedroute: ActivatedRoute, private router: Router, private CommonService: CommonServiceProxy,
     private GetAllProfessionalBodiesService: GetAllProfessionalBodiesServiceProxy,
-    private RecruitmentSettingService: RecruitmentSettingServiceProxy,private UploadProfileImageService: UploadProfileImageServiceProxy,
+    private RecruitmentSettingService: RecruitmentSettingServiceProxy,
+    private UploadProfileImageService: UploadProfileImageServiceProxy,
   private FileUploadService:FileStorageManagerServiceProxy) { }
   
     dateDiffInDays(a: Date, b:Date):number {

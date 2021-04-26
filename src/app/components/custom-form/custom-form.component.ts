@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import * as validate from 'validate.js';
 import { ChoiceName } from '../multi-select/multi-select.component';
 
 export enum FORM_TYPES {
-  text, amount, number, wysiwyg, select, file, employee, radio, date_range
+  text, amount, number, wysiwyg, select, file, employee, radio, date_range, date, checkbox
 }
 
 export class FormValidator{
@@ -17,6 +18,7 @@ export class FormField {
   name: string;
   label: string;
   type: FORM_TYPES;
+  validator?: any;
   validators?: FormValidator;
   optional?: boolean = false;
   placeholder?: string = 'place';
@@ -46,9 +48,14 @@ export class CustomFormComponent implements OnInit {
       {name: 'category_name', label: 'Name', type: FORM_TYPES.text}
     ]
   };
-  @Input() set value(val: object) {
+  @Input() set value(val: Record<string, string[]>) {
     this.data = { ...val };
   }
+  @Input() formErrors = {};
+  // @Input() formErrors(val: Record<string, string[]>) {
+  //   console.log(val);
+  //   this.errors = val;
+  // }
   @Input() loadingSave = false;
   @Output() valueChange = new EventEmitter<object>();
   @Output() onCancel = new EventEmitter();
@@ -68,6 +75,11 @@ export class CustomFormComponent implements OnInit {
   }
 
   validate() {
+    const validator = {};
+    this.formFields.filter(field => field.validator).forEach(field => {
+      validator[field.name] = field.validator;
+    });
+    this.errors = validate(this.data, validator);
     return true;
   }
 

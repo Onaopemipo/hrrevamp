@@ -1,0 +1,40 @@
+<ngx-componentsheader *ngIf="defaultPage > 0" [requiredButton]="[{name:'newType', label:'Add New', icon: 'plus'}]" (buttonClick)="toggleModal()" pageName='Interest Type'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="defaultPage < 1" pageName='Interest Type'></ngx-componentsheader>
+
+<div *ngIf="defaultPage < 1">
+  <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="toggleModal()">
+  </ngx-default-content>
+  </div>
+
+
+
+
+  <ngx-side-modal [(show)]='interestModal' style="width: 500px;">
+    <div modal-header>Create Interest Type</div>
+    <div modal-body>
+      <form #editItem="ngForm" name="editItem">
+          <div class="row">
+          <div class="form-group col">
+            <label>Interest Rate</label>
+            <input type="number" class="form-control" name="rateAmount" #rateAmount="ngModel" [minlength]="0" [maxlength]="100" [(ngModel)]="rateModel.rate" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col">
+            <label>Descripion</label>
+            <input type="text" class="form-control" name="description" #description="ngModel" [(ngModel)]="rateModel.description" required>
+          </div>
+        </div>
+
+
+          <div class="form-group" style="margin-top: 20px">
+            <label></label>
+            <div>
+                <button nbButton status="primary" outline class="white-background mr-2" style="margin: 3px;">Cancel</button>
+                <button nbButton status="primary" (click)="createType()">Create</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </ngx-side-modal>

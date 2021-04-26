@@ -1,3 +1,4 @@
+import { CommonServiceProxy, Competency } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
@@ -88,6 +89,7 @@ export class PlanningComponent implements OnInit {
 
   planDataCount: number = 0;
   newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
+  allCompetencies: Competency [] = [];
 
   constructor(
     private navCtrl: Location,
@@ -96,6 +98,7 @@ export class PlanningComponent implements OnInit {
     private planService: FetchSuccessionPlanServiceProxy,
     private succession: CareerSuccessionServiceProxy,
     private alertMe: AlertserviceService,
+    private commonService: CommonServiceProxy,
 
   ) { }
 
@@ -123,6 +126,7 @@ export class PlanningComponent implements OnInit {
     });
 
     this.fetchAllPlans();
+    this.fetchCompetencies()
   }
 
   goback() {
@@ -136,6 +140,13 @@ export class PlanningComponent implements OnInit {
 
   addPlan(){
     // this.newPlan = !this.newPlan;
+  }
+
+  async fetchCompetencies(){
+    const data = await this.commonService.getCompetency().toPromise();
+    if(!data.hasError){
+      this.allCompetencies = data.result;
+    }
   }
 
   async fetchAllPlans(){

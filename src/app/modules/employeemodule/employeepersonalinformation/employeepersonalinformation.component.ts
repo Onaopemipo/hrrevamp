@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   PostServiceProxy, MessageOut, OnboardingPersonalDTO,
-  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State,
-  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, FileParameter, OnboardingBankDTO, Country, OnboardingTaxDTO, Position, UploadDocumentServiceProxy
+  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State, VisaType, DropdownValueDTO, FetchEmployeesByName_IdServiceProxy,
+  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, GetVisaTypeServiceProxy, FileParameter, OnboardingBankDTO, Country, OnboardingTaxDTO, Position, UploadDocumentServiceProxy
 
 } from '../../../_services/service-proxies';
 
@@ -48,18 +48,30 @@ export class EmployeepersonalinformationComponent implements OnInit {
   Designation: Position[] = [];
   allDepartment: DropdownValue[] = [];
   Entity: IDTextViewModel[] = []
-  tempRef:any=''
+  tempRef: any = ''
   entityId = 0;
-  userId:number = 0
-  isReadOnly?: boolean= false
-  files:Transfer
+  userId: number = 0
+  isReadOnly?: boolean = false
+  files: Transfer
+  nameId?: undefined
+  iD?: undefined;
+  companyId?: undefined;
+  subId?: undefined;
+  visaName?: undefined;
+  pageSize = 1000;
+  pageNumber = 1;
+  createdById?: number = 1;
+
   // itemId?:FileParameter[]=[];
-  itemId:any= 0;
+  itemId: any = 0;
   OnboardingId: number = 1;
   id?: number = 1
+  Visa: VisaType[] = []
+  Manager: DropdownValueDTO[];
 
   constructor(private DataService: DataServiceProxy, private common: CommonServiceProxy, private PostService: PostServiceProxy,
-    private alertservice: AlertserviceService, private UploadDocumentService: UploadDocumentServiceProxy) { }
+    private alertservice: AlertserviceService, private UploadDocumentService: UploadDocumentServiceProxy, private GetVisaTypeServiceProxy: GetVisaTypeServiceProxy,
+    private FetchEmployeesByName_IdServiceProxy: FetchEmployeesByName_IdServiceProxy) { }
   async getGender() {
     const data = await this.DataService.getDropDownValuesById(10).toPromise()
     if (!data.hasError) {
@@ -68,6 +80,12 @@ export class EmployeepersonalinformationComponent implements OnInit {
 
     }
   }
+
+  // subId?: string = ''
+
+
+
+
   async getEntity() {
     const data = await this.DataService.docEntityTypes().toPromise()
     if (!data.hasError) {
@@ -76,6 +94,14 @@ export class EmployeepersonalinformationComponent implements OnInit {
     }
     else {
       return data.hasError[0]
+    }
+  }
+
+  async getManager() {
+    const data = await this.FetchEmployeesByName_IdServiceProxy.getEmployeesByNameId(this.nameId).toPromise()
+    if (!data.hasError) {
+      this.Manager = data.result;
+      console.log('manager', this.Manager)
     }
   }
 
@@ -143,7 +169,7 @@ export class EmployeepersonalinformationComponent implements OnInit {
     }
   }
   async getInstitution() {
-     
+
     const data = await this.common.getInstitutions().toPromise()
 
     if (!data.hasError) {
@@ -160,7 +186,13 @@ export class EmployeepersonalinformationComponent implements OnInit {
       this.allDepartment[0].option_text
     }
   }
-
+  async getTypeVisa() {
+    const data = await this.GetVisaTypeServiceProxy.getVisaType(this.iD, this.companyId, this.subId, this.visaName, this.pageNumber, this.pageSize).toPromise()
+    if (!data.hasError) {
+      this.Visa = data.result
+      console.log('Visa', this.Visa)
+    }
+  }
   async getDesignation() {
     const data = await this.common.getPosition().toPromise()
     if (!data.hasError) {
@@ -199,7 +231,7 @@ export class EmployeepersonalinformationComponent implements OnInit {
     if (this.taxData.passportExpiryDate) return true; return false
   }
 
-  get vali() {
+  get valid() {
     if (this.taxData.visaExpiryDate) return true; return false
   }
   get validatedata() {
@@ -232,11 +264,11 @@ export class EmployeepersonalinformationComponent implements OnInit {
   get validdate() {
     if (this.workData.dateofJoining) return true; return false
   }
-  get formval() {
+  // get formval() {
 
-    if (this.paymentData.accountNumber && this.paymentData.accountName && this.paymentData.accountTypeId && this.paymentData.bankNameId) return true;
-    return false;
-  }
+  //   if (this.paymentData.accountNumber && this.paymentData.accountName && this.paymentData.accountTypeId && this.paymentData.bankNameId) return true;
+  //   return false;
+  // }
 
   async onSubmit() {
     console.log('userdata', this.UserData)
@@ -246,11 +278,13 @@ export class EmployeepersonalinformationComponent implements OnInit {
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
       this.submitbtnPressed = false
-
+      this.selectedPanel = 'work_Info'
 
     } else {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
     }
+
+
   }
   selectPanel(hiringlist, i) {
     this.selectedPanel = hiringlist;
@@ -286,36 +320,57 @@ export class EmployeepersonalinformationComponent implements OnInit {
     this.getDesignation()
     this.getDepartment();
     this.getEntity()
+    this.getTypeVisa()
+    this.getManager()
   }
-  createdById?: number = 1;
-  companyId?: number = 1;
-  subId?: string = ''
+
+  async submitTax() {
+    this.submitbtnPressed = true
+    const data = await this.PostService.addUpdateOnboardingTaxData(this.taxData).toPromise()
+    if (!data.hasError) {
+
+      console.log("tax", this.taxData)
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+
+    } else {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+      this.submitbtnPressed = false
+    }
+
+  }
 
   async Submitdoc() {
     alert('checking')
     this.submitbtnPressed = true
-    const data = await this.PostService.addUpdateOnboardingDocummentData(this.OnboardingId, this.tempRef, this.userId, this.id, this.createdById, this.companyId, this.subId)
+    const data = await this.PostService.addUpdateOnboardingDocummentData(this.iD, this.companyId, this.subId, this.OnboardingId, this.createdById, this.userId, this.tempRef,)
       .toPromise();
     if (!data.hasError) {
+
+      console.log("tax", data)
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
-      this.submitbtnPressed = false
+
     } else {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+      this.submitbtnPressed = false
     }
-  }
 
+  }
+  getformv() {
+    if (this.paymentData.accountNumber && this.paymentData.accountName && this.paymentData.accountTypeId && this.paymentData.bankNameId && this.paymentData.onboardingId) return true;
+    return false;
+  }
   selectedFile(files: Transfer, title) {
     console.log('flow file', files.flowFile.file)
     if (this.Entity.length > 0) {
       let srchR = this.Entity.find(f => f.text == "EMPLOYEE_DOC");
       this.entityId = srchR.id;
     }
-     const refNumber =  this.tempRef
+    const refNumber = this.tempRef
     console.log('temp ref', this.tempRef)
     // this.files = files.flowFile.file
-    this.UploadDocumentService.uploadDocs(this.userId,title,this.itemId,this.entityId,this.isReadOnly,refNumber,files.flowFile.file[0]).subscribe(data => {
+    this.UploadDocumentService.uploadDocs(this.userId, title, this.itemId, this.entityId, this.isReadOnly, refNumber, files.flowFile.file[0]).subscribe(data => {
       if (!data.hasError) {
-        console.log('ref',this.tempRef)
+        console.log('ref', this.tempRef)
         console.log('datarseee', data.result)
         if (!data.hasError) {
           this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');

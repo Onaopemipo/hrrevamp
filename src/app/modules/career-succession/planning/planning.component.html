@@ -79,11 +79,12 @@
   </div>
   </ngx-side-modal> -->
 
-  <ngx-side-modal [(show)]='newPlan' style="width: 500px;">
+ <div>
+  <ngx-side-modal [(show)]='newPlan' style="width: 600px;">
     <div modal-header>Create Succession Plan</div>
-    <div class="row" modal-body style="padding: 5px;">
-        <div class="form-group row">
-          <div class="col">
+    <div class="row" modal-body>
+        <div class="row">
+          <div class="form-group col">
             <label>Title</label>
             <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
             <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
@@ -92,8 +93,8 @@
           </div>
         </div>
 
-        <div class="form-group row">
-         <div class="col">
+        <div class="row">
+         <div class="form-group col">
           <label>Employee</label>
           <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" required>
           <div *ngIf="employee.invalid && (employee.dirty || employee.touched)" class="error">
@@ -102,8 +103,8 @@
         </div>
         </div>
 
-        <div class="form-group row">
-          <div class="col">
+        <div class="row">
+          <div class="form-group col">
            <label>Position</label>
            <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionId" required>
            <div *ngIf="position.invalid && (position.dirty || position.touched)" class="error">
@@ -112,29 +113,39 @@
           </div>
          </div>
 
-         <div class="form-group row">
-          <div class="col">
+         <div class="row">
+          <div class="form-group col">
+           <label>Competency</label>
+           <select class="custom-select" name="competencyTitle" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+             <option value="">--Select--</option>
+             <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.plantitle }}</option>
+           </select>
+           <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
+            <div *ngIf="competencyTitle.errors.required">Competency is required</div>
+          </div>
+          </div>
+         </div>
+
+         <div class="row">
+          <div class="form-group col">
            <label>Successing Candidate</label>
            <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successionEmployee" required>
           </div>
          </div>
 
-         <div class="form-group row">
-          <div class="col">
+         <div class="row">
+          <div class="form-group col">
            <label>Readiness to start</label>
-           <select type="text" class="custom-select" name="startDate" #startDate="ngModel" [(ngModel)]="newSuccessionPlan.startDate" required>
-             <option value="">--Select--</option>
-             <option *ngFor="let myreadiness of readinessToStart" [value]="myreadiness.name">{{ myreadiness.title }}</option>
-           </select>
-           <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="error">
-            <div *ngIf="startDate.errors.required">Readiness is required</div>
+           <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" required>
+           <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
+            <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
           </div>
           </div>
          </div>
 
 
-         <div class="form-group row">
-          <div class="col">
+         <div class="row">
+          <div class="form-group col col">
            <label>Purpose</label>
            <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
             <option value="">--Select--</option>
@@ -146,13 +157,14 @@
           </div>
          </div>
 
-        <div class="form-group row" style="margin-top: 20px">
-         <div class="col">
+        <div class="row" style="margin-top: 20px">
+         <div class="form-group col col">
           <button nbButton status="primary" (click)="createSuccessionPlan()">Create</button>
          </div>
         </div>
     </div>
     </ngx-side-modal>
+ </div>
 
 
 

@@ -24,7 +24,7 @@ import { PayrollRoutingModule } from './payroll-routing.module';
 import { PayrollComponent } from './payroll.component';
 import { PayrollcomponentComponent } from './payrollcomponent/payrollcomponent.component';
 import { PaymentcreateComponent } from './paymentcreate/paymentcreate.component';
-import { InstitutionalmanagementComponent } from './institutionalmanagement/institutionalmanagement.component';
+import { InstitutionalmanagementComponent, PayrollElementComponent, PayrollTypeComponent } from './institutionalmanagement/institutionalmanagement.component';
 import { PaymenysetupComponent } from './paymenysetup/paymenysetup.component';
 import { PayelementComponent } from './payelement/payelement.component';
 import { EditpaymentformComponent } from './editpaymentform/editpaymentform.component';
@@ -39,8 +39,8 @@ import { PayrollanalysisComponent } from './payrollanalysis/payrollanalysis.comp
 import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.component';
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
-import { MyPayrollInstitutionService } from './services/common.service';
-import { AddUpdatePaymentInstitutionServiceProxy, GetAllPaymentInstitutionsServiceProxy } from 'app/_services/service-proxies';
+import { MyPayElementService, MyPayrollInstitutionService, MyPayrollTypeService } from './services/common.service';
+import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy } from 'app/_services/service-proxies';
 
 
 @NgModule({
@@ -63,6 +63,8 @@ import { AddUpdatePaymentInstitutionServiceProxy, GetAllPaymentInstitutionsServi
     AnalysistestpayComponent,
     DetailsTestPayComponent,
     PayrollRunLogComponent,
+    PayrollTypeComponent,
+    PayrollElementComponent,
   ],
   imports: [
     ComponentsModule,
@@ -87,8 +89,14 @@ import { AddUpdatePaymentInstitutionServiceProxy, GetAllPaymentInstitutionsServi
   ],
   providers: [
     MyPayrollInstitutionService,
+    MyPayrollTypeService,
+    MyPayElementService,
     AddUpdatePaymentInstitutionServiceProxy,
     GetAllPaymentInstitutionsServiceProxy,
+    AddUpdatePayScaleServiceProxy,
+    GetAllPayrollTypesServiceProxy,
+    GetAllPayElementsServiceProxy,
+    AddUpdatePayElementServiceProxy,
   ],
 })
 export class PayrollModule { }

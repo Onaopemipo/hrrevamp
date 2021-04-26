@@ -1,20 +1,26 @@
 <ngx-componentsheader *ngIf="pageNo == 1"
   pageName="Loan Request"
-  [requiredButton]="[]"
+  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="gotoNext()"
 ></ngx-componentsheader>
 
 <ngx-componentsheader *ngIf="pageNo == 2"
   pageName="Loan Request"
-  [requiredButton]="[{name:'submit', label:'Submit'}]" (buttonClick)="addRole()"
+  [requiredButton]="[{name:'submit', label:'Submit'}]" (buttonClick)="makeLoanRequest()"
 ></ngx-componentsheader>
 
-<div *ngIf="pageNo == 1">
+<div *ngIf="loansCounter < 1 && pageNo == 1">
   <nb-card>
     <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="button" (buttonClick) = "gotoNext()">
     </ngx-default-content>
   </nb-card>
 </div>
 
+<div *ngIf="loansCounter > 0 && pageNo == 1">
+  <nb-card>
+    <ngx-tableheader></ngx-tableheader>
+       <ngx-tablecomponent [tableColum]="loanRequestTable" [loading]="loading" [userData]="allLoansData"></ngx-tablecomponent>
+  </nb-card>
+</div>
 <!-- <div>
   <nb-card>
     <nb-card-body>
@@ -64,7 +70,7 @@
                   <div class="col-sm-6">
                     <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeName">
                       <option value="">--Select Loan Type--</option>
-                      <option *ngFor="let myType of allLoanTypes" [value]="myType.code">{{ myTpe.name }}</option>
+                      <option *ngFor="let myType of allLoanTypes" [value]="myType.code">{{ myType.name }}</option>
                     </select>
                   </div>
                 </div>
@@ -75,9 +81,9 @@
                     </div>
 
                     <div class="col-sm-6">
-                      <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeName">
+                      <select class="form-control" name="loanType" [(ngModel)]="loanModel.interestRate">
                         <option value="">--Select Interest Type--</option>
-                        <option value="1">Type One</option>
+                        <option *ngFor="let interest of allInterestRates" value="1">{{ interest.description }}</option>
                       </select>
                     </div>
                 </div>
@@ -128,7 +134,8 @@
                   </div>
 
                   <div class="col-sm-6">
-                    <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                    <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanModel.customQuestion" cols="60" rows="10"></textarea>
+                    <!-- <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                   </div>
 
                 </div>
@@ -139,7 +146,8 @@
                   </div>
 
                   <div class="col-sm-6">
-                    <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                    <textarea name="customAnswer" #customAnswer="ngModel" [(ngModel)]="loanModel.customAnswer" cols="60" rows="10"></textarea>
+                    <!-- <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                   </div>
 
                 </div>
@@ -150,6 +158,7 @@
                   </div>
 
                   <div class="col-sm-6">
+                    <textarea name="justification" #justification="ngModel" [(ngModel)]="loanModel.justification" cols="60" rows="10"></textarea>
                     <ngx-wysisyg-input [(value)]="loanModel.justification" style="padding-left: -10px;" ></ngx-wysisyg-input>
                   </div>
                 </div>

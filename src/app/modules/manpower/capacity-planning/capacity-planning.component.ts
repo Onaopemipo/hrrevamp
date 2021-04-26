@@ -338,6 +338,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
         });
 
        // newplan.planrequirement = newplanrqmnt;
+      newplan.stringDepartmentManPowerActivity = JSON.stringify(newplan.requirements);
        this.loading = true;
         this.ManpowerService.addUpdateDepartmentActivity(newplan)
           .subscribe((result) => {

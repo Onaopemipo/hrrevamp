@@ -1,15 +1,27 @@
+import { Router } from '@angular/router';
+import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType } from './../../../_services/service-proxies';
+import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, LoanTypeDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
+enum TABLE_ACTION {
+  VIEW = '1',
+  EDIT = '3'
+}
 @Component({
   selector: 'ngx-loan-request',
   templateUrl: './loan-request.component.html',
   styleUrls: ['./loan-request.component.scss']
 })
 export class LoanRequestComponent implements OnInit {
+
+  tableActions: TableAction[] = [
+    {name: TABLE_ACTION.VIEW, label: 'View'},
+    {name: TABLE_ACTION.EDIT, label: 'Edit'},
+
+  ]
 
   myHeader: string = 'You have no Loan Request';
   myDescription: string = 'Click to make a loan request';
@@ -28,30 +40,43 @@ export class LoanRequestComponent implements OnInit {
   ];
 
   loanRequestTable: TableColumn [] = [
-    {name: 'sn', title: 'SN'},
     {name: 'refNo', title: 'Ref No.'},
-    {name: 'employeeId', title: 'Staff No.'},
+    {name: 'employeeNo', title: 'Employee No.'},
     {name: 'employeeName', title: 'Employee Name'},
-    {name: ' loanAmount', title: 'Loan Amount'},
-    {name: ' amountRepaid', title: 'Amount Repaid'},
-    {name: ' status', title: 'Status'},
+    {name: ' amount', title: 'Loan Amount'},
+    {name: ' requestedAmount', title: 'Requested Amount'},
+    {name: ' loanTypeName', title: 'Loan Type'},
 
   ];
+
+  tableActionClicked(event: TableActionEvent){
+     if(event.name==TABLE_ACTION.VIEW){
+      this.router.navigateByUrl('process-loan' + event.data.id)
+       }
+
+       else if(event.name==TABLE_ACTION.EDIT){
+        this.router.navigateByUrl('update-loan' + event.data.id)
+         }
+  }
 
   allLoansData: LoanRequestDTO [] = [];
   loanSummary: IdNameObj [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
   loanForm: NgForm;
-  allLoanTypes: LoanType [] = [];
-
+  allLoanTypes: LoanTypeDTO [] = [];
+  allInterestRates: InterestRate [] = [];
+  loansCounter: number = 1;
+  loading: boolean = true;
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
-     private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy) { }
+     private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
+     private interestService: GetInterestRateServiceProxy, private router: Router) { }
 
   ngOnInit(): void {
     this.getLoanTypes();
+
   }
 
   selectPanel(rolelist, i) {
@@ -90,9 +115,10 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getAllLoans(){
-    const data = await this.getLoans.getLoanRequests(1,1,null,null,1,1,'',1,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(1,1,'',10,1).toPromise();
     if(!data.hasError){
       this.allLoansData = data.result;
+      this.loansCounter = data.totalRecord;
     }
   }
 
@@ -111,10 +137,17 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getLoanTypes(){
-    const data = await this.loanType.fetchLoanTypeById(1,1).toPromise();
+    const data = await this.loanType.fetchLoanTypeById(1).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       console.log('Here are the types', this.allLoanTypes)
+    }
+  }
+
+  async getInterest(){
+    const data = await this.interestService.getInterestRate().toPromise();
+    if(!data.hasError){
+      this.allInterestRates = data.result;
     }
   }
 

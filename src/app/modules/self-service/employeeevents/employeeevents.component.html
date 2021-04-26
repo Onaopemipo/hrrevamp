@@ -1,32 +1,9 @@
-<nb-card>
-    <!-- <ngx-default-content
-    *ngIf="showEmpty"
-    pageHeader="Create your Event"
-    pageDescription="Click on the button to create a Leave Year"
-    buttonValue="Create Leave Year"
-    [loading]="loading"
-    (buttonClick)="modal('add_leave_year')"
-  >
-  </ngx-default-content>
-    <ngx-tablecomponent  
-    *ngIf="!showEmpty"
-    (filterChange)="filterUpdated($event)"
-    [showActions]="true"
-    [showFilter]="true"
-    (actionClick)="tableActionClicked($event)"
-    [actions]="tableActions" 
-    [userData]="LeaveYear" 
-    [tableColum]="tableColumns"
-    [totalItems]="totalItems"
-    [currentPage]="currentPage"
-    [loading]="loading"
-    >
-</ngx-tablecomponent>  -->
 
-
-    <nb-card-body style="height: 43vh;">
         <ngx-componentsheader pageName='Events' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
         </ngx-componentsheader>
+<nb-card>
+    <nb-card-body style="height: 43vh;">
+
         <div style="width: 100%; position: relative;">
             <!-- <ngx-cal></ngx-cal> -->
             <button nbButton [nbPopover]="formcomponent" (addEvent)="addEvent($event)"
@@ -40,8 +17,9 @@
 
 
         <ngx-side-modal [(show)]='showEvent' style="width: 500px;">
-            <div modal-header style="font-size: larger; font-weight: bold;">{{Event.startDate | date:'medium'}}
-               <span></span> Create new Events</div>
+            <div modal-header style="font-size: larger; font-weight: bold;">
+                Create new Events - {{Event.startDate | date:'medium'}}
+               <span></span> </div>
             <div modal-body>
 
                 <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">

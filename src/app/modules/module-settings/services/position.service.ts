@@ -7,8 +7,8 @@ import { BaseFilter, CrudService, DEFAULT_PAGE_SIZE, ListResult } from './api.se
 
 export class MyPosition extends PositionDTO implements IStatus {
   data: PositionDTO;
-  selectedQualifications: string;
-  selectedCertifications: string;
+  selectedQualifications: [] = [];
+  selectedCertifications: [] = [];
 
   public constructor(data: PositionDTO = new PositionDTO()) {
     super(data);
@@ -29,8 +29,8 @@ export class MyPosition extends PositionDTO implements IStatus {
   }
 
   toManage() {
-    return new ManagePositionDTO({...this, selectedQualifications: this.selectedQualifications,
-      selectedCertifications: this.selectedCertifications });
+    return new ManagePositionDTO({...this,
+      selectedCertifications: this.selectedCertifications.join(','), selectedQualifications: this.selectedQualifications.join(',')});
   }
 
   get selectValue() {

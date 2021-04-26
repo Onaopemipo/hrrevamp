@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import {
-  PostServiceProxy, MessageOut, OnboardingPersonalDTO,Position,
-  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State,FetchEmployeesByName_IdServiceProxy,DropdownValueDTO
+  PostServiceProxy, MessageOut, OnboardingPersonalDTO, Position, OfferLetterTemplateDTO, PrepareOfferLetterEmailServiceProxy, PrepareOfferLetterDTO,
+  OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State, FetchEmployeesByName_IdServiceProxy, DropdownValueDTO, AddUpateOfferLetterTemplateServiceProxy
 } from '../../../_services/service-proxies';
 import { FormGroup } from '@angular/forms';
 import { AlertserviceService } from 'app/_services/alertservice.service';
@@ -32,11 +32,15 @@ export class HiringchecklistComponent implements OnInit {
   Marital: DropdownValue[] = [];
   Religion: DropdownValue[] = [];
   Designation: Position[] = [];
-  nameId?:undefined
-  Manager:DropdownValueDTO[]
-
+  nameId?: undefined
+  Manager: DropdownValueDTO[]
+  OfferLetter = new OfferLetterTemplateDTO().clone()
+  prepareOffer = new PrepareOfferLetterDTO().clone();
+  OnboardingId: number =1
+  EployType: DropdownValue[] = [];
   constructor(private sanitizer: DomSanitizer, private common: CommonServiceProxy, private PostService: PostServiceProxy, private alertservice: AlertserviceService,
-    private DataService: DataServiceProxy,private FetchEmployeesByName_IdServiceProxy:FetchEmployeesByName_IdServiceProxy) { }
+    private DataService: DataServiceProxy, private FetchEmployeesByName_IdServiceProxy: FetchEmployeesByName_IdServiceProxy, private AddUpateOfferLetterTemplateServiceProxy: AddUpateOfferLetterTemplateServiceProxy,
+    private PrepareOfferLetterEmailServiceProxy: PrepareOfferLetterEmailServiceProxy) { }
   async getGender() {
     const data = await this.DataService.getDropDownValuesById(10).toPromise()
     if (!data.hasError) {
@@ -45,11 +49,21 @@ export class HiringchecklistComponent implements OnInit {
     }
   }
 
+  async getEmployeeType() {
+    const data = await this.DataService.getDropDownValuesById(7).toPromise();
+
+    if (!data.hasError) {
+      this.EployType = data.result;
+      console.log('employ', this.EployType)
+      this.allGender[0].option_text
+    }
+
+  }
   async getManager() {
     const data = await this.FetchEmployeesByName_IdServiceProxy.getEmployeesByNameId(this.nameId).toPromise()
     if (!data.hasError) {
       this.Manager = data.result;
-      console.log('manager',this.Manager)
+      console.log('manager', this.Manager)
     }
   }
 
@@ -112,25 +126,55 @@ export class HiringchecklistComponent implements OnInit {
     } else {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
     }
+    this.submitbtnPressed= false
   }
 
 
   async proceedtoofferLetter() {
-    this.subtitle = 'Offer Letter';
-    this.selectedPanel = 'offerletterPanel';
-    this.submitbtnPressed = true
+  
+    this.submitbtnPressed = false
     console.log('workdata', this.workData)
     const data = await this.PostService.addUpdateOnboardingWorkData(this.workData).toPromise()
+
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+     
+      
+    this.subtitle = 'Offer Letter';
+    this.selectedPanel = 'offerletterPanel';
+    }
+    this.submitbtnPressed= false
+    if(data.hasError)  {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+      this.subtitle = 'Work Information';
+       this.selectedPanel = 'workInfoPanel';
+    }
+
+
+    
+  
+  }
+  //offfer letter
+  // async  proceedfferLetter(){
+  //   const data = await this.
+  // }
+
+  async fetchOffer(){
+
+    const datares = await this.PrepareOfferLetterEmailServiceProxy.applicantJobOfferEmail(this.OnboardingId).toPromise()
+    if (!datares.hasError) {
+      this.prepareOffer = datares.result
+      console.log('datares', this.prepareOffer)
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, datares.message, 'OK');
 
     }
 
     else {
-      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, datares.message, 'OK')
     }
-  }
 
+
+  }
   gotoPanel(paneltitle, wizardtitle) {
     this.subtitle = wizardtitle;
     this.selectedPanel = paneltitle;
@@ -143,6 +187,9 @@ export class HiringchecklistComponent implements OnInit {
     this.getreligion()
     this.getDesignation()
     this.getManager()
+    this.getEmployeeType()
+    this.fetchOffer()
+    
   }
 
   async getDesignation() {
@@ -165,14 +212,15 @@ export class HiringchecklistComponent implements OnInit {
       && this.UserData.martialStatusId && this.UserData.genderId && this.UserData.residentialAddress &&
       this.UserData.religionId
       && this.UserData.defaultMobile
-      && this.UserData.degree && this.UserData.fieldOfStudy) return true;
+      && this.UserData.degree && this.UserData.fieldOfStudy ) return true;
     return false;
   }
 
 
   get formvalidate() {
     if (this.workData.hireDate && this.workData.dateofJoining && this.workData.salaryPerAnnum && this.workData.desginationId && this.workData.employeeTypeId
-      && this.workData.departmentId && this.workData.reportingManagerId && this.workData.workEmail && this.workData.location && this.workData.onboardingId) return true;
+      && this.workData.departmentId && this.workData.reportingManagerId && this.workData.workEmail && this.workData.location && this.workData.onboardingId
+      && this.workData.linkExpireDate) return true;
     return false
   }
 
@@ -253,8 +301,8 @@ export class HiringchecklistComponent implements OnInit {
     return resp;
   }
 
-  get validatedate() {
-    if (this.InformationData.dateOfBirth) return true;
+  get validated() {
+    if (this.UserData.dateOfBirth) return true;
     return false;
   }
 

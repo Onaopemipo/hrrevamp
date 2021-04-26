@@ -26,6 +26,7 @@ import { DeploymentapplicationComponent } from './deploymentapplication/deployme
 import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
 import { CardComponent } from './card/card.component';
 
+
 import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';

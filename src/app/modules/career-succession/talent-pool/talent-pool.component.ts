@@ -43,6 +43,7 @@ export class TalentPoolComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchPool();
+    this.getCompetency();
   }
 
   addNewPool(){

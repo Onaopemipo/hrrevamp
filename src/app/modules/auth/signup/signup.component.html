@@ -11,37 +11,55 @@
                 </div>
                
                 <div class="col-md-4 col-lg-4" style="padding: 1.25rem;">
+                  
                   <div style="padding: 1.25rem;width:100%;border-radius: 8px; background: #FFFFFF 0% 0% no-repeat padding-box;box-shadow: 0px 3px 25px #9E9EA61A;">
                     <div style="padding: 10px;"></div>
                     <img src="assets/icons/smartaceLogo.png" style="width:10.6rem;height:1.6rem">
                    <div style="padding: 20px;"></div>
-                   <form>
+                   <form id="signupForm" name="signupForm" #signupForm="ngForm">
                     <div class="form-group">
                       <label for="exampleInputEmail1" class="label">Email address</label>
-                      <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Email">
+                      <input name="email" id="email" [(ngModel)]="companyDTO.email" #email="ngModel" type="email" nbInput fullWidth  placeholder="Email" [pattern]="emailPattern" required>
+                      <div *ngIf="email.invalid && (email.dirty || email.touched) " class="error">
+                        <div *ngIf="(email.errors.required || email.errors)">
+                          Valid email is required
+                        </div>
+                    </div>
                     </div>
                     <div style="padding: 5px;"></div>
                     <div class="form-group">
                         <label for="exampleInputEmail1" class="label">Phone Number</label>
-                        <input type="text" nbInput fullWidth id="exampleInputEmail1" placeholder="Phone Number">
-                    </div>
+                        <input name="phoneNumber" id="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="companyDTO.phoneNumber" type="text" nbInput fullWidth  placeholder="Phone Number" required>
+                        <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                          <div *ngIf="phoneNumber.errors.required">
+                            Phone Number is required
+                          </div>
+                      </div>
+                      </div>
                       <div style="padding: 5px;"></div>
                     <div class="form-group">
                       <label for="exampleInputPassword1" class="label">Password</label>
                       <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
-                        <input type="password" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" style="border: none;">
-                        <nb-icon  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;"></nb-icon>
+                        <input [type]="show ? 'text' : 'password'" name="password" id="password" [(ngModel)]="companyDTO.password" #password="ngModel"  nbInput fullWidth  placeholder="Password" style="border: none;" required>
+                        <nb-icon  (click)="viewpassword()" *ngIf="!show"  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;cursor: pointer;"></nb-icon>
+                        <nb-icon  (click)="viewpassword()" *ngIf="show"  icon="eye-outline" style="font-size: 32px;color: #95A8B8;cursor: pointer;"></nb-icon>
+                
                       </div>
-                      
+                      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+                        <div *ngIf="password.errors.required">
+                          Password is required
+                        </div>
+                    </div>
                     </div>
                     <div style="padding: 5px;"></div>
                   
-                    <button type="button" (click)="gotoSetup()" nbButton fullWidth status="primary">Sign Up</button>
+                    <button [disabled]="signupForm.invalid" type="button" (click)="gotoSetup()" nbButton fullWidth status="primary">Sign Up</button>
                     <div style="padding: 5px;"></div>
                   </form>
                   <div style="padding: 5px;"></div>
                   <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;">I have an account? <a routerLink="/auth/login" style="font-weight: 700;">Sign In</a></p>
                   </div>
+            
                 </div>
             </div>
         </div>

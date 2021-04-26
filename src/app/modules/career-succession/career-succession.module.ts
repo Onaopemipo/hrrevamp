@@ -28,6 +28,7 @@ import { NineGridBoxEmployeeComponent } from './nine-grid-box-employee/nine-grid
 import { SuccessionPlanService } from './services/succession-plan.service';
 import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
 import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
+import { NewCompetencyComponent } from './new-competency/new-competency.component';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { SuccessionDashboardComponent } from './succession-dashboard/succession-
     CompareCompetencyComponent,
     GridboxComponent,
     TestpoolComponent,
-    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SuccessionDashboardComponent],
+    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SuccessionDashboardComponent, NewCompetencyComponent],
   providers: [
     TalentPoolService,
     EmployeesService,

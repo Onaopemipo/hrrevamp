@@ -43,7 +43,7 @@ export class LoanTypeComponent implements OnInit {
   loanId: number = 0;
   loanSummary: IdNameObj [] = [];
   loanData: PostLoanDto = new PostLoanDto().clone();
-  allloanTypes: LoanType [] = [];
+  allloanTypes: LoanTypeDTO [] = [];
 
   constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService, private repaymentService: LoadRepaymentScheduleServiceProxy,
     private updateLoanService: AddUpdateLoanTypeServiceProxy, private simulateService: SimulatePaymentServiceProxy,
@@ -108,7 +108,7 @@ export class LoanTypeComponent implements OnInit {
   }
 
   async getLoanTypes(){
-    const data = await this.loanTypeService.fetchLoanTypeById(1,1).toPromise();
+    const data = await this.loanTypeService.fetchLoanTypeById(1).toPromise();
     if(!data.hasError){
       this.allloanTypes = data.result;
       this.dataCounter = data.totalRecord;
