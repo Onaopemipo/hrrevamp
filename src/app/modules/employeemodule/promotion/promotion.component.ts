@@ -1,8 +1,38 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { AddUpdateEligibleBucketServiceProxy, CommonServiceProxy, EmployeeDTO, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, Position, PromotionEligibilityViewModel, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
-import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IStatus, MyColor } from 'app/components/status/models';
+
+export class eliWithStatus extends Sp_FetchEligibleEmployees implements IStatus {
+  eliWithSt: Sp_FetchEligibleEmployees;
+
+  constructor(eliWithSt: Sp_FetchEligibleEmployees) {
+    super(eliWithSt);
+    this.eliWithSt = eliWithSt;
+
+  }
+  get status() {
+    return this.eliWithSt.log_status_id;
+  }
+  getStatusLabel() {
+    if (this.eliWithSt.log_status_id === 1) return 'Pending';
+    if (this.eliWithSt.log_status_id === 2) return 'Approved';
+    if (this.eliWithSt.log_status_id === 3) return 'Rejected';
+    if (this.eliWithSt.is_submitted) return 'YES';
+    if (!this.eliWithSt.is_submitted) return 'NO';
+
+  }
+  getStatusColor() {
+    if (this.eliWithSt.log_status_id === 1) return new MyColor(242, 153, 74);
+    if (this.eliWithSt.log_status_id ===2) return new MyColor(0, 153, 74);
+    if (this.eliWithSt.log_status_id === 3) return new MyColor(242, 0, 74);
+    if (this.eliWithSt.is_submitted) return new MyColor(0, 153, 74);
+    if (!this.eliWithSt.is_submitted) return new MyColor(242, 0, 74);
+    return new MyColor(253, 238, 238);
+  }
+}
 
 @Component({
   selector: 'ngx-promotion',
@@ -17,13 +47,13 @@ export class PromotionComponent implements OnInit {
   pageName = "Promotion List";
   showTableAction: boolean = false;
   tableColumns = [
-    { name: 'first_name', title: 'EMPLOYEE' },
-    { name: 'job_role', title: 'PREVIOUS ROLE' },
-    { name: 'period_in_current_postion', title: 'PERIOD SPENT' },
-    { name: 'next_position', title: 'NEXT POSITION' },
-    { name: 'last_promotion_date', title: 'LAST PROMOTION' },
-    { name: 'is_submitted', title: 'SUBMITTED' },
-    { name: 'log_status', title: 'STATUS' },
+    { name: 'employee_name', title: 'EMPLOYEE',type:ColumnTypes.Text },
+    { name: 'current_position', title: 'PREVIOUS ROLE',type:ColumnTypes.Text },
+    { name: 'years_in_current_grade', title: 'PERIOD SPENT',type:ColumnTypes.Text },
+    { name: 'next_position', title: 'NEXT POSITION',type:ColumnTypes.Text },
+    { name: 'last_promotion_date', title: 'LAST PROMOTION', type: ColumnTypes.Date },
+    { name: 'is_submitted', title: 'SUBMITTED',type: ColumnTypes.Status },
+    { name: 'log_status_id', title: 'STATUS',type: ColumnTypes.Status },
   ];
 
   newPromotion = new Sp_FetchEligibleEmployees().clone();
@@ -54,6 +84,16 @@ export class PromotionComponent implements OnInit {
     promotionTargetId: 0,
     comments:''
   }
+
+  Eligibilityfilter = {
+    end: null,
+    start: null,
+    is_closed: undefined,
+    _PageSize: 10,
+    _PageNumber: 1,
+    EligibilityId: undefined
+  }
+  loadingEligibilty: boolean = false;
   constructor(private alert: AlertserviceService,private router:Router,private GetPromotionListsService: GetPromotionListsServiceProxy,
     private activatedroute: ActivatedRoute, private GetPromotionEligibilityListsService: GetPromotionEligibilityListsServiceProxy,
     private CommonService: CommonServiceProxy,private updateEligibility: AddUpdateEligibleBucketServiceProxy) { }
@@ -84,7 +124,16 @@ export class PromotionComponent implements OnInit {
   get showEmpty() {
     return this.promotionList.length === 0;
   }
+
+  // filterUpdatedEligibilty(filter: any) {
+  //   this.Eligibilityfilter = {...this.Eligibilityfilter, ...this.Eligibilityfilter};
+  //   this.getPromotionList();
+  // }
+  // get showEmptyEligibilty() {
+  //   return this.PromotionEligibilityViewModel[0].eligibles.length === 0;
+  // }
   ngOnInit(): void {
+
     this.getPromotionList();
     this.getPositions();
   }
@@ -133,9 +182,16 @@ export class PromotionComponent implements OnInit {
       if (data) {
         if (data.data) {
           this.eligibilityBucket = true;
+          this.loading = true;
           this.promotionBucketList = JSON.parse(data.data);
           this.pageName = this.promotionBucketList.name + " Employee List";
-       //   this.promotionList = this.promotionBucketList.eligibles;
+          this.Eligibilityfilter.EligibilityId = this.promotionBucketList.id;
+          this.GetPromotionEligibilityListsService.getPromotionEligibilityLists(this.Eligibilityfilter._PageSize,
+            this.Eligibilityfilter._PageNumber, this.Eligibilityfilter.EligibilityId, this.Eligibilityfilter.is_closed, this.Eligibilityfilter.start, this.Eligibilityfilter.end)
+            .subscribe(data => {
+              this.loading = false;
+              this.promotionList = data.result[0].eligibles;            
+            });
           this.showTableAction = true;
           this.tableActions = [
             { name: ACTIONS.VIEW, label: 'View' },
