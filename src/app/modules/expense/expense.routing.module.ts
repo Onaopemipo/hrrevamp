@@ -5,6 +5,9 @@ import { ExpenseTypeComponent } from './expense-type/expense-type.component';
 import { ExpenseRequestComponent } from './expense-request/expense-request.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ExpenseReportComponent } from './expense-report/expense-report.component';
+import { ExpenseGroupComponent } from './expense-group/expense-group.component';
+import { ExpenseProjectActivityComponent } from './expense-project-activity/expense-project-activity.component';
+import { ExpenseProjectComponent } from './expense-project/expense-project.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +21,18 @@ export const routes: Routes = [
       {
         path: 'type',
         component: ExpenseTypeComponent,
+      },
+      {
+        path: 'project',
+        component: ExpenseProjectComponent,
+      },
+      {
+        path: 'group',
+        component: ExpenseGroupComponent,
+      },
+      {
+        path: 'project/:id/activities',
+        component: ExpenseProjectActivityComponent,
       },
       {
         path: 'request',

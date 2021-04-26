@@ -65,7 +65,8 @@ export class PromotioneligibilityComponent implements OnInit {
     start: null,
     is_closed: 0,
     _PageSize: 10,
-    _PageNumber: 1
+    _PageNumber: 1,
+    EligibilityId: undefined
   }
   tableActions: TableAction[] = [
     { name: ACTIONS.EDIT, label: 'View' },
@@ -127,7 +128,7 @@ export class PromotioneligibilityComponent implements OnInit {
   }
 
   async fetchEligibility(){
-    const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
+    const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.EligibilityId,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
     if (!data.hasError) {
       var elList = data.result.map(el=> new eligibilityWithStatus(el))
       this.eligibilityList =elList;

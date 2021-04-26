@@ -14,8 +14,8 @@
           </div>
           </div>
         <div style="text-align: center; padding: 10px;">
-            <p class="header6-medium" style="margin-bottom: 1rem !important;">{{newPromotion.first_name}}{{newPromotion.last_name}}</p>
-    <p style="color: #95A8B8 !important;">{{getPositionName(newPromotion.current_position_id)}}</p>
+            <p class="header6-medium" style="margin-bottom: 1rem !important;">{{employeeDetails.firstName}}&nbsp;{{employeeDetails.lastName}}</p>
+                            <p style="color: #95A8B8 !important;">{{jobName}}</p>
         </div>
         </div>
         </div>
@@ -47,7 +47,7 @@
                                             <span>First Name</span>
                                         </div>
                                         <div class="col-sm-8">
-                                            <span>{{newPromotion.first_name}}</span>
+                                            <span>{{employeeDetails.firstName}}</span>
                                         </div>
                                     </div>
 
@@ -56,7 +56,7 @@
                                           <span>Last Name</span>
                                       </div>
                                       <div class="col-sm-8">
-                                          <span>{{newPromotion.last_name}}</span>
+                                        <span>{{employeeDetails.lastName}}</span>
                                       </div>
                                   </div>
 
@@ -65,25 +65,25 @@
                                         <span>Employee ID</span>
                                     </div>
                                     <div class="col-sm-8">
-                                        <span>{{newPromotion.employee_contract_id}}</span>
+                                        <span>{{employeeDetails.id}}</span>
                                     </div>
                                 </div>
 
-                                <!-- <div class="row" style="padding-bottom: 20px;">
+                                <div class="row" style="padding-bottom: 20px;">
                                   <div class="col-sm-4">
                                       <span>Email Address</span>
                                   </div>
                                   <div class="col-sm-8">
-                                      <span>{{newPromotion.userEmail}}</span>
+                                    <span>{{employeeDetails.workEmail}}</span>
                                   </div>
-                              </div> -->
+                              </div>
 
                               <div class="row" style="padding-bottom: 20px;">
                                 <div class="col-sm-4">
                                     <span>Position</span>
                                 </div>
                                 <div class="col-sm-8">
-                                    <span>{{getPositionName(newPromotion.current_position_id)}}</span>
+                                    <span>{{getPositionName(employeeDetails.contracts[0]?.positionName)}}</span>
                                 </div>
                             </div>
 
@@ -92,35 +92,39 @@
                                   <span>Department</span>
                               </div>
                               <div class="col-sm-8">
-                                  <span>{{newPromotion.department}}</span>
+                                <span>{{employeeDetails.contracts[0]?.departmentName}}</span>
                               </div>
                           </div>
-
-                          <!-- <div class="row" style="padding-bottom: 20px;">
+                          <div class="row">
                             <div class="col-sm-4">
-                                <span>Residential LGA</span>
+                                <span>Address</span>
                             </div>
-                            <div class="col-sm-8">
-                                <span>{{newPromotion.residentialLga}}</span>
+                            <div class="col-sm-8" *ngFor="let add of employeeDetails.addresses">
+                                <div style="display: flex;flex-direction: column;">
+                                <span>{{add.address1}}</span>
+                                <span>{{add.address2}}</span>
+                                <span>{{add.address_type_name}}</span>
+                                <span>{{add.lga}}</span>
+                                <span>{{add.state}}</span>                                           
+                               </div>
                             </div>
-                        </div> -->
-
-                        <!-- <div class="row" style="padding-bottom: 20px;">
-                          <div class="col-sm-4">
-                              <span>Residential State</span>
-                          </div>
-                          <div class="col-sm-8">
-                              <span>{{newPromotion.residentialState}}</span>
-                          </div>
-                      </div> -->
+                        </div>
 
                                 </div>
 
                             </nb-tab>
 
                             <nb-tab tabTitle="Qualifications">
-
-                                <ngx-tablecomponent [tableColum]="tableColumns"></ngx-tablecomponent>
+                                <nb-card-body>
+                                    <ngx-default-content *ngIf="showEmptyQualifications" pageHeader="No Qualification Record Found"
+                                    pageDescription="" buttonValue=""
+                                >
+                                  </ngx-default-content>
+                                  <ngx-tablecomponent *ngIf="!showEmptyQualifications" [showFilter]="false"
+                                     [userData]="employeeDetails.qualifications"
+                                    [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" >
+                                  </ngx-tablecomponent>
+                                </nb-card-body>
 
 
 
@@ -131,14 +135,7 @@
 
                                 <div style="font-weight:normal;">
                                   <h5 style="padding-bottom: 20px;">Promotion Information</h5>
-                                    <div class="row" style="padding-bottom: 20px;">
-                                        <div class="col-sm-4">
-                                            <span>Appointment Date</span>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <span>{{newPromotion.date_of_appointment | date}}</span>
-                                        </div>
-                                    </div>
+                                  
 
                                     <div class="row" style="padding-bottom: 20px;">
                                       <div class="col-sm-4">
@@ -181,18 +178,11 @@
                                   <span>Duration in Grade</span>
                               </div>
                               <div class="col-sm-8">
-                                  <span>{{newPromotion.period_in_current_grade}}</span>
+                                  <span>{{newPromotion.years_in_current_grade}}</span>
                               </div>
                           </div>
 
-                          <div class="row" style="padding-bottom: 20px;">
-                            <div class="col-sm-4">
-                                <span>Professional Qualifications</span>
-                            </div>
-                            <div class="col-sm-8">
-                               <span>{{newPromotion.professional_qualifications}}</span>
-                            </div>
-                        </div>
+                       
 
                         <div class="row" style="padding-bottom: 20px;">
                           <div class="col-sm-4">
