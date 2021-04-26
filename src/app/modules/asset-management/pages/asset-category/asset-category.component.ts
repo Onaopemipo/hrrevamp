@@ -9,7 +9,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ListResult } from 'app/_services/base-api.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { Observable } from 'rxjs';
-import { AssetApiModelClass, AssetBaseService, AssetCategoryService, AssetSubTypeService, AssetTypeService, MyAssetCategory, MyAssetCategoryFilter, MyAssetSubTypeFilter, MyAssetSubType, AssetMakeService, MyAssetModelFilter, MyAssetModel, AssetModelService } from '../../services/asset-category.service';
+import { AssetApiModelClass, AssetBaseService, AssetCategoryService, AssetSubTypeService, AssetTypeService, MyAssetCategory, MyAssetCategoryFilter, MyAssetSubTypeFilter, MyAssetSubType, AssetMakeService, MyAssetModelFilter, MyAssetModel, AssetModelService, AssetStatusService } from '../../services/asset-category.service';
 
 enum DEFAULT_TABLE_ACTIONS{ edit = 'edit', delete = 'delete' }
 
@@ -373,3 +373,46 @@ export class MyAssetModelComponent extends AssetBaseComponent<MyAssetModelFilter
     });
   };
 }
+
+
+@Component({
+  selector: 'ngx-my-asset-status',
+  templateUrl: './asset-category.component.html',
+  styleUrls: ['./asset-category.component.scss']
+})
+export class MyAssetStatusComponent extends AssetBaseComponent<MyAssetCategoryFilter, MyAssetCategory>{
+  constructor(
+    protected api: AssetStatusService,
+    protected confirmBoxService: ConfirmBoxService,
+    protected alertService: AlertserviceService,
+  ) {
+    super(confirmBoxService);
+  }
+  objectName = 'Asset Status';
+  getTableColumns(): TableColumn[] {
+    return [
+      {name: 'name', title: 'Name'},
+      {name: 'dateCreated', title: 'Date Modified', type: ColumnTypes.Date},
+      {name: 'name', title: 'Status', type: ColumnTypes.Status},
+    ];
+  }
+  formConfig = {
+    fields: [
+      {name: 'name', label: 'Name', type: FORM_TYPES.text},
+      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+    ]
+  };
+  getFormConfig(): FormConfig {
+    return {
+      fields: [
+        {name: 'name', label: 'Name', type: FORM_TYPES.text},
+        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      ]
+    };
+  }
+  filter: MyAssetCategoryFilter = {};
+  getNewEditingData(): MyAssetCategory {
+    return new MyAssetCategory();
+  }
+}
+

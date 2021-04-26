@@ -26,7 +26,9 @@
         {{formTitle}}
     </div>
     <div modal-body>
-        {{errors|json}}
+        <!-- {{errors|json}} -->
+        <!-- {{data|json}} -->
+        <ng-content select='[custom-form]'></ng-content>
         <ngx-custom-form [loadingSave]="loadingSave" [formErrors]="errors" [formConfig]="formConfig" [(value)]="data" (valueChange)="dataChanged($event)" (onCancel)="onFormCancelled()"></ngx-custom-form>
     </div>
     <div modal-footer>
