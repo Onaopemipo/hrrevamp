@@ -12,7 +12,7 @@ import { ExpenseReportComponent } from './expense-report/expense-report.componen
 import { ExpenseRequestService } from './services/expense-request.service';
 import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
 import { ExpenseGroupComponent } from './expense-group/expense-group.component';
-import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService } from './services/expense-group.service';
+import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from './services/expense-group.service';
 import { ExpenseProjectActivityComponent } from './expense-project-activity/expense-project-activity.component';
 import { ExpenseProjectComponent } from './expense-project/expense-project.component';
 
@@ -46,6 +46,7 @@ import { ExpenseProjectComponent } from './expense-project/expense-project.compo
     ExpenseGroupService,
     ExpenseProjectActivityService,
     ExpenseProjectService,
+    ExpenseTypeService,
   ],
   imports: [
     CommonModule,

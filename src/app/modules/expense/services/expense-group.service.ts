@@ -3,7 +3,7 @@ import { IStatus, MyColor } from 'app/components/status/models';
 import { AssetBaseService } from 'app/modules/asset-management/services/asset-category.service';
 import { createSubscription, MessageOut } from 'app/modules/career-succession/services/base';
 import { ListResult } from 'app/_services/base-api.service';
-import { AddUpdateExpenseGroupServiceProxy, AddUpdateExpenseProjectServiceProxy, AddUpdateProjectActivityServiceProxy, AssetDTO, AssetManagementServiceProxy, ExpenseGroup, ExpenseGroupDto, ExpenseProject, ExpenseProjectActivity, ExpenseProjectActivityDTO, ExpenseProjectDto, ExpenseSubType, GetExpenseGroupsServiceProxy, GetExpenseProjectServiceProxy, GetProjectActivityServiceProxy, IState } from 'app/_services/service-proxies';
+import { AddUpdateExpenseGroupServiceProxy, AddUpdateExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, AddUpdateProjectActivityServiceProxy, AssetDTO, AssetManagementServiceProxy, ExpenseGroup, ExpenseGroupDto, ExpenseProject, ExpenseProjectActivity, ExpenseProjectActivityDTO, ExpenseProjectDto, ExpenseSubType, ExpenseType, ExpenseTypeDto, GetExpenseGroupsServiceProxy, GetExpenseProjectServiceProxy, GetExpenseTypesServiceProxy, GetProjectActivityServiceProxy, IState } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -171,3 +171,59 @@ export class ExpenseProjectService extends AssetBaseService<MyExpenseProject, an
   }
 }
 
+
+export class MyExpenseType extends ExpenseType implements IStatus{
+  actionTitle: string = '';
+  startDateString = '';
+  endDateString = '';
+  status = '';
+  constructor(data = new ExpenseType()) {
+    super(data);
+  }
+  getStatusLabel(): string {
+    return 'Active';
+  }
+  getStatusColor(): MyColor {
+    return new MyColor(200, 200, 200);
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExpenseTypeService extends AssetBaseService<MyExpenseType, any> {
+  list_api(filter: any) {
+    return this.list_api_service.getExpenseTypes(0, '', '', '', '', '', 1, 10);
+  }
+  toData(obj: ExpenseType): MyExpenseType {
+    return new MyExpenseType(obj);
+  }
+  list(filter: any): Observable<ListResult<MyExpenseType>> {
+    console.log('aaa');
+    return this.list_api(filter).pipe(map(res => {
+      console.log(res);
+      return {
+        data: res.result.map(obj => this.toData(obj)),
+        length: res.totalCount,
+      };
+    }));
+  }
+  fetch(id: number) {
+    throw new Error('Method not implemented.');
+  }
+  create(data: MyExpenseType) {
+    return this.create_api.addUpdateExpenseType(new ExpenseTypeDto({
+      ...data,
+    }));
+  }
+  delete(id: number) {
+    return createSubscription(new MessageOut('Deleted successfully', true));
+  }
+
+  constructor(
+    private create_api: AddUpdateLoanTypeServiceProxy,
+    private list_api_service: GetExpenseTypesServiceProxy,
+  ) {
+    super();
+  }
+}
