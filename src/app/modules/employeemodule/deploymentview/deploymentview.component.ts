@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeDTOApiResult, EmployeeDTO,VwConfirmationDTO } from '../../../_services/service-proxies';
-import { SaveConfirmationServiceProxy, FetchEmployeeByIdServiceProxy, } from '../../../_services/service-proxies';
+import { EmployeeDTOApiResult, IDeploymentRegistrationPayLoad,EmployeeDTO,VwConfirmationDTO, DeploymentLogDTO,Location,DropdownValue } from '../../../_services/service-proxies';
+import { SaveConfirmationServiceProxy, FetchEmployeeByIdServiceProxy,CommonServiceProxy,DataServiceProxy } from '../../../_services/service-proxies';
 
 
 
@@ -22,11 +22,10 @@ export class DeploymentviewComponent implements OnInit {
   employee: EmployeeDTO = new EmployeeDTO(); 
   mgr_feedback: string = '';
   mgr_advice: string = '';
-
+ 
 
   topActionButtons = [
     { name: TOP_ACTIONS.APPLY_FOR_LEAVE, label: 'Add', 'icon': 'plus', outline: true },
-
   ];
 
   tableColumns = [
@@ -44,12 +43,14 @@ export class DeploymentviewComponent implements OnInit {
     { title: 'deployment_info', label: 'Deployment Information', status: 'Inactive', iconname: 'inbox' },
 
   ];
-  comfirmationData = new VwConfirmationDTO().clone();
+  comfirmationData = new DeploymentLogDTO().clone();
   jobName: string = '';
   departmentName: string = '';
   totalItems = 0;
   currentPage = 1;
-  constructor(private activatedRoute: ActivatedRoute,
+  alllocations: Location[] = [];
+  maritalStatusValues: DropdownValue[] = [];
+  constructor(private myDropdown: DataServiceProxy,private activatedRoute: ActivatedRoute,private CommonService: CommonServiceProxy,
     private FetchEmployeeByIdServiceProx: FetchEmployeeByIdServiceProxy,
     private SaveConfirmation:SaveConfirmationServiceProxy ) { }
   selectPanel(hiringlist, i) {
@@ -61,23 +62,65 @@ export class DeploymentviewComponent implements OnInit {
     this.employeeviewlist[i].status = 'Active';
     this.selectedCase = this.employeeviewlist[i].title;
   }
+  getalllocations() {
+    this.CommonService.getLocations().subscribe(data => {
+      if (!data.hasError) {
+        this.alllocations = data.result;
+      }else{}
+      
+    })
+  }
+getEmployeebyId(employeeId) {
+  this.FetchEmployeeByIdServiceProx.getEmployeeById(employeeId).subscribe((data) => {
+    if (!data.hasError) {
+      this.employee= data.result;
+      this.jobName = this.employee.contracts.length > 0 ? this.employee.contracts[0].jobName : "";
+      this.departmentName = this.employee.contracts.length > 0 ? this.employee.contracts[0].departmentName : "";
+      this.totalItems = this.employee.qualifications.length;   
+        }
+  });
+  }
+  getLocationNAme(locationId): string {
 
+    if (locationId) {
+      if (this.alllocations.length > 0) {
+        var sRes = this.alllocations.find(l => l.id == locationId);
+        return sRes ? sRes.location_name : "";
+      }
+    }
+    return "";
+  }
+  getMaritalStatus() {
+    this.myDropdown.getDropDownValuesById(4).subscribe(data => {
+      if (!data.hasError) {
+        this.maritalStatusValues = data.result;
+        console.log(this.maritalStatusValues)
+      }
+      else {
+        console.log('There was an error')
+      }
+    })
+  }
+  getMaritalNAme(maritalStatusId): string {
+    if (maritalStatusId) {
+      if (this.maritalStatusValues.length > 0) {
+        var sRes = this.maritalStatusValues.find(l => l.option_value == maritalStatusId);
+        return sRes ? sRes.option_text : "";
+      }
+    }
+    return "";
+  }
   ngOnInit(): void {
+    this.getalllocations();
+    this.getMaritalStatus();
     this.employee.contracts = [];
     this.employee.addresses = [];
     this.employee.qualifications = [];
     this.activatedRoute.queryParams.subscribe(data => {
       if (data.data) {
-        this.comfirmationData = JSON.parse(data.data); 
-        this.FetchEmployeeByIdServiceProx.getEmployeeById(this.comfirmationData.employee_id).toPromise().then(
-          a => {
-            this.employee= a.result;
-            this.jobName = this.employee.contracts.length > 0 ? this.employee.contracts[0].jobName : "";
-            this.departmentName = this.employee.contracts.length > 0 ? this.employee.contracts[0].departmentName : "";
-            this.totalItems = this.employee.qualifications.length;
-        
-          }
-         )
+        this.comfirmationData = JSON.parse(data.data);
+        this.getEmployeebyId(this.comfirmationData.employeeid)
+ 
       }}
     );
   }

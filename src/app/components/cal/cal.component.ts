@@ -176,8 +176,8 @@ export class CalComponent implements AfterViewInit {
 
   @Output() dateClick = new EventEmitter<any>();
   dateClicked(day: MyDay) {
-    this.selectedDay = day;
     this.popOver.show()
+    this.selectedDay = day;
     this.dateClick.emit(day);
     
     

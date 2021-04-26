@@ -15,16 +15,16 @@ export class eligibilityWithStatus extends PromotionEligibilityViewModel impleme
 
   }
   get status() {
-    return this.elibility.isClosed;
+    return this.elibility.is_closed;
 }
   getStatusLabel() {
-    if (this.elibility.isClosed) return 'Closed';
-    if (!this.elibility.isClosed) return 'Open';
+    if (this.elibility.is_closed) return 'Closed';
+    if (!this.elibility.is_closed) return 'Open';
    
   }
   getStatusColor() {
-    if (this.elibility.isClosed) return new MyColor(253, 238, 238);
-    if (!this.elibility.isClosed) return new MyColor(0, 153, 74);
+    if (this.elibility.is_closed) return new MyColor(253, 238, 238);
+    if (!this.elibility.is_closed) return new MyColor(0, 153, 74);
    
     return new MyColor(242, 0, 74);
  }
@@ -58,7 +58,7 @@ export class PromotioneligibilityComponent implements OnInit {
 
   promotionBucket: NgForm;
   promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
-  eligibilityList: Sp_FetchEligibleEmployees[] = [];
+  eligibilityList = [];
   approvalProcesses: ApprovalProcess[] = [];
   filter = {
     end: null,
@@ -128,8 +128,9 @@ export class PromotioneligibilityComponent implements OnInit {
 
   async fetchEligibility(){
     const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
-    if(!data.hasError){
-      this.eligibilityList = data.result;
+    if (!data.hasError) {
+      var elList = data.result.map(el=> new eligibilityWithStatus(el))
+      this.eligibilityList =elList;
 
       console.log(this.eligibilityList)
     }

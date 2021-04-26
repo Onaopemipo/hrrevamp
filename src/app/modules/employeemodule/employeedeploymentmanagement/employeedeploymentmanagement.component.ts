@@ -15,15 +15,15 @@ export class deploymentWithStatus extends DeploymentLogDTO implements IStatus {
     return this.deploymnt.log_status;
   }
   getStatusLabel() {
-    if (this.deploymnt.log_status === 0) return 'Due';
     if (this.deploymnt.log_status === 1) return 'Pending';
     if (this.deploymnt.log_status === 2) return 'Approved';
-    if (this.deploymnt.log_status === 3) return 'Declined';
+    if (this.deploymnt.log_status === 3) return 'Rejected';
+
   }
   getStatusColor() {
-    if (this.deploymnt.log_status === 0) return new MyColor(242, 153, 74);
-    if (this.deploymnt.log_status === 1) return new MyColor(0, 153, 74);
-    if (this.deploymnt.log_status === 2) return new MyColor(253, 238, 238);
+    if (this.deploymnt.log_status === 1) return new MyColor(242, 153, 74);
+    if (this.deploymnt.log_status === 2) return new MyColor(0, 153, 74);
+    if (this.deploymnt.log_status === 3) return new MyColor(253, 238, 238);
     return new MyColor(242, 0, 74);
   }
 }

@@ -1,4 +1,4 @@
-import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchDeploymentServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchDeploymentServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { FormsModule as ngFormsModule } from '@angular/forms';
@@ -152,12 +152,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     FetchDeploymentServiceProxy,
     PostServiceProxy,
     UploadDocumentServiceProxy,
-    FetchEmployeesByName_IdServiceProxy,
-    GetVisaTypeServiceProxy,
-    AddUpateOfferLetterTemplateServiceProxy,
-    PrepareOfferLetterEmailServiceProxy
-    
-  
+    GetPromotionListsServiceProxy
   ]
 
 

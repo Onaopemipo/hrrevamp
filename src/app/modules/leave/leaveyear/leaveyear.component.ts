@@ -18,16 +18,16 @@ export class LeaveYearWithStatus extends LeaveYearDTO implements IStatus {
     return this.leaveYear.log_status;
   }
   getStatusLabel() {
-    if (this.leaveYear.log_status === 0) return 'Pending';
-    if (this.leaveYear.log_status === 1) return 'Approved';
-    if (this.leaveYear.log_status === 2) return 'Rejected';
+    if (this.leaveYear.log_status === 1) return 'Pending';
+    if (this.leaveYear.log_status === 2) return 'Approved';
+    if (this.leaveYear.log_status === 3) return 'Rejected';
 
   }
   getStatusColor() {
-    if (this.leaveYear.log_status === 0) return new MyColor(242, 153, 74);
-    if (this.leaveYear.log_status === 1) return new MyColor(0, 153, 74);
-    if (this.leaveYear.log_status === 2) return new MyColor(253, 238, 238);
-    return new MyColor(242, 0, 74);
+    if (this.leaveYear.log_status === 1) return new MyColor(242, 153, 74);
+    if (this.leaveYear.log_status ===2) return new MyColor(0, 153, 74);
+    if (this.leaveYear.log_status === 3) return new MyColor(242, 0, 74);
+    return new MyColor(253, 238, 238);
   }
 }
 

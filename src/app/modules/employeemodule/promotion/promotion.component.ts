@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { AddUpdateEligibleBucketServiceProxy, CommonServiceProxy, EmployeeDTO, GetPromotionEligibilityListsServiceProxy, Position, PromotionEligibilityViewModel, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
+import { AddUpdateEligibleBucketServiceProxy, CommonServiceProxy, EmployeeDTO, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, Position, PromotionEligibilityViewModel, Sp_FetchEligibleEmployees } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ACTIONS, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -51,9 +51,10 @@ export class PromotionComponent implements OnInit {
   gOptions = {
     promotionRuleId: 0,
     promotionCategoryId: 0,
-    promotionTargetId: 0
+    promotionTargetId: 0,
+    comments:''
   }
-  constructor(private alert: AlertserviceService,private router:Router,
+  constructor(private alert: AlertserviceService,private router:Router,private GetPromotionListsService: GetPromotionListsServiceProxy,
     private activatedroute: ActivatedRoute, private GetPromotionEligibilityListsService: GetPromotionEligibilityListsServiceProxy,
     private CommonService: CommonServiceProxy,private updateEligibility: AddUpdateEligibleBucketServiceProxy) { }
   tableActionClicked(event: TableActionEvent) {
@@ -91,16 +92,16 @@ export class PromotionComponent implements OnInit {
   addEmployeetoBucketList() {
     this.allEmployee.forEach(value => {
       let newEliObjt = new Sp_FetchEligibleEmployees().clone();
-      newEliObjt.next_position_id = this.gOptions.promotionTargetId
-      newEliObjt.current_position_parent_id
-      newEliObjt.current_parent_position
-      newEliObjt.employee_contract_id = value.employeeContractId
-      newEliObjt.eligiblility_id = this.promotionBucketList.id
-      newEliObjt.date_of_birth = value.dateOfBirth
-      newEliObjt.first_name = value.firstName
-      newEliObjt.last_name = value.lastName
-      newEliObjt.other_names = value.otherNames
-      newEliObjt.profile_pic = value.profilePic
+      newEliObjt.employee_id = value.id;
+      newEliObjt.next_position_id = this.gOptions.promotionTargetId;
+      newEliObjt.employee_contract_id = value.employeeContractId;
+      newEliObjt.eligiblility_id = this.promotionBucketList.id;
+      newEliObjt.date_of_birth = value.dateOfBirth;
+      newEliObjt.first_name = value.firstName;
+      newEliObjt.last_name = value.lastName;
+      newEliObjt.other_names = value.otherNames;
+      newEliObjt.profile_pic = value.profilePic;
+      newEliObjt.comments = this.gOptions.comments;
       this.promotionBucketList.eligibles.push(newEliObjt);
     });
     this.UpdateEligibleBucket();
@@ -128,11 +129,12 @@ export class PromotionComponent implements OnInit {
   async getPromotionList() {
     this.loading = true;
     this.activatedroute.queryParams.subscribe(async data => {
+      console.log(data)
       if (data) {
         if (data.data) {
           this.eligibilityBucket = true;
           this.promotionBucketList = JSON.parse(data.data);
-          this.promotionList = this.promotionBucketList.eligibles;
+       //   this.promotionList = this.promotionBucketList.eligibles;
           this.showTableAction = true;
           this.tableActions = [
             { name: ACTIONS.VIEW, label: 'View' },
@@ -155,7 +157,7 @@ export class PromotionComponent implements OnInit {
 
   async getPList() {
     this.loading = true;
-    const data = await this.GetPromotionEligibilityListsService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber, this.filter.is_closed, this.filter.start, this.filter.end).toPromise();
+    const data = await this.GetPromotionListsService.getPromotionLists(undefined,this.filter._PageSize, this.filter._PageNumber).toPromise();
     if(!data.hasError){
       this.promotionList = data.result;
       console.log(this.promotionList)
