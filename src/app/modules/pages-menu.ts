@@ -169,23 +169,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Asset Categories',
-        link: ''
+        link: '/asset/category'
       },
       {
         title: 'Asset Types',
-        link: ''
+        link: '/asset/type'
       },
       {
         title: 'Asset Make',
-        link: ''
+        link: '/asset/makes'
       },
       {
         title: 'Asset Status',
-        link: ''
+        link: '/asset/status'
       },
       {
         title: 'Asset',
-        link: ''
+        link: '/asset'
       },
       {
         title: 'Asset Request',
