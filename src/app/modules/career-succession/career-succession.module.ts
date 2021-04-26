@@ -61,7 +61,8 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     CareerSuccessionServiceProxy,
     GetEmployeeebyGridBoxServiceProxy,
     GetGridBoxCountServiceProxy,
-    TalentManagementServiceProxy
+    TalentManagementServiceProxy,
+    CompetencyServiceProxy
   ],
   imports: [
     CommonModule,
