@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
          <div class="form-group col">
           <label>Employee</label>
           <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" required>
@@ -101,9 +101,16 @@
             <div *ngIf="employee.errors.required">Employee Name is required</div>
           </div>
         </div>
+        </div> -->
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label for="Department" class="col-form-label mylabel">Employee</label>
+            <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+          </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="form-group col">
            <label>Position</label>
            <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionId" required>
@@ -111,14 +118,14 @@
             <div *ngIf="position.errors.required">Position is required</div>
           </div>
           </div>
-         </div>
+         </div> -->
 
          <div class="row">
           <div class="form-group col">
            <label>Competency</label>
-           <select class="custom-select" name="competencyTitle" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+           <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
              <option value="">--Select--</option>
-             <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.plantitle }}</option>
+             <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
            </select>
            <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
             <div *ngIf="competencyTitle.errors.required">Competency is required</div>
@@ -129,14 +136,15 @@
          <div class="row">
           <div class="form-group col">
            <label>Successing Candidate</label>
-           <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successionEmployee" required>
+           <ngx-employee-master-search (masterSubmitted)="getSuccessingCandidate($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+           <!-- <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successionEmployee" required> -->
           </div>
          </div>
 
          <div class="row">
           <div class="form-group col">
            <label>Readiness to start</label>
-           <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" required>
+           <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
            <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
             <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
           </div>

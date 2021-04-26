@@ -75,7 +75,7 @@
                   </div>
                 </div>
 
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                     <div class="col-sm-3">
                       <label for="">Interest Type</label>
                     </div>
@@ -86,7 +86,7 @@
                         <option *ngFor="let interest of allInterestRates" value="1">{{ interest.description }}</option>
                       </select>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                   <div class="col-sm-3">
@@ -128,17 +128,17 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <div class="col-sm-3">
                     <label for="">Custom Question</label>
                   </div>
 
                   <div class="col-sm-6">
                     <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanModel.customQuestion" cols="60" rows="10"></textarea>
-                    <!-- <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
+                    <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input>
                   </div>
 
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                   <div class="col-sm-3">
@@ -159,7 +159,7 @@
 
                   <div class="col-sm-6">
                     <textarea name="justification" #justification="ngModel" [(ngModel)]="loanModel.justification" cols="60" rows="10"></textarea>
-                    <ngx-wysisyg-input [(value)]="loanModel.justification" style="padding-left: -10px;" ></ngx-wysisyg-input>
+                    <!-- <ngx-wysisyg-input [(value)]="loanModel.justification" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                   </div>
                 </div>
 
@@ -183,7 +183,7 @@
               <label for="">Add Guarantor(s)</label>
             </div>
             <div class="col-sm-6">
-              <ngx-employee-master-search></ngx-employee-master-search>
+              <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
           </div>
 

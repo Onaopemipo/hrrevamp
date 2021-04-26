@@ -48,8 +48,15 @@ export class CompetencyComponent implements OnInit {
       }
 
       else if(event.name==TABLE_ACTION.DELETECOMPETENCY){
-       this.router.navigateByUrl('' + event.data.id)
-
+      //  this.router.navigateByUrl('' + event.data.id)
+      alert(event.data.id)
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to Delete','Yes').subscribe(dataAction => {
+        this.competencyService.deleteCompetency(event.data.id).subscribe(data => {
+          if(!data.hasError){
+            console.log('Deleted!')
+          }
+        })
+      })
         }
  }
 

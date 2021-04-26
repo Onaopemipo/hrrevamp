@@ -1,9 +1,9 @@
 <ngx-componentsheader
   pageName="Loan Type"
-  [requiredButton]="[{name:'newtype', label:'Add New'}]" (buttonClick)="createLoanType()"
+  [requiredButton]="[{name:'newtype', label:'Add New'}]" (buttonClick)="createNewType()"
 ></ngx-componentsheader>
 
-<div *ngIf="dataCounter < 1">
+<div *ngIf="createType == true">
   <nb-card>
       <nb-card-body>
         <form #loanType="ngForm" name="loanType">
@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-
+<!--
         <div class="form-group row">
           <div class="col-sm-3">
             <label for="">Is Active? </label>
@@ -44,7 +44,7 @@
               <nb-checkbox status="basic" name="isActive" #isActive="ngModel"
               [(ngModel)]="loanTypeModel.isActive" [(checked)]="isActiveState"></nb-checkbox>&nbsp;&nbsp;
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group row">
           <div class="col-sm-3">
@@ -87,21 +87,66 @@
 
         <div class="form-group row">
           <div class="col-sm-3">
+            <label for="">Eligible Employees</label>
+          </div>
+
+          <div class="col-sm-6">
+            <select [(ngModel)]="loanTypeModel.eligibleEmploymentStatus" #eligibleEmploymentStatus="ngModel" class="form-control" name="eligibleEmploymentStatus">
+              <option value="">--Select all Eligible Employees--</option>
+              <option *ngFor="let status of eligibilityStatus" [value]="status.id">{{ status.text }}</option>
+            </select>
+            <div *ngIf="eligibleEmploymentStatus.invalid && (eligibleEmploymentStatus.dirty || eligibleEmploymentStatus.touched)" class="error">
+              <div *ngIf="eligibleEmploymentStatus.errors.required">Eligible Employee is required</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
             <label for="">Eligible Grades</label>
           </div>
 
+          <!-- <nb-card-header>Selected Option: {{ option }}</nb-card-header> -->
           <div class="col-sm-6">
             <!-- <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
               <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
               <nb-option value="2">Grade 2</nb-option>
             </nb-select> -->
-            <select [(ngModel)]="loanTypeModel.eligibleGrades" class="form-control" name="eligibleGrades">
+            <!-- <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
               <option value="">--Select all Eligible Grades--</option>
-              <option value="1">Grade 2</option>
+              <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
             </select>
             <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
               <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
-            </div>
+            </div> -->
+            <nb-radio-group name="eligibleGrades" #eligibleGrades="ngModel" [(ngModel)]="option" (valueChange)="loanEligibility($event)">
+              <nb-radio *ngFor="let option of options"
+              [value]="option.value">
+              {{ option.label }} </nb-radio>
+              <!-- <nb-radio [value]="planB">Selected Grades</nb-radio> -->
+            </nb-radio-group>
+
+          </div>
+        </div>
+
+        <div *ngIf="option ==='selected'" class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Selected Grades</label>
+          </div>
+
+          <div class="col-sm-6">
+            <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
+              <nb-option [value]="">--Select Grades-- </nb-option>
+              <nb-option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</nb-option>
+            </nb-select>
+            <!-- <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
+              <option value="">--Select all Eligible Grades--</option>
+              <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
+            </select>
+            <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
+              <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
+            </div> -->
           </div>
         </div>
 
@@ -125,6 +170,8 @@
             </div>
           </div>
         </div>
+
+
 
         <div class="form-group row">
           <div class="col-sm-3">
@@ -154,7 +201,8 @@
             <div class="col-sm-6">
               <nb-select placeholder="Select Interest Type" name="interestType" #interestType="ngModel"
               [(ngModel)]="loanTypeModel.interestType">
-                <nb-option value="1">Option 1</nb-option>
+                <nb-option value="1">--Select Interest Rate--</nb-option>
+                <nb-option *ngFor="let interest of allInterestRates" [value]="interest.id">{{interest.text}}</nb-option>
               </nb-select>
               <div *ngIf="interestType.invalid && (interestType.dirty || interestType.touched)" class="error">
                 <div *ngIf="interestType.errors.required">Interest Type is required</div>
@@ -202,7 +250,7 @@
   </nb-card>
 </div>
 
-<div *ngIf="dataCounter > 0">
+<div>
 <nb-card>
   <nb-card-body>
     <ngx-tableheader></ngx-tableheader>

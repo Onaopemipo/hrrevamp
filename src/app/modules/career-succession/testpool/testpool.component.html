@@ -6,19 +6,30 @@
 <div>
   <nb-card *ngIf="newCandidate" style="padding: 5px;">
     <nb-tabset>
-      <nb-tab tabTitle="Employee Database">
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+      <nb-tab *ngIf="employeeCounter < 1" tabTitle="Employee Database">
+        <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+          (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
       </nb-tab>
-      <nb-tab tabTitle="Recruitment Portal">
+
+      <nb-tab *ngIf="employeeCounter > 0" tabTitle="Employee Database">
         <ngx-tableheader></ngx-tableheader>
         <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
       </nb-tab>
 
-      <nb-tab tabTitle="External Source">
+      <nb-tab *ngIf="employeeCounter < 1" tabTitle="Recruitment Portal">
+        <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+          (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
+      </nb-tab>
+
+      <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
         <ngx-tableheader></ngx-tableheader>
         <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
       </nb-tab>
+
+      <!-- <nb-tab tabTitle="External Source">
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+      </nb-tab> -->
      </nb-tabset>
   </nb-card>
 
@@ -58,7 +69,7 @@
 
            <div *ngIf="selectedChannel == 'database'">
 
-            <div class="form-group row mydiv">
+            <!-- <div class="form-group row mydiv">
               <div class="col">
                 <label for="Department" class="col-form-label mylabel">Name</label>
                 <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.name" placeholder="Philip Muyiwa" required>
@@ -66,12 +77,23 @@
                   <div *ngIf="name.errors.required">Name is required</div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group row mydiv">
               <div class="col">
+                <label for="Department" class="col-form-label mylabel">Employee</label>
+                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                <!-- <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.name" placeholder="Philip Muyiwa" required> -->
+                <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                  <div *ngIf="name.errors.required">Name is required</div>
+                </div> -->
+              </div>
+            </div>
+
+            <!-- <div class="form-group row mydiv">
+              <div class="col">
                 <label for="Country" class="col-form-label mylabel">Department</label>
-                <!-- <ngx-employee-master-search></ngx-employee-master-search> -->
+                <ngx-employee-master-search></ngx-employee-master-search>
                 <select class="custom-select" name="department" #department="ngModel" [(ngModel)]="candidateModel.department" required>
                   <option value="">Select </option>
                   <option value="1">Employee Database</option>
@@ -82,9 +104,9 @@
                   <div *ngIf="department.errors.required">Department is required</div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row mydiv">
+            <!-- <div class="form-group row mydiv">
               <div class="col">
                 <label for="Country" class="col-form-label mylabel">Unit/Division</label>
                 <select class="custom-select" name="unit" #unit="ngModel" [(ngModel)]="candidateModel.unit" required>
@@ -97,9 +119,9 @@
                   <div *ngIf="unit.errors.required">Type is required</div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row mydiv">
+            <!-- <div class="form-group row mydiv">
               <div class="col">
                 <label for="Position" class="col-form-label mylabel">Position</label>
                 <select class="custom-select" name="position" #position="ngModel" [(ngModel)]="candidateModel.position"  required>
@@ -112,19 +134,20 @@
                   <div *ngIf="position.errors.required">Position is required</div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Purpose" class="col-form-label mylabel">Purpose</label>
-                <input class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="candidateModel.purpose" required>
-                <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
-                  <div *ngIf="purpose.errors.required">Purpose is required</div>
+                <select class="custom-select" name="planPurpose" #planPurpose="ngModel" [(ngModel)]="purposes">
+                  <option *ngFor="let purpose of purposes" [value]="purpose.value">{{ purpose.label }}</option>
+                </select>
+                <div *ngIf="planPurpose.invalid && (planPurpose.dirty || planPurpose.touched)" class="error">
+                  <div *ngIf="planPurpose.errors.required">Purpose is required</div>
                 </div>
               </div>
             </div>
            </div>
-
 
       <!-- Recruitment Portal -->
 
