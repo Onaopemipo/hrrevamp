@@ -45,6 +45,12 @@ export class LoanTypeComponent implements OnInit {
          }
   }
 
+  options = [
+    { value: 'all', label: 'All Grades' },
+    { value: 'selected', label: 'Selected Grades' },
+  ];
+  option;
+
   loanType: NgForm;
   loading: boolean = true;
   dataCounter: number = 0;
@@ -62,8 +68,9 @@ export class LoanTypeComponent implements OnInit {
   allInterestRates: IDTextViewModel [] = [];
   eligibilityStatus: IDTextViewModel [] = [];
 
-  constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService, private repaymentService: LoadRepaymentScheduleServiceProxy,
-    private updateLoanService: AddUpdateLoanTypeServiceProxy, private simulateService: SimulatePaymentServiceProxy,
+  constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService,
+    private repaymentService: LoadRepaymentScheduleServiceProxy, private updateLoanService: AddUpdateLoanTypeServiceProxy,
+    private simulateService: SimulatePaymentServiceProxy,
     private summaryService: GetLoanSummaryServiceProxy, private fullpaymentService: PostFullRepaymentServiceProxy,
     private loanTypeService: GetLoanTypesServiceProxy,private interestService: GetInterestRateServiceProxy,
     private dataService: DataServiceProxy, private router: Router) { }
@@ -74,6 +81,7 @@ export class LoanTypeComponent implements OnInit {
     this.fetchRepaymentSchedule();
     this.fetchAllLoanTypes();
     this.getInterestRate();
+    this.fetchEligibilityStatus();
   }
 
 
@@ -83,7 +91,7 @@ export class LoanTypeComponent implements OnInit {
 
   loanEligibility(e){
     // alert(e.target.value);
-    console.log(e.target.value);
+    console.log(e);
   }
 
   async fetchEligibilityStatus(){
@@ -98,7 +106,7 @@ export class LoanTypeComponent implements OnInit {
     console.log(data)
     if(!data.hasError && data.result.isSuccessful){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss');
-      this.loanType.resetForm()
+      this.router.navigateByUrl('/loan/loan-type');
     }
 
     else {
@@ -138,7 +146,6 @@ export class LoanTypeComponent implements OnInit {
   }
 
   async getInterestRate(){
-    // const data = await this.interestService.getInterestRate().toPromise();
     const data = await this.dataService.interestTypes().toPromise();
     console.log('Here is my list', data.result);
     if(!data.hasError){
@@ -168,7 +175,7 @@ export class LoanTypeComponent implements OnInit {
     if(!data.hasError){
       this.allLoanTypes = data.result;
       this.dataCounter = data.totalRecord;
-      console.log(this.allLoanTypes);
+      console.log('All Loan Types:', this.allLoanTypes);
   }
 
 }

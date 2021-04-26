@@ -87,9 +87,27 @@
 
         <div class="form-group row">
           <div class="col-sm-3">
+            <label for="">Eligible Employees</label>
+          </div>
+
+          <div class="col-sm-6">
+            <select [(ngModel)]="loanTypeModel.eligibleEmploymentStatus" #eligibleEmploymentStatus="ngModel" class="form-control" name="eligibleEmploymentStatus">
+              <option value="">--Select all Eligible Employees--</option>
+              <option *ngFor="let status of eligibilityStatus" [value]="status.id">{{ status.text }}</option>
+            </select>
+            <div *ngIf="eligibleEmploymentStatus.invalid && (eligibleEmploymentStatus.dirty || eligibleEmploymentStatus.touched)" class="error">
+              <div *ngIf="eligibleEmploymentStatus.errors.required">Eligible Employee is required</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
             <label for="">Eligible Grades</label>
           </div>
 
+          <!-- <nb-card-header>Selected Option: {{ option }}</nb-card-header> -->
           <div class="col-sm-6">
             <!-- <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
               <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
@@ -102,11 +120,33 @@
             <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
               <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
             </div> -->
-            <nb-radio-group name="eligibleGrades" #eligibleGrades="ngModel" [(ngModel)]="loanTypeModel.eligibleGrades" (valueChange)="loanEligibility($event)">
-              <nb-radio [value]="planA">All Grades</nb-radio>
-              <nb-radio [value]="planB">Selected Grades</nb-radio>
+            <nb-radio-group name="eligibleGrades" #eligibleGrades="ngModel" [(ngModel)]="option" (valueChange)="loanEligibility($event)">
+              <nb-radio *ngFor="let option of options"
+              [value]="option.value">
+              {{ option.label }} </nb-radio>
+              <!-- <nb-radio [value]="planB">Selected Grades</nb-radio> -->
             </nb-radio-group>
 
+          </div>
+        </div>
+
+        <div *ngIf="option ==='selected'" class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Selected Grades</label>
+          </div>
+
+          <div class="col-sm-6">
+            <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
+              <nb-option [value]="">--Select Grades-- </nb-option>
+              <nb-option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</nb-option>
+            </nb-select>
+            <!-- <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
+              <option value="">--Select all Eligible Grades--</option>
+              <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
+            </select>
+            <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
+              <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
+            </div> -->
           </div>
         </div>
 
@@ -130,6 +170,8 @@
             </div>
           </div>
         </div>
+
+
 
         <div class="form-group row">
           <div class="col-sm-3">
@@ -208,11 +250,11 @@
   </nb-card>
 </div>
 
-<div>
+<!-- <div>
 <nb-card>
   <nb-card-body>
     <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allLoanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
   </nb-card-body>
 </nb-card>
-</div>
+</div> -->

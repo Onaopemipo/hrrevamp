@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CommonServiceProxy } from 'app/_services/service-proxies';
 import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO, Competency } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
@@ -39,7 +40,7 @@ export class TalentPoolComponent implements OnInit {
     {name: 'certification', title: 'certification'},
     {name: 'skills', title: 'Skills'},
   ];
-  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService,
+  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService, private router: Router,
     private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,private commonService: CommonServiceProxy ) { }
 
   ngOnInit(): void {
@@ -74,8 +75,11 @@ export class TalentPoolComponent implements OnInit {
     this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss')
-      console.log('Congrats, pool created successfully')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss').subscribe(dataAction => {
+        this.router.navigateByUrl('/career-succession/talent-pool');
+      })
+      console.log('Congrats, pool created successfully');
+
     }
     else {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Failed', 'Dismiss')

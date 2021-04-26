@@ -99,8 +99,6 @@ export class LoanRequestComponent implements OnInit {
   }
 
   uploadFile(){
-
-
   }
 
   addGuarantor(){
