@@ -183,7 +183,7 @@
               <label for="">Add Guarantor(s)</label>
             </div>
             <div class="col-sm-6">
-              <ngx-employee-master-search></ngx-employee-master-search>
+              <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
           </div>
 

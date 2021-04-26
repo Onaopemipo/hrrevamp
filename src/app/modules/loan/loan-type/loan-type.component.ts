@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Grade, InterestRate, LoanRepaymentLog, LoanType, DataServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
 import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy,
   SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy,
-  FetchLoanTypeByIdServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, IDTextViewModelIListApiResult } from './../../../_services/service-proxies';
+  GetLoanTypesByCriteriaServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, IDTextViewModelIListApiResult } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -24,8 +24,8 @@ export class LoanTypeComponent implements OnInit {
     {name: 'code', title: 'Code'},
     {name: 'name', title: 'Type Name'},
     {name: 'ledgerNo', title: 'Ledger No'},
-    {name: 'interestRate', title: 'Interest Rate'},
-    {name: 'eligibleGrades', title: 'Eligible Grades'},
+    {name: 'interestTypeName', title: 'Interest Type'},
+    {name: 'requiredNoOfGuarantors', title: 'Guarantor(s)'},
     {name: 'description', title: 'Description'},
   ];
 
@@ -63,7 +63,7 @@ export class LoanTypeComponent implements OnInit {
   loanId: number = 0;
   loanSummary: IdNameObj [] = [];
   loanData: PostLoanDto = new PostLoanDto().clone();
-  allLoanTypes: LoanType [] = [];
+  allLoanTypes: LoanTypeDTO [] = [];
   createType: boolean = false;
   allInterestRates: IDTextViewModel [] = [];
   eligibilityStatus: IDTextViewModel [] = [];
@@ -72,7 +72,7 @@ export class LoanTypeComponent implements OnInit {
     private repaymentService: LoadRepaymentScheduleServiceProxy, private updateLoanService: AddUpdateLoanTypeServiceProxy,
     private simulateService: SimulatePaymentServiceProxy,
     private summaryService: GetLoanSummaryServiceProxy, private fullpaymentService: PostFullRepaymentServiceProxy,
-    private loanTypeService: GetLoanTypesServiceProxy,private interestService: GetInterestRateServiceProxy,
+    private loanTypeService: GetLoanTypesByCriteriaServiceProxy, private interestService: GetInterestRateServiceProxy,
     private dataService: DataServiceProxy, private router: Router) { }
 
   ngOnInit(): void {
@@ -105,8 +105,11 @@ export class LoanTypeComponent implements OnInit {
     const data = await this.updateLoanService.addUpdateLoanType(this.loanTypeModel).toPromise();
     console.log(data)
     if(!data.hasError && data.result.isSuccessful){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss');
-      this.router.navigateByUrl('/loan/loan-type');
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss').subscribe(dataAction => {
+        this.router.navigateByUrl('/loan/loan-type');
+        this.loanTypeModel = new LoanTypeDTO().clone();
+      });
+
     }
 
     else {
@@ -171,7 +174,7 @@ export class LoanTypeComponent implements OnInit {
   // }
 
   async fetchAllLoanTypes(){
-    const data = await this.loanTypeService.getLoanTypes().toPromise();
+    const data = await this.loanTypeService.getLoanTypesByCriteria(undefined,'','','',0,0,0,0,1,10).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       this.dataCounter = data.totalRecord;

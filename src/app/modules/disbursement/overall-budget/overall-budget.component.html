@@ -181,8 +181,8 @@
               Delete
             </button>
 
-            <button (click)="viewBudgetItemModal()" nbButton type="outline" status="primary" outline style="border: none;">
-              view
+            <button (click)="viewBudgetItemModal(budget.id)" nbButton type="outline" status="primary" outline style="border: none;">
+              Update
               <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left: 0.5rem;"></i>
             </button>
           </div>
@@ -274,7 +274,6 @@
               </div>
             </div>
 
-            {{ addedDepartments }}
             <div class="form-group row" *ngIf="addedDepartments.length > 0" style="border: #4847E0 3px;">
               <div class="col-sm-3"></div>
               <div class="col-sm-8">
@@ -309,47 +308,56 @@
           <div class="row">
             <div class="form-group col">
               <label>Budget Item</label>
-              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.name" [(value)]="budgetItem.name" required>
+              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="singleBudgetItemUpdate.name" [(value)]="singleBudgetItemUpdate.name" required>
             </div>
           </div>
 
           <div class="form-group row">
             <div class="col">
               <label>Budget Code</label>
-              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.code" [(value)]="budgetItem.code" placeholder="Budget Code" required>
+              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="singleBudgetItemUpdate.code" [(value)]="singleBudgetItemUpdate.code" placeholder="Budget Code" required>
             </div>
           </div>
+
           <div class="form-group row">
             <div class="col">
-              <label>Total Budget Amount</label>
-              <app-amount-input [(value)]="budgetItem.totalBudget"></app-amount-input>
+              <label>Total Budget Amount: {{singleBudgetItemUpdate.totalBudget}}</label>
+              <app-amount-input [(ngModel)]="singleBudgetItemUpdate.totalBudget" name="amount" #amount="ngModel"></app-amount-input>
             </div>
           </div>
 
           <hr/>
           <div class="form-group row">
           <div class="col">
-            <label>Department</label>
-            <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
-              <option value="1">Select Department</option>
-              <option *ngFor="let dep of allDepartments[0]" value=dep.code>{{dep.name}}</option>
-            </select>
+            <label>Department: {{budgetItemAllocation.department}}</label>
+            <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.departmentId" required>
+                <option value="">Select Department</option>
+                <option *ngFor="let dep of allDepartments" [value]="dep.id">{{dep.name}}</option>
+              </select>
           </div>
           </div>
           <div class="form-group row">
             <div class="col">
-              <label>Allocated amount</label>
-              <app-amount-input></app-amount-input>
+              <label>Allocated amount: {{budgetItemAllocation.allocatedAmount}}</label>
+              <app-amount-input [(value)]="budgetItemAllocation.allocatedAmount"></app-amount-input>
             </div>
           </div>
 
           <div class="form-group" style="margin-top: 20px">
             <label></label>
             <div>
-                <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
+                <button nbButton status="primary" class="border-none" (click)="addDepartmentAllocations()" outline>
                   <nb-icon icon="plus-outline"></nb-icon>
                   Add department
                 </button>
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="budgetItemAllocation.length > 0" style="border: #4847E0 3px;">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-8">
+              <span class="cbadge"  *ngFor="let dept of budgetItemAllocation" style="margin: 5px;">{{dept.department}} &nbsp;
+                <i class="fa fa-times" (click)="removeDepartment(dept.id)" style="cursor: pointer;color: red;"></i></span>
             </div>
           </div>
 

@@ -71,6 +71,10 @@ export class LoanRequestComponent implements OnInit {
   allloanTypes: LoanType [] = [];
   dataCounter: number = 0;
 
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
@@ -80,6 +84,7 @@ export class LoanRequestComponent implements OnInit {
     // this.getLoanTypes();
     this.getInterestRate();
     this.fetchAllLoanTypes();
+    this.getAllLoans();
 
   }
 
@@ -112,15 +117,17 @@ export class LoanRequestComponent implements OnInit {
     this.loanForm.resetForm();
   }
   else{
-    console.log('Failure', data.message);
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
   }
   }
 
   async getAllLoans(){
     const data = await this.getLoans.getLoanRequests(1,1,'',10,1).toPromise();
+    console.log('My data',data);
     if(!data.hasError){
       this.allLoansData = data.result;
       this.loansCounter = data.totalRecord;
+
     }
   }
 

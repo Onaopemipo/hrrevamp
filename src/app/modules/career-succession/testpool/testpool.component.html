@@ -82,7 +82,7 @@
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Department" class="col-form-label mylabel">Employee</label>
-                <ngx-employee-master-search></ngx-employee-master-search>
+                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
                 <!-- <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.name" placeholder="Philip Muyiwa" required> -->
                 <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
                   <div *ngIf="name.errors.required">Name is required</div>

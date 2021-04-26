@@ -122,23 +122,19 @@ export class TalentPoolComponent implements OnInit {
     this.poolRequirementModel = new MyTalentPoolRequirement
   }
 
-  editPool(){
-
-  }
-
-  async deletePool(id){
-    const approved = await this.confirm.confirm('Are you sure?').toPromise();
-    if(!approved) {
-      this.confirm.close();
-      return false;
-    }
-    this.confirm.showLoading();
-   const data = await this.poolservice.delete(id).toPromise();
-   if(data.isSuccessful){
-     console.log('Deleted:', data.message)
-   }
-   this.confirm.close();
-   return true;
-  }
+  // async deletePool(id){
+  //   const approved = await this.confirm.confirm('Are you sure?').toPromise();
+  //   if(!approved) {
+  //     this.confirm.close();
+  //     return false;
+  //   }
+  //   this.confirm.showLoading();
+  //  const data = await this.poolservice.delete(id).toPromise();
+  //  if(data.isSuccessful){
+  //    console.log('Deleted:', data.message)
+  //  }
+  //  this.confirm.close();
+  //  return true;
+  // }
 
 }

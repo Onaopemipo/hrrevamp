@@ -50,6 +50,10 @@ showCandidateModal = false;
 showRequirementModal = false;
 poolTypes: any = [];
 
+allowmultipleselection: boolean = false;
+selectionHeader: string = "Select Employee";
+addbtnText: string = "Add Employee";
+
 talentPoolHeader: string = 'No Candidate yet';
 talentPoolDescription: string = 'Click on the button to add candidate to the pool';
 myButton: string = 'Add New';
@@ -117,7 +121,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
   async addCandidateToPool(){
   //  const data = await this.poolservice.addToPool(1,this.candidateModel).toPromise();
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
-    if(!data.hasError && data.result.isSuccessful == true){
+    if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
         this.route.navigateByUrl('talentpool/'+ this.pageId);
       })
@@ -127,9 +131,8 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
   async fetchPool(){
     this.loading = true;
     const data = await this.poolservice.fetch(this.pageId).toPromise();
-    // console.log('Yes Boss, the data is here:',data)
     this.poolRecords = data;
-    this,this.pageTitle = data.title;
+    this.pageTitle = data.title;
     console.log('Hey', this.poolRecords)
     this.loading = false;
   }
@@ -147,6 +150,14 @@ onChangeChannel($value){
     // return this.channel;
 
   // });
+}
+
+getSelectedEmployee(event,selectType) {
+  console.log(event)
+   if(selectType == 'employee')this.poolEmployee.employeeId = event[0].employeeNumber;
+  //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
+
+   console.log(selectType, event)
 }
 
 }
