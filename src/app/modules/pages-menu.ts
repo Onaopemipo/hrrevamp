@@ -398,13 +398,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Expenses',
     icon: 'assets/icons/Expenses.jpg',
     children: [
+      // {
+      //   title: 'Expense Management',
+      //   link: '/expenses/'
+      // },
       {
-        title: 'Expense Management',
-        link: '/expenses/'
+        title: 'Expense Group',
+        link: '/expenses/group'
       },
       {
         title: 'Expense Type',
         link: '/expenses/type'
+      },
+      {
+        title: 'Expense Project',
+        link: '/expenses/project'
       },
       {
         title: 'Expense Request',
