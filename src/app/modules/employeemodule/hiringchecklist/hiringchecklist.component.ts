@@ -36,7 +36,7 @@ export class HiringchecklistComponent implements OnInit {
   Manager: DropdownValueDTO[]
   OfferLetter = new OfferLetterTemplateDTO().clone()
   prepareOffer = new PrepareOfferLetterDTO().clone();
-  OnboardingId: number =1
+  OnboardingId: number = 0;
   EployType: DropdownValue[] = [];
   constructor(private sanitizer: DomSanitizer, private common: CommonServiceProxy, private PostService: PostServiceProxy, private alertservice: AlertserviceService,
     private DataService: DataServiceProxy, private FetchEmployeesByName_IdServiceProxy: FetchEmployeesByName_IdServiceProxy, private AddUpateOfferLetterTemplateServiceProxy: AddUpateOfferLetterTemplateServiceProxy,
@@ -117,11 +117,13 @@ export class HiringchecklistComponent implements OnInit {
     this.subtitle = 'Work Information';
     this.selectedPanel = 'workInfoPanel';
     this.submitbtnPressed = true
-    console.log('workdata', this.InformationData)
+  
     const data = await this.PostService.addUpdateOnboardingPersonnalData(this.UserData).toPromise()
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
-
+      console.log('user', this.UserData)
+      this.OnboardingId=data.result.retId
+      console.log( 'onid',this.OnboardingId)
       this.submitbtnPressed = false
     } else {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
@@ -130,10 +132,11 @@ export class HiringchecklistComponent implements OnInit {
   }
 
 
-  async proceedtoofferLetter() {
+  async proceedtoofferLetter(OnboardingId) {
   
     this.submitbtnPressed = false
-    console.log('workdata', this.workData)
+    this.workData.onboardingId = OnboardingId;
+    console.log('workdata', this.workData.onboardingId)
     const data = await this.PostService.addUpdateOnboardingWorkData(this.workData).toPromise()
 
     if (!data.hasError) {
@@ -219,7 +222,7 @@ export class HiringchecklistComponent implements OnInit {
 
   get formvalidate() {
     if (this.workData.hireDate && this.workData.dateofJoining && this.workData.salaryPerAnnum && this.workData.desginationId && this.workData.employeeTypeId
-      && this.workData.departmentId && this.workData.reportingManagerId && this.workData.workEmail && this.workData.location && this.workData.onboardingId
+      && this.workData.departmentId && this.workData.reportingManagerId && this.workData.workEmail && this.workData.location 
       && this.workData.linkExpireDate) return true;
     return false
   }

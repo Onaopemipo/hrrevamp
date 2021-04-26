@@ -397,7 +397,7 @@
                   </div>
                 </div> -->
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">OnBoarding Id</label>
                   <div class="col-sm-8">
 
@@ -409,7 +409,7 @@
 
 
                   </div>
-                </div> 
+                </div>  -->
 
 
                 <div class="form-group row">
@@ -563,7 +563,7 @@
                     <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
                       <i class="fa fa-spin fa-spinner"></i></button>
                     <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed"
-                      (click)="proceedtoofferLetter()" [disabled]="! formvalidate">Proceed</button>
+                      (click)="proceedtoofferLetter(OnboardingId)" [disabled]="! formvalidate">Proceed</button>
                   </div>
                 </div>
 
