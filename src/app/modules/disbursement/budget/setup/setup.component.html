@@ -39,7 +39,7 @@
               <label>Budget Item</label>
             </div>
             <div class="col-sm-5">
-              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="disBudgetItem.name" required>
+              <input class="form-control" name="itemName" #itemName="ngModel" [(ngModel)]="budgetItem.name" required>
             </div>
           </div>
 
@@ -48,11 +48,17 @@
               <label>Budget</label>
             </div>
             <div class="col-sm-5">
-              <select name="budget" #budget="ngModel" [(ngModel)]="myBudget.id" class="form-control">
+              <!-- <select name="budget" #budget="ngModel" [(ngModel)]="myBudget.id" class="form-control">
+                <option value=""> Select Budget Financial Year</option>
+                <option *ngFor="let budget of myBudget" [value]="budget.id">{{budget.financialYearStartDate	 | date : 'longDate'}} - {{budget.financialYearEndDate | date : 'longDate'}}</option>
+              </select> -->
+              <select name="budget" #budget="ngModel" [(ngModel)]="budgetItem.budgetID" class="form-control">
                 <option value=""> Select Budget Financial Year</option>
                 <option *ngFor="let budget of myBudget" [value]="budget.id">{{budget.financialYearStartDate	 | date : 'longDate'}} - {{budget.financialYearEndDate | date : 'longDate'}}</option>
               </select>
             </div>
+
+            {{budget.id}}
           </div>
 
           <div class="form-group row">
@@ -60,7 +66,7 @@
               <label>Budget Code</label>
             </div>
             <div class="col-sm-5">
-              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="disBudgetItem.code" placeholder="Budget Code" required>
+              <input class="form-control" name="itemCode" #itemCode="ngModel" [(ngModel)]="budgetItem.code" placeholder="Budget Code" required>
             </div>
           </div>
           <div class="form-group row">
@@ -68,7 +74,7 @@
               <label>Total Budget Amount</label>
             </div>
             <div class="col-sm-5">
-              <app-amount-input [(value)]="disBudgetItem.totalBudget"></app-amount-input>
+              <app-amount-input [(value)]="budgetItem.totalBudget"></app-amount-input>
             </div>
           </div>
 
@@ -78,9 +84,9 @@
             <label>Department</label>
           </div>
           <div class="col-sm-5">
-            <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.department_id" required>
-              <option value="1" disabled>--Select Department--</option>
-              <option *ngFor="let dep of allDepartments" value="dep.id">{{dep.name}}</option>
+            <select class="form-control" name="department" #department="ngModel" [(ngModel)]="departments.departmentId" required>
+              <option value="" disabled>--Select Department--</option>
+              <option *ngFor="let dep of allDepartments" [value]="dep.id">{{dep.name}}</option>
             </select>
           </div>
           </div>
@@ -89,7 +95,7 @@
               <label>Allocated amount</label>
             </div>
             <div class="col-sm-5">
-              <app-amount-input [(value)]="departments.amount"></app-amount-input>
+              <app-amount-input [(value)]="departments.allocatedAmount" [(max)]="budgetItem.totalBudget"></app-amount-input>
             </div>
           </div>
 
@@ -98,12 +104,21 @@
               <label></label>
             </div>
             <div class="col-sm-5">
-                <button nbButton status="primary" class="border-none" (click)="addDepartment()" outline>
+                <button nbButton status="primary" class="border-none" (click)="addDepartmentAllocations()" outline>
                   <nb-icon icon="plus-outline"></nb-icon>
                   Add department
                 </button>
             </div>
           </div>
+
+          <div class="form-group row" *ngIf="addedDepartments.length > 0" style="border: #4847E0 3px;">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-8">
+              <span class="cbadge"  *ngFor="let dept of addedDepartments" style="margin: 5px;">{{dept.department}} &nbsp;
+                <i class="fa fa-times" (click)="removeDepartment(dept.id)" style="cursor: pointer;color: red;"></i></span>
+            </div>
+          </div>
+
 
           <div class="form-group row" style="margin-top: 20px">
             <div class="col-sm-2">
@@ -111,7 +126,7 @@
             </div>
             <div class="col-sm-5">
                 <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-                <button nbButton status="primary" (click)="updateBudgetItem()">Save</button>
+                <button nbButton status="primary" (click)="addBudgetItem()">Save</button>
             </div>
           </div>
         </form>

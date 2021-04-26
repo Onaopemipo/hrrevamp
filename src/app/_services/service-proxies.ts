@@ -24117,7 +24117,7 @@ export class ApproveOrRejectServiceProxy {
 
     /**
      * this method is used to approve or reject leave plan. Note all fields are requiered except companyId
-    it uses Enum Leaveplan status : Approved = 1, Reject = 2, Pending =3
+    it uses Enum Leave Plan status : Approved = 1, Reject = 2, Pending =3
      * @param body (optional) 
      * @return Success
      */
@@ -24204,7 +24204,7 @@ export class PostReviewServiceProxy {
 
     /**
      * this method is used to review leave plan. Note all fields are requiered except companyId
-    it uses Enum Leaveplan status : Approved = 1, Reject = 2, Pending =3
+    it uses Enum Leave Plan status : Approved = 1, Reject = 2, Pending =3
      * @param body (optional) 
      * @return Success
      */
@@ -24389,7 +24389,7 @@ export class GetLeaveRequestServiceProxy {
      * @param pageNumber (optional) 
      * @return Success
      */
-    getLeaveReports(leaveTypeId: number | undefined, leaveYearId: number | undefined, startDate: Date | undefined, endDate: Date | undefined, employeeName: string | null | undefined, noOfDays: number | undefined, remainingDays: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LeaveReportListDTOListApiResult> {
+    getLeaveReports(leaveTypeId: number | undefined, leaveYearId: number | undefined, startDate: Date | null | undefined, endDate: Date | null | undefined, employeeName: string | null | undefined, noOfDays: number | undefined, remainingDays: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LeaveReportListDTOListApiResult> {
         let url_ = this.baseUrl + "/api/LeaveRequest/GetLeaveRequest/GetLeaveReports?";
         if (leaveTypeId === null)
             throw new Error("The parameter 'leaveTypeId' cannot be null.");
@@ -24399,13 +24399,9 @@ export class GetLeaveRequestServiceProxy {
             throw new Error("The parameter 'leaveYearId' cannot be null.");
         else if (leaveYearId !== undefined)
             url_ += "LeaveYearId=" + encodeURIComponent("" + leaveYearId) + "&";
-        if (startDate === null)
-            throw new Error("The parameter 'startDate' cannot be null.");
-        else if (startDate !== undefined)
+        if (startDate !== undefined && startDate !== null)
             url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&";
-        if (endDate === null)
-            throw new Error("The parameter 'endDate' cannot be null.");
-        else if (endDate !== undefined)
+        if (endDate !== undefined && endDate !== null)
             url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&";
         if (employeeName !== undefined && employeeName !== null)
             url_ += "EmployeeName=" + encodeURIComponent("" + employeeName) + "&";
@@ -32026,12 +32022,13 @@ export class GetPromotionEligibilityListsServiceProxy {
     /**
      * @param _PageSize (optional) 
      * @param _PageNumber (optional) 
+     * @param eligibilityId (optional) 
      * @param is_closed (optional) 
      * @param start (optional) 
      * @param end (optional) 
      * @return Success
      */
-    getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<PromotionEligibilityViewModelIListApiResult> {
+    getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, eligibilityId: number | null | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<PromotionEligibilityViewModelIListApiResult> {
         let url_ = this.baseUrl + "/api/Promotion/GetPromotionEligibilityLists/GetPromotionEligibilityLists?";
         if (_PageSize === null)
             throw new Error("The parameter '_PageSize' cannot be null.");
@@ -32041,6 +32038,8 @@ export class GetPromotionEligibilityListsServiceProxy {
             throw new Error("The parameter '_PageNumber' cannot be null.");
         else if (_PageNumber !== undefined)
             url_ += "_PageNumber=" + encodeURIComponent("" + _PageNumber) + "&";
+        if (eligibilityId !== undefined && eligibilityId !== null)
+            url_ += "EligibilityId=" + encodeURIComponent("" + eligibilityId) + "&";
         if (is_closed === null)
             throw new Error("The parameter 'is_closed' cannot be null.");
         else if (is_closed !== undefined)
@@ -83318,6 +83317,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
     comments!: string | undefined;
     id!: number | undefined;
     employee_id!: number | undefined;
+    employee_name!: string | undefined;
     employee_contract_id!: number;
     eligiblility_id!: number | undefined;
     date_of_appointment!: Date | undefined;
@@ -83375,6 +83375,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
             this.comments = _data["comments"];
             this.id = _data["id"];
             this.employee_id = _data["employee_id"];
+            this.employee_name = _data["employee_name"];
             this.employee_contract_id = _data["employee_contract_id"];
             this.eligiblility_id = _data["eligiblility_id"];
             this.date_of_appointment = _data["date_of_appointment"] ? new Date(_data["date_of_appointment"].toString()) : <any>undefined;
@@ -83432,6 +83433,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
         data["comments"] = this.comments;
         data["id"] = this.id;
         data["employee_id"] = this.employee_id;
+        data["employee_name"] = this.employee_name;
         data["employee_contract_id"] = this.employee_contract_id;
         data["eligiblility_id"] = this.eligiblility_id;
         data["date_of_appointment"] = this.date_of_appointment ? this.date_of_appointment.toISOString() : <any>undefined;
@@ -83489,6 +83491,7 @@ export interface ISp_FetchEligibleEmployees {
     comments: string | undefined;
     id: number | undefined;
     employee_id: number | undefined;
+    employee_name: string | undefined;
     employee_contract_id: number;
     eligiblility_id: number | undefined;
     date_of_appointment: Date | undefined;
@@ -89394,8 +89397,6 @@ export class RetirementLog implements IRetirementLog {
     reviewedBy!: string | undefined;
     reviewDate!: Date | undefined;
     reviewComment!: string | undefined;
-    subReason!: string | undefined;
-    sourceofInitiation!: string | undefined;
     personalEmail!: string | undefined;
     personalPhoneNumber!: string | undefined;
     lastWorkingDate!: Date;
@@ -89442,8 +89443,6 @@ export class RetirementLog implements IRetirementLog {
             this.reviewedBy = _data["reviewedBy"];
             this.reviewDate = _data["reviewDate"] ? new Date(_data["reviewDate"].toString()) : <any>undefined;
             this.reviewComment = _data["reviewComment"];
-            this.subReason = _data["subReason"];
-            this.sourceofInitiation = _data["sourceofInitiation"];
             this.personalEmail = _data["personalEmail"];
             this.personalPhoneNumber = _data["personalPhoneNumber"];
             this.lastWorkingDate = _data["lastWorkingDate"] ? new Date(_data["lastWorkingDate"].toString()) : <any>undefined;
@@ -89490,8 +89489,6 @@ export class RetirementLog implements IRetirementLog {
         data["reviewedBy"] = this.reviewedBy;
         data["reviewDate"] = this.reviewDate ? this.reviewDate.toISOString() : <any>undefined;
         data["reviewComment"] = this.reviewComment;
-        data["subReason"] = this.subReason;
-        data["sourceofInitiation"] = this.sourceofInitiation;
         data["personalEmail"] = this.personalEmail;
         data["personalPhoneNumber"] = this.personalPhoneNumber;
         data["lastWorkingDate"] = this.lastWorkingDate ? this.lastWorkingDate.toISOString() : <any>undefined;
@@ -89538,8 +89535,6 @@ export interface IRetirementLog {
     reviewedBy: string | undefined;
     reviewDate: Date | undefined;
     reviewComment: string | undefined;
-    subReason: string | undefined;
-    sourceofInitiation: string | undefined;
     personalEmail: string | undefined;
     personalPhoneNumber: string | undefined;
     lastWorkingDate: Date;

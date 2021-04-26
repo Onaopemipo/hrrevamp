@@ -67,6 +67,10 @@ export class ProcessRequestComponent implements OnInit {
     }
   }
 
+  async fetchSingleLoan(){
+    // const data = await this.singleLoan.
+  }
+
   async fetchLoanSummary(){
     const data = await this.summaryService.getLoanSummary(this.loanId).toPromise();
     if(!data.hasError){

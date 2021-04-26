@@ -15,7 +15,7 @@
 </ngx-componentsheader>
 
 
-<nb-card style="margin-top: 15px;">
+<nb-card style="margin-top: 15px;" >
     <nb-card-body>
       <ngx-default-content
       *ngIf="showEmpty"
@@ -48,7 +48,7 @@
   <div modal-body>
     <nb-card style="border: none;">
       <div class="row" style="padding-top:10px">
-        <div class="col-sm-6 form-group">
+        <!-- <div class="col-sm-6 form-group">
           <label>Follow Promotion Rule</label>
           <select class="form-control" [(ngModel)]="gOptions.promotionRuleId" name="promotionRuleId" id="promotionRuleId" #promotionRuleId="ngModel" >
             <option value="">--Select Rule--</option> 
@@ -63,7 +63,7 @@
                
         </select>
   
-        </div>
+        </div> -->
         <div class="col-sm-12 form-group">
           <label>Target Position</label>
           <select class="form-control"  required [(ngModel)]="gOptions.promotionTargetId" name="promotionTargetId" id="promotionTargetId" #promotionTargetId="ngModel">
@@ -73,6 +73,11 @@
         <div *ngIf="promotionTargetId.invalid && (promotionTargetId.dirty || promotionTargetId.touched)" class="error">
           <div *ngIf="promotionTargetId.errors.required">Job Title is required</div>
         </div>
+        </div>
+        <div class="col-sm-12 form-group" >     
+            <label>Comment:</label>
+            <textarea nbInput fullWidth rows="5" style="padding-left: -10px;" [(ngModel)]="gOptions.comments" #comments="ngModel" name="comments" id="comments"></textarea>
+       
         </div>
         <div class="col-sm-12 form-group">
           <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee:</label>
