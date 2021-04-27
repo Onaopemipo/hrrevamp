@@ -22,6 +22,7 @@ export class TalentPoolComponent implements OnInit {
   myButton: string = 'Create Talent Pool';
   newPool:boolean = false;
   talentPool: string = '';
+  allPoolData: number = 0;
   poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
   // poolModel: MyTalentPool = new MyTalentPool;
   allTalentPool: MyTalentPool [] = [];
@@ -44,7 +45,6 @@ export class TalentPoolComponent implements OnInit {
     private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,private commonService: CommonServiceProxy ) { }
 
   ngOnInit(): void {
-    this.fetchPool();
     this.getCompetency();
     this.fetchAllPools();
   }
@@ -94,6 +94,7 @@ export class TalentPoolComponent implements OnInit {
     const data = await this.newPoolService.fetchTalentManagementPool().toPromise();
     if(!data.hasError){
       this.allTalentPools = data.result;
+      this.allPoolData = data.totalRecord;
       console.log('See my pools', this.allTalentPools)
     }
   }
@@ -112,11 +113,10 @@ export class TalentPoolComponent implements OnInit {
 
   }
 
-  async fetchPool(){
-    const data = await this.poolservice.list({}).toPromise()
-    console.log('Yes Boss, the data is here:',data.data)
-    this.allTalentPool = data.data;
-  }
+  // async fetchSinglePool(){    const data = await this.newPoolService.getTalentPoolById().toPromise()
+  //   console.log('Yes Boss, the data is here:',data.data)
+  //   this.allTalentPool = data.data;
+  // }
 
   async getCompetency(){
     const data = await this.commonService.getCompetency().toPromise();

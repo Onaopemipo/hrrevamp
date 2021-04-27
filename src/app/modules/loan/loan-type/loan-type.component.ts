@@ -175,7 +175,7 @@ export class LoanTypeComponent implements OnInit {
   // }
 
   async fetchAllLoanTypes(){
-    const data = await this.loanTypeService.getLoanTypesByCriteria(undefined,'','','',0,0,0,0,1,10).toPromise();
+    const data = await this.loanTypeService.getLoanTypesByCriteria('','','',0,0,0,0,1,10).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       this.dataCounter = data.totalRecord;

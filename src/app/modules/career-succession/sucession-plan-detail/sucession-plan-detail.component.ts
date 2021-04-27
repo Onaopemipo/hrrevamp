@@ -1,3 +1,4 @@
+import { GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'app/components/base/base.component';
@@ -46,6 +47,8 @@ export class SucessionPlanDetailComponent extends BaseComponent<SuccessionPlanEm
   ];
 
   showModal = false;
+  planData: CareerSuccessionDTO = new CareerSuccessionDTO;
+  planTitle: string = '';
 
   editingData = new SuccessionPlanEmployee();
 
@@ -54,6 +57,7 @@ export class SucessionPlanDetailComponent extends BaseComponent<SuccessionPlanEm
     // protected alertService: AlertserviceService,
     private api: SuccessionPlanService,
     private activatedRoute: ActivatedRoute,
+    private getPlan: GetCareerSuccesionPlanByIdServiceProxy
   ) {
     super(confirmBox);
   }
@@ -66,6 +70,14 @@ export class SucessionPlanDetailComponent extends BaseComponent<SuccessionPlanEm
       });
       super.ngOnInit();
     });
+  }
+
+  async getSinglePlan(){
+    const data = await this.getPlan.getCareerSuccessionPlanById(1).toPromise();
+    if(!data.hasError){
+      this.planData = data.result;
+      this.planTitle = this.planData.title;
+    }
   }
 
 }

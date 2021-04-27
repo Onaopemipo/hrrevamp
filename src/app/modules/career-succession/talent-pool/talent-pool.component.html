@@ -1,5 +1,5 @@
 <ngx-componentsheader pageName='Talent Pool' [requiredButton]="rButton" (buttonClick)="addNewPool()"></ngx-componentsheader>
-<div *ngIf="newPool==false  && allTalentPool.length === 0" style="background-color: #ffffff;">
+<div *ngIf="allPoolData < 1" style="background-color: #ffffff;">
   <nb-card
     style="min-height: 100vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
     <nb-card-body>
@@ -12,7 +12,7 @@
 
 </div>
 
-<div *ngIf="newPool == true">
+<div *ngIf="allPoolData > 0">
   <nb-card>
     <nb-card-body>
       <form>
@@ -57,7 +57,7 @@
 </div>
 
 
-<div *ngIf="allTalentPools.length > 0 && newPool == false">
+<div *ngIf="allPoolData > 0">
       <nb-card *ngFor="let pool of allTalentPools" class="cardTitle">
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">

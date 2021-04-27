@@ -4,7 +4,7 @@
   <span style="cursor: pointer;"><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px; ">Back</a></span>
 </div>
 <div>
-  <nb-card *ngIf="newCandidate" style="padding: 5px;">
+  <nb-card *ngIf="newCandidate">
     <nb-tabset>
       <nb-tab *ngIf="employeeCounter < 1" tabTitle="Employee Database">
         <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
@@ -39,7 +39,7 @@
         <nb-card-header>Requirements</nb-card-header>
         <nb-card-body>
           <ngx-tableheader></ngx-tableheader>
-          <ngx-tablecomponent [userData]="poolRecords.requirements" [loading]="loading" [tableColum]="requirementTable"></ngx-tablecomponent>
+          <ngx-tablecomponent [userData]="poolRecords" [loading]="loading" [tableColum]="requirementTable"></ngx-tablecomponent>
         </nb-card-body>
       </nb-card>
     </div>
@@ -303,7 +303,7 @@
 
 
 <!-- Requirements Modal  -->
-<ngx-side-modal [(show)]='showRequirementModal' style="width: 500px;">
+<!-- <ngx-side-modal [(show)]='showRequirementModal' style="width: 500px;">
   <div modal-header>Add Requirement</div>
   <div modal-body>
     <div class="form-group row mydiv">
@@ -390,7 +390,7 @@
     </div>
   </div>
   <div style="margin-top: 15px;"></div>
-</ngx-side-modal>
+</ngx-side-modal> -->
 
 
 

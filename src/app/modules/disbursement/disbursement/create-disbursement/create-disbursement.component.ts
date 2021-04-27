@@ -1,6 +1,6 @@
-import { DataServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
+import { DataServiceProxy, CommonServiceProxy, BudgetDTO } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { ExpenseProject, AddUpdateBudgetServiceProxy, ManageBudgetDTO, SingleDisbursementPostDTO, SingleDisbursementServiceProxy, IDTextViewModel, BudgetItemDTO, FetchAllBudgetItemsServiceProxy, GetAllPaymentInstitutionsServiceProxy, PayInstitutionDTO, DropdownValue, GetExpenseProjectServiceProxy, IDropdownValue, FrequencyRule, TenantBeneficiary } from './../../../../_services/service-proxies';
+import { ExpenseProject, AddUpdateBudgetServiceProxy, ManageBudgetDTO, SingleDisbursementPostDTO, SingleDisbursementServiceProxy, IDTextViewModel, BudgetItemDTO, FetchAllBudgetItemsServiceProxy, GetAllPaymentInstitutionsServiceProxy, PayInstitutionDTO, DropdownValue, GetExpenseProjectServiceProxy, IDropdownValue, FrequencyRule, TenantBeneficiary, FetchAllBudgetsServiceProxy } from './../../../../_services/service-proxies';
 import { MyDisbursement, DisbursementService } from './../../services/disbursement.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
@@ -21,6 +21,14 @@ export class CreateDisbursementComponent implements OnInit {
     { value: 'project', label: 'Project' },
   ]
 
+  recipientVals = [
+    {value: 'new', title: 'New Account'},
+    {value: 'existing', title: 'Existing Beneficiary'},
+    {value: 'employee', title: 'Employee'},
+  ];
+
+  recipientVal;
+
   selectedTab = TABS.SINGLE;
   TABS = TABS;
 
@@ -38,12 +46,20 @@ export class CreateDisbursementComponent implements OnInit {
   AllCategories: IDTextViewModel [] = [];
 
   dataIndex: number = 1;
+  myBudget: BudgetDTO[] = [];
 
-  disbursement: SingleDisbursementPostDTO = new SingleDisbursementPostDTO;
+  allBudget: ManageBudgetDTO = new ManageBudgetDTO();
+
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
+  disbursement: SingleDisbursementPostDTO = new SingleDisbursementPostDTO();
 
   constructor(private disbursementService: SingleDisbursementServiceProxy, private alert: AlertserviceService,
     private dataService: DataServiceProxy, private budgetItemService: FetchAllBudgetItemsServiceProxy,
     private channel: GetAllPaymentInstitutionsServiceProxy, private project: GetExpenseProjectServiceProxy,
+    private budgetService: FetchAllBudgetsServiceProxy,
     private commonService: CommonServiceProxy  ) { }
 
   ngOnInit(): void {
@@ -97,11 +113,12 @@ async getFrequencies(){
 
 
 async createDisbursement(){
+  console.log('Hey Boss Datata',this.disbursement)
   const data = await this.disbursementService.postSingleDisbursement(this.disbursement).toPromise();
   if(!data.hasError){
     this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss');
   } else {
-    console.log(data.message)
+    console.log('See the log here:',data.message)
   }
 }
 
@@ -134,6 +151,14 @@ get disableSubmitbtn(){
   return resp;
 }
 
+getSelectedEmployee(event,selectType) {
+  console.log(event)
+   if(selectType == 'employee'){
+    this.disbursement.id= event[0].employeeNumber;
+   }
+   console.log(selectType, event)
+}
+
 async getProjects(){
   const data = await this.project.getExpenseProject(0,'','',false,'','',1,10).toPromise();
   this.allProjects = data.result;
@@ -147,6 +172,14 @@ async getBeneficiaries(){
     console.log('beneficiaries: ', this.allBeneficiaries)
   }
 }
+
+async fetAllBudget(){
+  const data = await this.budgetService.getAllBudgets().toPromise();
+  if(!data.hasError){
+   this.myBudget = data.result;
+   console.log('All Bugdet Items', this.myBudget)
+  }
+ }
 
 
 saveBeneficiary(event){

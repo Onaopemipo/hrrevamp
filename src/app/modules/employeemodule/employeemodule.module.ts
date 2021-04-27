@@ -152,7 +152,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     PostServiceProxy,
     UploadDocumentServiceProxy,
     GetPromotionListsServiceProxy,
-    FetchEmployeesByName_IdServiceProxy,
+    FetchEmployeesByName_IdServiceProxy
   ]
 
 

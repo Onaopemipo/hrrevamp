@@ -156,9 +156,11 @@ export class PlanningComponent implements OnInit {
 
   async fetchAllPlans(){
     const data = await this.planService.getCareerSuccessionPlan().toPromise();
+    console.log(data.result);
     if(!data.hasError){
       this.allPans = data.result;
       this.planDataCount = data.totalRecord;
+      console.log('My plans data here', this.allPans)
     }
   }
 

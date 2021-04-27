@@ -49,6 +49,7 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     SucessionPlanDetailComponent,
     SuccessionDashboardComponent,
     NewCompetencyComponent,
+
   ],
   providers: [
     TalentPoolService,

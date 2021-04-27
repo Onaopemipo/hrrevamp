@@ -89,7 +89,7 @@ export class SuccessionDashboardComponent implements OnInit {
        }
 
        else if(event.name==TABLE_ACTION.CREATEPLAN){
-        this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id)
+        this.router.navigateByUrl('/career-succession/succession-plan-detail/' + event.data.id)
          }
   }
   ngOnInit(): void {
