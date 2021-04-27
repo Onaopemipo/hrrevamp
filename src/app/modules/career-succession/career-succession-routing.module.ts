@@ -23,7 +23,7 @@ const routes: Routes = [
     component: CareerSuccessionComponent,
     children: [
       {
-        path: '',
+        path: 'succession-dashboard',
         component: SuccessionDashboardComponent
 
       },
@@ -38,7 +38,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'talent-pool',
+        path: 'talentpool',
         component: TalentPoolComponent
       },
 

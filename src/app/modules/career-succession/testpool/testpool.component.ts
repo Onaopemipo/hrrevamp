@@ -131,6 +131,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
   async fetchPool(){
     this.loading = true;
     const data = await this.poolservice.fetch(this.pageId).toPromise();
+    // const data = await this
     this.poolRecords = data;
     this.pageTitle = data.title;
     console.log('Hey', this.poolRecords)

@@ -107,6 +107,7 @@ export class LoanTypeComponent implements OnInit {
     if(!data.hasError && data.result.isSuccessful){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss').subscribe(dataAction => {
         this.router.navigateByUrl('/loan/loan-type');
+        this.fetchAllLoanTypes();
         this.loanTypeModel = new LoanTypeDTO().clone();
       });
 

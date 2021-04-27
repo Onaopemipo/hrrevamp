@@ -28,6 +28,10 @@ export class LoanRequestComponent implements OnInit {
   button: string = 'Click to request';
   pageNo: number = 1;
 
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
   loanModel: NewLoanRequestDTO = new NewLoanRequestDTO;
   loanRequest: NewLoanRequestDTO = new NewLoanRequestDTO;
 
@@ -70,10 +74,6 @@ export class LoanRequestComponent implements OnInit {
   loading: boolean = true;
   allloanTypes: LoanType [] = [];
   dataCounter: number = 0;
-
-  allowmultipleselection: boolean = false;
-  selectionHeader: string = "Select Employee";
-  addbtnText: string = "Add Employee";
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
@@ -173,4 +173,18 @@ export class LoanRequestComponent implements OnInit {
   showModal(){
     this.viewLoanModal = !this.viewLoanModal;
   }
+
+
+  getSelectedEmployee(event,selectType) {
+    console.log(event)
+     if(selectType == 'employee')this.loanModel.employeeNo = event[0].employeeNumber;
+     console.log(selectType, event)
+  }
+
+  getGuarantors(event,selectType) {
+    console.log(event)
+     if(selectType == 'employee')this.loanModel.strGuarantorIds = event[0].employeeNumber;
+     console.log(selectType, event)
+  }
+
 }

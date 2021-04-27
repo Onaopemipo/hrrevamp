@@ -75,8 +75,11 @@ export class TalentPoolComponent implements OnInit {
     this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
+      this.poolModel = new AddTalentMangementDTO().clone();
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss').subscribe(dataAction => {
-        this.router.navigateByUrl('/career-succession/talent-pool');
+        if(dataAction == 'closed'){
+          this.router.navigateByUrl('/career-succession/talent-pool');
+        }
       })
       console.log('Congrats, pool created successfully');
 

@@ -95,7 +95,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
-     
+
 
       CardComponent],
   imports: [
@@ -151,9 +151,8 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     FetchDeploymentServiceProxy,
     PostServiceProxy,
     UploadDocumentServiceProxy,
-    GetPromotionListsServiceProxy
-    
-    FetchEmployeesByName_IdServiceProxy
+    GetPromotionListsServiceProxy,
+    FetchEmployeesByName_IdServiceProxy,
   ]
 
 

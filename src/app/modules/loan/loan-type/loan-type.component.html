@@ -179,7 +179,7 @@
           </div>
 
           <div class="col-sm-6">
-            <app-amount-input [(value)]="loanTypeModel.minAmount"></app-amount-input>
+            <app-amount-input [(value)]="loanTypeModel.minAmount" [max]="loanTypeModel.maxAmount"></app-amount-input>
           </div>
         </div>
 
@@ -189,7 +189,7 @@
           </div>
 
           <div class="col-sm-6">
-            <app-amount-input [(value)]="loanTypeModel.maxAmount"></app-amount-input>
+            <app-amount-input [(value)]="loanTypeModel.maxAmount" [min]="loanTypeModel.minAmount"></app-amount-input>
           </div>
         </div>
 
@@ -216,7 +216,8 @@
           </div>
 
           <div class="col-sm-6">
-            <ngx-wysisyg-input [(value)]="loanTypeModel.customQuestion" style="padding-left: -10px;" ></ngx-wysisyg-input>
+            <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanTypeModel.customQuestion" cols="60" rows="10"></textarea>
+            <!-- <ngx-wysisyg-input [(value)]="loanTypeModel.customQuestion" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
           </div>
 
         </div>
@@ -228,7 +229,8 @@
           </div>
 
           <div class="col-sm-6">
-            <ngx-wysisyg-input [(value)]="loanTypeModel.description" style="padding-left: -10px;" ></ngx-wysisyg-input>
+            <textarea name="description" #description="ngModel" [(ngModel)]="loanTypeModel.description" cols="60" rows="10"></textarea>
+            <!-- <ngx-wysisyg-input [(value)]="loanTypeModel.description" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
           </div>
 
         </div>
