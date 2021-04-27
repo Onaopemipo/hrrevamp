@@ -1,3 +1,4 @@
+import { RetirementServiceProxy, RetirmentDTO } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { TableColumn, TableAction, TableActionEvent } from './../../../components/tablecomponent/models';
@@ -63,7 +64,7 @@ export class SuccessionDashboardComponent implements OnInit {
   myButton: string = 'Add New Plan';
 
   employeeDataCount: number = 0;
-  allEmployeesData: EmployeeDTO [] = [];
+  allRetireesData: RetirmentDTO [] = [];
   newPlan: boolean = false;
   successingCandidates
   newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
@@ -73,7 +74,7 @@ export class SuccessionDashboardComponent implements OnInit {
     {name: TABLE_ACTION.CREATEPLAN, label: 'Create Plan'},
 
   ]
-  constructor(private router: Router, private allEmployees: FetchAllEmployeesServiceProxy,
+  constructor(private router: Router, private allEmployees: FetchAllEmployeesServiceProxy, private retirees: RetirementServiceProxy,
     private succession: CareerSuccessionServiceProxy, private alertMe: AlertserviceService) { }
 
   tableActionClicked(event: TableActionEvent){
@@ -92,16 +93,23 @@ export class SuccessionDashboardComponent implements OnInit {
          }
   }
   ngOnInit(): void {
-    this.fetchAllEmployees();
+    // this.fetchAllEmployees();
+    this.getRetirees();
   }
 
-  async fetchAllEmployees(){
-    const data = await this.allEmployees.getAllEmployees(undefined,undefined,10,1).toPromise();
+  // async fetchAllEmployees(){
+  //   const data = await this.allEmployees.getAllEmployees(undefined,undefined,10,1).toPromise();
+  //   if(!data.hasError){
+  //     this.allEmployeesData = data.result;
+  //     this.employeeDataCount = data.totalRecord;
+  //     console.log(data.result);
+  //   }
+  // }
+
+  async getRetirees(){
+    const data = await this.retirees.getAllRetire('','','',0,10,'',null,null,10,10).toPromise();
     if(!data.hasError){
-      this.allEmployeesData = data.result;
-      // .map(data => new MyEmployeeDTO(data));
-      this.employeeDataCount = data.totalRecord;
-      console.log(data.result);
+      this.allRetireesData = data.result;
     }
   }
 

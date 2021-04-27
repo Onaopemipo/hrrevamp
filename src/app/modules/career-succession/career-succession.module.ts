@@ -1,5 +1,5 @@
 import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy } from './../../_services/service-proxies';
-import { GetAllDepartmentsServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
+import { GetAllDepartmentsServiceProxy, CommonServiceProxy, RetirementServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -45,7 +45,11 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     CompareCompetencyComponent,
     GridboxComponent,
     TestpoolComponent,
-    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SuccessionDashboardComponent, NewCompetencyComponent],
+    NineGridBoxEmployeeComponent,
+    SucessionPlanDetailComponent,
+    SuccessionDashboardComponent,
+    NewCompetencyComponent,
+  ],
   providers: [
     TalentPoolService,
     EmployeesService,
@@ -62,7 +66,8 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     GetEmployeeebyGridBoxServiceProxy,
     GetGridBoxCountServiceProxy,
     TalentManagementServiceProxy,
-    CompetencyServiceProxy
+    CompetencyServiceProxy,
+    RetirementServiceProxy
   ],
   imports: [
     CommonModule,
