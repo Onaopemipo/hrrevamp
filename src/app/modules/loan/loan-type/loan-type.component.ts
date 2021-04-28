@@ -165,21 +165,13 @@ export class LoanTypeComponent implements OnInit {
     }
   }
 
-  // async getLoanTypes(){
-  //   const data = await this.loanTypeService.fetchLoanTypeById(1,1).toPromise();
-  //   if(!data.hasError){
-  //     this.allloanTypes = data.result;
-  //     this.dataCounter = data.totalRecord;
-  //     console.log(this.dataCounter, this.allloanTypes)
-  //   }
-  // }
-
   async fetchAllLoanTypes(){
     const data = await this.loanTypeService.getLoanTypesByCriteria('','','',0,0,0,0,1,10).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       this.dataCounter = data.totalRecord;
       console.log('All Loan Types:', this.allLoanTypes);
+      this.loading = false;
   }
 
 }

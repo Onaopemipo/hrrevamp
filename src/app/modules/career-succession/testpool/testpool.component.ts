@@ -63,7 +63,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
  employeeCounter: number = 0;
  pageTitle: string = '';
  pageId:number = 0;
- poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO;
+ poolRecords: AddTalentMangementDTO [] = [];
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
@@ -113,7 +113,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     console.log('Here is the data',data)
     if(!data.hasError){
       this.poolRecords = data.result;
-      this.pageTitle = this.poolRecords.title;
+      // this.pageTitle = this.poolRecords.title;
       console.log('Single Record', this.poolRecords)
       this.loading = false;
     }

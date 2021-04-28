@@ -92,6 +92,7 @@ export class TalentPoolComponent implements OnInit {
 
   async fetchAllPools(){
     const data = await this.newPoolService.fetchTalentManagementPool().toPromise();
+    console.log('Here is all pools',data);
     if(!data.hasError){
       this.allTalentPools = data.result;
       this.allPoolData = data.totalRecord;
