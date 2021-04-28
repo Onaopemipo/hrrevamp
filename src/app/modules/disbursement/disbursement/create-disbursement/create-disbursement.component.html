@@ -6,7 +6,6 @@
   <!-- {{ allBanks | json }} -->
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="Single Disbursement" [tabId]="TABS.SINGLE">
-      {{disbursement}}
       <form #disburseForm="ngForm" name="disburseForm" id="disburseForm">
         <div class="form-group row">
           <div class="col-sm-2 col-md-2 col-lg-2">
@@ -18,7 +17,7 @@
             placeholder="Select Channel" name="channel" #channel="ngModel" [(ngModel)]="disbursement.channelId"
           >
           <option value=""  disabled>Select Channel</option>
-          <option value="mychannel.id" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
+          <option [value]="mychannel.id" *ngFor="let mychannel of allChannels">{{mychannel.name}}</option>
         </select>
           </div>
         </div>
@@ -28,40 +27,13 @@
                 <label>Disburse for</label>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
-                <nb-radio-group name="disburse_for" #disburse_for="ngModel" [(ngModel)]="disburseFor" (ngModelChange)="changeDisburse($event)">
-                  <nb-radio *ngFor="let dis of disburseFor" [value]="dis.value" >{{ dis.title }}</nb-radio>
+                <nb-radio-group name="categoryId" #categoryId="ngModel" [(ngModel)]="disbursement.categoryId" (ngModelChange)="changeDisburse($event)">
+                  <nb-radio *ngFor="let category of allCategories" [value]="category.id" >{{ category.text }}</nb-radio>
                 </nb-radio-group>
               </div>
             </div>
 
-              <!-- <div class="form-group row">
-                <div class="col-sm-2 col-md-2 col-lg-2">
-                  <label>Budget</label>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                <select name="budget" #budget="ngModel" [(ngModel)]="allBudget.id" class="form-control">
-                  <option value=""> Select Budget Financial Year</option>
-                  <option *ngFor="let budget of myBudget" [value]="budget.id">{{budget.financialYearStartDate	 | date : 'longDate'}} - {{budget.financialYearEndDate | date : 'longDate'}}</option>
-                </select>
-              </div>
-              </div> -->
-
-            <div *ngIf="budgetItem == true" class="form-group row" style="margin-top: 20px">
-              <div class="col-sm-2 col-md-2 col-lg-2">
-                <label>Budget Item</label>
-              </div>
-              <div class="col-sm-6 col-md-6 col-lg-6">
-                <select class="form-control" name="disbursementBudgetItemId" #disbursementBudgetItemId="ngModel" [(ngModel)]="disbursement.disbursementBudgetItemId" placeholder="Select">
-                <option value="" disabled>--Select Budget Item--</option>
-                <option *ngFor="let item of allBudgetItems" [value]="item.id">{{ item.name }}</option>
-              </select>
-              </div>
-              <div *ngIf="budgetItem.invalid && (budgetItem.dirty || budgetItem.touched)" class="error">
-                <div *ngIf="budgetItem.errors.required">Budget Item is required</div>
-              </div>
-            </div>
-
-            <div *ngIf="budgetItem == false" class="form-group row" style="margin-top: 20px">
+            <div *ngIf="category === 1" class="form-group row" style="margin-top: 20px">
               <div class="col-sm-2 col-md-2 col-lg-2">
                 <label>Project</label>
               </div>
@@ -76,22 +48,59 @@
               </div>
             </div>
 
+            <div *ngIf="category === 2" style="margin-top: 20px">
+
+              <div class="form-group row">
+                <div class="col-sm-2 col-md-2 col-lg-2">
+                  <label>Budget</label>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                <select name="budget" #budget="ngModel" [(ngModel)]="allBudget.id" (change)="getBudgetItem($event.target.value)" class="form-control">
+                  <option value=""> Select Budget Financial Year</option>
+                  <option *ngFor="let budget of myBudget" [value]="budget.id">{{budget.financialYearStartDate	 | date : 'longDate'}} - {{budget.financialYearEndDate | date : 'longDate'}}</option>
+                </select>
+              </div>
+              </div>
+
+              <div class="form-group row">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Budget Item</label>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <select class="form-control" name="disbursementBudgetItemId" #disbursementBudgetItemId="ngModel" [(ngModel)]="disbursement.disbursementBudgetItemId" placeholder="Select">
+                <option value="" disabled>--Select Budget Item--</option>
+                <option *ngFor="let item of allBudgetItems" [value]="item.id">{{ item.name }}</option>
+              </select>
+               <!-- <ngx-template *ngIf="finLoading == true">
+                  <div *ngIf="finLoading == true" style="background-color: white; min-height: 10vh;width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <div style="font-size: 32px;">
+                      <i class="fa fa-spin fa-spinner"></i>&nbsp;Loading...
+                    </div>
+                  </div>
+                </ngx-template> -->
+              </div>
+              <div *ngIf="disbursementBudgetItemId.invalid && (disbursementBudgetItemId.dirty || disbursementBudgetItemId.touched)" class="error">
+                <div *ngIf="disbursementBudgetItemId.errors.required">Budget Item is required</div>
+              </div>
+            </div>
+            </div>
+
 
             <div class="form-group row">
               <div class="col-sm-2 col-md-2 col-lg-2">
                 <label>Recipient</label>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
-                <nb-radio-group name="recipient" [(ngModel)]="disbursement" #recipient="ngModel" (ngModelChange)="changeRecipient($event)">
-                  <nb-radio [value]='1'>New account</nb-radio>
-                  <nb-radio [value]='2'>Existing Beneficiary</nb-radio>
-                  <nb-radio [value]='3'>Employee</nb-radio>
+                <nb-radio-group name="recipientIt" [(ngModel)]="recipient" #recipientIt="ngModel" (ngModelChange)="changeRecipient($event)">
+                  <nb-radio *ngFor="let recipient of recipientVal" [value]='recipient.value'>{{recipient.title}}</nb-radio>
+                  <!-- <nb-radio [value]='2'>Existing Beneficiary</nb-radio>
+                  <nb-radio [value]='3'>Employee</nb-radio> -->
                 </nb-radio-group>
               </div>
             </div>
 
 
-            <div *ngIf="myrecipient == '1'">
+            <div *ngIf="myrecipient == 'new'">
               <div class="form-group row" style="margin-top: 20px">
                 <div class="col-sm-2 col-md-2 col-lg-2">
                   <label>Bank Name</label>
@@ -128,7 +137,7 @@
 
             </div>
 
-            <div *ngIf="myrecipient == '2'" class="form-group row" style="margin-top: 20px">
+            <div *ngIf="myrecipient == 'existing'" class="form-group row" style="margin-top: 20px">
               <div class="col-sm-2 col-md-2 col-lg-2">
                 <label>Beneficiary</label>
               </div>
@@ -143,7 +152,7 @@
               </div>
             </div>
 
-            <div *ngIf="myrecipient =='3'" class="form-group row" style="margin-top: 20px">
+            <div *ngIf="myrecipient =='employee'" class="form-group row" style="margin-top: 20px">
               <div class="col-sm-2 col-md-2 col-lg-2">
                 <label>Select Employee</label>
               </div>

@@ -28,6 +28,8 @@ export class LoanRequestComponent implements OnInit {
   button: string = 'Click to request';
   pageNo: number = 1;
 
+  tempRef: any = '';
+
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
@@ -81,7 +83,7 @@ export class LoanRequestComponent implements OnInit {
      private interestService: GetInterestRateServiceProxy, private router: Router, private loanTypeService: GetLoanTypesServiceProxy) { }
 
   ngOnInit(): void {
-    // this.getLoanTypes();
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getInterestRate();
     this.fetchAllLoanTypes();
     this.getAllLoans();

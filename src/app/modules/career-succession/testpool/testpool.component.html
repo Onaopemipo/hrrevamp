@@ -1,4 +1,4 @@
-<ngx-componentsheader *ngIf="newCandidate" [requiredButton]="rButton" [pageName]="pageTitle" (buttonClick)="onTopActionClick($event)"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newCandidate" [requiredButton]="rButton" [pageName]="pageTitle" (buttonClick)="onTopActionClick()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="!newCandidate" pageName='Add Candidate'></ngx-componentsheader>
 <div *ngIf="newCandidate" style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
   <span style="cursor: pointer;"><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px; ">Back</a></span>
@@ -13,7 +13,8 @@
 
       <nb-tab *ngIf="employeeCounter > 0" tabTitle="Employee Database">
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
       </nb-tab>
 
       <nb-tab *ngIf="employeeCounter < 1" tabTitle="Recruitment Portal">
@@ -23,7 +24,7 @@
 
       <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" ></ngx-tablecomponent>
       </nb-tab>
 
       <!-- <nb-tab tabTitle="External Source">

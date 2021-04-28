@@ -61,7 +61,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
 
  newCandidate: boolean = true;
  employeeCounter: number = 0;
- pageTitle:string = '';
+ pageTitle: string = '';
  pageId:number = 0;
  poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO;
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
@@ -76,7 +76,6 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     this.pageId = Number(this.router.snapshot.paramMap.get("id"));
     console.log(this.channel);
     this.fetchTypes();
-    console.log('This page',this.pageId);
     this.fetchSinglePool();
 
   }
@@ -87,44 +86,20 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
    console.log('Hey Boss',this.poolTypes)
   }
 
-  onTopActionClick(event){
-    console.log('yasss',event)
-    if(event == 'requirement'){
-        this.showRequirementModal = true;
-    }
-    else if(event == 'candidate'){
+  onTopActionClick(){
       this.showCandidateModal = true;
-    }
   }
 
   goback() {
     this.navCtrl.back();
   }
 
-  showId(){
-    alert(this.pageId);
-  }
-
-  // async addRequirement(){
-  //   let poolRequirement = this.poolRequirementModel;
-  //   console.log('Hey Boss',poolRequirement)
-  //   const data = await this.poolservice.addRequirementToPool(this.poolRecords, this.poolRequirementModel).toPromise()
-  //   if(data.isSuccessful){
-  //     console.log('Success')
-  //     this.poolRequirementModel = new MyTalentPoolRequirement;
-  //   }
-  //   else {
-  //     console.log(data.message)
-  //   }
-  // }
-
-
   addCandidate(){
-    this.newCandidate = !this.newCandidate;
+    // this.newCandidate = !this.newCandidate;
+    this.showCandidateModal = true;
   }
 
   async addCandidateToPool(){
-  //  const data = await this.poolservice.addToPool(1,this.candidateModel).toPromise();
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
@@ -134,7 +109,6 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
   }
 
   async fetchSinglePool(){
-    alert('I am here');
     const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
     console.log('Here is the data',data)
     if(!data.hasError){
@@ -142,7 +116,6 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
       this.pageTitle = this.poolRecords.title;
       console.log('Single Record', this.poolRecords)
       this.loading = false;
-      alert('I am through')
     }
   }
 
