@@ -55,14 +55,18 @@ export class TablecomponentComponent implements OnInit {
   ];
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
-  @Input() userData: [] = [];
+  @Input() userData: any[] = [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: TableAction[];
+  @Input() Bulkactions: TableAction[];
   @Input() table2 = false;
   @Input() showFilter = false;
+  @Input() showBulkAction: boolean = false;
   // @Output() actionClicked = new EventEmitter<>();
   @Output() actionClick = new EventEmitter<TableActionEvent>();
+  @Output() actionChecked = new EventEmitter<TableActionEvent>();
+  @Output() actionBulkChecked = new EventEmitter<TableActionEvent>();
   pageData = [];
   tableData = [];
   _currentPage = 1;
@@ -87,7 +91,8 @@ export class TablecomponentComponent implements OnInit {
   }
   COLUMN_TYPES = ColumnTypes;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
-
+  bulkAction_isChecked: boolean = false;
+  
   constructor() { }
   test() {
     alert(112);
@@ -99,7 +104,40 @@ export class TablecomponentComponent implements OnInit {
       data,
     });
   }
+  handleBulkChecked(event) {
 
+    if (event) {
+      this.userData.map(d => {
+        d.is_selected = true;
+        return d;
+      })
+    } else {
+      this.userData.map(d => {
+        d.is_selected = false;
+        return d;
+      })
+    }
+    this.bulkAction_isChecked = event != true ? false : true;
+    var data = event;
+    this.actionBulkChecked.emit({
+      name: 'bulkChecked',
+      data,
+})
+
+  }
+  customActionChecked(colIndex, data) {
+//console.log(this.userData)
+    this.userData[colIndex]['is_selected'] = !this.userData[colIndex]['is_selected'];
+ //console.log(this.userData[colIndex]);
+    var serchPos = this.userData.findIndex(u => u.is_selected === true);
+  //////  console.log('search Position',serchPos )
+    this.bulkAction_isChecked = serchPos == -1 ? false : true;
+   // console.log( this.bulkAction_isChecked)
+    this.actionChecked.emit({
+      name: colIndex,
+      data,
+    });
+  }
   onSort({column, direction}: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {

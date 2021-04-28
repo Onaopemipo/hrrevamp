@@ -122,7 +122,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getAllLoans(){
-    const data = await this.getLoans.getLoanRequests(1,1,'',10,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(undefined,undefined,1,'',10,1).toPromise();
     console.log('My data',data);
     if(!data.hasError){
       this.allLoansData = data.result;

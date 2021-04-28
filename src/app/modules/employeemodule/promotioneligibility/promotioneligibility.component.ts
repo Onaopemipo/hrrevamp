@@ -152,6 +152,7 @@ export class PromotioneligibilityComponent implements OnInit {
 }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.ADD_NEW) {
+      this.promotionBucketList = new PromotionEligibilityViewModel().clone();
       this.showAddPlanModal = true;
     }
   //  if (buttion === TOP_ACTIONS.ADD_PLAN) {
