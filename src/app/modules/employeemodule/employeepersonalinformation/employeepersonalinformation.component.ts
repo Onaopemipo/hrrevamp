@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import {
   PostServiceProxy, MessageOut, OnboardingPersonalDTO,
   OnboardingWorkDTO, CommonServiceProxy, DropdownValue, StateIListApiResult, State,
-  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, FileParameter, OnboardingBankDTO, Country, OnboardingTaxDTO, Position, UploadDocumentServiceProxy
+  OnboardingMedicalDisclosureDTO, Institution, IDTextViewModel, FileParameter, OnboardingBankDTO, Country, OnboardingTaxDTO, Position, UploadDocumentServiceProxy, FetchEmployeeOnboardingDataDetailsServiceProxy, OnboardingTaxInfo, OnboardingMedicalDisclosureInfo, OnboardingPaymentInfo
 
 } from '../../../_services/service-proxies';
 
@@ -11,6 +11,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 import { DataServiceProxy } from '../../../_services/service-proxies'
 import { from } from 'rxjs';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'ngx-employeepersonalinformation',
@@ -57,9 +58,13 @@ export class EmployeepersonalinformationComponent implements OnInit {
   itemId:any= 0;
   OnboardingId: number = 1;
   id?: number = 1
-
-  constructor(private DataService: DataServiceProxy, private common: CommonServiceProxy, private PostService: PostServiceProxy,
-    private alertservice: AlertserviceService, private UploadDocumentService: UploadDocumentServiceProxy) { }
+  loading: boolean = false;
+  noOnbordingOfferString = "";
+  constructor(private DataService: DataServiceProxy,
+    private FetchEmployeeOnboardingDataDetailsServiceProxy: FetchEmployeeOnboardingDataDetailsServiceProxy,
+    private common: CommonServiceProxy, private PostService: PostServiceProxy,
+    private alertservice: AlertserviceService, private UploadDocumentService: UploadDocumentServiceProxy,
+  private activatedroute: ActivatedRoute) { }
   async getGender() {
     const data = await this.DataService.getDropDownValuesById(10).toPromise()
     if (!data.hasError) {
@@ -187,8 +192,6 @@ export class EmployeepersonalinformationComponent implements OnInit {
 
   SubmitMedical() {
     alert('hello medical')
-
-
   }
 
   get validated() {
@@ -274,8 +277,39 @@ export class EmployeepersonalinformationComponent implements OnInit {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
     }
   }
+  getDetails() {
+    this.activatedroute.queryParams.subscribe(data => {
+      if (data) {
+        if (data.onboardingId) {
+          this.getAllEmployeeOnboarding(data.onboardingId)
+        } else {
+          this.noOnbordingOfferString = "No Onbording Profile Found, Kindly Accept Job Offer to enable you Complete Employee Onboarding Profile!"
+        }
+      }
+    })
+  }
+  getAllEmployeeOnboarding(onboardingId){
+    this.loading= false
+     this.FetchEmployeeOnboardingDataDetailsServiceProxy.fetchEmployeeOnboardingDataDetails(onboardingId, 0).subscribe((data:any) => {
+      if(!data.hasError){ 
+        this.UserData = data.result[0].onboardingPersonalInfo;
+        this.workData =  data.result[0].onboardingWorkInformation ? data.result[0].onboardingWorkInformation : new OnboardingWorkDTO().clone();
+        this.paymentData = data.result[0].onboardingPaymentInfo ? data.result[0].onboardingPaymentInfo : new OnboardingPaymentInfo().clone();
+        this.medicalData = data.result[0].onboardingMedicalDisclosureInfo ? data.result[0].onboardingMedicalDisclosureInfo : new OnboardingMedicalDisclosureInfo().clone();
+        this.taxData = data.result[0].onboardingTaxInfo ? data.result[0].onboardingTaxInfo : new OnboardingTaxInfo().clone();
+       
+       
+        this.medicalData = data.result[0].onboardingMedicalDisclosureInfo ? data.result[0].onboardingWorkInformation : new OnboardingWorkDTO().clone();
+      
+      } else {
+        this.noOnbordingOfferString = "Invalid Onboarding Profile"
+   }
+ })
+    
+  }
   ngOnInit() {
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
+    this.getDetails()
     this.getGender();
     this.getMaritalStatus();
     this.getInstitution();
@@ -313,7 +347,8 @@ export class EmployeepersonalinformationComponent implements OnInit {
      const refNumber =  this.tempRef
     console.log('temp ref', this.tempRef)
     // this.files = files.flowFile.file
-    this.UploadDocumentService.uploadDocs(this.userId,title,this.itemId,this.entityId,this.isReadOnly,refNumber,files.flowFile.file[0]).subscribe(data => {
+    this.UploadDocumentService.uploadDocs(this.userId, title, this.itemId, this.entityId, this.isReadOnly, refNumber, files.flowFile.file[0])
+      .subscribe(data => {
       if (!data.hasError) {
         console.log('ref',this.tempRef)
         console.log('datarseee', data.result)

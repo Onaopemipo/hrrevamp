@@ -111,7 +111,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
 
   async fetchSinglePool(){
     const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
-    console.log('Here is the data',data)
+    console.log('Here is the data',data.result)
     if(!data.hasError){
       this.poolRecords = data.result;
       // this.pageTitle = this.poolRecords.title;

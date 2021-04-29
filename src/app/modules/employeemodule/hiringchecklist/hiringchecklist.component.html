@@ -495,9 +495,14 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Employee type</label>
                   <div class="col-sm-8">
-
-                    <input type="text" nbInput fullWidth placeholder="Enter  employeeTypeId " name=" employeeTypeId"
-                      #employeeTypeId="ngModel" [(ngModel)]="workData.employeeTypeId" required>
+                    <select class="form-control" name=" employeeTypeId"
+                    #employeeTypeId="ngModel" [(ngModel)]="workData.employeeTypeId" required>
+                      <option value="">--Select Type--</option>
+                      <option value="1">Full Time</option>
+                      <option value="2">Part Time</option>
+                      <option value="3">Contract</option>
+                    </select>
+                
                     <div *ngIf=" employeeTypeId.invalid && (employeeTypeId.dirty ||  employeeTypeId.touched)"
                       class="error">
                       <div *ngIf=" employeeTypeId.errors.required"> employeeTypeId is required</div>
@@ -575,7 +580,7 @@
                     <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
                       <i class="fa fa-spin fa-spinner"></i></button>
                     <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed"
-                      (click)="proceedtoofferLetter()" [disabled]="!formvalidation">Proceed</button>
+                      (click)="proceedtoofferLetter()" [disabled]="!formvalidate">Proceed</button>
                   </div>
                 </div>
               </form>
@@ -588,7 +593,7 @@
           <!--Offer Letter Panel ////////////////////////////////-->
           <div *ngSwitchCase="'offerletterPanel'">
 
-            <div class="fmContainer">
+            <div class="fmContainer" *ngIf="OfferLetterDTO.offerLetterContent">
             
 
               <div style="display: flex; flex-direction: row;padding-bottom: 15px;">
@@ -603,6 +608,12 @@
               <div [innerHTML]="OfferLetterDTO.offerLetterContent">
               </div>
              
+            </div>
+            <div class="fmContainer" *ngIf="!OfferLetterDTO.offerLetterContent">
+              <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+                <p class="listsubheader"> No Offer Letter Generated</p>
+                <p class="listsubheader">Please Complete Personal and Work Information to enable you send offer Letter</p>
+              </div>
             </div>
             <!-- <div style="background-color:#EDF1F7 ;padding: 20px;"></div>
             <div class="fmContainer">
