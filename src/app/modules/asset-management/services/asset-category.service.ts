@@ -36,6 +36,14 @@ export abstract class AssetApiModelClass<D=any, E=any, F=any>{
     // throw new Error('Method not implemented.');
     return this;
   }
+
+  get selectLabel() {
+    return this.name;
+  }
+
+  get selectValue() {
+    return this.id;
+  }
 };
 
 export class MyAssetCategoryFilter {
