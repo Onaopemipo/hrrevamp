@@ -11,6 +11,7 @@ export class eliWithStatus extends Sp_FetchEligibleEmployees implements IStatus 
   constructor(eliWithSt: Sp_FetchEligibleEmployees) {
     super(eliWithSt);
     this.eliWithSt = eliWithSt;
+    this.eliWithSt.is_selected = false;
 
   }
   get status() {
@@ -46,15 +47,7 @@ export class PromotionComponent implements OnInit {
 
   pageName = "Promotion List";
   showTableAction: boolean = false;
-  tableColumns = [
-    { name: 'employee_name', title: 'EMPLOYEE',type:ColumnTypes.Text },
-    { name: 'current_position', title: 'PREVIOUS ROLE',type:ColumnTypes.Text },
-    { name: 'years_in_current_grade', title: 'PERIOD SPENT',type:ColumnTypes.Text },
-    { name: 'next_position', title: 'NEXT POSITION',type:ColumnTypes.Text },
-    { name: 'last_promotion_date', title: 'LAST PROMOTION', type: ColumnTypes.Date },
-    { name: 'is_submitted', title: 'SUBMITTED',type: ColumnTypes.Text },
-    { name: 'log_status_id', title: 'STATUS',type: ColumnTypes.Status },
-  ];
+  tableColumns = [];
 
   newPromotion = new Sp_FetchEligibleEmployees().clone();
   promotionBucketList: PromotionEligibilityViewModel = new PromotionEligibilityViewModel().clone();
@@ -63,7 +56,7 @@ export class PromotionComponent implements OnInit {
   saveList: boolean = false;
   Submit: string = "Submit";
   allEmployee: EmployeeDTO[] = [];
-
+  showCheckBox: boolean = false;
   filter = {
     end: null,
     start: null,
@@ -96,7 +89,27 @@ export class PromotionComponent implements OnInit {
   loadingEligibilty: boolean = false;
   constructor(private alert: AlertserviceService,private router:Router,private GetPromotionListsService: GetPromotionListsServiceProxy,
     private activatedroute: ActivatedRoute, private GetPromotionEligibilityListsService: GetPromotionEligibilityListsServiceProxy,
-    private CommonService: CommonServiceProxy,private updateEligibility: AddUpdateEligibleBucketServiceProxy) { }
+    private CommonService: CommonServiceProxy, private updateEligibility: AddUpdateEligibleBucketServiceProxy) { }
+  
+  
+  tableActionChecked(event: TableActionEvent) {
+    this.promotionBucketList.eligibles[event.name].is_selected = !this.promotionBucketList.eligibles[event.name].is_selected
+  //  console.log(this.promotionBucketList.eligibles);
+  }
+  tableBulkActionClicked(event: TableActionEvent) {
+    if (event.data) {
+      this.promotionBucketList.eligibles.map(e => {
+        e.is_selected = true;
+        return e;
+      })
+    } else {
+      this.promotionBucketList.eligibles.map(e => {
+        e.is_selected = false;
+        return e;
+      })
+    }
+    console.log(this.promotionBucketList.eligibles);
+  }
   tableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
 
@@ -107,7 +120,8 @@ export class PromotionComponent implements OnInit {
       this.alert.openModalAlert(this.alert.ALERT_TYPES.CONFIRM, empFname, 'Yes').subscribe(data => {
         if (data == "closed") {
           let empPromoIndex = this.promotionBucketList.eligibles.findIndex(x => x.id == event.data.id);
-          this.promotionBucketList.eligibles.splice(empPromoIndex, 1);
+          this.promotionBucketList.eligibles[empPromoIndex].is_selected = true;
+          console.log(this.promotionBucketList.eligibles);
        //   this.UpdateEligibleBucket();
         }
 
@@ -138,21 +152,29 @@ export class PromotionComponent implements OnInit {
       newEliObjt.next_position_id = this.gOptions.promotionTargetId;
       newEliObjt.employee_contract_id = value.employeeContractId;
       newEliObjt.eligiblility_id = this.promotionBucketList.id;
-      newEliObjt.date_of_birth = value.dateOfBirth;
+      newEliObjt.date_of_birth = new Date() ;
       newEliObjt.first_name = value.firstName;
       newEliObjt.last_name = value.lastName;
       newEliObjt.other_names = value.otherNames;
       newEliObjt.profile_pic = value.profilePic;
       newEliObjt.comments = this.gOptions.comments;
+      newEliObjt.date_of_confirmation = new Date();
+      newEliObjt.last_promotion_date = new Date();
       this.promotionBucketList.eligibles.push(newEliObjt);
     });
     this.UpdateEligibleBucket();
   }
   UpdateEligibleBucket() {
     this.loading = true;
+    this.promotionBucketList.eligibles.map(pl => {
+      pl.date_of_birth = new Date();
+      pl.date_of_confirmation = new Date();
+      pl.last_promotion_date = new Date();
+      return pl;
+    })
     this.updateEligibility.addUpdateEligibleBucket(this.promotionBucketList).subscribe(data => {
       if (!data.hasError) {
-        this.getPList();
+        this.getEligibilityList();
       this.submitList = false;
       this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, data.message, 'OK');
       this.modificationStatus = false;
@@ -167,28 +189,42 @@ export class PromotionComponent implements OnInit {
       }
     });
   }
-
+  getEligibilityList() {
+    this.loading = true;
+    this.GetPromotionEligibilityListsService.getPromotionEligibilityLists(this.Eligibilityfilter._PageSize,
+      this.Eligibilityfilter._PageNumber, this.Eligibilityfilter.EligibilityId, this.Eligibilityfilter.is_closed, this.Eligibilityfilter.start, this.Eligibilityfilter.end)
+      .subscribe(data => {
+        this.loading = false;
+      
+        var Indata = data.result[0].eligibles.map(initd=> new eliWithStatus(initd))
+        this.promotionList = Indata;
+        this.totalItems = data.totalRecord
+       
+      });
+}
   async getPromotionList() {
     this.loading = true;
     this.activatedroute.queryParams.subscribe(async data => {
-      console.log(data)
+     // console.log(data)
       if (data) {
         if (data.data) {
           this.eligibilityBucket = true;
+          this.showCheckBox = true;
           this.loading = true;
           this.promotionBucketList = JSON.parse(data.data);
           this.pageName = this.promotionBucketList.name + " Employee List";
           this.Eligibilityfilter.EligibilityId = this.promotionBucketList.id;
-          this.GetPromotionEligibilityListsService.getPromotionEligibilityLists(this.Eligibilityfilter._PageSize,
-            this.Eligibilityfilter._PageNumber, this.Eligibilityfilter.EligibilityId, this.Eligibilityfilter.is_closed, this.Eligibilityfilter.start, this.Eligibilityfilter.end)
-            .subscribe(data => {
-              this.loading = false;
-            
-              var Indata = data.result[0].eligibles.map(initd=> new eliWithStatus(initd))
-              this.promotionList = Indata;
-             
-            });
+          this.getEligibilityList();
           this.showTableAction = true;
+          this.tableColumns = [
+            { name: 'employee_name', title: 'EMPLOYEE',type:ColumnTypes.Text },
+            { name: 'current_position', title: 'PREVIOUS ROLE',type:ColumnTypes.Text },
+            { name: 'years_in_current_grade', title: 'PERIOD SPENT',type:ColumnTypes.Text },
+            { name: 'next_position', title: 'NEXT POSITION',type:ColumnTypes.Text },
+            { name: 'last_promotion_date', title: 'LAST PROMOTION', type: ColumnTypes.Date },
+            { name: 'log_status_id', title: 'SUBMITTED',type: ColumnTypes.Status },
+        
+          ];
           this.tableActions = [
             { name: ACTIONS.VIEW, label: 'View' },
             { name: ACTIONS.DELETE, label: 'Delete' },
@@ -198,6 +234,15 @@ export class PromotionComponent implements OnInit {
         }else {
           this.eligibilityBucket = false;
           this.showTableAction = true;
+          this.tableColumns = [
+            { name: 'employee_name', title: 'EMPLOYEE',type:ColumnTypes.Text },
+            { name: 'current_position', title: 'PREVIOUS ROLE',type:ColumnTypes.Text },
+            { name: 'period_in_current_grade', title: 'PERIOD SPENT',type:ColumnTypes.Text },
+            { name: 'next_position', title: 'NEXT POSITION',type:ColumnTypes.Text },
+            { name: 'last_promotion_date', title: 'LAST PROMOTION', type: ColumnTypes.Date },
+        
+            { name: 'log_status_id', title: 'STATUS',type: ColumnTypes.Status },
+          ];
           this.tableActions =[
             { name: ACTIONS.VIEW, label: 'View' },
           ]
@@ -209,11 +254,14 @@ export class PromotionComponent implements OnInit {
   }
 
   async getPList() {
+    this.eligibilityBucket = false;
+    this.showCheckBox = false;
     this.loading = true;
-    const data = await this.GetPromotionListsService.getPromotionLists(undefined,this.filter._PageSize, this.filter._PageNumber).toPromise();
+    const data = await this.GetPromotionListsService.getPromotionLists(0, this.filter._PageNumber,this.filter._PageSize).toPromise();
     if (!data.hasError) {
-      var Indata = data.result.map(initd=>{ new eliWithStatus(initd)})
-      this.promotionList = Indata;   
+      var Indata = data.result.map(initd=>new eliWithStatus(initd))
+      this.promotionList = Indata;
+      this.totalItems = data.totalRecord;
      // console.log(this.promotionList)
     }
     else{

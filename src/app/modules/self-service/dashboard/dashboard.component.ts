@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
     if (!data.hasError) {
       this.employeeDetails = data.result;
       this.contract = data.result.contracts
+      console.log('contract',this.contract)
       console.log('employee', this.employeeDetails)
       // console.log('contract', this.contract)
 
