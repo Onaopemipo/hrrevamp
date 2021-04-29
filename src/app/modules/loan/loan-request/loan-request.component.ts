@@ -3,7 +3,7 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, LoanTypeDTO } from './../../../_services/service-proxies';
+import {  AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TABLE_ACTION {
@@ -59,7 +59,7 @@ export class LoanRequestComponent implements OnInit {
          }
   }
 
-  allLoansData: LoanRequestDTO [] = [];
+  allLoansData = [];
   loanSummary: IdNameObj [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
@@ -68,14 +68,23 @@ export class LoanRequestComponent implements OnInit {
   allInterestRates: InterestRate [] = [];
   loansCounter: number = 1;
   loading: boolean = true;
+  allloanTypes: LoanType [] = [];
+  dataCounter: number = 0;
+
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
-     private interestService: GetInterestRateServiceProxy, private router: Router) { }
+     private interestService: GetInterestRateServiceProxy, private router: Router, private loanTypeService: GetLoanTypesServiceProxy) { }
 
   ngOnInit(): void {
-    this.getLoanTypes();
+    // this.getLoanTypes();
+    this.getInterestRate();
+    this.fetchAllLoanTypes();
+    this.getAllLoans();
 
   }
 
@@ -95,8 +104,6 @@ export class LoanRequestComponent implements OnInit {
   }
 
   uploadFile(){
-
-
   }
 
   addGuarantor(){
@@ -106,19 +113,21 @@ export class LoanRequestComponent implements OnInit {
   async makeLoanRequest(){
   const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
-    this.alertMe.openModalAlert('Success', 'Request Created', 'Dismiss');
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
     this.loanForm.resetForm();
   }
   else{
-    console.log('Failure', data.message);
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
   }
   }
 
   async getAllLoans(){
-    const data = await this.getLoans.getLoanRequests(1,1,'',10,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(undefined,undefined,1,'',10,1).toPromise();
+    console.log('My data',data);
     if(!data.hasError){
       this.allLoansData = data.result;
       this.loansCounter = data.totalRecord;
+
     }
   }
 
@@ -136,15 +145,25 @@ export class LoanRequestComponent implements OnInit {
     }
   }
 
-  async getLoanTypes(){
-    const data = await this.loanType.fetchLoanTypeById(1).toPromise();
+  // async getLoanTypes(){
+  //   const data = await this.loanType.fetchLoanTypeById(0,1).toPromise();
+  //   if(!data.hasError){
+  //     this.allLoanTypes = data.result;
+  //     console.log('Here are the types', this.allLoanTypes)
+  //   }
+  // }
+
+  async fetchAllLoanTypes(){
+    const data = await this.loanTypeService.getLoanTypes().toPromise();
     if(!data.hasError){
-      this.allLoanTypes = data.result;
-      console.log('Here are the types', this.allLoanTypes)
-    }
+      this.allloanTypes = data.result;
+      this.dataCounter = data.totalRecord;
+      console.log(this.dataCounter, this.allloanTypes)
   }
 
-  async getInterest(){
+}
+
+  async getInterestRate(){
     const data = await this.interestService.getInterestRate().toPromise();
     if(!data.hasError){
       this.allInterestRates = data.result;

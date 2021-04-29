@@ -1,4 +1,4 @@
-import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchDeploymentServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchDeploymentServiceProxy, FetchEmployeeByIdServiceProxy, FetchEmployeeOnboardingDataDetailsServiceProxy, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, PrepareOfferLetterEmailServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { FormsModule as ngFormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
 import { EmployeemoduleRoutingModule } from './employeemodule-routing.module';
-import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
+// import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
  import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
 import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
 import { EmployeemoduleComponent } from './employeemodule.component';
@@ -70,7 +70,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 @NgModule({
   declarations:
     [
-      HiringchecklistComponent,
+      // HiringchecklistComponent,
       EmployeeonboardingdashboardComponent,
       EmploymentexitmanagementComponent,
       ManagementexistComponent,
@@ -153,11 +153,9 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     PostServiceProxy,
     UploadDocumentServiceProxy,
     GetPromotionListsServiceProxy,
-    GetVisaTypeServiceProxy,
+    FetchEmployeeOnboardingDataDetailsServiceProxy,
     FetchEmployeesByName_IdServiceProxy,
-    PrepareOfferLetterEmailServiceProxy,
-    AddUpateOfferLetterTemplateServiceProxy,
-    AlertserviceService
+    PrepareOfferLetterEmailServiceProxy
   ]
 
 

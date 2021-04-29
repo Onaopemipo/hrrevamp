@@ -488,6 +488,8 @@ export class EmployeerecordsviewComponent implements OnInit {
       'directorate_id',
       'lcda_id',
       'lga_id',
+      'gradeStepId',
+      'payRollTypeId'
   ]
     Object.entries(this.indvemployeeContract).map(([key, value], index) => {      
       if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
@@ -1114,13 +1116,13 @@ export class EmployeerecordsviewComponent implements OnInit {
     if (this.createNewEmployee.id) {
       let file = this.files[0].flowFile.file;     
       let filep ={
-        id: undefined,
+        id: 0,
         employee_id: this.createNewEmployee.id,
         employeeNo: this.createNewEmployee.employeeNumber,
         name: this.createNewEmployee.fullName,
-        directory: undefined,
-        lastModifiedDate: undefined,
-        docUrl:  undefined,
+        directory: "",
+        lastModifiedDate: new Date(),
+        docUrl:  "",
         file: {
           data: file,
           fileName: file.name
@@ -1134,6 +1136,10 @@ export class EmployeerecordsviewComponent implements OnInit {
         filep.docUrl, filep.file, filep.docType, filep.comment).subscribe((data) => {
           if (!data.hasError) {
             this.getEmployeebyId(this.createNewEmployee.id);
+            this.showdocumentUploadModal = false;
+            this.nextPanel();
+          } else {
+            this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, "ok");
           }
 
         });
@@ -1143,7 +1149,7 @@ export class EmployeerecordsviewComponent implements OnInit {
       // this.createEmployee();      
     }
     this.showCertificationModal = false;
-    this.nextPanel();
+    
   }
   submitQualification() {
     if (this.createNewEmployee.id) {
@@ -1501,6 +1507,11 @@ async  getAllfilestypes() {
     this.getAllQualificationsType();
     this.getAllQualificationsCourses();
     this.getAllInstitutions();
+    this.getallpayrolltypes();
+    this.getallEmploymenttypes();
+    this.getallGrade();
+    this.getallGradeSteps();
+    this.getallSalaryScales();
     this.activatedroute.queryParams.subscribe(data => {
       if (data) {
         if (data.employee_id) {

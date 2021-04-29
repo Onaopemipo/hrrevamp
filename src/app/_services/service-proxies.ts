@@ -5224,7 +5224,7 @@ export class AssetManagementServiceProxy {
      * @param isActive (optional) 
      * @return Success
      */
-    getActiveassetlist(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDeperciationProfileDTOIListApiResult> {
+    getActiveassetlist(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/AssetManagement/GetActiveassetlist?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
@@ -5259,14 +5259,14 @@ export class AssetManagementServiceProxy {
                 try {
                     return this.processGetActiveassetlist(<any>response_);
                 } catch (e) {
-                    return <Observable<AssetDeperciationProfileDTOIListApiResult>><any>_observableThrow(e);
+                    return <Observable<AssetDTOIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<AssetDeperciationProfileDTOIListApiResult>><any>_observableThrow(response_);
+                return <Observable<AssetDTOIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetActiveassetlist(response: HttpResponseBase): Observable<AssetDeperciationProfileDTOIListApiResult> {
+    protected processGetActiveassetlist(response: HttpResponseBase): Observable<AssetDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -5277,7 +5277,7 @@ export class AssetManagementServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = AssetDeperciationProfileDTOIListApiResult.fromJS(resultData200);
+            result200 = AssetDTOIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -5302,7 +5302,7 @@ export class AssetManagementServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AssetDeperciationProfileDTOIListApiResult>(<any>null);
+        return _observableOf<AssetDTOIListApiResult>(<any>null);
     }
 
     /**
@@ -5402,6 +5402,163 @@ export class AssetManagementServiceProxy {
             }));
         }
         return _observableOf<AssetHistoryDTOIListApiResult>(<any>null);
+    }
+
+    /**
+     * @param assetSubTypeid (optional) 
+     * @param assetid (optional) 
+     * @param employeeid (optional) 
+     * @param status (optional) 
+     * @param prioity (optional) 
+     * @param expectedusedate (optional) 
+     * @param returndate (optional) 
+     * @return Success
+     */
+    assetRequest(assetSubTypeid: number | null | undefined, assetid: number | null | undefined, employeeid: number | null | undefined, status: number | null | undefined, prioity: number | null | undefined, expectedusedate: Date | null | undefined, returndate: Date | null | undefined): Observable<AssetRequestDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/AssetManagement/AssetRequest?";
+        if (assetSubTypeid !== undefined && assetSubTypeid !== null)
+            url_ += "AssetSubTypeid=" + encodeURIComponent("" + assetSubTypeid) + "&";
+        if (assetid !== undefined && assetid !== null)
+            url_ += "Assetid=" + encodeURIComponent("" + assetid) + "&";
+        if (employeeid !== undefined && employeeid !== null)
+            url_ += "Employeeid=" + encodeURIComponent("" + employeeid) + "&";
+        if (status !== undefined && status !== null)
+            url_ += "Status=" + encodeURIComponent("" + status) + "&";
+        if (prioity !== undefined && prioity !== null)
+            url_ += "Prioity=" + encodeURIComponent("" + prioity) + "&";
+        if (expectedusedate !== undefined && expectedusedate !== null)
+            url_ += "Expectedusedate=" + encodeURIComponent(expectedusedate ? "" + expectedusedate.toJSON() : "") + "&";
+        if (returndate !== undefined && returndate !== null)
+            url_ += "Returndate=" + encodeURIComponent(returndate ? "" + returndate.toJSON() : "") + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAssetRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAssetRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<AssetRequestDTOListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AssetRequestDTOListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAssetRequest(response: HttpResponseBase): Observable<AssetRequestDTOListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AssetRequestDTOListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AssetRequestDTOListApiResult>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    myAssetRequest(): Observable<AssetRequestDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/AssetManagement/MyAssetRequest";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMyAssetRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMyAssetRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<AssetRequestDTOListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AssetRequestDTOListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processMyAssetRequest(response: HttpResponseBase): Observable<AssetRequestDTOListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AssetRequestDTOListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AssetRequestDTOListApiResult>(<any>null);
     }
 }
 
@@ -7613,6 +7770,91 @@ export class AddUpdateEmployeetoNineBoxGridServiceProxy {
 }
 
 @Injectable()
+export class AddUpdateEmployeetoPlanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateEmployeetoPlan(body: ManagecarreerSuccessor | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/AddUpdateEmployeetoPlan/Add-Update-EmployeetoPlan";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateEmployeetoPlan(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateEmployeetoPlan(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateEmployeetoPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class AddUpdateEmployeetoNineBoxGridBoxbyAppersialScoreServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -8041,6 +8283,107 @@ export class GetGridBoxCountServiceProxy {
             }));
         }
         return _observableOf<GridBoxCountDTOListApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetPotentialSuccessorListServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param competencyId (optional) 
+     * @param holderId (optional) 
+     * @param category (optional) 
+     * @param categoryType (optional) 
+     * @param justification (optional) 
+     * @return Success
+     */
+    getPotentailSuccessorList(competencyId: number | undefined, holderId: number | undefined, category: string | null | undefined, categoryType: number | undefined, justification: string | null | undefined): Observable<PersonListDTOListApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/GetPotentialSuccessorList/GetPotentailSuccessorList?";
+        if (competencyId === null)
+            throw new Error("The parameter 'competencyId' cannot be null.");
+        else if (competencyId !== undefined)
+            url_ += "CompetencyId=" + encodeURIComponent("" + competencyId) + "&";
+        if (holderId === null)
+            throw new Error("The parameter 'holderId' cannot be null.");
+        else if (holderId !== undefined)
+            url_ += "holderId=" + encodeURIComponent("" + holderId) + "&";
+        if (category !== undefined && category !== null)
+            url_ += "category=" + encodeURIComponent("" + category) + "&";
+        if (categoryType === null)
+            throw new Error("The parameter 'categoryType' cannot be null.");
+        else if (categoryType !== undefined)
+            url_ += "categoryType=" + encodeURIComponent("" + categoryType) + "&";
+        if (justification !== undefined && justification !== null)
+            url_ += "Justification=" + encodeURIComponent("" + justification) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPotentailSuccessorList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPotentailSuccessorList(<any>response_);
+                } catch (e) {
+                    return <Observable<PersonListDTOListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PersonListDTOListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetPotentailSuccessorList(response: HttpResponseBase): Observable<PersonListDTOListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PersonListDTOListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PersonListDTOListApiResult>(<any>null);
     }
 }
 
@@ -8888,6 +9231,91 @@ export class FetchSuccessionPlanServiceProxy {
 }
 
 @Injectable()
+export class GetCareerSuccesionPlanByIdServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getCareerSuccessionPlanById(id: number | undefined): Observable<CareerSuccessionDTOApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/GetCareerSuccesionPlanById/GetCareerSuccessionPlanById?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetCareerSuccessionPlanById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetCareerSuccessionPlanById(<any>response_);
+                } catch (e) {
+                    return <Observable<CareerSuccessionDTOApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<CareerSuccessionDTOApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetCareerSuccessionPlanById(response: HttpResponseBase): Observable<CareerSuccessionDTOApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = CareerSuccessionDTOApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<CareerSuccessionDTOApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class RemoveEmployeeFromSuccessorServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -9023,6 +9451,91 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
     }
 
     protected processRemoveRequirementFromTalentPool(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class DeleteSuccesionPlanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param planId (optional) 
+     * @return Success
+     */
+    deleteCareerSuccessionPlan(planId: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/DeleteSuccesionPlan/DeleteCareerSuccessionPlan?";
+        if (planId === null)
+            throw new Error("The parameter 'planId' cannot be null.");
+        else if (planId !== undefined)
+            url_ += "PlanId=" + encodeURIComponent("" + planId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteCareerSuccessionPlan(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteCareerSuccessionPlan(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteCareerSuccessionPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -13475,6 +13988,76 @@ export class DataServiceProxy {
     }
 
     /**
+     * API for getting Loan Request Status for filtering Loans i.e.
+    {'ALL_EMPLOYEES=0, FULL-TIME_EMPLOYEES=1, PART-TIME_EMPLOYEES=2' }
+     * @return Success
+     */
+    loanRequestStatus(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/LoanRequestStatus";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLoanRequestStatus(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLoanRequestStatus(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processLoanRequestStatus(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
+
+    /**
      * API for getting Loan Eligible Status i.e.
     {'ALL_EMPLOYEES=0, FULL-TIME_EMPLOYEES=1, PART-TIME_EMPLOYEES=2' }
      * @return Success
@@ -16970,6 +17553,93 @@ export class UploadProfileImageServiceProxy {
             }));
         }
         return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class FetchEmployeeByNoServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * API for retrieving Employees details (includes; Fullname, Id)
+    that matches the supplied Employee No.
+    which can be use in various part of the system for;
+    Supervisor, Loan-Guarantor etc
+     * @param empno (optional) 
+     * @return Success
+     */
+    fetchEmployeeByNo(empno: string | null | undefined): Observable<IdNameObjApiResult> {
+        let url_ = this.baseUrl + "/api/Employee/FetchEmployeeByNo/FetchEmployeeByNo?";
+        if (empno !== undefined && empno !== null)
+            url_ += "empno=" + encodeURIComponent("" + empno) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFetchEmployeeByNo(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFetchEmployeeByNo(<any>response_);
+                } catch (e) {
+                    return <Observable<IdNameObjApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IdNameObjApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFetchEmployeeByNo(response: HttpResponseBase): Observable<IdNameObjApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IdNameObjApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IdNameObjApiResult>(<any>null);
     }
 }
 
@@ -25706,23 +26376,24 @@ export class GetLoanRequestsServiceProxy {
     }
 
     /**
+     * @param startDate (optional) 
+     * @param endDate (optional) 
      * @param searchType (optional) 
-     * @param page (optional) 
      * @param searchText (optional) 
      * @param pageSize (optional) 
      * @param pageNumber (optional) 
      * @return Success
      */
-    getLoanRequests(searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
+    getLoanRequests(startDate: Date | null | undefined, endDate: Date | null | undefined, searchType: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOsIListApiResult> {
         let url_ = this.baseUrl + "/api/LoanRequest/GetLoanRequests/GetLoanRequests?";
+        if (startDate !== undefined && startDate !== null)
+            url_ += "startDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&";
+        if (endDate !== undefined && endDate !== null)
+            url_ += "endDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&";
         if (searchType === null)
             throw new Error("The parameter 'searchType' cannot be null.");
         else if (searchType !== undefined)
             url_ += "searchType=" + encodeURIComponent("" + searchType) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
         if (searchText !== undefined && searchText !== null)
             url_ += "searchText=" + encodeURIComponent("" + searchText) + "&";
         if (pageSize === null)
@@ -25750,14 +26421,14 @@ export class GetLoanRequestsServiceProxy {
                 try {
                     return this.processGetLoanRequests(<any>response_);
                 } catch (e) {
-                    return <Observable<LoanRequestDTOIListApiResult>><any>_observableThrow(e);
+                    return <Observable<LoanRequestDTOsIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<LoanRequestDTOIListApiResult>><any>_observableThrow(response_);
+                return <Observable<LoanRequestDTOsIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetLoanRequests(response: HttpResponseBase): Observable<LoanRequestDTOIListApiResult> {
+    protected processGetLoanRequests(response: HttpResponseBase): Observable<LoanRequestDTOsIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -25768,7 +26439,7 @@ export class GetLoanRequestsServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = LoanRequestDTOIListApiResult.fromJS(resultData200);
+            result200 = LoanRequestDTOsIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -25793,7 +26464,7 @@ export class GetLoanRequestsServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<LoanRequestDTOIListApiResult>(<any>null);
+        return _observableOf<LoanRequestDTOsIListApiResult>(<any>null);
     }
 }
 
@@ -26058,109 +26729,6 @@ export class LoadRepaymentScheduleServiceProxy {
 }
 
 @Injectable()
-export class FetchLoanRequestsServiceProxy {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
-    }
-
-    /**
-     * @param searchType (optional) 
-     * @param page (optional) 
-     * @param searchText (optional) 
-     * @param pageSize (optional) 
-     * @param pageNumber (optional) 
-     * @return Success
-     */
-    fetchLoanRequests(searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOIListApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/FetchLoanRequests/FetchLoanRequests?";
-        if (searchType === null)
-            throw new Error("The parameter 'searchType' cannot be null.");
-        else if (searchType !== undefined)
-            url_ += "searchType=" + encodeURIComponent("" + searchType) + "&";
-        if (page === null)
-            throw new Error("The parameter 'page' cannot be null.");
-        else if (page !== undefined)
-            url_ += "page=" + encodeURIComponent("" + page) + "&";
-        if (searchText !== undefined && searchText !== null)
-            url_ += "searchText=" + encodeURIComponent("" + searchText) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processFetchLoanRequests(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processFetchLoanRequests(<any>response_);
-                } catch (e) {
-                    return <Observable<LoanRequestDTOIListApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<LoanRequestDTOIListApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processFetchLoanRequests(response: HttpResponseBase): Observable<LoanRequestDTOIListApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = LoanRequestDTOIListApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<LoanRequestDTOIListApiResult>(<any>null);
-    }
-}
-
-@Injectable()
 export class GetLoanRequestServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -26172,25 +26740,15 @@ export class GetLoanRequestServiceProxy {
     }
 
     /**
-     * @param companyId (optional) 
-     * @param loanreqId (optional) 
-     * @param userid (optional) 
+     * @param id (optional) 
      * @return Success
      */
-    getLoanRequest(companyId: number | undefined, loanreqId: number | undefined, userid: number | undefined): Observable<LoanRequestApiResult> {
+    getLoanRequest(id: number | undefined): Observable<LoanRequestDTOsApiResult> {
         let url_ = this.baseUrl + "/api/LoanRequest/GetLoanRequest/GetLoanRequest?";
-        if (companyId === null)
-            throw new Error("The parameter 'companyId' cannot be null.");
-        else if (companyId !== undefined)
-            url_ += "companyId=" + encodeURIComponent("" + companyId) + "&";
-        if (loanreqId === null)
-            throw new Error("The parameter 'loanreqId' cannot be null.");
-        else if (loanreqId !== undefined)
-            url_ += "loanreqId=" + encodeURIComponent("" + loanreqId) + "&";
-        if (userid === null)
-            throw new Error("The parameter 'userid' cannot be null.");
-        else if (userid !== undefined)
-            url_ += "userid=" + encodeURIComponent("" + userid) + "&";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -26208,14 +26766,14 @@ export class GetLoanRequestServiceProxy {
                 try {
                     return this.processGetLoanRequest(<any>response_);
                 } catch (e) {
-                    return <Observable<LoanRequestApiResult>><any>_observableThrow(e);
+                    return <Observable<LoanRequestDTOsApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<LoanRequestApiResult>><any>_observableThrow(response_);
+                return <Observable<LoanRequestDTOsApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetLoanRequest(response: HttpResponseBase): Observable<LoanRequestApiResult> {
+    protected processGetLoanRequest(response: HttpResponseBase): Observable<LoanRequestDTOsApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -26226,7 +26784,7 @@ export class GetLoanRequestServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = LoanRequestApiResult.fromJS(resultData200);
+            result200 = LoanRequestDTOsApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -26251,7 +26809,7 @@ export class GetLoanRequestServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<LoanRequestApiResult>(<any>null);
+        return _observableOf<LoanRequestDTOsApiResult>(<any>null);
     }
 }
 
@@ -26268,7 +26826,6 @@ export class GetLoanTypesByCriteriaServiceProxy {
 
     /**
      * API for retrieving All Loan Types for further CRUD operation
-     * @param iD (optional) 
      * @param code (optional) 
      * @param ledgerNo (optional) 
      * @param name (optional) 
@@ -26280,12 +26837,8 @@ export class GetLoanTypesByCriteriaServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    getLoanTypesByCriteria(iD: number | undefined, code: string | null | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, minTenor: number | undefined, maxTenor: number | undefined, minAmount: number | undefined, maxAmount: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeDTOIListApiResult> {
+    getLoanTypesByCriteria(code: string | null | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, minTenor: number | undefined, maxTenor: number | undefined, minAmount: number | undefined, maxAmount: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/LoanType/GetLoanTypesByCriteria/GetLoanTypesByCriteria?";
-        if (iD === null)
-            throw new Error("The parameter 'iD' cannot be null.");
-        else if (iD !== undefined)
-            url_ += "ID=" + encodeURIComponent("" + iD) + "&";
         if (code !== undefined && code !== null)
             url_ += "Code=" + encodeURIComponent("" + code) + "&";
         if (ledgerNo !== undefined && ledgerNo !== null)
@@ -38692,16 +39245,20 @@ export class TalentManagementServiceProxy {
     }
 
     /**
-     * API for  Delete  Employee from Talent Management Pool
      * @param talentPoolId (optional) 
+     * @param employeeId (optional) 
      * @return Success
      */
-    deleteEmployeeFromTalentManagmentPool(talentPoolId: number | undefined): Observable<MessageOutApiResult> {
+    deleteEmployeeFromTalentManagmentPool(talentPoolId: number | undefined, employeeId: number | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/TalentManagement/DeleteEmployeeFromTalentManagmentPool?";
         if (talentPoolId === null)
             throw new Error("The parameter 'talentPoolId' cannot be null.");
         else if (talentPoolId !== undefined)
             url_ += "TalentPoolId=" + encodeURIComponent("" + talentPoolId) + "&";
+        if (employeeId === null)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else if (employeeId !== undefined)
+            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -38833,6 +39390,153 @@ export class TalentManagementServiceProxy {
             }));
         }
         return _observableOf<AddTalentMangementDTOListApiResult>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getTalentPoolById(id: number | undefined): Observable<AddTalentMangementDTOApiResult> {
+        let url_ = this.baseUrl + "/api/TalentManagement/GetTalentPoolById?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetTalentPoolById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetTalentPoolById(<any>response_);
+                } catch (e) {
+                    return <Observable<AddTalentMangementDTOApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<AddTalentMangementDTOApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetTalentPoolById(response: HttpResponseBase): Observable<AddTalentMangementDTOApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AddTalentMangementDTOApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<AddTalentMangementDTOApiResult>(<any>null);
+    }
+
+    /**
+     * API for  Deleting Talent Management Pool
+     * @param talentPoolId (optional) 
+     * @return Success
+     */
+    deleteTalentManagmentPool(talentPoolId: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/TalentManagement/DeleteTalentManagmentPool?";
+        if (talentPoolId === null)
+            throw new Error("The parameter 'talentPoolId' cannot be null.");
+        else if (talentPoolId !== undefined)
+            url_ += "TalentPoolId=" + encodeURIComponent("" + talentPoolId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteTalentManagmentPool(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteTalentManagmentPool(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteTalentManagmentPool(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
     }
 }
 
@@ -48201,6 +48905,73 @@ export interface IAssetHistoryDTOIListApiResult {
     totalRecord: number;
 }
 
+export class AssetRequestDTOListApiResult implements IAssetRequestDTOListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: AssetRequestDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IAssetRequestDTOListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(AssetRequestDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): AssetRequestDTOListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new AssetRequestDTOListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): AssetRequestDTOListApiResult {
+        const json = this.toJSON();
+        let result = new AssetRequestDTOListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAssetRequestDTOListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: AssetRequestDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class BenefitPlanDTO implements IBenefitPlanDTO {
     id!: number;
     benefitType!: string;
@@ -50982,6 +51753,89 @@ export interface INineGridBoxDTO {
     movementHistory: NineGridBoxMovementDTO[] | undefined;
 }
 
+export class ManagecarreerSuccessor implements IManagecarreerSuccessor {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    employeeId!: number;
+    readinessToStart!: number;
+    holderId!: number;
+    positionId!: number;
+    competencyId!: number;
+    purpose!: string | undefined;
+    successorId!: number;
+    careerSuccessionId!: number;
+
+    constructor(data?: IManagecarreerSuccessor) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.employeeId = _data["employeeId"];
+            this.readinessToStart = _data["readinessToStart"];
+            this.holderId = _data["holderId"];
+            this.positionId = _data["positionId"];
+            this.competencyId = _data["competencyId"];
+            this.purpose = _data["purpose"];
+            this.successorId = _data["successorId"];
+            this.careerSuccessionId = _data["careerSuccessionId"];
+        }
+    }
+
+    static fromJS(data: any): ManagecarreerSuccessor {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManagecarreerSuccessor();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["employeeId"] = this.employeeId;
+        data["readinessToStart"] = this.readinessToStart;
+        data["holderId"] = this.holderId;
+        data["positionId"] = this.positionId;
+        data["competencyId"] = this.competencyId;
+        data["purpose"] = this.purpose;
+        data["successorId"] = this.successorId;
+        data["careerSuccessionId"] = this.careerSuccessionId;
+        return data; 
+    }
+
+    clone(): ManagecarreerSuccessor {
+        const json = this.toJSON();
+        let result = new ManagecarreerSuccessor();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManagecarreerSuccessor {
+    id: number;
+    companyID: number;
+    subID: number;
+    employeeId: number;
+    readinessToStart: number;
+    holderId: number;
+    positionId: number;
+    competencyId: number;
+    purpose: string | undefined;
+    successorId: number;
+    careerSuccessionId: number;
+}
+
 export class ManageMoveEmployeeFilterDTO implements IManageMoveEmployeeFilterDTO {
     togridboxId!: number;
     fromgridboxId!: number;
@@ -51218,6 +52072,1259 @@ export interface IGridBoxCountDTOListApiResult {
     totalRecord: number;
 }
 
+export class EmployeeQualificationDTO implements IEmployeeQualificationDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    employeeId!: number;
+    name!: string | undefined;
+    qualificationId!: number;
+    qualificationGradeId!: number;
+    courseId!: number;
+    institutionId!: number;
+    institution!: string | undefined;
+    startDate!: Date;
+    endDate!: Date;
+    type!: string | undefined;
+    typeId!: number;
+    courseName!: string | undefined;
+    grade!: string | undefined;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IEmployeeQualificationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.employeeId = _data["employeeId"];
+            this.name = _data["name"];
+            this.qualificationId = _data["qualificationId"];
+            this.qualificationGradeId = _data["qualificationGradeId"];
+            this.courseId = _data["courseId"];
+            this.institutionId = _data["institutionId"];
+            this.institution = _data["institution"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
+            this.type = _data["type"];
+            this.typeId = _data["typeId"];
+            this.courseName = _data["courseName"];
+            this.grade = _data["grade"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): EmployeeQualificationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeeQualificationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["employeeId"] = this.employeeId;
+        data["name"] = this.name;
+        data["qualificationId"] = this.qualificationId;
+        data["qualificationGradeId"] = this.qualificationGradeId;
+        data["courseId"] = this.courseId;
+        data["institutionId"] = this.institutionId;
+        data["institution"] = this.institution;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
+        data["type"] = this.type;
+        data["typeId"] = this.typeId;
+        data["courseName"] = this.courseName;
+        data["grade"] = this.grade;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): EmployeeQualificationDTO {
+        const json = this.toJSON();
+        let result = new EmployeeQualificationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmployeeQualificationDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    employeeId: number;
+    name: string | undefined;
+    qualificationId: number;
+    qualificationGradeId: number;
+    courseId: number;
+    institutionId: number;
+    institution: string | undefined;
+    startDate: Date;
+    endDate: Date;
+    type: string | undefined;
+    typeId: number;
+    courseName: string | undefined;
+    grade: string | undefined;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class EmployeeSkillDTO implements IEmployeeSkillDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    employeeId!: number;
+    skillId!: number;
+    skillName!: string | undefined;
+    categoryId!: number;
+    categoryName!: string | undefined;
+    startDate!: Date | undefined;
+    numberOfExperienceInMonth!: number | undefined;
+    point!: number | undefined;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+
+    constructor(data?: IEmployeeSkillDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.employeeId = _data["employeeId"];
+            this.skillId = _data["skillId"];
+            this.skillName = _data["skillName"];
+            this.categoryId = _data["categoryId"];
+            this.categoryName = _data["categoryName"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.numberOfExperienceInMonth = _data["numberOfExperienceInMonth"];
+            this.point = _data["point"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+        }
+    }
+
+    static fromJS(data: any): EmployeeSkillDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeeSkillDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["employeeId"] = this.employeeId;
+        data["skillId"] = this.skillId;
+        data["skillName"] = this.skillName;
+        data["categoryId"] = this.categoryId;
+        data["categoryName"] = this.categoryName;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["numberOfExperienceInMonth"] = this.numberOfExperienceInMonth;
+        data["point"] = this.point;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        return data; 
+    }
+
+    clone(): EmployeeSkillDTO {
+        const json = this.toJSON();
+        let result = new EmployeeSkillDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmployeeSkillDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    employeeId: number;
+    skillId: number;
+    skillName: string | undefined;
+    categoryId: number;
+    categoryName: string | undefined;
+    startDate: Date | undefined;
+    numberOfExperienceInMonth: number | undefined;
+    point: number | undefined;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+}
+
+export class EmployeeCertificationDTO implements IEmployeeCertificationDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    employeeId!: number;
+    certificationId!: number;
+    certification!: string | undefined;
+    professionalBodyId!: number;
+    institution!: string | undefined;
+    startDate!: Date | undefined;
+    endDate!: Date | undefined;
+    comment!: string | undefined;
+    numberOfExperienceInMonth!: number | undefined;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IEmployeeCertificationDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.employeeId = _data["employeeId"];
+            this.certificationId = _data["certificationId"];
+            this.certification = _data["certification"];
+            this.professionalBodyId = _data["professionalBodyId"];
+            this.institution = _data["institution"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
+            this.comment = _data["comment"];
+            this.numberOfExperienceInMonth = _data["numberOfExperienceInMonth"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): EmployeeCertificationDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeeCertificationDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["employeeId"] = this.employeeId;
+        data["certificationId"] = this.certificationId;
+        data["certification"] = this.certification;
+        data["professionalBodyId"] = this.professionalBodyId;
+        data["institution"] = this.institution;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
+        data["comment"] = this.comment;
+        data["numberOfExperienceInMonth"] = this.numberOfExperienceInMonth;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): EmployeeCertificationDTO {
+        const json = this.toJSON();
+        let result = new EmployeeCertificationDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEmployeeCertificationDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    employeeId: number;
+    certificationId: number;
+    certification: string | undefined;
+    professionalBodyId: number;
+    institution: string | undefined;
+    startDate: Date | undefined;
+    endDate: Date | undefined;
+    comment: string | undefined;
+    numberOfExperienceInMonth: number | undefined;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class SuccessorcompetencyDTO implements ISuccessorcompetencyDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    careerSuccessorId!: number;
+    requirementCategory!: string;
+    skillId!: number | undefined;
+    skillName!: string | undefined;
+    trainingId!: number | undefined;
+    trainingName!: string | undefined;
+    certificationId!: number | undefined;
+    certificationName!: string | undefined;
+    qualificationId!: number | undefined;
+    qualificationName!: string | undefined;
+    abilityId!: number | undefined;
+    abilityName!: string | undefined;
+    experience!: string | undefined;
+    dateCreated!: Date;
+    isDeleted!: boolean;
+    isActive!: boolean;
+
+    constructor(data?: ISuccessorcompetencyDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.careerSuccessorId = _data["careerSuccessorId"];
+            this.requirementCategory = _data["requirementCategory"];
+            this.skillId = _data["skillId"];
+            this.skillName = _data["skillName"];
+            this.trainingId = _data["trainingId"];
+            this.trainingName = _data["trainingName"];
+            this.certificationId = _data["certificationId"];
+            this.certificationName = _data["certificationName"];
+            this.qualificationId = _data["qualificationId"];
+            this.qualificationName = _data["qualificationName"];
+            this.abilityId = _data["abilityId"];
+            this.abilityName = _data["abilityName"];
+            this.experience = _data["experience"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.isDeleted = _data["isDeleted"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): SuccessorcompetencyDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new SuccessorcompetencyDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["careerSuccessorId"] = this.careerSuccessorId;
+        data["requirementCategory"] = this.requirementCategory;
+        data["skillId"] = this.skillId;
+        data["skillName"] = this.skillName;
+        data["trainingId"] = this.trainingId;
+        data["trainingName"] = this.trainingName;
+        data["certificationId"] = this.certificationId;
+        data["certificationName"] = this.certificationName;
+        data["qualificationId"] = this.qualificationId;
+        data["qualificationName"] = this.qualificationName;
+        data["abilityId"] = this.abilityId;
+        data["abilityName"] = this.abilityName;
+        data["experience"] = this.experience;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["isDeleted"] = this.isDeleted;
+        data["isActive"] = this.isActive;
+        return data; 
+    }
+
+    clone(): SuccessorcompetencyDTO {
+        const json = this.toJSON();
+        let result = new SuccessorcompetencyDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISuccessorcompetencyDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    careerSuccessorId: number;
+    requirementCategory: string;
+    skillId: number | undefined;
+    skillName: string | undefined;
+    trainingId: number | undefined;
+    trainingName: string | undefined;
+    certificationId: number | undefined;
+    certificationName: string | undefined;
+    qualificationId: number | undefined;
+    qualificationName: string | undefined;
+    abilityId: number | undefined;
+    abilityName: string | undefined;
+    experience: string | undefined;
+    dateCreated: Date;
+    isDeleted: boolean;
+    isActive: boolean;
+}
+
+export class Competency implements ICompetency {
+    competencyTitle!: string | undefined;
+    jobRoleId!: number;
+    positionId!: number;
+    description!: string | undefined;
+    departmentId!: number;
+    competencesRequirements!: CompetencyRequirments[] | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: ICompetency) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.competencyTitle = _data["competencyTitle"];
+            this.jobRoleId = _data["jobRoleId"];
+            this.positionId = _data["positionId"];
+            this.description = _data["description"];
+            this.departmentId = _data["departmentId"];
+            if (Array.isArray(_data["competencesRequirements"])) {
+                this.competencesRequirements = [] as any;
+                for (let item of _data["competencesRequirements"])
+                    this.competencesRequirements!.push(CompetencyRequirments.fromJS(item));
+            }
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): Competency {
+        data = typeof data === 'object' ? data : {};
+        let result = new Competency();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["competencyTitle"] = this.competencyTitle;
+        data["jobRoleId"] = this.jobRoleId;
+        data["positionId"] = this.positionId;
+        data["description"] = this.description;
+        data["departmentId"] = this.departmentId;
+        if (Array.isArray(this.competencesRequirements)) {
+            data["competencesRequirements"] = [];
+            for (let item of this.competencesRequirements)
+                data["competencesRequirements"].push(item.toJSON());
+        }
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): Competency {
+        const json = this.toJSON();
+        let result = new Competency();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetency {
+    competencyTitle: string | undefined;
+    jobRoleId: number;
+    positionId: number;
+    description: string | undefined;
+    departmentId: number;
+    competencesRequirements: CompetencyRequirments[] | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class CompetencyRequirments implements ICompetencyRequirments {
+    competencyId!: number;
+    requirementCategory!: string | undefined;
+    skillId!: number | undefined;
+    trainingId!: number | undefined;
+    certificationId!: number | undefined;
+    qualificationId!: number | undefined;
+    points!: number;
+    experience!: string | undefined;
+    yearsofExperience!: number;
+    experienceWeight!: number | undefined;
+    skillWeight!: number | undefined;
+    competences!: Competency;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: ICompetencyRequirments) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.competencyId = _data["competencyId"];
+            this.requirementCategory = _data["requirementCategory"];
+            this.skillId = _data["skillId"];
+            this.trainingId = _data["trainingId"];
+            this.certificationId = _data["certificationId"];
+            this.qualificationId = _data["qualificationId"];
+            this.points = _data["points"];
+            this.experience = _data["experience"];
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.skillWeight = _data["skillWeight"];
+            this.competences = _data["competences"] ? Competency.fromJS(_data["competences"]) : <any>undefined;
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): CompetencyRequirments {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompetencyRequirments();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["competencyId"] = this.competencyId;
+        data["requirementCategory"] = this.requirementCategory;
+        data["skillId"] = this.skillId;
+        data["trainingId"] = this.trainingId;
+        data["certificationId"] = this.certificationId;
+        data["qualificationId"] = this.qualificationId;
+        data["points"] = this.points;
+        data["experience"] = this.experience;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["skillWeight"] = this.skillWeight;
+        data["competences"] = this.competences ? this.competences.toJSON() : <any>undefined;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): CompetencyRequirments {
+        const json = this.toJSON();
+        let result = new CompetencyRequirments();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetencyRequirments {
+    competencyId: number;
+    requirementCategory: string | undefined;
+    skillId: number | undefined;
+    trainingId: number | undefined;
+    certificationId: number | undefined;
+    qualificationId: number | undefined;
+    points: number;
+    experience: string | undefined;
+    yearsofExperience: number;
+    experienceWeight: number | undefined;
+    skillWeight: number | undefined;
+    competences: Competency;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class CompetencyDTO implements ICompetencyDTO {
+    id!: number;
+    companyID!: number | undefined;
+    subID!: number | undefined;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    jobRoleName!: string | undefined;
+    competencyTitle!: string;
+    jobRoleId!: number;
+    positionId!: number;
+    description!: string | undefined;
+    departmentId!: number;
+    competencesRequirements!: CompetencyRequirments[] | undefined;
+
+    constructor(data?: ICompetencyDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.jobRoleName = _data["jobRoleName"];
+            this.competencyTitle = _data["competencyTitle"];
+            this.jobRoleId = _data["jobRoleId"];
+            this.positionId = _data["positionId"];
+            this.description = _data["description"];
+            this.departmentId = _data["departmentId"];
+            if (Array.isArray(_data["competencesRequirements"])) {
+                this.competencesRequirements = [] as any;
+                for (let item of _data["competencesRequirements"])
+                    this.competencesRequirements!.push(CompetencyRequirments.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CompetencyDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompetencyDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["jobRoleName"] = this.jobRoleName;
+        data["competencyTitle"] = this.competencyTitle;
+        data["jobRoleId"] = this.jobRoleId;
+        data["positionId"] = this.positionId;
+        data["description"] = this.description;
+        data["departmentId"] = this.departmentId;
+        if (Array.isArray(this.competencesRequirements)) {
+            data["competencesRequirements"] = [];
+            for (let item of this.competencesRequirements)
+                data["competencesRequirements"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): CompetencyDTO {
+        const json = this.toJSON();
+        let result = new CompetencyDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetencyDTO {
+    id: number;
+    companyID: number | undefined;
+    subID: number | undefined;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    jobRoleName: string | undefined;
+    competencyTitle: string;
+    jobRoleId: number;
+    positionId: number;
+    description: string | undefined;
+    departmentId: number;
+    competencesRequirements: CompetencyRequirments[] | undefined;
+}
+
+export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
+    competencyId!: number;
+    requirementCategory!: string | undefined;
+    skillId!: number | undefined;
+    trainingId!: number | undefined;
+    certificationId!: number | undefined;
+    qualificationId!: number | undefined;
+    points!: number;
+    experience!: string | undefined;
+    yearsofExperience!: number;
+    experienceWeight!: number | undefined;
+    skillWeight!: number | undefined;
+    skillName!: string | undefined;
+    certificationName!: string | undefined;
+    qualificationName!: string | undefined;
+
+    constructor(data?: ICompetencyRequirmentsDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.competencyId = _data["competencyId"];
+            this.requirementCategory = _data["requirementCategory"];
+            this.skillId = _data["skillId"];
+            this.trainingId = _data["trainingId"];
+            this.certificationId = _data["certificationId"];
+            this.qualificationId = _data["qualificationId"];
+            this.points = _data["points"];
+            this.experience = _data["experience"];
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.experienceWeight = _data["experienceWeight"];
+            this.skillWeight = _data["skillWeight"];
+            this.skillName = _data["skillName"];
+            this.certificationName = _data["certificationName"];
+            this.qualificationName = _data["qualificationName"];
+        }
+    }
+
+    static fromJS(data: any): CompetencyRequirmentsDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompetencyRequirmentsDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["competencyId"] = this.competencyId;
+        data["requirementCategory"] = this.requirementCategory;
+        data["skillId"] = this.skillId;
+        data["trainingId"] = this.trainingId;
+        data["certificationId"] = this.certificationId;
+        data["qualificationId"] = this.qualificationId;
+        data["points"] = this.points;
+        data["experience"] = this.experience;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["experienceWeight"] = this.experienceWeight;
+        data["skillWeight"] = this.skillWeight;
+        data["skillName"] = this.skillName;
+        data["certificationName"] = this.certificationName;
+        data["qualificationName"] = this.qualificationName;
+        return data; 
+    }
+
+    clone(): CompetencyRequirmentsDTO {
+        const json = this.toJSON();
+        let result = new CompetencyRequirmentsDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompetencyRequirmentsDTO {
+    competencyId: number;
+    requirementCategory: string | undefined;
+    skillId: number | undefined;
+    trainingId: number | undefined;
+    certificationId: number | undefined;
+    qualificationId: number | undefined;
+    points: number;
+    experience: string | undefined;
+    yearsofExperience: number;
+    experienceWeight: number | undefined;
+    skillWeight: number | undefined;
+    skillName: string | undefined;
+    certificationName: string | undefined;
+    qualificationName: string | undefined;
+}
+
+export class CareerSuccessorDTO implements ICareerSuccessorDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    employeeId!: number;
+    employeeName!: string | undefined;
+    growthDuration!: number;
+    currentPositionId!: number;
+    currentPositionName!: string | undefined;
+    currentJobPositionName!: string | undefined;
+    targetPositionId!: number;
+    positionHolderId!: number;
+    positionHolderName!: string | undefined;
+    comment!: string | undefined;
+    careerSuccessionId!: number;
+    isNotification!: boolean;
+    successionCompetency!: SuccessorcompetencyDTO[] | undefined;
+    successionAdditionalCompetency!: SuccessorcompetencyDTO[] | undefined;
+    competencySuccssion!: CompetencyDTO[] | undefined;
+    competencyRequirments!: CompetencyRequirmentsDTO[] | undefined;
+    dateCreated!: Date;
+    isDeleted!: boolean;
+    isActive!: boolean;
+
+    constructor(data?: ICareerSuccessorDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.employeeId = _data["employeeId"];
+            this.employeeName = _data["employeeName"];
+            this.growthDuration = _data["growthDuration"];
+            this.currentPositionId = _data["currentPositionId"];
+            this.currentPositionName = _data["currentPositionName"];
+            this.currentJobPositionName = _data["currentJobPositionName"];
+            this.targetPositionId = _data["targetPositionId"];
+            this.positionHolderId = _data["positionHolderId"];
+            this.positionHolderName = _data["positionHolderName"];
+            this.comment = _data["comment"];
+            this.careerSuccessionId = _data["careerSuccessionId"];
+            this.isNotification = _data["isNotification"];
+            if (Array.isArray(_data["successionCompetency"])) {
+                this.successionCompetency = [] as any;
+                for (let item of _data["successionCompetency"])
+                    this.successionCompetency!.push(SuccessorcompetencyDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["successionAdditionalCompetency"])) {
+                this.successionAdditionalCompetency = [] as any;
+                for (let item of _data["successionAdditionalCompetency"])
+                    this.successionAdditionalCompetency!.push(SuccessorcompetencyDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["competencySuccssion"])) {
+                this.competencySuccssion = [] as any;
+                for (let item of _data["competencySuccssion"])
+                    this.competencySuccssion!.push(CompetencyDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["competencyRequirments"])) {
+                this.competencyRequirments = [] as any;
+                for (let item of _data["competencyRequirments"])
+                    this.competencyRequirments!.push(CompetencyRequirmentsDTO.fromJS(item));
+            }
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.isDeleted = _data["isDeleted"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): CareerSuccessorDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CareerSuccessorDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["employeeId"] = this.employeeId;
+        data["employeeName"] = this.employeeName;
+        data["growthDuration"] = this.growthDuration;
+        data["currentPositionId"] = this.currentPositionId;
+        data["currentPositionName"] = this.currentPositionName;
+        data["currentJobPositionName"] = this.currentJobPositionName;
+        data["targetPositionId"] = this.targetPositionId;
+        data["positionHolderId"] = this.positionHolderId;
+        data["positionHolderName"] = this.positionHolderName;
+        data["comment"] = this.comment;
+        data["careerSuccessionId"] = this.careerSuccessionId;
+        data["isNotification"] = this.isNotification;
+        if (Array.isArray(this.successionCompetency)) {
+            data["successionCompetency"] = [];
+            for (let item of this.successionCompetency)
+                data["successionCompetency"].push(item.toJSON());
+        }
+        if (Array.isArray(this.successionAdditionalCompetency)) {
+            data["successionAdditionalCompetency"] = [];
+            for (let item of this.successionAdditionalCompetency)
+                data["successionAdditionalCompetency"].push(item.toJSON());
+        }
+        if (Array.isArray(this.competencySuccssion)) {
+            data["competencySuccssion"] = [];
+            for (let item of this.competencySuccssion)
+                data["competencySuccssion"].push(item.toJSON());
+        }
+        if (Array.isArray(this.competencyRequirments)) {
+            data["competencyRequirments"] = [];
+            for (let item of this.competencyRequirments)
+                data["competencyRequirments"].push(item.toJSON());
+        }
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["isDeleted"] = this.isDeleted;
+        data["isActive"] = this.isActive;
+        return data; 
+    }
+
+    clone(): CareerSuccessorDTO {
+        const json = this.toJSON();
+        let result = new CareerSuccessorDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICareerSuccessorDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    employeeId: number;
+    employeeName: string | undefined;
+    growthDuration: number;
+    currentPositionId: number;
+    currentPositionName: string | undefined;
+    currentJobPositionName: string | undefined;
+    targetPositionId: number;
+    positionHolderId: number;
+    positionHolderName: string | undefined;
+    comment: string | undefined;
+    careerSuccessionId: number;
+    isNotification: boolean;
+    successionCompetency: SuccessorcompetencyDTO[] | undefined;
+    successionAdditionalCompetency: SuccessorcompetencyDTO[] | undefined;
+    competencySuccssion: CompetencyDTO[] | undefined;
+    competencyRequirments: CompetencyRequirmentsDTO[] | undefined;
+    dateCreated: Date;
+    isDeleted: boolean;
+    isActive: boolean;
+}
+
+export class PersonListDTO implements IPersonListDTO {
+    employeeId!: number;
+    competencyId!: number;
+    employeeName!: string | undefined;
+    employeePositionId!: number | undefined;
+    employeeJobRoleId!: number | undefined;
+    employeedepartmentId!: number | undefined;
+    employeeJobRoleName!: string | undefined;
+    employeePositionName!: string | undefined;
+    employeeDepartmentName!: string | undefined;
+    employeeImageUrl!: string | undefined;
+    successionStatus!: boolean;
+    checkedstatus!: boolean;
+    growInDuration!: number;
+    careerSuccessionId!: number;
+    employeeQualifications!: EmployeeQualificationDTO[] | undefined;
+    employeeSkills!: EmployeeSkillDTO[] | undefined;
+    employeeCertifications!: EmployeeCertificationDTO[] | undefined;
+    successionEmployee!: CareerSuccessorDTO[] | undefined;
+
+    constructor(data?: IPersonListDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.employeeId = _data["employeeId"];
+            this.competencyId = _data["competencyId"];
+            this.employeeName = _data["employeeName"];
+            this.employeePositionId = _data["employeePositionId"];
+            this.employeeJobRoleId = _data["employeeJobRoleId"];
+            this.employeedepartmentId = _data["employeedepartmentId"];
+            this.employeeJobRoleName = _data["employeeJobRoleName"];
+            this.employeePositionName = _data["employeePositionName"];
+            this.employeeDepartmentName = _data["employeeDepartmentName"];
+            this.employeeImageUrl = _data["employeeImageUrl"];
+            this.successionStatus = _data["successionStatus"];
+            this.checkedstatus = _data["checkedstatus"];
+            this.growInDuration = _data["growInDuration"];
+            this.careerSuccessionId = _data["careerSuccessionId"];
+            if (Array.isArray(_data["employeeQualifications"])) {
+                this.employeeQualifications = [] as any;
+                for (let item of _data["employeeQualifications"])
+                    this.employeeQualifications!.push(EmployeeQualificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["employeeSkills"])) {
+                this.employeeSkills = [] as any;
+                for (let item of _data["employeeSkills"])
+                    this.employeeSkills!.push(EmployeeSkillDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["employeeCertifications"])) {
+                this.employeeCertifications = [] as any;
+                for (let item of _data["employeeCertifications"])
+                    this.employeeCertifications!.push(EmployeeCertificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["successionEmployee"])) {
+                this.successionEmployee = [] as any;
+                for (let item of _data["successionEmployee"])
+                    this.successionEmployee!.push(CareerSuccessorDTO.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PersonListDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new PersonListDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["employeeId"] = this.employeeId;
+        data["competencyId"] = this.competencyId;
+        data["employeeName"] = this.employeeName;
+        data["employeePositionId"] = this.employeePositionId;
+        data["employeeJobRoleId"] = this.employeeJobRoleId;
+        data["employeedepartmentId"] = this.employeedepartmentId;
+        data["employeeJobRoleName"] = this.employeeJobRoleName;
+        data["employeePositionName"] = this.employeePositionName;
+        data["employeeDepartmentName"] = this.employeeDepartmentName;
+        data["employeeImageUrl"] = this.employeeImageUrl;
+        data["successionStatus"] = this.successionStatus;
+        data["checkedstatus"] = this.checkedstatus;
+        data["growInDuration"] = this.growInDuration;
+        data["careerSuccessionId"] = this.careerSuccessionId;
+        if (Array.isArray(this.employeeQualifications)) {
+            data["employeeQualifications"] = [];
+            for (let item of this.employeeQualifications)
+                data["employeeQualifications"].push(item.toJSON());
+        }
+        if (Array.isArray(this.employeeSkills)) {
+            data["employeeSkills"] = [];
+            for (let item of this.employeeSkills)
+                data["employeeSkills"].push(item.toJSON());
+        }
+        if (Array.isArray(this.employeeCertifications)) {
+            data["employeeCertifications"] = [];
+            for (let item of this.employeeCertifications)
+                data["employeeCertifications"].push(item.toJSON());
+        }
+        if (Array.isArray(this.successionEmployee)) {
+            data["successionEmployee"] = [];
+            for (let item of this.successionEmployee)
+                data["successionEmployee"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): PersonListDTO {
+        const json = this.toJSON();
+        let result = new PersonListDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPersonListDTO {
+    employeeId: number;
+    competencyId: number;
+    employeeName: string | undefined;
+    employeePositionId: number | undefined;
+    employeeJobRoleId: number | undefined;
+    employeedepartmentId: number | undefined;
+    employeeJobRoleName: string | undefined;
+    employeePositionName: string | undefined;
+    employeeDepartmentName: string | undefined;
+    employeeImageUrl: string | undefined;
+    successionStatus: boolean;
+    checkedstatus: boolean;
+    growInDuration: number;
+    careerSuccessionId: number;
+    employeeQualifications: EmployeeQualificationDTO[] | undefined;
+    employeeSkills: EmployeeSkillDTO[] | undefined;
+    employeeCertifications: EmployeeCertificationDTO[] | undefined;
+    successionEmployee: CareerSuccessorDTO[] | undefined;
+}
+
+export class PersonListDTOListApiResult implements IPersonListDTOListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: PersonListDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IPersonListDTOListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(PersonListDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): PersonListDTOListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new PersonListDTOListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): PersonListDTOListApiResult {
+        const json = this.toJSON();
+        let result = new PersonListDTOListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPersonListDTOListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: PersonListDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class EmployeeTalentPoolHistoryDTO implements IEmployeeTalentPoolHistoryDTO {
     id!: number;
     companyID!: number;
@@ -51422,256 +53529,6 @@ export interface IEmployeeTalentPoolDTO {
     isDeleted: boolean;
     isActive: boolean;
     employeeTalentPoolHistory: EmployeeTalentPoolHistoryDTO[] | undefined;
-}
-
-export class SuccessorcompetencyDTO implements ISuccessorcompetencyDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    careerSuccessorId!: number;
-    requirementCategory!: string;
-    skillId!: number | undefined;
-    skillName!: string | undefined;
-    trainingId!: number | undefined;
-    trainingName!: string | undefined;
-    certificationId!: number | undefined;
-    certificationName!: string | undefined;
-    qualificationId!: number | undefined;
-    qualificationName!: string | undefined;
-    abilityId!: number | undefined;
-    abilityName!: string | undefined;
-    experience!: string | undefined;
-    dateCreated!: Date;
-    isDeleted!: boolean;
-    isActive!: boolean;
-
-    constructor(data?: ISuccessorcompetencyDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.careerSuccessorId = _data["careerSuccessorId"];
-            this.requirementCategory = _data["requirementCategory"];
-            this.skillId = _data["skillId"];
-            this.skillName = _data["skillName"];
-            this.trainingId = _data["trainingId"];
-            this.trainingName = _data["trainingName"];
-            this.certificationId = _data["certificationId"];
-            this.certificationName = _data["certificationName"];
-            this.qualificationId = _data["qualificationId"];
-            this.qualificationName = _data["qualificationName"];
-            this.abilityId = _data["abilityId"];
-            this.abilityName = _data["abilityName"];
-            this.experience = _data["experience"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.isDeleted = _data["isDeleted"];
-            this.isActive = _data["isActive"];
-        }
-    }
-
-    static fromJS(data: any): SuccessorcompetencyDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new SuccessorcompetencyDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["careerSuccessorId"] = this.careerSuccessorId;
-        data["requirementCategory"] = this.requirementCategory;
-        data["skillId"] = this.skillId;
-        data["skillName"] = this.skillName;
-        data["trainingId"] = this.trainingId;
-        data["trainingName"] = this.trainingName;
-        data["certificationId"] = this.certificationId;
-        data["certificationName"] = this.certificationName;
-        data["qualificationId"] = this.qualificationId;
-        data["qualificationName"] = this.qualificationName;
-        data["abilityId"] = this.abilityId;
-        data["abilityName"] = this.abilityName;
-        data["experience"] = this.experience;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data; 
-    }
-
-    clone(): SuccessorcompetencyDTO {
-        const json = this.toJSON();
-        let result = new SuccessorcompetencyDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISuccessorcompetencyDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    careerSuccessorId: number;
-    requirementCategory: string;
-    skillId: number | undefined;
-    skillName: string | undefined;
-    trainingId: number | undefined;
-    trainingName: string | undefined;
-    certificationId: number | undefined;
-    certificationName: string | undefined;
-    qualificationId: number | undefined;
-    qualificationName: string | undefined;
-    abilityId: number | undefined;
-    abilityName: string | undefined;
-    experience: string | undefined;
-    dateCreated: Date;
-    isDeleted: boolean;
-    isActive: boolean;
-}
-
-export class CareerSuccessorDTO implements ICareerSuccessorDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    employeeId!: number;
-    employeeName!: string | undefined;
-    growthDuration!: number;
-    currentPositionId!: number;
-    currentPositionName!: string | undefined;
-    currentJobPositionName!: string | undefined;
-    targetPositionId!: number;
-    positionHolderId!: number;
-    positionHolderName!: string | undefined;
-    comment!: string | undefined;
-    careerSuccessionId!: number;
-    isNotification!: boolean;
-    successionCompetency!: SuccessorcompetencyDTO[] | undefined;
-    successionAdditionalCompetency!: SuccessorcompetencyDTO[] | undefined;
-    dateCreated!: Date;
-    isDeleted!: boolean;
-    isActive!: boolean;
-
-    constructor(data?: ICareerSuccessorDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.employeeId = _data["employeeId"];
-            this.employeeName = _data["employeeName"];
-            this.growthDuration = _data["growthDuration"];
-            this.currentPositionId = _data["currentPositionId"];
-            this.currentPositionName = _data["currentPositionName"];
-            this.currentJobPositionName = _data["currentJobPositionName"];
-            this.targetPositionId = _data["targetPositionId"];
-            this.positionHolderId = _data["positionHolderId"];
-            this.positionHolderName = _data["positionHolderName"];
-            this.comment = _data["comment"];
-            this.careerSuccessionId = _data["careerSuccessionId"];
-            this.isNotification = _data["isNotification"];
-            if (Array.isArray(_data["successionCompetency"])) {
-                this.successionCompetency = [] as any;
-                for (let item of _data["successionCompetency"])
-                    this.successionCompetency!.push(SuccessorcompetencyDTO.fromJS(item));
-            }
-            if (Array.isArray(_data["successionAdditionalCompetency"])) {
-                this.successionAdditionalCompetency = [] as any;
-                for (let item of _data["successionAdditionalCompetency"])
-                    this.successionAdditionalCompetency!.push(SuccessorcompetencyDTO.fromJS(item));
-            }
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.isDeleted = _data["isDeleted"];
-            this.isActive = _data["isActive"];
-        }
-    }
-
-    static fromJS(data: any): CareerSuccessorDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CareerSuccessorDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeId"] = this.employeeId;
-        data["employeeName"] = this.employeeName;
-        data["growthDuration"] = this.growthDuration;
-        data["currentPositionId"] = this.currentPositionId;
-        data["currentPositionName"] = this.currentPositionName;
-        data["currentJobPositionName"] = this.currentJobPositionName;
-        data["targetPositionId"] = this.targetPositionId;
-        data["positionHolderId"] = this.positionHolderId;
-        data["positionHolderName"] = this.positionHolderName;
-        data["comment"] = this.comment;
-        data["careerSuccessionId"] = this.careerSuccessionId;
-        data["isNotification"] = this.isNotification;
-        if (Array.isArray(this.successionCompetency)) {
-            data["successionCompetency"] = [];
-            for (let item of this.successionCompetency)
-                data["successionCompetency"].push(item.toJSON());
-        }
-        if (Array.isArray(this.successionAdditionalCompetency)) {
-            data["successionAdditionalCompetency"] = [];
-            for (let item of this.successionAdditionalCompetency)
-                data["successionAdditionalCompetency"].push(item.toJSON());
-        }
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["isDeleted"] = this.isDeleted;
-        data["isActive"] = this.isActive;
-        return data; 
-    }
-
-    clone(): CareerSuccessorDTO {
-        const json = this.toJSON();
-        let result = new CareerSuccessorDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICareerSuccessorDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    employeeId: number;
-    employeeName: string | undefined;
-    growthDuration: number;
-    currentPositionId: number;
-    currentPositionName: string | undefined;
-    currentJobPositionName: string | undefined;
-    targetPositionId: number;
-    positionHolderId: number;
-    positionHolderName: string | undefined;
-    comment: string | undefined;
-    careerSuccessionId: number;
-    isNotification: boolean;
-    successionCompetency: SuccessorcompetencyDTO[] | undefined;
-    successionAdditionalCompetency: SuccessorcompetencyDTO[] | undefined;
-    dateCreated: Date;
-    isDeleted: boolean;
-    isActive: boolean;
 }
 
 export class ManageCareerSuccessionDto implements IManageCareerSuccessionDto {
@@ -52478,6 +54335,176 @@ export interface ICareerSuccessionIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: CareerSuccession[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class CareerSuccessionDTO implements ICareerSuccessionDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    categoryType!: string;
+    planJustification!: string;
+    stringSuccessionEmployee!: string | undefined;
+    successionEmployee!: CareerSuccessorDTO[] | undefined;
+    holderId!: number;
+    dateCreated!: Date;
+    isDeleted!: boolean;
+    isActive!: boolean;
+    title!: string | undefined;
+    positionId!: number;
+    purpose!: string | undefined;
+    startDate!: Date;
+    competencyId!: number;
+
+    constructor(data?: ICareerSuccessionDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.categoryType = _data["categoryType"];
+            this.planJustification = _data["planJustification"];
+            this.stringSuccessionEmployee = _data["stringSuccessionEmployee"];
+            if (Array.isArray(_data["successionEmployee"])) {
+                this.successionEmployee = [] as any;
+                for (let item of _data["successionEmployee"])
+                    this.successionEmployee!.push(CareerSuccessorDTO.fromJS(item));
+            }
+            this.holderId = _data["holderId"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.isDeleted = _data["isDeleted"];
+            this.isActive = _data["isActive"];
+            this.title = _data["title"];
+            this.positionId = _data["positionId"];
+            this.purpose = _data["purpose"];
+            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
+            this.competencyId = _data["competencyId"];
+        }
+    }
+
+    static fromJS(data: any): CareerSuccessionDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new CareerSuccessionDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["categoryType"] = this.categoryType;
+        data["planJustification"] = this.planJustification;
+        data["stringSuccessionEmployee"] = this.stringSuccessionEmployee;
+        if (Array.isArray(this.successionEmployee)) {
+            data["successionEmployee"] = [];
+            for (let item of this.successionEmployee)
+                data["successionEmployee"].push(item.toJSON());
+        }
+        data["holderId"] = this.holderId;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["isDeleted"] = this.isDeleted;
+        data["isActive"] = this.isActive;
+        data["title"] = this.title;
+        data["positionId"] = this.positionId;
+        data["purpose"] = this.purpose;
+        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
+        data["competencyId"] = this.competencyId;
+        return data; 
+    }
+
+    clone(): CareerSuccessionDTO {
+        const json = this.toJSON();
+        let result = new CareerSuccessionDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICareerSuccessionDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    categoryType: string;
+    planJustification: string;
+    stringSuccessionEmployee: string | undefined;
+    successionEmployee: CareerSuccessorDTO[] | undefined;
+    holderId: number;
+    dateCreated: Date;
+    isDeleted: boolean;
+    isActive: boolean;
+    title: string | undefined;
+    positionId: number;
+    purpose: string | undefined;
+    startDate: Date;
+    competencyId: number;
+}
+
+export class CareerSuccessionDTOApiResult implements ICareerSuccessionDTOApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: CareerSuccessionDTO;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: ICareerSuccessionDTOApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? CareerSuccessionDTO.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): CareerSuccessionDTOApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new CareerSuccessionDTOApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): CareerSuccessionDTOApiResult {
+        const json = this.toJSON();
+        let result = new CareerSuccessionDTOApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICareerSuccessionDTOApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: CareerSuccessionDTO;
     totalCount: number;
     totalRecord: number;
 }
@@ -59375,236 +61402,6 @@ export interface IRetirementTypeIListApiResult {
     totalRecord: number;
 }
 
-export class CompetencyRequirments implements ICompetencyRequirments {
-    competencyId!: number;
-    requirementCategory!: string | undefined;
-    skillId!: number | undefined;
-    trainingId!: number | undefined;
-    certificationId!: number | undefined;
-    qualificationId!: number | undefined;
-    points!: number;
-    experience!: string | undefined;
-    yearsofExperience!: number;
-    experienceWeight!: number | undefined;
-    skillWeight!: number | undefined;
-    competences!: Competency;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ICompetencyRequirments) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.competencyId = _data["competencyId"];
-            this.requirementCategory = _data["requirementCategory"];
-            this.skillId = _data["skillId"];
-            this.trainingId = _data["trainingId"];
-            this.certificationId = _data["certificationId"];
-            this.qualificationId = _data["qualificationId"];
-            this.points = _data["points"];
-            this.experience = _data["experience"];
-            this.yearsofExperience = _data["yearsofExperience"];
-            this.experienceWeight = _data["experienceWeight"];
-            this.skillWeight = _data["skillWeight"];
-            this.competences = _data["competences"] ? Competency.fromJS(_data["competences"]) : <any>undefined;
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): CompetencyRequirments {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompetencyRequirments();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["competencyId"] = this.competencyId;
-        data["requirementCategory"] = this.requirementCategory;
-        data["skillId"] = this.skillId;
-        data["trainingId"] = this.trainingId;
-        data["certificationId"] = this.certificationId;
-        data["qualificationId"] = this.qualificationId;
-        data["points"] = this.points;
-        data["experience"] = this.experience;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["skillWeight"] = this.skillWeight;
-        data["competences"] = this.competences ? this.competences.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): CompetencyRequirments {
-        const json = this.toJSON();
-        let result = new CompetencyRequirments();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompetencyRequirments {
-    competencyId: number;
-    requirementCategory: string | undefined;
-    skillId: number | undefined;
-    trainingId: number | undefined;
-    certificationId: number | undefined;
-    qualificationId: number | undefined;
-    points: number;
-    experience: string | undefined;
-    yearsofExperience: number;
-    experienceWeight: number | undefined;
-    skillWeight: number | undefined;
-    competences: Competency;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class Competency implements ICompetency {
-    competencyTitle!: string | undefined;
-    jobRoleId!: number;
-    positionId!: number;
-    description!: string | undefined;
-    departmentId!: number;
-    competencesRequirements!: CompetencyRequirments[] | undefined;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ICompetency) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.competencyTitle = _data["competencyTitle"];
-            this.jobRoleId = _data["jobRoleId"];
-            this.positionId = _data["positionId"];
-            this.description = _data["description"];
-            this.departmentId = _data["departmentId"];
-            if (Array.isArray(_data["competencesRequirements"])) {
-                this.competencesRequirements = [] as any;
-                for (let item of _data["competencesRequirements"])
-                    this.competencesRequirements!.push(CompetencyRequirments.fromJS(item));
-            }
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): Competency {
-        data = typeof data === 'object' ? data : {};
-        let result = new Competency();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["competencyTitle"] = this.competencyTitle;
-        data["jobRoleId"] = this.jobRoleId;
-        data["positionId"] = this.positionId;
-        data["description"] = this.description;
-        data["departmentId"] = this.departmentId;
-        if (Array.isArray(this.competencesRequirements)) {
-            data["competencesRequirements"] = [];
-            for (let item of this.competencesRequirements)
-                data["competencesRequirements"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): Competency {
-        const json = this.toJSON();
-        let result = new Competency();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompetency {
-    competencyTitle: string | undefined;
-    jobRoleId: number;
-    positionId: number;
-    description: string | undefined;
-    departmentId: number;
-    competencesRequirements: CompetencyRequirments[] | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
 export class CompetencyIListApiResult implements ICompetencyIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
@@ -61044,89 +62841,6 @@ export interface IEmployeeCompensationDTO {
     paymentNarration: string | undefined;
     isDeleted: boolean;
     isActive: boolean;
-}
-
-export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
-    competencyId!: number;
-    requirementCategory!: string | undefined;
-    skillId!: number | undefined;
-    trainingId!: number | undefined;
-    certificationId!: number | undefined;
-    qualificationId!: number | undefined;
-    points!: number;
-    experience!: string | undefined;
-    yearsofExperience!: number;
-    experienceWeight!: number | undefined;
-    skillWeight!: number | undefined;
-
-    constructor(data?: ICompetencyRequirmentsDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.competencyId = _data["competencyId"];
-            this.requirementCategory = _data["requirementCategory"];
-            this.skillId = _data["skillId"];
-            this.trainingId = _data["trainingId"];
-            this.certificationId = _data["certificationId"];
-            this.qualificationId = _data["qualificationId"];
-            this.points = _data["points"];
-            this.experience = _data["experience"];
-            this.yearsofExperience = _data["yearsofExperience"];
-            this.experienceWeight = _data["experienceWeight"];
-            this.skillWeight = _data["skillWeight"];
-        }
-    }
-
-    static fromJS(data: any): CompetencyRequirmentsDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new CompetencyRequirmentsDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["competencyId"] = this.competencyId;
-        data["requirementCategory"] = this.requirementCategory;
-        data["skillId"] = this.skillId;
-        data["trainingId"] = this.trainingId;
-        data["certificationId"] = this.certificationId;
-        data["qualificationId"] = this.qualificationId;
-        data["points"] = this.points;
-        data["experience"] = this.experience;
-        data["yearsofExperience"] = this.yearsofExperience;
-        data["experienceWeight"] = this.experienceWeight;
-        data["skillWeight"] = this.skillWeight;
-        return data; 
-    }
-
-    clone(): CompetencyRequirmentsDTO {
-        const json = this.toJSON();
-        let result = new CompetencyRequirmentsDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICompetencyRequirmentsDTO {
-    competencyId: number;
-    requirementCategory: string | undefined;
-    skillId: number | undefined;
-    trainingId: number | undefined;
-    certificationId: number | undefined;
-    qualificationId: number | undefined;
-    points: number;
-    experience: string | undefined;
-    yearsofExperience: number;
-    experienceWeight: number | undefined;
-    skillWeight: number | undefined;
 }
 
 export class ManageCompetencyDTO implements IManageCompetencyDTO {
@@ -64508,6 +66222,65 @@ export interface IManageEmployeeDTO {
     documents: string | undefined;
 }
 
+export class IdNameObjApiResult implements IIdNameObjApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: IdNameObj;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IIdNameObjApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? IdNameObj.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): IdNameObjApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new IdNameObjApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): IdNameObjApiResult {
+        const json = this.toJSON();
+        let result = new IdNameObjApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IIdNameObjApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: IdNameObj;
+    totalCount: number;
+    totalRecord: number;
+}
+
 export class DropdownValueDTO implements IDropdownValueDTO {
     option_text!: string | undefined;
     option_value!: number;
@@ -64976,133 +66749,6 @@ export interface IPension {
     rsaNumber: string | undefined;
 }
 
-export class EmployeeQualificationDTO implements IEmployeeQualificationDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    employeeId!: number;
-    name!: string | undefined;
-    qualificationId!: number;
-    qualificationGradeId!: number;
-    courseId!: number;
-    institutionId!: number;
-    institution!: string | undefined;
-    startDate!: Date;
-    endDate!: Date;
-    type!: string | undefined;
-    typeId!: number;
-    courseName!: string | undefined;
-    grade!: string | undefined;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: IEmployeeQualificationDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.employeeId = _data["employeeId"];
-            this.name = _data["name"];
-            this.qualificationId = _data["qualificationId"];
-            this.qualificationGradeId = _data["qualificationGradeId"];
-            this.courseId = _data["courseId"];
-            this.institutionId = _data["institutionId"];
-            this.institution = _data["institution"];
-            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
-            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.type = _data["type"];
-            this.typeId = _data["typeId"];
-            this.courseName = _data["courseName"];
-            this.grade = _data["grade"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): EmployeeQualificationDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmployeeQualificationDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeId"] = this.employeeId;
-        data["name"] = this.name;
-        data["qualificationId"] = this.qualificationId;
-        data["qualificationGradeId"] = this.qualificationGradeId;
-        data["courseId"] = this.courseId;
-        data["institutionId"] = this.institutionId;
-        data["institution"] = this.institution;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["type"] = this.type;
-        data["typeId"] = this.typeId;
-        data["courseName"] = this.courseName;
-        data["grade"] = this.grade;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): EmployeeQualificationDTO {
-        const json = this.toJSON();
-        let result = new EmployeeQualificationDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmployeeQualificationDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    employeeId: number;
-    name: string | undefined;
-    qualificationId: number;
-    qualificationGradeId: number;
-    courseId: number;
-    institutionId: number;
-    institution: string | undefined;
-    startDate: Date;
-    endDate: Date;
-    type: string | undefined;
-    typeId: number;
-    courseName: string | undefined;
-    grade: string | undefined;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
 export class AddressDTO implements IAddressDTO {
     id!: number;
     companyID!: number;
@@ -65561,216 +67207,6 @@ export interface IEmployeeHistoryDTO {
     createdById: number;
     dateModified: Date | undefined;
     modifiedById: number | undefined;
-}
-
-export class EmployeeCertificationDTO implements IEmployeeCertificationDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    employeeId!: number;
-    certificationId!: number;
-    certification!: string | undefined;
-    professionalBodyId!: number;
-    institution!: string | undefined;
-    startDate!: Date | undefined;
-    endDate!: Date | undefined;
-    comment!: string | undefined;
-    numberOfExperienceInMonth!: number | undefined;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: IEmployeeCertificationDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.employeeId = _data["employeeId"];
-            this.certificationId = _data["certificationId"];
-            this.certification = _data["certification"];
-            this.professionalBodyId = _data["professionalBodyId"];
-            this.institution = _data["institution"];
-            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
-            this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.comment = _data["comment"];
-            this.numberOfExperienceInMonth = _data["numberOfExperienceInMonth"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): EmployeeCertificationDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmployeeCertificationDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeId"] = this.employeeId;
-        data["certificationId"] = this.certificationId;
-        data["certification"] = this.certification;
-        data["professionalBodyId"] = this.professionalBodyId;
-        data["institution"] = this.institution;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["comment"] = this.comment;
-        data["numberOfExperienceInMonth"] = this.numberOfExperienceInMonth;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): EmployeeCertificationDTO {
-        const json = this.toJSON();
-        let result = new EmployeeCertificationDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmployeeCertificationDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    employeeId: number;
-    certificationId: number;
-    certification: string | undefined;
-    professionalBodyId: number;
-    institution: string | undefined;
-    startDate: Date | undefined;
-    endDate: Date | undefined;
-    comment: string | undefined;
-    numberOfExperienceInMonth: number | undefined;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class EmployeeSkillDTO implements IEmployeeSkillDTO {
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    employeeId!: number;
-    skillId!: number;
-    skillName!: string | undefined;
-    categoryId!: number;
-    categoryName!: string | undefined;
-    startDate!: Date | undefined;
-    numberOfExperienceInMonth!: number | undefined;
-    point!: number | undefined;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-
-    constructor(data?: IEmployeeSkillDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.employeeId = _data["employeeId"];
-            this.skillId = _data["skillId"];
-            this.skillName = _data["skillName"];
-            this.categoryId = _data["categoryId"];
-            this.categoryName = _data["categoryName"];
-            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
-            this.numberOfExperienceInMonth = _data["numberOfExperienceInMonth"];
-            this.point = _data["point"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-        }
-    }
-
-    static fromJS(data: any): EmployeeSkillDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new EmployeeSkillDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["employeeId"] = this.employeeId;
-        data["skillId"] = this.skillId;
-        data["skillName"] = this.skillName;
-        data["categoryId"] = this.categoryId;
-        data["categoryName"] = this.categoryName;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["numberOfExperienceInMonth"] = this.numberOfExperienceInMonth;
-        data["point"] = this.point;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        return data; 
-    }
-
-    clone(): EmployeeSkillDTO {
-        const json = this.toJSON();
-        let result = new EmployeeSkillDTO();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IEmployeeSkillDTO {
-    id: number;
-    companyID: number;
-    subID: number;
-    employeeId: number;
-    skillId: number;
-    skillName: string | undefined;
-    categoryId: number;
-    categoryName: string | undefined;
-    startDate: Date | undefined;
-    numberOfExperienceInMonth: number | undefined;
-    point: number | undefined;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
 }
 
 export class Document implements IDocument {
@@ -74141,14 +75577,11 @@ export interface ILeaveYearDTOApiResult {
 export class NewLoanRequestDTO implements INewLoanRequestDTO {
     id!: number;
     loanTypeId!: number;
-    refNo!: string | undefined;
     employeeNo!: string | undefined;
     employeeName!: string | undefined;
-    loanTypeName!: string | undefined;
     employeeId!: number;
     log_status!: number;
     is_disbursed!: boolean;
-    is_active!: boolean;
     amount!: number;
     tenor!: number;
     totalPrincipalRepaid!: number;
@@ -74157,6 +75590,7 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
     tempRef!: string | undefined;
     strRequestedAmount!: string | undefined;
     strEffectiveDate!: string | undefined;
+    strMaturityDate!: string | undefined;
     strGuarantorIds!: string | undefined;
     effectiveDate!: Date | undefined;
     requestedAmount!: number;
@@ -74179,14 +75613,11 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
         if (_data) {
             this.id = _data["id"];
             this.loanTypeId = _data["loanTypeId"];
-            this.refNo = _data["refNo"];
             this.employeeNo = _data["employeeNo"];
             this.employeeName = _data["employeeName"];
-            this.loanTypeName = _data["loanTypeName"];
             this.employeeId = _data["employeeId"];
             this.log_status = _data["log_status"];
             this.is_disbursed = _data["is_disbursed"];
-            this.is_active = _data["is_active"];
             this.amount = _data["amount"];
             this.tenor = _data["tenor"];
             this.totalPrincipalRepaid = _data["totalPrincipalRepaid"];
@@ -74195,6 +75626,7 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
             this.tempRef = _data["tempRef"];
             this.strRequestedAmount = _data["strRequestedAmount"];
             this.strEffectiveDate = _data["strEffectiveDate"];
+            this.strMaturityDate = _data["strMaturityDate"];
             this.strGuarantorIds = _data["strGuarantorIds"];
             this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
             this.requestedAmount = _data["requestedAmount"];
@@ -74217,14 +75649,11 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["loanTypeId"] = this.loanTypeId;
-        data["refNo"] = this.refNo;
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
-        data["loanTypeName"] = this.loanTypeName;
         data["employeeId"] = this.employeeId;
         data["log_status"] = this.log_status;
         data["is_disbursed"] = this.is_disbursed;
-        data["is_active"] = this.is_active;
         data["amount"] = this.amount;
         data["tenor"] = this.tenor;
         data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
@@ -74233,6 +75662,7 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
         data["tempRef"] = this.tempRef;
         data["strRequestedAmount"] = this.strRequestedAmount;
         data["strEffectiveDate"] = this.strEffectiveDate;
+        data["strMaturityDate"] = this.strMaturityDate;
         data["strGuarantorIds"] = this.strGuarantorIds;
         data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
         data["requestedAmount"] = this.requestedAmount;
@@ -74255,14 +75685,11 @@ export class NewLoanRequestDTO implements INewLoanRequestDTO {
 export interface INewLoanRequestDTO {
     id: number;
     loanTypeId: number;
-    refNo: string | undefined;
     employeeNo: string | undefined;
     employeeName: string | undefined;
-    loanTypeName: string | undefined;
     employeeId: number;
     log_status: number;
     is_disbursed: boolean;
-    is_active: boolean;
     amount: number;
     tenor: number;
     totalPrincipalRepaid: number;
@@ -74271,6 +75698,7 @@ export interface INewLoanRequestDTO {
     tempRef: string | undefined;
     strRequestedAmount: string | undefined;
     strEffectiveDate: string | undefined;
+    strMaturityDate: string | undefined;
     strGuarantorIds: string | undefined;
     effectiveDate: Date | undefined;
     requestedAmount: number;
@@ -74490,42 +75918,34 @@ export interface ILoanRepaymentLogIListApiResult {
     totalRecord: number;
 }
 
-export class LoanRequestDTO implements ILoanRequestDTO {
+export class LoanRequestDTOs implements ILoanRequestDTOs {
     id!: number;
     loanTypeId!: number;
-    refNo!: string | undefined;
+    loanTypeName!: string | undefined;
     employeeNo!: string | undefined;
     employeeName!: string | undefined;
-    loanTypeName!: string | undefined;
-    employeeId!: number;
+    loggedForEmployeeId!: number;
+    requestedTenor!: number;
+    effectiveDate!: Date;
+    maturityDate!: Date;
+    requestedAmount!: number;
+    customAnswer!: string | undefined;
+    justification!: string | undefined;
+    approvedTenor!: number | undefined;
+    approvedAmount!: number | undefined;
+    dateApproved!: Date | undefined;
     log_status!: number;
     is_disbursed!: boolean;
-    is_active!: boolean;
-    amount!: number;
-    tenor!: number;
-    totalPrincipalRepaid!: number;
-    approvalProcessId!: number;
-    requestedTenor!: number;
-    approvedTenor!: number;
-    strRequestedAmount!: string | undefined;
-    strEffectiveDate!: string | undefined;
+    date_disbursed!: Date | undefined;
     tempRef!: string | undefined;
-    strApprovedAmount!: string | undefined;
-    strMaturityDate!: string | undefined;
-    _ServerDocURL!: string | undefined;
     strGuarantorIds!: string | undefined;
-    effectiveDate!: Date | undefined;
+    totalPrincipalRepaid!: number;
+    totalAmountRepaid!: number;
+    totalInterestRepaid!: number;
     outstandingPrincipal!: number;
     outstandingInterest!: number;
-    requestedAmount!: number;
-    approvedAmount!: number;
-    autoDeduction!: boolean;
-    customAnswer!: string | undefined;
-    loggedForEmployeeId!: string | undefined;
-    justification!: string | undefined;
-    submittedByUserId!: number;
 
-    constructor(data?: ILoanRequestDTO) {
+    constructor(data?: ILoanRequestDTOs) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -74538,43 +75958,35 @@ export class LoanRequestDTO implements ILoanRequestDTO {
         if (_data) {
             this.id = _data["id"];
             this.loanTypeId = _data["loanTypeId"];
-            this.refNo = _data["refNo"];
+            this.loanTypeName = _data["loanTypeName"];
             this.employeeNo = _data["employeeNo"];
             this.employeeName = _data["employeeName"];
-            this.loanTypeName = _data["loanTypeName"];
-            this.employeeId = _data["employeeId"];
+            this.loggedForEmployeeId = _data["loggedForEmployeeId"];
+            this.requestedTenor = _data["requestedTenor"];
+            this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
+            this.maturityDate = _data["maturityDate"] ? new Date(_data["maturityDate"].toString()) : <any>undefined;
+            this.requestedAmount = _data["requestedAmount"];
+            this.customAnswer = _data["customAnswer"];
+            this.justification = _data["justification"];
+            this.approvedTenor = _data["approvedTenor"];
+            this.approvedAmount = _data["approvedAmount"];
+            this.dateApproved = _data["dateApproved"] ? new Date(_data["dateApproved"].toString()) : <any>undefined;
             this.log_status = _data["log_status"];
             this.is_disbursed = _data["is_disbursed"];
-            this.is_active = _data["is_active"];
-            this.amount = _data["amount"];
-            this.tenor = _data["tenor"];
-            this.totalPrincipalRepaid = _data["totalPrincipalRepaid"];
-            this.approvalProcessId = _data["approvalProcessId"];
-            this.requestedTenor = _data["requestedTenor"];
-            this.approvedTenor = _data["approvedTenor"];
-            this.strRequestedAmount = _data["strRequestedAmount"];
-            this.strEffectiveDate = _data["strEffectiveDate"];
+            this.date_disbursed = _data["date_disbursed"] ? new Date(_data["date_disbursed"].toString()) : <any>undefined;
             this.tempRef = _data["tempRef"];
-            this.strApprovedAmount = _data["strApprovedAmount"];
-            this.strMaturityDate = _data["strMaturityDate"];
-            this._ServerDocURL = _data["_ServerDocURL"];
             this.strGuarantorIds = _data["strGuarantorIds"];
-            this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
+            this.totalPrincipalRepaid = _data["totalPrincipalRepaid"];
+            this.totalAmountRepaid = _data["totalAmountRepaid"];
+            this.totalInterestRepaid = _data["totalInterestRepaid"];
             this.outstandingPrincipal = _data["outstandingPrincipal"];
             this.outstandingInterest = _data["outstandingInterest"];
-            this.requestedAmount = _data["requestedAmount"];
-            this.approvedAmount = _data["approvedAmount"];
-            this.autoDeduction = _data["autoDeduction"];
-            this.customAnswer = _data["customAnswer"];
-            this.loggedForEmployeeId = _data["loggedForEmployeeId"];
-            this.justification = _data["justification"];
-            this.submittedByUserId = _data["submittedByUserId"];
         }
     }
 
-    static fromJS(data: any): LoanRequestDTO {
+    static fromJS(data: any): LoanRequestDTOs {
         data = typeof data === 'object' ? data : {};
-        let result = new LoanRequestDTO();
+        let result = new LoanRequestDTOs();
         result.init(data);
         return result;
     }
@@ -74583,92 +75995,76 @@ export class LoanRequestDTO implements ILoanRequestDTO {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["loanTypeId"] = this.loanTypeId;
-        data["refNo"] = this.refNo;
+        data["loanTypeName"] = this.loanTypeName;
         data["employeeNo"] = this.employeeNo;
         data["employeeName"] = this.employeeName;
-        data["loanTypeName"] = this.loanTypeName;
-        data["employeeId"] = this.employeeId;
+        data["loggedForEmployeeId"] = this.loggedForEmployeeId;
+        data["requestedTenor"] = this.requestedTenor;
+        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
+        data["maturityDate"] = this.maturityDate ? this.maturityDate.toISOString() : <any>undefined;
+        data["requestedAmount"] = this.requestedAmount;
+        data["customAnswer"] = this.customAnswer;
+        data["justification"] = this.justification;
+        data["approvedTenor"] = this.approvedTenor;
+        data["approvedAmount"] = this.approvedAmount;
+        data["dateApproved"] = this.dateApproved ? this.dateApproved.toISOString() : <any>undefined;
         data["log_status"] = this.log_status;
         data["is_disbursed"] = this.is_disbursed;
-        data["is_active"] = this.is_active;
-        data["amount"] = this.amount;
-        data["tenor"] = this.tenor;
-        data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["requestedTenor"] = this.requestedTenor;
-        data["approvedTenor"] = this.approvedTenor;
-        data["strRequestedAmount"] = this.strRequestedAmount;
-        data["strEffectiveDate"] = this.strEffectiveDate;
+        data["date_disbursed"] = this.date_disbursed ? this.date_disbursed.toISOString() : <any>undefined;
         data["tempRef"] = this.tempRef;
-        data["strApprovedAmount"] = this.strApprovedAmount;
-        data["strMaturityDate"] = this.strMaturityDate;
-        data["_ServerDocURL"] = this._ServerDocURL;
         data["strGuarantorIds"] = this.strGuarantorIds;
-        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
+        data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
+        data["totalAmountRepaid"] = this.totalAmountRepaid;
+        data["totalInterestRepaid"] = this.totalInterestRepaid;
         data["outstandingPrincipal"] = this.outstandingPrincipal;
         data["outstandingInterest"] = this.outstandingInterest;
-        data["requestedAmount"] = this.requestedAmount;
-        data["approvedAmount"] = this.approvedAmount;
-        data["autoDeduction"] = this.autoDeduction;
-        data["customAnswer"] = this.customAnswer;
-        data["loggedForEmployeeId"] = this.loggedForEmployeeId;
-        data["justification"] = this.justification;
-        data["submittedByUserId"] = this.submittedByUserId;
         return data; 
     }
 
-    clone(): LoanRequestDTO {
+    clone(): LoanRequestDTOs {
         const json = this.toJSON();
-        let result = new LoanRequestDTO();
+        let result = new LoanRequestDTOs();
         result.init(json);
         return result;
     }
 }
 
-export interface ILoanRequestDTO {
+export interface ILoanRequestDTOs {
     id: number;
     loanTypeId: number;
-    refNo: string | undefined;
+    loanTypeName: string | undefined;
     employeeNo: string | undefined;
     employeeName: string | undefined;
-    loanTypeName: string | undefined;
-    employeeId: number;
+    loggedForEmployeeId: number;
+    requestedTenor: number;
+    effectiveDate: Date;
+    maturityDate: Date;
+    requestedAmount: number;
+    customAnswer: string | undefined;
+    justification: string | undefined;
+    approvedTenor: number | undefined;
+    approvedAmount: number | undefined;
+    dateApproved: Date | undefined;
     log_status: number;
     is_disbursed: boolean;
-    is_active: boolean;
-    amount: number;
-    tenor: number;
-    totalPrincipalRepaid: number;
-    approvalProcessId: number;
-    requestedTenor: number;
-    approvedTenor: number;
-    strRequestedAmount: string | undefined;
-    strEffectiveDate: string | undefined;
+    date_disbursed: Date | undefined;
     tempRef: string | undefined;
-    strApprovedAmount: string | undefined;
-    strMaturityDate: string | undefined;
-    _ServerDocURL: string | undefined;
     strGuarantorIds: string | undefined;
-    effectiveDate: Date | undefined;
+    totalPrincipalRepaid: number;
+    totalAmountRepaid: number;
+    totalInterestRepaid: number;
     outstandingPrincipal: number;
     outstandingInterest: number;
-    requestedAmount: number;
-    approvedAmount: number;
-    autoDeduction: boolean;
-    customAnswer: string | undefined;
-    loggedForEmployeeId: string | undefined;
-    justification: string | undefined;
-    submittedByUserId: number;
 }
 
-export class LoanRequestDTOIListApiResult implements ILoanRequestDTOIListApiResult {
+export class LoanRequestDTOsIListApiResult implements ILoanRequestDTOsIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: LoanRequestDTO[] | undefined;
+    result!: LoanRequestDTOs[] | undefined;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: ILoanRequestDTOIListApiResult) {
+    constructor(data?: ILoanRequestDTOsIListApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -74684,16 +76080,16 @@ export class LoanRequestDTOIListApiResult implements ILoanRequestDTOIListApiResu
             if (Array.isArray(_data["result"])) {
                 this.result = [] as any;
                 for (let item of _data["result"])
-                    this.result!.push(LoanRequestDTO.fromJS(item));
+                    this.result!.push(LoanRequestDTOs.fromJS(item));
             }
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): LoanRequestDTOIListApiResult {
+    static fromJS(data: any): LoanRequestDTOsIListApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new LoanRequestDTOIListApiResult();
+        let result = new LoanRequestDTOsIListApiResult();
         result.init(data);
         return result;
     }
@@ -74712,18 +76108,18 @@ export class LoanRequestDTOIListApiResult implements ILoanRequestDTOIListApiResu
         return data; 
     }
 
-    clone(): LoanRequestDTOIListApiResult {
+    clone(): LoanRequestDTOsIListApiResult {
         const json = this.toJSON();
-        let result = new LoanRequestDTOIListApiResult();
+        let result = new LoanRequestDTOsIListApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface ILoanRequestDTOIListApiResult {
+export interface ILoanRequestDTOsIListApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: LoanRequestDTO[] | undefined;
+    result: LoanRequestDTOs[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -74850,253 +76246,14 @@ export interface IUpdateLoadRequestDTO {
     approved_amt: string | undefined;
 }
 
-export class LoanRequest implements ILoanRequest {
-    loanTypeId!: number;
-    submittedByUserId!: number;
-    loggedForEmployeeId!: number;
-    refNo!: string | undefined;
-    interestRate!: number;
-    requestedAmount!: number;
-    approvalProcessId!: number;
-    interestType!: number;
-    requestedTenor!: number;
-    approvedTenor!: number;
-    approvedAmount!: number;
-    totalPrincipalRepaid!: number;
-    totalInterestRepaid!: number;
-    totalAmountRepaid!: number;
-    lastRepaymentDate!: Date | undefined;
-    effectiveDate!: Date | undefined;
-    dateApproved!: Date | undefined;
-    customAnswer!: string | undefined;
-    justification!: string | undefined;
-    log_status!: number;
-    is_disbursed!: boolean;
-    date_disbursed!: Date | undefined;
-    autoDeduction!: boolean;
-    maxLoanRepaytPercent!: number;
-    maxLoanRepaytAmount!: number;
-    is_repaid!: boolean;
-    disbursementdetails!: string | undefined;
-    disburseby!: string | undefined;
-    disbursementType!: number | undefined;
-    employeeNo!: string | undefined;
-    employeeName!: string | undefined;
-    loanTypeName!: string | undefined;
-    strRequestedAmount!: string | undefined;
-    strEffectiveDate!: string | undefined;
-    tempRef!: string | undefined;
-    strApprovedAmount!: string | undefined;
-    strMaturityDate!: string | undefined;
-    _ServerDocURL!: string | undefined;
-    strGuarantorIds!: string | undefined;
-    outstandingPrincipal!: number;
-    outstandingInterest!: number;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ILoanRequest) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.loanTypeId = _data["loanTypeId"];
-            this.submittedByUserId = _data["submittedByUserId"];
-            this.loggedForEmployeeId = _data["loggedForEmployeeId"];
-            this.refNo = _data["refNo"];
-            this.interestRate = _data["interestRate"];
-            this.requestedAmount = _data["requestedAmount"];
-            this.approvalProcessId = _data["approvalProcessId"];
-            this.interestType = _data["interestType"];
-            this.requestedTenor = _data["requestedTenor"];
-            this.approvedTenor = _data["approvedTenor"];
-            this.approvedAmount = _data["approvedAmount"];
-            this.totalPrincipalRepaid = _data["totalPrincipalRepaid"];
-            this.totalInterestRepaid = _data["totalInterestRepaid"];
-            this.totalAmountRepaid = _data["totalAmountRepaid"];
-            this.lastRepaymentDate = _data["lastRepaymentDate"] ? new Date(_data["lastRepaymentDate"].toString()) : <any>undefined;
-            this.effectiveDate = _data["effectiveDate"] ? new Date(_data["effectiveDate"].toString()) : <any>undefined;
-            this.dateApproved = _data["dateApproved"] ? new Date(_data["dateApproved"].toString()) : <any>undefined;
-            this.customAnswer = _data["customAnswer"];
-            this.justification = _data["justification"];
-            this.log_status = _data["log_status"];
-            this.is_disbursed = _data["is_disbursed"];
-            this.date_disbursed = _data["date_disbursed"] ? new Date(_data["date_disbursed"].toString()) : <any>undefined;
-            this.autoDeduction = _data["autoDeduction"];
-            this.maxLoanRepaytPercent = _data["maxLoanRepaytPercent"];
-            this.maxLoanRepaytAmount = _data["maxLoanRepaytAmount"];
-            this.is_repaid = _data["is_repaid"];
-            this.disbursementdetails = _data["disbursementdetails"];
-            this.disburseby = _data["disburseby"];
-            this.disbursementType = _data["disbursementType"];
-            this.employeeNo = _data["employeeNo"];
-            this.employeeName = _data["employeeName"];
-            this.loanTypeName = _data["loanTypeName"];
-            this.strRequestedAmount = _data["strRequestedAmount"];
-            this.strEffectiveDate = _data["strEffectiveDate"];
-            this.tempRef = _data["tempRef"];
-            this.strApprovedAmount = _data["strApprovedAmount"];
-            this.strMaturityDate = _data["strMaturityDate"];
-            this._ServerDocURL = _data["_ServerDocURL"];
-            this.strGuarantorIds = _data["strGuarantorIds"];
-            this.outstandingPrincipal = _data["outstandingPrincipal"];
-            this.outstandingInterest = _data["outstandingInterest"];
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): LoanRequest {
-        data = typeof data === 'object' ? data : {};
-        let result = new LoanRequest();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["loanTypeId"] = this.loanTypeId;
-        data["submittedByUserId"] = this.submittedByUserId;
-        data["loggedForEmployeeId"] = this.loggedForEmployeeId;
-        data["refNo"] = this.refNo;
-        data["interestRate"] = this.interestRate;
-        data["requestedAmount"] = this.requestedAmount;
-        data["approvalProcessId"] = this.approvalProcessId;
-        data["interestType"] = this.interestType;
-        data["requestedTenor"] = this.requestedTenor;
-        data["approvedTenor"] = this.approvedTenor;
-        data["approvedAmount"] = this.approvedAmount;
-        data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
-        data["totalInterestRepaid"] = this.totalInterestRepaid;
-        data["totalAmountRepaid"] = this.totalAmountRepaid;
-        data["lastRepaymentDate"] = this.lastRepaymentDate ? this.lastRepaymentDate.toISOString() : <any>undefined;
-        data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
-        data["dateApproved"] = this.dateApproved ? this.dateApproved.toISOString() : <any>undefined;
-        data["customAnswer"] = this.customAnswer;
-        data["justification"] = this.justification;
-        data["log_status"] = this.log_status;
-        data["is_disbursed"] = this.is_disbursed;
-        data["date_disbursed"] = this.date_disbursed ? this.date_disbursed.toISOString() : <any>undefined;
-        data["autoDeduction"] = this.autoDeduction;
-        data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
-        data["maxLoanRepaytAmount"] = this.maxLoanRepaytAmount;
-        data["is_repaid"] = this.is_repaid;
-        data["disbursementdetails"] = this.disbursementdetails;
-        data["disburseby"] = this.disburseby;
-        data["disbursementType"] = this.disbursementType;
-        data["employeeNo"] = this.employeeNo;
-        data["employeeName"] = this.employeeName;
-        data["loanTypeName"] = this.loanTypeName;
-        data["strRequestedAmount"] = this.strRequestedAmount;
-        data["strEffectiveDate"] = this.strEffectiveDate;
-        data["tempRef"] = this.tempRef;
-        data["strApprovedAmount"] = this.strApprovedAmount;
-        data["strMaturityDate"] = this.strMaturityDate;
-        data["_ServerDocURL"] = this._ServerDocURL;
-        data["strGuarantorIds"] = this.strGuarantorIds;
-        data["outstandingPrincipal"] = this.outstandingPrincipal;
-        data["outstandingInterest"] = this.outstandingInterest;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): LoanRequest {
-        const json = this.toJSON();
-        let result = new LoanRequest();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ILoanRequest {
-    loanTypeId: number;
-    submittedByUserId: number;
-    loggedForEmployeeId: number;
-    refNo: string | undefined;
-    interestRate: number;
-    requestedAmount: number;
-    approvalProcessId: number;
-    interestType: number;
-    requestedTenor: number;
-    approvedTenor: number;
-    approvedAmount: number;
-    totalPrincipalRepaid: number;
-    totalInterestRepaid: number;
-    totalAmountRepaid: number;
-    lastRepaymentDate: Date | undefined;
-    effectiveDate: Date | undefined;
-    dateApproved: Date | undefined;
-    customAnswer: string | undefined;
-    justification: string | undefined;
-    log_status: number;
-    is_disbursed: boolean;
-    date_disbursed: Date | undefined;
-    autoDeduction: boolean;
-    maxLoanRepaytPercent: number;
-    maxLoanRepaytAmount: number;
-    is_repaid: boolean;
-    disbursementdetails: string | undefined;
-    disburseby: string | undefined;
-    disbursementType: number | undefined;
-    employeeNo: string | undefined;
-    employeeName: string | undefined;
-    loanTypeName: string | undefined;
-    strRequestedAmount: string | undefined;
-    strEffectiveDate: string | undefined;
-    tempRef: string | undefined;
-    strApprovedAmount: string | undefined;
-    strMaturityDate: string | undefined;
-    _ServerDocURL: string | undefined;
-    strGuarantorIds: string | undefined;
-    outstandingPrincipal: number;
-    outstandingInterest: number;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class LoanRequestApiResult implements ILoanRequestApiResult {
+export class LoanRequestDTOsApiResult implements ILoanRequestDTOsApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: LoanRequest;
+    result!: LoanRequestDTOs;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: ILoanRequestApiResult) {
+    constructor(data?: ILoanRequestDTOsApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -75109,15 +76266,15 @@ export class LoanRequestApiResult implements ILoanRequestApiResult {
         if (_data) {
             this.hasError = _data["hasError"];
             this.message = _data["message"];
-            this.result = _data["result"] ? LoanRequest.fromJS(_data["result"]) : <any>undefined;
+            this.result = _data["result"] ? LoanRequestDTOs.fromJS(_data["result"]) : <any>undefined;
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): LoanRequestApiResult {
+    static fromJS(data: any): LoanRequestDTOsApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new LoanRequestApiResult();
+        let result = new LoanRequestDTOsApiResult();
         result.init(data);
         return result;
     }
@@ -75132,18 +76289,18 @@ export class LoanRequestApiResult implements ILoanRequestApiResult {
         return data; 
     }
 
-    clone(): LoanRequestApiResult {
+    clone(): LoanRequestDTOsApiResult {
         const json = this.toJSON();
-        let result = new LoanRequestApiResult();
+        let result = new LoanRequestDTOsApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface ILoanRequestApiResult {
+export interface ILoanRequestDTOsApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: LoanRequest;
+    result: LoanRequestDTOs;
     totalCount: number;
     totalRecord: number;
 }
@@ -83337,6 +84494,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
     job_role!: string | undefined;
     is_submitted!: boolean;
     is_selected!: boolean;
+    is_deleted!: boolean;
     date_submitted!: Date | undefined;
     current_step!: string | undefined;
     current_step_id!: number | undefined;
@@ -83395,6 +84553,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
             this.job_role = _data["job_role"];
             this.is_submitted = _data["is_submitted"];
             this.is_selected = _data["is_selected"];
+            this.is_deleted = _data["is_deleted"];
             this.date_submitted = _data["date_submitted"] ? new Date(_data["date_submitted"].toString()) : <any>undefined;
             this.current_step = _data["current_step"];
             this.current_step_id = _data["current_step_id"];
@@ -83453,6 +84612,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
         data["job_role"] = this.job_role;
         data["is_submitted"] = this.is_submitted;
         data["is_selected"] = this.is_selected;
+        data["is_deleted"] = this.is_deleted;
         data["date_submitted"] = this.date_submitted ? this.date_submitted.toISOString() : <any>undefined;
         data["current_step"] = this.current_step;
         data["current_step_id"] = this.current_step_id;
@@ -83511,6 +84671,7 @@ export interface ISp_FetchEligibleEmployees {
     job_role: string | undefined;
     is_submitted: boolean;
     is_selected: boolean;
+    is_deleted: boolean;
     date_submitted: Date | undefined;
     current_step: string | undefined;
     current_step_id: number | undefined;
@@ -89397,6 +90558,8 @@ export class RetirementLog implements IRetirementLog {
     reviewedBy!: string | undefined;
     reviewDate!: Date | undefined;
     reviewComment!: string | undefined;
+    subReason!: string | undefined;
+    sourceofInitiation!: string | undefined;
     personalEmail!: string | undefined;
     personalPhoneNumber!: string | undefined;
     lastWorkingDate!: Date;
@@ -89443,6 +90606,8 @@ export class RetirementLog implements IRetirementLog {
             this.reviewedBy = _data["reviewedBy"];
             this.reviewDate = _data["reviewDate"] ? new Date(_data["reviewDate"].toString()) : <any>undefined;
             this.reviewComment = _data["reviewComment"];
+            this.subReason = _data["subReason"];
+            this.sourceofInitiation = _data["sourceofInitiation"];
             this.personalEmail = _data["personalEmail"];
             this.personalPhoneNumber = _data["personalPhoneNumber"];
             this.lastWorkingDate = _data["lastWorkingDate"] ? new Date(_data["lastWorkingDate"].toString()) : <any>undefined;
@@ -89489,6 +90654,8 @@ export class RetirementLog implements IRetirementLog {
         data["reviewedBy"] = this.reviewedBy;
         data["reviewDate"] = this.reviewDate ? this.reviewDate.toISOString() : <any>undefined;
         data["reviewComment"] = this.reviewComment;
+        data["subReason"] = this.subReason;
+        data["sourceofInitiation"] = this.sourceofInitiation;
         data["personalEmail"] = this.personalEmail;
         data["personalPhoneNumber"] = this.personalPhoneNumber;
         data["lastWorkingDate"] = this.lastWorkingDate ? this.lastWorkingDate.toISOString() : <any>undefined;
@@ -89535,6 +90702,8 @@ export interface IRetirementLog {
     reviewedBy: string | undefined;
     reviewDate: Date | undefined;
     reviewComment: string | undefined;
+    subReason: string | undefined;
+    sourceofInitiation: string | undefined;
     personalEmail: string | undefined;
     personalPhoneNumber: string | undefined;
     lastWorkingDate: Date;
@@ -91575,6 +92744,18 @@ export class TalentManagementRequirmentsDTO implements ITalentManagementRequirme
     dateCreated!: Date;
     isDeleted!: boolean;
     isActive!: boolean;
+    skillId!: number | undefined;
+    skillName!: string | undefined;
+    trainingId!: number | undefined;
+    trainingName!: string | undefined;
+    certificationId!: number | undefined;
+    certificationName!: string | undefined;
+    qualificationId!: number | undefined;
+    qualificationName!: string | undefined;
+    abilityId!: number | undefined;
+    abilityName!: string | undefined;
+    yearsofExperience!: number;
+    points!: number;
 
     constructor(data?: ITalentManagementRequirmentsDTO) {
         if (data) {
@@ -91599,6 +92780,18 @@ export class TalentManagementRequirmentsDTO implements ITalentManagementRequirme
             this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
             this.isDeleted = _data["isDeleted"];
             this.isActive = _data["isActive"];
+            this.skillId = _data["skillId"];
+            this.skillName = _data["skillName"];
+            this.trainingId = _data["trainingId"];
+            this.trainingName = _data["trainingName"];
+            this.certificationId = _data["certificationId"];
+            this.certificationName = _data["certificationName"];
+            this.qualificationId = _data["qualificationId"];
+            this.qualificationName = _data["qualificationName"];
+            this.abilityId = _data["abilityId"];
+            this.abilityName = _data["abilityName"];
+            this.yearsofExperience = _data["yearsofExperience"];
+            this.points = _data["points"];
         }
     }
 
@@ -91623,6 +92816,18 @@ export class TalentManagementRequirmentsDTO implements ITalentManagementRequirme
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
+        data["skillId"] = this.skillId;
+        data["skillName"] = this.skillName;
+        data["trainingId"] = this.trainingId;
+        data["trainingName"] = this.trainingName;
+        data["certificationId"] = this.certificationId;
+        data["certificationName"] = this.certificationName;
+        data["qualificationId"] = this.qualificationId;
+        data["qualificationName"] = this.qualificationName;
+        data["abilityId"] = this.abilityId;
+        data["abilityName"] = this.abilityName;
+        data["yearsofExperience"] = this.yearsofExperience;
+        data["points"] = this.points;
         return data; 
     }
 
@@ -91647,6 +92852,18 @@ export interface ITalentManagementRequirmentsDTO {
     dateCreated: Date;
     isDeleted: boolean;
     isActive: boolean;
+    skillId: number | undefined;
+    skillName: string | undefined;
+    trainingId: number | undefined;
+    trainingName: string | undefined;
+    certificationId: number | undefined;
+    certificationName: string | undefined;
+    qualificationId: number | undefined;
+    qualificationName: string | undefined;
+    abilityId: number | undefined;
+    abilityName: string | undefined;
+    yearsofExperience: number;
+    points: number;
 }
 
 export class AddTalentMangementDTO implements IAddTalentMangementDTO {
@@ -91658,6 +92875,8 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
     isActive!: boolean;
     dateCreated!: Date;
     isDeleted!: boolean;
+    loggedByUserId!: number;
+    loggedByUserName!: string | undefined;
     talentManagementRequirmentsDTOs!: TalentManagementRequirmentsDTO[] | undefined;
 
     constructor(data?: IAddTalentMangementDTO) {
@@ -91679,6 +92898,8 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
             this.isActive = _data["isActive"];
             this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
             this.isDeleted = _data["isDeleted"];
+            this.loggedByUserId = _data["loggedByUserId"];
+            this.loggedByUserName = _data["loggedByUserName"];
             if (Array.isArray(_data["talentManagementRequirmentsDTOs"])) {
                 this.talentManagementRequirmentsDTOs = [] as any;
                 for (let item of _data["talentManagementRequirmentsDTOs"])
@@ -91704,6 +92925,8 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
         data["isActive"] = this.isActive;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
+        data["loggedByUserId"] = this.loggedByUserId;
+        data["loggedByUserName"] = this.loggedByUserName;
         if (Array.isArray(this.talentManagementRequirmentsDTOs)) {
             data["talentManagementRequirmentsDTOs"] = [];
             for (let item of this.talentManagementRequirmentsDTOs)
@@ -91729,6 +92952,8 @@ export interface IAddTalentMangementDTO {
     isActive: boolean;
     dateCreated: Date;
     isDeleted: boolean;
+    loggedByUserId: number;
+    loggedByUserName: string | undefined;
     talentManagementRequirmentsDTOs: TalentManagementRequirmentsDTO[] | undefined;
 }
 
@@ -91842,6 +93067,7 @@ export class AddEmployyeetoPoolDTO implements IAddEmployyeetoPoolDTO {
     isDeleted!: boolean;
     isActive!: boolean;
     talentPoolId!: number;
+    source!: string | undefined;
     employeeTalentMangementPoolHistoriesDTO!: EmployeeTalentMangementPoolHistoryDTO[] | undefined;
 
     constructor(data?: IAddEmployyeetoPoolDTO) {
@@ -91865,6 +93091,7 @@ export class AddEmployyeetoPoolDTO implements IAddEmployyeetoPoolDTO {
             this.isDeleted = _data["isDeleted"];
             this.isActive = _data["isActive"];
             this.talentPoolId = _data["talentPoolId"];
+            this.source = _data["source"];
             if (Array.isArray(_data["employeeTalentMangementPoolHistoriesDTO"])) {
                 this.employeeTalentMangementPoolHistoriesDTO = [] as any;
                 for (let item of _data["employeeTalentMangementPoolHistoriesDTO"])
@@ -91892,6 +93119,7 @@ export class AddEmployyeetoPoolDTO implements IAddEmployyeetoPoolDTO {
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         data["talentPoolId"] = this.talentPoolId;
+        data["source"] = this.source;
         if (Array.isArray(this.employeeTalentMangementPoolHistoriesDTO)) {
             data["employeeTalentMangementPoolHistoriesDTO"] = [];
             for (let item of this.employeeTalentMangementPoolHistoriesDTO)
@@ -91919,6 +93147,7 @@ export interface IAddEmployyeetoPoolDTO {
     isDeleted: boolean;
     isActive: boolean;
     talentPoolId: number;
+    source: string | undefined;
     employeeTalentMangementPoolHistoriesDTO: EmployeeTalentMangementPoolHistoryDTO[] | undefined;
 }
 
@@ -91985,6 +93214,65 @@ export interface IAddTalentMangementDTOListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: AddTalentMangementDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class AddTalentMangementDTOApiResult implements IAddTalentMangementDTOApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: AddTalentMangementDTO;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IAddTalentMangementDTOApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? AddTalentMangementDTO.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): AddTalentMangementDTOApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddTalentMangementDTOApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): AddTalentMangementDTOApiResult {
+        const json = this.toJSON();
+        let result = new AddTalentMangementDTOApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddTalentMangementDTOApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: AddTalentMangementDTO;
     totalCount: number;
     totalRecord: number;
 }

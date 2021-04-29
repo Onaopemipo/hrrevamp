@@ -91,6 +91,10 @@ export class PlanningComponent implements OnInit {
   newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
   allCompetencies: Competency [] = [];
 
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
   constructor(
     private navCtrl: Location,
     private api: EmployeesService,
@@ -146,12 +150,13 @@ export class PlanningComponent implements OnInit {
     const data = await this.commonService.getCompetency().toPromise();
     if(!data.hasError){
       this.allCompetencies = data.result;
+      console.log(this.allCompetencies)
     }
   }
 
   async fetchAllPlans(){
     const data = await this.planService.getCareerSuccessionPlan().toPromise();
-    if(data.hasError){
+    if(!data.hasError){
       this.allPans = data.result;
       this.planDataCount = data.totalRecord;
     }
@@ -160,8 +165,31 @@ export class PlanningComponent implements OnInit {
   async createSuccessionPlan(){
     const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Plan created successfully', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Plan created successfully', 'Dismiss').subscribe(dataAction => {
+        if(dataAction == 'closed'){
+          this.fetchAllPlans();
+        }
+      })
     }
+    }
+
+    getSelectedEmployee(event,selectType) {
+      console.log(event)
+       if(selectType == 'employee'){
+        this.newSuccessionPlan.holderId = event[0].employeeNumber;
+        this.newSuccessionPlan.positionId = event[0].positionId;
+       }
+      //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
+
+       console.log(selectType, event)
+    }
+
+    getSuccessingCandidate(event,selectType) {
+      console.log(event)
+       if(selectType == 'employee')this.newSuccessionPlan.holderId = event[0].employeeNumber;
+      //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
+
+       console.log(selectType, event)
     }
 
 }

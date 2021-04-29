@@ -12,14 +12,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PromotioninfoComponent implements OnInit {
 
-
   tableColumns = [
-    { name: 'a', title: 'Name of Qualification' },
-    { name: 'b', title: 'Type' },
-    { name: 'c', title: 'Course' },
-    { name: 'd', title: 'Institution' },
-    { name: 'e', title: 'Start Date' },
-    { name: 'f', title: 'End Date' },
+    { name: '', title: ' Qualification Name' },
+    { name: '', title: 'Qualification Type' },
+    { name: '', title: 'Course Name' },
+    { name: '', title: 'Institution' },
+    { name: '', title: 'Start Date' },
+    { name: '', title: 'End Date' },
   ];
 
   selectedCase: string = 'personal_Info';
@@ -35,11 +34,16 @@ export class PromotioninfoComponent implements OnInit {
 
   newPromotion = new Sp_FetchEligibleEmployees().clone();
   allPositions: Position[] = [];
-  constructor(private employee: FetchEmployeeByIdServiceProxy, private activatedroute: ActivatedRoute,
+  departmentName: string = '';
+  totalItems = 0;
+  currentPage = 1;
+  jobName = '';
+  constructor(private employeeService: FetchEmployeeByIdServiceProxy, private activatedroute: ActivatedRoute,
     private router: Router,private CommonService: CommonServiceProxy,
     private alert: AlertserviceService,
     private contract: FetchEmployeeContractByEmployeeIdServiceProxy,
-    private dataService: DataServiceProxy) { }
+    private dataService: DataServiceProxy,
+  ) { }
 
 
   selectPanel(hiringlist, i) {
@@ -65,21 +69,37 @@ export class PromotioninfoComponent implements OnInit {
       ptitle = this.allPositions.find(x => x.id == position_id).title;
     }
     return ptitle;
-
   }
+  getEmployeebyId(employeeId) {
+    this.employeeService.getEmployeeById(employeeId).subscribe((data) => {
+      if (!data.hasError) {
+        this.employeeDetails = data.result;
+        this.jobName = this.employeeDetails.contracts.length > 0 ? this.employeeDetails.contracts[0].jobName : "";
+        this.departmentName = this.employeeDetails.contracts.length > 0 ? this.employeeDetails.contracts[0].departmentName : "";
+        this.totalItems = this.employeeDetails.qualifications.length;   
+          }
+    });
+    }
   ngOnInit(): void {
+    this.employeeDetails.contracts = [];
+    this.employeeDetails.addresses = [];
+    this.employeeDetails.qualifications = [];
     this.activatedroute.queryParams.subscribe(data => {
+      if (data.data) {
+        this.newPromotion = JSON.parse(data.data);
+        console.log(this.newPromotion);
+        this.getEmployeebyId(this.newPromotion.employee_id)
  
-      if (data) {
-        if (data.data) {
-    this.newPromotion = data.data
-    }else {
+      }else {
         this.router.navigate(['/employeemodule/promotion']);
   }
-      } 
-})
-  }
+    }
+    );
 
+  }
+  get   showEmptyQualifications(){
+    return this.employeeDetails.qualifications.length === 0;
+  }
 
 
 }

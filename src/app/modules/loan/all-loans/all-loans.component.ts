@@ -1,5 +1,5 @@
 import { TableColumn } from 'app/components/tablecomponent/models';
-import { LoanRequestDTO, GetLoanRequestsServiceProxy } from './../../../_services/service-proxies';
+import {  GetLoanRequestsServiceProxy } from './../../../_services/service-proxies';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AllLoansComponent implements OnInit {
 
   dataVal: number = 2;
-  allLoans: LoanRequestDTO [] = [];
+  allLoans = [];
   myHeader: string = 'No Record Found';
   myButton: string = 'Click to request';
   myDescription: string = 'No Loan request has been made yet';
@@ -39,7 +39,7 @@ export class AllLoansComponent implements OnInit {
   }
 
   async fetchLoans(){
-    const data = await this.loanService.getLoanRequests(1,1,'',10,1).toPromise();
+    const data = await this.loanService.getLoanRequests(undefined,undefined,1,'',10,1).toPromise();
     if(!data.hasError){
       this.allLoans = data.result;
       console.log('all loans', this.allLoans)
