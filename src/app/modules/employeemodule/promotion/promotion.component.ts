@@ -94,7 +94,7 @@ export class PromotionComponent implements OnInit {
   
   tableActionChecked(event: TableActionEvent) {
     this.promotionBucketList.eligibles[event.name].is_selected = !this.promotionBucketList.eligibles[event.name].is_selected
-    console.log(this.promotionBucketList.eligibles);
+  //  console.log(this.promotionBucketList.eligibles);
   }
   tableBulkActionClicked(event: TableActionEvent) {
     if (event.data) {
