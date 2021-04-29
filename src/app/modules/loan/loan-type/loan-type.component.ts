@@ -29,6 +29,15 @@ export class LoanTypeComponent implements OnInit {
     {name: 'description', title: 'Description'},
   ];
 
+  eligibleGrades = [{key: 'key1', value: 'Opt 1'},
+                     {key: 'key2', value: 'Opt 2'},
+                     {key: 'key3', value: 'Opt 3'},
+                     {key: 'key4', value: 'Opt 4'},
+                     {key: 'key5', value: 'Opt 5'},
+                     {key: 'key6', value: 'Opt 6'},
+                     {key: 'key7', value: 'Opt 7'}];
+
+
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
@@ -109,6 +118,7 @@ export class LoanTypeComponent implements OnInit {
         this.router.navigateByUrl('/loan/loan-type');
         this.fetchAllLoanTypes();
         this.loanTypeModel = new LoanTypeDTO().clone();
+        this.createType = false;
       });
 
     }

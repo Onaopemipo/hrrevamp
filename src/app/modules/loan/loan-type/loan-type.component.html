@@ -40,26 +40,22 @@
                 </div>
               </div>
 
-
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col-sm-9">
                   <label for="">Requires Guarantor? </label>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <nb-checkbox status="basic" name="isGuarantorRequired" #isGuarantorRequired="ngModel"
                   [(ngModel)]="loanTypeModel.requiresGuarantor" (checkedChange)="toggleGuarantor($event)"></nb-checkbox>
                 </div>
               </div>
 
               <div *ngIf="isGuarantor == true" class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Required Number of Guarantor </label>
-                </div>
-
-                <div class="col-sm-6">
                   <input type="number" class="form-control" name="guarantorNo" #guarantorNo="ngModel"
-                  [(ngModel)]="loanTypeModel.requiredNoOfGuarantors" placeholder="Required Number of Guarantor">
+                  [(ngModel)]="loanTypeModel.requiredNoOfGuarantors" placeholder="Required Number">
                   <div *ngIf="guarantorNo.invalid && (guarantorNo.dirty || guarantorNo.touched)" class="error">
                     <div *ngIf="guarantorNo.errors.required">Number of guarantor is required</div>
                   </div>
@@ -67,11 +63,8 @@
               </div>
 
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Ledger Number</label>
-                </div>
-
-                <div class="col-sm-6">
                   <input type="text" class="form-control" name="ledgerNo" #ledgerNo="ngModel"
                   [(ngModel)]="loanTypeModel.ledgerNo" placeholder="Enter Ledger Number">
                   <div *ngIf="ledgerNo.invalid && (ledgerNo.dirty || ledgerNo.touched)" class="error">
@@ -81,11 +74,8 @@
               </div>
 
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Eligible Employees</label>
-                </div>
-
-                <div class="col-sm-6">
                   <select [(ngModel)]="loanTypeModel.eligibleEmploymentStatus" #eligibleEmploymentStatus="ngModel" class="form-control" name="eligibleEmploymentStatus">
                     <option value="">--Select all Eligible Employees--</option>
                     <option *ngFor="let status of eligibilityStatus" [value]="status.id">{{ status.text }}</option>
@@ -98,12 +88,9 @@
               </div>
 
               <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Eligible Grades</label>
-                </div>
-
                 <!-- <nb-card-header>Selected Option: {{ option }}</nb-card-header> -->
-                <div class="col-sm-6">
+                <div class="col">
+                  <label for="">Eligible Grades</label>
                   <!-- <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
                     <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
                     <nb-option value="2">Grade 2</nb-option>
@@ -126,38 +113,30 @@
               </div>
 
               <div *ngIf="option ==='selected'" class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Selected Grades</label>
-                </div>
-
-                <div class="col-sm-6">
-                  <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
+                  <nb-select multiple [(ngModel)]="allGrades" name="allGrades"  placeholder="Select all Eligible Grades">
                     <nb-option [value]="">--Select Grades-- </nb-option>
                     <nb-option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</nb-option>
                   </nb-select>
-                  <!-- <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
-                    <option value="">--Select all Eligible Grades--</option>
-                    <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
-                  </select>
-                  <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
-                    <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
-                  </div> -->
                 </div>
               </div>
 
 
               <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for="">Tenor (Months)</label>
-                </div>
-
-                <div class="col-sm-6" style="display: flex; justify-content: space-between;">
+                <div class="col">
+                  <label for="">Min Tenor (Months)</label>
                   <input class="form-control" type="number" name="minTtenor" #minTtenor="ngModel"
                   [(ngModel)]="loanTypeModel.minTenor" placeholder="Minimum Tenor" required>
                   <div *ngIf="minTtenor.invalid && (minTtenor.dirty || minTtenor.touched)" class="error">
                     <div *ngIf="minTtenor.errors.required">Minimum Tenor is required</div>
                   </div>
-                  <span style="padding: 8px;"></span>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col">
+                  <label for="">Max Tenor (Months)</label>
                   <input class="form-control" type="number" name="maxTenor" #maxTenor="ngModel"
                   [(ngModel)]="loanTypeModel.maxTenor" placeholder="Maximum Tenor" required>
                   <div *ngIf="maxTenor.invalid && (maxTenor.dirty || maxTenor.touched)" class="error">
@@ -169,31 +148,22 @@
 
 
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Minimum Amount</label>
-                </div>
-
-                <div class="col-sm-6">
-                  <app-amount-input [(value)]="loanTypeModel.minAmount" [max]="loanTypeModel.maxAmount"></app-amount-input>
+                  <app-amount-input [(value)]="loanTypeModel.minAmount"></app-amount-input>
                 </div>
               </div>
 
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Maximum Amount</label>
-                </div>
-
-                <div class="col-sm-6">
-                  <app-amount-input [(value)]="loanTypeModel.maxAmount" [min]="loanTypeModel.minAmount"></app-amount-input>
+                  <app-amount-input [(value)]="loanTypeModel.maxAmount"></app-amount-input>
                 </div>
               </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col">
                     <label for="">Interest Type</label>
-                  </div>
-
-                  <div class="col-sm-6">
                     <nb-select placeholder="Select Interest Type" name="interestType" #interestType="ngModel"
                     [(ngModel)]="loanTypeModel.interestType">
                       <nb-option value="1">--Select Interest Rate--</nb-option>
@@ -206,12 +176,9 @@
               </div>
 
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Custom Question</label>
-                </div>
-
-                <div class="col-sm-6">
-                  <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanTypeModel.customQuestion" cols="60" rows="10"></textarea>
+                  <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanTypeModel.customQuestion"></textarea>
                   <!-- <ngx-wysisyg-input [(value)]="loanTypeModel.customQuestion" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                 </div>
 
@@ -219,23 +186,16 @@
 
 
               <div class="form-group row">
-                <div class="col-sm-3">
+                <div class="col">
                   <label for="">Description</label>
-                </div>
-
-                <div class="col-sm-6">
-                  <textarea name="description" #description="ngModel" [(ngModel)]="loanTypeModel.description" cols="60" rows="10"></textarea>
+                  <textarea name="description" #description="ngModel" [(ngModel)]="loanTypeModel.description"></textarea>
                   <!-- <ngx-wysisyg-input [(value)]="loanTypeModel.description" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                 </div>
 
               </div>
 
               <div class="form-group row">
-                <div class="col-sm-3">
-                  <label for=""></label>
-                </div>
-
-                <div class="col-sm-6">
+                 <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
                   <button type="submit" class="btn my-button" (click)="createLoanType()" [disabled]="!loanType.valid" nbButton status="primary">Submit</button>
                   <span style="padding: 8px;"></span>
                   <button type="submit" class="btn cancel-button" nbButton status="primary" outline>Cancel</button>

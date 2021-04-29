@@ -3,20 +3,20 @@
 <ngx-componentsheader *ngIf="planDataCount > 0" pageName='Succession Plans'  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="addPlan()"></ngx-componentsheader>
 <div>
 
-  <nb-card *ngIf="planDataCount < 1">
+  <!-- <nb-card *ngIf="planDataCount < 1">
     <nb-card-body>
       <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
           (buttonClick)="toggleToCreatePlan()"></ngx-default-content>
     </nb-card-body>
-  </nb-card>
+  </nb-card> -->
 
-  <nb-card *ngIf="planDataCount > 0">
+  <!-- <nb-card *ngIf="planDataCount > 0">
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [loading]='loading' [tableColum]="successionTable" [userData]='allPlans' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
-</div>
+</div> -->
 
 
 <!-- <ngx-side-modal [(show)]='newPlan' style="width: 500px;">

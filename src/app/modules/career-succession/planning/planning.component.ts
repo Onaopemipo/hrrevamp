@@ -27,11 +27,11 @@ enum TABLE_ACTION {
 export class PlanningComponent implements OnInit {
 
   successionTable: TableColumn [] = [
-    {name: 'position_name', title: 'position'},
-    {name: ' employee_name', title: 'Employee'},
-    {name: 'department_name', title: 'Department'},
+    {name: 'title', title: 'Title'},
+    {name: ' holderId', title: 'Employee Number'},
+    {name: 'competencyId', title: 'Competency ID'},
     {name: 'unit_name', title: 'Unit'},
-    {name: ' level', title: 'Level'},
+    {name: ' purpose', title: 'Purpose'},
 
   ];
 
@@ -160,6 +160,7 @@ export class PlanningComponent implements OnInit {
     if(!data.hasError){
       this.allPans = data.result;
       this.planDataCount = data.totalRecord;
+      this.loading = false;
       console.log('My plans data here', this.allPans)
     }
   }
