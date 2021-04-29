@@ -128,6 +128,7 @@ export class HiringchecklistComponent implements OnInit {
       console.log( this.OnboardingId )
       this.submitbtnPressed = false
     } else {
+      this.submitbtnPressed = false;
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK')
     }
   }
@@ -150,6 +151,7 @@ export class HiringchecklistComponent implements OnInit {
     this.workData.onboardingId = this.OnboardingId;
     console.log('workdata', this.workData)
     const data = await this.PostService.addUpdateOnboardingWorkData(this.workData).toPromise()
+    this.submitbtnPressed = false;
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
       this.getOfferLetterTemplate(this.OnboardingId);
@@ -180,9 +182,8 @@ export class HiringchecklistComponent implements OnInit {
       if(!data.hasError){
         this.onBoarding = data.result;
         this.UserData = data.result[0].onboardingPersonalInfo;
-        this.workData =  data.result[0].onboardingWorkInformation;
-        this.totalItems = data.totalRecord
-        
+        this.workData =  data.result[0].onboardingWorkInformation ? data.result[0].onboardingWorkInformation : new OnboardingWorkDTO().clone();
+        this.totalItems = data.totalRecord      
   
       }
  })
@@ -247,7 +248,11 @@ export class HiringchecklistComponent implements OnInit {
 
 
   get formvalidation() {
-    if (this.InformationData.firstName && this.InformationData.lastName && this.InformationData.personalEmail && this.InformationData.genderId && this.InformationData.residentialAddress) return true;
+    if (this.InformationData.firstName &&
+      this.InformationData.lastName &&
+      this.InformationData.personalEmail &&
+      this.InformationData.genderId &&
+      this.InformationData.residentialAddress) return true;
     return false
   }
 

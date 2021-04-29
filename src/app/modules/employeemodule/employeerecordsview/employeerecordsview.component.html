@@ -112,7 +112,7 @@
                               <!-- <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)" class="error">
                                 <div *ngIf="dateOfBirth.errors.required">Date of Birth is required</div>
                               </div> -->
-                              <ngx-date></ngx-date>
+                              <ngx-date [(value)]="createNewEmployee.dateOfBirth" name="dateOfBirth" id="dateOfBirth"></ngx-date>
                             </div>
                           </div>
                           <div class="form-group row">
@@ -1156,7 +1156,7 @@
         </form>
       </div>
       <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
-        <ngx-loadable-button [loading]="documentloading" [disabled]="!disableDocumentbtn" (click)="submitDocument(indVDocuments)" >
+        <ngx-loadable-button [loading]="documentloading" [disabled]="files.length < 1" (click)="submitDocument(indVDocuments)" >
           Submit
         </ngx-loadable-button>           
      
