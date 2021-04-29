@@ -178,7 +178,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select martialStatus" name="martialStatusId" #martialStatusId="ngModel"
+                    <select class="form-control" placeholder="Select martialStatus" name="martialStatusId" #martialStatusId="ngModel"
                       [(ngModel)]="UserData.martialStatusId" required>
                       <option value="">--Select Marital Status---</option>
                       <option *ngFor="let stat of Marital" [value]="stat.option_value">{{stat.option_text}}
@@ -195,7 +195,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Religion</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select religion" name="religionId" #religionId="ngModel"
+                    <select class="form-control" placeholder="Select religion" name="religionId" #religionId="ngModel"
                       [(ngModel)]="UserData.religionId" required>
                       <option value="">--Select Marital Status---</option>
                       <option *ngFor="let religion of Religion" [value]="religion.option_value">{{religion.option_text}}
@@ -209,7 +209,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select Gender" name="genderId" #genderId="ngModel"
+                    <select class="form-control" placeholder="Select Gender" name="genderId" #genderId="ngModel"
                       [(ngModel)]="UserData.genderId" required>
                       <option value="">--Select Gender---</option>
                       <option *ngFor="let gender of allGender"[value]="gender.option_value">{{gender.option_text}}
@@ -250,8 +250,12 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Field of Study</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="fieldOfStudy" name="fieldOfStudy"
-                      #fieldOfStudy="ngModel" [(ngModel)]="UserData.fieldOfStudy" required>
+                    <select class="form-control" placeholder="Select Gender"  name="fieldOfStudy"
+                    #fieldOfStudy="ngModel" [(ngModel)]="UserData.fieldOfStudy" required>
+                      <option value="">--Select Field---</option>
+                      <option *ngFor="let c of allCourses" [value]="c.name">{{c.name}}</option>
+                    </select>
+                
                     <div *ngIf="fieldOfStudy.invalid && (fieldOfStudy.dirty || fieldOfStudy.touched)" class="error">
                       <div *ngIf="fieldOfStudy.errors.required">fieldOfStudy is required</div>
                     </div>
@@ -261,10 +265,31 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Degree</label>
                   <div class="col-sm-8">
-                    <input type="text" nbInput fullWidth placeholder="Degree" name="degree" #degree="ngModel"
-                      [(ngModel)]="UserData.degree" required>
+                    <select class="form-control" name="degree" #degree="ngModel"
+                    [(ngModel)]="UserData.degree"  required >
+                      <option value="">--Select Degree--</option>
+                      <option *ngFor="let qt of allQulificationType" [value]="qt.text">{{qt.text}}</option>
+      
+                  </select>
+                   
                     <div *ngIf="degree.invalid && (degree.dirty || degree.touched)" class="error">
                       <div *ngIf="degree.errors.required">Degree is required</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Institution</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="institutionId" #institutionId="ngModel"
+                    [(ngModel)]="UserData.institutionId"  required >
+                      <option value="">--Select Institution--</option>
+                      <option *ngFor="let i of allInstitution" [value]="i.id">{{i.name}}</option>
+      
+                  </select>
+                   
+                    <div *ngIf="institutionId.invalid && (institutionId.dirty || institutionId.touched)" class="error">
+                      <div *ngIf="institutionId.errors.required">Institution is required</div>
                     </div>
                   </div>
                 </div>
@@ -453,7 +478,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select desginationId" name="desginationId" #desginationId="ngModel"
+                    <select class="form-control" placeholder="Select desginationId" name="desginationId" #desginationId="ngModel"
                       [(ngModel)]="workData.desginationId" required>
                       <option value="">--Select Designation---</option>
                       <option *ngFor="let des of Designation" [value]="des.id">{{des.title}}
@@ -485,7 +510,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select Gender" name="departmentId" #departmentId="ngModel"
+                    <select class="form-control" placeholder="Select Gender" name="departmentId" #departmentId="ngModel"
                       [(ngModel)]="workData.departmentId" required>
                       <option value="">--Select Department---</option>
                       <option *ngFor="let dept of allDepartment" [value]="dept.option_value">{{dept.option_text}}
@@ -502,7 +527,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reporting Manager</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select Manager" name="reportingManagerId" #reportingManagerId="ngModel"
+                    <select class="form-control" placeholder="Select Manager" name="reportingManagerId" #reportingManagerId="ngModel"
                     [(ngModel)]="workData.reportingManagerId" required>
                     <option value="">--Select Manager---</option>
                     <option *ngFor="let dept of Manager" [value]="dept.option_value">{{dept.option_text}}
@@ -520,9 +545,13 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Location</label>
                   <div class="col-sm-8">
-
-                    <input type="text" nbInput fullWidth placeholder="Enter location" name="location"
-                      #location="ngModel" [(ngModel)]="workData.location" required>
+                   
+                    <select class="form-control" placeholder="Select Manager" name="location"
+                    #location="ngModel" [(ngModel)]="workData.location" required>
+                    <option value="">--Select Location---</option>
+                    <option *ngFor="let lc of alllocations" [value]="lc.location_name">{{lc.location_name}}</option>
+                  </select>
+            
                     <div *ngIf="location.invalid && (location.dirty ||location.touched)" class="error">
                       <div *ngIf="location.errors.required"> location is required</div>
                     </div>
@@ -560,20 +589,22 @@
           <div *ngSwitchCase="'offerletterPanel'">
 
             <div class="fmContainer">
-              <div style="display: flex; flex-direction: row;">
+            
+
+              <div style="display: flex; flex-direction: row;padding-bottom: 15px;">
                 <div
-                  style="border:  0.800000011920929px solid #CED4DA; padding: 10px;display: flex;align-items: center; border-radius: 5px;">
+                  style="padding: 10px;display: flex;align-items: center; border-radius: 5px;flex: auto;">
                   <img src="assets/icons/smartaceLogo.png" style="width:10.8125rem">
                 </div>
                 <div style="display: flex;align-items: center;padding-left:10px;">
-                  <span class="a-normal" style="cursor: pointer;">Change Logo</span>
+                  <button type="submit" nbButton status="primary" (click)="sendtoofferLetter()">Send Offer</button>
                 </div>
               </div>
-
-              <div [innerHTML]="sanitizewysiwyg">
+              <div [innerHTML]="OfferLetterDTO.offerLetterContent">
               </div>
+             
             </div>
-            <div style="background-color:#EDF1F7 ;padding: 20px;"></div>
+            <!-- <div style="background-color:#EDF1F7 ;padding: 20px;"></div>
             <div class="fmContainer">
               <div style="padding-bottom: 10px;">
                 <p class="listsubheader">Email Message</p>
@@ -604,7 +635,7 @@
                   </div>
                 </div>
               </form>
-            </div>
+            </div> -->
           </div>
 
         </div>

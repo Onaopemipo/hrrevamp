@@ -1,6 +1,6 @@
 import { Certification } from 'app/_services/service-proxies';
 import { map } from 'rxjs/operators';
-import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy } from './../../../_services/service-proxies';
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -11,6 +11,7 @@ import { throwIfAlreadyLoaded } from 'app/@core/module-import-guard';
 
 
 class MyEmployeeDTO extends EmployeeDTO{
+
   get position_name(){
     return this.contracts[0].positionName;
   }
@@ -30,19 +31,19 @@ class MyEmployeeDTO extends EmployeeDTO{
     return this.contracts[0].gradeName;
   }
 
-  get myCertifications(){
-    return this.certifications
-  }
+  // get myCertifications(){
+  //   return this.certifications
+  // }
 
-  get mySkills(){
-    return this.skills[0];
-  }
+  // get mySkills(){
+  //   return this.skills[0];
+  // }
 
-  myCertification
+  // myCertification
 
-  get myQualifications(){
-    return this.qualifications[0] ;
-  }
+  // get myQualifications(){
+  //   return this.qualifications[0] ;
+  // }
 
 
 }
@@ -66,10 +67,12 @@ export class ProfileDetailsComponent implements OnInit {
   employeeContractData: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO
   employeeId: number = 0;
   planStatus: boolean = false;
+  planDetails: CareerSuccessionDTO = new CareerSuccessionDTO;
 
   constructor(private navCtrl: Location,
     private activatedRoute: ActivatedRoute,
-    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy, private allEmployees: FetchAllEmployeesServiceProxy) { }
+    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy,
+    private allEmployees: FetchAllEmployeesServiceProxy, private successionService: GetCareerSuccesionPlanByIdServiceProxy) { }
 
   async ngOnInit() {
     this.employeeData.certifications = [];
@@ -87,6 +90,7 @@ export class ProfileDetailsComponent implements OnInit {
 
     this.fetchAllEmployees();
     this.fetchProfile();
+    this.fetchSinglePlan();
   }
 
   goback() {
@@ -113,5 +117,13 @@ export class ProfileDetailsComponent implements OnInit {
   addPlan() {
     // this.data.location_name
     this.data.skills[0].point
+  }
+
+  async fetchSinglePlan(){
+    const data = await this.successionService.getCareerSuccessionPlanById(this.employeeId).toPromise();
+    if(!data.hasError){
+      this.planDetails = data.result;
+      console.log('Yippeee',this.planDetails)
+    }
   }
 }

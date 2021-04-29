@@ -1,5 +1,4 @@
-<ngx-componentsheader *ngIf="planDataCount < 1" (buttonClick)="addPlan()"
-  pageName='Succession Plans'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="planDataCount < 1" (buttonClick)="addPlan()" pageName='Succession Plans'></ngx-componentsheader>
 <ngx-componentsheader *ngIf="planDataCount > 0" pageName='Succession Plans'  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="addPlan()"></ngx-componentsheader>
 <div>
 
@@ -10,75 +9,13 @@
     </nb-card-body>
   </nb-card> -->
 
-  <!-- <nb-card *ngIf="planDataCount > 0">
+  <nb-card>
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [loading]='loading' [tableColum]="successionTable" [userData]='allPlans' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
-</div> -->
-
-
-<!-- <ngx-side-modal [(show)]='newPlan' style="width: 500px;">
-  <div modal-header>Create Succession Plan</div>
-  <div class="row" modal-body style="padding: 5px;">
-      <div class="form-group row">
-        <div class="col">
-          <label>Title</label>
-          <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.title" required>
-        </div>
-      </div>
-
-      <div class="form-group row">
-       <div class="col">
-        <label>Employee</label>
-        <ngx-employee-master-search></ngx-employee-master-search>
-        <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" placeholder="Onaopemipo Muyiwa" required>
-       </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col">
-         <label>Position</label>
-         <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionName" required>
-        </div>
-       </div>
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Successing Candidate</label>
-         <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successingCandidate" required>
-        </div>
-       </div>
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Readiness to start</label>
-         <select type="text" class="custom-select" name="readiness" required>
-           <option value="">--Select--</option>
-           <option *ngFor="let readiness of readinessToStart" [value]="readiness.name">{{ readiness.title }}</option>
-         </select>
-        </div>
-       </div>
-
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Purpose</label>
-         <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
-          <option value="">--Select--</option>
-          <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
-        </select>
-        </div>
-       </div>
-
-      <div class="form-group row" style="margin-top: 20px">
-       <div class="col">
-        <button nbButton status="primary" (click)="createSuccessionPlan()">Modify</button>
-       </div>
-      </div>
-  </div>
-  </ngx-side-modal> -->
+</div>
 
  <div>
   <ngx-side-modal [(show)]='newPlan' style="width: 600px;">

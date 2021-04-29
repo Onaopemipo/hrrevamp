@@ -95,6 +95,7 @@ export class SuccessionDashboardComponent implements OnInit {
   ngOnInit(): void {
     // this.fetchAllEmployees();
     this.getRetirees();
+    console.log('Heyyyyyyyyyyy')
   }
 
   // async fetchAllEmployees(){

@@ -22,7 +22,7 @@ export class TalentPoolComponent implements OnInit {
   myButton: string = 'Create Talent Pool';
   newPool:boolean = false;
   talentPool: string = '';
-  allPoolData: number = 0;
+  allPoolCounter: number = 0;
   poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
   // poolModel: MyTalentPool = new MyTalentPool;
   allTalentPool: MyTalentPool [] = [];
@@ -42,7 +42,8 @@ export class TalentPoolComponent implements OnInit {
     {name: 'skills', title: 'Skills'},
   ];
   constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService, private router: Router,
-    private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,private commonService: CommonServiceProxy ) { }
+    private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,
+    private commonService: CommonServiceProxy, ) { }
 
   ngOnInit(): void {
     this.getCompetency();
@@ -50,11 +51,11 @@ export class TalentPoolComponent implements OnInit {
   }
 
   addNewPool(){
-  this.newPool = !this.newPool;
+  this.newPool = true;
   }
 
   modalShow(){
-    this.viewPoolModal = !this.viewPoolModal;
+    this.viewPoolModal = true;
   }
 
   // async createTalentPool(){
@@ -78,7 +79,7 @@ export class TalentPoolComponent implements OnInit {
       this.poolModel = new AddTalentMangementDTO().clone();
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss').subscribe(dataAction => {
         if(dataAction == 'closed'){
-          this.router.navigateByUrl('/career-succession/talent-pool');
+          this.router.navigateByUrl('/career-succession/talentpool');
         }
       })
       console.log('Congrats, pool created successfully');
@@ -95,15 +96,16 @@ export class TalentPoolComponent implements OnInit {
     console.log('Here is all pools',data);
     if(!data.hasError){
       this.allTalentPools = data.result;
-      this.allPoolData = data.totalRecord;
+      this.allPoolCounter = data.totalRecord;
       console.log('See my pools', this.allTalentPools)
+      console.log('See my pools', this.allPoolCounter)
     }
   }
 
-  async deleteTalentPool(){
+  async deleteTalentPool(poolId){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Yes').subscribe(data => {
       if(data == 'closed'){
-        this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).subscribe(dataAction => {
+        this.newPoolService.deleteTalentManagmentPool(poolId).subscribe(dataAction => {
           if(!dataAction.hasError){
             this.fetchAllPools();
             this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Pool Deleted Successfully', 'Dismiss')

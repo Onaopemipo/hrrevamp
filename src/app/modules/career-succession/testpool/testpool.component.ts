@@ -88,6 +88,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
 
   onTopActionClick(){
       this.showCandidateModal = true;
+      console.log('Yes clicked')
   }
 
   goback() {
@@ -103,7 +104,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
-        this.route.navigateByUrl('talentpool/'+ this.pageId);
+        this.route.navigateByUrl('career-succession/talentpool');
       })
     }
   }
@@ -136,7 +137,10 @@ onChangeChannel($value){
 
 getSelectedEmployee(event,selectType) {
   console.log(event)
-   if(selectType == 'employee')this.poolEmployee.employeeId = event[0].employeeNumber;
+   if(selectType == 'employee'){
+    this.poolEmployee.employeeId = event[0].employeeNumber;
+    this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
+   }
   //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
 
    console.log(selectType, event)

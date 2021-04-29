@@ -27,16 +27,15 @@ enum TABLE_ACTION {
 export class PlanningComponent implements OnInit {
 
   successionTable: TableColumn [] = [
+    {name: 'holderId', title: 'Employee Number'},
     {name: 'title', title: 'Title'},
-    {name: ' holderId', title: 'Employee Number'},
     {name: 'competencyId', title: 'Competency ID'},
-    {name: 'unit_name', title: 'Unit'},
-    {name: ' purpose', title: 'Purpose'},
+    {name: 'purpose', title: 'Purpose'},
 
   ];
 
   loading = false;
-  allPans: CareerSuccession [] = [];
+  allPlans: CareerSuccession [] = [];
 
   // id: number;
   // position_name: string;
@@ -114,7 +113,7 @@ export class PlanningComponent implements OnInit {
     //     this.router.navigateByUrl('/payroll/editpayment')
     //   }
      if(event.name==TABLE_ACTION.VIEW){
-      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id)
+      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id);
        }
   }
  tableActions: TableAction[] = [
@@ -158,10 +157,10 @@ export class PlanningComponent implements OnInit {
     const data = await this.planService.getCareerSuccessionPlan().toPromise();
     console.log(data.result);
     if(!data.hasError){
-      this.allPans = data.result;
+      this.allPlans = data.result;
       this.planDataCount = data.totalRecord;
       this.loading = false;
-      console.log('My plans data here', this.allPans)
+      console.log('My plans data here', this.allPlans)
     }
   }
 

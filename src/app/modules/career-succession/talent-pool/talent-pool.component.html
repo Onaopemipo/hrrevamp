@@ -1,7 +1,7 @@
-<ngx-componentsheader pageName='Talent Pool' [requiredButton]="rButton" (buttonClick)="addNewPool()"></ngx-componentsheader>
-<div *ngIf="allPoolData < 1" style="background-color: #ffffff;">
-  <nb-card
-    style="min-height: 100vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
+<ngx-componentsheader *ngIf="allPoolCounter < 1" pageName='Talent Pool' [requiredButton]="rButton" (buttonClick)="addNewPool()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="allPoolCounter > 0" pageName='Talent Pool' [requiredButton]="rButton" (buttonClick)="addNewPool()"></ngx-componentsheader>
+<div *ngIf="allPoolCounter < 1" style="background-color: #ffffff;">
+  <nb-card>
     <nb-card-body>
       <div><br>
         <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
@@ -12,7 +12,7 @@
 
 </div>
 
-<div *ngIf="allPoolData > 0">
+<div *ngIf="allPoolCounter > 0 && newPool == true">
   <nb-card>
     <nb-card-body>
       <form>
@@ -29,7 +29,7 @@
         <div class="form-group row mydiv">
           <label for="Description" class="col-sm-3 col-form-label mylabel">Description</label>
             <div class="col-sm-6 col-md-6 col-lg-6">
-              <ngx-wysisyg-input style="padding-left: -10px;" [(value)]="poolModel.description"></ngx-wysisyg-input>
+              <textarea name="description" #description="ngModel" cols="30" rows="10" [(ngModel)]="poolModel.description"></textarea>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
 </div>
 
 
-<div *ngIf="allPoolData > 0">
+<div *ngIf="allPoolCounter > 0 && newPool == false">
       <nb-card *ngFor="let pool of allTalentPools" class="cardTitle">
         <nb-card-header>
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -81,22 +81,22 @@
           <p>{{pool.description}}</p>
         </nb-card-body>
       </nb-card>
-
-
-      <ngx-side-modal *ngFor="let pool of allTalentPool" [(show)]='viewPoolModal' style="width: 500px;">
-        <div modal-header>{{pool.title}}</div>
-        <div modal-body>
-
-        </div>
-
-        <div modal-actions class="d-flex mb-5">
-            <button nbButton status="primary" class="d-flex column">Submit</button>
-            <button nbButton outline status="primary" class="d-flex column">Discard</button>
-            <button class="d-flex column Attach">
-                <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
-                Attach</button>
-
-        </div>
-        <div style="margin-top: 15px;"></div>
-    </ngx-side-modal>
 </div>
+
+<!--
+<ngx-side-modal *ngFor="let pool of allTalentPool" [(show)]='viewPoolModal' style="width: 500px;">
+  <div modal-header>{{pool.title}}</div>
+  <div modal-body>
+
+  </div>
+
+  <div modal-actions class="d-flex mb-5">
+      <button nbButton status="primary" class="d-flex column">Submit</button>
+      <button nbButton outline status="primary" class="d-flex column">Discard</button>
+      <button class="d-flex column Attach">
+          <img class="icon" src="assets/icons/attach.jpg" style="height: 30px; margin-left: 20px;margin-right: 10px;">
+          Attach</button>
+
+  </div>
+  <div style="margin-top: 15px;"></div>
+</ngx-side-modal> -->
