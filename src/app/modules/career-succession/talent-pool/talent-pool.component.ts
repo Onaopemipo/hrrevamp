@@ -99,7 +99,7 @@ export class TalentPoolComponent implements OnInit {
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Dismiss').subscribe(data => {
       // if(data == 'yes')
     });
-    const data = await this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).toPromise();
+   // const data = await this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).toPromise();
   }
 
   async fetchPool(){
