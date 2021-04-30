@@ -12036,7 +12036,7 @@ export class CommonServiceProxy {
      * API for getting Positions that can be use for dropdowns
      * @return Success
      */
-    getCompetency(): Observable<CompetencyIListApiResult> {
+    getCompetency(): Observable<CompetencyRequirmentsDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/Common/GetCompetency";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -12055,14 +12055,14 @@ export class CommonServiceProxy {
                 try {
                     return this.processGetCompetency(<any>response_);
                 } catch (e) {
-                    return <Observable<CompetencyIListApiResult>><any>_observableThrow(e);
+                    return <Observable<CompetencyRequirmentsDTOIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<CompetencyIListApiResult>><any>_observableThrow(response_);
+                return <Observable<CompetencyRequirmentsDTOIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetCompetency(response: HttpResponseBase): Observable<CompetencyIListApiResult> {
+    protected processGetCompetency(response: HttpResponseBase): Observable<CompetencyRequirmentsDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12073,7 +12073,7 @@ export class CommonServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = CompetencyIListApiResult.fromJS(resultData200);
+            result200 = CompetencyRequirmentsDTOIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -12098,7 +12098,7 @@ export class CommonServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<CompetencyIListApiResult>(<any>null);
+        return _observableOf<CompetencyRequirmentsDTOIListApiResult>(<any>null);
     }
 }
 
@@ -20054,79 +20054,6 @@ export class AddUpdateLoanTypeServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    addUpdateLoanRequest(body: ManageLoanRequestDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/AddUpdateLoanType/Add-Update-Loan-Request";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddUpdateLoanRequest(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processAddUpdateLoanRequest(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processAddUpdateLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
-
-    /**
-     * @param body (optional) 
-     * @return Success
-     */
     addUpdateLoanType(body: ManageLoanTypeDTO | undefined): Observable<MessageOutApiResult> {
         let url_ = this.baseUrl + "/api/LoanType/AddUpdateLoanType/Add-Update-LoanType";
         url_ = url_.replace(/[?&]$/, "");
@@ -20666,7 +20593,7 @@ export class GetExpenseSubTypesServiceProxy {
      * @param pageSize (optional) 
      * @return Success
      */
-    getExpenseSubTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseTypeIListApiResult> {
+    getExpenseSubTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseSubTypeIListApiResult> {
         let url_ = this.baseUrl + "/api/ExpenseType/GetExpenseSubTypes/GetExpenseSubTypes?";
         if (iD === null)
             throw new Error("The parameter 'iD' cannot be null.");
@@ -20707,14 +20634,14 @@ export class GetExpenseSubTypesServiceProxy {
                 try {
                     return this.processGetExpenseSubTypes(<any>response_);
                 } catch (e) {
-                    return <Observable<ExpenseTypeIListApiResult>><any>_observableThrow(e);
+                    return <Observable<ExpenseSubTypeIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ExpenseTypeIListApiResult>><any>_observableThrow(response_);
+                return <Observable<ExpenseSubTypeIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetExpenseSubTypes(response: HttpResponseBase): Observable<ExpenseTypeIListApiResult> {
+    protected processGetExpenseSubTypes(response: HttpResponseBase): Observable<ExpenseSubTypeIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -20725,7 +20652,7 @@ export class GetExpenseSubTypesServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ExpenseTypeIListApiResult.fromJS(resultData200);
+            result200 = ExpenseSubTypeIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -20750,7 +20677,7 @@ export class GetExpenseSubTypesServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExpenseTypeIListApiResult>(<any>null);
+        return _observableOf<ExpenseSubTypeIListApiResult>(<any>null);
     }
 }
 
@@ -26267,6 +26194,91 @@ export class GetLeaveYearServiceProxy {
             }));
         }
         return _observableOf<LeaveYearDTOApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class AddUpdateLoanRequestServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateLoanRequest(body: ManageLoanRequestDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/LoanRequest/AddUpdateLoanRequest/Add-Update-Loan-Request";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateLoanRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateLoanRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
     }
 }
 
@@ -52957,6 +52969,11 @@ export interface ICompetencyDTO {
 }
 
 export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
+    description!: string | undefined;
+    competencyTitle!: string | undefined;
+    companyID!: number | undefined;
+    subID!: number | undefined;
+    isActive!: boolean;
     competencyId!: number;
     requirementCategory!: string | undefined;
     skillId!: number | undefined;
@@ -52983,6 +53000,11 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
 
     init(_data?: any) {
         if (_data) {
+            this.description = _data["description"];
+            this.competencyTitle = _data["competencyTitle"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
             this.competencyId = _data["competencyId"];
             this.requirementCategory = _data["requirementCategory"];
             this.skillId = _data["skillId"];
@@ -53009,6 +53031,11 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["description"] = this.description;
+        data["competencyTitle"] = this.competencyTitle;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
         data["competencyId"] = this.competencyId;
         data["requirementCategory"] = this.requirementCategory;
         data["skillId"] = this.skillId;
@@ -53035,6 +53062,11 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
 }
 
 export interface ICompetencyRequirmentsDTO {
+    description: string | undefined;
+    competencyTitle: string | undefined;
+    companyID: number | undefined;
+    subID: number | undefined;
+    isActive: boolean;
     competencyId: number;
     requirementCategory: string | undefined;
     skillId: number | undefined;
@@ -61485,14 +61517,14 @@ export interface IRetirementTypeIListApiResult {
     totalRecord: number;
 }
 
-export class CompetencyIListApiResult implements ICompetencyIListApiResult {
+export class CompetencyRequirmentsDTOIListApiResult implements ICompetencyRequirmentsDTOIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: Competency[] | undefined;
+    result!: CompetencyRequirmentsDTO[] | undefined;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: ICompetencyIListApiResult) {
+    constructor(data?: ICompetencyRequirmentsDTOIListApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -61508,16 +61540,16 @@ export class CompetencyIListApiResult implements ICompetencyIListApiResult {
             if (Array.isArray(_data["result"])) {
                 this.result = [] as any;
                 for (let item of _data["result"])
-                    this.result!.push(Competency.fromJS(item));
+                    this.result!.push(CompetencyRequirmentsDTO.fromJS(item));
             }
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): CompetencyIListApiResult {
+    static fromJS(data: any): CompetencyRequirmentsDTOIListApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new CompetencyIListApiResult();
+        let result = new CompetencyRequirmentsDTOIListApiResult();
         result.init(data);
         return result;
     }
@@ -61536,18 +61568,18 @@ export class CompetencyIListApiResult implements ICompetencyIListApiResult {
         return data; 
     }
 
-    clone(): CompetencyIListApiResult {
+    clone(): CompetencyRequirmentsDTOIListApiResult {
         const json = this.toJSON();
-        let result = new CompetencyIListApiResult();
+        let result = new CompetencyRequirmentsDTOIListApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface ICompetencyIListApiResult {
+export interface ICompetencyRequirmentsDTOIListApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: Competency[] | undefined;
+    result: CompetencyRequirmentsDTO[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -70054,6 +70086,73 @@ export interface IExpenseTypeIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: ExpenseType[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ExpenseSubTypeIListApiResult implements IExpenseSubTypeIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: ExpenseSubType[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IExpenseSubTypeIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(ExpenseSubType.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): ExpenseSubTypeIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExpenseSubTypeIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): ExpenseSubTypeIListApiResult {
+        const json = this.toJSON();
+        let result = new ExpenseSubTypeIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExpenseSubTypeIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: ExpenseSubType[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
