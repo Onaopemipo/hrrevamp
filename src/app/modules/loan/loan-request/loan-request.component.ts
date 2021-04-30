@@ -3,7 +3,7 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj } from './../../../_services/service-proxies';
+import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj, ManageLoanRequestDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/_services/authentication.service';
 
@@ -35,7 +35,7 @@ export class LoanRequestComponent implements OnInit {
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
 
-  loanModel:any;
+  loanModel: ManageLoanRequestDTO = new ManageLoanRequestDTO().clone();
   loanRequest: any;
 
   selectedCase: string = 'request';
@@ -90,6 +90,7 @@ export class LoanRequestComponent implements OnInit {
     this.getInterestRate();
     this.fetchAllLoanTypes();
     this.getAllLoans();
+    this.getLoggedInUser();
 
   }
 
@@ -117,7 +118,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async makeLoanRequest(){
-  this.loanModel.loggedForEmployeeId = this.user.employee_number;
+  this.loanModel.loggedForEmployeeId = this.user.employee_id;
   const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
@@ -198,7 +199,7 @@ export class LoanRequestComponent implements OnInit {
     console.log(event)
      if(selectType == 'employee'){
       this.loanModel.employeeNo = event[0].employeeNumber;
-      this.loanModel.employeeName = event[0].firstName +''+ event[0].firstName;
+      this.loanModel.employeeName = event[0].firstName +' '+ event[0].firstName;
      }
      console.log(selectType, event)
   }
