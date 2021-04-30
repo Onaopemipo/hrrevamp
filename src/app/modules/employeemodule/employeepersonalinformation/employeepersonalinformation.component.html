@@ -1,13 +1,40 @@
 <ngx-componentsheader [pageName]="title">
 </ngx-componentsheader>
 
-<div class="row">
+<nb-card *ngIf="noOnbordingOfferString">
+  <nb-card-body class="retire">
+      <div class="container">
+        <div style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+          <img src="assets/icons/warning.jpg" alt="" style="margin-top: 1.9rem; height: 85px;">
+          <div style="margin-top: 2rem;margin-bottom: 1.5rem;">
+              <p style="font-weight: bolder; font-size: large; ">Warning !</p>
+          </div>
+          
+          <div style="margin-top: 1rem;text-align: center;">
+            <p>
+              {{noOnbordingOfferString}}
+
+            </p>
+          
+        </div>
+        </div>
+        
+   
+      </div>
+
+
+  </nb-card-body>
+</nb-card>
+
+
+
+<div class="row" *ngIf="!noOnbordingOfferString">
   <div class="col-md-4 col-xxl-4">
     <nb-card>
       <nb-card-body style="padding: 1.5rem 1rem 0 1rem !important;">
         <div class="fmContainer">
           <div style="padding-bottom: 0;">
-            <p class="header6-medium" style="margin-bottom: 1rem !important;">Hiring Checklist</p>
+            <!-- <p class="header6-medium" style="margin-bottom: 1rem !important;">Hiring Checklist</p> -->
           </div>
 
 
@@ -43,10 +70,10 @@
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
               <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
               <div>
-                <nb-select selected="1" status="primary">
+                <!-- <nb-select selected="1" status="primary">
                   <nb-option value="1">Actions</nb-option>
                   <nb-option value="2">Option 2</nb-option>
-                </nb-select>
+                </nb-select> -->
               </div>
             </div>
 
@@ -113,7 +140,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Marital Status</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select martialStatus" name="martialStatusId" #martialStatusId="ngModel"
+                    <select  class="form-control" placeholder="Select martialStatus" name="martialStatusId" #martialStatusId="ngModel"
                       [(ngModel)]="UserData.martialStatusId" required>
                       <option value="">--Select Marital Status---</option>
                       <option *ngFor="let stat of Marital" [value]="stat.option_value">{{stat.option_text}}
@@ -130,7 +157,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Religion</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select religion" name="religionId" #religionId="ngModel"
+                    <select  class="form-control" placeholder="Select religion" name="religionId" #religionId="ngModel"
                       [(ngModel)]="UserData.religionId" required>
                       <option value="">--Select Marital Status---</option>
                       <option *ngFor="let religion of Religion" [value]="religion.option_value">{{religion.option_text}}
@@ -144,7 +171,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Gender</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select Gender" name="genderId" #genderId="ngModel"
+                    <select  class="form-control" placeholder="Select Gender" name="genderId" #genderId="ngModel"
                       [(ngModel)]="UserData.genderId" required>
                       <option value="">--Select Gender---</option>
                       <option *ngFor="let gender of Gender" [value]="gender.option_value">{{gender.option_text}}
@@ -236,7 +263,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Institution</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select institution" name="institutionId" #institutionId="ngModel"
+                    <select  class="form-control" placeholder="Select institution" name="institutionId" #institutionId="ngModel"
                       [(ngModel)]="UserData.institutionId" required>
                       <option value="">--Select Institution---</option>
                       <option *ngFor="let institute of Institution" [value]="institute.id">{{institute.name}}
@@ -319,10 +346,10 @@
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
               <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
               <div>
-                <nb-select selected="1" status="primary">
+                <!-- <nb-select selected="1" status="primary">
                   <nb-option value="1">Actions</nb-option>
                   <nb-option value="2">Option 2</nb-option>
-                </nb-select>
+                </nb-select> -->
               </div>
             </div>
 
@@ -393,7 +420,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Designation</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select desginationId" name="desginationId" #desginationId="ngModel"
+                    <select class="form-control" placeholder="Select desginationId" name="desginationId" #desginationId="ngModel"
                       [(ngModel)]="workData.desginationId" required>
                       <option value="">--Select Designation---</option>
                       <option *ngFor="let des of Designation" [value]="des.id">{{des.title}}
@@ -424,7 +451,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Department</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select Gender" name="departmentId" #departmentId="ngModel"
+                    <select class="form-control" placeholder="Select Gender" name="departmentId" #departmentId="ngModel"
                       [(ngModel)]="workData.departmentId" required>
                       <option value="">--Select Department---</option>
                       <option *ngFor="let dept of allDepartment" [value]="dept.option_value">{{dept.option_text}}
@@ -497,10 +524,10 @@
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
               <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
               <div>
-                <nb-select selected="1" status="primary">
+                <!-- <nb-select selected="1" status="primary">
                   <nb-option value="1">Actions</nb-option>
                   <nb-option value="2">Option 2</nb-option>
-                </nb-select>
+                </nb-select> -->
               </div>
             </div>
 
@@ -513,7 +540,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Bank Name</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select institution" name="bankNameId" #bankNameId="ngModel"
+                    <select class="form-control" placeholder="Select institution" name="bankNameId" #bankNameId="ngModel"
                       [(ngModel)]="paymentData.bankNameId" required>
                       <option value="">--Select Bank---</option>
                       <option *ngFor="let bank of BankName" [value]="bank.option_value">{{bank.option_text}}
@@ -566,7 +593,7 @@
                 <div class="form-group row">
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Account Type</label>
                   <div class="col-sm-8">
-                    <select placeholder="Select institution" name="accountTypeId" #accountTypeId="ngModel"
+                    <select class="form-control" placeholder="Select institution" name="accountTypeId" #accountTypeId="ngModel"
                       [(ngModel)]=" paymentData.accountTypeId" required>
                       <option value="">--Select Account Type---</option>
                       <option *ngFor="let type of BankType" [value]="type.id">{{type.text}}
@@ -736,7 +763,7 @@
                   <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Country</label>
                   <div class="col-sm-8">
 
-                    <select placeholder="Select institution" name="countryId" #countryId="ngModel"
+                    <select class="form-control" placeholder="Select institution" name="countryId" #countryId="ngModel"
                       [(ngModel)]=" taxData.countryId" required>
                       <option value="">--Select country---</option>
                       <option *ngFor="let country of countries" [value]="country.code">{{country.name}}
