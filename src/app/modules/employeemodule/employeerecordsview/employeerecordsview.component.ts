@@ -953,6 +953,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
       if (!data.hasError) {
         this.createNewEmployee = data.result;
+        console.log(this.createNewEmployee)
         this.createNewEmployee.nexkOfKin = this.createNewEmployee.nexkOfKin? this.createNewEmployee.nexkOfKin : new NextOfKin().clone();
       }
     });
@@ -1474,6 +1475,13 @@ async  getAllfilestypes() {
     })
   }
   ngOnInit(): void {
+    this.activatedroute.queryParams.subscribe(data => {
+      if (data) {
+        if (data.employee_id) {
+          this.getEmployeebyId(data.employee_id);
+        }
+      }
+    })
     this.createNewEmployee.documents = [];
     this.createNewEmployee.qualifications = [];
     this.createNewEmployee.banks = [];
@@ -1512,12 +1520,6 @@ async  getAllfilestypes() {
     this.getallGrade();
     this.getallGradeSteps();
     this.getallSalaryScales();
-    this.activatedroute.queryParams.subscribe(data => {
-      if (data) {
-        if (data.employee_id) {
-          this.getEmployeebyId(data.employee_id);
-        }
-      }
-    })
+
   }
 }

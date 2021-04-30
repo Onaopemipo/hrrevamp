@@ -96,7 +96,7 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="PhoneNumber" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
+                            <label for="phoneNumber" class="label col-sm-4 col-form-label listsubheader">Phone Number</label>
                             <div class="col-sm-8">
                               <input type="text" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel"  [(ngModel)]="createNewEmployee.phoneNumber" placeholder="Phone Number" required>
                               <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
@@ -172,11 +172,11 @@
                           <div class="form-group row">
                             <label for="Religion" class="label col-sm-4 col-form-label listsubheader">Employment Status</label>
                             <div class="col-sm-8">
-                              <select class="form-control" name="employmentStatus" #employmentStatus="ngModel"  [(ngModel)]="createNewEmployee.employmentStatus" placeholder="Religion" required>
+                              <select class="form-control" name="employmentStatusId" #employmentStatusId="ngModel"  [(ngModel)]="createNewEmployee.employmentStatusId" placeholder="Employment Status" required>
                                 <option *ngFor="let employment of employmentStatusValues" [value]="employment.option_value">{{employment.option_text}} </option>
                               </select>
-                              <div *ngIf="employmentStatus.invalid && (employmentStatus.dirty || employmentStatus.touched)" class="error">
-                                <div *ngIf="employmentStatus.errors.required">Employment Status is required</div>
+                              <div *ngIf="employmentStatusId.invalid && (employmentStatusId.dirty || employmentStatusId.touched)" class="error">
+                                <div *ngIf="employmentStatusId.errors.required">Employment Status is required</div>
                               </div>
                             </div>
                           </div>
@@ -195,7 +195,7 @@
                           <div class="form-group row">
                             <label for="personalEmail" class="label col-sm-4 col-form-label listsubheader">Personal Email</label>
                             <div class="col-sm-8">
-                              <input type="email" nbInput fullWidth name="personalEmail" #personalEmail="ngModel"  [(ngModel)]="createNewEmployee.userEmail"  placeholder="Personal Email" required>
+                              <input type="email" nbInput fullWidth name="personalEmail" #personalEmail="ngModel"  [(ngModel)]="createNewEmployee.personalEmail"  placeholder="Personal Email" required>
                               <div *ngIf="personalEmail.invalid && (personalEmail.dirty || personalEmail.touched)" class="error">
                                 <div *ngIf="personalEmail.errors.required">Personal Email is required</div>
                               </div>
