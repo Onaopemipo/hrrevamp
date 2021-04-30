@@ -8,7 +8,8 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
 
 
 enum TOP_ACTIONS {
-  INITIATE_VOLUNTARY_EXIT
+  INITIATE_VOLUNTARY_EXIT,
+  BULK_UPLOAD
 }
 
 enum TABLE_ACTION {
@@ -24,7 +25,8 @@ enum TABLE_ACTION {
 export class EmploymentexitmanagementComponent implements OnInit {
 ExitManagement: string = '';
   topActionButtons = [
-    {name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: '', 'icon': 'plus', outline: false},
+    { name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: '', 'icon': 'plus', outline: false },
+    {name: TOP_ACTIONS.BULK_UPLOAD, label: 'Bulk Upload', 'icon': '', outline: true},
   ];
 
   tableActions: TableAction[] = [  
