@@ -77,6 +77,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
 
   ngOnInit(): void {
     this.pageId = Number(this.router.snapshot.paramMap.get("id"));
+    this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
     this.fetchTypes();
     this.fetchSinglePool();

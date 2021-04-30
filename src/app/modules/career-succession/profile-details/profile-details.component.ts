@@ -65,7 +65,8 @@ export class ProfileDetailsComponent implements OnInit {
 
   employeeData: MyEmployeeDTO = new MyEmployeeDTO;
   employeeContractData: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO
-  employeeId: number = 0;
+  planId: number = 0;
+  employeeId:number = 0;
   planStatus: boolean = false;
   competencyId: number = 0;
   allCompetencies: Competency [] = [];
@@ -86,15 +87,15 @@ export class ProfileDetailsComponent implements OnInit {
     this.employeeData.qualifications = [];
     let subscription: Subscription = null;
     subscription = this.activatedRoute.paramMap.subscribe(params => {
-      this.employeeId = parseInt(params.get('id'));
+      this.planId = parseInt(params.get('id'));
 
       // subscription.unsubscribe();
-      this.employeeService.fetch(this.employeeId).toPromise().then(response => {
-        this.data = response;
-      })
+      // this.employeeService.fetch(this.employeeId).toPromise().then(response => {
+      //   this.data = response;
+      // })
     });
     this.fetchAllEmployees();
-    this.fetchProfile();
+    // this.fetchProfile();
     this.fetchSinglePlan();
     // this.fetchCompetencies();
   }
@@ -103,15 +104,15 @@ export class ProfileDetailsComponent implements OnInit {
     this.navCtrl.back();
   }
 
-  async fetchProfile(){
-    const data = await this.employee.getEmployeeById(this.employeeId).toPromise();
-    if(!data.hasError){
-      this.employeeData = new MyEmployeeDTO(data.result);
-    //  this.employeeData.contracts
-      console.log('My Details', this.employeeData);
-      console.log('My Contract', this.employeeContractData);
-      this.pageLoading = false;
-    }
+fetchProfile(){
+    this.employee.getEmployeeById(this.employeeId).subscribe(data => {
+      if(!data.hasError){
+        this.employeeData = new MyEmployeeDTO(data.result);
+        console.log('My Details', this.employeeData);
+        console.log('My Contract', this.employeeContractData);
+        this.pageLoading = false;
+      }
+    })
   }
 
   async fetchAllEmployees(){
@@ -127,12 +128,14 @@ export class ProfileDetailsComponent implements OnInit {
   }
 
   async fetchSinglePlan(){
-    const data = await this.successionService.getCareerSuccessionPlanById(this.employeeId).toPromise();
+    const data = await this.successionService.getCareerSuccessionPlanById(this.planId).toPromise();
     if(!data.hasError){
       this.planDetails = data.result;
       this.competencyId = data.result.competencyId;
+      this.employeeId = data.result.holderId;
       console.log('Yippeee',this.planDetails);
       console.log('Wowza',data.result.competencyId);
+      this.fetchProfile();
       this.fetchCompetencies();
     }
   }
@@ -146,7 +149,7 @@ export class ProfileDetailsComponent implements OnInit {
           // console.log(this.allCompetencies[i].id)
           if(this.allCompetencies[i].id =  this.competencyId) {
             this.roleCompetency = this.allCompetencies[i];
-            console.log('Finally ooo',this.roleCompetency)
+            console.log('Finally ooo', this.roleCompetency)
           }
           break;
         }

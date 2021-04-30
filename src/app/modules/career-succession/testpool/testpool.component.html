@@ -60,7 +60,7 @@
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Channel" class="col-form-label mylabel">Channel</label>
-                <select class="custom-select" (change)="onChangeChannel($event.target.value)" required>
+                <select class="custom-select" name="source" [(ngModel)]="poolEmployee.source" (change)="onChangeChannel($event.target.value)" required>
                   <option *ngFor="let i of channel"  [value]=i.source>{{i.label}}</option>
                 </select>
               </div>
@@ -140,7 +140,7 @@
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Purpose" class="col-form-label mylabel">Purpose</label>
-                <select class="custom-select" name="planPurpose" #planPurpose="ngModel" [(ngModel)]="purposes">
+                <select class="custom-select" name="planPurpose" #planPurpose="ngModel" [(ngModel)]="poolEmployee.purpose">
                   <option *ngFor="let purpose of purposes" [value]="purpose.value">{{ purpose.label }}</option>
                 </select>
                 <div *ngIf="planPurpose.invalid && (planPurpose.dirty || planPurpose.touched)" class="error">
