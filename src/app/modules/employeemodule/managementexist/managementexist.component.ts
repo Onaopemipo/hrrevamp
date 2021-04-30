@@ -101,6 +101,7 @@ this.getProccessId()
   }
   submitRetirement() {
     this.loading = true;
+    this.selectedEmployee.map(val => { val.dateCreated = new Date(); return val; });
     this.RetirmentBody.employeee = JSON.stringify(this.selectedEmployee);
     this.RetirementService.postRetireee(0, 1, this.RetirmentBody).subscribe(data => {
       this.loading = false;
