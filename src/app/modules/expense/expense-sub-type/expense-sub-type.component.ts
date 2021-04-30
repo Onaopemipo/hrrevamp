@@ -39,8 +39,8 @@ export class ExpenseSubTypeComponent extends AssetBaseComponent<any, any>{
       {name: 'ledgerNo', label: 'Title', type: FORM_TYPES.text},
       {name: 'code', label: 'Code', type: FORM_TYPES.text},
       {name: 'referenceId', label: 'Reference ID', type: FORM_TYPES.text},
-      {name: 'budgetedAmount', label: 'BAN', type: FORM_TYPES.amount},
-      {name: 'currentAmount', label: 'Close Ended', type: FORM_TYPES.amount},
+      {name: 'budgetedAmount', label: 'Budget Amount', type: FORM_TYPES.amount},
+      {name: 'currentAmount', label: 'Current Amount', type: FORM_TYPES.amount},
     ]
   };
   getFormConfig(): FormConfig {

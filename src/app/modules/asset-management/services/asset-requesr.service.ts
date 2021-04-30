@@ -39,14 +39,15 @@ export class AssetRequesrService extends AssetBaseService<MyAssetRequest, any> {
     return new MyAssetRequest();
   }
   list(filter: any): Observable<ListResult<MyAssetRequest>> {
-    console.log('aaa');
-    return this.list_api(filter).pipe(map(res => {
-      console.log(res);
-      return {
-        data: res.result.map(obj => this.toData(obj)),
-        length: res.totalCount,
-      };
-    }));
+    // console.log('aaa');
+    // return this.list_api(filter).pipe(map(res => {
+    //   console.log(res);
+    //   return {
+    //     data: res.result.map(obj => this.toData(obj)),
+    //     length: res.totalCount,
+    //   };
+    // }));
+    throw('');
   }
   fetch(id: number) {
     throw new Error('Method not implemented.');

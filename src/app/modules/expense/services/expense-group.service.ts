@@ -291,13 +291,11 @@ export class ExpenseSubTypeService extends AssetBaseService<MyExpenseSubType, an
   list_api(filter: any) {
     return this.list_api_service.getExpenseSubTypes(0, '', '', '', '', '', 1, 10);
   }
-  toData(obj: ExpenseTypeService): MyExpenseSubType {
+  toData(obj: ExpenseType): MyExpenseSubType {
     return new MyExpenseSubType();
   }
   list(filter: any): Observable<ListResult<MyExpenseSubType>> {
-    console.log('aaa');
     return this.list_api(filter).pipe(map(res => {
-      console.log(res);
       return {
         data: res.result.map(obj => this.toData(obj)),
         length: res.totalCount,
