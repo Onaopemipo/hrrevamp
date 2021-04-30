@@ -1,10 +1,11 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO } from './../../../_services/service-proxies';
+import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj } from './../../../_services/service-proxies';
 import { MyTalentPoolEmployee, TalentPoolService, MyTalentPoolRequirement, MyTalentPool, TalentPoolRequirementTypes } from './../services/talent-pool.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 @Component({
   selector: 'ngx-testpool',
@@ -63,14 +64,16 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
  employeeCounter: number = 0;
  pageTitle: string = '';
  pageId:number = 0;
- poolRecords: AddTalentMangementDTO [] = [];
+ user: IVwUserObj;
+ poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
 ]
   constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,
     private alertMe: AlertserviceService,  private navCtrl: Location, private route: Router,
-    private talentPool: TalentManagementServiceProxy) { }
+    private talentPool: TalentManagementServiceProxy,
+    public authServ: AuthenticationService) { }
 
   ngOnInit(): void {
     this.pageId = Number(this.router.snapshot.paramMap.get("id"));
@@ -80,11 +83,23 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
 
   }
 
-
   async fetchTypes(){
    this.poolTypes = await this.poolservice.getRequirementTypes().toPromise();
    console.log('Hey Boss',this.poolTypes)
   }
+
+
+  async getLoggedInUser(){
+    this.authServ.getuser().then(async (users: IVwUserObj[])=> {
+      if (users) {
+        if (users.length > 0) {
+          this.user = users[0];
+  }
+  }
+  })
+
+  }
+
 
   onTopActionClick(){
       this.showCandidateModal = true;
@@ -114,7 +129,7 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     console.log('Here is the data',data.result)
     if(!data.hasError){
       this.poolRecords = data.result;
-      // this.pageTitle = this.poolRecords.title;
+      this.pageTitle = this.poolRecords.title;
       console.log('Single Record', this.poolRecords)
       this.loading = false;
     }

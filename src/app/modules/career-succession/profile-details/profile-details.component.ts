@@ -1,4 +1,4 @@
-import { Certification } from 'app/_services/service-proxies';
+import { Certification, CommonServiceProxy, Competency } from 'app/_services/service-proxies';
 import { map } from 'rxjs/operators';
 import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
@@ -67,12 +67,18 @@ export class ProfileDetailsComponent implements OnInit {
   employeeContractData: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO
   employeeId: number = 0;
   planStatus: boolean = false;
+  competencyId: number = 0;
+  allCompetencies: Competency [] = [];
+  roleCompetency: Competency = new Competency;
   planDetails: CareerSuccessionDTO = new CareerSuccessionDTO;
+  pageLoading:boolean = true;
 
   constructor(private navCtrl: Location,
     private activatedRoute: ActivatedRoute,
     private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy,
-    private allEmployees: FetchAllEmployeesServiceProxy, private successionService: GetCareerSuccesionPlanByIdServiceProxy) { }
+    private allEmployees: FetchAllEmployeesServiceProxy,
+    private successionService: GetCareerSuccesionPlanByIdServiceProxy,
+    private commonService: CommonServiceProxy) { }
 
   async ngOnInit() {
     this.employeeData.certifications = [];
@@ -87,10 +93,10 @@ export class ProfileDetailsComponent implements OnInit {
         this.data = response;
       })
     });
-
     this.fetchAllEmployees();
     this.fetchProfile();
     this.fetchSinglePlan();
+    // this.fetchCompetencies();
   }
 
   goback() {
@@ -104,6 +110,7 @@ export class ProfileDetailsComponent implements OnInit {
     //  this.employeeData.contracts
       console.log('My Details', this.employeeData);
       console.log('My Contract', this.employeeContractData);
+      this.pageLoading = false;
     }
   }
 
@@ -123,7 +130,29 @@ export class ProfileDetailsComponent implements OnInit {
     const data = await this.successionService.getCareerSuccessionPlanById(this.employeeId).toPromise();
     if(!data.hasError){
       this.planDetails = data.result;
-      console.log('Yippeee',this.planDetails)
+      this.competencyId = data.result.competencyId;
+      console.log('Yippeee',this.planDetails);
+      console.log('Wowza',data.result.competencyId);
+      this.fetchCompetencies();
     }
+  }
+
+  fetchCompetencies(){
+    this.commonService.getCompetency().subscribe(data => {
+      if(!data.hasError){
+        this.allCompetencies = data.result;
+        let counter = data.totalRecord;
+        for(let i=0; i< counter; i++){
+          // console.log(this.allCompetencies[i].id)
+          if(this.allCompetencies[i].id =  this.competencyId) {
+            this.roleCompetency = this.allCompetencies[i];
+            console.log('Finally ooo',this.roleCompetency)
+          }
+          break;
+        }
+        console.log('Here is the competence',this.roleCompetency)
+      }
+    })
+
   }
 }

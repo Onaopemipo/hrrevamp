@@ -1,6 +1,7 @@
+import { NgForm } from '@angular/forms';
 import { CommonServiceProxy, Competency } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -15,6 +16,7 @@ enum TOP_ACTIONS {
 }
 enum TABLE_ACTION {
   VIEW = '1',
+  DELETE = '2',
   EDIT = '3'
 }
 
@@ -71,7 +73,7 @@ export class PlanningComponent implements OnInit {
   allPurposes = [
     {name: 'retirement', title: 'Retirement'},
     {name: 'firing', title: 'Firing'},
-    {name: 'position', title: 'Change of Position'},
+    {name: 'changeofposition', title: 'Change of Position'},
     {name: 'exit', title: 'Exit'},
   ]
 
@@ -81,6 +83,7 @@ export class PlanningComponent implements OnInit {
 
   ];
 
+  planForm: NgForm;
   myPlanHeader: string = 'Nothing to see';
   myPlanDesc: string = 'No succession plan has been set up, click the button below to add one';
   myButton: string = 'Add New Plan';
@@ -102,22 +105,36 @@ export class PlanningComponent implements OnInit {
     private succession: CareerSuccessionServiceProxy,
     private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy,
+    private deleteService: DeleteSuccesionPlanServiceProxy,
+
+
 
   ) { }
 
   tableActionClicked(event: TableActionEvent){
-    // if(event.name==TABLE_ACTION.DELETE){
-    //   this.showdeleteModal = true
-    //   }
-    //   if(event.name==TABLE_ACTION.EDIT){
-    //     this.router.navigateByUrl('/payroll/editpayment')
-    //   }
-     if(event.name==TABLE_ACTION.VIEW){
+    if(event.name==TABLE_ACTION.DELETE){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to Delete this plan?', 'Yes').subscribe(dataAction => {
+        if(dataAction){
+          this.deleteService.deleteCareerSuccessionPlan(event.data.id).subscribe(data => {
+            if(!data.hasError){
+              this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Succession plan has been deleted', 'Dismiss').subscribe(resp => {
+                if(resp) this.router.navigateByUrl('career-succession/planning');
+              })
+            }
+          })
+        }
+      })
+      }
+     else if(event.name==TABLE_ACTION.EDIT){
+        this.router.navigateByUrl('/payroll/editpayment')
+      }
+     else if(event.name==TABLE_ACTION.VIEW){
       this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id);
        }
   }
  tableActions: TableAction[] = [
   {name: TABLE_ACTION.VIEW, label: 'View'},
+  {name: TABLE_ACTION.DELETE, label: 'Delete'},
   {name: TABLE_ACTION.EDIT, label: 'Edit'},
 
 ]
@@ -136,13 +153,17 @@ export class PlanningComponent implements OnInit {
     this.navCtrl.back();
   }
 
-  toggleToCreatePlan(){
-    this.newPlan = !this.newPlan
+  // toggleToCreatePlan(){
+  //   this.newPlan = true;
 
-  }
+  // }
 
   addPlan(){
-    // this.newPlan = !this.newPlan;
+    this.newPlan = true;
+  }
+
+  cancelPlan(){
+    this.newPlan = false;
   }
 
   async fetchCompetencies(){
@@ -168,8 +189,10 @@ export class PlanningComponent implements OnInit {
     const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Plan created successfully', 'Dismiss').subscribe(dataAction => {
-        if(dataAction == 'closed'){
+        if(dataAction){
           this.fetchAllPlans();
+          this.router.navigateByUrl('career-succession/planning');
+          this.newPlan = true;
         }
       })
     }
@@ -188,7 +211,7 @@ export class PlanningComponent implements OnInit {
 
     getSuccessingCandidate(event,selectType) {
       console.log(event)
-       if(selectType == 'employee')this.newSuccessionPlan.holderId = event[0].employeeNumber;
+       if(selectType == 'employee')this.newSuccessionPlan.stringSuccessionEmployee = event[0].employeeNumber;
       //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
 
        console.log(selectType, event)

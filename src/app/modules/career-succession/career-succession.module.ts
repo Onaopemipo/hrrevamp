@@ -1,4 +1,4 @@
-import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy, GetCareerSuccesionPlanByIdServiceProxy } from './../../_services/service-proxies';
+import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, DeleteSuccesionPlanServiceProxy } from './../../_services/service-proxies';
 import { GetAllDepartmentsServiceProxy, CommonServiceProxy, RetirementServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -29,6 +29,7 @@ import { SuccessionPlanService } from './services/succession-plan.service';
 import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
 import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
 import { NewCompetencyComponent } from './new-competency/new-competency.component';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 
 @NgModule({
@@ -70,6 +71,8 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     CompetencyServiceProxy,
     RetirementServiceProxy,
     GetCareerSuccesionPlanByIdServiceProxy,
+    DeleteSuccesionPlanServiceProxy,
+    AuthenticationService
   ],
   imports: [
     CommonModule,
