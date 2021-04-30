@@ -26,7 +26,7 @@ export class GetTokenServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     getToken(body: UserLoginDTO | undefined): Observable<VwUserObjApiResult> {
@@ -111,7 +111,7 @@ export class ValidateServiceProxy {
     }
 
     /**
-     * @param key_token (optional)
+     * @param key_token (optional) 
      * @return Success
      */
     validate(key_token: string | null | undefined): Observable<VwUserObjApiResult> {
@@ -194,7 +194,7 @@ export class ForgotPasswordServiceProxy {
     }
 
     /**
-     * @param email (optional)
+     * @param email (optional) 
      * @return Success
      */
     forgotPassword(email: string | null | undefined): Observable<MessageOutApiResult> {
@@ -277,7 +277,7 @@ export class ResetPasswordServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     resetPassword(body: ResestPasswordDTO | undefined): Observable<MessageOutApiResult> {
@@ -362,8 +362,8 @@ export class ConfirmEmailServiceProxy {
     }
 
     /**
-     * @param userId (optional)
-     * @param token (optional)
+     * @param userId (optional) 
+     * @param token (optional) 
      * @return Success
      */
     confirmEmail(userId: string | null | undefined, token: string | null | undefined): Observable<VwUserObjApiResult> {
@@ -448,11 +448,11 @@ export class FetchActivityLogServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param moduleName (optional)
-     * @param operationType (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param id (optional) 
+     * @param moduleName (optional) 
+     * @param operationType (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getActivityLog(id: number | undefined, moduleName: string | null | undefined, operationType: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ActivityLogIListApiResult> {
@@ -549,7 +549,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateIAnnouncementType(body: AnnouncementTypeDto | undefined): Observable<MessageOutApiResult> {
@@ -622,7 +622,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateAnnouncement(body: AnnouncementDto | undefined): Observable<MessageOutApiResult> {
@@ -696,7 +696,7 @@ export class PostServiceProxy {
 
     /**
      * this method is used to create and edit leave type. Note all fields are required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createLeaveType(body: LeaveTypeCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -769,7 +769,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingPersonnalData(body: OnboardingPersonalDTO | undefined): Observable<MessageOutApiResult> {
@@ -842,7 +842,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingPaymentData(body: OnboardingBankDTO | undefined): Observable<MessageOutApiResult> {
@@ -915,7 +915,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingWorkData(body: OnboardingWorkDTO | undefined): Observable<MessageOutApiResult> {
@@ -988,7 +988,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingTaxData(body: OnboardingTaxDTO | undefined): Observable<MessageOutApiResult> {
@@ -1061,13 +1061,13 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param companyId (optional)
-     * @param subID (optional)
-     * @param onboardingId (optional)
-     * @param createdById (optional)
-     * @param userId (optional)
-     * @param tempRef (optional)
+     * @param iD (optional) 
+     * @param companyId (optional) 
+     * @param subID (optional) 
+     * @param onboardingId (optional) 
+     * @param createdById (optional) 
+     * @param userId (optional) 
+     * @param tempRef (optional) 
      * @return Success
      */
     addUpdateOnboardingDocummentData(iD: number | undefined, companyId: number | undefined, subID: number | undefined, onboardingId: number | undefined, createdById: number | undefined, userId: number | undefined, tempRef: string | null | undefined): Observable<MessageOutApiResult> {
@@ -1165,7 +1165,7 @@ export class PostServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOnboardingMedicalDisclosureData(body: OnboardingMedicalDisclosureDTO | undefined): Observable<MessageOutApiResult> {
@@ -1250,10 +1250,10 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param catalog (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param catalog (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAnnouncementTypeByCriteria(iD: number | undefined, catalog: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<AnnouncementTypeListApiResult> {
@@ -1336,12 +1336,12 @@ export class GetAnnouncementTypeByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param announcementMessage (optional)
-     * @param catalog (optional)
-     * @param departmentId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param announcementMessage (optional) 
+     * @param catalog (optional) 
+     * @param departmentId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAnnouncementByCriteria(iD: number | undefined, announcementMessage: string | null | undefined, catalog: string | null | undefined, departmentId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<AnnouncementListApiResult> {
@@ -1443,7 +1443,7 @@ export class SubordinateAppraisalsServiceProxy {
 
     /**
      * API for retrieving all Current Appraisal for Review by Line-Managers
-     * @param cycleId (optional)
+     * @param cycleId (optional) 
      * @return Success
      */
     subordinateAppraisalLists(cycleId: number | undefined): Observable<AppraisalReviewerListDTOIListApiResult> {
@@ -1529,10 +1529,10 @@ export class GetEmployeePerformanceReviewServiceProxy {
 
     /**
      * API for retrieving Current Employees Appraisal for Review by Reviewer
-     * @param reviewerContractId (optional)
-     * @param employeeContractId (optional)
-     * @param cycleId (optional)
-     * @param kraId (optional)
+     * @param reviewerContractId (optional) 
+     * @param employeeContractId (optional) 
+     * @param cycleId (optional) 
+     * @param kraId (optional) 
      * @return Success
      */
     getEmployeePerformanceReview(reviewerContractId: number | undefined, employeeContractId: number | undefined, cycleId: number | undefined, kraId: number | undefined): Observable<KpiReviewDTOApiResult> {
@@ -1631,7 +1631,7 @@ export class SubmitEmployeeAppraisalReviewServiceProxy {
     /**
      * API for submitting Employee's Appraisal Performance review for
     the KPIs under the assigned KRA by Reviewer
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     submitEmployeeAppraisalReview(body: PerformanceReviewDTO | undefined): Observable<MessageOutApiResult> {
@@ -1717,10 +1717,10 @@ export class EmployeePerformanceReviewServiceProxy {
 
     /**
      * API for retrieving Current Appraisal for Review by Employee
-     * @param reviewerContractId (optional)
-     * @param employeeContractId (optional)
-     * @param cycleId (optional)
-     * @param kraId (optional)
+     * @param reviewerContractId (optional) 
+     * @param employeeContractId (optional) 
+     * @param cycleId (optional) 
+     * @param kraId (optional) 
      * @return Success
      */
     employeePerformanceReview(reviewerContractId: number | undefined, employeeContractId: number | undefined, cycleId: number | undefined, kraId: number | undefined): Observable<KpiReviewDTOApiResult> {
@@ -1818,7 +1818,7 @@ export class SubmitPerformanceReviewServiceProxy {
 
     /**
      * API for submitting Employee's Performance review for the KPIs under the assigned KRA
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     submitEmployeePerformanceReview(body: PerformanceReviewDTO | undefined): Observable<MessageOutApiResult> {
@@ -1904,7 +1904,7 @@ export class GetEmployeeAppraisalHistoriesServiceProxy {
 
     /**
      * API for retrieving all Past Employee Appraisal Histories
-     * @param cycleId (optional)
+     * @param cycleId (optional) 
      * @return Success
      */
     employeeAppraisalHistories(cycleId: number | undefined): Observable<EmployeeAppraisalHistoryDTOIListApiResult> {
@@ -1990,7 +1990,7 @@ export class FetchApprovalProcessServiceProxy {
 
     /**
      * API for fetching approval processes
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     fetchApprovalProcess(id: number | undefined): Observable<ApprovalProcessListApiResult> {
@@ -2076,8 +2076,8 @@ export class FetchApprovalProcessStepsServiceProxy {
 
     /**
      * API for fetching approval processes steps
-     * @param processId (optional)
-     * @param stepId (optional)
+     * @param processId (optional) 
+     * @param stepId (optional) 
      * @return Success
      */
     fetchApprovalProcessSteps(processId: number | undefined, stepId: number | undefined): Observable<ApprovalStepListApiResult> {
@@ -2167,9 +2167,9 @@ export class FetchPendingItemsServiceProxy {
 
     /**
      * API for fetching my pending approval items
-     * @param processId (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
+     * @param processId (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
      * @return Success
      */
     fetchPendingItems(processId: number | undefined, startDate: Date | null | undefined, endDate: Date | null | undefined): Observable<VwPendingApprovalListApiResult> {
@@ -2259,7 +2259,7 @@ export class SaveApprovalProcessServiceProxy {
 
     /**
      * API for saving and updating an approval process
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     saveApprovalProcess(body: ApprovalProcess | undefined): Observable<MessageOutApiResult> {
@@ -2345,7 +2345,7 @@ export class SaveApprovalProcessStepServiceProxy {
 
     /**
      * API for saving and updating an approval process step
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     saveApprovalProcessStep(body: ApprovalStep | undefined): Observable<MessageOutApiResult> {
@@ -2431,7 +2431,7 @@ export class RemoveApprovalProcessStepServiceProxy {
 
     /**
      * API for removing an approval process step
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     removeApprovalProcessStep(body: ApprovalStep | undefined): Observable<MessageOutApiResult> {
@@ -2516,8 +2516,8 @@ export class FetchApprovalLogViewServiceProxy {
     }
 
     /**
-     * @param processId (optional)
-     * @param itemId (optional)
+     * @param processId (optional) 
+     * @param itemId (optional) 
      * @return Success
      */
     fetchApprovalLogView(processId: number | undefined, itemId: number | undefined): Observable<ApprovalLogViewModelApiResult> {
@@ -2606,7 +2606,7 @@ export class PostApprovalLogServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     postApprovalLog(body: ApprovalLog | undefined): Observable<ApprovalResponseObjApiResult> {
@@ -2691,7 +2691,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetType(body: AssetTypeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -2764,7 +2764,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addDeperciationProfile(body: AssetDeperciationProfileDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -2837,7 +2837,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetSubType(body: AssetSubTypeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -2910,7 +2910,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCatergory(body: AssetCategoryDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -2983,7 +2983,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetStatus(body: AssetStatusDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3056,7 +3056,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetMake(body: AssetMakeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3129,7 +3129,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetModel(body: AssetModelDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3202,7 +3202,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addAsset(body: AssetDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3275,7 +3275,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addAssetRequest(body: AssetRequestDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3348,7 +3348,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assignment(body: AssignmentDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3421,7 +3421,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCallback(body: AssetCallbackDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -3494,7 +3494,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCheckIn(body: AssetcheckInFilter | undefined): Observable<MessageOutIListApiResult> {
@@ -3567,7 +3567,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assetCheckInComfirmation(body: AssetcheckInFilter | undefined): Observable<MessageOutIListApiResult> {
@@ -3640,7 +3640,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateAssetRequest(body: UpdateAssetRequest | undefined): Observable<MessageOutIListApiResult> {
@@ -3713,7 +3713,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteAssetType(body: number | undefined): Observable<MessageOutIListApiResult> {
@@ -3786,7 +3786,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param iD (optional)
+     * @param iD (optional) 
      * @return Success
      */
     deleteAssetSubType(iD: number | undefined): Observable<MessageOutIListApiResult> {
@@ -3859,7 +3859,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteAssetCategory(body: number | undefined): Observable<MessageOutIListApiResult> {
@@ -3932,7 +3932,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteAssetMake(body: AssetMakeDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4005,7 +4005,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteAssetModel(body: AssetModelDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4078,7 +4078,7 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteAssetStatus(body: AssetStatusDTO | undefined): Observable<MessageOutIListApiResult> {
@@ -4151,11 +4151,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getActivateAsset(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -4240,11 +4240,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getDeactivateAsset(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -4329,11 +4329,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetType(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetTypeDTOIListApiResult> {
@@ -4418,9 +4418,9 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param assetTypeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param assetTypeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAssetSubType(assetTypeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<AssetSubTypeDTOIListApiResult> {
@@ -4501,11 +4501,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetCategory(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetCategoryDTOIListApiResult> {
@@ -4590,11 +4590,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetMake(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetMakeDTOIListApiResult> {
@@ -4679,11 +4679,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetModel(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetModelDTOIListApiResult> {
@@ -4768,11 +4768,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetStatus(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetStatusDTOIListApiResult> {
@@ -4857,9 +4857,9 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param assetTypeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param assetTypeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAssetSubTypeByAssetTypeId(assetTypeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<AssetSubTypeDTOIListApiResult> {
@@ -4940,12 +4940,12 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param assetSubTypeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param assetSubTypeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetbyAssetSubtypeId(assetSubTypeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -5034,12 +5034,12 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param assetmakeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param assetmakeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetModelByAssetMakeId(assetmakeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -5128,11 +5128,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getDepreciationProfile(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDeperciationProfileDTOIListApiResult> {
@@ -5217,11 +5217,11 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getActiveassetlist(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -5306,13 +5306,13 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param employeeId (optional)
-     * @param assetId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param employeeId (optional) 
+     * @param assetId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     getAssetByAssigedEmployee(employeeId: number | undefined, assetId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetHistoryDTOIListApiResult> {
@@ -5405,13 +5405,13 @@ export class AssetManagementServiceProxy {
     }
 
     /**
-     * @param assetSubTypeid (optional)
-     * @param assetid (optional)
-     * @param employeeid (optional)
-     * @param status (optional)
-     * @param prioity (optional)
-     * @param expectedusedate (optional)
-     * @param returndate (optional)
+     * @param assetSubTypeid (optional) 
+     * @param assetid (optional) 
+     * @param employeeid (optional) 
+     * @param status (optional) 
+     * @param prioity (optional) 
+     * @param expectedusedate (optional) 
+     * @param returndate (optional) 
      * @return Success
      */
     assetRequest(assetSubTypeid: number | null | undefined, assetid: number | null | undefined, employeeid: number | null | undefined, status: number | null | undefined, prioity: number | null | undefined, expectedusedate: Date | null | undefined, returndate: Date | null | undefined): Observable<AssetRequestDTOListApiResult> {
@@ -5574,7 +5574,7 @@ export class AddUpdateBenefitPlanServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateBenefitPlan(body: BenefitPlanDTO | undefined): Observable<MessageOutApiResult> {
@@ -5659,7 +5659,7 @@ export class DeleteBenefitPlanServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteBenefitPlan(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -5744,10 +5744,10 @@ export class GetBenefitPlanByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param catalog (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param catalog (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getBenefitPlanByCriteria(iD: number | undefined, catalog: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<BenefitPlanListApiResult> {
@@ -5842,7 +5842,7 @@ export class AddUpdateEmployeeCoverageBenefitServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeeCoverageBenefit(body: EmployeeCoverageBenefitDTO | undefined): Observable<MessageOutApiResult> {
@@ -5927,15 +5927,15 @@ export class FetchEmployeeCoverageBenefitServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param coverageName (optional)
-     * @param coveragePlanId (optional)
-     * @param companyID (optional)
-     * @param employeeId (optional)
-     * @param subID (optional)
-     * @param eligibilityTypeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param coverageName (optional) 
+     * @param coveragePlanId (optional) 
+     * @param companyID (optional) 
+     * @param employeeId (optional) 
+     * @param subID (optional) 
+     * @param eligibilityTypeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchEmployeeCoverageBenefit(iD: number | undefined, coverageName: string | null | undefined, coveragePlanId: number | undefined, companyID: number | undefined, employeeId: number | undefined, subID: number | undefined, eligibilityTypeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<EmployeeCoverageListApiResult> {
@@ -6050,7 +6050,7 @@ export class DeleteEmployeeCoverageBenefitServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteEmployeeCoverageBenefit(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -6135,7 +6135,7 @@ export class AddUpdateCoverageServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateCoverage(body: CoveragePlanDTO | undefined): Observable<MessageOutApiResult> {
@@ -6220,12 +6220,12 @@ export class FetchCoveragePlansServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param modifiedDate (optional)
-     * @param coverageName (optional)
-     * @param comapnyId (optional)
+     * @param id (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param modifiedDate (optional) 
+     * @param coverageName (optional) 
+     * @param comapnyId (optional) 
      * @return Success
      */
     fetchCoveragePlans(id: number | undefined, pageNumber: number | undefined, pageSize: number | undefined, modifiedDate: Date | null | undefined, coverageName: string | null | undefined, comapnyId: number | undefined): Observable<CoveragePlanListApiResult> {
@@ -6326,7 +6326,7 @@ export class DeleteCoveragePlansServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteCoveragePlan(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -6411,7 +6411,7 @@ export class AddUpdateEligibilityTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEligibilityType(body: EligibilityTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -6496,10 +6496,10 @@ export class GetEligibilityTypeByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param name (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param name (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getEligibilityTypeByCriteria(iD: number | undefined, name: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<EligibilityTypeListApiResult> {
@@ -6594,7 +6594,7 @@ export class DeleteEligibilityTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteEligibilityType(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -6680,7 +6680,7 @@ export class AddUpdateBudgetServiceProxy {
 
     /**
      * API for add/updating Budget for a particular period
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateBudget(body: ManageBudgetDTO | undefined): Observable<MessageOutApiResult> {
@@ -6847,7 +6847,7 @@ export class FetchBudgetServiceProxy {
 
     /**
      * API for getting Single Budget details by id for CRUD Operation
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getBudget(id: number | undefined): Observable<BudgetDTOApiResult> {
@@ -6933,7 +6933,7 @@ export class DeleteBudgetServiceProxy {
 
     /**
      * API  for Deleting Budget
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteBudget(body: number | undefined): Observable<MessageOutApiResult> {
@@ -7019,7 +7019,7 @@ export class AddUpdateBudgetItemServiceProxy {
 
     /**
      * API for add/updating BudgetItem and it's Allocations
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateBudgetItem(body: ManageBudgetItemDTO | undefined): Observable<MessageOutApiResult> {
@@ -7105,7 +7105,7 @@ export class FetchAllBudgetItemsServiceProxy {
 
     /**
      * API for retrieving All BudgetItems for further CRUD operation
-     * @param budgetId (optional)
+     * @param budgetId (optional) 
      * @return Success
      */
     getAllBudgetItems(budgetId: number | undefined): Observable<BudgetItemDTOIListApiResult> {
@@ -7191,7 +7191,7 @@ export class FetchBudgetItemsServiceProxy {
 
     /**
      * API for getting BudgetItems that can be use for dropdowns
-     * @param budgetId (optional)
+     * @param budgetId (optional) 
      * @return Success
      */
     getBudgetItems(budgetId: number | undefined): Observable<DisbursementBudgetItemIListApiResult> {
@@ -7277,7 +7277,7 @@ export class FetchBudgetItemServiceProxy {
 
     /**
      * API for getting Single Budget details by id for CRUD Operation
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getBudgetItem(id: number | undefined): Observable<BudgetItemDTOApiResult> {
@@ -7363,7 +7363,7 @@ export class DeleteBudgetItemServiceProxy {
 
     /**
      * API  for Deleting BudgetItem
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteBudgetItem(body: number | undefined): Observable<MessageOutApiResult> {
@@ -7449,7 +7449,7 @@ export class BulkMasterServiceProxy {
 
     /**
      * API for downloading Sample Template for Bulk Upload
-     * @param processId (optional)
+     * @param processId (optional) 
      * @return Success
      */
     downloadSampleTemplate(processId: number | undefined): Observable<File> {
@@ -7523,8 +7523,8 @@ export class BulkMasterServiceProxy {
 
     /**
      * API for Bulk uploading
-     * @param processId (optional)
-     * @param bulkFile (optional)
+     * @param processId (optional) 
+     * @param bulkFile (optional) 
      * @return Success
      */
     bulkUpload(processId: number | undefined, bulkFile: FileParameter | null | undefined): Observable<MessageOutApiResult> {
@@ -7605,8 +7605,8 @@ export class BulkMasterServiceProxy {
      * API for Processing Bulk upload (i.e. it does the final submission of the previous bulk upload)
     this will only process the record with Status "Ready" and ignore others
     by supplying "ProcessId and BulkUploadId that was return after uploading."
-     * @param processId (optional)
-     * @param bulkUploadId (optional)
+     * @param processId (optional) 
+     * @param bulkUploadId (optional) 
      * @return Success
      */
     processBulkUpload(processId: number | undefined, bulkUploadId: number | undefined): Observable<MessageOutApiResult> {
@@ -7696,7 +7696,7 @@ export class AddUpdateEmployeetoNineBoxGridServiceProxy {
 
     /**
      * API for adding/updating Employee to ninebox Grid
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeetoNineBoxGrid(body: NineGridBoxDTO | undefined): Observable<MessageOutApiResult> {
@@ -7781,12 +7781,8 @@ export class AddUpdateEmployeetoPlanServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param body (optional)
-=======
      * API for adding/updating Employee to plan
-     * @param body (optional)
->>>>>>> 2f8c0189ba0543292cd64e11ce44c4dd320a8179
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeetoPlan(body: ManagecarreerSuccessor | undefined): Observable<MessageOutApiResult> {
@@ -7872,7 +7868,7 @@ export class AddUpdateEmployeetoNineBoxGridBoxbyAppersialScoreServiceProxy {
 
     /**
      * API for adding/updating Employee to ninebox Grid
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeetoBoxBasedonAppersailScore(body: NineGridBoxDTO | undefined): Observable<MessageOutApiResult> {
@@ -7958,7 +7954,7 @@ export class MoveEmployeeServiceProxy {
 
     /**
      * API for Moving Employee
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     moveEmployee(body: ManageMoveEmployeeFilterDTO | undefined): Observable<MessageOutApiResult> {
@@ -8044,7 +8040,7 @@ export class RemoveEmployeeServiceProxy {
 
     /**
      * API for Remove Employee
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     removeEmployee(body: string | null | undefined): Observable<MessageOutApiResult> {
@@ -8131,8 +8127,8 @@ export class GetEmployeeebyGridBoxServiceProxy {
     /**
      * API to Fetch  Employee by Grid Box.
     Note: all filter are optional
-     * @param gridboxID (optional)
-     * @param departmentId (optional)
+     * @param gridboxID (optional) 
+     * @param departmentId (optional) 
      * @return Success
      */
     getEmployeebyGridBox(gridboxID: number | undefined, departmentId: number | undefined): Observable<NineGridBoxDTOListApiResult> {
@@ -8303,26 +8299,13 @@ export class GetPotentialSuccessorListServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-     * API for adding/updating Employee  to Talent Pool
-     * @param body (optional)
-=======
-     * @param competencyId (optional)
-     * @param holderId (optional)
-     * @param category (optional)
-     * @param categoryType (optional)
-     * @param justification (optional)
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
-=======
      * API to Fetch by potential Successor List.
     Note: all filter are optional
-     * @param competencyId (optional)
-     * @param holderId (optional)
-     * @param category (optional)
-     * @param categoryType (optional)
-     * @param justification (optional)
->>>>>>> 2f8c0189ba0543292cd64e11ce44c4dd320a8179
+     * @param competencyId (optional) 
+     * @param holderId (optional) 
+     * @param category (optional) 
+     * @param categoryType (optional) 
+     * @param justification (optional) 
      * @return Success
      */
     getPotentailSuccessorList(competencyId: number | undefined, holderId: number | undefined, category: string | null | undefined, categoryType: number | undefined, justification: string | null | undefined): Observable<PersonListDTOListApiResult> {
@@ -8419,14 +8402,8 @@ export class AddUpdateEmployeetoTalentPoolServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating Requirments  to Talent Pool
-     * @param talentPoolId (optional)
-     * @param requirements (optional)
-=======
      * API for adding/updating Employee  to Talent Pool
-     * @param body (optional)
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeetoTalentPool(body: EmployeeTalentPoolDTO | undefined): Observable<MessageOutApiResult> {
@@ -8511,14 +8488,9 @@ export class AddUpdateRequirmentstoTalentPoolServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for adding/updating CareerSuccsions
-     * @param body (optional)
-=======
      * API for adding/updating Requirments  to Talent Pool
-     * @param talentPoolId (optional)
-     * @param requirements (optional)
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
+     * @param talentPoolId (optional) 
+     * @param requirements (optional) 
      * @return Success
      */
     addUpdateRequirmentstoTalentPool(talentPoolId: number | undefined, requirements: string | null | undefined): Observable<MessageOutApiResult> {
@@ -8605,13 +8577,8 @@ export class CareerSuccessionServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for Creating  Talent Pool
-     * @param body (optional)
-=======
      * API for adding/updating CareerSuccsions
-     * @param body (optional)
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
+     * @param body (optional) 
      * @return Success
      */
     careerSuccession(body: ManageCareerSuccessionDto | undefined): Observable<MessageOutApiResult> {
@@ -8696,14 +8663,8 @@ export class CareerPoolServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API for  Delete  Employee from Talent Pool
-     * @param talentPoolId (optional)
-     * @param employeeId (optional)
-=======
      * API for Creating  Talent Pool
-     * @param body (optional)
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
+     * @param body (optional) 
      * @return Success
      */
     createPool(body: AddTalentPoolDTO | undefined): Observable<MessageOutApiResult> {
@@ -8789,8 +8750,8 @@ export class DeleteEmployeefromTalentPoolServiceProxy {
 
     /**
      * API for  Delete  Employee from Talent Pool
-     * @param talentPoolId (optional)
-     * @param employeeId (optional)
+     * @param talentPoolId (optional) 
+     * @param employeeId (optional) 
      * @return Success
      */
     deleteEmployeeFromPool(talentPoolId: number | undefined, employeeId: number | undefined): Observable<MessageOutApiResult> {
@@ -8881,64 +8842,64 @@ export class GetTalentPoolServiceProxy {
     /**
      * API to Fetch TalentPools.
     Note: all filter are optional
-     * @param user_id (optional)
-     * @param employee_id (optional)
-     * @param employee_number (optional)
-     * @param employee_contract_id (optional)
-     * @param companyProfile_Id (optional)
-     * @param companyProfile_UserId (optional)
-     * @param companyProfile_RCNo (optional)
-     * @param companyProfile_LogoName (optional)
-     * @param companyProfile_ShortText (optional)
-     * @param companyProfile_FirstName (optional)
-     * @param companyProfile_LastName (optional)
-     * @param companyProfile_Address (optional)
-     * @param companyProfile_DomainName (optional)
-     * @param companyProfile_AuditorEmail (optional)
-     * @param companyProfile_MaxEmployeeCount (optional)
-     * @param companyProfile_SubscriptionPlanId (optional)
-     * @param companyProfile_SubscriptionPlanName (optional)
-     * @param companyProfile_LastBillingDate (optional)
-     * @param companyProfile_LastPaymentDate (optional)
-     * @param companyProfile_LicenseUsage (optional)
-     * @param companyProfile_IsActiveByAdmin (optional)
-     * @param companyProfile_IsTrial (optional)
-     * @param companyProfile_FrequencyId (optional)
-     * @param companyProfile_TempRef (optional)
-     * @param companyProfile_ReferenceNumber (optional)
-     * @param grade_id (optional)
-     * @param confirmation_date (optional)
-     * @param serial_no (optional)
-     * @param first_name (optional)
-     * @param last_name (optional)
-     * @param full_name (optional)
-     * @param other_name (optional)
-     * @param department (optional)
-     * @param department_id (optional)
-     * @param email (optional)
-     * @param phone_number (optional)
-     * @param email_confirmed (optional)
-     * @param session_token (optional)
-     * @param jwt_token (optional)
-     * @param user_token (optional)
-     * @param company_id (optional)
-     * @param licenseUsuage (optional)
-     * @param licenseCount (optional)
-     * @param company_name (optional)
-     * @param sub_id (optional)
-     * @param isAdmin (optional)
-     * @param isSuperAdmin (optional)
-     * @param isTenantAdmin (optional)
-     * @param isActiveBySysOrAdmin (optional)
-     * @param lstPermissions (optional)
-     * @param message (optional)
-     * @param isSuccessful (optional)
-     * @param retId (optional)
-     * @param bulkUploadId (optional)
-     * @param bulkUploadHtmlData (optional)
-     * @param redirectUrl (optional)
-     * @param referenceNumber (optional)
-     * @param errors (optional)
+     * @param user_id (optional) 
+     * @param employee_id (optional) 
+     * @param employee_number (optional) 
+     * @param employee_contract_id (optional) 
+     * @param companyProfile_Id (optional) 
+     * @param companyProfile_UserId (optional) 
+     * @param companyProfile_RCNo (optional) 
+     * @param companyProfile_LogoName (optional) 
+     * @param companyProfile_ShortText (optional) 
+     * @param companyProfile_FirstName (optional) 
+     * @param companyProfile_LastName (optional) 
+     * @param companyProfile_Address (optional) 
+     * @param companyProfile_DomainName (optional) 
+     * @param companyProfile_AuditorEmail (optional) 
+     * @param companyProfile_MaxEmployeeCount (optional) 
+     * @param companyProfile_SubscriptionPlanId (optional) 
+     * @param companyProfile_SubscriptionPlanName (optional) 
+     * @param companyProfile_LastBillingDate (optional) 
+     * @param companyProfile_LastPaymentDate (optional) 
+     * @param companyProfile_LicenseUsage (optional) 
+     * @param companyProfile_IsActiveByAdmin (optional) 
+     * @param companyProfile_IsTrial (optional) 
+     * @param companyProfile_FrequencyId (optional) 
+     * @param companyProfile_TempRef (optional) 
+     * @param companyProfile_ReferenceNumber (optional) 
+     * @param grade_id (optional) 
+     * @param confirmation_date (optional) 
+     * @param serial_no (optional) 
+     * @param first_name (optional) 
+     * @param last_name (optional) 
+     * @param full_name (optional) 
+     * @param other_name (optional) 
+     * @param department (optional) 
+     * @param department_id (optional) 
+     * @param email (optional) 
+     * @param phone_number (optional) 
+     * @param email_confirmed (optional) 
+     * @param session_token (optional) 
+     * @param jwt_token (optional) 
+     * @param user_token (optional) 
+     * @param company_id (optional) 
+     * @param licenseUsuage (optional) 
+     * @param licenseCount (optional) 
+     * @param company_name (optional) 
+     * @param sub_id (optional) 
+     * @param isAdmin (optional) 
+     * @param isSuperAdmin (optional) 
+     * @param isTenantAdmin (optional) 
+     * @param isActiveBySysOrAdmin (optional) 
+     * @param lstPermissions (optional) 
+     * @param message (optional) 
+     * @param isSuccessful (optional) 
+     * @param retId (optional) 
+     * @param bulkUploadId (optional) 
+     * @param bulkUploadHtmlData (optional) 
+     * @param redirectUrl (optional) 
+     * @param referenceNumber (optional) 
+     * @param errors (optional) 
      * @return Success
      */
     fetchTalentPool(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_LastBillingDate: Date | null | undefined, companyProfile_LastPaymentDate: Date | null | undefined, companyProfile_LicenseUsage: number | undefined, companyProfile_IsActiveByAdmin: boolean | undefined, companyProfile_IsTrial: boolean | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<AddTalentPoolDTOListApiResult> {
@@ -9284,7 +9245,7 @@ export class GetCareerSuccesionPlanByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getCareerSuccessionPlanById(id: number | undefined): Observable<CareerSuccessionDTOApiResult> {
@@ -9370,8 +9331,8 @@ export class RemoveEmployeeFromSuccessorServiceProxy {
 
     /**
      * API for Remove Employee form Successor
-     * @param successionId (optional)
-     * @param employee (optional)
+     * @param successionId (optional) 
+     * @param employee (optional) 
      * @return Success
      */
     removeEmployeeFromSuccessor(successionId: number | undefined, employee: string | null | undefined): Observable<MessageOutApiResult> {
@@ -9459,7 +9420,7 @@ export class RemoveRequirmentfromTalentPoolServiceProxy {
 
     /**
      * API for Remove Requirment from TalentPool
-     * @param requirementId (optional)
+     * @param requirementId (optional) 
      * @return Success
      */
     removeRequirementFromTalentPool(requirementId: number | undefined): Observable<MessageOutApiResult> {
@@ -9544,12 +9505,8 @@ export class DeleteSuccesionPlanServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param planId (optional)
-=======
      * API for  Deleting CareerSuceesion Plan
-     * @param planId (optional)
->>>>>>> 2f8c0189ba0543292cd64e11ce44c4dd320a8179
+     * @param planId (optional) 
      * @return Success
      */
     deleteCareerSuccessionPlan(planId: number | undefined): Observable<MessageOutApiResult> {
@@ -9634,8 +9591,8 @@ export class DeleteEmployeefromCareerSuccessionplanServiceProxy {
     }
 
     /**
-     * @param employeeId (optional)
-     * @param planId (optional)
+     * @param employeeId (optional) 
+     * @param planId (optional) 
      * @return Success
      */
     deleteEmployeeFromCareerSuccesionPlan(employeeId: number | undefined, planId: number | undefined): Observable<MessageOutApiResult> {
@@ -9725,7 +9682,7 @@ export class AddUpdateCertificationServiceProxy {
 
     /**
      * API for adding/updating Certification
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateCertification(body: ManageCertificationDTO | undefined): Observable<MessageOutApiResult> {
@@ -9812,9 +9769,9 @@ export class GetAllCertificationsServiceProxy {
     /**
      * API to Fetch Certifications.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param professionalBodyId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param professionalBodyId (optional) 
      * @return Success
      */
     getAllCertifications(pageSize: number | undefined, pageNumber: number | undefined, professionalBodyId: number | undefined): Observable<CertificationDTOListApiResult> {
@@ -9908,7 +9865,7 @@ export class GetCertificationByIdServiceProxy {
 
     /**
      * API to get Certification by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getCertification(id: number | undefined): Observable<CertificationDTOApiResult> {
@@ -10830,10 +10787,6 @@ export class CommonServiceProxy {
     /**
      * API for getting Professional Bodies that can be use for dropdowns
     for filtering
-<<<<<<< HEAD
-     * @param searchText (optional)
-=======
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
      * @return Success
      */
     getProfessionalBodies(): Observable<ProfessionalBodyIListApiResult> {
@@ -10975,7 +10928,7 @@ export class CommonServiceProxy {
      * API for getting Tenant Beneficiaries that can be use for dropdowns
     and takes searchText (i.e. account-name, account-no, bank-name, bank-code)
     for filtering
-     * @param searchText (optional)
+     * @param searchText (optional) 
      * @return Success
      */
     getBeneficiaries(searchText: string | null | undefined): Observable<TenantBeneficiaryIListApiResult> {
@@ -12080,15 +12033,10 @@ export class CommonServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * API to get EmailSetting by id and can be used for update, details etc
-     * @param id (optional)
-=======
      * API for getting Positions that can be use for dropdowns
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
      * @return Success
      */
-    getCompetency(): Observable<CompetencyIListApiResult> {
+    getCompetency(): Observable<CompetencyRequirmentsDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/Common/GetCompetency";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -12107,14 +12055,14 @@ export class CommonServiceProxy {
                 try {
                     return this.processGetCompetency(<any>response_);
                 } catch (e) {
-                    return <Observable<CompetencyIListApiResult>><any>_observableThrow(e);
+                    return <Observable<CompetencyRequirmentsDTOIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<CompetencyIListApiResult>><any>_observableThrow(response_);
+                return <Observable<CompetencyRequirmentsDTOIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetCompetency(response: HttpResponseBase): Observable<CompetencyIListApiResult> {
+    protected processGetCompetency(response: HttpResponseBase): Observable<CompetencyRequirmentsDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12125,7 +12073,7 @@ export class CommonServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = CompetencyIListApiResult.fromJS(resultData200);
+            result200 = CompetencyRequirmentsDTOIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -12150,7 +12098,7 @@ export class CommonServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<CompetencyIListApiResult>(<any>null);
+        return _observableOf<CompetencyRequirmentsDTOIListApiResult>(<any>null);
     }
 }
 
@@ -12237,7 +12185,7 @@ export class CommunicationServiceProxy {
 
     /**
      * API to get EmailSetting by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getEmailSetting(id: number | undefined): Observable<EmailSettingApiResult> {
@@ -12311,7 +12259,7 @@ export class CommunicationServiceProxy {
 
     /**
      * API for adding/updating EmailSettings
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmailSetting(body: EmailSetting | undefined): Observable<MessageOutApiResult> {
@@ -12455,7 +12403,7 @@ export class CommunicationServiceProxy {
 
     /**
      * API for adding/updating EmailTemplate
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmailTemplate(body: ManageMailTemplateDTO | undefined): Observable<MessageOutApiResult> {
@@ -12599,7 +12547,7 @@ export class CommunicationServiceProxy {
 
     /**
      * API to get EmailTemplate by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getEmailTemplate(id: number | undefined): Observable<MailTemplateDTOApiResult> {
@@ -12673,10 +12621,10 @@ export class CommunicationServiceProxy {
 
     /**
      * API for retrieving all Email Logs by email log filtering parameter
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param emailTo (optional)
-     * @param pageSize (optional)
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param emailTo (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getEmailLogs(startDate: Date | null | undefined, endDate: Date | null | undefined, emailTo: string | null | undefined, pageSize: number | undefined): Observable<EmailLogDTOIListApiResult> {
@@ -12756,7 +12704,7 @@ export class CommunicationServiceProxy {
 
     /**
      * API for getting Single EmailLog Details by id for CRUD Operation
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getEmailLogById(id: number | undefined): Observable<EmailLogDTOApiResult> {
@@ -12841,7 +12789,7 @@ export class AddUpdateCompensationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateCompensation(body: CompensationDTO | undefined): Observable<MessageOutApiResult> {
@@ -12926,11 +12874,11 @@ export class FetchCompensationServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param compensationName (optional)
-     * @param employeeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param compensationName (optional) 
+     * @param employeeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchCompensation(iD: number | undefined, compensationName: string | null | undefined, employeeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DependantListApiResult> {
@@ -13029,7 +12977,7 @@ export class DeleteCompensationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteCompensation(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -13114,7 +13062,7 @@ export class AddUpdateEmployeeCompensationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeeCompensation(body: EmployeeCompensationDTO | undefined): Observable<MessageOutApiResult> {
@@ -13199,11 +13147,11 @@ export class FetchEmployeeCompensationServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param compensationId (optional)
-     * @param employeeId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param compensationId (optional) 
+     * @param employeeId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchEmployeeCompensation(iD: number | undefined, compensationId: number | undefined, employeeId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DependantListApiResult> {
@@ -13304,7 +13252,7 @@ export class DeleteEmployeeCompensationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteEmployeeCompensation(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -13390,7 +13338,7 @@ export class CompetencyServiceProxy {
 
     /**
      * API for adding/updating Competency
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateCompetency(body: ManageCompetencyDTO | undefined): Observable<MessageOutApiResult> {
@@ -13464,7 +13412,7 @@ export class CompetencyServiceProxy {
 
     /**
      * API for  Deleting Competency
-     * @param iD (optional)
+     * @param iD (optional) 
      * @return Success
      */
     deleteCompetency(iD: number | undefined): Observable<MessageOutApiResult> {
@@ -13537,8 +13485,8 @@ export class CompetencyServiceProxy {
     }
 
     /**
-     * @param employeeId (optional)
-     * @param competencyId (optional)
+     * @param employeeId (optional) 
+     * @param competencyId (optional) 
      * @return Success
      */
     compareCompetency(employeeId: number | undefined, competencyId: number | undefined): Observable<VmListComparismApiResult> {
@@ -13627,7 +13575,7 @@ export class SaveConfirmationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     saveConfirmation(body: VwConfirmationDTO | undefined): Observable<MessageOutApiResult> {
@@ -13712,11 +13660,11 @@ export class GetConfirmationsByDetailsServiceProxy {
     }
 
     /**
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param log_status (optional)
-     * @param _pagenumber (optional)
-     * @param _PageSize (optional)
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param log_status (optional) 
+     * @param _pagenumber (optional) 
+     * @param _PageSize (optional) 
      * @return Success
      */
     getConfirmationsByDetails(startDate: Date | null | undefined, endDate: Date | null | undefined, log_status: number | undefined, _pagenumber: number | undefined, _PageSize: number | undefined): Observable<VwConfirmationDTOIListApiResult> {
@@ -13814,7 +13762,7 @@ export class CourseServiceProxy {
 
     /**
      * API for adding/updating Course
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateCourse(body: Course | undefined): Observable<MessageOutApiResult> {
@@ -13889,8 +13837,8 @@ export class CourseServiceProxy {
     /**
      * API to Fetch Courses.
     Note: all filter are optional
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAllCourses(pageNumber: number | undefined, pageSize: number | undefined): Observable<CourseListApiResult> {
@@ -13968,7 +13916,7 @@ export class CourseServiceProxy {
 
     /**
      * API to get Course by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getCourse(id: number | undefined): Observable<CourseApiResult> {
@@ -14912,7 +14860,7 @@ export class DataServiceProxy {
     14: pfa
     16: address_type
     27: Sectors
-     * @param dropDownName (optional)
+     * @param dropDownName (optional) 
      * @return Success
      */
     getDropDownValues(dropDownName: string | null | undefined): Observable<DropdownValueIListApiResult> {
@@ -14993,9 +14941,9 @@ export class DataServiceProxy {
     title: 10
     gender: 12
     pension fund administrator: 14
-    address_type: 16
+    address_type: 16 
     sectors: 27
-     * @param dropDownId (optional)
+     * @param dropDownId (optional) 
      * @return Success
      */
     getDropDownValuesById(dropDownId: number | undefined): Observable<DropdownValueIListApiResult> {
@@ -15207,7 +15155,7 @@ export class DataServiceProxy {
 
     /**
      * API for getting the list of all State by CountryId
-     * @param countryId (optional)
+     * @param countryId (optional) 
      * @return Success
      */
     getStateByCountryId(countryId: number | undefined): Observable<StateIListApiResult> {
@@ -15419,7 +15367,7 @@ export class DataServiceProxy {
 
     /**
      * API for getting the list of all Local Govts by State
-     * @param stateId (optional)
+     * @param stateId (optional) 
      * @return Success
      */
     getLGAsByState(stateId: number | undefined): Observable<LGAIListApiResult> {
@@ -16266,7 +16214,7 @@ export class AddUpdateDepartmentServiceProxy {
 
     /**
      * API for adding/updating Department
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateDepartment(body: ManageDepartmentDTO | undefined): Observable<MessageOutApiResult> {
@@ -16353,8 +16301,8 @@ export class GetAllDepartmentsServiceProxy {
     /**
      * API to Fetch Departments.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllDepartments(pageSize: number | undefined, pageNumber: number | undefined): Observable<DepartmentDTOListApiResult> {
@@ -16444,7 +16392,7 @@ export class GetDepartmentByIdServiceProxy {
 
     /**
      * API to get Department by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getDepartment(id: number | undefined): Observable<DepartmentDTOApiResult> {
@@ -16529,7 +16477,7 @@ export class AddUpdateDependantServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateDependant(body: DependantDTO | undefined): Observable<MessageOutApiResult> {
@@ -16614,7 +16562,7 @@ export class DeleteDependantServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     deleteDependant(body: DeleteDTO | undefined): Observable<MessageOutApiResult> {
@@ -16699,14 +16647,14 @@ export class GetDependantByCriteriaServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param firstName (optional)
-     * @param lastName (optional)
-     * @param dependantType (optional)
-     * @param gender (optional)
-     * @param nIN (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param firstName (optional) 
+     * @param lastName (optional) 
+     * @param dependantType (optional) 
+     * @param gender (optional) 
+     * @param nIN (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchDependants(iD: number | undefined, firstName: string | null | undefined, lastName: string | null | undefined, dependantType: string | null | undefined, gender: string | null | undefined, nIN: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DependantListApiResult> {
@@ -16809,9 +16757,9 @@ export class GetAllDependantByCompanyIdServiceProxy {
     }
 
     /**
-     * @param employeeId (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param employeeId (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllDependantByCompanyId(employeeId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<DependantResultDTOListApiResult> {
@@ -16904,9 +16852,9 @@ export class GetAllDependantByEmployeeIdServiceProxy {
     }
 
     /**
-     * @param employeeId (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param employeeId (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllDependantByEmployeeId(employeeId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<DependantResultDTOListApiResult> {
@@ -16999,7 +16947,7 @@ export class AddUpdateDeploymentServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateDeployment(body: DeploymentRegistrationPayLoad | undefined): Observable<MessageOutApiResult> {
@@ -17084,7 +17032,7 @@ export class FetchDeploymentByReferenceNoServiceProxy {
     }
 
     /**
-     * @param referenceNo (optional)
+     * @param referenceNo (optional) 
      * @return Success
      */
     fetchDeploymentByReferenceNo(referenceNo: string | null | undefined): Observable<DeploymentLogIListApiResult> {
@@ -17167,17 +17115,17 @@ export class FetchDeploymentServiceProxy {
     }
 
     /**
-     * @param companyID (optional)
-     * @param subID (optional)
-     * @param employeeContractid (optional)
-     * @param name (optional)
-     * @param iD (optional)
-     * @param strStartDate (optional)
-     * @param strEndDate (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param employeeContractid (optional) 
+     * @param name (optional) 
+     * @param iD (optional) 
+     * @param strStartDate (optional) 
+     * @param strEndDate (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchDeployment(companyID: number | undefined, subID: number | undefined, employeeContractid: number | undefined, name: string | null | undefined, iD: number | undefined, strStartDate: string | null | undefined, strEndDate: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DeploymentLogDTOIListApiResult> {
@@ -17454,7 +17402,7 @@ export class SingleDisbursementServiceProxy {
 
     /**
      * API for posting/updating Single Disbursement
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     postSingleDisbursement(body: SingleDisbursementPostDTO | undefined): Observable<MessageOutApiResult> {
@@ -17540,7 +17488,7 @@ export class CreateEmployeeServiceProxy {
 
     /**
      * API for adding a single Employee profile
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addEmployee(body: ManageEmployeeDTO | undefined): Observable<MessageOutApiResult> {
@@ -17626,8 +17574,8 @@ export class UploadProfileImageServiceProxy {
 
     /**
      * API for uploading Employee profile picture
-     * @param base64Image (optional)
-     * @param employeeId (optional)
+     * @param base64Image (optional) 
+     * @param employeeId (optional) 
      * @return Success
      */
     uploadProfileImage(base64Image: string | null | undefined, employeeId: number | undefined): Observable<MessageOutApiResult> {
@@ -17714,15 +17662,11 @@ export class FetchEmployeeByNoServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param empno (optional)
-=======
      * API for retrieving Employees details (includes; Fullname, Id)
     that matches the supplied Employee No.
     which can be use in various part of the system for;
     Supervisor, Loan-Guarantor etc
-     * @param empno (optional)
->>>>>>> b3190a584ad91a029e5ae18e9182ef136071295c
+     * @param empno (optional) 
      * @return Success
      */
     fetchEmployeeByNo(empno: string | null | undefined): Observable<IdNameObjApiResult> {
@@ -17808,10 +17752,10 @@ export class FetchEmployeesDetailsServiceProxy {
      * API for retrieving all Employees by Employee number (i.e. for specific Employee) or
     empty string (i.e. for all Employee
     with their few details for further CRUD operation
-     * @param searchText (optional)
-     * @param contractStatus (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param searchText (optional) 
+     * @param contractStatus (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getEmployeesDetails(searchText: string | null | undefined, contractStatus: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<DropdownValueDTOIListApiResult> {
@@ -17907,10 +17851,10 @@ export class FetchEmployeesByName_IdServiceProxy {
 
     /**
      * API for retrieving all Employees with details (includes; Fullname, Id, EmpNo)
-    that matches the supplied name/employee Id
+    that matches the supplied name/employee Id 
     which can be use in various part of the system for Dropdown selection for;
     Supervisor-List, Appraisal-Reviewer-List etc
-     * @param nameId (optional)
+     * @param nameId (optional) 
      * @return Success
      */
     getEmployeesByNameId(nameId: string | null | undefined): Observable<DropdownValueDTOIListApiResult> {
@@ -17994,7 +17938,7 @@ export class FetchEmployeeByIdServiceProxy {
 
     /**
      * API for retrieving single Employee's record
-     * @param employeeId (optional)
+     * @param employeeId (optional) 
      * @return Success
      */
     getEmployeeById(employeeId: number | undefined): Observable<EmployeeDTOApiResult> {
@@ -18080,16 +18024,16 @@ export class SearchEmployeesServiceProxy {
 
     /**
      * API for Master Employees Search
-     * @param pageSize (optional)
-     * @param companyId (optional)
-     * @param searchText (optional)
-     * @param peopleGroupId (optional)
-     * @param departmentId (optional)
-     * @param jobRoleId (optional)
-     * @param locationId (optional)
-     * @param salaryscaleId (optional)
-     * @param gradeId (optional)
-     * @param gradestepId (optional)
+     * @param pageSize (optional) 
+     * @param companyId (optional) 
+     * @param searchText (optional) 
+     * @param peopleGroupId (optional) 
+     * @param departmentId (optional) 
+     * @param jobRoleId (optional) 
+     * @param locationId (optional) 
+     * @param salaryscaleId (optional) 
+     * @param gradeId (optional) 
+     * @param gradestepId (optional) 
      * @return Success
      */
     searchEmployees(pageSize: number | undefined, companyId: number | undefined, searchText: string | null | undefined, peopleGroupId: number | undefined, departmentId: number | undefined, jobRoleId: number | undefined, locationId: number | undefined, salaryscaleId: number | undefined, gradeId: number | undefined, gradestepId: number | undefined): Observable<EmployeeDTOIListApiResult> {
@@ -18209,10 +18153,10 @@ export class FetchAllEmployeesServiceProxy {
 
     /**
      * API for retrieving All Tenant's registered Employees
-     * @param searchText (optional)
-     * @param contractStatus (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param searchText (optional) 
+     * @param contractStatus (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllEmployees(searchText: string | null | undefined, contractStatus: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<EmployeeDTOIListApiResult> {
@@ -18308,7 +18252,7 @@ export class FetchEmployeeContractByEmployeeIdServiceProxy {
 
     /**
      * API for retrieving Employee's Contract profile by Employee Id
-     * @param employeeId (optional)
+     * @param employeeId (optional) 
      * @return Success
      */
     fetchEmployeeContractByEmployeeId(employeeId: number | undefined): Observable<EmployeeContractAssignmentDTOApiResult> {
@@ -18394,7 +18338,7 @@ export class AddUpdateEventsServiceProxy {
 
     /**
      * API for adding/updating Event
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEvent(body: ManageEventDTO | undefined): Observable<MessageOutApiResult> {
@@ -18481,8 +18425,8 @@ export class GetAllEventsServiceProxy {
     /**
      * API to Fetch Events.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllEvents(pageSize: number | undefined, pageNumber: number | undefined): Observable<EventDTOListApiResult> {
@@ -18572,7 +18516,7 @@ export class GetEventsByIdServiceProxy {
 
     /**
      * API to get jobroles by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getEventsById(id: number | undefined): Observable<EventDTOApiResult> {
@@ -18658,7 +18602,7 @@ export class DeleteEventsServiceProxy {
 
     /**
      * this method is used to delete JobRole
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteEvents(id: number | undefined): Observable<MessageOutApiResult> {
@@ -18743,7 +18687,7 @@ export class AddUpdateExpenseGroupServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateExpenseGroup(body: ExpenseGroupDto | undefined): Observable<MessageOutApiResult> {
@@ -18828,7 +18772,7 @@ export class ToggleExpenseGroupServiceProxy {
     }
 
     /**
-     * @param encryptedId (optional)
+     * @param encryptedId (optional) 
      * @return Success
      */
     toggleExpenseGroup(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -18911,14 +18855,14 @@ export class GetExpenseGroupsServiceProxy {
     }
 
     /**
-     * @param companyID (optional)
-     * @param subID (optional)
-     * @param name (optional)
-     * @param iD (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param name (optional) 
+     * @param iD (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getExpenseGroups(companyID: number | undefined, subID: number | undefined, name: string | null | undefined, iD: number | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseGroupIListApiResult> {
@@ -19025,7 +18969,7 @@ export class AddUpdateExpenseProjectServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateExpenseProject(body: ExpenseProjectDto | undefined): Observable<MessageOutApiResult> {
@@ -19110,7 +19054,7 @@ export class ToggleExpenseProjectServiceProxy {
     }
 
     /**
-     * @param encryptedId (optional)
+     * @param encryptedId (optional) 
      * @return Success
      */
     toggleExpenseProject(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -19193,14 +19137,14 @@ export class GetExpenseProjectServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param ban (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param name (optional) 
+     * @param description (optional) 
+     * @param ban (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getExpenseProject(iD: number | undefined, name: string | null | undefined, description: string | null | undefined, ban: boolean | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseProjectIListApiResult> {
@@ -19305,7 +19249,7 @@ export class AddUpdateProjectActivityServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateProjectActivity(body: ExpenseProjectActivityDTO | undefined): Observable<MessageOutApiResult> {
@@ -19390,7 +19334,7 @@ export class ToggleProjectActivityServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     toggleLoanType(body: number | undefined): Observable<MessageOutApiResult> {
@@ -19475,14 +19419,14 @@ export class GetProjectActivityServiceProxy {
     }
 
     /**
-     * @param companyID (optional)
-     * @param subID (optional)
-     * @param name (optional)
-     * @param iD (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param name (optional) 
+     * @param iD (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getProjectActivity(companyID: number | undefined, subID: number | undefined, name: string | null | undefined, iD: number | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseProjectActivityIListApiResult> {
@@ -19589,7 +19533,7 @@ export class AddUpdateExpenseServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateExpense(body: ExpenseDTO | undefined): Observable<MessageOutApiResult> {
@@ -19674,7 +19618,7 @@ export class ToggleExpenseRequestServiceProxy {
     }
 
     /**
-     * @param encryptedId (optional)
+     * @param encryptedId (optional) 
      * @return Success
      */
     toggleExpenseRequest(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -19757,17 +19701,17 @@ export class FetchExpensesServiceProxy {
     }
 
     /**
-     * @param companyID (optional)
-     * @param subID (optional)
-     * @param iD (optional)
-     * @param userid (optional)
-     * @param companyid (optional)
-     * @param searchText (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param companyID (optional) 
+     * @param subID (optional) 
+     * @param iD (optional) 
+     * @param userid (optional) 
+     * @param companyid (optional) 
+     * @param searchText (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param searchType (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchExpenses(companyID: number | undefined, subID: number | undefined, iD: number | undefined, userid: number | undefined, companyid: number | undefined, searchText: string | null | undefined, startDate: string | null | undefined, endDate: string | null | undefined, searchType: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseDTOIListApiResult> {
@@ -19886,20 +19830,20 @@ export class FetchExpensesDetailedServiceProxy {
     }
 
     /**
-     * @param projid (optional)
-     * @param expensegrpid (optional)
-     * @param expensetypeid (optional)
-     * @param locationid (optional)
-     * @param deptid (optional)
-     * @param userid (optional)
-     * @param companyid (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param searchText (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param projid (optional) 
+     * @param expensegrpid (optional) 
+     * @param expensetypeid (optional) 
+     * @param locationid (optional) 
+     * @param deptid (optional) 
+     * @param userid (optional) 
+     * @param companyid (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param searchType (optional) 
+     * @param page (optional) 
+     * @param searchText (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchExpensesDetailed(projid: number | undefined, expensegrpid: number | undefined, expensetypeid: number | undefined, locationid: number | undefined, deptid: number | undefined, userid: number | undefined, companyid: number | undefined, startDate: Date | undefined, endDate: Date | undefined, searchType: number | undefined, page: number | undefined, searchText: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseDTOIListApiResult> {
@@ -20034,7 +19978,7 @@ export class AddUpdateLoanTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateExpenseType(body: ExpenseTypeDto | undefined): Observable<MessageOutApiResult> {
@@ -20107,80 +20051,7 @@ export class AddUpdateLoanTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
-     * @return Success
-     */
-    addUpdateLoanRequest(body: ManageLoanRequestDTO | undefined): Observable<MessageOutApiResult> {
-        let url_ = this.baseUrl + "/api/LoanRequest/AddUpdateLoanType/Add-Update-Loan-Request";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddUpdateLoanRequest(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processAddUpdateLoanRequest(<any>response_);
-                } catch (e) {
-                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processAddUpdateLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = MessageOutApiResult.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData400) {
-                result400 = {} as any;
-                for (let key in resultData400) {
-                    if (resultData400.hasOwnProperty(key))
-                        result400![key] = resultData400[key];
-                }
-            }
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("Server Error", status, _responseText, _headers);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<MessageOutApiResult>(<any>null);
-    }
-
-    /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateLoanType(body: ManageLoanTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -20265,7 +20136,7 @@ export class ToggleExpenseTypeServiceProxy {
     }
 
     /**
-     * @param encryptedId (optional)
+     * @param encryptedId (optional) 
      * @return Success
      */
     toggleExpenseType(encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -20348,14 +20219,14 @@ export class GetExpenseTypesServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param ledgerNo (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param ledgerNo (optional) 
+     * @param name (optional) 
+     * @param description (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getExpenseTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseTypeIListApiResult> {
@@ -20458,7 +20329,7 @@ export class AddExpenseSubTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addExpenseSubType(body: ExpenseSubType | undefined): Observable<MessageOutApiResult> {
@@ -20543,8 +20414,8 @@ export class ToggleExpenseSubTypeServiceProxy {
     }
 
     /**
-     * @param typeId (optional)
-     * @param encryptedId (optional)
+     * @param typeId (optional) 
+     * @param encryptedId (optional) 
      * @return Success
      */
     toggleExpenseSubType(typeId: string | null | undefined, encryptedId: string | null | undefined): Observable<MessageOutApiResult> {
@@ -20629,7 +20500,7 @@ export class GetExpenseTypeNameServiceProxy {
     }
 
     /**
-     * @param encryptedId (optional)
+     * @param encryptedId (optional) 
      * @return Success
      */
     getExpenseTypeName(encryptedId: string | null | undefined): Observable<ExpenseTypeIListApiResult> {
@@ -20712,17 +20583,17 @@ export class GetExpenseSubTypesServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param ledgerNo (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param referenceId (optional)
-     * @param code (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param ledgerNo (optional) 
+     * @param name (optional) 
+     * @param description (optional) 
+     * @param referenceId (optional) 
+     * @param code (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
-    getExpenseSubTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseTypeIListApiResult> {
+    getExpenseSubTypes(iD: number | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, description: string | null | undefined, referenceId: string | null | undefined, code: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<ExpenseSubTypeIListApiResult> {
         let url_ = this.baseUrl + "/api/ExpenseType/GetExpenseSubTypes/GetExpenseSubTypes?";
         if (iD === null)
             throw new Error("The parameter 'iD' cannot be null.");
@@ -20763,14 +20634,14 @@ export class GetExpenseSubTypesServiceProxy {
                 try {
                     return this.processGetExpenseSubTypes(<any>response_);
                 } catch (e) {
-                    return <Observable<ExpenseTypeIListApiResult>><any>_observableThrow(e);
+                    return <Observable<ExpenseSubTypeIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ExpenseTypeIListApiResult>><any>_observableThrow(response_);
+                return <Observable<ExpenseSubTypeIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetExpenseSubTypes(response: HttpResponseBase): Observable<ExpenseTypeIListApiResult> {
+    protected processGetExpenseSubTypes(response: HttpResponseBase): Observable<ExpenseSubTypeIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -20781,7 +20652,7 @@ export class GetExpenseSubTypesServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ExpenseTypeIListApiResult.fromJS(resultData200);
+            result200 = ExpenseSubTypeIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -20806,7 +20677,7 @@ export class GetExpenseSubTypesServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExpenseTypeIListApiResult>(<any>null);
+        return _observableOf<ExpenseSubTypeIListApiResult>(<any>null);
     }
 }
 
@@ -20823,16 +20694,16 @@ export class FileStorageManagerServiceProxy {
 
     /**
      * API to upload documents for Employee on the system.
-     * @param id (optional)
-     * @param employee_id (optional)
-     * @param employeeNo (optional)
-     * @param name (optional)
-     * @param directory (optional)
-     * @param lastModifiedDate (optional)
-     * @param docUrl (optional)
-     * @param file (optional)
-     * @param docType (optional)
-     * @param comment (optional)
+     * @param id (optional) 
+     * @param employee_id (optional) 
+     * @param employeeNo (optional) 
+     * @param name (optional) 
+     * @param directory (optional) 
+     * @param lastModifiedDate (optional) 
+     * @param docUrl (optional) 
+     * @param file (optional) 
+     * @param docType (optional) 
+     * @param comment (optional) 
      * @return Success
      */
     uploadDocuments(id: number | undefined, employee_id: number | undefined, employeeNo: string | undefined, name: string | undefined, directory: string | null | undefined, lastModifiedDate: Date | undefined, docUrl: string | null | undefined, file: FileParameter | null | undefined, docType: string | undefined, comment: string | null | undefined): Observable<MessageOutApiResult> {
@@ -20936,8 +20807,8 @@ export class FileStorageManagerServiceProxy {
     }
 
     /**
-     * @param employeeNumber (optional)
-     * @param docType (optional)
+     * @param employeeNumber (optional) 
+     * @param docType (optional) 
      * @return Success
      */
     fetchEmployeeDocuments(employeeNumber: string | null | undefined, docType: string | null | undefined): Observable<AzureDocsListApiResult> {
@@ -21011,7 +20882,7 @@ export class FileStorageManagerServiceProxy {
 
     /**
      * API for downloading Document in form of Base64string by passing the filename
-     * @param filename (optional)
+     * @param filename (optional) 
      * @return Success
      */
     downloadMiscDocument(filename: string | null | undefined): Observable<StringApiResult> {
@@ -21095,7 +20966,7 @@ export class GradeLevelServiceProxy {
 
     /**
      * API for adding/updating GradeLevel
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateGradeLevel(body: GradeLevelCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -21169,7 +21040,7 @@ export class GradeLevelServiceProxy {
 
     /**
      * API  for Deleting GradeLevel
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     delete_GradeLevel(body: number | undefined): Observable<MessageOutApiResult> {
@@ -21244,10 +21115,10 @@ export class GradeLevelServiceProxy {
     /**
      * API to Fetch GradeLevel.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param promotion_min_years (optional)
-     * @param promotion_min_in_days (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param promotion_min_years (optional) 
+     * @param promotion_min_in_days (optional) 
      * @return Success
      */
     getAllGradeLevel(pageSize: number | undefined, pageNumber: number | undefined, promotion_min_years: number | null | undefined, promotion_min_in_days: number | null | undefined): Observable<GradeLevelDTOListApiResult> {
@@ -21341,7 +21212,7 @@ export class GradeLevelBenefitServiceProxy {
 
     /**
      * API for adding/updating GradeLevelBenefit
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateGradeLevelBenefit(body: ManageGradeLevelBenefitDTO | undefined): Observable<MessageOutApiResult> {
@@ -21415,7 +21286,7 @@ export class GradeLevelBenefitServiceProxy {
 
     /**
      * API  for Deleting GradeLevelBenefit
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteGradeLevelBenefit(id: number | undefined): Observable<MessageOutApiResult> {
@@ -21489,7 +21360,7 @@ export class GradeLevelBenefitServiceProxy {
 
     /**
      * API to get GradeLevelBenefit by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getGradeLevelBenefitById(id: number | undefined): Observable<GradeLevelBenefitDTOApiResult> {
@@ -21564,8 +21435,8 @@ export class GradeLevelBenefitServiceProxy {
     /**
      * API to Fetch GradeLevelBenefit.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllGradeLevelBenefit(pageSize: number | undefined, pageNumber: number | undefined): Observable<GradeLevelBenefitDTOListApiResult> {
@@ -21655,7 +21526,7 @@ export class GradeLevelStepServiceProxy {
 
     /**
      * API for adding/updating GradeLevelStep
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateGradeLevelStep(body: GradestepCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -21730,11 +21601,11 @@ export class GradeLevelStepServiceProxy {
     /**
      * API to Fetch Grade Level Steps.
     Note: all filter are optional
-     * @param gradeName (optional)
-     * @param stepName (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param companyID (optional)
+     * @param gradeName (optional) 
+     * @param stepName (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param companyID (optional) 
      * @return Success
      */
     getAllGradeLevelSteps(gradeName: boolean | undefined, stepName: boolean | undefined, pageSize: number | undefined, pageNumber: number | undefined, companyID: number | undefined): Observable<GradestepDTOListApiResult> {
@@ -21824,7 +21695,7 @@ export class GradeLevelStepServiceProxy {
 
     /**
      * API to get GradeLevelStep by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getGradeLevelStepById(id: number | undefined): Observable<GradestepDTOApiResult> {
@@ -21898,7 +21769,7 @@ export class GradeLevelStepServiceProxy {
 
     /**
      * API  for Deleting GradeLevel Step
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     delete_GradeLevel_Step(body: number | undefined): Observable<MessageOutApiResult> {
@@ -21984,7 +21855,7 @@ export class InstitutionServiceProxy {
 
     /**
      * API for adding/updating Institution
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateInstitution(body: Institution | undefined): Observable<MessageOutApiResult> {
@@ -22059,8 +21930,8 @@ export class InstitutionServiceProxy {
     /**
      * API to Fetch Institutions.
     Note: all filter are optional
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAllInstitutions(pageNumber: number | undefined, pageSize: number | undefined): Observable<InstitutionListApiResult> {
@@ -22138,7 +22009,7 @@ export class InstitutionServiceProxy {
 
     /**
      * API to get Institution by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getInstitution(id: number | undefined): Observable<InstitutionApiResult> {
@@ -22223,7 +22094,7 @@ export class AddUpdateInterestRateServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateIntrestRate(body: InterestRateDTO | undefined): Observable<MessageOutApiResult> {
@@ -22308,7 +22179,7 @@ export class ToggleInterestRateServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     toggleInterestRate(body: number | undefined): Observable<MessageOutApiResult> {
@@ -22474,7 +22345,7 @@ export class AddUpdateJobRolesServiceProxy {
 
     /**
      * API for adding/updating JobRole
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateJobRoles(body: ManageJobRoleDTO | undefined): Observable<MessageOutApiResult> {
@@ -22561,8 +22432,8 @@ export class GetAllJobRolesServiceProxy {
     /**
      * API to Fetch JobRoles.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllJobRoles(pageSize: number | undefined, pageNumber: number | undefined): Observable<JobRolesDTOListApiResult> {
@@ -22652,7 +22523,7 @@ export class GetJobRoleByIdServiceProxy {
 
     /**
      * API to get jobroles by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getJobRolesById(id: number | undefined): Observable<JobRolesDTOApiResult> {
@@ -22738,7 +22609,7 @@ export class DeleteJobRoleServiceProxy {
 
     /**
      * this method is used to delete Jobrole
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteJobRole(id: number | undefined): Observable<MessageOutApiResult> {
@@ -22823,14 +22694,14 @@ export class FetchKeyResultAreasServiceProxy {
     }
 
     /**
-     * API for retrieving all Key Result Areas with filters as follows
+     * API for retrieving all Key Result Areas with filters as follows 
     'Status: for Active/InActive' Key Result Area
     'RatingType: for Open-ended/Close-ended' Key Result Area
-     * @param status (optional)
-     * @param ratingType (optional)
-     * @param strategyCategoryId (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param status (optional) 
+     * @param ratingType (optional) 
+     * @param strategyCategoryId (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getKeyResultAreas(status: number | undefined, ratingType: number | undefined, strategyCategoryId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<SectionDTOIListApiResult> {
@@ -23013,7 +22884,7 @@ export class FetchKeyResultAreaServiceProxy {
 
     /**
      * API for getting Single Key Result Area Details by id for CRUD Operation
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getKeyResultArea(id: number | undefined): Observable<SectionDTOApiResult> {
@@ -23098,10 +22969,10 @@ export class CreateKeyResultAreaServiceProxy {
     }
 
     /**
-     * API for add/updating Key Result Areas
+     * API for add/updating Key Result Areas 
     Toggle (i.e. While Updating use the property 'IsActive'
     as Radio-toggle button and pass true/false. When creating new Key Result Areas 'IsActive is by default)
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createKeyResultArea(body: ManageSectionDTO | undefined): Observable<MessageOutApiResult> {
@@ -23186,10 +23057,10 @@ export class AssignKRAServiceProxy {
     }
 
     /**
-     * API for add/updating Key Result Areas
+     * API for add/updating Key Result Areas 
     Toggle (i.e. While Updating use the property 'IsActive'
     as Radio-toggle button and pass true/false. When creating new Key Result Areas 'IsActive is by default)
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     assignKRA(body: AssignKraDto | undefined): Observable<MessageOutApiResult> {
@@ -23275,7 +23146,7 @@ export class AddUpdateKPIServiceProxy {
 
     /**
      * API for add/updating Key Performance Index (KPI) by Admin/Line Managers
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateKPI(body: ManageKpiDTO | undefined): Observable<MessageOutApiResult> {
@@ -23361,7 +23232,7 @@ export class AddUpdateEmployeeKPIServiceProxy {
 
     /**
      * API for add/updating Employee's Key Performance Index (KPI)
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeeKPI(body: ManageKpiDTO | undefined): Observable<MessageOutApiResult> {
@@ -23447,7 +23318,7 @@ export class FetchKPIsServiceProxy {
 
     /**
      * API for retrieving All Key Performance Index (KPIs) attach to a KRA
-     * @param key_area_id (optional)
+     * @param key_area_id (optional) 
      * @return Success
      */
     getKPIs(key_area_id: number | undefined): Observable<KpiDTOIListApiResult> {
@@ -23533,7 +23404,7 @@ export class FetchKPIServiceProxy {
 
     /**
      * API for getting Single Key Performance Index (KPI) Details by id for CRUD Operation
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getKPI(id: number | undefined): Observable<KpiDTOApiResult> {
@@ -23619,7 +23490,7 @@ export class FetchEmployeeKPIsServiceProxy {
 
     /**
      * API for retrieving Employee's Key Performance Index (KPI)
-     * @param key_area_id (optional)
+     * @param key_area_id (optional) 
      * @return Success
      */
     getEmployeeKPIs(key_area_id: number | undefined): Observable<KpiDTOIListApiResult> {
@@ -23705,8 +23576,8 @@ export class LeaveEntitlementServiceProxy {
 
     /**
      * this method is used to fetch all the leave entitlements. no param for now
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getLeaveEntitlements(pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveEntitlementResourceListApiResult> {
@@ -23784,7 +23655,7 @@ export class LeaveEntitlementServiceProxy {
 
     /**
      * this method is get leave entitlement by Id. Id is required
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLeaveEntitlement(id: number | undefined): Observable<LeaveEntitlementResourceApiResult> {
@@ -23858,7 +23729,7 @@ export class LeaveEntitlementServiceProxy {
 
     /**
      * this method is used to used to create and edit leave entitlement. Note all fields are required.
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addLeaveEntitlement(body: LeaveEntitlementPayload | undefined): Observable<MessageOutApiResult> {
@@ -23932,7 +23803,7 @@ export class LeaveEntitlementServiceProxy {
 
     /**
      * this method is used to delete leave entitlement
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteLeaveEntitlement(id: number | undefined): Observable<MessageOutApiResult> {
@@ -24087,7 +23958,7 @@ export class AddUpdateHolidayServiceProxy {
 
     /**
      * API for add/updating Leave Holiday Date
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateHoliday(body: ManageLeaveHolidayDTO | undefined): Observable<MessageOutApiResult> {
@@ -24173,8 +24044,8 @@ export class HolidayDatesServiceProxy {
 
     /**
      * this method is used to fetch all or by Id. no param for now
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getHolidayDates(pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveHolidayDTOListApiResult> {
@@ -24264,7 +24135,7 @@ export class GetByIdServiceProxy {
 
     /**
      * this method is get leave holiday date by Id. Id is required
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getHolidayById(id: number | undefined): Observable<LeaveHolidayDTOApiResult> {
@@ -24350,7 +24221,7 @@ export class DeleteServiceProxy {
 
     /**
      * this method is used to delete leave holiday date
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteHolidayDate(id: number | undefined): Observable<MessageOutApiResult> {
@@ -24424,7 +24295,7 @@ export class DeleteServiceProxy {
 
     /**
      * this method is used to delete leave plan
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteLeavePlan(id: number | undefined): Observable<MessageOutApiResult> {
@@ -24498,7 +24369,7 @@ export class DeleteServiceProxy {
 
     /**
      * this method is used to delete. leave request Id is required
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteLeaveRequest(id: number | undefined): Observable<MessageOutApiResult> {
@@ -24572,7 +24443,7 @@ export class DeleteServiceProxy {
 
     /**
      * this method is used to delete leave year
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteLeaveYear(id: number | undefined): Observable<MessageOutApiResult> {
@@ -24658,7 +24529,7 @@ export class CreateLeavePlanServiceProxy {
 
     /**
      * this method is used to create  leave plan. Note all fields are required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createLeavePlan(body: LeavePlanDTO | undefined): Observable<MessageOutApiResult> {
@@ -24744,14 +24615,14 @@ export class FetchLeavePlanServiceProxy {
 
     /**
      * this method is used fetch leave plans. all filter are optional
-     * @param isApproved (optional)
-     * @param leaveYearId (optional)
-     * @param leaveTypeId (optional)
-     * @param empno (optional)
-     * @param strStartDate (optional)
-     * @param strEndDate (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param isApproved (optional) 
+     * @param leaveYearId (optional) 
+     * @param leaveTypeId (optional) 
+     * @param empno (optional) 
+     * @param strStartDate (optional) 
+     * @param strEndDate (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchLeavePlans(isApproved: number | null | undefined, leaveYearId: number | null | undefined, leaveTypeId: number | null | undefined, empno: string | null | undefined, strStartDate: Date | null | undefined, strEndDate: Date | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeavePlanResourceListApiResult> {
@@ -24853,7 +24724,7 @@ export class LeavePlanEventsServiceProxy {
 
     /**
      * this method is used fetch events using calender type.calender type include: LeavePlan, ActiveLeaveRequests
-     * @param calenderType (optional)
+     * @param calenderType (optional) 
      * @return Success
      */
     getLeavePlanEvents(calenderType: string | null | undefined): Observable<LeavePlanResourceListApiResult> {
@@ -24938,7 +24809,7 @@ export class ApproveOrRejectServiceProxy {
     /**
      * this method is used to approve or reject leave plan. Note all fields are requiered except companyId
     it uses Enum Leave Plan status : Approved = 1, Reject = 2, Pending =3
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     approveOrRejectLeavePlan(body: ApproveOrRejectPayload | undefined): Observable<MessageOutApiResult> {
@@ -25025,7 +24896,7 @@ export class PostReviewServiceProxy {
     /**
      * this method is used to review leave plan. Note all fields are requiered except companyId
     it uses Enum Leave Plan status : Approved = 1, Reject = 2, Pending =3
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     postReview(body: ApproveOrRejectPayload | undefined): Observable<MessageOutApiResult> {
@@ -25111,7 +24982,7 @@ export class CreateLeaveByAdminServiceProxy {
 
     /**
      * this method is used to create and edit leave by admin.
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createLeaveByAdmin(body: ManageLeaveRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -25198,15 +25069,15 @@ export class GetLeaveRequestServiceProxy {
     /**
      * this method is used to get leave report.
     all filter is optional
-     * @param leaveTypeId (optional)
-     * @param leaveYearId (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param employeeName (optional)
-     * @param noOfDays (optional)
-     * @param remainingDays (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param leaveTypeId (optional) 
+     * @param leaveYearId (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param employeeName (optional) 
+     * @param noOfDays (optional) 
+     * @param remainingDays (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getLeaveReports(leaveTypeId: number | undefined, leaveYearId: number | undefined, startDate: Date | null | undefined, endDate: Date | null | undefined, employeeName: string | null | undefined, noOfDays: number | undefined, remainingDays: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LeaveReportListDTOListApiResult> {
@@ -25307,7 +25178,7 @@ export class GetLeaveRequestServiceProxy {
     /**
      * this method is used to get leave by Id.
     Id is required
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLeaveRequestById(id: number | undefined): Observable<LeaveRequestApiResult> {
@@ -25393,7 +25264,7 @@ export class CancelLeaveRequestServiceProxy {
 
     /**
      * this method is used to cancel leave request by initiator. leave request Id is required
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     cancelLeaveRequest(id: number | undefined): Observable<MessageOutApiResult> {
@@ -25480,12 +25351,12 @@ export class GetLeaveTypesServiceProxy {
     /**
      * fetch LeaveTypes.
     Note: all filter are optional
-     * @param isAnnualLeave (optional)
-     * @param maxDays (optional)
-     * @param isGradeDependent (optional)
-     * @param minDays (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param isAnnualLeave (optional) 
+     * @param maxDays (optional) 
+     * @param isGradeDependent (optional) 
+     * @param minDays (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getLeaveTypes(isAnnualLeave: boolean | undefined, maxDays: number | null | undefined, isGradeDependent: boolean | undefined, minDays: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveTypeDTOListApiResult> {
@@ -25587,7 +25458,7 @@ export class DeleteLeaveTypeServiceProxy {
 
     /**
      * this method is used to delete leave type
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteLeaveType(id: number | undefined): Observable<MessageOutApiResult> {
@@ -25673,7 +25544,7 @@ export class GetLeaveTypeServiceProxy {
 
     /**
      * This method is used to get leave type by id
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLeaveType(id: number | undefined): Observable<LeaveTypeDTOApiResult> {
@@ -25828,7 +25699,7 @@ export class LeaveWorkFlowServiceProxy {
 
     /**
      * this method is get leave workflow by Id. Id is required
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLeaveWorkFlowById(id: number | undefined): Observable<LeaveWorkFlowResourceApiResult> {
@@ -25902,7 +25773,7 @@ export class LeaveWorkFlowServiceProxy {
 
     /**
      * this method is used to used to create and edit leave workflow. Note all fields are requiered.
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addOrUpdateWorkflow(body: LeaveworkFlowPayload | undefined): Observable<MessageOutApiResult> {
@@ -25976,7 +25847,7 @@ export class LeaveWorkFlowServiceProxy {
 
     /**
      * this method is used to delete leave workflow
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteLeaveWorkFlow(id: number | undefined): Observable<MessageOutApiResult> {
@@ -26062,12 +25933,12 @@ export class GetLeaveYearsServiceProxy {
 
     /**
      * Gets leave years
-     * @param yearStartDate (optional)
-     * @param yearName (optional)
-     * @param yearEndDate (optional)
-     * @param companyID (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param yearStartDate (optional) 
+     * @param yearName (optional) 
+     * @param yearEndDate (optional) 
+     * @param companyID (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getLeaveYears(yearStartDate: Date | null | undefined, yearName: string | null | undefined, yearEndDate: Date | null | undefined, companyID: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LeaveYearDTOListApiResult> {
@@ -26167,7 +26038,7 @@ export class CreateLeaveYearServiceProxy {
 
     /**
      * this method is used to create and edit leave year. Note: all fields are required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createLeaveYear(body: LeaveYearCreatePayload | undefined): Observable<MessageOutApiResult> {
@@ -26253,7 +26124,7 @@ export class GetLeaveYearServiceProxy {
 
     /**
      * this method is used to delete leave year
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLeaveYear(id: number | undefined): Observable<LeaveYearDTOApiResult> {
@@ -26327,6 +26198,91 @@ export class GetLeaveYearServiceProxy {
 }
 
 @Injectable()
+export class AddUpdateLoanRequestServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateLoanRequest(body: ManageLoanRequestDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/LoanRequest/AddUpdateLoanRequest/Add-Update-Loan-Request";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateLoanRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateLoanRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class PostFullRepaymentServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -26338,7 +26294,7 @@ export class PostFullRepaymentServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     postFullRepayment(body: PostLoanDto | undefined): Observable<MessageOutApiResult> {
@@ -26423,11 +26379,11 @@ export class SimulatePaymentServiceProxy {
     }
 
     /**
-     * @param principal (optional)
-     * @param interestType (optional)
-     * @param tenor (optional)
-     * @param interestRate (optional)
-     * @param effectiveDate (optional)
+     * @param principal (optional) 
+     * @param interestType (optional) 
+     * @param tenor (optional) 
+     * @param interestRate (optional) 
+     * @param effectiveDate (optional) 
      * @return Success
      */
     simulatePayment(principal: number | undefined, interestType: number | undefined, tenor: number | undefined, interestRate: number | undefined, effectiveDate: string | null | undefined): Observable<LoanRepaymentLogIListApiResult> {
@@ -26526,12 +26482,12 @@ export class GetLoanRequestsServiceProxy {
     }
 
     /**
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchType (optional)
-     * @param searchText (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param searchType (optional) 
+     * @param searchText (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getLoanRequests(startDate: Date | null | undefined, endDate: Date | null | undefined, searchType: number | undefined, searchText: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<LoanRequestDTOsIListApiResult> {
@@ -26630,7 +26586,7 @@ export class GetLoanSummaryServiceProxy {
     }
 
     /**
-     * @param loanId (optional)
+     * @param loanId (optional) 
      * @return Success
      */
     getLoanSummary(loanId: number | undefined): Observable<IdNameObjIListApiResult> {
@@ -26715,7 +26671,7 @@ export class UpdateLoanRequestServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateLoanRequest(body: UpdateLoadRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -26800,8 +26756,8 @@ export class LoadRepaymentScheduleServiceProxy {
     }
 
     /**
-     * @param loanId (optional)
-     * @param recompute (optional)
+     * @param loanId (optional) 
+     * @param recompute (optional) 
      * @return Success
      */
     loadRepaymentSchedule(loanId: number | undefined, recompute: number | undefined): Observable<LoanRepaymentLogIListApiResult> {
@@ -26890,7 +26846,7 @@ export class GetLoanRequestServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLoanRequest(id: number | undefined): Observable<LoanRequestDTOsApiResult> {
@@ -26976,15 +26932,15 @@ export class GetLoanTypesByCriteriaServiceProxy {
 
     /**
      * API for retrieving All Loan Types for further CRUD operation
-     * @param code (optional)
-     * @param ledgerNo (optional)
-     * @param name (optional)
-     * @param minTenor (optional)
-     * @param maxTenor (optional)
-     * @param minAmount (optional)
-     * @param maxAmount (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param code (optional) 
+     * @param ledgerNo (optional) 
+     * @param name (optional) 
+     * @param minTenor (optional) 
+     * @param maxTenor (optional) 
+     * @param minAmount (optional) 
+     * @param maxAmount (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getLoanTypesByCriteria(code: string | null | undefined, ledgerNo: string | null | undefined, name: string | null | undefined, minTenor: number | undefined, maxTenor: number | undefined, minAmount: number | undefined, maxAmount: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeDTOIListApiResult> {
@@ -27176,7 +27132,7 @@ export class FetchLoanTypeByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     fetchLoanTypeById(id: number | undefined): Observable<LoanTypeDTOIListApiResult> {
@@ -27261,7 +27217,7 @@ export class ToggleLoanTypeServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     toggleLoanType(id: number | undefined): Observable<MessageOutApiResult> {
@@ -27347,7 +27303,7 @@ export class AddUpdateLocationServiceProxy {
 
     /**
      * API for adding/updating Location
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateLocation(body: ManageLocationDTO | undefined): Observable<MessageOutApiResult> {
@@ -27434,10 +27390,10 @@ export class GetAllLocationsServiceProxy {
     /**
      * API to Fetch Locations.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param lga_id (optional)
-     * @param state_id (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param lga_id (optional) 
+     * @param state_id (optional) 
      * @return Success
      */
     getAllLocations(pageSize: number | undefined, pageNumber: number | undefined, lga_id: number | undefined, state_id: number | undefined): Observable<LocationDTOListApiResult> {
@@ -27535,7 +27491,7 @@ export class GetLocationByIdServiceProxy {
 
     /**
      * API to get Location by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getLocation(id: number | undefined): Observable<LocationDTOApiResult> {
@@ -27621,7 +27577,7 @@ export class ManpowerServiceProxy {
 
     /**
      * API for adding/updating DepartmentActivity
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateDepartmentActivity(body: DepartmentActivityDTO | undefined): Observable<MessageOutApiResult> {
@@ -27696,7 +27652,7 @@ export class ManpowerServiceProxy {
     /**
      * API to Fetch Requirments Details.
     Note: all filter are optional
-     * @param reqId (optional)
+     * @param reqId (optional) 
      * @return Success
      */
     getRequirmentsDetails(reqId: number | undefined): Observable<DepartmentManPowerActivityDTOListApiResult> {
@@ -27771,8 +27727,8 @@ export class ManpowerServiceProxy {
     /**
      * API to Fetch baseYear.
     Note: all filter are optional
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchBaseYear(pageNumber: number | undefined, pageSize: number | undefined): Observable<BaseYearDTOListApiResult> {
@@ -27851,12 +27807,12 @@ export class ManpowerServiceProxy {
     /**
      * API to Fetch Departments Activity.
     Note: all filter are optional
-     * @param taskProject (optional)
-     * @param taskType (optional)
-     * @param year (optional)
-     * @param status (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param taskProject (optional) 
+     * @param taskType (optional) 
+     * @param year (optional) 
+     * @param status (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getDepartmentActivity(taskProject: string | null | undefined, taskType: number | null | undefined, year: number | null | undefined, status: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOListApiResult> {
@@ -27943,11 +27899,11 @@ export class ManpowerServiceProxy {
     /**
      * API to Fetch ProjectionActivities.
     Note: all filter are optional
-     * @param actitvityTypeId (optional)
-     * @param deptId (optional)
-     * @param status (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param actitvityTypeId (optional) 
+     * @param deptId (optional) 
+     * @param status (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchProjectionActivities(actitvityTypeId: number | null | undefined, deptId: number | undefined, status: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentManPowerActivityDTOIListApiResult> {
@@ -28034,10 +27990,10 @@ export class ManpowerServiceProxy {
     /**
      * API to Fetch Projection Task Project .
     Note: all filter are optional
-     * @param tasktype (optional)
-     * @param activityYear (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param tasktype (optional) 
+     * @param activityYear (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchProjectionTaskProject(tasktype: number | undefined, activityYear: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
@@ -28123,7 +28079,7 @@ export class ManpowerServiceProxy {
 
     /**
      * API for submitting Requirment Review
-     * @param activitymodel (optional)
+     * @param activitymodel (optional) 
      * @return Success
      */
     submitRequirmentReview(activitymodel: string | null | undefined): Observable<MessageOutApiResult> {
@@ -28196,11 +28152,11 @@ export class ManpowerServiceProxy {
     /**
      * API to fetch Projection Activity
     Note: all filter are optional
-     * @param activityTypeId (optional)
-     * @param deptId (optional)
-     * @param status (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param activityTypeId (optional) 
+     * @param deptId (optional) 
+     * @param status (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchProjectionActivity(activityTypeId: number | undefined, deptId: number | undefined, status: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentActivityDTOIListApiResult> {
@@ -28291,15 +28247,15 @@ export class ManpowerServiceProxy {
     /**
      * API to fetch Projection Requirment
     Note: all filter are optional
-     * @param baseYear (optional)
-     * @param year (optional)
-     * @param activityName (optional)
-     * @param jobCategory (optional)
-     * @param deptId (optional)
-     * @param status (optional)
-     * @param tastType (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param baseYear (optional) 
+     * @param year (optional) 
+     * @param activityName (optional) 
+     * @param jobCategory (optional) 
+     * @param deptId (optional) 
+     * @param status (optional) 
+     * @param tastType (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchProjectionRequirment(baseYear: number | undefined, year: number | undefined, activityName: string | null | undefined, jobCategory: string | null | undefined, deptId: number | null | undefined, status: number | null | undefined, tastType: number | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<DepartmentManPowerActivityDTOIListApiResult> {
@@ -28395,7 +28351,7 @@ export class ManpowerServiceProxy {
 
     /**
      * API to add requirment to plan
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addRequirementToPlan(body: DepartmentManPowerActivityDTO | undefined): Observable<MessageOutApiResult> {
@@ -28468,7 +28424,7 @@ export class ManpowerServiceProxy {
     }
 
     /**
-     * @param requirementId (optional)
+     * @param requirementId (optional) 
      * @return Success
      */
     removeRequirementToPlan(requirementId: number | undefined): Observable<MessageOutApiResult> {
@@ -28543,11 +28499,11 @@ export class ManpowerServiceProxy {
     /**
      * API to Download AssetReport
     Note: all filter are optional
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @param name (optional)
-     * @param isFilter (optional)
-     * @param isActive (optional)
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param name (optional) 
+     * @param isFilter (optional) 
+     * @param isActive (optional) 
      * @return Success
      */
     fetchAssetReport(pageNumber: number | undefined, pageSize: number | undefined, name: string | null | undefined, isFilter: boolean | undefined, isActive: boolean | null | undefined): Observable<AssetDTOIListApiResult> {
@@ -28644,7 +28600,7 @@ export class AddUpateOfferLetterTemplateServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateOfferletterTemplate(body: OfferLetterTemplateDTO | undefined): Observable<MessageOutApiResult> {
@@ -28729,7 +28685,7 @@ export class ToggleOfferLetterTempleteServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     toggleOfferLetterTemplate(body: number | undefined): Observable<MessageOutApiResult> {
@@ -28814,11 +28770,11 @@ export class FetchOfferLetterTemplateServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param signatoryName (optional)
-     * @param offerTitle (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param signatoryName (optional) 
+     * @param offerTitle (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchOfferLetterTemplate(iD: number | undefined, signatoryName: string | null | undefined, offerTitle: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<LoanTypeIListApiResult> {
@@ -28915,7 +28871,7 @@ export class PrepareOfferLetterEmailServiceProxy {
     }
 
     /**
-     * @param onboardingId (optional)
+     * @param onboardingId (optional) 
      * @return Success
      */
     applicantJobOfferEmail(onboardingId: number | undefined): Observable<PrepareOfferLetterDTOApiResult> {
@@ -29000,9 +28956,9 @@ export class FetchOnboardingPersonnalDataByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
+     * @param id (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
      * @return Success
      */
     fetchOnboardingPersonnalDataById(id: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingPersonalInfoApiResult> {
@@ -29095,10 +29051,10 @@ export class FetchOnboardingDocummentDataByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
+     * @param id (optional) 
+     * @param onboardingId (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
      * @return Success
      */
     fetchOnboardingDocummentDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingDocumentInfoApiResult> {
@@ -29195,10 +29151,10 @@ export class FetchOnboardingMedicalDisclosureDataByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
+     * @param id (optional) 
+     * @param onboardingId (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
      * @return Success
      */
     fetchOnboardingMedicalDisclosureDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingMedicalDisclosureInfoApiResult> {
@@ -29295,10 +29251,10 @@ export class FetchOnboardingPaymentDataByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
+     * @param id (optional) 
+     * @param onboardingId (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
      * @return Success
      */
     fetchOnboardingPaymentDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingMedicalDisclosureInfoApiResult> {
@@ -29395,10 +29351,10 @@ export class FetchOnboardingTaxDataByIdServiceProxy {
     }
 
     /**
-     * @param id (optional)
-     * @param onboardingId (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
+     * @param id (optional) 
+     * @param onboardingId (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
      * @return Success
      */
     fetchOnboardingTaxDataById(id: number | undefined, onboardingId: number | undefined, companyId: number | undefined, subId: number | undefined): Observable<OnboardingTaxInfoApiResult> {
@@ -29495,8 +29451,8 @@ export class FetchEmployeeOnboardingDataDetailsServiceProxy {
     }
 
     /**
-     * @param onboardingId (optional)
-     * @param companyId (optional)
+     * @param onboardingId (optional) 
+     * @param companyId (optional) 
      * @return Success
      */
     fetchEmployeeOnboardingDataDetails(onboardingId: number | undefined, companyId: number | undefined): Observable<EmployeeOnboardingPersonalDataListApiResult> {
@@ -29586,7 +29542,7 @@ export class AddUpdatePayElementServiceProxy {
 
     /**
      * API for adding/updating Pay Element
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdatePayElement(body: ManagePayElementDTO | undefined): Observable<MessageOutApiResult> {
@@ -29673,12 +29629,12 @@ export class GetAllPayElementsServiceProxy {
     /**
      * API to Fetch Payment Elements.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param payTypeId (optional)
-     * @param paymentInstitutionId (optional)
-     * @param elementTypeId (optional)
-     * @param elementCategoryId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param payTypeId (optional) 
+     * @param paymentInstitutionId (optional) 
+     * @param elementTypeId (optional) 
+     * @param elementCategoryId (optional) 
      * @return Success
      */
     getAllPayElements(pageSize: number | undefined, pageNumber: number | undefined, payTypeId: number | undefined, paymentInstitutionId: number | undefined, elementTypeId: number | undefined, elementCategoryId: number | undefined): Observable<PayElementDTOListApiResult> {
@@ -29784,7 +29740,7 @@ export class GetPayElementByIdServiceProxy {
 
     /**
      * API to get Payment Element by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getPayElement(id: number | undefined): Observable<PayElementDTOApiResult> {
@@ -29870,7 +29826,7 @@ export class AddUpdatePaymentInstitutionServiceProxy {
 
     /**
      * API for adding/updating Payment Institution
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdatePaymentInstitution(body: ManagePayInstitutionDTO | undefined): Observable<MessageOutApiResult> {
@@ -29957,9 +29913,9 @@ export class GetAllPaymentInstitutionsServiceProxy {
     /**
      * API to Fetch Payment Institutions.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param categoryId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param categoryId (optional) 
      * @return Success
      */
     getAllPaymentInstitutions(pageSize: number | undefined, pageNumber: number | undefined, categoryId: number | undefined): Observable<PayInstitutionDTOListApiResult> {
@@ -30053,7 +30009,7 @@ export class GetPaymentInstitutionByIdServiceProxy {
 
     /**
      * API to get Payment Institution by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getPaymentInstitution(id: number | undefined): Observable<PayInstitutionDTOApiResult> {
@@ -30139,7 +30095,7 @@ export class GetPayslipAnalysisServiceProxy {
 
     /**
      * API for fetching payslip analysis
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getPayslipAnalysis(payrollRunId: number | undefined): Observable<RptPayslipAnalyzerListApiResult> {
@@ -30225,8 +30181,8 @@ export class GetPayrollAnalysisServiceProxy {
 
     /**
      * API for fetching payroll analysis
-     * @param payrollRunId (optional)
-     * @param payrollTypeId (optional)
+     * @param payrollRunId (optional) 
+     * @param payrollTypeId (optional) 
      * @return Success
      */
     getPayrollAnalysis(payrollRunId: number | undefined, payrollTypeId: number | undefined): Observable<RptPayrollRunAnalysisListApiResult> {
@@ -30316,7 +30272,7 @@ export class GetBankScheduleServiceProxy {
 
     /**
      * API for fetching the bank schedule
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getBankSchedule(payrollRunId: number | undefined): Observable<RptBankScheduleListApiResult> {
@@ -30402,7 +30358,7 @@ export class GetEarningsServiceProxy {
 
     /**
      * API for fetching the payroll earnings
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getEarnings(payrollRunId: number | undefined): Observable<RptEarningsListApiResult> {
@@ -30488,7 +30444,7 @@ export class GetDeductionsServiceProxy {
 
     /**
      * API for fetching the payroll deductions
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getDeductions(payrollRunId: number | undefined): Observable<RptDeductionsListApiResult> {
@@ -30574,7 +30530,7 @@ export class GetAllElementsServiceProxy {
 
     /**
      * API for fetching the all the payroll elements
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getAllElements(payrollRunId: number | undefined): Observable<RptAllElementSheetListApiResult> {
@@ -30660,7 +30616,7 @@ export class GetDeductionSummaryServiceProxy {
 
     /**
      * API for fetching the all the payroll deduction elements
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getDeductionSummary(payrollRunId: number | undefined): Observable<RptDeductionSummaryListApiResult> {
@@ -30746,7 +30702,7 @@ export class GetPaymentSummaryServiceProxy {
 
     /**
      * API for fetching the all the payroll earning elements
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getPaymentSummary(payrollRunId: number | undefined): Observable<RptPaymentSummaryListApiResult> {
@@ -30832,7 +30788,7 @@ export class GetTaxDetailServiceProxy {
 
     /**
      * API for fetching the all the payroll tax elements details
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getTaxDetail(payrollRunId: number | undefined): Observable<RptTaxDetailListApiResult> {
@@ -30918,7 +30874,7 @@ export class GetTaxSummaryServiceProxy {
 
     /**
      * API for fetching the all the payroll tax elements summary
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getTaxSummary(payrollRunId: number | undefined): Observable<RptTaxSummaryListApiResult> {
@@ -31004,7 +30960,7 @@ export class GetPensionDetailServiceProxy {
 
     /**
      * API for fetching the all the payroll pension elements details
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getPensionDetail(payrollRunId: number | undefined): Observable<RptPensionDetailListApiResult> {
@@ -31090,7 +31046,7 @@ export class GetPensionSummaryServiceProxy {
 
     /**
      * API for fetching the all the payroll pension elements summary
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     getPensionSummary(payrollRunId: number | undefined): Observable<RptPensionSummaryListApiResult> {
@@ -31176,7 +31132,7 @@ export class FetchPayrollServiceProxy {
 
     /**
      * API for fetching payroll runs
-     * @param payrollRunId (optional)
+     * @param payrollRunId (optional) 
      * @return Success
      */
     fetchPayroll(payrollRunId: number | undefined): Observable<PayrollRunListApiResult> {
@@ -31262,8 +31218,8 @@ export class FetchPayslipsServiceProxy {
 
     /**
      * API for fetching the payslips
-     * @param payrollRunId (optional)
-     * @param payslipId (optional)
+     * @param payrollRunId (optional) 
+     * @param payslipId (optional) 
      * @return Success
      */
     fetchPayslips(payrollRunId: number | undefined, payslipId: number | undefined): Observable<PayslipListApiResult> {
@@ -31353,7 +31309,7 @@ export class FetchPayslipItemsServiceProxy {
 
     /**
      * API for fetching the payslips items
-     * @param payslipId (optional)
+     * @param payslipId (optional) 
      * @return Success
      */
     fetchPayslipItems(payslipId: number | undefined): Observable<PayslipItemListApiResult> {
@@ -31439,7 +31395,7 @@ export class AddUpdatePayScaleServiceProxy {
 
     /**
      * API for adding/updating Payroll Type (Pay Scale)
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdatePayScale(body: ManagePayrollTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -31526,9 +31482,9 @@ export class GetAllPayrollTypesServiceProxy {
     /**
      * API to Fetch Payroll Types.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param frequencyRuleId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param frequencyRuleId (optional) 
      * @return Success
      */
     getAllPayrollTypes(pageSize: number | undefined, pageNumber: number | undefined, frequencyRuleId: number | undefined): Observable<PayrollTypeDTOListApiResult> {
@@ -31623,7 +31579,7 @@ export class GetPayrollTypeByIdServiceProxy {
     /**
      * API to get Payroll Type by id and can be used for update, details and also
     includes; No. of Employees and Employee list that are attached to this PayScale etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getPayrollType(id: number | undefined): Observable<PayrollTypeDTOApiResult> {
@@ -31708,15 +31664,15 @@ export class FetchPerformanceCyclesServiceProxy {
     }
 
     /**
-     * API for retrieving all Performance Cycles with filters as follows
+     * API for retrieving all Performance Cycles with filters as follows 
     'Status: for Active, Pending_Approval, Approved, Ongoing, Closed
     'RatingType: for Open-ended/Close-ended'
-     * @param status (optional)
-     * @param departmentId (optional)
-     * @param locationId (optional)
-     * @param unitId (optional)
-     * @param ratingType (optional)
-     * @param pageSize (optional)
+     * @param status (optional) 
+     * @param departmentId (optional) 
+     * @param locationId (optional) 
+     * @param unitId (optional) 
+     * @param ratingType (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getPerformanceCycles(status: number | undefined, departmentId: number | undefined, locationId: number | undefined, unitId: number | undefined, ratingType: number | undefined, pageSize: number | undefined): Observable<CycleDTOIListApiResult> {
@@ -31822,7 +31778,7 @@ export class FetchPerformanceCycleServiceProxy {
 
     /**
      * API for getting Single Performance Cycle Details by id for CRUD Operation
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getPerformanceCycle(id: number | undefined): Observable<CycleDTOApiResult> {
@@ -31910,7 +31866,7 @@ export class AddUpdatePerformanceCycleServiceProxy {
      * API for add/updating Performance Cycle
     Toggle (i.e. While Updating use the property 'IsActive'
     as Radio-toggle button and pass true/false. When creating new Performance Cycle 'IsActive is by default)
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdatePerformanceCycle(body: ManageCycleDTO | undefined): Observable<MessageOutApiResult> {
@@ -31996,7 +31952,7 @@ export class AddUpdatePositionServiceProxy {
 
     /**
      * API for adding/updating Position
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdatePosition(body: ManagePositionDTO | undefined): Observable<MessageOutApiResult> {
@@ -32083,11 +32039,11 @@ export class GetAllPositionsServiceProxy {
     /**
      * API to Fetch Positions.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param parentPositionId (optional)
-     * @param nextPositionId (optional)
-     * @param basicSalary (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param parentPositionId (optional) 
+     * @param nextPositionId (optional) 
+     * @param basicSalary (optional) 
      * @return Success
      */
     getAllPositions(pageSize: number | undefined, pageNumber: number | undefined, parentPositionId: number | undefined, nextPositionId: number | undefined, basicSalary: number | undefined): Observable<PositionDTOListApiResult> {
@@ -32189,7 +32145,7 @@ export class GetPositionByIdServiceProxy {
 
     /**
      * API to get Position by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getPosition(id: number | undefined): Observable<PositionDTOApiResult> {
@@ -32275,7 +32231,7 @@ export class AddUpdateProfessionalBodyServiceProxy {
 
     /**
      * API for adding/updating Professional Body
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateProfessionalBody(body: ManageProfessionalBodyDTO | undefined): Observable<MessageOutApiResult> {
@@ -32362,9 +32318,9 @@ export class GetAllProfessionalBodiesServiceProxy {
     /**
      * API to Fetch Professional Bodies.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param sectorId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param sectorId (optional) 
      * @return Success
      */
     getAllProfessionalBodies(pageSize: number | undefined, pageNumber: number | undefined, sectorId: number | undefined): Observable<ProfessionalBodyDTOListApiResult> {
@@ -32458,7 +32414,7 @@ export class GetProfessionalBodyByIdServiceProxy {
 
     /**
      * API to get Professional Body by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getProfessionalBody(id: number | undefined): Observable<ProfessionalBodyDTOApiResult> {
@@ -32543,7 +32499,7 @@ export class AddUpdateEligibleBucketServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEligibleBucket(body: PromotionEligibilityViewModel | undefined): Observable<MessageOutApiResult> {
@@ -32628,9 +32584,9 @@ export class GetEligibilityEmployeeListsServiceProxy {
     }
 
     /**
-     * @param eligibilityId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param eligibilityId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getEligibilityEmployeeLists(eligibilityId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<PromotionLogIListApiResult> {
@@ -32723,12 +32679,12 @@ export class GetPromotionEligibilityListsServiceProxy {
     }
 
     /**
-     * @param _PageSize (optional)
-     * @param _PageNumber (optional)
-     * @param eligibilityId (optional)
-     * @param is_closed (optional)
-     * @param start (optional)
-     * @param end (optional)
+     * @param _PageSize (optional) 
+     * @param _PageNumber (optional) 
+     * @param eligibilityId (optional) 
+     * @param is_closed (optional) 
+     * @param start (optional) 
+     * @param end (optional) 
      * @return Success
      */
     getPromotionEligibilityLists(_PageSize: number | undefined, _PageNumber: number | undefined, eligibilityId: number | null | undefined, is_closed: number | undefined, start: Date | null | undefined, end: Date | null | undefined): Observable<PromotionEligibilityViewModelIListApiResult> {
@@ -32827,9 +32783,9 @@ export class GetPromotionListsServiceProxy {
     }
 
     /**
-     * @param eligibilityId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param eligibilityId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getPromotionLists(eligibilityId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<Sp_FetchEligibleEmployeesIListApiResult> {
@@ -32923,7 +32879,7 @@ export class QualificationServiceProxy {
 
     /**
      * API for adding/updating Qualification
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateQualification(body: ManageQualificationDTO | undefined): Observable<MessageOutApiResult> {
@@ -32998,9 +32954,9 @@ export class QualificationServiceProxy {
     /**
      * API to Fetch Qualifications.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param categoryId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param categoryId (optional) 
      * @return Success
      */
     getAllQualifications(pageSize: number | undefined, pageNumber: number | undefined, categoryId: number | undefined): Observable<QualificationDTOListApiResult> {
@@ -33082,7 +33038,7 @@ export class QualificationServiceProxy {
 
     /**
      * API to get Qualification by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getQualification(id: number | undefined): Observable<QualificationDTOApiResult> {
@@ -33249,7 +33205,7 @@ export class AddUpdateRatingServiceProxy {
 
     /**
      * API for add/updating Rating
-     * @param payloads (optional)
+     * @param payloads (optional) 
      * @return Success
      */
     addUpdateRating(payloads: string | null | undefined): Observable<MessageOutApiResult> {
@@ -33333,7 +33289,7 @@ export class DeleteRatingRecordServiceProxy {
 
     /**
      * API for deleting Rating
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteRating(id: number | undefined): Observable<MessageOutApiResult> {
@@ -33419,7 +33375,7 @@ export class RecruitmentJobServiceProxy {
 
     /**
      * API for adding/updating Job
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateJob(body: ManageJobDTO | undefined): Observable<MessageOutApiResult> {
@@ -33494,7 +33450,7 @@ export class RecruitmentJobServiceProxy {
     /**
      * API to Fetch All Jobs.
     Note: all filter are optional
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     getAllJobs(body: JobFilterDTO | undefined): Observable<JobDTOListApiResult> {
@@ -33637,7 +33593,7 @@ export class RecruitmentJobServiceProxy {
 
     /**
      * API to get Job details by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getJob(id: number | undefined): Observable<JobDTOApiResult> {
@@ -33711,7 +33667,7 @@ export class RecruitmentJobServiceProxy {
 
     /**
      * API  for Deleting Job
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteJob(id: number | undefined): Observable<MessageOutApiResult> {
@@ -33796,19 +33752,19 @@ export class RecruitmentJobApplicationServiceProxy {
     }
 
     /**
-     * @param skills (optional)
-     * @param email (optional)
-     * @param mobile (optional)
-     * @param jobId (optional)
-     * @param applicantCode (optional)
-     * @param jobApplicantId (optional)
-     * @param dateApplied (optional)
-     * @param alertSent (optional)
-     * @param coverLetter (optional)
-     * @param jobLocation (optional)
-     * @param iD (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param skills (optional) 
+     * @param email (optional) 
+     * @param mobile (optional) 
+     * @param jobId (optional) 
+     * @param applicantCode (optional) 
+     * @param jobApplicantId (optional) 
+     * @param dateApplied (optional) 
+     * @param alertSent (optional) 
+     * @param coverLetter (optional) 
+     * @param jobLocation (optional) 
+     * @param iD (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     fetchJobApplications(skills: string | null | undefined, email: string | null | undefined, mobile: string | null | undefined, jobId: number | undefined, applicantCode: string | null | undefined, jobApplicantId: number | undefined, dateApplied: Date | undefined, alertSent: boolean | undefined, coverLetter: string | null | undefined, jobLocation: number | undefined, iD: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<JobApplicationSearchIListApiResult> {
@@ -33919,7 +33875,7 @@ export class RecruitmentJobApplicationServiceProxy {
     }
 
     /**
-     * @param jobApplicantId (optional)
+     * @param jobApplicantId (optional) 
      * @return Success
      */
     fetchJobInterviewerListByApplicationId(jobApplicantId: number | undefined): Observable<JobScheduleInterviewIListApiResult> {
@@ -33992,7 +33948,7 @@ export class RecruitmentJobApplicationServiceProxy {
     }
 
     /**
-     * @param jobApplicantId (optional)
+     * @param jobApplicantId (optional) 
      * @return Success
      */
     viewJobApplicationProfileById(jobApplicantId: number | undefined): Observable<JobApplicationIListApiResult> {
@@ -34065,7 +34021,7 @@ export class RecruitmentJobApplicationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateJobApplication(body: JobApplicantDto | undefined): Observable<MessageOutApiResult> {
@@ -34138,7 +34094,7 @@ export class RecruitmentJobApplicationServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateScheduleJobInterviews(body: JobApplicantScheduleInterview | undefined): Observable<MessageOutApiResult> {
@@ -34364,7 +34320,7 @@ export class RecruitmentQuizServiceProxy {
 
     /**
      * API for adding/updating Quiz
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateQuiz(body: ManageQuizDTO | undefined): Observable<MessageOutApiResult> {
@@ -34507,7 +34463,7 @@ export class RecruitmentQuizServiceProxy {
 
     /**
      * API to get Quiz by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getQuiz(id: number | undefined): Observable<QuizDTOApiResult> {
@@ -34733,7 +34689,7 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API for adding/updating HireStage
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateHireStage(body: ManageHireStageDTO | undefined): Observable<MessageOutApiResult> {
@@ -34946,7 +34902,7 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API to get HireStage by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getHireStage(id: number | undefined): Observable<HireStageDTOApiResult> {
@@ -35020,7 +34976,7 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API for adding/updating SubHireStage
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateSubHireStage(body: ManageSubHireStageDTO | undefined): Observable<MessageOutApiResult> {
@@ -35165,7 +35121,7 @@ export class RecruitmentSettingServiceProxy {
     /**
      * API to Fetch Sub HireStages by HireStage Id.
     Like Interview and sub-stages under it
-     * @param hireStageId (optional)
+     * @param hireStageId (optional) 
      * @return Success
      */
     getSubHireStageByStageId(hireStageId: number | undefined): Observable<SubHireStageDTOListApiResult> {
@@ -35308,7 +35264,7 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API to get Sub HireStage by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getSubHireStage(id: number | undefined): Observable<SubHireStageDTOApiResult> {
@@ -35382,7 +35338,7 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API for adding/updating ScoreCard
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateScoreCard(body: ManageRecruitmentScoreCardDTO | undefined): Observable<MessageOutApiResult> {
@@ -35595,7 +35551,7 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API to get ScoreCard by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getRecruitmentScoreCard(id: number | undefined): Observable<RecruitmentScoreCardDTOApiResult> {
@@ -35669,8 +35625,8 @@ export class RecruitmentSettingServiceProxy {
 
     /**
      * API  for Removing ScoreCard Question by ScoreCardId and QuestionId
-     * @param scoreCardId (optional)
-     * @param questionId (optional)
+     * @param scoreCardId (optional) 
+     * @param questionId (optional) 
      * @return Success
      */
     removeScoreCardQuestion(scoreCardId: number | undefined, questionId: number | undefined): Observable<MessageOutApiResult> {
@@ -35760,7 +35716,7 @@ export class AddUpdateRequestServiceProxy {
 
     /**
      * API for adding/updating Request
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateRequest(body: ManageRequestDTO | undefined): Observable<MessageOutApiResult> {
@@ -35847,12 +35803,12 @@ export class GetAllRequestServiceProxy {
     /**
      * API to Fetch Requests.
     Note: all filter are optional
-     * @param departmentId (optional)
-     * @param requestStatusId (optional)
-     * @param log_status (optional)
-     * @param requestTypeId (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param departmentId (optional) 
+     * @param requestStatusId (optional) 
+     * @param log_status (optional) 
+     * @param requestTypeId (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllRequest(departmentId: number | undefined, requestStatusId: number | undefined, log_status: number | undefined, requestTypeId: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RequestDTOListApiResult> {
@@ -35958,7 +35914,7 @@ export class GetRequestByIdServiceProxy {
 
     /**
      * API to get Department by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getRequestById(id: number | undefined): Observable<RequestDTOApiResult> {
@@ -36044,7 +36000,7 @@ export class CreateUpdateRequestTypeServiceProxy {
 
     /**
      * API for adding/updating RequestType
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createUpdateRequestType(body: ManageRequestTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -36131,8 +36087,8 @@ export class GetAllRequestTypeServiceProxy {
     /**
      * API to Fetch RequestType.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllRequestType(pageSize: number | undefined, pageNumber: number | undefined): Observable<RequestTypeDTOListApiResult> {
@@ -36222,7 +36178,7 @@ export class GetRequestTypeByIdServiceProxy {
 
     /**
      * API to get RequestType by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getRequestTypeById(id: number | undefined): Observable<RequestTypeDTOApiResult> {
@@ -36307,7 +36263,7 @@ export class DeleteRequestTypeServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteRequestType(id: number | undefined): Observable<MessageOutApiResult> {
@@ -36393,9 +36349,9 @@ export class RetirementServiceProxy {
 
     /**
      * API for adding/updating Post Retirement
-     * @param adminMode (optional)
-     * @param saveNsubmit (optional)
-     * @param body (optional)
+     * @param adminMode (optional) 
+     * @param saveNsubmit (optional) 
+     * @param body (optional) 
      * @return Success
      */
     postRetireee(adminMode: number | undefined, saveNsubmit: number | undefined, body: ManageRetirementDTO | undefined): Observable<MessageOutApiResult> {
@@ -36478,16 +36434,16 @@ export class RetirementServiceProxy {
     /**
      * API to Fetch Retireee.
     Note: all filter are optional
-     * @param startdte (optional)
-     * @param enddte (optional)
-     * @param searchText (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param _selected (optional)
-     * @param startdate (optional)
-     * @param endate (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param startdte (optional) 
+     * @param enddte (optional) 
+     * @param searchText (optional) 
+     * @param searchType (optional) 
+     * @param page (optional) 
+     * @param _selected (optional) 
+     * @param startdate (optional) 
+     * @param endate (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllRetire(startdte: string | null | undefined, enddte: string | null | undefined, searchText: string | null | undefined, searchType: number | null | undefined, page: number | null | undefined, _selected: string | null | undefined, startdate: Date | null | undefined, endate: Date | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
@@ -36582,13 +36538,13 @@ export class RetirementServiceProxy {
     /**
      * API to Fetch Retireee.
     Note: all filter are optional
-     * @param iD (optional)
-     * @param fullName (optional)
-     * @param dateRequested (optional)
-     * @param type (optional)
-     * @param status (optional)
-     * @param isCleared (optional)
-     * @param retirmentTypeid (optional)
+     * @param iD (optional) 
+     * @param fullName (optional) 
+     * @param dateRequested (optional) 
+     * @param type (optional) 
+     * @param status (optional) 
+     * @param isCleared (optional) 
+     * @param retirmentTypeid (optional) 
      * @return Success
      */
     getRetirees(iD: number | undefined, fullName: string | null | undefined, dateRequested: Date | null | undefined, type: string | null | undefined, status: string | null | undefined, isCleared: boolean | undefined, retirmentTypeid: number | undefined): Observable<RetirmentDTOListApiResult> {
@@ -36749,16 +36705,16 @@ export class RetirementServiceProxy {
     /**
      * API to Fetch Retireee.
     Note: all filter are optional
-     * @param startdte (optional)
-     * @param enddte (optional)
-     * @param searchText (optional)
-     * @param searchType (optional)
-     * @param page (optional)
-     * @param _selected (optional)
-     * @param startdate (optional)
-     * @param endate (optional)
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param startdte (optional) 
+     * @param enddte (optional) 
+     * @param searchText (optional) 
+     * @param searchType (optional) 
+     * @param page (optional) 
+     * @param _selected (optional) 
+     * @param startdate (optional) 
+     * @param endate (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     searchRetiree(startdte: string | null | undefined, enddte: string | null | undefined, searchText: string | null | undefined, searchType: number | null | undefined, page: number | null | undefined, _selected: string | null | undefined, startdate: Date | null | undefined, endate: Date | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
@@ -36853,7 +36809,7 @@ export class RetirementServiceProxy {
     /**
      * API to Fetch Retirement by Id.
     Note: all filter are optional
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getRetirmentByid(id: number | undefined): Observable<RetirmentDTOApiResult> {
@@ -36928,64 +36884,64 @@ export class RetirementServiceProxy {
     /**
      * API to Fetch Retirement by Employee Id.
     Note: all filter are optional
-     * @param user_id (optional)
-     * @param employee_id (optional)
-     * @param employee_number (optional)
-     * @param employee_contract_id (optional)
-     * @param companyProfile_Id (optional)
-     * @param companyProfile_UserId (optional)
-     * @param companyProfile_RCNo (optional)
-     * @param companyProfile_LogoName (optional)
-     * @param companyProfile_ShortText (optional)
-     * @param companyProfile_FirstName (optional)
-     * @param companyProfile_LastName (optional)
-     * @param companyProfile_Address (optional)
-     * @param companyProfile_DomainName (optional)
-     * @param companyProfile_AuditorEmail (optional)
-     * @param companyProfile_MaxEmployeeCount (optional)
-     * @param companyProfile_SubscriptionPlanId (optional)
-     * @param companyProfile_SubscriptionPlanName (optional)
-     * @param companyProfile_LastBillingDate (optional)
-     * @param companyProfile_LastPaymentDate (optional)
-     * @param companyProfile_LicenseUsage (optional)
-     * @param companyProfile_IsActiveByAdmin (optional)
-     * @param companyProfile_IsTrial (optional)
-     * @param companyProfile_FrequencyId (optional)
-     * @param companyProfile_TempRef (optional)
-     * @param companyProfile_ReferenceNumber (optional)
-     * @param grade_id (optional)
-     * @param confirmation_date (optional)
-     * @param serial_no (optional)
-     * @param first_name (optional)
-     * @param last_name (optional)
-     * @param full_name (optional)
-     * @param other_name (optional)
-     * @param department (optional)
-     * @param department_id (optional)
-     * @param email (optional)
-     * @param phone_number (optional)
-     * @param email_confirmed (optional)
-     * @param session_token (optional)
-     * @param jwt_token (optional)
-     * @param user_token (optional)
-     * @param company_id (optional)
-     * @param licenseUsuage (optional)
-     * @param licenseCount (optional)
-     * @param company_name (optional)
-     * @param sub_id (optional)
-     * @param isAdmin (optional)
-     * @param isSuperAdmin (optional)
-     * @param isTenantAdmin (optional)
-     * @param isActiveBySysOrAdmin (optional)
-     * @param lstPermissions (optional)
-     * @param message (optional)
-     * @param isSuccessful (optional)
-     * @param retId (optional)
-     * @param bulkUploadId (optional)
-     * @param bulkUploadHtmlData (optional)
-     * @param redirectUrl (optional)
-     * @param referenceNumber (optional)
-     * @param errors (optional)
+     * @param user_id (optional) 
+     * @param employee_id (optional) 
+     * @param employee_number (optional) 
+     * @param employee_contract_id (optional) 
+     * @param companyProfile_Id (optional) 
+     * @param companyProfile_UserId (optional) 
+     * @param companyProfile_RCNo (optional) 
+     * @param companyProfile_LogoName (optional) 
+     * @param companyProfile_ShortText (optional) 
+     * @param companyProfile_FirstName (optional) 
+     * @param companyProfile_LastName (optional) 
+     * @param companyProfile_Address (optional) 
+     * @param companyProfile_DomainName (optional) 
+     * @param companyProfile_AuditorEmail (optional) 
+     * @param companyProfile_MaxEmployeeCount (optional) 
+     * @param companyProfile_SubscriptionPlanId (optional) 
+     * @param companyProfile_SubscriptionPlanName (optional) 
+     * @param companyProfile_LastBillingDate (optional) 
+     * @param companyProfile_LastPaymentDate (optional) 
+     * @param companyProfile_LicenseUsage (optional) 
+     * @param companyProfile_IsActiveByAdmin (optional) 
+     * @param companyProfile_IsTrial (optional) 
+     * @param companyProfile_FrequencyId (optional) 
+     * @param companyProfile_TempRef (optional) 
+     * @param companyProfile_ReferenceNumber (optional) 
+     * @param grade_id (optional) 
+     * @param confirmation_date (optional) 
+     * @param serial_no (optional) 
+     * @param first_name (optional) 
+     * @param last_name (optional) 
+     * @param full_name (optional) 
+     * @param other_name (optional) 
+     * @param department (optional) 
+     * @param department_id (optional) 
+     * @param email (optional) 
+     * @param phone_number (optional) 
+     * @param email_confirmed (optional) 
+     * @param session_token (optional) 
+     * @param jwt_token (optional) 
+     * @param user_token (optional) 
+     * @param company_id (optional) 
+     * @param licenseUsuage (optional) 
+     * @param licenseCount (optional) 
+     * @param company_name (optional) 
+     * @param sub_id (optional) 
+     * @param isAdmin (optional) 
+     * @param isSuperAdmin (optional) 
+     * @param isTenantAdmin (optional) 
+     * @param isActiveBySysOrAdmin (optional) 
+     * @param lstPermissions (optional) 
+     * @param message (optional) 
+     * @param isSuccessful (optional) 
+     * @param retId (optional) 
+     * @param bulkUploadId (optional) 
+     * @param bulkUploadHtmlData (optional) 
+     * @param redirectUrl (optional) 
+     * @param referenceNumber (optional) 
+     * @param errors (optional) 
      * @return Success
      */
     getRetirmentByEmployeeId(user_id: number | undefined, employee_id: number | undefined, employee_number: string | null | undefined, employee_contract_id: number | undefined, companyProfile_Id: number | undefined, companyProfile_UserId: number | undefined, companyProfile_Name: string, companyProfile_RCNo: string | null | undefined, companyProfile_LogoName: string | null | undefined, companyProfile_ShortText: string | null | undefined, companyProfile_Email: string, companyProfile_PhoneNumber: string, companyProfile_FirstName: string | null | undefined, companyProfile_LastName: string | null | undefined, companyProfile_Address: string | null | undefined, companyProfile_AdministratorEmail: string, companyProfile_DomainName: string | null | undefined, companyProfile_AuditorEmail: string | null | undefined, companyProfile_MaxEmployeeCount: number | undefined, companyProfile_SubscriptionPlanId: number | undefined, companyProfile_SubscriptionPlanName: string | null | undefined, companyProfile_LastBillingDate: Date | null | undefined, companyProfile_LastPaymentDate: Date | null | undefined, companyProfile_LicenseUsage: number | undefined, companyProfile_IsActiveByAdmin: boolean | undefined, companyProfile_IsTrial: boolean | undefined, companyProfile_Password: string, companyProfile_FrequencyId: number | undefined, companyProfile_TempRef: string | null | undefined, companyProfile_ReferenceNumber: string | null | undefined, grade_id: number | null | undefined, confirmation_date: Date | null | undefined, serial_no: string | null | undefined, first_name: string | null | undefined, last_name: string | null | undefined, full_name: string | null | undefined, other_name: string | null | undefined, department: string | null | undefined, department_id: number | undefined, email: string | null | undefined, phone_number: string | null | undefined, email_confirmed: boolean | undefined, session_token: string | null | undefined, jwt_token: string | null | undefined, user_token: string | null | undefined, company_id: number | undefined, licenseUsuage: number | undefined, licenseCount: number | undefined, company_name: string | null | undefined, sub_id: number | undefined, isAdmin: boolean | undefined, isSuperAdmin: boolean | undefined, isTenantAdmin: boolean | undefined, isActiveBySysOrAdmin: boolean | undefined, lstPermissions: string[] | null | undefined, message: string | null | undefined, isSuccessful: boolean | undefined, retId: number | undefined, bulkUploadId: number | undefined, bulkUploadHtmlData: string | null | undefined, redirectUrl: string | null | undefined, referenceNumber: string | null | undefined, errors: string[] | null | undefined): Observable<RetirementApiResult> {
@@ -37239,7 +37195,7 @@ export class RetirementServiceProxy {
 
     /**
      * API for adding/updating RetirementType
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateRetirementype(body: ManageRetirmentTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -37324,7 +37280,7 @@ export class AddUpdateRequestTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateRequestType(body: AddRequestViewModel | undefined): Observable<MessageOutApiResult> {
@@ -37409,10 +37365,10 @@ export class GetAllRequestsServiceProxy {
     }
 
     /**
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param _PageSize (optional)
-     * @param log_status (optional)
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param _PageSize (optional) 
+     * @param log_status (optional) 
      * @return Success
      */
     getAllRequests(startDate: Date | null | undefined, endDate: Date | null | undefined, _PageSize: number | undefined, log_status: number | undefined): Observable<RequestViewModelIListApiResult> {
@@ -37505,7 +37461,7 @@ export class RequestDetailsServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     requestDetails(id: number | null | undefined): Observable<RequestFileDtoIListApiResult> {
@@ -37833,7 +37789,7 @@ export class FetchRoleServiceProxy {
     /**
      * API for getting single Role for CRUD operation as a Super Admin that possesses
     'Role Management' Privilege
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getRole(id: number | undefined): Observable<ApplicationRoleDTOApiResult> {
@@ -37920,7 +37876,7 @@ export class CreateRoleServiceProxy {
     /**
      * API for Adding/Updating Roles as a Super Admin that possesses
     'Role Management' Privilege
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createRole(body: ApplicationRoleDTO | undefined): Observable<MessageOutApiResult> {
@@ -38085,7 +38041,7 @@ export class FetchRolePermissionServiceProxy {
     }
 
     /**
-     * @param roleId (optional)
+     * @param roleId (optional) 
      * @return Success
      */
     getRolePermission(roleId: number | undefined): Observable<RolePermissionDTOApiResult> {
@@ -38170,7 +38126,7 @@ export class RolePermissionMappingServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     rolePermissionMapping(body: RolePermissionMappingDTO | undefined): Observable<MessageOutApiResult> {
@@ -38256,7 +38212,7 @@ export class SalaryscaleServiceProxy {
 
     /**
      * API for adding/updating Salaryscale
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateSalaryscale(body: ManageSalaryscaleDTO | undefined): Observable<MessageOutApiResult> {
@@ -38331,8 +38287,8 @@ export class SalaryscaleServiceProxy {
     /**
      * API to Fetch Salaryscale.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
     getAllSalaryscale(pageSize: number | undefined, pageNumber: number | undefined): Observable<SalaryscaleDTOListApiResult> {
@@ -38410,7 +38366,7 @@ export class SalaryscaleServiceProxy {
 
     /**
      * API to get Salaryscale by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getSalarybyId(id: number | undefined): Observable<SalaryscaleDTOApiResult> {
@@ -38484,7 +38440,7 @@ export class SalaryscaleServiceProxy {
 
     /**
      * this method is used to delete Salaryscale
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteSalaryscale(id: number | undefined): Observable<MessageOutApiResult> {
@@ -38570,7 +38526,7 @@ export class AddSkillsServiceProxy {
 
     /**
      * API for adding Skill
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addSkills(body: ManageSkillDTO | undefined): Observable<MessageOutApiResult> {
@@ -38657,9 +38613,9 @@ export class GetAllSkillsServiceProxy {
     /**
      * API to Fetch Skills.
     Note: all filter are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param categoryId (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param categoryId (optional) 
      * @return Success
      */
     getAllSkills(pageSize: number | undefined, pageNumber: number | undefined, categoryId: number | undefined): Observable<SkillListApiResult> {
@@ -38753,7 +38709,7 @@ export class GetSkillByIdServiceProxy {
 
     /**
      * API to get Skill by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getSkill(id: number | undefined): Observable<SkillApiResult> {
@@ -38838,7 +38794,7 @@ export class CreateSubscriptionPlanServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createSubscriptionPlan(body: SubscriptionPlan | undefined): Observable<MessageOutApiResult> {
@@ -39003,7 +38959,7 @@ export class FetchSubscriptionPlanServiceProxy {
     }
 
     /**
-     * @param planId (optional)
+     * @param planId (optional) 
      * @return Success
      */
     getSubscriptionPlan(planId: number | undefined): Observable<SubscriptionPlanApiResult> {
@@ -39088,7 +39044,7 @@ export class FetchSubscriptionPlanModulesServiceProxy {
     }
 
     /**
-     * @param planId (optional)
+     * @param planId (optional) 
      * @return Success
      */
     getSubscriptionPlanModules(planId: number | undefined): Observable<SubscriptionPlanModuleIListApiResult> {
@@ -39174,7 +39130,7 @@ export class TalentManagementServiceProxy {
 
     /**
      * API for Creating  Talent Management Pool
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createTalentManagementPool(body: AddTalentMangementDTO | undefined): Observable<MessageOutApiResult> {
@@ -39248,7 +39204,7 @@ export class TalentManagementServiceProxy {
 
     /**
      * API for Remove Requirment from TalentManagementPool
-     * @param requirementId (optional)
+     * @param requirementId (optional) 
      * @return Success
      */
     removeRequirementFromTalentManagementPool(requirementId: number | undefined): Observable<MessageOutApiResult> {
@@ -39322,7 +39278,7 @@ export class TalentManagementServiceProxy {
 
     /**
      * API for adding/updating Employee  to Talent Management Pool
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateEmployeetoTalentManagementPool(body: AddEmployyeetoPoolDTO | undefined): Observable<MessageOutApiResult> {
@@ -39395,19 +39351,9 @@ export class TalentManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
      * API for  Delete  Employee from Talent Management Pool
-     * @param talentPoolId (optional)
-=======
-     * @param talentPoolId (optional)
-     * @param employeeId (optional)
->>>>>>> 6ee76ec07c2f408829318814441f0af949e365b4
-=======
-     * API for  Delete  Employee from Talent Management Pool
-     * @param talentPoolId (optional)
-     * @param employeeId (optional)
->>>>>>> 2f8c0189ba0543292cd64e11ce44c4dd320a8179
+     * @param talentPoolId (optional) 
+     * @param employeeId (optional) 
      * @return Success
      */
     deleteEmployeeFromTalentManagmentPool(talentPoolId: number | undefined, employeeId: number | undefined): Observable<MessageOutApiResult> {
@@ -39554,7 +39500,7 @@ export class TalentManagementServiceProxy {
     }
 
     /**
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getTalentPoolById(id: number | undefined): Observable<AddTalentMangementDTOApiResult> {
@@ -39627,12 +39573,8 @@ export class TalentManagementServiceProxy {
     }
 
     /**
-<<<<<<< HEAD
-     * @param talentPoolId (optional)
-=======
      * API for  Deleting Talent Management Pool
-     * @param talentPoolId (optional)
->>>>>>> b3190a584ad91a029e5ae18e9182ef136071295c
+     * @param talentPoolId (optional) 
      * @return Success
      */
     deleteTalentManagmentPool(talentPoolId: number | undefined): Observable<MessageOutApiResult> {
@@ -39719,8 +39661,8 @@ export class VerifySubscriptionPaymentServiceProxy {
     /**
      * API for verifying and updating Tenant's Subscription Payment
     with payment reference and userid
-     * @param reference (optional)
-     * @param userId (optional)
+     * @param reference (optional) 
+     * @param userId (optional) 
      * @return Success
      */
     verifySubscriptionPayment(reference: string | null | undefined, userId: string | null | undefined): Observable<VwUserObjApiResult> {
@@ -39806,7 +39748,7 @@ export class TenantSignUpServiceProxy {
 
     /**
      * API for signing up Tenant's account on the system
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     tenantSignUp(body: CompanySignUpDTO | undefined): Observable<MessageOutApiResult> {
@@ -39893,8 +39835,8 @@ export class ConfirmTenantEmailServiceProxy {
     /**
      * API for confirming Tenant's email account by providing the two querystring inside
     the Confirmation link ('userid' and 'token')
-     * @param userId (optional)
-     * @param token (optional)
+     * @param userId (optional) 
+     * @param token (optional) 
      * @return Success
      */
     confirmTenantEmail(userId: string | null | undefined, token: string | null | undefined): Observable<VwUserObjApiResult> {
@@ -39979,7 +39921,7 @@ export class RegisterCompanyServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     registerCompany(body: CompanyDTO | undefined): Observable<MessageOutApiResult> {
@@ -40065,10 +40007,10 @@ export class FetchAllTenantsServiceProxy {
 
     /**
      * API for retrieving All Tenant on the system with filtering parameters
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param searchText (optional)
-     * @param status (optional)
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param searchText (optional) 
+     * @param status (optional) 
      * @return Success
      */
     getAllTenants(startDate: Date | undefined, endDate: Date | undefined, searchText: string | null | undefined, status: number | undefined): Observable<CompanyIListApiResult> {
@@ -40245,7 +40187,7 @@ export class UpdateTenantModulesServiceProxy {
 
     /**
      * API for updating Tenant's Modules
-     * @param payload (optional)
+     * @param payload (optional) 
      * @return Success
      */
     updateTenantModules(payload: string | null | undefined): Observable<MessageOutApiResult> {
@@ -40329,7 +40271,7 @@ export class AddTenantModulesServiceProxy {
 
     /**
      * API for creating Tenant's Modules
-     * @param payload (optional)
+     * @param payload (optional) 
      * @return Success
      */
     createTenantModules(payload: string | null | undefined): Observable<MessageOutApiResult> {
@@ -40413,7 +40355,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to create  or update  training vendor.  if it is update, training vendor Id is required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createvendor(body: TrainingVendorPayload | undefined): Observable<MessageOutApiResult> {
@@ -40487,9 +40429,9 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used fetch training vendor. all filter are optional
-     * @param name (optional)
-     * @param trainingSpecializationId (optional)
-     * @param trainingTag (optional)
+     * @param name (optional) 
+     * @param trainingSpecializationId (optional) 
+     * @param trainingTag (optional) 
      * @return Success
      */
     vendors(name: string | null | undefined, trainingSpecializationId: number | null | undefined, trainingTag: string | null | undefined): Observable<TrainingVendorResourceListApiResult> {
@@ -40565,7 +40507,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used get training vendor by Id.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getVendor(id: number | undefined): Observable<TrainingVendorResourceApiResult> {
@@ -40639,7 +40581,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete training vendor
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteVendor(id: number | undefined): Observable<MessageOutApiResult> {
@@ -40713,7 +40655,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to upload excel file of vendors. accepted file format ".xlsx", ".xls"
-     * @param file (optional)
+     * @param file (optional) 
      * @return Success
      */
     uploadVendor(file: FileParameter | null | undefined): Observable<MessageOutApiResult> {
@@ -40788,16 +40730,16 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to create  or update  training type.  if it is update, training vendour Id is required
-     * @param costPer_Head (optional)
-     * @param no_Of_Trainees (optional)
-     * @param overAll_Budget (optional)
-     * @param trainingTypeId (optional)
-     * @param employeeId (optional)
-     * @param trainingVendorId (optional)
-     * @param trainingSpecializationId (optional)
-     * @param name (optional)
-     * @param tempRef (optional)
-     * @param trainingCategoryId (optional)
+     * @param costPer_Head (optional) 
+     * @param no_Of_Trainees (optional) 
+     * @param overAll_Budget (optional) 
+     * @param trainingTypeId (optional) 
+     * @param employeeId (optional) 
+     * @param trainingVendorId (optional) 
+     * @param trainingSpecializationId (optional) 
+     * @param name (optional) 
+     * @param tempRef (optional) 
+     * @param trainingCategoryId (optional) 
      * @return Success
      */
     createtype(costPer_Head: number | undefined, no_Of_Trainees: number | undefined, overAll_Budget: number | undefined, trainingTypeId: number | undefined, employeeId: number | undefined, trainingVendorId: number | undefined, trainingSpecializationId: number | undefined, name: string | null | undefined, tempRef: string | null | undefined, trainingCategoryId: number | undefined): Observable<MessageOutApiResult> {
@@ -40906,10 +40848,10 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used fetch training types. all filter are optional
-     * @param name (optional)
-     * @param trainingVendorId (optional)
-     * @param trainingSpecializationId (optional)
-     * @param trainingCategoryId (optional)
+     * @param name (optional) 
+     * @param trainingVendorId (optional) 
+     * @param trainingSpecializationId (optional) 
+     * @param trainingCategoryId (optional) 
      * @return Success
      */
     types(name: string | null | undefined, trainingVendorId: number | null | undefined, trainingSpecializationId: number | null | undefined, trainingCategoryId: number | null | undefined): Observable<TrainingTypeResourceListApiResult> {
@@ -40987,7 +40929,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used get training type by Id.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getTrainingType(id: number | undefined): Observable<TrainingTypeResourceApiResult> {
@@ -41061,7 +41003,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is use to change training type status. Note:  if status false, it means inactive while true means active
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     changetypestatus(body: ToggleTrainingType | undefined): Observable<MessageOutApiResult> {
@@ -41135,7 +41077,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete training type
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteTrainingType(id: number | undefined): Observable<MessageOutApiResult> {
@@ -41209,7 +41151,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to create  or update  training Category.  if it is update, training Category Id is required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createorupdatecategory(body: TrainingCategoryPayload | undefined): Observable<MessageOutApiResult> {
@@ -41352,7 +41294,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used get training Category by Id.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getCategory(id: number | undefined): Observable<TrainingCategoryResourceListApiResult> {
@@ -41426,7 +41368,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete training category
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteCategory(id: number | undefined): Observable<MessageOutApiResult> {
@@ -41500,7 +41442,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to create  or update  training Specialization/Expertise.  if it is update, training specialization Id is required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateSpecialization(body: TrainingSpecializationPayload | undefined): Observable<MessageOutApiResult> {
@@ -41643,7 +41585,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used get training Specialization by Id.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getSpecializationById(id: number | undefined): Observable<TrainingSpecializationDTOApiResult> {
@@ -41717,7 +41659,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete training Specialization
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteSpecialization(id: number | undefined): Observable<MessageOutApiResult> {
@@ -41791,19 +41733,19 @@ export class TrainingServiceProxy {
 
     /**
      * API for adding/updating Training Plan.
-     * @param id (optional)
-     * @param name (optional)
-     * @param description (optional)
-     * @param status (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param trainingTypeId (optional)
-     * @param specializationId (optional)
-     * @param vendorId (optional)
-     * @param totalCost (optional)
-     * @param costPerEmployee (optional)
-     * @param selectedEmployees (optional)
-     * @param tempRef (optional)
+     * @param id (optional) 
+     * @param name (optional) 
+     * @param description (optional) 
+     * @param status (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param trainingTypeId (optional) 
+     * @param specializationId (optional) 
+     * @param vendorId (optional) 
+     * @param totalCost (optional) 
+     * @param costPerEmployee (optional) 
+     * @param selectedEmployees (optional) 
+     * @param tempRef (optional) 
      * @return Success
      */
     addUpdateTrainingPlan(id: number | undefined, name: string | undefined, description: string | undefined, status: boolean | undefined, startDate: Date | undefined, endDate: Date | undefined, trainingTypeId: number | undefined, specializationId: number | undefined, vendorId: number | undefined, totalCost: number | null | undefined, costPerEmployee: number | null | undefined, selectedEmployees: string | null | undefined, tempRef: string | null | undefined): Observable<MessageOutApiResult> {
@@ -41920,15 +41862,15 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used fetch training plan. Note filters are optional
-     * @param pageSize (optional)
-     * @param pageNumber (optional)
-     * @param trainingTypeId (optional)
-     * @param specializationId (optional)
-     * @param vendorId (optional)
-     * @param startDate (optional)
-     * @param endDate (optional)
-     * @param totalCost (optional)
-     * @param costPerEmployee (optional)
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
+     * @param trainingTypeId (optional) 
+     * @param specializationId (optional) 
+     * @param vendorId (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param totalCost (optional) 
+     * @param costPerEmployee (optional) 
      * @return Success
      */
     getAllTrainingPlans(pageSize: number | undefined, pageNumber: number | undefined, trainingTypeId: number | undefined, specializationId: number | undefined, vendorId: number | undefined, startDate: Date | null | undefined, endDate: Date | null | undefined, totalCost: number | undefined, costPerEmployee: number | undefined): Observable<TrainingDTOListApiResult> {
@@ -42030,7 +41972,7 @@ export class TrainingServiceProxy {
 
     /**
      * API to get Training Plan by id and can be used for update, details etc
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getTrainingPlan(id: number | undefined): Observable<TrainingDTOApiResult> {
@@ -42104,7 +42046,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to change Training Plan status. if training status: false = inactive, true = active
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     toggleTrainingPlan(id: number | undefined): Observable<MessageOutApiResult> {
@@ -42178,7 +42120,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete Training Plan
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteTrainingPlan(id: number | undefined): Observable<MessageOutApiResult> {
@@ -42252,7 +42194,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to create or update  training Criteria. if it is update, training specialization Id is required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createUpdateCriteria(body: TrainingCriteriaPayload | undefined): Observable<MessageOutApiResult> {
@@ -42326,9 +42268,9 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used fetch training criteria.
-     * @param name (optional)
-     * @param min_Age (optional)
-     * @param min_LengthOfService (optional)
+     * @param name (optional) 
+     * @param min_Age (optional) 
+     * @param min_LengthOfService (optional) 
      * @return Success
      */
     getCriterias(trainingTypeId: number, name: string | null | undefined, min_Age: number | undefined, min_LengthOfService: number | undefined): Observable<TrainingCriteriaResourceListApiResult> {
@@ -42412,7 +42354,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used get training criteria by Id.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getCriteria(id: number | undefined): Observable<TrainingCriteriaResourceListApiResult> {
@@ -42486,7 +42428,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete training Criteria
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteCriteria(id: number | undefined): Observable<MessageOutApiResult> {
@@ -42560,7 +42502,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to asign training to employees.  Note: file is not required
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addEmployeeToTraining(body: AssignTrainingToEmpPayload | undefined): Observable<MessageOutApiResult> {
@@ -42634,10 +42576,10 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used fetch training assigned to employee. all filter are optional
-     * @param specializationName (optional)
-     * @param trainingTypeName (optional)
-     * @param name (optional)
-     * @param trainingVendorName (optional)
+     * @param specializationName (optional) 
+     * @param trainingTypeName (optional) 
+     * @param name (optional) 
+     * @param trainingVendorName (optional) 
      * @return Success
      */
     getEmployeeTrainings(specializationName: string | null | undefined, trainingTypeName: string | null | undefined, name: string | null | undefined, trainingVendorName: string | null | undefined): Observable<EmpTrainingResourceListApiResult> {
@@ -42715,7 +42657,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used send training for approval.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     sendTrainingForApproval(id: number | undefined): Observable<MessageOutApiResult> {
@@ -42789,7 +42731,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to notify employee for assigned training.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     notifyEmployee(id: number | undefined): Observable<MessageOutApiResult> {
@@ -42863,7 +42805,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to remove employees from training.
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     removeBulkEmployeeFromTraining(body: AssignTrainingToEmpPayload | undefined): Observable<MessageOutApiResult> {
@@ -42937,7 +42879,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to remove employee from training
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     removeEmployeeFromTraining(body: AssignTrainingToOneEmpPayload | undefined): Observable<MessageOutApiResult> {
@@ -43011,7 +42953,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to delete employee added to training
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     deleteEmployeeTraining(id: number | undefined): Observable<MessageOutApiResult> {
@@ -43085,7 +43027,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used get emp training by Id.
-     * @param id (optional)
+     * @param id (optional) 
      * @return Success
      */
     getEmpTraining(id: number | undefined): Observable<EmpTrainingResourceApiResult> {
@@ -43159,7 +43101,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to  save employee feedback after training.
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     employeeTrainingFeedback(body: EmpFeedBack | undefined): Observable<MessageOutApiResult> {
@@ -43233,7 +43175,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to upload excel file of vendors. accepted file format ".xlsx", ".xls"
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     postEmployeeTraining(body: EmployeeTrainingDTO | undefined): Observable<MessageOutApiResult> {
@@ -43307,7 +43249,7 @@ export class TrainingServiceProxy {
 
     /**
      * this method is used to update emp training
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateEmployeeTraining(body: EmployeeTrainingDTO | undefined): Observable<MessageOutApiResult> {
@@ -43393,13 +43335,13 @@ export class UploadDocumentServiceProxy {
 
     /**
      * API to upload document(s) in all any part of the system.
-     * @param userId (optional)
-     * @param title (optional)
-     * @param itemId (optional)
-     * @param entityId (optional)
-     * @param isReadOnly (optional)
-     * @param tempRef (optional)
-     * @param files (optional)
+     * @param userId (optional) 
+     * @param title (optional) 
+     * @param itemId (optional) 
+     * @param entityId (optional) 
+     * @param isReadOnly (optional) 
+     * @param tempRef (optional) 
+     * @param files (optional) 
      * @return Success
      */
     uploadDocs(userId: number | undefined, title: string | null | undefined, itemId: number | undefined, entityId: number | undefined, isReadOnly: boolean | undefined, tempRef: string | undefined, files: FileParameter[] | null | undefined): Observable<MessageOutApiResult> {
@@ -43501,7 +43443,7 @@ export class UploadDocumentServiceProxy {
     or ItemId which can represent EmployeeId, Other record Id that was added along with docs.
     ItemId is optional but EntityId is required.
     All Doc. EntityType list will be available on Data controller endpoints
-     * @param itemId (optional)
+     * @param itemId (optional) 
      * @return Success
      */
     loadDocumentFiles(entityId: number, itemId: number | undefined): Observable<DocFileDTOListApiResult> {
@@ -43590,7 +43532,7 @@ export class RegisterUserServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     registerUser(body: RegisterUserDTO | undefined): Observable<MessageOutApiResult> {
@@ -43675,7 +43617,7 @@ export class UpdateUserServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateUser(body: RegisterUserDTO | undefined): Observable<MessageOutApiResult> {
@@ -43760,10 +43702,10 @@ export class FetchAllUsersServiceProxy {
     }
 
     /**
-     * @param firstName (optional)
-     * @param lastName (optional)
-     * @param email (optional)
-     * @param pageSize (optional)
+     * @param firstName (optional) 
+     * @param lastName (optional) 
+     * @param email (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getAllUsers(firstName: string | null | undefined, lastName: string | null | undefined, email: string | null | undefined, pageSize: number | undefined): Observable<ApplicationUserDTOIListApiResult> {
@@ -43854,7 +43796,7 @@ export class AddUpdateVisaTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addUpdateVisaType(body: VisaTypeDTO | undefined): Observable<MessageOutApiResult> {
@@ -43939,7 +43881,7 @@ export class ToggleVisaTypeServiceProxy {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     toggleVisaType(body: number | undefined): Observable<MessageOutApiResult> {
@@ -44024,12 +43966,12 @@ export class GetVisaTypeServiceProxy {
     }
 
     /**
-     * @param iD (optional)
-     * @param companyId (optional)
-     * @param subId (optional)
-     * @param visaName (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param iD (optional) 
+     * @param companyId (optional) 
+     * @param subId (optional) 
+     * @param visaName (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getVisaType(iD: number | undefined, companyId: number | undefined, subId: number | undefined, visaName: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<VisaTypeIListApiResult> {
@@ -44151,7 +44093,7 @@ export class UserLoginDTO implements IUserLoginDTO {
         data = typeof data === 'object' ? data : {};
         data["email"] = this.email;
         data["password"] = this.password;
-        return data;
+        return data; 
     }
 
     clone(): UserLoginDTO {
@@ -44270,7 +44212,7 @@ export class CompanyDTO implements ICompanyDTO {
         data["frequencyId"] = this.frequencyId;
         data["tempRef"] = this.tempRef;
         data["referenceNumber"] = this.referenceNumber;
-        return data;
+        return data; 
     }
 
     clone(): CompanyDTO {
@@ -44465,7 +44407,7 @@ export class VwUserObj implements IVwUserObj {
             for (let item of this.errors)
                 data["errors"].push(item);
         }
-        return data;
+        return data; 
     }
 
     clone(): VwUserObj {
@@ -44557,7 +44499,7 @@ export class VwUserObjApiResult implements IVwUserObjApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): VwUserObjApiResult {
@@ -44633,7 +44575,7 @@ export class MessageOut implements IMessageOut {
             for (let item of this.errors)
                 data["errors"].push(item);
         }
-        return data;
+        return data; 
     }
 
     clone(): MessageOut {
@@ -44695,7 +44637,7 @@ export class MessageOutApiResult implements IMessageOutApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): MessageOutApiResult {
@@ -44751,7 +44693,7 @@ export class ResestPasswordDTO implements IResestPasswordDTO {
         data["email"] = this.email;
         data["password"] = this.password;
         data["confirmPassword"] = this.confirmPassword;
-        return data;
+        return data; 
     }
 
     clone(): ResestPasswordDTO {
@@ -44845,7 +44787,7 @@ export class ActivityLog implements IActivityLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ActivityLog {
@@ -44924,7 +44866,7 @@ export class ActivityLogIListApiResult implements IActivityLogIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ActivityLogIListApiResult {
@@ -44983,7 +44925,7 @@ export class AnnouncementTypeDto implements IAnnouncementTypeDto {
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
         data["departmentId"] = this.departmentId;
-        return data;
+        return data; 
     }
 
     clone(): AnnouncementTypeDto {
@@ -45060,7 +45002,7 @@ export class AnnouncementType implements IAnnouncementType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): AnnouncementType {
@@ -45133,7 +45075,7 @@ export class AnnouncementTypeListApiResult implements IAnnouncementTypeListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AnnouncementTypeListApiResult {
@@ -45204,7 +45146,7 @@ export class AnnouncementDto implements IAnnouncementDto {
         data["closeDate"] = this.closeDate ? this.closeDate.toISOString() : <any>undefined;
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): AnnouncementDto {
@@ -45297,7 +45239,7 @@ export class Announcement implements IAnnouncement {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Announcement {
@@ -45374,7 +45316,7 @@ export class AnnouncementListApiResult implements IAnnouncementListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AnnouncementListApiResult {
@@ -45493,7 +45435,7 @@ export class AppraisalReviewerListDTO implements IAppraisalReviewerListDTO {
         data["isReviewerStartedAppraisal"] = this.isReviewerStartedAppraisal;
         data["employeeStatus"] = this.employeeStatus;
         data["reviewerStatus"] = this.reviewerStatus;
-        return data;
+        return data; 
     }
 
     clone(): AppraisalReviewerListDTO {
@@ -45580,7 +45522,7 @@ export class AppraisalReviewerListDTOIListApiResult implements IAppraisalReviewe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AppraisalReviewerListDTOIListApiResult {
@@ -45654,7 +45596,7 @@ export class AssignedKPIs implements IAssignedKPIs {
         data["averageScore"] = this.averageScore;
         data["kraId"] = this.kraId;
         data["kpiId"] = this.kpiId;
-        return data;
+        return data; 
     }
 
     clone(): AssignedKPIs {
@@ -45759,7 +45701,7 @@ export class KpiReviewDTO implements IKpiReviewDTO {
             for (let item of this.assignedKPIs)
                 data["assignedKPIs"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): KpiReviewDTO {
@@ -45829,7 +45771,7 @@ export class KpiReviewDTOApiResult implements IKpiReviewDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): KpiReviewDTOApiResult {
@@ -45900,7 +45842,7 @@ export class PerformanceReviewDTO implements IPerformanceReviewDTO {
         data["employeeComment"] = this.employeeComment;
         data["reviewerComment"] = this.reviewerComment;
         data["assignedKPIs"] = this.assignedKPIs;
-        return data;
+        return data; 
     }
 
     clone(): PerformanceReviewDTO {
@@ -45984,7 +45926,7 @@ export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO
         data["grade"] = this.grade;
         data["recommendationId"] = this.recommendationId;
         data["recommendation"] = this.recommendation;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeAppraisalHistoryDTO {
@@ -46058,7 +46000,7 @@ export class EmployeeAppraisalHistoryDTOIListApiResult implements IEmployeeAppra
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeAppraisalHistoryDTOIListApiResult {
@@ -46207,7 +46149,7 @@ export class ApprovalLog implements IApprovalLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalLog {
@@ -46358,7 +46300,7 @@ export class ApprovalStep implements IApprovalStep {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalStep {
@@ -46487,7 +46429,7 @@ export class ApprovalProcess implements IApprovalProcess {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalProcess {
@@ -46566,7 +46508,7 @@ export class ApprovalProcessListApiResult implements IApprovalProcessListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalProcessListApiResult {
@@ -46633,7 +46575,7 @@ export class ApprovalStepListApiResult implements IApprovalStepListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalStepListApiResult {
@@ -46722,7 +46664,7 @@ export class VwPendingApproval implements IVwPendingApproval {
         data["description"] = this.description;
         data["stepLabel"] = this.stepLabel;
         data["fullName"] = this.fullName;
-        return data;
+        return data; 
     }
 
     clone(): VwPendingApproval {
@@ -46799,7 +46741,7 @@ export class VwPendingApprovalListApiResult implements IVwPendingApprovalListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): VwPendingApprovalListApiResult {
@@ -46900,7 +46842,7 @@ export class ApprovalLogViewModel implements IApprovalLogViewModel {
         data["isRequestTypeApproval"] = this.isRequestTypeApproval;
         data["category"] = this.category;
         data["partialViewName"] = this.partialViewName;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalLogViewModel {
@@ -46973,7 +46915,7 @@ export class ApprovalLogViewModelApiResult implements IApprovalLogViewModelApiRe
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalLogViewModelApiResult {
@@ -47029,7 +46971,7 @@ export class ApprovalResponseObj implements IApprovalResponseObj {
         data["message"] = this.message;
         data["next_approver"] = this.next_approver;
         data["isApprovalStepExist"] = this.isApprovalStepExist;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalResponseObj {
@@ -47087,7 +47029,7 @@ export class ApprovalResponseObjApiResult implements IApprovalResponseObjApiResu
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApprovalResponseObjApiResult {
@@ -47155,7 +47097,7 @@ export class AssetTypeDTO implements IAssetTypeDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetTypeDTO {
@@ -47225,7 +47167,7 @@ export class MessageOutIListApiResult implements IMessageOutIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): MessageOutIListApiResult {
@@ -47308,7 +47250,7 @@ export class AssetDeperciationProfileDTO implements IAssetDeperciationProfileDTO
         data["depriciationType"] = this.depriciationType;
         data["peroidicity"] = this.peroidicity ? this.peroidicity.toISOString() : <any>undefined;
         data["deperciationPercentage"] = this.deperciationPercentage;
-        return data;
+        return data; 
     }
 
     clone(): AssetDeperciationProfileDTO {
@@ -47393,7 +47335,7 @@ export class AssetSubTypeDTO implements IAssetSubTypeDTO {
         data["isActive"] = this.isActive;
         data["code"] = this.code;
         data["assetTypeName"] = this.assetTypeName;
-        return data;
+        return data; 
     }
 
     clone(): AssetSubTypeDTO {
@@ -47467,7 +47409,7 @@ export class AssetCategoryDTO implements IAssetCategoryDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetCategoryDTO {
@@ -47544,7 +47486,7 @@ export class AssetStatusDTO implements IAssetStatusDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetStatusDTO {
@@ -47626,7 +47568,7 @@ export class AssetMakeDTO implements IAssetMakeDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetMakeDTO {
@@ -47709,7 +47651,7 @@ export class AssetModelDTO implements IAssetModelDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetModelDTO {
@@ -47888,7 +47830,7 @@ export class AssetDTO implements IAssetDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetDTO {
@@ -48057,7 +47999,7 @@ export class AssetRequestDTO implements IAssetRequestDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetRequestDTO {
@@ -48134,7 +48076,7 @@ export class AssignmentDTO implements IAssignmentDTO {
         data["id"] = this.id;
         data["assetid"] = this.assetid;
         data["comment"] = this.comment;
-        return data;
+        return data; 
     }
 
     clone(): AssignmentDTO {
@@ -48194,7 +48136,7 @@ export class AssetCallbackDTO implements IAssetCallbackDTO {
         data["itemId"] = this.itemId;
         data["approvalProcessId"] = this.approvalProcessId;
         data["isapproved"] = this.isapproved;
-        return data;
+        return data; 
     }
 
     clone(): AssetCallbackDTO {
@@ -48257,7 +48199,7 @@ export class AssetcheckInFilter implements IAssetcheckInFilter {
         data["name"] = this.name;
         data["isFilter"] = this.isFilter;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): AssetcheckInFilter {
@@ -48326,7 +48268,7 @@ export class UpdateAssetRequest implements IUpdateAssetRequest {
         data["name"] = this.name;
         data["isFilter"] = this.isFilter;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): UpdateAssetRequest {
@@ -48396,7 +48338,7 @@ export class AssetDTOIListApiResult implements IAssetDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetDTOIListApiResult {
@@ -48463,7 +48405,7 @@ export class AssetTypeDTOIListApiResult implements IAssetTypeDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetTypeDTOIListApiResult {
@@ -48530,7 +48472,7 @@ export class AssetSubTypeDTOIListApiResult implements IAssetSubTypeDTOIListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetSubTypeDTOIListApiResult {
@@ -48597,7 +48539,7 @@ export class AssetCategoryDTOIListApiResult implements IAssetCategoryDTOIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetCategoryDTOIListApiResult {
@@ -48664,7 +48606,7 @@ export class AssetMakeDTOIListApiResult implements IAssetMakeDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetMakeDTOIListApiResult {
@@ -48731,7 +48673,7 @@ export class AssetModelDTOIListApiResult implements IAssetModelDTOIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetModelDTOIListApiResult {
@@ -48798,7 +48740,7 @@ export class AssetStatusDTOIListApiResult implements IAssetStatusDTOIListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetStatusDTOIListApiResult {
@@ -48865,7 +48807,7 @@ export class AssetDeperciationProfileDTOIListApiResult implements IAssetDepercia
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetDeperciationProfileDTOIListApiResult {
@@ -48969,7 +48911,7 @@ export class AssetHistoryDTO implements IAssetHistoryDTO {
         data["departmentNameAssignedTo"] = this.departmentNameAssignedTo;
         data["assignedDate"] = this.assignedDate ? this.assignedDate.toISOString() : <any>undefined;
         data["employeelocationName"] = this.employeelocationName;
-        return data;
+        return data; 
     }
 
     clone(): AssetHistoryDTO {
@@ -49051,7 +48993,7 @@ export class AssetHistoryDTOIListApiResult implements IAssetHistoryDTOIListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetHistoryDTOIListApiResult {
@@ -49118,7 +49060,7 @@ export class AssetRequestDTOListApiResult implements IAssetRequestDTOListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AssetRequestDTOListApiResult {
@@ -49174,7 +49116,7 @@ export class BenefitPlanDTO implements IBenefitPlanDTO {
         data["benefitType"] = this.benefitType;
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
-        return data;
+        return data; 
     }
 
     clone(): BenefitPlanDTO {
@@ -49220,7 +49162,7 @@ export class DeleteDTO implements IDeleteDTO {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        return data;
+        return data; 
     }
 
     clone(): DeleteDTO {
@@ -49290,7 +49232,7 @@ export class BenefitPlan implements IBenefitPlan {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): BenefitPlan {
@@ -49362,7 +49304,7 @@ export class BenefitPlanListApiResult implements IBenefitPlanListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): BenefitPlanListApiResult {
@@ -49427,7 +49369,7 @@ export class EmployeeCoverageBenefitDTO implements IEmployeeCoverageBenefitDTO {
         data["eligibilityTypeId"] = this.eligibilityTypeId;
         data["addtionalComment"] = this.addtionalComment;
         data["benefitIcon"] = this.benefitIcon;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCoverageBenefitDTO {
@@ -49503,7 +49445,7 @@ export class CoveragePlan implements ICoveragePlan {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): CoveragePlan {
@@ -49605,7 +49547,7 @@ export class EmployeeCoverage implements IEmployeeCoverage {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCoverage {
@@ -49682,7 +49624,7 @@ export class EmployeeCoverageListApiResult implements IEmployeeCoverageListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCoverageListApiResult {
@@ -49738,7 +49680,7 @@ export class CoveragePlanDTO implements ICoveragePlanDTO {
         data["coverageName"] = this.coverageName;
         data["companyID"] = this.companyID;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): CoveragePlanDTO {
@@ -49804,7 +49746,7 @@ export class CoveragePlanListApiResult implements ICoveragePlanListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CoveragePlanListApiResult {
@@ -49860,7 +49802,7 @@ export class EligibilityTypeDTO implements IEligibilityTypeDTO {
         data["eligibilityTypes"] = this.eligibilityTypes;
         data["companyID"] = this.companyID;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): EligibilityTypeDTO {
@@ -49933,7 +49875,7 @@ export class EligibilityType implements IEligibilityType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EligibilityType {
@@ -50005,7 +49947,7 @@ export class EligibilityTypeListApiResult implements IEligibilityTypeListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EligibilityTypeListApiResult {
@@ -50064,7 +50006,7 @@ export class ManageBudgetDTO implements IManageBudgetDTO {
         data["financialYearEndDate"] = this.financialYearEndDate ? this.financialYearEndDate.toISOString() : <any>undefined;
         data["totalBudgetAmount"] = this.totalBudgetAmount;
         data["spent"] = this.spent;
-        return data;
+        return data; 
     }
 
     clone(): ManageBudgetDTO {
@@ -50123,7 +50065,7 @@ export class DisbursementBudgetItemAllocationDTO implements IDisbursementBudgetI
         data["departmentId"] = this.departmentId;
         data["department"] = this.department;
         data["allocatedAmount"] = this.allocatedAmount;
-        return data;
+        return data; 
     }
 
     clone(): DisbursementBudgetItemAllocationDTO {
@@ -50229,7 +50171,7 @@ export class BudgetItemDTO implements IBudgetItemDTO {
             for (let item of this.budgetItemAllocations)
                 data["budgetItemAllocations"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): BudgetItemDTO {
@@ -50336,7 +50278,7 @@ export class BudgetDTO implements IBudgetDTO {
             for (let item of this.budgetItems)
                 data["budgetItems"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): BudgetDTO {
@@ -50412,7 +50354,7 @@ export class BudgetDTOIListApiResult implements IBudgetDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): BudgetDTOIListApiResult {
@@ -50471,7 +50413,7 @@ export class BudgetDTOApiResult implements IBudgetDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): BudgetDTOApiResult {
@@ -50536,7 +50478,7 @@ export class ManageBudgetItemDTO implements IManageBudgetItemDTO {
         data["totalBudget"] = this.totalBudget;
         data["spent"] = this.spent;
         data["budgetAllocations"] = this.budgetAllocations;
-        return data;
+        return data; 
     }
 
     clone(): ManageBudgetItemDTO {
@@ -50605,7 +50547,7 @@ export class BudgetItemDTOIListApiResult implements IBudgetItemDTOIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): BudgetItemDTOIListApiResult {
@@ -50699,7 +50641,7 @@ export class DisbursementBudget implements IDisbursementBudget {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DisbursementBudget {
@@ -50808,7 +50750,7 @@ export class Department implements IDepartment {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Department {
@@ -50905,7 +50847,7 @@ export class DisbursementBudgetItemAllocation implements IDisbursementBudgetItem
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DisbursementBudgetItemAllocation {
@@ -51039,7 +50981,7 @@ export class ProjectActivity implements IProjectActivity {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ProjectActivity {
@@ -51193,7 +51135,7 @@ export class Project implements IProject {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Project {
@@ -51379,7 +51321,7 @@ export class FundDisbursement implements IFundDisbursement {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): FundDisbursement {
@@ -51526,7 +51468,7 @@ export class DisbursementBudgetItem implements IDisbursementBudgetItem {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DisbursementBudgetItem {
@@ -51605,7 +51547,7 @@ export class DisbursementBudgetItemIListApiResult implements IDisbursementBudget
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DisbursementBudgetItemIListApiResult {
@@ -51664,7 +51606,7 @@ export class BudgetItemDTOApiResult implements IBudgetItemDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): BudgetItemDTOApiResult {
@@ -51706,7 +51648,7 @@ export class File implements IFile {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        return data;
+        return data; 
     }
 
     clone(): File {
@@ -51793,7 +51735,7 @@ export class NineGridBoxMovementDTO implements INineGridBoxMovementDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): NineGridBoxMovementDTO {
@@ -51892,7 +51834,7 @@ export class NineGridBoxDTO implements INineGridBoxDTO {
             for (let item of this.movementHistory)
                 data["movementHistory"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): NineGridBoxDTO {
@@ -51976,7 +51918,7 @@ export class ManagecarreerSuccessor implements IManagecarreerSuccessor {
         data["purpose"] = this.purpose;
         data["successorId"] = this.successorId;
         data["careerSuccessionId"] = this.careerSuccessionId;
-        return data;
+        return data; 
     }
 
     clone(): ManagecarreerSuccessor {
@@ -52038,7 +51980,7 @@ export class ManageMoveEmployeeFilterDTO implements IManageMoveEmployeeFilterDTO
         data["fromgridboxId"] = this.fromgridboxId;
         data["employeeId"] = this.employeeId;
         data["justification"] = this.justification;
-        return data;
+        return data; 
     }
 
     clone(): ManageMoveEmployeeFilterDTO {
@@ -52104,7 +52046,7 @@ export class NineGridBoxDTOListApiResult implements INineGridBoxDTOListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): NineGridBoxDTOListApiResult {
@@ -52154,7 +52096,7 @@ export class GridBoxCountDTO implements IGridBoxCountDTO {
         data = typeof data === 'object' ? data : {};
         data["gridboxId"] = this.gridboxId;
         data["gridboxCount"] = this.gridboxCount;
-        return data;
+        return data; 
     }
 
     clone(): GridBoxCountDTO {
@@ -52218,7 +52160,7 @@ export class GridBoxCountDTOListApiResult implements IGridBoxCountDTOListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GridBoxCountDTOListApiResult {
@@ -52328,7 +52270,7 @@ export class EmployeeQualificationDTO implements IEmployeeQualificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeQualificationDTO {
@@ -52434,7 +52376,7 @@ export class EmployeeSkillDTO implements IEmployeeSkillDTO {
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeSkillDTO {
@@ -52542,7 +52484,7 @@ export class EmployeeCertificationDTO implements IEmployeeCertificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCertificationDTO {
@@ -52656,7 +52598,7 @@ export class SuccessorcompetencyDTO implements ISuccessorcompetencyDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): SuccessorcompetencyDTO {
@@ -52767,7 +52709,7 @@ export class Competency implements ICompetency {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Competency {
@@ -52884,7 +52826,7 @@ export class CompetencyRequirments implements ICompetencyRequirments {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): CompetencyRequirments {
@@ -52997,7 +52939,7 @@ export class CompetencyDTO implements ICompetencyDTO {
             for (let item of this.competencesRequirements)
                 data["competencesRequirements"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): CompetencyDTO {
@@ -53027,6 +52969,11 @@ export interface ICompetencyDTO {
 }
 
 export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
+    description!: string | undefined;
+    competencyTitle!: string | undefined;
+    companyID!: number | undefined;
+    subID!: number | undefined;
+    isActive!: boolean;
     competencyId!: number;
     requirementCategory!: string | undefined;
     skillId!: number | undefined;
@@ -53053,6 +53000,11 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
 
     init(_data?: any) {
         if (_data) {
+            this.description = _data["description"];
+            this.competencyTitle = _data["competencyTitle"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
             this.competencyId = _data["competencyId"];
             this.requirementCategory = _data["requirementCategory"];
             this.skillId = _data["skillId"];
@@ -53079,6 +53031,11 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["description"] = this.description;
+        data["competencyTitle"] = this.competencyTitle;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
         data["competencyId"] = this.competencyId;
         data["requirementCategory"] = this.requirementCategory;
         data["skillId"] = this.skillId;
@@ -53093,7 +53050,7 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
         data["skillName"] = this.skillName;
         data["certificationName"] = this.certificationName;
         data["qualificationName"] = this.qualificationName;
-        return data;
+        return data; 
     }
 
     clone(): CompetencyRequirmentsDTO {
@@ -53105,6 +53062,11 @@ export class CompetencyRequirmentsDTO implements ICompetencyRequirmentsDTO {
 }
 
 export interface ICompetencyRequirmentsDTO {
+    description: string | undefined;
+    competencyTitle: string | undefined;
+    companyID: number | undefined;
+    subID: number | undefined;
+    isActive: boolean;
     competencyId: number;
     requirementCategory: string | undefined;
     skillId: number | undefined;
@@ -53244,7 +53206,7 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): CareerSuccessorDTO {
@@ -53391,7 +53353,7 @@ export class PersonListDTO implements IPersonListDTO {
             for (let item of this.successionEmployee)
                 data["successionEmployee"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): PersonListDTO {
@@ -53471,7 +53433,7 @@ export class PersonListDTOListApiResult implements IPersonListDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PersonListDTOListApiResult {
@@ -53563,7 +53525,7 @@ export class EmployeeTalentPoolHistoryDTO implements IEmployeeTalentPoolHistoryD
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeTalentPoolHistoryDTO {
@@ -53668,7 +53630,7 @@ export class EmployeeTalentPoolDTO implements IEmployeeTalentPoolDTO {
             for (let item of this.employeeTalentPoolHistory)
                 data["employeeTalentPoolHistory"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): EmployeeTalentPoolDTO {
@@ -53757,9 +53719,7 @@ export class ManageCareerSuccessionDto implements IManageCareerSuccessionDto {
         data["isActive"] = this.isActive;
         data["readinessToStart"] = this.readinessToStart;
         data["stringSuccessionEmployee"] = this.stringSuccessionEmployee;
-
-        return data;
-
+        return data; 
     }
 
     clone(): ManageCareerSuccessionDto {
@@ -53876,7 +53836,7 @@ export class TalentpoolrequirementDTO implements ITalentpoolrequirementDTO {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): TalentpoolrequirementDTO {
@@ -53984,7 +53944,7 @@ export class AddTalentPoolDTO implements IAddTalentPoolDTO {
             for (let item of this.talentPoolRequirement)
                 data["talentPoolRequirement"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): AddTalentPoolDTO {
@@ -54059,7 +54019,7 @@ export class AddTalentPoolDTOListApiResult implements IAddTalentPoolDTOListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AddTalentPoolDTOListApiResult {
@@ -54154,7 +54114,7 @@ export class SuccessorCompetency implements ISuccessorCompetency {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): SuccessorCompetency {
@@ -54275,7 +54235,7 @@ export class CareerSuccessor implements ICareerSuccessor {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): CareerSuccessor {
@@ -54395,7 +54355,7 @@ export class CareerSuccession implements ICareerSuccession {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): CareerSuccession {
@@ -54475,7 +54435,7 @@ export class CareerSuccessionIListApiResult implements ICareerSuccessionIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CareerSuccessionIListApiResult {
@@ -54575,7 +54535,7 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
         data["purpose"] = this.purpose;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["competencyId"] = this.competencyId;
-        return data;
+        return data; 
     }
 
     clone(): CareerSuccessionDTO {
@@ -54645,7 +54605,7 @@ export class CareerSuccessionDTOApiResult implements ICareerSuccessionDTOApiResu
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CareerSuccessionDTOApiResult {
@@ -54704,7 +54664,7 @@ export class ManageCertificationDTO implements IManageCertificationDTO {
         data["name"] = this.name;
         data["code"] = this.code;
         data["point"] = this.point;
-        return data;
+        return data; 
     }
 
     clone(): ManageCertificationDTO {
@@ -54790,7 +54750,7 @@ export class CertificationDTO implements ICertificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): CertificationDTO {
@@ -54866,7 +54826,7 @@ export class CertificationDTOListApiResult implements ICertificationDTOListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CertificationDTOListApiResult {
@@ -54925,7 +54885,7 @@ export class CertificationDTOApiResult implements ICertificationDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CertificationDTOApiResult {
@@ -54975,7 +54935,7 @@ export class ElementTypeDTO implements IElementTypeDTO {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): ElementTypeDTO {
@@ -55039,7 +54999,7 @@ export class ElementTypeDTOIListApiResult implements IElementTypeDTOIListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ElementTypeDTOIListApiResult {
@@ -55089,7 +55049,7 @@ export class ElementCategoryDTO implements IElementCategoryDTO {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): ElementCategoryDTO {
@@ -55153,7 +55113,7 @@ export class ElementCategoryDTOIListApiResult implements IElementCategoryDTOILis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ElementCategoryDTOIListApiResult {
@@ -55244,7 +55204,7 @@ export class PayslipCategory implements IPayslipCategory {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
-        return data;
+        return data; 
     }
 
     clone(): PayslipCategory {
@@ -55355,7 +55315,7 @@ export class ElementClassification implements IElementClassification {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
-        return data;
+        return data; 
     }
 
     clone(): ElementClassification {
@@ -55522,7 +55482,7 @@ export class Element implements IElement {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
-        return data;
+        return data; 
     }
 
     clone(): Element {
@@ -55657,7 +55617,7 @@ export class PaymentInstitution implements IPaymentInstitution {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
-        return data;
+        return data; 
     }
 
     clone(): PaymentInstitution {
@@ -55736,7 +55696,7 @@ export class PaymentInstitutionIListApiResult implements IPaymentInstitutionILis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PaymentInstitutionIListApiResult {
@@ -55803,7 +55763,7 @@ export class ElementIListApiResult implements IElementIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ElementIListApiResult {
@@ -55979,7 +55939,7 @@ export class EmployeeContractAssignment implements IEmployeeContractAssignment {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeContractAssignment {
@@ -56112,7 +56072,7 @@ export class FrequencyRule implements IFrequencyRule {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
-        return data;
+        return data; 
     }
 
     clone(): FrequencyRule {
@@ -56245,7 +56205,7 @@ export class PayrollType implements IPayrollType {
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
         data["row_version"] = this.row_version;
-        return data;
+        return data; 
     }
 
     clone(): PayrollType {
@@ -56331,7 +56291,7 @@ export class PayrollTypeIListApiResult implements IPayrollTypeIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayrollTypeIListApiResult {
@@ -56398,7 +56358,7 @@ export class FrequencyRuleIListApiResult implements IFrequencyRuleIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): FrequencyRuleIListApiResult {
@@ -56472,7 +56432,7 @@ export class Institution implements IInstitution {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Institution {
@@ -56544,7 +56504,7 @@ export class InstitutionIListApiResult implements IInstitutionIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): InstitutionIListApiResult {
@@ -56638,7 +56598,7 @@ export class Skill implements ISkill {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Skill {
@@ -56742,7 +56702,7 @@ export class EmployeeSkill implements IEmployeeSkill {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeSkill {
@@ -56848,7 +56808,7 @@ export class ProfessionalBody implements IProfessionalBody {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ProfessionalBody {
@@ -56943,7 +56903,7 @@ export class Certification implements ICertification {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Certification {
@@ -57050,7 +57010,7 @@ export class EmployeeCertification implements IEmployeeCertification {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCertification {
@@ -57140,7 +57100,7 @@ export class State implements IState {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): State {
@@ -57226,7 +57186,7 @@ export class LGA implements ILGA {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LGA {
@@ -57337,7 +57297,7 @@ export class Address implements IAddress {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Address {
@@ -57602,7 +57562,7 @@ export class Employee implements IEmployee {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Employee {
@@ -57740,7 +57700,7 @@ export class QualificationGrade implements IQualificationGrade {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): QualificationGrade {
@@ -57840,7 +57800,7 @@ export class Qualification implements IQualification {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Qualification {
@@ -57974,7 +57934,7 @@ export class EmployeeQualification implements IEmployeeQualification {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeQualification {
@@ -58081,7 +58041,7 @@ export class Course implements ICourse {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Course {
@@ -58154,7 +58114,7 @@ export class CourseIListApiResult implements ICourseIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CourseIListApiResult {
@@ -58221,7 +58181,7 @@ export class QualificationIListApiResult implements IQualificationIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): QualificationIListApiResult {
@@ -58310,7 +58270,7 @@ export class ChannelParameter implements IChannelParameter {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ChannelParameter {
@@ -58416,7 +58376,7 @@ export class Channel implements IChannel {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Channel {
@@ -58490,7 +58450,7 @@ export class ChannelIListApiResult implements IChannelIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ChannelIListApiResult {
@@ -58557,7 +58517,7 @@ export class SkillIListApiResult implements ISkillIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SkillIListApiResult {
@@ -58642,7 +58602,7 @@ export class Sector implements ISector {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Sector {
@@ -58715,7 +58675,7 @@ export class SectorIListApiResult implements ISectorIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SectorIListApiResult {
@@ -58782,7 +58742,7 @@ export class ProfessionalBodyIListApiResult implements IProfessionalBodyIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ProfessionalBodyIListApiResult {
@@ -58849,7 +58809,7 @@ export class CertificationIListApiResult implements ICertificationIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CertificationIListApiResult {
@@ -58941,7 +58901,7 @@ export class TenantBeneficiary implements ITenantBeneficiary {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): TenantBeneficiary {
@@ -59019,7 +58979,7 @@ export class TenantBeneficiaryIListApiResult implements ITenantBeneficiaryIListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TenantBeneficiaryIListApiResult {
@@ -59153,7 +59113,7 @@ export class DeploymentLog implements IDeploymentLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DeploymentLog {
@@ -59272,7 +59232,7 @@ export class Location implements ILocation {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Location {
@@ -59348,7 +59308,7 @@ export class LocationIListApiResult implements ILocationIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LocationIListApiResult {
@@ -59415,7 +59375,7 @@ export class DepartmentIListApiResult implements IDepartmentIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentIListApiResult {
@@ -59510,7 +59470,7 @@ export class JobRole implements IJobRole {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): JobRole {
@@ -59589,7 +59549,7 @@ export class JobRoleIListApiResult implements IJobRoleIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobRoleIListApiResult {
@@ -59681,7 +59641,7 @@ export class Event implements IEvent {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Event {
@@ -59759,7 +59719,7 @@ export class EventIListApiResult implements IEventIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EventIListApiResult {
@@ -59848,7 +59808,7 @@ export class PositionRequirement implements IPositionRequirement {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): PositionRequirement {
@@ -59970,7 +59930,7 @@ export class Position implements IPosition {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Position {
@@ -60052,7 +60012,7 @@ export class PositionIListApiResult implements IPositionIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PositionIListApiResult {
@@ -60129,7 +60089,7 @@ export class SalaryScale implements ISalaryScale {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): SalaryScale {
@@ -60202,7 +60162,7 @@ export class SalaryScaleIListApiResult implements ISalaryScaleIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SalaryScaleIListApiResult {
@@ -60294,7 +60254,7 @@ export class Grade implements IGrade {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Grade {
@@ -60372,7 +60332,7 @@ export class GradeIListApiResult implements IGradeIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeIListApiResult {
@@ -60470,7 +60430,7 @@ export class GradeStep implements IGradeStep {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): GradeStep {
@@ -60550,7 +60510,7 @@ export class GradeStepIListApiResult implements IGradeStepIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeStepIListApiResult {
@@ -60648,7 +60608,7 @@ export class GradeLevelBenefit implements IGradeLevelBenefit {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelBenefit {
@@ -60728,7 +60688,7 @@ export class GradeLevelBenefitIListApiResult implements IGradeLevelBenefitIListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelBenefitIListApiResult {
@@ -60820,7 +60780,7 @@ export class RequestType implements IRequestType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RequestType {
@@ -60898,7 +60858,7 @@ export class RequestTypeIListApiResult implements IRequestTypeIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestTypeIListApiResult {
@@ -60981,7 +60941,7 @@ export class RequestFile implements IRequestFile {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RequestFile {
@@ -61119,7 +61079,7 @@ export class Request implements IRequest {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Request {
@@ -61207,7 +61167,7 @@ export class RequestIListApiResult implements IRequestIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestIListApiResult {
@@ -61266,7 +61226,7 @@ export class RetirementDocAttachment implements IRetirementDocAttachment {
         data["documentName"] = this.documentName;
         data["docUrl"] = this.docUrl;
         data["retirement"] = this.retirement ? this.retirement.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): RetirementDocAttachment {
@@ -61345,7 +61305,7 @@ export class Retirement implements IRetirement {
             for (let item of this.retirmentDocAttachments)
                 data["retirmentDocAttachments"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): Retirement {
@@ -61416,7 +61376,7 @@ export class RetirementIListApiResult implements IRetirementIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RetirementIListApiResult {
@@ -61472,7 +61432,7 @@ export class RetirementType implements IRetirementType {
         data["name"] = this.name;
         data["requirements"] = this.requirements;
         data["isEntitledToBenefits"] = this.isEntitledToBenefits;
-        return data;
+        return data; 
     }
 
     clone(): RetirementType {
@@ -61538,7 +61498,7 @@ export class RetirementTypeIListApiResult implements IRetirementTypeIListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RetirementTypeIListApiResult {
@@ -61557,14 +61517,14 @@ export interface IRetirementTypeIListApiResult {
     totalRecord: number;
 }
 
-export class CompetencyIListApiResult implements ICompetencyIListApiResult {
+export class CompetencyRequirmentsDTOIListApiResult implements ICompetencyRequirmentsDTOIListApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: Competency[] | undefined;
+    result!: CompetencyRequirmentsDTO[] | undefined;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: ICompetencyIListApiResult) {
+    constructor(data?: ICompetencyRequirmentsDTOIListApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -61580,16 +61540,16 @@ export class CompetencyIListApiResult implements ICompetencyIListApiResult {
             if (Array.isArray(_data["result"])) {
                 this.result = [] as any;
                 for (let item of _data["result"])
-                    this.result!.push(Competency.fromJS(item));
+                    this.result!.push(CompetencyRequirmentsDTO.fromJS(item));
             }
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): CompetencyIListApiResult {
+    static fromJS(data: any): CompetencyRequirmentsDTOIListApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new CompetencyIListApiResult();
+        let result = new CompetencyRequirmentsDTOIListApiResult();
         result.init(data);
         return result;
     }
@@ -61605,21 +61565,21 @@ export class CompetencyIListApiResult implements ICompetencyIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
-    clone(): CompetencyIListApiResult {
+    clone(): CompetencyRequirmentsDTOIListApiResult {
         const json = this.toJSON();
-        let result = new CompetencyIListApiResult();
+        let result = new CompetencyRequirmentsDTOIListApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface ICompetencyIListApiResult {
+export interface ICompetencyRequirmentsDTOIListApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: Competency[] | undefined;
+    result: CompetencyRequirmentsDTO[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -61694,7 +61654,7 @@ export class EmailSetting implements IEmailSetting {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmailSetting {
@@ -61771,7 +61731,7 @@ export class EmailSettingListApiResult implements IEmailSettingListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmailSettingListApiResult {
@@ -61830,7 +61790,7 @@ export class EmailSettingApiResult implements IEmailSettingApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmailSettingApiResult {
@@ -61880,7 +61840,7 @@ export class IDTextViewModel implements IIDTextViewModel {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["text"] = this.text;
-        return data;
+        return data; 
     }
 
     clone(): IDTextViewModel {
@@ -61944,7 +61904,7 @@ export class IDTextViewModelListApiResult implements IIDTextViewModelListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): IDTextViewModelListApiResult {
@@ -62000,7 +61960,7 @@ export class ManageMailTemplateDTO implements IManageMailTemplateDTO {
         data["emailTemplateTypeId"] = this.emailTemplateTypeId;
         data["subject"] = this.subject;
         data["body"] = this.body;
-        return data;
+        return data; 
     }
 
     clone(): ManageMailTemplateDTO {
@@ -62082,7 +62042,7 @@ export class MailTemplateDTO implements IMailTemplateDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): MailTemplateDTO {
@@ -62157,7 +62117,7 @@ export class MailTemplateDTOListApiResult implements IMailTemplateDTOListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): MailTemplateDTOListApiResult {
@@ -62216,7 +62176,7 @@ export class MailTemplateDTOApiResult implements IMailTemplateDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): MailTemplateDTOApiResult {
@@ -62331,7 +62291,7 @@ export class EmailLog implements IEmailLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmailLog {
@@ -62412,7 +62372,7 @@ export class EmailLogAttachment implements IEmailLogAttachment {
         data["fileNameOnServer"] = this.fileNameOnServer;
         data["emailFileName"] = this.emailFileName;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): EmailLogAttachment {
@@ -62529,7 +62489,7 @@ export class EmailLogDTO implements IEmailLogDTO {
             for (let item of this.emailAttachments)
                 data["emailAttachments"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): EmailLogDTO {
@@ -62612,7 +62572,7 @@ export class EmailLogDTOIListApiResult implements IEmailLogDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmailLogDTOIListApiResult {
@@ -62671,7 +62631,7 @@ export class EmailLogDTOApiResult implements IEmailLogDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmailLogDTOApiResult {
@@ -62730,7 +62690,7 @@ export class CompensationDTO implements ICompensationDTO {
         data["companyID"] = this.companyID;
         data["subID"] = this.subID;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): CompensationDTO {
@@ -62822,7 +62782,7 @@ export class Dependant implements IDependant {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Dependant {
@@ -62900,7 +62860,7 @@ export class DependantListApiResult implements IDependantListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DependantListApiResult {
@@ -62974,7 +62934,7 @@ export class EmployeeCompensationDTO implements IEmployeeCompensationDTO {
         data["paymentNarration"] = this.paymentNarration;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeCompensationDTO {
@@ -63073,7 +63033,7 @@ export class ManageCompetencyDTO implements IManageCompetencyDTO {
             for (let item of this.competencesRequirementsDTO)
                 data["competencesRequirementsDTO"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): ManageCompetencyDTO {
@@ -63174,7 +63134,7 @@ export class CompareSkillDTO implements ICompareSkillDTO {
         data["experienceWeight"] = this.experienceWeight;
         data["skillWeight"] = this.skillWeight;
         data["employeeSkillStatus"] = this.employeeSkillStatus;
-        return data;
+        return data; 
     }
 
     clone(): CompareSkillDTO {
@@ -63280,7 +63240,7 @@ export class CompareQualificationDTO implements ICompareQualificationDTO {
         data["experienceWeight"] = this.experienceWeight;
         data["qualificationWeight"] = this.qualificationWeight;
         data["employeeQualificationStatus"] = this.employeeQualificationStatus;
-        return data;
+        return data; 
     }
 
     clone(): CompareQualificationDTO {
@@ -63384,7 +63344,7 @@ export class CompareCertificationDTO implements ICompareCertificationDTO {
         data["experienceWeight"] = this.experienceWeight;
         data["certificationWeight"] = this.certificationWeight;
         data["employeeCertificationStatus"] = this.employeeCertificationStatus;
-        return data;
+        return data; 
     }
 
     clone(): CompareCertificationDTO {
@@ -63487,7 +63447,7 @@ export class CompareTraningDTO implements ICompareTraningDTO {
         data["experienceWeight"] = this.experienceWeight;
         data["trainingWeight"] = this.trainingWeight;
         data["employeeTrainingStatus"] = this.employeeTrainingStatus;
-        return data;
+        return data; 
     }
 
     clone(): CompareTraningDTO {
@@ -63586,7 +63546,7 @@ export class VmListComparism implements IVmListComparism {
             for (let item of this.listEmployeeTrainings)
                 data["listEmployeeTrainings"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): VmListComparism {
@@ -63644,7 +63604,7 @@ export class VmListComparismApiResult implements IVmListComparismApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): VmListComparismApiResult {
@@ -63742,7 +63702,7 @@ export class VwConfirmationDTO implements IVwConfirmationDTO {
         data["effective_date"] = this.effective_date ? this.effective_date.toISOString() : <any>undefined;
         data["str_effective_date"] = this.str_effective_date;
         data["confirmationDate"] = this.confirmationDate ? this.confirmationDate.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): VwConfirmationDTO {
@@ -63822,7 +63782,7 @@ export class VwConfirmationDTOIListApiResult implements IVwConfirmationDTOIListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): VwConfirmationDTOIListApiResult {
@@ -63889,7 +63849,7 @@ export class CourseListApiResult implements ICourseListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CourseListApiResult {
@@ -63948,7 +63908,7 @@ export class CourseApiResult implements ICourseApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CourseApiResult {
@@ -64007,7 +63967,7 @@ export class VwDashboard implements IVwDashboard {
         data["dueForPromotion"] = this.dueForPromotion;
         data["dueForDeployment"] = this.dueForDeployment;
         data["totalNoOfEmployees"] = this.totalNoOfEmployees;
-        return data;
+        return data; 
     }
 
     clone(): VwDashboard {
@@ -64057,7 +64017,7 @@ export class DashboardData implements IDashboardData {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["value"] = this.value;
-        return data;
+        return data; 
     }
 
     clone(): DashboardData {
@@ -64119,7 +64079,7 @@ export class DashboardData2 implements IDashboardData2 {
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
         data["itemId"] = this.itemId;
-        return data;
+        return data; 
     }
 
     clone(): DashboardData2 {
@@ -64267,7 +64227,7 @@ export class DashboardDTO implements IDashboardDTO {
             for (let item of this.lstAnnouncementData)
                 data["lstAnnouncementData"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): DashboardDTO {
@@ -64331,7 +64291,7 @@ export class DashboardDTOApiResult implements IDashboardDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DashboardDTOApiResult {
@@ -64398,7 +64358,7 @@ export class IDTextViewModelIListApiResult implements IIDTextViewModelIListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): IDTextViewModelIListApiResult {
@@ -64481,7 +64441,7 @@ export class DropdownValue implements IDropdownValue {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DropdownValue {
@@ -64556,7 +64516,7 @@ export class DropdownValueIListApiResult implements IDropdownValueIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DropdownValueIListApiResult {
@@ -64636,7 +64596,7 @@ export class Country implements ICountry {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Country {
@@ -64710,7 +64670,7 @@ export class CountryIListApiResult implements ICountryIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CountryIListApiResult {
@@ -64777,7 +64737,7 @@ export class StateIListApiResult implements IStateIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): StateIListApiResult {
@@ -64844,7 +64804,7 @@ export class LGAIListApiResult implements ILGAIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LGAIListApiResult {
@@ -64897,7 +64857,7 @@ export class ManageDepartmentDTO implements IManageDepartmentDTO {
         data["id"] = this.id;
         data["name"] = this.name;
         data["code"] = this.code;
-        return data;
+        return data; 
     }
 
     clone(): ManageDepartmentDTO {
@@ -64981,7 +64941,7 @@ export class DepartmentDTO implements IDepartmentDTO {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         data["headOfDepartment"] = this.headOfDepartment;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentDTO {
@@ -65057,7 +65017,7 @@ export class DepartmentDTOListApiResult implements IDepartmentDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentDTOListApiResult {
@@ -65116,7 +65076,7 @@ export class DepartmentDTOApiResult implements IDepartmentDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentDTOApiResult {
@@ -65184,7 +65144,7 @@ export class DependantDTO implements IDependantDTO {
         data["gender"] = this.gender;
         data["nin"] = this.nin;
         data["dateofBirth"] = this.dateofBirth ? this.dateofBirth.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): DependantDTO {
@@ -65261,7 +65221,7 @@ export class DependantResultDTO implements IDependantResultDTO {
         data["isActive"] = this.isActive;
         data["employeeName"] = this.employeeName;
         data["dependentId"] = this.dependentId;
-        return data;
+        return data; 
     }
 
     clone(): DependantResultDTO {
@@ -65333,7 +65293,7 @@ export class DependantResultDTOListApiResult implements IDependantResultDTOListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DependantResultDTOListApiResult {
@@ -65464,7 +65424,7 @@ export class DeploymentRegistrationPayLoad implements IDeploymentRegistrationPay
         data["requestedDepartment"] = this.requestedDepartment;
         data["justification"] = this.justification;
         data["tempRef"] = this.tempRef;
-        return data;
+        return data; 
     }
 
     clone(): DeploymentRegistrationPayLoad {
@@ -65555,7 +65515,7 @@ export class DeploymentLogIListApiResult implements IDeploymentLogIListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DeploymentLogIListApiResult {
@@ -65674,7 +65634,7 @@ export class DeploymentLogDTO implements IDeploymentLogDTO {
         data["is_treated"] = this.is_treated;
         data["fileName"] = this.fileName;
         data["filePath"] = this.filePath;
-        return data;
+        return data; 
     }
 
     clone(): DeploymentLogDTO {
@@ -65761,7 +65721,7 @@ export class DeploymentLogDTOIListApiResult implements IDeploymentLogDTOIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DeploymentLogDTOIListApiResult {
@@ -65814,7 +65774,7 @@ export class IdNameObj implements IIdNameObj {
         data["id"] = this.id;
         data["code"] = this.code;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): IdNameObj {
@@ -65878,7 +65838,7 @@ export class CreateDeploymentViewModel implements ICreateDeploymentViewModel {
             for (let item of this.ministries)
                 data["ministries"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): CreateDeploymentViewModel {
@@ -65942,7 +65902,7 @@ export class CreateDeploymentViewModelIListApiResult implements ICreateDeploymen
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CreateDeploymentViewModelIListApiResult {
@@ -66022,7 +65982,7 @@ export class DisburseChannelDTO implements IDisburseChannelDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): DisburseChannelDTO {
@@ -66096,7 +66056,7 @@ export class DisburseChannelDTOListApiResult implements IDisburseChannelDTOListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DisburseChannelDTOListApiResult {
@@ -66191,7 +66151,7 @@ export class SingleDisbursementPostDTO implements ISingleDisbursementPostDTO {
         data["description"] = this.description;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): SingleDisbursementPostDTO {
@@ -66334,7 +66294,7 @@ export class ManageEmployeeDTO implements IManageEmployeeDTO {
         data["certifications"] = this.certifications;
         data["skills"] = this.skills;
         data["documents"] = this.documents;
-        return data;
+        return data; 
     }
 
     clone(): ManageEmployeeDTO {
@@ -66417,7 +66377,7 @@ export class IdNameObjApiResult implements IIdNameObjApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): IdNameObjApiResult {
@@ -66476,7 +66436,7 @@ export class DropdownValueDTO implements IDropdownValueDTO {
         data["employee_number"] = this.employee_number;
         data["company_id"] = this.company_id;
         data["subsidary_id"] = this.subsidary_id;
-        return data;
+        return data; 
     }
 
     clone(): DropdownValueDTO {
@@ -66543,7 +66503,7 @@ export class DropdownValueDTOIListApiResult implements IDropdownValueDTOIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DropdownValueDTOIListApiResult {
@@ -66773,7 +66733,7 @@ export class EmployeeContractAssignmentDTO implements IEmployeeContractAssignmen
         data["directorate_id"] = this.directorate_id;
         data["lcda_id"] = this.lcda_id;
         data["lga_id"] = this.lga_id;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeContractAssignmentDTO {
@@ -66886,7 +66846,7 @@ export class Pension implements IPension {
         data["pfaId"] = this.pfaId;
         data["pfa"] = this.pfa;
         data["rsaNumber"] = this.rsaNumber;
-        return data;
+        return data; 
     }
 
     clone(): Pension {
@@ -66992,7 +66952,7 @@ export class AddressDTO implements IAddressDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): AddressDTO {
@@ -67106,7 +67066,7 @@ export class EmployeeBankDTO implements IEmployeeBankDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeBankDTO {
@@ -67220,7 +67180,7 @@ export class NextOfKin implements INextOfKin {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): NextOfKin {
@@ -67332,7 +67292,7 @@ export class EmployeeHistoryDTO implements IEmployeeHistoryDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeHistoryDTO {
@@ -67440,7 +67400,7 @@ export class Document implements IDocument {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Document {
@@ -67704,7 +67664,7 @@ export class EmployeeDTO implements IEmployeeDTO {
             for (let item of this.documents)
                 data["documents"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): EmployeeDTO {
@@ -67806,7 +67766,7 @@ export class EmployeeDTOApiResult implements IEmployeeDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeDTOApiResult {
@@ -67873,7 +67833,7 @@ export class EmployeeDTOIListApiResult implements IEmployeeDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeDTOIListApiResult {
@@ -67932,7 +67892,7 @@ export class EmployeeContractAssignmentDTOApiResult implements IEmployeeContract
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeContractAssignmentDTOApiResult {
@@ -67997,7 +67957,7 @@ export class ManageEventDTO implements IManageEventDTO {
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
         data["description"] = this.description;
-        return data;
+        return data; 
     }
 
     clone(): ManageEventDTO {
@@ -68106,7 +68066,7 @@ export class EventDTO implements IEventDTO {
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
         data["description"] = this.description;
-        return data;
+        return data; 
     }
 
     clone(): EventDTO {
@@ -68189,7 +68149,7 @@ export class EventDTOListApiResult implements IEventDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EventDTOListApiResult {
@@ -68248,7 +68208,7 @@ export class EventDTOApiResult implements IEventDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EventDTOApiResult {
@@ -68307,7 +68267,7 @@ export class ExpenseGroupDto implements IExpenseGroupDto {
         data["subID"] = this.subID;
         data["name"] = this.name;
         data["referenceId"] = this.referenceId;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseGroupDto {
@@ -68384,7 +68344,7 @@ export class ExpenseGroup implements IExpenseGroup {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseGroup {
@@ -68457,7 +68417,7 @@ export class ExpenseGroupIListApiResult implements IExpenseGroupIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseGroupIListApiResult {
@@ -68555,7 +68515,7 @@ export class ExpenseProjectDto implements IExpenseProjectDto {
         data["startDateString"] = this.startDateString;
         data["endDateString"] = this.endDateString;
         data["status"] = this.status;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProjectDto {
@@ -68651,7 +68611,7 @@ export class ExpenseDoc implements IExpenseDoc {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseDoc {
@@ -68780,7 +68740,7 @@ export class ExpenseSubType implements IExpenseSubType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseSubType {
@@ -68909,7 +68869,7 @@ export class ExpenseType implements IExpenseType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseType {
@@ -69036,7 +68996,7 @@ export class ExpenseProjectActivity implements IExpenseProjectActivity {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProjectActivity {
@@ -69227,7 +69187,7 @@ export class Expense implements IExpense {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Expense {
@@ -69380,7 +69340,7 @@ export class ExpenseProject implements IExpenseProject {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProject {
@@ -69461,7 +69421,7 @@ export class ExpenseProjectIListApiResult implements IExpenseProjectIListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProjectIListApiResult {
@@ -69565,7 +69525,7 @@ export class ExpenseProjectActivityDTO implements IExpenseProjectActivityDTO {
         data["startDateString"] = this.startDateString;
         data["endDateString"] = this.endDateString;
         data["status"] = this.status;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProjectActivityDTO {
@@ -69647,7 +69607,7 @@ export class ExpenseProjectActivityIListApiResult implements IExpenseProjectActi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseProjectActivityIListApiResult {
@@ -69844,7 +69804,7 @@ export class ExpenseDTO implements IExpenseDTO {
         data["tempRef"] = this.tempRef;
         data["departmentName"] = this.departmentName;
         data["locatioName"] = this.locatioName;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseDTO {
@@ -69957,7 +69917,7 @@ export class ExpenseDTOIListApiResult implements IExpenseDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseDTOIListApiResult {
@@ -70037,7 +69997,7 @@ export class ExpenseTypeDto implements IExpenseTypeDto {
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseTypeDto {
@@ -70111,7 +70071,7 @@ export class ExpenseTypeIListApiResult implements IExpenseTypeIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ExpenseTypeIListApiResult {
@@ -70126,6 +70086,73 @@ export interface IExpenseTypeIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: ExpenseType[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ExpenseSubTypeIListApiResult implements IExpenseSubTypeIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: ExpenseSubType[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IExpenseSubTypeIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(ExpenseSubType.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): ExpenseSubTypeIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExpenseSubTypeIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): ExpenseSubTypeIListApiResult {
+        const json = this.toJSON();
+        let result = new ExpenseSubTypeIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExpenseSubTypeIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: ExpenseSubType[] | undefined;
     totalCount: number;
     totalRecord: number;
 }
@@ -70170,7 +70197,7 @@ export class AzureDocs implements IAzureDocs {
         data["lastModifiedDate"] = this.lastModifiedDate;
         data["url"] = this.url;
         data["size"] = this.size;
-        return data;
+        return data; 
     }
 
     clone(): AzureDocs {
@@ -70237,7 +70264,7 @@ export class AzureDocsListApiResult implements IAzureDocsListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AzureDocsListApiResult {
@@ -70296,7 +70323,7 @@ export class StringApiResult implements IStringApiResult {
         data["result"] = this.result;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): StringApiResult {
@@ -70361,7 +70388,7 @@ export class GradeLevelCreatePayload implements IGradeLevelCreatePayload {
         data["promotion_min_years"] = this.promotion_min_years;
         data["promotion_min_in_days"] = this.promotion_min_in_days;
         data["noOfLeaveDays"] = this.noOfLeaveDays;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelCreatePayload {
@@ -70458,7 +70485,7 @@ export class GradeLevelDTO implements IGradeLevelDTO {
         data["promotion_min_in_days"] = this.promotion_min_in_days;
         data["noOfLeaveDays"] = this.noOfLeaveDays;
         data["salaryScaleId"] = this.salaryScaleId;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelDTO {
@@ -70537,7 +70564,7 @@ export class GradeLevelDTOListApiResult implements IGradeLevelDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelDTOListApiResult {
@@ -70614,7 +70641,7 @@ export class ManageGradeLevelBenefitDTO implements IManageGradeLevelBenefitDTO {
         data["noOfLeaveDays"] = this.noOfLeaveDays;
         data["benefitId"] = this.benefitId;
         data["gradeName"] = this.gradeName;
-        return data;
+        return data; 
     }
 
     clone(): ManageGradeLevelBenefitDTO {
@@ -70730,7 +70757,7 @@ export class GradeLevelBenefitDTO implements IGradeLevelBenefitDTO {
         data["salaryScaleName"] = this.salaryScaleName;
         data["amount"] = this.amount;
         data["gradeName"] = this.gradeName;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelBenefitDTO {
@@ -70806,7 +70833,7 @@ export class GradeLevelBenefitDTOApiResult implements IGradeLevelBenefitDTOApiRe
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelBenefitDTOApiResult {
@@ -70873,7 +70900,7 @@ export class GradeLevelBenefitDTOListApiResult implements IGradeLevelBenefitDTOL
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeLevelBenefitDTOListApiResult {
@@ -70932,7 +70959,7 @@ export class GradestepCreatePayload implements IGradestepCreatePayload {
         data["step_no"] = this.step_no;
         data["gradeName"] = this.gradeName;
         data["stepName"] = this.stepName;
-        return data;
+        return data; 
     }
 
     clone(): GradestepCreatePayload {
@@ -71021,7 +71048,7 @@ export class GradestepDTO implements IGradestepDTO {
         data["modifiedById"] = this.modifiedById;
         data["grade_id"] = this.grade_id;
         data["step_no"] = this.step_no;
-        return data;
+        return data; 
     }
 
     clone(): GradestepDTO {
@@ -71098,7 +71125,7 @@ export class GradestepDTOListApiResult implements IGradestepDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradestepDTOListApiResult {
@@ -71157,7 +71184,7 @@ export class GradestepDTOApiResult implements IGradestepDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradestepDTOApiResult {
@@ -71224,7 +71251,7 @@ export class InstitutionListApiResult implements IInstitutionListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): InstitutionListApiResult {
@@ -71283,7 +71310,7 @@ export class InstitutionApiResult implements IInstitutionApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): InstitutionApiResult {
@@ -71342,7 +71369,7 @@ export class InterestRateDTO implements IInterestRateDTO {
         data["description"] = this.description;
         data["companyID"] = this.companyID;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): InterestRateDTO {
@@ -71419,7 +71446,7 @@ export class InterestRate implements IInterestRate {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): InterestRate {
@@ -71492,7 +71519,7 @@ export class InterestRateIListApiResult implements IInterestRateIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): InterestRateIListApiResult {
@@ -71551,7 +71578,7 @@ export class ManageJobRoleDTO implements IManageJobRoleDTO {
         data["code"] = this.code;
         data["salary"] = this.salary;
         data["parentJobRoleId"] = this.parentJobRoleId;
-        return data;
+        return data; 
     }
 
     clone(): ManageJobRoleDTO {
@@ -71643,7 +71670,7 @@ export class JobRolesDTO implements IJobRolesDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): JobRolesDTO {
@@ -71721,7 +71748,7 @@ export class JobRolesDTOListApiResult implements IJobRolesDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobRolesDTOListApiResult {
@@ -71780,7 +71807,7 @@ export class JobRolesDTOApiResult implements IJobRolesDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobRolesDTOApiResult {
@@ -71890,7 +71917,7 @@ export class SectionDTO implements ISectionDTO {
         data["modifiedById"] = this.modifiedById;
         data["strategyCategory"] = this.strategyCategory;
         data["ratingType"] = this.ratingType;
-        return data;
+        return data; 
     }
 
     clone(): SectionDTO {
@@ -71974,7 +72001,7 @@ export class SectionDTOIListApiResult implements ISectionDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SectionDTOIListApiResult {
@@ -72087,7 +72114,7 @@ export class KPI implements IKPI {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): KPI {
@@ -72217,7 +72244,7 @@ export class KPISection implements IKPISection {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): KPISection {
@@ -72299,7 +72326,7 @@ export class KPISectionIListApiResult implements IKPISectionIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): KPISectionIListApiResult {
@@ -72358,7 +72385,7 @@ export class SectionDTOApiResult implements ISectionDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SectionDTOApiResult {
@@ -72429,7 +72456,7 @@ export class ManageSectionDTO implements IManageSectionDTO {
         data["description"] = this.description;
         data["instructions"] = this.instructions;
         data["ratingTypeId"] = this.ratingTypeId;
-        return data;
+        return data; 
     }
 
     clone(): ManageSectionDTO {
@@ -72489,7 +72516,7 @@ export class AssignKraDto implements IAssignKraDto {
         data["krAs"] = this.krAs;
         data["reviewerId"] = this.reviewerId;
         data["employeeContractIds"] = this.employeeContractIds;
-        return data;
+        return data; 
     }
 
     clone(): AssignKraDto {
@@ -72553,7 +72580,7 @@ export class ManageKpiDTO implements IManageKpiDTO {
         data["score"] = this.score;
         data["unit_of_measurement_id"] = this.unit_of_measurement_id;
         data["canComment"] = this.canComment;
-        return data;
+        return data; 
     }
 
     clone(): ManageKpiDTO {
@@ -72683,7 +72710,7 @@ export class KpiDTO implements IKpiDTO {
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         data["unitOfMeasurement"] = this.unitOfMeasurement;
-        return data;
+        return data; 
     }
 
     clone(): KpiDTO {
@@ -72773,7 +72800,7 @@ export class KpiDTOIListApiResult implements IKpiDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): KpiDTOIListApiResult {
@@ -72832,7 +72859,7 @@ export class KpiDTOApiResult implements IKpiDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): KpiDTOApiResult {
@@ -72924,7 +72951,7 @@ export class LeaveEntitlementResource implements ILeaveEntitlementResource {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveEntitlementResource {
@@ -73002,7 +73029,7 @@ export class LeaveEntitlementResourceListApiResult implements ILeaveEntitlementR
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveEntitlementResourceListApiResult {
@@ -73061,7 +73088,7 @@ export class LeaveEntitlementResourceApiResult implements ILeaveEntitlementResou
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveEntitlementResourceApiResult {
@@ -73117,7 +73144,7 @@ export class LeaveEntitlementPayload implements ILeaveEntitlementPayload {
         data["leaveTypeID"] = this.leaveTypeID;
         data["entitlement"] = this.entitlement;
         data["id"] = this.id;
-        return data;
+        return data; 
     }
 
     clone(): LeaveEntitlementPayload {
@@ -73183,7 +73210,7 @@ export class GradeListApiResult implements IGradeListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): GradeListApiResult {
@@ -73239,7 +73266,7 @@ export class ManageLeaveHolidayDTO implements IManageLeaveHolidayDTO {
         data["holidayDate"] = this.holidayDate ? this.holidayDate.toISOString() : <any>undefined;
         data["description"] = this.description;
         data["leaveYearId"] = this.leaveYearId;
-        return data;
+        return data; 
     }
 
     clone(): ManageLeaveHolidayDTO {
@@ -73321,7 +73348,7 @@ export class LeaveHolidayDTO implements ILeaveHolidayDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveHolidayDTO {
@@ -73396,7 +73423,7 @@ export class LeaveHolidayDTOListApiResult implements ILeaveHolidayDTOListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveHolidayDTOListApiResult {
@@ -73455,7 +73482,7 @@ export class LeaveHolidayDTOApiResult implements ILeaveHolidayDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveHolidayDTOApiResult {
@@ -73523,7 +73550,7 @@ export class LeavePlanDTO implements ILeavePlanDTO {
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
         data["noOfDays"] = this.noOfDays;
         data["locationId"] = this.locationId;
-        return data;
+        return data; 
     }
 
     clone(): LeavePlanDTO {
@@ -73627,7 +73654,7 @@ export class LeavePlanResource implements ILeavePlanResource {
         data["leaveYear"] = this.leaveYear;
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): LeavePlanResource {
@@ -73708,7 +73735,7 @@ export class LeavePlanResourceListApiResult implements ILeavePlanResourceListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeavePlanResourceListApiResult {
@@ -73767,7 +73794,7 @@ export class ApproveOrRejectPayload implements IApproveOrRejectPayload {
         data["id"] = this.id;
         data["companyId"] = this.companyId;
         data["leavePlaneStatus"] = this.leavePlaneStatus;
-        return data;
+        return data; 
     }
 
     clone(): ApproveOrRejectPayload {
@@ -73839,7 +73866,7 @@ export class ManageLeaveRequestDTO implements IManageLeaveRequestDTO {
         data["reliefOfficerStaffNo"] = this.reliefOfficerStaffNo;
         data["tempRef"] = this.tempRef;
         data["file"] = this.file;
-        return data;
+        return data; 
     }
 
     clone(): ManageLeaveRequestDTO {
@@ -73939,7 +73966,7 @@ export class LeaveReportListDTO implements ILeaveReportListDTO {
         data["noOfDays"] = this.noOfDays;
         data["position"] = this.position;
         data["approvalStatus"] = this.approvalStatus;
-        return data;
+        return data; 
     }
 
     clone(): LeaveReportListDTO {
@@ -74018,7 +74045,7 @@ export class LeaveReportListDTOListApiResult implements ILeaveReportListDTOListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveReportListDTOListApiResult {
@@ -74107,7 +74134,7 @@ export class LeaveYear implements ILeaveYear {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveYear {
@@ -74237,7 +74264,7 @@ export class LeaveType implements ILeaveType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveType {
@@ -74347,7 +74374,7 @@ export class LeaveEntitlement implements ILeaveEntitlement {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveEntitlement {
@@ -74532,7 +74559,7 @@ export class LeaveRequest implements ILeaveRequest {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveRequest {
@@ -74624,7 +74651,7 @@ export class LeaveRequestApiResult implements ILeaveRequestApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveRequestApiResult {
@@ -74737,7 +74764,7 @@ export class LeaveTypeDTO implements ILeaveTypeDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveTypeDTO {
@@ -74822,7 +74849,7 @@ export class LeaveTypeDTOListApiResult implements ILeaveTypeDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveTypeDTOListApiResult {
@@ -74887,7 +74914,7 @@ export class LeaveTypeCreatePayload implements ILeaveTypeCreatePayload {
         data["minDays"] = this.minDays;
         data["maxNoofPossibleApplication"] = this.maxNoofPossibleApplication;
         data["maxNoofYearlyApplication"] = this.maxNoofYearlyApplication;
-        return data;
+        return data; 
     }
 
     clone(): LeaveTypeCreatePayload {
@@ -74948,7 +74975,7 @@ export class LeaveTypeDTOApiResult implements ILeaveTypeDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveTypeDTOApiResult {
@@ -75042,7 +75069,7 @@ export class LeaveWorkFlow implements ILeaveWorkFlow {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveWorkFlow {
@@ -75146,7 +75173,7 @@ export class LeaveWorkFlowItem implements ILeaveWorkFlowItem {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveWorkFlowItem {
@@ -75246,7 +75273,7 @@ export class LeaveWorkFlowResource implements ILeaveWorkFlowResource {
         data["isDeleted"] = this.isDeleted;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["createdById"] = this.createdById;
-        return data;
+        return data; 
     }
 
     clone(): LeaveWorkFlowResource {
@@ -75320,7 +75347,7 @@ export class LeaveWorkFlowResourceListApiResult implements ILeaveWorkFlowResourc
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveWorkFlowResourceListApiResult {
@@ -75379,7 +75406,7 @@ export class LeaveWorkFlowResourceApiResult implements ILeaveWorkFlowResourceApi
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveWorkFlowResourceApiResult {
@@ -75435,7 +75462,7 @@ export class LeaveworkFlowPayload implements ILeaveworkFlowPayload {
         data["departmentID"] = this.departmentID;
         data["workFlowName"] = this.workFlowName;
         data["workFlowString"] = this.workFlowString;
-        return data;
+        return data; 
     }
 
     clone(): LeaveworkFlowPayload {
@@ -75520,7 +75547,7 @@ export class LeaveYearDTO implements ILeaveYearDTO {
         data["create_contextyId"] = this.create_contextyId;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifie_contextyId"] = this.modifie_contextyId;
-        return data;
+        return data; 
     }
 
     clone(): LeaveYearDTO {
@@ -75596,7 +75623,7 @@ export class LeaveYearDTOListApiResult implements ILeaveYearDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveYearDTOListApiResult {
@@ -75655,7 +75682,7 @@ export class LeaveYearCreatePayload implements ILeaveYearCreatePayload {
         data["isActiveYear"] = this.isActiveYear;
         data["yearStartDate"] = this.yearStartDate ? this.yearStartDate.toISOString() : <any>undefined;
         data["yearEndDate"] = this.yearEndDate ? this.yearEndDate.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): LeaveYearCreatePayload {
@@ -75714,7 +75741,7 @@ export class LeaveYearDTOApiResult implements ILeaveYearDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LeaveYearDTOApiResult {
@@ -75816,7 +75843,6 @@ export class ManageLoanRequestDTO implements IManageLoanRequestDTO {
         data["requestedAmount"] = this.requestedAmount;
         data["customAnswer"] = this.customAnswer;
         data["justification"] = this.justification;
-
         data["approvedTenor"] = this.approvedTenor;
         data["approvedAmount"] = this.approvedAmount;
         data["dateApproved"] = this.dateApproved ? this.dateApproved.toISOString() : <any>undefined;
@@ -75828,8 +75854,7 @@ export class ManageLoanRequestDTO implements IManageLoanRequestDTO {
         data["totalPrincipalRepaid"] = this.totalPrincipalRepaid;
         data["totalAmountRepaid"] = this.totalAmountRepaid;
         data["totalInterestRepaid"] = this.totalInterestRepaid;
-        return data;
-
+        return data; 
     }
 
     clone(): ManageLoanRequestDTO {
@@ -75909,7 +75934,7 @@ export class PostLoanDto implements IPostLoanDto {
         data["repaymenttype"] = this.repaymenttype;
         data["partamt"] = this.partamt;
         data["repytdate"] = this.repytdate;
-        return data;
+        return data; 
     }
 
     clone(): PostLoanDto {
@@ -76115,7 +76140,7 @@ export class LoanRequest implements ILoanRequest {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LoanRequest {
@@ -76237,10 +76262,8 @@ export class LoanRepaymentLog implements ILoanRepaymentLog {
         data["comment"] = this.comment;
         data["isSchedule"] = this.isSchedule;
         data["strRepaymentDate"] = this.strRepaymentDate;
-
         data["loanRequest"] = this.loanRequest ? this.loanRequest.toJSON() : <any>undefined;
-        return data;
-
+        return data; 
     }
 
     clone(): LoanRepaymentLog {
@@ -76313,7 +76336,7 @@ export class LoanRepaymentLogIListApiResult implements ILoanRepaymentLogIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LoanRepaymentLogIListApiResult {
@@ -76432,7 +76455,7 @@ export class LoanRequestDTOs implements ILoanRequestDTOs {
         data["totalInterestRepaid"] = this.totalInterestRepaid;
         data["outstandingPrincipal"] = this.outstandingPrincipal;
         data["outstandingInterest"] = this.outstandingInterest;
-        return data;
+        return data; 
     }
 
     clone(): LoanRequestDTOs {
@@ -76519,7 +76542,7 @@ export class LoanRequestDTOsIListApiResult implements ILoanRequestDTOsIListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LoanRequestDTOsIListApiResult {
@@ -76586,7 +76609,7 @@ export class IdNameObjIListApiResult implements IIdNameObjIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): IdNameObjIListApiResult {
@@ -76642,7 +76665,7 @@ export class UpdateLoadRequestDTO implements IUpdateLoadRequestDTO {
         data["loan_id"] = this.loan_id;
         data["approved_tenor"] = this.approved_tenor;
         data["approved_amt"] = this.approved_amt;
-        return data;
+        return data; 
     }
 
     clone(): UpdateLoadRequestDTO {
@@ -76700,7 +76723,7 @@ export class LoanRequestDTOsApiResult implements ILoanRequestDTOsApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LoanRequestDTOsApiResult {
@@ -76798,7 +76821,7 @@ export class ManageLoanTypeDTO implements IManageLoanTypeDTO {
         data["eligibleEmploymentStatus"] = this.eligibleEmploymentStatus;
         data["customQuestion"] = this.customQuestion;
         data["maxLoanRepaytPercent"] = this.maxLoanRepaytPercent;
-        return data;
+        return data; 
     }
 
     clone(): ManageLoanTypeDTO {
@@ -76864,7 +76887,7 @@ export class EligibleGradeDTO implements IEligibleGradeDTO {
         data["loanTypeID"] = this.loanTypeID;
         data["gradeID"] = this.gradeID;
         data["gradeName"] = this.gradeName;
-        return data;
+        return data; 
     }
 
     clone(): EligibleGradeDTO {
@@ -77001,7 +77024,7 @@ export class LoanTypeDTO implements ILoanTypeDTO {
             for (let item of this.eligibleGradeList)
                 data["eligibleGradeList"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): LoanTypeDTO {
@@ -77092,7 +77115,7 @@ export class LoanTypeDTOIListApiResult implements ILoanTypeDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LoanTypeDTOIListApiResult {
@@ -77223,7 +77246,7 @@ export class LoanType implements ILoanType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LoanType {
@@ -77314,7 +77337,7 @@ export class LoanTypeIListApiResult implements ILoanTypeIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LoanTypeIListApiResult {
@@ -77373,7 +77396,7 @@ export class ManageLocationDTO implements IManageLocationDTO {
         data["state_id"] = this.state_id;
         data["lga_id"] = this.lga_id;
         data["is_enabled"] = this.is_enabled;
-        return data;
+        return data; 
     }
 
     clone(): ManageLocationDTO {
@@ -77462,7 +77485,7 @@ export class LocationDTO implements ILocationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): LocationDTO {
@@ -77539,7 +77562,7 @@ export class LocationDTOListApiResult implements ILocationDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LocationDTOListApiResult {
@@ -77598,7 +77621,7 @@ export class LocationDTOApiResult implements ILocationDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): LocationDTOApiResult {
@@ -77750,7 +77773,7 @@ export class DepartmentManPowerActivityDTO implements IDepartmentManPowerActivit
         data["apporvedDate"] = this.apporvedDate ? this.apporvedDate.toISOString() : <any>undefined;
         data["statusName"] = this.statusName;
         data["activityTypeName"] = this.activityTypeName;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentManPowerActivityDTO {
@@ -77923,7 +77946,7 @@ export class DepartmentActivityDTO implements IDepartmentActivityDTO {
             for (let item of this.requirements)
                 data["requirements"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): DepartmentActivityDTO {
@@ -78015,7 +78038,7 @@ export class DepartmentManPowerActivityDTOListApiResult implements IDepartmentMa
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentManPowerActivityDTOListApiResult {
@@ -78071,7 +78094,7 @@ export class BaseYearJobRoleDTO implements IBaseYearJobRoleDTO {
         data["roleName"] = this.roleName;
         data["roleCount"] = this.roleCount;
         data["roleCost"] = this.roleCost;
-        return data;
+        return data; 
     }
 
     clone(): BaseYearJobRoleDTO {
@@ -78126,7 +78149,7 @@ export class BaseYearPositionDTO implements IBaseYearPositionDTO {
         data["positionName"] = this.positionName;
         data["positionCount"] = this.positionCount;
         data["positionCost"] = this.positionCost;
-        return data;
+        return data; 
     }
 
     clone(): BaseYearPositionDTO {
@@ -78181,7 +78204,7 @@ export class BaseYearGradeDTO implements IBaseYearGradeDTO {
         data["gradeName"] = this.gradeName;
         data["gradeCount"] = this.gradeCount;
         data["gradeCost"] = this.gradeCost;
-        return data;
+        return data; 
     }
 
     clone(): BaseYearGradeDTO {
@@ -78260,7 +78283,7 @@ export class BaseYearDTO implements IBaseYearDTO {
             for (let item of this.grade)
                 data["grade"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): BaseYearDTO {
@@ -78326,7 +78349,7 @@ export class BaseYearDTOListApiResult implements IBaseYearDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): BaseYearDTOListApiResult {
@@ -78393,7 +78416,7 @@ export class DepartmentActivityDTOListApiResult implements IDepartmentActivityDT
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentActivityDTOListApiResult {
@@ -78460,7 +78483,7 @@ export class DepartmentManPowerActivityDTOIListApiResult implements IDepartmentM
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentManPowerActivityDTOIListApiResult {
@@ -78527,7 +78550,7 @@ export class DepartmentActivityDTOIListApiResult implements IDepartmentActivityD
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DepartmentActivityDTOIListApiResult {
@@ -78589,7 +78612,7 @@ export class OfferLetterTemplateDTO implements IOfferLetterTemplateDTO {
         data["signatoryName"] = this.signatoryName;
         data["signatoryTitle"] = this.signatoryTitle;
         data["signatureFileName"] = this.signatureFileName;
-        return data;
+        return data; 
     }
 
     clone(): OfferLetterTemplateDTO {
@@ -78691,7 +78714,7 @@ export class PrepareOfferLetterDTO implements IPrepareOfferLetterDTO {
         data["signatureFileName"] = this.signatureFileName;
         data["offerLetterId"] = this.offerLetterId;
         data["expireDate"] = this.expireDate ? this.expireDate.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): PrepareOfferLetterDTO {
@@ -78764,7 +78787,7 @@ export class PrepareOfferLetterDTOApiResult implements IPrepareOfferLetterDTOApi
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PrepareOfferLetterDTOApiResult {
@@ -78910,7 +78933,7 @@ export class OnboardingPersonalDTO implements IOnboardingPersonalDTO {
         data["countryId"] = this.countryId;
         data["stateId"] = this.stateId;
         data["regionId"] = this.regionId;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingPersonalDTO {
@@ -79037,7 +79060,7 @@ export class OnboardingBankDTO implements IOnboardingBankDTO {
         data["fullName"] = this.fullName;
         data["dialingCode"] = this.dialingCode;
         data["created_by"] = this.created_by;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingBankDTO {
@@ -79154,7 +79177,7 @@ export class OnboardingWorkDTO implements IOnboardingWorkDTO {
         data["userId"] = this.userId;
         data["created_by"] = this.created_by;
         data["linkExpireDate"] = this.linkExpireDate ? this.linkExpireDate.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingWorkDTO {
@@ -79264,7 +79287,7 @@ export class OnboardingTaxDTO implements IOnboardingTaxDTO {
         data["createdById"] = this.createdById;
         data["dialingCode"] = this.dialingCode;
         data["created_by"] = this.created_by;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingTaxDTO {
@@ -79362,7 +79385,7 @@ export class OnboardingMedicalDisclosureDTO implements IOnboardingMedicalDisclos
         data["createdById"] = this.createdById;
         data["userId"] = this.userId;
         data["created_by"] = this.created_by;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingMedicalDisclosureDTO {
@@ -79538,7 +79561,7 @@ export class OnboardingPersonalInfo implements IOnboardingPersonalInfo {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingPersonalInfo {
@@ -79633,7 +79656,7 @@ export class OnboardingPersonalInfoApiResult implements IOnboardingPersonalInfoA
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingPersonalInfoApiResult {
@@ -79722,7 +79745,7 @@ export class OnboardingDocumentInfo implements IOnboardingDocumentInfo {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingDocumentInfo {
@@ -79791,7 +79814,7 @@ export class OnboardingDocumentInfoApiResult implements IOnboardingDocumentInfoA
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingDocumentInfoApiResult {
@@ -79877,7 +79900,7 @@ export class OnboardingMedicalDisclosureInfo implements IOnboardingMedicalDisclo
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingMedicalDisclosureInfo {
@@ -79945,7 +79968,7 @@ export class OnboardingMedicalDisclosureInfoApiResult implements IOnboardingMedi
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingMedicalDisclosureInfoApiResult {
@@ -80040,7 +80063,7 @@ export class OnboardingTaxInfo implements IOnboardingTaxInfo {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingTaxInfo {
@@ -80111,7 +80134,7 @@ export class OnboardingTaxInfoApiResult implements IOnboardingTaxInfoApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingTaxInfoApiResult {
@@ -80200,7 +80223,7 @@ export class OnboardingPaymentInfo implements IOnboardingPaymentInfo {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingPaymentInfo {
@@ -80314,7 +80337,7 @@ export class OnboardingWorkInformation implements IOnboardingWorkInformation {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): OnboardingWorkInformation {
@@ -80394,7 +80417,7 @@ export class EmployeeOnboardingPersonalData implements IEmployeeOnboardingPerson
         data["onboardingPersonalInfo"] = this.onboardingPersonalInfo ? this.onboardingPersonalInfo.toJSON() : <any>undefined;
         data["onboardingTaxInfo"] = this.onboardingTaxInfo ? this.onboardingTaxInfo.toJSON() : <any>undefined;
         data["onboardingWorkInformation"] = this.onboardingWorkInformation ? this.onboardingWorkInformation.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeOnboardingPersonalData {
@@ -80463,7 +80486,7 @@ export class EmployeeOnboardingPersonalDataListApiResult implements IEmployeeOnb
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeOnboardingPersonalDataListApiResult {
@@ -80552,7 +80575,7 @@ export class ManagePayElementDTO implements IManagePayElementDTO {
         data["noOfWorkHours"] = this.noOfWorkHours;
         data["start_date"] = this.start_date ? this.start_date.toISOString() : <any>undefined;
         data["end_date"] = this.end_date ? this.end_date.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): ManagePayElementDTO {
@@ -80687,7 +80710,7 @@ export class PayElementDTO implements IPayElementDTO {
         data["updated_by"] = this.updated_by;
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): PayElementDTO {
@@ -80776,7 +80799,7 @@ export class PayElementDTOListApiResult implements IPayElementDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayElementDTOListApiResult {
@@ -80835,7 +80858,7 @@ export class PayElementDTOApiResult implements IPayElementDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayElementDTOApiResult {
@@ -80897,7 +80920,7 @@ export class ManagePayInstitutionDTO implements IManagePayInstitutionDTO {
         data["accountName"] = this.accountName;
         data["accountNumber"] = this.accountNumber;
         data["bankId"] = this.bankId;
-        return data;
+        return data; 
     }
 
     clone(): ManagePayInstitutionDTO {
@@ -80987,7 +81010,7 @@ export class PayInstitutionDTO implements IPayInstitutionDTO {
         data["updated_by"] = this.updated_by;
         data["date_created"] = this.date_created ? this.date_created.toISOString() : <any>undefined;
         data["last_update_created"] = this.last_update_created ? this.last_update_created.toISOString() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): PayInstitutionDTO {
@@ -81064,7 +81087,7 @@ export class PayInstitutionDTOListApiResult implements IPayInstitutionDTOListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayInstitutionDTOListApiResult {
@@ -81123,7 +81146,7 @@ export class PayInstitutionDTOApiResult implements IPayInstitutionDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayInstitutionDTOApiResult {
@@ -81197,7 +81220,7 @@ export class RptPayslipAnalyzer implements IRptPayslipAnalyzer {
         data["totalPreviousDeduction"] = this.totalPreviousDeduction;
         data["totalCurrentNetPay"] = this.totalCurrentNetPay;
         data["totalPreviousNetPay"] = this.totalPreviousNetPay;
-        return data;
+        return data; 
     }
 
     clone(): RptPayslipAnalyzer {
@@ -81269,7 +81292,7 @@ export class RptPayslipAnalyzerListApiResult implements IRptPayslipAnalyzerListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptPayslipAnalyzerListApiResult {
@@ -81331,7 +81354,7 @@ export class RptPayrollRunAnalysis implements IRptPayrollRunAnalysis {
         data["totalEarning"] = this.totalEarning;
         data["totalDeduction"] = this.totalDeduction;
         data["totalNetPayt"] = this.totalNetPayt;
-        return data;
+        return data; 
     }
 
     clone(): RptPayrollRunAnalysis {
@@ -81399,7 +81422,7 @@ export class RptPayrollRunAnalysisListApiResult implements IRptPayrollRunAnalysi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptPayrollRunAnalysisListApiResult {
@@ -81482,7 +81505,7 @@ export class RptBankSchedule implements IRptBankSchedule {
         data["gradeLevel"] = this.gradeLevel;
         data["step"] = this.step;
         data["location"] = this.location;
-        return data;
+        return data; 
     }
 
     clone(): RptBankSchedule {
@@ -81557,7 +81580,7 @@ export class RptBankScheduleListApiResult implements IRptBankScheduleListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptBankScheduleListApiResult {
@@ -81619,7 +81642,7 @@ export class RptEarnings implements IRptEarnings {
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
         data["locationName"] = this.locationName;
-        return data;
+        return data; 
     }
 
     clone(): RptEarnings {
@@ -81687,7 +81710,7 @@ export class RptEarningsListApiResult implements IRptEarningsListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptEarningsListApiResult {
@@ -81749,7 +81772,7 @@ export class RptDeductions implements IRptDeductions {
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
         data["locationName"] = this.locationName;
-        return data;
+        return data; 
     }
 
     clone(): RptDeductions {
@@ -81817,7 +81840,7 @@ export class RptDeductionsListApiResult implements IRptDeductionsListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptDeductionsListApiResult {
@@ -81879,7 +81902,7 @@ export class RptAllElementSheet implements IRptAllElementSheet {
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
         data["locationName"] = this.locationName;
-        return data;
+        return data; 
     }
 
     clone(): RptAllElementSheet {
@@ -81947,7 +81970,7 @@ export class RptAllElementSheetListApiResult implements IRptAllElementSheetListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptAllElementSheetListApiResult {
@@ -82000,7 +82023,7 @@ export class RptDeductionSummary implements IRptDeductionSummary {
         data["sn"] = this.sn;
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
-        return data;
+        return data; 
     }
 
     clone(): RptDeductionSummary {
@@ -82065,7 +82088,7 @@ export class RptDeductionSummaryListApiResult implements IRptDeductionSummaryLis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptDeductionSummaryListApiResult {
@@ -82118,7 +82141,7 @@ export class RptPaymentSummary implements IRptPaymentSummary {
         data["sn"] = this.sn;
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
-        return data;
+        return data; 
     }
 
     clone(): RptPaymentSummary {
@@ -82183,7 +82206,7 @@ export class RptPaymentSummaryListApiResult implements IRptPaymentSummaryListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptPaymentSummaryListApiResult {
@@ -82242,7 +82265,7 @@ export class RptTaxDetail implements IRptTaxDetail {
         data["location"] = this.location;
         data["elementName"] = this.elementName;
         data["amount"] = this.amount;
-        return data;
+        return data; 
     }
 
     clone(): RptTaxDetail {
@@ -82309,7 +82332,7 @@ export class RptTaxDetailListApiResult implements IRptTaxDetailListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptTaxDetailListApiResult {
@@ -82359,7 +82382,7 @@ export class RptTaxSummary implements IRptTaxSummary {
         data = typeof data === 'object' ? data : {};
         data["location"] = this.location;
         data["amount"] = this.amount;
-        return data;
+        return data; 
     }
 
     clone(): RptTaxSummary {
@@ -82423,7 +82446,7 @@ export class RptTaxSummaryListApiResult implements IRptTaxSummaryListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptTaxSummaryListApiResult {
@@ -82494,7 +82517,7 @@ export class RptPensionDetail implements IRptPensionDetail {
         data["employeeContribution"] = this.employeeContribution;
         data["employerContribution"] = this.employerContribution;
         data["remittance"] = this.remittance;
-        return data;
+        return data; 
     }
 
     clone(): RptPensionDetail {
@@ -82565,7 +82588,7 @@ export class RptPensionDetailListApiResult implements IRptPensionDetailListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptPensionDetailListApiResult {
@@ -82627,7 +82650,7 @@ export class RptPensionSummary implements IRptPensionSummary {
         data["employeeContribution"] = this.employeeContribution;
         data["employerContribution"] = this.employerContribution;
         data["remittance"] = this.remittance;
-        return data;
+        return data; 
     }
 
     clone(): RptPensionSummary {
@@ -82695,7 +82718,7 @@ export class RptPensionSummaryListApiResult implements IRptPensionSummaryListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RptPensionSummaryListApiResult {
@@ -82826,7 +82849,7 @@ export class PayrollRun implements IPayrollRun {
         data["ministryId"] = this.ministryId;
         data["locationId"] = this.locationId;
         data["departmentId"] = this.departmentId;
-        return data;
+        return data; 
     }
 
     clone(): PayrollRun {
@@ -82917,7 +82940,7 @@ export class PayrollRunListApiResult implements IPayrollRunListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayrollRunListApiResult {
@@ -83033,7 +83056,7 @@ export class Payslip implements IPayslip {
         data["pensionBalance"] = this.pensionBalance;
         data["taxBalanceYTD"] = this.taxBalanceYTD;
         data["taxableIncomeYTD"] = this.taxableIncomeYTD;
-        return data;
+        return data; 
     }
 
     clone(): Payslip {
@@ -83119,7 +83142,7 @@ export class PayslipListApiResult implements IPayslipListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayslipListApiResult {
@@ -83202,7 +83225,7 @@ export class PayslipItem implements IPayslipItem {
         data["isProcessed"] = this.isProcessed;
         data["dateProcessed"] = this.dateProcessed ? this.dateProcessed.toISOString() : <any>undefined;
         data["varianceId"] = this.varianceId;
-        return data;
+        return data; 
     }
 
     clone(): PayslipItem {
@@ -83277,7 +83300,7 @@ export class PayslipItemListApiResult implements IPayslipItemListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayslipItemListApiResult {
@@ -83345,7 +83368,7 @@ export class ManagePayrollTypeDTO implements IManagePayrollTypeDTO {
         data["effectiveDate"] = this.effectiveDate ? this.effectiveDate.toISOString() : <any>undefined;
         data["negativePaymentAllowed"] = this.negativePaymentAllowed;
         data["code"] = this.code;
-        return data;
+        return data; 
     }
 
     clone(): ManagePayrollTypeDTO {
@@ -83428,7 +83451,7 @@ export class EmployeeProfileDTO implements IEmployeeProfileDTO {
         data["grade"] = this.grade;
         data["employmentTypeId"] = this.employmentTypeId;
         data["employmentType"] = this.employmentType;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeProfileDTO {
@@ -83547,7 +83570,7 @@ export class PayrollTypeDTO implements IPayrollTypeDTO {
             for (let item of this.employees)
                 data["employees"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): PayrollTypeDTO {
@@ -83629,7 +83652,7 @@ export class PayrollTypeDTOListApiResult implements IPayrollTypeDTOListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayrollTypeDTOListApiResult {
@@ -83688,7 +83711,7 @@ export class PayrollTypeDTOApiResult implements IPayrollTypeDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PayrollTypeDTOApiResult {
@@ -83861,7 +83884,7 @@ export class CycleDTO implements ICycleDTO {
         data["reviewPurpose"] = this.reviewPurpose;
         data["appraisalType"] = this.appraisalType;
         data["ratingType"] = this.ratingType;
-        return data;
+        return data; 
     }
 
     clone(): CycleDTO {
@@ -83966,7 +83989,7 @@ export class CycleDTOIListApiResult implements ICycleDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CycleDTOIListApiResult {
@@ -84025,7 +84048,7 @@ export class CycleDTOApiResult implements ICycleDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CycleDTOApiResult {
@@ -84126,7 +84149,7 @@ export class ManageCycleDTO implements IManageCycleDTO {
         data["lastPeriodUnderReview"] = this.lastPeriodUnderReview;
         data["dueDate"] = this.dueDate ? this.dueDate.toISOString() : <any>undefined;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): ManageCycleDTO {
@@ -84214,7 +84237,7 @@ export class ManagePositionDTO implements IManagePositionDTO {
         data["next_position_id"] = this.next_position_id;
         data["selectedQualifications"] = this.selectedQualifications;
         data["selectedCertifications"] = this.selectedCertifications;
-        return data;
+        return data; 
     }
 
     clone(): ManagePositionDTO {
@@ -84328,7 +84351,7 @@ export class PositionDTO implements IPositionDTO {
             for (let item of this.positionRequirements)
                 data["positionRequirements"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): PositionDTO {
@@ -84409,7 +84432,7 @@ export class PositionDTOListApiResult implements IPositionDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PositionDTOListApiResult {
@@ -84468,7 +84491,7 @@ export class PositionDTOApiResult implements IPositionDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PositionDTOApiResult {
@@ -84527,7 +84550,7 @@ export class ManageProfessionalBodyDTO implements IManageProfessionalBodyDTO {
         data["name"] = this.name;
         data["code"] = this.code;
         data["website"] = this.website;
-        return data;
+        return data; 
     }
 
     clone(): ManageProfessionalBodyDTO {
@@ -84613,7 +84636,7 @@ export class ProfessionalBodyDTO implements IProfessionalBodyDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ProfessionalBodyDTO {
@@ -84689,7 +84712,7 @@ export class ProfessionalBodyDTOListApiResult implements IProfessionalBodyDTOLis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ProfessionalBodyDTOListApiResult {
@@ -84748,7 +84771,7 @@ export class ProfessionalBodyDTOApiResult implements IProfessionalBodyDTOApiResu
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ProfessionalBodyDTOApiResult {
@@ -84798,7 +84821,7 @@ export class SelectListGroup implements ISelectListGroup {
         data = typeof data === 'object' ? data : {};
         data["disabled"] = this.disabled;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): SelectListGroup {
@@ -84854,7 +84877,7 @@ export class SelectListItem implements ISelectListItem {
         data["selected"] = this.selected;
         data["text"] = this.text;
         data["value"] = this.value;
-        return data;
+        return data; 
     }
 
     clone(): SelectListItem {
@@ -85039,7 +85062,7 @@ export class Sp_FetchEligibleEmployees implements ISp_FetchEligibleEmployees {
         data["log_status_id"] = this.log_status_id;
         data["effective_date"] = this.effective_date ? this.effective_date.toISOString() : <any>undefined;
         data["str_effective_date"] = this.str_effective_date;
-        return data;
+        return data; 
     }
 
     clone(): Sp_FetchEligibleEmployees {
@@ -85204,7 +85227,7 @@ export class PromotionEligibilityViewModel implements IPromotionEligibilityViewM
         data["strDateGenerated"] = this.strDateGenerated;
         data["isClosed"] = this.isClosed;
         data["strDateClosed"] = this.strDateClosed;
-        return data;
+        return data; 
     }
 
     clone(): PromotionEligibilityViewModel {
@@ -85372,7 +85395,7 @@ export class PromotionLog implements IPromotionLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): PromotionLog {
@@ -85470,7 +85493,7 @@ export class PromotionLogIListApiResult implements IPromotionLogIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PromotionLogIListApiResult {
@@ -85537,7 +85560,7 @@ export class PromotionEligibilityViewModelIListApiResult implements IPromotionEl
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): PromotionEligibilityViewModelIListApiResult {
@@ -85604,7 +85627,7 @@ export class Sp_FetchEligibleEmployeesIListApiResult implements ISp_FetchEligibl
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): Sp_FetchEligibleEmployeesIListApiResult {
@@ -85663,7 +85686,7 @@ export class ManageQualificationDTO implements IManageQualificationDTO {
         data["name"] = this.name;
         data["code"] = this.code;
         data["point"] = this.point;
-        return data;
+        return data; 
     }
 
     clone(): ManageQualificationDTO {
@@ -85749,7 +85772,7 @@ export class QualificationDTO implements IQualificationDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): QualificationDTO {
@@ -85825,7 +85848,7 @@ export class QualificationDTOListApiResult implements IQualificationDTOListApiRe
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): QualificationDTOListApiResult {
@@ -85884,7 +85907,7 @@ export class QualificationDTOApiResult implements IQualificationDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): QualificationDTOApiResult {
@@ -85967,7 +85990,7 @@ export class RatingDTO implements IRatingDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RatingDTO {
@@ -86042,7 +86065,7 @@ export class RatingDTOIListApiResult implements IRatingDTOIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RatingDTOIListApiResult {
@@ -86140,7 +86163,7 @@ export class ManageJobDTO implements IManageJobDTO {
         data["minSalary"] = this.minSalary;
         data["maxSalary"] = this.maxSalary;
         data["scoreCardId"] = this.scoreCardId;
-        return data;
+        return data; 
     }
 
     clone(): ManageJobDTO {
@@ -86203,7 +86226,7 @@ export class JobFilterDTO implements IJobFilterDTO {
         data = typeof data === 'object' ? data : {};
         data["pageNumber"] = this.pageNumber;
         data["pageSize"] = this.pageSize;
-        return data;
+        return data; 
     }
 
     clone(): JobFilterDTO {
@@ -86337,7 +86360,7 @@ export class JobDTO implements IJobDTO {
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
         data["availability"] = this.availability;
-        return data;
+        return data; 
     }
 
     clone(): JobDTO {
@@ -86430,7 +86453,7 @@ export class JobDTOListApiResult implements IJobDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobDTOListApiResult {
@@ -86513,7 +86536,7 @@ export class ApplicantDocument implements IApplicantDocument {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ApplicantDocument {
@@ -86698,7 +86721,7 @@ export class JobApplicant implements IJobApplicant {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): JobApplicant {
@@ -86839,7 +86862,7 @@ export class JobApplication implements IJobApplication {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): JobApplication {
@@ -86997,7 +87020,7 @@ export class Job implements IJob {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Job {
@@ -87089,7 +87112,7 @@ export class JobIListApiResult implements IJobIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobIListApiResult {
@@ -87148,7 +87171,7 @@ export class JobDTOApiResult implements IJobDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobDTOApiResult {
@@ -87231,7 +87254,7 @@ export class JobApplicationSearch implements IJobApplicationSearch {
         data["id"] = this.id;
         data["pageNumber"] = this.pageNumber;
         data["pageSize"] = this.pageSize;
-        return data;
+        return data; 
     }
 
     clone(): JobApplicationSearch {
@@ -87306,7 +87329,7 @@ export class JobApplicationSearchIListApiResult implements IJobApplicationSearch
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobApplicationSearchIListApiResult {
@@ -87395,7 +87418,7 @@ export class JobScheduleInterview implements IJobScheduleInterview {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): JobScheduleInterview {
@@ -87472,7 +87495,7 @@ export class JobScheduleInterviewIListApiResult implements IJobScheduleInterview
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobScheduleInterviewIListApiResult {
@@ -87539,7 +87562,7 @@ export class JobApplicationIListApiResult implements IJobApplicationIListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): JobApplicationIListApiResult {
@@ -87698,7 +87721,7 @@ export class JobApplicantDto implements IJobApplicantDto {
             for (let item of this.applicantDocuments)
                 data["applicantDocuments"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): JobApplicantDto {
@@ -87799,7 +87822,7 @@ export class JobApplicantScheduleInterview implements IJobApplicantScheduleInter
         data["duration"] = this.duration;
         data["interviewType"] = this.interviewType;
         data["employeeName"] = this.employeeName;
-        return data;
+        return data; 
     }
 
     clone(): JobApplicantScheduleInterview {
@@ -87857,7 +87880,7 @@ export class ManageQuizDTO implements IManageQuizDTO {
         data["name"] = this.name;
         data["typeId"] = this.typeId;
         data["questions"] = this.questions;
-        return data;
+        return data; 
     }
 
     clone(): ManageQuizDTO {
@@ -87915,7 +87938,7 @@ export class QuestionOptionDTO implements IQuestionOptionDTO {
         data["question"] = this.question;
         data["value"] = this.value;
         data["isAnswer"] = this.isAnswer;
-        return data;
+        return data; 
     }
 
     clone(): QuestionOptionDTO {
@@ -87991,7 +88014,7 @@ export class QuestionDTO implements IQuestionDTO {
                 data["questionOptions"].push(item.toJSON());
         }
         data["totalAnswers"] = this.totalAnswers;
-        return data;
+        return data; 
     }
 
     clone(): QuestionDTO {
@@ -88088,7 +88111,7 @@ export class QuizDTO implements IQuizDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): QuizDTO {
@@ -88164,7 +88187,7 @@ export class QuizDTOListApiResult implements IQuizDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): QuizDTOListApiResult {
@@ -88223,7 +88246,7 @@ export class QuizDTOApiResult implements IQuizDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): QuizDTOApiResult {
@@ -88282,7 +88305,7 @@ export class ManageHireStageDTO implements IManageHireStageDTO {
         data["emailTemplateId"] = this.emailTemplateId;
         data["autoEmailRespond"] = this.autoEmailRespond;
         data["reviewers"] = this.reviewers;
-        return data;
+        return data; 
     }
 
     clone(): ManageHireStageDTO {
@@ -88368,7 +88391,7 @@ export class SubHireStageReviewer implements ISubHireStageReviewer {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): SubHireStageReviewer {
@@ -88477,7 +88500,7 @@ export class SubHireStage implements ISubHireStage {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): SubHireStage {
@@ -88590,7 +88613,7 @@ export class HireStage implements IHireStage {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): HireStage {
@@ -88685,7 +88708,7 @@ export class HireStageReviewer implements IHireStageReviewer {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): HireStageReviewer {
@@ -88794,7 +88817,7 @@ export class SubHireStageDTO implements ISubHireStageDTO {
             for (let item of this.reviewers)
                 data["reviewers"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): SubHireStageDTO {
@@ -88907,7 +88930,7 @@ export class HireStageDTO implements IHireStageDTO {
             for (let item of this.subStages)
                 data["subStages"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): HireStageDTO {
@@ -88983,7 +89006,7 @@ export class HireStageDTOListApiResult implements IHireStageDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): HireStageDTOListApiResult {
@@ -89050,7 +89073,7 @@ export class HireStageIListApiResult implements IHireStageIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): HireStageIListApiResult {
@@ -89109,7 +89132,7 @@ export class HireStageDTOApiResult implements IHireStageDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): HireStageDTOApiResult {
@@ -89174,7 +89197,7 @@ export class ManageSubHireStageDTO implements IManageSubHireStageDTO {
         data["autoEmailRespond"] = this.autoEmailRespond;
         data["scoreCard"] = this.scoreCard;
         data["reviewers"] = this.reviewers;
-        return data;
+        return data; 
     }
 
     clone(): ManageSubHireStageDTO {
@@ -89243,7 +89266,7 @@ export class SubHireStageDTOListApiResult implements ISubHireStageDTOListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SubHireStageDTOListApiResult {
@@ -89310,7 +89333,7 @@ export class SubHireStageIListApiResult implements ISubHireStageIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SubHireStageIListApiResult {
@@ -89369,7 +89392,7 @@ export class SubHireStageDTOApiResult implements ISubHireStageDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SubHireStageDTOApiResult {
@@ -89428,7 +89451,7 @@ export class ManageRecruitmentScoreCardDTO implements IManageRecruitmentScoreCar
         data["totalWeight"] = this.totalWeight;
         data["scoringTypeId"] = this.scoringTypeId;
         data["questions"] = this.questions;
-        return data;
+        return data; 
     }
 
     clone(): ManageRecruitmentScoreCardDTO {
@@ -89519,7 +89542,7 @@ export class RecruitmentScoreCard implements IRecruitmentScoreCard {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RecruitmentScoreCard {
@@ -89610,7 +89633,7 @@ export class ScoreCardQuestion implements IScoreCardQuestion {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): ScoreCardQuestion {
@@ -89709,7 +89732,7 @@ export class RecruitmentScoreCardDTO implements IRecruitmentScoreCardDTO {
             for (let item of this.questions)
                 data["questions"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): RecruitmentScoreCardDTO {
@@ -89784,7 +89807,7 @@ export class RecruitmentScoreCardDTOListApiResult implements IRecruitmentScoreCa
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RecruitmentScoreCardDTOListApiResult {
@@ -89851,7 +89874,7 @@ export class RecruitmentScoreCardIListApiResult implements IRecruitmentScoreCard
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RecruitmentScoreCardIListApiResult {
@@ -89910,7 +89933,7 @@ export class RecruitmentScoreCardDTOApiResult implements IRecruitmentScoreCardDT
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RecruitmentScoreCardDTOApiResult {
@@ -89993,7 +90016,7 @@ export class ManageRequestDTO implements IManageRequestDTO {
         data["submitted_by"] = this.submitted_by;
         data["date_resolved"] = this.date_resolved ? this.date_resolved.toISOString() : <any>undefined;
         data["refNo"] = this.refNo;
-        return data;
+        return data; 
     }
 
     clone(): ManageRequestDTO {
@@ -90120,7 +90143,7 @@ export class RequestDTO implements IRequestDTO {
         data["refNo"] = this.refNo;
         data["employeeName"] = this.employeeName;
         data["status"] = this.status;
-        return data;
+        return data; 
     }
 
     clone(): RequestDTO {
@@ -90207,7 +90230,7 @@ export class RequestDTOListApiResult implements IRequestDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestDTOListApiResult {
@@ -90266,7 +90289,7 @@ export class RequestDTOApiResult implements IRequestDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestDTOApiResult {
@@ -90328,7 +90351,7 @@ export class ManageRequestTypeDTO implements IManageRequestTypeDTO {
         data["is_SystemRequirment"] = this.is_SystemRequirment;
         data["isActive"] = this.isActive;
         data["is_StepNotify"] = this.is_StepNotify;
-        return data;
+        return data; 
     }
 
     clone(): ManageRequestTypeDTO {
@@ -90427,7 +90450,7 @@ export class RequestTypeDTO implements IRequestTypeDTO {
         data["processid"] = this.processid;
         data["enable_step_notify"] = this.enable_step_notify;
         data["is_system_requirement"] = this.is_system_requirement;
-        return data;
+        return data; 
     }
 
     clone(): RequestTypeDTO {
@@ -90507,7 +90530,7 @@ export class RequestTypeDTOListApiResult implements IRequestTypeDTOListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestTypeDTOListApiResult {
@@ -90566,7 +90589,7 @@ export class RequestTypeDTOApiResult implements IRequestTypeDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestTypeDTOApiResult {
@@ -90694,7 +90717,7 @@ export class ManageRetirementDTO implements IManageRetirementDTO {
         data["age"] = this.age;
         data["employeeId"] = this.employeeId;
         data["employeeContractId"] = this.employeeContractId;
-        return data;
+        return data; 
     }
 
     clone(): ManageRetirementDTO {
@@ -90845,7 +90868,7 @@ export class RetirmentDTO implements IRetirmentDTO {
         data["log_status"] = this.log_status;
         data["subReason"] = this.subReason;
         data["sourceofInitiation"] = this.sourceofInitiation;
-        return data;
+        return data; 
     }
 
     clone(): RetirmentDTO {
@@ -90935,7 +90958,7 @@ export class RetirmentDTOListApiResult implements IRetirmentDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RetirmentDTOListApiResult {
@@ -91087,7 +91110,7 @@ export class RetirementLog implements IRetirementLog {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RetirementLog {
@@ -91185,7 +91208,7 @@ export class RetirementLogListApiResult implements IRetirementLogListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RetirementLogListApiResult {
@@ -91244,7 +91267,7 @@ export class RetirmentDTOApiResult implements IRetirmentDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RetirmentDTOApiResult {
@@ -91303,7 +91326,7 @@ export class RetirementApiResult implements IRetirementApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RetirementApiResult {
@@ -91359,7 +91382,7 @@ export class ManageRetirmentTypeDTO implements IManageRetirmentTypeDTO {
         data["name"] = this.name;
         data["requirments"] = this.requirments;
         data["isEntitledToBenefits"] = this.isEntitledToBenefits;
-        return data;
+        return data; 
     }
 
     clone(): ManageRetirmentTypeDTO {
@@ -91426,7 +91449,7 @@ export class AddRequestViewModel implements IAddRequestViewModel {
         data["code"] = this.code;
         data["enable_step_notify"] = this.enable_step_notify;
         data["is_system_requirement"] = this.is_system_requirement;
-        return data;
+        return data; 
     }
 
     clone(): AddRequestViewModel {
@@ -91500,7 +91523,7 @@ export class RequestItemViewModel implements IRequestItemViewModel {
         data["resolution"] = this.resolution;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data;
+        return data; 
     }
 
     clone(): RequestItemViewModel {
@@ -91568,7 +91591,7 @@ export class RequestViewModel implements IRequestViewModel {
             for (let item of this.lstOfRequests)
                 data["lstOfRequests"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): RequestViewModel {
@@ -91634,7 +91657,7 @@ export class RequestViewModelIListApiResult implements IRequestViewModelIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestViewModelIListApiResult {
@@ -91709,7 +91732,7 @@ export class RequestFileDto implements IRequestFileDto {
         data["employee"] = this.employee;
         data["itemId"] = this.itemId;
         data["employeeName"] = this.employeeName;
-        return data;
+        return data; 
     }
 
     clone(): RequestFileDto {
@@ -91776,7 +91799,7 @@ export class RequestFileDtoIListApiResult implements IRequestFileDtoIListApiResu
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RequestFileDtoIListApiResult {
@@ -91832,7 +91855,7 @@ export class ApplicationRoleDTO implements IApplicationRoleDTO {
         data["name"] = this.name;
         data["description"] = this.description;
         data["isSystemRole"] = this.isSystemRole;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRoleDTO {
@@ -91898,7 +91921,7 @@ export class ApplicationRoleDTOIListApiResult implements IApplicationRoleDTOILis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRoleDTOIListApiResult {
@@ -91957,7 +91980,7 @@ export class ApplicationRoleDTOApiResult implements IApplicationRoleDTOApiResult
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRoleDTOApiResult {
@@ -92013,7 +92036,7 @@ export class PermissionDTO implements IPermissionDTO {
         data["name"] = this.name;
         data["applicationName"] = this.applicationName;
         data["code"] = this.code;
-        return data;
+        return data; 
     }
 
     clone(): PermissionDTO {
@@ -92073,7 +92096,7 @@ export class RolePermissionDTO implements IRolePermissionDTO {
             for (let item of this.permissions)
                 data["permissions"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): RolePermissionDTO {
@@ -92138,7 +92161,7 @@ export class RolePermissionDTOIListApiResult implements IRolePermissionDTOIListA
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RolePermissionDTOIListApiResult {
@@ -92197,7 +92220,7 @@ export class RolePermissionDTOApiResult implements IRolePermissionDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): RolePermissionDTOApiResult {
@@ -92258,7 +92281,7 @@ export class RolePermissionMappingDTO implements IRolePermissionMappingDTO {
             for (let item of this.permissionIds)
                 data["permissionIds"].push(item);
         }
-        return data;
+        return data; 
     }
 
     clone(): RolePermissionMappingDTO {
@@ -92311,7 +92334,7 @@ export class ManageSalaryscaleDTO implements IManageSalaryscaleDTO {
         data["name"] = this.name;
         data["code"] = this.code;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): ManageSalaryscaleDTO {
@@ -92393,7 +92416,7 @@ export class SalaryscaleDTO implements ISalaryscaleDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): SalaryscaleDTO {
@@ -92468,7 +92491,7 @@ export class SalaryscaleDTOListApiResult implements ISalaryscaleDTOListApiResult
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SalaryscaleDTOListApiResult {
@@ -92527,7 +92550,7 @@ export class SalaryscaleDTOApiResult implements ISalaryscaleDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SalaryscaleDTOApiResult {
@@ -92583,7 +92606,7 @@ export class ManageSkillDTO implements IManageSkillDTO {
         data["categoryId"] = this.categoryId;
         data["category"] = this.category;
         data["skills"] = this.skills;
-        return data;
+        return data; 
     }
 
     clone(): ManageSkillDTO {
@@ -92649,7 +92672,7 @@ export class SkillListApiResult implements ISkillListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SkillListApiResult {
@@ -92708,7 +92731,7 @@ export class SkillApiResult implements ISkillApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SkillApiResult {
@@ -92775,7 +92798,7 @@ export class Modular implements IModular {
             for (let item of this.subscriptionPlanModules)
                 data["subscriptionPlanModules"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): Modular {
@@ -92846,7 +92869,7 @@ export class SubscriptionPlanModule implements ISubscriptionPlanModule {
         data["modularDefaultEnabled"] = this.modularDefaultEnabled;
         data["subscriptionPlan"] = this.subscriptionPlan ? this.subscriptionPlan.toJSON() : <any>undefined;
         data["modular"] = this.modular ? this.modular.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlanModule {
@@ -92929,7 +92952,7 @@ export class SubscriptionPlan implements ISubscriptionPlan {
             for (let item of this.subscriptionPlanModules)
                 data["subscriptionPlanModules"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlan {
@@ -93000,7 +93023,7 @@ export class SubscriptionPlanIListApiResult implements ISubscriptionPlanIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlanIListApiResult {
@@ -93059,7 +93082,7 @@ export class SubscriptionPlanApiResult implements ISubscriptionPlanApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlanApiResult {
@@ -93126,7 +93149,7 @@ export class SubscriptionPlanModuleIListApiResult implements ISubscriptionPlanMo
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): SubscriptionPlanModuleIListApiResult {
@@ -93242,7 +93265,7 @@ export class TalentManagementRequirmentsDTO implements ITalentManagementRequirme
         data["abilityName"] = this.abilityName;
         data["yearsofExperience"] = this.yearsofExperience;
         data["points"] = this.points;
-        return data;
+        return data; 
     }
 
     clone(): TalentManagementRequirmentsDTO {
@@ -93346,7 +93369,7 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
             for (let item of this.talentManagementRequirmentsDTOs)
                 data["talentManagementRequirmentsDTOs"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): AddTalentMangementDTO {
@@ -93441,7 +93464,7 @@ export class EmployeeTalentMangementPoolHistoryDTO implements IEmployeeTalentMan
         data["actionType"] = this.actionType;
         data["loggedByUserId"] = this.loggedByUserId;
         data["isActive"] = this.isActive;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeTalentMangementPoolHistoryDTO {
@@ -93539,7 +93562,7 @@ export class AddEmployyeetoPoolDTO implements IAddEmployyeetoPoolDTO {
             for (let item of this.employeeTalentMangementPoolHistoriesDTO)
                 data["employeeTalentMangementPoolHistoriesDTO"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): AddEmployyeetoPoolDTO {
@@ -93613,7 +93636,7 @@ export class AddTalentMangementDTOListApiResult implements IAddTalentMangementDT
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AddTalentMangementDTOListApiResult {
@@ -93672,7 +93695,7 @@ export class AddTalentMangementDTOApiResult implements IAddTalentMangementDTOApi
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): AddTalentMangementDTOApiResult {
@@ -93725,7 +93748,7 @@ export class CompanySignUpDTO implements ICompanySignUpDTO {
         data["email"] = this.email;
         data["phoneNumber"] = this.phoneNumber;
         data["password"] = this.password;
-        return data;
+        return data; 
     }
 
     clone(): CompanySignUpDTO {
@@ -93845,7 +93868,7 @@ export class Company implements ICompany {
         data["isTrial"] = this.isTrial;
         data["frequencyId"] = this.frequencyId;
         data["referenceNumber"] = this.referenceNumber;
-        return data;
+        return data; 
     }
 
     clone(): Company {
@@ -93933,7 +93956,7 @@ export class CompanyIListApiResult implements ICompanyIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CompanyIListApiResult {
@@ -93998,7 +94021,7 @@ export class CompanyModuleDTO implements ICompanyModuleDTO {
         data["moduleName"] = this.moduleName;
         data["icon"] = this.icon;
         data["isReadonly"] = this.isReadonly;
-        return data;
+        return data; 
     }
 
     clone(): CompanyModuleDTO {
@@ -94067,7 +94090,7 @@ export class CompanyModuleDTOIListApiResult implements ICompanyModuleDTOIListApi
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): CompanyModuleDTOIListApiResult {
@@ -94138,7 +94161,7 @@ export class TrainingVendorPayload implements ITrainingVendorPayload {
         data["description"] = this.description;
         data["trainingSpecializationId"] = this.trainingSpecializationId;
         data["trainingTag"] = this.trainingTag;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendorPayload {
@@ -94222,7 +94245,7 @@ export class TrainingSpecialization implements ITrainingSpecialization {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecialization {
@@ -94333,7 +94356,7 @@ export class TrainingVendorResource implements ITrainingVendorResource {
         data["deleted_By"] = this.deleted_By;
         data["trainingSpecializationId"] = this.trainingSpecializationId;
         data["trainingSpecialization"] = this.trainingSpecialization ? this.trainingSpecialization.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendorResource {
@@ -94415,7 +94438,7 @@ export class TrainingVendorResourceListApiResult implements ITrainingVendorResou
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendorResourceListApiResult {
@@ -94474,7 +94497,7 @@ export class TrainingVendorResourceApiResult implements ITrainingVendorResourceA
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendorResourceApiResult {
@@ -94578,7 +94601,7 @@ export class TrainingVendor implements ITrainingVendor {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingVendor {
@@ -94685,7 +94708,7 @@ export class TrainingCategory implements ITrainingCategory {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategory {
@@ -94847,7 +94870,7 @@ export class TrainingType implements ITrainingType {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingType {
@@ -95000,7 +95023,7 @@ export class Training implements ITraining {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): Training {
@@ -95167,7 +95190,7 @@ export class TrainingTypeResource implements ITrainingTypeResource {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingTypeResource {
@@ -95260,7 +95283,7 @@ export class TrainingTypeResourceListApiResult implements ITrainingTypeResourceL
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingTypeResourceListApiResult {
@@ -95319,7 +95342,7 @@ export class TrainingTypeResourceApiResult implements ITrainingTypeResourceApiRe
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingTypeResourceApiResult {
@@ -95369,7 +95392,7 @@ export class ToggleTrainingType implements IToggleTrainingType {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["status"] = this.status;
-        return data;
+        return data; 
     }
 
     clone(): ToggleTrainingType {
@@ -95416,7 +95439,7 @@ export class TrainingCategoryPayload implements ITrainingCategoryPayload {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategoryPayload {
@@ -95493,7 +95516,7 @@ export class TrainingCategoryResource implements ITrainingCategoryResource {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategoryResource {
@@ -95567,7 +95590,7 @@ export class TrainingCategoryResourceListApiResult implements ITrainingCategoryR
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCategoryResourceListApiResult {
@@ -95623,7 +95646,7 @@ export class TrainingSpecializationPayload implements ITrainingSpecializationPay
         data["name"] = this.name;
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecializationPayload {
@@ -95702,7 +95725,7 @@ export class TrainingSpecializationDTO implements ITrainingSpecializationDTO {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecializationDTO {
@@ -95776,7 +95799,7 @@ export class TrainingSpecializationDTOListApiResult implements ITrainingSpeciali
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecializationDTOListApiResult {
@@ -95835,7 +95858,7 @@ export class TrainingSpecializationDTOApiResult implements ITrainingSpecializati
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingSpecializationDTOApiResult {
@@ -95951,7 +95974,7 @@ export class TrainingDTO implements ITrainingDTO {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingDTO {
@@ -96037,7 +96060,7 @@ export class TrainingDTOListApiResult implements ITrainingDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingDTOListApiResult {
@@ -96096,7 +96119,7 @@ export class TrainingDTOApiResult implements ITrainingDTOApiResult {
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingDTOApiResult {
@@ -96179,7 +96202,7 @@ export class TrainingCriteriaPayload implements ITrainingCriteriaPayload {
         data["employmentTypeId"] = this.employmentTypeId;
         data["salaryScaleId"] = this.salaryScaleId;
         data["positionId"] = this.positionId;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCriteriaPayload {
@@ -96267,7 +96290,7 @@ export class Ministry implements IMinistry {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): Ministry {
@@ -96405,7 +96428,7 @@ export class TrainingCriteriaResource implements ITrainingCriteriaResource {
         data["updated_By"] = this.updated_By;
         data["last_Date_Updated"] = this.last_Date_Updated ? this.last_Date_Updated.toISOString() : <any>undefined;
         data["deleted_By"] = this.deleted_By;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCriteriaResource {
@@ -96496,7 +96519,7 @@ export class TrainingCriteriaResourceListApiResult implements ITrainingCriteriaR
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): TrainingCriteriaResourceListApiResult {
@@ -96552,7 +96575,7 @@ export class AssignTrainingToEmpPayload implements IAssignTrainingToEmpPayload {
         data["trainingId"] = this.trainingId;
         data["training"] = this.training;
         data["tempRef"] = this.tempRef;
-        return data;
+        return data; 
     }
 
     clone(): AssignTrainingToEmpPayload {
@@ -96687,7 +96710,7 @@ export class EmpTrainingResource implements IEmpTrainingResource {
         data["location"] = this.location;
         data["jobRole"] = this.jobRole;
         data["position"] = this.position;
-        return data;
+        return data; 
     }
 
     clone(): EmpTrainingResource {
@@ -96777,7 +96800,7 @@ export class EmpTrainingResourceListApiResult implements IEmpTrainingResourceLis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmpTrainingResourceListApiResult {
@@ -96827,7 +96850,7 @@ export class AssignTrainingToOneEmpPayload implements IAssignTrainingToOneEmpPay
         data = typeof data === 'object' ? data : {};
         data["emplogId"] = this.emplogId;
         data["trainingId"] = this.trainingId;
-        return data;
+        return data; 
     }
 
     clone(): AssignTrainingToOneEmpPayload {
@@ -96883,7 +96906,7 @@ export class EmpTrainingResourceApiResult implements IEmpTrainingResourceApiResu
         data["result"] = this.result ? this.result.toJSON() : <any>undefined;
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): EmpTrainingResourceApiResult {
@@ -96933,7 +96956,7 @@ export class EmpFeedBack implements IEmpFeedBack {
         data = typeof data === 'object' ? data : {};
         data["emplogId"] = this.emplogId;
         data["feedBack"] = this.feedBack;
-        return data;
+        return data; 
     }
 
     clone(): EmpFeedBack {
@@ -97016,7 +97039,7 @@ export class EmployeeTrainingDTO implements IEmployeeTrainingDTO {
         data["age"] = this.age;
         data["yearsOfService"] = this.yearsOfService;
         data["hasAttended"] = this.hasAttended;
-        return data;
+        return data; 
     }
 
     clone(): EmployeeTrainingDTO {
@@ -97090,7 +97113,7 @@ export class DocFileDTO implements IDocFileDTO {
         data["uploadedBy"] = this.uploadedBy;
         data["dateUploaded"] = this.dateUploaded ? this.dateUploaded.toISOString() : <any>undefined;
         data["docFileOcrId"] = this.docFileOcrId;
-        return data;
+        return data; 
     }
 
     clone(): DocFileDTO {
@@ -97159,7 +97182,7 @@ export class DocFileDTOListApiResult implements IDocFileDTOListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): DocFileDTOListApiResult {
@@ -97226,7 +97249,7 @@ export class ApplicationPermission implements IApplicationPermission {
             for (let item of this.applicationRolePermissions)
                 data["applicationRolePermissions"].push(item.toJSON());
         }
-        return data;
+        return data; 
     }
 
     clone(): ApplicationPermission {
@@ -97288,7 +97311,7 @@ export class ApplicationRolePermission implements IApplicationRolePermission {
         data["applicationPermissionId"] = this.applicationPermissionId;
         data["applicationRole"] = this.applicationRole ? this.applicationRole.toJSON() : <any>undefined;
         data["applicationPermission"] = this.applicationPermission ? this.applicationPermission.toJSON() : <any>undefined;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRolePermission {
@@ -97362,7 +97385,7 @@ export class ApplicationRole implements IApplicationRole {
         data["name"] = this.name;
         data["normalizedName"] = this.normalizedName;
         data["concurrencyStamp"] = this.concurrencyStamp;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationRole {
@@ -97509,7 +97532,7 @@ export class RegisterUserDTO implements IRegisterUserDTO {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): RegisterUserDTO {
@@ -97612,7 +97635,7 @@ export class ApplicationUserDTO implements IApplicationUserDTO {
         data["token"] = this.token;
         data["apiSessionId"] = this.apiSessionId;
         data["lastComputerName"] = this.lastComputerName;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationUserDTO {
@@ -97688,7 +97711,7 @@ export class ApplicationUserDTOIListApiResult implements IApplicationUserDTOILis
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): ApplicationUserDTOIListApiResult {
@@ -97744,7 +97767,7 @@ export class VisaTypeDTO implements IVisaTypeDTO {
         data["companyId"] = this.companyId;
         data["subId"] = this.subId;
         data["visaName"] = this.visaName;
-        return data;
+        return data; 
     }
 
     clone(): VisaTypeDTO {
@@ -97817,7 +97840,7 @@ export class VisaType implements IVisaType {
         data["createdById"] = this.createdById;
         data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
         data["modifiedById"] = this.modifiedById;
-        return data;
+        return data; 
     }
 
     clone(): VisaType {
@@ -97889,7 +97912,7 @@ export class VisaTypeIListApiResult implements IVisaTypeIListApiResult {
         }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
-        return data;
+        return data; 
     }
 
     clone(): VisaTypeIListApiResult {
@@ -97909,7 +97932,7 @@ export interface IVisaTypeIListApiResult {
 }
 
 function formatDate(d: Date) {
-    return d.getFullYear() + '-' +
+    return d.getFullYear() + '-' + 
         (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
         (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }
