@@ -7549,11 +7549,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUploadid(response_);
+            return this.processBulkUpload(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUploadid(<any>response_);
+                    return this.processBulkUpload(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7562,7 +7562,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7630,11 +7630,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processProcessBulkUpload(response_);
+            return this.processProcessBulkUploadid(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processProcessBulkUpload(<any>response_);
+                    return this.processProcessBulkUploadid(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7643,7 +7643,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processProcessBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processProcessBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -31673,9 +31673,10 @@ export class FetchPerformanceCyclesServiceProxy {
      * @param unitId (optional) 
      * @param ratingType (optional) 
      * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
-    getPerformanceCycles(status: number | undefined, departmentId: number | undefined, locationId: number | undefined, unitId: number | undefined, ratingType: number | undefined, pageSize: number | undefined): Observable<CycleDTOIListApiResult> {
+    getPerformanceCycles(status: number | undefined, departmentId: number | undefined, locationId: number | undefined, unitId: number | undefined, ratingType: number | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<CycleDTOIListApiResult> {
         let url_ = this.baseUrl + "/api/PerformanceCycle/FetchPerformanceCycles/GetPerformanceCycles?";
         if (status === null)
             throw new Error("The parameter 'status' cannot be null.");
@@ -31700,7 +31701,11 @@ export class FetchPerformanceCyclesServiceProxy {
         if (pageSize === null)
             throw new Error("The parameter 'pageSize' cannot be null.");
         else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -45896,7 +45901,7 @@ export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO
     appraisalType!: string | undefined;
     ratingTypeId!: number;
     ratingType!: string | undefined;
-    periodUnderReview!: string | undefined;
+    periodUnderReview!: Date;
     totalPercentageScore!: number;
     grade!: string | undefined;
     recommendationId!: number;
@@ -45920,7 +45925,7 @@ export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO
             this.appraisalType = _data["appraisalType"];
             this.ratingTypeId = _data["ratingTypeId"];
             this.ratingType = _data["ratingType"];
-            this.periodUnderReview = _data["periodUnderReview"];
+            this.periodUnderReview = _data["periodUnderReview"] ? new Date(_data["periodUnderReview"].toString()) : <any>undefined;
             this.totalPercentageScore = _data["totalPercentageScore"];
             this.grade = _data["grade"];
             this.recommendationId = _data["recommendationId"];
@@ -45944,7 +45949,7 @@ export class EmployeeAppraisalHistoryDTO implements IEmployeeAppraisalHistoryDTO
         data["appraisalType"] = this.appraisalType;
         data["ratingTypeId"] = this.ratingTypeId;
         data["ratingType"] = this.ratingType;
-        data["periodUnderReview"] = this.periodUnderReview;
+        data["periodUnderReview"] = this.periodUnderReview ? this.periodUnderReview.toISOString() : <any>undefined;
         data["totalPercentageScore"] = this.totalPercentageScore;
         data["grade"] = this.grade;
         data["recommendationId"] = this.recommendationId;
@@ -45968,7 +45973,7 @@ export interface IEmployeeAppraisalHistoryDTO {
     appraisalType: string | undefined;
     ratingTypeId: number;
     ratingType: string | undefined;
-    periodUnderReview: string | undefined;
+    periodUnderReview: Date;
     totalPercentageScore: number;
     grade: string | undefined;
     recommendationId: number;
@@ -71862,7 +71867,7 @@ export class SectionDTO implements ISectionDTO {
     is_notified_employees!: boolean;
     order!: number;
     no_of_kpis!: number;
-    kpi_rating_type_id!: number;
+    kpi_rating_type_id!: number | undefined;
     strategyCategoryId!: number;
     isActive!: boolean;
     isDeleted!: boolean;
@@ -71964,7 +71969,7 @@ export interface ISectionDTO {
     is_notified_employees: boolean;
     order: number;
     no_of_kpis: number;
-    kpi_rating_type_id: number;
+    kpi_rating_type_id: number | undefined;
     strategyCategoryId: number;
     isActive: boolean;
     isDeleted: boolean;
@@ -72182,7 +72187,7 @@ export class KPISection implements IKPISection {
     instructions!: string | undefined;
     is_notified_employees!: boolean;
     order!: number;
-    kpi_rating_type_id!: number;
+    kpi_rating_type_id!: number | undefined;
     category_id!: number;
     weight!: number;
     kpis!: KPI[] | undefined;
@@ -72286,7 +72291,7 @@ export interface IKPISection {
     instructions: string | undefined;
     is_notified_employees: boolean;
     order: number;
-    kpi_rating_type_id: number;
+    kpi_rating_type_id: number | undefined;
     category_id: number;
     weight: number;
     kpis: KPI[] | undefined;
@@ -72436,7 +72441,7 @@ export class ManageSectionDTO implements IManageSectionDTO {
     order!: number;
     description!: string | undefined;
     instructions!: string | undefined;
-    ratingTypeId!: number;
+    ratingTypeId!: number | undefined;
 
     constructor(data?: IManageSectionDTO) {
         if (data) {
@@ -72499,7 +72504,7 @@ export interface IManageSectionDTO {
     order: number;
     description: string | undefined;
     instructions: string | undefined;
-    ratingTypeId: number;
+    ratingTypeId: number | undefined;
 }
 
 export class AssignKraDto implements IAssignKraDto {
@@ -83768,11 +83773,14 @@ export class CycleDTO implements ICycleDTO {
     departmentId!: number | undefined;
     locationId!: number | undefined;
     unitId!: number | undefined;
+    departmentName!: string | undefined;
+    locationName!: string | undefined;
+    unitName!: string | undefined;
     cycleInfo!: string | undefined;
     startDate!: Date;
     endDate!: Date;
-    periodUnderReview!: string | undefined;
-    lastPeriodUnderReview!: string | undefined;
+    periodUnderReview!: Date;
+    lastPeriodUnderReview!: Date | undefined;
     dueDate!: Date;
     dateStopped!: Date | undefined;
     frequencyId!: number;
@@ -83823,11 +83831,14 @@ export class CycleDTO implements ICycleDTO {
             this.departmentId = _data["departmentId"];
             this.locationId = _data["locationId"];
             this.unitId = _data["unitId"];
+            this.departmentName = _data["departmentName"];
+            this.locationName = _data["locationName"];
+            this.unitName = _data["unitName"];
             this.cycleInfo = _data["cycleInfo"];
             this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
             this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.periodUnderReview = _data["periodUnderReview"];
-            this.lastPeriodUnderReview = _data["lastPeriodUnderReview"];
+            this.periodUnderReview = _data["periodUnderReview"] ? new Date(_data["periodUnderReview"].toString()) : <any>undefined;
+            this.lastPeriodUnderReview = _data["lastPeriodUnderReview"] ? new Date(_data["lastPeriodUnderReview"].toString()) : <any>undefined;
             this.dueDate = _data["dueDate"] ? new Date(_data["dueDate"].toString()) : <any>undefined;
             this.dateStopped = _data["dateStopped"] ? new Date(_data["dateStopped"].toString()) : <any>undefined;
             this.frequencyId = _data["frequencyId"];
@@ -83878,11 +83889,14 @@ export class CycleDTO implements ICycleDTO {
         data["departmentId"] = this.departmentId;
         data["locationId"] = this.locationId;
         data["unitId"] = this.unitId;
+        data["departmentName"] = this.departmentName;
+        data["locationName"] = this.locationName;
+        data["unitName"] = this.unitName;
         data["cycleInfo"] = this.cycleInfo;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["periodUnderReview"] = this.periodUnderReview;
-        data["lastPeriodUnderReview"] = this.lastPeriodUnderReview;
+        data["periodUnderReview"] = this.periodUnderReview ? this.periodUnderReview.toISOString() : <any>undefined;
+        data["lastPeriodUnderReview"] = this.lastPeriodUnderReview ? this.lastPeriodUnderReview.toISOString() : <any>undefined;
         data["dueDate"] = this.dueDate ? this.dueDate.toISOString() : <any>undefined;
         data["dateStopped"] = this.dateStopped ? this.dateStopped.toISOString() : <any>undefined;
         data["frequencyId"] = this.frequencyId;
@@ -83933,11 +83947,14 @@ export interface ICycleDTO {
     departmentId: number | undefined;
     locationId: number | undefined;
     unitId: number | undefined;
+    departmentName: string | undefined;
+    locationName: string | undefined;
+    unitName: string | undefined;
     cycleInfo: string | undefined;
     startDate: Date;
     endDate: Date;
-    periodUnderReview: string | undefined;
-    lastPeriodUnderReview: string | undefined;
+    periodUnderReview: Date;
+    lastPeriodUnderReview: Date | undefined;
     dueDate: Date;
     dateStopped: Date | undefined;
     frequencyId: number;
@@ -84106,8 +84123,8 @@ export class ManageCycleDTO implements IManageCycleDTO {
     cycleInfo!: string | undefined;
     startDate!: Date;
     endDate!: Date;
-    periodUnderReview!: string | undefined;
-    lastPeriodUnderReview!: string | undefined;
+    periodUnderReview!: Date;
+    lastPeriodUnderReview!: Date | undefined;
     dueDate!: Date;
     isActive!: boolean;
 
@@ -84137,8 +84154,8 @@ export class ManageCycleDTO implements IManageCycleDTO {
             this.cycleInfo = _data["cycleInfo"];
             this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
             this.endDate = _data["endDate"] ? new Date(_data["endDate"].toString()) : <any>undefined;
-            this.periodUnderReview = _data["periodUnderReview"];
-            this.lastPeriodUnderReview = _data["lastPeriodUnderReview"];
+            this.periodUnderReview = _data["periodUnderReview"] ? new Date(_data["periodUnderReview"].toString()) : <any>undefined;
+            this.lastPeriodUnderReview = _data["lastPeriodUnderReview"] ? new Date(_data["lastPeriodUnderReview"].toString()) : <any>undefined;
             this.dueDate = _data["dueDate"] ? new Date(_data["dueDate"].toString()) : <any>undefined;
             this.isActive = _data["isActive"];
         }
@@ -84168,8 +84185,8 @@ export class ManageCycleDTO implements IManageCycleDTO {
         data["cycleInfo"] = this.cycleInfo;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["endDate"] = this.endDate ? this.endDate.toISOString() : <any>undefined;
-        data["periodUnderReview"] = this.periodUnderReview;
-        data["lastPeriodUnderReview"] = this.lastPeriodUnderReview;
+        data["periodUnderReview"] = this.periodUnderReview ? this.periodUnderReview.toISOString() : <any>undefined;
+        data["lastPeriodUnderReview"] = this.lastPeriodUnderReview ? this.lastPeriodUnderReview.toISOString() : <any>undefined;
         data["dueDate"] = this.dueDate ? this.dueDate.toISOString() : <any>undefined;
         data["isActive"] = this.isActive;
         return data; 
@@ -84199,8 +84216,8 @@ export interface IManageCycleDTO {
     cycleInfo: string | undefined;
     startDate: Date;
     endDate: Date;
-    periodUnderReview: string | undefined;
-    lastPeriodUnderReview: string | undefined;
+    periodUnderReview: Date;
+    lastPeriodUnderReview: Date | undefined;
     dueDate: Date;
     isActive: boolean;
 }

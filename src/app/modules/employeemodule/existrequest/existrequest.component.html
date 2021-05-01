@@ -9,11 +9,10 @@
     <nb-card class="col-md-3 " style="display: flex;justify-items: center; text-align: centre;">
         <nb-card-body>
             <div>
-                <img src="assets/images/nick.png" width="60%" style="background-size: cover;
+                <img [src]="createNewEmployee.profilePic" onError="this.src='assets/icons/camera.jpg'" width="60%" style="background-size: cover;
             margin-top: 20px; margin-left: 50px;" class="rounded-circle mb-1" alt="Cinque Terre">
                 <br>
-                <span class="d-flex flex-row pl-2" style="font-size: x-small; margin-left: 34px;">software
-                    developer</span>
+                <span class="d-flex flex-row pl-2" style="font-size: x-small; margin-left: 34px;"> {{jobName}}</span>
             </div>
             <br>
             
@@ -25,7 +24,7 @@
                     <br>
                     <div class="ml-2">
                         <h6 style="font-size: xx-small; font-weight: lighter;">Staff Id</h6>
-                        <h6 style="font-size: x-small;">FGD234567</h6>
+                        <h6 style="font-size: x-small;">{{createNewEmployee.employeeNumber}}</h6>
                     </div>
 
 
@@ -37,7 +36,7 @@
                     <br>
                     <div class="ml-2">
                         <h6 style="font-size: xx-small; font-weight: lighter;">Phone</h6>
-                        <h6 style="font-size: x-small; font-weight: bold;">0808987663</h6>
+                        <h6 style="font-size: x-small; font-weight: bold;">{{createNewEmployee.workMobile}}</h6>
                     </div>
                 </div>
                 <div class="d-flex mt-4" style="margin-left: 15px; padding-bottom: 10px;">
@@ -47,7 +46,7 @@
                     <br>
                     <div class="ml-2">
                         <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Department</h6>
-                        <h6 style="font-size: x-small; font-weight: bold; ">Product of Development</h6>
+                        <h6 style="font-size: x-small; font-weight: bold; ">{{createNewEmployee.departmentName}}</h6>
                     </div>
 
 
@@ -61,7 +60,7 @@
                         <br>
                         <div class="ml-2">
                             <h6 style="font-size: xx-small; font-weight: lighter;">Email address</h6>
-                            <h6 style="font-size: x-small; font-weight: bold;">sheriff@smartace.com</h6>
+                            <h6 style="font-size: x-small; font-weight: bold;">{{createNewEmployee.workEmail}}</h6>
                         </div>
                     </div>
                     <div class="d-flex mt-4" style="margin-left: 15px;">
@@ -71,7 +70,7 @@
                         <br>
                         <div class="ml-2">
                             <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Date of joining</h6>
-                            <h6 style="font-size: x-small; font-weight: bold; ">15th/jan/2022</h6>
+                            <h6 style="font-size: x-small; font-weight: bold; ">{{createNewEmployee.contracts[0]?.dateOfAppointment | date: 'medium'}}</h6>
                         </div>
 
                     </div>
@@ -84,7 +83,7 @@
                         <br>
                         <div class="ml-2">
                             <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Office location</h6>
-                            <h6 style="font-size: x-small; font-weight: bold; ">Marina,lekki.Lagos</h6>
+                            <h6 style="font-size: x-small; font-weight: bold; ">{{createNewEmployee.contracts[0]?.locationName}}</h6>
                         </div>
 
                     </div>
@@ -118,10 +117,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Enter Phone
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Enter Personal Phone
                                 Number</label>
                             <div class="col-sm-8">
                                 <input type="number" nbInput fullWidth placeholder="Enter Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Enter Personal Email
+                                <div class="col-sm-8">
+                                <input type="email" nbInput fullWidth placeholder="Enter Phone Number">
                             </div>
                         </div>
                         <div class="form-group row" style="margin-top: 15px;">
