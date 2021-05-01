@@ -7549,11 +7549,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUploadid(response_);
+            return this.processBulkUpload(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUploadid(<any>response_);
+                    return this.processBulkUpload(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7562,7 +7562,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -36540,14 +36540,19 @@ export class RetirementServiceProxy {
     Note: all filter are optional
      * @param iD (optional) 
      * @param fullName (optional) 
+     * @param employeeId (optional) 
      * @param dateRequested (optional) 
      * @param type (optional) 
      * @param status (optional) 
      * @param isCleared (optional) 
      * @param retirmentTypeid (optional) 
+     * @param startdate (optional) 
+     * @param endate (optional) 
+     * @param pageSize (optional) 
+     * @param pageNumber (optional) 
      * @return Success
      */
-    getRetirees(iD: number | undefined, fullName: string | null | undefined, dateRequested: Date | null | undefined, type: string | null | undefined, status: string | null | undefined, isCleared: boolean | undefined, retirmentTypeid: number | undefined): Observable<RetirmentDTOListApiResult> {
+    getRetirees(iD: number | undefined, fullName: string | null | undefined, employeeId: number | undefined, dateRequested: Date | null | undefined, type: string | null | undefined, status: number | undefined, isCleared: boolean | undefined, retirmentTypeid: number | undefined, startdate: string | null | undefined, endate: string | null | undefined, pageSize: number | undefined, pageNumber: number | undefined): Observable<RetirmentDTOListApiResult> {
         let url_ = this.baseUrl + "/api/Retirement/GetRetirees?";
         if (iD === null)
             throw new Error("The parameter 'iD' cannot be null.");
@@ -36555,11 +36560,17 @@ export class RetirementServiceProxy {
             url_ += "ID=" + encodeURIComponent("" + iD) + "&";
         if (fullName !== undefined && fullName !== null)
             url_ += "FullName=" + encodeURIComponent("" + fullName) + "&";
+        if (employeeId === null)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else if (employeeId !== undefined)
+            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
         if (dateRequested !== undefined && dateRequested !== null)
             url_ += "DateRequested=" + encodeURIComponent(dateRequested ? "" + dateRequested.toJSON() : "") + "&";
         if (type !== undefined && type !== null)
             url_ += "Type=" + encodeURIComponent("" + type) + "&";
-        if (status !== undefined && status !== null)
+        if (status === null)
+            throw new Error("The parameter 'status' cannot be null.");
+        else if (status !== undefined)
             url_ += "Status=" + encodeURIComponent("" + status) + "&";
         if (isCleared === null)
             throw new Error("The parameter 'isCleared' cannot be null.");
@@ -36569,6 +36580,18 @@ export class RetirementServiceProxy {
             throw new Error("The parameter 'retirmentTypeid' cannot be null.");
         else if (retirmentTypeid !== undefined)
             url_ += "retirmentTypeid=" + encodeURIComponent("" + retirmentTypeid) + "&";
+        if (startdate !== undefined && startdate !== null)
+            url_ += "startdate=" + encodeURIComponent("" + startdate) + "&";
+        if (endate !== undefined && endate !== null)
+            url_ += "endate=" + encodeURIComponent("" + endate) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
