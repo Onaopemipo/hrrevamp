@@ -112,14 +112,14 @@
         </div> -->
         <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
 <div style="padding:5px"></div>
-        <!-- <div class="form-group row">
+        <div class="form-group row">
           <div class="col-md-4" style="display: flex;align-items:center">
             <label for="">Upload Supporting Document</label>
           </div>
           <div class="col-md-8 col-xxl-8 ">
             <div style="display: flex;flex-direction: row;">
               <div>
-                <ngx-file-upload  class="form-control">
+                <ngx-file-upload (valueChange)="selectedFile($event,'Supporting Document')"  class="form-control">
                 </ngx-file-upload>
               </div>
               <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
@@ -129,7 +129,7 @@
 
 
           </div>
-        </div> -->
+        </div>
 
 
         <div class="form-group row">

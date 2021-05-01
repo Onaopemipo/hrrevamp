@@ -7549,11 +7549,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUpload(response_);
+            return this.processBulkUploadid(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUpload(<any>response_);
+                    return this.processBulkUploadid(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7562,7 +7562,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7630,11 +7630,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processProcessBulkUploadid(response_);
+            return this.processProcessBulkUpload(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processProcessBulkUploadid(<any>response_);
+                    return this.processProcessBulkUpload(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7643,7 +7643,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processProcessBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processProcessBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -90823,11 +90823,18 @@ export class RetirmentDTO implements IRetirmentDTO {
     dateSubmitted!: Date | undefined;
     reviewedBy!: string | undefined;
     reviewerComment!: string | undefined;
+    exitChoice!: string | undefined;
+    personalEmail!: string | undefined;
+    personalPhoneNumber!: string | undefined;
     dateReviewed!: Date | undefined;
     isAccepted!: boolean | undefined;
     log_status!: number;
     subReason!: string | undefined;
     sourceofInitiation!: string | undefined;
+    tempref!: string | undefined;
+    clearance!: string | undefined;
+    survey!: string | undefined;
+    exitDate!: Date;
 
     constructor(data?: IRetirmentDTO) {
         if (data) {
@@ -90863,11 +90870,18 @@ export class RetirmentDTO implements IRetirmentDTO {
             this.dateSubmitted = _data["dateSubmitted"] ? new Date(_data["dateSubmitted"].toString()) : <any>undefined;
             this.reviewedBy = _data["reviewedBy"];
             this.reviewerComment = _data["reviewerComment"];
+            this.exitChoice = _data["exitChoice"];
+            this.personalEmail = _data["personalEmail"];
+            this.personalPhoneNumber = _data["personalPhoneNumber"];
             this.dateReviewed = _data["dateReviewed"] ? new Date(_data["dateReviewed"].toString()) : <any>undefined;
             this.isAccepted = _data["isAccepted"];
             this.log_status = _data["log_status"];
             this.subReason = _data["subReason"];
             this.sourceofInitiation = _data["sourceofInitiation"];
+            this.tempref = _data["tempref"];
+            this.clearance = _data["clearance"];
+            this.survey = _data["survey"];
+            this.exitDate = _data["exitDate"] ? new Date(_data["exitDate"].toString()) : <any>undefined;
         }
     }
 
@@ -90903,11 +90917,18 @@ export class RetirmentDTO implements IRetirmentDTO {
         data["dateSubmitted"] = this.dateSubmitted ? this.dateSubmitted.toISOString() : <any>undefined;
         data["reviewedBy"] = this.reviewedBy;
         data["reviewerComment"] = this.reviewerComment;
+        data["exitChoice"] = this.exitChoice;
+        data["personalEmail"] = this.personalEmail;
+        data["personalPhoneNumber"] = this.personalPhoneNumber;
         data["dateReviewed"] = this.dateReviewed ? this.dateReviewed.toISOString() : <any>undefined;
         data["isAccepted"] = this.isAccepted;
         data["log_status"] = this.log_status;
         data["subReason"] = this.subReason;
         data["sourceofInitiation"] = this.sourceofInitiation;
+        data["tempref"] = this.tempref;
+        data["clearance"] = this.clearance;
+        data["survey"] = this.survey;
+        data["exitDate"] = this.exitDate ? this.exitDate.toISOString() : <any>undefined;
         return data; 
     }
 
@@ -90943,11 +90964,18 @@ export interface IRetirmentDTO {
     dateSubmitted: Date | undefined;
     reviewedBy: string | undefined;
     reviewerComment: string | undefined;
+    exitChoice: string | undefined;
+    personalEmail: string | undefined;
+    personalPhoneNumber: string | undefined;
     dateReviewed: Date | undefined;
     isAccepted: boolean | undefined;
     log_status: number;
     subReason: string | undefined;
     sourceofInitiation: string | undefined;
+    tempref: string | undefined;
+    clearance: string | undefined;
+    survey: string | undefined;
+    exitDate: Date;
 }
 
 export class RetirmentDTOListApiResult implements IRetirmentDTOListApiResult {

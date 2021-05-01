@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {  MyExitRequest } from '../services/exit-request.service';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { FormGroup } from '@angular/forms'
-import { CommonServiceProxy, DataServiceProxy, RetirementServiceProxy, RetirementType, RetirmentDTO,IDTextViewModel, ManageRetirementDTO } from 'app/_services/service-proxies';
+import { CommonServiceProxy, DataServiceProxy, RetirementServiceProxy, RetirementType, RetirmentDTO,IDTextViewModel, ManageRetirementDTO, UploadDocumentServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService, ALERT_TYPES } from 'app/_services/alertservice.service';
 import { CustomServiceService } from 'app/_services/custom-service.service';
 
@@ -22,7 +22,7 @@ enum TOP_ACTIONS {
 })
 export class ManagementexistComponent implements OnInit {
   pageName: string = '';
-  exitForm: FormGroup
+  exitForm: FormGroup;
   inputText: string = 'Attach';
   // creatingExit:MyExitRequest[]=[]
   order: boolean = false;
@@ -50,6 +50,10 @@ export class ManagementexistComponent implements OnInit {
   selectionHeader = "Select Employee";
   addbtnText = "Add Employee";
   selectedEmployee = [];
+  tempRef = "";
+  files: Transfer;
+  entityId = 0;
+  Entity: IDTextViewModel[] = []
   constructor(
     private router: Router,
     private DataService: DataServiceProxy,
@@ -58,13 +62,16 @@ private CommonService: CommonServiceProxy,
     private RetirementService: RetirementServiceProxy,
     private alertService: AlertserviceService,
     private CustomService: CustomServiceService,
+    private UploadDocumentService: UploadDocumentServiceProxy,
 
   ) {
 
   }
 
   ngOnInit(): void {
-    this.getRetirementsTypes();
+    this.getEntity();
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
+this.getRetirementsTypes();
 this.getProccessId()
     this.activatedRoute.queryParams.subscribe(params => {
       if (params) {
@@ -136,6 +143,36 @@ this.getProccessId()
 
   }
 
-
-
+  selectedFile(files: Transfer, title) {
+    const refNumber =  this.tempRef
+   console.log('temp ref', this.tempRef)
+   if (this.Entity.length > 0) {
+     let srchR = this.Entity.find(f => f.text == "RETIREMENT");
+     this.entityId = srchR.id;
+   }
+   // this.files = files.flowFile.file
+   this.UploadDocumentService.uploadDocs(0, title, 0, this.entityId, false, refNumber, files.flowFile.file[0])
+     .subscribe(data => {
+     if (!data.hasError) {
+       console.log('ref',this.tempRef)
+       console.log('datarseee', data.result)
+       if (!data.hasError) {
+         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS, data.message, 'OK');
+        
+       } else {
+         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, 'OK')
+       }
+     }
+   });
+ }
+ async getEntity() {
+  const data = await this.DataService.docEntityTypes().toPromise()
+  if (!data.hasError) {
+    this.Entity = data.result
+    console.log('doc', this.Entity)
+  }
+  else {
+    return data.hasError[0]
+  }
+}
 }

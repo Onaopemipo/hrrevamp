@@ -1,6 +1,7 @@
 
 <ngx-componentsheader 
- pageName='Exit Request'>
+ pageName='Exit Request'  [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
 </ngx-componentsheader>
 
 
@@ -12,41 +13,41 @@
                 <img [src]="createNewEmployee.profilePic" onError="this.src='assets/icons/camera.jpg'" width="60%" style="background-size: cover;
             margin-top: 20px; margin-left: 50px;" class="rounded-circle mb-1" alt="Cinque Terre">
                 <br>
-                <span class="d-flex flex-row pl-2" style="font-size: x-small; margin-left: 34px;"> {{jobName}}</span>
+                <span class="d-flex flex-row pl-2" style="font-size: small; margin-left: 34px;"> {{jobName}}</span>
             </div>
             <br>
             
             <div>
                 <div class="d-flex mt-4" style="margin-left: 15px;">
                     <div class="mt-2">
-                    <img  style="height: 20px;" src="assets/icons/StaffID.jpg" alt="">
+                    <img  style="height: 30px;" src="assets/icons/StaffID.jpg" alt="">
                     </div>
                     <br>
                     <div class="ml-2">
-                        <h6 style="font-size: xx-small; font-weight: lighter;">Staff Id</h6>
-                        <h6 style="font-size: x-small;">{{createNewEmployee.employeeNumber}}</h6>
+                        <h6 style="font-size:small; font-weight: lighter;">Staff Id</h6>
+                        <h6 style="font-size: small;">{{createNewEmployee.employeeNumber}}</h6>
                     </div>
 
 
                 </div>
                 <div class="d-flex mt-4" style="margin-left: 15px;">
                     <div nbButton class="mt-2">
-                        <img src="assets/icons/Phone.jpg" style="height: 20px;" alt="">
+                        <img src="assets/icons/Phone.jpg" style="height: 30px;" alt="">
                     </div>
                     <br>
                     <div class="ml-2">
-                        <h6 style="font-size: xx-small; font-weight: lighter;">Phone</h6>
-                        <h6 style="font-size: x-small; font-weight: bold;">{{createNewEmployee.workMobile}}</h6>
+                        <h6 style="font-size: small; font-weight: lighter;">Phone</h6>
+                        <h6 style="font-size: small; font-weight: bold;">{{createNewEmployee.workMobile}}</h6>
                     </div>
                 </div>
                 <div class="d-flex mt-4" style="margin-left: 15px; padding-bottom: 10px;">
                     <div class="mt-2">
-                        <img src="assets/icons/department.jpg" style="height: 20px;" alt="">
+                        <img src="assets/icons/department.jpg" style="height: 30px;" alt="">
                     </div>
                     <br>
                     <div class="ml-2">
-                        <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Department</h6>
-                        <h6 style="font-size: x-small; font-weight: bold; ">{{createNewEmployee.departmentName}}</h6>
+                        <h6 style="font-size: small; font-weight: lighter; margin-left: 9px;">Department</h6>
+                        <h6 style="font-size: small; font-weight: bold; ">{{createNewEmployee.departmentName}}</h6>
                     </div>
 
 
@@ -55,22 +56,22 @@
                 <div>
                     <div class="d-flex mt-4" style="margin-left: 15px;">
                         <div class="mt-2" style="font-weight: lighter;">
-                     <img style="height: 20px;" src="assets/icons/emailaddress.jpg" alt="">
+                     <img style="height: 30px;" src="assets/icons/emailaddress.jpg" alt="">
                         </div>
                         <br>
                         <div class="ml-2">
-                            <h6 style="font-size: xx-small; font-weight: lighter;">Email address</h6>
+                            <h6 style="font-size: small; font-weight: lighter;">Email address</h6>
                             <h6 style="font-size: x-small; font-weight: bold;">{{createNewEmployee.workEmail}}</h6>
                         </div>
                     </div>
                     <div class="d-flex mt-4" style="margin-left: 15px;">
                         <div class="mt-2">
-                            <img src="assets/icons/department.jpg" style="height: 20px;" alt="">
+                            <img src="assets/icons/department.jpg" style="height: 30px;" alt="">
                         </div>
                         <br>
                         <div class="ml-2">
-                            <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Date of joining</h6>
-                            <h6 style="font-size: x-small; font-weight: bold; ">{{createNewEmployee.contracts[0]?.dateOfAppointment | date: 'medium'}}</h6>
+                            <h6 style="font-size: small; font-weight: lighter; margin-left: 9px;">Date of joining</h6>
+                            <h6 style="font-size: small; font-weight: bold; ">{{createNewEmployee.contracts[0]?.dateOfAppointment | date: 'medium'}}</h6>
                         </div>
 
                     </div>
@@ -78,12 +79,12 @@
 
                     <div class="d-flex mt-4" style="margin-left: 15px;">
                         <div class="mt-2">
-                            <img src="assets/icons/officelocation.jpg" style="height: 20px;" alt="">
+                            <img src="assets/icons/officelocation.jpg" style="height: 30px;" alt="">
                         </div>
                         <br>
                         <div class="ml-2">
-                            <h6 style="font-size: xx-small; font-weight: lighter; margin-left: 9px;">Office location</h6>
-                            <h6 style="font-size: x-small; font-weight: bold; ">{{createNewEmployee.contracts[0]?.locationName}}</h6>
+                            <h6 style="font-size: small; font-weight: lighter; margin-left: 9px;">Office location</h6>
+                            <h6 style="font-size: small; font-weight: bold; ">{{createNewEmployee.contracts[0]?.locationName}}</h6>
                         </div>
 
                     </div>
@@ -98,7 +99,7 @@
 
     <nb-card class="col-md-8">
         <nb-card-body>
-            <nb-tabset>
+            <nb-tabset #tabset>
                 <nb-tab tabTitle="Exit Details">
                     <nb-card-header>
                         <p style="font-weight: bold;">Exit Details</p>
@@ -108,44 +109,74 @@
                         </p>
                     </nb-card-header>
 
-                    <form>
+                    <form id="exitForm" name="exitForm" #exitForm="ngForm">
                        
                         <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For Retirement</label>
                             <div class="col-sm-8">
-                                <input type="text" nbInput fullWidth placeholder=" Enter Personal Email Address">
-                            </div>
-                        </div>
+                                <select class="form-control" fullWidth name="retirementTypeId" id="retirementTypeId" #retirementTypeId="ngModel" [(ngModel)]="RetirmentBody.retirementTypeId">
+        <option value="undefined">--Select Reetirement Type--</option>
+        <option *ngFor="let reType of allRetirementType" [value]="reType.id">{{reType.name}}</option>
+      </select>
+      <div *ngIf="retirementTypeId.invalid && (retirementTypeId.dirty || retirementTypeId.touched)" class="error">
+        <div *ngIf="retirementTypeId.errors.required">
+          Exit Reason is required
+        </div>
+    </div>
+    </div>
+    </div>
+       <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Sub-Reason</label>
+          <div class="col-sm-8">
+            <input name="subReason" id="subReason" #subReason="ngModel" [(ngModel)]="RetirmentBody.subReason" type="text" nbInput fullWidth placeholder="Enter Sub-Reason">
+            <div>
+       
+            </div>
+          </div>
+        </div>
                         <div class="form-group row">
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Enter Personal Phone
                                 Number</label>
                             <div class="col-sm-8">
-                                <input type="number" nbInput fullWidth placeholder="Enter Phone Number">
+                              <input name="personalPhoneNumber" id="personalPhoneNumber" #personalPhoneNumber="ngModel" [(ngModel)]="RetirmentBody.personalPhoneNumber" type="text" nbInput fullWidth placeholder="Enter Personal Phone Number">
+                              <div *ngIf="personalPhoneNumber.invalid && (personalPhoneNumber.dirty || personalPhoneNumber.touched)" class="error">
+                                <div *ngIf="personalPhoneNumber.errors.required">
+                                    Personal Phone Number is required
+                                </div>
+                            </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Enter Personal Email
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Enter Personal Email </label>
                                 <div class="col-sm-8">
-                                <input type="email" nbInput fullWidth placeholder="Enter Phone Number">
+                                    <input name="personalEmail" id="personalEmail" #personalEmail="ngModel" [(ngModel)]="RetirmentBody.personalEmail" type="email" nbInput fullWidth placeholder="Enter Personal Email">
+                              <div *ngIf="personalEmail.invalid && (personalEmail.dirty || personalEmail.touched)" class="error">
+                                <div *ngIf="personalEmail.errors.required">
+                                    Personal Email is required
+                                </div>
+                            </div>
                             </div>
                         </div>
+     
                         <div class="form-group row" style="margin-top: 15px;">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Upload Affected
-                                Employee</label>
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Exit Choice</label>
                             <div class="col-sm-8">
-                                <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
-                                    <nb-radio value="1">Forgo Salary</nb-radio>
-                                    <nb-radio value="2">Spend 30 dayy notice period</nb-radio>
-
-                                </nb-radio-group>
+                                <nb-radio-group  name="exitChoice" id="exitChoice" #exitChoice="ngModel" [(ngModel)]="RetirmentBody.exitChoice" class="d-flex">
+                                    <nb-radio [value]="1">Forgo Salary</nb-radio>
+                                    <nb-radio [value]="2">Spend 30 Days notice period</nb-radio>
+                                  </nb-radio-group>
+                                  <div *ngIf="exitChoice.invalid && (exitChoice.dirty || exitChoice.touched)" class="error">
+                                    <div *ngIf="exitChoice.errors.required">
+                                        Exit Choice is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Exit
-                                Date</label>
+                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Exit Date</label>
                             <div class="col-sm-8">
-                                <input type="text" nbInput fullWidth placeholder="Enter Exit Date">
+                                <ngx-date [(value)]='RetirmentBody.effectiveDate'   #effectiveDate name="effectiveDate" id="effectiveDate"></ngx-date>
                             </div>
                         </div>
 
@@ -165,7 +196,7 @@
                             <div class="col-md-8 col-xxl-8 ">
                                 <div style="display: flex;flex-direction: row;">
                                     <div>
-                                        <ngx-file-upload class="form-control"></ngx-file-upload>
+                                        <ngx-file-upload (valueChange)="selectedFile($event,'Handover Note')" class="form-control"></ngx-file-upload>
                                     </div>
                                     <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
                                         Not More than 1 mb
@@ -185,7 +216,7 @@
                             <div class="col-md-8 col-xxl-8 ">
                                 <div style="display: flex;flex-direction: row;">
                                     <div>
-                                        <ngx-file-upload class="form-control"></ngx-file-upload>
+                                        <ngx-file-upload (valueChange)="selectedFile($event,'Resignation Letter')" class="form-control"></ngx-file-upload>
                                     </div>
                                     <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
                                         Not More than 1 mb
@@ -202,7 +233,7 @@
                             <div class="col-md-8 col-xxl-8 ">
                                 <div style="display: flex;flex-direction: row;">
                                     <div>
-                                        <ngx-file-upload class="form-control"></ngx-file-upload>
+                                        <ngx-file-upload (valueChange)="selectedFile($event,'Additional Upload')" class="form-control"></ngx-file-upload>
                                     </div>
                                     <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
                                         Not More than 1 mb
@@ -212,8 +243,7 @@
 
                             </div>
                         </div>
-
-
+<!-- 
                         <div class="form-group row">
                             <div class="col-md-4" style="display: flex;align-items:center">
 
@@ -229,18 +259,14 @@
                                 </div>
 
                             </div>
-                        </div>
-
-
-
-
+                        </div> -->
 
                     </form>
 
                     <br>
 
                 </nb-tab>
-                <nb-tab tabTitle="Exit survey Form">
+                <!-- <nb-tab tabTitle="Exit survey Form">
                     <nb-card-header>
                         <h6>Survey Form</h6>
                         <p style="margin-top: 15px; font-size: small;">This form is to understand why you have decided to leave
@@ -640,7 +666,7 @@
 
 
 
-                </nb-tab>
+                </nb-tab> -->
 
 
             </nb-tabset>
