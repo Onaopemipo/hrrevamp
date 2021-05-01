@@ -1,9 +1,9 @@
 <ngx-componentsheader
-  pageName="All Loan Request"
+  pageName="All Loan Requests"
   [requiredButton]="[]"
 ></ngx-componentsheader>
 
-<div *ngIf="dataVal < 1" style="background-color: #ffffff;">
+<div *ngIf="loansCounter < 1" style="background-color: #ffffff;">
   <nb-card>
     <nb-card-body>
       <div><br>
@@ -15,7 +15,7 @@
 
 </div>
 
-<div *ngIf="dataVal > 0">
+<div *ngIf="loansCounter > 0">
   <nb-card>
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>

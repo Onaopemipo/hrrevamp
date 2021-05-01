@@ -1,7 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { CommonServiceProxy, Competency } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy, CompetencyRequirmentsDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -91,7 +91,7 @@ export class PlanningComponent implements OnInit {
 
   planDataCount: number = 0;
   newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
-  allCompetencies: Competency [] = [];
+  allCompetencies: CompetencyRequirmentsDTO [] = [];
 
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";

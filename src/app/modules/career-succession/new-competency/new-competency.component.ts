@@ -47,7 +47,7 @@ export class NewCompetencyComponent implements OnInit {
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
-  allCompetencies: Competency [] = [];
+  allCompetencies: CompetencyRequirmentsDTO [] = [];
   myCompetency: ManageCompetencyDTO = new ManageCompetencyDTO().clone();
   allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
   competencyRequirement = new CompetencyRequirmentsDTO;

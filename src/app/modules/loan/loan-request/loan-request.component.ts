@@ -3,12 +3,13 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj, ManageLoanRequestDTO } from './../../../_services/service-proxies';
+import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj, ManageLoanRequestDTO, AddUpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/_services/authentication.service';
 
 enum TABLE_ACTION {
   VIEW = '1',
+  DELETE = '2',
   EDIT = '3'
 }
 @Component({
@@ -21,6 +22,7 @@ export class LoanRequestComponent implements OnInit {
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
+    {name: TABLE_ACTION.DELETE, label: 'Delete'},
 
   ]
 
@@ -64,6 +66,10 @@ export class LoanRequestComponent implements OnInit {
        else if(event.name==TABLE_ACTION.EDIT){
         this.router.navigateByUrl('update-loan' + event.data.id)
          }
+
+         else if(event.name==TABLE_ACTION.DELETE){
+          this.router.navigateByUrl('update-loan' + event.data.id)
+           }
   }
 
   allLoansData: LoanRequestDTOs [] = [];
@@ -83,7 +89,7 @@ export class LoanRequestComponent implements OnInit {
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
      private interestService: GetInterestRateServiceProxy, public authServ: AuthenticationService,
-     private router: Router, private loanTypeService: GetLoanTypesServiceProxy) { }
+     private router: Router, private loanTypeService: GetLoanTypesServiceProxy, private loanRequestService: AddUpdateLoanRequestServiceProxy) { }
 
   ngOnInit(): void {
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
@@ -119,7 +125,7 @@ export class LoanRequestComponent implements OnInit {
 
   async makeLoanRequest(){
   this.loanModel.loggedForEmployeeId = this.user.employee_id;
-  const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
+  const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
     this.loanForm.resetForm();

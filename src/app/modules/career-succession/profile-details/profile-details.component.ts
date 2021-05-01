@@ -1,4 +1,4 @@
-import { Certification, CommonServiceProxy, Competency } from 'app/_services/service-proxies';
+import { Certification, CommonServiceProxy, Competency, CompetencyRequirmentsDTO } from 'app/_services/service-proxies';
 import { map } from 'rxjs/operators';
 import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
@@ -69,8 +69,8 @@ export class ProfileDetailsComponent implements OnInit {
   employeeId:number = 0;
   planStatus: boolean = false;
   competencyId: number = 0;
-  allCompetencies: Competency [] = [];
-  roleCompetency: Competency = new Competency;
+  allCompetencies: CompetencyRequirmentsDTO [] = [];
+  roleCompetency: CompetencyRequirmentsDTO = new CompetencyRequirmentsDTO;
   planDetails: CareerSuccessionDTO = new CareerSuccessionDTO;
   pageLoading:boolean = true;
 
@@ -147,7 +147,7 @@ fetchProfile(){
         let counter = data.totalRecord;
         for(let i=0; i< counter; i++){
           // console.log(this.allCompetencies[i].id)
-          if(this.allCompetencies[i].id =  this.competencyId) {
+          if(this.allCompetencies[i].competencyId =  this.competencyId) {
             this.roleCompetency = this.allCompetencies[i];
             console.log('Finally ooo', this.roleCompetency)
           }

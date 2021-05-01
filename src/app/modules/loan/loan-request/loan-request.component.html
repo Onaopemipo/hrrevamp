@@ -1,25 +1,25 @@
-<ngx-componentsheader *ngIf="pageNo == 1"
+<!-- <ngx-componentsheader *ngIf="pageNo == 1"
   pageName="Loan Request" (buttonClick)="gotoNext()"
-></ngx-componentsheader>
+></ngx-componentsheader> -->
 
-<ngx-componentsheader *ngIf="pageNo == 2"
+<ngx-componentsheader
   pageName="Loan Request"
   [requiredButton]="[{name:'submit', label:'Submit'}]" (buttonClick)="makeLoanRequest()"
 ></ngx-componentsheader>
 
-<div *ngIf="loansCounter < 1 && pageNo == 1">
+<!-- <div *ngIf="loansCounter < 1 && pageNo == 1">
   <nb-card>
     <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="button" (buttonClick) = "gotoNext()">
     </ngx-default-content>
   </nb-card>
-</div>
+</div> -->
 
-<div *ngIf="loansCounter > 0 && pageNo == 1">
+<!-- <div *ngIf="loansCounter > 0 && pageNo == 1">
   <nb-card>
     <ngx-tableheader></ngx-tableheader>
        <ngx-tablecomponent [tableColum]="loanRequestTable" [loading]="loading" [userData]="allLoansData"></ngx-tablecomponent>
   </nb-card>
-</div>
+</div> -->
 <!-- <div>
   <nb-card>
     <nb-card-body>
@@ -29,7 +29,7 @@
   </nb-card>
 </div> -->
 
-<div *ngIf="pageNo == 2" class="row">
+<div class="row">
   <div class="col-lg-3 col-md-3 col-xxl-3">
     <nb-card>
     <div>
@@ -53,6 +53,16 @@
 
                 <div class="form-group row">
                   <div class="col-sm-4">
+                    <label for="">Request for Self?</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <nb-toggle [(ngModel)]="toggleNgModel">Toggle with NgModel</nb-toggle>
+                  </div>
+                    </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-4">
                     <label for="">Employee Name</label>
                   </div>
 
@@ -69,7 +79,7 @@
                   <div class="col-sm-6">
                     <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeId">
                       <option value="">--Select Loan Type--</option>
-                      <option *ngFor="let myType of allloanTypes" [value]="myType.code">{{ myType.name }}</option>
+                      <option *ngFor="let myType of allloanTypes" [value]="myType.id">{{ myType.name }}</option>
                     </select>
                   </div>
                 </div>

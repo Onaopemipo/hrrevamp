@@ -13,6 +13,11 @@ const routes: Routes = [
     path: '',
     component: LoanComponent,
     children: [
+      {
+        path: '',
+        component: AllLoansComponent,
+      },
+
     {
       path: 'request',
       component: LoanRequestComponent,
@@ -34,19 +39,13 @@ const routes: Routes = [
     },
 
     {
-      path: 'all-loans',
-      component: AllLoansComponent,
-
-    },
-
-    {
       path: 'interest-type',
       component: InterestTypeComponent,
 
     },
 
-    { path: '', redirectTo: 'request', pathMatch: 'full' },
-    { path: '**', redirectTo: 'request' },
+    { path: '', redirectTo: 'all-loans', pathMatch: 'full' },
+    { path: '**', redirectTo: 'all-loans' },
   ]
 
   }
