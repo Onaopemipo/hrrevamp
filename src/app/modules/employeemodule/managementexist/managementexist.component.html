@@ -67,6 +67,15 @@
             <ngx-date [(value)]='RetirmentBody.effectiveDate'   #effectiveDate name="effectiveDate" id="effectiveDate"></ngx-date>
           </div>
         </div>
+        <div class="form-group row">
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Exit Choice</label>
+          <div class="col-sm-8">
+            <nb-radio-group  name="exitChoice" id="exitChoice" #exitChoice="ngModel" [(ngModel)]="RetirmentBody.exitChoice" class="d-flex">
+              <nb-radio [value]="1">Forgo Salary</nb-radio>
+              <nb-radio [value]="2">Spend 30 Days notice period</nb-radio>
+            </nb-radio-group>
+          </div>
+        </div>
         <!-- <hr>jj-{{selectedOption}}=uuuu -->
         <div class="form-group row" style="margin-top: 15px;">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Select Affected Employee</label>
