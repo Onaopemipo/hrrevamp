@@ -3,11 +3,13 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import {  AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO } from './../../../_services/service-proxies';
+import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj, ManageLoanRequestDTO, AddUpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 enum TABLE_ACTION {
   VIEW = '1',
+  DELETE = '2',
   EDIT = '3'
 }
 @Component({
@@ -20,6 +22,7 @@ export class LoanRequestComponent implements OnInit {
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
+    {name: TABLE_ACTION.DELETE, label: 'Delete'},
 
   ]
 
@@ -28,8 +31,14 @@ export class LoanRequestComponent implements OnInit {
   button: string = 'Click to request';
   pageNo: number = 1;
 
-  loanModel: any
-  loanRequest: any
+  tempRef: any = '';
+
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
+  loanModel: ManageLoanRequestDTO = new ManageLoanRequestDTO().clone();
+  loanRequest: any;
 
   selectedCase: string = 'request';
   selectedPanel: any = { title: 'request', label: 'Loan Request', status: 'Active'};
@@ -57,9 +66,13 @@ export class LoanRequestComponent implements OnInit {
        else if(event.name==TABLE_ACTION.EDIT){
         this.router.navigateByUrl('update-loan' + event.data.id)
          }
+
+         else if(event.name==TABLE_ACTION.DELETE){
+          this.router.navigateByUrl('update-loan' + event.data.id)
+           }
   }
 
-  allLoansData = [];
+  allLoansData: LoanRequestDTOs [] = [];
   loanSummary: IdNameObj [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
@@ -70,21 +83,20 @@ export class LoanRequestComponent implements OnInit {
   loading: boolean = true;
   allloanTypes: LoanType [] = [];
   dataCounter: number = 0;
-
-  allowmultipleselection: boolean = false;
-  selectionHeader: string = "Select Employee";
-  addbtnText: string = "Add Employee";
+  user: IVwUserObj;
 
   constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
-     private interestService: GetInterestRateServiceProxy, private router: Router, private loanTypeService: GetLoanTypesServiceProxy) { }
+     private interestService: GetInterestRateServiceProxy, public authServ: AuthenticationService,
+     private router: Router, private loanTypeService: GetLoanTypesServiceProxy, private loanRequestService: AddUpdateLoanRequestServiceProxy) { }
 
   ngOnInit(): void {
-    // this.getLoanTypes();
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getInterestRate();
     this.fetchAllLoanTypes();
     this.getAllLoans();
+    this.getLoggedInUser();
 
   }
 
@@ -104,6 +116,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   uploadFile(){
+    this.loanModel.tempRef = this.tempRef;
   }
 
   addGuarantor(){
@@ -111,7 +124,8 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async makeLoanRequest(){
-  const data = await this.loanService.addUpdateLoanRequest(this.loanModel).toPromise();
+  this.loanModel.loggedForEmployeeId = this.user.employee_id;
+  const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
     this.loanForm.resetForm();
@@ -122,11 +136,13 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getAllLoans(){
-    const data = await this.getLoans.getLoanRequests(undefined,undefined,1,'',10,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(null,null,1,'',10,1).toPromise();
     console.log('My data',data);
     if(!data.hasError){
       this.allLoansData = data.result;
       this.loansCounter = data.totalRecord;
+      console.log('my counter', )
+      if(this.loansCounter < 1) this.loading = false;
 
     }
   }
@@ -173,4 +189,31 @@ export class LoanRequestComponent implements OnInit {
   showModal(){
     this.viewLoanModal = !this.viewLoanModal;
   }
+
+  async getLoggedInUser(){
+    this.authServ.getuser().then(async (users: IVwUserObj[])=> {
+      if (users) {
+        if (users.length > 0) {
+          this.user = users[0];
+  }
+  }
+  })
+
+  }
+
+  getSelectedEmployee(event,selectType) {
+    console.log(event)
+     if(selectType == 'employee'){
+      this.loanModel.employeeNo = event[0].employeeNumber;
+      this.loanModel.employeeName = event[0].firstName +' '+ event[0].firstName;
+     }
+     console.log(selectType, event)
+  }
+
+  getGuarantors(event,selectType) {
+    console.log(event)
+     if(selectType == 'employee')this.loanModel.strGuarantorIds = event[0].employeeNumber;
+     console.log(selectType, event)
+  }
+
 }

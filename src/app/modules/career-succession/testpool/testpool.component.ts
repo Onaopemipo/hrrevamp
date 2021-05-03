@@ -1,10 +1,11 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy } from './../../../_services/service-proxies';
+import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj } from './../../../_services/service-proxies';
 import { MyTalentPoolEmployee, TalentPoolService, MyTalentPoolRequirement, MyTalentPool, TalentPoolRequirementTypes } from './../services/talent-pool.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 @Component({
   selector: 'ngx-testpool',
@@ -61,80 +62,78 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
 
  newCandidate: boolean = true;
  employeeCounter: number = 0;
- pageTitle:string = '';
+ pageTitle: string = '';
  pageId:number = 0;
- poolRecords: MyTalentPool = new MyTalentPool;
+ user: IVwUserObj;
+ poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
 ]
   constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,
     private alertMe: AlertserviceService,  private navCtrl: Location, private route: Router,
-    private talentPool: TalentManagementServiceProxy) { }
+    private talentPool: TalentManagementServiceProxy,
+    public authServ: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.pageId = Number(this.router.snapshot.paramMap.get("id"));
+    this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
-    this.fetchPool();
     this.fetchTypes();
-    this.pageId = Number(this.router.snapshot.paramMap.get("id"))
-    console.log(this.poolRecords.requirements)
-  }
+    this.fetchSinglePool();
 
+  }
 
   async fetchTypes(){
    this.poolTypes = await this.poolservice.getRequirementTypes().toPromise();
    console.log('Hey Boss',this.poolTypes)
   }
 
-  onTopActionClick(event){
-    console.log('yasss',event)
-    if(event == 'requirement'){
-        this.showRequirementModal = true;
-    }
-    else if(event == 'candidate'){
+
+  async getLoggedInUser(){
+    this.authServ.getuser().then(async (users: IVwUserObj[])=> {
+      if (users) {
+        if (users.length > 0) {
+          this.user = users[0];
+  }
+  }
+  })
+
+  }
+
+
+  onTopActionClick(){
       this.showCandidateModal = true;
-    }
+      console.log('Yes clicked')
   }
 
   goback() {
     this.navCtrl.back();
   }
 
-  async addRequirement(){
-    let poolRequirement = this.poolRequirementModel;
-    console.log('Hey Boss',poolRequirement)
-    const data = await this.poolservice.addRequirementToPool(this.poolRecords, this.poolRequirementModel).toPromise()
-    if(data.isSuccessful){
-      console.log('Success')
-      this.poolRequirementModel = new MyTalentPoolRequirement;
-    }
-    else {
-      console.log(data.message)
-    }
-  }
-
-
   addCandidate(){
-    this.newCandidate = !this.newCandidate;
+    // this.newCandidate = !this.newCandidate;
+    this.showCandidateModal = true;
   }
 
   async addCandidateToPool(){
-  //  const data = await this.poolservice.addToPool(1,this.candidateModel).toPromise();
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
-        this.route.navigateByUrl('talentpool/'+ this.pageId);
+        this.route.navigateByUrl('career-succession/talentpool');
       })
     }
   }
 
-  async fetchPool(){
-    this.loading = true;
-    const data = await this.poolservice.fetch(this.pageId).toPromise();
-    this.poolRecords = data;
-    this.pageTitle = data.title;
-    console.log('Hey', this.poolRecords)
-    this.loading = false;
+  async fetchSinglePool(){
+    const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
+    console.log('Here is the data',data.result)
+    if(!data.hasError){
+      this.poolRecords = data.result;
+      this.pageTitle = this.poolRecords.title;
+      console.log('Single Record', this.poolRecords)
+      this.loading = false;
+    }
   }
 
 onChangeChannel($value){
@@ -154,7 +153,10 @@ onChangeChannel($value){
 
 getSelectedEmployee(event,selectType) {
   console.log(event)
-   if(selectType == 'employee')this.poolEmployee.employeeId = event[0].employeeNumber;
+   if(selectType == 'employee'){
+    this.poolEmployee.employeeId = event[0].employeeNumber;
+    this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
+   }
   //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
 
    console.log(selectType, event)

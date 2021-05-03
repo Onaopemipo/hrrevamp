@@ -1,5 +1,6 @@
+import { GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'app/components/base/base.component';
 import { TopAction } from 'app/components/componentsheader/models';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
@@ -36,6 +37,14 @@ export class SucessionPlanDetailComponent extends BaseComponent<SuccessionPlanEm
     {name: 'department', title: 'Department'},
     {name: 'readiness', title: 'Readiness'},
   ];
+
+  successionTable: TableColumn[] = [
+    { name: 'name', title: 'Name' },
+    { name: 'position', title: 'Position' },
+    { name: 'experience', title: 'Experience' },
+    { name: 'qualification', title: 'Qualification' },
+    { name: 'certification', title: 'certification' },
+  ];
   successMessage: string;
   protected alertService: AlertserviceService;
   deleteData(data: SuccessionPlanEmployee): Observable<any> {
@@ -46,6 +55,9 @@ export class SucessionPlanDetailComponent extends BaseComponent<SuccessionPlanEm
   ];
 
   showModal = false;
+  planData: CareerSuccessionDTO = new CareerSuccessionDTO;
+  planTitle: string = '';
+  successionPlanId: number = 0;
 
   editingData = new SuccessionPlanEmployee();
 
@@ -54,18 +66,30 @@ export class SucessionPlanDetailComponent extends BaseComponent<SuccessionPlanEm
     // protected alertService: AlertserviceService,
     private api: SuccessionPlanService,
     private activatedRoute: ActivatedRoute,
+    private getPlan: GetCareerSuccesionPlanByIdServiceProxy,
+    private router: ActivatedRoute,
   ) {
     super(confirmBox);
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((data) => {
-      this.id = Number(data.get('id'));
-      this.api.fetch(this.id).toPromise().then(_data => {
-        this.plan = _data;
-      });
-      super.ngOnInit();
-    });
+    this.successionPlanId = Number(this.router.snapshot.paramMap.get("id"));
+    // this.activatedRoute.paramMap.subscribe((data) => {
+    //   this.id = Number(data.get('id'));
+    //   this.api.fetch(this.id).toPromise().then(_data => {
+    //     this.plan = _data;
+    //   });
+    //   super.ngOnInit();
+    // });
+    this.getSinglePlan();
+  }
+
+  async getSinglePlan(){
+    const data = await this.getPlan.getCareerSuccessionPlanById(this.successionPlanId).toPromise();
+    if(!data.hasError){
+      this.planData = data.result;
+      this.planTitle = this.planData.title;
+    }
   }
 
 }

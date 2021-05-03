@@ -29,6 +29,15 @@ export class LoanTypeComponent implements OnInit {
     {name: 'description', title: 'Description'},
   ];
 
+  eligibleGrades = [{key: 'key1', value: 'Opt 1'},
+                     {key: 'key2', value: 'Opt 2'},
+                     {key: 'key3', value: 'Opt 3'},
+                     {key: 'key4', value: 'Opt 4'},
+                     {key: 'key5', value: 'Opt 5'},
+                     {key: 'key6', value: 'Opt 6'},
+                     {key: 'key7', value: 'Opt 7'}];
+
+
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
@@ -107,7 +116,9 @@ export class LoanTypeComponent implements OnInit {
     if(!data.hasError && data.result.isSuccessful){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss').subscribe(dataAction => {
         this.router.navigateByUrl('/loan/loan-type');
+        this.fetchAllLoanTypes();
         this.loanTypeModel = new LoanTypeDTO().clone();
+        this.createType = false;
       });
 
     }
@@ -164,21 +175,13 @@ export class LoanTypeComponent implements OnInit {
     }
   }
 
-  // async getLoanTypes(){
-  //   const data = await this.loanTypeService.fetchLoanTypeById(1,1).toPromise();
-  //   if(!data.hasError){
-  //     this.allloanTypes = data.result;
-  //     this.dataCounter = data.totalRecord;
-  //     console.log(this.dataCounter, this.allloanTypes)
-  //   }
-  // }
-
   async fetchAllLoanTypes(){
-    const data = await this.loanTypeService.getLoanTypesByCriteria(undefined,undefined,undefined,undefined,undefined,undefined,undefined,1,10).toPromise();
+    const data = await this.loanTypeService.getLoanTypesByCriteria('','','',0,0,0,0,1,10).toPromise();
     if(!data.hasError){
       this.allLoanTypes = data.result;
       this.dataCounter = data.totalRecord;
       console.log('All Loan Types:', this.allLoanTypes);
+      this.loading = false;
   }
 
 }
