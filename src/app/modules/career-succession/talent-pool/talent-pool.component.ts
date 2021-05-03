@@ -124,7 +124,7 @@ export class TalentPoolComponent implements OnInit {
   async getCompetency(){
     const data = await this.commonService.getCompetency().toPromise();
     if(!data.hasError){
-      this.allCompetencies = data.result;
+      // this.allCompetencies = data.result;
       console.log('All competencies', this.allCompetencies)
     }
   }
