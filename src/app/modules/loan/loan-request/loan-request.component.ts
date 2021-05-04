@@ -110,7 +110,7 @@ export class LoanRequestComponent implements OnInit {
     if(this.toggleNgModel === false){
         this.loanModel.employeeNo = String(this.user.employee_id);
         this.loanModel.employeeName = this.user.full_name;
-
+        this.loanModel.loggedForEmployeeId = this.user.employee_id;
     }
     else {
       return;
@@ -138,13 +138,14 @@ export class LoanRequestComponent implements OnInit {
 
 
   async makeLoanRequest(){
-  this.loanModel.loggedForEmployeeId = this.user.employee_id;
   console.log(this.loanModel)
   const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
   if(!data.hasError){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
-    this.loanForm.reset();
-    this.loanModel = new ManageLoanRequestDTO();
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss').subscribe(dataAction => {
+      if(dataAction){
+        this.router.navigateByUrl('loan/request')
+      }
+    });
   }
   else{
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
@@ -229,6 +230,7 @@ export class LoanRequestComponent implements OnInit {
      if(selectType == 'employee' && this.toggleNgModel == true){
       this.loanModel.employeeNo = event[0].employeeNumber;
       this.loanModel.employeeName = event[0].firstName +' '+ event[0].firstName;
+      this.loanModel.loggedForEmployeeId = event[0].id;
      }
   }
 
