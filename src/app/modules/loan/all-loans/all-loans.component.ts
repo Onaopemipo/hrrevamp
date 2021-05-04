@@ -55,7 +55,6 @@ export class AllLoansComponent implements OnInit {
   ];
 
   loanRequestTable: TableColumn [] = [
-    // {name: 'refNo', title: 'Ref No.'},
     {name: 'employeeNo', title: 'Employee No.'},
     {name: 'employeeName', title: 'Employee Name'},
     {name: 'approvedAmount', title: 'Loan Amount'},

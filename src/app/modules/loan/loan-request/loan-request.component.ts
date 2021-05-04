@@ -32,6 +32,7 @@ export class LoanRequestComponent implements OnInit {
   pageNo: number = 1;
 
   tempRef: any = '';
+  toggleNgModel: boolean = false;
 
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
@@ -97,12 +98,23 @@ export class LoanRequestComponent implements OnInit {
   ngOnInit(): void {
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getInterestRate();
-    // this.fetchAllLoanTypes();
+    this.fetchAllLoanTypes();
     this.getAllLoans();
     this.getLoggedInUser();
     this.loanId = Number(this.route.snapshot.paramMap.get("id"));
-    this.fetchSingleLoanRequest();
 
+  }
+
+  toggler(e){
+    this.toggleNgModel = e;
+    if(this.toggleNgModel === false){
+        this.loanModel.employeeNo = String(this.user.employee_id);
+        this.loanModel.employeeName = this.user.full_name;
+
+    }
+    else {
+      return;
+    }
   }
 
   selectPanel(rolelist, i) {
@@ -124,17 +136,20 @@ export class LoanRequestComponent implements OnInit {
     this.loanModel.tempRef = this.tempRef;
   }
 
-  // async makeLoanRequest(){
-  // this.loanModel.loggedForEmployeeId = this.user.employee_id;
-  // const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
-  // if(!data.hasError){
-  //   this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
-  //   this.loanForm.resetForm();
-  // }
-  // else{
-  //   this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
-  // }
-  // }
+
+  async makeLoanRequest(){
+  this.loanModel.loggedForEmployeeId = this.user.employee_id;
+  console.log(this.loanModel)
+  const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
+  if(!data.hasError){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
+    this.loanForm.reset();
+    this.loanModel = new ManageLoanRequestDTO();
+  }
+  else{
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
+  }
+  }
 
   async fetchSingleLoanRequest(){
     const data = await this.loanService.getLoanRequest(this.loanId).toPromise();
@@ -177,15 +192,15 @@ export class LoanRequestComponent implements OnInit {
   //   }
   // }
 
-//   async fetchAllLoanTypes(){
-//     const data = await this.loanTypeService.getLoanTypes().toPromise();
-//     if(!data.hasError){
-//       this.allloanTypes = data.result;
-//       this.dataCounter = data.totalRecord;
-//       console.log(this.dataCounter, this.allloanTypes)
-//   }
+  async fetchAllLoanTypes(){
+    const data = await this.loanTypeService.getLoanTypes().toPromise();
+    if(!data.hasError){
+      this.allloanTypes = data.result;
+      this.dataCounter = data.totalRecord;
+      console.log(this.dataCounter, this.allloanTypes)
+  }
 
-// }
+}
 
   async getInterestRate(){
     const data = await this.interestService.getInterestRate().toPromise();
@@ -203,6 +218,7 @@ export class LoanRequestComponent implements OnInit {
       if (users) {
         if (users.length > 0) {
           this.user = users[0];
+          console.log('My user is here',this.user)
   }
   }
   })
@@ -210,12 +226,10 @@ export class LoanRequestComponent implements OnInit {
   }
 
   getSelectedEmployee(event,selectType) {
-    console.log(event)
-     if(selectType == 'employee'){
+     if(selectType == 'employee' && this.toggleNgModel == true){
       this.loanModel.employeeNo = event[0].employeeNumber;
       this.loanModel.employeeName = event[0].firstName +' '+ event[0].firstName;
      }
-     console.log(selectType, event)
   }
 
   getGuarantors(event,selectType) {
