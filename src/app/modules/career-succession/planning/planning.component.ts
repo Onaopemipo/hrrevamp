@@ -1,7 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { CommonServiceProxy, Competency } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy, CompetencyRequirmentsDTO } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionDTO, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy, CompetencyRequirmentsDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -28,16 +28,18 @@ enum TABLE_ACTION {
 })
 export class PlanningComponent implements OnInit {
 
-  successionTable: TableColumn [] = [
-    {name: 'holderId', title: 'Employee Number'},
-    {name: 'title', title: 'Title'},
-    {name: 'competencyId', title: 'Competency ID'},
+  successionTable: TableColumn[] = [
+    {name: 'title', title: 'Succession Title'},
+    { name: 'holderId', title: 'Employee Id' },
+    { name: 'holdersName', title: 'Employee Name'},
+    {name: 'positionName', title: 'Position'},   
+    {name: 'competencyName', title: 'Competency'},
     {name: 'purpose', title: 'Purpose'},
 
   ];
 
   loading = false;
-  allPlans: CareerSuccession [] = [];
+  allPlans: CareerSuccessionDTO [] = [];
 
   // id: number;
   // position_name: string;
@@ -96,7 +98,17 @@ export class PlanningComponent implements OnInit {
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
-
+  totalItems = 0;
+  currentPage = 1;
+  filter = {
+    planTitle: null,
+    employeeName: null,
+    employeeNumber: null,
+    employeeId: undefined,
+    positionId: undefined,
+    pageSize: 10,
+    pageNumber: 1
+  }
   constructor(
     private navCtrl: Location,
     private api: EmployeesService,
@@ -111,12 +123,20 @@ export class PlanningComponent implements OnInit {
 
   ) { }
 
+  filterUpdated(filter: any) {
+    this.filter = { ...this.filter, ...filter };
+    this.fetchAllPlans();
+  }
+  get showEmpty() {
+    return this.allPlans.length === 0;
+  }
   tableActionClicked(event: TableActionEvent){
     if(event.name==TABLE_ACTION.DELETE){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to Delete this plan?', 'Yes').subscribe(dataAction => {
         if(dataAction){
           this.deleteService.deleteCareerSuccessionPlan(event.data.id).subscribe(data => {
-            if(!data.hasError){
+            if (!data.hasError) {
+              this.fetchAllPlans();
               this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Succession plan has been deleted', 'Dismiss').subscribe(resp => {
                 if(resp) this.router.navigateByUrl('career-succession/planning');
               })
@@ -128,7 +148,8 @@ export class PlanningComponent implements OnInit {
      else if(event.name==TABLE_ACTION.EDIT){
         this.router.navigateByUrl('/payroll/editpayment')
       }
-     else if(event.name==TABLE_ACTION.VIEW){
+    else if (event.name == TABLE_ACTION.VIEW) {
+      console.log(event.data)
       this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id);
        }
   }
@@ -174,12 +195,14 @@ export class PlanningComponent implements OnInit {
     }
   }
 
-  async fetchAllPlans(){
-    const data = await this.planService.getCareerSuccessionPlan().toPromise();
+  async fetchAllPlans() {
+    this.loading = true;
+    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
     console.log(data.result);
     if(!data.hasError){
       this.allPlans = data.result;
       this.planDataCount = data.totalRecord;
+      this.totalItems = data.totalRecord
       this.loading = false;
       console.log('My plans data here', this.allPlans)
     }
@@ -191,8 +214,8 @@ export class PlanningComponent implements OnInit {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Plan created successfully', 'Dismiss').subscribe(dataAction => {
         if(dataAction){
           this.fetchAllPlans();
-          this.router.navigateByUrl('career-succession/planning');
-          this.newPlan = true;
+        //  this.router.navigateByUrl('career-succession/planning');
+          this.newPlan = false;
         }
       })
     }
@@ -201,8 +224,8 @@ export class PlanningComponent implements OnInit {
     getSelectedEmployee(event,selectType) {
       console.log(event)
        if(selectType == 'employee'){
-        this.newSuccessionPlan.holderId = event[0].employeeNumber;
-        this.newSuccessionPlan.positionId = event[0].positionId;
+        this.newSuccessionPlan.holderId = event[0].id;
+        this.newSuccessionPlan.positionId = event[0].employeeContractId;
        }
       //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
 

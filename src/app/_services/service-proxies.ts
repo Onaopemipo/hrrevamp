@@ -7549,11 +7549,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUpload(response_);
+            return this.processBulkUploadid(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUpload(<any>response_);
+                    return this.processBulkUploadid(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7562,7 +7562,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -9164,11 +9164,39 @@ export class FetchSuccessionPlanServiceProxy {
     }
 
     /**
-     * API for getting CareerrSuccssionPlan that can be use for dropdowns
+     * @param planTitle (optional) 
+     * @param employeeName (optional) 
+     * @param employeeNumber (optional) 
+     * @param employeeId (optional) 
+     * @param positionId (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
-    getCareerSuccessionPlan(): Observable<CareerSuccessionIListApiResult> {
-        let url_ = this.baseUrl + "/api/CareerSuccession/FetchSuccessionPlan/Get-CareerSuccession-Plan";
+    getCareerSuccessionPlan(planTitle: string | null | undefined, employeeName: string | null | undefined, employeeNumber: string | null | undefined, employeeId: number | undefined, positionId: number | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<CareerSuccessionDTOIListApiResult> {
+        let url_ = this.baseUrl + "/api/CareerSuccession/FetchSuccessionPlan/Get-CareerSuccession-Plan?";
+        if (planTitle !== undefined && planTitle !== null)
+            url_ += "PlanTitle=" + encodeURIComponent("" + planTitle) + "&";
+        if (employeeName !== undefined && employeeName !== null)
+            url_ += "EmployeeName=" + encodeURIComponent("" + employeeName) + "&";
+        if (employeeNumber !== undefined && employeeNumber !== null)
+            url_ += "EmployeeNumber=" + encodeURIComponent("" + employeeNumber) + "&";
+        if (employeeId === null)
+            throw new Error("The parameter 'employeeId' cannot be null.");
+        else if (employeeId !== undefined)
+            url_ += "EmployeeId=" + encodeURIComponent("" + employeeId) + "&";
+        if (positionId === null)
+            throw new Error("The parameter 'positionId' cannot be null.");
+        else if (positionId !== undefined)
+            url_ += "PositionId=" + encodeURIComponent("" + positionId) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -9186,14 +9214,14 @@ export class FetchSuccessionPlanServiceProxy {
                 try {
                     return this.processGetCareerSuccessionPlan(<any>response_);
                 } catch (e) {
-                    return <Observable<CareerSuccessionIListApiResult>><any>_observableThrow(e);
+                    return <Observable<CareerSuccessionDTOIListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<CareerSuccessionIListApiResult>><any>_observableThrow(response_);
+                return <Observable<CareerSuccessionDTOIListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetCareerSuccessionPlan(response: HttpResponseBase): Observable<CareerSuccessionIListApiResult> {
+    protected processGetCareerSuccessionPlan(response: HttpResponseBase): Observable<CareerSuccessionDTOIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -9204,7 +9232,7 @@ export class FetchSuccessionPlanServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = CareerSuccessionIListApiResult.fromJS(resultData200);
+            result200 = CareerSuccessionDTOIListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -9229,7 +9257,7 @@ export class FetchSuccessionPlanServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<CareerSuccessionIListApiResult>(<any>null);
+        return _observableOf<CareerSuccessionDTOIListApiResult>(<any>null);
     }
 }
 
@@ -26920,6 +26948,91 @@ export class GetLoanRequestServiceProxy {
 }
 
 @Injectable()
+export class DeleteLoanRequestServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    deleteLoanRequest(id: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/LoanRequest/DeleteLoanRequest/DeleteLoanRequest?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteLoanRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteLoanRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteLoanRequest(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class GetLoanTypesByCriteriaServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -27251,6 +27364,91 @@ export class ToggleLoanTypeServiceProxy {
     }
 
     protected processToggleLoanType(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class DeleteLoanTypeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    deleteLoanType(id: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/LoanType/DeleteLoanType/DeleteLoanType?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteLoanType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteLoanType(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteLoanType(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -53122,11 +53320,15 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
     currentPositionName!: string | undefined;
     currentJobPositionName!: string | undefined;
     targetPositionId!: number;
+    targetPositionName!: string | undefined;
     positionHolderId!: number;
     positionHolderName!: string | undefined;
     comment!: string | undefined;
     careerSuccessionId!: number;
     isNotification!: boolean;
+    certifications!: EmployeeCertificationDTO[] | undefined;
+    skills!: EmployeeSkillDTO[] | undefined;
+    qualifications!: EmployeeQualificationDTO[] | undefined;
     successionCompetency!: SuccessorcompetencyDTO[] | undefined;
     successionAdditionalCompetency!: SuccessorcompetencyDTO[] | undefined;
     competencySuccssion!: CompetencyDTO[] | undefined;
@@ -53156,11 +53358,27 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
             this.currentPositionName = _data["currentPositionName"];
             this.currentJobPositionName = _data["currentJobPositionName"];
             this.targetPositionId = _data["targetPositionId"];
+            this.targetPositionName = _data["targetPositionName"];
             this.positionHolderId = _data["positionHolderId"];
             this.positionHolderName = _data["positionHolderName"];
             this.comment = _data["comment"];
             this.careerSuccessionId = _data["careerSuccessionId"];
             this.isNotification = _data["isNotification"];
+            if (Array.isArray(_data["certifications"])) {
+                this.certifications = [] as any;
+                for (let item of _data["certifications"])
+                    this.certifications!.push(EmployeeCertificationDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["skills"])) {
+                this.skills = [] as any;
+                for (let item of _data["skills"])
+                    this.skills!.push(EmployeeSkillDTO.fromJS(item));
+            }
+            if (Array.isArray(_data["qualifications"])) {
+                this.qualifications = [] as any;
+                for (let item of _data["qualifications"])
+                    this.qualifications!.push(EmployeeQualificationDTO.fromJS(item));
+            }
             if (Array.isArray(_data["successionCompetency"])) {
                 this.successionCompetency = [] as any;
                 for (let item of _data["successionCompetency"])
@@ -53206,11 +53424,27 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
         data["currentPositionName"] = this.currentPositionName;
         data["currentJobPositionName"] = this.currentJobPositionName;
         data["targetPositionId"] = this.targetPositionId;
+        data["targetPositionName"] = this.targetPositionName;
         data["positionHolderId"] = this.positionHolderId;
         data["positionHolderName"] = this.positionHolderName;
         data["comment"] = this.comment;
         data["careerSuccessionId"] = this.careerSuccessionId;
         data["isNotification"] = this.isNotification;
+        if (Array.isArray(this.certifications)) {
+            data["certifications"] = [];
+            for (let item of this.certifications)
+                data["certifications"].push(item.toJSON());
+        }
+        if (Array.isArray(this.skills)) {
+            data["skills"] = [];
+            for (let item of this.skills)
+                data["skills"].push(item.toJSON());
+        }
+        if (Array.isArray(this.qualifications)) {
+            data["qualifications"] = [];
+            for (let item of this.qualifications)
+                data["qualifications"].push(item.toJSON());
+        }
         if (Array.isArray(this.successionCompetency)) {
             data["successionCompetency"] = [];
             for (let item of this.successionCompetency)
@@ -53256,11 +53490,15 @@ export interface ICareerSuccessorDTO {
     currentPositionName: string | undefined;
     currentJobPositionName: string | undefined;
     targetPositionId: number;
+    targetPositionName: string | undefined;
     positionHolderId: number;
     positionHolderName: string | undefined;
     comment: string | undefined;
     careerSuccessionId: number;
     isNotification: boolean;
+    certifications: EmployeeCertificationDTO[] | undefined;
+    skills: EmployeeSkillDTO[] | undefined;
+    qualifications: EmployeeQualificationDTO[] | undefined;
     successionCompetency: SuccessorcompetencyDTO[] | undefined;
     successionAdditionalCompetency: SuccessorcompetencyDTO[] | undefined;
     competencySuccssion: CompetencyDTO[] | undefined;
@@ -53699,6 +53937,7 @@ export class ManageCareerSuccessionDto implements IManageCareerSuccessionDto {
     isActive!: boolean;
     readinessToStart!: number;
     stringSuccessionEmployee!: string | undefined;
+    successionEmployee!: CareerSuccessorDTO[] | undefined;
 
     constructor(data?: IManageCareerSuccessionDto) {
         if (data) {
@@ -53723,6 +53962,11 @@ export class ManageCareerSuccessionDto implements IManageCareerSuccessionDto {
             this.isActive = _data["isActive"];
             this.readinessToStart = _data["readinessToStart"];
             this.stringSuccessionEmployee = _data["stringSuccessionEmployee"];
+            if (Array.isArray(_data["successionEmployee"])) {
+                this.successionEmployee = [] as any;
+                for (let item of _data["successionEmployee"])
+                    this.successionEmployee!.push(CareerSuccessorDTO.fromJS(item));
+            }
         }
     }
 
@@ -53747,6 +53991,11 @@ export class ManageCareerSuccessionDto implements IManageCareerSuccessionDto {
         data["isActive"] = this.isActive;
         data["readinessToStart"] = this.readinessToStart;
         data["stringSuccessionEmployee"] = this.stringSuccessionEmployee;
+        if (Array.isArray(this.successionEmployee)) {
+            data["successionEmployee"] = [];
+            for (let item of this.successionEmployee)
+                data["successionEmployee"].push(item.toJSON());
+        }
         return data; 
     }
 
@@ -53771,6 +54020,7 @@ export interface IManageCareerSuccessionDto {
     isActive: boolean;
     readinessToStart: number;
     stringSuccessionEmployee: string | undefined;
+    successionEmployee: CareerSuccessorDTO[] | undefined;
 }
 
 export class TalentpoolrequirementDTO implements ITalentpoolrequirementDTO {
@@ -54066,422 +54316,6 @@ export interface IAddTalentPoolDTOListApiResult {
     totalRecord: number;
 }
 
-export class SuccessorCompetency implements ISuccessorCompetency {
-    careerSuccessorId!: number;
-    requirementCategory!: string | undefined;
-    skillId!: number | undefined;
-    trainingId!: number | undefined;
-    certificationId!: number | undefined;
-    qualificationId!: number | undefined;
-    experience!: string | undefined;
-    careerSuccessor!: CareerSuccessor;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ISuccessorCompetency) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.careerSuccessorId = _data["careerSuccessorId"];
-            this.requirementCategory = _data["requirementCategory"];
-            this.skillId = _data["skillId"];
-            this.trainingId = _data["trainingId"];
-            this.certificationId = _data["certificationId"];
-            this.qualificationId = _data["qualificationId"];
-            this.experience = _data["experience"];
-            this.careerSuccessor = _data["careerSuccessor"] ? CareerSuccessor.fromJS(_data["careerSuccessor"]) : <any>undefined;
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): SuccessorCompetency {
-        data = typeof data === 'object' ? data : {};
-        let result = new SuccessorCompetency();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["careerSuccessorId"] = this.careerSuccessorId;
-        data["requirementCategory"] = this.requirementCategory;
-        data["skillId"] = this.skillId;
-        data["trainingId"] = this.trainingId;
-        data["certificationId"] = this.certificationId;
-        data["qualificationId"] = this.qualificationId;
-        data["experience"] = this.experience;
-        data["careerSuccessor"] = this.careerSuccessor ? this.careerSuccessor.toJSON() : <any>undefined;
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): SuccessorCompetency {
-        const json = this.toJSON();
-        let result = new SuccessorCompetency();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISuccessorCompetency {
-    careerSuccessorId: number;
-    requirementCategory: string | undefined;
-    skillId: number | undefined;
-    trainingId: number | undefined;
-    certificationId: number | undefined;
-    qualificationId: number | undefined;
-    experience: string | undefined;
-    careerSuccessor: CareerSuccessor;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class CareerSuccessor implements ICareerSuccessor {
-    careerSuccessionId!: number;
-    employeeId!: number;
-    growthDuration!: number;
-    currentPositionId!: number;
-    targetPositionId!: number;
-    positionHolderId!: number;
-    comment!: string | undefined;
-    isNotification!: boolean;
-    careerSuccession!: CareerSuccession;
-    successorCompetencies!: SuccessorCompetency[] | undefined;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ICareerSuccessor) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.careerSuccessionId = _data["careerSuccessionId"];
-            this.employeeId = _data["employeeId"];
-            this.growthDuration = _data["growthDuration"];
-            this.currentPositionId = _data["currentPositionId"];
-            this.targetPositionId = _data["targetPositionId"];
-            this.positionHolderId = _data["positionHolderId"];
-            this.comment = _data["comment"];
-            this.isNotification = _data["isNotification"];
-            this.careerSuccession = _data["careerSuccession"] ? CareerSuccession.fromJS(_data["careerSuccession"]) : <any>undefined;
-            if (Array.isArray(_data["successorCompetencies"])) {
-                this.successorCompetencies = [] as any;
-                for (let item of _data["successorCompetencies"])
-                    this.successorCompetencies!.push(SuccessorCompetency.fromJS(item));
-            }
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): CareerSuccessor {
-        data = typeof data === 'object' ? data : {};
-        let result = new CareerSuccessor();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["careerSuccessionId"] = this.careerSuccessionId;
-        data["employeeId"] = this.employeeId;
-        data["growthDuration"] = this.growthDuration;
-        data["currentPositionId"] = this.currentPositionId;
-        data["targetPositionId"] = this.targetPositionId;
-        data["positionHolderId"] = this.positionHolderId;
-        data["comment"] = this.comment;
-        data["isNotification"] = this.isNotification;
-        data["careerSuccession"] = this.careerSuccession ? this.careerSuccession.toJSON() : <any>undefined;
-        if (Array.isArray(this.successorCompetencies)) {
-            data["successorCompetencies"] = [];
-            for (let item of this.successorCompetencies)
-                data["successorCompetencies"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): CareerSuccessor {
-        const json = this.toJSON();
-        let result = new CareerSuccessor();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICareerSuccessor {
-    careerSuccessionId: number;
-    employeeId: number;
-    growthDuration: number;
-    currentPositionId: number;
-    targetPositionId: number;
-    positionHolderId: number;
-    comment: string | undefined;
-    isNotification: boolean;
-    careerSuccession: CareerSuccession;
-    successorCompetencies: SuccessorCompetency[] | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class CareerSuccession implements ICareerSuccession {
-    categoryType!: string | undefined;
-    planJustification!: string | undefined;
-    holderId!: number;
-    title!: string | undefined;
-    positionId!: number;
-    purpose!: string | undefined;
-    startDate!: Date;
-    competencyId!: number;
-    careerSuccessors!: CareerSuccessor[] | undefined;
-    id!: number;
-    companyID!: number;
-    subID!: number;
-    isActive!: boolean;
-    isDeleted!: boolean;
-    dateCreated!: Date;
-    createdById!: number;
-    dateModified!: Date | undefined;
-    modifiedById!: number | undefined;
-
-    constructor(data?: ICareerSuccession) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.categoryType = _data["categoryType"];
-            this.planJustification = _data["planJustification"];
-            this.holderId = _data["holderId"];
-            this.title = _data["title"];
-            this.positionId = _data["positionId"];
-            this.purpose = _data["purpose"];
-            this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
-            this.competencyId = _data["competencyId"];
-            if (Array.isArray(_data["careerSuccessors"])) {
-                this.careerSuccessors = [] as any;
-                for (let item of _data["careerSuccessors"])
-                    this.careerSuccessors!.push(CareerSuccessor.fromJS(item));
-            }
-            this.id = _data["id"];
-            this.companyID = _data["companyID"];
-            this.subID = _data["subID"];
-            this.isActive = _data["isActive"];
-            this.isDeleted = _data["isDeleted"];
-            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
-            this.createdById = _data["createdById"];
-            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
-            this.modifiedById = _data["modifiedById"];
-        }
-    }
-
-    static fromJS(data: any): CareerSuccession {
-        data = typeof data === 'object' ? data : {};
-        let result = new CareerSuccession();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["categoryType"] = this.categoryType;
-        data["planJustification"] = this.planJustification;
-        data["holderId"] = this.holderId;
-        data["title"] = this.title;
-        data["positionId"] = this.positionId;
-        data["purpose"] = this.purpose;
-        data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
-        data["competencyId"] = this.competencyId;
-        if (Array.isArray(this.careerSuccessors)) {
-            data["careerSuccessors"] = [];
-            for (let item of this.careerSuccessors)
-                data["careerSuccessors"].push(item.toJSON());
-        }
-        data["id"] = this.id;
-        data["companyID"] = this.companyID;
-        data["subID"] = this.subID;
-        data["isActive"] = this.isActive;
-        data["isDeleted"] = this.isDeleted;
-        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
-        data["createdById"] = this.createdById;
-        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
-        data["modifiedById"] = this.modifiedById;
-        return data; 
-    }
-
-    clone(): CareerSuccession {
-        const json = this.toJSON();
-        let result = new CareerSuccession();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICareerSuccession {
-    categoryType: string | undefined;
-    planJustification: string | undefined;
-    holderId: number;
-    title: string | undefined;
-    positionId: number;
-    purpose: string | undefined;
-    startDate: Date;
-    competencyId: number;
-    careerSuccessors: CareerSuccessor[] | undefined;
-    id: number;
-    companyID: number;
-    subID: number;
-    isActive: boolean;
-    isDeleted: boolean;
-    dateCreated: Date;
-    createdById: number;
-    dateModified: Date | undefined;
-    modifiedById: number | undefined;
-}
-
-export class CareerSuccessionIListApiResult implements ICareerSuccessionIListApiResult {
-    hasError!: boolean;
-    message!: string | undefined;
-    result!: CareerSuccession[] | undefined;
-    totalCount!: number;
-    readonly totalRecord!: number;
-
-    constructor(data?: ICareerSuccessionIListApiResult) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.hasError = _data["hasError"];
-            this.message = _data["message"];
-            if (Array.isArray(_data["result"])) {
-                this.result = [] as any;
-                for (let item of _data["result"])
-                    this.result!.push(CareerSuccession.fromJS(item));
-            }
-            this.totalCount = _data["totalCount"];
-            (<any>this).totalRecord = _data["totalRecord"];
-        }
-    }
-
-    static fromJS(data: any): CareerSuccessionIListApiResult {
-        data = typeof data === 'object' ? data : {};
-        let result = new CareerSuccessionIListApiResult();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["hasError"] = this.hasError;
-        data["message"] = this.message;
-        if (Array.isArray(this.result)) {
-            data["result"] = [];
-            for (let item of this.result)
-                data["result"].push(item.toJSON());
-        }
-        data["totalCount"] = this.totalCount;
-        data["totalRecord"] = this.totalRecord;
-        return data; 
-    }
-
-    clone(): CareerSuccessionIListApiResult {
-        const json = this.toJSON();
-        let result = new CareerSuccessionIListApiResult();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ICareerSuccessionIListApiResult {
-    hasError: boolean;
-    message: string | undefined;
-    result: CareerSuccession[] | undefined;
-    totalCount: number;
-    totalRecord: number;
-}
-
 export class CareerSuccessionDTO implements ICareerSuccessionDTO {
     id!: number;
     companyID!: number;
@@ -54491,11 +54325,15 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
     stringSuccessionEmployee!: string | undefined;
     successionEmployee!: CareerSuccessorDTO[] | undefined;
     holderId!: number;
+    holdersName!: string | undefined;
+    holderEmployeeId!: number;
     dateCreated!: Date;
     isDeleted!: boolean;
     isActive!: boolean;
     title!: string | undefined;
     positionId!: number;
+    positionName!: string | undefined;
+    competencyName!: string | undefined;
     purpose!: string | undefined;
     startDate!: Date;
     competencyId!: number;
@@ -54523,11 +54361,15 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
                     this.successionEmployee!.push(CareerSuccessorDTO.fromJS(item));
             }
             this.holderId = _data["holderId"];
+            this.holdersName = _data["holdersName"];
+            this.holderEmployeeId = _data["holderEmployeeId"];
             this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
             this.isDeleted = _data["isDeleted"];
             this.isActive = _data["isActive"];
             this.title = _data["title"];
             this.positionId = _data["positionId"];
+            this.positionName = _data["positionName"];
+            this.competencyName = _data["competencyName"];
             this.purpose = _data["purpose"];
             this.startDate = _data["startDate"] ? new Date(_data["startDate"].toString()) : <any>undefined;
             this.competencyId = _data["competencyId"];
@@ -54555,11 +54397,15 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
                 data["successionEmployee"].push(item.toJSON());
         }
         data["holderId"] = this.holderId;
+        data["holdersName"] = this.holdersName;
+        data["holderEmployeeId"] = this.holderEmployeeId;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
         data["isDeleted"] = this.isDeleted;
         data["isActive"] = this.isActive;
         data["title"] = this.title;
         data["positionId"] = this.positionId;
+        data["positionName"] = this.positionName;
+        data["competencyName"] = this.competencyName;
         data["purpose"] = this.purpose;
         data["startDate"] = this.startDate ? this.startDate.toISOString() : <any>undefined;
         data["competencyId"] = this.competencyId;
@@ -54583,14 +54429,85 @@ export interface ICareerSuccessionDTO {
     stringSuccessionEmployee: string | undefined;
     successionEmployee: CareerSuccessorDTO[] | undefined;
     holderId: number;
+    holdersName: string | undefined;
+    holderEmployeeId: number;
     dateCreated: Date;
     isDeleted: boolean;
     isActive: boolean;
     title: string | undefined;
     positionId: number;
+    positionName: string | undefined;
+    competencyName: string | undefined;
     purpose: string | undefined;
     startDate: Date;
     competencyId: number;
+}
+
+export class CareerSuccessionDTOIListApiResult implements ICareerSuccessionDTOIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: CareerSuccessionDTO[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: ICareerSuccessionDTOIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(CareerSuccessionDTO.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): CareerSuccessionDTOIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new CareerSuccessionDTOIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): CareerSuccessionDTOIListApiResult {
+        const json = this.toJSON();
+        let result = new CareerSuccessionDTOIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICareerSuccessionDTOIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: CareerSuccessionDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
 }
 
 export class CareerSuccessionDTOApiResult implements ICareerSuccessionDTOApiResult {
@@ -90823,11 +90740,18 @@ export class RetirmentDTO implements IRetirmentDTO {
     dateSubmitted!: Date | undefined;
     reviewedBy!: string | undefined;
     reviewerComment!: string | undefined;
+    exitChoice!: string | undefined;
+    personalEmail!: string | undefined;
+    personalPhoneNumber!: string | undefined;
     dateReviewed!: Date | undefined;
     isAccepted!: boolean | undefined;
     log_status!: number;
     subReason!: string | undefined;
     sourceofInitiation!: string | undefined;
+    tempref!: string | undefined;
+    clearance!: string | undefined;
+    survey!: string | undefined;
+    exitDate!: Date;
 
     constructor(data?: IRetirmentDTO) {
         if (data) {
@@ -90863,11 +90787,18 @@ export class RetirmentDTO implements IRetirmentDTO {
             this.dateSubmitted = _data["dateSubmitted"] ? new Date(_data["dateSubmitted"].toString()) : <any>undefined;
             this.reviewedBy = _data["reviewedBy"];
             this.reviewerComment = _data["reviewerComment"];
+            this.exitChoice = _data["exitChoice"];
+            this.personalEmail = _data["personalEmail"];
+            this.personalPhoneNumber = _data["personalPhoneNumber"];
             this.dateReviewed = _data["dateReviewed"] ? new Date(_data["dateReviewed"].toString()) : <any>undefined;
             this.isAccepted = _data["isAccepted"];
             this.log_status = _data["log_status"];
             this.subReason = _data["subReason"];
             this.sourceofInitiation = _data["sourceofInitiation"];
+            this.tempref = _data["tempref"];
+            this.clearance = _data["clearance"];
+            this.survey = _data["survey"];
+            this.exitDate = _data["exitDate"] ? new Date(_data["exitDate"].toString()) : <any>undefined;
         }
     }
 
@@ -90903,11 +90834,18 @@ export class RetirmentDTO implements IRetirmentDTO {
         data["dateSubmitted"] = this.dateSubmitted ? this.dateSubmitted.toISOString() : <any>undefined;
         data["reviewedBy"] = this.reviewedBy;
         data["reviewerComment"] = this.reviewerComment;
+        data["exitChoice"] = this.exitChoice;
+        data["personalEmail"] = this.personalEmail;
+        data["personalPhoneNumber"] = this.personalPhoneNumber;
         data["dateReviewed"] = this.dateReviewed ? this.dateReviewed.toISOString() : <any>undefined;
         data["isAccepted"] = this.isAccepted;
         data["log_status"] = this.log_status;
         data["subReason"] = this.subReason;
         data["sourceofInitiation"] = this.sourceofInitiation;
+        data["tempref"] = this.tempref;
+        data["clearance"] = this.clearance;
+        data["survey"] = this.survey;
+        data["exitDate"] = this.exitDate ? this.exitDate.toISOString() : <any>undefined;
         return data; 
     }
 
@@ -90943,11 +90881,18 @@ export interface IRetirmentDTO {
     dateSubmitted: Date | undefined;
     reviewedBy: string | undefined;
     reviewerComment: string | undefined;
+    exitChoice: string | undefined;
+    personalEmail: string | undefined;
+    personalPhoneNumber: string | undefined;
     dateReviewed: Date | undefined;
     isAccepted: boolean | undefined;
     log_status: number;
     subReason: string | undefined;
     sourceofInitiation: string | undefined;
+    tempref: string | undefined;
+    clearance: string | undefined;
+    survey: string | undefined;
+    exitDate: Date;
 }
 
 export class RetirmentDTOListApiResult implements IRetirmentDTOListApiResult {

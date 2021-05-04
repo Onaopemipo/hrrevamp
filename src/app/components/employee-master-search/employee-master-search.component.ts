@@ -74,6 +74,7 @@ employeeResultTotal = 0;
 @Input() allowmultipleselection: boolean = false;
   @Input() selectionHeader = 'Select Employees';
   @Output() masterSubmitted = new EventEmitter<EmployeeDTO[]>();
+  @Output() masterSearchOpened = new EventEmitter<boolean>();
   @Input() value = [];
   @Output() valueChange = new EventEmitter<number[]>();
  
@@ -214,5 +215,6 @@ cancelMasterSearch(){
 }
   showMasterSearchModal() {
     this.showModal = true;
+    this.masterSearchOpened.emit(true);
   }
 }
