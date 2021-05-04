@@ -1,9 +1,9 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj, ManageLoanRequestDTO, AddUpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
+import { LoanRequestDTOs, AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO, IVwUserObj, ManageLoanRequestDTO, AddUpdateLoanRequestServiceProxy, GetLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/_services/authentication.service';
 
@@ -73,6 +73,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   allLoansData: LoanRequestDTOs [] = [];
+  singleLoanData: LoanRequestDTOs = new LoanRequestDTOs;
   loanSummary: IdNameObj [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
@@ -84,19 +85,23 @@ export class LoanRequestComponent implements OnInit {
   allloanTypes: LoanType [] = [];
   dataCounter: number = 0;
   user: IVwUserObj;
+  loanId: number = 0;
 
-  constructor(private alertMe: AlertserviceService, private loanService: AddUpdateLoanTypeServiceProxy,
+  constructor(private alertMe: AlertserviceService, private loanService: GetLoanRequestServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
      private interestService: GetInterestRateServiceProxy, public authServ: AuthenticationService,
-     private router: Router, private loanTypeService: GetLoanTypesServiceProxy, private loanRequestService: AddUpdateLoanRequestServiceProxy) { }
+     private router: Router, private loanTypeService: GetLoanTypesServiceProxy, private route: ActivatedRoute,
+     private loanRequestService: AddUpdateLoanRequestServiceProxy) { }
 
   ngOnInit(): void {
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getInterestRate();
-    this.fetchAllLoanTypes();
+    // this.fetchAllLoanTypes();
     this.getAllLoans();
     this.getLoggedInUser();
+    this.loanId = Number(this.route.snapshot.paramMap.get("id"));
+    this.fetchSingleLoanRequest();
 
   }
 
@@ -119,20 +124,23 @@ export class LoanRequestComponent implements OnInit {
     this.loanModel.tempRef = this.tempRef;
   }
 
-  addGuarantor(){
+  // async makeLoanRequest(){
+  // this.loanModel.loggedForEmployeeId = this.user.employee_id;
+  // const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
+  // if(!data.hasError){
+  //   this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
+  //   this.loanForm.resetForm();
+  // }
+  // else{
+  //   this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
+  // }
+  // }
 
-  }
-
-  async makeLoanRequest(){
-  this.loanModel.loggedForEmployeeId = this.user.employee_id;
-  const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
-  if(!data.hasError){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss');
-    this.loanForm.resetForm();
-  }
-  else{
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
-  }
+  async fetchSingleLoanRequest(){
+    const data = await this.loanService.getLoanRequest(this.loanId).toPromise();
+    if(!data.hasError){
+      this.singleLoanData = data.result;
+    }
   }
 
   async getAllLoans(){
@@ -141,7 +149,7 @@ export class LoanRequestComponent implements OnInit {
     if(!data.hasError){
       this.allLoansData = data.result;
       this.loansCounter = data.totalRecord;
-      console.log('my counter', )
+      console.log('my counter',  this.loansCounter )
       if(this.loansCounter < 1) this.loading = false;
 
     }
@@ -169,15 +177,15 @@ export class LoanRequestComponent implements OnInit {
   //   }
   // }
 
-  async fetchAllLoanTypes(){
-    const data = await this.loanTypeService.getLoanTypes().toPromise();
-    if(!data.hasError){
-      this.allloanTypes = data.result;
-      this.dataCounter = data.totalRecord;
-      console.log(this.dataCounter, this.allloanTypes)
-  }
+//   async fetchAllLoanTypes(){
+//     const data = await this.loanTypeService.getLoanTypes().toPromise();
+//     if(!data.hasError){
+//       this.allloanTypes = data.result;
+//       this.dataCounter = data.totalRecord;
+//       console.log(this.dataCounter, this.allloanTypes)
+//   }
 
-}
+// }
 
   async getInterestRate(){
     const data = await this.interestService.getInterestRate().toPromise();

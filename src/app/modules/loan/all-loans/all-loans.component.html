@@ -19,7 +19,7 @@
   <nb-card>
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="repaymentTable"></ngx-tablecomponent>
+      <ngx-tablecomponent [loading]='loading' [userData]='allLoansData' [actions]='tableActions' [tableColum]="loanRequestTable"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 </div>

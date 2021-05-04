@@ -32,30 +32,30 @@ export class MyPerformanceCycle extends CycleDTO implements IStatus{
 @Injectable({
   providedIn: 'root'
 })
-export class PerformanceManagementService extends CrudService<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
-  list(filter: MyPerformanceCycle): Observable<ListResult<MyPerformanceCycle>> {
-    return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10).pipe(map(res => {
-      return {
-        data: res.result.map(data => new MyPerformanceCycle(data)),
-        length: res.totalCount,
-      }
-    }))
-  }
-  fetch(id: number) {
-    throw new Error('Method not implemented.');
-  }
-  create(data: MyPerformanceCycle) {
-    return this.create_api.addUpdatePerformanceCycle(data.toManage());
-  }
-  delete(id: number) {
-    throw new Error('Method not implemented.');
-  }
+// export class PerformanceManagementService extends CrudService<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
+//   list(filter: MyPerformanceCycle): Observable<ListResult<MyPerformanceCycle>> {
+//     return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10).pipe(map(res => {
+//       return {
+//         data: res.result.map(data => new MyPerformanceCycle(data)),
+//         length: res.totalCount,
+//       }
+//     }))
+//   }
+//   fetch(id: number) {
+//     throw new Error('Method not implemented.');
+//   }
+//   create(data: MyPerformanceCycle) {
+//     return this.create_api.addUpdatePerformanceCycle(data.toManage());
+//   }
+//   delete(id: number) {
+//     throw new Error('Method not implemented.');
+//   }
 
 
-  constructor(
-    private list_api: FetchPerformanceCyclesServiceProxy,
-    private create_api: AddUpdatePerformanceCycleServiceProxy,
-  ) { 
-    super();
-  }
-}
+//   constructor(
+//     private list_api: FetchPerformanceCyclesServiceProxy,
+//     private create_api: AddUpdatePerformanceCycleServiceProxy,
+//   ) {
+//     super();
+//   }
+// }
