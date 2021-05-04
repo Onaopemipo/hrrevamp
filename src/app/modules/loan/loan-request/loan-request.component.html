@@ -226,7 +226,7 @@
               <label>Attach File</label>
             </div>
             <div class="col-sm-6">
-              <ngx-file-upload></ngx-file-upload>
+              <ngx-file-upload (valueChange)="selectedFile($event,'Loan Document')" class="form-control"></ngx-file-upload>
             </div>
           </div>
 

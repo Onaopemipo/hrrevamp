@@ -1,3 +1,5 @@
+import { IDTextViewModel, UploadDocumentServiceProxy, DataServiceProxy } from 'app/_services/service-proxies';
+import { Transfer } from '@flowjs/ngx-flow';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { NgForm } from '@angular/forms';
@@ -69,7 +71,17 @@ export class LoanRequestComponent implements OnInit {
          }
 
          else if(event.name==TABLE_ACTION.DELETE){
-          this.router.navigateByUrl('update-loan' + event.data.id)
+          // this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete this?', 'Yes').subscribe(dataAction => {
+          //   if(dataAction == 'closed'){
+          //     this.deleterService.deleteLoanRequest(event.data.id).subscribe(data => {
+          //       if(!data.hasError && data.result.isSuccessful == true){
+          //         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Request has been deleted','Success').subscribe(delData =>{
+          //           if(delData) this.router.navigateByUrl('/loan')
+          //         })
+          //       }
+          //     })
+          //   }
+          // })
            }
   }
 
@@ -86,14 +98,17 @@ export class LoanRequestComponent implements OnInit {
   allloanTypes: LoanType [] = [];
   dataCounter: number = 0;
   user: IVwUserObj;
+  Entity: IDTextViewModel[] = [];
   loanId: number = 0;
+  entityId:number = 0;
 
   constructor(private alertMe: AlertserviceService, private loanService: GetLoanRequestServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
      private interestService: GetInterestRateServiceProxy, public authServ: AuthenticationService,
      private router: Router, private loanTypeService: GetLoanTypesServiceProxy, private route: ActivatedRoute,
-     private loanRequestService: AddUpdateLoanRequestServiceProxy) { }
+     private UploadDocumentService: UploadDocumentServiceProxy, private loanRequestService: AddUpdateLoanRequestServiceProxy,
+     private DataService: DataServiceProxy,) { }
 
   ngOnInit(): void {
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
@@ -115,6 +130,39 @@ export class LoanRequestComponent implements OnInit {
     else {
       return;
     }
+  }
+
+  async getEntity() {
+    const data = await this.DataService.docEntityTypes().toPromise()
+    if (!data.hasError) {
+      this.Entity = data.result
+      console.log('doc', this.Entity)
+    }
+    else {
+      return data.hasError[0]
+    }
+  }
+  selectedFile(files: Transfer, title) {
+     const refNumber =  this.tempRef
+    console.log('temp ref', this.tempRef)
+    if (this.Entity.length > 0) {
+      let srchR = this.Entity.find(f => f.text == "RETIREMENT");
+      this.entityId = srchR.id;
+    }
+    // this.files = files.flowFile.file
+    this.UploadDocumentService.uploadDocs(0, title, 0, this.entityId, false, refNumber, files.flowFile.file[0])
+      .subscribe(data => {
+      if (!data.hasError) {
+        console.log('ref',this.tempRef)
+        console.log('datarseee', data.result)
+        if (!data.hasError) {
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'OK');
+
+        } else {
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'OK')
+        }
+      }
+    });
   }
 
   selectPanel(rolelist, i) {

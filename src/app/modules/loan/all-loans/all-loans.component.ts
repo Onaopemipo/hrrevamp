@@ -1,5 +1,6 @@
+import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
-import { LoanRequestDTOs, GetLoanRequestsServiceProxy } from './../../../_services/service-proxies';
+import { LoanRequestDTOs, GetLoanRequestsServiceProxy, DeleteLoanRequestServiceProxy, CompetencyServiceProxy } from './../../../_services/service-proxies';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -25,7 +26,17 @@ export class AllLoansComponent implements OnInit {
 
   tableActionClicked(event: TableActionEvent){
     if(event.name == TABLE_ACTION.DELETE){
-      this.router.navigateByUrl('' + event.data.id)
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete this?', 'Yes').subscribe(dataAction => {
+        if(dataAction == 'closed'){
+          this.deleteService.deleteLoanRequest(event.data.id).subscribe(data => {
+            if(!data.hasError && data.result.isSuccessful == true){
+              this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Request has been deleted','Success').subscribe(delData =>{
+                if(delData) this.router.navigateByUrl('/loan')
+              })
+            }
+          })
+        }
+      })
     }
     else if(event.name==TABLE_ACTION.PROCESS){
      this.router.navigateByUrl('loan/process' + event.data.id)
@@ -67,7 +78,8 @@ export class AllLoansComponent implements OnInit {
   allLoansData: LoanRequestDTOs [] = [];
   loansCounter: number = 0;
 
-  constructor(private router: Router, private getLoans: GetLoanRequestsServiceProxy,) { }
+  constructor(private router: Router, private getLoans: GetLoanRequestsServiceProxy,
+    private deleteService: DeleteLoanRequestServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
     this.fetchLoans();

@@ -1,6 +1,6 @@
 import { AlertserviceService } from './../../_services/alertservice.service';
-import { CommonServiceProxy, DataServiceProxy } from 'app/_services/service-proxies';
-import { AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, LoadRepaymentScheduleServiceProxy, GetLoanRequestsServiceProxy, FetchLoanTypeByIdServiceProxy, AddUpdateInterestRateServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, GetLoanTypesByCriteriaServiceProxy, AddUpdateLoanRequestServiceProxy, GetLoanRequestServiceProxy } from './../../_services/service-proxies';
+import { CommonServiceProxy, DataServiceProxy, DeleteLoanTypeServiceProxy, UploadDocumentServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateLoanTypeServiceProxy, UpdateLoanRequestServiceProxy, SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy, LoadRepaymentScheduleServiceProxy, GetLoanRequestsServiceProxy, FetchLoanTypeByIdServiceProxy, AddUpdateInterestRateServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, GetLoanTypesByCriteriaServiceProxy, AddUpdateLoanRequestServiceProxy, GetLoanRequestServiceProxy, DeleteLoanRequestServiceProxy } from './../../_services/service-proxies';
 import { LoanComponent } from './loan.component';
 import { NbCardModule, NbCheckboxModule, NbSelectModule, NbToggleModule, NbRadioModule } from '@nebular/theme';
 import { ThemeModule } from './../../@theme/theme.module';
@@ -49,7 +49,10 @@ import { InterestTypeComponent } from './interest-type/interest-type.component';
     DataServiceProxy,
     GetLoanTypesByCriteriaServiceProxy,
     AddUpdateLoanRequestServiceProxy,
-    GetLoanRequestServiceProxy
+    GetLoanRequestServiceProxy,
+    DeleteLoanRequestServiceProxy,
+    DeleteLoanTypeServiceProxy,
+    UploadDocumentServiceProxy,
 
   ]
 })
