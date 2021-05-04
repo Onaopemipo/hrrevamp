@@ -1189,7 +1189,7 @@
                   </div>
                 <div class="col-sm-6 form-group">
                <label for="Employee Name" style="font-size: small;font-weight: bold;">Supervisor:</label>
-               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               <ngx-employee-master-search (masterSearchOpened)="showEmployeeContractModal = false" (masterSubmitted)="getSelectedEmployee($event);showEmployeeContractModal = true" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
                
                 </div>
                 <div class="col-sm-6 form-group">

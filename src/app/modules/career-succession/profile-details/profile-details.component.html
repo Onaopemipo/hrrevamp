@@ -3,7 +3,7 @@
   <ngx-componentsheader *ngIf="planStatus == true"  [requiredButton]="[{name:'plan', label:'Add Successor'}]" (buttonClick)="addPlan()"
   pageName='Roles'></ngx-componentsheader>
 <div style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
-  <span><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px;">Back</a></span>
+  <span><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px;cursor: pointer;">Back</a></span>
 </div>
 <div>
   <nb-card>
@@ -116,7 +116,7 @@
 <div style="padding: 10px"></div>
 <nb-card>
   <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-    <h5 style="padding:20px;">Potential Succesors</h5><a href=""
+    <h5 style="padding:20px;">Succesors</h5><a href=""
       style="padding:20px; font-weight:600; text-decoration: underline;">View Tree</a>
   </div>
   <ngx-tableheader></ngx-tableheader>

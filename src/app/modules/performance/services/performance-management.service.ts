@@ -34,7 +34,7 @@ export class MyPerformanceCycle extends CycleDTO implements IStatus{
 })
 export class PerformanceManagementService extends CrudService<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
   list(filter: MyPerformanceCycle): Observable<ListResult<MyPerformanceCycle>> {
-    return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10).pipe(map(res => {
+    return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10,1).pipe(map(res => {
       return {
         data: res.result.map(data => new MyPerformanceCycle(data)),
         length: res.totalCount,

@@ -2,17 +2,19 @@
 <ngx-componentsheader *ngIf="planDataCount > 0" pageName='Succession Plans'  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="addPlan()"></ngx-componentsheader>
 <div>
 
-  <!-- <nb-card *ngIf="planDataCount < 1">
-    <nb-card-body>
-      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="toggleToCreatePlan()"></ngx-default-content>
-    </nb-card-body>
-  </nb-card> -->
+
 
   <nb-card>
     <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="successionTable" [userData]='allPlans' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      <ngx-default-content *ngIf="showEmpty" pageHeader="Career Succession"
+      pageDescription="Click on the button to create a succession plan" buttonValue="Create Plan" [loading]="loading"
+      (buttonClick)="addPlan()">
+    </ngx-default-content>
+    <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+      [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allPlans"
+      [tableColum]="successionTable" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+    </ngx-tablecomponent>
+
     </nb-card-body>
   </nb-card>
 </div>
@@ -21,8 +23,7 @@
   <ngx-side-modal [(show)]='newPlan' style="width: 600px;">
     <div modal-header>Create Succession Plan</div>
     <div modal-body>
-        <nb-card>
-          <nb-card-body>
+     
             <form name="planForm" #planForm="ngForm">
               <div class="form-group row">
                 <div class="col">
@@ -46,8 +47,8 @@
 
               <div class="form-group row">
                 <div class="col">
-                  <label for="Department" class="col-form-label mylabel">Employee</label>
-                  <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                  <label for="Department" class="col-form-label mylabel">Predecessor Employee</label>
+                  <ngx-employee-master-search (masterSearchOpened)="newPlan = false" (masterSubmitted)="getSelectedEmployee($event,'employee');newPlan = true" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
                 </div>
               </div>
 
@@ -66,7 +67,7 @@
                  <label>Competency</label>
                  <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
                    <option value="">--Select--</option>
-                   <option *ngFor="let competency of allCompetencies" [value]="competency.id">{{ competency.competencyTitle }}</option>
+                   <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
                  </select>
                  <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
                   <div *ngIf="competencyTitle.errors.required">Competency is required</div>
@@ -74,7 +75,7 @@
                 </div>
                </div>
 
-               <div class="form-group row">
+               <!-- <div class="form-group row">
                 <div class="col">
                  <label>Successing Candidate</label>
                  <ngx-employee-master-search (masterSubmitted)="getSuccessingCandidate($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
@@ -89,7 +90,7 @@
                   <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
                 </div>
                 </div>
-               </div>
+               </div> -->
 
 
                <div class="form-group row">
@@ -119,8 +120,7 @@
                </div>
              </div>
             </form>
-          </nb-card-body>
-        </nb-card>
+   
     </div>
     </ngx-side-modal>
  </div>

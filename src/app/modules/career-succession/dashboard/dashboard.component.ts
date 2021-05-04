@@ -1,4 +1,4 @@
-import { CommonServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccession } from './../../../_services/service-proxies';
+import { CommonServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionDTO } from './../../../_services/service-proxies';
  import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -23,13 +23,21 @@ export class DashboardComponent implements OnInit {
   barcolorSchemeOrange: any;
   lineOption: any = {};
   allJobRoles: number;
-  allPans: CareerSuccession [] = [];
+  allPans: CareerSuccessionDTO [] = [];
   planDataCount: number = 0;
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
-
+  filter = {
+    planTitle: null,
+    employeeName: null,
+    employeeNumber: null,
+    employeeId: undefined,
+    positionId: undefined,
+    pageSize: 10,
+    pageNumber: 1
+  }
 
 
   single = [
@@ -585,7 +593,7 @@ this.myPieOptions = {
   }
 
   async fetchAllPlans(){
-    const data = await this.planService.getCareerSuccessionPlan().toPromise();
+    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
     if(data.hasError){
       this.allPans = data.result;
       this.planDataCount = data.totalRecord;
