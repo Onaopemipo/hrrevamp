@@ -1,0 +1,85 @@
+<ngx-componentsheader *ngIf="competencyCounter < 1" pageName='Competency'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="competencyCounter > 0" [requiredButton]="[{name:'newCompetency', label:'Add New', icon: 'plus'}]" (buttonClick)="addNewCompetency()" pageName='All Competencies'></ngx-componentsheader>
+<!-- <ngx-componentsheader *ngIf="newCompetency && selectedCase=='Cadre'" pageName='Role Management' [requiredButton]="[{name:'newCadre', label:'New Cadre', icon: 'plus'}]" (buttonClick)="addCadre()"></ngx-componentsheader> -->
+
+<div *ngIf="competencyCounter < 1" style="background-color: #ffffff;">
+  <nb-card>
+    <nb-card-body>
+      <div><br>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
+          (buttonClick)="addNewCompetency()"></ngx-default-content>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="competencyCounter > 0">
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='loading'
+      [tableColum]="competencyTable"
+      [userData]='allCompetencies'
+      [actions]='tableActions'
+      (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="competencyCounter > 0" class="row">
+  <!-- <div class="col-lg-3 col-md-3 col-xxl-3">
+    <nb-card>
+    <div>
+        <div #linklist style="display: flex;flex-direction: column;" *ngFor="let rolelist of competencyChecklist; let i = index">
+
+        <div (click)="selectPanel(rolelist,i)" [ngClass]="{'wizardlistactive': rolelist.status == 'Active','wizardlistinactive': rolelist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
+        <div style="padding-left: 1rem;"><nb-icon icon="checkmark-circle-2" status="{{rolelist.status == 'Active'? 'primary': 'none'}}"></nb-icon></div>
+        <div style="padding-left: 0.625rem;"><span [ngClass]="{'listtextActive': rolelist.status == 'Active','listtextInactive': rolelist.status != 'Active'}" >{{rolelist.label}} </span> </div>
+        </div>
+
+      </div>
+    </div>
+
+    </nb-card>
+    </div> -->
+
+  <!-- <div class="col-lg-9 col-md-9 col-xxl-9" style="background-color: transparent;">
+    <div  class="fmContainer" style="background-color: transparent;">
+      <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
+        <nb-card>
+            <nb-card-body>
+
+                <div *ngIf="selectedCase=='Role'" class="form-group row ">
+                    <div class="col" *ngIf="competencyCounter > 0">
+                      <nb-card *ngFor="let compt of allCompetencies">
+                        <nb-card-header>
+                          <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <span>{{ compt.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(compt.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(compt.id)" style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                          </div>
+                        </nb-card-header>
+                        <nb-card-body>
+                          <h4>{{ myCompetency.description }}</h4>
+                        </nb-card-body>
+                      </nb-card>
+                    </div>
+                </div>
+
+                <div *ngIf="selectedCase=='Position'" class="form-group row ">
+                    <div class="col" *ngIf="competencyCounter > 0">
+                      <nb-card *ngFor="let compt of allCompetencies">
+                        <nb-card-header>
+                          <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <span>{{ compt.competencyTitle }}</span><span class="actions"><a href="javascript:void(0);" (click)="updateCompetency(compt.id)">Edit</a><a href="javascript:void(0);" (click)="deleteCompetency(compt.id)" style="padding: 10px; color:#EB5757;">Delete</a></span>
+                          </div>
+                        </nb-card-header>
+                      </nb-card>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+    </div>
+  </div> -->
+</div>
+

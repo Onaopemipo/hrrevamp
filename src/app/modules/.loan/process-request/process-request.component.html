@@ -1,0 +1,167 @@
+<ngx-componentsheader
+  pageName="Process Loan Request"
+  [requiredButton]="[]"
+></ngx-componentsheader>
+
+<!-- <div>
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='loading' [tableColum]="loanRequestTable" [userData]='data' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div> -->
+
+<nb-card>
+  <nb-card-header style="display: flex; justify-content: space-between;">
+    <h6>Repayment Schedule</h6> <button nbButton status="primary" (click)="simulateLoanRepayment()">Simulate Repayment</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='true' [tableColum]="loanRequestTable"></ngx-tablecomponent>
+  </nb-card-body>
+</nb-card>
+
+<div class="row">
+  <div class="col-sm-8">
+    <nb-card>
+      <nb-card-body>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Employee Name</label>
+          </div>
+
+          <div class="col-sm-6">
+            <input class="form-control" type="text" name="employee" value="Employee Name" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Loan Type</label>
+          </div>
+
+          <div class="col-sm-6">
+            <select class="form-control" name="loanType" disabled>
+              <option value="">--Select Loan Type--</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Effective Date</label>
+          </div>
+          <div class="col-sm-6">
+            <ngx-date></ngx-date>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Requested Amount</label>
+          </div>
+          <div class="col-sm-6">
+            <app-amount-input></app-amount-input>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Requested Tenor (Months)</label>
+          </div>
+
+          <div class="col-sm-6">
+            <input class="form-control" type="number" name="tenor" placeholder="12">
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Maturity Date</label>
+          </div>
+          <div class="col-sm-6">
+            <ngx-date></ngx-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Custom Question</label>
+          </div>
+
+          <div class="col-sm-6">
+            <ngx-wysisyg-input style="padding-left: -10px;" ></ngx-wysisyg-input>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label for="">Loan Justification</label>
+          </div>
+
+          <div class="col-sm-6">
+            <ngx-wysisyg-input style="padding-left: -10px;" ></ngx-wysisyg-input>
+          </div>
+        </div>
+
+      </nb-card-body>
+  </nb-card>
+
+  </div>
+
+  <div class="col-sm-4">
+    <nb-card>
+      <nb-card-header>
+        Guarantor(s)
+      </nb-card-header>
+      <nb-card-body>
+        <div class="form-group row">
+          <div class="col">
+            <label>Guarrantor 1</label>
+            <input type="text" class="form-control" name="" value="Philip Ogungbenro" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <label>Guarrantor 1</label>
+            <input type="text" class="form-control" name="" value="Philip Ogungbenro" disabled>
+          </div>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+      <nb-card-header>
+        Documents
+      </nb-card-header>
+      <nb-card-body>
+        <div class="form-group row">
+          <div class="col">
+            <label>Document Title</label>
+            <ngx-file-upload></ngx-file-upload>
+          </div>
+        </div>
+
+          <div class="form-group row">
+            <div class="col">
+              <label>Document Title</label>
+              <ngx-file-upload></ngx-file-upload>
+            </div>
+          </div>
+
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+

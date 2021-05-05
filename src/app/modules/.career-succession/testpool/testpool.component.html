@@ -1,0 +1,399 @@
+<ngx-componentsheader *ngIf="newCandidate" [requiredButton]="rButton" [pageName]="pageTitle" (buttonClick)="onTopActionClick()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="!newCandidate" pageName='Add Candidate'></ngx-componentsheader>
+<div *ngIf="newCandidate" style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
+  <span style="cursor: pointer;"><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px; ">Back</a></span>
+</div>
+<div>
+  <nb-card *ngIf="newCandidate">
+    <nb-tabset>
+      <nb-tab *ngIf="employeeCounter < 1" tabTitle="Employee Database">
+        <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+          (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
+      </nb-tab>
+
+      <nb-tab *ngIf="employeeCounter > 0" tabTitle="Employee Database">
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      </nb-tab>
+
+      <nb-tab *ngIf="employeeCounter < 1" tabTitle="Recruitment Portal">
+        <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+          (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
+      </nb-tab>
+
+      <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" ></ngx-tablecomponent>
+      </nb-tab>
+
+      <!-- <nb-tab tabTitle="External Source">
+        <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+      </nb-tab> -->
+     </nb-tabset>
+  </nb-card>
+
+  <!-- <div class="row">
+    <div class="col">
+      <nb-card>
+        <nb-card-header>Requirements</nb-card-header>
+        <nb-card-body>
+          <ngx-tableheader></ngx-tableheader>
+          <ngx-tablecomponent [userData]="poolRecords" [loading]="loading" [tableColum]="requirementTable"></ngx-tablecomponent>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div> -->
+
+
+</div>
+
+<!-- Add Candidate Modal  -->
+<ngx-side-modal [(show)]='showCandidateModal' style="width: 500px;">
+  <div modal-header>Add Candidate</div>
+  <div modal-body>
+    <nb-card>
+      <nb-tabset style="background-color: #ffffff; padding: 10px;">
+        <nb-tab tabTitle="Add Manually">
+          <form>
+            <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Channel" class="col-form-label mylabel">Channel</label>
+                <select class="custom-select" name="source" [(ngModel)]="poolEmployee.source" (change)="onChangeChannel($event.target.value)" required>
+                  <option *ngFor="let i of channel"  [value]=i.source>{{i.label}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Employee Database -->
+
+           <div *ngIf="selectedChannel == 'database'">
+
+            <!-- <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Department" class="col-form-label mylabel">Name</label>
+                <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.name" placeholder="Philip Muyiwa" required>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                  <div *ngIf="name.errors.required">Name is required</div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Department" class="col-form-label mylabel">Employee</label>
+                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                <!-- <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.name" placeholder="Philip Muyiwa" required> -->
+                <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                  <div *ngIf="name.errors.required">Name is required</div>
+                </div> -->
+              </div>
+            </div>
+
+            <!-- <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Country" class="col-form-label mylabel">Department</label>
+                <ngx-employee-master-search></ngx-employee-master-search>
+                <select class="custom-select" name="department" #department="ngModel" [(ngModel)]="candidateModel.department" required>
+                  <option value="">Select </option>
+                  <option value="1">Employee Database</option>
+                  <option value="2">Recruitment Porta;</option>
+                  <option value="3">External Source</option>
+                </select>
+                <div *ngIf="department.invalid && (department.dirty || department.touched)" class="error">
+                  <div *ngIf="department.errors.required">Department is required</div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Country" class="col-form-label mylabel">Unit/Division</label>
+                <select class="custom-select" name="unit" #unit="ngModel" [(ngModel)]="candidateModel.unit" required>
+                  <option value="">Select </option>
+                  <option value="1">Employee Database</option>
+                  <option value="2">Recruitment Porta;</option>
+                  <option value="3">External Source</option>
+                </select>
+                <div *ngIf="unit.invalid && (unit.dirty || unit.touched)" class="error">
+                  <div *ngIf="unit.errors.required">Type is required</div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Position" class="col-form-label mylabel">Position</label>
+                <select class="custom-select" name="position" #position="ngModel" [(ngModel)]="candidateModel.position"  required>
+                  <option value="">Select </option>
+                  <option value="1">Employee Database</option>
+                  <option value="2">Recruitment Porta;</option>
+                  <option value="3">External Source</option>
+                </select>
+                <div *ngIf="position.invalid && (position.dirty || position.touched)" class="error">
+                  <div *ngIf="position.errors.required">Position is required</div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="form-group row mydiv">
+              <div class="col">
+                <label for="Purpose" class="col-form-label mylabel">Purpose</label>
+                <select class="custom-select" name="planPurpose" #planPurpose="ngModel" [(ngModel)]="poolEmployee.purpose">
+                  <option *ngFor="let purpose of purposes" [value]="purpose.value">{{ purpose.label }}</option>
+                </select>
+                <div *ngIf="planPurpose.invalid && (planPurpose.dirty || planPurpose.touched)" class="error">
+                  <div *ngIf="planPurpose.errors.required">Purpose is required</div>
+                </div>
+              </div>
+            </div>
+           </div>
+
+      <!-- Recruitment Portal -->
+
+        <div *ngIf="selectedChannel == 'portal'">
+              <div class="form-group row mydiv">
+                <div class="col">
+                  <label for="Name" class="col-form-label mylabel">Name</label>
+                  <!-- <ngx-employee-master-search></ngx-employee-master-search> -->
+                  <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.department" placeholder="John Doe" required>
+                  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                    <div *ngIf="name.errors.required">Name is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row mydiv">
+                <div class="col">
+                  <label for="Country" class="col-form-label mylabel">Email</label>
+                    <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="candidateModel.email" placeholder="johndoe@gmail.com" required>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                      <div *ngIf="email.errors.required">Email is required</div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-group row mydiv">
+                <div class="col">
+                  <label for="Phone" class="col-form-label mylabel">Phone</label>
+                    <input type="tel" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="candidateModel.phone" placeholder="090-000-000-00" required>
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
+                      <div *ngIf="phone.errors.required">Phone is required</div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-group row mydiv">
+                <div class="col">
+                  <label for="Purpose" class="col-form-label mylabel">Purpose</label>
+                  <input class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="candidateModel.purpose" required>
+                  <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
+                    <div *ngIf="purpose.errors.required">Purpose is required</div>
+                  </div>
+                </div>
+              </div>
+       </div>
+
+
+        <!-- External Source -->
+
+        <div *ngIf="selectedChannel == 'external'">
+          <div class="form-group row mydiv">
+            <div class="col">
+              <label for="Name" class="col-form-label mylabel">Name</label>
+              <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="candidateModel.name" placeholder="John Doe" required>
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                <div *ngIf="name.errors.required">Name is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <label for="Email" class="col-form-label mylabel">Email</label>
+                <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="candidateModel.email" placeholder="johndoe@gmail.com" required>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                  <div *ngIf="email.errors.required">Email is required</div>
+                </div>
+              </div>
+            </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <label for="Phone" class="col-form-label mylabel">Phone</label>
+                <input type="tel" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="candidateModel.phone" placeholder="090-000-000-00" required>
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
+                  <div *ngIf="phone.errors.required">Phone is required</div>
+                </div>
+              </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <label for="Website" class="col-form-label mylabel">Website</label>
+              <input type="url" class="form-control" name="website" #website="ngModel" [(ngModel)]="candidateModel.website" placeholder="Enter Website" required>
+              <div *ngIf="website.invalid && (website.dirty || website.touched)" class="error">
+                <div *ngIf="website.errors.required">Website is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <label for="LinkedIn" class="col-form-label mylabel">LinkedIn</label>
+                <input type="url" class="form-control" name="linkedIn" #linkedIn="ngModel" [(ngModel)]="candidateModel.linkedIn" placeholder="LinkedIn URL" required>
+                <div *ngIf="linkedIn.invalid && (linkedIn.dirty || linkedIn.touched)" class="error">
+                  <div *ngIf="linkedIn.errors.required">LinkedIn URL is required</div>
+                </div>
+              </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <label for="Purpose" class="col-form-label mylabel">Purpose</label>
+              <input class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="candidateModel.purpose" required>
+              <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
+                <div *ngIf="purpose.errors.required">Purpose is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <button nbButton status="primary" (click)="addCandidateToPool()">Add Candidate</button>
+                <span style="padding: 8px;"></span>
+                <button nbButton style="color: #4847E0;">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </nb-tab>
+
+    <nb-tab tabTitle="Bulk Upload">
+      <form action="">
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label for="Employee List" class="col-form-label mylabel">Employee List</label>
+            <ngx-file-upload></ngx-file-upload>
+          </div>
+        </div>
+        <div class="form-group row mydiv">
+          <div class="col">
+            <i class="fa fa-download" style="color: #4847E0; padding: 10px;" aria-hidden="true"></i>
+            <span style="color: #4847E0; padding: 10px;">Download Template</span>
+          </div>
+        </div>
+
+        <div class="form-group row" style="display: flex; flex-direction: row; justify-content: space-between; align-items:unset;">
+          <div class="col-md-4">
+            <button nbButton status="primary">Save</button>
+          </div>
+
+          <div class="col-md-4">
+            <button nbButton style="color: #4847E0;">Cancel</button>
+          </div>
+        </div>
+      </form>
+        </nb-tab>
+       </nb-tabset>
+    </nb-card>
+  </div>
+</ngx-side-modal>
+
+
+
+<!-- Requirements Modal  -->
+<!-- <ngx-side-modal [(show)]='showRequirementModal' style="width: 500px;">
+  <div modal-header>Add Requirement</div>
+  <div modal-body>
+    <div class="form-group row mydiv">
+      <div class="col">
+        <label for="Category" class="col-form-label mylabel">Category</label>
+        <select class="custom-select" name="category" #category="ngModel" [(ngModel)]="poolRequirementModel.category" required>
+          <option value="">Select </option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      <div *ngIf="category.invalid && (category.dirty || category.touched)" class="error">
+        <div *ngIf="category.errors.required">Category is required</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <div class="col">
+        <label for="Type" class="col-form-label mylabel">Type</label>
+        <select class="custom-select" name="type" #type="ngModel" [(ngModel)]="poolRequirementModel.type" required>
+          <option *ngFor="let type of poolTypes" [value]="type.name"> {{type.label}} </option>
+        </select>
+      <div *ngIf="type.invalid && (type.dirty || type.touched)" class="error">
+        <div *ngIf="type.errors.required">Type is required</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <div class="col">
+        <label for="Point" class="col-form-label mylabel">Recruitment Point</label>
+        <select class="custom-select" name="point" #point="ngModel" [(ngModel)]="poolRequirementModel.requirementPoint" required>
+          <option value="">Select </option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      <div *ngIf="point.invalid && (point.dirty || point.touched)" class="error">
+        <div *ngIf="point.errors.required">Recruitment Point is required</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <div class="col">
+        <label for="Skill Weight" class="col-form-label mylabel">Skill Weight</label>
+        <input type="text" class="form-control" name="skillWeight" #skillWeight="ngModel" [(ngModel)]="poolRequirementModel.skillWeight" placeholder="Skill Weight" required>
+      <div *ngIf="skillWeight.invalid && (skillWeight.dirty || skillWeight.touched)" class="error">
+        <div *ngIf="skillWeight.errors.required">Skill Weight is required</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <div class="col">
+        <label for="Experience" class="col-form-label mylabel">Experience</label>
+        <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="poolRequirementModel.experience" required>
+          <option value="">Select </option>
+          <option value="1">Beginner</option>
+          <option value="2">Intermediate</option>
+          <option value="3">Master</option>
+        </select>
+      <div *ngIf="experience.invalid && (experience.dirty || experience.touched)" class="error">
+        <div *ngIf="experience.errors.required">Experience is required</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group row mydiv">
+      <div class="col">
+        <label for="Experience Weight" class="col-form-label mylabel">Experience Weight</label>
+        <input type="text" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="poolRequirementModel.experienceWeight" placeholder="Experience Weight" required>
+      </div>
+      <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
+        <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <button nbButton status="primary" (click)="addRequirement()">Add Requirement</button>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 15px;"></div>
+</ngx-side-modal> -->
+
+
+
+
+
