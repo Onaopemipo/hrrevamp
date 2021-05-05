@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { CommonServiceProxy} from 'app/_services/service-proxies';
-import { TalentManagementServiceProxy, AddTalentMangementDTO,CompetencyDTO } from './../../../_services/service-proxies';
+import { TalentManagementServiceProxy, AddTalentMangementDTO, CompetencyDTO, CompetencyServiceProxy } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
@@ -32,6 +32,7 @@ export class TalentPoolComponent implements OnInit {
   //competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
   allCompetencies: CompetencyDTO [] = [];
   allTalentPools: AddTalentMangementDTO [] = [];
+  competencyCounter: number = 0;
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -43,7 +44,7 @@ export class TalentPoolComponent implements OnInit {
   ];
   constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService, private router: Router,
     private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,
-    private commonService: CommonServiceProxy, ) { }
+    private commonService: CommonServiceProxy, private competencyService: CompetencyServiceProxy) { }
 
   ngOnInit(): void {
     this.getCompetency();
@@ -121,10 +122,19 @@ export class TalentPoolComponent implements OnInit {
   //   this.allTalentPool = data.data;
   // }
 
+  // async getCompetency(){
+  //   const data = await this.commonService.getCompetency().toPromise();
+  //   if(!data.hasError){
+  //     this.allCompetencies = data.result;
+  //     console.log('All competencies', this.allCompetencies)
+  //   }
+  // }
+
   async getCompetency(){
-    const data = await this.commonService.getCompetency().toPromise();
+    const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
     if(!data.hasError){
-      // this.allCompetencies = data.result;
+      this.allCompetencies = data.result;
+      this.competencyCounter = data.totalRecord;
       console.log('All competencies', this.allCompetencies)
     }
   }

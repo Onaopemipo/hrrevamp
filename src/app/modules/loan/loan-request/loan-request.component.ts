@@ -105,7 +105,7 @@ export class LoanRequestComponent implements OnInit {
   constructor(private alertMe: AlertserviceService, private loanService: GetLoanRequestServiceProxy,
      private getLoans: GetLoanRequestsServiceProxy, private loanSummaryService: GetLoanSummaryServiceProxy,
      private updateService: UpdateLoanRequestServiceProxy, private loanType: FetchLoanTypeByIdServiceProxy,
-     private interestService: GetInterestRateServiceProxy, public authServ: AuthenticationService,
+     private interestService: GetInterestRateServiceProxy, private authServ: AuthenticationService,
      private router: Router, private loanTypeService: GetLoanTypesServiceProxy, private route: ActivatedRoute,
      private UploadDocumentService: UploadDocumentServiceProxy, private loanRequestService: AddUpdateLoanRequestServiceProxy,
      private DataService: DataServiceProxy,) { }

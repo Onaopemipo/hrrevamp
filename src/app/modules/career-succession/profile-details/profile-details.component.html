@@ -1,5 +1,9 @@
-<ngx-componentsheader *ngIf="planStatus == false" [requiredButton]="[{name:'plan', label:'Create Succession Plan'}]" (buttonClick)="addPlan()"
+<ngx-componentsheader *ngIf="planStatus == false && planDataCounter < 1" [requiredButton]="[{name:'plan', label:'Create Succession Plan'}]" (buttonClick)="addPlan()"
   pageName='Profile Details'></ngx-componentsheader>
+
+  <ngx-componentsheader *ngIf="planDataCounter > 0" [requiredButton]="[{name:'modify', label:'Modify Plan'}, {name:'addSuccessor', label: 'Add Successor', outline: true}]" (buttonClick)="newCandidate()"
+  pageName='Profile Details'></ngx-componentsheader>
+
   <ngx-componentsheader *ngIf="planStatus == true"  [requiredButton]="[{name:'plan', label:'Add Successor'}]" (buttonClick)="addPlan()"
   pageName='Profile Details'></ngx-componentsheader>
 <div style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
@@ -108,28 +112,28 @@
       <div class="col-md-6">
         <span style="font-size:medium; font-weight: bold;">Work Experience</span>
         <div style="padding: 5px;"></div>
-        <div *ngIf="experienceData > 0">
+        <div *ngIf="experienceData.length > 0">
           <div style="display: flex; flex-direction: column; justify-self: center;"
           *ngFor="let experience of experienceData">
           <span><i class="fas fa-circle"
               style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Cert</span>
         </div>
         </div>
-        <div *ngIf="experienceData < 1">
+        <div *ngIf="experienceData.length < 1">
           <p>No record found</p>
         </div>
       </div>
       <div class="col-md-6">
         <span style="font-size:medium; font-weight: bold;">Skills</span>
         <div style="padding: 5px;"></div>
-        <div *ngIf="skillsData > 0">
+        <div *ngIf="skillsData.length > 0">
           <div style="display: flex; flex-direction: column; justify-self: center;"
           *ngFor="let skill of skillsData">
           <span><i class="fas fa-circle"
               style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Skill</span>
         </div>
         </div>
-        <div *ngIf="skillsData < 1">
+        <div *ngIf="skillsData.length < 1">
           <p>No record found</p>
         </div>
     </div>
@@ -137,9 +141,7 @@
   </nb-card-body>
 </nb-card>
 
-
-<div style="padding: 10px"></div>
-<nb-card>
+<nb-card *ngIf="successorCount > 0">
   <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
     <h5 style="padding:20px;">Succesors</h5><a href=""
       style="padding:20px; font-weight:600; text-decoration: underline;">View Tree</a>
@@ -148,11 +150,16 @@
   <ngx-tablecomponent [tableColum]="successionTable"></ngx-tablecomponent>
 </nb-card>
 
-<div>
+<nb-card *ngIf="successorCount < 1">
+  <ngx-default-content *ngIf="showEmpty" pageHeader="No successor found"
+    pageDescription="Click on the button to add a successor" buttonValue="Create Plan" [loading]="loading"
+    (buttonClick)="addPlan()">
+  </ngx-default-content>
+</nb-card>
+
   <ngx-side-modal [(show)]='newPlan' style="width: 600px;">
     <div modal-header>Create Succession Plan</div>
     <div modal-body>
-
             <form name="planForm" #planForm="ngForm">
               <div class="form-group row">
                 <div class="col">
@@ -252,5 +259,70 @@
 
     </div>
     </ngx-side-modal>
- </div>
+
+    <ngx-side-modal [(show)]='newSuccessor' style="width: 600px;">
+      <div modal-header>Add Employee to Plan</div>
+      <div modal-body>
+              <form name="planForm" #planForm="ngForm">
+                <div class="form-group row">
+                  <div class="col">
+                    <label>Plan Title</label>
+                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" readonly>
+                  </div>
+                </div>
+
+                <div class="row">
+                 <div class="form-group col">
+                  <label>Holding Employee</label>
+                  <input type="text" class="form-control" name="holderId" #holderId="ngModel" [(ngModel)]="newSuccessionPlan.holderId" readonly>
+                </div>
+                </div>
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Competency</label>
+                   <!-- <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+                     <option value="">--Select--</option>
+                     <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
+                   </select> -->
+                   <input type="text" class="form-control" readonly>
+                  </div>
+                 </div>
+
+                 <!-- <div class="form-group row">
+                  <div class="col">
+                   <label>Readiness to start</label>
+                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(value)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
+                   <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
+                    <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+                  </div>
+                  </div>
+                 </div> -->
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Purpose</label>
+                   <input type="text" class="form-control" readonly>
+                  </div>
+                 </div>
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Successing Candidate</label>
+                   <ngx-employee-master-search (masterSubmitted)="getSuccessingCandidate($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                  </div>
+                 </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
+                   <button type="submit" class="btn my-button" (click)="createSuccessionPlan()" [disabled]="!planForm.valid" nbButton status="primary">Submit</button>
+                   <span style="padding: 8px;"></span>
+                   <button type="submit" class="btn cancel-button" (click)="cancelPlan()" nbButton status="primary" outline>Cancel</button>
+                 </div>
+               </div>
+              </form>
+
+      </div>
+      </ngx-side-modal>
+
 
