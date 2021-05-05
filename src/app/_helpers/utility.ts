@@ -2,9 +2,9 @@ export const Util = {
 
     getDomain(env: string): string {
 
-
+      return 'https://localhost:44323/'
         if (env === 'local') {
-   
+
         }
 
         if (env === 'development') {
@@ -29,11 +29,11 @@ export const Util = {
 
 
         if (env === 'localmain') {
-       
+
         }
 
         if (env === 'developmentmain') {
-        
+
         }
 
         if (env === 'companydevelopmentmain') {

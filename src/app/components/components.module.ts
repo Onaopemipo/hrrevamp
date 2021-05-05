@@ -1,3 +1,5 @@
+import { AddUpdatePaymentInstitutionServiceProxy, GetAllPaymentInstitutionsServiceProxy, AddUpdatePayScaleServiceProxy, GetAllPayrollTypesServiceProxy, GetAllPayElementsServiceProxy, AddUpdatePayElementServiceProxy } from 'app/_services/service-proxies';
+import { MyPayrollInstitutionService, MyPayrollTypeService, MyPayElementService } from './../modules/payroll/services/common.service';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DefaultContentComponent } from './default-content/default-content.component';
 
@@ -235,7 +237,16 @@ import {DeleteEventsServiceProxy} from '../_services/service-proxies'
     VendorService,
     CertificationService,
     QualificationService,
-    DeleteEventsServiceProxy
+    DeleteEventsServiceProxy,
+    MyPayrollInstitutionService,
+    MyPayrollTypeService,
+    MyPayElementService,
+    AddUpdatePaymentInstitutionServiceProxy,
+    GetAllPaymentInstitutionsServiceProxy,
+    AddUpdatePayScaleServiceProxy,
+    GetAllPayrollTypesServiceProxy,
+    GetAllPayElementsServiceProxy,
+    AddUpdatePayElementServiceProxy,
   ],
   exports: [
     ComponentsheaderComponent,

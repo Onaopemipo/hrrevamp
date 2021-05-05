@@ -47,4 +47,9 @@ export class TemplatesComponent implements OnInit {
     this.showCreateModal = true;
   }
 
+  editTemplate(template){
+    this.editingData = template;
+    this.showCreateModal = true;
+  }
+
 }

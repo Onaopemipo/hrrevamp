@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
+import { Router } from '@angular/router';
+import { ColumnTypes, TableColumn, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { CommunicationServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
 import { ApiService } from '../../api.service';
 import { Email } from '../models';
@@ -26,7 +27,7 @@ export class EmailLogComponent implements OnInit {
   columns: TableColumn[] = [
     {name: 'subject', title: 'SUBJECT', type: ColumnTypes.Text},
     {name: 'recipient', title: 'RECIEPIENT', type: ColumnTypes.Text},
-    {name: 'cc_recipient', title: 'CC RECIEPIENT', type: ColumnTypes.Text},
+    // {name: 'cc_recipient', title: 'CC RECIEPIENT', type: ColumnTypes.Text},
     {name: 'date_sent', title: 'DATE SENT', type: ColumnTypes.Date},
     {name: 'status', title: 'STATUS', type: ColumnTypes.Status},
   ];
@@ -36,6 +37,7 @@ export class EmailLogComponent implements OnInit {
   loading = false;
   constructor(
     private api: ApiService,
+    private router: Router,
     private comService: CommunicationServiceProxy,
   ) { }
 
@@ -73,5 +75,13 @@ export class EmailLogComponent implements OnInit {
   loadNewPage(pageNo: number) {
     this.currentPage  = pageNo;
     this.loadData();
+  }
+
+  tableAction: TableAction[] = [
+    {name: 'detail', label: 'Detail'}
+  ]
+
+  tableActionClicked(event: TableActionEvent<Email>) {
+    this.router.navigateByUrl(`/communications/email/` + event.data.iObj.id + `/detail`)
   }
 }

@@ -1,3 +1,4 @@
+import { MyPayrollInstitutionService, MyPayrollTypeService } from './../../modules/payroll/services/common.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
 import { JobRoleService } from 'app/modules/module-settings/services/job-role.service';
@@ -24,7 +25,9 @@ export enum ChoiceName {
   qualifications,
   skills,
   payrollFrequencies,
-  payrollElementCategories
+  payrollElementCategories,
+  payrollInstitutions,
+  payrollTypes,
 }
 @Component({
   selector: 'ngx-multi-select',
@@ -76,6 +79,8 @@ export class MultiSelectComponent implements OnInit {
     private qualificationService: QualificationService,
     private payrollFrequencyService: PayrollFrequencyRuleService,
     private payrollElementCategoryService: PayElementCategoriesService,
+    private payrollInstitutionService: MyPayrollInstitutionService,
+    private payrollTypeService: MyPayrollTypeService,
   ) {}
 
   dropdownList = [];
@@ -131,7 +136,9 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.certifications] = this.certificationService;
       config[ChoiceName.qualifications] = this.qualificationService;
       config[ChoiceName.payrollFrequencies] = this.payrollFrequencyService;
+      config[ChoiceName.payrollInstitutions] = this.payrollInstitutionService;
       config[ChoiceName.payrollElementCategories] = this.payrollElementCategoryService;
+      config[ChoiceName.payrollTypes] = this.payrollTypeService;
       this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;
       console.log('aaa', this.dropdownList, this.choice_name, config[this.choice_name]);
       //1 this.dropdownList = (await this.trainingSpecializationService.list({}).toPromise()).data;
