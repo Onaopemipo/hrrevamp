@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EventInput } from '@fullcalendar/angular';
-import { TableColumn } from '../tablecomponent/models';
+import { TableAction, TableColumn } from '../tablecomponent/models';
 
 const SORT_KEY = 'sort';
 export interface FilterField extends TableColumn {};
@@ -14,16 +14,25 @@ export class TableheaderComponent implements OnInit {
   @Input() set filter(val: boolean) {
     this.showFilter = val;
   }
+  @Input() showCheckBox: boolean = false;
+  @Output() bulkAction_Checked =new EventEmitter<boolean>();
+  @Input() Bulkactions: TableAction[];
+  @Input() showBulkAction: boolean = false;
   filterData: object = {};
   showFilter = false;
   sort = '';
   @Output() filterChange = new EventEmitter<boolean>();
   @Output() filterDataChange = new EventEmitter<object>();
+  @Input() bulkAction_isChecked:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
+  
   }
-
+  checkedAcction() {
+    this.bulkAction_isChecked = !this.bulkAction_isChecked;
+    this.bulkAction_Checked.emit(this.bulkAction_isChecked);
+  }
   changeFilter() {
     this.showFilter = !this.showFilter;
     this.filterChange.emit(this.showFilter);

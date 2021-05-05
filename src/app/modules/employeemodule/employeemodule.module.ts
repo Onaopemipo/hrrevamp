@@ -1,4 +1,4 @@
-import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchDeploymentServiceProxy, FetchEmployeeByIdServiceProxy, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
+import { AddUpdateDeploymentServiceProxy, BulkMasterServiceProxy, CreateEmployeeServiceProxy, DataServiceProxy, EmployeeDeploymentServiceProxy, FetchAllEmployeesServiceProxy, FetchApprovalProcessServiceProxy, FetchDeploymentServiceProxy, FetchEmployeeByIdServiceProxy, FetchEmployeeOnboardingDataDetailsServiceProxy, GetPromotionEligibilityListsServiceProxy, GetPromotionListsServiceProxy, PrepareOfferLetterEmailServiceProxy, RetirementServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { FormsModule as ngFormsModule } from '@angular/forms';
@@ -57,7 +57,7 @@ import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.c
 import { ExitRequestService } from './services/exit-request.service';
 import { CustomServiceService } from '../../_services/custom-service.service';
 import {
-  FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,
+  FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,FetchEmployeesByName_IdServiceProxy,
   RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy,
   FetchEmployeeContractByEmployeeIdServiceProxy, GetConfirmationsByDetailsServiceProxy, SaveConfirmationServiceProxy, PostServiceProxy, UploadDocumentServiceProxy
 } from 'app/_services/service-proxies';
@@ -151,7 +151,10 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     FetchDeploymentServiceProxy,
     PostServiceProxy,
     UploadDocumentServiceProxy,
-    GetPromotionListsServiceProxy
+    GetPromotionListsServiceProxy,
+    FetchEmployeeOnboardingDataDetailsServiceProxy,
+    FetchEmployeesByName_IdServiceProxy,
+    PrepareOfferLetterEmailServiceProxy
   ]
 
 

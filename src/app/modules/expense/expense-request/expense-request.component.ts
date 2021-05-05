@@ -34,23 +34,26 @@ export class ExpenseRequestComponent extends AssetBaseComponent<any, any>{
   objectName = 'Expense Request';
   getTableColumns(): TableColumn[] {
     return [
-      { name: 'date', title: 'REF ID' },
-      { name: 'date', title: 'Employee' },
-      { name: 'date', title: 'Project' },
-      { name: 'date', title: 'Type' },
-      { name: 'date', title: 'Amount' }
+      { name: 'refNo', title: 'REF ID' },
+      { name: 'loggedForEmployeeName', title: 'Employee' },
+      // { name: 'date', title: 'Project' },
+      { name: 'expenseTypeName', title: 'Type' },
+      { name: 'requestedAmount', title: 'Amount' }
     ];
   }
-  formConfig = {
+  formConfig: FormConfig = {
     fields: [
-      // {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      // {name: 'actionTitle', label: 'Title', type: FORM_TYPES.text},
-      // {name: 'code', label: 'Code', type: FORM_TYPES.text},
-      // {name: 'referenceId', label: 'Reference ID', type: FORM_TYPES.text},
-      // {name: 'ban', label: 'BAN', type: FORM_TYPES.checkbox},
-      // {name: 'closedEnded', label: 'Close Ended', type: FORM_TYPES.checkbox},
-      // {name: 'range', label: 'Range', type: FORM_TYPES.date_range},
-      // {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'tempRef', label: 'Ref', type: FORM_TYPES.text},
+      {name: 'expenseGroupId', label: 'Group', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseGroup},
+      {name: 'refNo', label: 'Ref No', type: FORM_TYPES.text},
+      {name: 'requestedAmount', label: 'Amount', type: FORM_TYPES.amount},
+      {name: 'expenseProjectId', label: 'Project', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseProject},
+      {name: 'expenseProjectActivityId', label: 'Activity', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseProjectActivity},
+      {name: 'loggedForEmployeeId', label: 'Employee', type: FORM_TYPES.employee, singleSelection: true},
+      {name: 'expenseTypeId', label: 'Expense Type', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseType},
+      {name: 'expenseSubTypeId', label: 'Expense SubType', type: FORM_TYPES.text},
+      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'title', label: 'Title', type: FORM_TYPES.text},
     ]
   };
   getFormConfig(): FormConfig {

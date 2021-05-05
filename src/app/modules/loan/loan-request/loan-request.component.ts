@@ -3,7 +3,7 @@ import { TableAction, TableActionEvent } from 'app/components/tablecomponent/mod
 import { NgForm } from '@angular/forms';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { TableColumn } from './../../../components/tablecomponent/models';
-import { LoanRequestDTO, AddUpdateLoanTypeServiceProxy, NewLoanRequestDTO, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO } from './../../../_services/service-proxies';
+import {  AddUpdateLoanTypeServiceProxy, IdNameObj, UpdateLoadRequestDTO, GetLoanRequestsServiceProxy, GetLoanSummaryServiceProxy, UpdateLoanRequestServiceProxy, FetchLoanTypeByIdServiceProxy, LoanType, GetInterestRateServiceProxy, InterestRate, GetLoanTypesServiceProxy, LoanTypeDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 enum TABLE_ACTION {
@@ -28,8 +28,8 @@ export class LoanRequestComponent implements OnInit {
   button: string = 'Click to request';
   pageNo: number = 1;
 
-  loanModel: NewLoanRequestDTO = new NewLoanRequestDTO;
-  loanRequest: NewLoanRequestDTO = new NewLoanRequestDTO;
+  loanModel: any
+  loanRequest: any
 
   selectedCase: string = 'request';
   selectedPanel: any = { title: 'request', label: 'Loan Request', status: 'Active'};
@@ -59,7 +59,7 @@ export class LoanRequestComponent implements OnInit {
          }
   }
 
-  allLoansData: LoanRequestDTO [] = [];
+  allLoansData = [];
   loanSummary: IdNameObj [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
   viewLoanModal: boolean = false;
@@ -122,7 +122,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   async getAllLoans(){
-    const data = await this.getLoans.getLoanRequests(1,1,'',10,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(undefined,undefined,1,'',10,1).toPromise();
     console.log('My data',data);
     if(!data.hasError){
       this.allLoansData = data.result;

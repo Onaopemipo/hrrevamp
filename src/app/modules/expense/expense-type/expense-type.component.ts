@@ -22,6 +22,7 @@ export class ExpenseTypeComponent  extends AssetBaseComponent<any, any>{
     protected api: ExpenseTypeService,
     protected confirmBoxService: ConfirmBoxService,
     protected alertService: AlertserviceService,
+    private router: Router,
   ) {
     super(confirmBoxService);
   }
@@ -60,5 +61,19 @@ export class ExpenseTypeComponent  extends AssetBaseComponent<any, any>{
   filter = {};
   getNewEditingData(): MyExpenseType {
     return new MyExpenseType();
+  }
+
+  getTableActions(): TableAction[] {
+    const actions = super.getTableActions();
+    return [
+      {name: 'subtypes', label: 'SubTypes'},
+      ...actions,
+    ];
+  }
+
+  tableActionClick(event: TableActionEvent<MyExpenseType>) {
+    if (super.tableActionClick(event)) return true;
+    this.router.navigateByUrl(`expenses/type/${event.data.id}/subtypes`);
+    return true;
   }
 }

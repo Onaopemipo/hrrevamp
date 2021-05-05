@@ -1,5 +1,7 @@
 import { MyPayrollInstitutionService, MyPayrollTypeService } from './../../modules/payroll/services/common.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AssetCategoryService, AssetMakeService, AssetModelService, AssetSubTypeService, AssetTypeService } from 'app/modules/asset-management/services/asset-category.service';
+import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
 import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
 import { JobRoleService } from 'app/modules/module-settings/services/job-role.service';
 import { LocationService } from 'app/modules/module-settings/services/location.service';
@@ -28,6 +30,16 @@ export enum ChoiceName {
   payrollElementCategories,
   payrollInstitutions,
   payrollTypes,
+  assetCategories,
+  assetTypes,
+  assetSubTypes,
+  assetMakes,
+  assetModels,
+  expenseGroup,
+  expenseType,
+  expenseSubType,
+  expenseProject,
+  expenseProjectActivity,
 }
 @Component({
   selector: 'ngx-multi-select',
@@ -81,6 +93,16 @@ export class MultiSelectComponent implements OnInit {
     private payrollElementCategoryService: PayElementCategoriesService,
     private payrollInstitutionService: MyPayrollInstitutionService,
     private payrollTypeService: MyPayrollTypeService,
+    private assetCategoryService: AssetCategoryService,
+    private assetTypeService: AssetTypeService,
+    private assetSubTypeService: AssetSubTypeService,
+    private assetMakeService: AssetMakeService,
+    private assetModelService: AssetModelService,
+    private expenseGroupService: ExpenseGroupService,
+    private expenseTypeService: ExpenseTypeService,
+    // private expenseSubTypeService: ExpenseSub
+    private expenseProjectService: ExpenseProjectService,
+    private expenseProjectActivityService: ExpenseProjectActivityService,
   ) {}
 
   dropdownList = [];
@@ -139,6 +161,17 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.payrollInstitutions] = this.payrollInstitutionService;
       config[ChoiceName.payrollElementCategories] = this.payrollElementCategoryService;
       config[ChoiceName.payrollTypes] = this.payrollTypeService;
+      config[ChoiceName.assetCategories] = this.assetCategoryService;
+      config[ChoiceName.assetMakes] = this.assetMakeService;
+      config[ChoiceName.assetModels] = this.assetModelService;
+      config[ChoiceName.assetTypes] = this.assetTypeService;
+      config[ChoiceName.assetSubTypes] = this.assetSubTypeService;
+
+      config[ChoiceName.expenseGroup] = this.expenseGroupService;
+      config[ChoiceName.expenseType] = this.expenseTypeService;
+      // config[ChoiceName.assetSubTypes] = this.assetSubTypeService;
+      config[ChoiceName.expenseProject] = this.expenseProjectService;
+      config[ChoiceName.expenseProjectActivity] = this.expenseProjectActivityService;
       this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;
       console.log('aaa', this.dropdownList, this.choice_name, config[this.choice_name]);
       //1 this.dropdownList = (await this.trainingSpecializationService.list({}).toPromise()).data;

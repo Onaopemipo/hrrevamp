@@ -93,6 +93,13 @@ import {   SearchEmployeesServiceProxy,
   TrainingServiceProxy,
   CommonServiceProxy,
   CreateLeavePlanServiceProxy,
+  AssetManagementServiceProxy,
+  FetchExpensesServiceProxy,
+  GetExpenseTypesServiceProxy,
+  GetExpenseProjectServiceProxy,
+  GetExpenseGroupsServiceProxy,
+  GetProjectActivityServiceProxy,
+  AddUpdateProjectActivityServiceProxy,
 } from '../_services/service-proxies';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
@@ -109,6 +116,10 @@ import { CreateleaveRequestComponent } from './createleave-request/createleave-r
 import { VendorService } from 'app/modules/training/services/vendor.service';
 import { CertificationService, QualificationService } from '../_services/common.service';
 import {DeleteEventsServiceProxy} from '../_services/service-proxies'
+import { AssetListService } from 'app/modules/asset-management/services/asset-list.service';
+import { AssetCategoryService, AssetMakeService, AssetModelService, AssetStatusService, AssetSubTypeService, AssetTypeService } from 'app/modules/asset-management/services/asset-category.service';
+import { ExpenseRequestService } from 'app/modules/expense/services/expense-request.service';
+import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -247,6 +258,27 @@ import {DeleteEventsServiceProxy} from '../_services/service-proxies'
     GetAllPayrollTypesServiceProxy,
     GetAllPayElementsServiceProxy,
     AddUpdatePayElementServiceProxy,
+    AssetCategoryService,
+    AssetTypeService,
+    AssetSubTypeService,
+    AssetMakeService,
+    AssetModelService,
+    AssetStatusService,
+    AssetManagementServiceProxy,
+    AssetListService,
+
+    ExpenseRequestService,
+    FetchExpensesServiceProxy,
+    GetExpenseTypesServiceProxy,
+    GetExpenseProjectServiceProxy,
+    GetExpenseGroupsServiceProxy,
+    GetProjectActivityServiceProxy,
+    AddUpdateProjectActivityServiceProxy,
+    ExpenseRequestService,
+    ExpenseGroupService,
+    ExpenseProjectActivityService,
+    ExpenseProjectService,
+    ExpenseTypeService,
   ],
   exports: [
     ComponentsheaderComponent,

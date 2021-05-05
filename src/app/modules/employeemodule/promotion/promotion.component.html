@@ -1,8 +1,13 @@
 <ngx-componentsheader [pageName]='pageName' >
 <div headerButton style="display: flex; flex-direction: row;">
   <div *ngIf="eligibilityBucket" style="display: flex; flex-direction: row;">
-    <div><button  nbButton status="primary"  class="d-flex column">Submit List</button></div>
-    <div style="padding-left: 5px;"> <button  nbButton status="primary"  class="d-flex column">Save List</button></div>
+    <div>
+      <ngx-loadable-button [loading]="loading"  (click)="UpdateEligibleBucket()" >
+        Submit List
+      </ngx-loadable-button>    
+     
+    </div>
+  
     <div style="padding-left: 5px;">
       <button outline="true"  nbButton status="primary" (click)="updateEligibilityList()" class="d-flex column">Update List</button>
     </div> 
@@ -32,12 +37,16 @@
       [showActions]="showTableAction"
       [showFilter]="true"
       (actionClick)="tableActionClicked($event)"
+      (actionChecked)="tableActionChecked($event)"
+      (actionBulkChecked)="tableBulkActionClicked($event)"
       [actions]="tableActions" 
       [userData]="promotionList" 
       [tableColum]="tableColumns"
       [totalItems]="totalItems"
       [currentPage]="currentPage"
       [loading]="loading"
+      [showCheckBox] = "showCheckBox"
+    [showBulkAction] = "false"
       >
   </ngx-tablecomponent>
     </nb-card-body>
