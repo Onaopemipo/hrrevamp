@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
     employeeName: null,
     employeeNumber: null,
     employeeId: undefined,
+    CompetencyId: undefined,
     positionId: undefined,
     pageSize: 10,
     pageNumber: 1
@@ -593,7 +594,7 @@ this.myPieOptions = {
   }
 
   async fetchAllPlans(){
-    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
+    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.CompetencyId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
     if(data.hasError){
       this.allPans = data.result;
       this.planDataCount = data.totalRecord;

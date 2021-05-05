@@ -2,7 +2,7 @@ import { TableColumn, TableAction, TableActionEvent } from 'app/components/table
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { title } from 'process';
-import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, Competency, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
+import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
 import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill, GetAllPositionsServiceProxy, PositionDTO } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
