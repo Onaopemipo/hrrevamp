@@ -3935,7 +3935,7 @@ export class AssetManagementServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    deleteAssetMake(body: AssetMakeDTO | undefined): Observable<MessageOutIListApiResult> {
+    deleteAssetMake(body: number | undefined): Observable<MessageOutIListApiResult> {
         let url_ = this.baseUrl + "/api/AssetManagement/DeleteAssetMake";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4008,7 +4008,7 @@ export class AssetManagementServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    deleteAssetModel(body: AssetModelDTO | undefined): Observable<MessageOutIListApiResult> {
+    deleteAssetModel(body: number | undefined): Observable<MessageOutIListApiResult> {
         let url_ = this.baseUrl + "/api/AssetManagement/DeleteAssetModel";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4081,7 +4081,7 @@ export class AssetManagementServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    deleteAssetStatus(body: AssetStatusDTO | undefined): Observable<MessageOutIListApiResult> {
+    deleteAssetStatus(body: number | undefined): Observable<MessageOutIListApiResult> {
         let url_ = this.baseUrl + "/api/AssetManagement/DeleteAssetStatus";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7549,11 +7549,11 @@ export class BulkMasterServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processBulkUpload(response_);
+            return this.processBulkUploadid(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processBulkUpload(<any>response_);
+                    return this.processBulkUploadid(<any>response_);
                 } catch (e) {
                     return <Observable<MessageOutApiResult>><any>_observableThrow(e);
                 }
@@ -7562,7 +7562,7 @@ export class BulkMasterServiceProxy {
         }));
     }
 
-    protected processBulkUpload(response: HttpResponseBase): Observable<MessageOutApiResult> {
+    protected processBulkUploadid(response: HttpResponseBase): Observable<MessageOutApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -94005,6 +94005,7 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
     isDeleted!: boolean;
     loggedByUserId!: number;
     loggedByUserName!: string | undefined;
+    employeeCount!: number;
     talentManagementRequirmentsDTOs!: TalentManagementRequirmentsDTO[] | undefined;
 
     constructor(data?: IAddTalentMangementDTO) {
@@ -94028,6 +94029,7 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
             this.isDeleted = _data["isDeleted"];
             this.loggedByUserId = _data["loggedByUserId"];
             this.loggedByUserName = _data["loggedByUserName"];
+            this.employeeCount = _data["employeeCount"];
             if (Array.isArray(_data["talentManagementRequirmentsDTOs"])) {
                 this.talentManagementRequirmentsDTOs = [] as any;
                 for (let item of _data["talentManagementRequirmentsDTOs"])
@@ -94055,6 +94057,7 @@ export class AddTalentMangementDTO implements IAddTalentMangementDTO {
         data["isDeleted"] = this.isDeleted;
         data["loggedByUserId"] = this.loggedByUserId;
         data["loggedByUserName"] = this.loggedByUserName;
+        data["employeeCount"] = this.employeeCount;
         if (Array.isArray(this.talentManagementRequirmentsDTOs)) {
             data["talentManagementRequirmentsDTOs"] = [];
             for (let item of this.talentManagementRequirmentsDTOs)
@@ -94082,6 +94085,7 @@ export interface IAddTalentMangementDTO {
     isDeleted: boolean;
     loggedByUserId: number;
     loggedByUserName: string | undefined;
+    employeeCount: number;
     talentManagementRequirmentsDTOs: TalentManagementRequirmentsDTO[] | undefined;
 }
 

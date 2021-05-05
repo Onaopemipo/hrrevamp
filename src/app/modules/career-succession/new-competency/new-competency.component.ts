@@ -1,5 +1,5 @@
 import { competencyRequirement } from './../competency/competency.component';
-import { DataServiceProxy, GetAllDepartmentsServiceProxy, GradeLevelServiceProxy, CommonServiceProxy, DepartmentDTO, JobRole, Skill, Certification, Competency } from 'app/_services/service-proxies';
+import { DataServiceProxy, GetAllDepartmentsServiceProxy, GradeLevelServiceProxy, CommonServiceProxy, DepartmentDTO, JobRole, Skill, Certification, } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { CompetencyRequirmentsDTO, CompetencyServiceProxy, GradeLevelDTO, Qualification, ManageCompetencyDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
