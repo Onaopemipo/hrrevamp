@@ -10,7 +10,7 @@ import { checkEmployeeDTO } from 'app/components/employee-master-search/employee
 
 enum TABLE_ACTION {
   VIEW = '1',
-  CREATEPLAN = '3'
+  // CREATEPLAN = '3'
 }
 
 class MyEmployeeDTO extends EmployeeDTO{
@@ -93,7 +93,7 @@ topActionButtons = [
 
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
-    {name: TABLE_ACTION.CREATEPLAN, label: 'Create Plan'},
+    // {name: TABLE_ACTION.CREATEPLAN, label: 'Create Plan'},
 
   ]
   employeeResultTotal = 0;
@@ -119,19 +119,13 @@ topActionButtons = [
       return this.allEmployees.length === 0;
     }
   tableActionClicked(event: TableActionEvent){
-    // if(event.name==TABLE_ACTION.DELETE){
-    //   this.showdeleteModal = true
-    //   }
-    //   if(event.name==TABLE_ACTION.EDIT){
-    //     this.router.navigateByUrl('/payroll/editpayment')
-    //   }
      if(event.name==TABLE_ACTION.VIEW){
       this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id)
        }
 
-       else if(event.name==TABLE_ACTION.CREATEPLAN){
-        this.router.navigateByUrl('/career-succession/succession-plan-detail/' + event.data.id)
-         }
+      //  else if(event.name==TABLE_ACTION.CREATEPLAN){
+      //   this.router.navigateByUrl('/career-succession/succession-plan-detail/' + event.data.id)
+      //    }
   }
   getAllDepartment() {
     this.CommonService.getDepartments().subscribe(res => {
@@ -139,7 +133,7 @@ topActionButtons = [
         this.allDepartment = res.result;
   }
 })
-    
+
   }
   getAllLocation() {
     this.CommonService.getLocations().subscribe(res => {
@@ -154,7 +148,7 @@ topActionButtons = [
         this.allJobRole = res.result;
   }
     })
-   
+
   }
   getAllGrade() {
     this.CommonService.getGrades().subscribe(res => {
@@ -171,7 +165,7 @@ topActionButtons = [
     })
   }
   getAllPeoplesGroup() {
-    
+
   }
   ngOnInit(): void {
     this.getRetirees();
@@ -228,7 +222,7 @@ topActionButtons = [
       this.employeeResultTotal = data.totalCount;
       this.searchbtnclicked = false;
     }else{
-    
+
     }
       })
       }

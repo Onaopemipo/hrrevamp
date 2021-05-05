@@ -2,7 +2,7 @@
 
   <nb-card >
     <nb-card-body>
-          
+
   <ngx-default-content *ngIf="showEmpty" pageHeader="Succession Dashboard"
   pageDescription="Click on the button to Fetch With Employee Master" buttonValue="Master Search" [loading]="searchbtnclicked"
   (buttonClick)="newPlan = true">
@@ -19,7 +19,11 @@
 
 
 <ngx-side-modal [(show)]='newPlan' style="width: 500px;">
-  <div modal-header>Employee Search</div>
+  <div modal-header style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div modal-header>Employee Search</div>
+    <div modal-header><i class="fa fa-times" (click)="toggleToCreatePlan()" aria-hidden="true"></i></div>
+</div>
+
 <div modal-body>
   <div>
     <form id="searchForm" name="searchForm" #searchForm="ngForm">
@@ -63,7 +67,7 @@
                 <option *ngFor="let sal of allsalaryScale;" [value]="sal.id">{{sal.name}}</option>
             </select>
         </div>
-        <div class="col-sm-6 form-group" style="padding-top:26px">         
+        <div class="col-sm-6 form-group" style="padding-top:26px">
             <button [disabled]="disableSearchBtn" *ngIf="!searchbtnclicked" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
             <button *ngIf="searchbtnclicked" nbButton status='primary' style="min-width: unset !important;">Processing&nbsp;<i class="fa fa-spin fa-spinner"></i></button>
         </div>
