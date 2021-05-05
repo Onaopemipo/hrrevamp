@@ -5,7 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ComponentsModule } from 'app/components/components.module';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { PerformanceRoutingModule } from './performance.routing.module';
-import { PerformanceManagementCycleComponent } from './pages/performance-management-cycle/performance-management-cycle.component';
+//import { PerformanceManagementCycleComponent } from './pages/performance-management-cycle/performance-management-cycle.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { SetKpiComponent } from './page/set-kpi/set-kpi.component';
 import { KeyResultAreaComponent } from './pages/key-result-area/key-result-area.component';
@@ -31,7 +31,7 @@ import { KpiService } from './services/kpi.service';
     DashboardComponent,
     KeyResultAreaComponent,
     PerformanceComponent,
-    PerformanceManagementCycleComponent,
+   // PerformanceManagementCycleComponent,
     PerformanceMatrixComponent,
     PerformanceReviewComponent,
     PerformanceReviewsComponent,
@@ -41,7 +41,7 @@ import { KpiService } from './services/kpi.service';
     WorkflowComponent,
   ],
   providers: [
-    PerformanceManagementService,
+  //  PerformanceManagementService,
     FetchPerformanceCyclesServiceProxy,
     AddUpdatePerformanceCycleServiceProxy,
     CreateKeyResultAreaServiceProxy,

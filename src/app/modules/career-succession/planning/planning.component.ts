@@ -1,5 +1,5 @@
 import { NgForm } from '@angular/forms';
-import { CommonServiceProxy, Competency } from 'app/_services/service-proxies';
+import { CommonServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionDTO, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy, CompetencyRequirmentsDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
@@ -105,6 +105,7 @@ export class PlanningComponent implements OnInit {
     employeeName: null,
     employeeNumber: null,
     employeeId: undefined,
+    CompetencyId: undefined,
     positionId: undefined,
     pageSize: 10,
     pageNumber: 1
@@ -197,7 +198,7 @@ export class PlanningComponent implements OnInit {
 
   async fetchAllPlans() {
     this.loading = true;
-    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
+    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.CompetencyId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
     console.log(data.result);
     if(!data.hasError){
       this.allPlans = data.result;
