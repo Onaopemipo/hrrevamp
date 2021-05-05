@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 enum TABLE_ACTION {
   PROCESS = '1',
   DELETE = '2',
-  EDIT = '3'
+  EDIT = '3',
+  SUMMARY = '4'
 }
 @Component({
   selector: 'ngx-all-loans',

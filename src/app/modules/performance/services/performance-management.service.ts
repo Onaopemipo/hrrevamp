@@ -25,7 +25,6 @@
 //     return new MyColor(200, 200, 200);
 //   }
 
-<<<<<<< HEAD
 //   toManage(){
 //     return new ManageCycleDTO(this);
 //   }
@@ -35,7 +34,7 @@
 // })
 // export class PerformanceManagementService extends CrudService<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
 //   list(filter: MyPerformanceCycle): Observable<ListResult<MyPerformanceCycle>> {
-//     return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10).pipe(map(res => {
+//     return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10,1).pipe(map(res => {
 //       return {
 //         data: res.result.map(data => new MyPerformanceCycle(data)),
 //         length: res.totalCount,
@@ -51,33 +50,6 @@
 //   delete(id: number) {
 //     throw new Error('Method not implemented.');
 //   }
-=======
-  toManage(){
-    return new ManageCycleDTO(this);
-  }
-}
-@Injectable({
-  providedIn: 'root'
-})
-export class PerformanceManagementService extends CrudService<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
-  list(filter: MyPerformanceCycle): Observable<ListResult<MyPerformanceCycle>> {
-    return this.list_api.getPerformanceCycles(0, 0, 0, 0, 0, 10,1).pipe(map(res => {
-      return {
-        data: res.result.map(data => new MyPerformanceCycle(data)),
-        length: res.totalCount,
-      }
-    }))
-  }
-  fetch(id: number) {
-    throw new Error('Method not implemented.');
-  }
-  create(data: MyPerformanceCycle) {
-    return this.create_api.addUpdatePerformanceCycle(data.toManage());
-  }
-  delete(id: number) {
-    throw new Error('Method not implemented.');
-  }
->>>>>>> 51751b57b53a1f2e46cf5672d7486a816c498ba1
 
 
 //   constructor(

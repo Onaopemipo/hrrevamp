@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { CommonServiceProxy } from 'app/_services/service-proxies';
-import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO, Competency } from './../../../_services/service-proxies';
+import { CommonServiceProxy, Competency } from 'app/_services/service-proxies';
+import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO,  } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
