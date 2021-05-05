@@ -158,6 +158,7 @@ export class TablecomponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.userData)
     this.tableData = this.userData;
 
     // setTimeout(() => {

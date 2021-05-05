@@ -24,7 +24,7 @@ export class EmployeerbulkaddComponent implements OnInit {
   onDropFileceived(event: FlowDirective) {
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
- 
+
     });
   }
   filereceived(event: FlowDirective) {
@@ -32,7 +32,7 @@ export class EmployeerbulkaddComponent implements OnInit {
       this.files = value.transfers;
       this.files[0].flowFile.file
 
-      
+
     });
   }
   onDragOver(event) {
@@ -65,28 +65,28 @@ export class EmployeerbulkaddComponent implements OnInit {
       this.loading = false;
       if (!data.hasError) {
         this.initialUploadResp = data.result;
-        
+
       }
     })
   }
-  processBulkUpload() {
-    this.loading = true;
-    let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
-    this.BulkMasterService.processBulkUpload(processId, this.initialUploadResp.bulkUploadId).subscribe(data => {
-      this.loading = false;
-      this.files = [];
-          this.initialUploadResp = new MessageOut().clone();
-      if (!data.hasError) {
-        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
-          
-        })
-      } else {
-        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, "ok").subscribe(data => {
-     
-        })
-      }
-    })
-  }
+  // processBulkUpload() {
+  //   this.loading = true;
+  //   let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
+  //   this.BulkMasterService.processBulkUpload(processId, this.initialUploadResp.bulkUploadId).subscribe(data => {
+  //     this.loading = false;
+  //     this.files = [];
+  //         this.initialUploadResp = new MessageOut().clone();
+  //     if (!data.hasError) {
+  //       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
+
+  //       })
+  //     } else {
+  //       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, "ok").subscribe(data => {
+
+  //       })
+  //     }
+  //   })
+  // }
   discardProcess() {
     this.files = [];
     this.initialUploadResp = new MessageOut().clone();

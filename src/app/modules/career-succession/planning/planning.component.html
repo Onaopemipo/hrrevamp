@@ -1,175 +1,126 @@
-<ngx-componentsheader (buttonClick)="addPlan()"
-  pageName='Succession Plans'></ngx-componentsheader>
-<!-- <ngx-componentsheader pageName='Career Succession Plan'></ngx-componentsheader> -->
+<ngx-componentsheader *ngIf="planDataCount < 1" (buttonClick)="addPlan()" pageName='Succession Plans'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="planDataCount > 0" pageName='Succession Plans'  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="addPlan()"></ngx-componentsheader>
 <div>
-  <nb-card *ngIf="planDataCount < 1">
-    <nb-card-body>
-      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="toggleToCreatePlan()"></ngx-default-content>
-    </nb-card-body>
-  </nb-card>
 
-  <nb-card *ngIf="planDataCount > 0">
+
+
+  <nb-card>
     <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="successionTable" [userData]='allPlans' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      <ngx-default-content *ngIf="showEmpty" pageHeader="Career Succession"
+      pageDescription="Click on the button to create a succession plan" buttonValue="Create Plan" [loading]="loading"
+      (buttonClick)="addPlan()">
+    </ngx-default-content>
+    <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+      [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allPlans"
+      [tableColum]="successionTable" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+    </ngx-tablecomponent>
+
     </nb-card-body>
   </nb-card>
 </div>
 
-
-<!-- <ngx-side-modal [(show)]='newPlan' style="width: 500px;">
-  <div modal-header>Create Succession Plan</div>
-  <div class="row" modal-body style="padding: 5px;">
-      <div class="form-group row">
-        <div class="col">
-          <label>Title</label>
-          <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.title" required>
-        </div>
-      </div>
-
-      <div class="form-group row">
-       <div class="col">
-        <label>Employee</label>
-        <ngx-employee-master-search></ngx-employee-master-search>
-        <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" placeholder="Onaopemipo Muyiwa" required>
-       </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col">
-         <label>Position</label>
-         <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionName" required>
-        </div>
-       </div>
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Successing Candidate</label>
-         <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successingCandidate" required>
-        </div>
-       </div>
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Readiness to start</label>
-         <select type="text" class="custom-select" name="readiness" required>
-           <option value="">--Select--</option>
-           <option *ngFor="let readiness of readinessToStart" [value]="readiness.name">{{ readiness.title }}</option>
-         </select>
-        </div>
-       </div>
-
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Purpose</label>
-         <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
-          <option value="">--Select--</option>
-          <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
-        </select>
-        </div>
-       </div>
-
-      <div class="form-group row" style="margin-top: 20px">
-       <div class="col">
-        <button nbButton status="primary" (click)="createSuccessionPlan()">Modify</button>
-       </div>
-      </div>
-  </div>
-  </ngx-side-modal> -->
-
  <div>
   <ngx-side-modal [(show)]='newPlan' style="width: 600px;">
     <div modal-header>Create Succession Plan</div>
-    <div class="row" modal-body>
-        <div class="row">
-          <div class="form-group col">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
-            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-              <div *ngIf="title.errors.required">Title is required</div>
-            </div>
-          </div>
-        </div>
+    <div modal-body>
+     
+            <form name="planForm" #planForm="ngForm">
+              <div class="form-group row">
+                <div class="col">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
+                  <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                    <div *ngIf="title.errors.required">Title is required</div>
+                  </div>
+                </div>
+              </div>
 
-        <!-- <div class="row">
-         <div class="form-group col">
-          <label>Employee</label>
-          <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" required>
-          <div *ngIf="employee.invalid && (employee.dirty || employee.touched)" class="error">
-            <div *ngIf="employee.errors.required">Employee Name is required</div>
-          </div>
-        </div>
-        </div> -->
+              <!-- <div class="row">
+               <div class="form-group col">
+                <label>Employee</label>
+                <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" required>
+                <div *ngIf="employee.invalid && (employee.dirty || employee.touched)" class="error">
+                  <div *ngIf="employee.errors.required">Employee Name is required</div>
+                </div>
+              </div>
+              </div> -->
 
-        <div class="form-group row mydiv">
-          <div class="col">
-            <label for="Department" class="col-form-label mylabel">Employee</label>
-            <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
-          </div>
-        </div>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="Department" class="col-form-label mylabel">Predecessor Employee</label>
+                  <ngx-employee-master-search (masterSearchOpened)="newPlan = false" (masterSubmitted)="getSelectedEmployee($event,'employee');newPlan = true" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                </div>
+              </div>
 
-        <!-- <div class="row">
-          <div class="form-group col">
-           <label>Position</label>
-           <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionId" required>
-           <div *ngIf="position.invalid && (position.dirty || position.touched)" class="error">
-            <div *ngIf="position.errors.required">Position is required</div>
-          </div>
-          </div>
-         </div> -->
+              <!-- <div class="row">
+                <div class="form-group col">
+                 <label>Position</label>
+                 <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionId" required>
+                 <div *ngIf="position.invalid && (position.dirty || position.touched)" class="error">
+                  <div *ngIf="position.errors.required">Position is required</div>
+                </div>
+                </div>
+               </div> -->
 
-         <div class="row">
-          <div class="form-group col">
-           <label>Competency</label>
-           <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
-             <option value="">--Select--</option>
-             <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
-           </select>
-           <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
-            <div *ngIf="competencyTitle.errors.required">Competency is required</div>
-          </div>
-          </div>
-         </div>
+               <div class="form-group row">
+                <div class="col">
+                 <label>Competency</label>
+                 <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+                   <option value="">--Select--</option>
+                   <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
+                 </select>
+                 <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
+                  <div *ngIf="competencyTitle.errors.required">Competency is required</div>
+                </div>
+                </div>
+               </div>
 
-         <div class="row">
-          <div class="form-group col">
-           <label>Successing Candidate</label>
-           <ngx-employee-master-search (masterSubmitted)="getSuccessingCandidate($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
-           <!-- <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successionEmployee" required> -->
-          </div>
-         </div>
+               <!-- <div class="form-group row">
+                <div class="col">
+                 <label>Successing Candidate</label>
+                 <ngx-employee-master-search (masterSubmitted)="getSuccessingCandidate($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                </div>
+               </div>
 
-         <div class="row">
-          <div class="form-group col">
-           <label>Readiness to start</label>
-           <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
-           <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
-            <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
-          </div>
-          </div>
-         </div>
+               <div class="form-group row">
+                <div class="col">
+                 <label>Readiness to start</label>
+                 <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
+                 <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
+                  <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+                </div>
+                </div>
+               </div> -->
 
 
-         <div class="row">
-          <div class="form-group col col">
-           <label>Purpose</label>
-           <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
-            <option value="">--Select--</option>
-            <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
-          </select>
-          <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
-            <div *ngIf="purpose.errors.required">Position is required</div>
-          </div>
-          </div>
-         </div>
+               <div class="form-group row">
+                <div class="col">
+                 <label>Purpose</label>
+                 <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
+                  <option value="">--Select--</option>
+                  <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
+                </select>
+                <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
+                  <div *ngIf="purpose.errors.required">Position is required</div>
+                </div>
+                </div>
+               </div>
+<!--
+              <div class="row" style="margin-top: 20px">
+               <div class="form-group col">
+                <button nbButton status="primary" (click)="createSuccessionPlan()">Create</button>
+               </div>
+              </div> -->
 
-        <div class="row" style="margin-top: 20px">
-         <div class="form-group col col">
-          <button nbButton status="primary" (click)="createSuccessionPlan()">Create</button>
-         </div>
-        </div>
+              <div class="form-group row">
+                <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
+                 <button type="submit" class="btn my-button" (click)="createSuccessionPlan()" [disabled]="!planForm.valid" nbButton status="primary">Submit</button>
+                 <span style="padding: 8px;"></span>
+                 <button type="submit" class="btn cancel-button" (click)="cancelPlan()" nbButton status="primary" outline>Cancel</button>
+               </div>
+             </div>
+            </form>
+   
     </div>
     </ngx-side-modal>
  </div>

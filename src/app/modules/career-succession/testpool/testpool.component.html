@@ -1,10 +1,10 @@
-<ngx-componentsheader *ngIf="newCandidate" [requiredButton]="rButton" [pageName]="pageTitle" (buttonClick)="onTopActionClick($event)"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="newCandidate" [requiredButton]="rButton" [pageName]="pageTitle" (buttonClick)="onTopActionClick()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="!newCandidate" pageName='Add Candidate'></ngx-componentsheader>
 <div *ngIf="newCandidate" style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
   <span style="cursor: pointer;"><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px; ">Back</a></span>
 </div>
 <div>
-  <nb-card *ngIf="newCandidate" style="padding: 5px;">
+  <nb-card *ngIf="newCandidate">
     <nb-tabset>
       <nb-tab *ngIf="employeeCounter < 1" tabTitle="Employee Database">
         <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
@@ -13,7 +13,8 @@
 
       <nb-tab *ngIf="employeeCounter > 0" tabTitle="Employee Database">
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
       </nb-tab>
 
       <nb-tab *ngIf="employeeCounter < 1" tabTitle="Recruitment Portal">
@@ -23,7 +24,7 @@
 
       <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" ></ngx-tablecomponent>
       </nb-tab>
 
       <!-- <nb-tab tabTitle="External Source">
@@ -33,17 +34,17 @@
      </nb-tabset>
   </nb-card>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col">
       <nb-card>
         <nb-card-header>Requirements</nb-card-header>
         <nb-card-body>
           <ngx-tableheader></ngx-tableheader>
-          <ngx-tablecomponent [userData]="poolRecords.requirements" [loading]="loading" [tableColum]="requirementTable"></ngx-tablecomponent>
+          <ngx-tablecomponent [userData]="poolRecords" [loading]="loading" [tableColum]="requirementTable"></ngx-tablecomponent>
         </nb-card-body>
       </nb-card>
     </div>
-  </div>
+  </div> -->
 
 
 </div>
@@ -59,7 +60,7 @@
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Channel" class="col-form-label mylabel">Channel</label>
-                <select class="custom-select" (change)="onChangeChannel($event.target.value)" required>
+                <select class="custom-select" name="source" [(ngModel)]="poolEmployee.source" (change)="onChangeChannel($event.target.value)" required>
                   <option *ngFor="let i of channel"  [value]=i.source>{{i.label}}</option>
                 </select>
               </div>
@@ -139,7 +140,7 @@
             <div class="form-group row mydiv">
               <div class="col">
                 <label for="Purpose" class="col-form-label mylabel">Purpose</label>
-                <select class="custom-select" name="planPurpose" #planPurpose="ngModel" [(ngModel)]="purposes">
+                <select class="custom-select" name="planPurpose" #planPurpose="ngModel" [(ngModel)]="poolEmployee.purpose">
                   <option *ngFor="let purpose of purposes" [value]="purpose.value">{{ purpose.label }}</option>
                 </select>
                 <div *ngIf="planPurpose.invalid && (planPurpose.dirty || planPurpose.touched)" class="error">
@@ -303,7 +304,7 @@
 
 
 <!-- Requirements Modal  -->
-<ngx-side-modal [(show)]='showRequirementModal' style="width: 500px;">
+<!-- <ngx-side-modal [(show)]='showRequirementModal' style="width: 500px;">
   <div modal-header>Add Requirement</div>
   <div modal-body>
     <div class="form-group row mydiv">
@@ -390,7 +391,7 @@
     </div>
   </div>
   <div style="margin-top: 15px;"></div>
-</ngx-side-modal>
+</ngx-side-modal> -->
 
 
 

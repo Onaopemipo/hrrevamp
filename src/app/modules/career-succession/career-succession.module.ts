@@ -1,9 +1,9 @@
-import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy } from './../../_services/service-proxies';
-import { GetAllDepartmentsServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
+import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, DeleteSuccesionPlanServiceProxy, SearchEmployeesServiceProxy } from './../../_services/service-proxies';
+import { GetAllDepartmentsServiceProxy, CommonServiceProxy, RetirementServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NbLayoutModule, NbCardModule, NbIconModule, NbSelectModule, NbCheckboxModule, NbProgressBarModule } from '@nebular/theme';
+import { NbLayoutModule, NbCardModule, NbIconModule, NbSelectModule, NbCheckboxModule, NbProgressBarModule, NbFormFieldModule } from '@nebular/theme';
 import { ThemeModule } from './../../@theme/theme.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -29,6 +29,7 @@ import { SuccessionPlanService } from './services/succession-plan.service';
 import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
 import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
 import { NewCompetencyComponent } from './new-competency/new-competency.component';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 
 @NgModule({
@@ -45,7 +46,12 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     CompareCompetencyComponent,
     GridboxComponent,
     TestpoolComponent,
-    NineGridBoxEmployeeComponent, SucessionPlanDetailComponent, SuccessionDashboardComponent, NewCompetencyComponent],
+    NineGridBoxEmployeeComponent,
+    SucessionPlanDetailComponent,
+    SuccessionDashboardComponent,
+    NewCompetencyComponent,
+
+  ],
   providers: [
     TalentPoolService,
     EmployeesService,
@@ -62,7 +68,13 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     GetEmployeeebyGridBoxServiceProxy,
     GetGridBoxCountServiceProxy,
     TalentManagementServiceProxy,
-    CompetencyServiceProxy
+    CompetencyServiceProxy,
+    RetirementServiceProxy,
+    GetCareerSuccesionPlanByIdServiceProxy,
+    DeleteSuccesionPlanServiceProxy,
+    AuthenticationService,
+    SearchEmployeesServiceProxy,
+    CommonServiceProxy
   ],
   imports: [
     CommonModule,
@@ -76,7 +88,8 @@ import { NewCompetencyComponent } from './new-competency/new-competency.componen
     NbSelectModule,
     NbCheckboxModule,
     ComponentsModule,
-    NbProgressBarModule
+    NbProgressBarModule,
+    NbFormFieldModule
   ]
 })
 export class CareerSuccessionModule { }

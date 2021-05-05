@@ -314,7 +314,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Talent Management',
-    link: '/career-succession/talent-pool',
+    link: '/career-succession/talentpool',
     icon: 'assets/icons/TalentManagement.jpg',
   },
   {
