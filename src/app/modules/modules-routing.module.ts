@@ -91,11 +91,11 @@ const routes: Routes = [{
       .then(m => m.PerformanceModule)
     },
 
-    {
-      path: 'career-succession',
-      loadChildren: () => import('./career-succession/career-succession.module')
-      .then(m => m.CareerSuccessionModule)
-    },
+    // {
+    //   path: 'career-succession',
+    //   loadChildren: () => import('./career-succession/career-succession.module')
+    //   .then(m => m.CareerSuccessionModule)
+    // },
     {
       path: 'setup',
       loadChildren: () => import('./module-settings/module-settings.module')
@@ -107,11 +107,11 @@ const routes: Routes = [{
       .then(m => m.AssetManagementModule)
     },
 
-    {
-      path: 'loan',
-      loadChildren: () => import('./loan/loan.module')
-      .then(m => m.LoanModule)
-    },
+    // {
+    //   path: 'loan',
+    //   loadChildren: () => import('./loan/loan.module')
+    //   .then(m => m.LoanModule)
+    // },
     {
       path: 'manpower',
       loadChildren: () => import('./manpower/manpower.module')

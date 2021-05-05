@@ -90,7 +90,7 @@ class BugReport implements IFaker{
   templateUrl: './expense-report.component.html',
   styleUrls: ['./expense-report.component.scss']
 })
-export class ExpenseReportComponent extends BaseComponent<MyExpenseReport, {}, MyExpenseReport> {
+export class ExpenseReportComponent extends BaseComponent<MyExpenseRequest, {}, MyExpenseRequest> {
   successMessage = "true";
   filter = {};
   data = [];
@@ -120,7 +120,7 @@ export class ExpenseReportComponent extends BaseComponent<MyExpenseReport, {}, M
   }
 
   getNewEditingData(){
-    return new MyExpenseReport();
+    return new MyExpenseRequest();
   }
 
   public constructor(
