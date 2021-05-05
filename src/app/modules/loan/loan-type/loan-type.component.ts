@@ -162,7 +162,7 @@ export class LoanTypeComponent implements OnInit {
   }
 
   async fetchSimulateRepayment(){
-    const data = await this.simulateService.simulatePayment(0,0,0,0,'').toPromise();
+    const data = await this.simulateService.simulatePayment(0,0,0,0,null).toPromise();
     if(!data.hasError){
       this.simulateData = data.result;
     }

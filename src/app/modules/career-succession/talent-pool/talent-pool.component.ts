@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { CommonServiceProxy} from 'app/_services/service-proxies';
-import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO, CompetencyDTO, CompetencyServiceProxy } from './../../../_services/service-proxies';
+import { TalentManagementServiceProxy, AddTalentMangementDTO, CompetencyDTO, CompetencyServiceProxy } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
@@ -29,7 +29,7 @@ export class TalentPoolComponent implements OnInit {
   loading = false;
   viewPoolModal: boolean = false;
   poolModel: AddTalentMangementDTO =  new AddTalentMangementDTO;
-  competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
+  //competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
   allCompetencies: CompetencyDTO [] = [];
   allTalentPools: AddTalentMangementDTO [] = [];
   competencyCounter: number = 0;
@@ -74,7 +74,7 @@ export class TalentPoolComponent implements OnInit {
   // }
 
   async createTalentPool(){
-    this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
+  //  this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
       this.poolModel = new AddTalentMangementDTO().clone();

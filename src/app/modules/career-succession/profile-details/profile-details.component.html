@@ -267,14 +267,14 @@
                 <div class="form-group row">
                   <div class="col">
                     <label>Plan Title</label>
-                    <input type="text" class="form-control" [(value)]="planData.title" readonly>
+                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.title" [(value)]="planData.title" readonly>
                   </div>
                 </div>
 
                 <div class="row">
                  <div class="form-group col">
                   <label>Holding Employee</label>
-                  <input type="text" class="form-control" [(value)]="planData.holdersName" readonly>
+                  <input type="text" class="form-control" name="holderId" #holderId="ngModel" [(ngModel)]="newSuccessionPlan.holdersName" [(value)]="planData.holdersName" readonly>
                 </div>
                 </div>
 
