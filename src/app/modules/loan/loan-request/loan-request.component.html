@@ -1,26 +1,25 @@
-<ngx-componentsheader *ngIf="pageNo == 1"
-  pageName="Loan Request"
-  [requiredButton]="[{name:'request', label:'Add New'}]" (buttonClick)="gotoNext()"
-></ngx-componentsheader>
+<!-- <ngx-componentsheader *ngIf="pageNo == 1"
+  pageName="Loan Request" (buttonClick)="gotoNext()"
+></ngx-componentsheader> -->
 
-<ngx-componentsheader *ngIf="pageNo == 2"
+<ngx-componentsheader
   pageName="Loan Request"
   [requiredButton]="[{name:'submit', label:'Submit'}]" (buttonClick)="makeLoanRequest()"
 ></ngx-componentsheader>
 
-<div *ngIf="loansCounter < 1 && pageNo == 1">
+<!-- <div *ngIf="loansCounter < 1 && pageNo == 1">
   <nb-card>
     <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="button" (buttonClick) = "gotoNext()">
     </ngx-default-content>
   </nb-card>
-</div>
+</div> -->
 
-<div *ngIf="loansCounter > 0 && pageNo == 1">
+<!-- <div *ngIf="loansCounter > 0 && pageNo == 1">
   <nb-card>
     <ngx-tableheader></ngx-tableheader>
        <ngx-tablecomponent [tableColum]="loanRequestTable" [loading]="loading" [userData]="allLoansData"></ngx-tablecomponent>
   </nb-card>
-</div>
+</div> -->
 <!-- <div>
   <nb-card>
     <nb-card-body>
@@ -30,7 +29,7 @@
   </nb-card>
 </div> -->
 
-<div *ngIf="pageNo == 2" class="row">
+<div class="row">
   <div class="col-lg-3 col-md-3 col-xxl-3">
     <nb-card>
     <div>
@@ -53,43 +52,53 @@
               <form name="loanForm" #loanForm="ngForm">
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
+                    <label for="">Request for Someone else?</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <nb-toggle (checkedChange)="toggler($event)"></nb-toggle>
+                  </div>
+                    </div>
+
+                <div *ngIf="toggleNgModel == true" class="form-group row">
+                  <div class="col-sm-4">
                     <label for="">Employee Name</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <ngx-employee-master-search></ngx-employee-master-search>
+                        <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
                   </div>
-                </div>
+                    </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Loan Type</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeName">
+                    <select class="form-control" name="loanType" [(ngModel)]="loanModel.loanTypeId">
                       <option value="">--Select Loan Type--</option>
-                      <option *ngFor="let myType of allLoanTypes" [value]="myType.code">{{ myType.name }}</option>
+                      <option *ngFor="let myType of allloanTypes" [value]="myType.id">{{ myType.name }}</option>
                     </select>
                   </div>
                 </div>
 
-                  <!-- <div class="form-group row">
-                    <div class="col-sm-3">
+                  <div class="form-group row">
+                    <div class="col-sm-4">
                       <label for="">Interest Type</label>
                     </div>
 
                     <div class="col-sm-6">
-                      <select class="form-control" name="loanType" [(ngModel)]="loanModel.interestRate">
+                      <select class="form-control" name="loanType" #loanType="ngModel" [(ngModel)]="loanModel.interestTypeId">
                         <option value="">--Select Interest Type--</option>
-                        <option *ngFor="let interest of allInterestRates" value="1">{{ interest.description }}</option>
+                        <option *ngFor="let interest of allInterestRates" [value]="interest.id">{{ interest.description }}</option>
                       </select>
                     </div>
-                </div> -->
+                </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Effective Date</label>
                   </div>
                   <div class="col-sm-6">
@@ -99,7 +108,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Requested Amount</label>
                   </div>
                   <div class="col-sm-6">
@@ -109,7 +118,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Requested Tenor (Months)</label>
                   </div>
 
@@ -120,7 +129,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Maturity Date</label>
                   </div>
                   <div class="col-sm-6">
@@ -129,7 +138,7 @@
                 </div>
 
                 <!-- <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Custom Question</label>
                   </div>
 
@@ -141,30 +150,30 @@
                 </div> -->
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Custom Answer</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <textarea name="customAnswer" #customAnswer="ngModel" [(ngModel)]="loanModel.customAnswer" cols="60" rows="10"></textarea>
+                    <textarea name="customAnswer" #customAnswer="ngModel" [(ngModel)]="loanModel.customAnswer" cols="40" rows="10"></textarea>
                     <!-- <ngx-wysisyg-input [(value)]="loanModel.customAnswer" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                   </div>
 
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="">Loan Justification</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <textarea name="justification" #justification="ngModel" [(ngModel)]="loanModel.justification" cols="60" rows="10"></textarea>
+                    <textarea name="justification" #justification="ngModel" [(ngModel)]="loanModel.justification" cols="40" rows="10"></textarea>
                     <!-- <ngx-wysisyg-input [(value)]="loanModel.justification" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for=""></label>
                   </div>
                 </div>
@@ -179,16 +188,16 @@
     <nb-card>
       <nb-card-body>
           <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <label for="">Add Guarantor(s)</label>
             </div>
             <div class="col-sm-6">
-              <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+              <ngx-employee-master-search (masterSubmitted)="getGuarantors($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
           </div>
 
           <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <label for=""></label>
             </div>
             <div class="col-sm-6">
@@ -204,7 +213,7 @@
       <nb-card-body>
 
           <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <label>Documnt Title</label>
             </div>
             <div class="col-sm-6">
@@ -213,16 +222,16 @@
           </div>
 
           <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <label>Attach File</label>
             </div>
             <div class="col-sm-6">
-              <ngx-file-upload></ngx-file-upload>
+              <ngx-file-upload (valueChange)="selectedFile($event,'Loan Document')" class="form-control"></ngx-file-upload>
             </div>
           </div>
 
           <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <label></label>
             </div>
             <div class="col-sm-6">

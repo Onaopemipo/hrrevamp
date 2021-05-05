@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { LoanRepaymentLog, UpdateLoadRequestDTO, UpdateLoanRequestServiceProxy } from './../../../_services/service-proxies';
+import { LoanRepaymentLog, UpdateLoadRequestDTO, UpdateLoanRequestServiceProxy, LoanRequestDTOs, GetLoanRequestServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,8 +12,11 @@ export class UpdateLoanComponent implements OnInit {
   repaymentData: LoanRepaymentLog [] = [];
   simulationData: LoanRepaymentLog [] = [];
   updateLoanPayment: UpdateLoadRequestDTO = new UpdateLoadRequestDTO;
+  singleLoanData: LoanRequestDTOs = new LoanRequestDTOs;
+  loanId:number = 0;
 
-  constructor(private updateService: UpdateLoanRequestServiceProxy, private alertMe: AlertserviceService) { }
+  constructor(private updateService: UpdateLoanRequestServiceProxy, private alertMe: AlertserviceService,
+    private loanService: GetLoanRequestServiceProxy) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +25,14 @@ export class UpdateLoanComponent implements OnInit {
   async updateLoan(){
     const data = await this.updateService.updateLoanRequest(this.updateLoanPayment).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Loan Updated!', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Updated!', 'Dismiss')
+    }
+  }
+
+  async fetchSingleLoanRequest(){
+    const data = await this.loanService.getLoanRequest(this.loanId).toPromise();
+    if(!data.hasError){
+      this.singleLoanData = data.result;
     }
   }
 

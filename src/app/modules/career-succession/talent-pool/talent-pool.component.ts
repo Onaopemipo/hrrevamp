@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { CommonServiceProxy } from 'app/_services/service-proxies';
-import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO, Competency } from './../../../_services/service-proxies';
+import { CommonServiceProxy} from 'app/_services/service-proxies';
+import { TalentManagementServiceProxy, AddTalentMangementDTO,CompetencyDTO } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
@@ -22,14 +22,15 @@ export class TalentPoolComponent implements OnInit {
   myButton: string = 'Create Talent Pool';
   newPool:boolean = false;
   talentPool: string = '';
+  allPoolCounter: number = 0;
   poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
   // poolModel: MyTalentPool = new MyTalentPool;
   allTalentPool: MyTalentPool [] = [];
   loading = false;
   viewPoolModal: boolean = false;
   poolModel: AddTalentMangementDTO =  new AddTalentMangementDTO;
-  competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
-  allCompetencies: Competency [] = [];
+  //competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
+  allCompetencies: CompetencyDTO [] = [];
   allTalentPools: AddTalentMangementDTO [] = [];
 
   talentPoolTable: TableColumn [] = [
@@ -41,20 +42,20 @@ export class TalentPoolComponent implements OnInit {
     {name: 'skills', title: 'Skills'},
   ];
   constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService, private router: Router,
-    private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,private commonService: CommonServiceProxy ) { }
+    private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,
+    private commonService: CommonServiceProxy, ) { }
 
   ngOnInit(): void {
-    this.fetchPool();
     this.getCompetency();
     this.fetchAllPools();
   }
 
   addNewPool(){
-  this.newPool = !this.newPool;
+  this.newPool = true;
   }
 
   modalShow(){
-    this.viewPoolModal = !this.viewPoolModal;
+    this.viewPoolModal = true;
   }
 
   // async createTalentPool(){
@@ -72,11 +73,14 @@ export class TalentPoolComponent implements OnInit {
   // }
 
   async createTalentPool(){
-    this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
+  //  this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
+      this.poolModel = new AddTalentMangementDTO().clone();
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss').subscribe(dataAction => {
-        this.router.navigateByUrl('/career-succession/talent-pool');
+        if(dataAction == 'closed'){
+          this.router.navigateByUrl('/career-succession/talentpool');
+        }
       })
       console.log('Congrats, pool created successfully');
 
@@ -89,29 +93,38 @@ export class TalentPoolComponent implements OnInit {
 
   async fetchAllPools(){
     const data = await this.newPoolService.fetchTalentManagementPool().toPromise();
+    console.log('Here is all pools',data);
     if(!data.hasError){
       this.allTalentPools = data.result;
+      this.allPoolCounter = data.totalRecord;
       console.log('See my pools', this.allTalentPools)
+      console.log('See my pools', this.allPoolCounter)
     }
   }
 
-  async deleteTalentPool(){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Dismiss').subscribe(data => {
-      // if(data == 'yes')
+  async deleteTalentPool(poolId){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Yes').subscribe(data => {
+      if(data == 'closed'){
+        this.newPoolService.deleteTalentManagmentPool(poolId).subscribe(dataAction => {
+          if(!dataAction.hasError){
+            this.fetchAllPools();
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Pool Deleted Successfully', 'Dismiss')
+          }
+        });
+      }
     });
-   // const data = await this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).toPromise();
+
   }
 
-  async fetchPool(){
-    const data = await this.poolservice.list({}).toPromise()
-    console.log('Yes Boss, the data is here:',data.data)
-    this.allTalentPool = data.data;
-  }
+  // async fetchSinglePool(){    const data = await this.newPoolService.getTalentPoolById().toPromise()
+  //   console.log('Yes Boss, the data is here:',data.data)
+  //   this.allTalentPool = data.data;
+  // }
 
   async getCompetency(){
     const data = await this.commonService.getCompetency().toPromise();
     if(!data.hasError){
-      this.allCompetencies = data.result;
+      // this.allCompetencies = data.result;
       console.log('All competencies', this.allCompetencies)
     }
   }

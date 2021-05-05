@@ -6,15 +6,15 @@
 <nb-card style="margin-top: 15px;">
     <nb-card-body>
 
-        <nb-tabset>
+        <nb-tabset #tset (click)="filterLeavePlan(tset.tabs._results)">
             <nb-tab tabTitle="New Exits">
             
             </nb-tab>
-            <nb-tab tabTitle="Compelled Exist">
+            <nb-tab tabTitle="Compelled Exit">
                 
             </nb-tab>
 
-            <nb-tab tabTitle="Cancelled Exist">
+            <nb-tab tabTitle="Cancelled Exit">
                 
             </nb-tab>
         </nb-tabset>
