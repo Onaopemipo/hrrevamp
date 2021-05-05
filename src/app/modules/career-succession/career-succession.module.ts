@@ -1,4 +1,4 @@
-import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, DeleteSuccesionPlanServiceProxy, SearchEmployeesServiceProxy } from './../../_services/service-proxies';
+import { GradeLevelServiceProxy, CompetencyServiceProxy, FetchEmployeeByIdServiceProxy, FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionServiceProxy, GetEmployeeebyGridBoxServiceProxy, GetGridBoxCountServiceProxy, TalentManagementServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, DeleteSuccesionPlanServiceProxy, SearchEmployeesServiceProxy, EmployeePossibleSuccessorServiceProxy } from './../../_services/service-proxies';
 import { GetAllDepartmentsServiceProxy, CommonServiceProxy, RetirementServiceProxy } from 'app/_services/service-proxies';
 import { ComponentsModule } from './../../components/components.module';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -74,7 +74,8 @@ import { AuthenticationService } from 'app/_services/authentication.service';
     DeleteSuccesionPlanServiceProxy,
     AuthenticationService,
     SearchEmployeesServiceProxy,
-    CommonServiceProxy
+    CommonServiceProxy,
+    EmployeePossibleSuccessorServiceProxy,
   ],
   imports: [
     CommonModule,

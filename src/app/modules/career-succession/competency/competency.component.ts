@@ -2,7 +2,7 @@ import { TableColumn, TableAction, TableActionEvent } from 'app/components/table
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { title } from 'process';
-import { GradeLevelServiceProxy, GradeLevelDTO, Sector, Qualification, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
+import { GradeLevelServiceProxy, GradeLevelDTO, CompetencyDTO, Qualification, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
 import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill, GetAllPositionsServiceProxy, PositionDTO } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
@@ -102,7 +102,7 @@ export class CompetencyComponent implements OnInit {
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
-  allCompetencies: CompetencyRequirmentsDTO [] = [];
+  allCompetencies: CompetencyDTO [] = [];
   myCompetency: ManageCompetencyDTO = new ManageCompetencyDTO().clone();
   allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
   competencyRequirement = new CompetencyRequirmentsDTO;
@@ -146,7 +146,7 @@ allPositions: PositionDTO [] = [];
   }
 
   async getCompetency(){
-    const data = await this.commonService.getCompetency().toPromise();
+    const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
     if(!data.hasError){
       this.allCompetencies = data.result;
       this.competencyCounter = data.totalRecord;
