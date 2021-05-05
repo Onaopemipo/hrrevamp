@@ -1,7 +1,7 @@
 import { MyPayrollInstitutionService, MyPayrollTypeService } from './../../modules/payroll/services/common.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AssetCategoryService, AssetMakeService, AssetModelService, AssetSubTypeService, AssetTypeService } from 'app/modules/asset-management/services/asset-category.service';
-import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
+import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseSubTypeService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
 import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
 import { JobRoleService } from 'app/modules/module-settings/services/job-role.service';
 import { LocationService } from 'app/modules/module-settings/services/location.service';
@@ -100,7 +100,7 @@ export class MultiSelectComponent implements OnInit {
     private assetModelService: AssetModelService,
     private expenseGroupService: ExpenseGroupService,
     private expenseTypeService: ExpenseTypeService,
-    // private expenseSubTypeService: ExpenseSub
+    private expenseSubTypeService: ExpenseSubTypeService,
     private expenseProjectService: ExpenseProjectService,
     private expenseProjectActivityService: ExpenseProjectActivityService,
   ) {}
@@ -166,10 +166,9 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.assetModels] = this.assetModelService;
       config[ChoiceName.assetTypes] = this.assetTypeService;
       config[ChoiceName.assetSubTypes] = this.assetSubTypeService;
-
       config[ChoiceName.expenseGroup] = this.expenseGroupService;
       config[ChoiceName.expenseType] = this.expenseTypeService;
-      // config[ChoiceName.assetSubTypes] = this.assetSubTypeService;
+      config[ChoiceName.expenseSubType] = this.expenseSubTypeService;
       config[ChoiceName.expenseProject] = this.expenseProjectService;
       config[ChoiceName.expenseProjectActivity] = this.expenseProjectActivityService;
       this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;

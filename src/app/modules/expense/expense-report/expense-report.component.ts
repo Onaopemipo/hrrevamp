@@ -1,3 +1,4 @@
+import { ExpenseRequestService } from 'app/modules/expense/services/expense-request.service';
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
@@ -97,13 +98,13 @@ export class ExpenseReportComponent extends BaseComponent<MyExpenseReport, {}, M
   ];
   TOP_ACTIONS = TOP_ACTIONS;
   tableColumns = [
-    { name: 'date', title: 'REF ID' },
-    { name: 'date', title: 'Employee Name' },
-    { name: 'date', title: 'Project' },
-    { name: 'date', title: 'Type' },
-    { name: 'date', title: 'Approved Amount' },
-    { name: 'date', title: 'Approval Status' },
-    { name: 'date', title: 'Disbursement Status' }
+    { name: 'refNo', title: 'REF ID' },
+    { name: 'loggedForEmployeeName', title: 'Employee Name' },
+    // { name: 'date', title: 'Project' },
+    { name: 'expenseTypeName', title: 'Type' },
+    { name: 'approvedAmount', title: 'Approved Amount' },
+    { name: 'date', title: 'Approval Status', type: ColumnTypes.Status },
+    { name: 'disburse_status', title: 'Disbursement Status', type: ColumnTypes.CustomStatus }
   ];
 
   saveData(){
@@ -125,7 +126,7 @@ export class ExpenseReportComponent extends BaseComponent<MyExpenseReport, {}, M
   public constructor(
     protected alertService: AlertserviceService,
     protected confirmBox: ConfirmBoxService,
-    protected api: ExpenseReportService,
+    protected api: ExpenseRequestService,
   ){
     super(confirmBox);
   }

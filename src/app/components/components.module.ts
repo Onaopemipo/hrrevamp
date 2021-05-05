@@ -120,6 +120,7 @@ import { AssetListService } from 'app/modules/asset-management/services/asset-li
 import { AssetCategoryService, AssetMakeService, AssetModelService, AssetStatusService, AssetSubTypeService, AssetTypeService } from 'app/modules/asset-management/services/asset-category.service';
 import { ExpenseRequestService } from 'app/modules/expense/services/expense-request.service';
 import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
+import { NamedStatusComponent } from './named-status/named-status.component';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -159,6 +160,7 @@ import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectServi
     PageComponent,
     CreateleavePlanComponent,
     CreateleaveRequestComponent,
+    NamedStatusComponent,
   ],
   imports: [
     FormsModule,

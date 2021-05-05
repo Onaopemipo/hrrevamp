@@ -8,10 +8,18 @@ import { IStatus } from './models';
 })
 export class StatusComponent implements OnInit {
   @Input() data: IStatus;
+  @Input() name: String;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getColor(){
+    return this.data.getStatusColor()
+  }
+  getLabel(){
+    return this.data.getStatusLabel()
   }
 
 }

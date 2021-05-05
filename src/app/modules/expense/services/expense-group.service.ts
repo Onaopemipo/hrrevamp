@@ -60,7 +60,7 @@ export class ExpenseGroupService extends AssetBaseService<MyExpenseGroup, any> {
 
   constructor(
     private create_api: AddUpdateExpenseGroupServiceProxy,
-    private list_api_service: GetExpenseGroupsServiceProxy, 
+    private list_api_service: GetExpenseGroupsServiceProxy,
   ) {
     super();
   }
@@ -291,8 +291,8 @@ export class ExpenseSubTypeService extends AssetBaseService<MyExpenseSubType, an
   list_api(filter: any) {
     return this.list_api_service.getExpenseSubTypes(0, '', '', '', '', '', 1, 10);
   }
-  toData(obj: ExpenseType): MyExpenseSubType {
-    return new MyExpenseSubType();
+  toData(obj: ExpenseSubType): MyExpenseSubType {
+    return new MyExpenseSubType(obj);
   }
   list(filter: any): Observable<ListResult<MyExpenseSubType>> {
     return this.list_api(filter).pipe(map(res => {

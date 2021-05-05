@@ -35,25 +35,26 @@ export class ExpenseRequestComponent extends AssetBaseComponent<any, any>{
   getTableColumns(): TableColumn[] {
     return [
       { name: 'refNo', title: 'REF ID' },
+      { name: 'title', title: 'Title' },
       { name: 'loggedForEmployeeName', title: 'Employee' },
-      // { name: 'date', title: 'Project' },
       { name: 'expenseTypeName', title: 'Type' },
-      { name: 'requestedAmount', title: 'Amount' }
+      { name: 'requestedAmount', title: 'Amount' },
+      { name: 'name', title: 'Status', type: ColumnTypes.Status },
     ];
   }
   formConfig: FormConfig = {
     fields: [
-      {name: 'tempRef', label: 'Ref', type: FORM_TYPES.text},
+      {name: 'title', label: 'Title', type: FORM_TYPES.text},
+      // {name: 'tempRef', label: 'Ref', type: FORM_TYPES.text},
       {name: 'expenseGroupId', label: 'Group', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseGroup},
-      {name: 'refNo', label: 'Ref No', type: FORM_TYPES.text},
+      // {name: 'refNo', label: 'Ref No', type: FORM_TYPES.text},
       {name: 'requestedAmount', label: 'Amount', type: FORM_TYPES.amount},
       {name: 'expenseProjectId', label: 'Project', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseProject},
       {name: 'expenseProjectActivityId', label: 'Activity', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseProjectActivity},
       {name: 'loggedForEmployeeId', label: 'Employee', type: FORM_TYPES.employee, singleSelection: true},
       {name: 'expenseTypeId', label: 'Expense Type', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseType},
-      {name: 'expenseSubTypeId', label: 'Expense SubType', type: FORM_TYPES.text},
+      {name: 'expenseSubTypeId', label: 'Expense SubType', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseSubType},
       {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
-      {name: 'title', label: 'Title', type: FORM_TYPES.text},
     ]
   };
   getFormConfig(): FormConfig {
