@@ -1,6 +1,7 @@
+import { KraAssignDTO } from './../../../_services/service-proxies';
 import { Injectable } from '@angular/core';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { AssignKraDto, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, ManageSectionDTO, SectionDTO } from 'app/_services/service-proxies';
+import { AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, ManageSectionDTO, SectionDTO } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -16,7 +17,6 @@ export class MyKeyResultArea extends SectionDTO {
       score: this.maximum_score_obtainable,
       weight: this.weight,
       strategyCategoryId: this.strategyCategoryId,
-      order: this.order,
       description: this.description,
       instructions: this.instructions,
       ratingTypeId: this.ratingTypeId
@@ -53,10 +53,11 @@ export class KeyResultAreaService extends CrudService<MyKeyResultAreaFilter, MyK
   }
 
   assignObj(kra: MyKeyResultArea, reviewerId, employees) {
-    const obj = new AssignKraDto({
+    const obj = new KraAssignDTO({
       cycleId: kra.id,
-      krAs: String(kra.id),
-      reviewerId: reviewerId,
+      selectedKraReviewers: "",
+      // krAs: String(kra.id),
+      // reviewerId: reviewerId,
       employeeContractIds: employees,
     });
     return this.assign_api.assignKRA(obj);
