@@ -1,7 +1,7 @@
 import { Contacts } from './../../../@core/data/users';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { EmployeeCertification } from './../services/employees.service';
-import { Certification, CommonServiceProxy, Competency, CompetencyRequirmentsDTO } from 'app/_services/service-proxies';
+import { Certification, CommonServiceProxy, CompetencyRequirmentsDTO } from 'app/_services/service-proxies';
 import { map } from 'rxjs/operators';
 import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO, EmployeeCertificationDTO, EmployeeHistoryDTO, EmployeeSkillDTO, EmployeeQualificationDTO, ManageCareerSuccessionDto, CareerSuccessionServiceProxy } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
