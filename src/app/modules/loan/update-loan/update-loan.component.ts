@@ -1,6 +1,6 @@
-import { IVwUserObj } from 'app/_services/service-proxies';
+import { IVwUserObj, InterestRate, LoanType } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { LoanRepaymentLog, UpdateLoadRequestDTO, UpdateLoanRequestServiceProxy, LoanRequestDTOs, GetLoanRequestServiceProxy, ManageLoanRequestDTO } from './../../../_services/service-proxies';
+import { LoanRepaymentLog, UpdateLoadRequestDTO, UpdateLoanRequestServiceProxy, LoanRequestDTOs, GetLoanRequestServiceProxy, ManageLoanRequestDTO, GetInterestRateServiceProxy, GetLoanTypesServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'app/_services/authentication.service';
 
@@ -17,15 +17,24 @@ export class UpdateLoanComponent implements OnInit {
   singleLoanData: LoanRequestDTOs = new LoanRequestDTOs;
   loanId:number = 0;
   updateLoanData: ManageLoanRequestDTO = new ManageLoanRequestDTO();
-  selectionHeader="";
   user: IVwUserObj;
   toggleNgModel: boolean = false;
+  allInterestRates: InterestRate [] = [];
+  allloanTypes: LoanType [] = [];
+  dataCounter: number = 0;
+
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
 
 
   constructor(private updateService: UpdateLoanRequestServiceProxy, private alertMe: AlertserviceService,
-    private loanService: GetLoanRequestServiceProxy, private authServ: AuthenticationService,) { }
+    private loanService: GetLoanRequestServiceProxy, private authServ: AuthenticationService,
+    private interestService: GetInterestRateServiceProxy,private loanTypeService: GetLoanTypesServiceProxy,) { }
 
   ngOnInit(): void {
+    this.getInterestRate();
+    this.fetchAllLoanTypes();
   }
 
 
@@ -42,6 +51,16 @@ export class UpdateLoanComponent implements OnInit {
       this.singleLoanData = data.result;
     }
   }
+
+  async fetchAllLoanTypes(){
+    const data = await this.loanTypeService.getLoanTypes().toPromise();
+    if(!data.hasError){
+      this.allloanTypes = data.result;
+      this.dataCounter = data.totalRecord;
+      console.log(this.dataCounter, this.allloanTypes)
+  }
+
+}
 
   async makeRequest(){
 
@@ -64,6 +83,13 @@ export class UpdateLoanComponent implements OnInit {
     }
     else {
       return;
+    }
+  }
+
+  async getInterestRate(){
+    const data = await this.interestService.getInterestRate().toPromise();
+    if(!data.hasError){
+      this.allInterestRates = data.result;
     }
   }
 

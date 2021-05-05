@@ -96,7 +96,7 @@ export class ProfileDetailsComponent implements OnInit {
   experienceData: EmployeeHistoryDTO [] = [];
   skillsData: EmployeeSkillDTO [] = [];
   qualificationData: EmployeeQualificationDTO [] = [];
-  newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
+  newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto();
   successionData: EmployeeDTO [] = [];
   planDataCounter:number = 0;
   positionId: number = 0;
