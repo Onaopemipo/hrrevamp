@@ -34,11 +34,11 @@ export class ExpenseRequestComponent extends AssetBaseComponent<any, any>{
   objectName = 'Expense Request';
   getTableColumns(): TableColumn[] {
     return [
-      { name: 'date', title: 'REF ID' },
-      { name: 'date', title: 'Employee' },
-      { name: 'date', title: 'Project' },
-      { name: 'date', title: 'Type' },
-      { name: 'date', title: 'Amount' }
+      { name: 'refNo', title: 'REF ID' },
+      { name: 'loggedForEmployeeName', title: 'Employee' },
+      // { name: 'date', title: 'Project' },
+      { name: 'expenseTypeName', title: 'Type' },
+      { name: 'requestedAmount', title: 'Amount' }
     ];
   }
   formConfig: FormConfig = {

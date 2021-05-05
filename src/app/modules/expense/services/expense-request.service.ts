@@ -45,7 +45,7 @@ export class ExpenseRequestService extends CrudService<MyExpenseRequest, Expense
 
   list(filter: ExpenseRequestFilter) {
     const subject = new Subject<ListResult<MyExpenseRequest>>();
-    this.api_list.fetchExpenses(0, 0, 0, 0, 0, '0', '0', '0', 0, 0, 0).subscribe(data => {
+    this.api_list.fetchExpenses(0, 0, 0, 0, 0, null, null, null, 0, 1, 10).subscribe(data => {
       subject.next({data: data.result.map(expense => new MyExpenseRequest(expense)), length: data.totalCount});
       subject.complete();
     });
