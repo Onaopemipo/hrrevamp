@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { TableColumn, TableAction, TableActionEvent } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
-import { Grade, InterestRate, LoanRepaymentLog, LoanType, DataServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
+import { Grade, InterestRate, LoanRepaymentLog, LoanType, DataServiceProxy, IDTextViewModel, DeleteLoanTypeServiceProxy } from 'app/_services/service-proxies';
 import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy,
   SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy,
   GetLoanTypesByCriteriaServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, IDTextViewModelIListApiResult } from './../../../_services/service-proxies';
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 
 enum TABLE_ACTION {
   VIEW = '1',
+  DELETE = '2',
   EDIT = '3'
 }
 @Component({
@@ -41,6 +42,7 @@ export class LoanTypeComponent implements OnInit {
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
+    {name: TABLE_ACTION.DELETE, label: 'Delete'},
 
   ]
 
@@ -52,6 +54,20 @@ export class LoanTypeComponent implements OnInit {
        else if(event.name==TABLE_ACTION.EDIT){
         this.router.navigateByUrl('/' + event.data.id)
          }
+
+        else if(event.name == TABLE_ACTION.DELETE){
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete this?', 'Yes').subscribe(dataAction => {
+            if(dataAction == 'closed'){
+              this.deleteService.deleteLoanType(event.data.id).subscribe(myData => {
+                if(!myData.hasError && myData.result.isSuccessful == true){
+                  this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Request has been deleted','Success').subscribe(delData =>{
+                    if(delData) this.router.navigateByUrl('/loan/loan-type')
+                  })
+                }
+              })
+            }
+          })
+        }
   }
 
   options = [
@@ -79,7 +95,7 @@ export class LoanTypeComponent implements OnInit {
 
   constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService,
     private repaymentService: LoadRepaymentScheduleServiceProxy, private updateLoanService: AddUpdateLoanTypeServiceProxy,
-    private simulateService: SimulatePaymentServiceProxy,
+    private simulateService: SimulatePaymentServiceProxy, private deleteService: DeleteLoanTypeServiceProxy,
     private summaryService: GetLoanSummaryServiceProxy, private fullpaymentService: PostFullRepaymentServiceProxy,
     private loanTypeService: GetLoanTypesByCriteriaServiceProxy, private interestService: GetInterestRateServiceProxy,
     private dataService: DataServiceProxy, private router: Router) { }

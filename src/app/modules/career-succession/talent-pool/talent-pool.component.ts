@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { CommonServiceProxy } from 'app/_services/service-proxies';
-import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO, Competency } from './../../../_services/service-proxies';
+import { CommonServiceProxy} from 'app/_services/service-proxies';
+import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO,CompetencyDTO } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
@@ -30,7 +30,7 @@ export class TalentPoolComponent implements OnInit {
   viewPoolModal: boolean = false;
   poolModel: AddTalentMangementDTO =  new AddTalentMangementDTO;
   competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
-  allCompetencies: Competency [] = [];
+  allCompetencies: CompetencyDTO [] = [];
   allTalentPools: AddTalentMangementDTO [] = [];
 
   talentPoolTable: TableColumn [] = [

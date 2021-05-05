@@ -53,15 +53,15 @@
 
                 <div class="form-group row">
                   <div class="col-sm-4">
-                    <label for="">Request for Self?</label>
+                    <label for="">Request for Someone else?</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <nb-toggle [(ngModel)]="toggleNgModel">Toggle with NgModel</nb-toggle>
+                    <nb-toggle (checkedChange)="toggler($event)"></nb-toggle>
                   </div>
                     </div>
 
-                <div class="form-group row">
+                <div *ngIf="toggleNgModel == true" class="form-group row">
                   <div class="col-sm-4">
                     <label for="">Employee Name</label>
                   </div>
@@ -226,7 +226,7 @@
               <label>Attach File</label>
             </div>
             <div class="col-sm-6">
-              <ngx-file-upload></ngx-file-upload>
+              <ngx-file-upload (valueChange)="selectedFile($event,'Loan Document')" class="form-control"></ngx-file-upload>
             </div>
           </div>
 

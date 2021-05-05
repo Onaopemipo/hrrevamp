@@ -1,6 +1,7 @@
 <ngx-componentsheader
   pageName="All Loan Requests"
-  [requiredButton]="[]"
+  [requiredButton]="[{name: 'newRequest', label: 'New Request'}]"
+  (buttonClick)="addRequest()"
 ></ngx-componentsheader>
 
 <div *ngIf="loansCounter < 1" style="background-color: #ffffff;">
@@ -19,7 +20,7 @@
   <nb-card>
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="repaymentTable"></ngx-tablecomponent>
+      <ngx-tablecomponent [loading]='loading' [userData]='allLoansData' [actions]='tableActions' [tableColum]="loanRequestTable"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 </div>
