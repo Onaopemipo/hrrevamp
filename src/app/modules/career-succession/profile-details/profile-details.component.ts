@@ -130,6 +130,10 @@ export class ProfileDetailsComponent implements OnInit {
     this.navCtrl.back();
   }
 
+  getPlanByEmployeeId(){
+
+  }
+
   async getSingleSuccession(){
     const data = await this.successionService.getCareerSuccessionPlanById(this.planId).toPromise();
     if(!data.hasError){
