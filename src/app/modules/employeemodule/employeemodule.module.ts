@@ -31,7 +31,7 @@ import { EmployeemoduleRoutingModule } from './employeemodule-routing.module';
  import { EmployeeonboardingdashboardComponent } from './employeeonboardingdashboard/employeeonboardingdashboard.component';
 import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
 import { EmployeemoduleComponent } from './employeemodule.component';
-import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
+
 import { EmployeeofferComponent } from './employeeoffer/employeeoffer.component';
 import { EmploymentexitmanagementComponent } from './employmentexitmanagement/employmentexitmanagement.component';
 import { ManagementexistComponent } from './managementexist/managementexist.component';
@@ -84,7 +84,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
       PromotioninfoComponent,
       OnboardingemployeesComponent,
       EmployeemoduleComponent,
-      EmployeepersonalinformationComponent,
+     
       PromotioneligibilityComponent,
       EligibilityxxComponent,
       AnothereligibilitylistComponent,

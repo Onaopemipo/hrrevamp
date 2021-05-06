@@ -23,7 +23,7 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
-import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
+
 import { CardComponent } from './card/card.component';
 
 
@@ -156,10 +156,10 @@ const routes: Routes = [
           path: 'employeebulkupload',
           component: EmployeerbulkaddComponent
         },
-        {
-          path: 'employeepersonalinformation',
-             component:EmployeepersonalinformationComponent
-        },
+        // {
+        //   path: 'employeepersonalinformation',
+        //      component:EmployeepersonalinformationComponent
+        // },
         {
           path: 'employeeoffer',
           component: EmployeeofferComponent
