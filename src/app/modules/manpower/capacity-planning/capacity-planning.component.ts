@@ -52,7 +52,7 @@ export class CapacityPlanningComponent implements OnInit {
 
   ];
   showAddPlanModal: boolean = false;
-  allCapacityPlan: DepartmentActivityDTO[] = []
+  allCapacityPlan = []
   modificationStatus: boolean = false;
   newcaplan = new DepartmentActivityDTO().clone();
   filter = {
@@ -68,8 +68,8 @@ export class CapacityPlanningComponent implements OnInit {
   totalItems = 0;
   currentPage = 1;
   tableColumns = [
-    {name: 'activityTypeName', title: 'Activity Name',type: ColumnTypes.Text},
-    {name: 'activityTypeName', title: 'Task Type',type: ColumnTypes.Text},
+    {name: 'activityName', title: 'Activity Name',type: ColumnTypes.Text},
+    {name: 'activityNameType', title: 'Task Type',type: ColumnTypes.Text},
     {name: 'description', title: 'Justification',type: ColumnTypes.Text},
     { name: 'requirements', title: 'Requirements', type: ColumnTypes.Object},
     { name: 'year', title: 'Calendar Year',type: ColumnTypes.Text },
@@ -141,7 +141,8 @@ Jobgrade =  []
       this.filter.status, this.filter.pageNumber, this.filter.pageSize).subscribe(data => {
         this.loading = false;
         if (!data.hasError) {
-          this.allCapacityPlan = data.result;
+          var planwithStat = data.result.map(p=> new ActivityWithStatus(p))
+          this.allCapacityPlan = planwithStat;
         } else {
           
         }
