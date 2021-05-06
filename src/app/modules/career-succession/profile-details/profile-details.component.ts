@@ -1,11 +1,12 @@
+import { TableAction } from 'app/components/tablecomponent/models';
 import { NgForm } from '@angular/forms';
 import { Contacts } from './../../../@core/data/users';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { EmployeeCertification } from './../services/employees.service';
 import { Certification, CommonServiceProxy, CompetencyRequirmentsDTO } from 'app/_services/service-proxies';
 import { map } from 'rxjs/operators';
-import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO, EmployeeCertificationDTO, EmployeeHistoryDTO, EmployeeSkillDTO, EmployeeQualificationDTO, ManageCareerSuccessionDto, CareerSuccessionServiceProxy, EmployeePossibleSuccessorServiceProxy, CompetencyServiceProxy, FetchSuccessionPlanServiceProxy, CompetencyDTO } from './../../../_services/service-proxies';
-import { TableColumn } from './../../../components/tablecomponent/models';
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO, EmployeeCertificationDTO, EmployeeHistoryDTO, EmployeeSkillDTO, EmployeeQualificationDTO, ManageCareerSuccessionDto, CareerSuccessionServiceProxy, EmployeePossibleSuccessorServiceProxy, CompetencyServiceProxy, FetchSuccessionPlanServiceProxy, CompetencyDTO, CareerSuccessorDTO } from './../../../_services/service-proxies';
+import { TableColumn, TableActionEvent } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +15,15 @@ import { EmployeesService, MyEmployeeDatail, } from '../services/employees.servi
 import { throwIfAlreadyLoaded } from 'app/@core/module-import-guard';
 import { stringify } from '@angular/compiler/src/util';
 
-
+// enum TOP_ACTIONS {
+//   ADD_MORE,
+//   INITIATE_VOLUNTARY_EXIT
+// }
+enum TABLE_ACTION {
+  VIEW = '1',
+  DELETE = '2',
+  EDIT = '3'
+}
 class MyEmployeeDTO extends EmployeeDTO{
 
   get position_name(){
@@ -72,12 +81,39 @@ export class ProfileDetailsComponent implements OnInit {
     { name: 'certification', title: 'certification' },
   ];
 
+  successorsTable: TableColumn[] = [
+    { name: 'employeeId', title: 'Employee ID' },
+    { name: 'employeeName', title: 'Employee Name' },
+    { name: 'experience', title: 'Experience' },
+    { name: 'qualification', title: 'Qualification' },
+    { name: 'certification', title: 'certification' },
+  ];
+
   allPurposes = [
     {name: 'retirement', title: 'Retirement'},
     {name: 'firing', title: 'Firing'},
     {name: 'changeofposition', title: 'Change of Position'},
     {name: 'exit', title: 'Exit'},
   ]
+
+  tableActionClicked(event: TableActionEvent){
+    if(event.name==TABLE_ACTION.DELETE){
+
+      }
+     else if(event.name==TABLE_ACTION.EDIT){
+        this.router.navigateByUrl('/payroll/editpayment')
+      }
+    else if (event.name == TABLE_ACTION.VIEW) {
+      console.log(event.data)
+      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id);
+       }
+  }
+ tableActions: TableAction[] = [
+  {name: TABLE_ACTION.VIEW, label: 'View'},
+  {name: TABLE_ACTION.DELETE, label: 'Delete'},
+  {name: TABLE_ACTION.EDIT, label: 'Edit'},
+
+]
 
   allowmultipleselection: boolean = true;
   selectionHeader: string = "Select Employee";
@@ -108,6 +144,8 @@ export class ProfileDetailsComponent implements OnInit {
   successorCount: number = 0;
   newSuccessor:boolean = false;
   allCandidate = [];
+  loading: boolean = true;
+  successionEmployeesData: CareerSuccessorDTO [] = [];
 
   constructor(private navCtrl: Location, private alertMe: AlertserviceService,
     private activatedRoute: ActivatedRoute,private succession: CareerSuccessionServiceProxy,
@@ -186,10 +224,14 @@ async fetchProfile(){
 
   async getEmployeeSuccessionPlan(){
     const data = await this.planById.getCareerSuccessionPlan(undefined,undefined,undefined,this.employeeId,this.competencyId,0,1,10).toPromise();
-    if(!data.hasError){
+    if(!data.hasError && data.totalRecord > 0){
       this.planData = data.result[0];
       this.planDataCounter = data.totalRecord;
-      console.log('My Data', this.planData)
+      this.successionEmployeesData = data.result[0].successionEmployee;
+      this.loading = false;
+      console.log('My Data', this.successionEmployeesData)
+    } else {
+      this.planData = new CareerSuccessionDTO().clone();
     }
   }
 

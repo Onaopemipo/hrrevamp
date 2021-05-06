@@ -139,14 +139,18 @@ allPositions: PositionDTO [] = [];
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Competency Added!', 'Dismiss')
-      this.myCompetency = new ManageCompetencyDTO().clone();
+    if(!data.hasError && data.result.isSuccessful === true){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
+        if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
+      })
+      // this.myCompetency = new ManageCompetencyDTO().clone();
+    } else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
     }
   }
 
   async getCompetency(){
-    const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
+    const data = await this.competencyService.fetchCompetency(undefined,undefined,20,1).toPromise();
     if(!data.hasError){
       this.allCompetencies = data.result;
       this.competencyCounter = data.totalRecord;

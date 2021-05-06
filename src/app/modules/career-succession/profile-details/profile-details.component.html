@@ -141,16 +141,16 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card *ngIf="successorCount > 0">
+<nb-card *ngIf="successionEmployeesData.length > 0">
   <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
     <h5 style="padding:20px;">Succesors</h5><a href=""
       style="padding:20px; font-weight:600; text-decoration: underline;">View Tree</a>
   </div>
   <ngx-tableheader></ngx-tableheader>
-  <ngx-tablecomponent [tableColum]="successionTable"></ngx-tablecomponent>
+  <ngx-tablecomponent [loading]='loading' [tableColum]="successorsTable" [userData]='successionEmployeesData' [actions]='tableActions'></ngx-tablecomponent>
 </nb-card>
 
-<nb-card *ngIf="successorCount < 1">
+<nb-card *ngIf="successionEmployeesData.length < 1">
   <ngx-default-content *ngIf="showEmpty" pageHeader="No successor found"
     pageDescription="Click on the button to add a successor" buttonValue="Create Plan" [loading]="loading"
     (buttonClick)="addPlan()">
