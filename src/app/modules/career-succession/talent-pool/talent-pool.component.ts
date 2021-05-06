@@ -137,7 +137,7 @@ export class TalentPoolComponent implements OnInit {
   //     this.competencyCounter = data.totalRecord;
   //     console.log('All competencies', this.allCompetencies)
   //   }
-  // }
+  //  }
 
   addRequirement(){
     let poolRequirement = this.poolRequirementModel;

@@ -97,30 +97,33 @@
             margin-left: 10px;">create new events</h6> -->
             <div style="margin: 20px;">
                 <div class="form-group">
-                    <label for="title">Vendor Name</label>
-                    <input type="text" class="form-control" placeholder="Enter title" id="title">
+                    <label for="title">Name of Vendor</label>
+                    <input type="text" class="form-control" placeholder="Enter title" id="name" #name="ngModel" name="name"
+                    [(ngModel)]=" AddVendor.name" required>
 
-                    <!-- <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                        <div *ngIf="title.errors.required">title is required</div>
-                    </div> -->
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div> 
 
                 </div>
                 <div class="form-group">
                     <label for="title">Phone number</label>
-                    <input type="number" class="form-control" placeholder="Enter title" id="title">
+                    <input type="number" class="form-control" placeholder="Enter phoneNumber" id="phoneNumber" #phoneNumber="ngModel"
+                    name="phoneNumber" [(ngModel)]="AddVendor.phoneNumber" required>
 
-                    <!-- <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                        <div *ngIf="title.errors.required">title is required</div>
-                    </div> -->
+                    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                        <div *ngIf="phoneNumber.errors.required">phoneNumber is required</div>
+                    </div> 
 
                 </div>
                 <div class="form-group">
                     <label for="title">Email</label>
-                    <input type="email" class="form-control" placeholder="Enter title" id="title">
+                    <input type="email" class="form-control" placeholder="Enter Email" id="phoneNumber" #email="ngModel"
+                    name="email" [(ngModel)]="AddVendor.email" required>
 
-                    <!-- <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                        <div *ngIf="title.errors.required">title is required</div>
-                    </div> -->
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                        <div *ngIf="email.errors.required">email is required</div>
+                    </div> 
 
                 </div>
 
@@ -130,38 +133,38 @@
                     <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Benefit
                         Type</label>
                     <div class="col-sm-8">
-                        <select placeholder="Select Gender" class="form-control">
+                        <select placeholder="Select Gender" class="form-control" name="benefitTypeID" id="benefitTypeID" #benefitTypeID="ngModel" [(ngModel)]="AddVendor.benefitTypeID">
                             <option value="">--Select Event---</option>
-                            <!-- <option *ngFor="let evo of EventTypes" [value]="evo.id">{{evo.text}}</option> -->
+                             <option *ngFor="let benefit of Benefit" [value]="benefit.id">{{benefit.text}}</option> -->
                         </select>
 
-                        <!-- <div *ngIf="eventTypeId.invalid && (eventTypeId.dirty || eventTypeId.touched)"
+                         <div *ngIf="benefitTypeID.invalid && (benefitTypeID.dirty || benefitTypeID.touched)"
                             class="error">
-                            <div *ngIf="eventTypeId.errors.required">eventType is required</div>
-                        </div> -->
+                            <div *ngIf="benefitTypeID.errors.required">benefitTypeID is required</div>
+                        </div> 
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="Description">Description</label>
                     <textarea type="textarea" class="form-control" placeholder="Enter Description"
-                        id="description"></textarea>
-                    <!-- 
+                        id="description" name="description" #description="ngModel"  [(ngModel)]="AddVendor.description" ></textarea>
+                    
                     <div *ngIf="description.invalid && (description.dirty || description.touched)"
                         class="error">
                         <div *ngIf="description.errors.required">Description is required</div>
-                    </div> -->
+                    </div>
 
                 </div>
 
                 <div class="form-group">
                     <label for="Description">Adress</label>
-                    <textarea type="textarea" class="form-control" placeholder="Enter Description"
-                        id="description"></textarea>
-                    <!-- 
-                    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                    <textarea type="textarea" class="form-control" placeholder="Enter Address"
+                        id="address" name="address" #address="ngModel"  [(ngModel)]="AddVendor.address" ></textarea>
+                    
+                    <div *ngIf="address.invalid && (address.dirty|| address.touched)"
                         class="error">
-                        <div *ngIf="description.errors.required">Description is required</div>
-                    </div> -->
+                        <div *ngIf="address.errors.required">Address is required</div>
+                    </div> 
 
                 </div>
                 <div>
@@ -200,20 +203,22 @@
             <div style="margin: 20px;">
                 <div class="form-group">
                     <label for="title">Name of Plan</label>
-                    <input type="text" class="form-control" placeholder="Enter title" id="title">
+                    <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel" name="name"
+                    [(ngModel)]=" AddVendorPlan.name" required>
 
-                    <!-- <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                        <div *ngIf="title.errors.required">title is required</div>
-                    </div> -->
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div> 
 
                 </div>
                 <div class="form-group">
                     <label for="title">Policy number</label>
-                    <input type="number" class="form-control" placeholder="Enter title" id="title">
+                    <input type="text" class="form-control" placeholder="Enter refNumber" id="refNumber" #refNumber="ngModel" name="refNumber"
+                    [(ngModel)]=" AddVendorPlan.refNumber" required>
 
-                    <!-- <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                        <div *ngIf="title.errors.required">title is required</div>
-                    </div> -->
+                    <div *ngIf="refNumber.invalid && (refNumber.dirty || refNumber.touched)" class="error">
+                        <div *ngIf="refNumber.errors.required">refNumber is required</div>
+                    </div>
 
                 </div>
                
@@ -223,54 +228,35 @@
                     <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor id
                         </label>
                     <div class="col-sm-8">
-                        <select placeholder="Select Gender" class="form-control">
+                        <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId" #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId"> 
                             <option value="">--Select Vendor---</option>
-                            <!-- <option *ngFor="let evo of EventTypes" [value]="evo.id">{{evo.text}}</option> -->
+                            <option *ngFor="let evo of Vendora" [value]="evo.benefitTypeID">{{evo.name}}</option> -->
                         </select>
 
-                        <!-- <div *ngIf="eventTypeId.invalid && (eventTypeId.dirty || eventTypeId.touched)"
+                        <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)"
                             class="error">
-                            <div *ngIf="eventTypeId.errors.required">eventType is required</div>
-                        </div> -->
+                            <div *ngIf="vendorId.errors.required">Vendor is required</div>
+                        </div> 
                     </div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="Description">Description</label>
+                    <label for="Description">Plan Description</label>
                     <textarea type="textarea" class="form-control" placeholder="Enter Description"
-                        id="description"></textarea>
-                    <!-- 
+                        id="description" name="description" #description="ngModel"  [(ngModel)]="AddVendorPlan.description" ></textarea>
+                    
                     <div *ngIf="description.invalid && (description.dirty || description.touched)"
                         class="error">
                         <div *ngIf="description.errors.required">Description is required</div>
-                    </div> -->
+                    </div>
 
-                </div>
-
-                <div class="form-group">
-                    <label for="Description">Adress</label>
-                    <textarea type="textarea" class="form-control" placeholder="Enter Description"
-                        id="description"></textarea>
-                    <!-- 
-                    <div *ngIf="description.invalid && (description.dirty || description.touched)"
-                        class="error">
-                        <div *ngIf="description.errors.required">Description is required</div>
-                    </div> -->
-
-                </div>
-                <div>
-                    <!-- <button type="submit" class="btn btn-primary" *ngIf="submitbtnPressed" nbButton status="primary"
-                        [disabled]="disableEvent">Submit</button> -->
-                    <!-- <button *ngIf="submitbtnPressed" nbButton status="primary" disabled]="disableEvent"
-                        class="d-flex column">Processing &nbsp;
-                        <i class="fa fa-spin fa-spinner">
-                        </i> Submit</button> -->
                 </div>
 
                 <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
                     <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
                             class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
                     <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
-                        [disabled]="!disableEvent" (click)="SubmitEvent()">Submit</button>
+                        [disabled]="!disable" (click)="SubmitPlan()">Submit</button>
 
 
                 </div>

@@ -153,7 +153,8 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     GetPromotionListsServiceProxy,
     FetchEmployeeOnboardingDataDetailsServiceProxy,
     FetchEmployeesByName_IdServiceProxy,
-    PrepareOfferLetterEmailServiceProxy
+    PrepareOfferLetterEmailServiceProxy,
+    AlertserviceService
   ]
 
 
