@@ -289,16 +289,6 @@
                   </div>
                  </div>
 
-                 <!-- <div class="form-group row">
-                  <div class="col">
-                   <label>Readiness to start</label>
-                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(value)]="planData.readinessToStart" placeholder="Readiness in months" required>
-                   <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
-                    <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
-                  </div>
-                  </div>
-                 </div> -->
-
                  <div class="form-group row">
                   <div class="col">
                    <label>Purpose</label>
@@ -310,6 +300,16 @@
                   <div class="col">
                    <label>Successing Candidate</label>
                    <ngx-employee-master-search (masterSubmitted)="getSuccessingCandidate($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                  </div>
+                 </div>
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Readiness to start</label>
+                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(value)]="planData.readinessToStart" placeholder="Readiness in months" required>
+                   <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
+                    <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+                  </div>
                   </div>
                  </div>
 

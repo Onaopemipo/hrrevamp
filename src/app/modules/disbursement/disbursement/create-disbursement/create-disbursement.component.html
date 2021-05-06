@@ -330,9 +330,17 @@
                 <label></label>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
+                <button type="submit" class="btn cancel-button" (click)="cancelSubmission()" nbButton status="primary" outline>Cancel</button>
                 <button nbButton status="primary" (click)="createDisbursement()">Submit</button>
               </div>
             </div>
+            <!-- <div class="form-group row">
+              <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
+               <button type="submit" class="btn my-button" (click)="createDisbursement()" nbButton status="primary">Submit</button>
+               <span style="padding: 8px;"></span>
+               <button type="submit" class="btn cancel-button" (click)="cancelSubmission()" nbButton status="primary" outline>Cancel</button>
+             </div>
+           </div> -->
           </div>
     </nb-tab>
   </nb-tabset>
