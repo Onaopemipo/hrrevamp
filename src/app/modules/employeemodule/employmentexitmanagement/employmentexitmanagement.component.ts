@@ -1,14 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExitRequestService, MyExitRequestFilter } from '../services/exit-request.service';
-import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { RetirementServiceProxy, RetirmentDTO } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+import { IStatus, MyColor } from 'app/components/status/models';
 
+export class RetirementWithStatus extends RetirmentDTO implements IStatus {
+  retirementClass: RetirmentDTO;
 
+  constructor(retirementClass: RetirmentDTO) {
+    super(retirementClass);
+    this.retirementClass = retirementClass;
+
+  }
+  get status() {
+    return this.retirementClass.log_status;
+  }
+  getStatusLabel() {
+    if (this.retirementClass.log_status === 1) return 'Pending';
+    if (this.retirementClass.log_status === 2) return 'Approved';
+    if (this.retirementClass.log_status === 3) return 'Rejected';
+
+  }
+  getStatusColor() {
+    if (this.retirementClass.log_status === 1) return new MyColor(242, 153, 74);
+    if (this.retirementClass.log_status ===2) return new MyColor(0, 153, 74);
+    if (this.retirementClass.log_status === 3) return new MyColor(242, 0, 74);
+    return new MyColor(253, 238, 238);
+  }
+}
 
 enum TOP_ACTIONS {
-  INITIATE_VOLUNTARY_EXIT
+  INITIATE_VOLUNTARY_EXIT,
+  BULK_UPLOAD
 }
 
 enum TABLE_ACTION {
@@ -24,7 +49,8 @@ enum TABLE_ACTION {
 export class EmploymentexitmanagementComponent implements OnInit {
 ExitManagement: string = '';
   topActionButtons = [
-    {name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: '', 'icon': 'plus', outline: false},
+    { name: TOP_ACTIONS.INITIATE_VOLUNTARY_EXIT, label: '', 'icon': 'plus', outline: false },
+    {name: TOP_ACTIONS.BULK_UPLOAD, label: 'Bulk Upload', 'icon': '', outline: true},
   ];
 
   tableActions: TableAction[] = [  
@@ -33,17 +59,29 @@ ExitManagement: string = '';
   ]
 
   tableColumns = [
-    { name: 'id', title: 'id' },
-    { name: 'b', title: 'Full Name' },
-    { name: 'c', title: 'Date Requested' },
-    { name: 'd', title: 'End Date' },
-    { name: 'e', title: 'Type' },
-    { name: 'f', title: 'Status' },
+    { name: 'FullName', title: 'Full Name', type: ColumnTypes.Text },
+    { name: 'DateSubmitted', title: 'Date Requested',type: ColumnTypes.Date },
+    { name: 'EffectiveDate', title: 'Effective Date',type: ColumnTypes.Date },
+    { name: 'RetirementType', title: 'Type',type: ColumnTypes.Text },
+    { name: 'log_status', title: 'Status',type: ColumnTypes.Status },
   ];
   
+  filter = {
+    ID: undefined,
+    FullName: undefined,
+    EmployeeId: undefined,
+    DateRequested: undefined,
+    Type: undefined,
+    Status: undefined,
+    IsCleared: undefined,
+    retirmentTypeid: undefined,
+    startdate: undefined,
+    endate: undefined,
+    PageSize: 10,
+    PageNumber: 1
+  }
 
-  filter: MyExitRequestFilter = {};
-  allExitRequest: RetirmentDTO[] = [];
+  allExitRequest = [];
   totalItems = 0;
   currentPage = 1;
   loading: boolean = false;
@@ -54,10 +92,10 @@ ExitManagement: string = '';
     private activatedroute: ActivatedRoute
   ) { }
   tableActionClicked(event: TableActionEvent) {
-    if (event.name == "1") {
-
+    if (event.name == TABLE_ACTION.EDIT) {
+this.router.navigate(['/employeemodule/exitrequest'],{queryParams:{employeeId: event.data.EmployeeId}})
     }
-    if (event.name == "2") {
+    if (event.name == TABLE_ACTION.DELETE) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.CONFIRM, event.data.yearName, 'Yes').subscribe(data => {
         if (data == "closed") {
         
@@ -74,7 +112,7 @@ ExitManagement: string = '';
     return this.allExitRequest.length === 0;
   }
   getAllRetirementRequest() {
-    this.RetirementService.getAllRetire(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
+    this.RetirementService.getRetirees(this.filter.ID, this.filter.FullName,this.filter.EmployeeId,this.filter.DateRequested,this.filter.Type,this.filter.Status,this.filter.IsCleared,this.filter.retirmentTypeid,this.filter.startdate,this.filter.endate,this.filter.PageSize,this.filter.PageNumber)
       .subscribe(data => {
         if (!data.hasError) {
           this.allExitRequest = data.result;
@@ -107,5 +145,14 @@ ExitManagement: string = '';
     }
   }
 
-
+  filterLeavePlan(is_approved = []) {
+   
+    let tabtittle = "";
+    is_approved.forEach(value => {
+      if (value.activeValue) tabtittle = value.tabTitle;
+    });
+    console.log(tabtittle);
+     this.filter.Status = tabtittle == 'New Exits'? 1 : (tabtittle == 'Compelled Exit'?2 : 3);
+    this.getAllRetirementRequest();
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
 import { ColumnTypes, TableColumn, TableData, TableAction, TableActionEvent } from './models';
-
+import { ExcelServiceService } from '../../_services/excel-service.service';
+import { PdfServiceService } from '../../_services/pdf-service.service';
 
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
 
@@ -93,7 +94,7 @@ export class TablecomponentComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   bulkAction_isChecked: boolean = false;
   
-  constructor() { }
+  constructor(private ExcelService: ExcelServiceService, private PdfService:PdfServiceService) { }
   test() {
     alert(112);
   }
@@ -158,6 +159,7 @@ export class TablecomponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.userData)
     this.tableData = this.userData;
 
     // setTimeout(() => {
@@ -171,7 +173,14 @@ export class TablecomponentComponent implements OnInit {
     this.filter = {...this.filter, ...{page: pageNo, } };
     this.filterChange.emit(this.filter);
   }
-
+  handleExportAs(event) {
+    if (event == "Excel") {
+      this.ExcelService.exportAsExcelFile(this.userData,"SmartaceFile")
+    }
+    if (event == "pdf") {
+      this.PdfService.downloadAsPDF()
+    }
+  }
   filterUpdated(filter){
     this.filter = {...filter, ...{page: this.currentPage, } };
     this.filterChange.emit(this.filter);

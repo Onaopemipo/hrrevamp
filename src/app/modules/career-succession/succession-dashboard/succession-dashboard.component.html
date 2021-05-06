@@ -1,82 +1,79 @@
-<ngx-componentsheader pageName='Succession Dashboard'></ngx-componentsheader>
-<div>
-  <nb-card *ngIf="employeeDataCount < 1">
+<ngx-componentsheader pageName='Succession Dashboard' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'></ngx-componentsheader>
+
+  <nb-card >
     <nb-card-body>
-      <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="toggleToCreatePlan()"></ngx-default-content>
+
+  <ngx-default-content *ngIf="showEmpty" pageHeader="Succession Dashboard"
+  pageDescription="Click on the button to Fetch With Employee Master" buttonValue="Master Search" [loading]="searchbtnclicked"
+  (buttonClick)="newPlan = true">
+</ngx-default-content>
+
+<ngx-tablecomponent *ngIf="!showEmpty" [showActions]="true"
+  [showFilter]="false" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allEmployees"
+  [tableColum]="dashboardTable" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="searchbtnclicked">
+</ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 
-  <nb-card *ngIf="employeeDataCount > 0">
-    <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading'
-      [tableColum]="dashboardTable"
-      [userData]='allEmployeesData'
-      [actions]='tableActions'
-      (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-    </nb-card-body>
-  </nb-card>
-</div>
+
 
 
 <ngx-side-modal [(show)]='newPlan' style="width: 500px;">
-  <div modal-header>Create Succession Plan</div>
-  <div class="row" modal-body style="padding: 5px;">
-      <div class="form-group row">
-        <div class="col">
-          <label>Title</label>
-          <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
+  <div modal-header style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div modal-header>Employee Search</div>
+    <div modal-header><i class="fa fa-times" (click)="toggleToCreatePlan()" aria-hidden="true"></i></div>
+</div>
+
+<div modal-body>
+  <div>
+    <form id="searchForm" name="searchForm" #searchForm="ngForm">
+    <nb-form-field>
+        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+        <input #searchtText type="text" id="searchtText" name="searchtText" nbInput class="form-control" [(ngModel)]="filterObject.searchtText">
+    </nb-form-field>
+    <div class="row" style="padding-top:10px">
+        <div class="col-sm-6 form-group">
+            <label>Department</label>
+            <select class="form-control" #searchDepartment  id="searchDepartment" name="searchDepartment" [(ngModel)]="filterObject.searchDepartment">
+                <option value="0">--Select Department--</option>
+                <option *ngFor="let dep of allDepartment;" [value]="dep.id">{{dep.name}}</option>
+            </select>
         </div>
-      </div>
-
-      <div class="form-group row">
-       <div class="col">
-        <label>Employee</label>
-        <input type="text" class="form-control" name="employee" #employee="ngModel" [(ngModel)]="newSuccessionPlan.holderId" required>
-       </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col">
-         <label>Position</label>
-         <input type="text" class="form-control" name="position" #position="ngModel" [(ngModel)]="newSuccessionPlan.positionId" required>
+        <div class="col-sm-6 form-group">
+            <label>Location</label>
+            <select class="form-control" #searchLocation  id="searchLocation" name="searchLocation" [(ngModel)]="filterObject.searchLocation">
+                <option value="0">--Select Location--</option>
+                <option *ngFor="let loc of allLocation;" [value]="loc.id">{{loc.location_name}}</option>
+            </select>
         </div>
-       </div>
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Successing Candidate</label>
-         <input type="text" class="form-control" name="successingCandidate" #successingCandidate="ngModel" [(ngModel)]="newSuccessionPlan.successionEmployee" required>
+        <div class="col-sm-6 form-group">
+            <label>Job Role</label>
+            <select class="form-control" #searchJobRole  id="searchJobRole" name="searchJobRole"   [(ngModel)]="filterObject.searchJobRole">
+                <option value="0">--Select Role--</option>
+                <option *ngFor="let job of allJobRole;" [value]="job.id">{{job.name}}</option>
+            </select>
         </div>
-       </div>
-
-       <div class="form-group row">
-        <div class="col">
-         <label>Readiness to start</label>
-         <select type="text" class="custom-select" name="readiness" required>
-           <option value="">--Select--</option>
-           <option *ngFor="let readiness of readinessToStart" [value]="readiness.name">{{ readiness.title }}</option>
-         </select>
+        <div class="col-sm-6 form-group">
+            <label>Grade</label>
+            <select class="form-control" #saerchGrade  id="saerchGrade" name="saerchGrade"  [(ngModel)]="filterObject.saerchGrade">
+                <option value="0">--Select Grade--</option>
+                <option *ngFor="let gra of allGrade;" [value]="gra.id">{{gra.name}}</option>
+            </select>
         </div>
-       </div>
-
-
-       <!-- <div class="form-group row">
-        <div class="col">
-         <label>Purpose</label>
-         <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
-          <option value="">--Select--</option>
-          <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
-        </select>
+        <div class="col-sm-6 form-group">
+            <label>Salary Scale</label>
+            <select class="form-control" #salaryscaleId  id="salaryscaleId" name="salaryscaleId"  [(ngModel)]="filterObject.salaryscaleId">
+               <option value="0">--Select Scale--</option>
+                <option *ngFor="let sal of allsalaryScale;" [value]="sal.id">{{sal.name}}</option>
+            </select>
         </div>
-       </div> -->
-
-      <div class="form-group row" style="margin-top: 20px">
-       <div class="col">
-        <button nbButton status="primary" (click)="createSuccessionPlan()">Modify</button>
-       </div>
-      </div>
-  </div> 
+        <div class="col-sm-6 form-group" style="padding-top:26px">
+            <button [disabled]="disableSearchBtn" *ngIf="!searchbtnclicked" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
+            <button *ngIf="searchbtnclicked" nbButton status='primary' style="min-width: unset !important;">Processing&nbsp;<i class="fa fa-spin fa-spinner"></i></button>
+        </div>
+    </div>
+    </form>
+    </div>
+</div>
   </ngx-side-modal>
 

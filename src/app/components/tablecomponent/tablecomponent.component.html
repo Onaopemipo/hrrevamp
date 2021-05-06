@@ -5,7 +5,9 @@
  [Bulkactions]=[Bulkactions] 
  (bulkAction_Checked)="handleBulkChecked($event)" 
  [filterFields]="tableColum" 
- (filterDataChange)="filterUpdated($event)">
+ (filterDataChange)="filterUpdated($event)"
+ (downloadasChange)="handleExportAs($event)"
+ >
 </ngx-tableheader>
 
 <div class="table-responsive">

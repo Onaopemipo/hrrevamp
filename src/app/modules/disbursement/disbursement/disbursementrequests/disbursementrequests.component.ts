@@ -19,15 +19,20 @@ export class DisbursementrequestsComponent implements OnInit {
   tableActions = [{}];
   myHeader: string = 'No request found';
   requestCounter: number = 0;
+  characters: string ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
   constructor(private disbursement: DisbursementService, private alert: AlertserviceService,
     private request: FetchExpensesServiceProxy) { }
 
   ngOnInit(): void {
-    this.allDisbursementRequest()
+    this.allDisbursementRequest();
+    this.makeTempRef();
+    console.log(this.generateString(10));
   }
 
   selectedTab = TABS.ALL_REQUESTS;
   allDisbursements: ExpenseDTO [] = [];
+  tempRef: any = '';
 
   selectTab(tab: TABS) {
     this.selectedTab = tab;
@@ -68,6 +73,27 @@ export class DisbursementrequestsComponent implements OnInit {
 
   tableData = [];
 
+  makeTempRef(){
+    let result = [];
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = 12;
+    for( let i = 0; i < length; i++ ) {
+      result.push(characters.charAt(Math.floor(Math.random()*charactersLength)));
+      this.tempRef = result;
+   }
+   console.log('I amcvvddd here',this.tempRef)
+}
+
+generateString(length) {
+  let result = '';
+  const charactersLength = this.characters.length;
+  for (let i = 0; i < length; i++ ) {
+    this.tempRef += this.characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  this.tempRef = result;
+  console.log('Here is your string',this.tempRef)
+}
+
 
 getTableActions (){
   if(TABS.ALL_REQUESTS){
@@ -75,16 +101,16 @@ getTableActions (){
     {name: 'disburse', label:'Disburse'},
   ]
   } else if(TABS.DISBURSED){
-    this.tableActions = [{name: 'pending', label:'Pending'},
-    {name: 'disburse', label:'Disburse'},
+    this.tableActions = [{name: 'view', label:'View'},
+    // {name: 'disburse', label:'Disburse'},
   ]
   } else if(TABS.FAILED){
-    this.tableActions = [{name: 'pending', label:'Pending'},
-    {name: 'disburse', label:'Disburse'},
+    this.tableActions = [{name: 'view', label:'View'},
+    // {name: 'disburse', label:'Disburse'},
   ]
   } else if(TABS.PENDING){
-    this.tableActions = [{name: 'pending', label:'Pending'},
-    {name: 'disburse', label:'Disburse'},
+    this.tableActions = [{name: 'view', label:'View'},
+    // {name: 'disburse', label:'Disburse'},
   ]
   }
 }

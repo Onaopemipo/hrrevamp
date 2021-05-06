@@ -1,6 +1,7 @@
-import { DataServiceProxy, CommonServiceProxy } from 'app/_services/service-proxies';
+import { Router } from '@angular/router';
+import { DataServiceProxy, CommonServiceProxy, BudgetDTO } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { ExpenseProject, AddUpdateBudgetServiceProxy, ManageBudgetDTO, SingleDisbursementPostDTO, SingleDisbursementServiceProxy, IDTextViewModel, BudgetItemDTO, FetchAllBudgetItemsServiceProxy, GetAllPaymentInstitutionsServiceProxy, PayInstitutionDTO, DropdownValue, GetExpenseProjectServiceProxy, IDropdownValue, FrequencyRule, TenantBeneficiary } from './../../../../_services/service-proxies';
+import { ExpenseProject, AddUpdateBudgetServiceProxy, ManageBudgetDTO, SingleDisbursementPostDTO, SingleDisbursementServiceProxy, IDTextViewModel, BudgetItemDTO, FetchAllBudgetItemsServiceProxy, GetAllPaymentInstitutionsServiceProxy, PayInstitutionDTO, DropdownValue, GetExpenseProjectServiceProxy, IDropdownValue, FrequencyRule, TenantBeneficiary, FetchAllBudgetsServiceProxy } from './../../../../_services/service-proxies';
 import { MyDisbursement, DisbursementService } from './../../services/disbursement.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
@@ -16,17 +17,23 @@ enum TABS {
 })
 export class CreateDisbursementComponent implements OnInit {
 
-  disburseFor = [
-    { value: 'budget', label: 'Budget Item', checked: true },
-    { value: 'project', label: 'Project' },
-  ]
+  recipientVal = [
+    {value: 'new', title: 'New Account'},
+    {value: 'existing', title: 'Existing Beneficiary'},
+    {value: 'employee', title: 'Employee'},
+  ];
+
+  recipient;
+
+  loading: boolean = false;
+
 
   selectedTab = TABS.SINGLE;
   TABS = TABS;
 
   disburseForm: NgForm;
-  budgetItem: boolean = true;
-  myrecipient: string = '1';
+  category: number = 1;
+  myrecipient: string = 'new';
   recurrence: boolean = false;
   allBudgetItems: BudgetItemDTO []= [];
   allChannels = [];
@@ -35,15 +42,23 @@ export class CreateDisbursementComponent implements OnInit {
   allFrequencies: FrequencyRule [] = [];
   allBeneficiaries: TenantBeneficiary [] = [];
 
-  AllCategories: IDTextViewModel [] = [];
+  allCategories: IDTextViewModel [] = [];
 
   dataIndex: number = 1;
+  myBudget: BudgetDTO[] = [];
 
-  disbursement: SingleDisbursementPostDTO = new SingleDisbursementPostDTO;
+  allBudget: ManageBudgetDTO = new ManageBudgetDTO();
+
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
+  disbursement: SingleDisbursementPostDTO = new SingleDisbursementPostDTO().clone();
 
   constructor(private disbursementService: SingleDisbursementServiceProxy, private alert: AlertserviceService,
     private dataService: DataServiceProxy, private budgetItemService: FetchAllBudgetItemsServiceProxy,
-    private channel: GetAllPaymentInstitutionsServiceProxy, private project: GetExpenseProjectServiceProxy,
+    private router: Router, private project: GetExpenseProjectServiceProxy,
+    private budgetService: FetchAllBudgetsServiceProxy,
     private commonService: CommonServiceProxy  ) { }
 
   ngOnInit(): void {
@@ -53,8 +68,8 @@ export class CreateDisbursementComponent implements OnInit {
     this.getBanks();
     this.getCategories();
     this.getProjects();
-    this.fetAllBudgetItems();
-    this. getBeneficiaries();
+    this.getBeneficiaries();
+    this.fetAllBudget();
   }
 
   selectTab(tab: TABS) {
@@ -62,12 +77,18 @@ export class CreateDisbursementComponent implements OnInit {
   }
 
   changeDisburse(event){
-      this.budgetItem = event;
+      this.category = event;
+      if(this.category === 1){
+        this.disbursement.categoryId = 1;
+        console.log(this.disbursement.categoryId);
+      } else {
+        this.disbursement.categoryId = 2;
+        console.log(this.disbursement.categoryId);
+      }
   }
 
 changeRecipient(event){
   this.myrecipient = event;
-  // alert(event)
   }
 
 toggle(event){
@@ -78,14 +99,15 @@ benefiary(event){
   this.saveBeneficiary = event;
   }
 
-async fetAllBudgetItems(){
-  const data = await this.budgetItemService.getAllBudgetItems(this.dataIndex).toPromise();
+async getBudgetItem(event){
+  this.loading = true;
+  const data = await this.budgetItemService.getAllBudgetItems(event).toPromise();
   if(!data.hasError){
-    this.allBudgetItems = data.result;
-    console.log('Yo boss,, I am here', this.allBudgetItems)
-  }
-
+  this.allBudgetItems = data.result;
+  this.loading = false;
+  console.log('Yo boss,, I am here', this.allBudgetItems)
 }
+  }
 
 async getFrequencies(){
   const data = await this.commonService.getFrequencies().toPromise();
@@ -97,18 +119,25 @@ async getFrequencies(){
 
 
 async createDisbursement(){
+  console.log('Hey Boss Datata',this.disbursement)
   const data = await this.disbursementService.postSingleDisbursement(this.disbursement).toPromise();
   if(!data.hasError){
-    this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss');
+    this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss').subscribe(dataAction =>{
+      if(dataAction){
+        this.disbursement = new SingleDisbursementPostDTO().clone();
+        this.router.navigateByUrl('/disbursement/disbursement/requests')
+      }
+    });
   } else {
-    console.log(data.message)
+    console.log('See the log here:',data.message)
   }
 }
 
 async getCategories(){
   const data = await this.dataService.getDisbursementCategories().toPromise();
   if(!data.hasError){
-    this.AllCategories = data.result;
+    this.allCategories = data.result;
+    console.log('available cat', this.allCategories)
   }
 }
 
@@ -134,6 +163,14 @@ get disableSubmitbtn(){
   return resp;
 }
 
+getSelectedEmployee(event,selectType) {
+  console.log(event)
+   if(selectType == 'employee'){
+    this.disbursement.id= event[0].employeeNumber;
+   }
+   console.log(selectType, event)
+}
+
 async getProjects(){
   const data = await this.project.getExpenseProject(0,'','',false,'','',1,10).toPromise();
   this.allProjects = data.result;
@@ -147,6 +184,21 @@ async getBeneficiaries(){
     console.log('beneficiaries: ', this.allBeneficiaries)
   }
 }
+
+async fetchDisbursementCategories(){
+  const data = await this.dataService.getDisbursementCategories().toPromise();
+  if(!data.hasError){
+    this.allCategories = data.result;
+  }
+}
+
+async fetAllBudget(){
+  const data = await this.budgetService.getAllBudgets().toPromise();
+  if(!data.hasError){
+   this.myBudget = data.result;
+   console.log('All Bugdet Items', this.myBudget)
+  }
+ }
 
 
 saveBeneficiary(event){

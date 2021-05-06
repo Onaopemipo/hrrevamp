@@ -95,8 +95,6 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
       EmployeerecordsComponent,
       EmployeerecordsviewComponent,
       EmployeerbulkaddComponent,
-      EmployeeofferComponent,
-     
 
       CardComponent],
   imports: [
