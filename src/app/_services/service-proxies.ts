@@ -6927,6 +6927,516 @@ export class DeleteEligibilityTypeServiceProxy {
 }
 
 @Injectable()
+export class AddUpdateVendorServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateVendor(body: ManageVendorDTO | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Benefit/AddUpdateVendor/Add-Update-Vendor";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateVendor(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateVendor(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateVendor(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class DeleteVendorServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    deleteVendor(body: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Benefit/DeleteVendor/DeleteVendor";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteVendor(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteVendor(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteVendor(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetVendorByIdServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getVendorById(id: number | undefined): Observable<VendorDTOApiResult> {
+        let url_ = this.baseUrl + "/api/Benefit/GetVendorById/GetVendorById?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetVendorById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetVendorById(<any>response_);
+                } catch (e) {
+                    return <Observable<VendorDTOApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VendorDTOApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetVendorById(response: HttpResponseBase): Observable<VendorDTOApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VendorDTOApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VendorDTOApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class AddUpdateVendorPlanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addUpdateVendorPlan(body: ManageVendorPlanDto | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Benefit/AddUpdateVendorPlan/Add-Update-VendorPlan";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddUpdateVendorPlan(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddUpdateVendorPlan(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddUpdateVendorPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class DeleteVendorplanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    deleteVendorPlan(body: number | undefined): Observable<MessageOutApiResult> {
+        let url_ = this.baseUrl + "/api/Benefit/DeleteVendorplan/DeleteVendorPlan";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteVendorPlan(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteVendorPlan(<any>response_);
+                } catch (e) {
+                    return <Observable<MessageOutApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MessageOutApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeleteVendorPlan(response: HttpResponseBase): Observable<MessageOutApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = MessageOutApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<MessageOutApiResult>(<any>null);
+    }
+}
+
+@Injectable()
+export class GetVendorplanByVendorIdServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://hrv2-api.azurewebsites.net";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getVendorplanByVendorId(id: number | undefined): Observable<VendorDTOApiResult> {
+        let url_ = this.baseUrl + "/api/Benefit/GetVendorplanByVendorId/GetVendorplanByVendorId?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetVendorplanByVendorId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetVendorplanByVendorId(<any>response_);
+                } catch (e) {
+                    return <Observable<VendorDTOApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VendorDTOApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetVendorplanByVendorId(response: HttpResponseBase): Observable<VendorDTOApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VendorDTOApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VendorDTOApiResult>(<any>null);
+    }
+}
+
+@Injectable()
 export class AddUpdateBudgetServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -12596,6 +13106,74 @@ export class CommonServiceProxy {
         }
         return _observableOf<CompetencyRequirmentsDTOIListApiResult>(<any>null);
     }
+
+    /**
+     * @return Success
+     */
+    getVendor(): Observable<VendorsIListApiResult> {
+        let url_ = this.baseUrl + "/api/Common/GetVendor";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetVendor(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetVendor(<any>response_);
+                } catch (e) {
+                    return <Observable<VendorsIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<VendorsIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetVendor(response: HttpResponseBase): Observable<VendorsIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VendorsIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<VendorsIListApiResult>(<any>null);
+    }
 }
 
 @Injectable()
@@ -16812,6 +17390,74 @@ export class DataServiceProxy {
     }
 
     protected processGetRequirmentType(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = IDTextViewModelIListApiResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData400) {
+                result400 = {} as any;
+                for (let key in resultData400) {
+                    if (resultData400.hasOwnProperty(key))
+                        result400![key] = resultData400[key];
+                }
+            }
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 500) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Server Error", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<IDTextViewModelIListApiResult>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getBenefitType(): Observable<IDTextViewModelIListApiResult> {
+        let url_ = this.baseUrl + "/api/Data/GetBenefitType";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetBenefitType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetBenefitType(<any>response_);
+                } catch (e) {
+                    return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<IDTextViewModelIListApiResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetBenefitType(response: HttpResponseBase): Observable<IDTextViewModelIListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -51306,6 +51952,286 @@ export interface IEligibilityTypeListApiResult {
     totalRecord: number;
 }
 
+export class ManageVendorDTO implements IManageVendorDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    name!: string;
+    description!: string | undefined;
+    phoneNumber!: string;
+    email!: string;
+    benefitTypeID!: number;
+    address!: string;
+
+    constructor(data?: IManageVendorDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.email = _data["email"];
+            this.benefitTypeID = _data["benefitTypeID"];
+            this.address = _data["address"];
+        }
+    }
+
+    static fromJS(data: any): ManageVendorDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageVendorDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["phoneNumber"] = this.phoneNumber;
+        data["email"] = this.email;
+        data["benefitTypeID"] = this.benefitTypeID;
+        data["address"] = this.address;
+        return data; 
+    }
+
+    clone(): ManageVendorDTO {
+        const json = this.toJSON();
+        let result = new ManageVendorDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageVendorDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    name: string;
+    description: string | undefined;
+    phoneNumber: string;
+    email: string;
+    benefitTypeID: number;
+    address: string;
+}
+
+export class VendorDTO implements IVendorDTO {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    name!: string | undefined;
+    benefitTypeID!: number;
+    description!: string | undefined;
+    phoneNumber!: string | undefined;
+    email!: string | undefined;
+    address!: string | undefined;
+    isActive!: boolean;
+
+    constructor(data?: IVendorDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.name = _data["name"];
+            this.benefitTypeID = _data["benefitTypeID"];
+            this.description = _data["description"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.email = _data["email"];
+            this.address = _data["address"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): VendorDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new VendorDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["name"] = this.name;
+        data["benefitTypeID"] = this.benefitTypeID;
+        data["description"] = this.description;
+        data["phoneNumber"] = this.phoneNumber;
+        data["email"] = this.email;
+        data["address"] = this.address;
+        data["isActive"] = this.isActive;
+        return data; 
+    }
+
+    clone(): VendorDTO {
+        const json = this.toJSON();
+        let result = new VendorDTO();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVendorDTO {
+    id: number;
+    companyID: number;
+    subID: number;
+    name: string | undefined;
+    benefitTypeID: number;
+    description: string | undefined;
+    phoneNumber: string | undefined;
+    email: string | undefined;
+    address: string | undefined;
+    isActive: boolean;
+}
+
+export class VendorDTOApiResult implements IVendorDTOApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: VendorDTO;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IVendorDTOApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            this.result = _data["result"] ? VendorDTO.fromJS(_data["result"]) : <any>undefined;
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): VendorDTOApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new VendorDTOApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): VendorDTOApiResult {
+        const json = this.toJSON();
+        let result = new VendorDTOApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVendorDTOApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: VendorDTO;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class ManageVendorPlanDto implements IManageVendorPlanDto {
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    name!: string;
+    description!: string | undefined;
+    vendorId!: number;
+    refNumber!: string | undefined;
+
+    constructor(data?: IManageVendorPlanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.vendorId = _data["vendorId"];
+            this.refNumber = _data["refNumber"];
+        }
+    }
+
+    static fromJS(data: any): ManageVendorPlanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ManageVendorPlanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["vendorId"] = this.vendorId;
+        data["refNumber"] = this.refNumber;
+        return data; 
+    }
+
+    clone(): ManageVendorPlanDto {
+        const json = this.toJSON();
+        let result = new ManageVendorPlanDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IManageVendorPlanDto {
+    id: number;
+    companyID: number;
+    subID: number;
+    name: string;
+    description: string | undefined;
+    vendorId: number;
+    refNumber: string | undefined;
+}
+
 export class ManageBudgetDTO implements IManageBudgetDTO {
     id!: number;
     financialYearStartDate!: Date;
@@ -54222,6 +55148,7 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
     comment!: string | undefined;
     careerSuccessionId!: number;
     isNotification!: boolean;
+    readinessToStart!: number;
     certifications!: EmployeeCertificationDTO[] | undefined;
     skills!: EmployeeSkillDTO[] | undefined;
     qualifications!: EmployeeQualificationDTO[] | undefined;
@@ -54260,6 +55187,7 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
             this.comment = _data["comment"];
             this.careerSuccessionId = _data["careerSuccessionId"];
             this.isNotification = _data["isNotification"];
+            this.readinessToStart = _data["readinessToStart"];
             if (Array.isArray(_data["certifications"])) {
                 this.certifications = [] as any;
                 for (let item of _data["certifications"])
@@ -54326,6 +55254,7 @@ export class CareerSuccessorDTO implements ICareerSuccessorDTO {
         data["comment"] = this.comment;
         data["careerSuccessionId"] = this.careerSuccessionId;
         data["isNotification"] = this.isNotification;
+        data["readinessToStart"] = this.readinessToStart;
         if (Array.isArray(this.certifications)) {
             data["certifications"] = [];
             for (let item of this.certifications)
@@ -54392,6 +55321,7 @@ export interface ICareerSuccessorDTO {
     comment: string | undefined;
     careerSuccessionId: number;
     isNotification: boolean;
+    readinessToStart: number;
     certifications: EmployeeCertificationDTO[] | undefined;
     skills: EmployeeSkillDTO[] | undefined;
     qualifications: EmployeeQualificationDTO[] | undefined;
@@ -55228,6 +56158,7 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
     isActive!: boolean;
     title!: string | undefined;
     positionId!: number;
+    readinessToStart!: number;
     positionName!: string | undefined;
     competencyName!: string | undefined;
     purpose!: string | undefined;
@@ -55264,6 +56195,7 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
             this.isActive = _data["isActive"];
             this.title = _data["title"];
             this.positionId = _data["positionId"];
+            this.readinessToStart = _data["readinessToStart"];
             this.positionName = _data["positionName"];
             this.competencyName = _data["competencyName"];
             this.purpose = _data["purpose"];
@@ -55300,6 +56232,7 @@ export class CareerSuccessionDTO implements ICareerSuccessionDTO {
         data["isActive"] = this.isActive;
         data["title"] = this.title;
         data["positionId"] = this.positionId;
+        data["readinessToStart"] = this.readinessToStart;
         data["positionName"] = this.positionName;
         data["competencyName"] = this.competencyName;
         data["purpose"] = this.purpose;
@@ -55332,6 +56265,7 @@ export interface ICareerSuccessionDTO {
     isActive: boolean;
     title: string | undefined;
     positionId: number;
+    readinessToStart: number;
     positionName: string | undefined;
     competencyName: string | undefined;
     purpose: string | undefined;
@@ -64254,6 +65188,279 @@ export interface ICompetencyRequirmentsDTOIListApiResult {
     hasError: boolean;
     message: string | undefined;
     result: CompetencyRequirmentsDTO[] | undefined;
+    totalCount: number;
+    totalRecord: number;
+}
+
+export class VendorPlans implements IVendorPlans {
+    name!: string | undefined;
+    description!: string | undefined;
+    refNumber!: string | undefined;
+    vendorId!: number;
+    vendors!: Vendors;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IVendorPlans) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.refNumber = _data["refNumber"];
+            this.vendorId = _data["vendorId"];
+            this.vendors = _data["vendors"] ? Vendors.fromJS(_data["vendors"]) : <any>undefined;
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): VendorPlans {
+        data = typeof data === 'object' ? data : {};
+        let result = new VendorPlans();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["refNumber"] = this.refNumber;
+        data["vendorId"] = this.vendorId;
+        data["vendors"] = this.vendors ? this.vendors.toJSON() : <any>undefined;
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): VendorPlans {
+        const json = this.toJSON();
+        let result = new VendorPlans();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVendorPlans {
+    name: string | undefined;
+    description: string | undefined;
+    refNumber: string | undefined;
+    vendorId: number;
+    vendors: Vendors;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class Vendors implements IVendors {
+    name!: string | undefined;
+    benefitTypeID!: number;
+    description!: string | undefined;
+    phoneNumber!: string | undefined;
+    email!: string | undefined;
+    address!: string | undefined;
+    vendorPlans!: VendorPlans[] | undefined;
+    id!: number;
+    companyID!: number;
+    subID!: number;
+    isActive!: boolean;
+    isDeleted!: boolean;
+    dateCreated!: Date;
+    createdById!: number;
+    dateModified!: Date | undefined;
+    modifiedById!: number | undefined;
+
+    constructor(data?: IVendors) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.benefitTypeID = _data["benefitTypeID"];
+            this.description = _data["description"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.email = _data["email"];
+            this.address = _data["address"];
+            if (Array.isArray(_data["vendorPlans"])) {
+                this.vendorPlans = [] as any;
+                for (let item of _data["vendorPlans"])
+                    this.vendorPlans!.push(VendorPlans.fromJS(item));
+            }
+            this.id = _data["id"];
+            this.companyID = _data["companyID"];
+            this.subID = _data["subID"];
+            this.isActive = _data["isActive"];
+            this.isDeleted = _data["isDeleted"];
+            this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
+            this.createdById = _data["createdById"];
+            this.dateModified = _data["dateModified"] ? new Date(_data["dateModified"].toString()) : <any>undefined;
+            this.modifiedById = _data["modifiedById"];
+        }
+    }
+
+    static fromJS(data: any): Vendors {
+        data = typeof data === 'object' ? data : {};
+        let result = new Vendors();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["benefitTypeID"] = this.benefitTypeID;
+        data["description"] = this.description;
+        data["phoneNumber"] = this.phoneNumber;
+        data["email"] = this.email;
+        data["address"] = this.address;
+        if (Array.isArray(this.vendorPlans)) {
+            data["vendorPlans"] = [];
+            for (let item of this.vendorPlans)
+                data["vendorPlans"].push(item.toJSON());
+        }
+        data["id"] = this.id;
+        data["companyID"] = this.companyID;
+        data["subID"] = this.subID;
+        data["isActive"] = this.isActive;
+        data["isDeleted"] = this.isDeleted;
+        data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
+        data["createdById"] = this.createdById;
+        data["dateModified"] = this.dateModified ? this.dateModified.toISOString() : <any>undefined;
+        data["modifiedById"] = this.modifiedById;
+        return data; 
+    }
+
+    clone(): Vendors {
+        const json = this.toJSON();
+        let result = new Vendors();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVendors {
+    name: string | undefined;
+    benefitTypeID: number;
+    description: string | undefined;
+    phoneNumber: string | undefined;
+    email: string | undefined;
+    address: string | undefined;
+    vendorPlans: VendorPlans[] | undefined;
+    id: number;
+    companyID: number;
+    subID: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    dateCreated: Date;
+    createdById: number;
+    dateModified: Date | undefined;
+    modifiedById: number | undefined;
+}
+
+export class VendorsIListApiResult implements IVendorsIListApiResult {
+    hasError!: boolean;
+    message!: string | undefined;
+    result!: Vendors[] | undefined;
+    totalCount!: number;
+    readonly totalRecord!: number;
+
+    constructor(data?: IVendorsIListApiResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.hasError = _data["hasError"];
+            this.message = _data["message"];
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(Vendors.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            (<any>this).totalRecord = _data["totalRecord"];
+        }
+    }
+
+    static fromJS(data: any): VendorsIListApiResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new VendorsIListApiResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["hasError"] = this.hasError;
+        data["message"] = this.message;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["totalRecord"] = this.totalRecord;
+        return data; 
+    }
+
+    clone(): VendorsIListApiResult {
+        const json = this.toJSON();
+        let result = new VendorsIListApiResult();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVendorsIListApiResult {
+    hasError: boolean;
+    message: string | undefined;
+    result: Vendors[] | undefined;
     totalCount: number;
     totalRecord: number;
 }

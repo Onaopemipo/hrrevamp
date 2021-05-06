@@ -263,36 +263,36 @@
     <ngx-side-modal [(show)]='newSuccessor' style="width: 600px;">
       <div modal-header>Add Employee to Plan</div>
       <div modal-body>
-              <form name="planForm" #planForm="ngForm">
+              <form name="addCandidateForm" #addCandidateForm="ngForm">
                 <div class="form-group row">
                   <div class="col">
                     <label>Plan Title</label>
-                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" readonly>
+                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="planData.title" readonly>
                   </div>
                 </div>
 
                 <div class="row">
                  <div class="form-group col">
                   <label>Holding Employee</label>
-                  <input type="text" class="form-control" name="holderId" #holderId="ngModel" [(ngModel)]="newSuccessionPlan.holderId" readonly>
+                  <input type="text" class="form-control" name="holdersName" #holdersName="ngModel" [(ngModel)]="planData.holdersName" readonly>
                 </div>
                 </div>
 
                  <div class="form-group row">
                   <div class="col">
                    <label>Competency</label>
-                   <!-- <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+                   <input type="text" class="form-control" name="competency" #competency="ngModel" [(ngModel)]="planData.competencyName" readonly>
+                   <!-- <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="planData.purpose" required>
                      <option value="">--Select--</option>
                      <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
                    </select> -->
-                   <input type="text" class="form-control" readonly>
                   </div>
                  </div>
 
                  <!-- <div class="form-group row">
                   <div class="col">
                    <label>Readiness to start</label>
-                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(value)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
+                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(value)]="planData.readinessToStart" placeholder="Readiness in months" required>
                    <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
                     <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
                   </div>
@@ -302,7 +302,7 @@
                  <div class="form-group row">
                   <div class="col">
                    <label>Purpose</label>
-                   <input type="text" class="form-control" readonly>
+                   <input type="text" class="form-control" name="purpose" #purpose="ngModel" [(ngModel)]="planData.purpose" readonly>
                   </div>
                  </div>
 
@@ -315,7 +315,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
-                   <button type="submit" class="btn my-button" (click)="createSuccessionPlan()" [disabled]="!planForm.valid" nbButton status="primary">Submit</button>
+                   <button type="submit" class="btn my-button" (click)="addEmployeeToPlan()" nbButton status="primary">Submit</button>
                    <span style="padding: 8px;"></span>
                    <button type="submit" class="btn cancel-button" (click)="cancelPlan()" nbButton status="primary" outline>Cancel</button>
                  </div>

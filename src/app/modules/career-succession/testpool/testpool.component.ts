@@ -154,8 +154,12 @@ onChangeChannel($value){
 getSelectedEmployee(event,selectType) {
   console.log(event)
    if(selectType == 'employee'){
-    this.poolEmployee.employeeId = event[0].employeeNumber;
-    this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
+    // this.poolEmployee.employeeId = event[0].employeeNumber;
+    // this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
+    let allCandidate = [];
+       allCandidate.push(event);
+      // this.poolEmployee. = JSON.stringify(allCandidate);
+      // console.log(event, this.poolEmployee.stringSuccessionEmployee);
    }
   //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
 
