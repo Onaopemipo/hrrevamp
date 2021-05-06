@@ -306,9 +306,9 @@
                  <div class="form-group row">
                   <div class="col">
                    <label>Readiness to start</label>
-                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(value)]="planData.readinessToStart" placeholder="Readiness in months" required>
-                   <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
-                    <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+                   <input type="number" class="custom-select" name="readiness" #readiness="ngModel" [(ngModel)]="updateSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
+                   <div *ngIf="readiness.invalid && (readiness.dirty || readiness.touched)" class="error">
+                    <div *ngIf="readiness.errors.required">Readiness is required</div>
                   </div>
                   </div>
                  </div>

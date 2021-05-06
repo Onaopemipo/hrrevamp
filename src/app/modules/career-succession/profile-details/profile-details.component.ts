@@ -236,9 +236,9 @@ async fetchProfile(){
       this.updateSuccessionPlan.planTitle = this.planData.title;
       this.updateSuccessionPlan.purpose = this.planData.purpose;
       this.updateSuccessionPlan.competencyId = this.planData.competencyId;
-      this.updateSuccessionPlan.readinessToStart = this.planData.readinessToStart;
+      // this.updateSuccessionPlan.readinessToStart = this.planData.readinessToStart;
       this.allCandidate.map(val => { val.dateCreated = new Date(); return val; });
-      this.updateSuccessionPlan.stringSuccessionEmployee = JSON.stringify(this.allCandidate);  
+      this.updateSuccessionPlan.stringSuccessionEmployee = JSON.stringify(this.allCandidate);
       const data = await this.succession.careerSuccession(this.updateSuccessionPlan).toPromise();
       if(!data.hasError && data.result.isSuccessful == true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate added successfully', 'Dismiss').subscribe(dataAction => {

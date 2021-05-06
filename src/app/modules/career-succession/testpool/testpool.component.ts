@@ -116,11 +116,22 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     this.showCandidateModal = true;
   }
 
+  cancel(){
+    this.showCandidateModal = false;
+  }
+
   async addCandidateToPool(){
+    this.poolEmployee.talentPoolId = this.pageId;
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
         this.route.navigateByUrl('career-succession/talentpool');
+      })
+    }
+
+    else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss').subscribe(dataAction => {
+        this.route.navigateByUrl('career-succession/talentpool'+ this.pageId);
       })
     }
   }
@@ -154,15 +165,9 @@ onChangeChannel($value){
 getSelectedEmployee(event,selectType) {
   console.log(event)
    if(selectType == 'employee'){
-    // this.poolEmployee.employeeId = event[0].employeeNumber;
+    this.poolEmployee.employeeId = event[0].employeeNumber;
     // this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
-    let allCandidate = [];
-       allCandidate.push(event);
-      // this.poolEmployee. = JSON.stringify(allCandidate);
-      // console.log(event, this.poolEmployee.stringSuccessionEmployee);
    }
-  //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
-
    console.log(selectType, event)
 }
 
