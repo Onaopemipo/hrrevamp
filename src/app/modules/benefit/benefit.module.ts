@@ -15,6 +15,7 @@ import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/s
 
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
+import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     BenefitViewComponent,
     EligibilityListComponent,
     ManageEmployeeComponent,
+    VendorPlanComponent
   ],
   imports: [
     CommonModule,

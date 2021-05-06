@@ -58,7 +58,7 @@ import { ExitRequestService } from './services/exit-request.service';
 import { CustomServiceService } from '../../_services/custom-service.service';
 import {
   FileStorageManagerServiceProxy, GetAllProfessionalBodiesServiceProxy,FetchEmployeesByName_IdServiceProxy, GetVisaTypeServiceProxy,
-  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy, AddUpateOfferLetterTemplateServiceProxy,PrepareOfferLetterEmailServiceProxy,
+  RecruitmentSettingServiceProxy, UploadProfileImageServiceProxy, AddUpdateEligibleBucketServiceProxy, AddUpateOfferLetterTemplateServiceProxy,
   FetchEmployeeContractByEmployeeIdServiceProxy, GetConfirmationsByDetailsServiceProxy, SaveConfirmationServiceProxy, PostServiceProxy, UploadDocumentServiceProxy
 } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';

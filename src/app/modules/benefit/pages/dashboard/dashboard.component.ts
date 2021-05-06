@@ -23,18 +23,18 @@ export class DashboardComponent implements OnInit {
   }
 
   iD:number= 0;
-  coverageName?:number=0
-  companyID?:number=0
-  employeeID?:number=0
-  subID? : number=0
-  pageNumber?:number=1
-  pageSize?:number = 1000
-  coveragePlanId?: number =0
-  eligibilityTypeId?:string = '';
+  coverageName?:string='';
+  companyID?:number=1;
+  employeeID?:number=1;
+  subID? : number=0;
+  pageNumber?:number=1;
+  pageSize?:number = 1000;
+  coveragePlanId?: number =0;
+  eligibilityTypeId?:number = 0;
 
   //get all employee coverages
    async getBenefitsCoverage(){
-    const CoverageData= await this.benefitscoverages.fetchEmployeeCoverageBenefit(this.iD,this.eligibilityTypeId,this.coverageName,this.companyID,this.coveragePlanId,this.employeeID,this.subID,this.pageNumber,this.pageSize)
+    const CoverageData= await this.benefitscoverages.fetchEmployeeCoverageBenefit(this.iD,this.coverageName,this.coveragePlanId,this.employeeID,this.subID,this.eligibilityTypeId,this.subID,this.pageNumber,this.pageSize)
     .toPromise()
     if(!CoverageData.hasError){
       console.log('my coveragedATA',CoverageData)
