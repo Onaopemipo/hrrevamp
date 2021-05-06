@@ -112,28 +112,28 @@
       <div class="col-md-6">
         <span style="font-size:medium; font-weight: bold;">Work Experience</span>
         <div style="padding: 5px;"></div>
-        <div *ngIf="experienceData > 0">
+        <div *ngIf="experienceData.length > 0">
           <div style="display: flex; flex-direction: column; justify-self: center;"
           *ngFor="let experience of experienceData">
           <span><i class="fas fa-circle"
               style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Cert</span>
         </div>
         </div>
-        <div *ngIf="experienceData < 1">
+        <div *ngIf="experienceData.length < 1">
           <p>No record found</p>
         </div>
       </div>
       <div class="col-md-6">
         <span style="font-size:medium; font-weight: bold;">Skills</span>
         <div style="padding: 5px;"></div>
-        <div *ngIf="skillsData > 0">
+        <div *ngIf="skillsData.length > 0">
           <div style="display: flex; flex-direction: column; justify-self: center;"
           *ngFor="let skill of skillsData">
           <span><i class="fas fa-circle"
               style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Skill</span>
         </div>
         </div>
-        <div *ngIf="skillsData < 1">
+        <div *ngIf="skillsData.length < 1">
           <p>No record found</p>
         </div>
     </div>
@@ -267,14 +267,14 @@
                 <div class="form-group row">
                   <div class="col">
                     <label>Plan Title</label>
-                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.title" [(value)]="planData.title" readonly>
+                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" readonly>
                   </div>
                 </div>
 
                 <div class="row">
                  <div class="form-group col">
                   <label>Holding Employee</label>
-                  <input type="text" class="form-control" name="holderId" #holderId="ngModel" [(ngModel)]="newSuccessionPlan.holdersName" [(value)]="planData.holdersName" readonly>
+                  <input type="text" class="form-control" name="holderId" #holderId="ngModel" [(ngModel)]="newSuccessionPlan.holderId" readonly>
                 </div>
                 </div>
 
@@ -285,7 +285,7 @@
                      <option value="">--Select--</option>
                      <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
                    </select> -->
-                   <input type="text" class="form-control" [(value)]="planData.competencyName" readonly>
+                   <input type="text" class="form-control" readonly>
                   </div>
                  </div>
 
@@ -302,7 +302,7 @@
                  <div class="form-group row">
                   <div class="col">
                    <label>Purpose</label>
-                   <input type="text" class="form-control" [(value)]="planData.purpose" readonly>
+                   <input type="text" class="form-control" readonly>
                   </div>
                  </div>
 
