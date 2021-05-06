@@ -1,7 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { CommonServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionDTO, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy, CompetencyRequirmentsDTO } from './../../../_services/service-proxies';
+import { FetchAllEmployeesServiceProxy, FetchSuccessionPlanServiceProxy, CareerSuccessionDTO, CareerSuccessionServiceProxy, ManageCareerSuccessionDto, DeleteSuccesionPlanServiceProxy, CompetencyRequirmentsDTO, CompetencyServiceProxy, CompetencyDTO } from './../../../_services/service-proxies';
 import { TableColumn } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -32,7 +32,7 @@ export class PlanningComponent implements OnInit {
     {name: 'title', title: 'Succession Title'},
     { name: 'holderId', title: 'Employee Id' },
     { name: 'holdersName', title: 'Employee Name'},
-    {name: 'positionName', title: 'Position'},   
+    {name: 'positionName', title: 'Position'},
     {name: 'competencyName', title: 'Competency'},
     {name: 'purpose', title: 'Purpose'},
 
@@ -93,7 +93,7 @@ export class PlanningComponent implements OnInit {
 
   planDataCount: number = 0;
   newSuccessionPlan: ManageCareerSuccessionDto = new ManageCareerSuccessionDto;
-  allCompetencies: CompetencyRequirmentsDTO [] = [];
+  allCompetencies: CompetencyDTO [] = [];
 
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
@@ -119,6 +119,7 @@ export class PlanningComponent implements OnInit {
     private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy,
     private deleteService: DeleteSuccesionPlanServiceProxy,
+    private competencyService: CompetencyServiceProxy,
 
 
 
@@ -189,7 +190,7 @@ export class PlanningComponent implements OnInit {
   }
 
   async fetchCompetencies(){
-    const data = await this.commonService.getCompetency().toPromise();
+    const data = await this.competencyService.fetchCompetency(undefined,undefined,10,1).toPromise();
     if(!data.hasError){
       this.allCompetencies = data.result;
       console.log(this.allCompetencies)
