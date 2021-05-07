@@ -1,5 +1,6 @@
-import { CommonServiceProxy } from 'app/_services/service-proxies';
-import { TalentManagementServiceProxy, AddTalentMangementDTO, TalentManagementRequirmentsDTO, Competency } from './../../../_services/service-proxies';
+import { Router } from '@angular/router';
+import { CommonServiceProxy} from 'app/_services/service-proxies';
+import { TalentManagementServiceProxy, AddTalentMangementDTO, CompetencyDTO, CompetencyServiceProxy } from './../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { MyTalentPool, MyTalentPoolRequirement, TalentPoolService } from '../services/talent-pool.service';
@@ -21,14 +22,17 @@ export class TalentPoolComponent implements OnInit {
   myButton: string = 'Create Talent Pool';
   newPool:boolean = false;
   talentPool: string = '';
+  allPoolCounter: number = 0;
   poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
   // poolModel: MyTalentPool = new MyTalentPool;
   allTalentPool: MyTalentPool [] = [];
   loading = false;
   viewPoolModal: boolean = false;
   poolModel: AddTalentMangementDTO =  new AddTalentMangementDTO;
-  competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
-  allCompetencies: Competency [] = [];
+  //competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
+  allCompetencies: CompetencyDTO [] = [];
+  allTalentPools: AddTalentMangementDTO [] = [];
+  competencyCounter: number = 0;
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -38,20 +42,21 @@ export class TalentPoolComponent implements OnInit {
     {name: 'certification', title: 'certification'},
     {name: 'skills', title: 'Skills'},
   ];
-  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService,
-    private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,private commonService: CommonServiceProxy ) { }
+  constructor(private poolservice: TalentPoolService, private confirm: ConfirmBoxService, private router: Router,
+    private alertMe: AlertserviceService, private newPoolService: TalentManagementServiceProxy,
+    private commonService: CommonServiceProxy, private competencyService: CompetencyServiceProxy) { }
 
   ngOnInit(): void {
-    this.fetchPool();
     this.getCompetency();
+    this.fetchAllPools();
   }
 
   addNewPool(){
-  this.newPool = !this.newPool;
+  this.newPool = true;
   }
 
   modalShow(){
-    this.viewPoolModal = !this.viewPoolModal;
+    this.viewPoolModal = true;
   }
 
   // async createTalentPool(){
@@ -69,35 +74,67 @@ export class TalentPoolComponent implements OnInit {
   // }
 
   async createTalentPool(){
-    this.poolModel.talentManagementRequirmentsDTOs = this. competencyRequirementModel;
+  //  this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss')
-      console.log('Congrats, pool created successfully')
+      this.poolModel = new AddTalentMangementDTO().clone();
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss').subscribe(dataAction => {
+        if(dataAction == 'closed'){
+          this.router.navigateByUrl('/career-succession/talentpool');
+        }
+      })
+      console.log('Congrats, pool created successfully');
+
     }
     else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Successful', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Failed', 'Dismiss')
       console.log('Try again please')
     }
   }
 
-  async deleteTalentPool(){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Dismiss').subscribe(data => {
-      // if(data == 'yes')
-    });
-    const data = await this.newPoolService.deleteEmployeeFromTalentManagmentPool(1).toPromise();
+  async fetchAllPools(){
+    const data = await this.newPoolService.fetchTalentManagementPool().toPromise();
+    console.log('Here is all pools',data);
+    if(!data.hasError){
+      this.allTalentPools = data.result;
+      this.allPoolCounter = data.totalRecord;
+      console.log('See my pools', this.allTalentPools)
+      console.log('See my pools', this.allPoolCounter)
+    }
   }
 
-  async fetchPool(){
-    const data = await this.poolservice.list({}).toPromise()
-    console.log('Yes Boss, the data is here:',data.data)
-    this.allTalentPool = data.data;
+  async deleteTalentPool(poolId){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Yes').subscribe(data => {
+      if(data == 'closed'){
+        this.newPoolService.deleteTalentManagmentPool(poolId).subscribe(dataAction => {
+          if(!dataAction.hasError){
+            this.fetchAllPools();
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Pool Deleted Successfully', 'Dismiss')
+          }
+        });
+      }
+    });
+
   }
+
+  // async fetchSinglePool(){    const data = await this.newPoolService.getTalentPoolById().toPromise()
+  //   console.log('Yes Boss, the data is here:',data.data)
+  //   this.allTalentPool = data.data;
+  // }
+
+  // async getCompetency(){
+  //   const data = await this.commonService.getCompetency().toPromise();
+  //   if(!data.hasError){
+  //     this.allCompetencies = data.result;
+  //     console.log('All competencies', this.allCompetencies)
+  //   }
+  // }
 
   async getCompetency(){
-    const data = await this.commonService.getCompetency().toPromise();
+    const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
     if(!data.hasError){
       this.allCompetencies = data.result;
+      this.competencyCounter = data.totalRecord;
       console.log('All competencies', this.allCompetencies)
     }
   }
@@ -108,23 +145,19 @@ export class TalentPoolComponent implements OnInit {
     this.poolRequirementModel = new MyTalentPoolRequirement
   }
 
-  editPool(){
-
-  }
-
-  async deletePool(id){
-    const approved = await this.confirm.confirm('Are you sure?').toPromise();
-    if(!approved) {
-      this.confirm.close();
-      return false;
-    }
-    this.confirm.showLoading();
-   const data = await this.poolservice.delete(id).toPromise();
-   if(data.isSuccessful){
-     console.log('Deleted:', data.message)
-   }
-   this.confirm.close();
-   return true;
-  }
+  // async deletePool(id){
+  //   const approved = await this.confirm.confirm('Are you sure?').toPromise();
+  //   if(!approved) {
+  //     this.confirm.close();
+  //     return false;
+  //   }
+  //   this.confirm.showLoading();
+  //  const data = await this.poolservice.delete(id).toPromise();
+  //  if(data.isSuccessful){
+  //    console.log('Deleted:', data.message)
+  //  }
+  //  this.confirm.close();
+  //  return true;
+  // }
 
 }

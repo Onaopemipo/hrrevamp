@@ -1,3 +1,4 @@
+import { CompetencyServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,13 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompareCompetencyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private compare: CompetencyServiceProxy) { }
 
   ngOnInit(): void {
   }
 
   goback(){
 
+  }
+
+  async compareCompetency(){
+    const data = await this.compare.compareCompetency(1,1 ).toPromise();
   }
 
 }

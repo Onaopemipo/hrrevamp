@@ -68,53 +68,53 @@ export class JwtInterceptor implements HttpInterceptor {
         const started = Date.now();
         let ok: any;
         
+       return next.handle(request)
+     //  return this.reqHandler(next,request)
+            .pipe(tap(
+            (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
+            (error: HttpErrorResponse) => ok = error
+          ),
+          // Log when response observable either completes or errors
+          finalize(() => {
+            const elapsed = Date.now() - started;
+            const msg = `${request.method} "${request.urlWithParams}" ${ok.status} in ${elapsed} ms.`;
+             // console.log(msg);
+             this.processResponse(<any>ok)
+          }))
         
-        return this.reqHandler(next,request);
-        //     .pipe(tap(
-        //     (event: HttpEvent<any>) => ok = event instanceof HttpResponse ? event : '',
-        //     (error: HttpErrorResponse) => ok = error
-        //   ),
-        //   // Log when response observable either completes or errors
-        //   finalize(() => {
-        //     const elapsed = Date.now() - started;
-        //     const msg = `${request.method} "${request.urlWithParams}" ${ok.status} in ${elapsed} ms.`;
-        //       console.log(msg);
-        //      //this.processResponse(<any>ok)
-        //   }))
-        
-            // .pipe(tap ((response_: HttpEvent<any>) =>
-            // {
-            //     if (response_ instanceof HttpResponseBase) {
-            //         console.log(response_)
-            //         try {
+            .pipe(tap ((response_: HttpEvent<any>) =>
+            {
+                if (response_ instanceof HttpResponseBase) {
+               //     console.log(response_)
+                    try {
                         
-            //             return this.processResponse(<any>response_);
+                        return this.processResponse(<any>response_);
 
-            //     } catch (e) {
-            //         return <Observable<any>><any>_observableThrow(e);
-            //     }
-            // }
-            // else
-            //     return <Observable<any>><any>_observableThrow(response_);
-            // }
-            // )
-            // );
+                } catch (e) {
+                    return <Observable<any>><any>_observableThrow(e);
+                }
+            }
+            else
+                return <Observable<any>><any>_observableThrow(response_);
+            }
+            )
+            );
     }
 
-    protected  reqHandler(next, request): any {
-        this.sleep(1000);   
-        return next.handle(request);
-    }
-    protected sleep(milliseconds) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-          currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-      }
+    // protected  reqHandler(next, request): any {
+    //     this.sleep(1000);   
+    //     return next.handle(request);
+    // }
+    // protected sleep(milliseconds) {
+    //     const date = Date.now();
+    //     let currentDate = null;
+    //     do {
+    //       currentDate = Date.now();
+    //     } while (currentDate - date < milliseconds);
+    //   }
     protected processResponse(response: HttpResponseBase): Observable<any> {
-        alert(6)
-    console.log(response)
+
+  //  console.log(response)
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :

@@ -1,4 +1,13 @@
-<ngx-tableheader *ngIf="showFilter" [filterFields]="tableColum" (filterDataChange)="filterUpdated($event)">
+<ngx-tableheader *ngIf="showFilter" 
+[bulkAction_isChecked]="bulkAction_isChecked" 
+ [showCheckBox] = "showCheckBox" 
+ [showBulkAction]="showBulkAction" 
+ [Bulkactions]=[Bulkactions] 
+ (bulkAction_Checked)="handleBulkChecked($event)" 
+ [filterFields]="tableColum" 
+ (filterDataChange)="filterUpdated($event)"
+ (downloadasChange)="handleExportAs($event)"
+ >
 </ngx-tableheader>
 
 <div class="table-responsive">
@@ -15,7 +24,8 @@
         <tr *ngFor="let data of userData; let i = index">
           <td *ngIf="showCheckBox">
             <div style="padding: 10px">
-              <nb-checkbox></nb-checkbox>
+              
+              <nb-checkbox (change)='customActionChecked(i, data)' [checked]="data['is_selected']"></nb-checkbox>
             </div>
           </td>
           <td *ngFor="let col of tableColum">
@@ -27,7 +37,7 @@
               <button nbButton status='primary' outline
                 style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
                 (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
-            </span>
+            </span> 
             <ng-content *ngIf="col.type === COLUMN_TYPES.Object" select="[tableObject]"> </ng-content>
           </td>
           <td *ngIf="showActions">

@@ -44,7 +44,7 @@ export class ProcessRequestComponent implements OnInit {
   }
 
   async simulateLoanRepayment(){
-    const data = await this.simulateService.simulatePayment(1,1,1,1,'').toPromise();
+    const data = await this.simulateService.simulatePayment(1,1,1,1,null).toPromise();
     if(!data.hasError){
       this.simulationData = data.result;
     }
@@ -61,10 +61,14 @@ export class ProcessRequestComponent implements OnInit {
   }
 
   async fetchSimulateRepayment(){
-    const data = await this.simulateService.simulatePayment(0,0,0,0,'').toPromise();
+    const data = await this.simulateService.simulatePayment(0,0,0,0,null).toPromise();
     if(!data.hasError){
       this.simulationData = data.result;
     }
+  }
+
+  async fetchSingleLoan(){
+    // const data = await this.singleLoan.
   }
 
   async fetchLoanSummary(){

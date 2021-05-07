@@ -1,8 +1,11 @@
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj } from './../../../_services/service-proxies';
 import { MyTalentPoolEmployee, TalentPoolService, MyTalentPoolRequirement, MyTalentPool, TalentPoolRequirementTypes } from './../services/talent-pool.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 @Component({
   selector: 'ngx-testpool',
@@ -34,6 +37,13 @@ channel: { source: string, label: string, status: boolean }[] = [
   {source: 'external', label: 'External Source',  status: false},
 ];
 
+purposes: { value: string, label: string}[] = [
+  {value: 'retirement', label: 'Retirement'},
+  {value: 'firing', label: 'Firing'},
+  {value: 'positionChange', label: 'Change of Position'},
+  {value: 'exit', label: 'Exit'},
+];
+
 selectedChannel: string = 'database';
 poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
 
@@ -41,78 +51,89 @@ showCandidateModal = false;
 showRequirementModal = false;
 poolTypes: any = [];
 
+allowmultipleselection: boolean = false;
+selectionHeader: string = "Select Employee";
+addbtnText: string = "Add Employee";
+
+talentPoolHeader: string = 'No Candidate yet';
+talentPoolDescription: string = 'Click on the button to add candidate to the pool';
+myButton: string = 'Add New';
+poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
+
  newCandidate: boolean = true;
- pageTitle:string = '';
+ employeeCounter: number = 0;
+ pageTitle: string = '';
  pageId:number = 0;
- poolRecords: MyTalentPool = new MyTalentPool;
+ user: IVwUserObj;
+ poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
-  {name: 'requirement', label: 'Add Requiremnt', icon: 'plus'},
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
 ]
-  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,  private navCtrl: Location) { }
+  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,
+    private alertMe: AlertserviceService,  private navCtrl: Location, private route: Router,
+    private talentPool: TalentManagementServiceProxy,
+    public authServ: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.pageId = Number(this.router.snapshot.paramMap.get("id"));
+    this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
-    this.fetchPool();
     this.fetchTypes();
-    this.pageId = Number(this.router.snapshot.paramMap.get("id"))
-    console.log(this.poolRecords.requirements)
-  }
+    this.fetchSinglePool();
 
+  }
 
   async fetchTypes(){
    this.poolTypes = await this.poolservice.getRequirementTypes().toPromise();
    console.log('Hey Boss',this.poolTypes)
   }
 
-  onTopActionClick(event){
-    console.log('yasss',event)
-    if(event == 'requirement'){
-        this.showRequirementModal = true;
-    }
-    else if(event == 'candidate'){
+
+  async getLoggedInUser(){
+    this.authServ.getuser().then(async (users: IVwUserObj[])=> {
+      if (users) {
+        if (users.length > 0) {
+          this.user = users[0];
+  }
+  }
+  })
+
+  }
+
+
+  onTopActionClick(){
       this.showCandidateModal = true;
-    }
+      console.log('Yes clicked')
   }
 
   goback() {
     this.navCtrl.back();
   }
 
-  async addRequirement(){
-    let poolRequirement = this.poolRequirementModel;
-    console.log('Hey Boss',poolRequirement)
-    const data = await this.poolservice.addRequirementToPool(this.poolRecords, this.poolRequirementModel).toPromise()
-    if(data.isSuccessful){
-      console.log('Success')
-      this.poolRequirementModel = new MyTalentPoolRequirement;
-    }
-    else {
-      console.log(data.message)
-    }
-  }
-
-
   addCandidate(){
-    this.newCandidate = !this.newCandidate;
+    // this.newCandidate = !this.newCandidate;
+    this.showCandidateModal = true;
   }
 
   async addCandidateToPool(){
-   const data = await this.poolservice.addToPool(1,this.candidateModel).toPromise()
-   if(data.isSuccessful){
-    console.log('Hey Boss', data.message)
-   }
+    const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
+    if(!data.hasError){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
+        this.route.navigateByUrl('career-succession/talentpool');
+      })
+    }
   }
 
-  async fetchPool(){
-    this.loading = true;
-    const data = await this.poolservice.fetch(this.pageId).toPromise();
-    // console.log('Yes Boss, the data is here:',data)
-    this.poolRecords = data;
-    this,this.pageTitle = data.title;
-    console.log('Hey', this.poolRecords)
-    this.loading = false;
+  async fetchSinglePool(){
+    const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
+    console.log('Here is the data',data.result)
+    if(!data.hasError){
+      this.poolRecords = data.result;
+      this.pageTitle = this.poolRecords.title;
+      console.log('Single Record', this.poolRecords)
+      this.loading = false;
+    }
   }
 
 onChangeChannel($value){
@@ -128,6 +149,21 @@ onChangeChannel($value){
     // return this.channel;
 
   // });
+}
+
+getSelectedEmployee(event,selectType) {
+  console.log(event)
+   if(selectType == 'employee'){
+    // this.poolEmployee.employeeId = event[0].employeeNumber;
+    // this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
+    let allCandidate = [];
+       allCandidate.push(event);
+      // this.poolEmployee. = JSON.stringify(allCandidate);
+      // console.log(event, this.poolEmployee.stringSuccessionEmployee);
+   }
+  //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
+
+   console.log(selectType, event)
 }
 
 }

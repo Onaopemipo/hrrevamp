@@ -65,7 +65,8 @@ export class PromotioneligibilityComponent implements OnInit {
     start: null,
     is_closed: 0,
     _PageSize: 10,
-    _PageNumber: 1
+    _PageNumber: 1,
+    EligibilityId: undefined
   }
   tableActions: TableAction[] = [
     { name: ACTIONS.EDIT, label: 'View' },
@@ -91,13 +92,13 @@ export class PromotioneligibilityComponent implements OnInit {
        }
     filterUpdated(filter: any) {
       this.filter = {...this.filter, ...filter};
-      // this.fetchEligibility();
+      this.fetchEligibility();
     }
     get showEmpty() {
       return this.eligibilityList.length === 0;
     }
   ngOnInit(): void {
-    // this.fetchEligibility();
+    this.fetchEligibility();
     this.getApprovalProcesses();
     this.promotionBucketList.is_closed = false;
     this.promotionBucketList.noOfMembers = 0;
@@ -108,7 +109,7 @@ export class PromotioneligibilityComponent implements OnInit {
     console.log(this.promotionBucketList)
     this.promotion.addUpdateEligibleBucket(this.promotionBucketList).subscribe(data => {
     if(!data.hasError){
-      // this.fetchEligibility();
+      this.fetchEligibility();
       this.showAddPlanModal = false;
       this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, data.message, 'OK');
       this.promotionBucketList = new PromotionEligibilityViewModel().clone();
@@ -126,19 +127,19 @@ export class PromotioneligibilityComponent implements OnInit {
 
   }
 
-  // async fetchEligibility(){
-  //   const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
-  //   if (!data.hasError) {
-  //     var elList = data.result.map(el=> new eligibilityWithStatus(el))
-  //     this.eligibilityList =elList;
+  async fetchEligibility(){
+    const data = await this.GetEligibilityListService.getPromotionEligibilityLists(this.filter._PageSize, this.filter._PageNumber,this.filter.EligibilityId,this.filter.is_closed,this.filter.start,this.filter.end).toPromise();
+    if (!data.hasError) {
+      var elList = data.result.map(el=> new eligibilityWithStatus(el))
+      this.eligibilityList =elList;
 
-  //     console.log(this.eligibilityList)
-  //   }
-  //   else {
-  //     console.log('Error has occured')
-  //   }
+      console.log(this.eligibilityList)
+    }
+    else {
+      console.log('Error has occured')
+    }
 
-  // }
+  }
  async getApprovalProcesses() {
    const data = await this.FetchApprovalProcessService.fetchApprovalProcess(undefined).toPromise();
    if(!data.hasError){
@@ -151,6 +152,7 @@ export class PromotioneligibilityComponent implements OnInit {
 }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.ADD_NEW) {
+      this.promotionBucketList = new PromotionEligibilityViewModel().clone();
       this.showAddPlanModal = true;
     }
   //  if (buttion === TOP_ACTIONS.ADD_PLAN) {
@@ -166,6 +168,6 @@ export class PromotioneligibilityComponent implements OnInit {
     });
     console.log(tabtittle);
      this.filter.is_closed = tabtittle == 'Open'? 0 : 1;
-    // this.fetchEligibility();
+    this.fetchEligibility();
   }
 }

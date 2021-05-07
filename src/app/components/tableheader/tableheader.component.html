@@ -2,16 +2,17 @@
   <div class="row">
     <div class="col-md-12 col-lg-12 col-xxxl-12">
       <nb-card>
-        <nb-card-body>
+        <nb-card-body style="padding-left: 0px !important;">
           <nb-actions size="medium" fullWidth>
-            <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important">
-              <nb-checkbox></nb-checkbox>
-              <nb-icon
+            <nb-action *ngIf="showCheckBox" style="padding: 0px 0.5rem 0px 1rem !important;justify-content: flex-start; ">
+              <nb-checkbox  (change)="checkedAcction()" [checked]="bulkAction_isChecked" ></nb-checkbox>
+           
+              <nb-icon *ngIf="showBulkAction"
                 icon="more-vertical"
                 style="color: #d3d3eb; font-size: 25px"
               ></nb-icon>
             </nb-action>
-            <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important">
+            <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important;justify-content: flex-start;">
               <nb-form-field style="padding: 5px; min-width: 170px">
                 <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
                 <input type="text" placeholder="Search" nbInput />
@@ -44,7 +45,17 @@
               </button>
             </nb-action>
             <nb-action>
-              <button
+              <ng-template #card>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <nb-list>
+                      <nb-list-item (click)='downloadas("Excel")' style="cursor: pointer; min-width: 40px;"><img src="assets/icons/excelicon.svg">Excel</nb-list-item>
+                      <nb-list-item (click)='downloadas("pdf")' style="cursor: pointer;min-width: 40px;"><img src="assets/icons/pdf.svg"> Pdf</nb-list-item>
+                    </nb-list>
+                  </div>
+                </div>
+              </ng-template>
+              <button [nbPopover]="card"
                 nbButton
                 style="background-color: transparent; border: 1px solid #b6b3b3"
               >

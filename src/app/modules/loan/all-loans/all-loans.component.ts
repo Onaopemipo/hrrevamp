@@ -1,8 +1,16 @@
-import { TableColumn } from 'app/components/tablecomponent/models';
-import { LoanRequestDTO, GetLoanRequestsServiceProxy } from './../../../_services/service-proxies';
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { TableColumn, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { LoanRequestDTOs, GetLoanRequestsServiceProxy, DeleteLoanRequestServiceProxy, CompetencyServiceProxy } from './../../../_services/service-proxies';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+
+enum TABLE_ACTION {
+  PROCESS = '1',
+  DELETE = '2',
+  EDIT = '3',
+  SUMMARY = '4'
+}
 @Component({
   selector: 'ngx-all-loans',
   templateUrl: './all-loans.component.html',
@@ -10,8 +18,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllLoansComponent implements OnInit {
 
+  tableActions: TableAction[] = [
+    {name: TABLE_ACTION.PROCESS, label: 'Process'},
+    {name: TABLE_ACTION.EDIT, label: 'Edit'},
+    {name: TABLE_ACTION.DELETE, label: 'Delete'},
+
+  ]
+
+  tableActionClicked(event: TableActionEvent){
+    if(event.name == TABLE_ACTION.DELETE){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete this?', 'Yes').subscribe(dataAction => {
+        if(dataAction == 'closed'){
+          this.deleteService.deleteLoanRequest(event.data.id).subscribe(data => {
+            if(!data.hasError && data.result.isSuccessful == true){
+              this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Request has been deleted','Success').subscribe(delData =>{
+                if(delData) this.router.navigateByUrl('/loan')
+              })
+            }
+          })
+        }
+      })
+    }
+    else if(event.name==TABLE_ACTION.PROCESS){
+     this.router.navigateByUrl('loan/process' + event.data.id)
+      }
+
+      else if(event.name==TABLE_ACTION.EDIT){
+       this.router.navigateByUrl('/' + event.data.id)
+        }
+ }
+
+
   dataVal: number = 2;
-  allLoans: LoanRequestDTO [] = [];
+  allLoans: LoanRequestDTOs [] = [];
   myHeader: string = 'No Record Found';
   myButton: string = 'Click to request';
   myDescription: string = 'No Loan request has been made yet';
@@ -27,23 +66,40 @@ export class AllLoansComponent implements OnInit {
 
   ];
 
+  loanRequestTable: TableColumn [] = [
+    {name: 'employeeNo', title: 'Employee No.'},
+    {name: 'employeeName', title: 'Employee Name'},
+    {name: 'approvedAmount', title: 'Loan Amount'},
+    {name: 'approvedTenor', title: 'Approved Tenor'},
+    {name: 'loanTypeName', title: 'Loan Type'},
+
+  ];
+
   loading:boolean = true;
-  constructor(private router: Router, private loanService: GetLoanRequestsServiceProxy) { }
+  allLoansData: LoanRequestDTOs [] = [];
+  loansCounter: number = 0;
+
+  constructor(private router: Router, private getLoans: GetLoanRequestsServiceProxy,
+    private deleteService: DeleteLoanRequestServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
     this.fetchLoans();
   }
 
   addRequest() {
-    this.router.navigateByUrl('/loan/all-loans');
+    this.router.navigateByUrl('/loan/request');
   }
 
   async fetchLoans(){
-    const data = await this.loanService.getLoanRequests(1,1,'',10,1).toPromise();
+    const data = await this.getLoans.getLoanRequests(null,null,2,'',10,1).toPromise();
+    console.log('My data',data);
     if(!data.hasError){
-      this.allLoans = data.result;
-      console.log('all loans', this.allLoans)
-    }
+      this.allLoansData = data.result;
+      this.loansCounter = data.totalRecord;
+      console.log('my counter', this.loansCounter)
+      if(this.loansCounter > 0) this.loading = false;
   }
+
+}
 
 }

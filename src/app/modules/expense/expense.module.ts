@@ -1,4 +1,4 @@
-import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy } from './../../_services/service-proxies';
+import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy, AddUpdateExpenseGroupServiceProxy, GetExpenseGroupsServiceProxy, GetProjectActivityServiceProxy, AddUpdateProjectActivityServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpenseComponent } from './expense/expense.component';
@@ -11,6 +11,10 @@ import { ExpenseManagementComponent } from './expense-management/expense-managem
 import { ExpenseReportComponent } from './expense-report/expense-report.component';
 import { ExpenseRequestService } from './services/expense-request.service';
 import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
+import { ExpenseGroupComponent } from './expense-group/expense-group.component';
+import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from './services/expense-group.service';
+import { ExpenseProjectActivityComponent } from './expense-project-activity/expense-project-activity.component';
+import { ExpenseProjectComponent } from './expense-project/expense-project.component';
 
 
 
@@ -21,6 +25,9 @@ import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, Fetc
     ExpenseTypeComponent,
     ExpenseRequestComponent,
     ExpenseReportComponent,
+    ExpenseGroupComponent,
+    ExpenseProjectActivityComponent,
+    ExpenseProjectComponent,
   ],
   providers: [
     AddUpdateExpenseProjectServiceProxy,
@@ -31,7 +38,15 @@ import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, Fetc
     GetExpenseTypesServiceProxy,
     GetExpenseProjectServiceProxy,
     GetExpenseProjectServiceProxy,
+    AddUpdateExpenseGroupServiceProxy,
+    GetExpenseGroupsServiceProxy,
+    GetProjectActivityServiceProxy,
+    AddUpdateProjectActivityServiceProxy,
     ExpenseRequestService,
+    ExpenseGroupService,
+    ExpenseProjectActivityService,
+    ExpenseProjectService,
+    ExpenseTypeService,
   ],
   imports: [
     CommonModule,

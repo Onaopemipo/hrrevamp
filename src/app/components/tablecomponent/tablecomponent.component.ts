@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef,ViewChild } from '@angular/core';
 import { ColumnTypes, TableColumn, TableData, TableAction, TableActionEvent } from './models';
-
-
+import { ExcelServiceService } from '../../_services/excel-service.service';
+import { PdfServiceService } from '../../_services/pdf-service.service';
+import { NbPopoverDirective } from '@nebular/theme';
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
 
 export enum ActionsType {
@@ -33,6 +34,7 @@ export interface SortEvent {
 })
 // tslint:disable-next-line: directive-class-suffix
 export class NgbdSortableHeader {
+
   @Input() sortable: any = '';
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
@@ -55,14 +57,18 @@ export class TablecomponentComponent implements OnInit {
   ];
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
-  @Input() userData: [] = [];
+  @Input() userData: any[] = [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
   @Input() actions: TableAction[];
+  @Input() Bulkactions: TableAction[];
   @Input() table2 = false;
   @Input() showFilter = false;
+  @Input() showBulkAction: boolean = false;
   // @Output() actionClicked = new EventEmitter<>();
   @Output() actionClick = new EventEmitter<TableActionEvent>();
+  @Output() actionChecked = new EventEmitter<TableActionEvent>();
+  @Output() actionBulkChecked = new EventEmitter<TableActionEvent>();
   pageData = [];
   tableData = [];
   _currentPage = 1;
@@ -87,19 +93,54 @@ export class TablecomponentComponent implements OnInit {
   }
   COLUMN_TYPES = ColumnTypes;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
-
-  constructor() { }
+  bulkAction_isChecked: boolean = false;
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  constructor(private ExcelService: ExcelServiceService, private PdfService:PdfServiceService) { }
   test() {
     alert(112);
   }
 
-  customActionClicked(col, data){
+  customActionClicked(col, data) {
+    this.popover.hide();
     this.actionClick.emit({
       name: col.name,
       data,
     });
   }
+  handleBulkChecked(event) {
 
+    if (event) {
+      this.userData.map(d => {
+        d.is_selected = true;
+        return d;
+      })
+    } else {
+      this.userData.map(d => {
+        d.is_selected = false;
+        return d;
+      })
+    }
+    this.bulkAction_isChecked = event != true ? false : true;
+    var data = event;
+    this.actionBulkChecked.emit({
+      name: 'bulkChecked',
+      data,
+})
+
+  }
+  customActionChecked(colIndex, data) {
+//console.log(this.userData)
+    this.userData[colIndex]['is_selected'] = !this.userData[colIndex]['is_selected'];
+ //console.log(this.userData[colIndex]);
+    var serchPos = this.userData.findIndex(u => u.is_selected === true);
+  //////  console.log('search Position',serchPos )
+    this.bulkAction_isChecked = serchPos == -1 ? false : true;
+   // console.log( this.bulkAction_isChecked)
+    this.actionChecked.emit({
+      name: colIndex,
+      data,
+    });
+  }
   onSort({column, direction}: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {
@@ -120,6 +161,7 @@ export class TablecomponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.userData)
     this.tableData = this.userData;
 
     // setTimeout(() => {
@@ -133,7 +175,14 @@ export class TablecomponentComponent implements OnInit {
     this.filter = {...this.filter, ...{page: pageNo, } };
     this.filterChange.emit(this.filter);
   }
-
+  handleExportAs(event) {
+    if (event == "Excel") {
+      this.ExcelService.exportAsExcelFile(this.userData,"SmartaceFile")
+    }
+    if (event == "pdf") {
+      this.PdfService.downloadAsPDF()
+    }
+  }
   filterUpdated(filter){
     this.filter = {...filter, ...{page: this.currentPage, } };
     this.filterChange.emit(this.filter);

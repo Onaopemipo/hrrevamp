@@ -1,4 +1,4 @@
-import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO, DisbursementBudgetItemAllocationDTO, DeleteBudgetServiceProxy, DeleteBudgetItemServiceProxy } from './../../../_services/service-proxies';
+import { BudgetDTO, FetchAllBudgetsServiceProxy, FetchAllBudgetItemsServiceProxy, BudgetItemDTO, CommonServiceProxy, Department, DisbursementBudgetItemAllocation, AddUpdateBudgetItemServiceProxy, ManageBudgetItemDTO, FetchBudgetServiceProxy, AddUpdateBudgetServiceProxy, ManageBudgetDTO, DisbursementBudgetItemAllocationDTO, DeleteBudgetServiceProxy, DeleteBudgetItemServiceProxy, FetchBudgetItemServiceProxy } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { MyDepartment } from './../../module-settings/services/api.service';
 import { MyBudgetItem, BudgetItemService } from './../services/budget-item.service';
@@ -36,7 +36,7 @@ export class OverallBudgetComponent implements OnInit {
     private budgetService: FetchAllBudgetsServiceProxy, private singleBudget: FetchBudgetServiceProxy,
     private alertMe: AlertserviceService, private common: CommonServiceProxy, private deleteBudget: DeleteBudgetServiceProxy,
      private budgetItemUpdate: AddUpdateBudgetItemServiceProxy, private addBudgetService: AddUpdateBudgetServiceProxy,
-     private deleteItem: DeleteBudgetItemServiceProxy) { }
+     private deleteItem: DeleteBudgetItemServiceProxy, private budgetItemView: FetchBudgetItemServiceProxy) { }
 
   ngOnInit(): void {
     this.fetAllBudget();
@@ -62,12 +62,15 @@ export class OverallBudgetComponent implements OnInit {
   budgetId:number = 0;
   finYear: BudgetDTO = new BudgetDTO;
   singleBudgetUpdate: ManageBudgetDTO = new ManageBudgetDTO().clone();
+  singleBudgetItemUpdate: BudgetItemDTO = new BudgetItemDTO().clone();
   finLoading: boolean = false;
   editBudgetItem: MyBudgetItem = new MyBudgetItem;
   allBudgetItems: BudgetItemDTO []= [];
   allItems: MyBudgetItem []= [];
   editBudgetItemModal: boolean = false;
-
+  budgetItemId: number = 0;
+  budgetItemAllocation: DisbursementBudgetItemAllocationDTO [] = [];
+  updatedAllocation: DisbursementBudgetItemAllocationDTO = new DisbursementBudgetItemAllocationDTO();
   // addBudgetItem(){
 
   //   this.router.navigateByUrl('/disbursement/budget/setup');
@@ -77,8 +80,17 @@ export class OverallBudgetComponent implements OnInit {
     this.addItemModal = true;
   }
 
-  viewBudgetItemModal(){
-    this.editBudgetItemModal = !this.editBudgetItemModal;
+  async viewBudgetItemModal(event: number){
+    this.budgetItemId = event;
+    const data = await this.budgetItemView.getBudgetItem(this.budgetItemId).toPromise();
+    if(!data.hasError){
+      this.singleBudgetItemUpdate = data.result;
+      this.budgetItemAllocation = data.result.budgetItemAllocations;
+      this.editBudgetItemModal = true;
+      console.log(this.singleBudgetItemUpdate);
+      console.log(this.budgetItemAllocation)
+    }
+
   }
 
  async fetAllBudgetItems(num:number){
@@ -92,6 +104,7 @@ export class OverallBudgetComponent implements OnInit {
 
   editbudgetItemModal(){
     this.editItem = !this.editItem;
+
   }
 
   async editBudgetModal(event:number){
@@ -114,6 +127,11 @@ export class OverallBudgetComponent implements OnInit {
     this.addedDepartments.push(myAllocations)
     console.log('Hey guys',this.addedDepartments)
     this.departments = new DisbursementBudgetItemAllocation().clone();
+  }
+
+  addUpdatedDepartment(){
+    let allocation = new DisbursementBudgetItemAllocation;
+    // allocation.allocatedAmount = this.budgetItemAllocation
   }
 
   removeDepartment(id){
@@ -229,6 +247,7 @@ export class OverallBudgetComponent implements OnInit {
     const data = await this.budgetItemUpdate.addUpdateBudgetItem(budgetItemUpdate).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Item Added!', 'Dismiss').subscribe(data => {
+        this.router.navigateByUrl('/disbursement');
         this.addItemModal = false;
       });
     }
