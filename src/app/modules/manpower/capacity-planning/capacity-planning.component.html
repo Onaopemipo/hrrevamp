@@ -29,9 +29,6 @@
       <div tableObject>
         <span class="mb-0" *ngFor="let req of allCapacityPlan.requirements; let i = index">
 
-            <span class="badge" *ngIf="req.gradeName">
-              {{req.jobCategoryName}} | {{req.gradeName}} - {{req.numberOfResource}}
-            </span>
             <span class="badge" *ngIf="req.jobRoleName">
               {{req.jobCategoryName}} | {{req.jobRoleName}} - {{req.numberOfResource}}
             </span>
@@ -263,7 +260,7 @@
   </div>
     <div class="row">
 <div class="col-sm-8">
-  <span *ngIf="editOperations">  <i class="fa fa-spin fa-spinner"></i> &nbsp; Processing...       </span> 
+
 </div>
 <div class="col-sm-4">
   <div style="display:flex;justify-content:  flex-end;align-items: flex-end;">
@@ -319,16 +316,16 @@
                       <td>{{req.ApporvedDate | date}}</td>
                       <td>
                         <span class="mb-0" >
-                          <span class="badge" style="background-color: #494948;width: 80px;" *ngIf="req.Status == 'Returned'">
+                          <span class="cbadge" style="background-color: #494948;width: 80px;" *ngIf="req.Status == 'Returned'">
                             {{req.Status}}
                           </span>
-                          <span class="badge" style="background-color: #d99700;width: 80px;" *ngIf="req.Status == 'Pending'">
+                          <span class="cbadge" style="background-color: #d99700;width: 80px;" *ngIf="req.Status == 'Pending'">
                             {{req.Status}}
                           </span>
-                          <span class="badge" style="background-color: #EF5350;width: 80px;" *ngIf="req.Status == 'Rejected'">
+                          <span class="cbadge" style="background-color: #EF5350;width: 80px;" *ngIf="req.Status == 'Rejected'">
                             {{req.Status}}
                           </span>
-                          <span class="badge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 'Approved'">
+                          <span class="cbadge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 'Approved'">
                             {{req.Status}}
                           </span>
                         </span> 

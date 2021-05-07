@@ -52,7 +52,7 @@ export class CapacityPlanningComponent implements OnInit {
 
   ];
   showAddPlanModal: boolean = false;
-  allCapacityPlan = []
+  allCapacityPlan:ActivityWithStatus[] = []
   modificationStatus: boolean = false;
   newcaplan = new DepartmentActivityDTO().clone();
   filter = {
@@ -68,6 +68,7 @@ export class CapacityPlanningComponent implements OnInit {
   totalItems = 0;
   currentPage = 1;
   tableColumns = [
+    {name: 'id', title: 'ID',type: ColumnTypes.Text},
     {name: 'activityName', title: 'Activity Name',type: ColumnTypes.Text},
     {name: 'activityNameType', title: 'Task Type',type: ColumnTypes.Text},
     {name: 'description', title: 'Justification',type: ColumnTypes.Text},
@@ -95,7 +96,7 @@ Jobgrade =  []
   startYear: any = "";
   submitRequirementError = "";
   showEditPlanModal: boolean = false;
-  viewplan: any;
+  viewplan:ActivityWithStatus;
   showAddRequirementModal: boolean = false;
   editOperations: boolean = false;
   addRequirementObj = new DepartmentManPowerActivityDTO().clone();
@@ -113,12 +114,12 @@ Jobgrade =  []
 
       this.allreqPlan = [];
       var plan = event.data;
-      this.viewplan =plan;    
-
+      this.viewplan =event.data;    
+ 
       this.projecttask =  plan.activityTypeId == 2 ? true: false;
 
       
-      this.newcaplan.id = plan.ID;
+      this.newcaplan.id = plan.id;
       this.newcaplan.activityName = plan.activityName;
       this.newcaplan.activityTypeId = plan.activityTypeId;
       this.newcaplan.description = plan.description;
@@ -129,33 +130,30 @@ Jobgrade =  []
       plan.requirements.forEach(value=>{
         var cJtypeName;
         var Jtype;
-        if(value.JobRoleId){
-          cJtypeName = value.JobRoleName;
-          Jtype = value.JobRoleId;
+        if(value.jobRoleId){
+          cJtypeName = value.jobRoleName;
+          Jtype = value.jobRoleId;
         }
-        if(value.GradeId){
-          cJtypeName = value.GradeName;
-          Jtype = value.GradeId;
-        }
-        if(value.PostionId){
-          cJtypeName = value.PositionName;
-          Jtype = value.PostionId;
+     
+        if(value.postionId){
+          cJtypeName = value.positionName;
+          Jtype = value.postionId;
         }
         
 
         let obj = {
-          ID: value.ID,
+          ID: value.id,
           cJtypeName: cJtypeName,
-          Ctype: value.JobCategoryName,
+          Ctype: value.jobCategoryName,
           Jtype: Jtype,
-          Nstaff: value.NumberOfResource,
+          Nstaff: value.numberOfResource,
           costPerResource: value.costPerResource,
-          ApprovedR: value.ApprovedResource,
-          HRComment: value.HRComment,
-          Decision: value.Decision,
-          Status: value.Status == 0? "Returned" :(value.Status == 1? "Pending":(value.Status== 2 ? "Approved" : (value.Status== 3 ?"Rejected": null))),
-          ApprovedByName: value.ApprovedByName,
-          ApporvedDate: value.ApporvedDate
+          ApprovedR: value.approvedResource,
+          HRComment: value.hRComment,
+          Decision: value.decision,
+          Status: value.status == 0? "Returned" :(value.status == 1? "Pending":(value.status== 2 ? "Approved" : (value.status== 3 ?"Rejected": null))),
+          ApprovedByName: value.approvedByName,
+          ApporvedDate: value.apporvedDate
         }
         this.allreqPlan.push(obj);
       })
@@ -197,6 +195,7 @@ Jobgrade =  []
         if (!data.hasError) {
           var planwithStat = data.result.map(p=> new ActivityWithStatus(p))
           this.allCapacityPlan = planwithStat;
+   
         } else {
           
         }
@@ -441,7 +440,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     }
     var JobRoleId = reqObj.Ctype == "Job Role"? reqObj.Jtype: null;
     var PostionId = reqObj.Ctype == "Position"? reqObj.Jtype: null;
-    var GradeId = reqObj.Ctype == "Grade"? reqObj.Jtype: null;
+  //  var GradeId = reqObj.Ctype == "Grade"? reqObj.Jtype: null;
     var planReq = planrequirement.id;
     if(!planrequirement.id) {planReq = 0;}
 
@@ -451,12 +450,14 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
       this.addRequirementObj.jobRoleId = JobRoleId;
       this.addRequirementObj.postionId = PostionId;
       this.addRequirementObj.numberOfResource = reqObj.Nstaff;
-      this.addRequirementObj.costPerResource = reqObj.RCost
+      this.addRequirementObj.costPerResource = reqObj.RCost;
       this.ManpowerService.addRequirementToPlan(this.addRequirementObj).subscribe(data => {
         var respData = data;
         if (!respData.hasError) {
+          this.showAddRequirementModal = false;
           this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
           this.getallCaplan();
+         this.newcaplan= this.allCapacityPlan.find(c => c.id == this.viewplan.id);
         }
         else {
           this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');

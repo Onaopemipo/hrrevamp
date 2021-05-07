@@ -7446,7 +7446,7 @@ export class GetVendorplanByVendorIdServiceProxy {
      * @param vendorId (optional) 
      * @return Success
      */
-    getVendorplanByVendorId(vendorId: number | undefined): Observable<VendorPlanDTOApiResult> {
+    getVendorplanByVendorId(vendorId: number | undefined): Observable<VendorPlanDTOListApiResult> {
         let url_ = this.baseUrl + "/api/Benefit/GetVendorplanByVendorId/GetVendorplanByVendorId?";
         if (vendorId === null)
             throw new Error("The parameter 'vendorId' cannot be null.");
@@ -7469,14 +7469,14 @@ export class GetVendorplanByVendorIdServiceProxy {
                 try {
                     return this.processGetVendorplanByVendorId(<any>response_);
                 } catch (e) {
-                    return <Observable<VendorPlanDTOApiResult>><any>_observableThrow(e);
+                    return <Observable<VendorPlanDTOListApiResult>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<VendorPlanDTOApiResult>><any>_observableThrow(response_);
+                return <Observable<VendorPlanDTOListApiResult>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetVendorplanByVendorId(response: HttpResponseBase): Observable<VendorPlanDTOApiResult> {
+    protected processGetVendorplanByVendorId(response: HttpResponseBase): Observable<VendorPlanDTOListApiResult> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -7487,7 +7487,7 @@ export class GetVendorplanByVendorIdServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = VendorPlanDTOApiResult.fromJS(resultData200);
+            result200 = VendorPlanDTOListApiResult.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -7512,7 +7512,7 @@ export class GetVendorplanByVendorIdServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<VendorPlanDTOApiResult>(<any>null);
+        return _observableOf<VendorPlanDTOListApiResult>(<any>null);
     }
 }
 
@@ -52632,14 +52632,14 @@ export interface IVendorPlanDTO {
     refNumber: string | undefined;
 }
 
-export class VendorPlanDTOApiResult implements IVendorPlanDTOApiResult {
+export class VendorPlanDTOListApiResult implements IVendorPlanDTOListApiResult {
     hasError!: boolean;
     message!: string | undefined;
-    result!: VendorPlanDTO;
+    result!: VendorPlanDTO[] | undefined;
     totalCount!: number;
     readonly totalRecord!: number;
 
-    constructor(data?: IVendorPlanDTOApiResult) {
+    constructor(data?: IVendorPlanDTOListApiResult) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -52652,15 +52652,19 @@ export class VendorPlanDTOApiResult implements IVendorPlanDTOApiResult {
         if (_data) {
             this.hasError = _data["hasError"];
             this.message = _data["message"];
-            this.result = _data["result"] ? VendorPlanDTO.fromJS(_data["result"]) : <any>undefined;
+            if (Array.isArray(_data["result"])) {
+                this.result = [] as any;
+                for (let item of _data["result"])
+                    this.result!.push(VendorPlanDTO.fromJS(item));
+            }
             this.totalCount = _data["totalCount"];
             (<any>this).totalRecord = _data["totalRecord"];
         }
     }
 
-    static fromJS(data: any): VendorPlanDTOApiResult {
+    static fromJS(data: any): VendorPlanDTOListApiResult {
         data = typeof data === 'object' ? data : {};
-        let result = new VendorPlanDTOApiResult();
+        let result = new VendorPlanDTOListApiResult();
         result.init(data);
         return result;
     }
@@ -52669,24 +52673,28 @@ export class VendorPlanDTOApiResult implements IVendorPlanDTOApiResult {
         data = typeof data === 'object' ? data : {};
         data["hasError"] = this.hasError;
         data["message"] = this.message;
-        data["result"] = this.result ? this.result.toJSON() : <any>undefined;
+        if (Array.isArray(this.result)) {
+            data["result"] = [];
+            for (let item of this.result)
+                data["result"].push(item.toJSON());
+        }
         data["totalCount"] = this.totalCount;
         data["totalRecord"] = this.totalRecord;
         return data; 
     }
 
-    clone(): VendorPlanDTOApiResult {
+    clone(): VendorPlanDTOListApiResult {
         const json = this.toJSON();
-        let result = new VendorPlanDTOApiResult();
+        let result = new VendorPlanDTOListApiResult();
         result.init(json);
         return result;
     }
 }
 
-export interface IVendorPlanDTOApiResult {
+export interface IVendorPlanDTOListApiResult {
     hasError: boolean;
     message: string | undefined;
-    result: VendorPlanDTO;
+    result: VendorPlanDTO[] | undefined;
     totalCount: number;
     totalRecord: number;
 }

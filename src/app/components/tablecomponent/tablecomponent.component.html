@@ -37,7 +37,7 @@
               <button nbButton status='primary' outline
                 style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
                 (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
-            </span>
+            </span> 
             <ng-content *ngIf="col.type === COLUMN_TYPES.Object" select="[tableObject]"> </ng-content>
           </td>
           <td *ngIf="showActions">
