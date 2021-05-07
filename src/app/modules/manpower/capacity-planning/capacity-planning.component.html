@@ -470,22 +470,15 @@
             <span class="help-block"><small>Required number of staff</small></span>
             <div style="width: 150px;">
               <div class="form-group" >
-                <div class="input-group" >
-                  <span class="input-group-prepend">
-                    <button style="height: 32px;" type="button" class="btn waves-effect waves-light btn-primary" (click)="decresenumber()"><i class="fa fa-minus"></i></button>
-                  </span>
-                  <input  readonly name="numberOfStaff" id="numberOfStaff" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="text" class="form-control" placeholder="number of staff">
-                  <span class="input-group-append">
-                    <button style="height: 32px;" type="button" class="btn waves-effect waves-light btn-primary" (click)="increasenumber()"><i class="fa fa-plus"></i></button>
-                  </span>
-                </div>  
+                <input   name="numberOfStaff" id="numberOfStaff" min="1" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="number" class="form-control" placeholder="number of staff">
+  
               </div>
             </div>
           
           </div>
           <div class="col-md-3">
             <span class="help-block"><small>Cost per Resource</small></span>
-            <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
+            <input type="number" min="1" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
           </div>
          
         </div>

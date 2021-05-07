@@ -463,7 +463,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     var JobRoleId = reqObj.Ctype == "Job Role"? reqObj.Jtype: null;
     var PostionId = reqObj.Ctype == "Position"? reqObj.Jtype: null;
   //  var GradeId = reqObj.Ctype == "Grade"? reqObj.Jtype: null;
-    var planReq = planrequirement.id;
+    var planReq = planrequirement.ID;
     if(!planrequirement.id) {planReq = 0;}
 
       this.addRequirementObj.id = planReq;
@@ -473,20 +473,21 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
       this.addRequirementObj.postionId = PostionId;
       this.addRequirementObj.numberOfResource = reqObj.Nstaff;
       this.addRequirementObj.costPerResource = reqObj.RCost;
-      this.ManpowerService.addRequirementToPlan(this.addRequirementObj).subscribe(data => {
-        var respData = data;
-        if (!respData.hasError) {
-          this.showAddRequirementModal = false;
-          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
-          this.getallCaplan(true);
+      console.log(this.addRequirementObj);
+      // this.ManpowerService.addRequirementToPlan(this.addRequirementObj).subscribe(data => {
+      //   var respData = data;
+      //   if (!respData.hasError) {
+      //     this.showAddRequirementModal = false;
+      //     this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
+      //     this.getallCaplan(true);
          
-        }
-        else {
-          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');
-               }
+      //   }
+      //   else {
+      //     this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');
+      //          }
 
-        this.loading = false;
-      })
+      //   this.loading = false;
+      // })
      
   
   
@@ -501,6 +502,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
 
   }
   openEditRequirement(req) {
+    console.log(req);
     this.showEditRequirementModal = true;
     this.validCost = true;
 this.planrequirement.ID = req.ID;
