@@ -7443,15 +7443,15 @@ export class GetVendorplanByVendorIdServiceProxy {
     }
 
     /**
-     * @param vendorPlanId (optional) 
+     * @param vendorId (optional) 
      * @return Success
      */
-    getVendorplanByVendorId(vendorPlanId: number | undefined): Observable<VendorPlanDTOApiResult> {
+    getVendorplanByVendorId(vendorId: number | undefined): Observable<VendorPlanDTOApiResult> {
         let url_ = this.baseUrl + "/api/Benefit/GetVendorplanByVendorId/GetVendorplanByVendorId?";
-        if (vendorPlanId === null)
-            throw new Error("The parameter 'vendorPlanId' cannot be null.");
-        else if (vendorPlanId !== undefined)
-            url_ += "vendorPlanId=" + encodeURIComponent("" + vendorPlanId) + "&";
+        if (vendorId === null)
+            throw new Error("The parameter 'vendorId' cannot be null.");
+        else if (vendorId !== undefined)
+            url_ += "vendorId=" + encodeURIComponent("" + vendorId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -96554,6 +96554,7 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
     positionName!: string | undefined;
     departmentId!: number;
     departmentName!: string | undefined;
+    channel!: string | undefined;
     talentPoints!: number;
     recommendations!: string | undefined;
     dateCreated!: Date;
@@ -96583,6 +96584,7 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
             this.positionName = _data["positionName"];
             this.departmentId = _data["departmentId"];
             this.departmentName = _data["departmentName"];
+            this.channel = _data["channel"];
             this.talentPoints = _data["talentPoints"];
             this.recommendations = _data["recommendations"];
             this.dateCreated = _data["dateCreated"] ? new Date(_data["dateCreated"].toString()) : <any>undefined;
@@ -96616,6 +96618,7 @@ export class EmployeeTalentManagementDTO implements IEmployeeTalentManagementDTO
         data["positionName"] = this.positionName;
         data["departmentId"] = this.departmentId;
         data["departmentName"] = this.departmentName;
+        data["channel"] = this.channel;
         data["talentPoints"] = this.talentPoints;
         data["recommendations"] = this.recommendations;
         data["dateCreated"] = this.dateCreated ? this.dateCreated.toISOString() : <any>undefined;
@@ -96649,6 +96652,7 @@ export interface IEmployeeTalentManagementDTO {
     positionName: string | undefined;
     departmentId: number;
     departmentName: string | undefined;
+    channel: string | undefined;
     talentPoints: number;
     recommendations: string | undefined;
     dateCreated: Date;

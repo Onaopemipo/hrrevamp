@@ -76,7 +76,7 @@ export class CapacityPlanningComponent implements OnInit {
     {name: 'statusName', title: 'Status',type: ColumnTypes.Status},
   ];
   tableActions: TableAction[] = [
-    { name: ACTIONS.VIEW, label: 'View' },
+    { name: ACTIONS.VIEW, label: 'View Requirements' },
     { name: ACTIONS.EDIT, label: 'Edit' },
   ];
   projecttask: boolean = false;
@@ -94,6 +94,11 @@ Jobgrade =  []
   endYear: any = "";
   startYear: any = "";
   submitRequirementError = "";
+  showEditPlanModal: boolean = false;
+  viewplan: any;
+  showAddRequirementModal: boolean = false;
+  editOperations: boolean = false;
+  addRequirementObj = new DepartmentManPowerActivityDTO().clone();
   constructor(private alertservice: AlertserviceService, private myDropdown: DataServiceProxy,
     private ManpowerService: ManpowerServiceProxy,private CommonService: CommonServiceProxy,public CustomService: CustomServiceService) { }
 
@@ -101,10 +106,59 @@ Jobgrade =  []
     return this.allCapacityPlan.length === 0;
   }
   tableActionClicked(event: TableActionEvent) {
-    if (event.name == "1") {
+    if (event.name == ACTIONS.EDIT) {
       this.newcaplan = event.data;
-      this.showAddPlanModal = true;
+      this.showEditPlanModal = true;
       this.modificationStatus = true;
+
+      this.allreqPlan = [];
+      var plan = event.data;
+      this.viewplan =plan;    
+
+      this.projecttask =  plan.activityTypeId == 2 ? true: false;
+
+      
+      this.newcaplan.id = plan.ID;
+      this.newcaplan.activityName = plan.activityName;
+      this.newcaplan.activityTypeId = plan.activityTypeId;
+      this.newcaplan.description = plan.description;
+      this.newcaplan.startDate = plan.startDate;
+      this.newcaplan.endDate = plan.endDate;
+      this.newcaplan.year= plan.year;
+      
+      plan.requirements.forEach(value=>{
+        var cJtypeName;
+        var Jtype;
+        if(value.JobRoleId){
+          cJtypeName = value.JobRoleName;
+          Jtype = value.JobRoleId;
+        }
+        if(value.GradeId){
+          cJtypeName = value.GradeName;
+          Jtype = value.GradeId;
+        }
+        if(value.PostionId){
+          cJtypeName = value.PositionName;
+          Jtype = value.PostionId;
+        }
+        
+
+        let obj = {
+          ID: value.ID,
+          cJtypeName: cJtypeName,
+          Ctype: value.JobCategoryName,
+          Jtype: Jtype,
+          Nstaff: value.NumberOfResource,
+          costPerResource: value.costPerResource,
+          ApprovedR: value.ApprovedResource,
+          HRComment: value.HRComment,
+          Decision: value.Decision,
+          Status: value.Status == 0? "Returned" :(value.Status == 1? "Pending":(value.Status== 2 ? "Approved" : (value.Status== 3 ?"Rejected": null))),
+          ApprovedByName: value.ApprovedByName,
+          ApporvedDate: value.ApporvedDate
+        }
+        this.allreqPlan.push(obj);
+      })
     }
     if (event.name == "3") {
 
@@ -373,6 +427,56 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     }
   }
 
+  addexistplanRequirement(planrequirement){ 
+    if(this.validCost){
+    this.editOperations = true;
+    var cJtypeName = this.JcategoryType[planrequirement.categoryType].name;
+    var Jtype = this.JcategoryType[planrequirement.categoryType].ID;
+    var reqObj = {
+      cJtypeName: cJtypeName,
+      Ctype: planrequirement.jobCategory,
+      Jtype: Jtype,
+      Nstaff: planrequirement.numberOfStaff,
+      RCost: planrequirement.costPerResource
+    }
+    var JobRoleId = reqObj.Ctype == "Job Role"? reqObj.Jtype: null;
+    var PostionId = reqObj.Ctype == "Position"? reqObj.Jtype: null;
+    var GradeId = reqObj.Ctype == "Grade"? reqObj.Jtype: null;
+    var planReq = planrequirement.id;
+    if(!planrequirement.id) {planReq = 0;}
+
+      this.addRequirementObj.id = planReq;
+      this.addRequirementObj.departmentActivityId = this.viewplan.id;
+      this.addRequirementObj.jobCategoryName = reqObj.Ctype;
+      this.addRequirementObj.jobRoleId = JobRoleId;
+      this.addRequirementObj.postionId = PostionId;
+      this.addRequirementObj.numberOfResource = reqObj.Nstaff;
+      this.addRequirementObj.costPerResource = reqObj.RCost
+      this.ManpowerService.addRequirementToPlan(this.addRequirementObj).subscribe(data => {
+        var respData = data;
+        if (!respData.hasError) {
+          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
+          this.getallCaplan();
+        }
+        else {
+          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');
+               }
+
+        this.editOperations = false;
+      })
+     
+  
+  
+  }else{
+     this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, `Input Valid Resource Cost - Number Only`, 'OK');
+  }
+  }
+
+  openAddRequirementtoplan(){
+    this.planrequirement.numberOfStaff = 0;
+    this.showAddRequirementModal = true;
+
+  }
   ngOnInit(): void {
     this.planrequirement.numberOfStaff = 0;
     this.newcaplan.requirements = [];
