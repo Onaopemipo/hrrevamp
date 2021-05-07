@@ -16,7 +16,7 @@ import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/s
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
-import { AddUpdateVendorServiceProxy,DataServiceProxy ,AddUpdateVendorPlanServiceProxy,CommonServiceProxy } from '../../_services/service-proxies';
+import { AddUpdateVendorServiceProxy,DataServiceProxy ,DeleteVendorServiceProxy,AddUpdateVendorPlanServiceProxy,CommonServiceProxy, GetVendorplanByVendorIdServiceProxy,GetAllVendorServiceProxy, GetVendorByIdServiceProxy } from '../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 
 
@@ -48,7 +48,11 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     DataServiceProxy,
     AlertserviceService,
     AddUpdateVendorPlanServiceProxy,
-    CommonServiceProxy 
+    CommonServiceProxy,
+    GetVendorByIdServiceProxy,
+    GetAllVendorServiceProxy,
+    GetVendorplanByVendorIdServiceProxy,
+    DeleteVendorServiceProxy
   ]
 })
 export class BenefitModule { }

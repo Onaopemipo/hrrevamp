@@ -24,7 +24,7 @@ export const routes: Routes = [
         component: EmployeeViewComponent,
       },
       {
-        path: 'create-benefit',
+        path: 'create-benefit/:id',
         component: CreateBenefitComponent,
       },
       {

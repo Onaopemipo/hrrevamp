@@ -11,7 +11,7 @@ export class MyKPI extends KpiDTO {
     this.kra_id = kra_id;
   }
   toManage() {
-    return new ManageKpiDTO(this);
+    return new ManageKpiDTO(this as any);
   }
 }
 export class MyKPIFilter {
