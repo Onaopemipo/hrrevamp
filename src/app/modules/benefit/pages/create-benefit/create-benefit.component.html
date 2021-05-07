@@ -1,8 +1,7 @@
-
-
 <ngx-componentsheader [pageName]="singleVendor.name" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
-<span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"(click)="back()"></i></span>
+<span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
+    (click)="back()"></i></span>
 <div class="main-page-container">
   <!-- <h4>Initiate New Benefit</h4>
   <p>Let's help create a new benefit plan</p> -->
@@ -69,26 +68,26 @@
     </div>
     
   </div> -->
- 
+
   <nb-card>
-    
-    
-    
+
+
+
     <nb-card-body>
-      
+
       <div class="row">
         <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
           <span style="font-size: large; font-weight: bold;">Vendor</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.name}}</span> 
+          <span style="font-size: large; font-weight: bold;">{{singleVendor.name}}</span>
         </div>
 
         <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
           <span style="font-size: large; font-weight: bold;">Email1</span>
         </div>
         <div class="col-sm-8">
-           <span style="font-size: large; font-weight: bold;">{{singleVendor.email}}</span>
+          <span style="font-size: large; font-weight: bold;">{{singleVendor.email}}</span>
         </div>
 
 
@@ -96,7 +95,7 @@
           <span style="font-size: large; font-weight: bold;">Description</span>
         </div>
         <div class="col-sm-8">
-         <span style="font-size: large; font-weight: bold;">{{singleVendor.description}}</span> 
+          <span style="font-size: large; font-weight: bold;">{{singleVendor.description}}</span>
         </div>
 
 
@@ -105,7 +104,7 @@
           <span style="font-size: large; font-weight: bold;">Address</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.address}}</span> 
+          <span style="font-size: large; font-weight: bold;">{{singleVendor.address}}</span>
         </div>
 
 
@@ -113,7 +112,7 @@
           <span style="font-size: large; font-weight: bold;">phoneNumber</span>
         </div>
         <div class="col-sm-8">
-           <span style="font-size: large; font-weight: bold;">{{singleVendor.phoneNumber}}</span> 
+          <span style="font-size: large; font-weight: bold;">{{singleVendor.phoneNumber}}</span>
         </div>
         <!-- <div style="align-items: center;justify-content: center;display: flex; margin: 0.4rem 1rem 1rem 1rem;">
             <a href="javascript:void(0)" (click)="onClick()">view details</a>
@@ -132,33 +131,38 @@
         <div class="col-sm-3">
           <span style="font-weight: bold;">Plan Name</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-           <span> {{plans?.name}}</span>  
+            <span> {{plans?.name}}</span>
           </p>
         </div>
         <div class="col-sm-3">
           <span style="font-weight: bold;">Description</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-              <span>{{plans?.description}}</span>  
+            <span>{{plans?.description}}</span>
           </p>
         </div>
 
         <div class="col-sm-3">
           <span style="font-weight: bold;">Policy Number</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-              <span>{{plans?.refNumber}}</span>  
+            <span>{{plans?.refNumber}}</span>
           </p>
         </div>
 
-        <div class="col-sm-3">
-          <span><a href="">view details</a></span>
+        <div class="col-sm-1">
+          <span><a href="">view details</a>
+           </span>
+          
         </div>
-
+        <div class="col-sm-1">
+          <button nbButton outline status="danger"  class="d-flex column pl-1"
+          style="background-color: white; border: none;"  (click)="deletePlan()"><i class="fas fa-times" style="padding-right: 0.3rem;"></i> Delete Plan</button>
+        </div>
 
       </div>
 
       <div style="align-items: center; justify-content: center; display: flex; margin: 4rem 1rem;">
         <div nbButton status="primary" outline class="d-flex column" style="background-color: white;"></div>
-      </div> 
+      </div>
     </nb-card-body>
 
 
@@ -205,7 +209,7 @@
                 <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId"
                   #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId">
                   <option value="">--Select Vendor---</option>
-                  <option *ngFor="let evo of Vendora" [value]="evo.id">{{evo.name}}</option> -->
+                  <option *ngFor="let evo of Vendora" [value]="evo.id">{{evo.name}}</option> 
                 </select>
 
                 <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)" class="error">
