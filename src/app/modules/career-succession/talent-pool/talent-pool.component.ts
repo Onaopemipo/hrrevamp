@@ -47,7 +47,7 @@ export class TalentPoolComponent implements OnInit {
     private commonService: CommonServiceProxy, private competencyService: CompetencyServiceProxy) { }
 
   ngOnInit(): void {
-    this.getCompetency();
+    // this.getCompetency();
     this.fetchAllPools();
   }
 
@@ -130,14 +130,14 @@ export class TalentPoolComponent implements OnInit {
   //   }
   // }
 
-  async getCompetency(){
-    const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
-    if(!data.hasError){
-      this.allCompetencies = data.result;
-      this.competencyCounter = data.totalRecord;
-      console.log('All competencies', this.allCompetencies)
-    }
-  }
+  // async getCompetency(){
+  //   const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
+  //   if(!data.hasError){
+  //     this.allCompetencies = data.result;
+  //     this.competencyCounter = data.totalRecord;
+  //     console.log('All competencies', this.allCompetencies)
+  //   }
+  //  }
 
   addRequirement(){
     let poolRequirement = this.poolRequirementModel;
