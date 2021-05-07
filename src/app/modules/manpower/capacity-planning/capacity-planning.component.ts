@@ -448,7 +448,8 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     }
   }
 
-  addexistplanRequirement(planrequirement){ 
+  addexistplanRequirement(planrequirement) {
+    console.log(planrequirement)
     if(this.validCost){
       this.loading = true;
     var cJtypeName = this.JcategoryType[planrequirement.categoryType].name;
