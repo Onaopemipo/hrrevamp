@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IStatus,MyColor } from '../../../components/status/models';
 import { ColumnTypes, TableActionEvent ,TableAction, ACTIONS} from '../../../components/tablecomponent/models';
@@ -6,6 +6,7 @@ import { AlertserviceService } from '../../../_services/alertservice.service';
 import { CommonServiceProxy, DataServiceProxy, DepartmentActivityDTO, DepartmentManPowerActivityDTO, ManpowerServiceProxy } from '../../../_services/service-proxies';
 import { CustomServiceService } from '../../../_services/custom-service.service';
 import { Observable, forkJoin } from 'rxjs';
+import { NbPopoverDirective } from '@nebular/theme';
 export interface planRequirement{
   ID?: number,
   jobCategory?: string,
@@ -45,6 +46,7 @@ enum TOP_ACTIONS {
   styleUrls: ['./capacity-planning.component.scss']
 })
 export class CapacityPlanningComponent implements OnInit {
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
   caplanForm: FormGroup;
   pageName: string = 'Capacity Planning';
   topActionButtons = [
@@ -100,63 +102,62 @@ Jobgrade =  []
   showAddRequirementModal: boolean = false;
   editOperations: boolean = false;
   addRequirementObj = new DepartmentManPowerActivityDTO().clone();
+  showEditRequirementModal: boolean = false;
   constructor(private alertservice: AlertserviceService, private myDropdown: DataServiceProxy,
     private ManpowerService: ManpowerServiceProxy,private CommonService: CommonServiceProxy,public CustomService: CustomServiceService) { }
+  setSelectedPlan(data) {
+    this.allreqPlan = [];
+    this.newcaplan = data;
+    this.viewplan = data;
+    var plan = data;       
+    this.projecttask =  plan.activityTypeId == 2 ? true: false;    
+    this.newcaplan.id = plan.id;
+    this.newcaplan.activityName = plan.activityName;
+    this.newcaplan.activityTypeId = plan.activityTypeId;
+    this.newcaplan.description = plan.description;
+    this.newcaplan.startDate = plan.startDate;
+    this.newcaplan.endDate = plan.endDate;
+    this.newcaplan.year= plan.year;
+    
+    plan.requirements.forEach(value=>{
+      var cJtypeName;
+      var Jtype;
+      if(value.jobRoleId){
+        cJtypeName = value.jobRoleName;
+        Jtype = value.jobRoleId;
+      }
+   
+      if(value.postionId){
+        cJtypeName = value.positionName;
+        Jtype = value.postionId;
+      }
+      
 
+      let obj = {
+        ID: value.id,
+        cJtypeName: cJtypeName,
+        Ctype: value.jobCategoryName,
+        Jtype: Jtype,
+        Nstaff: value.numberOfResource,
+        costPerResource: value.costPerResource,
+        ApprovedR: value.approvedResource,
+        HRComment: value.hRComment,
+        Decision: value.decision,
+        Status: value.status == 0? "Returned" :(value.status == 1? "Pending":(value.status== 2 ? "Approved" : (value.status== 3 ?"Rejected": null))),
+        ApprovedByName: value.approvedByName,
+        ApporvedDate: value.apporvedDate
+      }
+      this.allreqPlan.push(obj);
+    })
+}
   get showEmpty() {
     return this.allCapacityPlan.length === 0;
   }
   tableActionClicked(event: TableActionEvent) {
-    if (event.name == ACTIONS.EDIT) {
-      this.newcaplan = event.data;
+    if (event.name == ACTIONS.EDIT) {     
       this.showEditPlanModal = true;
-      this.modificationStatus = true;
-
-      this.allreqPlan = [];
-      var plan = event.data;
-      this.viewplan =event.data;    
- 
-      this.projecttask =  plan.activityTypeId == 2 ? true: false;
-
-      
-      this.newcaplan.id = plan.id;
-      this.newcaplan.activityName = plan.activityName;
-      this.newcaplan.activityTypeId = plan.activityTypeId;
-      this.newcaplan.description = plan.description;
-      this.newcaplan.startDate = plan.startDate;
-      this.newcaplan.endDate = plan.endDate;
-      this.newcaplan.year= plan.year;
-      
-      plan.requirements.forEach(value=>{
-        var cJtypeName;
-        var Jtype;
-        if(value.jobRoleId){
-          cJtypeName = value.jobRoleName;
-          Jtype = value.jobRoleId;
-        }
-     
-        if(value.postionId){
-          cJtypeName = value.positionName;
-          Jtype = value.postionId;
-        }
-        
-
-        let obj = {
-          ID: value.id,
-          cJtypeName: cJtypeName,
-          Ctype: value.jobCategoryName,
-          Jtype: Jtype,
-          Nstaff: value.numberOfResource,
-          costPerResource: value.costPerResource,
-          ApprovedR: value.approvedResource,
-          HRComment: value.hRComment,
-          Decision: value.decision,
-          Status: value.status == 0? "Returned" :(value.status == 1? "Pending":(value.status== 2 ? "Approved" : (value.status== 3 ?"Rejected": null))),
-          ApprovedByName: value.approvedByName,
-          ApporvedDate: value.apporvedDate
-        }
-        this.allreqPlan.push(obj);
-      })
+      this.modificationStatus = true;      
+      this.setSelectedPlan(event.data);
     }
     if (event.name == "3") {
 
@@ -164,7 +165,7 @@ Jobgrade =  []
      }
   filterUpdated(filter: any) {
     this.filter = {...this.filter, ...filter};
-    this.getallCaplan();
+    this.getallCaplan(false);
   }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
@@ -187,7 +188,7 @@ Jobgrade =  []
       
     })
   }
-  getallCaplan() {
+  getallCaplan(update) {
     this.loading = true;
     this.ManpowerService.getDepartmentActivity(this.filter.taskProject, this.filter.taskType, this.filter.year,
       this.filter.status, this.filter.pageNumber, this.filter.pageSize).subscribe(data => {
@@ -195,6 +196,13 @@ Jobgrade =  []
         if (!data.hasError) {
           var planwithStat = data.result.map(p=> new ActivityWithStatus(p))
           this.allCapacityPlan = planwithStat;
+
+          if (update) {
+            var sResult = this.allCapacityPlan.find(c => c.id == this.viewplan.id);
+            console.log(sResult);
+            this.newcaplan = sResult;
+            this.setSelectedPlan(sResult);
+          }
    
         } else {
           
@@ -297,6 +305,20 @@ Jobgrade =  []
 
 
   }
+  deleteRequirement(requirementId, i) {
+    this.popover.hide();
+    this.loading = true;
+    this.ManpowerService.removeRequirementToPlan(requirementId).subscribe(data => {
+      if (!data.hasError) {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+        this.getallCaplan(true);
+     
+      } else {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, data.message, 'OK');
+      }
+      this.loading = false;
+    });
+  }
   onDateSelection(date: Date){
     if(this.newcaplan.startDate){
        if(this.newcaplan.startDate.getFullYear() != date.getFullYear()){
@@ -336,7 +358,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     })
   }
   submitnewplan(newplan: DepartmentActivityDTO, requirement) {
-  
+
     if (this.allreqPlan.length > 0) {
       if (newplan.activityTypeId == 2) {
         if (!newplan.startDate || !newplan.endDate  || newplan.startDate == null || newplan.endDate == null) {
@@ -400,7 +422,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
        var respData = result;
           if (!respData.hasError) {   
             this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
-        this.getallCaplan();
+        this.getallCaplan(false);
         this.newcaplan = new DepartmentActivityDTO().clone() ;
         this.planrequirement = {};
         this.allreqPlan = [];
@@ -428,7 +450,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
 
   addexistplanRequirement(planrequirement){ 
     if(this.validCost){
-    this.editOperations = true;
+      this.loading = true;
     var cJtypeName = this.JcategoryType[planrequirement.categoryType].name;
     var Jtype = this.JcategoryType[planrequirement.categoryType].ID;
     var reqObj = {
@@ -456,14 +478,14 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
         if (!respData.hasError) {
           this.showAddRequirementModal = false;
           this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
-          this.getallCaplan();
-         this.newcaplan= this.allCapacityPlan.find(c => c.id == this.viewplan.id);
+          this.getallCaplan(true);
+         
         }
         else {
           this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');
                }
 
-        this.editOperations = false;
+        this.loading = false;
       })
      
   
@@ -478,11 +500,40 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     this.showAddRequirementModal = true;
 
   }
+  openEditRequirement(req) {
+    this.showEditRequirementModal = true;
+    this.validCost = true;
+this.planrequirement.ID = req.ID;
+if(req.Ctype == "Job Role"){
+  this.JcategoryType = this.jobRole;
+      }
+      if(req.Ctype == "Position"){
+        this.JcategoryType=[];
+        this.JobPosition.forEach(value=>{
+          let newObj = {
+            ID: value.ID,
+            name: value.title
+          }
+          this.JcategoryType.push(newObj)
+        });
+            }
+            if(req.Ctype == "Grade"){
+              this.JcategoryType = this.Jobgrade;
+                  }
+var cjPos =  this.JcategoryType.findIndex(j=>j.name == req.cJtypeName);
+
+this.planrequirement.jobCategory = req.Ctype;
+this.planrequirement.categorytypeName = req.cJtypeName;
+this.planrequirement.numberOfStaff = req.Nstaff;
+this.planrequirement.categoryType = cjPos;
+this.planrequirement.costPerResource = req.costPerResource;
+
+  }
   ngOnInit(): void {
     this.planrequirement.numberOfStaff = 0;
     this.newcaplan.requirements = [];
     this.newcaplan.status = 0;   
-    this.getallCaplan();
+    this.getallCaplan(false);
     this.getJobRoles();
     this.getPositions();
     this.CustomService.getnxttenyears();

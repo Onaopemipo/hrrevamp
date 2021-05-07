@@ -332,18 +332,29 @@
                         </td>
                         <td colspan="2">
                           <i *ngIf="req.Status == 'Approved' || req.Status == 'Rejected'" class="fa fa-check-square" style="color: #1e8300;font-size: 22px;"></i>
-                          <span >
-                            <a *ngIf="req.Status == 'Pending' || req.Status == 'Returned'" href="javascript:void(0)" (click)="openEditRequirement(req,editRequirement)">
-                              <i class="fa  fa-edit" style="color: #494948;font-size: 22px;"></i>
-                             </a>
-                            <br>
-                            <a *ngIf="req.Status == 'Pending'" href="javascript:void(0)" (click)="removeRequirement(req.ID,i)">
-                              <i class="fa fa-trash" style="color: #D80000;font-size: 22px;"></i>
-                             </a>
-                            
-                           
-                          </span>
-                         
+                                            
+                          <ng-template #card>
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <nb-list >
+                                  <nb-list-item *ngIf="req.Status == 'Pending' || req.Status == 'Returned'"  style="cursor: pointer;" (click)="openEditRequirement(req)">
+                                    Edit
+                                  </nb-list-item>
+                                  <nb-list-item  *ngIf="req.Status == 'Pending'" style="cursor: pointer;" (click)="deleteRequirement(req.ID,i)">
+                                    Delete
+                                  </nb-list-item>
+                                </nb-list>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <button *ngIf="req.Status != 'Approved' || req.Status != 'Rejected'" nbButton outline status="primary" [nbPopover]="card" style="
+                              min-width: unset !important;
+                              background: transparent;
+                              border: none;
+                              padding: 0px;
+                            ">
+                            <nb-icon icon="more-horizontal-outline"></nb-icon>
+                          </button>
                           
                         </td>
                     </tr>
@@ -428,5 +439,69 @@
    
   </div>
   </ngx-side-modal>
+
+  <ngx-side-modal [(show)]='showEditRequirementModal' [position]="'Center'" style="width: 500px; height: 1000px;">
+    <div modal-header>Edit Requirement</div>
+    <div modal-body>
+      <form class="form-horizontal" name="caplanForm" id="caplanForm" #caplanForm="ngForm">
+        <div class="form-group row">
+       
+          <div class="col-md-3">
+            <span class="help-block"><small>Select Job Category</small></span>
+            <select class="form-control" name="jobCategory" id="jobCategory" [(ngModel)]="planrequirement.jobCategory" #jobCategory="ngModel" (change)="loadselected($event)">
+              <option value="">--select--</option>
+              <option value="Job Role">Job Role</option>
+              <option value="Position">Position</option>
+              <option value="Grade">Grade</option>
+            </select>
+            
+  
+          </div>
+          <div class="col-md-3">
+            <span class="help-block"><small>Select {{planrequirement.jobCategory}} type</small></span>
+            <select class="form-control" name="categoryType" id="categoryType" [(ngModel)]="planrequirement.categoryType" #categoryType="ngModel">
+              <option value="">--select--</option>
+              <option *ngFor="let cty of JcategoryType;let i = index" value="{{i}}">{{cty.name}}</option>
+            </select>
+            
+  
+          </div>
+          <div class="col-md-3">
+            <span class="help-block"><small>Required number of staff</small></span>
+            <div style="width: 150px;">
+              <div class="form-group" >
+                <div class="input-group" >
+                  <span class="input-group-prepend">
+                    <button style="height: 32px;" type="button" class="btn waves-effect waves-light btn-primary" (click)="decresenumber()"><i class="fa fa-minus"></i></button>
+                  </span>
+                  <input  readonly name="numberOfStaff" id="numberOfStaff" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="text" class="form-control" placeholder="number of staff">
+                  <span class="input-group-append">
+                    <button style="height: 32px;" type="button" class="btn waves-effect waves-light btn-primary" (click)="increasenumber()"><i class="fa fa-plus"></i></button>
+                  </span>
+                </div>  
+              </div>
+            </div>
+          
+          </div>
+          <div class="col-md-3">
+            <span class="help-block"><small>Cost per Resource</small></span>
+            <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
+          </div>
+         
+        </div>
+        </form>
+      </div>
+      <div modal-actions class="d-flex"
+      style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+      <ngx-loadable-button [loading]="loading"  (click)="addexistplanRequirement(planrequirement)">
+        Save 
+      </ngx-loadable-button>  
+      <div style="padding-left: 15px;">
+        <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
+      </div>
+     
+    </div>
+    <div style="margin-top: 10px;"></div>
+    </ngx-side-modal>
   </nb-card-body>
   </nb-card>
