@@ -45,7 +45,17 @@
               </button>
             </nb-action>
             <nb-action>
-              <button
+              <ng-template #card>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <nb-list>
+                      <nb-list-item (click)='downloadas("Excel")' style="cursor: pointer; min-width: 40px;"><img src="assets/icons/excelicon.svg">Excel</nb-list-item>
+                      <nb-list-item (click)='downloadas("pdf")' style="cursor: pointer;min-width: 40px;"><img src="assets/icons/pdf.svg"> Pdf</nb-list-item>
+                    </nb-list>
+                  </div>
+                </div>
+              </ng-template>
+              <button [nbPopover]="card"
                 nbButton
                 style="background-color: transparent; border: 1px solid #b6b3b3"
               >

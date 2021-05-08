@@ -23,11 +23,15 @@ export class TableheaderComponent implements OnInit {
   sort = '';
   @Output() filterChange = new EventEmitter<boolean>();
   @Output() filterDataChange = new EventEmitter<object>();
+  @Output() downloadasChange = new EventEmitter<string>();
   @Input() bulkAction_isChecked:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   
+  }
+  downloadas(downloadtype) {
+    this.downloadasChange.emit(downloadtype);
   }
   checkedAcction() {
     this.bulkAction_isChecked = !this.bulkAction_isChecked;

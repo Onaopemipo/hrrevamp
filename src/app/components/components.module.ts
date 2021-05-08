@@ -106,7 +106,9 @@ import { CreateleavePlanComponent } from './createleave-plan/createleave-plan.co
 import { CreateleaveRequestComponent } from './createleave-request/createleave-request.component';
 import { VendorService } from 'app/modules/training/services/vendor.service';
 import { CertificationService, QualificationService } from '../_services/common.service';
-import {DeleteEventsServiceProxy} from '../_services/service-proxies'
+import { DeleteEventsServiceProxy } from '../_services/service-proxies';
+import { ExcelServiceService } from '../_services/excel-service.service';
+import { PdfServiceService } from '../_services/pdf-service.service';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -235,7 +237,9 @@ import {DeleteEventsServiceProxy} from '../_services/service-proxies'
     VendorService,
     CertificationService,
     QualificationService,
-    DeleteEventsServiceProxy
+    DeleteEventsServiceProxy,
+    ExcelServiceService,
+    PdfServiceService
   ],
   exports: [
     ComponentsheaderComponent,

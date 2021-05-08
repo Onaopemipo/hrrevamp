@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, Directive, ViewChildren, QueryList, TemplateRef,ViewChild } from '@angular/core';
 import { ColumnTypes, TableColumn, TableData, TableAction, TableActionEvent } from './models';
-
-
+import { ExcelServiceService } from '../../_services/excel-service.service';
+import { PdfServiceService } from '../../_services/pdf-service.service';
+import { NbPopoverDirective } from '@nebular/theme';
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
 
 export enum ActionsType {
@@ -33,6 +34,7 @@ export interface SortEvent {
 })
 // tslint:disable-next-line: directive-class-suffix
 export class NgbdSortableHeader {
+
   @Input() sortable: any = '';
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
@@ -92,13 +94,14 @@ export class TablecomponentComponent implements OnInit {
   COLUMN_TYPES = ColumnTypes;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   bulkAction_isChecked: boolean = false;
-  
-  constructor() { }
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  constructor(private ExcelService: ExcelServiceService, private PdfService:PdfServiceService) { }
   test() {
     alert(112);
   }
 
-  customActionClicked(col, data){
+  customActionClicked(col, data) {
+    this.popover.hide();
     this.actionClick.emit({
       name: col.name,
       data,
@@ -172,7 +175,14 @@ export class TablecomponentComponent implements OnInit {
     this.filter = {...this.filter, ...{page: pageNo, } };
     this.filterChange.emit(this.filter);
   }
-
+  handleExportAs(event) {
+    if (event == "Excel") {
+      this.ExcelService.exportAsExcelFile(this.userData,"SmartaceFile")
+    }
+    if (event == "pdf") {
+      this.PdfService.downloadAsPDF()
+    }
+  }
   filterUpdated(filter){
     this.filter = {...filter, ...{page: this.currentPage, } };
     this.filterChange.emit(this.filter);
