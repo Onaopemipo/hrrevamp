@@ -92,7 +92,7 @@
       </div>
       <div class="col-sm-12 form-group">
         <span class="help-block">Base year</span>    
-          <select id="baseYear" name="baseYear" [(ngModel)]="baseYear" (change)="compareyearlycost($event)" class="form-control" >
+          <select id="baseYear" name="baseYear" [(ngModel)]="baseYear" (change)="compareyearlycost($event)" class="form-control" required>
             <option value="">--Base Year--</option>
          <option *ngFor="let yr of CustomService.prevTenYears;" value="{{yr}}">{{yr}}</option> 
                 </select>                

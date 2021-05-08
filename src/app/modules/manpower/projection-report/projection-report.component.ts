@@ -96,8 +96,9 @@ unlockComment: string = "";
   
   getRequirement(newQuery:searchQuery){
     this.loading = true;
-    if(!this.baseYear){
-
+    if (!this.baseYear) {
+      this.loading = false;
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, "Please select a base year", 'OK');
     }else{
     //  console.log(newQuery);
     var mode = "";
@@ -105,6 +106,7 @@ unlockComment: string = "";
       if(newQuery.jobCategory)mode = newQuery.jobCategory == "Job Role"?"jobrole":(newQuery.jobCategory == "Position"? "position":(newQuery.jobCategory == "Grade"? "grade" : ""))
       this.ManpowerService.fetchProjectionRequirment(this.baseYear, newQuery.activityYear, newQuery.activityName, newQuery.jobCategory,
         newQuery.departments, newQuery.status, newQuery.taskType, 1, 10).subscribe(data => {
+          this.loading = false;
           if (!data.hasError) {
             this.DepartmentManPowerActivities = data.result;
             
@@ -149,7 +151,7 @@ if(sYear != "" || sYear != null)
        }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.FILTER) {
-     this.showHRReviewModal = true;
+     this.showFilterModal = true;
 
     }
 
@@ -214,6 +216,8 @@ if(sYear != "" || sYear != null)
     this.getJobRoles();
     this.getPositions();
     this.getdepartments();
+    this.CustomService.getnxttenyears();
+    this.CustomService.getprevtenyears();
     this.projectionplan.newRequirement = [];
     this.newQuery.jobCategory = "";
     this.newQuery.taskProject = "";
