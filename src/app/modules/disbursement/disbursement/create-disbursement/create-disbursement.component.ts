@@ -145,6 +145,16 @@ async getCategories(){
   }
 }
 
+
+getDayDifference(){
+  let scheduledDay = (this.disbursement.scheduledDate).getDay()
+  let endDay = (this.disbursement.endDate).getDay();
+  if(endDay < scheduledDay){
+    alert('Please check the end date as it is less than disbursemt day')
+  }
+  console.log(scheduledDay, endDay);
+}
+
 async getBanks(){
   const data = await this.dataService.getDropDownValues('bank').toPromise();
   if(!data.hasError){
