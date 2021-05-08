@@ -1,19 +1,14 @@
 import { TableAction } from 'app/components/tablecomponent/models';
 import { NgForm } from '@angular/forms';
-import { Contacts } from './../../../@core/data/users';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { EmployeeCertification } from './../services/employees.service';
-import { Certification, CommonServiceProxy, CompetencyRequirmentsDTO } from 'app/_services/service-proxies';
-import { map } from 'rxjs/operators';
-import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO, EmployeeCertificationDTO, EmployeeHistoryDTO, EmployeeSkillDTO, EmployeeQualificationDTO, ManageCareerSuccessionDto, CareerSuccessionServiceProxy, EmployeePossibleSuccessorServiceProxy, CompetencyServiceProxy, FetchSuccessionPlanServiceProxy, CompetencyDTO, CareerSuccessorDTO } from './../../../_services/service-proxies';
+import { CommonServiceProxy, CompetencyRequirmentsDTO } from 'app/_services/service-proxies';
+import { FetchEmployeeByIdServiceProxy, EmployeeDTO, EmployeeContractAssignmentDTO, FetchAllEmployeesServiceProxy, GetCareerSuccesionPlanByIdServiceProxy, CareerSuccessionDTO, EmployeeCertificationDTO, EmployeeHistoryDTO, EmployeeSkillDTO, EmployeeQualificationDTO, ManageCareerSuccessionDto, CareerSuccessionServiceProxy, EmployeePossibleSuccessorServiceProxy, CompetencyServiceProxy, FetchSuccessionPlanServiceProxy, CompetencyDTO, CareerSuccessorDTO, DeleteEmployeefromCareerSuccessionplanServiceProxy } from './../../../_services/service-proxies';
 import { TableColumn, TableActionEvent } from './../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EmployeesService, MyEmployeeDatail, } from '../services/employees.service';
-import { throwIfAlreadyLoaded } from 'app/@core/module-import-guard';
-import { stringify } from '@angular/compiler/src/util';
 
 // enum TOP_ACTIONS {
 //   ADD_MORE,
@@ -84,9 +79,9 @@ export class ProfileDetailsComponent implements OnInit {
   successorsTable: TableColumn[] = [
     { name: 'employeeId', title: 'Employee ID' },
     { name: 'employeeName', title: 'Employee Name' },
-    { name: 'experience', title: 'Experience' },
-    { name: 'qualification', title: 'Qualification' },
-    { name: 'certification', title: 'certification' },
+    { name: 'currentJobPositionName', title: 'Current Position' },
+    { name: 'readinessToStart', title: 'Readiness to Start' },
+    // { name: 'certification', title: 'certification' },
   ];
 
   allPurposes = [
@@ -98,18 +93,30 @@ export class ProfileDetailsComponent implements OnInit {
 
   tableActionClicked(event: TableActionEvent){
     if(event.name==TABLE_ACTION.DELETE){
-
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to remove employee?', 'Yes').subscribe(dataAction => {
+        if(dataAction){
+          this.deleteEmployee.deleteEmployeeFromCareerSuccesionPlan(this.employeeId, event.data.id).subscribe(data => {
+            if (!data.hasError && data.result.isSuccessful === true) {
+              this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss').subscribe(resp => {
+                if(resp) this.router.navigateByUrl('/career-succession/planning');
+              })
+            }
+          })
+        }
+      })
       }
      else if(event.name==TABLE_ACTION.EDIT){
-        this.router.navigateByUrl('/payroll/editpayment')
+       this.editPlan = true;
       }
     else if (event.name == TABLE_ACTION.VIEW) {
-      console.log(event.data)
-      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id);
+      this.employeeId = event.data.employeeId;
+      this.isSuccessor = true;
+      this.initializePage();
+
        }
   }
  tableActions: TableAction[] = [
-  {name: TABLE_ACTION.VIEW, label: 'View'},
+  {name: TABLE_ACTION.VIEW, label: 'View Profile'},
   {name: TABLE_ACTION.DELETE, label: 'Delete'},
   {name: TABLE_ACTION.EDIT, label: 'Edit'},
 
@@ -144,20 +151,37 @@ export class ProfileDetailsComponent implements OnInit {
   successorCount: number = 0;
   newSuccessor:boolean = false;
   allCandidate = [];
+  gradeName: string = "";
+  jobName: string = "";
+  locationName: string = "";
+  editPlan: boolean = false;
+  isSuccessor: boolean = false;
+  compareCompetency: boolean = false;
+  center: boolean = true;
+
   loading: boolean = true;
   successionEmployeesData: CareerSuccessorDTO [] = [];
 
   constructor(private navCtrl: Location, private alertMe: AlertserviceService,
-    private activatedRoute: ActivatedRoute,private succession: CareerSuccessionServiceProxy,
+    private activatedRoute: ActivatedRoute,private succession: CareerSuccessionServiceProxy, private deleteEmployee: DeleteEmployeefromCareerSuccessionplanServiceProxy,
     private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy,
     private allEmployees: FetchAllEmployeesServiceProxy, private router: Router, private planById: FetchSuccessionPlanServiceProxy,
     private successionService: GetCareerSuccesionPlanByIdServiceProxy, private successor: EmployeePossibleSuccessorServiceProxy,
     private commonService: CommonServiceProxy, private competencyService: CompetencyServiceProxy,) { }
 
+    initializePage(){
+      this.employeeData.certifications = [];
+      this.employeeData.skills = [];
+      // this.employeeData.gradeName = "";
+      this.employeeData.qualifications = [];
+
+      this.fetchProfile();
+      // this.fetchSinglePlan();
+      this.fetchCompetencies();
+      // this.getSuccessors();
+      // this.getEmployeeSuccessionPlan();
+    }
   async ngOnInit() {
-    this.employeeData.certifications = [];
-    this.employeeData.skills = [];
-    this.employeeData.qualifications = [];
     let subscription: Subscription = null;
     subscription = this.activatedRoute.paramMap.subscribe(params => {
       this.employeeId = parseInt(params.get('id'));
@@ -167,15 +191,19 @@ export class ProfileDetailsComponent implements OnInit {
       //   this.data = response;
       // })
     });
-    this.fetchProfile();
-    // this.fetchSinglePlan();
-    this.fetchCompetencies();
-    // this.getSuccessors();
-    // this.getEmployeeSuccessionPlan();
+  this.initializePage();
   }
 
   goback() {
     this.navCtrl.back();
+  }
+
+  compareCompetencies(){
+    this.compareCompetency = true;
+  }
+
+  modifyPlan(){
+    this.editPlan = true;
   }
 
   // async fetchSinglePlan(){
@@ -200,14 +228,18 @@ async fetchProfile(){
         this.certificationData = data.result.certifications
         this.experienceData = data.result.employmentHistories;
         this.skillsData = data.result.skills;
+        this.gradeName = data.result.contracts[0].gradeName;
+        this.jobName = data.result.contracts[0].jobName;
         this.qualificationData = data.result.qualifications;
         this.positionId = this.employeeData.positionId;
+        this.locationName = data.result.contracts[0].locationName;
         console.log('My Details', this.employeeData);
         console.log('My Contract', this.employeeContractData);
         console.log('My position ID:',this.positionId )
         this.getEmployeeSuccessionPlan();
         this.getPlanSuccessors();
         this.pageLoading = false;
+        this.loading = false;
       }
     })
   }
@@ -217,7 +249,8 @@ async fetchProfile(){
     if(!data.result){
       this.successionData = data.result;
       this.successorCount = data.totalRecord;
-      console.log('My successors:',this.successionData)
+      console.log('My successors:',this.successionData);
+      this.loading = false;
     }
   }
 

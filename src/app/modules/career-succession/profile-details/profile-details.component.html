@@ -1,31 +1,58 @@
-<ngx-componentsheader *ngIf="planStatus == false && planDataCounter < 1" [requiredButton]="[{name:'plan', label:'Create Succession Plan'}]" (buttonClick)="addPlan()"
-  pageName='Profile Details'></ngx-componentsheader>
+<ngx-componentsheader
+  pageName='Profile Details'>
+<div headerButton>
+  <div style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div style="margin-right: 5px;">
+      <button *ngIf="(planDataCounter > 0) && !isSuccessor"   [outline]="true"   (click)="newCandidate()"   nbButton   status="primary" >
+        Add Successor
+       </button>
+    </div>
+    <div>
+      <button *ngIf="(planDataCounter > 0 && !isSuccessor)"  (click)="modifyPlan()" nbButton status="primary">
+        Modify Plan
+        </button>
+    </div>
+  </div>
 
-  <ngx-componentsheader *ngIf="planDataCounter > 0" [requiredButton]="[{name:'modify', label:'Modify Plan'}, {name:'addSuccessor', label: 'Add Successor', outline: true}]" (buttonClick)="newCandidate()"
-  pageName='Profile Details'></ngx-componentsheader>
+<button *ngIf="(planStatus == false && planDataCounter < 1) && !isSuccessor" (click)="addPlan()" nbButton status="primary">
+Create Succession
+</button>
+<div style="display: flex;flex-direction: row;" *ngIf="isSuccessor">
+    <div class="form-group row">
+      <div class="col-md-8" style="display: flex; flex-direction: row; justify-content:left;">
+        <div class="col-md-8">
+          <label>Readines to Start</label>
+        </div>
+        <div class="col-md-4">
+          <input type="number" name="readiness" min="0" max="12" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-4"><button nbButton status="primary"> Change </button></div>
+    </div>
 
-  <ngx-componentsheader *ngIf="planStatus == true"  [requiredButton]="[{name:'plan', label:'Add Successor'}]" (buttonClick)="addPlan()"
-  pageName='Profile Details'></ngx-componentsheader>
+</div>
+
+</div>
+</ngx-componentsheader>
+
 <div style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
   <span><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px;cursor: pointer;">Back</a></span>
 </div>
 <div>
   <nb-card>
     <nb-card-header>Employee Information</nb-card-header>
-    <nb-card-body *ngIf="pageLoading == true">
+    <!-- <nb-card-body *ngIf="pageLoading == true">
       <div class="row" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start;">
         <div class="col-md">
           <img src="assets/icons/department.jpg" style="width:3rem;">
-          <!-- <img src="{{ employeeData.profilePic }}" style="width:3rem;"> -->
         </div>
       </div>
-    </nb-card-body>
+    </nb-card-body> -->
 
-    <nb-card-body *ngIf="pageLoading == false" >
+    <nb-card-body>
       <div class="row" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start;">
         <div class="col-md">
           <img src="assets/icons/department.jpg" style="width:3rem;">
-          <!-- <img src="{{ employeeData.profilePic }}" style="width:3rem;"> -->
         </div>
         <div class="col-md-10">
           <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -39,21 +66,17 @@
             </div>
 
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{employeeData.gradeName}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Level:</span><span>{{ gradeName }}</span>
             </div>
           </div>
 
           <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{employeeData.jobName }}</span>
+              <span style="font-weight: 600; padding-right:25px;">Job Title:</span><span>{{ jobName }}</span>
             </div>
-<!--
-            <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Unit/Division:</span><span>Unit</span>
-            </div> -->
 
             <div class="col-md-4 col-lg-4 col-sm-6">
-              <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{employeeData.locationName}}</span>
+              <span style="font-weight: 600; padding-right:25px;">Location:</span><span>{{locationName}}</span>
             </div>
           </div>
         </div>
@@ -67,7 +90,8 @@
 <div style="padding: 10px"></div>
 
 <nb-card>
-  <nb-card-header style="font-size: large; font-weight: bold;">Role Competencies</nb-card-header>
+  <nb-card-header *ngIf="isSuccessor == false" style="font-size: large; font-weight: bold;">Role Competencies</nb-card-header>
+  <nb-card-header *ngIf="isSuccessor == true" style="font-size: large; font-weight: bold;">Required Competencies</nb-card-header>
   <nb-card-body>
 
       <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
@@ -87,7 +111,6 @@
             <p>No record found</p>
           </div>
 
-          <!-- <div style="padding: 15px;"></div> -->
         </div>
 
         <div class="col-md-6">
@@ -141,13 +164,93 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card *ngIf="successionEmployeesData.length > 0">
+<nb-card *ngIf="isSuccessor == true">
+  <nb-card-header style="font-size: large; font-weight: bold;">Available Competencies</nb-card-header>
+  <nb-card-body>
+
+      <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+        <div class="col-md-6">
+          <span style="font-size:medium; font-weight: bold;">Qualifications</span>
+          <div *ngIf="qualificationData.length > 0">
+            <div *ngFor="let qualification of qualificationData">
+              <div style="padding: 5px;"></div>
+              <div style="display: flex; flex-direction: column; justify-self: center;">
+                <span class="title">Qualifications</span>
+                <span class="date">Date</span>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="qualificationData.length < 1">
+            <p>No record found</p>
+          </div>
+
+        </div>
+
+        <div class="col-md-6">
+          <span style="font-size:medium; font-weight: bold;">Certifications</span>
+          <div style="padding: 5px;"></div>
+          <div *ngIf="certificationData.length > 0">
+            <div style="display: flex; flex-direction: column; justify-self: center;"
+            *ngFor="let certification of certificationData">
+            <span><i class="fas fa-circle"
+                style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Cert</span>
+          </div>
+          </div>
+
+          <div *ngIf="certificationData.length < 1">
+            <p>No record found</p>
+          </div>
+        </div>
+    </div>
+
+    <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+
+      <div class="col-md-6">
+        <span style="font-size:medium; font-weight: bold;">Work Experience</span>
+        <div style="padding: 5px;"></div>
+        <div *ngIf="experienceData.length > 0">
+          <div style="display: flex; flex-direction: column; justify-self: center;"
+          *ngFor="let experience of experienceData">
+          <span><i class="fas fa-circle"
+              style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Cert</span>
+        </div>
+        </div>
+        <div *ngIf="experienceData.length < 1">
+          <p>No record found</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <span style="font-size:medium; font-weight: bold;">Skills</span>
+        <div style="padding: 5px;"></div>
+        <div *ngIf="skillsData.length > 0">
+          <div style="display: flex; flex-direction: column; justify-self: center;"
+          *ngFor="let skill of skillsData">
+          <span><i class="fas fa-circle"
+              style="font-size:xx-small; color: #4847E0; padding-right: 4px;"></i>Skill</span>
+        </div>
+        </div>
+        <div *ngIf="skillsData.length < 1">
+          <p>No record found</p>
+        </div>
+    </div>
+    </div>
+
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+       <button type="submit" class="btn my-button"     nbButton status="primary">Create Upskilling Plan</button>
+       <span style="padding: 8px;"></span>
+       <button type="submit" class="btn cancel-button" (click)="compareCompetencies()" nbButton status="primary" outline>Compare Competency</button>
+     </div>
+
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="(successionEmployeesData.length > 0 && isSuccessor == false)">
   <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-    <h5 style="padding:20px;">Succesors</h5><a href=""
-      style="padding:20px; font-weight:600; text-decoration: underline;">View Tree</a>
+    <h5 style="padding:20px;">Succesors</h5><a href="" style="padding:20px; font-weight:600; text-decoration: underline;">View Tree</a>
   </div>
   <ngx-tableheader></ngx-tableheader>
-  <ngx-tablecomponent [loading]='loading' [tableColum]="successorsTable" [userData]='successionEmployeesData' [actions]='tableActions'></ngx-tablecomponent>
+  <ngx-tablecomponent [loading]='loading' [tableColum]="successorsTable" [userData]='successionEmployeesData' (actionClick)="tableActionClicked($event)" [actions]='tableActions'></ngx-tablecomponent>
 </nb-card>
 
 <nb-card *ngIf="successionEmployeesData.length < 1">
@@ -260,7 +363,7 @@
     </div>
     </ngx-side-modal>
 
-    <ngx-side-modal [(show)]='newSuccessor' style="width: 600px;">
+  <ngx-side-modal [(show)]='newSuccessor' style="width: 600px;">
       <div modal-header>Add Employee to Plan</div>
       <div modal-body>
               <form name="addCandidateForm" #addCandidateForm="ngForm">
@@ -324,5 +427,143 @@
 
       </div>
       </ngx-side-modal>
+
+  <ngx-side-modal [(show)]='editPlan' style="width: 600px;">
+        <div modal-header>Update Plan</div>
+        <div modal-body>
+                <form name="planForm" #planForm="ngForm">
+                  <div class="form-group row">
+                    <div class="col">
+                      <label>Title</label>
+                      <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
+                      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                        <div *ngIf="title.errors.required">Title is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                   <div class="form-group col">
+                    <label>Employee</label>
+                    <input type="text" class="form-control" [(value)]="employeeData.fullName" readonly>
+                  </div>
+                  </div>
+
+                   <div class="form-group row">
+                    <div class="col">
+                     <label>Competency</label>
+                     <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+                       <option value="">--Select--</option>
+                       <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
+                     </select>
+                     <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
+                      <div *ngIf="competencyTitle.errors.required">Competency is required</div>
+                    </div>
+                    </div>
+                   </div>
+
+                   <div class="form-group row">
+                    <div class="col">
+                     <label>Readiness to start</label>
+                     <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
+                     <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
+                      <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+                    </div>
+                    </div>
+                   </div>
+
+
+                   <div class="form-group row">
+                    <div class="col">
+                     <label>Purpose</label>
+                     <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
+                      <option value="">--Select--</option>
+                      <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
+                    </select>
+                    <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
+                      <div *ngIf="purpose.errors.required">Purpose is required</div>
+                    </div>
+                    </div>
+                   </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
+                     <button type="submit" class="btn my-button" (click)="createSuccessionPlan()" [disabled]="!planForm.valid" nbButton status="primary">Submit</button>
+                     <span style="padding: 8px;"></span>
+                     <button type="submit" class="btn cancel-button" (click)="cancelPlan()" nbButton status="primary" outline>Cancel</button>
+                   </div>
+                 </div>
+                </form>
+        </div>
+    </ngx-side-modal>
+
+  <ngx-side-modal [(show)]='compareCompetency' [position]="center" style="width: 600px;">
+      <div modal-header>Compare Competency</div>
+      <div modal-body>
+              <form name="planForm" #planForm="ngForm">
+                <div class="form-group row">
+                  <div class="col">
+                    <label>Title</label>
+                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
+                    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                      <div *ngIf="title.errors.required">Title is required</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                 <div class="form-group col">
+                  <label>Employee</label>
+                  <input type="text" class="form-control" [(value)]="employeeData.fullName" readonly>
+                </div>
+                </div>
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Competency</label>
+                   <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
+                     <option value="">--Select--</option>
+                     <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
+                   </select>
+                   <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
+                    <div *ngIf="competencyTitle.errors.required">Competency is required</div>
+                  </div>
+                  </div>
+                 </div>
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Readiness to start</label>
+                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
+                   <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
+                    <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+                  </div>
+                  </div>
+                 </div>
+
+
+                 <div class="form-group row">
+                  <div class="col">
+                   <label>Purpose</label>
+                   <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
+                    <option value="">--Select--</option>
+                    <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
+                  </select>
+                  <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
+                    <div *ngIf="purpose.errors.required">Purpose is required</div>
+                  </div>
+                  </div>
+                 </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
+                   <button type="submit" class="btn my-button" (click)="createSuccessionPlan()" [disabled]="!planForm.valid" nbButton status="primary">Submit</button>
+                   <span style="padding: 8px;"></span>
+                   <button type="submit" class="btn cancel-button" (click)="cancelPlan()" nbButton status="primary" outline>Cancel</button>
+                 </div>
+               </div>
+              </form>
+      </div>
+  </ngx-side-modal>
 
 

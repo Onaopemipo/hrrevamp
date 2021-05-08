@@ -79,7 +79,6 @@ export class PlanningComponent implements OnInit {
     {name: 'exit', title: 'Exit'},
   ]
 
-
   topActionButtons = [
     {name: TOP_ACTIONS.ADD_MORE, label: 'Add More', 'icon': 'plus', outline: false},
 
@@ -148,11 +147,11 @@ export class PlanningComponent implements OnInit {
       })
       }
      else if(event.name==TABLE_ACTION.EDIT){
-        this.router.navigateByUrl('/payroll/editpayment')
+
       }
     else if (event.name == TABLE_ACTION.VIEW) {
       console.log(event.data)
-      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.id);
+      this.router.navigateByUrl('/career-succession/profiledetails/' + event.data.holderId);
        }
   }
  tableActions: TableAction[] = [
@@ -163,13 +162,12 @@ export class PlanningComponent implements OnInit {
 ]
  ngOnInit(): void {
     this.loading = true;
+    this.fetchAllPlans();
+    this.fetchCompetencies()
     this.api.list({}).toPromise().then(response => {
       [...this.data ]= response.data;
       this.loading = false;
     });
-
-    this.fetchAllPlans();
-    this.fetchCompetencies()
   }
 
   goback() {
@@ -206,17 +204,16 @@ export class PlanningComponent implements OnInit {
       this.planDataCount = data.totalRecord;
       this.totalItems = data.totalRecord
       this.loading = false;
-      console.log('My plans data here', this.allPlans)
+      console.log('My plans data here', this.allPlans);
     }
   }
 
   async createSuccessionPlan(){
     const data = await this.succession.careerSuccession(this.newSuccessionPlan).toPromise();
-    if(!data.hasError){
+    if(!data.hasError && data.result.isSuccessful === true){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Plan created successfully', 'Dismiss').subscribe(dataAction => {
         if(dataAction){
           this.fetchAllPlans();
-        //  this.router.navigateByUrl('career-succession/planning');
           this.newPlan = false;
         }
       })
@@ -229,16 +226,11 @@ export class PlanningComponent implements OnInit {
         this.newSuccessionPlan.holderId = event[0].id;
         this.newSuccessionPlan.positionId = event[0].employeeContractId;
        }
-      //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
-
-       console.log(selectType, event)
     }
 
     getSuccessingCandidate(event,selectType) {
       console.log(event)
        if(selectType == 'employee')this.newSuccessionPlan.stringSuccessionEmployee = event[0].employeeNumber;
-      //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
-
        console.log(selectType, event)
     }
 

@@ -4,22 +4,26 @@
   <span style="cursor: pointer;"><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px; ">Back</a></span>
 </div>
 <div>
-  <nb-card *ngIf="newCandidate">
+  <nb-card>
     <nb-tabset>
-      <nb-tab *ngIf="employeeCounter < 1" tabTitle="Employee Database">
-        <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+      <nb-tab [active]= true tabTitle="Employee Database">
+        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
+          <ng-template [ngIf]="employeeCounter > 0">
+            <ngx-tableheader></ngx-tableheader>
+            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+            (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+          </ng-template>
       </nb-tab>
 
-      <nb-tab *ngIf="employeeCounter > 0" tabTitle="Employee Database">
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
-        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-      </nb-tab>
-
-      <nb-tab *ngIf="employeeCounter < 1" tabTitle="Recruitment Portal">
-        <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+      <nb-tab tabTitle="Recruitment Portal">
+        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
+          <ng-template [ngIf]="employeeCounter > 0">
+            <ngx-tableheader></ngx-tableheader>
+            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+            (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+          </ng-template>
       </nb-tab>
 
       <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
