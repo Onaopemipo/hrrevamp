@@ -26,18 +26,6 @@
       [currentPage]="currentPage"
       [loading]="loading"
       >
-      <div tableObject>
-        <span class="mb-0" *ngFor="let req of allCapacityPlan.requirements; let i = index">
-
-            <span class="badge" *ngIf="req.jobRoleName">
-              {{req.jobCategoryName}} | {{req.jobRoleName}} - {{req.numberOfResource}}
-            </span>
-            <span class="badge" *ngIf="req.positionName">
-              {{req.jobCategoryName}} | {{req.positionName}} - {{req.numberOfResource}}
-            </span>
-
-          </span>
-      </div>
   </ngx-tablecomponent>
  
  
@@ -496,5 +484,95 @@
     </div>
     <div style="margin-top: 10px;"></div>
     </ngx-side-modal>
+
+
+    <ngx-side-modal [(show)]='showViewRequirementModal' [position]="'Center'" style="width: 500px; height: 1000px;">
+      <div modal-header>View Requirement</div>
+      <div modal-body>
+        <div class="form-group row">
+          <label class="col-md-2 control-label" for="example-text-input">Date Created:</label>
+          <div class="col-md-10">
+          {{viewplan?.dateCreated | date}}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 control-label" for="example-text-input">Logged By:</label>
+          <div class="col-md-10">
+          {{viewplan?.LoggedByUserName}}
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr style="background-color: #d7d0e6;">
+              <th scope="col" style="font-size: 12px; font-weight: normal">Job Category Name</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Job Type Name</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Requested Resource</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Cost Per Resource</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Total Cost</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">
+                Approved Resource
+              </th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">
+                Approved Resource Cost
+              </th>
+            
+              <th scope="col" style="font-size: 12px; font-weight: normal">Comment</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Approved By</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Approved Date</th>
+              <th scope="col" style="font-size: 12px; font-weight: normal">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let req of allreqPlan;let i = index">
+              <td>{{req.Ctype}}</td>
+              <td>
+                {{req.cJtypeName}}
+              </td>
+              <td><span>{{req.Nstaff}}</span></td>
+              <td><span>{{req.costPerResource | number}}</span></td>
+              <td><span>{{req.Nstaff * req.costPerResource | number}}</span></td>
+              <td>
+                {{req.ApprovedR}}
+             </td>
+             <td><span>{{req.ApprovedR * req.costPerResource | number}}</span></td>
+    
+              <td>     
+                <span >{{req.HRComment}}</span>
+              </td>
+              <td>{{req.ApprovedByName}}</td>
+              <td>{{req.ApporvedDate | date}}</td>
+              <td>
+                <span class="mb-0" >
+                  <span class="badge" style="background-color: #494948;width: 80px;" *ngIf="req.Status == 'Returned'">
+                    {{req.Status}}
+                  </span>
+                  <span class="badge" style="background-color: #d99700;width: 80px;" *ngIf="req.Status == 'Pending'">
+                    {{req.Status}}
+                  </span>
+                  <span class="badge" style="background-color: #EF5350;width: 80px;" *ngIf="req.Status == 'Rejected'">
+                    {{req.Status}}
+                  </span>
+                  <span class="badge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 'Approved'">
+                    {{req.Status}}
+                  </span>
+                </span> 
+                </td>
+                
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        <div modal-actions class="d-flex"
+        style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+
+        <div style="padding-left: 15px;">
+          <button nbButton outline status="primary" (click)="showViewRequirementModal = false" class="d-flex column" style="background-color: white;">Discard</button>
+        </div>
+       
+      </div>
+      <div style="margin-top: 10px;"></div>
+      </ngx-side-modal>
   </nb-card-body>
   </nb-card>
