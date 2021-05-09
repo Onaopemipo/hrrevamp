@@ -24,7 +24,7 @@ export class MyAppraisalsComponent implements OnInit {
 
   async loadData(pageNo) {
     this.loading = true;
-    const res = (await this.api.employeeAppraisalHistories(10, pageNo).toPromise())
+    const res = (await this.api.employeeAppraisalHistories(0, 10, pageNo).toPromise())
     this.appraisals = res.result;
     this.loading = false;
   }

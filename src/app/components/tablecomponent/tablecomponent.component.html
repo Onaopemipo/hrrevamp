@@ -1,5 +1,5 @@
 <ngx-tableheader *ngIf="showFilter"
-[bulkAction_isChecked]="bulkAction_isChecked"
+ [bulkAction_isChecked]="bulkAction_isChecked"
  [showCheckBox] = "showCheckBox"
  [showBulkAction]="showBulkAction"
  [Bulkactions]=[Bulkactions]
@@ -24,7 +24,6 @@
         <tr *ngFor="let data of userData; let i = index">
           <td *ngIf="showCheckBox">
             <div style="padding: 10px">
-
               <nb-checkbox (change)='customActionChecked(i, data)' [checked]="data['is_selected']"></nb-checkbox>
             </div>
           </td>

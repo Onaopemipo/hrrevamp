@@ -1,8 +1,8 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { KpiDTO } from 'app/_services/service-proxies';
+import { KpiDTO, SavePerformanceReviewServiceProxy } from 'app/_services/service-proxies';
 import { AuthenticationService } from './../../../../_services/authentication.service';
 import { AuthService } from './../../../../_services/auth.service';
-import { EmployeeCycleKrasServiceProxy, FetchKPIsServiceProxy, EmployeePerformanceReviewServiceProxy, KpiReviewDTO, GetEmployeePerformanceReviewServiceProxy, AssignedKPIs, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, PerformanceReviewDTO } from './../../../../_services/service-proxies';
+import { EmployeeCycleKrasServiceProxy, FetchKPIsServiceProxy, EmployeePerformanceReviewServiceProxy, KpiReviewDTO, GetEmployeePerformanceReviewServiceProxy, AssignedKPIs, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, PerformanceReviewDTO, SaveEmployeeAppraisalReviewServiceProxy } from './../../../../_services/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -33,6 +33,8 @@ export class PerformanceReviewComponent implements OnInit {
     private reviewePerformanceService: GetEmployeePerformanceReviewServiceProxy,
     private employeePerformanceService: EmployeePerformanceReviewServiceProxy,
     private submitEmployeePerformanceService: SubmitPerformanceReviewServiceProxy,
+    private saveEmployeePerformanceService: SavePerformanceReviewServiceProxy,
+    private saveEmployeeAppraisalService: SaveEmployeeAppraisalReviewServiceProxy,
     private submitReviewerPerformanceService: SubmitEmployeeAppraisalReviewServiceProxy,
     private user: AuthService,
     private user1: AuthenticationService,
@@ -64,8 +66,9 @@ export class PerformanceReviewComponent implements OnInit {
         employeeComment: this.employeeComment,
         reviewerComment: '',
         assignedKPIs: JSON.stringify(this.tempEditingData),
+        hrComment: '',
       });
-      this.submitEmployeePerformanceService.submitEmployeePerformanceReview(performanceData).subscribe(data => {
+      this.saveEmployeePerformanceService.saveEmployeePerformanceReview(performanceData).subscribe(data => {
         this.alertService.openModalAlert(
           data.hasError || !data.result.isSuccessful ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS,
           data.message,
