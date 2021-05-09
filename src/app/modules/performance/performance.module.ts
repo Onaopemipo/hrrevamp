@@ -1,3 +1,6 @@
+import { MyAppraisalCycleComponent } from './pages/my-appraisal-cycle/my-appraisal-cycle.component';
+import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy } from './../../_services/service-proxies';
+import { MyAppraisalsComponent } from './pages/my-appraisals/my-appraisals.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerformanceComponent } from './performance.component';
@@ -38,6 +41,8 @@ import { KpiService } from './services/kpi.service';
     RatingComponent,
     SetKpiComponent,
     ScoreCardComponent,
+    MyAppraisalsComponent,
+    MyAppraisalCycleComponent,
     WorkflowComponent,
   ],
   providers: [
@@ -54,6 +59,12 @@ import { KpiService } from './services/kpi.service';
     AddUpdateKPIServiceProxy,
     FetchKPIsServiceProxy,
     AppraisalService,
+    GetEmployeeAppraisalHistoriesServiceProxy,
+    GetEmployeePerformanceReviewServiceProxy,
+    EmployeePerformanceReviewServiceProxy,
+    SubmitEmployeeAppraisalReviewServiceProxy,
+    SubmitPerformanceReviewServiceProxy,
+    EmployeeCycleKrasServiceProxy,
   ],
   imports: [
     CommonModule,

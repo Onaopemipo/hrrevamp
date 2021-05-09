@@ -125,6 +125,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/performance/appraisals'
       },
       {
+        title: 'My Appraisals',
+        link: '/performance/my-appraisals'
+      },
+      {
         title: 'Rating',
         link: '/performance/rating'
       },
