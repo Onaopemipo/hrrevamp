@@ -5,31 +5,31 @@
         <div class="row summary">
             <div class="col-sm-4">
                 <div>Employee Name</div>
-                <div>kwame eugene</div>
+                <div>{{kra.employeeName}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Department</div>
-                <div>kwame eugene</div>
+                <div>{{kra.department}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Position</div>
-                <div>kwame eugene</div>
+                <div>{{kra.position}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Reviewer Name</div>
-                <div>kwame eugene</div>
+                <div>{{kra.reviewerName}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Reviewer Title</div>
-                <div>kwame eugene</div>
+                <div>{{kra.reviewerTitle}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Last appraised date</div>
-                <div>kwame eugene</div>
+                <div>{{kra.lastAppraisedDate | date}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Period under review</div>
-                <div>kwame eugene</div>
+                <div>{{kra.periodUnderReview}}</div>
             </div>
         </div>
     </div>
@@ -44,46 +44,60 @@
                     <th></th>
                     <th>Employee Score</th>
                     <th>Employee Comment</th>
-                    <th>Reviewer Score</th>
-                    <th>Reviewer Comment</th>
-                    <th>Average Score</th>
+                    <th  *ngIf="!isEmployeePage">Reviewer Score</th>
+                    <th *ngIf="!isEmployeePage">Reviewer Comment</th>
+                    <th *ngIf="!isEmployeePage && kra.reviewerTitle">Average Score</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor='let a of [1,2,3,4,5]'>
-                    <td>System Design</td>
-                    <td>40</td>
-                    <td>Good</td>
-                    <td>40</td>
-                    <td>Good</td>
-                    <td>40</td>
+                <tr *ngFor='let kpi of tempEditingData'>
+                    <td>{{kpi.title}}</td>
+                    <td>
+                      <div *ngIf="kra.isEmployeeSubmitted">
+                        {{kpi.employeeScore}}
+                      </div>
+                      <div *ngIf="!kra.isEmployeeSubmitted">
+                        <input class="form-control" [(ngModel)]="kpi.employeeScore"/>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="kra.isEmployeeSubmitted">
+                        {{kpi.employeeComment}}
+                      </div>
+                      <div *ngIf="!kra.isEmployeeSubmitted">
+                        <input class="form-control" [(ngModel)]="kpi.employeeComment"/>
+                      </div>
+                    </td>
+                    <td *ngIf="!isEmployeePage">{{kpi.reviewerScore}}</td>
+                    <td *ngIf="!isEmployeePage">{{kpi.reviewerComment}}</td>
+                    <td *ngIf="!isEmployeePage && kra.isReviewerSubmitted">{{kpi.averageScore}}</td>
                 </tr>
             </tbody>
             <tfoot>
-                <tr>
+                <!-- <tr>
                     <td colspan="5" style="text-align: right;">
                         Total
                     </td>
-                    <td>40</td>
-                </tr>
+                    <td></td>
+                </tr> -->
             </tfoot>
         </table>
     </div>
     <div>
         <div class="linear-form">
-            <div class="form-group">
+            <div class="form-group" *ngIf="!kra.isEmployeeSubmitted">
                 <label>Employee's Comment</label>
-                <input class="form-control"/>
+                <input class="form-control" [(ngModel)]="employeeComment"/>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="kra.isEmployeeSubmitted && !kra.isReviewerSubmitted">
                 <label>Reviewer's Comment</label>
                 <input class="form-control"/>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="kra.isEmployeeSubmitted && !kra.isReviewerSubmitted">
                 <label>Recommendations</label>
                 <select class="form-control"></select>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label></label>
                 <div>
                     <button nbButton status='primary' outline style="border: none;">
@@ -91,11 +105,11 @@
                         Add more
                     </button>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label></label>
                 <div>
-                    <button nbButton status='primary'>
+                    <button nbButton status='primary' (click)="submit()">
                         Submit
                     </button>
                     <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">

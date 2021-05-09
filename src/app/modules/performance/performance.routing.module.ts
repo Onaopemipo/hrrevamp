@@ -1,8 +1,10 @@
+import { MyAppraisalCycleComponent } from './pages/my-appraisal-cycle/my-appraisal-cycle.component';
+import { MyAppraisalsComponent } from './pages/my-appraisals/my-appraisals.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PerformanceComponent } from './performance.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-//import { PerformanceManagementCycleComponent } from './pages/performance-management-cycle/performance-management-cycle.component';
+import { PerformanceManagementCycleComponent } from './pages/performance-management-cycle/performance-management-cycle.component';
 import { SetKpiComponent } from './page/set-kpi/set-kpi.component';
 import { KeyResultAreaComponent } from './pages/key-result-area/key-result-area.component';
 import { AssignKraComponent } from './page/assign-kra/assign-kra.component';
@@ -27,10 +29,19 @@ export const routes: Routes = [
             path: 'appraisals',
             component: AppraisalComponent,
         },
-        // {
-        //     path: 'cycle',
-        //     component: PerformanceManagementCycleComponent
-        // },
+        {
+          path: 'my-appraisals',
+          component: MyAppraisalsComponent,
+        },
+
+        {
+          path: 'my-appraisals/cycle/:id',
+          component: MyAppraisalCycleComponent,
+        },
+        {
+            path: 'cycle',
+            component: PerformanceManagementCycleComponent
+        },
         {
             path: 'kra',
             component: KeyResultAreaComponent,
@@ -40,9 +51,13 @@ export const routes: Routes = [
             component: AssignKraComponent,
         },
         {
-            path: 'kra/:id/kpi',
+            path: 'my-appraisals/kra/:id',
             component: SetKpiComponent,
         },
+        {
+          path: 'kra/:id/kpi',
+          component: SetKpiComponent,
+      },
         {
             path: 'matrix',
             component: PerformanceMatrixComponent,
@@ -54,6 +69,10 @@ export const routes: Routes = [
         {
             path: 'reviews',
             component: PerformanceReviewsComponent,
+        },
+        {
+          path: 'cycle/:cycle_id/kra/:kra_id/my-review',
+          component: PerformanceReviewComponent,
         },
         {
             path: 'rating',
