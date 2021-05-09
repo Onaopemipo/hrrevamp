@@ -108,7 +108,7 @@ unlockComment: string = "";
         newQuery.departments, newQuery.status, newQuery.taskType, 1, 10).subscribe(data => {
           this.loading = false;
           if (!data.hasError) {
-            this.DepartmentManPowerActivities = data.result;
+           // this.DepartmentManPowerActivities = data.result;
             
           }
         });
