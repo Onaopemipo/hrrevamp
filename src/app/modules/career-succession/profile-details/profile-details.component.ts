@@ -93,7 +93,7 @@ export class ProfileDetailsComponent implements OnInit {
 
   tableActionClicked(event: TableActionEvent){
     if(event.name==TABLE_ACTION.DELETE){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to remove employee?', 'Yes').subscribe(dataAction => {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, event.data.planTitle, 'Yes').subscribe(dataAction => {
         if(dataAction){
           this.deleteEmployee.deleteEmployeeFromCareerSuccesionPlan(this.employeeId, event.data.id).subscribe(data => {
             if (!data.hasError && data.result.isSuccessful === true) {
@@ -119,7 +119,6 @@ export class ProfileDetailsComponent implements OnInit {
   {name: TABLE_ACTION.VIEW, label: 'View Profile'},
   {name: TABLE_ACTION.DELETE, label: 'Delete'},
   {name: TABLE_ACTION.EDIT, label: 'Edit'},
-
 ]
 
   allowmultipleselection: boolean = true;
@@ -159,7 +158,7 @@ export class ProfileDetailsComponent implements OnInit {
   compareCompetency: boolean = false;
   center: boolean = true;
 
-  loading: boolean = true;
+  loading: boolean = false;
   successionEmployeesData: CareerSuccessorDTO [] = [];
 
   constructor(private navCtrl: Location, private alertMe: AlertserviceService,
@@ -208,23 +207,25 @@ export class ProfileDetailsComponent implements OnInit {
 
 
 
-  // async fetchSinglePlan(){
-  //   const data = await this.successionService.getCareerSuccessionPlanById(this.employeeId).toPromise();
-  //   if(!data.hasError){
-  //     this.planDetails = data.result;
-  //     this.competencyId = data.result.competencyId;
-  //     this.employeeId = data.result.holderId;
-  //     console.log('Yippeee',this.planDetails);
-  //     console.log('Wowza',data.result.competencyId);
-  //     this.fetchProfile();
-  //     this.fetchCompetencies();
-  //     this.getSuccessors();
-  //   }
-  // }
+  async fetchSinglePlan(){
+    const data = await this.successionService.getCareerSuccessionPlanById(this.employeeId).toPromise();
+    if(!data.hasError){
+      this.planDetails = data.result;
+      this.competencyId = data.result.competencyId;
+      this.employeeId = data.result.holderId;
+      console.log('Yippeee',this.planDetails);
+      console.log('Wowza',data.result.competencyId);
+      this.fetchProfile();
+      this.fetchCompetencies();
+      // this.getSuccessors();
+    }
+  }
 
 
-async fetchProfile(){
-    this.employee.getEmployeeById(this.employeeId).subscribe(data => {
+fetchProfile(){
+       this.loading = true;
+      this.employee.getEmployeeById(this.employeeId).subscribe(data => {
+        this.loading = false;
       if(!data.hasError){
         this.employeeData = new MyEmployeeDTO(data.result);
         this.certificationData = data.result.certifications
@@ -237,11 +238,10 @@ async fetchProfile(){
         this.locationName = data.result.contracts[0].locationName;
         console.log('My Details', this.employeeData);
         console.log('My Contract', this.employeeContractData);
-        console.log('My position ID:',this.positionId )
+        console.log('My position ID:',this.positionId)
         this.getEmployeeSuccessionPlan();
         this.getPlanSuccessors();
         this.pageLoading = false;
-        this.loading = false;
       }
     })
   }

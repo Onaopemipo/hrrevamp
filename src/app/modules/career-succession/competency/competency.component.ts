@@ -44,18 +44,20 @@ export class CompetencyComponent implements OnInit {
 
   tableActionClicked(event: TableActionEvent){
     if(event.name==TABLE_ACTION.VIEW){
-     this.router.navigateByUrl('/roles' + event.data.id)
+
       }
 
       else if(event.name==TABLE_ACTION.DELETECOMPETENCY){
-      //  this.router.navigateByUrl('' + event.data.id)
-      // alert(event.data.id)
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to Delete','Yes').subscribe(dataAction => {
-        this.competencyService.deleteCompetency(event.data.id).subscribe(data => {
-          if(!data.hasError){
-           this.router.navigateByUrl('career-succession/competency')
-          }
-        })
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, event.data.competencyTitle,'Yes').subscribe(dataAction => {
+        if(dataAction){
+          this.competencyService.deleteCompetency(event.data.id).subscribe(data => {
+            if(!data.hasError){
+              this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successfully Deleted', 'Dismiss').subscribe(res => {
+                this.router.navigateByUrl('career-succession/competency');
+              })
+            }
+          })
+        }
       })
         }
  }
@@ -68,6 +70,7 @@ export class CompetencyComponent implements OnInit {
   newCompetency: boolean = false;
   competencyCounter: number = 0;
   myPanel: string = '';
+  loading: boolean = false;
 
   selectedCase: string = 'Role';
   selectedPanel: any = { title: 'Role', label: 'Role', status: 'Active'};
@@ -107,11 +110,11 @@ export class CompetencyComponent implements OnInit {
   allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
   competencyRequirement = new CompetencyRequirmentsDTO;
   addedRequirements: [] = [];
-tempQualReq = [];
-tempSkillReq = [];
-tempCertReq = [];
-tempTrainReq = [];
-allPositions: PositionDTO [] = [];
+  tempQualReq = [];
+  tempSkillReq = [];
+  tempCertReq = [];
+  tempTrainReq = [];
+  allPositions: PositionDTO [] = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy, private positionService: GetAllPositionsServiceProxy,
@@ -149,13 +152,17 @@ allPositions: PositionDTO [] = [];
     }
   }
 
-  async getCompetency(){
-    const data = await this.competencyService.fetchCompetency(undefined,undefined,20,1).toPromise();
-    if(!data.hasError){
-      this.allCompetencies = data.result;
-      this.competencyCounter = data.totalRecord;
-      console.log('All competencies', this.allCompetencies)
-    }
+getCompetency(){
+    this.loading = true;
+    this.competencyService.fetchCompetency(undefined,undefined,20,1).subscribe(data => {
+      this.loading = false;
+      if(!data.hasError){
+        this.allCompetencies = data.result;
+        this.competencyCounter = data.totalRecord;
+        console.log('All competencies', this.allCompetencies)
+      }
+    })
+
   }
 
   addRequirement(){
@@ -257,8 +264,4 @@ allPositions: PositionDTO [] = [];
   updateCompetency(event:any){
     alert(event);
   }
-
-  // deleteCompetency(event:any){
-  //   alert(event)
-  // }
 }

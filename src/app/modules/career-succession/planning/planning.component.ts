@@ -161,23 +161,16 @@ export class PlanningComponent implements OnInit {
 
 ]
  ngOnInit(): void {
-    this.loading = true;
     this.fetchAllPlans();
     this.fetchCompetencies()
     this.api.list({}).toPromise().then(response => {
       [...this.data ]= response.data;
-      this.loading = false;
     });
   }
 
   goback() {
     this.navCtrl.back();
   }
-
-  // toggleToCreatePlan(){
-  //   this.newPlan = true;
-
-  // }
 
   addPlan(){
     this.newPlan = true;
@@ -195,17 +188,21 @@ export class PlanningComponent implements OnInit {
     }
   }
 
-  async fetchAllPlans() {
+  fetchAllPlans() {
     this.loading = true;
-    const data = await this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.CompetencyId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize).toPromise();
-    console.log(data.result);
+    this.planService.getCareerSuccessionPlan(this.filter.planTitle,this.filter.employeeName,this.filter.employeeNumber,this.filter.employeeId,this.filter.CompetencyId,this.filter.positionId,this.filter.pageNumber,this.filter.pageSize)
+    .subscribe(data => {
+      this.loading = false;
     if(!data.hasError){
       this.allPlans = data.result;
       this.planDataCount = data.totalRecord;
-      this.totalItems = data.totalRecord
-      this.loading = false;
+      this.totalItems = data.totalRecord;
       console.log('My plans data here', this.allPlans);
+
+
     }
+    })
+
   }
 
   async createSuccessionPlan(){
