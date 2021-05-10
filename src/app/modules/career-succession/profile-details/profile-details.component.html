@@ -497,72 +497,127 @@ Create Succession
         </div>
     </ngx-side-modal>
 
-  <ngx-side-modal [(show)]='compareCompetency' [position]="'center'" style="width: 600px;">
+  <ngx-side-modal [(show)]='compareCompetency' [position]="'Center'" style="width: 600px;">
       <div modal-header>Compare Competency</div>
       <div modal-body>
-              <form name="planForm" #planForm="ngForm">
-                <div class="form-group row">
-                  <div class="col">
-                    <label>Title</label>
-                    <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="newSuccessionPlan.planTitle" required>
-                    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                      <div *ngIf="title.errors.required">Title is required</div>
-                    </div>
+        <div>
+          <nb-card>
+            <nb-card-body>
+                <div class="row" style="display: flex; flex-direction: row; justify-content:center; align-items: center;">
+                    <div class="col-md-3 col-lg-3 col-sm-3"></div>
+
+                      <div class="col-md-3 col-lg-3 col-sm-3">
+                        <div>
+                          <img src="assets/icons/department.jpg" style="width:3rem;">
+                        </div>
+                        <span style="font-weight: 600; padding-right:25px; text-align: center;">Onaopemipo</span><br>
+                        <span>Sales</span>
+                      </div>
+
+                      <div class="col-md-3 col-lg-3 col-sm-3">
+                        <div>
+                          <img src="assets/icons/department.jpg" style="width:3rem;">
+                        </div>
+                        <span style="font-weight: 600; padding-right:25px; text-align: center;">Philipiano</span><br>
+                        <span>Marketing</span>
+                      </div>
+
+                      <div class="col-md-3 col-lg-3 col-sm-3"></div>
+                  </div>
+            </nb-card-body>
+          </nb-card>
+                </div>
+
+                <div style="padding: 10px"></div>
+
+        <nb-card>
+          <nb-card-header>Role Competencies</nb-card-header>
+          <nb-card-body>
+            <div>
+              <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Tag</span>
+                    <span class="title">Tag</span>
+                    <span class="title">Tag</span>
+                    <span class="title">Tag</span>
+                    <span class="title">Tag</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
                   </div>
                 </div>
 
-                <div class="row">
-                 <div class="form-group col">
-                  <label>Employee</label>
-                  <input type="text" class="form-control" [(value)]="employeeData.fullName" readonly>
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                    <span class="title">Bsc. in Sales and Marketing</span>
+                  </div>
                 </div>
                 </div>
 
-                 <div class="form-group row">
-                  <div class="col">
-                   <label>Competency</label>
-                   <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
-                     <option value="">--Select--</option>
-                     <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
-                   </select>
-                   <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
-                    <div *ngIf="competencyTitle.errors.required">Competency is required</div>
-                  </div>
-                  </div>
-                 </div>
+            </div>
 
-                 <div class="form-group row">
-                  <div class="col">
-                   <label>Readiness to start</label>
-                   <input type="number" class="custom-select" name="readinessToStart" #readinessToStart="ngModel" [(ngModel)]="newSuccessionPlan.readinessToStart" placeholder="Readiness in months" required>
-                   <div *ngIf="readinessToStart.invalid && (readinessToStart.dirty || readinessToStart.touched)" class="error">
-                    <div *ngIf="readinessToStart.errors.required">Readiness is required</div>
+          </nb-card-body>
+        </nb-card>
+        <div style="padding: 10px"></div>
+        <nb-card>
+          <nb-card-header>Skills</nb-card-header>
+          <nb-card-body>
+            <div>
+              <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Communication</span>
+                    <span class="title">Computer Literacy</span>
+                    <span class="title">Time Management</span>
+                    <span class="title">Complete Candor</span>
                   </div>
+                </div>
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">No</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                    <span class="title">No</span>
+                    <span class="title">No</span>
                   </div>
-                 </div>
+                </div>
 
-
-                 <div class="form-group row">
-                  <div class="col">
-                   <label>Purpose</label>
-                   <select type="text"  class="custom-select" name="purpose" #purpose="ngModel" [(ngModel)]="newSuccessionPlan.purpose">
-                    <option value="">--Select--</option>
-                    <option *ngFor="let purpose of allPurposes" [value]="purpose.name">{{purpose.title}}</option>
-                  </select>
-                  <div *ngIf="purpose.invalid && (purpose.dirty || purpose.touched)" class="error">
-                    <div *ngIf="purpose.errors.required">Purpose is required</div>
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Yes</span>
+                    <span class="title">No</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                    <span class="title">No</span>
+                    <span class="title">Yes</span>
                   </div>
-                  </div>
-                 </div>
+                </div>
+                </div>
 
-                <div class="form-group row">
-                  <div class="col-sm-6" style="display: flex; flex-direction: row; justify-content: space-between;">
-                   <button type="submit" class="btn my-button" (click)="createSuccessionPlan()" [disabled]="!planForm.valid" nbButton status="primary">Submit</button>
-                   <span style="padding: 8px;"></span>
-                   <button type="submit" class="btn cancel-button" (click)="cancelPlan()" nbButton status="primary" outline>Cancel</button>
-                 </div>
-               </div>
-              </form>
+            </div>
+
+          </nb-card-body>
+        </nb-card>
       </div>
   </ngx-side-modal>
 
