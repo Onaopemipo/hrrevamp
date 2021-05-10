@@ -37,7 +37,7 @@ export class CreateBenefitComponent implements OnInit {
   showPlan: boolean = false;
   submitbtnPressed: boolean = false;
   AddVendorPlan = new ManageVendorPlanDto().clone();
-  plans:VendorPlanDTO
+  plans: VendorPlanDTO[] = [];
   constructor(
     private common: CommonServiceProxy,
     private GetAllVendorServiceProxy: GetAllVendorServiceProxy,
