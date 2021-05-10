@@ -74,7 +74,7 @@ export class CapacityPlanningComponent implements OnInit {
     {name: 'activityName', title: 'Activity Name',type: ColumnTypes.Text},
     {name: 'activityNameType', title: 'Task Type',type: ColumnTypes.Text},
     {name: 'description', title: 'Justification',type: ColumnTypes.Text},
-    { name: 'requirements', title: 'Requirements', type: ColumnTypes.Object},
+    // { name: 'requirements', title: 'Requirements', type: ColumnTypes.Object},
     { name: 'year', title: 'Calendar Year',type: ColumnTypes.Text },
     {name: 'statusName', title: 'Status',type: ColumnTypes.Status},
   ];
@@ -103,6 +103,7 @@ Jobgrade =  []
   editOperations: boolean = false;
   addRequirementObj = new DepartmentManPowerActivityDTO().clone();
   showEditRequirementModal: boolean = false;
+  showViewRequirementModal: boolean = false;
   constructor(private alertservice: AlertserviceService, private myDropdown: DataServiceProxy,
     private ManpowerService: ManpowerServiceProxy,private CommonService: CommonServiceProxy,public CustomService: CustomServiceService) { }
   setSelectedPlan(data) {
@@ -159,8 +160,8 @@ Jobgrade =  []
       this.modificationStatus = true;      
       this.setSelectedPlan(event.data);
     }
-    if (event.name == "3") {
-
+    if (event.name == ACTIONS.VIEW) {
+      this.viewPlanRequirement(event.data);
     }
      }
   filterUpdated(filter: any) {
@@ -448,7 +449,8 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     }
   }
 
-  addexistplanRequirement(planrequirement){ 
+  addexistplanRequirement(planrequirement) {
+
     if(this.validCost){
       this.loading = true;
     var cJtypeName = this.JcategoryType[planrequirement.categoryType].name;
@@ -464,7 +466,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     var PostionId = reqObj.Ctype == "Position"? reqObj.Jtype: null;
   //  var GradeId = reqObj.Ctype == "Grade"? reqObj.Jtype: null;
     var planReq = planrequirement.ID;
-    if(!planrequirement.id) {planReq = 0;}
+    if(!planrequirement.ID) {planReq = 0;}
 
       this.addRequirementObj.id = planReq;
       this.addRequirementObj.departmentActivityId = this.viewplan.id;
@@ -473,21 +475,22 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
       this.addRequirementObj.postionId = PostionId;
       this.addRequirementObj.numberOfResource = reqObj.Nstaff;
       this.addRequirementObj.costPerResource = reqObj.RCost;
-      console.log(this.addRequirementObj);
-      // this.ManpowerService.addRequirementToPlan(this.addRequirementObj).subscribe(data => {
-      //   var respData = data;
-      //   if (!respData.hasError) {
-      //     this.showAddRequirementModal = false;
-      //     this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
-      //     this.getallCaplan(true);
-         
-      //   }
-      //   else {
-      //     this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');
-      //          }
 
-      //   this.loading = false;
-      // })
+      this.ManpowerService.addRequirementToPlan(this.addRequirementObj).subscribe(data => {
+        var respData = data;
+        if (!respData.hasError) {
+          this.showAddRequirementModal = false;
+          this.showEditRequirementModal = false;
+          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, respData.message, 'OK');
+          this.getallCaplan(true);
+         
+        }
+        else {
+          this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK');
+               }
+
+        this.loading = false;
+      })
      
   
   
@@ -502,26 +505,31 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
 
   }
   openEditRequirement(req) {
-    console.log(req);
+
     this.showEditRequirementModal = true;
     this.validCost = true;
 this.planrequirement.ID = req.ID;
 if(req.Ctype == "Job Role"){
-  this.JcategoryType = this.jobRole;
+  this.JcategoryType = [];
+  this.jobRole.forEach(value => {
+    let newObj = {
+      ID: value.id,
+      name: value.name
+    }
+    this.JcategoryType.push(newObj)
+  })
       }
       if(req.Ctype == "Position"){
         this.JcategoryType=[];
         this.JobPosition.forEach(value=>{
           let newObj = {
-            ID: value.ID,
+            ID: value.id,
             name: value.title
           }
           this.JcategoryType.push(newObj)
         });
             }
-            if(req.Ctype == "Grade"){
-              this.JcategoryType = this.Jobgrade;
-                  }
+  
 var cjPos =  this.JcategoryType.findIndex(j=>j.name == req.cJtypeName);
 
 this.planrequirement.jobCategory = req.Ctype;
@@ -529,11 +537,16 @@ this.planrequirement.categorytypeName = req.cJtypeName;
 this.planrequirement.numberOfStaff = req.Nstaff;
 this.planrequirement.categoryType = cjPos;
 this.planrequirement.costPerResource = req.costPerResource;
-
+    this.popover.hide();
+  }
+  viewPlanRequirement(plan) {
+    this.showViewRequirementModal = true;
+    this.setSelectedPlan(plan);
   }
   ngOnInit(): void {
     this.planrequirement.numberOfStaff = 0;
     this.newcaplan.requirements = [];
+
     this.newcaplan.status = 0;   
     this.getallCaplan(false);
     this.getJobRoles();

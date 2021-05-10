@@ -1,10 +1,10 @@
-<ngx-tableheader *ngIf="showFilter" 
-[bulkAction_isChecked]="bulkAction_isChecked" 
- [showCheckBox] = "showCheckBox" 
- [showBulkAction]="showBulkAction" 
- [Bulkactions]=[Bulkactions] 
- (bulkAction_Checked)="handleBulkChecked($event)" 
- [filterFields]="tableColum" 
+<ngx-tableheader *ngIf="showFilter"
+ [bulkAction_isChecked]="bulkAction_isChecked"
+ [showCheckBox] = "showCheckBox"
+ [showBulkAction]="showBulkAction"
+ [Bulkactions]=[Bulkactions]
+ (bulkAction_Checked)="handleBulkChecked($event)"
+ [filterFields]="tableColum"
  (filterDataChange)="filterUpdated($event)"
  (downloadasChange)="handleExportAs($event)"
  >
@@ -24,7 +24,6 @@
         <tr *ngFor="let data of userData; let i = index">
           <td *ngIf="showCheckBox">
             <div style="padding: 10px">
-              
               <nb-checkbox (change)='customActionChecked(i, data)' [checked]="data['is_selected']"></nb-checkbox>
             </div>
           </td>
@@ -33,12 +32,32 @@
             <span *ngIf="col.type === COLUMN_TYPES.Number">{{ data[col.name] | number: '.2'}}</span>
             <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
             <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
+            <span *ngIf="col.type === COLUMN_TYPES.Mark">
+              <span>
+                <nb-icon *ngIf="data[col.name]" icon="checkmark-circle-2-outline" class="text-primary"></nb-icon>
+                <nb-icon *ngIf="!data[col.name]" icon="close-circle-outline" class="text-danger"></nb-icon>
+            </span>
+            </span>
             <span *ngIf="col.type === COLUMN_TYPES.Link">
               <button nbButton status='primary' outline
                 style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
                 (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
-            </span> 
-            <ng-content *ngIf="col.type === COLUMN_TYPES.Object" select="[tableObject]"> </ng-content>
+            </span>
+            <!-- <div *ngIf="col.type === COLUMN_TYPES.Object" >
+              <div class="row" *ngFor="let req of data[col.name]; let i = index">
+                <div class="col-sm-12" *ngIf="req.jobRoleName">
+                  <span class="cbadge"   style="margin: 10px;">
+                    {{req.jobCategoryName}} | {{req.jobRoleName}} - {{req.numberOfResource}}
+                  </span>
+                </div>
+                <div class="col-sm-12" *ngIf="req.positionName">
+                  <span class="cbadge"  >
+                    {{req.jobCategoryName}} | {{req.positionName}} - {{req.numberOfResource}}
+                  </span>
+                </div>
+              </div>
+
+            </div> -->
           </td>
           <td *ngIf="showActions">
             <ng-template #card>
@@ -89,11 +108,11 @@
       <nb-actions size="medium">
         <nb-action [disabled]="currentPage <= 1" (click)="pageClicked(currentPage - 1)" icon="arrow-ios-back-outline"></nb-action>
       <nb-action>{{currentPage}}</nb-action>
-    
+
         <nb-action icon="arrow-ios-forward-outline" [disabled]="currentPage <= totalNoOfPages" (click)="pageClicked(currentPage + 1)"></nb-action>
       </nb-actions>
- 
- 
+
+
     </div>
   </div>
 

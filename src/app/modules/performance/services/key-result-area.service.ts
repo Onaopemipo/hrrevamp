@@ -35,7 +35,7 @@ export class MyKeyResultAreaFilter{
 export class KeyResultAreaService extends CrudService<MyKeyResultAreaFilter, MyKeyResultArea, MyKeyResultArea>{
   list(filter: MyKeyResultAreaFilter): Observable<ListResult<MyKeyResultArea>> {
     return this.list_api.getKeyResultAreas(
-      filter.status, filter.ratingType, filter.startegyCategoryId, 10, filter.pageNo).pipe(map(res => {
+      filter.status, filter.ratingType, filter.startegyCategoryId, 10, filter.pageNo ? filter.pageNo : 1).pipe(map(res => {
       return {
         data: res.result.map(obj => new MyKeyResultArea(obj)),
         length: res.totalCount
@@ -52,10 +52,10 @@ export class KeyResultAreaService extends CrudService<MyKeyResultAreaFilter, MyK
     throw new Error('Method not implemented.');
   }
 
-  assignObj(kra: MyKeyResultArea, reviewerId, employees) {
+  assignObj(cycle_id: number, kras: string, employees) {
     const obj = new KraAssignDTO({
-      cycleId: kra.id,
-      selectedKraReviewers: "",
+      cycleId: cycle_id,
+      selectedKraReviewers: kras,
       // krAs: String(kra.id),
       // reviewerId: reviewerId,
       employeeContractIds: employees,

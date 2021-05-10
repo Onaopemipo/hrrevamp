@@ -2,22 +2,33 @@
 
 <div class="main-page-container">
     <div class="linear-form">
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label>Appraisal Cycle</label>
-            <select class="form-control"></select>
+            <select class="form-control" [(ngModel)]="selected_cylce">
+              <option *ngFor="let cycle of cycles" [value]="cycle.id">{{cycle.name}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label>Key Result Area</label>
-            <select class="form-control"></select>
-        </div> -->
+            <select class="form-control" [(ngModel)]="editing_kra_data.kraId">
+              <option *ngFor="let kra of unselected_kras" [value]="kra.id">{{kra.section_name}}</option>
+            </select>
+        </div>
         <div class="form-group">
             <label>Reviewer</label>
-            <ngx-employee-master-search [(value)]="reviewer"></ngx-employee-master-search>
+            <ngx-employee-master-search [clearFlag]="master_search_clear_flag" (masterSubmitted)="reviewerSelected($event)"></ngx-employee-master-search>
         </div>
+        <div>
+          <div *ngFor="let kra of selected_kras">
+            <span>{{kra.kraName}}</span>
+            <span (click)="deleteKra(kra)">Delete</span>
+          </div>
+        </div>
+        <button (click)="addKra()">Add</button>
         <div class="form-group">
-            <label>Employee</label>
-            <ngx-employee-master-search [(value)]="employees"></ngx-employee-master-search>
-        </div>
+          <label>Employee</label>
+          <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)"></ngx-employee-master-search>
+      </div>
         <div class="form-group">
             <label></label>
             <div>
