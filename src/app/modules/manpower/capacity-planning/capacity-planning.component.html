@@ -13,22 +13,22 @@
       (buttonClick)="showAddPlanModal = true"
     >
     </ngx-default-content>
-      <ngx-tablecomponent  
+      <ngx-tablecomponent
       *ngIf="!showEmpty"
       (filterChange)="filterUpdated($event)"
       [showActions]="true"
       [showFilter]="true"
       (actionClick)="tableActionClicked($event)"
-      [actions]="tableActions" 
-      [userData]="allCapacityPlan" 
+      [actions]="tableActions"
+      [userData]="allCapacityPlan"
       [tableColum]="tableColumns"
       [totalItems]="totalItems"
       [currentPage]="currentPage"
       [loading]="loading"
       >
   </ngx-tablecomponent>
- 
- 
+
+
   <ngx-side-modal [(show)]='showAddPlanModal' style="width: 500px; height: 1000px;">
     <div modal-header>Add Plan</div>
     <div modal-body>
@@ -36,7 +36,7 @@
      <div *ngIf="submitRequirementError">
         <div class="error" style="padding: 10px 0;">
             <div>{{submitRequirementError}}</div>
-        </div> 
+        </div>
      </div>
     <div class="form-group">
         <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Activity Name:</label>
@@ -54,48 +54,48 @@
                 <option value="">--select--</option>
                 <option value="1">Task</option>
                 <option value="2">Project</option>
-    
+
               </select>
               <div *ngIf="activityTypeId.invalid && (activityTypeId.dirty || activityTypeId.touched) " class="error">
                 <div *ngIf="(activityTypeId.errors.required || activityTypeId.errors)">
                   Task type is required
                 </div>
               </div>
-    
-       
-        </div>        
+
+
+        </div>
         <div class="col-md-6" *ngIf="projecttask">
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
             <ngx-date  [(value)]='newcaplan.startDate'  #startDate [max]="newcaplan.endDate" name="startDate" id="startDate"></ngx-date>
             <div *ngIf="!validateStartdate" class="error">
                 <div>Plan Start Date is required</div>
-            </div>  
+            </div>
           </div>
           <div class="col-md-6" *ngIf="projecttask">
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
             <ngx-date (valueChange)="onDateSelection($event)"  [(value)]='newcaplan.endDate'  #endDate [min]="newcaplan.startDate" name="endDate" id="endDate"></ngx-date>
             <div *ngIf="!validateEnddate" class="error">
                 <div>Plan End Date is required</div>
-            </div>  
+            </div>
           </div>
 
           <div class="col-md-12">
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Justification</label>
             <textarea rows="5"  id="description" name="description" [(ngModel)]="newcaplan.description" nbInput fullWidth   placeholder="Enter Justification"></textarea>
-          </div> 
+          </div>
           <div class="col-md-12">
             <label style="font-size: small;font-weight: bold;">Requirements:</label>
             <div *ngIf="addRequirementError" class="error">
                 <div>{{addRequirementError}}</div>
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div class="col-md-6" >
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Select Job Category</label>
             <select class="form-control" name="jobCategory" id="jobCategory" [(ngModel)]="planrequirement.jobCategory" #jobCategory="ngModel" (change)="loadselected($event)">
                 <option value="">--select--</option>
                 <option value="Job Role">Job Role</option>
                 <option value="Position">Position</option>
-           
+
               </select>
           </div>
           <div class="col-md-6" >
@@ -111,11 +111,11 @@
           </div>
           <div class="col-md-6" >
             <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Cost per Resource:</label>
-            <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
+            <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">
             <div *ngIf="staffCostError" class="error">
                 <div>{{staffCostError}}</div>
-            </div> 
-            
+            </div>
+
         </div>
         <div class="offset-md-6 col-md-12" style="padding:10px 0 ;" >
             <button (click)="addrequirement(planrequirement)" nbButton outline status="primary" class="d-flex column" style="background-color: white;">Add Requirement</button>
@@ -129,7 +129,7 @@
 </div>
   </div>
             </div>
-           
+
           </div>
 
           <div class="col-md-12" >
@@ -138,7 +138,7 @@
                 <select name="year" id="year" [(ngModel)]="newcaplan.year" #year="ngModel" class="form-control" >
                   <option value="">select calendar year</option>
                   <option *ngFor="let yr of CustomService.nextTenYears;" value="{{yr}}">{{yr}}</option>
-      
+
                 </select>
                 <div *ngIf="year.invalid && (year.dirty || year.touched) " class="error">
                     <div *ngIf="(year.errors.required || year.errors)">
@@ -156,18 +156,18 @@
     <div modal-actions class="d-flex"
       style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
       <ngx-loadable-button [loading]="loading"  (click)="submitnewplan(newcaplan,allreqPlan)">
-        Submit 
-      </ngx-loadable-button>  
+        Submit
+      </ngx-loadable-button>
       <div style="padding-left: 15px;">
         <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
       </div>
-     
+
     </div>
     <div style="margin-top: 10px;"></div>
   </ngx-side-modal>
 
 
-   
+
   <ngx-side-modal [(show)]='showEditPlanModal' [position]="'Center'" style="width: 500px; height: 1000px;">
     <div modal-header>Edit Plan</div>
     <div modal-body>
@@ -177,13 +177,13 @@
             <div *ngIf="submitRequirementError">
                <div class="error" style="padding: 10px 0;">
                    <div>{{submitRequirementError}}</div>
-               </div> 
+               </div>
             </div>
            <div class="form-group">
                <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Activity Name:</label>
                <input type="text" class="form-control" placeholder="Enter Activity Name" name="activityName"
                  #activityName="ngModel" [(ngModel)]="newcaplan.activityName" required>
-       
+
                <div *ngIf="activityName.invalid && (activityName.dirty || activityName.touched)" class="error">
                  <div *ngIf="activityName.errors.required">Leave Year name is required</div>
                </div>
@@ -195,44 +195,44 @@
                        <option value="">--select--</option>
                        <option value="1">Task</option>
                        <option value="2">Project</option>
-           
+
                      </select>
                      <div *ngIf="activityTypeId.invalid && (activityTypeId.dirty || activityTypeId.touched) " class="error">
                        <div *ngIf="(activityTypeId.errors.required || activityTypeId.errors)">
                          Task type is required
                        </div>
                      </div>
-           
-              
-               </div>        
+
+
+               </div>
                <div class="col-md-6" *ngIf="projecttask">
                    <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Start Date:</label>
                    <ngx-date  [(value)]='newcaplan.startDate'  #startDate [max]="newcaplan.endDate" name="startDate" id="startDate"></ngx-date>
                    <div *ngIf="!validateStartdate" class="error">
                        <div>Plan Start Date is required</div>
-                   </div>  
+                   </div>
                  </div>
                  <div class="col-md-6" *ngIf="projecttask">
                    <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
                    <ngx-date (valueChange)="onDateSelection($event)"  [(value)]='newcaplan.endDate'  #endDate [min]="newcaplan.startDate" name="endDate" id="endDate"></ngx-date>
                    <div *ngIf="!validateEnddate" class="error">
                        <div>Plan End Date is required</div>
-                   </div>  
+                   </div>
                  </div>
-       
+
                  <div class="col-md-12">
                    <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Justification</label>
                    <textarea rows="5"  id="description" name="description" [(ngModel)]="newcaplan.description" nbInput fullWidth   placeholder="Enter Justification"></textarea>
-                 </div> 
-               
-       
+                 </div>
+
+
                  <div class="col-md-12" >
                    <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Calendar Year</label>
                    <div  *ngIf="newcaplan.activityTypeId == 1">
                        <select name="year" id="year" [(ngModel)]="newcaplan.year" #year="ngModel" class="form-control" >
                          <option value="">select calendar year</option>
                          <option *ngFor="let yr of CustomService.nextTenYears;" value="{{yr}}">{{yr}}</option>
-             
+
                        </select>
                        <div *ngIf="year.invalid && (year.dirty || year.touched) " class="error">
                            <div *ngIf="(year.errors.required || year.errors)">
@@ -254,8 +254,8 @@
   <div style="display:flex;justify-content:  flex-end;align-items: flex-end;">
     <ngx-loadable-button [loading]="loading"  (click)="openAddRequirementtoplan()" >
       Add Requirement
-    </ngx-loadable-button>  
-   
+    </ngx-loadable-button>
+
   </div>
 </div>
     </div>
@@ -297,7 +297,7 @@
                         {{req.ApprovedR}}
                      </td>
                      <td><span>{{req.ApprovedR * req.costPerResource | number}}</span></td>
-                      <td>     
+                      <td>
                         <span >{{req.HRComment}}</span>
                       </td>
                       <td>{{req.ApprovedByName}}</td>
@@ -316,11 +316,11 @@
                           <span class="cbadge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 'Approved'">
                             {{req.Status}}
                           </span>
-                        </span> 
+                        </span>
                         </td>
                         <td colspan="2">
                           <i *ngIf="req.Status == 'Approved' || req.Status == 'Rejected'" class="fa fa-check-square" style="color: #1e8300;font-size: 22px;"></i>
-                                            
+
                           <ng-template #card>
                             <div class="row">
                               <div class="col-sm-12">
@@ -343,50 +343,50 @@
                             ">
                             <nb-icon icon="more-horizontal-outline"></nb-icon>
                           </button>
-                          
+
                         </td>
                     </tr>
                     </tbody>
                   </table>
                 </div>
-      
-    
+
+
         </form>
         </nb-card-body>
       </nb-card>
-  
+
   </div>
   <div modal-actions class="d-flex"
   style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
   <ngx-loadable-button [loading]="loading"  (click)="submitnewplan(newcaplan,allreqPlan)">
-    Submit 
-  </ngx-loadable-button>  
+    Submit
+  </ngx-loadable-button>
   <div style="padding-left: 15px;">
     <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
   </div>
- 
+
 </div>
 <div style="margin-top: 10px;"></div>
   </ngx-side-modal>
 
 
 
-     
+
   <ngx-side-modal [(show)]='showAddRequirementModal' [position]="'Center'" style="width: 500px; height: 1000px;">
     <div modal-header>Add Requirement</div>
     <div modal-body>
-      <form class="form-horizontal" name="caplanForm" id="caplanForm" #caplanForm="ngForm">    
-          <div class="form-group row">     
+      <form class="form-horizontal" name="caplanForm" id="caplanForm" #caplanForm="ngForm">
+          <div class="form-group row">
             <div class="col-md-3">
               <span class="help-block"><small>Select Job Category</small></span>
               <select class="form-control" name="jobCategory" id="jobCategory" [(ngModel)]="planrequirement.jobCategory" #jobCategory="ngModel" (change)="loadselected($event)">
                 <option value="">--select--</option>
                 <option value="Job Role">Job Role</option>
                 <option value="Position">Position</option>
-          
+
               </select>
-              
-    
+
+
             </div>
             <div class="col-md-3">
               <span class="help-block"><small>Select {{planrequirement.jobCategory}} type</small></span>
@@ -394,37 +394,37 @@
                 <option value="">--select--</option>
                 <option *ngFor="let cty of JcategoryType;let i = index" value="{{i}}">{{cty.name}}</option>
               </select>
-              
-    
+
+
             </div>
             <div class="col-md-3">
               <span class="help-block"><small>Required number of staff</small></span>
               <div style="width: 150px;">
                 <div class="form-group" >
                   <input   name="numberOfStaff" id="numberOfStaff" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="number" class="form-control" placeholder="number of staff">
-  
+
                 </div>
               </div>
-            
+
             </div>
             <div class="col-md-3">
               <span class="help-block"><small>Cost per Resource</small></span>
-              <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
+              <input type="text" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">
             </div>
-           
+
           </div>
-      
+
       </form>
     </div>
     <div modal-actions class="d-flex"
     style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
     <ngx-loadable-button [loading]="loading"  (click)="addexistplanRequirement(planrequirement)">
-      Add Requirement 
-    </ngx-loadable-button>  
+      Add Requirement
+    </ngx-loadable-button>
     <div style="padding-left: 15px;">
       <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
     </div>
-   
+
   </div>
   </ngx-side-modal>
 
@@ -433,7 +433,7 @@
     <div modal-body>
       <form class="form-horizontal" name="caplanForm" id="caplanForm" #caplanForm="ngForm">
         <div class="form-group row">
-       
+
           <div class="col-md-3">
             <span class="help-block"><small>Select Job Category</small></span>
             <select class="form-control" name="jobCategory" id="jobCategory" [(ngModel)]="planrequirement.jobCategory" #jobCategory="ngModel" (change)="loadselected($event)">
@@ -442,8 +442,8 @@
               <option value="Position">Position</option>
               <option value="Grade">Grade</option>
             </select>
-            
-  
+
+
           </div>
           <div class="col-md-3">
             <span class="help-block"><small>Select {{planrequirement.jobCategory}} type</small></span>
@@ -451,36 +451,36 @@
               <option value="">--select--</option>
               <option *ngFor="let cty of JcategoryType;let i = index" value="{{i}}">{{cty.name}}</option>
             </select>
-            
-  
+
+
           </div>
           <div class="col-md-3">
             <span class="help-block"><small>Required number of staff</small></span>
             <div style="width: 150px;">
               <div class="form-group" >
                 <input   name="numberOfStaff" id="numberOfStaff" min="1" [(ngModel)]="planrequirement.numberOfStaff" #numberOfStaff="ngModel" type="number" class="form-control" placeholder="number of staff">
-  
+
               </div>
             </div>
-          
+
           </div>
           <div class="col-md-3">
             <span class="help-block"><small>Cost per Resource</small></span>
-            <input type="number" min="1" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">      
+            <input type="number" min="1" #costPerResource (keyup)="validatenumber(costPerResource.value)" class="form-control" name="costPerResource" id="costPerResource" [(ngModel)]="planrequirement.costPerResource" #costPerResource="ngModel" required placeholder="Resource Cost">
           </div>
-         
+
         </div>
         </form>
       </div>
       <div modal-actions class="d-flex"
       style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
       <ngx-loadable-button [loading]="loading"  (click)="addexistplanRequirement(planrequirement)">
-        Save 
-      </ngx-loadable-button>  
+        Save
+      </ngx-loadable-button>
       <div style="padding-left: 15px;">
         <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
       </div>
-     
+
     </div>
     <div style="margin-top: 10px;"></div>
     </ngx-side-modal>
@@ -498,7 +498,7 @@
         <div class="form-group row">
           <label class="col-md-2 control-label" for="example-text-input">Logged By:</label>
           <div class="col-md-10">
-          {{viewplan?.LoggedByUserName}}
+          {{viewplan?.loggedByUserName}}
           </div>
         </div>
         <div class="table-responsive">
@@ -516,7 +516,7 @@
               <th scope="col" style="font-size: 12px; font-weight: normal">
                 Approved Resource Cost
               </th>
-            
+
               <th scope="col" style="font-size: 12px; font-weight: normal">Comment</th>
               <th scope="col" style="font-size: 12px; font-weight: normal">Approved By</th>
               <th scope="col" style="font-size: 12px; font-weight: normal">Approved Date</th>
@@ -536,8 +536,8 @@
                 {{req.ApprovedR}}
              </td>
              <td><span>{{req.ApprovedR * req.costPerResource | number}}</span></td>
-    
-              <td>     
+
+              <td>
                 <span >{{req.HRComment}}</span>
               </td>
               <td>{{req.ApprovedByName}}</td>
@@ -556,9 +556,9 @@
                   <span class="badge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 'Approved'">
                     {{req.Status}}
                   </span>
-                </span> 
+                </span>
                 </td>
-                
+
             </tr>
             </tbody>
           </table>
@@ -570,7 +570,7 @@
         <div style="padding-left: 15px;">
           <button nbButton outline status="primary" (click)="showViewRequirementModal = false" class="d-flex column" style="background-color: white;">Discard</button>
         </div>
-       
+
       </div>
       <div style="margin-top: 10px;"></div>
       </ngx-side-modal>

@@ -6,12 +6,13 @@ import { map } from 'rxjs/operators';
 
 export class MyKPI extends KpiDTO {
   public kra_id: number;
+  ratingTypeId = 1;
   constructor(kra_id = 1, data = new KpiDTO()) {
     super(data);
     this.kra_id = kra_id;
   }
   toManage() {
-   // return new ManageKpiDTO(this);
+   return new ManageKpiDTO(this);
   }
 }
 export class MyKPIFilter {
@@ -34,7 +35,7 @@ export class KpiService extends CrudService<MyKPIFilter, MyKPI, MyKPI> {
     }));
   }
   create(data: MyKPI) {
- //   return this.create_api.addUpdateKPI(data.toManage());
+   return this.create_api.addUpdateKPI(data.toManage());
   }
   delete(id: number) {
     throw new Error('Method not implemented.');

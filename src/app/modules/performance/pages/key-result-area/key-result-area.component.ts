@@ -1,3 +1,4 @@
+import { MyKeyResultAreaFilter } from './../../services/key-result-area.service';
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableAction, TableActionEvent, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
@@ -23,9 +24,11 @@ enum ACTIONS {
   templateUrl: './key-result-area.component.html',
   styleUrls: ['./key-result-area.component.scss']
 })
-export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKeyResultArea, MyKeyResultArea> {
+export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKeyResultAreaFilter, MyKeyResultArea> {
   ChoiceName = ChoiceName;
-  filter: MyKeyResultArea;
+  filter: MyKeyResultAreaFilter = {
+    pageNo: 1
+  };
   data: MyKeyResultArea[];
   getData(): Observable<ListResult<MyKeyResultArea>> {
     return this.api.list({});

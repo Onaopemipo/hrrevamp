@@ -3,7 +3,7 @@ import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
 
 
-enum TOP_ACTIONS {};
+enum TOP_ACTIONS { };
 
 
 
@@ -14,13 +14,13 @@ enum TOP_ACTIONS {};
 })
 export class PerformanceReviewsComponent extends MainBaseComponent {
   topActionButtons = [
- ]
-TOP_ACTIONS = TOP_ACTIONS
-tableColumns = [
-                {name: 'date', title: 'Performance Period'},
-{name: 'date', title: 'Appraisal Type'},
-{name: 'date', title: 'Score'},
-{name: 'date', title: 'Grade'},
-{name: 'date', title: 'Recommendation'}
-            ]
+  ]
+  TOP_ACTIONS = TOP_ACTIONS
+  tableColumns = [
+    { name: 'date', title: 'Performance Period' },
+    { name: 'date', title: 'Appraisal Type' },
+    { name: 'date', title: 'Score' },
+    { name: 'date', title: 'Grade' },
+    { name: 'date', title: 'Recommendation' }
+  ]
 }

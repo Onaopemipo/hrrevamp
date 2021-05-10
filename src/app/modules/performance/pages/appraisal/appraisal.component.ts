@@ -38,6 +38,7 @@ export class AppraisalComponent extends MainBaseComponent {
 
   async ngOnInit() {
     this.loading = true;
+    alert(8)
     const res = await this.api.list({cycleId: 1}).toPromise();
     this.data = res.data;
     this.loading = false;

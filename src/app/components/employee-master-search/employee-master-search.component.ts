@@ -13,7 +13,7 @@ export interface checkEmployeeDTO extends EmployeeDTO{
 
 @Component({
   selector: 'ngx-employee-list',
-  template: `    
+  template: `
     <div style="display: inline-flex;" *ngIf="allowmultipleselection">
       <div *ngFor="let i of selectedEmployees" >
           <img style="width: 3rem; height: 3rem; border-radius: 50%; margin-left: -0.5rem;" [src]="i.profilePic"  onError="this.src='assets/icons/camera.jpg'"/>
@@ -70,6 +70,10 @@ employeeResultTotal = 0;
   allJobRole = [];
   allGrade = [];
   allsalaryScale = [];
+  @Input() set clearFlag(val: number) {
+    this.selectedEmployeeRecord = null;
+    this.selectedEmployees = [];
+  }
 @Input() addbtnText: string = '';
 @Input() allowmultipleselection: boolean = false;
   @Input() selectionHeader = 'Select Employees';
@@ -77,16 +81,16 @@ employeeResultTotal = 0;
   @Output() masterSearchOpened = new EventEmitter<boolean>();
   @Input() value = [];
   @Output() valueChange = new EventEmitter<number[]>();
- 
+
   constructor(private allemployeeServices: SearchEmployeesServiceProxy,
   private CommonService: CommonServiceProxy) { }
-  
+
   get disableaddbtn() {
   if(this.selectedEmployeeRecord || this.selectedEmployees.length > 0){
     return true;
   } else {
     return false;
-  }  
+  }
   }
 
   get disableSearchBtn() {
@@ -107,7 +111,7 @@ employeeResultTotal = 0;
         this.allDepartment = res.result;
   }
 })
-    
+
   }
   getAllLocation() {
     this.CommonService.getLocations().subscribe(res => {
@@ -122,7 +126,7 @@ employeeResultTotal = 0;
         this.allJobRole = res.result;
   }
     })
-   
+
   }
   getAllGrade() {
     this.CommonService.getGrades().subscribe(res => {
@@ -139,7 +143,7 @@ employeeResultTotal = 0;
     })
   }
   getAllPeoplesGroup() {
-    
+
   }
   ngOnInit(): void {
     this.getAllDepartment();
@@ -180,7 +184,7 @@ if(!data.hasError){
       this.allEmployees[i].checkInputValue = false;
     } else {
       this.selectedEmployees.push(this.allEmployees[i]);
-      this.selectedEmployeeRecord = this.emptyRecord;   
+      this.selectedEmployeeRecord = this.emptyRecord;
       this.allEmployees[i].checkInputValue = true;
     }
   } else {
@@ -191,7 +195,7 @@ if(!data.hasError){
     if (this.selectedEmployeeRecord && this.selectedEmployeeRecord.employeeContractId == employeContId) {
       this.selectedEmployeeRecord = this.emptyRecord;
       this.selectedEmployees = [];
-      
+
     } else {
       this.selectedEmployeeRecord = this.allEmployees[i];
       this.selectedEmployees = [];
