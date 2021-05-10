@@ -40,7 +40,7 @@
               <div class="col-sm-6 col-md-6 col-lg-6">
                 <select class="form-control" name="projectItem" #projectItem="ngModel" [(ngModel)]="disbursement.projectId" placeholder="Select">
                   <option value="" disabled>Select Project Item</option>
-                  <option *ngFor="let project of allProjects" [value]="project.code">{{ project.name }}</option>
+                  <option *ngFor="let project of allProjects" [value]="project.id">{{ project.name }}</option>
                 </select>
               </div>
               <div *ngIf="projectItem.invalid && (projectItem.dirty || projectItem.touched)" class="error">
@@ -330,7 +330,7 @@
                 <label></label>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-6">
-                <button type="submit" class="btn cancel-button" (click)="cancelSubmission()" nbButton status="primary" outline>Cancel</button>
+                <button type="submit" (click)="cancelSubmission()" nbButton status="primary" outline>Cancel</button>
                 <button nbButton status="primary" (click)="createDisbursement()">Submit</button>
               </div>
             </div>

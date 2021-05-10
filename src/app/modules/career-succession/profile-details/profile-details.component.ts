@@ -206,6 +206,8 @@ export class ProfileDetailsComponent implements OnInit {
     this.editPlan = true;
   }
 
+
+
   // async fetchSinglePlan(){
   //   const data = await this.successionService.getCareerSuccessionPlanById(this.employeeId).toPromise();
   //   if(!data.hasError){
@@ -270,8 +272,6 @@ async fetchProfile(){
 
   addPlan() {
     this.newPlan = true;
-    // this.data.location_name
-    // this.data.skills[0].point
   }
 
   newCandidate(){
@@ -355,7 +355,9 @@ async fetchProfile(){
 
   }
 
-  cancelPlan(){}
+  cancelPlan(){
+    this.newPlan = false;
+  }
 
 
   getSelectedEmployee(event,selectType) {

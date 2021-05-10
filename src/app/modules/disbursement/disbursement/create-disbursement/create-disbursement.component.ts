@@ -124,16 +124,24 @@ cancelSubmission(){
 
 async createDisbursement(){
   console.log('Hey Boss Datata',this.disbursement)
-  const data = await this.disbursementService.postSingleDisbursement(this.disbursement).toPromise();
-  if(!data.hasError){
-    this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss').subscribe(dataAction =>{
-      if(dataAction){
-        this.disbursement = new SingleDisbursementPostDTO().clone();
-        this.router.navigateByUrl('/disbursement/disbursement/requests')
+  let scheduledDay = (this.disbursement.scheduledDate).getDay()
+  let endDay = (this.disbursement.endDate).getDay();
+  if(endDay < scheduledDay){
+    this.alert.openModalAlert(this.alert.ALERT_TYPES.CONFIRM, 'The end date is less than the scheduled date', 'Continue').subscribe(res => {
+      if(res){
+        this.disbursement.runCount = 1;
+        this.disbursementService.postSingleDisbursement(this.disbursement).subscribe(data => {
+        if(!data.hasError){
+        this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss').subscribe(dataAction =>{
+          if(dataAction){
+            this.disbursement = new SingleDisbursementPostDTO().clone();
+            this.router.navigateByUrl('/disbursement/disbursement/requests')
+          }
+        });
       }
     });
-  } else {
-    console.log('See the log here:',data.message)
+      }
+    })
   }
 }
 
