@@ -62,7 +62,7 @@
                             <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Event
                                 Type</label>
                             <div class="col-sm-8">
-                                <select placeholder="Select Gender" name="eventTypeId" #eventTypeId="ngModel"
+                                <select placeholder="Select Gender" class="form-control" name="eventTypeId" #eventTypeId="ngModel"
                                     [(ngModel)]="Event.eventTypeId" required>
                                     <option value="">--Select Event---</option>
                                     <option *ngFor="let evo of EventTypes" [value]="evo.id">{{evo.text}}</option>

@@ -1,24 +1,31 @@
+import { TableActionEvent } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj } from './../../../_services/service-proxies';
+import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj, EmployeeTalentManagementDTO } from './../../../_services/service-proxies';
 import { MyTalentPoolEmployee, TalentPoolService, MyTalentPoolRequirement, MyTalentPool, TalentPoolRequirementTypes } from './../services/talent-pool.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TableColumn } from 'app/components/tablecomponent/models';
-import { Component, OnInit } from '@angular/core';
+import { TableColumn, TableAction } from 'app/components/tablecomponent/models';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { AuthenticationService } from 'app/_services/authentication.service';
+import { NbTabsetComponent } from '@nebular/theme';
 
+enum TABLE_ACTION {
+  VIEW = '1',
+  DELETE = '2',
+}
 @Component({
   selector: 'ngx-testpool',
   templateUrl: './testpool.component.html',
   styleUrls: ['./testpool.component.scss']
 })
-export class TestpoolComponent implements OnInit {
+export class TestpoolComponent implements OnInit, AfterViewInit {
+  @ViewChild(NbTabsetComponent) tab: NbTabsetComponent;
   loading = true;
   testPoolTable: TableColumn [] = [
-    {name: 'name', title: 'Name'},
-    {name: 'department', title: 'Department'},
-    {name: 'unit', title: 'Unit/Division'},
-    {name: 'position', title: 'Position'},
+    {name: 'id', title: 'Employee ID'},
+    {name: 'employeeName', title: 'Employee Name'},
+    {name: 'departmentName', title: 'Department Name'},
+    {name: 'positionName', title: 'Position'},
   ];
 
   requirementTable : TableColumn [] = [
@@ -44,6 +51,30 @@ purposes: { value: string, label: string}[] = [
   {value: 'exit', label: 'Exit'},
 ];
 
+tableActionClicked(event: TableActionEvent){
+  if(event.name==TABLE_ACTION.DELETE){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to rempve employee?', 'Yes').subscribe(dataAction => {
+      if(dataAction){
+        this.talentPool.deleteEmployeeFromTalentManagmentPool(this.pageId, event.data.id).subscribe(data => {
+          if (!data.hasError) {
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss').subscribe(resp => {
+              if(resp) this.route.navigateByUrl('/career-succession/talentpool');
+            })
+          }
+        })
+      }
+    })
+    }
+   else if(event.name==TABLE_ACTION.VIEW){
+      this.route.navigateByUrl('/career-succession/profiledetails/'+ event.data.id)
+    }
+}
+tableActions: TableAction[] = [
+{name: TABLE_ACTION.VIEW, label: 'View'},
+{name: TABLE_ACTION.DELETE, label: 'Delete'},
+
+]
+
 selectedChannel: string = 'database';
 poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
 
@@ -65,7 +96,8 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
  pageTitle: string = '';
  pageId:number = 0;
  user: IVwUserObj;
- poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
+//  poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
+poolRecords: EmployeeTalentManagementDTO [] = []
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
@@ -74,8 +106,12 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     private alertMe: AlertserviceService,  private navCtrl: Location, private route: Router,
     private talentPool: TalentManagementServiceProxy,
     public authServ: AuthenticationService) { }
+  ngAfterViewInit(): void {
+    this.tab.selectTab(this.tab.tabs.first);
+  }
 
   ngOnInit(): void {
+    // window.globalThis.vvvv = this;
     this.pageId = Number(this.router.snapshot.paramMap.get("id"));
     this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
@@ -116,11 +152,22 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
     this.showCandidateModal = true;
   }
 
+  cancel(){
+    this.showCandidateModal = false;
+  }
+
   async addCandidateToPool(){
+    this.poolEmployee.talentPoolId = this.pageId;
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
         this.route.navigateByUrl('career-succession/talentpool');
+      })
+    }
+
+    else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss').subscribe(dataAction => {
+        this.route.navigateByUrl('career-succession/talentpool'+ this.pageId);
       })
     }
   }
@@ -128,10 +175,12 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
   async fetchSinglePool(){
     const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
     console.log('Here is the data',data.result)
-    if(!data.hasError){
-      this.poolRecords = data.result;
-      this.pageTitle = this.poolRecords.title;
-      console.log('Single Record', this.poolRecords)
+    if(!data.hasError && data.result.employeeTalentManagement.length > 0){
+      this.poolRecords = data.result.employeeTalentManagement;
+      this.pageTitle = data.result.title;
+      console.log('Page Title:',this.pageTitle)
+      this.employeeCounter = data.result.employeeTalentManagement.length;
+      console.log('Single Record', this.poolRecords);
       this.loading = false;
     }
   }
@@ -154,15 +203,9 @@ onChangeChannel($value){
 getSelectedEmployee(event,selectType) {
   console.log(event)
    if(selectType == 'employee'){
-    // this.poolEmployee.employeeId = event[0].employeeNumber;
+    this.poolEmployee.employeeId = event[0].employeeNumber;
     // this.poolEmployee.name = event[0].firstName + '' + event[0].lastName;
-    let allCandidate = [];
-       allCandidate.push(event);
-      // this.poolEmployee. = JSON.stringify(allCandidate);
-      // console.log(event, this.poolEmployee.stringSuccessionEmployee);
    }
-  //  if (selectType == 'relief') this.leaveReq.reliefOfficerStaffNo = event[0].employeeNumber;
-
    console.log(selectType, event)
 }
 

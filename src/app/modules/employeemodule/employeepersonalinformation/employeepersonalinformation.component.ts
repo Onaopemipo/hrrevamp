@@ -16,7 +16,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 @Component({
   selector: 'ngx-employeepersonalinformation',
   templateUrl: './employeepersonalinformation.component.html',
-  styleUrls: ['./employeepersonalinformation.component.scss']
+ // styleUrls: ['./employeepersonalinformation.component.scss']
 })
 export class EmployeepersonalinformationComponent implements OnInit {
   submitbtnPressed: boolean = false

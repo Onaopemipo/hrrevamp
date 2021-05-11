@@ -7,7 +7,7 @@
     <nb-card-body>
       <div><br>
         <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" buttonValue={{myButton}}
-          (buttonClick)="addNewCompetency()"></ngx-default-content>
+          (buttonClick)="addNewCompetency()" [loading]='loading'></ngx-default-content>
       </div>
     </nb-card-body>
   </nb-card>
@@ -21,6 +21,7 @@
       [tableColum]="competencyTable"
       [userData]='allCompetencies'
       [actions]='tableActions'
+      [loading]='loading'
       (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>

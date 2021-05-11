@@ -15,7 +15,7 @@ import { EmployeeviewComponent } from './employeeview/employeeview.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component';
 import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
-import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
+// import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
 import { PromotioneligibilityComponent } from './promotioneligibility/promotioneligibility.component';
 import { EligibilityxxComponent } from './eligibilityxx/eligibilityxx.component';
 import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothereligibilitylist.component';
@@ -23,8 +23,9 @@ import { EmployeedeploymentmanagementComponent } from './employeedeploymentmanag
 import { DeploymentviewComponent } from './deploymentview/deploymentview.component';
 import { ManagementviewComponent } from './managementview/managementview.component';
 import { DeploymentapplicationComponent } from './deploymentapplication/deploymentapplication.component';
-import { EmployeepersonalinformationComponent } from './employeepersonalinformation/employeepersonalinformation.component';
+
 import { CardComponent } from './card/card.component';
+
 
 import { EmployeerecordsComponent } from './employeerecords/employeerecords.component';
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
@@ -46,8 +47,8 @@ const routes: Routes = [
           component: OnboardingemployeesComponent
         },
         {
-          path: 'employeeonboarding',
-          component: HiringchecklistComponent
+          // path: 'employeeonboarding',
+          // component: HiringchecklistComponent
         },
         {
           path: 'employeeoffer',
@@ -155,10 +156,10 @@ const routes: Routes = [
           path: 'employeebulkupload',
           component: EmployeerbulkaddComponent
         },
-        {
-          path: 'employeepersonalinformation',
-             component:EmployeepersonalinformationComponent
-        },
+        // {
+        //   path: 'employeepersonalinformation',
+        //      component:EmployeepersonalinformationComponent
+        // },
         {
           path: 'employeeoffer',
           component: EmployeeofferComponent

@@ -55,9 +55,9 @@ export class LoanRequestComponent implements OnInit {
     {name: 'refNo', title: 'Ref No.'},
     {name: 'employeeNo', title: 'Employee No.'},
     {name: 'employeeName', title: 'Employee Name'},
-    {name: ' amount', title: 'Loan Amount'},
-    {name: ' requestedAmount', title: 'Requested Amount'},
-    {name: ' loanTypeName', title: 'Loan Type'},
+    {name: 'amount', title: 'Loan Amount'},
+    {name: 'requestedAmount', title: 'Requested Amount'},
+    {name: 'loanTypeName', title: 'Loan Type'},
 
   ];
 
