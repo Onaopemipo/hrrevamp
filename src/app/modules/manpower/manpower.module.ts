@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from './../../@theme/theme.module';
 import { FormsModule } from '@angular/forms';
-import { NbAlertModule, NbCheckboxModule, NbDatepickerModule, NbPopoverModule, NbSelectModule, } from '@nebular/theme';
+import { NbActionsModule, NbAlertModule, NbCheckboxModule, NbDatepickerModule, NbPopoverModule, NbSelectModule, } from '@nebular/theme';
 
 import { ManpowerRoutingModule } from './manpower-routing.module';
 import { ManpowerComponent } from './manpower.component';
@@ -25,7 +25,8 @@ import { DataServiceProxy, ManpowerServiceProxy } from 'app/_services/service-pr
     ThemeModule,
     NbSelectModule,
     NbAlertModule,
-    NbPopoverModule
+    NbPopoverModule,
+    NbActionsModule
   ],
   providers: [
     AlertserviceService,

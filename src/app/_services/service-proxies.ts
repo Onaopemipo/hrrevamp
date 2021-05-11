@@ -82771,6 +82771,7 @@ export class ProjectionReportDTO implements IProjectionReportDTO {
     lchecked!: boolean;
     requirementcompletedStatus!: string | undefined;
     allbaseYearCount!: number;
+    baseyrPerRoleCost!: number;
     roleCost!: number;
     employeeRoleCost!: number;
     increament!: number;
@@ -82813,6 +82814,7 @@ export class ProjectionReportDTO implements IProjectionReportDTO {
             this.lchecked = _data["lchecked"];
             this.requirementcompletedStatus = _data["requirementcompletedStatus"];
             this.allbaseYearCount = _data["allbaseYearCount"];
+            this.baseyrPerRoleCost = _data["baseyrPerRoleCost"];
             this.roleCost = _data["roleCost"];
             this.employeeRoleCost = _data["employeeRoleCost"];
             this.increament = _data["increament"];
@@ -82855,6 +82857,7 @@ export class ProjectionReportDTO implements IProjectionReportDTO {
         data["lchecked"] = this.lchecked;
         data["requirementcompletedStatus"] = this.requirementcompletedStatus;
         data["allbaseYearCount"] = this.allbaseYearCount;
+        data["baseyrPerRoleCost"] = this.baseyrPerRoleCost;
         data["roleCost"] = this.roleCost;
         data["employeeRoleCost"] = this.employeeRoleCost;
         data["increament"] = this.increament;
@@ -82889,6 +82892,7 @@ export interface IProjectionReportDTO {
     lchecked: boolean;
     requirementcompletedStatus: string | undefined;
     allbaseYearCount: number;
+    baseyrPerRoleCost: number;
     roleCost: number;
     employeeRoleCost: number;
     increament: number;

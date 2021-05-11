@@ -12,35 +12,121 @@
 
       >
       </ngx-default-content>
-        <ngx-tablecomponent  
-        *ngIf="!showEmpty"
-        (filterChange)="filterUpdated($event)"
-        [showActions]="true"
-        [showFilter]="true"
-        (actionClick)="tableActionClicked($event)"
-        [actions]="tableActions" 
-        [userData]="allCapacityPlan" 
-        [tableColum]="tableColumns"
-        [totalItems]="totalItems"
-        [currentPage]="currentPage"
-        [loading]="loading"
-        >
-        <div tableObject>
-          <span class="mb-0" *ngFor="let req of allCapacityPlan.requirements; let i = index">
-  
-              <span class="badge" *ngIf="req.gradeName">
-                {{req.jobCategoryName}} | {{req.gradeName}} - {{req.numberOfResource}}
-              </span>
-              <span class="badge" *ngIf="req.jobRoleName">
-                {{req.jobCategoryName}} | {{req.jobRoleName}} - {{req.numberOfResource}}
-              </span>
-              <span class="badge" *ngIf="req.positionName">
-                {{req.jobCategoryName}} | {{req.positionName}} - {{req.numberOfResource}}
-              </span>
-  
-            </span>
-        </div>
-    </ngx-tablecomponent>
+     
+
+
+    <div class="table-responsive"   *ngIf="!showEmpty">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th *ngIf="showCheckBox"></th>
+            <th scope="col" *ngFor="let col of tableColumns">{{ col.title }}</th>
+            <th *ngIf="showActions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="!loading">
+            <tr *ngFor="let data of DepartmentManPowerActivities; let i = index">
+              <td *ngIf="showCheckBox">
+                <div style="padding: 10px">
+                  <nb-checkbox (change)='tableActionChecked(i, data)' [checked]="data['lchecked']"></nb-checkbox>
+                </div>
+              </td>
+              <td *ngFor="let col of tableColumns">
+                <span *ngIf="col.type === COLUMN_TYPES.Object">  
+            
+                  <span class="mb-0" *ngIf="data.jobRoleName">
+                    <span class="badge badge-purple" style="padding: 5px;">
+                      {{data.jobRoleName}} | {{data.jobRoleCount}}
+                    </span>  
+                  </span> 
+                  <span *ngFor="let rl of data.allroles; let i= index">
+                  <span class="mb-0" >
+                    <span class="badge badge-purple" style="padding: 5px; margin: 2px">
+                      {{rl.roleName}} | {{rl.roleResource}}
+                    </span>  
+                  </span> 
+                </span>             
+                
+                </span>
+                <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === NULL">{{ data[col.name] }}</span>
+                <span *ngIf="col.type === COLUMN_TYPES.Number">{{ data[col.name] | number: '.2'}}</span>
+                <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
+                <span *ngIf="col.type === COLUMN_TYPES.Date"> {{ data[col.name] | date }} </span>
+                <span *ngIf="col.type === COLUMN_TYPES.Mark">
+                  <span>
+                    <nb-icon *ngIf="data[col.name]" icon="checkmark-circle-2-outline" class="text-primary"></nb-icon>
+                    <nb-icon *ngIf="!data[col.name]" icon="close-circle-outline" class="text-danger"></nb-icon>
+                </span>
+                </span>
+                <span *ngIf="col.type === COLUMN_TYPES.Link">
+                  <button nbButton status='primary' outline
+                    style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
+                    (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
+                </span>
+             
+              </td>
+              <td *ngIf="showActions">
+                <ng-template #card>
+                  <nb-card class="popover-card">             
+                    <nb-card-body>                
+                      <nb-list>
+                        <nb-list-item *ngIf="data.requirementcompletedStatus == 'Pending'" (click)='tableActionClicked("action", data)' style="cursor: pointer;">
+                         Take Action
+                        </nb-list-item>
+                        <nb-list-item *ngIf="data.requirementcompletedStatus == 'Completed'"  (click)='tableActionClicked("view", data)' style="cursor: pointer;">
+                         View
+                        </nb-list-item>
+                      </nb-list>
+                    </nb-card-body>
+                  </nb-card>
+            
+                </ng-template>
+                <button nbButton outline status="primary" [nbPopover]="card" style="
+                    min-width: unset !important;
+                    background: transparent;
+                    border: none;
+                    padding: 0px;
+                  ">
+                  <nb-icon icon="more-horizontal-outline"></nb-icon>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+    
+          <tr *ngIf="DepartmentManPowerActivities.length == 0 && !loading">
+            <td colspan="10000">no record found</td>
+          </tr>
+          <tr *ngIf="loading">
+            <td colspan="1000">
+              <nb-card [nbSpinner]="true" nbSpinnerSize="medium" nbSpinnerStatus="primary">
+                <nb-card-body> Loading... </nb-card-body>
+              </nb-card>
+            </td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+          <div style="display: flex;padding-top: 10px;" *ngIf="!showEmpty">
+            <div style="flex: auto;">
+            <div style="padding-top: 7px;">
+              Showing {{currentPage}} - {{pageSize}} of {{totalItems}}
+            </div>
+            </div>
+            <div>
+              <div class="paginator">
+                <nb-actions size="medium">
+                  <nb-action [disabled]="currentPage <= 1" (click)="pageClicked(currentPage - 1)" icon="arrow-ios-back-outline"></nb-action>
+                <nb-action>{{currentPage}}</nb-action>
+          
+                  <nb-action icon="arrow-ios-forward-outline" [disabled]="currentPage <= totalItems" (click)="pageClicked(currentPage + 1)"></nb-action>
+                </nb-actions>
+          
+          
+              </div>
+            </div>
+          
+          </div>
     </nb-card-body>
 </nb-card>
 <ngx-side-modal [(show)]='showFilterModal' style="width: 500px; height: 1000px;">
@@ -142,18 +228,18 @@
                 <div class="row">
                     <div class="col-sm-12 form-group">
                         <label>Department</label>
-                        {{projectionplan.deptmntName}}
+                        {{DepartmentActivities.deptmntName}}
                     </div>
                     <div class="col-sm-12 form-group">
                         <label>Head of Department</label>
-                        {{projectionplan.HeadofDepartmentName}}
+                        {{DepartmentActivities.headofDepartmentName}}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 form-group">
                     <label>Resource Count</label>
-                    {{projectionplan.JobRoleCount}}
+                    {{DepartmentActivities.jobRoleCount}}
                     </div>
             </div>
        
@@ -183,37 +269,37 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngIf="projectionplan.newRequirement.length < 1">
+                  <tr *ngIf="DepartmentActivities.newRequirement.length < 1">
                     <td colspan="8">No Record Found</td>
                   </tr>
-                  <tr *ngFor="let req of projectionplan.newRequirement;let i = index">                
-                    <td>{{req.ActivityName}}</td>
+                  <tr *ngFor="let req of DepartmentActivities.newRequirement;let i = index">                
+                    <td>{{req.activityName}}</td>
                     <td>
-                      <span *ngIf="req.GradeId">{{req.GradeName}}</span>
-                      <span *ngIf="req.JobRoleId">{{req.JobRoleName}}</span>
-                      <span *ngIf="req.PostionId">{{req.PositionName}}</span>
+               
+                      <span *ngIf="req.jobRoleId">{{req.jobRoleName}}</span>
+                      <span *ngIf="req.postionId">{{req.positionName}}</span>
                       </td>
-                    <td><span>{{req.NumberOfResource}}</span></td> 
+                    <td><span>{{req.numberOfResource}}</span></td> 
                     <td><span>{{req.costPerResource | number: '.2'}}</span></td>
-                    <td><span>{{req.NumberOfResource * req.costPerResource | number: '.2'}}</span></td>               
+                    <td><span>{{req.numberOfResource * req.costPerResource | number: '.2'}}</span></td>               
                     <td>   
-                      <span *ngIf="req.Status == 2 || req.Status == 3 || req.Status == 0">{{req.ApprovedResource}}</span>
+                      <span *ngIf="req.status == 2 || req.status == 3 || req.status == 0">{{req.approvedResource}}</span>
                                  
-                      <input *ngIf="req.Status == 1" required  type="text"  class="form-control" (keyup)="setApprovedResource($event,req)">
+                      <input *ngIf="req.status == 1" required  type="text"  class="form-control" (keyup)="setApprovedResource($event,req)">
                        </td>
                     <td > 
-                      <span class="mb-0" *ngIf="req.Status == 2 || req.Status == 3 || req.Status == 0">                
-                        <span class="badge" style="background-color: #EF5350;width: 80px;" *ngIf="req.Status == 3">
-                          {{req.Decision}}d
+                      <span class="mb-0" *ngIf="req.status == 2 || req.status == 3 || req.status == 0">                
+                        <span class="badge" style="background-color: #EF5350;width: 80px;" *ngIf="req.status == 3">
+                          {{req.decision}}d
                         </span>
-                        <span class="badge" style="background-color: #1e8300;width: 80px;" *ngIf="req.Status == 2">
-                          {{req.Decision}}d
+                        <span class="badge" style="background-color: #1e8300;width: 80px;" *ngIf="req.status == 2">
+                          {{req.decision}}d
                         </span>
-                        <span class="badge" style="background-color: #d99700;width: 80px;" *ngIf="req.Status == 0">
-                          {{req.Decision}}d
+                        <span class="badge" style="background-color: #d99700;width: 80px;" *ngIf="req.status == 0">
+                          {{req.decision}}d
                         </span>
                       </span>       
-                      <select *ngIf="req.Status == 1 " class="form-control" (change)="setdecision($event,req)">
+                      <select *ngIf="req.status == 1 " class="form-control" (change)="setdecision($event,req)">
                         <option value="">--select--</option>
                         <option value="Return">Return</option>
                         <option value="Approve">Approve</option>
@@ -221,9 +307,9 @@
                       </select>
                      </td>
                     <td>     
-                      <span *ngIf="req.Status == 2 || req.Status == 3 || req.Status == 0">{{req.HRComment}}</span>
+                      <span *ngIf="req.status == 2 || req.status == 3 || req.status == 0">{{req.hrComment}}</span>
                                
-                      <input *ngIf="req.Status == 1"  type="text"  class="form-control" (keyup)="setcomment($event,req)"  >
+                      <input *ngIf="req.status == 1"  type="text"  class="form-control" (keyup)="setcomment($event,req)"  >
                      </td>
                   </tr>
                   </tbody>
@@ -237,11 +323,11 @@
    </div>
    <div modal-actions class="d-flex"
    style="display: flex; flex-direction: row; justify-content: flex-end;align-items: flex-end; margin-top: 10px; margin-bottom: 20px;">
-   <ngx-loadable-button [loading]="loading" (click)="getRequirement(newQuery)">
+   <ngx-loadable-button [loading]="loading" (click)="submitrequirement(DepartmentActivities)">
      Submit 
    </ngx-loadable-button>  
    <div style="padding-left: 15px;">
-     <button nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
+     <button (click)="showHRReviewModal = false" nbButton outline status="primary" class="d-flex column" style="background-color: white;">Discard</button>
    </div>
   
  </div>

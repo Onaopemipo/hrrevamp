@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'ngx-hiringchecklist',
   templateUrl: './hiringchecklist.component.html',
-  styleUrls: ['./hiringchecklist.component.scss']
+ // styleUrls: ['./hiringchecklist.component.scss']
 })
 export class HiringchecklistComponent implements OnInit {
   allInstitution: Institution[] = [];
