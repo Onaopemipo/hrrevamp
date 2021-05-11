@@ -74,7 +74,7 @@ employeeResultTotal = 0;
     this.selectedEmployeeRecord = null;
     this.selectedEmployees = [];
   }
-@Input() addbtnText: string = '';
+@Input() addbtnText: string = 'Select';
 @Input() allowmultipleselection: boolean = false;
   @Input() selectionHeader = 'Select Employees';
   @Output() masterSubmitted = new EventEmitter<EmployeeDTO[]>();

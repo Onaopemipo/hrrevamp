@@ -2,6 +2,7 @@ import { Injectable, Component, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { NbDialogRef } from '@nebular/theme';
 import { Observable, Subject } from 'rxjs';
+import { MessageOutApiResult } from './service-proxies';
 
 export enum ALERT_TYPES {
   SUCCESS = 'success',
@@ -15,7 +16,7 @@ export enum ALERT_TYPES {
   template: `
   <nb-card>
   <nb-card-body>
-  
+
    <div style="display:flex;flex-direction: column;padding:5rem;align-items:center; text-align:center">
    <img src="assets/icons/success.jpg" style="width:10rem" *ngIf="alertType == 'success'">
    <img src="assets/icons/failure.jpg" style="width:10rem" *ngIf="alertType == 'danger'">
@@ -89,9 +90,9 @@ export class alertmodalComponent implements OnInit {
       Object.entries(initialerr).forEach(([key, value], index) => {
         this.alerterrors.push(value[0])
       })
-  
+
     }
-    
+
   }
 }
 
@@ -108,6 +109,10 @@ export class AlertserviceService {
   catchErrorAlert: boolean = false;
   alerterrors: Array<any>[] = [];
   constructor(private dialogService: NbDialogService) { }
+
+  showResponseMessage(res: MessageOutApiResult){
+    return this.openModalAlert(res.hasError ? this.ALERT_TYPES.FAILED : this.ALERT_TYPES.SUCCESS, res.message, 'Okay');
+  }
 
   openModalAlert(alertType, alertMessage, alertButtonMessage): Observable<any> {
     this.alertType = alertType;

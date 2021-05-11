@@ -121,6 +121,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/performance/kra'
       },
       {
+        title: 'Assign KRA',
+        link: '/performance/kra/assign'
+      },
+      {
         title: 'Appraisal',
         link: '/performance/appraisals'
       },
@@ -135,6 +139,30 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Score Card',
         link: '/performance/score-card'
+      },
+      {
+        title: 'Supervisor',
+        link: '/performance/supervisor/reviews'
+      },
+      {
+        title: 'HR',
+        link: '/performance/hr/reviews'
+      },
+      // {
+      //   title: 'Reviewer',
+      //   link: '/performance/reviewer/reviews'
+      // },
+      // {
+      //   title: 'Review Performance',
+      //   link: '/performance/reviewer/cycle/2/kra/2/employee/6/review'
+      // },
+      {
+        title: 'Supervisor Performance',
+        link: '/performance/supervisor/cycle/2/employee/6'
+      },
+      {
+        title: 'HR Performance',
+        link: '/hr/supervisor/cycle/2/employee/6'
       },
     ]
   },
