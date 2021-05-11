@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { TableAction } from './../../../../components/tablecomponent/models';
 import { Observable } from 'rxjs';
 import { ListResult } from 'app/_services/base-api.service';
-import { TableActionEvent, ColumnTypes } from 'app/components/tablecomponent/models';
+import { TableActionEvent, ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { KeyResultAreaService } from './../../services/key-result-area.service';
@@ -53,16 +53,19 @@ export class HrReviewListComponent extends BaseComponent<any, any, any> {
     throw new Error('Method not implemented.');
   }
   topActionButtons = [];
-  tableColumns = [
-    { name: 'section_name', title: 'KRA' },
-    { name: 'maximum_score_obtainable', title: 'Score' },
-    { name: 'weight', title: 'Weight' },
-    { name: 'ratingType', title: 'Rating Type' },
-    { name: 'no_of_kpis', title: 'No of KPIs' },
+  tableColumns: TableColumn[] = [
+    { name: 'fullName', title: 'Full Name' },
+    // { name: 'maximum_score_obtainable', title: 'Score' },
+    { name: 'employeeStatus', title: 'Employee Status' },
+    { name: 'reviewerStatus', title: 'Reviewer Status' },
+    { name: 'appraisalType', title: 'Appraisal Type' },
+    { name: 'assignedKra', title: 'No of KRAs' },
+    { name: 'link', title: '', link_name: 'View', type: ColumnTypes.Link },
   ];
 
   tableActionClicked(event: TableActionEvent<AppraisalReviewerListDTO>) {
-    this.router.navigateByUrl(`/performance/kra/${event.data.periodId}/assign`);
+    if(this.is_hr_page) this.router.navigateByUrl(`/performance/hr/cycle/${event.data.periodId}/employee/${event.data.employeeId}`);
+    else this.router.navigateByUrl(`/performance/supervisor/cycle/${event.data.periodId}/employee/${event.data.employeeId}`);
   }
   constructor(
     private api: KeyResultAreaService,

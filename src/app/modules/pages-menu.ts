@@ -156,14 +156,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
       //   title: 'Review Performance',
       //   link: '/performance/reviewer/cycle/2/kra/2/employee/6/review'
       // },
-      {
-        title: 'Supervisor Performance',
-        link: '/performance/supervisor/cycle/2/employee/6'
-      },
-      {
-        title: 'HR Performance',
-        link: '/hr/supervisor/cycle/2/employee/6'
-      },
+      // {
+      //   title: 'Supervisor Performance',
+      //   link: '/performance/supervisor/cycle/2/employee/6'
+      // },
+      // {
+      //   title: 'HR Performance',
+      //   link: '/hr/supervisor/cycle/2/employee/6'
+      // },
     ]
   },
   {

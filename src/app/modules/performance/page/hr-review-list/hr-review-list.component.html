@@ -17,10 +17,11 @@
   <ngx-tablecomponent
     *ngIf="!showEmpty"
     [tableColum]="tableColumns"
-    [actions]="tableActions"
+    [actions]="[]"
     [userData]="tableData"
     [loading]="loading"
     (pageChange)="loadNewPage($event)"
     (actionClick)="tableActionClicked($event)"
+    [showActions]="false"
   ></ngx-tablecomponent>
 </div>
