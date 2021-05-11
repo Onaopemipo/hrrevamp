@@ -1,36 +1,15 @@
+import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Router } from '@angular/router';
-import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
-import { AlertserviceService } from 'app/_services/alertservice.service';
-import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, JobFilterDTO, Qualification, RecruitmentSettingServiceProxy, Country } from './../../../../_services/service-proxies';
-import { TableAction, TableActionEvent, TableColumn } from './../../../../components/tablecomponent/models';
+import { CommonServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, DepartmentDTO, Certification, IDTextViewModel, State, JobRole } from 'app/_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy,Country, JobDTO, JobFilterDTO, Qualification, ManageJobDTO } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
-enum TP  {
-VIEW ='1',DELETE = '2'
-}
-
-enum TABS {
-  postedJobs, scheduledJobs, darftedJobs,
-}
-
 @Component({
-  selector: 'ngx-jobs',
-  templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.scss']
+  selector: 'ngx-newjob',
+  templateUrl: './newjob.component.html',
+  styleUrls: ['./newjob.component.scss']
 })
-export class JobsComponent implements OnInit {
-
-  allowmultipleselection: boolean = false;
-  selectionHeader: string = "Select Employee";
-  addbtnText: string = "Add Employee";
-
-  showModal = false
-
-  showCvModal = false
-  showdeleteModal = false
-
-  myPlanHeader: string = 'You have not posted any Job';
-  myPlanDesc: string = 'Click on the button to post a job';
+export class NewjobComponent implements OnInit {
 
   myButton: string = 'Add a Job Posting';
   availability: string = 'Physical';
@@ -48,53 +27,6 @@ export class JobsComponent implements OnInit {
   allStates: State [] = [];
   allJobRoles: JobRole [] = [];
   singleJob: JobDTO = new JobDTO;
-  tableData: string = '';
-
-  postedJobsTable: TableColumn [] = [
-    {name: 'jobTitle', title: 'Job Title'},
-    {name: 'department', title: 'Department'},
-    {name: 'applicants', title: 'Applicants'},
-    {name: 'datePosted', title: 'Date Posted'},
-    {name: 'status', title: 'Status'},
-  ];
-data = [
-  {jobTitle: 'jobTitle', department: 'technical ', applicants:'developer',datePosted : '02/03/2021',status:'status'}
-]
-tableActions: TableAction[] = [
-  {name: TP.VIEW, label: 'View'},
-{name: TP.DELETE, label: 'Delete'},
-]
-
-  scheduledJobsTable: TableColumn [] = [
-    {name: 'jobTitle', title: 'Job Title'},
-    {name: 'department', title: 'Department'},
-    {name: 'scheduledDate', title: 'Scheduled Date'},
-  ];
-
-
-
-  draftedJobsTable: TableColumn [] = [
-    {name: 'jobTitle', title: 'Job Title'},
-    {name: 'department', title: 'Department'},
-  ];
-
-  getTableActions (){
-    if(TABS.postedJobs){
-      this.tableActions = [{name: 'posted', label:'Posted'},
-      {name: 'disburse', label:'Disburse'},
-    ]
-    } else if(TABS.scheduledJobs){
-      this.tableActions = [{name: 'view', label:'View'},
-      // {name: 'disburse', label:'Disburse'},
-    ]
-    } else if(TABS.darftedJobs){
-      this.tableActions = [{name: 'view', label:'View'},
-      // {name: 'disburse', label:'Disburse'},
-    ]
-    }
-  }
-
-  selectedOption;
   loading: boolean;
   newJobModel: ManageJobDTO = new ManageJobDTO();
 
@@ -105,12 +37,11 @@ tableActions: TableAction[] = [
    }
 
   ngOnInit(): void {
-    this.fetchAllJobs();
+    this.fetchAllDepartments();
+    this.fetchCountries();
     this.fetchEmploymentTypes();
-  }
-
-  selectTab($event){
-
+    this.fetchQualifications();
+    this.fetchStates();
   }
 
   newJobPosting(){
@@ -198,17 +129,10 @@ tableActions: TableAction[] = [
     })
   }
 
-  actionClicked(event: TableActionEvent){
-    if (event.name === TP.VIEW){
-      this.showCvModal = true
+  getSelectedEmployee(event,selectType) {
+    if(selectType == 'employee'){
+     this.newJobModel.ref = event[0].employeeNumber;
     }
+ }
 
-    if (event.name === TP.DELETE){
-      this.showdeleteModal = true
-    }
-
-  }
-  showMasterSearchModal(){
-    this.showModal = true
-  }
 }

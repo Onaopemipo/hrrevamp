@@ -1,3 +1,4 @@
+import { RecruitmentJobServiceProxy } from './_services/service-proxies';
 
 
 /**
@@ -142,7 +143,7 @@ FullCalendarModule.registerPlugins([
     NbDatepickerModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     ComponentsModule,
-    
+
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -159,7 +160,8 @@ FullCalendarModule.registerPlugins([
     NbDialogService,
     AlertserviceService,
     FetchDashboardDataServiceProxy,
-    CustomServiceService
+    CustomServiceService,
+    RecruitmentJobServiceProxy
   ],
 })
 export class AppModule {

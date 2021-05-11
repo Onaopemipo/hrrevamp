@@ -18,6 +18,7 @@ export const routes: Routes = [
       loadChildren: () => import('./modules/recruitment/recruitment.module')
       .then(m => m.RecruitmentModule)
   },
+
   {
     path: 'accountverify',
     loadChildren: () => import('./modules/recruitment/account-verify/accountverify.module')

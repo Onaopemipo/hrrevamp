@@ -1,3 +1,4 @@
+import { RecruitmentSettingServiceProxy } from './../../../_services/service-proxies';
 import { AdminDashboardRoutingModule } from './admindashboard-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ComponentsModule } from '../../../components/components.module';
@@ -11,11 +12,12 @@ import { JobsComponent } from './jobs/jobs.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { NewjobComponent } from './newjob/newjob.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent],
+  declarations: [DashboardComponent,NewjobComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent, NewjobComponent],
   imports: [
     CommonModule,
     AdminDashboardRoutingModule,
@@ -30,6 +32,10 @@ import { QuizComponent } from './quiz/quiz.component';
     FullCalendarModule,
     NbCalendarModule,
     NbRadioModule
+  ],
+
+  providers: [
+    RecruitmentSettingServiceProxy,
   ]
 })
 export class AdminDashboardModule { }
