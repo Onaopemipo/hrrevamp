@@ -13,7 +13,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NineGridBoxEmployeeComponent } from './nine-grid-box-employee/nine-grid-box-employee.component';
-import { SucessionPlanDetailComponent } from './sucession-plan-detail/sucession-plan-detail.component';
 import { CareerSuccessionComponent } from './career-succession.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
@@ -76,11 +75,6 @@ const routes: Routes = [
       {
         path: 'gridbox',
         component: GridboxComponent
-      },
-
-      {
-        path: 'succession/:id',
-        component: SucessionPlanDetailComponent,
       },
 
       {

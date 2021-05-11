@@ -23,7 +23,7 @@
   <ngx-side-modal [(show)]='newPlan' style="width: 600px;">
     <div modal-header>Create Succession Plan</div>
     <div modal-body>
-     
+
             <form name="planForm" #planForm="ngForm">
               <div class="form-group row">
                 <div class="col">
@@ -67,7 +67,7 @@
                  <label>Competency</label>
                  <select class="custom-select" name="competencyId" #competencyTitle="ngModel" [(ngModel)]="newSuccessionPlan.competencyId" required>
                    <option value="">--Select--</option>
-                   <option *ngFor="let competency of allCompetencies" [value]="competency.competencyId">{{ competency.competencyTitle }}</option>
+                   <option *ngFor="let competency of allCompetencies" [value]="competency.id">{{ competency.competencyTitle }}</option>
                  </select>
                  <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
                   <div *ngIf="competencyTitle.errors.required">Competency is required</div>
@@ -120,7 +120,7 @@
                </div>
              </div>
             </form>
-   
+
     </div>
     </ngx-side-modal>
  </div>

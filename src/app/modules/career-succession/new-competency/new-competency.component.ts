@@ -52,10 +52,10 @@ export class NewCompetencyComponent implements OnInit {
   allCompetencyRequirements: CompetencyRequirmentsDTO [] = [];
   competencyRequirement = new CompetencyRequirmentsDTO;
   addedRequirements: [] = [];
-tempQualReq = [];
-tempSkillReq = [];
-tempCertReq = [];
-tempTrainReq = [];
+  tempQualReq = [];
+  tempSkillReq = [];
+  tempCertReq = [];
+  tempTrainReq = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,

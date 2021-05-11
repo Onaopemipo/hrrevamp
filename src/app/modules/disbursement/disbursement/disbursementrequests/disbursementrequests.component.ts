@@ -116,7 +116,7 @@ getTableActions (){
 }
 
   async allDisbursementRequest(){
-    const data = await this.request.fetchExpenses(0,0,0,0,0,'','','',0,0,0).toPromise();
+    const data = await this.request.fetchExpenses(0,0,0,0,0,'','','',0,10,1).toPromise();
     if(!data.hasError){
       this.allDisbursements = data.result;
       this.requestCounter = data.totalRecord;
