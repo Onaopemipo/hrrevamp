@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class MyAppraisalsComponent implements OnInit {
 
   tableColumns: TableColumn[] = [
+    {name: 'cycle', title: 'Cycle'},
     {name: 'appraisalType', title: 'Appraisal Type'},
     {name: 'assignedKra', title: 'No of KRAS'},
     {name: 'assignedKr', title: '', type: ColumnTypes.Link, link_name: 'View KRAs'},
