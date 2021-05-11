@@ -1,5 +1,8 @@
+import { NbRadioModule } from '@nebular/theme';
+import { ReviewerReviewMainComponent } from './page/reviewer-review-main/reviewer-review-main.component';
+import { PerformanceReviewMainComponent } from './page/performance-review-main/performance-review-main.component';
 import { MyAppraisalCycleComponent } from './pages/my-appraisal-cycle/my-appraisal-cycle.component';
-import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy } from './../../_services/service-proxies';
+import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, ReviewRecommendationsServiceProxy, SubmitHRAppraisalReviewServiceProxy, GetHRAppraisalReviewsServiceProxy } from './../../_services/service-proxies';
 import { MyAppraisalsComponent } from './pages/my-appraisals/my-appraisals.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +23,9 @@ import { PerformanceReviewsComponent } from './pages/performance-reviews/perform
 import { PerformanceMatrixComponent } from './pages/performance-matrix/performance-matrix.component';
 import { AppraisalComponent } from './pages/appraisal/appraisal.component';
 import { PerformanceManagementService } from './services/performance-management.service';
-import { AddUpdateKPIServiceProxy, AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, FetchKPIsServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateKPIServiceProxy, AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, FetchKPIsServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy,
+  SavePerformanceReviewServiceProxy,
+  SaveEmployeeAppraisalReviewServiceProxy, } from 'app/_services/service-proxies';
 import { KeyResultAreaService } from './services/key-result-area.service';
 import { AppraisalService } from './services/appraisal.service';
 import { KpiService } from './services/kpi.service';
@@ -44,6 +49,8 @@ import { KpiService } from './services/kpi.service';
     MyAppraisalsComponent,
     MyAppraisalCycleComponent,
     WorkflowComponent,
+    PerformanceReviewMainComponent,
+    ReviewerReviewMainComponent,
   ],
   providers: [
    PerformanceManagementService,
@@ -65,12 +72,18 @@ import { KpiService } from './services/kpi.service';
     SubmitEmployeeAppraisalReviewServiceProxy,
     SubmitPerformanceReviewServiceProxy,
     EmployeeCycleKrasServiceProxy,
+    SavePerformanceReviewServiceProxy,
+    SaveEmployeeAppraisalReviewServiceProxy,
+    ReviewRecommendationsServiceProxy,
+    SubmitHRAppraisalReviewServiceProxy,
+    GetHRAppraisalReviewsServiceProxy,
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     ThemeModule,
     PerformanceRoutingModule,
+    NbRadioModule,
   ]
 })
 export class PerformanceModule { }

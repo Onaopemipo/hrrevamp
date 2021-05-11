@@ -12,6 +12,7 @@
       pageDescription="Click on the button to create a performance cycle"
       buttonValue="Create Cycle"
       (buttonClick)="createNewClicked()"
+      [loading]="loading"
     >
     </ngx-default-content>
     <ngx-tablecomponent
@@ -20,6 +21,9 @@
       [userData]="tableData"
       [loading]="loading"
       (pageChange)="loadNewPage($event)"
+      [actions]="tableActions"
+      (actionClick)="tableActionClick($event)"
+      [loading]="loading"
     ></ngx-tablecomponent>
   </ng-template>
   <div *ngIf="showModal" title="New Performance Cycle">
@@ -59,21 +63,27 @@
 
         <div class="form-group">
           <label>Appraisal Type</label>
-          <ngx-radio-button
+          <!-- <ngx-radio-button
             [items]="appraisalTypes"
             [(value)]="editingData.appraisalTypeId"
-          ></ngx-radio-button>
+          ></ngx-radio-button> -->
+          <nb-radio-group [(ngModel)]="editingData.appraisalTypeId">
+            <nb-radio [value]="item.selectValue" *ngFor="let item of appraisalTypes">{{item.selectLabel}}</nb-radio>
+          </nb-radio-group>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Rating Type</label>
-          <ngx-radio-button
+          <nb-radio-group [(ngModel)]="selectedOption">
+            <nb-radio [value]="item.selectValue" *ngFor="let item of ratingTypes">{{item.selectLabel}}</nb-radio>
+          </nb-radio-group> -->
+          <!-- <ngx-radio-button
             [items]="ratingTypes"
             [(value)]="editingData.ratingTypeId"
-          ></ngx-radio-button>
-        </div>
+          ></ngx-radio-button> -->
+        <!-- </div> -->
 
-        <div class="form-group" 
+        <!-- <div class="form-group"
           *ngIf="editingData.ratingTypeId==RATING_TYPE_VALUES.OPEN_ENDED">
           <label>Close Ended</label>
           <div style="display: flex;">
@@ -81,7 +91,7 @@
             <div style="margin: 1rem"></div>
             <input class="form-control" [(ngModel)]="editingData.maxRating" />
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group">
           <label>Department</label>

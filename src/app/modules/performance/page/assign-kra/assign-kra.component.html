@@ -18,21 +18,29 @@
             <label>Reviewer</label>
             <ngx-employee-master-search [clearFlag]="master_search_clear_flag" (masterSubmitted)="reviewerSelected($event)"></ngx-employee-master-search>
         </div>
-        <div>
-          <div *ngFor="let kra of selected_kras">
-            <span>{{kra.kraName}}</span>
-            <span (click)="deleteKra(kra)">Delete</span>
+        <div class="form-group">
+          <label></label>
+          <div>
+            <button nbButton status="primary" (click)="addKra()" outline="true">
+              <nb-icon icon="plus"></nb-icon>
+              Add
+            </button>
+            <br/>
+            <button *ngFor="let kra of selected_kras" nbButton style="background: transparent; margin: 0.5rem">
+              {{kra.kraName}}
+              <nb-icon icon="close-outline" (click)="deleteKra(kra)" status="danger"></nb-icon>
+            </button>
           </div>
         </div>
-        <button (click)="addKra()">Add</button>
         <div class="form-group">
           <label>Employee</label>
-          <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)"></ngx-employee-master-search>
+          <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true"></ngx-employee-master-search>
       </div>
         <div class="form-group">
             <label></label>
             <div>
-                <button nbButton status='primary' (click)="assignKra()">Assign</button>
+              <ngx-loadable-button (click)="assignKra()" [loading]="loadingSave">Assign</ngx-loadable-button>
+                <!-- <button nbButton status='primary' (click)="assignKra()">Assign</button> -->
             </div>
         </div>
         <!-- <div class="form-group">

@@ -28,22 +28,23 @@
   <div modal-header>New Key Result Area</div>
   <div modal-body>
     <div class="">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Performance Cycle</label>
         <ngx-multi-select [singleSelection]="true" [choice_name]="ChoiceName.departments"></ngx-multi-select>
-      </div>
+      </div> -->
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Strategy Category ID</label>
         <select class="form-control" [(ngModel)]="editingData.strategyCategoryId">
           <option value="1">Financia</option>
         </select>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label>Rating Type</label>
-        <select class="form-control" [(ngModel)]="editingData.strategyCategoryId">
+        <select class="form-control" [(ngModel)]="editingData.ratingTypeId">
           <option value="1">Open Ended</option>
+          <option value="2">Close Ended</option>
         </select>
       </div>
 

@@ -1,3 +1,4 @@
+import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { EmployeeDTO } from 'app/_services/service-proxies';
 import { MyKeyResultArea } from './../../services/key-result-area.service';
 import { filter } from 'rxjs/operators';
@@ -28,6 +29,7 @@ export class AssignKraComponent implements OnInit {
   selected_cylce = 0;
   cycles: MyPerformanceCycle[] = []
   kras: MyKeyResultArea[] = [];
+  loadingSave = false;
   get unselected_kras(): MyKeyResultArea[] {
     return this.kras.filter(kra => !this.selected_kras.find(_kra => kra.id == _kra.kraId))
   }
@@ -46,6 +48,7 @@ export class AssignKraComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private kraService: KeyResultAreaService,
     private cycleService: PerformanceManagementService,
+    private alertService: AlertserviceService,
   ) { }
 
 
@@ -68,8 +71,15 @@ export class AssignKraComponent implements OnInit {
     // });
   }
 
-  assignKra() {
-    this.kraService.assignObj(this.selected_cylce, JSON.stringify(this.selected_kras), this.employees.join(',')).toPromise();
+  async assignKra() {
+    this.loadingSave = true;
+    const res = await this.kraService.assignObj(this.selected_cylce, JSON.stringify(this.selected_kras), this.employees.join(',')).toPromise();
+    await this.alertService.openModalAlert(res.hasError ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS, res.message, 'Okay').toPromise();
+    this.loadingSave = false;
+    if(!res.hasError){
+      this.master_search_clear_flag += 1;
+    }
+    this.loadingSave = false;
   }
   reviewerSelected(employees: EmployeeDTO[]){
     const reviewer = employees[0];
