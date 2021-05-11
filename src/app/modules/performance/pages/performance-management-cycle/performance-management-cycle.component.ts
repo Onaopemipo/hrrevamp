@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
+import { ColumnTypes, TableColumn, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
 import { MyPerformanceCycle, PerformanceManagementService, Review_Types } from '../../services/performance-management.service';
 import { BaseComponent } from 'app/components/base/base.component';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 import { ISelectable } from 'app/components/radio-button/radio-button.component';
+import { CycleDTO } from 'app/_services/service-proxies';
 
 
 enum TOP_ACTIONS { ADD__NEW__CYCLE, };
@@ -48,11 +49,11 @@ export class PerformanceManagementCycleComponent extends BaseComponent<MyPerform
   TOP_ACTIONS = TOP_ACTIONS;
   tableColumns = [
     { name: 'name', title: 'Cycle Name' },
-    { name: 'startDate', title: 'Date (From)' },
-    { name: 'endDate', title: 'Date (TO)' },
-    { name: 'date', title: 'Period' },
-    { name: 'date', title: 'Time' },
-    { name: 'rating_type', title: 'Rating' },
+    { name: 'startDate', title: 'Date (From)', type: ColumnTypes.Date },
+    { name: 'endDate', title: 'Date (TO)', type: ColumnTypes.Date },
+    // { name: 'date', title: 'Period' },
+    // { name: 'date', title: 'Time' },
+    // { name: 'rating_type', title: 'Rating' },
     { name: 'status', title: 'Status', type: ColumnTypes.Status },
   ];
 
@@ -60,6 +61,20 @@ export class PerformanceManagementCycleComponent extends BaseComponent<MyPerform
     protected confirmBox: ConfirmBoxService,
     protected api: PerformanceManagementService) {
     super(confirmBox);
+  }
+
+  tableActions: TableAction[] = [
+    {name: 'edit', label: 'Edit'},
+    {name: 'delete', label: 'Delete'},
+  ]
+
+  tableActionClick(event: TableActionEvent<MyPerformanceCycle>) {
+    if(event.name === 'edit') {
+      this.editingData = new MyPerformanceCycle(new CycleDTO({...event.data}));
+      this.showModal = true;
+    } else {
+      this.deleteData(event.data);
+    }
   }
 
   reviewPurposes: any[] = [

@@ -1,124 +1,159 @@
 <ngx-componentsheader pageName='Set KPIS'></ngx-componentsheader>
 
 <div class="main-page-container">
-    <div>
-        <div class="card" style="margin-bottom: 0.5rem;">
-            <!-- <div class="card-info" style=";"> -->
-                <div>
-                    <div>Key Result Area</div>
-                    <div>{{kra.section_name}}</div>
-                </div>
-                <div>
-                    <div>Strategy</div>
-                    <div>Operations</div>
-                </div>
-                <div>
-                    <div>Score</div>
-                    <div>{{kra.maximum_score_obtainable}}</div>
-                </div>
-                <div>
-                    <div>Weight</div>
-                    <div>{{kra.weight}}</div>
-                </div>
-            <!-- </div> -->
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <span style="color: #EB5757;">
-                <nb-icon icon='calendar'></nb-icon>
-                Due 05 July, 2020
-            </span>
-        </div>
+  <div>
+    <div class="card" style="margin-bottom: 0.5rem;">
+      <!-- <div class="card-info" style=";"> -->
+      <div>
+        <div>Key Result Area</div>
+        <div>{{kra.section_name}}</div>
+      </div>
+      <div>
+        <div>Strategy</div>
+        <div>Operations</div>
+      </div>
+      <div>
+        <div>Score</div>
+        <div>{{kra.maximum_score_obtainable}}</div>
+      </div>
+      <div>
+        <div>Weight</div>
+        <div>{{kra.weight}}</div>
+      </div>
+      <!-- </div> -->
     </div>
+    <div style="display: flex; justify-content: flex-end;">
+      <span style="color: #EB5757;">
+        <nb-icon icon='calendar'></nb-icon>
+        Due 05 July, 2020
+      </span>
+    </div>
+  </div>
 
-    <div style="margin-bottom: 0.5rem;">
-        <div style="display: flex; justify-content: flex-end;" class="table-buttons">
-            <button nbButton outline text-button  status='primary' (click)="createNewClicked()">
-                <nb-icon icon='plus'></nb-icon>
-                Add KPI
-            </button>
-            <button nbButton outline text-button  status='primary'>
-                <nb-icon icon='download-outline'></nb-icon>
-                Downlaod Template
-            </button>
-                        <button nbButton outline text-button  status='primary'>
-                <nb-icon icon='upload-outline'></nb-icon>
-                Upload KPI
-            </button>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>KPIs</th>
-                    <th>UNIT OF MEASUREMENT</th>
-                    <th>SCORE</th>
-                    <th>COMMENT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let kpi of data">
-                    <td>{{kpi.title}}</td>
-                    <td>{{kpi.unitOfMeasurement}}</td>
-                    <td>{{kpi.sectionTotalScore}}</td>
-                    <td>{{kpi.canComment}}</td>
-                </tr>
-            </tbody>
-        </table>
+  <div style="margin-bottom: 0.5rem;">
+    <div style="display: flex; justify-content: flex-end;" class="table-buttons">
+      <button nbButton outline text-button status='primary' (click)="createNewClicked()">
+        <nb-icon icon='plus'></nb-icon>
+        Add KPI
+      </button>
+      <button nbButton outline text-button status='primary'>
+        <nb-icon icon='download-outline'></nb-icon>
+        Downlaod Template
+      </button>
+      <button nbButton outline text-button status='primary'>
+        <nb-icon icon='upload-outline'></nb-icon>
+        Upload KPI
+      </button>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>KPIs</th>
+          <th>UNIT OF MEASUREMENT</th>
+          <th>IS CLOSE ENDED</th>
+          <th>SCORE</th>
+          <th>COMMENT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let kpi of data">
+          <td>{{kpi.title}}</td>
+          <td>{{kpi.unitOfMeasurement}}</td>
+          <td>
+            <nb-icon *ngIf="kpi.ratingTypeId == 2" icon="checkmark-circle-2-outline" class="text-primary"></nb-icon>
+            <nb-icon *ngIf="!(kpi.ratingTypeId == 2)" icon="close-circle-outline" class="text-danger"></nb-icon>
+          </td>
+          <td>{{kpi.score}}</td>
+          <td>
+            <nb-icon *ngIf="kpi.canComment" icon="checkmark-circle-2-outline" class="text-primary"></nb-icon>
+            <nb-icon *ngIf="!kpi.canComment" icon="close-circle-outline" class="text-danger"></nb-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <ngx-side-modal [(show)]="showModal">
-    <div header>
-        Add KPI
-    </div>
-    <div modal-body>
-        <div class="form">
-            <div class="form-group">
-                <label>Name</label>
-                <input [(ngModel)]="editingData.title" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label>Unit of Measurement</label>
-                <ngx-multi-select [singleSelection]="true" [items]="unitsOfMeasurement" [(idValue)]="editingData.unit_of_measurement_id"></ngx-multi-select>
-            </div>
-            <div class="form-group">
-                <label>Score</label>
-                <input [(ngModel)]="editingData.score" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label>Allow Comment</label>
-                <input type="checkbox" [(ngModel)]="editingData.canComment"  class="form-control"/>
-                <!-- <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input> -->
-            </div>
+  <div header>
+    Add KPI
+  </div>
+  <div modal-body>
+    <div class="form">
+      <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="editingData.title" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Unit of Measurement</label>
+        <ngx-multi-select [singleSelection]="true" [items]="unitsOfMeasurement"
+          [(idValue)]="editingData.unit_of_measurement_id"></ngx-multi-select>
+      </div>
+      <div class="form-group">
+        <label>Rating Type</label>
+        <select class="form-control" [(ngModel)]="editingData.ratingTypeId">
+          <option [value]="1">Open Ended</option>
+          <option [value]="2">Close Ended</option>
+        </select>
+      </div>
+      <!-- <div class="form-group">
+        <label>Weight</label>
+        <input [(ngModel)]="editingData." class="form-control" />
+      </div> -->
+      <div class="form-group">
+        <label>Score</label>
+        <input [(ngModel)]="editingData.score" class="form-control" />
+      </div>
+      <div class="form-group" *ngIf="editingData.ratingTypeId == 2">
+        <label>Min Rating</label>
+        <input [(ngModel)]="editingData.minRating" class="form-control" />
+      </div>
+      <div class="form-group" *ngIf="editingData.ratingTypeId == 2">
+        <label>Max Rating</label>
+        <input [(ngModel)]="editingData.maxRating" class="form-control" />
+      </div>
+      <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
+        <label>Yes Score</label>
+        <input [(ngModel)]="editingData.yes_Score" class="form-control" />
+      </div>
+      <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
+        <label>No Score</label>
+        <input [(ngModel)]="editingData.no_Score" class="form-control" />
+      </div>
+      <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
+        <label>Fair Score</label>
+        <input [(ngModel)]="editingData.fair_Score" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Allow Comment</label>
+        <input type="checkbox" [(ngModel)]="editingData.canComment" class="form-control" />
+        <!-- <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input> -->
+      </div>
 
 
-            <div class="form-group">
-                <label></label>
-                <div style="display: flex">
-                  <button nbButton status="primary" (click)="submitForm()">save</button>
-                  <div class="m-1"></div>
-                  <button
-                    nbButton
-                    status="primary"
-                    outline
-                    style="background: transparent"
-                  >
-                    cancel
-                  </button>
-                </div>
-              </div>
-
+      <div class="form-group">
+        <label></label>
+        <div style="display: flex">
+          <button nbButton status="primary" (click)="submitForm()">save</button>
+          <div class="m-1"></div>
+          <button nbButton status="primary" outline style="background: transparent">
+            cancel
+          </button>
         </div>
+      </div>
+
     </div>
-    <div modal-footer>
-        <div class="linear-form">
-            <div class="form-group">
-                <label>
-                </label>
-                <div>
-                    <button nbButton status='primary'>Save</button>
-                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
-                </div>
-            </div>
+  </div>
+  <div modal-footer>
+    <div class="linear-form">
+      <div class="form-group">
+        <label>
+        </label>
+        <div>
+          <button nbButton status='primary'>Save</button>
+          <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;">Cancel</button>
         </div>
+      </div>
     </div>
+  </div>
 </ngx-side-modal>

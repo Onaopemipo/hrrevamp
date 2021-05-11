@@ -1,20 +1,17 @@
-<ngx-componentsheader
-          pageName="KRAs"
-          [requiredButton]="[]"
-        ></ngx-componentsheader><div class="main-page-container">
-        <!-- <nb-tabset (changeTab)="selectTab($event)">
+<ngx-componentsheader pageName="KRAs" [requiredButton]="[]"></ngx-componentsheader>
+<div class="main-page-container">
+  <!-- <nb-tabset (changeTab)="selectTab($event)">
         <nb-tab tabTitle="Pending" [tabId]="TABS.PENDING">
         </nb-tab><nb-tab tabTitle="Reviewed" [tabId]="TABS.REVIEWED">
         </nb-tab>
         </nb-tabset> -->
-    <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader><ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Cycle" pageDescription="Click on the button to create a performance cycle">
-    </ngx-default-content>
-      <ngx-tablecomponent
-        [showActions]="false"
-        *ngIf="!showEmpty"
-        [tableColum]="tableColumns"
-        [userData]="kras"
-        [loading]="loading"
-        (actionClick)="itemClicked($event)"
-      ></ngx-tablecomponent>
-    </div>
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader>
+  <ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Cycle"
+    pageDescription="Click on the button to create a performance cycle">
+  </ngx-default-content>
+  <div style="display: flex; justify-content: flex-end;">
+    <button nbButton status="primary" (click)="gotoReview()">Review</button>
+  </div>
+  <ngx-tablecomponent [showActions]="false" *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]="kras"
+    [loading]="loading" (actionClick)="itemClicked($event)"></ngx-tablecomponent>
+</div>

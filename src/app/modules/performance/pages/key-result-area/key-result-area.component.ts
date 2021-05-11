@@ -11,6 +11,7 @@ import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { Router } from '@angular/router';
+import { SectionDTO } from 'app/_services/service-proxies';
 
 
 enum TOP_ACTIONS { ADD__KEY__RESULT__AREAS, };
@@ -49,16 +50,14 @@ export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKey
   TOP_ACTIONS = TOP_ACTIONS;
   tableColumns = [
     { name: 'section_name', title: 'KRA' },
-    { name: 'description', title: 'Description' },
-    { name: 'date', title: 'Cycle' },
     { name: 'maximum_score_obtainable', title: 'Score' },
     { name: 'weight', title: 'Weight' },
+    { name: 'ratingType', title: 'Rating Type' },
     { name: 'no_of_kpis', title: 'No of KPIs' },
-    { name: 'date', title: 'Strategy Category' }
   ];
   tableActions: TableAction[] = [
     {name: ACTIONS.view_kpi, label: 'View Kpi'},
-    {name: ACTIONS.assign, label: 'Assign KRA'},
+    // {name: ACTIONS.assign, label: 'Assign KRA'},
     {name: ACTIONS.edit, label: 'Edit'},
     {name: ACTIONS.delete, label: 'Delete'},
   ];
@@ -66,8 +65,10 @@ export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKey
     if (event.name === ACTIONS.view_kpi) {
       this.router.navigateByUrl(`/performance/kra/${event.data.id}/kpi`);
     }
-    if (event.name === ACTIONS.assign) {
-      this.router.navigateByUrl(`/performance/kra/${event.data.id}/assign`);
+    if (event.name === ACTIONS.edit) {
+      this.editingData = new MyKeyResultArea(new SectionDTO({ ...event.data }));
+      this.showModal = true;
+      // this.router.navigateByUrl(`/performance/kra/${event.data.id}/assign`);
     }
   }
   constructor(
