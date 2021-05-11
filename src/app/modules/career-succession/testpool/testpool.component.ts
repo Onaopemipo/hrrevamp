@@ -66,7 +66,7 @@ tableActionClicked(event: TableActionEvent){
     })
     }
    else if(event.name==TABLE_ACTION.VIEW){
-      this.route.navigateByUrl('/career-succession/profiledetails')
+      this.route.navigateByUrl('/career-succession/profiledetails/'+ event.data.id)
     }
 }
 tableActions: TableAction[] = [
@@ -178,6 +178,7 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     if(!data.hasError && data.result.employeeTalentManagement.length > 0){
       this.poolRecords = data.result.employeeTalentManagement;
       this.pageTitle = data.result.title;
+      console.log('Page Title:',this.pageTitle)
       this.employeeCounter = data.result.employeeTalentManagement.length;
       console.log('Single Record', this.poolRecords);
       this.loading = false;

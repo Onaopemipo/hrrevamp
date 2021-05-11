@@ -239,7 +239,7 @@ Create Succession
     <div style="display: flex; flex-direction: row; justify-content: space-between;">
        <button type="submit" class="btn my-button"     nbButton status="primary">Create Upskilling Plan</button>
        <span style="padding: 8px;"></span>
-       <button type="submit" class="btn cancel-button" (click)="compareCompetencies()" nbButton status="primary" outline>Compare Competency</button>
+       <button type="submit" class="btn cancel-button" (click)="toggleCompetency()" nbButton status="primary" outline>Compare Competency</button>
      </div>
 
   </nb-card-body>
@@ -497,8 +497,11 @@ Create Succession
         </div>
     </ngx-side-modal>
 
-  <ngx-side-modal [(show)]='compareCompetency' [position]="'Center'" style="width: 600px;">
-      <div modal-header>Compare Competency</div>
+  <ngx-side-modal [(show)]='compareCompetency' [position]="'Center'" style="width: 800px;">
+      <div modal-header style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div modal-header>Compare Competency</div>
+        <div modal-header><i class="fa fa-times" (click)="compareCompetencies()" aria-hidden="true"></i></div>
+    </div>
       <div modal-body>
         <div>
           <nb-card>
@@ -510,7 +513,7 @@ Create Succession
                         <div>
                           <img src="assets/icons/department.jpg" style="width:3rem;">
                         </div>
-                        <span style="font-weight: 600; padding-right:25px; text-align: center;">Onaopemipo</span><br>
+                        <span style="font-weight: 600; padding-right:25px; text-align: center;">Philip Muyiwa</span><br>
                         <span>Sales</span>
                       </div>
 
@@ -518,7 +521,7 @@ Create Succession
                         <div>
                           <img src="assets/icons/department.jpg" style="width:3rem;">
                         </div>
-                        <span style="font-weight: 600; padding-right:25px; text-align: center;">Philipiano</span><br>
+                        <span style="font-weight: 600; padding-right:25px; text-align: center;">Ridwan Olawunmi</span><br>
                         <span>Marketing</span>
                       </div>
 
@@ -528,28 +531,23 @@ Create Succession
           </nb-card>
                 </div>
 
-                <div style="padding: 10px"></div>
-
         <nb-card>
           <nb-card-header>Role Competencies</nb-card-header>
           <nb-card-body>
             <div>
               <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <div style="padding: 5px;"></div>
                   <div style="display: flex; flex-direction: column; justify-self: center;">
-                    <span class="title">Tag</span>
                     <span class="title">Tag</span>
                     <span class="title">Tag</span>
                     <span class="title">Tag</span>
                     <span class="title">Tag</span>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div style="padding: 5px;"></div>
                   <div style="display: flex; flex-direction: column; justify-self: center;">
-                    <span class="title">Bsc. in Sales and Marketing</span>
-                    <span class="title">Bsc. in Sales and Marketing</span>
                     <span class="title">Bsc. in Sales and Marketing</span>
                     <span class="title">Bsc. in Sales and Marketing</span>
                     <span class="title">Bsc. in Sales and Marketing</span>
@@ -557,11 +555,9 @@ Create Succession
                   </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div style="padding: 5px;"></div>
                   <div style="display: flex; flex-direction: column; justify-self: center;">
-                    <span class="title">Bsc. in Sales and Marketing</span>
-                    <span class="title">Bsc. in Sales and Marketing</span>
                     <span class="title">Bsc. in Sales and Marketing</span>
                     <span class="title">Bsc. in Sales and Marketing</span>
                     <span class="title">Bsc. in Sales and Marketing</span>
@@ -574,7 +570,6 @@ Create Succession
 
           </nb-card-body>
         </nb-card>
-        <div style="padding: 10px"></div>
         <nb-card>
           <nb-card-header>Skills</nb-card-header>
           <nb-card-body>
@@ -596,8 +591,6 @@ Create Succession
                     <span class="title">Yes</span>
                     <span class="title">Yes</span>
                     <span class="title">Yes</span>
-                    <span class="title">No</span>
-                    <span class="title">No</span>
                   </div>
                 </div>
 
@@ -608,7 +601,85 @@ Create Succession
                     <span class="title">No</span>
                     <span class="title">Yes</span>
                     <span class="title">Yes</span>
+                  </div>
+                </div>
+                </div>
+
+            </div>
+
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+          <nb-card-header>Qualification</nb-card-header>
+          <nb-card-body>
+            <div>
+              <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Communication</span>
+                    <span class="title">Computer Literacy</span>
+                    <span class="title">Time Management</span>
+                    <span class="title">Complete Candor</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
                     <span class="title">No</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Yes</span>
+                    <span class="title">No</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                  </div>
+                </div>
+                </div>
+
+            </div>
+
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+          <nb-card-header>Certification</nb-card-header>
+          <nb-card-body>
+            <div>
+              <div class="row" style="display: flex; flex-direction: row; justify-content: left; align-items: flex-start;">
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Communication</span>
+                    <span class="title">Computer Literacy</span>
+                    <span class="title">Time Management</span>
+                    <span class="title">Complete Candor</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">No</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                    <span class="title">Yes</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div style="padding: 5px;"></div>
+                  <div style="display: flex; flex-direction: column; justify-self: center;">
+                    <span class="title">Yes</span>
+                    <span class="title">No</span>
+                    <span class="title">Yes</span>
                     <span class="title">Yes</span>
                   </div>
                 </div>
