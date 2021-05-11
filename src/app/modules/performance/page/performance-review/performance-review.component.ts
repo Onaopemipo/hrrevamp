@@ -118,7 +118,7 @@ export class PerformanceReviewComponent implements OnInit {
         ...this.kra,
         appraisalId: 0,
         employeeComment: this.kra.employeeComment,
-        reviewerComment: this.kra.reviewerComment,
+        reviewerComment: this.kra.reviewComment,
         assignedKPIs: JSON.stringify(this.tempEditingData),
         hrComment: '',
       });

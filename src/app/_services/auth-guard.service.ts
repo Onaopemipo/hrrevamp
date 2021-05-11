@@ -19,12 +19,12 @@ export class AuthGuardService implements CanLoad {
         console.log(data)
         localStorage.setItem('returnUrl', this.router.url);  
         if (!data) {
-          this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
-            this.AuthenService.clearusers();
-            if (data) {
+          // this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Session TimeOut", "Login").subscribe(data => {
+          //   this.AuthenService.clearusers();
+          //   if (data) {
 
-            }
-          });  
+          //   }
+          // });  
           resolve(false);
         } else {
           this.AuthenService.getuser().then((usersdata: IVwUserObj[]) => {
