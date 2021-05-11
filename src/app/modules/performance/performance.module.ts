@@ -1,3 +1,4 @@
+import { HrReviewListComponent } from './page/hr-review-list/hr-review-list.component';
 import { NbRadioModule } from '@nebular/theme';
 import { ReviewerReviewMainComponent } from './page/reviewer-review-main/reviewer-review-main.component';
 import { PerformanceReviewMainComponent } from './page/performance-review-main/performance-review-main.component';
@@ -51,6 +52,7 @@ import { KpiService } from './services/kpi.service';
     WorkflowComponent,
     PerformanceReviewMainComponent,
     ReviewerReviewMainComponent,
+    HrReviewListComponent,
   ],
   providers: [
    PerformanceManagementService,
