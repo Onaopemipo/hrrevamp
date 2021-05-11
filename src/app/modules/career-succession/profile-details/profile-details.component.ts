@@ -109,7 +109,9 @@ export class ProfileDetailsComponent implements OnInit {
        this.editPlan = true;
       }
     else if (event.name == TABLE_ACTION.VIEW) {
-      this.employeeId = event.data.employeeId;
+      // this.employeeId = event.data.employeeId;
+      this.successorId = event.data.employeeId;
+      alert(this.successorId)
       this.isSuccessor = true;
       this.initializePage();
 
@@ -157,13 +159,22 @@ export class ProfileDetailsComponent implements OnInit {
   isSuccessor: boolean = false;
   compareCompetency: boolean = false;
   center: boolean = true;
-
+  successorId: number = 0;
+  SuccessorEmployeeData: MyEmployeeDTO = new MyEmployeeDTO;
+  SuccessorCertificationData: EmployeeCertificationDTO [] = [];
+  SuccessorExperienceData: EmployeeHistoryDTO [] = [];
+  SuccessorSkillsData: EmployeeSkillDTO [] = [];
+  SuccessorGradeName: string = "";
+  SuccessorJobName: string = "";
+  SuccessorQualificationData: EmployeeQualificationDTO [] = [];
+  SuccessorPositionId: number = 0;
+  SuccessorLocationName: string = "";
   loading: boolean = false;
   successionEmployeesData: CareerSuccessorDTO [] = [];
 
   constructor(private navCtrl: Location, private alertMe: AlertserviceService,
     private activatedRoute: ActivatedRoute,private succession: CareerSuccessionServiceProxy, private deleteEmployee: DeleteEmployeefromCareerSuccessionplanServiceProxy,
-    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy,
+    private employeeService: EmployeesService, private employee: FetchEmployeeByIdServiceProxy, private compare: CompetencyServiceProxy,
     private allEmployees: FetchAllEmployeesServiceProxy, private router: Router, private planById: FetchSuccessionPlanServiceProxy,
     private successionService: GetCareerSuccesionPlanByIdServiceProxy, private successor: EmployeePossibleSuccessorServiceProxy,
     private commonService: CommonServiceProxy, private competencyService: CompetencyServiceProxy,) { }
@@ -198,7 +209,20 @@ export class ProfileDetailsComponent implements OnInit {
   }
 
   compareCompetencies(){
-    this.compareCompetency = true;
+   this.compare.compareCompetency(this.employeeId, this.competencyId).subscribe(data => {
+     if(!data.hasError){
+      console.log(data.result)
+     }
+   })
+  }
+
+  toggleCompetency(){
+    this.compareCompetency = !this.compareCompetency;
+    this.compare.compareCompetency(this.employeeId, this.competencyId).subscribe(data => {
+      if(!data.hasError){
+       console.log(data.result)
+      }
+    })
   }
 
   modifyPlan(){
@@ -245,6 +269,30 @@ fetchProfile(){
       }
     })
   }
+
+  fetchSuccessorProfile(){
+    this.loading = true;
+   this.employee.getEmployeeById(this.successorId).subscribe(data => {
+     this.loading = false;
+   if(!data.hasError){
+     this.SuccessorEmployeeData = new MyEmployeeDTO(data.result);
+     this.SuccessorCertificationData = data.result.certifications;
+     this.SuccessorExperienceData = data.result.employmentHistories;
+     this.SuccessorSkillsData = data.result.skills;
+     this.SuccessorGradeName = data.result.contracts[0].gradeName;
+     this.SuccessorJobName = data.result.contracts[0].jobName;
+     this.SuccessorQualificationData = data.result.qualifications;
+     this.SuccessorPositionId = this.employeeData.positionId;
+     this.SuccessorLocationName = data.result.contracts[0].locationName;
+     console.log('My Successor Details', this.employeeData);
+     console.log('My Successor Contract', this.employeeContractData);
+     console.log('My Successor position ID:',this.positionId)
+     this.getEmployeeSuccessionPlan();
+     this.getPlanSuccessors();
+     this.pageLoading = false;
+   }
+ })
+}
 
   async getPlanSuccessors(){
     const data = await this.successor.getEmployeePossibleSuccessor(undefined,undefined,undefined,this.employeeId,this.competencyId,0,1,10).toPromise();

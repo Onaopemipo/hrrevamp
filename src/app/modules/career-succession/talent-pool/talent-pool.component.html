@@ -5,7 +5,7 @@
     <nb-card-body>
       <div><br>
         <ngx-default-content pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
-          (buttonClick)="addNewPool()"></ngx-default-content>
+          (buttonClick)="addNewPool()" [loading]="loading"></ngx-default-content>
       </div>
     </nb-card-body>
   </nb-card>

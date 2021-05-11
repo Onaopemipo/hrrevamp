@@ -21,4 +21,6 @@ export class CompareCompetencyComponent implements OnInit {
     const data = await this.compare.compareCompetency(1,1 ).toPromise();
   }
 
+
+
 }

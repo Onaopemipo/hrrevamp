@@ -92,15 +92,17 @@ export class TalentPoolComponent implements OnInit {
     }
   }
 
-  async fetchAllPools(){
-    const data = await this.newPoolService.fetchTalentManagementPool().toPromise();
-    console.log('Here is all pools',data);
+  fetchAllPools(){
+    this.loading = true;
+    this.newPoolService.fetchTalentManagementPool().subscribe(data => {
+    this.loading = false;
     if(!data.hasError){
       this.allTalentPools = data.result;
       this.allPoolCounter = data.totalRecord;
       console.log('See my pools', this.allTalentPools)
       console.log('See my pools', this.allPoolCounter)
     }
+  })
   }
 
   async deleteTalentPool(poolId){

@@ -148,11 +148,13 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   deleteMyBudget(id:number){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you wish to delete?', 'Yes').subscribe(dataAction => {
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(dataAction => {
      if(dataAction == 'closed'){
       this.deleteBudget.deleteBudget(id).subscribe(data => {
         if(!data.hasError && data.result.isSuccessful == true){
-          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget has been deleted', 'Dismiss')
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget has been deleted', 'Dismiss').subscribe(res => {
+            this.fetAllBudget();
+          })
         }
       });
      }
@@ -160,11 +162,13 @@ export class OverallBudgetComponent implements OnInit {
   }
 
   deleteMyBudgetItem(id:number){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you wish to delete budget item?', 'Yes').subscribe(dataAction => {
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(dataAction => {
      if(dataAction == 'closed'){
       this.deleteItem.deleteBudgetItem(id).subscribe(data => {
-        if(!data.hasError && data.result.isSuccessful == true){
-          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget item has been deleted', 'Dismiss')
+        if(!data.hasError){
+          this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget item has been deleted', 'Dismiss').subscribe(res => {
+            this.fetAllBudget();
+          })
         }
       });
      }
@@ -174,8 +178,8 @@ export class OverallBudgetComponent implements OnInit {
  async updateSingleBudget(){
     const data = await this.addBudgetService.addUpdateBudget(this.singleBudgetUpdate).toPromise();
     if(!data.hasError){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss').subscribe(data => {
-      if(data == 'closed'){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss').subscribe(res => {
+      if(res == 'closed'){
         this.addItemModal = false;
       }
     });
