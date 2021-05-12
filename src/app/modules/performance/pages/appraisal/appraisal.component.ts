@@ -1,4 +1,4 @@
-import { AppraisalReviewerListDTO, AppraisalReviewerListDTOIListApiResult } from './../../../../_services/service-proxies';
+import { AppraisalReviewerListDTO, AppraisalReviewerListDTOIListApiResult, KpiReviewDTO, KpiReviewDTOIListApiResult } from './../../../../_services/service-proxies';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn, TableActionEvent } from 'app/components/tablecomponent/models';
@@ -24,13 +24,13 @@ export class AppraisalComponent extends MainBaseComponent {
   TABS = TABS;
   selectedTab = TABS.PENDING;
   tableColumns: TableColumn[] = [
-    { name: 'fullName', title: 'Name' },
+    { name: 'employeeName', title: 'Name' },
     // { name: 'date', title: 'ID' },
-    { name: 'departmentId', title: 'Department' },
-    { name: 'period', title: 'Cycle' },
-    { name: 'assignedKra', title: 'Assigned KRA' },
-    { name: 'date', title: 'Employee Status' },
-    { name: 'date', title: 'Reviewer Status' },
+    { name: 'department', title: 'Department' },
+    { name: 'cycleName', title: 'Cycle' },
+    { name: 'kraName', title: 'Assigned KRA' },
+    { name: 'isEmployeeSubmitted', title: 'Employee Status', type: ColumnTypes.Mark },
+    { name: 'isReviewerSubmitted', title: 'Reviewer Status', type: ColumnTypes.Mark },
     { name: 'link', title: '', type: ColumnTypes.Link, link_name: 'View'},
   ];
 
@@ -43,7 +43,7 @@ export class AppraisalComponent extends MainBaseComponent {
   }
 
   getKras(){
-    return this.http.get<AppraisalReviewerListDTOIListApiResult>('https://hrv2-api.azurewebsites.net/api/Appraisal/FecthReviewerKras/FecthReviewerKras')
+    return this.http.get<KpiReviewDTOIListApiResult>('https://hrv2-api.azurewebsites.net/api/Appraisal/FecthReviewerKras/FecthReviewerKras')
   }
 
   async ngOnInit() {
@@ -51,13 +51,9 @@ export class AppraisalComponent extends MainBaseComponent {
     const res = await this.getKras().toPromise(); //this.api.list({cycleId: 0}).toPromise();
     this.data = res.result;
     this.loading = false;
-    // this.getKras().toPromise()
-    // this.activatedRoute.paramMap.subscribe(async (data) => {
-      // this.kra = await this.KraService.fetch(Number(data.get('id'))).toPromise();
-    // });
   }
 
-  tableActionClick(data: TableActionEvent<AppraisalReviewerListDTO>){
-    this.router.navigateByUrl(`/performance/reviewer/cycle/${data.data.periodId}/kra/${data.data.assignedKra}/employee/${data.data.employeeId}/review`)
+  tableActionClick(data: TableActionEvent<KpiReviewDTO>){
+    this.router.navigateByUrl(`/performance/reviewer/cycle/${data.data.cycleId}/kra/${data.data.kraId}/${data.data.kraName}/employee/${data.data.employeeId}/review`)
   }
 }

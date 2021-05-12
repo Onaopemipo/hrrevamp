@@ -49,8 +49,8 @@ export const routes: Routes = [
         component: PerformanceReviewMainComponent,
       },
       {
-        path: 'reviewer/cycle/:cycle_id/kra/:kra_id/employee/:employee_id/review',
-        component: ReviewerReviewMainComponent,
+        path: 'reviewer/cycle/:id/kra/:kra_id/:kra_name/employee/:employee_id/review',
+        component: PerformanceReviewMainComponent, //ReviewerReviewMainComponent,
       },
       {
         path: 'supervisor/reviews',
