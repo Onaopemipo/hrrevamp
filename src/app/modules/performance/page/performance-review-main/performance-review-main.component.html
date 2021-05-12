@@ -5,19 +5,19 @@
         <div class="row summary">
             <div class="col-sm-4">
                 <div>Employee Name</div>
-                <div>{{employeeName}}</div>
+                <div>{{employee.fullName}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Department</div>
-                <div>{{employeeDepartment}}</div>
+                <div>{{contract.departmentName}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Position</div>
-                <div>{{kra.position}}</div>
+                <div>{{contract.positionName}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Reviewer Name</div>
-                <div>{{kra.reviewerName}}</div>
+                <div>{{reviewerName}}</div>
             </div>
             <div class="col-sm-4">
                 <div>Reviewer Title</div>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-sm-4">
                 <div>Period under review</div>
-                <div>{{kra.periodUnderReview}}</div>
+                <div>{{kra.periodUnderReview | date}}</div>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
             <label>Supervisor's Comment</label>
             <input class="form-control" [disabled]="!supervisorCanEdit" [(ngModel)]="supervisorComment"/>
         </div>
-        <div class="form-group" *ngIf="isSupervisor">
+        <div class="form-group" *ngIf="isHR">
           <label>HR Comment</label>
           <input class="form-control" [(ngModel)]="hrComment"/>
       </div>
