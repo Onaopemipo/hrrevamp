@@ -31,11 +31,12 @@ import { EmployeerecordsComponent } from './employeerecords/employeerecords.comp
 import { EmployeerecordsviewComponent } from './employeerecordsview/employeerecordsview.component';
 import { EmployeerbulkaddComponent } from './employeerbulkadd/employeerbulkadd.component';
 import { EmployeeofferComponent } from './employeeoffer/employeeoffer.component';
-
+import { AuthGuardService as AuthGuard } from '../../_services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
     component: EmployeemoduleComponent,
+    canLoad: [AuthGuard],
     children:
       [
         {
@@ -46,10 +47,10 @@ const routes: Routes = [
           path: 'allemployees',
           component: OnboardingemployeesComponent
         },
-        {
-          // path: 'employeeonboarding',
-          // component: HiringchecklistComponent
-        },
+        // {
+        //   path: 'employeeonboarding',
+        //   component: HiringchecklistComponent
+        // },
         {
           path: 'employeeoffer',
           component: EmployeeofferComponent

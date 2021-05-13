@@ -19,6 +19,7 @@ export class CreateleaveRequestComponent implements OnInit {
   noOfDaysError: string = '';
   leaveReq = new ManageLeaveRequestDTO().clone();
   btnSubmitted: boolean = false;
+  masterSearchM = false;
   constructor(
     private PostServiceProxy: PostServiceProxy,
     public dateService: NbDateService<Date>,
@@ -27,10 +28,18 @@ export class CreateleaveRequestComponent implements OnInit {
     private GetLeaveTypesService: GetLeaveTypesServiceProxy,
     private alertService: AlertserviceService,
     private CreateLeaveByAdminService: CreateLeaveByAdminServiceProxy) { }
-
+    masterSearchOpen() {  
+      this.masterSearchM = !this.masterSearchM;
+      this.showModalRequest = ! this.showModalRequest;
+      this.closed.emit(true);
+    }
     modalClosed(event) {
       // console.log(event)
-       this.closed.emit(false);
+      if (this.masterSearchM) {
+      
+      } else {
+        this.closed.emit(false);
+      }
      }
   createLeaveRequest() {
     this.btnSubmitted = true;

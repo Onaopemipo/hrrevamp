@@ -20,10 +20,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Employee Self Service',
     icon: 'assets/icons/EmployeeManagement.jpg',
     children: [
-      {
-        title: 'Self Service Dashboard',
-        link: '/self-service',
-      },
+      // {
+      //   title: 'Self Service Dashboard',
+      //   link: '/self-service',
+      // },
       {
         title: 'Employee Events',
         link: '/self-service/employeeevents',

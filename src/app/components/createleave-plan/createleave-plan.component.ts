@@ -14,6 +14,7 @@ export class CreateleavePlanComponent implements OnInit {
   leavePlan: FormGroup;
   @Input() showModal: boolean = false;
   @Output() closed = new EventEmitter<boolean>();
+  @Output() masterSearchOpened = new EventEmitter<boolean>();
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
@@ -24,7 +25,8 @@ export class CreateleavePlanComponent implements OnInit {
   allLocation = [];
   noOfDaysError: string = '';
   btnSubmitted: boolean = false;
-  
+  masterSearchM = false;
+
   constructor(
     private PostServiceProxy: PostServiceProxy,
     public dateService: NbDateService<Date>,
@@ -34,6 +36,11 @@ export class CreateleavePlanComponent implements OnInit {
     private alertService: AlertserviceService,
   private CreateLeavePlanService: CreateLeavePlanServiceProxy) { }
 
+  masterSearchOpen() {  
+    this.masterSearchM = !this.masterSearchM;
+    this.showModal = ! this.showModal;
+    this.closed.emit(true);
+  }
 
   get disableSubmitbtn() {
     let resp: boolean = true;
@@ -48,7 +55,12 @@ export class CreateleavePlanComponent implements OnInit {
   }
   modalClosed(event) {
    // console.log(event)
-    this.closed.emit(false);
+    if (this.masterSearchM) {
+      
+    } else {
+      this.closed.emit(false);
+    }
+
   }
   createLeavePlan() {
     this.btnSubmitted = true;
