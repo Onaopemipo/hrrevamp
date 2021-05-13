@@ -8,6 +8,13 @@ import { MainComponent } from './pages/main/main.component';
 import { DisciplineEditComponent } from './components/discipline-edit/discipline-edit.component';
 import { CreateComponent } from './pages/create/create.component';
 import { DisciplinaryManagementLogComponent } from './pages/disciplinary-management-log/disciplinary-management-log.component';
+import {
+  AddUpdateDisciplineTemplateServiceProxy, AddUpdateDisciplineTypeServiceProxy,AddUpdateDisciplineTypesRulesServiceProxy,CommunicationServiceProxy,
+  DataServiceProxy,
+  DeleteDisciplineTemplatesServiceProxy,
+  FetchDisciplineTemplatesServiceProxy, GetAllDisciplineTypesServiceProxy, UploadDocumentServiceProxy
+} from 'app/_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
 
 
 @NgModule({
@@ -23,6 +30,19 @@ import { DisciplinaryManagementLogComponent } from './pages/disciplinary-managem
     ComponentsModule,
     DisciplinaryManagementRoutingModule,
     ThemeModule,
+  ],
+  providers: [
+    GetAllDisciplineTypesServiceProxy,
+    AddUpdateDisciplineTypeServiceProxy,
+    AlertserviceService,
+    FetchDisciplineTemplatesServiceProxy,
+    AddUpdateDisciplineTemplateServiceProxy,
+    CommunicationServiceProxy,
+    UploadDocumentServiceProxy,
+    DataServiceProxy,
+    DeleteDisciplineTemplatesServiceProxy,
+    AddUpdateDisciplineTypesRulesServiceProxy
+     
   ]
 })
 export class DisciplinaryManagementModule { }

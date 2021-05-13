@@ -7,7 +7,7 @@
         </nb-tab><nb-tab tabTitle="Reviewed" [tabId]="TABS.REVIEWED">
         </nb-tab>
         </nb-tabset> -->
-    <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader><ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Cycle" pageDescription="Click on the button to create a performance cycle">
+    <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader><ngx-default-content *ngIf="showEmpty" pageHeader="" pageDescription="You don't have any performance history" [loading]="loading">
     </ngx-default-content>
       <ngx-tablecomponent
         [showActions]="false"

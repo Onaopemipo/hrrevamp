@@ -1,4 +1,6 @@
+import { GetPerformanceScoreCardsServiceProxy } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { ScoreCardQuestion } from 'app/_services/service-proxies';
 
 @Component({
   selector: 'ngx-score-card',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScoreCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private api: GetPerformanceScoreCardsServiceProxy,
+  ) { }
 
   ngOnInit(): void {
+    this.api.fetchPerformanceScoreCards(0, 0, 0, 10, 1).subscribe(data => {})
   }
 
 }

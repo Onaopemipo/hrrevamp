@@ -29,8 +29,8 @@ export class AuthGuardService implements CanLoad {
         } else {
           this.AuthenService.getuser().then((usersdata: IVwUserObj[]) => {
             console.log(usersdata)
-            if (usersdata.length > 0) {
-              const route = this.router.url.split('?')[0];
+            if (usersdata.length > 0) {           
+             // const route = this.router.url.split('?')[0];
               if (usersdata[0]) {
                 resolve(true);
               } else {

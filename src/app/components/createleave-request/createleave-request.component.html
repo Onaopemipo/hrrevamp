@@ -1,10 +1,13 @@
+<div>
+
+
 <ngx-side-modal [(show)]='showModalRequest' (closed)="modalClosed($event)" style="width: 500px;">
     <div modal-header>Apply For Leave</div>
     <div modal-body>
         <form action="">
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee:</label>
-               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               <ngx-employee-master-search (masterSearchOpened)="masterSearchOpen()" (masterSubmitted)="getSelectedEmployee($event,'employee');masterSearchOpen()" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
 
            
@@ -66,7 +69,7 @@
             </div>
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Reflief Officer:</label>
-               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'relief')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               <ngx-employee-master-search (masterSearchOpened)="masterSearchOpen()" (masterSubmitted)="getSelectedEmployee($event,'relief');masterSearchOpen()" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
 
 
@@ -85,3 +88,4 @@
     </div>
     <div style="margin-top: 15px;"></div>
 </ngx-side-modal>
+</div>

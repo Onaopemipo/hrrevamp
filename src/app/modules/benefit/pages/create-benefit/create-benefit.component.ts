@@ -13,10 +13,10 @@ import {
   GetVendorByIdServiceProxy,
   VendorDTO,
   CommonServiceProxy,
-  Vendors,
+ 
   GetAllVendorServiceProxy,
   VendorPlanDTO,
-  GetVendorplanByVendorIdServiceProxy
+  
   
 } from "../../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
@@ -28,7 +28,7 @@ import { AlertserviceService } from "app/_services/alertservice.service";
   styleUrls: ["./create-benefit.component.scss"],
 })
 export class CreateBenefitComponent implements OnInit {
-  Vendora: Vendors[] = [];
+  Vendora = [];
   AllVendors: VendorDTO[];
   VendorId:number=0
   singleVendor:VendorDTO;
@@ -46,7 +46,7 @@ export class CreateBenefitComponent implements OnInit {
     private  GetVendorByIdServiceProxy: GetVendorByIdServiceProxy,
     private alertservice : AlertserviceService,
     private AddUpdateVendorPlanServiceProxy :AddUpdateVendorPlanServiceProxy,
-    private GetVendorplanByVendorIdServiceProxy:GetVendorplanByVendorIdServiceProxy,
+  //  private GetVendorplanByVendorIdServiceProxy:GetVendorplanByVendorIdServiceProxy,
 
   ) {}
 
@@ -160,10 +160,10 @@ export class CreateBenefitComponent implements OnInit {
   }
   //fetch plans by vendor
    async getPlans(){
-    const data = await this.GetVendorplanByVendorIdServiceProxy.getVendorplanByVendorId(this.VendorId).toPromise();
-    if(!data.hasError){
-      this.plans = data.result
-      console.log('plan',this.plans)
-    }
+    // const data = await this.GetVendorplanByVendorIdServiceProxy.getVendorplanByVendorId(this.VendorId).toPromise();
+    // if(!data.hasError){
+    //   this.plans = data.result
+    //   console.log('plan',this.plans)
+    // }
    }
 }

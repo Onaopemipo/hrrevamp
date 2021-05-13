@@ -12,7 +12,7 @@
                     <th>Employee Comment</th>
                     <th  *ngIf="!isEmployeePage">Reviewer Score</th>
                     <th *ngIf="!isEmployeePage">Reviewer Comment</th>
-                    <th *ngIf="!isEmployeePage && kra.reviewerTitle">Average Score</th>
+                    <th *ngIf="!isEmployeePage && kra.isReviewerSubmitted">Average Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +28,8 @@
                     </td>
                     <td>
                       <div *ngIf="kra.isEmployeeSubmitted">
-                        {{kpi.employeeComment}}
+                        <span *ngIf="kpi.employeeComment">{{kpi.employeeComment}}</span>
+                        <span *ngIf="!kpi.employeeComment">-</span>
                       </div>
                       <div *ngIf="!kra.isEmployeeSubmitted">
                         <input class="form-control" [(ngModel)]="kpi.employeeComment"/>
@@ -45,7 +46,8 @@
                     <td *ngIf="!isEmployeePage">
                       <span style="display: none">{{kra.isReviewerSubmitted}}</span>
                       <div *ngIf="kra.isReviewerSubmitted">
-                        {{kpi.reviewerComment}}
+                        <span *ngIf="kpi.reviewerComment"> {{kpi.reviewerComment}} </span>
+                        <span *ngIf="!kpi.reviewerComment">-</span>
                       </div>
                       <div *ngIf="!kra.isReviewerSubmitted">
                         <input class="form-control" [(ngModel)]="kpi.reviewerComment"/>
@@ -90,10 +92,13 @@
             <div class="form-group">
                 <label></label>
                 <div>
-                    <button nbButton status='primary' (click)="save()" *ngIf="isEmployeePage || isReviewerPage">
+                    <ngx-loadable-button  status='primary' (click)="save()" *ngIf="isEmployeePage || isReviewerPage" [disabled]="userHasSubmitted" [loading]="loadingSave">
+                      Save
+                    </ngx-loadable-button>
+                    <!-- <button nbButton>
                         Save
-                    </button>
-                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;" (click)="gotoNext()">
+                    </button> -->
+                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;" (click)="gotoNext()" *ngIf="!isReviewerPage">
                         Next
                     </button>
                 </div>

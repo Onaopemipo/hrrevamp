@@ -123,11 +123,24 @@ export class LeavehistoryComponent implements OnInit {
 }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
-      this.showAddPlanModal = true;
+ 
+      if (this.showAddPlanModal) {
+        this.showAddPlanModal = false;
+        setTimeout(() => {
+          this.showAddPlanModal = true;
+        }, 1000);
+      } else {
+        this.showAddPlanModal = true;
+      }
 
     }
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
-      this.showLeavePlanModal = true;
+      if (this.showLeavePlanModal) {
+        this.showLeavePlanModal = false;
+        setTimeout(() => {
+          this.showLeavePlanModal = true;
+        }, 1000);
+      }else{ this.showLeavePlanModal = true;}
     }
   }
   showAddPlanModal = false;
