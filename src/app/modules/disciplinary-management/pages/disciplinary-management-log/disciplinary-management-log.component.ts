@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
+import { DisciplineTemplateDTO } from 'app/_services/service-proxies';
 
 
 enum TOP_ACTIONS { DISCIPLINE, }
@@ -13,6 +14,7 @@ enum TOP_ACTIONS { DISCIPLINE, }
   styleUrls: ['./disciplinary-management-log.component.scss']
 })
 export class DisciplinaryManagementLogComponent extends MainBaseComponent {
+
   topActionButtons = [
     { name: 'DISCIPLINE', label: 'Discipline', icon: '', outline: false },
   ];

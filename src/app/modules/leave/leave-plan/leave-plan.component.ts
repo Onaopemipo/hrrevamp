@@ -23,19 +23,20 @@ export class LeavePlanWithStatus extends LeavePlanResource implements IStatus {
     this.leavePlan = leavePlan;
 
   }
+
   get status() {
     return this.leavePlan.isApproved;
 }
   getStatusLabel() {
-    if (this.leavePlan.isApproved === 0) return 'Pending';
-    if (this.leavePlan.isApproved === 1) return 'Approved';
-    if (this.leavePlan.isApproved === 2) return 'Rejected';
+    if (this.leavePlan.isApproved === 1) return 'Pending';
+    if (this.leavePlan.isApproved === 2) return 'Approved';
+    if (this.leavePlan.isApproved === 3) return 'Rejected';
 
   }
   getStatusColor() {
-    if (this.leavePlan.isApproved  === 0) return new MyColor(242, 153, 74);
-    if (this.leavePlan.isApproved === 1) return new MyColor(0, 153, 74);
-    if (this.leavePlan.isApproved === 2) return new MyColor(253, 238, 238);
+    if (this.leavePlan.isApproved  === 1) return new MyColor(242, 153, 74);
+    if (this.leavePlan.isApproved === 2) return new MyColor(0, 153, 74);
+    if (this.leavePlan.isApproved === 3) return new MyColor(253, 238, 238);
     return new MyColor(242, 0, 74);
  }
  }
@@ -55,7 +56,7 @@ export class LeavePlanComponent implements OnInit {
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
   filter = {
-    is_approved: null,
+    is_approved: 2,
     leavetypeId: null,
     year_id: null,
     empno: null,
@@ -72,10 +73,13 @@ export class LeavePlanComponent implements OnInit {
     { name: TOP_ACTIONS.ADD_PLAN, label: 'Add Plan', 'icon': 'plus', outline: false },
   ];
   tableColumns = [
-    { name: 'a', title: 'Number' },
-    { name: 'b', title: 'Name' },
-    { name: 'c', title: 'Department' },
-    { name: 'd', title: 'Designation' },
+    { name: 'employeeNo', title: 'Number',type: ColumnTypes.Text },
+    { name: 'fullName', title: 'Name',type: ColumnTypes.Text },
+    { name: 'locationName', title: 'Location',type: ColumnTypes.Text },
+    { name: 'leaveType', title: 'Leave Type',type: ColumnTypes.Text }, 
+    { name: 'noOfDays', title: 'Number of Days',type: ColumnTypes.Text },
+    { name: 'startDate', title: 'Start Date',type: ColumnTypes.Date },
+    { name: 'isApproved', title: 'Status' ,type: ColumnTypes.Status },
   ];
   get showFirstName() {
     return this.selectedOption === '1';
@@ -113,12 +117,22 @@ export class LeavePlanComponent implements OnInit {
   }
   modal(buttion) {
     if (buttion === TOP_ACTIONS.APPLY_FOR_LEAVE) {
-      this.showAddPlanModal = true;
-      console.log(this.showAddPlanModal);
+      if (this.showAddPlanModal) {
+        this.showAddPlanModal = false;
+        setTimeout(() => {
+          this.showAddPlanModal = true;
+        }, 1000);
+      } else {
+        this.showAddPlanModal = true;
+      }
     }
     if (buttion === TOP_ACTIONS.ADD_PLAN) {
-      this.showLeavePlanModal = true;
-      console.log(this.showLeavePlanModal);
+      if (this.showLeavePlanModal) {
+        this.showLeavePlanModal = false;
+        setTimeout(() => {
+          this.showLeavePlanModal = true;
+        }, 1000);
+      }else{ this.showLeavePlanModal = true;}
     }
   }
   tableActions: TableAction[] = [
@@ -174,8 +188,9 @@ export class LeavePlanComponent implements OnInit {
       this.filter.empno,
       this.filter.start_date,
       this.filter.end_date,
+      this.filter.page_no,
       this.filter.page_size,
-      this.filter.page_no
+     
     ).subscribe(data => {
       this.loading = false;
       this.modificationStatus = false;

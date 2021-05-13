@@ -1,142 +1,235 @@
-<div [class]="classes">
-    <div *ngIf="!createNew">
-        <div style="display: flex;">
-            <h4 style="flex: auto;">Interview Invite</h4>
+<div>
+    <form name="newDisciplineTemplateForm" id="newDisciplineTemplateForm" #newDisciplineTemplateForm="ngForm">
+        <div [class]="classes">
             <div>
-                <button nbButton status='primary' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="showDetail()">Edit</button>
-                <button  nbButton status='danger' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;">Delete</button>
-            </div>
-        </div>
-            <div class="linear-form" *ngIf="showDetails">
-                <div class="form-group">
-                    <label>Discipline Type</label>
-                    <select class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label>Subject</label>
-                    <input class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <label>Body</label>
-                    <ngx-wysisyg-input></ngx-wysisyg-input>
-                </div>
-                <div class="form-group">
-                    <label>Default duration</label>
-                    <select class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label>Attachment</label>
-                    <ngx-file-upload></ngx-file-upload>
-                </div>
-                <div class="form-group">
-                    <label>Present Location</label>
-                    <select class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label>Proposed Grade</label>
-                    <select class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label></label>
+                <div style="display: flex;" *ngIf="DisciplineTemplate.id">
+                    <h4 style="flex: auto;">{{DisciplineTemplate.templateName}}</h4>
                     <div>
-                        <input type='checkbox'>
-                        <span style="margin-left: 1rem">Allow Comment</span>
+                        <button nbButton status='primary' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="showDetail()">Edit</button>
+                        <button  nbButton status='danger' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="deleteTemplate(DisciplineTemplate.id)">Delete</button>
+                    </div>
+                </div>
+                    <div class="linear-form" *ngIf="showDetails">
+                        <div class="form-group row">
+                            <label class="col-sm-4">Discipline Template Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Enter Template Name" name="templateName"
+                                #templateName="ngModel" [(ngModel)]="DisciplineTemplate.templateName" required>
+                                <div *ngIf="templateName.invalid && (templateName.dirty || templateName.touched)" class="error">
+                                    <div *ngIf="templateName.errors.required">Default duration is required</div>
+                                  </div>
+                            </div>
+                        
+                          
+                        </div>
+                        <div class="form-group row">
+                            <label  class="col-sm-4">Discipline Type</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" [(ngModel)]="DisciplineTemplate.disciplineType" id="disciplineType" name="disciplineType" #disciplineType="ngModel" required>
+                                    <option value="undefined">--Select Type--</option>
+                                    <option *ngFor="let dType of allDisciplineType" [value]="dType.id">{{dType.disciplineName}}</option>
+                                </select>
+                                <div *ngIf="disciplineType.invalid && (disciplineType.dirty || disciplineType.touched)" class="error">
+                                    <div *ngIf="disciplineType.errors.required">Discipline Type is required</div>
+                                  </div>
+                             </div>
+                         
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">Email Template</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" [(ngModel)]="DisciplineTemplate.emailTemplateId" id="emailTemplateId" name="emailTemplateId" #emailTemplateId="ngModel" required>
+                                    <option>--Select Type--</option>
+                                    <option *ngFor="let templ of templates" [value]="templ.id">{{templ.subject}}</option>
+                                </select>
+                                <div *ngIf="emailTemplateId.invalid && (emailTemplateId.dirty || emailTemplateId.touched)" class="error">
+                                    <div *ngIf="emailTemplateId.errors.required">Email Template is required</div>
+                                  </div>
+                            </div>
+                          
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">Default duration (Weeks)</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Enter Duration in weeks" name="defaulltDuration"
+                                #defaulltDuration="ngModel" [(ngModel)]="DisciplineTemplate.defaulltDuration" required>
+                              <div *ngIf="defaulltDuration.invalid && (defaulltDuration.dirty || defaulltDuration.touched)" class="error">
+                                <div *ngIf="defaulltDuration.errors.required">Default duration is required</div>
+                              </div>
+                            </div>
+                        
+                        </div>                  
+                        <div class="form-group row">
+                            <label class="col-sm-4">Present Location</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" #presentLocationId="ngModel" [(ngModel)]="DisciplineTemplate.presentLocationId" name="presentLocationId" id="presentLocationId" required   >
+                                    <option value="">--Select Location--</option>
+                                    <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
+                                </select>
+                                <div *ngIf="presentLocationId.invalid && (presentLocationId.dirty || presentLocationId.touched)" class="error">
+                                    <div *ngIf="presentLocationId.errors.required">Present Location is required</div>
+                                  </div>
+                                </div>
+                       
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">Proposed Location</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" #proposedLocationId="ngModel" [(ngModel)]="DisciplineTemplate.proposedLocationId" name="proposedLocationId" id="proposedLocationId" required   >
+                                    <option value="">--Select Location--</option>
+                                    <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
+                                </select>
+                                <div *ngIf="proposedLocationId.invalid && (proposedLocationId.dirty || proposedLocationId.touched)" class="error">
+                                    <div *ngIf="proposedLocationId.errors.required">Proposed Location is required</div>
+                                  </div>
+                            </div>
+                        
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">Present Grade</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" #presentGrade="ngModel"  [(ngModel)]="DisciplineTemplate.presentGrade" name="presentGrade" id="presentGrade"  required   >
+                                    <option value="">--Select Grade--</option>
+                                    <option *ngFor="let gr of allgrades" [value]="gr.id">{{gr.name}}</option>
+                                </select>
+                                <div *ngIf="presentGrade.invalid && (presentGrade.dirty || presentGrade.touched)" class="error">
+                                    <div *ngIf="presentGrade.errors.required">Present Grade is required</div>
+                                  </div>
+                            </div>
+                     
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4">Proposed Grade</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" #proposedGrade="ngModel"  [(ngModel)]="DisciplineTemplate.proposedGrade" name="proposedGrade" id="proposedGrade"  required   >
+                                    <option value="">--Select Grade--</option>
+                                    <option *ngFor="let gr of allgrades" [value]="gr.id">{{gr.name}}</option>
+                                </select>
+                                <div *ngIf="proposedGrade.invalid && (proposedGrade.dirty || proposedGrade.touched)" class="error">
+                                    <div *ngIf="proposedGrade.errors.required">Proposed Grade is required</div>
+                                  </div>
+                            </div>  
+                     
+                        </div>
+                             
+                   
+                    <div class="form-group row">
+                        <label class="col-sm-4">Plan Reason</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Enter Plan reason" name="planReason"
+                            #planReason="ngModel" [(ngModel)]="DisciplineTemplate.planReason" required>
+                          <div *ngIf="planReason.invalid && (planReason.dirty || planReason.touched)" class="error">
+                            <div *ngIf="planReason.errors.required">Plan reason is required</div>
+                          </div>
+                        </div>
+                   
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4">PIR Purpose</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Enter Plan purpose" name="pipPurpose"
+                            #pipPurpose="ngModel" [(ngModel)]="DisciplineTemplate.pipPurpose" required>
+                          <div *ngIf="pipPurpose.invalid && (pipPurpose.dirty || pipPurpose.touched)" class="error">
+                            <div *ngIf="pipPurpose.errors.required">Plan purpose is required</div>
+                          </div>
+                        </div>
+                
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Scoring scale</label>
+                        <ngx-wysisyg-input></ngx-wysisyg-input>
+                    </div> -->            
+                    <div class="form-group row">
+                        <label class="col-sm-4">Start Date</label>
+                        <div class="col-sm-8">
+                        <ngx-date [(value)]="DisciplineTemplate.startDate" name="startDate" id="startDate"></ngx-date>
+                   </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4">End Date</label>
+                        <div class="col-sm-8">
+                            <ngx-date [(value)]="DisciplineTemplate.endDate" name="endDate" id="endDate"></ngx-date>
+                        </div>
+                     
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4">Review Frequency</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" [(ngModel)]="DisciplineTemplate.reviewFrequency" id="reviewFrequency" name="reviewFrequency" #reviewFrequency="ngModel" required>
+                                <option value="7">Weekly</option>
+                                <option value="30">Monthly</option>
+                                <option value="90">Quaterly</option>
+                                <option value="180">Bi-Annually</option>
+                                <option value="365">Annually</option>
+                            </select>
+                            <div *ngIf="reviewFrequency.invalid && (reviewFrequency.dirty || reviewFrequency.touched)" class="error">
+                                <div *ngIf="reviewFrequency.errors.required">Review Frequency is required</div>
+                              </div>
+                        </div>
+                   
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4">Goal</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Enter Goal" name="goal"
+                            #goal="ngModel" [(ngModel)]="DisciplineTemplate.goal" required>
+                          <div *ngIf="goal.invalid && (goal.dirty || goal.touched)" class="error">
+                            <div *ngIf="goal.errors.required">Goal is required</div>
+                          </div>
+                        </div>
+                  
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4">Special Need</label>
+                        <div class="col-sm-8">
+                            <textarea rows="5" [(ngModel)]="DisciplineTemplate.specailNeed" #specailNeed="ngModel"  id="specailNeed" name="specailNeed"  nbInput fullWidth   placeholder="Enter Special Needs"></textarea>
+                            <div *ngIf="specailNeed.invalid && (specailNeed.dirty || specailNeed.touched)" class="error">
+                              <div *ngIf="specailNeed.errors.required">Special Need is required</div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4">Failed goal action</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" [(ngModel)]="DisciplineTemplate.failedGoalAction" id="failedGoalAction" name="failedGoalAction" #failedGoalAction="ngModel" required>
+                                <option>--Select Type--</option>
+                                <option *ngFor="let dType of allDisciplineType" [value]="dType.id">{{dType.disciplineName}}</option>
+                            </select>
+                            <div *ngIf="failedGoalAction.invalid && (failedGoalAction.dirty || failedGoalAction.touched)" class="error">
+                                <div *ngIf="failedGoalAction.errors.required">Failed goal action is required</div>
+                              </div>
+                        </div>
+              
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input type='checkbox'  #allowComments="ngModel"  [(ngModel)]="DisciplineTemplate.allowComments" name="allowComments" id="allowComments" >
+                            <span style="margin-left: 1rem">Allow Comment</span>
+                        </div>
+                    </div> 
+                    <div class="form-group row">
+                        <label class="col-sm-4">Attachment</label>
+                        <div class="col-sm-8">
+                            <ngx-file-upload (valueChange)="selectedFile($event,'Supporting Document')"  class="form-control"></ngx-file-upload>
+                        </div>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"></label>
+                        <div class="col-sm-8"> 
+                            <ngx-loadable-button [loading]="loadingDisciplineTemplates" [disabled]="newDisciplineTemplateForm.invalid" (click)="updateCreatedisciplineTemplate()" >
+                                <span *ngIf="!DisciplineTemplate.id" >Save Template</span>
+                                <span *ngIf="DisciplineTemplate.id">Update</span>  
+                              </ngx-loadable-button> 
+                  
+                        </div>
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
+    </form>
 </div>
 
-<div [class]="classes" *ngIf="showDetails">
-    <div>
-        <div style="display: flex;">
-            <h4 style="flex: auto;">Plan Information</h4>
-        </div>
-        <div class="linear-form">
-            <div class="form-group">
-                <label>Plan Reason</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label>PIR Purpose</label>
-                <input class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label>Scoring scale</label>
-                <ngx-wysisyg-input></ngx-wysisyg-input>
-            </div>
-            <div class="form-group">
-                <label>Default duration</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label>Action Point</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label></label>
-                <button nbButton outline style="border: none;" status='primary'>
-                    <nb-icon icon='plus'></nb-icon>
-                    Add
-                </button>
-            </div>
-            <div class="form-group">
-                <label>Start Date</label>
-                <ngx-file-upload></ngx-file-upload>
-            </div>
-            <div class="form-group">
-                <label>End Date</label>
-                <ngx-file-upload></ngx-file-upload>
-            </div>
-            <div class="form-group">
-                <label>Review Frequency</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label>Goal</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label>Special Need</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label>Failed goal action</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label></label>
-                <div>
-                    <button nbButton status='primary'>Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div [class]="classes" *ngIf="showDetails">
-    <div>
-        <div style="display: flex;">
-            <h4 style="flex: auto;">Rules </h4>
-        </div>
-        <div class="linear-form">
-            <div class="form-group">
-                <label>Demotion</label>
-                <select class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label></label>
-                <button nbButton outline status='primary' style="border: none;">
-                    <nb-icon icon='plus'></nb-icon>
-                    Add rule
-                </button>
-            </div>
-            <div class="form-group">
-                <label></label>
-                <div>
-                    <button nbButton status='primary'>Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

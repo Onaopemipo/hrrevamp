@@ -12,7 +12,7 @@ import {
   GetAllVendorServiceProxy,
   DeleteVendorServiceProxy,
   CommonServiceProxy,
-  Vendors,
+
 } from "../../../_services/service-proxies";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import {
@@ -43,7 +43,7 @@ export class VendorPlanComponent implements OnInit {
   singleVendor: VendorDTO;
   showPlan: boolean = false;
   Benefit: IDTextViewModel[] = [];
-  Vendora: Vendors[] = [];
+  Vendora = [];
   AddVendor = new ManageVendorDTO().clone();
   AddVendorPlan = new ManageVendorPlanDto().clone();
   AllVendors: VendorDTO[];
@@ -116,8 +116,8 @@ export class VendorPlanComponent implements OnInit {
       this.AddVendor.name &&
       this.AddVendor.phoneNumber &&
       this.AddVendor.address &&
-      this.AddVendor.email &&
-      this.AddVendor.benefitTypeID
+      this.AddVendor.email //&&
+      //this.AddVendor.benefitTypeID
     )
       return true;
     return false;

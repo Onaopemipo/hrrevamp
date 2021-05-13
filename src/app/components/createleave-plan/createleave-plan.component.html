@@ -1,3 +1,6 @@
+<div>
+
+
 <ngx-side-modal [(show)]='showModal' (closed)="modalClosed($event)" style="width: 500px; height: 1000px;">
     
     <div modal-header>Add New Leave Plan</div>
@@ -7,7 +10,7 @@
 
             <div class="form-group">
                 <label for="Employee Name" style="font-size: small;font-weight: bold;">Employee:</label>
-               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+               <ngx-employee-master-search (masterSearchOpened)="masterSearchOpen()" (masterSubmitted)="getSelectedEmployee($event);masterSearchOpen()" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
 
             <div class="form-group">
@@ -98,4 +101,4 @@
 
 </ngx-side-modal>
 
-{{showModal}}
+</div>

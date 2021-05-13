@@ -19,6 +19,7 @@ export class ReviewerReviewMainComponent implements OnInit {
   kra_id = 0;
   employee_id = 0;
   kra_object: KpiReviewDTO;
+  kra = new KpiReviewDTO();
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(data => {
       this.cycle_id = Number(data.get('cycle_id'));

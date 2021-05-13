@@ -85,6 +85,10 @@ employeeResultTotal = 0;
   constructor(private allemployeeServices: SearchEmployeesServiceProxy,
   private CommonService: CommonServiceProxy) { }
 
+  modalClosed(event) {
+    if (event && this.showModal){this.cancelMasterSearch(); console.log("master closed", event)}   
+    
+  }
   get disableaddbtn() {
   if(this.selectedEmployeeRecord || this.selectedEmployees.length > 0){
     return true;
@@ -216,6 +220,7 @@ cancelMasterSearch(){
   this.allEmployees = [];
   this.selectedEmployeeRecord = this.emptyRecord;
   this.showModal = false;
+  this.masterSearchOpened.emit(false);
 }
   showMasterSearchModal() {
     this.showModal = true;

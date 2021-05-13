@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { KpiDTO, SavePerformanceReviewServiceProxy } from 'app/_services/service-proxies';
+import { KpiDTO, MessageOutApiResult, SavePerformanceReviewServiceProxy } from 'app/_services/service-proxies';
 import { AuthenticationService } from './../../../../_services/authentication.service';
 import { AuthService } from './../../../../_services/auth.service';
 import { EmployeeCycleKrasServiceProxy, FetchKPIsServiceProxy, EmployeePerformanceReviewServiceProxy, KpiReviewDTO, GetEmployeePerformanceReviewServiceProxy, AssignedKPIs, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, PerformanceReviewDTO, SaveEmployeeAppraisalReviewServiceProxy } from './../../../../_services/service-proxies';
@@ -38,6 +38,7 @@ export class PerformanceReviewComponent implements OnInit {
   kra_id = 0;
   kra_name = '';
   _kra: KpiReviewDTO;
+  loadingSave = false;
   // get kra() {
   //   return this._kra;
   // }
@@ -65,7 +66,13 @@ export class PerformanceReviewComponent implements OnInit {
     private alertService: AlertserviceService,
   ) { }
 
+  delay(time: number) {
+    return new Promise((resolve, reject) => {
+      window.setTimeout(() => {resolve(null)}, time)
+    });
+  }
   async loadKraInfo(){
+    await this.delay(500);
     this.loading = true;
     if(this.performanceEmployeeType == PerformanceEmployeeType.employee) {
       this.kra =  (await this.employeePerformanceService.employeePerformanceReview(this.user.user.employee_contract_id, this.cycle_id, this.kra_id).toPromise()).result;
@@ -92,39 +99,45 @@ export class PerformanceReviewComponent implements OnInit {
     this.next.emit();
   }
 
-  save(){
+  async save(){
+    this.loadingSave = true;
+    let res: MessageOutApiResult;
     if(this.isEmployeePage){
       const performanceData = new PerformanceReviewDTO({
         ...this.kra,
         appraisalId: 0,
-        employeeComment: this.kra.employeeComment,
+        //employeeComment: this.kra.employeeComment,
         reviewerComment: '',
         assignedKPIs: JSON.stringify(this.tempEditingData),
         hrComment: '',
       });
-      this.saveEmployeePerformanceService.saveEmployeePerformanceReview(performanceData).subscribe(data => {
-        if(!data.hasError && data.result.isSuccessful){
-          this.next.emit();
-        }
-        this.alertService.openModalAlert(
-          data.hasError || !data.result.isSuccessful ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS,
-          data.message,
-          'Okay'
-        );
-      });
+      res = await this.saveEmployeePerformanceService.saveEmployeePerformanceReview(performanceData).toPromise();
+      //   if(!data.hasError && data.result.isSuccessful){
+      //     this.next.emit();
+      //   }
+      //   this.alertService.openModalAlert(
+      //     data.hasError || !data.result.isSuccessful ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS,
+      //     data.message,
+      //     'Okay'
+      //   );
+      // });
     }
     else if(this.isReviewerPage){
       const performanceData = new PerformanceReviewDTO({
         ...this.kra,
         appraisalId: 0,
-        employeeComment: this.kra.employeeComment,
+        //employeeComment: this.kra.employeeComment,
         reviewerComment: this.kra.reviewComment,
         assignedKPIs: JSON.stringify(this.tempEditingData),
         hrComment: '',
       });
-      this.saveEmployeeAppraisalService.saveEmployeeAppraisalReview(performanceData).subscribe(data => {
-        console.log(100);
-      })
+      res = await this.saveEmployeeAppraisalService.saveEmployeeAppraisalReview(performanceData).toPromise();
     }
+    await this.alertService.showResponseMessage(res).toPromise();
+    if(this.isEmployeePage) this.next.emit();
+  }
+
+  get userHasSubmitted() {
+    return (this.isEmployeePage && this.kra.isEmployeeSubmitted) || (this.isReviewerPage && this.kra.isReviewerSubmitted)
   }
 }

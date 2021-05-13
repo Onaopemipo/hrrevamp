@@ -141,8 +141,8 @@ export class PromotionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getPromotionList();
-    this.getPositions();
+   this.getPromotionList();
+   this.getPositions();
   }
 
   addEmployeetoBucketList() {
