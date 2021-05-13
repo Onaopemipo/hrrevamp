@@ -1,8 +1,19 @@
 {
   "extends": "../tsconfig.base.json",
+  // "compilerOptions": {
+  //   "outDir": "../out-tsc/app",
+  //   "baseUrl": "./",
+  //   "paths": {
+  //     "tslib" : ["path/to/node_modules/tslib/tslib.d.ts"]
+  //   },
+
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "tslib" : ["path/to/node_modules/tslib/tslib.d.ts"]
+    },
+
   },
   "exclude": [
     "test.ts",
@@ -13,5 +24,7 @@
     "../src/*.ts",
     "../src/**/*.ts",
     "../node_modules/@nebular/**/*.ts"
-  ]
+  ],
+
+   
 }

@@ -127,27 +127,54 @@
         <span style="font-weight: 100; font-size: medium; font-style: normal;">PLANS</span>
       </div>
 
-      <div class="row">
+      <div class="row" >
         <div class="col-sm-3">
           <span style="font-weight: bold;">Plan Name</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-            <span> {{AddVendorPlan?.name}}</span>
+          
           </p>
         </div>
         <div class="col-sm-3">
           <span style="font-weight: bold;">Description</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-            <span>{{AddVendorPlan?.description}}</span>
+        
           </p>
         </div>
 
         <div class="col-sm-3">
           <span style="font-weight: bold;">Policy Number</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-            <span>{{AddVendorPlan?.refNumber}}</span>
+        
           </p>
         </div>
 
+      </div>
+
+     
+
+
+      <div class="row" *ngFor="let plan of plans">
+
+        <div class="col-sm-3">
+        
+          <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
+            <span> {{plan?.name}}</span>
+          </p>
+        </div>
+        <div class="col-sm-3">
+          
+          <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
+            <span>{{plan?.description}}</span>
+          </p>
+        </div>
+  
+        <div class="col-sm-3">
+       
+          <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
+            <span>{{plan?.refNumber}}</span>
+          </p>
+        </div>
+  
         <div class="col-sm-1">
           <span><a href="">view details</a>
            </span>
@@ -157,9 +184,8 @@
           <button nbButton outline status="danger"  class="d-flex column pl-1"
           style="background-color: white; border: none;"  (click)="deletePlan()"><i class="fas fa-times" style="padding-right: 0.3rem;"></i> Delete Plan</button>
         </div>
-
+        
       </div>
-
       <div style="align-items: center; justify-content: center; display: flex; margin: 4rem 1rem;">
         <div nbButton status="primary" outline class="d-flex column" style="background-color: white;"></div>
       </div>

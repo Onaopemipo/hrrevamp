@@ -78,8 +78,9 @@ export class AssignKraComponent implements OnInit {
     this.loadingSave = false;
     if(!res.hasError){
       this.master_search_clear_flag += 1;
+      this.loadingSave = false
     }
-    this.loadingSave = false;
+    this.loadingSave = false
   }
   reviewerSelected(employees: EmployeeDTO[]){
     const reviewer = employees[0];
@@ -90,4 +91,5 @@ export class AssignKraComponent implements OnInit {
   employeesSelected(employees: EmployeeDTO[]){
     this.employees = employees.map(employee => employee.employeeContractId)
   }
+  
 }
