@@ -10,7 +10,7 @@ VIEW ='1',DELETE = '2'
 }
 
 enum TABS {
-  postedJobs, scheduledJobs, darftedJobs,
+  postedJobs, scheduledJobs, draftedJobs
 }
 
 @Component({
@@ -19,7 +19,7 @@ enum TABS {
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-
+  TABS = TABS;
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
@@ -38,7 +38,7 @@ export class JobsComponent implements OnInit {
   newJob: boolean = false;
   allJobs: JobDTO []= [];
   jobFilter: JobFilterDTO;
-  jobsCounter: number = 0;
+  jobsCounter: number = 4;
   allDepartments: DepartmentDTO [] = [];
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
@@ -49,6 +49,10 @@ export class JobsComponent implements OnInit {
   allJobRoles: JobRole [] = [];
   singleJob: JobDTO = new JobDTO;
   tableData: string = '';
+
+  rButton = [
+    {name: 'a', label: 'Add New', icon: 'plus'},
+  ]
 
   postedJobsTable: TableColumn [] = [
     {name: 'jobTitle', title: 'Job Title'},
@@ -87,12 +91,14 @@ tableActions: TableAction[] = [
       this.tableActions = [{name: 'view', label:'View'},
       // {name: 'disburse', label:'Disburse'},
     ]
-    } else if(TABS.darftedJobs){
+    } else if(TABS.draftedJobs){
       this.tableActions = [{name: 'view', label:'View'},
       // {name: 'disburse', label:'Disburse'},
     ]
     }
   }
+
+  selectedTab = TABS.postedJobs;
 
   selectedOption;
   loading: boolean;
@@ -109,8 +115,8 @@ tableActions: TableAction[] = [
     this.fetchEmploymentTypes();
   }
 
-  selectTab($event){
-
+  selectTab(tab: TABS) {
+    this.selectedTab = tab;
   }
 
   newJobPosting(){

@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Jobs'></ngx-componentsheader>
+<ngx-componentsheader pageName='Jobs' [requiredButton]="rButton" (buttonClick)="addNewJob()"></ngx-componentsheader>
 
 <div *ngIf="jobsCounter < 1" style="background-color: #ffffff;">
   <nb-card>
@@ -8,7 +8,7 @@
     </nb-card-body>
   </nb-card>
 </div>
-
+<!--
 <div *ngIf="jobsCounter > 0">
   <nb-card>
     <nb-card-body>
@@ -16,76 +16,51 @@
       <ngx-tablecomponent [loading]='loading' [userData]='allJobs' [actions]='tableActions' [tableColum]="postedJobsTable"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
-</div>
+</div> -->
 
-<nb-tabset (changeTab)="selectTab($event)">
-  <nb-tab tabTitle="Posted Jobs" [tabId]="TABS.postedJobs">
-    <div *ngIf="jobsCounter < 1">
-    <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
-    </ngx-default-content>
-    </div>
+<nb-card>
+  <nb-card-body>
+    <nb-tabset  *ngIf="jobsCounter > 0" (changeTab)="selectTab($event)">
+      <nb-tab tabTitle="Posted Jobs" [tabId]="TABS.postedJobs">
+          <div *ngIf="jobsCounter < 1">
+            <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
+            </ngx-default-content>
+            </div>
 
-    <div *ngIf="jobsCounter < 0">
-      <ngx-tableheader></ngx-tableheader>
-     <ngx-tablecomponent [tableColum]="postedJobsTable" [userData]="tableData" [showActions]="tableActions"></ngx-tablecomponent>
-    </div>
-  </nb-tab>
+            <div *ngIf="jobsCounter > 0">
+              <ngx-tableheader></ngx-tableheader>
+              <ngx-tablecomponent [loading]='loading' [userData]='allJobs' [actions]='tableActions' [tableColum]="postedJobsTable"></ngx-tablecomponent>
+            </div>
+      </nb-tab>
 
-  <nb-tab tabTitle="Scheduled Jobs" [tabId]="TABS.scheduledJobs">
-    <div *ngIf="jobsCounter < 1">
-      <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
-      </ngx-default-content>
-      </div>
+      <nb-tab tabTitle="Scheduled Jobs" [tabId]="TABS.scheduledJobs">
+          <div *ngIf="jobsCounter < 1">
+            <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
+            </ngx-default-content>
+            </div>
 
-    <div *ngIf="jobsCounter > 0">
-      <ngx-tableheader></ngx-tableheader>
-    <ngx-tablecomponent [tableColum]="scheduledJobsTable" [userData]="tableData" [showActions]="true" [actions]="tableActions"></ngx-tablecomponent>
-    </div>
-  </nb-tab>
-
-
-  <nb-tab tabTitle="Drafts" [tabId]="TABS.darftedJobs">
-
-    <div *ngIf="jobsCounter < 1">
-      <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
-      </ngx-default-content>
-      </div>
-
-    <div *ngIf="jobsCounter > 0">
-      <ngx-tableheader></ngx-tableheader>
-     <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="tableData"></ngx-tablecomponent>
-    </div>
-  </nb-tab>
-
-</nb-tabset>
-
-<!-- Job Posting Form  -->
-
-<div *ngIf="jobsCounter > 0" style="background-color: #ffffff;">
-  <nb-tabset>
-    <nb-tab tabTitle="Posted Jobs">
-      <nb-card>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent (actionClick)='actionClicked($event)' [actions]='tableActions' [userData]='data'
-          [tableColum]="postedJobsTable"></ngx-tablecomponent>
-      </nb-card>
-    </nb-tab>
-    <nb-tab tabTitle="Scheduled Postings">
-      <nb-card>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent [tableColum]="scheduledJobsTable"></ngx-tablecomponent>
-      </nb-card>
-    </nb-tab>
-    <nb-tab tabTitle="Drafts">
-      <nb-card>
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent [tableColum]="draftedJobsTable"></ngx-tablecomponent>
-      </nb-card>
-    </nb-tab>
-  </nb-tabset>
+          <div *ngIf="jobsCounter > 0">
+            <ngx-tableheader></ngx-tableheader>
+          <ngx-tablecomponent [tableColum]="scheduledJobsTable" [userData]="tableData" [showActions]="true" [actions]="tableActions"></ngx-tablecomponent>
+          </div>
+      </nb-tab>
 
 
-</div>
+      <nb-tab tabTitle="Drafts" [tabId]="TABS.draftedJobs">
+            <div *ngIf="jobsCounter < 1">
+              <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
+              </ngx-default-content>
+              </div>
+
+            <div *ngIf="jobsCounter > 0">
+              <ngx-tableheader></ngx-tableheader>
+             <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="tableData"></ngx-tablecomponent>
+            </div>
+      </nb-tab>
+
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>
 
 <ngx-side-modal [(show)]='showCvModal' style="width: auto;" position='Center'>
   <div modal-header></div>
@@ -399,7 +374,7 @@
 
 </ngx-side-modal>
 
-<ngx-side-modal style="width: 600px;">
+<!-- <ngx-side-modal style="width: 600px;">
   <div modal-header>
     Job title and Department details
   </div>
@@ -529,7 +504,6 @@
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
             <div class="col-sm-2">
               <app-amount-input [(value)]="newJobModel.maxSalary"></app-amount-input>
-              <!-- <ngx-date [(value)]="loanModel.effectiveDate"></ngx-date> -->
             </div>
           </div>
 
@@ -582,16 +556,9 @@
           </div>
 
 
-          <!-- Add reviewrs modal -->
-
-
           <ngx-side-modal [(show)]="showModal">
             <div modal-header>{{selectionHeader}}</div>
             <div modal-body>
-              <nb-form-field>
-                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-                <input type="text" nbInput class="form-control">
-              </nb-form-field>
               <div class="row">
                 <div class="col-sm-4 form-group">
                   <label>Department</label>
@@ -702,4 +669,4 @@
     </nb-card>
   </div>
 
-</ngx-side-modal>
+</ngx-side-modal> -->

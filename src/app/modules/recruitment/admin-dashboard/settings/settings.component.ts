@@ -1,5 +1,8 @@
+import { AlertserviceService } from './../../../../_services/alertservice.service';
+import { RecruitmentSettingServiceProxy, ManageHireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion } from './../../../../_services/service-proxies';
 import { NbTabComponent } from '@nebular/theme';
 import { Component, OnInit } from '@angular/core';
+import { truncateSync } from 'fs';
 
 @Component({
   selector: 'ngx-settings',
@@ -20,6 +23,7 @@ export class SettingsComponent implements OnInit {
   ];
   createStage: boolean = true;
   createTemplate: boolean = true;
+  scorecard:boolean = false;
   selectedCase: string = '';
   selectedPanel: any = { title: 'Hiring_Stages', label: 'Hiring Stages', status: 'Active'};
   hiringChecklist = [
@@ -30,8 +34,18 @@ export class SettingsComponent implements OnInit {
   ];
 
   scoreCardClick: boolean = false;
+  emailResponder;
+  newStage: boolean = false;
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+  stagesModel: ManageHireStageDTO = new ManageHireStageDTO;
+  scoreCardModel: ManageRecruitmentScoreCardDTO = new ManageRecruitmentScoreCardDTO;
+  questionModel: ScoreCardQuestion = new ScoreCardQuestion;
+  questionBank: ScoreCardQuestion [] = [];
 
-  constructor() { }
+
+  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
   }
@@ -51,6 +65,32 @@ export class SettingsComponent implements OnInit {
     this.createTemplate = !this.createTemplate;
     // this.selectedCase = 'Hiring_Stages';
   }
+
+  toggleScorecard(){
+    this.scorecard = true;
+  }
+
+  addNewStage(){
+    this.settings.addUpdateHireStage(this.stagesModel).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Stage Added!','Dismiss')
+      }
+    })
+  }
+
+  addMoreQuestion(){
+    this.questionBank.push(this.questionModel);
+    this.questionModel = new ScoreCardQuestion().clone();
+  }
+
+  addScoreCard(){
+    this.settings.addUpdateScoreCard(this.scoreCardModel).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Scorecard Added!','Dismiss')
+      }
+    })
+  }
+
   createNewTemplate() {
     this.createStage = !this.createStage;
     this.createTemplate = !this.createTemplate;
@@ -62,6 +102,10 @@ export class SettingsComponent implements OnInit {
     console.log(panelTitle);
   }
 
+  autoEmail(){
+
+  }
+
   toggleScoreCard(event) {
     this.scoreCardClick = !this.scoreCardClick;
   }
@@ -71,7 +115,7 @@ export class SettingsComponent implements OnInit {
   }
 
   addStage() {
-
+    this.newStage = true;
   }
 
   addTemplate() {
@@ -81,6 +125,16 @@ export class SettingsComponent implements OnInit {
   addScorecard() {
 
   }
+
+  getAllTemplates(){
+
+  }
+
+  getSelectedEmployee(event,selectType) {
+    if(selectType == 'employee'){
+     this.stagesModel.reviewers = event[0].employeeNumber;
+    }
+ }
 
   showModal(){
       this.showEditModal = true

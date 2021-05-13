@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { CommonServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, DepartmentDTO, Certification, IDTextViewModel, State, JobRole } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy,Country, JobDTO, JobFilterDTO, Qualification, ManageJobDTO } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, JobFilterDTO, Qualification, ManageJobDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -28,7 +28,9 @@ export class NewjobComponent implements OnInit {
   allJobRoles: JobRole [] = [];
   singleJob: JobDTO = new JobDTO;
   loading: boolean;
+  showModal: boolean = true;
   newJobModel: ManageJobDTO = new ManageJobDTO();
+  allScoreCards: RecruitmentScoreCard [] = [];
 
   constructor(private job: RecruitmentJobServiceProxy, private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy, private department: GetAllDepartmentsServiceProxy,
@@ -127,6 +129,13 @@ export class NewjobComponent implements OnInit {
         this.jobsCounter = data.totalRecord;
       }
     })
+  }
+
+  async fetchScoreCards(){
+   const data = await this.employment.getRecruitmentScoreCards().toPromise();
+   if(!data.hasError){
+     this.allScoreCards = data.result
+   }
   }
 
   getSelectedEmployee(event,selectType) {

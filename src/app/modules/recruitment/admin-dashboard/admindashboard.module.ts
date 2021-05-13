@@ -5,7 +5,7 @@ import { ComponentsModule } from '../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule } from '@nebular/theme';
+import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule, NbToggleModule } from '@nebular/theme';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { JobsComponent } from './jobs/jobs.component';
@@ -31,7 +31,8 @@ import { NewjobComponent } from './newjob/newjob.component';
     NbSelectModule,
     FullCalendarModule,
     NbCalendarModule,
-    NbRadioModule
+    NbRadioModule,
+    NbToggleModule
   ],
 
   providers: [
