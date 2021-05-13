@@ -32,6 +32,10 @@ export class NewjobComponent implements OnInit {
   newJobModel: ManageJobDTO = new ManageJobDTO();
   allScoreCards: RecruitmentScoreCard [] = [];
 
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
   constructor(private job: RecruitmentJobServiceProxy, private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy, private department: GetAllDepartmentsServiceProxy,
     private employment: RecruitmentSettingServiceProxy, private dataService: DataServiceProxy,
@@ -140,7 +144,7 @@ export class NewjobComponent implements OnInit {
 
   getSelectedEmployee(event,selectType) {
     if(selectType == 'employee'){
-     this.newJobModel.ref = event[0].employeeNumber;
+    //  this.newJobModel.reviewers = event[0].employeeNumber;
     }
  }
 
