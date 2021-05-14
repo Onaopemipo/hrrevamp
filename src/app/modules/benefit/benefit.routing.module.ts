@@ -9,7 +9,7 @@ import { BenefitViewComponent } from './pages/benefit-view/benefit-view.componen
 import { EligibilityListComponent } from './pages/eligibility-list/eligibility-list.component';
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
-
+import {  AddBenefitComponent } from './add-benefit/add-benefit.component';
 export const routes: Routes = [
   {
     path: '',
@@ -22,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'employee',
         component: EmployeeViewComponent,
+      },
+      {
+        path: 'addBenefit',
+        component: AddBenefitComponent,
       },
       {
         path: 'create-benefit/:id',
@@ -47,6 +51,7 @@ export const routes: Routes = [
         path: 'BenefitsVendor',
         component: VendorPlanComponent,
       },
+  
     ],
   }
 
