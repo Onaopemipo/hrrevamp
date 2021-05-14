@@ -44,6 +44,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Deployment Application',
         link: '/employeemodule/deploymentapplication',
       },
+      {
+        title: 'My Appraisals',
+        link: '/performance/my-appraisals'
+      },
     ],
   },
   {
@@ -113,7 +117,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       //   link: '/performance'
       // },
       {
-        title: 'Cycle',
+        title: 'Appraisal Cycle',
         link: '/performance/cycle'
       },
       {
@@ -125,27 +129,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/performance/kra/assign'
       },
       {
-        title: 'Appraisal',
+        title: 'Reviewer Appraisal',
         link: '/performance/appraisals'
       },
+    
       {
-        title: 'My Appraisals',
-        link: '/performance/my-appraisals'
+        title: 'Rating',
+        link: '/performance/rating'
       },
-      // {
-      //   title: 'Rating',
-      //   link: '/performance/rating'
-      // },
-      // {
-      //   title: 'Score Card',
-      //   link: '/performance/score-card'
-      // },
       {
-        title: 'Supervisor',
+        title: 'Score Card',
+        link: '/performance/score-card'
+      },
+      {
+        title: 'Supervisor Review',
         link: '/performance/supervisor/reviews'
       },
       {
-        title: 'HR',
+        title: 'HR Review',
         link: '/performance/hr/reviews'
       },
       // {
