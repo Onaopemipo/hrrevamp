@@ -44,6 +44,7 @@ export class AssignKraComponent implements OnInit {
     return new_kra_data;
   }
   editing_kra_data = this.get_new_kra_data();
+  emptykra: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private kraService: KeyResultAreaService,
@@ -52,11 +53,18 @@ export class AssignKraComponent implements OnInit {
   ) { }
 
 
-  addKra(){
-    this.editing_kra_data.kraName = this.kras.find(kra => kra.id == this.editing_kra_data.kraId).section_name;
-    this.selected_kras.push(this.editing_kra_data);
-    this.editing_kra_data = this.get_new_kra_data();
-    this.master_search_clear_flag += 1;
+  addKra() {
+    console.log(this.kras, this.editing_kra_data)
+    if (this.editing_kra_data.kraId) {
+      this.emptykra = false;
+      this.editing_kra_data.kraName = this.kras.find(kra => kra.id == this.editing_kra_data.kraId).section_name;
+      this.selected_kras.push(this.editing_kra_data);
+      this.editing_kra_data = this.get_new_kra_data();
+      this.master_search_clear_flag += 1;
+    } else {
+      this.emptykra = true;
+    }
+
   }
   deleteKra(f_kra){
     this.selected_kras = this.selected_kras.filter(kra => kra.kraId !== f_kra.kraId)
@@ -74,8 +82,9 @@ export class AssignKraComponent implements OnInit {
   async assignKra() {
     this.loadingSave = true;
     const res = await this.kraService.assignObj(this.selected_cylce, JSON.stringify(this.selected_kras), this.employees.join(',')).toPromise();
-    await this.alertService.openModalAlert(res.hasError ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS, res.message, 'Okay').toPromise();
     this.loadingSave = false;
+    await this.alertService.openModalAlert(res.hasError ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS, res.message, 'Okay').toPromise();
+ 
     if(!res.hasError){
       this.master_search_clear_flag += 1;
     }

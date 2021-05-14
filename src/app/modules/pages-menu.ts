@@ -108,10 +108,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/',
     icon: 'assets/icons/PerformanceAppraisals.jpg',
     children: [
-      {
-        title: 'Dashboard',
-        link: '/performance'
-      },
+      // {
+      //   title: 'Dashboard',
+      //   link: '/performance'
+      // },
       {
         title: 'Cycle',
         link: '/performance/cycle'
@@ -132,14 +132,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Appraisals',
         link: '/performance/my-appraisals'
       },
-      {
-        title: 'Rating',
-        link: '/performance/rating'
-      },
-      {
-        title: 'Score Card',
-        link: '/performance/score-card'
-      },
+      // {
+      //   title: 'Rating',
+      //   link: '/performance/rating'
+      // },
+      // {
+      //   title: 'Score Card',
+      //   link: '/performance/score-card'
+      // },
       {
         title: 'Supervisor',
         link: '/performance/supervisor/reviews'
