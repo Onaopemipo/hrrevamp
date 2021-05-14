@@ -225,9 +225,10 @@ export class OverallBudgetComponent implements OnInit {
 
   async addNewBudget(){
     const data = await this.addBudgetService.addUpdateBudget(this.newBudget).toPromise();
-    if(!data.hasError){
+    if(!data.hasError && data.result.isSuccessful == true){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget Created Successfully', 'Dismiss').subscribe(data=>{
       this.addBudget = false;
+      this.fetAllBudget();
     })
     } else {
       // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');

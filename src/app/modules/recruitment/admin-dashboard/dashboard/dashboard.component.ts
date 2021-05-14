@@ -1,3 +1,4 @@
+import { JobDTO, JobFilterDTO, RecruitmentJobServiceProxy, RecruitmentJobApplicationServiceProxy, JobApplicationSearch } from './../../../../_services/service-proxies';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -22,6 +23,13 @@ export class DashboardComponent implements OnInit {
   myPieOptions: any = {};
   barcolorSchemeOrange: any;
   lineOption: any = {};
+
+  allJobs: JobDTO []= [];
+  jobFilter: JobFilterDTO;
+  jobsCounter: number = 0;
+
+  allJobsApplicaions: JobApplicationSearch [] = [];
+  applicationsCounter: number = 0;
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
@@ -173,8 +181,8 @@ export class DashboardComponent implements OnInit {
   ];
   customizePieOption: any = {};
   customizedlineoptions: any = {};
-  constructor(private theme: NbThemeService,
-              private FetchDashboard: FetchDashboardDataServiceProxy) {
+  constructor(private theme: NbThemeService,private job: RecruitmentJobServiceProxy,
+              private FetchDashboard: FetchDashboardDataServiceProxy, private applications: RecruitmentJobApplicationServiceProxy) {
     // this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
     //   const colors: any = config.variables;
@@ -588,6 +596,22 @@ this.optionsForPie = {
 
     closeModal() {
       this.show_modal = false;
+    }
+
+    async fetchAllJobs(){
+    const data = await this.job.getAllJobs(this.jobFilter).toPromise();
+    if(!data.hasError){
+      this.allJobs = data.result;
+      this.jobsCounter = data.totalRecord;
+    }
+    }
+
+    async fetchJobApplications(){
+      const data = await this.applications.fetchJobApplications(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined).toPromise();
+      if(!data.hasError){
+        this.allJobsApplicaions = data.result;
+        this.applicationsCounter = data.totalRecord;
+      }
     }
 
 

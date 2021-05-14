@@ -47,7 +47,7 @@ export class TalentPoolComponent implements OnInit {
     private commonService: CommonServiceProxy, private competencyService: CompetencyServiceProxy) { }
 
   ngOnInit(): void {
-    // this.getCompetency();
+    this.getCompetency();
     this.fetchAllPools();
   }
 
@@ -78,7 +78,7 @@ export class TalentPoolComponent implements OnInit {
     const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
     if(!data.hasError){
       this.poolModel = new AddTalentMangementDTO().clone();
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successful', 'Dismiss').subscribe(dataAction => {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Talent Pool created!', 'Dismiss').subscribe(dataAction => {
         if(dataAction == 'closed'){
           this.router.navigateByUrl('/career-succession/talentpool');
         }
@@ -132,14 +132,14 @@ export class TalentPoolComponent implements OnInit {
   //   }
   // }
 
-  // async getCompetency(){
-  //   const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
-  //   if(!data.hasError){
-  //     this.allCompetencies = data.result;
-  //     this.competencyCounter = data.totalRecord;
-  //     console.log('All competencies', this.allCompetencies)
-  //   }
-  //  }
+  async getCompetency(){
+    const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
+    if(!data.hasError){
+      this.allCompetencies = data.result;
+      this.competencyCounter = data.totalRecord;
+      console.log('All competencies', this.allCompetencies)
+    }
+   }
 
   addRequirement(){
     let poolRequirement = this.poolRequirementModel;
@@ -147,19 +147,19 @@ export class TalentPoolComponent implements OnInit {
     this.poolRequirementModel = new MyTalentPoolRequirement
   }
 
-  // async deletePool(id){
-  //   const approved = await this.confirm.confirm('Are you sure?').toPromise();
-  //   if(!approved) {
-  //     this.confirm.close();
-  //     return false;
-  //   }
-  //   this.confirm.showLoading();
-  //  const data = await this.poolservice.delete(id).toPromise();
-  //  if(data.isSuccessful){
-  //    console.log('Deleted:', data.message)
-  //  }
-  //  this.confirm.close();
-  //  return true;
-  // }
+  async deletePool(id){
+    const approved = await this.confirm.confirm('Are you sure?').toPromise();
+    if(!approved) {
+      this.confirm.close();
+      return false;
+    }
+    this.confirm.showLoading();
+   const data = await this.poolservice.delete(id).toPromise();
+   if(data.isSuccessful){
+     console.log('Deleted:', data.message)
+   }
+   this.confirm.close();
+   return true;
+  }
 
 }

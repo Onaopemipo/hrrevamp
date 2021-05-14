@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
@@ -15,19 +16,19 @@ export const routes: Routes = [
     path: '',
     component: RecruitmentComponent,
     children: [
-      {
-        path: 'applicantssignin',
-        component: ApplicantssigninComponent,
-      },
-      {
-        path: 'applicantssignup',
-        component: ApplicantssignupComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'applicantssignin',
-        pathMatch: 'full',
-      },
+      // {
+      //   path: 'applicantssignin',
+      //   component: ApplicantssigninComponent,
+      // },
+      // {
+      //   path: 'applicantssignup',
+      //   component: ApplicantssignupComponent,
+      // },
+      // {
+      //   path: '',
+      //   redirectTo: 'applicantssignin',
+      //   pathMatch: 'full',
+      // },
 
       {
         path: 'applicantprofile',
@@ -44,15 +45,21 @@ export const routes: Routes = [
         component: ApplicantsDashboardComponent
       },
 
+      // {
+      //   path: 'admin',
+      //   component: AdminDashboardComponent
+      // },
+
       {
         path: 'applicantquiz',
         component: ApplicantquizComponent
       },
 
-      {
-        path: '**',
-        component: ApplicantssigninComponent,
-      },
+
+      // {
+      //   path: '**',
+      //   component: ApplicantssigninComponent,
+      // },
     ],
   }
 

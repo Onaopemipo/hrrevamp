@@ -15,7 +15,7 @@ import { EmployeeviewComponent } from './employeeview/employeeview.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { PromotioninfoComponent } from './promotioninfo/promotioninfo.component';
 import { OnboardingemployeesComponent } from './onboardingemployees/onboardingemployees.component';
-// import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
+import { HiringchecklistComponent } from './hiringchecklist/hiringchecklist.component';
 import { PromotioneligibilityComponent } from './promotioneligibility/promotioneligibility.component';
 import { EligibilityxxComponent } from './eligibilityxx/eligibilityxx.component';
 import { AnothereligibilitylistComponent } from './anothereligibilitylist/anothereligibilitylist.component';
@@ -47,10 +47,10 @@ const routes: Routes = [
           path: 'allemployees',
           component: OnboardingemployeesComponent
         },
-        // {
-        //   path: 'employeeonboarding',
-        //   component: HiringchecklistComponent
-        // },
+        {
+          path: 'employeeonboarding',
+          component: HiringchecklistComponent
+        },
         {
           path: 'employeeoffer',
           component: EmployeeofferComponent

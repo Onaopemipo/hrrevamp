@@ -86,7 +86,7 @@ export class NewCompetencyComponent implements OnInit {
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError){
+    if(!data.hasError && data.result.isSuccessful){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(data => {
         if(data == 'closed'){
           this.myCompetency = new ManageCompetencyDTO().clone();
@@ -94,6 +94,9 @@ export class NewCompetencyComponent implements OnInit {
       })
       this.myCompetency = new ManageCompetencyDTO().clone();
       this.competencyRequirement = new CompetencyRequirmentsDTO().clone();
+    }
+    else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.result.message, 'Dismiss')
     }
   }
 
