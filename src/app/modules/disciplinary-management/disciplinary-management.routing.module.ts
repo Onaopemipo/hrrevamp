@@ -11,15 +11,15 @@ const routes: Routes = [
     component: DisciplinaryManagementComponent,
     children: [
       {
-        path: '',
+        path: 'disciplinaryandreward/:type',
         component: MainComponent,
       },
       {
-        path: 'log',
+        path: 'log/:type',
         component: DisciplinaryManagementLogComponent,
       },
       {
-        path: 'create',
+        path: 'create/:type',
         component: CreateComponent,
       }
     ]

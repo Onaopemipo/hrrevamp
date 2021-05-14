@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { AddUpdateDisciplineTemplateServiceProxy, AddUpdateDisciplineTypeServiceProxy, AddUpdateDisciplineTypesRulesServiceProxy, CommunicationServiceProxy, DisciplinePayload,DisciplineRulesDTO,DisciplineTemplateDTO,FetchDisciplineTemplatesServiceProxy,GetAllDisciplineTypesServiceProxy, MailTemplateDTO } from 'app/_services/service-proxies';
 
@@ -36,7 +37,8 @@ export class MainComponent implements OnInit {
     private FetchDisciplineTemplatesService: FetchDisciplineTemplatesServiceProxy,
   private AddUpdateDisciplineTypesRulesService: AddUpdateDisciplineTypesRulesServiceProxy,
     private api: CommunicationServiceProxy,
-  private alertService: AlertserviceService) { }
+    private alertService: AlertserviceService,
+  private acitivatedroute: ActivatedRoute) { }
 
   get showEmptyDisciplineType() {
     return this.allDisciplineType.length === 0;
@@ -108,6 +110,9 @@ export class MainComponent implements OnInit {
     this.showDetails = true;
   }
   ngOnInit(): void {
+    this.acitivatedroute.params.subscribe(data => {
+      console.log(data);
+    });
     this.getDisciplineType();
     this.getEmailTemplates();
   }

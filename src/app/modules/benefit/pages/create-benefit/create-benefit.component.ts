@@ -108,14 +108,14 @@ export class CreateBenefitComponent implements OnInit {
 
  //getVendor
   async getVendor() {
-    const data = await this.common.getVendor().toPromise();
-    if (!data.hasError) {
-      this.Vendora = data.result;
-      console.log(
-        "i want see wetin i keep for that vendora variable",
-        this.Vendora
-      );
-    }
+    // const data = await this.common.getVendor().toPromise();
+    // if (!data.hasError) {
+    //   this.Vendora = data.result;
+    //   console.log(
+    //     "i want see wetin i keep for that vendora variable",
+    //     this.Vendora
+    //   );
+    // }
   }
 
   //get all vendors

@@ -180,15 +180,15 @@ export class VendorPlanComponent implements OnInit {
   }
 
   async getVendor() {
-    const data = await this.common.getVendor().toPromise();
-    if (!data.hasError) {
-      this.Vendora = data.result;
-      console.log(
-        "i want see wetin i keep for that vendora variable",
-        this.Vendora,
-        this.AddVendorPlan.vendorId
-      );
-    }
+    // const data = await this.common.getVendor().toPromise();
+    // if (!data.hasError) {
+    //   this.Vendora = data.result;
+    //   console.log(
+    //     "i want see wetin i keep for that vendora variable",
+    //     this.Vendora,
+    //     this.AddVendorPlan.vendorId
+    //   );
+    // }
   }
 
   async getSingleVendor() {
