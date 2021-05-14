@@ -1,11 +1,12 @@
+import { NewjobComponent } from './newjob/newjob.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { SettingsComponent } from './settings/settings.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { ReportsComponent } from './reports/reports.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,11 @@ export const routes: Routes = [
       },
 
       {
+        path: 'newjob',
+        component: NewjobComponent
+      },
+
+      {
         path: 'quiz',
         component: QuizComponent
       },
@@ -35,7 +41,10 @@ export const routes: Routes = [
       {
         path: 'reports',
         component: ReportsComponent
-      }
+      },
+
+      { path: '', redirectTo: 'jobs', pathMatch: 'full' },
+      { path: '**', redirectTo: 'jobs' },
     ]
     }
 ];

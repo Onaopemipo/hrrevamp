@@ -1,7 +1,7 @@
 <ngx-componentsheader pageName='Settings' *ngIf="selectedCase == ''"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='Hiring_Stages'" pageName='Settings' [requiredButton]="[{name:'newStage', label:'Add New Stage', icon: 'plus'}]" (buttonClick)="addStage()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='EmailSms_Templates'" pageName='Settings' [requiredButton]="[{name:'newTemplate', label:'Add New Template', icon: 'plus'}]" (buttonClick)="addTemplate()"></ngx-componentsheader>
-<ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="addScorecard()"></ngx-componentsheader>
+<ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="toggleScorecard()"></ngx-componentsheader>
 <div *ngIf="createStage && createTemplate" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  <div class="col-md-4">
     <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
       <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
@@ -375,81 +375,6 @@
               </div>
             </nb-card-header>
           </nb-card> -->
-
-          <nb-card>
-          <nb-card-body>
-            <nb-card-body>
-              <form>
-                <div class="form-group row mydiv">
-                  <div class="col-sm-8 col-md-8 col-lg-8">
-                    <label for="Name" class="col-form-label mylabel">Core Focus Area</label>
-                    <input type="text" class="form-control" id="jobTitle" placeholder="Communication">
-                  </div>
-                </div>
-
-                <div class="form-group row mydiv">
-                  <div class="col-sm-8 col-md-8 col-lg-8">
-                    <label for="TotalWeight" class="col-form-label mylabel">Total Weight</label>
-                    <select class="custom-select" required>
-                      <option value="">Select </option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row mydiv">
-                  <div class="col-sm-8 col-md-8 col-lg-8">
-                    <label for="ScoringType" class="col-form-label mylabel">Scoring type</label>
-                    <select class="custom-select" required>
-                      <option value="">Select </option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                <h6>Questions</h6>
-
-                <div class="form-group row mydiv">
-                  <div class="col-sm-8 col-md-8 col-lg-8">
-                    <label for="Name" class="col-form-label mylabel">Question 1</label>
-                    <input type="text" class="form-control" id="jobTitle" placeholder="Communication">
-                  </div>
-                </div>
-
-                <div class="form-group row mydiv">
-                  <div class="col-sm-8 col-md-8 col-lg-8">
-                    <label for="ScoringType" class="col-form-label mylabel">Weight</label>
-                    <select class="custom-select" required>
-                      <option value="">Select </option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row mydiv">
-                  <div class="col-sm-8 col-md-8 col-lg-8">
-                    <button nbButton>
-                      <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
-                      Add Question</button>
-                  </div>
-                </div>
-
-                  <div class="form-group row">
-                    <div class="col-sm-8">
-                      <button nbButton status="primary">Save</button>
-                      <span style="padding: 8px;"></span>
-                      <button nbButton>Discard</button>
-                    </div>
-                  </div>
-                </form>
-            </nb-card-body>
-          </nb-card-body>
-        </nb-card>
       </div>
         </div>
   </div>
@@ -458,77 +383,118 @@
 
 <!-- Modal -->
 
-<ngx-side-modal [(show)]="showEditModal">
+<ngx-side-modal [(show)]="newStage">
   <div modal-header>Edit Stage</div>
   <div modal-body>
-    <nb-card>
-      <nb-card-body>
-
-        <div modal-body>
           <form action="">
-
-
             <div class="form-group">
-              <label for="Name" style="font-size: small;font-weight: bold;">Name</label>
-              <input type="text" class="form-control" placeholder="Enter Name" id="Name">
+              <label>Name</label>
+              <input type="text" name="title" #title="ngModel" [(ngModel)]="stagesModel.name" class="form-control" placeholder="Enter Name" required>
+              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                <div *ngIf="title.errors.required">Name is required</div>
+              </div>
             </div>
 
 
-            <div class="form-group row" style="margin-top: 15px; display: flex;  flex-direction: column;">
-              <label for="inputEmail1" class="label col-sm-8 col-form-label listsubheader">Auto-respond-with-mail</label>
-              <div class="col-sm-4">
-                  <nb-radio-group [(ngModel)]="selectedOption" class="d-flex">
-                      <nb-radio value="1">off</nb-radio>
-                      <nb-radio value="2">on</nb-radio>
-
-                  </nb-radio-group>
-              </div>
+            <div class="form-group row" style="margin-top: 15px; display: flex;  flex-direction: row;">
+              <label>Auto-respond-with-mail</label>
+                  <nb-toggle [(ngModel)]="stagesModel.autoEmailRespond" (checked)="autoEmail()"></nb-toggle>
           </div>
 
 
             <div class="form-group">
-              <label for="Email" style="font-size: small;font-weight: bold;">Email</label>
-              <select class=" form-control" aria-placeholder="Enter Email"></select>
-
+              <label>Email Template</label>
+              <select class=" form-control" name="emailTemplate" #emailTemplate="ngModel" [(ngModel)]="stagesModel.emailTemplateId" placeholder="Enter Email">
+                <option value="">--Select Template--</option>
+                <!-- <option *ngFor="let template of allEmailTemplates" [value]="template.id">{{template.name}}</option> -->
+              </select>
+              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                <div *ngIf="title.errors.required">Template is required</div>
+              </div>
             </div>
-
-
 
             <div class="form-group">
-              <label for="Allow Gender" style="font-size: small;font-weight: bold;">Reviewer</label>
-             <select name="" id="" class="form-control"></select>
+              <label for="Allow Gender" style="font-size: small;font-weight: bold;">Reviewers</label>
+              <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
-            <!--
-
-  <div class="d-flex-column"></div><nb-checkbox (checkedChange)="toggle($event)">
-      <span>Allow rollover</span>
-  </nb-checkbox>
-</div>-->
-            <!--<label>Checked:</label> {{ checked }}-->
-
-
           </form>
         </div>
-
-
-
 
 
         <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 8rem;">
 
           <button nbButton status="primary" class="d-flex column"
-            style="margin-left: -4rem;">Save</button>
+            style="margin-left: -4rem;" (click)="addNewStage()">Save</button>
           <button nbButton outline status="primary" class="d-flex column"
             style="background-color: white; margin-left: 1.2rem;">Cancel</button>
+         </div>
+</ngx-side-modal>
 
+<ngx-side-modal [(show)]="scorecard">
+  <div modal-header>Add ScoreCard</div>
+
+  <div modal-body>
+    <form>
+      <div class="form-group row mydiv">
+        <div class="col-sm-10">
+          <label for="Name" class="col-form-label mylabel">Core Focus Area</label>
+          <input type="text" name="focusArea" #focusArea="ngModel" [(ngModel)]="scoreCardModel.focusArea" class="form-control" placeholder="Focus Area" required>
         </div>
-      </nb-card-body>
+      </div>
 
+      <div class="form-group row mydiv">
+        <div class="col-sm-10">
+          <label for="TotalWeight" class="col-form-label mylabel">Total Weight</label>
+         <input type="number" name="totalWeight" #totalWeight="ngModel" [(ngModel)]="scoreCardModel.totalWeight" class="form-control" required>
+        </div>
+      </div>
 
-    </nb-card>
+      <div class="form-group row mydiv">
+        <div class="col-sm-10">
+          <label for="ScoringType" class="col-form-label mylabel">Scoring type</label>
+          <select class="custom-select" required>
+            <option value="">Select </option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
 
+      <h6>Questions</h6>
+
+      <div class="form-group row mydiv">
+        <div class="col-sm-10">
+          <label class="col-form-label mylabel">Question</label><br>
+          <textarea name="question" id="" cols="30" rows="10"></textarea>
+          <!-- <ngx-wysisyg-input [(value)]="questionModel.question" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+        <div class="col-sm-10">
+          <label class="col-form-label mylabel">Weight</label>
+         <input type="number" min="0" name="questionWeight" #questionWeight="ngModel" [(ngModel)]="questionModel.weight" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+        <div class="col">
+          <button nbButton>
+            <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;" (click)="addMoreQuestion()"></i>
+            Add Question</button>
+        </div>
+      </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <button nbButton status="primary" (click)="addScoreCard()" >Save</button>
+            <span style="padding: 8px;"></span>
+            <button nbButton>Discard</button>
+          </div>
+        </div>
+      </form>
   </div>
-
 
 
 </ngx-side-modal>

@@ -50,6 +50,7 @@ export class SetupComponent implements OnInit {
   if(!data.hasError && data.result.isSuccessful == true){
   this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss');
   this.page = 2;
+  this.fetAllBudget();
   } else {
     // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
     console.error();

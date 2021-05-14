@@ -1,21 +1,23 @@
+import { RecruitmentSettingServiceProxy } from './../../../_services/service-proxies';
 import { AdminDashboardRoutingModule } from './admindashboard-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ComponentsModule } from '../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule } from '@nebular/theme';
+import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule, NbToggleModule } from '@nebular/theme';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { JobsComponent } from './jobs/jobs.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { NewjobComponent } from './newjob/newjob.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent],
+  declarations: [DashboardComponent,NewjobComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent, NewjobComponent],
   imports: [
     CommonModule,
     AdminDashboardRoutingModule,
@@ -29,7 +31,12 @@ import { QuizComponent } from './quiz/quiz.component';
     NbSelectModule,
     FullCalendarModule,
     NbCalendarModule,
-    NbRadioModule
+    NbRadioModule,
+    NbToggleModule
+  ],
+
+  providers: [
+    RecruitmentSettingServiceProxy,
   ]
 })
 export class AdminDashboardModule { }
