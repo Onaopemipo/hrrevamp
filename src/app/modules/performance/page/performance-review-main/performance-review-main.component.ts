@@ -25,8 +25,8 @@ export class PerformanceReviewMainComponent implements OnInit {
   employee_id = 0;
   recommendation = '';
   hrComment = '';
-  employee: EmployeeDTO;
-  contract: EmployeeContractAssignmentDTO;
+  employee: EmployeeDTO = new EmployeeDTO();
+  contract: EmployeeContractAssignmentDTO = new EmployeeContractAssignmentDTO();
   constructor(
     private activatedRoute: ActivatedRoute,
     private user: AuthService,
@@ -75,10 +75,8 @@ export class PerformanceReviewMainComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(async (params) => {
       const id = Number(params.get('id'));
       this.id = id;
+      console.log(id)
       const employee_id = params.get('employee_id');
-      // this.cycle_id = Number(data.get('cycle_id'));
-      // this.kra = Number(data.get('kra_id'));
-      // this.employee_id = Number(data.get('employee_id'));
       this.loading = true;
       if (!employee_id) {
         this.kras = (await this.api.fetchEmployeeCycleKras(id, 1000, 1).toPromise()).result;

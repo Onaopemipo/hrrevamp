@@ -1,18 +1,18 @@
 <ngx-componentsheader pageName='Rating'></ngx-componentsheader>
 <div class="main-page-container">
     <div style="display: flex; justify-content: flex-end;" class="table-buttons">
-        <button nbButton outline text-button  status='primary'>
+        <button nbButton outline text-button  status='primary' (click)="createNew()">
             <nb-icon icon='plus'></nb-icon>
-            Add KPI
+            Add Rating
         </button>
-        <button nbButton outline text-button  status='primary'>
+        <!-- <button nbButton outline text-button  status='primary'>
             <nb-icon icon='download-outline'></nb-icon>
             Downlaod Template
         </button>
                     <button nbButton outline text-button  status='primary'>
             <nb-icon icon='upload-outline'></nb-icon>
             Upload KPI
-        </button>
+        </button> -->
     </div>
 
     <table>
@@ -22,18 +22,95 @@
                 <th>Performance(To)</th>
                 <th>Grade</th>
                 <th>Description</th>
-                <th>Recommendation</th>
+                <th></th>
+                <!-- <th>Recommendation</th> -->
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Performance(From)</td>
-                <td>Performance(To)</td>
-                <td>Grade</td>
-                <td>Description</td>
-                <td>Recommendation</td>
+            <tr *ngFor="let rating of data">
+                <td>{{rating.scoreFrom}}</td>
+                <td>{{rating.scoreTo}}</td>
+                <td>{{rating.grade}}</td>
+                <td>{{rating.description}}</td>
+                <td>
+                  <nb-icon (click)="editRating(rating)" icon="edit-outline" status="primary"></nb-icon>
+                  <nb-icon (click)="deleteRating(rating)" icon="trash-outline" status="danger"></nb-icon>
+                  <!-- <button>edit</button>
+                  <button >delete</button> -->
+                </td>
+                <!-- <td>Recommendation</td> -->
             </tr>
         </tbody>
     </table>
-    <button nbButton status='primary'>Save</button>
 </div>
+
+<ngx-side-modal [(show)]="showModal">
+  <div modal-header>
+    <ng-template [ngIf]="!editingData.id">
+      Create New Rating
+    </ng-template>
+    <ng-template [ngIf]="editingData.id">
+      Edit Rating
+    </ng-template>
+  </div>
+  <div modal-body>
+    <div class="my-form">
+      <div class="form-group">
+        <label>Score From</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            type="number"
+            [(ngModel)]="editingData.scoreFrom"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Score To</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            type="number"
+            [(ngModel)]="editingData.scoreTo"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Grade</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            type="text"
+            [(ngModel)]="editingData.grade"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <div>
+          <input
+            class="form-control"
+            placeholder="Name"
+            type="text"
+            [(ngModel)]="editingData.description"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div modal-actions>
+    <ngx-loadable-button
+    (click)="submitForm()"
+    [loading]="loadingSave"
+    style="margin-right: 1rem"
+    >Save</ngx-loadable-button
+    >
+    <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
+    <button nbButton status="primary" outline (click)="hideModal()">
+      cancel
+    </button>
+  </div>
+</ngx-side-modal>

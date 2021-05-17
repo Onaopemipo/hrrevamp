@@ -55,6 +55,7 @@ export class HrReviewListComponent extends BaseComponent<any, any, any> {
   topActionButtons = [];
   tableColumns: TableColumn[] = [
     { name: 'fullName', title: 'Full Name' },
+    { name: 'period', title: 'Cycle' },
     // { name: 'maximum_score_obtainable', title: 'Score' },
     { name: 'employeeStatus', title: 'Employee Status' },
     { name: 'reviewerStatus', title: 'Reviewer Status' },

@@ -3,11 +3,11 @@
           [requiredButton]="topActionButtons"
           (buttonClick)="pageActionClicked($event)"
         ></ngx-componentsheader><div class="main-page-container">
-        <nb-tabset (changeTab)="selectTab($event)">
+        <!-- <nb-tabset (changeTab)="selectTab($event)">
         <nb-tab tabTitle="Pending" [tabId]="TABS.PENDING">
         </nb-tab><nb-tab tabTitle="Reviewed" [tabId]="TABS.REVIEWED">
         </nb-tab>
-        </nb-tabset>
+        </nb-tabset> -->
     <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader><ngx-default-content [loading]="loading" *ngIf="showEmpty" pageHeader="" pageDescription="You have no appraisals to review" buttonValue="" (buttonClick)="createNewClicked()">
     </ngx-default-content>
       <ngx-tablecomponent

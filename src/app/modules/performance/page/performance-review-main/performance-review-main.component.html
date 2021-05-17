@@ -2,7 +2,7 @@
 
 <div class="main-page-container">
     <div>
-        <div class="row summary">
+        <!-- <div class="row summary">
             <div class="col-sm-4">
                 <div>Employee Name</div>
                 <div>{{employee.fullName}}</div>
@@ -31,7 +31,7 @@
                 <div>Period under review</div>
                 <div>{{kra.periodUnderReview | date}}</div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 <ngx-performance-review [current_kra]="selectedKra" [performanceEmployeeType]="pageType" *ngIf="!current_kra_is_last" (next)="gotoNext()"></ngx-performance-review>
