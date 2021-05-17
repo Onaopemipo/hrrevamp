@@ -11,7 +11,7 @@ import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { ChoiceName } from 'app/components/multi-select/multi-select.component';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { Router } from '@angular/router';
-import { SectionDTO } from 'app/_services/service-proxies';
+import { DataServiceProxy, IDTextViewModel, IDTextViewModelIListApiResult, SectionDTO } from 'app/_services/service-proxies';
 
 
 enum TOP_ACTIONS { ADD__KEY__RESULT__AREAS, };
@@ -52,7 +52,7 @@ export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKey
     { name: 'section_name', title: 'KRA' },
     { name: 'maximum_score_obtainable', title: 'Score' },
     { name: 'weight', title: 'Weight' },
-    { name: 'ratingType', title: 'Rating Type' },
+    // { name: 'ratingType', title: 'Rating Type' },
     { name: 'no_of_kpis', title: 'No of KPIs' },
   ];
   tableActions: TableAction[] = [
@@ -71,12 +71,17 @@ export class KeyResultAreaComponent extends BaseComponent<MyKeyResultArea, MyKey
       // this.router.navigateByUrl(`/performance/kra/${event.data.id}/assign`);
     }
   }
+  
   constructor(
     private api: KeyResultAreaService,
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,
     private router: Router,
+    protected dataService: DataServiceProxy
   ) {
     super(confirmBox);
+  }
+  getStrategy(): Observable<IDTextViewModelIListApiResult>{
+    return this.dataService.getStrategyCategories();
   }
 }

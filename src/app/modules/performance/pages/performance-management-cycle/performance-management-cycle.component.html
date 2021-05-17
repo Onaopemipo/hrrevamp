@@ -32,13 +32,17 @@
       <div class="linear-form">
         <div class="form-group">
           <label>Review Purpose</label>
-          <!-- <select class="form-control" [(ngModel)]="editingData.reviewPurposeId"></select> -->
-          <ngx-multi-select [(idValue)]="editingData.reviewPurposeId" [singleSelection]="true" [items]="reviewPurposes"></ngx-multi-select>
+          <select class="form-control" [(ngModel)]="editingData.reviewPurposeId">
+            <option>--Select Purpose--</option>
+            <option *ngFor="let purp of reviewPurposes" value="purp.name">{{purp.label}}</option>
+          </select>
+          <!-- <ngx-multi-select [(idValue)]="editingData.reviewPurposeId" [singleSelection]="true" [items]="reviewPurposes"></ngx-multi-select> -->
         </div>
 
         <div class="form-group">
           <label>Description</label>
-          <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+          <textarea [(ngModel)]="editingData.description" nbInput fullWidth></textarea>
+          <!-- <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input> -->
         </div>
 
         <div class="form-group">

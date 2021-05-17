@@ -1,3 +1,4 @@
+
 <div>
     <form name="newDisciplineTemplateForm" id="newDisciplineTemplateForm" #newDisciplineTemplateForm="ngForm">
         <div [class]="classes">
@@ -5,13 +6,14 @@
                 <div style="display: flex;" *ngIf="DisciplineTemplate.id">
                     <h4 style="flex: auto;">{{DisciplineTemplate.templateName}}</h4>
                     <div>
-                        <button nbButton status='primary' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="showDetail()">Edit</button>
+                        <button nbButton status='primary' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="showDetail()">{{showDetails? "Collapse":"Edit"}}</button>
                         <button  nbButton status='danger' outline style="min-width: unset !important; background-color: white; padding: 1rem; border: none;" (click)="deleteTemplate(DisciplineTemplate.id)">Delete</button>
                     </div>
                 </div>
                     <div class="linear-form" *ngIf="showDetails">
                         <div class="form-group row">
-                            <label class="col-sm-4">Discipline Template Name</label>
+                            <label class="col-sm-4">  <span *ngIf="IsReward">Reward</span>
+                                <span *ngIf="!IsReward">Discipline</span> Template Name</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" placeholder="Enter Template Name" name="templateName"
                                 #templateName="ngModel" [(ngModel)]="DisciplineTemplate.templateName" required>
@@ -23,7 +25,9 @@
                           
                         </div>
                         <div class="form-group row">
-                            <label  class="col-sm-4">Discipline Type</label>
+                            <label  class="col-sm-4">
+                                <span *ngIf="IsReward">Reward</span>
+                                <span *ngIf="!IsReward">Discipline</span> Type</label>
                             <div class="col-sm-8">
                                 <select class="form-control" [(ngModel)]="DisciplineTemplate.disciplineType" id="disciplineType" name="disciplineType" #disciplineType="ngModel" required>
                                     <option value="undefined">--Select Type--</option>
@@ -51,14 +55,16 @@
                         <div class="form-group row">
                             <label class="col-sm-4">Default duration (Weeks)</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" placeholder="Enter Duration in weeks" name="defaulltDuration"
+                                <input type="number" class="form-control" placeholder="Enter Duration in weeks" name="defaulltDuration"
                                 #defaulltDuration="ngModel" [(ngModel)]="DisciplineTemplate.defaulltDuration" required>
                               <div *ngIf="defaulltDuration.invalid && (defaulltDuration.dirty || defaulltDuration.touched)" class="error">
                                 <div *ngIf="defaulltDuration.errors.required">Default duration is required</div>
                               </div>
                             </div>
                         
-                        </div>                  
+                        </div> 
+                        <!--Transfer-->        
+                        <div *ngIf="disciplineCode == 'transfer'">     
                         <div class="form-group row">
                             <label class="col-sm-4">Present Location</label>
                             <div class="col-sm-8">
@@ -85,6 +91,9 @@
                             </div>
                         
                         </div>
+                    </div>    
+                        <!--Demotion-->  
+                        <div *ngIf="disciplineCode == 'demotion'">                       
                         <div class="form-group row">
                             <label class="col-sm-4">Present Grade</label>
                             <div class="col-sm-8">
@@ -111,8 +120,9 @@
                             </div>  
                      
                         </div>
-                             
-                   
+                    </div>
+                      <!--Pip-->  
+                   <div *ngIf="disciplineCode == 'pip'">
                     <div class="form-group row">
                         <label class="col-sm-4">Plan Reason</label>
                         <div class="col-sm-8">
@@ -202,6 +212,9 @@
                         </div>
               
                     </div>
+
+                   </div>
+                   
                     <div class="form-group row">
                         <label class="col-sm-4"></label>
                         <div class="col-sm-8">
@@ -232,4 +245,4 @@
     </form>
 </div>
 
-
+<div style="padding: 10px;"></div>

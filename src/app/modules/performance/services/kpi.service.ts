@@ -10,6 +10,7 @@ export class MyKPI extends KpiDTO {
   constructor(kra_id = 1, data = new KpiDTO()) {
     super(data);
     this.kra_id = kra_id;
+    this.ratingTypeId = data.rating_type_id;
   }
   toManage() {
    return new ManageKpiDTO(this);
