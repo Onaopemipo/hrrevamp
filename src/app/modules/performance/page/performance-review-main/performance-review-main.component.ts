@@ -17,7 +17,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
 export class PerformanceReviewMainComponent implements OnInit {
 
   loadingSave = false;
-  selectedKra?: KpiReviewDTO;
+  selectedKra = new KpiReviewDTO().clone();
   kras: KpiReviewDTO[] = [];
   loading = false;
   id = 0;
@@ -73,6 +73,7 @@ export class PerformanceReviewMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.globalThis.zzz = this;
     this.loadRecommendations();
     this.activatedRoute.paramMap.subscribe(async (params) => {
       const id = Number(params.get('id'));
@@ -82,9 +83,7 @@ export class PerformanceReviewMainComponent implements OnInit {
       this.loading = true;
       if (!employee_id) {
         this.kras = (await this.api.fetchEmployeeCycleKras(id, 1000, 1).toPromise()).result;
-        this.user1.getuser().then(user => {
-          this.employee_id = user[0].employee_id;
-        })
+        this.employee_id = (await this.user1.getuser())[0].employee_id;
 
       } else {
         this.employee_id = Number(employee_id);
@@ -109,7 +108,10 @@ export class PerformanceReviewMainComponent implements OnInit {
           kra.employeeContractId = this.employee_id;
           this.kras = [kra]
         } else {
-          this.kras = (await this.loadEmployeecycleData(this.id, this.employee_id).toPromise()).result;
+          this.kras = (await this.loadEmployeecycleData(this.id, this.employee_id).toPromise()).result.map(kra => {
+            kra.employeeContractId = this.employee_id;
+            return kra;
+          });
         }
       }
       const { employee, contract } = await this.fetchEmployeeDetailsById(this.employee_id);

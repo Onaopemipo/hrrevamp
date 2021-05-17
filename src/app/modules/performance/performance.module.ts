@@ -3,7 +3,7 @@ import { NbPopoverModule, NbRadioModule ,  NbAlertModule, NbActionsModule, NbFor
 import { ReviewerReviewMainComponent } from './page/reviewer-review-main/reviewer-review-main.component';
 import { PerformanceReviewMainComponent } from './page/performance-review-main/performance-review-main.component';
 import { MyAppraisalCycleComponent } from './pages/my-appraisal-cycle/my-appraisal-cycle.component';
-import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, ReviewRecommendationsServiceProxy, SubmitHRAppraisalReviewServiceProxy, GetHRAppraisalReviewsServiceProxy, GetPerformanceScoreCardsServiceProxy, FetchEmployeeByIdServiceProxy, AddUpdateRatingServiceProxy, CommonServiceProxy, DataServiceProxy, DeleteRatingRecordServiceProxy } from './../../_services/service-proxies';
+import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, ReviewRecommendationsServiceProxy, SubmitHRAppraisalReviewServiceProxy, GetHRAppraisalReviewsServiceProxy, GetPerformanceScoreCardsServiceProxy, FetchEmployeeByIdServiceProxy, AddUpdateRatingServiceProxy, CommonServiceProxy, DataServiceProxy, DeleteRatingRecordServiceProxy, GetHREmployeePerformanceReviewServiceProxy } from './../../_services/service-proxies';
 import { MyAppraisalsComponent } from './pages/my-appraisals/my-appraisals.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -89,7 +89,8 @@ import { KpiService } from './services/kpi.service';
     FetchRatingsServiceProxy,
     AddUpdateRatingServiceProxy,
     DataServiceProxy,
-    DeleteRatingRecordServiceProxy
+    DeleteRatingRecordServiceProxy,
+    GetHREmployeePerformanceReviewServiceProxy
   ],
   imports: [
     CommonModule,
