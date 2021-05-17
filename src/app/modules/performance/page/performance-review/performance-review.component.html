@@ -1,107 +1,117 @@
 
-
-    <div style="border: 1px solid #15157A30; margin-top: 2rem; margin-bottom: 2rem;">
-        <div style="font-weight: bold; padding: 0.5rem;">
-            {{kra_name}}
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Employee Score</th>
-                    <th>Employee Comment</th>
-                    <th  *ngIf="!isEmployeePage">Reviewer Score</th>
-                    <th *ngIf="!isEmployeePage">Reviewer Comment</th>
-                    <th *ngIf="!isEmployeePage && kra.isReviewerSubmitted">Average Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor='let kpi of tempEditingData'>
-                    <td>{{kpi.title}}</td>
-                    <td>
-                      <div *ngIf="kra.isEmployeeSubmitted">
-                        {{kpi.employeeScore}}
-                      </div>
-                      <div *ngIf="!kra.isEmployeeSubmitted">
-                        <input class="form-control" type="number" min="0" [(ngModel)]="kpi.employeeScore"/>
-                      </div>
-                    </td>
-                    <td>
-                      <div *ngIf="kra.isEmployeeSubmitted">
-                        <span *ngIf="kpi.employeeComment">{{kpi.employeeComment}}</span>
-                        <span *ngIf="!kpi.employeeComment">-</span>
-                      </div>
-                      <div *ngIf="!kra.isEmployeeSubmitted">
-                        <input class="form-control" [(ngModel)]="kpi.employeeComment"/>
-                      </div>
-                    </td>
-                    <td *ngIf="!isEmployeePage">
-                      <div *ngIf="kra.isReviewerSubmitted">
-                        {{kpi.reviewerScore}}
-                      </div>
-                      <div *ngIf="!kra.isReviewerSubmitted">
-                        <input type="number" min="0" class="form-control" [(ngModel)]="kpi.reviewerScore"/>
-                      </div>
-                    </td>
-                    <td *ngIf="!isEmployeePage">
-                      <span style="display: none">{{kra.isReviewerSubmitted}}</span>
-                      <div *ngIf="kra.isReviewerSubmitted">
-                        <span *ngIf="kpi.reviewerComment"> {{kpi.reviewerComment}} </span>
-                        <span *ngIf="!kpi.reviewerComment">-</span>
-                      </div>
-                      <div *ngIf="!kra.isReviewerSubmitted">
-                        <input class="form-control" [(ngModel)]="kpi.reviewerComment"/>
-                      </div>
-                    </td>
-                    <td *ngIf="!isEmployeePage && kra.isReviewerSubmitted">{{kpi.averageScore}}</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <!-- <tr>
-                    <td colspan="5" style="text-align: right;">
-                        Total
-                    </td>
-                    <td></td>
-                </tr> -->
-            </tfoot>
-        </table>
+ <ngx-default-content
+ *ngIf="loading"
+ pageHeader="Performance Review"
+ pageDescription=""
+ [loading]="loading"
+      
+>
+</ngx-default-content>
+<div *ngIf="!loading">
+  <div style="border: 1px solid #15157A30; margin-top: 2rem; margin-bottom: 2rem;">
+    <div style="font-weight: bold; padding: 0.5rem;">
+        {{kra_name}}
     </div>
-    <div>
-        <div class="linear-form">
-            <div class="form-group">
-                <label>Employee's Comment</label>
-                <input class="form-control" [(ngModel)]="kra.employeeComment" [disabled]="kra.isEmployeeSubmitted"/>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Employee Score</th>
+                <th>Employee Comment</th>
+                <th  *ngIf="!isEmployeePage">Reviewer Score</th>
+                <th *ngIf="!isEmployeePage">Reviewer Comment</th>
+                <th *ngIf="!isEmployeePage && kra.isReviewerSubmitted">Average Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let kpi of tempEditingData'>
+                <td>{{kpi.title}}</td>
+                <td>
+                  <div *ngIf="kra.isEmployeeSubmitted">
+                    {{kpi.employeeScore}}
+                  </div>
+                  <div *ngIf="!kra.isEmployeeSubmitted">
+                    <input class="form-control" type="number" min="0" [(ngModel)]="kpi.employeeScore"/>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="kra.isEmployeeSubmitted">
+                    <span *ngIf="kpi.employeeComment">{{kpi.employeeComment}}</span>
+                    <span *ngIf="!kpi.employeeComment">-</span>
+                  </div>
+                  <div *ngIf="!kra.isEmployeeSubmitted">
+                    <input class="form-control" [(ngModel)]="kpi.employeeComment"/>
+                  </div>
+                </td>
+                <td *ngIf="!isEmployeePage">
+                  <div *ngIf="kra.isReviewerSubmitted">
+                    {{kpi.reviewerScore}}
+                  </div>
+                  <div *ngIf="!kra.isReviewerSubmitted">
+                    <input type="number" min="0" class="form-control" [(ngModel)]="kpi.reviewerScore"/>
+                  </div>
+                </td>
+                <td *ngIf="!isEmployeePage">
+                  <span style="display: none">{{kra.isReviewerSubmitted}}</span>
+                  <div *ngIf="kra.isReviewerSubmitted">
+                    <span *ngIf="kpi.reviewerComment"> {{kpi.reviewerComment}} </span>
+                    <span *ngIf="!kpi.reviewerComment">-</span>
+                  </div>
+                  <div *ngIf="!kra.isReviewerSubmitted">
+                    <input class="form-control" [(ngModel)]="kpi.reviewerComment"/>
+                  </div>
+                </td>
+                <td *ngIf="!isEmployeePage && kra.isReviewerSubmitted">{{kpi.averageScore}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <!-- <tr>
+                <td colspan="5" style="text-align: right;">
+                    Total
+                </td>
+                <td></td>
+            </tr> -->
+        </tfoot>
+    </table>
+</div>
+<div>
+    <div class="linear-form">
+        <div class="form-group">
+            <label>Employee's Comment</label>
+            <input class="form-control" [(ngModel)]="kra.employeeComment" [disabled]="kra.isEmployeeSubmitted"/>
+        </div>
+        <div class="form-group" *ngIf="!isEmployeePage">
+            <label>Reviewer's Comment</label>
+            <input class="form-control" [disabled]="kra.isReviewerSubmitted" [(ngModel)]="kra.reviewComment"/>
+        </div>
+        <!-- <div class="form-group" *ngIf="kra.isEmployeeSubmitted && !kra.isReviewerSubmitted">
+            <label>Recommendations</label>
+            <select class="form-control"></select>
+        </div> -->
+        <!-- <div class="form-group">
+            <label></label>
+            <div>
+                <button nbButton status='primary' outline style="border: none;">
+                    <nb-icon icon='plus'></nb-icon>
+                    Add more
+                </button>
             </div>
-            <div class="form-group" *ngIf="!isEmployeePage">
-                <label>Reviewer's Comment</label>
-                <input class="form-control" [disabled]="kra.isReviewerSubmitted" [(ngModel)]="kra.reviewComment"/>
-            </div>
-            <!-- <div class="form-group" *ngIf="kra.isEmployeeSubmitted && !kra.isReviewerSubmitted">
-                <label>Recommendations</label>
-                <select class="form-control"></select>
-            </div> -->
-            <!-- <div class="form-group">
-                <label></label>
-                <div>
-                    <button nbButton status='primary' outline style="border: none;">
-                        <nb-icon icon='plus'></nb-icon>
-                        Add more
-                    </button>
-                </div>
-            </div> -->
-            <div class="form-group">
-                <label></label>
-                <div>
-                    <ngx-loadable-button  status='primary' (click)="save()" *ngIf="isEmployeePage || isReviewerPage" [disabled]="userHasSubmitted" [loading]="loadingSave">
-                      Save
-                    </ngx-loadable-button>
-                    <!-- <button nbButton>
-                        Save
-                    </button> -->
-                    <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;" (click)="gotoNext()" *ngIf="!isReviewerPage">
-                        Next
-                    </button>
-                </div>
+        </div> -->
+        <div class="form-group">
+            <label></label>
+            <div>
+                <ngx-loadable-button  status='primary' (click)="save()" *ngIf="isEmployeePage || isReviewerPage" [disabled]="userHasSubmitted" [loading]="loadingSave">
+                  Save
+                </ngx-loadable-button>
+                <!-- <button nbButton>
+                    Save
+                </button> -->
+                <button nbButton status='primary' outline style="background: transparent; margin-left: 1rem;" (click)="gotoNext()" *ngIf="!isReviewerPage">
+                    Next
+                </button>
             </div>
         </div>
     </div>
+</div>
+</div>
+ 

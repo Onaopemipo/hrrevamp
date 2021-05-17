@@ -1,8 +1,8 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { KpiDTO, MessageOutApiResult, SavePerformanceReviewServiceProxy } from 'app/_services/service-proxies';
+import { GetHRAppraisalReviewsServiceProxy, KpiDTO, MessageOutApiResult, SavePerformanceReviewServiceProxy } from 'app/_services/service-proxies';
 import { AuthenticationService } from './../../../../_services/authentication.service';
 import { AuthService } from './../../../../_services/auth.service';
-import { EmployeeCycleKrasServiceProxy, FetchKPIsServiceProxy, EmployeePerformanceReviewServiceProxy, KpiReviewDTO, GetEmployeePerformanceReviewServiceProxy, AssignedKPIs, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, PerformanceReviewDTO, SaveEmployeeAppraisalReviewServiceProxy } from './../../../../_services/service-proxies';
+import { EmployeeCycleKrasServiceProxy,GetHREmployeePerformanceReviewServiceProxy, FetchKPIsServiceProxy, EmployeePerformanceReviewServiceProxy, KpiReviewDTO, GetEmployeePerformanceReviewServiceProxy, AssignedKPIs, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, PerformanceReviewDTO, SaveEmployeeAppraisalReviewServiceProxy } from './../../../../_services/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
@@ -20,7 +20,7 @@ interface MyKpiReview {
 })
 export class PerformanceReviewComponent implements OnInit {
   kpis: MyKpiReview[]  = []
-  kra: KpiReviewDTO = new KpiReviewDTO().clone();
+  kra = new KpiReviewDTO().clone();
   loading = true;
   get isEmployeePage() { 
     return this.performanceEmployeeType == PerformanceEmployeeType.employee;
@@ -43,7 +43,7 @@ export class PerformanceReviewComponent implements OnInit {
   //   return this._kra;
   // }
   @Input() set current_kra(val: KpiReviewDTO) {
-    if(!val) return;
+    if(!val || val.cycleId == 0) return;
     this._kra = val;
     this.cycle_id = val.cycleId;
     this.kra_id = val.kraId;
@@ -56,6 +56,7 @@ export class PerformanceReviewComponent implements OnInit {
     private kra_api: EmployeeCycleKrasServiceProxy,
     private kpiService: FetchKPIsServiceProxy,
     private reviewePerformanceService: GetEmployeePerformanceReviewServiceProxy,
+    private GetHRAppraisalReviewsService: GetHREmployeePerformanceReviewServiceProxy,
     private employeePerformanceService: EmployeePerformanceReviewServiceProxy,
     private submitEmployeePerformanceService: SubmitPerformanceReviewServiceProxy,
     private saveEmployeePerformanceService: SavePerformanceReviewServiceProxy,
@@ -72,32 +73,41 @@ export class PerformanceReviewComponent implements OnInit {
     });
   }
   async loadKraInfo(){
-    await this.delay(500);
+    // await this.delay(2000);
     this.loading = true;
     if (this.performanceEmployeeType == PerformanceEmployeeType.employee) {
 
       this.user1.getuser().then(async user => {
         let luser = user[0];
         this.kra =  (await this.employeePerformanceService.employeePerformanceReview(luser.employee_contract_id, this.cycle_id, this.kra_id).toPromise()).result;
+        this.loading = false;
         this.tempEditingData = this.kra.assignedKPIs.map(kpi => kpi.clone())
       })
      
-    } else {
+    } else if (this.performanceEmployeeType == PerformanceEmployeeType.reviewer) {
       this.kra =  (await this.reviewePerformanceService.getEmployeePerformanceReview(this._kra.employeeContractId, this.cycle_id, this.kra_id).toPromise()).result;
+      this.loading = false;
       this.tempEditingData = this.kra.assignedKPIs.map(kpi => kpi.clone())
     }
-    this.loading = false;
+    else {
+      console.log(this._kra)
+      this.kra =  (await this.GetHRAppraisalReviewsService.getEmployeePerformanceReview(this._kra.employeeContractId, this.cycle_id, this.kra_id).toPromise()).result;
+      this.loading = false;
+      this.tempEditingData = this.kra.assignedKPIs.map(kpi => kpi.clone())
+    }
+   
   }
   // async loadKpi(){
   //   this.kra =  (await this.performanceService.getEmployeePerformanceReview(this.user.user.employee_contract_id, this.cycle_id, this.kra_id).toPromise()).result
   // }
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.cycle_id = Number(params.get('cycle_id'));
-      this.kra_id = Number(params.get('kra_id'));
-      this.kra_name = params.get('kra_name');
-      this.loadKraInfo();
-    })
+    window.globalThis.yyy = this;
+    // this.activatedRoute.paramMap.subscribe(params => {
+    //   this.cycle_id = Number(params.get('cycle_id'));
+    //   this.kra_id = Number(params.get('kra_id'));
+    //   this.kra_name = params.get('kra_name');
+    //   this.loadKraInfo();
+    // })
   }
 
   gotoNext(){

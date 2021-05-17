@@ -48,6 +48,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Appraisals',
         link: '/performance/my-appraisals'
       },
+      {
+        title: 'Appraisals Key Result Area',
+        link: '/performance/kra'
+      },
     ],
   },
   {
