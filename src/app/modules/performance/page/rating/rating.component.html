@@ -1,9 +1,10 @@
 <ngx-componentsheader pageName='Rating'></ngx-componentsheader>
 <div class="main-page-container">
+
     <div style="display: flex; justify-content: flex-end;" class="table-buttons">
-        <button nbButton outline text-button  status='primary'>
+        <button nbButton outline text-button (click)="showAddRatingModal = true" status='primary'>
             <nb-icon icon='plus'></nb-icon>
-            Add KPI
+            Add Rating
         </button>
         <button nbButton outline text-button  status='primary'>
             <nb-icon icon='download-outline'></nb-icon>
@@ -14,26 +15,109 @@
             Upload KPI
         </button>
     </div>
-
-    <table>
+    <ngx-default-content *ngIf="showEmpty" pageHeader="Performance Rating"
+    pageDescription="Click on the button to start setup" buttonValue="Continue" [loading]="loadingRatingAdd"
+    (buttonClick)="showAddRatingModal = true">
+    </ngx-default-content>
+    <table *ngIf="!showEmpty">
         <thead>
             <tr>
                 <th>Performance(From)</th>
                 <th>Performance(To)</th>
                 <th>Grade</th>
                 <th>Description</th>
-                <th>Recommendation</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Performance(From)</td>
-                <td>Performance(To)</td>
-                <td>Grade</td>
-                <td>Description</td>
-                <td>Recommendation</td>
+            <tr *ngFor="let rating of allRating; let i = index">
+                <td>{{rating.scoreFrom}}</td>
+                <td>{{rating.scoreTo}}</td>
+                <td>{{rating.grade}}</td>
+                <td>{{rating.description}}</td>
+                <td>
+                  <ng-template #card>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <nb-list>
+                          <nb-list-item  (click)='editActionClicked(rating)' style="cursor: pointer;">
+                           Edit
+                          </nb-list-item>
+                          <nb-list-item  (click)='deleteActionClicked(rating.id)' style="cursor: pointer;">
+                            Delete
+                          </nb-list-item>
+                        </nb-list>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <button nbButton outline status="primary" [nbPopover]="card" style="
+                      min-width: unset !important;
+                      background: transparent;
+                      border: none;
+                      padding: 0px;
+                    ">
+                    <nb-icon icon="more-horizontal-outline"></nb-icon>
+                  </button>
+                </td>
             </tr>
         </tbody>
     </table>
-    <button nbButton status='primary'>Save</button>
+    <!-- <button nbButton status='primary'>Save</button> -->
 </div>
+
+<ngx-side-modal [(show)]='showAddRatingModal' style="width: 500px; height: 1000px;">
+    <div modal-header>Add Rating</div>
+    <div modal-body>
+      <form #newRatingForm="ngForm" name="newRatingForm" id="newRatingForm">
+          <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Performance(From):</label>
+                <input type="number" class="form-control" placeholder="Enter Score From" name="scoreFrom"
+                  #scoreFrom="ngModel" [(ngModel)]="newRatingBody.scoreFrom" required>
+                <div *ngIf="scoreFrom.invalid && (scoreFrom.dirty || scoreFrom.touched)" class="error">
+                  <div *ngIf="scoreFrom.errors.required">Performance Score From required</div>
+                </div>
+              </div>
+        <div class="col-sm-12 form-group">
+            <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Performance(To):</label>
+            <input type="number" class="form-control" placeholder="Enter Score To" name="scoreTo"
+              #scoreTo="ngModel" [(ngModel)]="newRatingBody.scoreTo" required>
+            <div *ngIf="scoreTo.invalid && (scoreTo.dirty || scoreTo.touched)" class="error">
+              <div *ngIf="scoreTo.errors.required">Performance Score To required</div>
+            </div>
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Grade Interpretation:</label>
+            <input type="text" class="form-control" placeholder="Enter Grade Interpretation" name="grade"
+            #grade="ngModel" [(ngModel)]="newRatingBody.grade" required>
+    
+            <div *ngIf="grade.invalid && (grade.dirty || grade.touched)" class="error">
+              <div *ngIf="grade.errors.required">Grade is required</div>
+            </div>
+          </div>
+          <div class="col-sm-12 form-group">
+            <label>Description:</label>
+            <textarea rows="5" [(ngModel)]="newRatingBody.description" #description="ngModel"  id="description" name="description"  nbInput fullWidth   placeholder="Enter Description"></textarea>
+
+          </div>
+          
+        </div>
+    </form>
+    </div>
+    <div modal-actions style="margin-top: 10px; margin-bottom: 10px;display: flex;flex-direction: row;">
+        <ngx-loadable-button [loading]="loadingRatingAdd" [disabled]="newRatingForm.invalid" (click)="createUpdateRating()" >
+         <span *ngIf="newRatingBody.id">
+Save Changes
+         </span>
+         <span *ngIf="!newRatingBody.id">
+          Submit
+                   </span> 
+        </ngx-loadable-button>           
+        <div style="padding-left: 15px;">
+          <button  outline="true" (click)="showAddRatingModal = false"  nbButton status="primary" class="d-flex column" > 
+            Discard
+        </button>
+       
+        </div>
+    </div>
+    </ngx-side-modal>

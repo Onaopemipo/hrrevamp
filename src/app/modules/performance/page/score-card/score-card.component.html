@@ -1,7 +1,90 @@
 <ngx-componentsheader pageName='Score Card'></ngx-componentsheader>
 <div class="main-page-container">
-    <ngx-tableheader></ngx-tableheader>
-    <table>
+    <ngx-default-content *ngIf="showEmpty" pageHeader="Performance Score Card"
+    pageDescription="Employee Appraisal not submitted by HR"  [loading]="loadingRatingAdd"
+   >
+    </ngx-default-content>
+    <div style="padding: 10px 0 5px" *ngIf="!showEmpty">
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xxxl-12">
+            <nb-card>
+              <nb-card-body style="padding-left: 0px !important;">
+                <nb-actions size="medium" fullWidth>
+           
+                  <nb-action style="padding: 0px 0.5rem 0px 0.5rem !important;justify-content: flex-start;">
+                    <nb-form-field style="padding: 5px; min-width: 170px">
+                      <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                      <input type="text" placeholder="Search" nbInput />
+                    </nb-form-field>
+                  </nb-action>
+                  <nb-action>
+                    <span>Filter</span> &nbsp; &nbsp;
+                    <button
+                      nbButton
+                      style="background-color: transparent; border: 1px solid #b6b3b3"
+                      (click)="changeFilter()"
+                    >
+                      <ng-template [ngIf]="!showFilter">
+                        All &nbsp;<nb-icon icon="options-2-outline"></nb-icon>
+                      </ng-template>
+                      <ng-template [ngIf]="showFilter">
+                        Filter &nbsp;<nb-icon icon="options-2-outline"></nb-icon>
+                      </ng-template>
+                    </button>
+                  </nb-action>             
+                  <nb-action>
+                    <ng-template #card>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <nb-list>
+                            <nb-list-item (click)='downloadas("Excel")' style="cursor: pointer; min-width: 40px;"><img src="assets/icons/excelicon.svg">Excel</nb-list-item>
+                            <nb-list-item (click)='downloadas("pdf")' style="cursor: pointer;min-width: 40px;"><img src="assets/icons/pdf.svg"> Pdf</nb-list-item>
+                          </nb-list>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <button [nbPopover]="card"
+                      nbButton
+                      style="background-color: transparent; border: 1px solid #b6b3b3"
+                    >
+                      Export as
+                    </button>
+                  </nb-action>
+         
+                </nb-actions>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+        <div *ngIf="showFilter">
+          <div class='row'>
+            <div class="form-group col-sm-4" >
+              <label>Department</label>
+              <select class="form-control" [(ngModel)]="filter.departmentId" name="departmentId" id="departmentId" #departmentId="ngModel" >
+                <option value="">--Select Title--</option> 
+                <option *ngFor="let dep of alldepartments" [value]="dep.option_value">{{dep.option_text}}</option>               
+            </select>
+        
+            </div>
+            <div class="form-group col-sm-4" >
+                <label>Location</label>
+                <select class="form-control" #locationId="ngModel" [(ngModel)]="filter.locationId" name="locationId" id="locationId" required   >
+                    <option value="">--Select Location--</option>
+                    <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
+                </select>
+      
+              </div>
+            
+            <div class="form-group col-sm-4">
+              <div style="padding-top: 30px;">
+              <input nbButton status='primary' value='Submit' type='button' (click)="getScoreCard()"/>
+            </div>
+          </div>
+          <ng-content select='div'></ng-content>
+        </div>
+      </div>
+      </div>
+    <table *ngIf="!showEmpty">
         <thead>
             <tr>
                 <th>KRAs</th>
@@ -13,13 +96,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Financial</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+            <tr *ngFor="let score of allScoreCard;let i=index">
+                <td>{{score.goal}}</td>
+                <td>{{score.weight}}</td>
+                <td>{{score.actual}}</td>
+                <td>{{score.stretch}}</td>
+                <td>{{score.average}}</td>
+                <td>{{score.performance}}</td>
             </tr>
         </tbody>
     </table>

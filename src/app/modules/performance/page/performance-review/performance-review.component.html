@@ -23,7 +23,7 @@
                         {{kpi.employeeScore}}
                       </div>
                       <div *ngIf="!kra.isEmployeeSubmitted">
-                        <input class="form-control" [(ngModel)]="kpi.employeeScore"/>
+                        <input class="form-control" type="number" min="0" [(ngModel)]="kpi.employeeScore"/>
                       </div>
                     </td>
                     <td>
@@ -40,7 +40,7 @@
                         {{kpi.reviewerScore}}
                       </div>
                       <div *ngIf="!kra.isReviewerSubmitted">
-                        <input class="form-control" [(ngModel)]="kpi.reviewerScore"/>
+                        <input type="number" min="0" class="form-control" [(ngModel)]="kpi.reviewerScore"/>
                       </div>
                     </td>
                     <td *ngIf="!isEmployeePage">

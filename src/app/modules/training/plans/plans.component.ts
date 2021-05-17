@@ -14,6 +14,7 @@ import { TrainingCategoryService } from '../services/training-category.service';
 import { TrainingSpecializationService } from '../services/training-specialization.service';
 import { EmptyConfig } from 'app/components/page/page.component';
 import { ChoiceName } from 'app/components/multi-select/multi-select.component';
+import { DataServiceProxy } from 'app/_services/service-proxies';
 
 enum TABS {
   pending = 'pending', approved = 'approved', declined = 'declined'
@@ -91,6 +92,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
     protected confirmBox: ConfirmBoxService,
     protected alertService: AlertserviceService,
     private api: TrainingPlanService,
+    protected dataService: DataServiceProxy
     ) {
       super(confirmBox);
   }

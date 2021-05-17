@@ -102,27 +102,27 @@
       </div> -->
       <div class="form-group">
         <label>Score</label>
-        <input [(ngModel)]="editingData.score" class="form-control" />
+        <input type="number"  min="1" [(ngModel)]="editingData.score" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 2">
         <label>Min Rating</label>
-        <input [(ngModel)]="editingData.minRating" class="form-control" />
+        <input type="number"  min="0" [(ngModel)]="editingData.minRating" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 2">
         <label>Max Rating</label>
-        <input [(ngModel)]="editingData.maxRating" class="form-control" />
+        <input type="number"  min="1" [(ngModel)]="editingData.maxRating" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
         <label>Yes Score</label>
-        <input [(ngModel)]="editingData.yes_Score" class="form-control" />
+        <input type="number"  min="1" [(ngModel)]="editingData.yes_Score" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
         <label>No Score</label>
-        <input [(ngModel)]="editingData.no_Score" class="form-control" />
+        <input type="number"  min="1" [(ngModel)]="editingData.no_Score" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
         <label>Fair Score</label>
-        <input [(ngModel)]="editingData.fair_Score" class="form-control" />
+        <input type="number"  min="1" [(ngModel)]="editingData.fair_Score" class="form-control" />
       </div>
       <div class="form-group">
         <label>Allow Comment</label>
@@ -132,9 +132,10 @@
       <div class="form-group">
         <label></label>
         <div style="display: flex">
-          <button nbButton status="primary" (click)="submitForm()">save</button>
+          <ngx-loadable-button (click)="submitForm()" [loading]="loadingSave" style="margin-right: 1rem;">Save</ngx-loadable-button>
+          <!-- <button nbButton status="primary" (click)="submitForm()">save</button> -->
           <div class="m-1"></div>
-          <button nbButton status="primary" outline style="background: transparent">
+          <button (click)="showModal = false" nbButton status="primary" outline style="background: transparent">
             cancel
           </button>
         </div>

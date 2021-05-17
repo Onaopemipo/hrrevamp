@@ -13,6 +13,7 @@ export class DisciplineEditComponent implements OnInit {
   newDisciplineTemplateForm: FormGroup;
   @Input() DisciplineTemplate = new DisciplineTemplateDTO().clone();
   @Input() showDetails: boolean = false;
+  @Input() IsReward: boolean = false;
   _createNew = false;
   @Input() set createNew(val: boolean) {
     this._createNew = val;
@@ -40,12 +41,23 @@ export class DisciplineEditComponent implements OnInit {
   entityId = 0;
   Entity: IDTextViewModel[] = []
   loadingDisciplineTemplates = false;
+  disciplineCode = "";
   constructor(private CommonService: CommonServiceProxy,private DataService: DataServiceProxy,
     private api: CommunicationServiceProxy, private disciplineService: GetAllDisciplineTypesServiceProxy,
     private UploadDocumentService: UploadDocumentServiceProxy, private alertService: AlertserviceService,
     private AddUpdateDisciplineTemplateService: AddUpdateDisciplineTemplateServiceProxy,
     private DeleteDisciplineTemplatesService: DeleteDisciplineTemplatesServiceProxy
   ) { }
+ get getSelectedDisciplineCode() {
+   var disciplinId = this.DisciplineTemplate.disciplineType;
+   if (this.allDisciplineType.length > 0 && disciplinId) {
+     var disciplineName = this.allDisciplineType.find(x => x.id == disciplinId).disciplineName;
+     this.disciplineCode = disciplineName.toLowerCase().includes("performance") ? "pip" :
+       (disciplineName.toLowerCase().includes("demotion") ? "demotion" :
+         ((disciplineName.toLowerCase().includes("transfer") ? "transfer" : "")));
+   }
+   return this.disciplineCode;
+  }
   deleteTemplate(disciplineId) {
     this.loadingDisciplineTemplates = true;
     this.DeleteDisciplineTemplatesService.deleteDisciplineTemplates(disciplineId).subscribe(data => {
@@ -62,6 +74,7 @@ export class DisciplineEditComponent implements OnInit {
   }
   updateCreatedisciplineTemplate() {
     this.loadingDisciplineTemplates = true;
+    this.DisciplineTemplate.tempref = this.tempRef;
     this.AddUpdateDisciplineTemplateService.addUpdateDisciplineTemplates(this.DisciplineTemplate).subscribe(data => {
       this.loadingDisciplineTemplates = false;
       if (!data.hasError) {
@@ -80,7 +93,7 @@ export class DisciplineEditComponent implements OnInit {
   }
   getDisciplineType() {
     this.loadingDisciplineType = true
-    this.disciplineService.fetchAllDisciplineTypes().subscribe(data => {
+    this.disciplineService.fetchAllDisciplineTypes(this.IsReward).subscribe(data => {
       this.loadingDisciplineType = false;
       if (!data.hasError) {
         this.allDisciplineType = data.result;
@@ -121,7 +134,14 @@ export class DisciplineEditComponent implements OnInit {
      this.entityId = srchR.id;
    }
    // this.files = files.flowFile.file
-   this.UploadDocumentService.uploadDocs(0, title, 0, this.entityId, false, refNumber, files.flowFile.file[0])
+  //  console.log(files.flowFile.file)
+    var fileParam = [];
+    let fileObj = {
+      data: files.flowFile.file,
+      fileName: "Discipline/Reward"
+    }
+    fileParam.push(fileObj)
+   this.UploadDocumentService.uploadDocs(0, title, 0, this.entityId, false, refNumber, fileParam)
      .subscribe(data => {
        if (!data.hasError) {
          this.DisciplineTemplate.tempref = this.tempRef;
@@ -152,6 +172,6 @@ export class DisciplineEditComponent implements OnInit {
   };
 
   showDetail() {
-    this.showDetails = true;
+    this.showDetails = !this.showDetails;
   }
 }

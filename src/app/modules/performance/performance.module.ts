@@ -1,9 +1,9 @@
 import { HrReviewListComponent } from './page/hr-review-list/hr-review-list.component';
-import { NbRadioModule } from '@nebular/theme';
+import { NbPopoverModule, NbRadioModule ,  NbAlertModule, NbActionsModule, NbFormFieldModule,} from '@nebular/theme';
 import { ReviewerReviewMainComponent } from './page/reviewer-review-main/reviewer-review-main.component';
 import { PerformanceReviewMainComponent } from './page/performance-review-main/performance-review-main.component';
 import { MyAppraisalCycleComponent } from './pages/my-appraisal-cycle/my-appraisal-cycle.component';
-import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, ReviewRecommendationsServiceProxy, SubmitHRAppraisalReviewServiceProxy, GetHRAppraisalReviewsServiceProxy, GetPerformanceScoreCardsServiceProxy, FetchEmployeeByIdServiceProxy } from './../../_services/service-proxies';
+import { GetEmployeeAppraisalHistoriesServiceProxy, EmployeeCycleKrasServiceProxy, GetEmployeePerformanceReviewServiceProxy, EmployeePerformanceReviewServiceProxy, SubmitEmployeeAppraisalReviewServiceProxy, SubmitPerformanceReviewServiceProxy, ReviewRecommendationsServiceProxy, SubmitHRAppraisalReviewServiceProxy, GetHRAppraisalReviewsServiceProxy, GetPerformanceScoreCardsServiceProxy, FetchEmployeeByIdServiceProxy, AddUpdateRatingServiceProxy, CommonServiceProxy, DataServiceProxy, DeleteRatingRecordServiceProxy } from './../../_services/service-proxies';
 import { MyAppraisalsComponent } from './pages/my-appraisals/my-appraisals.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,8 +24,10 @@ import { PerformanceReviewsComponent } from './pages/performance-reviews/perform
 import { PerformanceMatrixComponent } from './pages/performance-matrix/performance-matrix.component';
 import { AppraisalComponent } from './pages/appraisal/appraisal.component';
 import { PerformanceManagementService } from './services/performance-management.service';
-import { AddUpdateKPIServiceProxy, AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, FetchKPIsServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy,
-  SavePerformanceReviewServiceProxy,
+import { AddUpdateKPIServiceProxy, AddUpdatePerformanceCycleServiceProxy, AssignKRAServiceProxy, 
+  CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy,
+  FetchKPIsServiceProxy, FetchPerformanceCyclesServiceProxy, SubordinateAppraisalsServiceProxy,
+  SavePerformanceReviewServiceProxy,FetchRatingsServiceProxy,
   SaveEmployeeAppraisalReviewServiceProxy, } from 'app/_services/service-proxies';
 import { KeyResultAreaService } from './services/key-result-area.service';
 import { AppraisalService } from './services/appraisal.service';
@@ -81,6 +83,10 @@ import { KpiService } from './services/kpi.service';
     GetHRAppraisalReviewsServiceProxy,
     GetPerformanceScoreCardsServiceProxy,
     FetchEmployeeByIdServiceProxy,
+    FetchRatingsServiceProxy,
+    AddUpdateRatingServiceProxy,
+    DataServiceProxy,
+    DeleteRatingRecordServiceProxy
   ],
   imports: [
     CommonModule,
@@ -88,6 +94,10 @@ import { KpiService } from './services/kpi.service';
     ThemeModule,
     PerformanceRoutingModule,
     NbRadioModule,
+    NbPopoverModule,
+    NbAlertModule,
+    NbActionsModule,
+    NbFormFieldModule
   ]
 })
 export class PerformanceModule { }
