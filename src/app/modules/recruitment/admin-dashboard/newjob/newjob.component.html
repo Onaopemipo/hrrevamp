@@ -6,7 +6,10 @@
           <div class="form-group row mydiv">
             <label for="Title" class="col-sm-3 col-form-label mylabel">Job Title</label>
             <div class="col-sm-6 col-md-6 col-lg-6">
-              <input type="text" class="form-control" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="newJobModel.position" placeholder="Job Title">
+              <select class="custom-select" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="newJobModel.jobTitleId" placeholder="Job Title">
+              <option value=""></option>
+              <option *ngFor="let job of allJobRoles" [value]="job.id">{{ job.name }}</option>
+              </select>
             </div>
           </div>
 
@@ -26,9 +29,7 @@
             <div class="col-sm-6 col-md-6 col-lg-6">
               <select name="country" #country="ngModel" [(ngModel)]="newJobModel.countryId" class="custom-select" required>
                 <option value="">Select </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
               </select>
             </div>
           </div>
@@ -38,7 +39,7 @@
             <div class="col-sm-6 col-md-6 col-lg-6">
               <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.stateId" required>
                 <option value="">--Select State--</option>
-                <option *ngFor="let state of allStates" [value]="state.id">{{state.name}}</option>
+                <option *ngFor="let state of allStates" [value]="state.id">{{state.state_name}}</option>
               </select>
             </div>
           </div>
@@ -66,7 +67,7 @@
             <div class="col-sm-6 col-md-6 col-lg-6">
               <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.employmentTypeId" required>
                 <option value="">--Select Employment Type--</option>
-                <option *ngFor="let employ of employmentTypes" [value]="employ.id">{{employ.name}}</option>
+                <option *ngFor="let employ of employmentTypes" [value]="employ.id">{{employ.text}}</option>
               </select>
             </div>
 
@@ -77,7 +78,7 @@
             <div class="col-sm-6 col-md-6 col-lg-6">
               <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.jobAvailabilityId" required>
                 <option value="">--Select Availability--</option>
-                <option *ngFor="let avail of jobAvailability" [value]="avail.id">{{avail.name}}</option>
+                <option *ngFor="let avail of jobAvailability" [value]="avail.id">{{avail.text}}</option>
               </select>
             </div>
           </div>
@@ -92,14 +93,20 @@
           <div class="form-group row mydiv">
             <label class="col-sm-3 col-form-label mylabel">Minimum Qualification</label>
             <div class="col-sm-6 col-md-6 col-lg-6">
-              <input type="text" class="form-control" name="minQualification" #minQualification="ngModel" [(ngModel)]="newJobModel.minQualificationId" placeholder="Minimum Education">
+              <select type="text" class="form-control" name="minQualification" #minQualification="ngModel" [(ngModel)]="newJobModel.minQualificationId" placeholder="Minimum Education">
+              <option value="">--Select Qualification--</option>
+              <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
+              </select>
             </div>
           </div>
 
           <div class="form-group row mydiv">
             <label class="col-sm-3 col-form-label mylabel">Maximum Qualification</label>
             <div class="col-sm-6 col-md-6 col-lg-6">
-              <input type="text" class="form-control" name="maxQualification" #maxQualification="ngModel" [(ngModel)]="newJobModel.maxQualificationId" placeholder="Maximum Education">
+            <select type="text" class="form-control" name="maxQualification" #maxQualification="ngModel" [(ngModel)]="newJobModel.maxQualificationId" placeholder="Maximum Education">
+              <option value="">--Select Qualification--</option>
+              <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
+              </select>
             </div>
           </div>
 
@@ -122,8 +129,7 @@
             <label for="currency" class="col-sm-3 col-form-label mylabel">Min Salary<span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
             <div class="col-sm-6 col-md-6 col-lg-6">
-              <app-amount-input [(value)]="newJobModel.maxSalary"></app-amount-input>
-              <!-- <ngx-date [(value)]="loanModel.effectiveDate"></ngx-date> -->
+              <app-amount-input [(value)]="newJobModel.minSalary"></app-amount-input>
             </div>
           </div>
 
@@ -186,7 +192,7 @@
           <div class="form-group row">
             <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
             <div class="col-sm-6">
-              <button nbButton status="primary">Post</button>
+              <button nbButton status="primary" (click)="addNewJob()">Post</button>
               <span style="padding: 8px;"></span>
               <button nbButton>Save Draft</button>
             </div>
@@ -197,13 +203,9 @@
   </div>
 
 
-  <ngx-side-modal [(show)]="showModal">
+  <!-- <ngx-side-modal [(show)]="showModal">
     <div modal-header><Header></Header></div>
     <div modal-body>
-      <!-- <nb-form-field>
-        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-        <input type="text" nbInput class="form-control">
-      </nb-form-field> -->
       <div class="row">
         <div class="col-sm-4 form-group">
           <label>Department</label>
@@ -274,5 +276,5 @@
         <button nbButton status='primary' outline style="background: transparent;">Cancel</button>
       </div>
     </div>
-  </ngx-side-modal>
+  </ngx-side-modal> -->
 

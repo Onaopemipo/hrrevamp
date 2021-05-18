@@ -136,6 +136,18 @@ tableActions: TableAction[] = [
    })
   }
 
+  deleteJob(){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '','Yes').subscribe(res => {
+      if(res){
+        this.job.deleteJob(1).subscribe(data => {
+          if(!data.hasError){
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Job Deleted!', 'Dismiss');
+          }
+        })
+      }
+    })
+  }
+
   async fetchCountries(){
     const data = await this.dataService.getCountries().toPromise();
     if(!data.hasError){

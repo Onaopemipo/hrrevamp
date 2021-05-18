@@ -48,6 +48,8 @@ export class NewjobComponent implements OnInit {
     this.fetchEmploymentTypes();
     this.fetchQualifications();
     this.fetchStates();
+    this.fetchJobRoles();
+    this.fetchJobAvailabilty();
   }
 
   newJobPosting(){
@@ -55,8 +57,9 @@ export class NewjobComponent implements OnInit {
   }
   addNewJob() {
     this.loading = true;
+    this.newJobModel.locationId = 1;
    this.job.addUpdateJob(this.newJobModel).subscribe(data => {
-    if(!data.hasError){
+    if(!data.hasError && data.result.isSuccessful == true){
       this.loading = false;
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss').subscribe(res => {
         if(res){
@@ -75,7 +78,7 @@ export class NewjobComponent implements OnInit {
   }
 
   async fetchStates(){
-    const data = await this.dataService.getStateByCountryId(1).toPromise();
+    const data = await this.dataService.getStateByCountryId(154).toPromise();
     if(!data.hasError){
       this.allStates = data.result;
     }
@@ -144,7 +147,7 @@ export class NewjobComponent implements OnInit {
 
   getSelectedEmployee(event,selectType) {
     if(selectType == 'employee'){
-    //  this.newJobModel.reviewers = event[0].employeeNumber;
+     this.newJobModel.reviewers = event[0].employeeNumber;
     }
  }
 
