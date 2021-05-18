@@ -65,7 +65,7 @@ export class PerformanceManagementCycleComponent extends BaseComponent<MyPerform
 
   tableActions: TableAction[] = [
     {name: 'edit', label: 'Edit'},
-    {name: 'delete', label: 'Delete'},
+    // {name: 'delete', label: 'Delete'},
   ]
 
   tableActionClick(event: TableActionEvent<MyPerformanceCycle>) {

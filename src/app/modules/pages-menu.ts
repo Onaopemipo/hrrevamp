@@ -48,6 +48,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Appraisals',
         link: '/performance/my-appraisals'
       },
+      {
+        title: 'Appraisals Key Result Area',
+        link: '/performance/kra'
+      },
     ],
   },
   {
@@ -174,11 +178,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Settings',
-        link: '/discipline'
+        link: '/discipline/disciplinaryandreward/discipline'
       },
       {
         title: 'Log',
-        link: '/discipline/log'
+        link: '/discipline/log/discipline'
+      },
+    ]
+  },
+  {
+    title: 'Reward Management',
+    link: '/',
+    icon: 'assets/icons/DisciplinaryManagement.jpg',
+    children: [
+      {
+        title: 'Settings',
+        link: '/reward/disciplinaryandreward/reward'
+      },
+      {
+        title: 'Log',
+        link: '/reward/log/reward'
       },
     ]
   },

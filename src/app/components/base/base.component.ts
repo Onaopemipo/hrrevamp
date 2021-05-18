@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
-import { IMessageOut, MessageOutApiResult } from 'app/_services/service-proxies';
+import { DataServiceProxy, IDTextViewModel, IMessageOut, MessageOutApiResult } from 'app/_services/service-proxies';
 // import { MainBaseComponent } from 'app/components/main-base/main-base.component';
 import { Observable } from 'rxjs';
 import * as validate from 'validate.js';
@@ -72,18 +72,19 @@ export abstract class MainBaseComponent{
   template: ''
 })
 export abstract class BaseComponent<D, F, E> extends MainBaseComponent implements OnInit {
-
   // protected abstract confirmBox: ConfirmBoxService;
   errors = {};
   validator = {};
   abstract filter: F;
   abstract data: D[];
   editingData = this.getNewEditingData();
+  allStrategy: IDTextViewModel[] = []
   constructor(protected confirmBox: ConfirmBoxService) {
     super();
   }
 
   abstract getData(): Observable<ListResult<D>>;
+ //protected abstract dataService: DataServiceProxy;
   abstract saveData(e: E): Observable<any>;
   abstract getNewEditingData(): E;
   abstract successMessage: string;
@@ -98,6 +99,10 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
       this.tableData = this.data;
       this.loading = false;
     });
+    
+    // this.dataService.getStrategyCategories().subscribe((data: any) => {
+    //   this.allStrategy = data.result;
+    // })
   }
   filterUpdated(filter: any) {
     this.filter = {...this.filter, ...filter};
@@ -113,7 +118,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
     this.loadingSave = true;
     this.saveData(this.editingData).subscribe(data => {
       this.loadingSave = false;
-      if (data.isSuccessful) {
+      if (!data.hasError) {
         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,
           this.successMessage, 'Ok').subscribe(data => {
             this.reload();

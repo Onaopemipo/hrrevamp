@@ -83,6 +83,9 @@ export class AssignKraComponent implements OnInit {
     this.loadingSave = true;
     const res = await this.kraService.assignObj(this.selected_cylce, JSON.stringify(this.selected_kras), this.employees.join(',')).toPromise();
     this.loadingSave = false;
+    this.selected_cylce = 0;
+    this.selected_kras = [];
+    this.employees = [];
     await this.alertService.openModalAlert(res.hasError ? this.alertService.ALERT_TYPES.FAILED : this.alertService.ALERT_TYPES.SUCCESS, res.message, 'Okay').toPromise();
  
     if(!res.hasError){

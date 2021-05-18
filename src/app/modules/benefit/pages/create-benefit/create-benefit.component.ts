@@ -15,7 +15,7 @@ import {
   CommonServiceProxy,
   GetAllVendorServiceProxy,
   VendorPlanDTO,
-  GetVendorPlanByVendorIdServiceProxy
+  GetVendorPlanByVendorIdServiceProxy,
 } from "../../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -44,10 +44,8 @@ export class CreateBenefitComponent implements OnInit {
     private GetVendorByIdServiceProxy: GetVendorByIdServiceProxy,
     private alertservice: AlertserviceService,
     private AddUpdateVendorPlanServiceProxy: AddUpdateVendorPlanServiceProxy,
-    private GetVendorplanByVendorIdServiceProxy:GetVendorPlanByVendorIdServiceProxy
-  ) // ,
-
-  {}
+    private GetVendorplanByVendorIdServiceProxy: GetVendorPlanByVendorIdServiceProxy // ,
+  ) {}
 
   // tableActions: TableAction[] = [
   topActionButtons = [
@@ -79,7 +77,6 @@ export class CreateBenefitComponent implements OnInit {
     return false;
   }
   ngOnInit(): void {
-    
     this.getAllVendor();
 
     this.activatedRoute.paramMap.subscribe((paramMap) => {
@@ -107,6 +104,29 @@ export class CreateBenefitComponent implements OnInit {
     }
   }
 
+
+  // async getSingleVendor() {
+  //   const data = await this.GetVendorByIdServiceProxy.getVendorById(
+  //     this.VendorId
+  //   ).toPromise();
+  //   if (!data.hasError) {
+  //     this.singleVendor = data.result;
+  //     console.log("singleVendor", this.singleVendor);
+  //   }
+  // }
+
+  //getVendor
+  async getVendor() {
+    // const data = await this.common.getVendor().toPromise();
+    // if (!data.hasError) {
+    //   this.Vendora = data.result;
+    //   console.log(
+    //     "i want see wetin i keep for that vendora variable",
+    //     this.Vendora
+    //   );
+    // }
+  }
+
   //getVendor
   // async getVendor() {
   //   const data = await this.common.getVendor().toPromise();
@@ -124,10 +144,7 @@ export class CreateBenefitComponent implements OnInit {
     const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
     if (!data.hasError) {
       this.AllVendors = data.result;
-      console.log(
-        "All vendors",
-        this.AllVendors
-      );
+      console.log("All vendors", this.AllVendors);
     }
   }
   // AddPlan(){
@@ -158,10 +175,13 @@ export class CreateBenefitComponent implements OnInit {
   }
   //fetch plans by vendor
   async getPlans() {
-    const data = await this. GetVendorplanByVendorIdServiceProxy.getVendorPlanByVendorId(this.VendorId).toPromise();
-   if(!data.hasError){
-       this.plans = data.result
-       console.log('plan',this.plans)
+    const data =
+      await this.GetVendorplanByVendorIdServiceProxy.getVendorPlanByVendorId(
+        this.VendorId
+      ).toPromise();
+    if (!data.hasError) {
+      this.plans = data.result;
+      console.log("plan", this.plans);
     }
   }
 }

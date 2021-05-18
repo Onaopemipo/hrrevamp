@@ -1,8 +1,9 @@
-<ngx-componentsheader
-  pageName="Disciplinary Management"
-  [requiredButton]="topActionButtons"
-  (buttonClick)="pageActionClicked($event)"
-></ngx-componentsheader>
+<ngx-componentsheader [pageName]="pageName">
+<div headerButton style="display: flex; flex-direction: row;" >
+  <button   nbButton status="primary" (click)="AddNewDiscipline()" class="d-flex column">
+    {{IsReward? 'Reward':'Discipline'}}</button>
+</div>
+</ngx-componentsheader>
 <div class="main-page-container">
   <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
   ><ngx-default-content
