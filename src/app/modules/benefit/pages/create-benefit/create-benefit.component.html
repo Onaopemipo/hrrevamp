@@ -229,13 +229,13 @@
 
 
             <div class="form-group row">
-              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor id
+              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor 
               </label>
               <div class="col-sm-8">
                 <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId"
                   #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId">
                   <option value="">--Select Vendor---</option>
-                  <option *ngFor="let evo of Vendora" [value]="evo.id">{{evo.name}}</option> 
+                  <option *ngFor="let v of  AllVendors" [value]="v.id">{{v.name}}</option> 
                 </select>
 
                 <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)" class="error">

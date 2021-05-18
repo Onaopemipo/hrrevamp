@@ -10,6 +10,7 @@ import { EligibilityListComponent } from './pages/eligibility-list/eligibility-l
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {  AddBenefitComponent } from './add-benefit/add-benefit.component';
+import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
 export const routes: Routes = [
   {
     path: '',
@@ -50,6 +51,10 @@ export const routes: Routes = [
       {
         path: 'BenefitsVendor',
         component: VendorPlanComponent,
+      },
+      {
+        path: 'eligibilityView/:id',
+        component: EligibilityviewComponent,
       },
   
     ],

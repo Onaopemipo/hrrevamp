@@ -1,89 +1,242 @@
-<ngx-componentsheader pageName="Create Benefit">
+<ngx-componentsheader pageName="Create Benefit" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
 <!-- <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
     (click)="back()"></i></span>
     [requiredButton]="topActionButtons" (buttonClick)='modal($event)' -->
-<div class="main-page-container">
-    <h4>Initiate New Benefit</h4>
-    <p>Let's help create a new benefit plan</p> -->
-    <div class="linear-form">
-        <hr />
-        <div class="form-group">
-            <label>Benefit Name</label>
-            <input class="form-control" />
-        </div>
 
-        <div class="form-group">
-            <label>Benefit Icon</label>
-            <ngx-file-upload></ngx-file-upload>
-            <span>Icon should be in JPEG format</span>
-        </div>
+<nb-card>
+    <nb-card-body>
 
-        <hr />
+        <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">
+            <nb-tab tabTitle="Individual">
 
-        <!-- <div class="form-group">
-      <label>Upload Employees</label>
-      <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']" [horizontal]="true">
-      </ngx-radio-button>
-    </div>
+                <div class="main-page-container">
+                    <h4>Initiate New Benefit</h4>
+                    <p>Let's help create a new benefit plan</p>
+                    <form action="" #EventForm="ngForm" name="EventForm" id="EventForm">
+                        <hr />
+                        <div class="form-group">
+                            <label>Benefit Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Benefit Name" id="name"
+                                #name="ngModel" name="name" [(ngModel)]=" benefit.name" required>
 
-    <div class="form-group">
-      <label>Employee(s)</label>
-      <ngx-employee-master-search></ngx-employee-master-search>
-    </div>
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                                <div *ngIf="name.errors.required">name is required</div>
+                            </div>
 
-    <div class="form-group">
-      <label>Upload Employee CSV file</label>
-      <ngx-file-upload></ngx-file-upload>
-    </div> -->
+                        </div>
 
-        <div class="form-group">
-            <label>Vendor</label>
-            <select class="form-control"></select>
+                        <div class="form-group">
+                            <label>Vendor</label>
+                            <div>
+                                <select placeholder="Select Vendor" (change)="handleVendor(vendorId.value)"
+                                    class="form-control" name="vendorId" id="vendorId" #vendorId="ngModel"
+                                    [(ngModel)]=" benefit.vendorId">
+                                    <option value="">--Select Vendor---</option>
+                                    <option *ngFor="let v of  AllVendors" [value]="v.id">{{v.name}}</option>
+                                </select>
 
-            <hr />
+                                <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)" class="error">
+                                    <div *ngIf="vendorId.errors.required">Vendor is required</div>
+                                </div>
+                            </div>
 
 
-        </div>
 
-        <div class="form-group">
-            <label>Vendor Plan</label>
-            <select class="form-control"></select>
+                        </div>
 
+                        <div class="form-group">
+                            <label>Vendor Plan</label>
+                            <select placeholder="Select Gender" class="form-control" name="vendorPlanId"
+                                id="vendorPlanId" #vendorPlanId="ngModel" [(ngModel)]=" benefit.vendorPlanId">
+                                <option value="">--Select Vendor---</option>
+                                <option *ngFor="let v of  plans" [value]="v.id">{{v.name}}</option>
+                            </select>
 
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control"></textarea>
-        </div>
-
-
-    </div>
-<!-- 
-    <div style="display: flex;flex-wrap: wrap;">
-        <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-            <h4>Initiate New Benefit</h4>
-            <p>Let's help create a new benefit plan</p>
-        </div>
-        <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-            <h4>Initiate New Benefit</h4>
-            <p>Let's help create a new benefit plan</p>
-        </div>
-        <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-            <h4>Initiate New Benefit</h4>
-            <p>Let's help create a new benefit plan</p>
-        </div>
-        <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-            <h4>Initiate New Benefit</h4>
-            <p>Let's help create a new benefit plan</p>
-        </div>
+                            <div *ngIf="vendorPlanId.invalid && (vendorId.dirty || vendorPlanId.touched)" class="error">
+                                <div *ngIf="vendorPlanId.errors.required">Vendor Plan is required</div>
+                            </div>
 
 
-    </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
 
-    <div class="form-group">
-        <label>Employee</label>
-        <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
-        </ngx-employee-master-search>
-      </div>
-</div>
+                            <textarea type="textarea" class="form-control" placeholder="Enter Description"
+                                id="description" name="description" #description="ngModel"
+                                [(ngModel)]="benefit.description"></textarea>
+
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                class="error">
+                                <div *ngIf="description.errors.required">Description is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <!-- <label>Employee</label>
+                            <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
+                            </ngx-employee-master-search> -->
+
+                            <div class="col-sm-6">
+                                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')"
+                                    [allowmultipleselection]="true" [selectionHeader]="selectionHeader"
+                                    [addbtnText]="addbtnText"></ngx-employee-master-search>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                            <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                                    class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                            <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                                [disabled]="!disabled" (click)="SubmitBenefit()">Submit</button>
+
+
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label>Upload Employees</label>
+                            <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']"
+                                [horizontal]="true">
+                            </ngx-radio-button>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Employee</label>
+                            
+                            <select placeholder="Select Employee" class="form-control" name="employees" id="employees"
+                                  #employees="ngModel" [(ngModel)]="benefit.employees">
+                                  <option value="">--Select Employee---</option>
+                                  <option *ngFor="let evo of  employees[0]" [value]="evo.employeeId">{{evo.employeeFirstname}}</option> 
+                                </select>
+                
+                                <div *ngIf="employees.invalid && (employees.dirty || employees.touched)" class="error">
+                                  <div *ngIf="employees.errors.required">Vendor is required</div>
+                                </div>
+                        </div> -->
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <!-- 
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                
+                 <div class="form-group">
+                      <label>Upload Employees</label>
+                      <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']" [horizontal]="true">
+                      </ngx-radio-button>
+                    </div>
+                
+                    <div class="form-group">
+                      <label>Employee(s)</label>
+                      <ngx-employee-master-search></ngx-employee-master-search>
+                    </div>
+                
+                    <div class="form-group">
+                      <label>Upload Employee CSV file</label>
+                      <ngx-file-upload></ngx-file-upload>
+                    </div> 
+                
+                    <div class="form-group">
+                            <label>Benefit Icon</label>
+                             <ngx-file-upload></ngx-file-upload>
+                        <span>Icon should be in JPEG format</span>
+                    </div>
+                     
+                           
+                        
+                </div>   -->
+
+
+
+
+
+                <ngx-side-modal [(show)]='showPlan' style="width: 500px;">
+                    <div modal-header style="font-size: larger; font-weight: bold;">
+                        <span></span>
+                    </div>
+                    <div modal-body>
+
+                        <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+                            <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+                          margin-left: 10px;">create new events</h6> -->
+                            <div style="margin: 20px;">
+                                <div class="form-group">
+                                    <label for="title">Type of Benefit</label>
+                                    <input type="text" class="form-control" placeholder="Enter name of plan" id="name"
+                                        #name="ngModel" name="name" [(ngModel)]="  AddBenefit.name" required>
+
+                                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                                        <div *ngIf="name.errors.required">name is required</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                        </form>
+
+                    </div>
+
+
+                    <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                        <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                                class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                        <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                            [disabled]="!disable" (click)="SubmitBenefitType()">Submit</button>
+
+
+                    </div>
+
+                </ngx-side-modal>
+
+
+
+
+
+
+            </nb-tab>
+            <nb-tab tabTitle="Bulk">
+
+            </nb-tab>
+
+            <nb-tab tabTitle="Eligibility">
+
+            </nb-tab>
+
+        </nb-tabset>
+    </nb-card-body>
+</nb-card>

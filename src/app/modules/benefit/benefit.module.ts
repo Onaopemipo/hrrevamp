@@ -13,13 +13,14 @@ import { EligibilityListComponent } from './pages/eligibility-list/eligibility-l
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
 import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/service-proxies'
 import { AddBenefitComponent } from './add-benefit/add-benefit.component';
+import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
 
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {
-  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy, AddUpdateVendorPlanServiceProxy,
-  CommonServiceProxy, GetAllVendorServiceProxy, GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy
+  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy, AddUpdateBenefitEligibilityServiceProxy,FetchBenefitEligibilityServiceProxy, AddUpdateVendorPlanServiceProxy,AddUpdateBenefitTypeServiceProxy,AddUpdateBenefitServiceProxy,
+  CommonServiceProxy, GetAllVendorServiceProxy,GetAllVendorPlanServiceProxy ,FetchAllEligibilitiesServiceProxy,DeleteBenefitEligibilityServiceProxy , GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy,GetVendorPlanByVendorIdServiceProxy
 } from '../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 
@@ -35,7 +36,8 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     EligibilityListComponent,
     ManageEmployeeComponent,
     VendorPlanComponent,
-    AddBenefitComponent
+    AddBenefitComponent,
+    EligibilityviewComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,15 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     GetVendorByIdServiceProxy,
     GetAllVendorServiceProxy,
     FetchAllEmployeesServiceProxy,
-    DeleteVendorServiceProxy
+    DeleteVendorServiceProxy,GetVendorPlanByVendorIdServiceProxy,
+    AddUpdateBenefitTypeServiceProxy,
+    GetAllVendorPlanServiceProxy ,
+    AddUpdateBenefitServiceProxy,
+    AddUpdateBenefitEligibilityServiceProxy,
+    FetchAllEligibilitiesServiceProxy,
+    DeleteBenefitEligibilityServiceProxy ,
+    FetchBenefitEligibilityServiceProxy
+
   ]
 })
 export class BenefitModule { }
