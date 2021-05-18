@@ -22,7 +22,7 @@ import {
   GetAllVendorPlanServiceProxy,
   VendorPlan,
   AddUpdateBenefitServiceProxy
-} from "../../../_services/service-proxies";
+} from "../../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import { J } from "@angular/cdk/keycodes";
@@ -34,7 +34,7 @@ import { J } from "@angular/cdk/keycodes";
 })
 export class AddBenefitComponent implements OnInit {
 
-  selectedOption=1
+  selectedOption:string = "1"
   AllVendors: VendorDTO[];
   AllEmployee: EmployeeDTO[];
   searchText?: string = "a";

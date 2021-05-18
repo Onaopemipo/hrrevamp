@@ -7,7 +7,7 @@ import {
   FetchAllEligibilitiesServiceProxy,
   BenefitEligibilityDTO,
   FetchBenefitEligibilityServiceProxy,
-} from "../../../_services/service-proxies";
+} from "../../../../_services/service-proxies";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import { Transfer } from "@flowjs/ngx-flow";
 

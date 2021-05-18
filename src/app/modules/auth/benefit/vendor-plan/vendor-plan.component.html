@@ -1,0 +1,320 @@
+<!-- <ngx-componentsheader [pageName]='Benefits' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader> -->
+<ngx-componentsheader pageName="Vendors" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader>
+
+
+
+
+<nb-card>
+
+    <nb-card-body>
+
+
+        <div class="row" *ngFor="let vend of AllVendors">
+
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Vendor</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: bold;">{{vend.name}}</span>
+            </div>
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Description</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: bold;">{{vend.description}}</span>
+            </div>
+
+
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Address</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: bold;">{{vend.address}}</span>
+            </div>
+
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">phoneNumber</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: bold;">{{vend.phoneNumber}}</span>
+            </div>
+            <div class="col-sm-6"style="margin-top: 1rem; margin-bottom: 1rem;" >
+                <a href="javascript:void(0)" (click)="onClick()"  [routerLink]="['/benefits/create-benefit',vend.id]">view details</a>
+            </div>
+            <div class="col-sm-6" style="margin-top: 1rem; margin-bottom: 1rem;">
+                <!-- <span style="padding: 0.5rem;"><i class="fas fa-trash-alt" style="color: rgb(255, 0, 0);" (click)="deleteVendor()">Remove Vendor</i></span> -->
+                <button nbButton outline status="danger"  class="d-flex column"
+                style="background-color: white;"  (click)="deleteVendor()">Remove Vendor</button>
+            </div>
+        </div>
+
+
+        <!-- <div style="align-items: center;
+         justify-content: center;
+         display: flex; margin: 6.4rem 1rem 1rem 1rem;">
+            <span style="font-weight: 100; font-size: medium; font-style: normal;">PLANS</span>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <span>Plan Name</span>
+                <span></span>
+            </div>
+            <div class="col-sm-3">
+                <span>Description</span>
+                 <div>fhhfkfkfkfk</div>
+            </div>
+
+            <div class="col-sm-3">
+                <span>Policy Number</span>
+
+            </div>
+
+            <div class="col-sm-3">
+                <span><a href="">view details</a></span>
+            </div>
+
+
+        </div> -->
+
+<!-- 
+        <div style="align-items: center; justify-content: center; display: flex; margin: 2rem 1rem;">
+            <button nbButton status="primary" outline class="d-flex column" style="background-color: white;"
+                (click)="AddPlan()">Add Plans</button>
+        </div> -->
+
+    </nb-card-body>
+</nb-card>
+
+<!-- modal for vendor -->
+<ngx-side-modal [(show)]='showEvent' style="width: 500px;">
+    <div modal-header style="font-size: larger; font-weight: bold;">
+
+        <span></span>
+    </div>
+    <div modal-body>
+
+        <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+            <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+            margin-left: 10px;">create new events</h6> -->
+            <div style="margin: 20px;">
+                <div class="form-group">
+                    <label for="title">Name of Vendor</label>
+                    <input type="text" class="form-control" placeholder="Enter title" id="name" #name="ngModel"
+                        name="name" [(ngModel)]="AddVendor.name" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="title">Phone number</label>
+                    <input type="text" class="form-control" placeholder="Enter phoneNumber" id="phoneNumber"
+                        #phoneNumber="ngModel" name="phoneNumber" [(ngModel)]="AddVendor.phoneNumber" required>
+
+                    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                        <div *ngIf="phoneNumber.errors.required">phoneNumber is required</div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="title">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Email" id="phoneNumber" #email="ngModel"
+                        name="email" [(ngModel)]="AddVendor.email" required>
+
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                        <div *ngIf="email.errors.required">email is required</div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Benefit
+                        Type</label>
+                    <div class="col-sm-8">
+                         <select placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+                            #benefitTypeId="ngModel" [(ngModel)]="AddVendor.benefitTypeId">
+                            <option value="">--Select Event---</option>
+                            <option *ngFor="let benefit of Benefit" [value]="benefit.id">{{benefit.text}}</option>
+                        </select>
+
+                        <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
+                            class="error">
+                            <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description</label>
+                    <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                        name="description" #description="ngModel" [(ngModel)]="AddVendor.description"></textarea>
+
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                        <div *ngIf="description.errors.required">Description is required</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">Adress</label>
+                    <textarea type="textarea" class="form-control" placeholder="Enter Address" id="address"
+                        name="address" #address="ngModel" [(ngModel)]="AddVendor.address"></textarea>
+
+                    <div *ngIf="address.invalid && (address.dirty|| address.touched)" class="error">
+                        <div *ngIf="address.errors.required">Address is required</div>
+                    </div>
+
+                </div>
+                <div>
+                    <!-- <button type="submit" class="btn btn-primary" *ngIf="submitbtnPressed" nbButton status="primary"
+                        [disabled]="disableEvent">Submit</button> -->
+                    <!-- <button *ngIf="submitbtnPressed" nbButton status="primary" disabled]="disableEvent"
+                        class="d-flex column">Processing &nbsp;
+                        <i class="fa fa-spin fa-spinner">
+                        </i> Submit</button> -->
+                </div>
+
+                <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                            class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                    <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                        [disabled]="!disableEvent" (click)="SubmitEvent()">Submit</button>
+
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</ngx-side-modal>
+<!-- vendor for plan -->
+<ngx-side-modal [(show)]='showPlan' style="width: 500px;">
+    <div modal-header style="font-size: larger; font-weight: bold;">
+        <span></span>
+    </div>
+    <div modal-body>
+
+        <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+            <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+            margin-left: 10px;">create new events</h6> -->
+            <div style="margin: 20px;">
+                <div class="form-group">
+                    <label for="title">Name of Plan</label>
+                    <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel"
+                        name="name" [(ngModel)]=" AddVendorPlan.name" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="title">Policy number</label>
+                    <input type="text" class="form-control" placeholder="Enter refNumber" id="refNumber"
+                        #refNumber="ngModel" name="refNumber" [(ngModel)]=" AddVendorPlan.refNumber" required>
+
+                    <div *ngIf="refNumber.invalid && (refNumber.dirty || refNumber.touched)" class="error">
+                        <div *ngIf="refNumber.errors.required">refNumber is required</div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor id
+                    </label>
+                    <div class="col-sm-8">
+                        <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId"
+                            #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId">
+                            <option value="">--Select Vendor---</option>
+                            <option *ngFor="let evo of AllVendors" [value]="evo.id">{{evo.name}}</option> -->
+                        </select>
+
+                        <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)" class="error">
+                            <div *ngIf="vendorId.errors.required">Vendor is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">Plan Description</label>
+                    <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                        name="description" #description="ngModel" [(ngModel)]="AddVendorPlan.description"></textarea>
+
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                        <div *ngIf="description.errors.required">Description is required</div>
+                    </div>
+
+                </div>
+
+                <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                            class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                    <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                        [disabled]="!disable" (click)="SubmitPlan()">Submit</button>
+
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</ngx-side-modal>
+
+
+<!-- modal for benefit create -->
+<ngx-side-modal [(show)]='showBenefit' style="width: 500px;">
+    <div modal-header style="font-size: larger; font-weight: bold;">
+        <span></span>
+    </div>
+    <div modal-body>
+
+        <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+            <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+          margin-left: 10px;">create new events</h6> -->
+            <div style="margin: 20px;">
+                <div class="form-group">
+                    <label for="title">Type of Benefit</label>
+                    <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel"
+                        name="name" [(ngModel)]="  AddBenefit.name" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+        </form>
+
+    </div>
+
+    
+    <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+        <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+            class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disabled"
+          (click)="SubmitBenefitType()">Submit</button>
+
+
+      </div>
+
+</ngx-side-modal>

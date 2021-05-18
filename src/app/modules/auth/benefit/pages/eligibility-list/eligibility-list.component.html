@@ -1,0 +1,93 @@
+<ngx-componentsheader
+  pageName="Benefit Eligibility List"
+  [requiredButton]="topActionButtons"
+  (buttonClick)="pageActionClicked($event)"
+></ngx-componentsheader>
+<div class="main-page-container">
+  <nb-tabset (changeTab)="selectTab($event)">
+    <nb-tab tabTitle="Open" [tabId]="TABS.OPEN"> </nb-tab
+    ><nb-tab tabTitle="Closed" [tabId]="TABS.CLOSED"> </nb-tab>
+  </nb-tabset>
+  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  ><ngx-default-content
+    *ngIf="showEmpty"
+    pageHeader="let's set up your expenses"
+    pageDescription="Now, you can add your request"
+    buttonValue="Add expense request"
+    (buttonClick)="createNewClicked()"
+  >
+  </ngx-default-content>
+   <ngx-tablecomponent
+    *ngIf="!showEmpty"
+    [tableColum]="tableColumns"
+    [userData]=" Eligibility"
+    [loading]="loading"
+    (pageChange)="loadNewPage($event)"
+    [loading]="loading"
+    [totalItems]="totalItems"
+    [loading]="loading"
+    [currentPage]="currentPage"
+    [actions]="tableActions" 
+    (actionClick)="tableActionClicked($event)"
+  ></ngx-tablecomponent> 
+  
+</div>
+<!-- <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+[showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allDeployment"
+[tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+</ngx-tablecomponent> -->
+
+
+
+
+<ngx-side-modal [(show)]='showPlan' style="width: 500px;">
+  <div modal-header style="font-size: larger; font-weight: bold;">
+      <span> Add Eligiblity</span>
+  </div>
+  <div modal-body>
+
+      <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+          <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+        margin-left: 10px;">create new events</h6> -->
+          <div style="margin: 20px;">
+              <div class="form-group">
+                  <label for="title">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel"
+                      name="name" [(ngModel)]="eligibility.name" required>
+
+                  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                      <div *ngIf="name.errors.required">name is required</div>
+                  </div> 
+
+              </div>
+          </div>
+
+          <div class="form-group">
+            <!-- <label>Employee</label>
+            <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
+            </ngx-employee-master-search> -->
+            
+            <div class="col-sm-6">
+                <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="true" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+          </div>
+        </div>
+
+
+
+
+
+      </form>
+
+  </div>
+
+  
+  <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+      <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+          class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+      <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disability"
+        (click)="Submit()">Submit</button>
+
+
+    </div>
+
+</ngx-side-modal>

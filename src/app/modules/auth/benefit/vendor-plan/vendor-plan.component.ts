@@ -16,7 +16,7 @@ import {
   AddUpdateBenefitTypeServiceProxy
 
 } from "../../../_services/service-proxies";
-import { AlertserviceService} from "app/_services/alertservice.service";
+import { AlertserviceService } from "app/_services/alertservice.service";
 import {
   ColumnTypes,
   TableAction,
