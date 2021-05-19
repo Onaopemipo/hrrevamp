@@ -6,10 +6,10 @@
         </nb-tab>
         </nb-tabset> -->
   <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader>
-  <ngx-default-content *ngIf="showEmpty" pageHeader="Create your first Cycle"
-    pageDescription="Click on the button to create a performance cycle">
+  <ngx-default-content *ngIf="showEmpty" pageHeader="No KRA to review"
+    pageDescription="" [loading]="loading">
   </ngx-default-content>
-  <div style="display: flex; justify-content: flex-end;">
+  <div style="display: flex; justify-content: flex-end;" *ngIf="!showEmpty">
     <button nbButton status="primary" (click)="gotoReview()">Review</button>
   </div>
   <ngx-tablecomponent [showActions]="false" *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]="kras"

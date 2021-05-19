@@ -6,14 +6,14 @@
             <nb-icon icon='plus'></nb-icon>
             Add Rating
         </button>
-        <button nbButton outline text-button  status='primary'>
+        <!-- <button nbButton outline text-button  status='primary'>
             <nb-icon icon='download-outline'></nb-icon>
             Downlaod Template
         </button>
                     <button nbButton outline text-button  status='primary'>
             <nb-icon icon='upload-outline'></nb-icon>
             Upload KPI
-        </button>
+        </button> -->
     </div>
     <ngx-default-content *ngIf="showEmpty" pageHeader="Performance Rating"
     pageDescription="Click on the button to start setup" buttonValue="Continue" [loading]="loadingRatingAdd"
@@ -90,7 +90,7 @@
             <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Grade Interpretation:</label>
             <input type="text" class="form-control" placeholder="Enter Grade Interpretation" name="grade"
             #grade="ngModel" [(ngModel)]="newRatingBody.grade" required>
-    
+
             <div *ngIf="grade.invalid && (grade.dirty || grade.touched)" class="error">
               <div *ngIf="grade.errors.required">Grade is required</div>
             </div>
@@ -100,7 +100,7 @@
             <textarea rows="5" [(ngModel)]="newRatingBody.description" #description="ngModel"  id="description" name="description"  nbInput fullWidth   placeholder="Enter Description"></textarea>
 
           </div>
-          
+
         </div>
     </form>
     </div>
@@ -111,13 +111,13 @@ Save Changes
          </span>
          <span *ngIf="!newRatingBody.id">
           Submit
-                   </span> 
-        </ngx-loadable-button>           
+                   </span>
+        </ngx-loadable-button>
         <div style="padding-left: 15px;">
-          <button  outline="true" (click)="showAddRatingModal = false"  nbButton status="primary" class="d-flex column" > 
+          <button  outline="true" (click)="showAddRatingModal = false"  nbButton status="primary" class="d-flex column" >
             Discard
         </button>
-       
+
         </div>
     </div>
     </ngx-side-modal>

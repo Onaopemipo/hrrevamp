@@ -67,9 +67,9 @@ export class RatingComponent implements OnInit {
       this.loadingRatingAdd = false;
       if (!data.hasError) {
         this.allRating = data.result;
-       
+
       } else {
-       
+
       }
     });
   }
@@ -79,9 +79,9 @@ export class RatingComponent implements OnInit {
       this.loadingRatingAdd = false;
       if (!data.hasError) {
         this.allRatingTypes = data.result;
-       
+
       } else {
-       
+
       }
     });
   }
