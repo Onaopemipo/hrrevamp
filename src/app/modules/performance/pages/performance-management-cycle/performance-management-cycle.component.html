@@ -34,7 +34,7 @@
           <label>Review Purpose</label>
           <select class="form-control" [(ngModel)]="editingData.reviewPurposeId">
             <option>--Select Purpose--</option>
-            <option *ngFor="let purp of reviewPurposes" value="purp.name">{{purp.label}}</option>
+            <option *ngFor="let purp of reviewPurposes" [value]="purp.name">{{purp.label}}</option>
           </select>
           <!-- <ngx-multi-select [(idValue)]="editingData.reviewPurposeId" [singleSelection]="true" [items]="reviewPurposes"></ngx-multi-select> -->
         </div>
@@ -52,7 +52,12 @@
 
         <div class="form-group">
           <label>Appraisal Period Date</label>
-          <ngx-date-range [(start)]="editingData.startDate" [(end)]="editingData.endDate"></ngx-date-range>
+          <div style="display: flex; align-items: center;">
+            <ngx-date [(value)]="editingData.startDate" [max]="editingData.endDate"></ngx-date>
+            <span style="margin: 0px 10px;">-</span>
+            <ngx-date [(value)]="editingData.endDate" [min]="editingData.startDate"></ngx-date>
+          </div>
+          <!-- <ngx-date-range [(start)]="editingData.startDate" [(end)]="editingData.endDate"></ngx-date-range> -->
         </div>
 
         <div class="form-group">
@@ -62,7 +67,10 @@
 
         <div class="form-group">
           <label>Period Under Review</label>
-          <ngx-date [(value)]="editingData.periodUnderReview"></ngx-date>
+          <div>
+            <input [value]="periodUnderReview" disabled class="form-control disabled"/>
+          </div>
+          <!-- <ngx-date [(value)]="editingData.periodUnderReview"></ngx-date> -->
         </div>
 
         <div class="form-group">
@@ -71,7 +79,7 @@
             [items]="appraisalTypes"
             [(value)]="editingData.appraisalTypeId"
           ></ngx-radio-button> -->
-          <nb-radio-group [(ngModel)]="editingData.appraisalTypeId">
+          <nb-radio-group [(ngModel)]="editingData.appraisalTypeId" name="appraisalTypeId">
             <nb-radio [value]="item.selectValue" *ngFor="let item of appraisalTypes">{{item.selectLabel}}</nb-radio>
           </nb-radio-group>
         </div>
@@ -97,19 +105,28 @@
           </div>
         </div> -->
 
-        <div class="form-group">
+        <div  class="form-group">
+          <label>Applicable Area</label>
+          <!-- <div> -->
+            <nb-radio-group [(ngModel)]="applicableArea" name="applicableArea">
+              <nb-radio [value]="0">Department</nb-radio>
+              <nb-radio [value]="1">Location</nb-radio>
+            </nb-radio-group>
+          <!-- </div> -->
+        </div>
+        <div class="form-group" *ngIf="applicableArea == 0">
           <label>Department</label>
-          <ngx-multi-select [(idValue)]="editingData.departmentId" [singleSelection]="true" [choice_name]="ChoiceName.departments"></ngx-multi-select>
+          <ngx-multi-select [(multiIdValueChange)]="editingData.departmentId" [singleSelection]="false" [choice_name]="ChoiceName.departments"></ngx-multi-select>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Unit/Division</label>
           <ngx-multi-select [(idValue)]="editingData.unitId" [singleSelection]="true" [choice_name]="ChoiceName.departments"></ngx-multi-select>
-        </div>
+        </div> -->
 
-        <div class="form-group">
+        <div class="form-group" *ngIf="applicableArea == 1">
           <label>Location</label>
-          <ngx-multi-select [(idValue)]="editingData.locationId" [singleSelection]="true" [choice_name]="ChoiceName.locations"></ngx-multi-select>
+          <ngx-multi-select [(multiIdValueChange)]="editingData.locationId" [singleSelection]="false" [choice_name]="ChoiceName.locations"></ngx-multi-select>
         </div>
 
         <div class="form-group">

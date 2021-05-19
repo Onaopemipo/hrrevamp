@@ -26,6 +26,7 @@ enum RATING_TYPE_VALUES{
   styleUrls: ['./performance-management-cycle.component.scss']
 })
 export class PerformanceManagementCycleComponent extends BaseComponent<MyPerformanceCycle, MyPerformanceCycle, MyPerformanceCycle> {
+  applicableArea = 0;
   reviewTypes = Review_Types;
   ChoiceName = ChoiceName;
   filter: MyPerformanceCycle = new MyPerformanceCycle();
@@ -39,9 +40,19 @@ export class PerformanceManagementCycleComponent extends BaseComponent<MyPerform
   getNewEditingData(): MyPerformanceCycle {
     return new MyPerformanceCycle();
   }
-  successMessage: string;
+  successMessage: string = "Cycle saved successfully";
   deleteData(data: MyPerformanceCycle): Observable<any> {
     throw new Error('Method not implemented.');
+  }
+  get periodUnderReview() {
+    if (!this.editingData) {
+      return 0;
+    }
+    if (!this.editingData.startDate || !this.editingData.endDate) {
+      return 0;
+    }
+    // const months = Math.ceil((this.editingData.endDate.getTime() - this.editingData.startDate.getTime()) / (30 * 24 * 60 * 60 * 1000))
+    return (this.editingData.endDate.getFullYear() - this.editingData.startDate.getFullYear()) * 12 + (this.editingData.endDate.getMonth() - this.editingData.startDate.getMonth()) + 1
   }
   topActionButtons = [
     { name: 'ADD__NEW__CYCLE', label: 'Add New Cycle', icon: 'plus', outline: false },

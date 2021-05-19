@@ -40,6 +40,9 @@ export class MultiSelectComponent implements OnInit {
   }
   @Output() idValueChange = new EventEmitter();
 
+  @Input() multiIdValue(val) { }
+  @Output() multiIdValueChange = new EventEmitter<string>();
+
   @Output() valueChange = new EventEmitter();
   @Input() choice_name: ChoiceName = null;
   @Input() singleSelection = true;
@@ -154,6 +157,7 @@ export class MultiSelectComponent implements OnInit {
     } else {
       console.log(idValues);
       this.idValueChange.emit(idValues);
+      this.multiIdValueChange.emit(idValues.join(','))
     }
   }
   onSelectAll(items: any) {

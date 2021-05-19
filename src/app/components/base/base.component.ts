@@ -120,7 +120,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
       this.loadingSave = false;
       if (!data.hasError) {
         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,
-          this.successMessage, 'Ok').subscribe(data => {
+          this.successMessage ? this.successMessage : data.message, 'Ok').subscribe(data => {
             this.reload();
           });
       } else {
