@@ -1,8 +1,15 @@
 <ngx-componentsheader pageName="Performance Review"></ngx-componentsheader>
 
-<div class="main-page-container">
+<ngx-default-content
+*ngIf="loading"
+pageHeader="Performance Review"
+pageDescription=""
+[loading]="loading"
+>
+</ngx-default-content>
+<div class="main-page-container" *ngIf="!loading">
     <div>
-        <!-- <div class="row summary">
+        <div class="row summary">
             <div class="col-sm-4">
                 <div>Employee Name</div>
                 <div>{{employee.fullName}}</div>
@@ -31,10 +38,11 @@
                 <div>Period under review</div>
                 <div>{{kra.periodUnderReview | date}}</div>
             </div>
-        </div> -->
+        </div>
     </div>
 
-<ngx-performance-review [current_kra]="selectedKra" [performanceEmployeeType]="pageType" *ngIf="!current_kra_is_last" (next)="gotoNext()"></ngx-performance-review>
+<ngx-performance-review [current_kra]="selectedKra" [performanceEmployeeType]="pageType" (next)="gotoNext()"></ngx-performance-review>
+{{pageType}}
 <div *ngIf="current_kra_is_last">
   <div style="margin-top: 20px;">
     <div class="linear-form">
@@ -50,7 +58,7 @@
           <label>HR Comment</label>
           <input class="form-control" [(ngModel)]="hrComment"/>
       </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="isHR">
             <label>Recommendations</label>
             <select class="form-control" [(ngModel)]="recommendation">
               <option *ngFor="let rec of recommendations" [value]="rec.id">
