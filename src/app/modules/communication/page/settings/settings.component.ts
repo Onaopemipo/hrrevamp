@@ -1,3 +1,4 @@
+import { title } from 'process';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'app/components/base/base.component';
 import { TopAction } from 'app/components/componentsheader/models';
@@ -53,7 +54,9 @@ export class SettingsComponent extends BaseComponent<MyEmailSetting, MyEmailSett
     buttonValue: 'Create New Settings'
   }
   showModal = false;
-  tableActions: TableAction[] = [];
+  tableActions: TableAction[] = [
+    {name: 'Edit', label: 'Edit'}
+  ];
   formConfig: FormConfig = {
     fields: [
       {name: 'emailUserName', label: 'Username', type: FORM_TYPES.text, validator: {presence: true}},
@@ -70,7 +73,10 @@ export class SettingsComponent extends BaseComponent<MyEmailSetting, MyEmailSett
     {name: 'emailUserName', title: 'User Name'},
     {name: 'emailHost', title: 'Host'}
   ]
-  tableActionClick(event: TableActionEvent<MyEmailSetting>) {}
+  tableActionClick(event: TableActionEvent<MyEmailSetting>) {
+    this.editingData = event.data;
+    this.showModal = true;
+  }
   topActionButtons: TopAction[] = [
     {name: 'Add Setting', label: 'Add Setting', icon: 'plus'}
   ];

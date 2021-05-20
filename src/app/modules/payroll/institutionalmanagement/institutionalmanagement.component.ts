@@ -240,14 +240,17 @@ PayElementFilter, MyPayrollElementModel> {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
       {name: 'element_category_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
-      {name: 'institution_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
+      {name: 'institution_id', label: 'Institution', type: FORM_TYPES.select, choice_name: ChoiceName.payrollInstitutions, singleSelection: true},
+      {name: 'type_id', label: 'Type', type: FORM_TYPES.select, choice_name: ChoiceName.payrollInstitutions, singleSelection: true},
       {name: 'is_reocurring', label: 'Is Reocurring', type: FORM_TYPES.checkbox},
       {name: 'is_tax_deduct', label: 'Is Tax Deduct', type: FORM_TYPES.checkbox},
       {name: 'is_variable', label: 'Is Variable', type: FORM_TYPES.checkbox},
+      {name: 'ratio', label: 'Ratio', type: FORM_TYPES.number},
+      {name: 'tax_percentage', label: 'Tax Percentage', type: FORM_TYPES.number},
+      {name: 'hourly_pay', label: 'Hourly Pay', type: FORM_TYPES.amount},
+      {name: 'start_date', label: 'Start Date', type: FORM_TYPES.date},
+      {name: 'end_date', label: 'End Date', type: FORM_TYPES.date},
       {name: 'amount', label: 'Amount', type: FORM_TYPES.amount},
-      {name: 'amount', label: 'Amount', type: FORM_TYPES.amount},
-      {name: 'amount', label: 'Amount', type: FORM_TYPES.number},
-      {name: 'amount', label: 'Amount', type: FORM_TYPES.number},
       // {name: 'range', label: 'Date', type: FORM_TYPES.date_range,}
     ]
   };

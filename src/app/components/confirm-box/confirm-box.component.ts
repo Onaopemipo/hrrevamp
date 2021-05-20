@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmBoxComponent implements OnInit {
 
+  a = {
+    b: 1,
+    c: 2
+  };
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.a.b);
   }
 
 }

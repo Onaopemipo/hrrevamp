@@ -1,3 +1,4 @@
+import { ThemeModule } from 'app/@theme/theme.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from 'app/components/components.module';
@@ -12,15 +13,17 @@ import { CommunicationServiceProxy } from 'app/_services/service-proxies';
 import {
   NbIconModule,
 } from '@nebular/theme';
+import { CommunicationComponent } from './communication/communication.component';
 
 
 @NgModule({
-  declarations: [EmailLogComponent, TemplatesComponent, SettingsComponent, MailDetailComponent],
+  declarations: [EmailLogComponent, TemplatesComponent, SettingsComponent, MailDetailComponent, CommunicationComponent],
   imports: [
     CommonModule,
     ComponentsModule,
     CommunicationRoutingModule,
-    NbIconModule
+    NbIconModule,
+    ThemeModule,
   ],
   providers: [
     ApiService,

@@ -17,6 +17,14 @@ export class MyAsset extends AssetDTO implements IStatus{
   getStatusColor(): MyColor {
     return new MyColor(200, 200, 200);
   }
+
+  toManage() {
+    return this;
+  }
+
+  public getFake() {
+    return this;
+  }
 }
 
 @Injectable({
@@ -87,7 +95,8 @@ export class AssetListService  extends AssetBaseService<MyAsset, any> {
       "dateCreated": new Date(),
       "isDeleted": true,
       "isActive": true
-    }
+    },
+    ...data
     }));
   }
   delete(id: number) {

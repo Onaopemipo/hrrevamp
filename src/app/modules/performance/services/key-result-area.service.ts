@@ -1,7 +1,6 @@
-import { KraAssignDTO } from './../../../_services/service-proxies';
 import { Injectable } from '@angular/core';
 import { CrudService, ListResult } from 'app/_services/base-api.service';
-import { AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, ManageSectionDTO, SectionDTO } from 'app/_services/service-proxies';
+import { AssignKRAServiceProxy, CreateKeyResultAreaServiceProxy, FetchKeyResultAreaServiceProxy, FetchKeyResultAreasServiceProxy, KraAssignDTO, ManageSectionDTO, SectionDTO } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
