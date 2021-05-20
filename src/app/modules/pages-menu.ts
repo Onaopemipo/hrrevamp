@@ -422,27 +422,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Institution Management',
-        link: 'payrpll/institutionalmanagement'
+        link: '/payroll/institutionalmanagement'
       },
       {
         title: 'Pay Elements',
-        link:'/'
+        link:'/payroll/payelement'
       },
       {
         title: 'Pay Scale',
-        link:'/'
+        link:'/payroll/payscaletable'
       },
       {
         title: 'Quick Payroll',
-        link:'/'
+        link:'/payroll/quickpayroll'
       },
       {
         title: 'Payroll Run Log',
-        link:'/'
+        link:'/payroll/runlog'
       },
       {
         title: 'Report',
-        link:'/'
+        link:'/payroll/report'
       },
     ]
   },

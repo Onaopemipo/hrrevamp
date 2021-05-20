@@ -101,7 +101,7 @@ export class TablecomponentComponent implements OnInit {
   }
 
   customActionClicked(col, data) {
-    // this.popover.hide();
+    this.popover.hide();
     this.actionClick.emit({
       name: col.name,
       data,
