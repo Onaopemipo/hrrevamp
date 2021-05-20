@@ -1,6 +1,5 @@
-
-  <ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
-  </ngx-componentsheader>
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+</ngx-componentsheader>
 
 
 
@@ -10,36 +9,37 @@
     <nb-card-header>
       <div style="display: flex;flex-direction: column;">
         <span> Iniate <span *ngIf="pageName != 'Retirement'">Involuntary exit</span>
-        <span *ngIf="pageName == 'Retirement'">Retirement request</span> </span>
+          <span *ngIf="pageName == 'Retirement'">Retirement request</span> </span>
         <small><span *ngIf="pageName != 'Retirement'">Let's commence Exit process</span>
           <span *ngIf="pageName == 'Retirement'">Let's commence Retirement process</span> </small>
       </div>
 
-   
-  </nb-card-header>
+
+    </nb-card-header>
     <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
 
 
 
 
-  <div class="container" style="margin-top: 3rem;">
+    <div class="container" style="margin-top: 3rem;">
 
       <form id="exitForm" name="exitForm" #exitForm="ngForm">
- 
+
         <div class="form-group row">
-          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For 
+          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Reason For
             <span *ngIf="pageName != 'Retirement'">Termination</span>
             <span *ngIf="pageName == 'Retirement'">Retirement</span> </label>
           <div class="col-sm-8">
-      <select class="form-control" fullWidth name="retirementTypeId" id="retirementTypeId" #retirementTypeId="ngModel" [(ngModel)]="RetirmentBody.retirementTypeId">
-        <option value="undefined">--Select Reetirement Type--</option>
-        <option *ngFor="let reType of allRetirementType" [value]="reType.id">{{reType.name}}</option>
-      </select>
-      <div *ngIf="retirementTypeId.invalid && (retirementTypeId.dirty || retirementTypeId.touched)" class="error">
-        <div *ngIf="retirementTypeId.errors.required">
-          Exit Reason is required
-        </div>
-    </div>
+            <select class="form-control" fullWidth name="retirementTypeId" id="retirementTypeId"
+              #retirementTypeId="ngModel" [(ngModel)]="RetirmentBody.retirementTypeId">
+              <option value="undefined">--Select Reetirement Type--</option>
+              <option *ngFor="let reType of allRetirementType" [value]="reType.id">{{reType.name}}</option>
+            </select>
+            <div *ngIf="retirementTypeId.invalid && (retirementTypeId.dirty || retirementTypeId.touched)" class="error">
+              <div *ngIf="retirementTypeId.errors.required">
+                Exit Reason is required
+              </div>
+            </div>
           </div>
         </div>
 
@@ -47,10 +47,10 @@
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Sub-Reason</label>
           <div class="col-sm-8">
-            <input name="subReason" id="subReason" #subReason="ngModel" [(ngModel)]="RetirmentBody.subReason" type="text" nbInput fullWidth placeholder="Enter Sub-Reason"
-             >
+            <input name="subReason" id="subReason" #subReason="ngModel" [(ngModel)]="RetirmentBody.subReason"
+              type="text" nbInput fullWidth placeholder="Enter Sub-Reason">
             <div>
-       
+
             </div>
           </div>
         </div>
@@ -58,19 +58,23 @@
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Source of initiation</label>
           <div class="col-sm-8">
-            <input name="sourceofInitiation" id="sourceofInitiation" #sourceofInitiation="ngModel" [(ngModel)]="RetirmentBody.sourceofInitiation" type="text" nbInput fullWidth placeholder="Enter Source of initiation">
+            <input name="sourceofInitiation" id="sourceofInitiation" #sourceofInitiation="ngModel"
+              [(ngModel)]="RetirmentBody.sourceofInitiation" type="text" nbInput fullWidth
+              placeholder="Enter Source of initiation">
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Date of Exit</label>
           <div class="col-sm-8">
-            <ngx-date [(value)]='RetirmentBody.effectiveDate'   #effectiveDate name="effectiveDate" id="effectiveDate"></ngx-date>
+            <ngx-date [(value)]='RetirmentBody.effectiveDate' #effectiveDate name="effectiveDate" id="effectiveDate">
+            </ngx-date>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Exit Choice</label>
           <div class="col-sm-8">
-            <nb-radio-group  name="exitChoice" id="exitChoice" #exitChoice="ngModel" [(ngModel)]="RetirmentBody.exitChoice" class="d-flex">
+            <nb-radio-group name="exitChoice" id="exitChoice" #exitChoice="ngModel"
+              [(ngModel)]="RetirmentBody.exitChoice" class="d-flex">
               <nb-radio [value]="1">Forgo Salary</nb-radio>
               <nb-radio [value]="2">Spend 30 Days notice period</nb-radio>
             </nb-radio-group>
@@ -85,10 +89,12 @@
               <nb-radio [value]="2">Individual Upload</nb-radio>
 
             </nb-radio-group> -->
-            <ngx-employee-master-search  (masterSubmitted)="getSelectedEmployee($event)" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+            <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event)"
+              [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader"
+              [addbtnText]="addbtnText"></ngx-employee-master-search>
           </div>
         </div>
-         <!-- <div class="form-group row">
+        <!-- <div class="form-group row">
           <div class="col-md-4" style="display: flex;align-items:center">
             <label for="" *ngIf="uploadOption == 1">Upload Employee CSV File</label>
             <label for="" *ngIf="uploadOption == 2">Employee Master</label>
@@ -111,7 +117,7 @@
           </div>
         </div> -->
         <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 5px;"></div>
-<div style="padding:5px"></div>
+        <div style="padding:5px"></div>
         <div class="form-group row">
           <div class="col-md-4" style="display: flex;align-items:center">
             <label for="">Upload Supporting Document</label>
@@ -119,7 +125,7 @@
           <div class="col-md-8 col-xxl-8 ">
             <div style="display: flex;flex-direction: row;">
               <div>
-                <ngx-file-upload (valueChange)="selectedFile($event,'Supporting Document')"  class="form-control">
+                <ngx-file-upload (valueChange)="selectedFile($event,'Supporting Document')" class="form-control">
                 </ngx-file-upload>
               </div>
               <div style="padding-left: 10px;display: flex;align-items: center;flex: auto;">
@@ -136,8 +142,9 @@
           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Additional comment</label>
           <div class="col-sm-8">
 
-            <textarea id="comment" name="comment" [(ngModel)]="RetirmentBody.comment" #comment="ngModel" rows="5" nbInput fullWidth placeholder="Enter Additional comment here"
-               name="AdditionalComment" required></textarea>
+            <textarea id="comment" name="comment" [(ngModel)]="RetirmentBody.comment" #comment="ngModel" rows="5"
+              nbInput fullWidth placeholder="Enter Additional comment here" name="AdditionalComment"
+              required></textarea>
 
           </div>
 
@@ -147,16 +154,16 @@
 
           <div class="offset-sm-4 col-sm-8" style=" display: flex; margin-top: 3rem;margin-bottom: 2rem;">
 
-            <ngx-loadable-button [loading]="loading" [disabled]="exitForm.invalid" (click)="submitRetirement()" >
+            <ngx-loadable-button [loading]="loading" [disabled]="exitForm.invalid" (click)="submitRetirement()">
               Submit
-            </ngx-loadable-button>  
+            </ngx-loadable-button>
           </div>
 
         </div>
       </form>
 
 
-  </div>
-  
-</nb-card-body>
+    </div>
+
+  </nb-card-body>
 </nb-card>

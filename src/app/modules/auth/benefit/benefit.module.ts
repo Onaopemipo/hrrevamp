@@ -11,7 +11,7 @@ import { CreateBenefitComponent } from './pages/create-benefit/create-benefit.co
 import { BenefitViewComponent } from './pages/benefit-view/benefit-view.component';
 import { EligibilityListComponent } from './pages/eligibility-list/eligibility-list.component';
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
-import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/service-proxies'
+import{ NbRadioModule} from '@nebular/theme'
 import { AddBenefitComponent } from './add-benefit/add-benefit.component';
 import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
 
@@ -19,10 +19,11 @@ import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {
-  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy, AddUpdateBenefitEligibilityServiceProxy,FetchBenefitEligibilityServiceProxy, AddUpdateVendorPlanServiceProxy,AddUpdateBenefitTypeServiceProxy,AddUpdateBenefitServiceProxy,
-  CommonServiceProxy, GetAllVendorServiceProxy,GetAllVendorPlanServiceProxy ,FetchAllEligibilitiesServiceProxy,DeleteBenefitEligibilityServiceProxy , GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy,GetVendorPlanByVendorIdServiceProxy
-} from '../../_services/service-proxies';
+  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy,FetchBenefitEligibilitiesServiceProxy, DeleteBenefitEligibilityServiceProxy,AddUpdateBenefitEligibilityServiceProxy,FetchBenefitEligibilityServiceProxy, AddUpdateVendorPlanServiceProxy,AddUpdateBenefitTypeServiceProxy,AddUpdateBenefitServiceProxy,
+  CommonServiceProxy, GetAllVendorServiceProxy,GetAllVendorPlanServiceProxy ,FetchAllEligibilitiesServiceProxy , GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy,GetVendorPlanByVendorIdServiceProxy
+  ,FetchEmployeeCoverageBenefitServiceProxy} from '../../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+
 
 
 @NgModule({
@@ -37,13 +38,15 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     ManageEmployeeComponent,
     VendorPlanComponent,
     AddBenefitComponent,
-    EligibilityviewComponent
+    EligibilityviewComponent,
+
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     BenefitRoutingModule,
     ThemeModule,
+    NbRadioModule
   ],
   providers: [
     {
@@ -66,7 +69,9 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     AddUpdateBenefitEligibilityServiceProxy,
     FetchAllEligibilitiesServiceProxy,
     DeleteBenefitEligibilityServiceProxy ,
-    FetchBenefitEligibilityServiceProxy
+    FetchBenefitEligibilityServiceProxy,
+    FetchBenefitEligibilitiesServiceProxy,
+    DeleteBenefitEligibilityServiceProxy
 
   ]
 })

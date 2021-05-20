@@ -21,11 +21,13 @@ import {
   ManageBenefitTypeDTO,
   GetAllVendorPlanServiceProxy,
   VendorPlan,
-  AddUpdateBenefitServiceProxy
+  AddUpdateBenefitServiceProxy,
+  FetchBenefitEligibilitiesServiceProxy,
+
 } from "../../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
-import { J } from "@angular/cdk/keycodes";
+// import { J } from "@angular/cdk/keycodes";
 
 @Component({
   selector: "ngx-add-benefit",
@@ -33,8 +35,8 @@ import { J } from "@angular/cdk/keycodes";
   styleUrls: ["./add-benefit.component.scss"],
 })
 export class AddBenefitComponent implements OnInit {
-
-  selectedOption:string = "1"
+  Alleligibilities: IDTextViewModel[] = [];
+  selectedOption: string = "1";
   AllVendors: VendorDTO[];
   AllEmployee: EmployeeDTO[];
   searchText?: string = "a";
@@ -51,7 +53,7 @@ export class AddBenefitComponent implements OnInit {
   Vendorid: any = 5;
   AllPlans: VendorPlan[] = [];
   selectionHeader: string = "Select Employee";
-  addbtnText:string= "Add Employee"
+  addbtnText: string = "Add Employee";
   topActionButtons = [
     {
       name: "add_leave_year",
@@ -78,14 +80,15 @@ export class AddBenefitComponent implements OnInit {
     private AddUpdateBenefitTypeServiceProxy: AddUpdateBenefitTypeServiceProxy,
     private alertservice: AlertserviceService,
     private GetAllVendorPlanServiceProxy: GetAllVendorPlanServiceProxy,
-    private AddUpdateBenefitServiceProxy:AddUpdateBenefitServiceProxy
+    private AddUpdateBenefitServiceProxy: AddUpdateBenefitServiceProxy,
+    private FetchBenefitEligibilitiesServiceProxy: FetchBenefitEligibilitiesServiceProxy
   ) {}
 
   ngOnInit(): void {
     this.getAllVendor();
     this.getPlans();
-    this.benefit.vendorId;
     this.getAllPlans();
+    this.getAllEligibilities();
   }
   //Gey ALL vendors
   async getAllVendor() {
@@ -102,10 +105,18 @@ export class AddBenefitComponent implements OnInit {
       console.log("ids", this.Vendorid);
     }
   }
-   get disabled(){
-     if(this.benefit.name && this.benefit.vendorId && this.benefit.vendorPlanId && this.benefit.employees && this.benefit.description) return true;
-     return false
-   }
+
+  get disabled() {
+    if (
+      this.benefit.name &&
+      this.benefit.vendorId &&
+      this.benefit.vendorPlanId &&
+      this.benefit.employees &&
+      this.benefit.description
+    )
+      return true;
+    return false;
+  }
 
   // async getAllEmployee() {
   //   const data = await this.FetchAllEmployeesServiceProxy.getAllEmployees(
@@ -133,17 +144,17 @@ export class AddBenefitComponent implements OnInit {
     console.log("employee", this.employees);
   }
 
-  getSelectedEmployee(event,selectType) {
-    if(selectType == 'employee' ){
-   event.forEach(eve => {
-     var id = eve.id
-     var idString = id.toString();
-     this.benefit.employees =idString
-   })
-   
-   console.log( 'benben',this.benefit.employees)
+  getSelectedEmployee(event, selectType) {
+    if (selectType == "employee") {
+      event.forEach((eve) => {
+        var id = eve.id;
+        var idString = id.toString();
+        this.benefit.employees = idString;
+      });
+
+      console.log("benben", this.benefit.employees);
     }
- }
+  }
   //get all PLans
 
   async getAllPlans() {
@@ -156,7 +167,6 @@ export class AddBenefitComponent implements OnInit {
   }
   //get plans by vendor id
   async getPlans() {
-    
     const data =
       await this.GetVendorPlanByVendorIdServiceProxy.getVendorPlanByVendorId(
         this.Vendorid
@@ -190,16 +200,15 @@ export class AddBenefitComponent implements OnInit {
     }
   }
 
-
-  filtertabConf(){
-
-  }
+  filtertabConf() {}
 
   //Create Benefit
 
-   async SubmitBenefit(){
-     this.submitbtnPressed= true
-    const data = await this. AddUpdateBenefitServiceProxy.addUpdateBenefit(this.benefit).toPromise();
+  async SubmitBenefit() {
+    this.submitbtnPressed = true;
+    const data = await this.AddUpdateBenefitServiceProxy.addUpdateBenefit(
+      this.benefit
+    ).toPromise();
     if (!data.hasError) {
       this.alertservice.openModalAlert(
         this.alertservice.ALERT_TYPES.SUCCESS,
@@ -215,18 +224,28 @@ export class AddBenefitComponent implements OnInit {
         "OK"
       );
     }
-    this.submitbtnPressed = false
+    this.submitbtnPressed = false;
   }
- 
-  handleVendor(vendorId){
 
-    this.GetVendorPlanByVendorIdServiceProxy.getVendorPlanByVendorId(vendorId).toPromise().then(
-      data => { 
-        if(!data.hasError){
+  handleVendor(vendorId) {
+    this.GetVendorPlanByVendorIdServiceProxy.getVendorPlanByVendorId(vendorId)
+      .toPromise()
+      .then((data) => {
+        if (!data.hasError) {
           this.plans = data.result;
-      console.log("plan", this.plans);
+          console.log("plan", this.plans);
         }
-      }
-    ).catch(error => error.message)
+      })
+      .catch((error) => error.message);
+  }
+
+  //get all eligibilities
+  async getAllEligibilities() {
+    const data =
+      await this.FetchBenefitEligibilitiesServiceProxy.getBenefitEligibilities().toPromise();
+    if (!data.hasError) {
+      this.Alleligibilities = data.result;
+      console.log("alleligiblioooo", this.Alleligibilities);
+    }
   }
 }

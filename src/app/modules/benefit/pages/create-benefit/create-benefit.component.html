@@ -197,7 +197,7 @@
 
     <ngx-side-modal [(show)]='showPlan' style="width: 500px;">
       <div modal-header style="font-size: larger; font-weight: bold;">
-        <span></span>
+        <span>Create Vendor Plan</span>
       </div>
       <div modal-body>
 
@@ -255,14 +255,30 @@
 
             </div>
 
-            <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+            <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;  display: flex;flex-direction: row;">
               <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
                   class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
               <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
                 (click)="SubmitPlan()">Submit</button>
 
+                <div style="padding-left: 15px;">
+                  <button nbButton outline status="primary" (click)="showPlan = false"
+                    class="d-flex column" style="background-color: white;">Discard</button>
+                </div>
 
             </div>
+
+<!-- 
+            <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+              <ngx-loadable-button [loading]="loading" (click)="applyForLeave()">
+                Submit
+              </ngx-loadable-button>
+              <div style="padding-left: 15px;">
+                <button nbButton outline status="primary" (click)="showPlan = false"
+                  class="d-flex column" style="background-color: white;">Discard</button>
+              </div>
+            </div>
+   -->
 
           </div>
         </form>

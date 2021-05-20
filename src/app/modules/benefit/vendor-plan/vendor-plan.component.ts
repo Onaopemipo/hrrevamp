@@ -76,7 +76,7 @@ export class VendorPlanComponent implements OnInit {
     },
   ];
   onClick() {
-    alert("helllo");
+  
   }
   constructor(
     private AddUpdateVendorServiceProx: AddUpdateVendorServiceProxy,
@@ -114,7 +114,7 @@ export class VendorPlanComponent implements OnInit {
   }
 
   AddPlan() {
-    alert("hello world");
+  
     this.showPlan = true;
   }
 
@@ -242,7 +242,7 @@ export class VendorPlanComponent implements OnInit {
 
   async getSingleVendor() {
     const data = await this.GetVendorByIdServiceProxy.getVendorById(
-      4
+      this.vendorId
     ).toPromise();
     if (!data.hasError) {
       this.singleVendor = data.result;
@@ -296,12 +296,12 @@ export class VendorPlanComponent implements OnInit {
     });
 
 
-    const data = await this.DeleteVendorServiceProxy.deleteVendor(this.vendorId).toPromise()
-    if(!data.hasError){
-      this.alertservice.openModalAlert(
-        this.alertservice.ALERT_TYPES.SUCCESS,
-        data.message,
-        "OK")
-    }
+    // const data = await this.DeleteVendorServiceProxy.deleteVendor(this.vendorId).toPromise()
+    // if(!data.hasError){
+    //   this.alertservice.openModalAlert(
+    //     this.alertservice.ALERT_TYPES.SUCCESS,
+    //     data.message,
+    //     "OK")
+    // }
   }
 }

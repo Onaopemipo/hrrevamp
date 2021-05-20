@@ -37,7 +37,7 @@ enum TABLE_ACTION {
   styleUrls: ["./eligibility-list.component.scss"],
 })
 export class EligibilityListComponent extends MainBaseComponent {
-  status?: number = 0;
+  status?: number = 2;
   pageSize?: number = 1000;
   pageNumber?: number = 1;
   showPlan: boolean = false;

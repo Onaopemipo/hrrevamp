@@ -10,6 +10,7 @@
         <div class="main-page-container">
             <h4>Initiate New Benefit</h4>
             <p>Let's help create a new benefit plan</p>
+
             <form action="" #EventForm="ngForm" name="EventForm" id="EventForm">
                 <hr />
                 <div class="form-group">
@@ -70,40 +71,20 @@
                     <div>
                         <label for=""> Add Employee</label>
                     </div>
+                    <div style="display: flex; flex-direction: row;">
+                        <nb-radio-group name="selected" id="selected" #selected="ngModel" [(ngModel)]="selectedOption"
+                            class="d-flex">
+                            <nb-radio value="1">Individual</nb-radio>
+                            <nb-radio value="2">Bulk upload</nb-radio>
+                            <nb-radio value="3">Eligibility list</nb-radio>
+                        </nb-radio-group>
+                    </div>
 
-                    <nb-radio-group [(value)]="selectedOption">
-                        <nb-radio value="1">Individual</nb-radio>
-                        <nb-radio value="2">Bulk upload</nb-radio>
-                        <nb-radio value="3">Eligibility list</nb-radio>
-                    </nb-radio-group>
                 </div>
 
 
-                <!-- <div class="form-group">
-                    <label>Upload Employees</label>
-                    <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']"
-                        [horizontal]="true">
-                    </ngx-radio-button>
-                </div> -->
-
-
-
-                <div class="form-group">
-                    <label>Upload Employee CSV file</label>
-                    <ngx-file-upload></ngx-file-upload>
-                </div>
-
-                <div class="form-group">
-                    <label>Benefit Icon</label>
-                    <ngx-file-upload></ngx-file-upload>
-                    <span>Icon should be in JPEG format</span>
-                </div>
-                <div *ngIf="selectedOption === 1">
+                <div *ngIf="selectedOption == '1'">
                     <div class="form-group">
-                        <!-- <label>Employee</label>
-                        <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
-                        </ngx-employee-master-search> -->
-
                         <div class="col-sm-6">
                             <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')"
                                 [allowmultipleselection]="true" [selectionHeader]="selectionHeader"
@@ -112,22 +93,109 @@
                     </div>
                 </div>
 
+                <div *ngIf="selectedOption == '2'">
+                    <div class="form-group">
+                        <label>Upload Employee CSV file</label>
+                        <ngx-file-upload></ngx-file-upload>
+                    </div>
 
+                </div>
 
+                <div *ngIf="selectedOption == '3'">
+                    <div class="form-group">
+                        <label>eligibility</label>
+                        <select placeholder="Select Gender" class="form-control" name="bucketId" id="bucketId"
+                            #bucketId="ngModel" [(ngModel)]=" benefit.bucketId">
+                            <option value="">--Select eligibility---</option>
+                            <option *ngFor="let v of   Alleligibilities" [value]="v.id">{{v.text}}</option>
+                        </select>
 
+                        <div *ngIf="bucketId.invalid && (bucketId.dirty || bucketId.touched)" class="error">
+                            <div *ngIf="bucketId.errors.required">eligibility is required</div>
+                        </div>
+
+                    </div>
+
+                </div>
 
                 <div class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
                     <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
                             class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
                     <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
                         [disabled]="!disabled" (click)="SubmitBenefit()">Submit</button>
+                </div>
+
+            </form>
 
 
+        </div>
+
+
+
+        <h1> hello</h1>
+    </nb-card-body>
+
+
+    <ngx-side-modal [(show)]='showPlan' style="width: 500px;">
+        <div modal-header style="font-size: larger; font-weight: bold;">
+            <span></span>
+        </div>
+        <div modal-body>
+
+            <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+                <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+      margin-left: 10px;">create new events</h6> -->
+                <div style="margin: 20px;">
+                    <div class="form-group">
+                        <label for="title">Type of Benefit</label>
+                        <input type="text" class="form-control" placeholder="Enter name of plan" id="name"
+                            #name="ngModel" name="name" [(ngModel)]=" AddBenefit.name" required>
+
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                            <div *ngIf="name.errors.required">name is required</div>
+                        </div>
+
+                    </div>
                 </div>
 
 
 
-                <!-- <div class="form-group">
+
+
+            </form>
+
+        </div>
+
+
+        <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+            <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                    class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+            <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
+                (click)="SubmitBenefitType()">Submit</button>
+
+
+        </div>
+    </ngx-side-modal>
+</nb-card>
+
+
+
+
+<!-- <div class="form-group">
+                    <label>Upload Employees</label>
+                    <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']"
+                        [horizontal]="true">
+                    </ngx-radio-button>
+                    [(value)]="selectedOption"   name="exitChoice"
+                </div> -->
+
+<!-- <div class="form-group">
+                    
+                     <div class="form-group">
+                    <label>Benefit Icon</label>
+                    <ngx-file-upload></ngx-file-upload>
+                    <span>Icon should be in JPEG format</span>
+                </div>
                     <label>Employee</label>
                     
                     <select placeholder="Select Employee" class="form-control" name="employees" id="employees"
@@ -141,113 +209,77 @@
                         </div>
                 </div> -->
 
+<!-- <div *ngIf="selectedOption == '1'">
+                    <div class="form-group">
+                       
 
-            </form>
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!-- 
-        <div style="display: flex;flex-wrap: wrap;">
-            <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-                <h4>Initiate New Benefit</h4>
-                <p>Let's help create a new benefit plan</p>
-            </div>
-            <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-                <h4>Initiate New Benefit</h4>
-                <p>Let's help create a new benefit plan</p>
-            </div>
-            <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-                <h4>Initiate New Benefit</h4>
-                <p>Let's help create a new benefit plan</p>
-            </div>
-            <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
-                <h4>Initiate New Benefit</h4>
-                <p>Let's help create a new benefit plan</p>
-            </div>
-        
-         <div class="form-group">
-              <label>Upload Employees</label>
-              <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']" [horizontal]="true">
-              </ngx-radio-button>
-            </div>
-        
-            <div class="form-group">
-              <label>Employee(s)</label>
-              <ngx-employee-master-search></ngx-employee-master-search>
-            </div>
-        
-            <div class="form-group">
-              <label>Upload Employee CSV file</label>
-              <ngx-file-upload></ngx-file-upload>
-            </div> 
-        
-            <div class="form-group">
-                    <label>Benefit Icon</label>
-                     <ngx-file-upload></ngx-file-upload>
-                <span>Icon should be in JPEG format</span>
-            </div>
-             
-                   
-                
-        </div>   -->
-
-
-
-
-
-        <ngx-side-modal [(show)]='showPlan' style="width: 500px;">
-            <div modal-header style="font-size: larger; font-weight: bold;">
-                <span></span>
-            </div>
-            <div modal-body>
-
-                <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
-                    <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
-                  margin-left: 10px;">create new events</h6> -->
-                    <div style="margin: 20px;">
-                        <div class="form-group">
-                            <label for="title">Type of Benefit</label>
-                            <input type="text" class="form-control" placeholder="Enter name of plan" id="name"
-                                #name="ngModel" name="name" [(ngModel)]="  AddBenefit.name" required>
-
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-                                <div *ngIf="name.errors.required">name is required</div>
-                            </div>
-
+                        <div class="col-sm-6">
+                            <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')"
+                                [allowmultipleselection]="true" [selectionHeader]="selectionHeader"
+                                [addbtnText]="addbtnText"></ngx-employee-master-search>
                         </div>
                     </div>
+                </div> -->
+
+<!-- <label>Employee</label>
+                        <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
+                        </ngx-employee-master-search> -->
 
 
 
 
 
-                </form>
-
-            </div>
 
 
-            <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
-                <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
-                        class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-                <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
-                    (click)="SubmitBenefitType()">Submit</button>
 
 
-            </div>
-
-        </ngx-side-modal>
 
 
-    </nb-card-body>
-</nb-card>
+
+<!-- 
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
+                        <h4>Initiate New Benefit</h4>
+                        <p>Let's help create a new benefit plan</p>
+                    </div>
+                
+                 <div class="form-group">
+                      <label>Upload Employees</label>
+                      <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']" [horizontal]="true">
+                      </ngx-radio-button>
+                    </div>
+                
+                    <div class="form-group">
+                      <label>Employee(s)</label>
+                      <ngx-employee-master-search></ngx-employee-master-search>
+                    </div>
+                
+                    <div class="form-group">
+                      <label>Upload Employee CSV file</label>
+                      <ngx-file-upload></ngx-file-upload>
+                    </div> 
+                
+                    <div class="form-group">
+                            <label>Benefit Icon</label>
+                             <ngx-file-upload></ngx-file-upload>
+                        <span>Icon should be in JPEG format</span>
+                    </div>
+                     
+                           
+                        
+                </div>   -->
 
 <!-- 
 <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">

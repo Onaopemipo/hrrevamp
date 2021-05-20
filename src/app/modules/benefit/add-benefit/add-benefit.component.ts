@@ -9,6 +9,7 @@ import {
   AddUpdateVendorPlanServiceProxy,
   ManageVendorPlanDto,
   GetVendorByIdServiceProxy,
+  FetchBenefitEligibilitiesServiceProxy,
   VendorDTO,
   EmployeeDTO,
   CommonServiceProxy,
@@ -26,6 +27,7 @@ import {
 import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import { J } from "@angular/cdk/keycodes";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "ngx-add-benefit",
@@ -33,7 +35,7 @@ import { J } from "@angular/cdk/keycodes";
   styleUrls: ["./add-benefit.component.scss"],
 })
 export class AddBenefitComponent implements OnInit {
-
+  allEligibilities:  IDTextViewModel[]=[]
   selectedOption=1
   AllVendors: VendorDTO[];
   AllEmployee: EmployeeDTO[];
@@ -60,7 +62,9 @@ export class AddBenefitComponent implements OnInit {
       outline: true,
     },
   ];
-
+  back(){
+    this.route.navigateByUrl('/benefits')
+  }
   modal(event) {
     if (event == "add_leave_year") {
       this.showPlan = !this.showPlan;
@@ -78,14 +82,16 @@ export class AddBenefitComponent implements OnInit {
     private AddUpdateBenefitTypeServiceProxy: AddUpdateBenefitTypeServiceProxy,
     private alertservice: AlertserviceService,
     private GetAllVendorPlanServiceProxy: GetAllVendorPlanServiceProxy,
-    private AddUpdateBenefitServiceProxy:AddUpdateBenefitServiceProxy
+    private AddUpdateBenefitServiceProxy:AddUpdateBenefitServiceProxy,
+    private FetchBenefitEligibilitiesServiceProxy: FetchBenefitEligibilitiesServiceProxy,
+    private route : Router
   ) {}
 
   ngOnInit(): void {
     this.getAllVendor();
     this.getPlans();
-    this.benefit.vendorId;
     this.getAllPlans();
+    this.getAllEligibilities()
   }
   //Gey ALL vendors
   async getAllVendor() {
@@ -229,4 +235,15 @@ export class AddBenefitComponent implements OnInit {
       }
     ).catch(error => error.message)
   }
+
+  //getAllELIGIBILITIES FOR DROPDOWN
+
+ async getAllEligibilities(){
+  const data = await this.FetchBenefitEligibilitiesServiceProxy.getBenefitEligibilities().toPromise();
+  if(!data.hasError){
+    this.allEligibilities = data.result
+    console.log('i don tire ell',this.allEligibilities)
+  }
+  }
+
 }

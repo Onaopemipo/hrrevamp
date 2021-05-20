@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
+import { Router } from '@angular/router';
 
 
 enum TABS { NOT__COMPLETED, COMPLETED, }
@@ -25,4 +26,13 @@ export class ManageEmployeeComponent extends MainBaseComponent {
     { name: 'date', title: 'Position' },
     { name: 'date', title: 'Job Type' }
   ];
+
+  constructor(private route: Router){
+    super()
+  }
+
+
+back(){
+  this.route.navigateByUrl('/benefits')
+}
 }

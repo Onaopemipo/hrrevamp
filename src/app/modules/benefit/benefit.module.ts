@@ -19,10 +19,11 @@ import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {
-  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy, AddUpdateBenefitEligibilityServiceProxy,FetchBenefitEligibilityServiceProxy, AddUpdateVendorPlanServiceProxy,AddUpdateBenefitTypeServiceProxy,AddUpdateBenefitServiceProxy,
-  CommonServiceProxy, GetAllVendorServiceProxy,GetAllVendorPlanServiceProxy ,FetchAllEligibilitiesServiceProxy,DeleteBenefitEligibilityServiceProxy , GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy,GetVendorPlanByVendorIdServiceProxy
+  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy,FetchAllBenefitsServiceProxy,FetchBenefitEligibilitiesServiceProxy, AddUpdateBenefitEligibilityServiceProxy,FetchBenefitEligibilityServiceProxy, AddUpdateVendorPlanServiceProxy,AddUpdateBenefitTypeServiceProxy,AddUpdateBenefitServiceProxy,
+  CommonServiceProxy, GetAllVendorServiceProxy,GetAllVendorPlanServiceProxy ,DeleteBenefitServiceProxy,FetchAllEligibilitiesServiceProxy,DeleteBenefitEligibilityServiceProxy , GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy,GetVendorPlanByVendorIdServiceProxy
 } from '../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+import { NbRadioModule } from '@nebular/theme';
 
 
 @NgModule({
@@ -37,13 +38,15 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     ManageEmployeeComponent,
     VendorPlanComponent,
     AddBenefitComponent,
-    EligibilityviewComponent
+    EligibilityviewComponent,
+    
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     BenefitRoutingModule,
     ThemeModule,
+    NbRadioModule
   ],
   providers: [
     {
@@ -66,7 +69,13 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     AddUpdateBenefitEligibilityServiceProxy,
     FetchAllEligibilitiesServiceProxy,
     DeleteBenefitEligibilityServiceProxy ,
-    FetchBenefitEligibilityServiceProxy
+    FetchBenefitEligibilityServiceProxy,
+    FetchBenefitEligibilitiesServiceProxy,
+    FetchAllBenefitsServiceProxy,
+    GetAllVendorPlanServiceProxy,
+    DeleteBenefitEligibilityServiceProxy ,
+    DeleteBenefitServiceProxy
+    
 
   ]
 })

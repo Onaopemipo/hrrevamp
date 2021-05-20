@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IRequiredButton } from 'app/components/componentsheader/componentsheader.component';
-import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../../_services/service-proxies'
+import { FetchEmployeeCoverageBenefitServiceProxy } from '../../../../../_services/service-proxies';
+
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
