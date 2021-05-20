@@ -8,6 +8,7 @@ import { ExpenseReportComponent } from './expense-report/expense-report.componen
 import { ExpenseGroupComponent } from './expense-group/expense-group.component';
 import { ExpenseProjectActivityComponent } from './expense-project-activity/expense-project-activity.component';
 import { ExpenseProjectComponent } from './expense-project/expense-project.component';
+import { ExpenseSubTypeComponent } from './expense-sub-type/expense-sub-type.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'type',
         component: ExpenseTypeComponent,
+      },
+      {
+        path: 'type/:id/subtypes',
+        component: ExpenseSubTypeComponent,
       },
       {
         path: 'project',

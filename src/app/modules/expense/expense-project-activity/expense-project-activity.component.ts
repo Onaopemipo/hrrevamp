@@ -23,7 +23,7 @@ export class ExpenseProjectActivityComponent extends AssetBaseComponent<any, any
   ) {
     super(confirmBoxService);
   }
-  objectName = 'Expense Group';
+  objectName = 'Expense Project Activity';
   getTableColumns(): TableColumn[] {
     return [
       {name: 'name', title: 'Name'},

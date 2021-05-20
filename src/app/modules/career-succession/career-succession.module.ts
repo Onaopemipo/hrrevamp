@@ -89,7 +89,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
     NbCheckboxModule,
     ComponentsModule,
     NbProgressBarModule,
-    NbFormFieldModule
+    NbFormFieldModule,
   ]
 })
 export class CareerSuccessionModule { }

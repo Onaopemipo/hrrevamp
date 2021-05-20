@@ -1,6 +1,10 @@
 import { IStatus, MyColor } from 'app/components/status/models';
 import { TABS } from './email-log/email-log.component';
 
+export enum EMAIL_STATUS {
+  DRAFT, SENT, TRASH,
+}
+
 export interface IEmail {
     id: number;
     subject: string;
@@ -9,6 +13,8 @@ export interface IEmail {
     content: string;
     date_sent: Date;
     status_id: number;
+    sender_name?: string;
+    sender_email?: string;
 }
 
 export class Email implements IStatus {
@@ -51,15 +57,15 @@ export class Email implements IStatus {
     }
 
     getStatusLabel() {
-        if (this.iObj.status_id === TABS.DRAFT) return 'Drafted';
-        if (this.iObj.status_id === TABS.SENT) return 'Sent';
-        if (this.iObj.status_id === TABS.TRASH) return 'Trashed';
+        if (this.iObj.status_id === EMAIL_STATUS.DRAFT) return 'Drafted';
+        if (this.iObj.status_id === EMAIL_STATUS.SENT) return 'Sent';
+        if (this.iObj.status_id === EMAIL_STATUS.TRASH) return 'Trashed';
     }
 
     getStatusColor() {
-        if (this.iObj.status_id === 1) return new MyColor(242, 153, 74);
-        if (this.iObj.status_id === 2) return new MyColor(0, 153, 74);
-        if (this.iObj.status_id === 3) return new MyColor(242, 0, 74);
+        if (this.iObj.status_id === EMAIL_STATUS.DRAFT) return new MyColor(242, 153, 74);
+        if (this.iObj.status_id === EMAIL_STATUS.SENT) return new MyColor(0, 153, 74);
+        if (this.iObj.status_id === EMAIL_STATUS.TRASH) return new MyColor(242, 0, 74);
         return new MyColor(242, 0, 74);
     }
 }

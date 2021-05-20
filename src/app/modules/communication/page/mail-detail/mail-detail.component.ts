@@ -1,6 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Email } from '../models';
 import IEmailFactory from '../factory';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'ngx-mail-detail',
@@ -8,10 +10,19 @@ import IEmailFactory from '../factory';
   styleUrls: ['./mail-detail.component.scss']
 })
 export class MailDetailComponent implements OnInit {
-  email = new Email(IEmailFactory.buildList(1)[0]);
-  constructor() { }
+  email: Email;
+  loading = true;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private api: ApiService,
+  ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(async(data) => {
+      const id = Number(data.get('id'));
+      this.email = await this.api.fetchEmailById(id).toPromise();
+      this.loading = false;
+    })
   }
 
 }

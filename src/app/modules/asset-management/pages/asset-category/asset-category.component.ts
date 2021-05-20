@@ -200,10 +200,8 @@ export class MyAssetTypeComponent extends AssetBaseComponent<MyAssetCategoryFilt
     return actions;
   }
   tableActionClick(event: TableActionEvent<MyAssetCategory>) {
-    alert(5)
     if (super.tableActionClick(event)) return true;
-    alert(10);
-    this.router.navigateByUrl('/assets/types/' + event.data.id + '/subtypes');
+    this.router.navigateByUrl('/asset/types/' + event.data.id + '/subtypes');
     return true;
   }
 }
@@ -310,10 +308,8 @@ export class MyAssetMakeComponent extends AssetBaseComponent<MyAssetCategoryFilt
     return actions;
   }
   tableActionClick(event: TableActionEvent<MyAssetCategory>) {
-    alert(5)
     if (super.tableActionClick(event)) return true;
-    alert(10);
-    this.router.navigateByUrl('/assets/makes/' + event.data.id + '/makes');
+    this.router.navigateByUrl('/asset/makes/' + event.data.id + '/models');
     return true;
   }
 }

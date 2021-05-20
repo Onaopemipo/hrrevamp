@@ -16,7 +16,7 @@
                 <ngx-employee-master-search *ngIf="field.type===FIELD_TYPES.employee" [(value)]="data[field.name]" [allowmultipleselection]="!field.singleSelection" (valueChange)="employeeChange(field, $event)"></ngx-employee-master-search>
                 <ngx-multi-select *ngIf="field.type===FIELD_TYPES.select" [(value)]="tempData[field.name]" (valueChange)="selectChange(field, $event)" [choice_name]="field.choice_name"
                     [singleSelection]="field.singleSelection"></ngx-multi-select>
-                <div *ngIf="errors[field.name]">
+                <div *ngIf="errors && errors[field.name]">
                     <div *ngFor="let error of errors[field.name]" class="error">
                         {{error}}
                     </div>
