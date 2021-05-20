@@ -2,7 +2,7 @@ import { IStatus, MyColor } from './../../../../components/status/models';
 import { Router } from '@angular/router';
 import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, JobFilterDTO, Qualification, RecruitmentSettingServiceProxy, Country } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, Qualification, RecruitmentSettingServiceProxy, Country } from './../../../../_services/service-proxies';
 import { TableAction, TableActionEvent, TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -61,7 +61,7 @@ export class JobsComponent implements OnInit {
   employmentType: string = 'Full Time';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
-  jobFilter: JobFilterDTO = new JobFilterDTO();
+  // jobFilter: JobFilterDTO = new JobFilterDTO();
   jobsCounter: number = 4;
   allDepartments: DepartmentDTO [] = [];
   certificationData: Certification [] = [];
@@ -255,7 +255,7 @@ tableActionClicked(event: TableActionEvent){
 
   async fetchAllJobs(){
     this.loading = true;
-   const data = await this.job.getAllJobs(undefined).toPromise();
+   const data = await this.job.getAllJobs(10,1).toPromise();
     if(!data.hasError){
       this.loading = false;
       this.allJobs = data.result;
