@@ -14,6 +14,7 @@ import {
   DataServiceProxy,
   DeleteDisciplineTemplatesServiceProxy,
   DeleteDisciplineTypesRulesServiceProxy,
+  FetchDisciplineLogServiceProxy,
   FetchDisciplineTemplatesServiceProxy, GetAllDisciplineTypesServiceProxy, UploadDocumentServiceProxy
 } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
@@ -45,8 +46,8 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     DeleteDisciplineTemplatesServiceProxy,
     AddUpdateDisciplineTypesRulesServiceProxy,
     DeleteDisciplineTypesRulesServiceProxy,
-    AddUpdateDisciplineManagementServiceProxy
-     
+    AddUpdateDisciplineManagementServiceProxy,
+    FetchDisciplineLogServiceProxy
   ]
 })
 export class DisciplinaryManagementModule { }
