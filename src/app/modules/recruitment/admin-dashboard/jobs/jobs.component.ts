@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, JobFilterDTO, Qualification, RecruitmentSettingServiceProxy, Country } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, Qualification, RecruitmentSettingServiceProxy, Country } from './../../../../_services/service-proxies';
 import { TableAction, TableActionEvent, TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -37,7 +37,7 @@ export class JobsComponent implements OnInit {
   employmentType: string = 'Full Time';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
-  jobFilter: JobFilterDTO;
+  jobFilter: any;
   jobsCounter: number = 4;
   allDepartments: DepartmentDTO [] = [];
   certificationData: Certification [] = [];
@@ -196,7 +196,7 @@ tableActions: TableAction[] = [
   }
 
   fetchAllJobs(){
-    this.job.getAllJobs(this.jobFilter).subscribe(data => {
+    this.job.getAllJobs(1,10).subscribe(data => {
       if(!data.hasError){
         this.allJobs = data.result;
         this.jobsCounter = data.totalRecord;
