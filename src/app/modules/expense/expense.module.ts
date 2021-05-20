@@ -1,4 +1,4 @@
-import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy, AddUpdateExpenseGroupServiceProxy, GetExpenseGroupsServiceProxy, GetProjectActivityServiceProxy, AddUpdateProjectActivityServiceProxy } from './../../_services/service-proxies';
+import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy, AddUpdateExpenseGroupServiceProxy, GetExpenseGroupsServiceProxy, GetProjectActivityServiceProxy, AddUpdateProjectActivityServiceProxy, AddExpenseSubTypeServiceProxy, GetExpenseSubTypesServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpenseComponent } from './expense/expense.component';
@@ -12,9 +12,10 @@ import { ExpenseReportComponent } from './expense-report/expense-report.componen
 import { ExpenseRequestService } from './services/expense-request.service';
 import { AddUpdateExpenseServiceProxy, AddUpdateExpenseProjectServiceProxy, FetchExpensesServiceProxy } from 'app/_services/service-proxies';
 import { ExpenseGroupComponent } from './expense-group/expense-group.component';
-import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from './services/expense-group.service';
+import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseSubTypeService, ExpenseTypeService } from './services/expense-group.service';
 import { ExpenseProjectActivityComponent } from './expense-project-activity/expense-project-activity.component';
 import { ExpenseProjectComponent } from './expense-project/expense-project.component';
+import { ExpenseSubTypeComponent } from './expense-sub-type/expense-sub-type.component';
 
 
 
@@ -28,6 +29,7 @@ import { ExpenseProjectComponent } from './expense-project/expense-project.compo
     ExpenseGroupComponent,
     ExpenseProjectActivityComponent,
     ExpenseProjectComponent,
+    ExpenseSubTypeComponent,
   ],
   providers: [
     AddUpdateExpenseProjectServiceProxy,
@@ -47,6 +49,9 @@ import { ExpenseProjectComponent } from './expense-project/expense-project.compo
     ExpenseProjectActivityService,
     ExpenseProjectService,
     ExpenseTypeService,
+    ExpenseSubTypeService,
+    AddExpenseSubTypeServiceProxy,
+    GetExpenseSubTypesServiceProxy,
   ],
   imports: [
     CommonModule,

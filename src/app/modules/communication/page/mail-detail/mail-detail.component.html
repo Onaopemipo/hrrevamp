@@ -2,7 +2,10 @@
 <div class="main-page-container">
     <div style="display: flex;">
         <div style="flex: auto; align-self: center;">
-            <h5>{{ email.subject }}</h5>
+            <h5>
+              <ng-template [ngIf]="loading">.....</ng-template>
+              <ng-template [ngIf]="!loading">{{ email.subject }}</ng-template>
+            </h5>
         </div>
         <div style="display: flex; padding: 1rem 0rem; align-self: center;">
             <button nbButton style="background-color: transparent;border:1px solid #b6b3b3" >
@@ -13,35 +16,44 @@
                 <span>Print</span>
             </div>
         </div>
-        
+
     </div>
   <div style="display: flex;">
     <div>
       <div style="display: flex">
-        <img
+        <img *ngIf="!loading"
           [src]="email.senderImageSrc"
           style="height: 50px; width: 50px; border-radius: 50%"
         />
         <div style="padding-left: 10px" class="header6-medium">
-          <div>{{ email.senderName }}</div>
+          <!-- <div>{{ email.senderName }}</div> -->
           <div class="detail-text">
-            {{ email.senderMail }}
+            <div *ngIf="loading">...</div>
+            <div *ngIf="!loading"> {{ email.iObj.sender_email }} </div>
           </div>
         </div>
       </div>
     </div>
     <!-- <div style="display: flex;"> -->
       <!-- <div style="flex: auto;"></div> -->
-        <div style="max-width: 60%; padding: 30px; padding-top: 3rem;" class="header6-normal">{{ email.content }}</div>
+        <div style="max-width: 60%; padding: 30px; padding-top: 3rem;" class="header6-normal">
+          <ng-template [ngIf]="!loading">
+            {{ email.content }}
+          </ng-template>
+        </div>
         <!-- <div style="flex: auto;"></div> -->
   <!-- </div> -->
     <div>
       <div style="visibility: hidden;">lll</div>
       <div class="detail-text" style="text-align: left;">
-        <span>{{ email.date_sent | date: "HH:mm" }}</span>
-        <span style="margin-left: 20px">{{
-            email.date_sent | date: "MMM dd, yyyy"
-        }}</span>
+        <div *ngIf="loading">...</div>
+        <span *ngIf="!loading">{{ email.date_sent | date: "HH:mm" }}</span>
+        <span style="margin-left: 20px">
+          <ng-template [ngIf]="loading">...</ng-template>
+          <ng-template [ngIf]="!loading">
+            {{ email.date_sent | date: "MMM dd, yyyy" }}
+          </ng-template>
+          </span>
       </div>
     </div>
   </div>

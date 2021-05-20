@@ -112,11 +112,11 @@ const routes: Routes = [{
       .then(m => m.AssetManagementModule)
     },
 
-    {
-      path: 'loan',
-      loadChildren: () => import('./loan/loan.module')
-      .then(m => m.LoanModule)
-    },
+    // {
+    //   path: 'loan',
+    //   loadChildren: () => import('./loan/loan.module')
+    //   .then(m => m.LoanModule)
+    // },
     {
       path: 'manpower',
       loadChildren: () => import('./manpower/manpower.module')

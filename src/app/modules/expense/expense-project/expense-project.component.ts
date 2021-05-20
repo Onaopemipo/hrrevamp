@@ -10,9 +10,11 @@ import { ListResult } from 'app/_services/base-api.service';
 import { ConfirmBoxService } from 'app/_services/confirm-box.service';
 import { AssetDTO } from 'app/_services/service-proxies';
 import { Observable } from 'rxjs';
-import { ExpenseGroupService, ExpenseProjectService, MyExpenseGroup } from '../services/expense-group.service';
+import { ExpenseGroupService, ExpenseProjectService, MyExpenseGroup, MyExpenseProject } from '../services/expense-group.service';
 
-
+enum ACTIONS{
+  activities = 'activities'
+}
 @Component({
   selector: 'ngx-expense-project',
   templateUrl: './expense-project.component.html',
@@ -23,6 +25,7 @@ export class ExpenseProjectComponent extends AssetBaseComponent<any, any>{
     protected api: ExpenseProjectService,
     protected confirmBoxService: ConfirmBoxService,
     protected alertService: AlertserviceService,
+    private router: Router,
   ) {
     super(confirmBoxService);
   }
@@ -56,5 +59,19 @@ export class ExpenseProjectComponent extends AssetBaseComponent<any, any>{
   filter = {};
   getNewEditingData(): MyExpenseGroup {
     return new MyExpenseGroup();
+  }
+
+  getTableActions(): TableAction[] {
+    const actions = super.getTableActions();
+    return [
+      {name: ACTIONS.activities, label: 'Activities'},
+      ...actions,
+    ];
+  }
+
+  tableActionClick(event: TableActionEvent<MyExpenseProject>) {
+    if (super.tableActionClick(event)) return true;
+    this.router.navigateByUrl(`expenses/project/${event.data.id}/activities`)
+    return true;
   }
 }

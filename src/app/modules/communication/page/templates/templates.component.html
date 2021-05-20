@@ -13,7 +13,7 @@
     *ngFor="let template of templates"
     class="col-md-3 col-sm-4"
   >
-    <div class="card black" style="padding: 30px; margin: 10px; background-color: white">
+    <div class="card black" style="padding: 30px; margin: 10px; background-color: white" (click)="editTemplate(template)">
       <div class="control" style="background-color: #3AF28614; width: max-content; padding: 10px; border-radius: 1px;">
         <nb-icon icon="file-text-outline"status='success'></nb-icon>
       </div>

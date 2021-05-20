@@ -114,6 +114,16 @@ class CommonObject implements ICommon{
     this.id = obj.id;
     this.name = obj.name;
   }
+
+  get selectValue() {
+    return this.id;
+  }
+
+  get selectLabel() {
+    // console.log(this);
+    return this.name;
+  }
+
 }
 
 @Injectable({

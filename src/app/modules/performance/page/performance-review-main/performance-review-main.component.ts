@@ -8,6 +8,7 @@ import { EmployeeCycleKrasServiceProxy, KpiReviewDTO, SubmitPerformanceReviewSer
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'app/_services/authentication.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-performance-review-main',
@@ -19,7 +20,7 @@ export class PerformanceReviewMainComponent implements OnInit {
   loadingSave = false;
   selectedKra = new KpiReviewDTO().clone();
   kras: KpiReviewDTO[] = [];
-  loading = false;
+  loading = true;
   id = 0;
   selected_kra_index = 0;
   pageType = PerformanceEmployeeType.employee
@@ -72,57 +73,57 @@ export class PerformanceReviewMainComponent implements OnInit {
     return {employee: data, contract: data.contracts.find(contract => contract.isContractActive)};
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     window.globalThis.zzz = this;
     this.loadRecommendations();
-    this.activatedRoute.paramMap.subscribe(async (params) => {
-      const id = Number(params.get('id'));
-      this.id = id;
-      const employee_id = params.get('employee_id');
-      // this.cycle_id = Number(data.get('cycle_id'));
-      // this.kra = Number(data.get('kra_id'));
-      // this.employee_id = Number(data.get('employee_id'));
-      this.loading = true;
-      if (!employee_id) {
-        this.kras = (await this.api.fetchEmployeeCycleKras(id, 1000, 1).toPromise()).result;
-        this.employee_id = (await this.user1.getuser())[0].employee_id;
-        
-      } else {
-        this.employee_id = Number(employee_id);
-        this.activatedRoute.url.subscribe(async (url) => {
-          const isSupervisor = url.find(f => f.toString() == 'supervisor');
-          if (isSupervisor) {
-            this.pageType = PerformanceEmployeeType.supervisor;
-          } else if(url.find(f => f.toString() == 'hr')) {
-            this.pageType = PerformanceEmployeeType.hr;
-          } else {
-            this.pageType = PerformanceEmployeeType.reviewer
-          }
-        });
-        if(this.pageType == PerformanceEmployeeType.reviewer){
-          const kra_id = Number(params.get('kra_id'));
-          const kra_name = params.get('kra_name');
-          const kra = new KpiReviewDTO().clone();
-          kra.kraId = kra_id;
-          kra.kraName = kra_name;
-          kra.cycleId = this.id;
-          kra.employeeId = this.employee_id;
-          kra.employeeContractId = this.employee_id;
-          this.kras = [kra]
+    const params = await this.activatedRoute.paramMap.pipe(take(1)).toPromise();
+    const id = Number(params.get('id'));
+    this.id = id;
+    console.log(id)
+    const employee_id = params.get('employee_id');
+    this.loading = true;
+    if (!employee_id) {
+      this.kras = (await this.api.fetchEmployeeCycleKras(id, 1000, 1).toPromise()).result;
+      this.employee_id = (await this.user1.getuser())[0].employee_id;
+    } else {
+      this.employee_id = Number(employee_id);
+      const url = await this.activatedRoute.url.pipe(take(1)).toPromise();
+      // subscribe(async (url) => {
+        const isSupervisor = url.find(f => f.toString() == 'supervisor');
+        if (isSupervisor) {
+          this.pageType = PerformanceEmployeeType.supervisor;
+        } else if(url.find(f => f.toString() == 'hr')) {
+          this.pageType = PerformanceEmployeeType.hr;
         } else {
-          this.kras = (await this.loadEmployeecycleData(this.id, this.employee_id).toPromise()).result.map(kra => {
-            kra.employeeContractId = this.employee_id;
-            return kra;
-          });
+          this.pageType = PerformanceEmployeeType.reviewer
+          console.log(9999)
+          console.log({pageType: this.pageType})
         }
+      // });
+      if(this.pageType == PerformanceEmployeeType.reviewer){
+        const kra_id = Number(params.get('kra_id'));
+        const kra_name = params.get('kra_name');
+        const kra = new KpiReviewDTO().clone();
+        kra.kraId = kra_id;
+        kra.kraName = kra_name;
+        kra.cycleId = this.id;
+        kra.employeeId = this.employee_id;
+        kra.employeeContractId = this.employee_id;
+        this.kras = [kra]
+      } else {
+        this.kras = (await this.loadEmployeecycleData(this.id, this.employee_id).toPromise()).result.map(kra => {
+          kra.employeeContractId = this.employee_id;
+          return kra;
+        });
       }
-      const { employee, contract } = await this.fetchEmployeeDetailsById(this.employee_id);
-      this.employee = employee;
-      this.contract = contract;
-      this.selectedKra = this.kras.length > 0 ? this.kras[0] : null;
-      this.selected_kra_index = 0;
-      this.loading = false;
-    })
+    }
+    const { employee, contract } = await this.fetchEmployeeDetailsById(this.employee_id);
+    this.employee = employee;
+    this.contract = contract;
+    this.selectedKra = this.kras.length > 0 ? this.kras[0] : null;
+    this.selected_kra_index = 0;
+    console.log({pageType: this.pageType})
+    this.loading = false;
   }
 
   get current_kra_is_last() {
@@ -197,11 +198,16 @@ export class PerformanceReviewMainComponent implements OnInit {
   //   // return this.user.user.;
   // }
 
+  _current_employee_name = '';
   get reviewerName() {
-    if(this.pageType == PerformanceEmployeeType.reviewer) {
-      return this.user.user.full_name;
-    } else {
+    // if(this.pageType == PerformanceEmployeeType.reviewer) {
+    //   return this._current_employee_name
+    // } else {
+    //   return this.kra.reviewerName;
+    // }
+    if(this.kra){
       return this.kra.reviewerName;
     }
+    return '';
   }
 }

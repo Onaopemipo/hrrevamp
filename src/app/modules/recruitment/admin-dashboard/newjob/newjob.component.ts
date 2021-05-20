@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { CommonServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, DepartmentDTO, Certification, IDTextViewModel, State, JobRole } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, JobFilterDTO, Qualification, ManageJobDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, Qualification, ManageJobDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,7 +17,7 @@ export class NewjobComponent implements OnInit {
   pagetitle: string = 'Post New Job';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
-  jobFilter: JobFilterDTO;
+  jobFilter: any;
   jobsCounter: number = 0;
   allDepartments: DepartmentDTO [] = [];
   certificationData: Certification [] = [];
@@ -131,12 +131,12 @@ export class NewjobComponent implements OnInit {
   }
 
   fetchAllJobs(){
-    this.job.getAllJobs(this.jobFilter).subscribe(data => {
-      if(!data.hasError){
-        this.allJobs = data.result;
-        this.jobsCounter = data.totalRecord;
-      }
-    })
+    // this.job.getAllJobs(this.jobFilter).subscribe(data => {
+    //   if(!data.hasError){
+    //     this.allJobs = data.result;
+    //     this.jobsCounter = data.totalRecord;
+    //   }
+    // })
   }
 
   async fetchScoreCards(){

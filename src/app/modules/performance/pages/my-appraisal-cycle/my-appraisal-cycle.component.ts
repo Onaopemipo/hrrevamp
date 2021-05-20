@@ -76,7 +76,7 @@ export class MyAppraisalCycleComponent implements OnInit {
     {name: 'dueDate', title: 'Due Date', type: ColumnTypes.Date},
     {name: 'isEmployeeSubmitted', title: 'Employee Reviewed', type: ColumnTypes.Mark},
     {name: 'isReviewerSubmitted', title: 'Reviewer Reviewed', type: ColumnTypes.Mark},
-    {name: 'assignedKr', title: '', type: ColumnTypes.Link, link_name: 'View KPIs'},
+    // {name: 'assignedKr', title: '', type: ColumnTypes.Link, link_name: 'View KPIs'},
   ]
 
   get showEmpty(){
