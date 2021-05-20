@@ -120,9 +120,9 @@ export class PromotionComponent implements OnInit {
       this.alert.openModalAlert(this.alert.ALERT_TYPES.CONFIRM, empFname, 'Yes').subscribe(data => {
         if (data == "closed") {
           let empPromoIndex = this.promotionBucketList.eligibles.findIndex(x => x.id == event.data.id);
-          this.promotionBucketList.eligibles[empPromoIndex].is_selected = true;
+          this.promotionBucketList.eligibles[empPromoIndex].is_deleted = true;
           console.log(this.promotionBucketList.eligibles);
-       //   this.UpdateEligibleBucket();
+         this.UpdateEligibleBucket();
         }
 
       })

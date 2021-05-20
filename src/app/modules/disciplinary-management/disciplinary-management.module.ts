@@ -9,9 +9,11 @@ import { DisciplineEditComponent } from './components/discipline-edit/discipline
 import { CreateComponent } from './pages/create/create.component';
 import { DisciplinaryManagementLogComponent } from './pages/disciplinary-management-log/disciplinary-management-log.component';
 import {
+  AddUpdateDisciplineManagementServiceProxy,
   AddUpdateDisciplineTemplateServiceProxy, AddUpdateDisciplineTypeServiceProxy,AddUpdateDisciplineTypesRulesServiceProxy,CommunicationServiceProxy,
   DataServiceProxy,
   DeleteDisciplineTemplatesServiceProxy,
+  DeleteDisciplineTypesRulesServiceProxy,
   FetchDisciplineTemplatesServiceProxy, GetAllDisciplineTypesServiceProxy, UploadDocumentServiceProxy
 } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
@@ -41,7 +43,9 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     UploadDocumentServiceProxy,
     DataServiceProxy,
     DeleteDisciplineTemplatesServiceProxy,
-    AddUpdateDisciplineTypesRulesServiceProxy
+    AddUpdateDisciplineTypesRulesServiceProxy,
+    DeleteDisciplineTypesRulesServiceProxy,
+    AddUpdateDisciplineManagementServiceProxy
      
   ]
 })

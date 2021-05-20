@@ -14,6 +14,7 @@ export class NewjobComponent implements OnInit {
   myButton: string = 'Add a Job Posting';
   availability: string = 'Physical';
   employmentType: string = 'Full Time';
+  pagetitle: string = 'Post New Job';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
   jobFilter: JobFilterDTO;
@@ -50,6 +51,7 @@ export class NewjobComponent implements OnInit {
     this.fetchStates();
     this.fetchJobRoles();
     this.fetchJobAvailabilty();
+    this.fetchScoreCards();
   }
 
   newJobPosting(){
@@ -57,13 +59,12 @@ export class NewjobComponent implements OnInit {
   }
   addNewJob() {
     this.loading = true;
-    this.newJobModel.locationId = 1;
    this.job.addUpdateJob(this.newJobModel).subscribe(data => {
     if(!data.hasError && data.result.isSuccessful == true){
       this.loading = false;
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss').subscribe(res => {
         if(res){
-
+          this.router.navigateByUrl('/recruitmentadmin/jobs/');
         }
       })
     }

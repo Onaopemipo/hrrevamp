@@ -86,6 +86,11 @@ const routes: Routes = [{
       .then(m => m.DisciplinaryManagementModule)
     },
     {
+      path: 'reward',
+      loadChildren: () => import('./disciplinary-management/disciplinary-management.module')
+      .then(m => m.DisciplinaryManagementModule)
+    },
+    {
       path: 'performance',
       loadChildren: () => import('./performance/performance.module')
       .then(m => m.PerformanceModule)

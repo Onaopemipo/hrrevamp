@@ -1,3 +1,4 @@
+import { IStatus, MyColor } from './../../../../components/status/models';
 import { Router } from '@angular/router';
 import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
@@ -12,6 +13,29 @@ VIEW ='1',DELETE = '2'
 enum TABS {
   postedJobs, scheduledJobs, draftedJobs
 }
+
+export class JobWithStatus extends JobDTO implements IStatus {
+  jobStatus: JobDTO;
+
+  constructor(jobStatus: JobDTO) {
+    super(jobStatus);
+    this.jobStatus = jobStatus;
+
+  }
+
+  get status() {
+    return this.jobStatus.isActive;
+}
+  getStatusLabel() {
+    if (this.jobStatus.isActive === true) return 'Open';
+    if (this.jobStatus.isActive === false) return 'closed';
+  }
+  getStatusColor() {
+    if (this.jobStatus.isActive === true) return new MyColor(242, 153, 74);
+    if (this.jobStatus.isActive === false) return new MyColor(0, 153, 74);
+    return new MyColor(242, 0, 74);
+ }
+ }
 
 @Component({
   selector: 'ngx-jobs',
@@ -37,7 +61,7 @@ export class JobsComponent implements OnInit {
   employmentType: string = 'Full Time';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
-  jobFilter: JobFilterDTO;
+  jobFilter: JobFilterDTO = new JobFilterDTO();
   jobsCounter: number = 4;
   allDepartments: DepartmentDTO [] = [];
   certificationData: Certification [] = [];
@@ -57,17 +81,10 @@ export class JobsComponent implements OnInit {
   postedJobsTable: TableColumn [] = [
     {name: 'jobTitle', title: 'Job Title'},
     {name: 'department', title: 'Department'},
-    {name: 'applicants', title: 'Applicants'},
-    {name: 'datePosted', title: 'Date Posted'},
-    {name: 'status', title: 'Status'},
+    {name: 'availability', title: 'Availability'},
+    {name: 'experience', title: 'Experience(Months)'},
+    {name: 'isActive', title: 'Status'},
   ];
-data = [
-  {jobTitle: 'jobTitle', department: 'technical ', applicants:'developer',datePosted : '02/03/2021',status:'status'}
-]
-tableActions: TableAction[] = [
-  {name: TP.VIEW, label: 'View'},
-{name: TP.DELETE, label: 'Delete'},
-]
 
   scheduledJobsTable: TableColumn [] = [
     {name: 'jobTitle', title: 'Job Title'},
@@ -75,12 +92,41 @@ tableActions: TableAction[] = [
     {name: 'scheduledDate', title: 'Scheduled Date'},
   ];
 
-
-
   draftedJobsTable: TableColumn [] = [
     {name: 'jobTitle', title: 'Job Title'},
     {name: 'department', title: 'Department'},
   ];
+
+
+
+
+
+tableActions: TableAction [] = [
+  {name: TP.VIEW, label: 'View'},
+{name: TP.DELETE, label: 'Delete'},
+]
+
+tableActionClicked(event: TableActionEvent){
+  if(event.name==TP.VIEW){
+
+    }
+
+    else if(event.name==TP.DELETE){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '','Yes').subscribe(dataAction => {
+      if(dataAction){
+        this.job.deleteJob(event.data.id).subscribe(data => {
+          if(!data.hasError){
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successfully Deleted', 'Dismiss').subscribe(res => {
+              this.router.navigateByUrl('/recruitmentadmin/jobs');
+            })
+          }
+        })
+      }
+    })
+      }
+}
+
+
 
   getTableActions (){
     if(TABS.postedJobs){
@@ -207,13 +253,15 @@ tableActions: TableAction[] = [
       }
   }
 
-  fetchAllJobs(){
-    this.job.getAllJobs(this.jobFilter).subscribe(data => {
-      if(!data.hasError){
-        this.allJobs = data.result;
-        this.jobsCounter = data.totalRecord;
-      }
-    })
+  async fetchAllJobs(){
+    this.loading = true;
+   const data = await this.job.getAllJobs(undefined).toPromise();
+    if(!data.hasError){
+      this.loading = false;
+      this.allJobs = data.result;
+      this.jobsCounter = data.totalRecord;
+      console.log('My Jobs:',this.allJobs)
+   }
   }
 
   actionClicked(event: TableActionEvent){

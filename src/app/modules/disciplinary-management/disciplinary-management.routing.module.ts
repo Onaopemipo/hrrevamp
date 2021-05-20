@@ -15,11 +15,15 @@ const routes: Routes = [
         component: MainComponent,
       },
       {
-        path: 'log',
+        path: 'disciplinaryandreward/:type',
+        component: MainComponent,
+      },
+      {
+        path: 'log/:type',
         component: DisciplinaryManagementLogComponent,
       },
       {
-        path: 'create',
+        path: 'create/:type',
         component: CreateComponent,
       }
     ]

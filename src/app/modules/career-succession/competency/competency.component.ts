@@ -39,7 +39,6 @@ export class CompetencyComponent implements OnInit {
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.DELETECOMPETENCY, label: 'Delete'},
-
   ]
 
   tableActionClicked(event: TableActionEvent){

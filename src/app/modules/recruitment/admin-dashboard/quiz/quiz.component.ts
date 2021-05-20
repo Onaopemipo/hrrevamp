@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { IDTextViewModel } from 'app/_services/service-proxies';
 import { RecruitmentQuizServiceProxy, QuizDTO, ManageQuizDTO } from './../../../../_services/service-proxies';
@@ -18,7 +19,7 @@ export class QuizComponent implements OnInit {
   myQuiz: QuizDTO = new QuizDTO();
   newQuizModel: ManageQuizDTO = new ManageQuizDTO();
 
-  constructor(private quiz: RecruitmentQuizServiceProxy, private alertMe: AlertserviceService) { }
+  constructor(private quiz: RecruitmentQuizServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,6 +30,10 @@ export class QuizComponent implements OnInit {
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Quiz Added!', 'Dismiss');
       }
     });
+  }
+
+  toggleNewQuiz(){
+    this.router.navigateByUrl('/recruitmentadmin/newquiz');
   }
 
   async fetchQuizTypes(){

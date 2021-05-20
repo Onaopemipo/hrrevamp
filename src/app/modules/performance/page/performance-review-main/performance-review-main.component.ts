@@ -7,6 +7,7 @@ import { AuthService } from './../../../../_services/auth.service';
 import { EmployeeCycleKrasServiceProxy, KpiReviewDTO, SubmitPerformanceReviewServiceProxy, SubmitPerformanceReviewDTO, KpiReviewDTOIListApiResult, SubmitEmployeeAppraisalReviewServiceProxy, ReviewRecommendationsServiceProxy, SubmitHRAppraisalReviewServiceProxy, FetchEmployeesDetailsServiceProxy, EmployeeContractAssignment, EmployeeContractAssignmentDTO } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 @Component({
   selector: 'ngx-performance-review-main',
@@ -16,7 +17,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PerformanceReviewMainComponent implements OnInit {
 
   loadingSave = false;
-  selectedKra?: KpiReviewDTO;
+  selectedKra = new KpiReviewDTO().clone();
   kras: KpiReviewDTO[] = [];
   loading = false;
   id = 0;
@@ -25,8 +26,8 @@ export class PerformanceReviewMainComponent implements OnInit {
   employee_id = 0;
   recommendation = '';
   hrComment = '';
-  employee: EmployeeDTO;
-  contract: EmployeeContractAssignmentDTO;
+  employee = new EmployeeDTO().clone();
+  contract = new EmployeeContractAssignmentDTO().clone();
   constructor(
     private activatedRoute: ActivatedRoute,
     private user: AuthService,
@@ -38,6 +39,7 @@ export class PerformanceReviewMainComponent implements OnInit {
     private submitHrReview: SubmitHRAppraisalReviewServiceProxy,
     private employeeService: FetchEmployeeByIdServiceProxy,
     private alertService: AlertserviceService,
+    private user1: AuthenticationService,
   ) { }
 
   loadEmployeecycleData(cycleId: number, employeeContractId: number) {
@@ -71,6 +73,7 @@ export class PerformanceReviewMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.globalThis.zzz = this;
     this.loadRecommendations();
     this.activatedRoute.paramMap.subscribe(async (params) => {
       const id = Number(params.get('id'));
@@ -82,7 +85,8 @@ export class PerformanceReviewMainComponent implements OnInit {
       this.loading = true;
       if (!employee_id) {
         this.kras = (await this.api.fetchEmployeeCycleKras(id, 1000, 1).toPromise()).result;
-        this.employee_id = this.user.user.employee_id;
+        this.employee_id = (await this.user1.getuser())[0].employee_id;
+        
       } else {
         this.employee_id = Number(employee_id);
         this.activatedRoute.url.subscribe(async (url) => {
@@ -98,7 +102,7 @@ export class PerformanceReviewMainComponent implements OnInit {
         if(this.pageType == PerformanceEmployeeType.reviewer){
           const kra_id = Number(params.get('kra_id'));
           const kra_name = params.get('kra_name');
-          const kra = new KpiReviewDTO();
+          const kra = new KpiReviewDTO().clone();
           kra.kraId = kra_id;
           kra.kraName = kra_name;
           kra.cycleId = this.id;
@@ -106,7 +110,10 @@ export class PerformanceReviewMainComponent implements OnInit {
           kra.employeeContractId = this.employee_id;
           this.kras = [kra]
         } else {
-          this.kras = (await this.loadEmployeecycleData(this.id, this.employee_id).toPromise()).result;
+          this.kras = (await this.loadEmployeecycleData(this.id, this.employee_id).toPromise()).result.map(kra => {
+            kra.employeeContractId = this.employee_id;
+            return kra;
+          });
         }
       }
       const { employee, contract } = await this.fetchEmployeeDetailsById(this.employee_id);

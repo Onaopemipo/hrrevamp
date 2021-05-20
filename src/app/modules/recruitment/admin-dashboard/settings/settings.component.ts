@@ -34,6 +34,7 @@ export class SettingsComponent implements OnInit {
   ];
 
   scoreCardClick: boolean = false;
+  newTemplate: boolean = false;
   emailResponder;
   newStage: boolean = false;
   allowmultipleselection: boolean = false;
@@ -68,6 +69,10 @@ export class SettingsComponent implements OnInit {
 
   toggleScorecard(){
     this.scorecard = true;
+  }
+
+  toggleNewTemplate(){
+    this.newTemplate = true;
   }
 
   addNewStage(){

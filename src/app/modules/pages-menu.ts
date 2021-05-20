@@ -44,6 +44,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Deployment Application',
         link: '/employeemodule/deploymentapplication',
       },
+      {
+        title: 'My Appraisals',
+        link: '/performance/my-appraisals'
+      },
+      {
+        title: 'Appraisals Key Result Area',
+        link: '/performance/kra'
+      },
     ],
   },
   {
@@ -108,12 +116,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/',
     icon: 'assets/icons/PerformanceAppraisals.jpg',
     children: [
+      // {
+      //   title: 'Dashboard',
+      //   link: '/performance'
+      // },
       {
-        title: 'Dashboard',
-        link: '/performance'
-      },
-      {
-        title: 'Cycle',
+        title: 'Appraisal Cycle',
         link: '/performance/cycle'
       },
       {
@@ -125,13 +133,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/performance/kra/assign'
       },
       {
-        title: 'Appraisal',
+        title: 'Reviewer Appraisal',
         link: '/performance/appraisals'
       },
-      {
-        title: 'My Appraisals',
-        link: '/performance/my-appraisals'
-      },
+    
       {
         title: 'Rating',
         link: '/performance/rating'
@@ -141,11 +146,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/performance/score-card'
       },
       {
-        title: 'Supervisor',
+        title: 'Supervisor Review',
         link: '/performance/supervisor/reviews'
       },
       {
-        title: 'HR',
+        title: 'HR Review',
         link: '/performance/hr/reviews'
       },
       // {
@@ -173,11 +178,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Settings',
-        link: '/discipline'
+        link: '/discipline/disciplinaryandreward/discipline'
       },
       {
         title: 'Log',
-        link: '/discipline/log'
+        link: '/discipline/log/discipline'
+      },
+    ]
+  },
+  {
+    title: 'Reward Management',
+    link: '/',
+    icon: 'assets/icons/DisciplinaryManagement.jpg',
+    children: [
+      {
+        title: 'Settings',
+        link: '/reward/disciplinaryandreward/reward'
+      },
+      {
+        title: 'Log',
+        link: '/reward/log/reward'
       },
     ]
   },

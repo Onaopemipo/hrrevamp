@@ -1,13 +1,22 @@
 
-<ngx-componentsheader pageName="Disciplinary Settings"></ngx-componentsheader>
-<ngx-default-content *ngIf="showEmptyDisciplineType" pageHeader="Setup Your Discipline"
-pageDescription="Click on the button to start your setup" buttonValue="Continue" [loading]="loadingDisciplineType"
+<ngx-componentsheader [pageName]="pageName">
+  <div headerButton style="display: flex; flex-direction: row;" *ngIf="selectedDiscipline.id">
+    <button   nbButton status="primary" (click)="AddNewTemplate()" class="d-flex column">
+      <nb-icon icon="plus"></nb-icon> &nbsp;
+      Add Template</button>
+  </div>
+</ngx-componentsheader>
+<ngx-default-content *ngIf="showEmptyDisciplineType" pageHeader="Setup {{IsReward? 'Reward':'Discipline'}}"
+pageDescription="Click on the button to start setup" buttonValue="Continue" [loading]="loadingDisciplineType"
 (buttonClick)="showAddDisciplineTypeModal = true">
 </ngx-default-content>
-<div class="row" *ngIf="!showEmptyDisciplineType">
+<div class="row" *ngIf="!showEmptyDisciplineType" >
     <div class="col-sm-3">
         <div style="margin-right: 1rem" class="card main-page-container">
-            <div class="grey-2" style="font-size: 0.9rem;font-weight: bold;">DISCIPLINE</div>
+            <div class="grey-2" style="font-size: 0.9rem;font-weight: bold;">
+              <span *ngIf="IsReward">REWARD</span>
+              <span *ngIf="!IsReward">DISCIPLINE</span>
+              </div>
             <div class="items" *ngFor="let disc of allDisciplineType; let i = index">
                 <div (click)="getTemplatesbyId(disc,disc.id)" style="cursor: pointer;">{{disc.disciplineName}}</div>
             </div>
@@ -17,12 +26,12 @@ pageDescription="Click on the button to start your setup" buttonValue="Continue"
         </div>
     </div>
     <div class="col-sm-9">
-      <ngx-default-content *ngIf="allDisciplineTemplate.length < 1" pageHeader="Setup Your Discipline Template"
+      <ngx-default-content *ngIf="allDisciplineTemplate.length < 1" pageHeader="Setup Your {{IsReward? 'Reward':'Discipline'}} Template"
 pageDescription="Click on the button to setup Template" buttonValue="Continue" [loading]="loadingDisciplineTemplates"
 (buttonClick)="AddNewTemplate()">
 </ngx-default-content>
 <span *ngIf="allDisciplineTemplate.length > 0" >
-  <ngx-discipline-edit (TemplateSubmitted)="handleTemplateSubmit($event)" [DisciplineTemplate]="temp" [showDetails]="showDetails" *ngFor="let temp of allDisciplineTemplate;let i =index"></ngx-discipline-edit>
+  <ngx-discipline-edit [IsReward]="IsReward" (TemplateSubmitted)="handleTemplateSubmit($event)" [DisciplineTemplate]="temp" [showDetails]="showDetails" *ngFor="let temp of allDisciplineTemplate;let i =index"></ngx-discipline-edit>
 </span>
 <div  *ngIf="selectedDiscipline.id">
   <nb-card>
@@ -35,7 +44,7 @@ pageDescription="Click on the button to setup Template" buttonValue="Continue" [
           <div class="row">
             <div class="col-sm-4 form-group">
               <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Max Count:</label>
-              <input type="number" class="form-control" placeholder="Max Count" name="maxCount"
+              <input type="number" class="form-control" placeholder="Max Count" min="1" name="maxCount"
                 #maxCount="ngModel" [(ngModel)]="newDisciplineRules.maxCount" required>
               <div *ngIf="maxCount.invalid && (maxCount.dirty || maxCount.touched)" class="error">
                 <div *ngIf="maxCount.errors.required">Max Count is required</div>
@@ -43,7 +52,7 @@ pageDescription="Click on the button to setup Template" buttonValue="Continue" [
             </div>
             <div class="col-sm-4 form-group">
               <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Next Action:</label>
-              <select class="form-control" [(ngModel)]="DisciplineTemplate.nextDisciplineTypeId" id="nextDisciplineTypeId" name="nextDisciplineTypeId" #nextDisciplineTypeId="ngModel" required>
+              <select class="form-control" [(ngModel)]="newDisciplineRules.nextDisciplineTypeId" id="nextDisciplineTypeId" name="nextDisciplineTypeId" #nextDisciplineTypeId="ngModel" required>
                 <option value="undefined">--Select Type--</option>
                 <option *ngFor="let dType of allDisciplineType" [value]="dType.id">{{dType.disciplineName}}</option>
             </select>
@@ -51,14 +60,20 @@ pageDescription="Click on the button to setup Template" buttonValue="Continue" [
                 <div *ngIf="nextDisciplineTypeId.errors.required">Discipline Type is required</div>
               </div>
             </div>
-            <div class="col-sm-4 form-group">
-              <ngx-loadable-button [loading]="loadingDisciplineRules" [disabled]="disciplineRuleForm.invalid" (click)="updateCreatedisciplineRules()" >
-              Add Rule
-              </ngx-loadable-button> 
+            <div class="col-sm-4 form-group" style="display: flex;align-items: flex-end;">  
+ 
+      <ngx-loadable-button [loading]="loadingDisciplineRules" [disabled]="disciplineRuleForm.invalid" (click)="updateCreatedisciplineRules()" >
+      Add Rule
+      </ngx-loadable-button> 
+  
             </div>
             </div>
         </form>
-     
+     <div class="row">
+<div class="col-sm-12" *ngFor="let r of selectedDiscipline.disciplineRules">
+<span class="cbadge">{{r.disciplineTypeName}} &nbsp; | &nbsp; {{r.maxCount}} &nbsp;<i (click)="deletedisciplineRules(r.id)" class="fa fa-times"style="color:#EB5757;cursor: pointer;"></i></span>
+</div>
+     </div>
     </nb-card-body>
   </nb-card>
   <div>
@@ -68,19 +83,19 @@ pageDescription="Click on the button to setup Template" buttonValue="Continue" [
 </div>
     </div>
 </div>
-
+<div style="padding: 10px;"></div>
 <ngx-side-modal [(show)]='showAddDisciplineTypeModal' style="width: 500px; height: 1000px;">
-    <div modal-header>Add Discipline Type</div>
+    <div modal-header>Add {{IsReward? 'Reward':'Discipline'}} Type</div>
     <div modal-body>
       <form #disciplinetyupeForm="ngForm" name="disciplinetyupeForm" id="disciplinetyupeForm">
           <div class="row">
 
         <div class="col-sm-12 form-group">
             <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Name:</label>
-            <input type="text" class="form-control" placeholder="Enter Discipline Name" name="disciplineName"
+            <input type="text" class="form-control" placeholder="Enter {{IsReward? 'Reward':'Discipline'}} Name" name="disciplineName"
               #disciplineName="ngModel" [(ngModel)]="DisciplinePayload.disciplineName" required>
             <div *ngIf="disciplineName.invalid && (disciplineName.dirty || disciplineName.touched)" class="error">
-              <div *ngIf="disciplineName.errors.required">Discipline name is required</div>
+              <div *ngIf="disciplineName.errors.required">{{IsReward? 'Reward':'Discipline'}} name is required</div>
             </div>
           </div>
           <div class="col-sm-12 form-group">
