@@ -162,7 +162,6 @@ export class NewCompetencyComponent implements OnInit {
 
   selectPanel(rolelist, i) {
     this.selectedPanel = rolelist;
-
     this.competencyChecklist.forEach(value => {
       value.status = 'Inactive';
     });
@@ -196,14 +195,6 @@ export class NewCompetencyComponent implements OnInit {
 
   toggleScoreCard(event) {
     this.scoreCardClick = !this.scoreCardClick;
-  }
-
-  updateCompetency(){
-
-  }
-
-  deleteCompetency(){
-
   }
 
 }

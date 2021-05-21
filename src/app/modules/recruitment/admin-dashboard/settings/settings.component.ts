@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { RecruitmentSettingServiceProxy, ManageHireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion } from './../../../../_services/service-proxies';
+import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO } from './../../../../_services/service-proxies';
 import { NbTabComponent } from '@nebular/theme';
 import { Component, OnInit } from '@angular/core';
 import { truncateSync } from 'fs';
@@ -44,6 +44,11 @@ export class SettingsComponent implements OnInit {
   scoreCardModel: ManageRecruitmentScoreCardDTO = new ManageRecruitmentScoreCardDTO;
   questionModel: ScoreCardQuestion = new ScoreCardQuestion;
   questionBank: ScoreCardQuestion [] = [];
+  hiringStages: HireStageDTO [] = [];
+  hireStage: HireStageDTO = new HireStageDTO();
+  subHireStage: SubHireStageDTO = new SubHireStageDTO();
+  allSubHireStages: SubHireStageDTO [] = [];
+
 
 
   constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService) { }
@@ -131,8 +136,35 @@ export class SettingsComponent implements OnInit {
 
   }
 
-  getAllTemplates(){
+  async getAllTemplates(){
+  }
 
+  async getHireStages(){
+    const data = await this.settings.getAllHireStages().toPromise();
+    if(!data.hasError){
+      this.hiringStages = data.result;
+    }
+  }
+
+  async getSingleHireStage(){
+    const data = await this.settings.getHireStage(1).toPromise();
+    if(!data.hasError){
+      this.hireStage = data.result;
+    }
+  }
+
+  async getAllSubHireStages(){
+    const data = await this.settings.getAllSubHireStages().toPromise();
+    if(!data.hasError){
+      this.allSubHireStages = data.result;
+    }
+  }
+
+  async getSingleSubHireStage(){
+    const data = await this.settings.getSubHireStage(1).toPromise();
+    if(!data.hasError){
+      this.subHireStage = data.result;
+    }
   }
 
   getSelectedEmployee(event,selectType) {

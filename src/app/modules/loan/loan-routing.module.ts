@@ -29,7 +29,7 @@ const routes: Routes = [
     },
 
     {
-      path: 'process-loan',
+      path: 'process-loan/:id',
       component: ProcessRequestComponent,
     },
 

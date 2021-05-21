@@ -1,14 +1,8 @@
 <ngx-componentsheader pageName='Leave Plan' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
-
-
-
-
-
-
 <nb-card>
     <nb-card-body>
-       
+
         <nb-tabset #tset (click)="filterLeavePlan(tset.tabs._results)">
             <nb-tab tabTitle="Approved"  ></nb-tab>
             <nb-tab tabTitle="Pending" ></nb-tab>
@@ -21,15 +15,15 @@
         buttonValue="Create Leave Plan"
         [loading]="loading"
         (buttonClick)="showLeavePlanModal = true;"
-    
+
       >
       </ngx-default-content>
-        <ngx-tablecomponent  
+        <ngx-tablecomponent
         *ngIf="!showEmpty"
         (filterChange)="filterUpdated($event)"
         [showActions]="false"
         [showFilter]="true"
-        [userData]="LeaveData" 
+        [userData]="LeaveData"
         [tableColum]="tableColumns"
         [totalItems]="totalItems"
         [currentPage]="currentPage"

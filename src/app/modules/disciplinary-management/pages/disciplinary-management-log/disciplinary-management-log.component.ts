@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
-import { DisciplineTemplateDTO } from 'app/_services/service-proxies';
+import { DisciplineManagementDTO, DisciplineTemplateDTO, FetchDisciplineLogServiceProxy } from 'app/_services/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -29,15 +29,34 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
   ];
   pageName = "Disciplinary Management"
   IsReward: boolean = false;
-
-  constructor( private acitivatedroute: ActivatedRoute, private router: Router ) {
+  filter = {
+    iD:  undefined,
+    disciplinaryTypeId:  undefined,
+    pageSize: 10,
+    pageNumber: 1
+  }
+  DisciplineManagementList: DisciplineManagementDTO[] = [];
+  constructor( private acitivatedroute: ActivatedRoute, private router: Router,private FetchDisciplineLogService: FetchDisciplineLogServiceProxy ) {
     super();
+  }
+  get showEmpty(){
+    return this.DisciplineManagementList.length === 0;
+  }
+  getallLog() {
+    this.loading = true;
+    this.FetchDisciplineLogService.fetchDisciplineLog(this.filter.iD, this.filter.disciplinaryTypeId, this.filter.pageSize, this.filter.pageNumber).subscribe(data => {
+      this.loading = false; 
+      if (!data.hasError) {
+        this.DisciplineManagementList = data.result;
+      }
+    })
   }
   AddNewDiscipline() {
     var param = this.IsReward ? "reward" : "discipline";
     this.router.navigate(['/discipline/create/' + param]);
   }
   ngOnInit() {
+    this.getallLog();
     this.acitivatedroute.params.subscribe(data => {
       //    console.log(data);
           if (data.type) {
