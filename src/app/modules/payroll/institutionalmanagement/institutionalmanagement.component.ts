@@ -44,7 +44,10 @@ export abstract class PayrollBaseComponent<F, D extends PayrollApiModelClass> ex
     };
   };
 
-  abstract getTableColumns(): TableColumn[];
+  tableColumns: TableColumn[] = [];
+  getTableColumns(): TableColumn[] {
+    return [];
+  }
   // tableColumns = [
   //   {name: 'name', title: 'Name'},
   //   {name: 'dateCreated', title: 'Date Modified', type: ColumnTypes.Date},
@@ -104,6 +107,7 @@ export abstract class PayrollBaseComponent<F, D extends PayrollApiModelClass> ex
 
   ngAfterViewInit() {
     this.setTableActions();
+    this.tableColumns = this.getTableColumns();
   }
 }
 
@@ -128,7 +132,7 @@ export class InstitutionalmanagementComponent extends PayrollBaseComponent<
   getTableColumns(): TableColumn[] {
     return [
       { name: 'name', title: 'NAME' },
-      { name: 'category_id', title: 'INDUSTRY' },
+      // { name: 'category_id', title: 'INDUSTRY' },
       { name: 'account_name', title: 'ACCOUNT NAME' },
       { name: 'account_number', title: 'ACCOUNT NUMBER' },
       { name: 'bank_id', title: 'BANK' },
@@ -137,13 +141,13 @@ export class InstitutionalmanagementComponent extends PayrollBaseComponent<
       // {name: 'name', title: 'Status', type: ColumnTypes.Status},
     ];
   }
-  formConfig = {
+  formConfig: FormConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'category_id', label: 'Category', type: FORM_TYPES.text},
+      {name: 'category_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
       {name: 'account_name', label: 'Account Name', type: FORM_TYPES.text},
       {name: 'account_number', label: 'Account Number', type: FORM_TYPES.text},
-      {name: 'bank_id', label: 'Bank', type: FORM_TYPES.text},
+      {name: 'bank_id', label: 'Bank', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.dataDropdown, dropDownId: 2},
     ]
   };
   filter: MyPayrollInstitutionFilter = {};
@@ -241,7 +245,7 @@ PayElementFilter, MyPayrollElementModel> {
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
       {name: 'element_category_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
       {name: 'institution_id', label: 'Institution', type: FORM_TYPES.select, choice_name: ChoiceName.payrollInstitutions, singleSelection: true},
-      {name: 'type_id', label: 'Type', type: FORM_TYPES.select, choice_name: ChoiceName.payrollInstitutions, singleSelection: true},
+      {name: 'type_id', label: 'Type', type: FORM_TYPES.select, choice_name: ChoiceName.payrollTypes, singleSelection: true},
       {name: 'is_reocurring', label: 'Is Reocurring', type: FORM_TYPES.checkbox},
       {name: 'is_tax_deduct', label: 'Is Tax Deduct', type: FORM_TYPES.checkbox},
       {name: 'is_variable', label: 'Is Variable', type: FORM_TYPES.checkbox},

@@ -24,6 +24,7 @@ export class FormField {
   placeholder?: string = 'place';
   choice_name?: ChoiceName;
   singleSelection?: boolean = true;
+  dropDownId?: number = 0;
   disabled?: boolean;
   selectOptions?: ISelectItem[];
   hide?: boolean;
