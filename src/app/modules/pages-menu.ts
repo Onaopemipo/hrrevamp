@@ -521,8 +521,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Benefit Administration',
-    link: '/',
     icon: 'assets/icons/BenefitAdministration.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: '/benefits/',
+      },
+    ]
   },
   {
     title: 'ACCOUNT & SETTINGS',

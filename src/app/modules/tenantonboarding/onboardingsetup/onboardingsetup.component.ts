@@ -127,9 +127,11 @@ export class OnboardingsetupComponent implements OnInit {
     this.registerCompany();
    }
   paymentCancel() {
+    console.log('cancel')
     this.paymentLoading = false;
   }
   paymentDone() {
+    console.log('success')
     this.verifyPayment()
   }
   registerCompany() {

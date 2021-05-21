@@ -73,9 +73,20 @@
                           <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Company RC-Number</label>
                           <div class="col-sm-8">
                             <input id="rcNo" name="rcNo" [(ngModel)]="companyDTO.rcNo" #rcNo="ngModel" type="text" nbInput fullWidth  placeholder="Company RC-Number" required>
-                            <div *ngIf="companyDTO.invalid && (companyDTO.dirty || companyDTO.touched)" class="error">
-                              <div *ngIf="companyDTO.errors.required">
+                            <div *ngIf="rcNo.invalid && (rcNo.dirty || rcNo.touched)" class="error">
+                              <div *ngIf="rcNo.errors.required">
                                 Company RC-Number is required
+                              </div>
+                          </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Company Name</label>
+                          <div class="col-sm-8">
+                            <input id="name" name="name" [(ngModel)]="companyDTO.name" #name="ngModel" type="text" nbInput fullWidth  placeholder="Company Name" required>
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                              <div *ngIf="name.errors.required">
+                                Company Name is required
                               </div>
                           </div>
                           </div>
@@ -256,7 +267,7 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <button *ngIf="!paymentLoading" angular4-paystack
+              <button  angular4-paystack
               [email]="companyDTO.email"
               [amount]="selectedPlan.amount * 100"
               [ref]="reference"
@@ -264,10 +275,11 @@
               (close)="paymentCancel()"
               (callback)="paymentDone()"
               [channels]="['bank','card'] "
-              style="width: 144px;" type="submit" nbButton status="primary">Pay</button>
-              <button *ngIf="paymentLoading" style="width: 144px;"  nbButton status="primary">
-              <i class="fa fa-spin fa-spinner"></i> Loading...
-              </button>
+              style="width: 144px;" type="submit" nbButton status="primary">
+              <span *ngIf="!paymentLoading" style="color: #fff;">Pay</span>
+              <span *ngIf="paymentLoading" style="color: #fff;"><i class="fa fa-spin fa-spinner"></i> Loading...</span>
+            </button>
+           
             </div>
          </div>
 </div>
@@ -276,10 +288,10 @@
    <!--Module Panel ////////////////////////////////-->
 <div class="fmContainer" *ngSwitchCase="'modulesPanel'">
     <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
-   <p class="listsubheader">Select the modules you want to grant your users access to.</p>
+   <p class="listsubheader">Subscribed Plan Modules.</p>
    </div>
    <div style="padding-top:2rem;">
-    <nb-checkbox [value]="true">Select all</nb-checkbox>
+    <!-- <nb-checkbox [value]="true">Select all</nb-checkbox> -->
     <div style="padding-top:1.5rem;">
       <div class="row">
         <div class="col-xxxl-4 col-md-4" *ngIf="loadingSubscriptionModule"> 
