@@ -527,6 +527,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Dashboard',
         link: '/benefits/',
       },
+      {
+        title: 'Vendor',
+        link: '/benefits/BenefitsVendor',
+      },
     ]
   },
   {
