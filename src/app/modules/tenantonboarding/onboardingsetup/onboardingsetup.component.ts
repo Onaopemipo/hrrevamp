@@ -5,7 +5,7 @@ import { AlertserviceService } from '../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import {
   CommonServiceProxy,
-  CompanyDTO, DataServiceProxy, FetchSubscriptionPlansServiceProxy, FileParameter, FrequencyRule, IDTextViewModel, RegisterCompanyServiceProxy, SubscriptionPlan, UploadDocumentServiceProxy, VerifySubscriptionPaymentServiceProxy
+  CompanyDTO, DataServiceProxy, FetchSubscriptionPlanModulesServiceProxy, FetchSubscriptionPlansServiceProxy, FileParameter, FrequencyRule, IDTextViewModel, RegisterCompanyServiceProxy, SubscriptionPlan, SubscriptionPlanModule, UploadDocumentServiceProxy, VerifySubscriptionPaymentServiceProxy
 } from 'app/_services/service-proxies';
 import { FormGroup } from '@angular/forms';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
@@ -42,29 +42,59 @@ export class OnboardingsetupComponent implements OnInit {
     tempRef: '',
     files: this.allfileObj
   }
+  loadingSubscriptionModule = false;
+  loadingSubscriptionPlan = false;
+  billingType = 1;
+  activateSubscription = false;
+  activateModuleSelection = false;
+  subscriptionPlanModule: SubscriptionPlanModule[] = []
+  regUserId = 0;
+  paymentLoading = false;
   constructor(iconsLibrary: NbIconLibraries, private alertController: AlertserviceService, private router: Router,
     private FetchSubscriptionPlansService: FetchSubscriptionPlansServiceProxy,private CommonService:CommonServiceProxy,
     private RegisterCompanyService: RegisterCompanyServiceProxy, private UploadDocumentService: UploadDocumentServiceProxy,
-  private DataService:DataServiceProxy, private VerifySubscriptionPaymentService: VerifySubscriptionPaymentServiceProxy) {
+    private DataService: DataServiceProxy,private FetchSubscriptionPlanModulesService:FetchSubscriptionPlanModulesServiceProxy,
+    private VerifySubscriptionPaymentService: VerifySubscriptionPaymentServiceProxy) {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
   }
-
+  get nextPaymentDate(): Date{
+    var tdate = new Date();    
+    var adddays = this.billingType == 1 ? '1' :
+      (this.billingType == 2 ? "7" : (this.billingType == 3 ? "30" :
+        (this.billingType == 4 ? "90" : (this.billingType == 5?"180":(this.billingType == 6?"365":"1" )))));
+    var adddate = parseInt(String(tdate.getDate())) + parseInt(adddays);
+    tdate.setDate(adddate);
+     return tdate;
+}
   startSetup() {
     this.beginSetup = false;
     this.selectedPanel = 'companyPanel';
   }
 
   gotoPanel(paneltitle, wizardtitle) {
+    if (paneltitle == 'subscriptionPanel' && !this.activateSubscription)
+    {
+      this.alertController.openModalAlert(this.alertController.ALERT_TYPES.FAILED, "Please Complete Company Information", 'OK');
+      return;
+    }
+    if (paneltitle == 'modulesPanel' && !this.activateModuleSelection)
+    {
+      this.alertController.openModalAlert(this.alertController.ALERT_TYPES.FAILED, "Please Complete Subscription", 'OK');
+      return;
+    }
+     
     this.title = wizardtitle;
     this.selectedPanel = paneltitle;
+   
   }
   proceedtosubcription() {
     this.title = 'Choose Package';
     this.selectedPanel = 'subscriptionPanel';
     localStorage.removeItem('tenantSetup');
-    localStorage.setItem('tenantSetup',JSON.stringify(this.companyDTO))
+    localStorage.setItem('tenantSetup', JSON.stringify(this.companyDTO));
+    this.activateSubscription = true;
   }
   proceedtobilling(planid) {
     this.title = 'Billing Details';
@@ -93,19 +123,37 @@ export class OnboardingsetupComponent implements OnInit {
 }
 
   paymentInit() {
+    this.paymentLoading = true;
     this.registerCompany();
    }
-  paymentCancel() {}
+  paymentCancel() {
+    this.paymentLoading = false;
+  }
   paymentDone() {
     this.verifyPayment()
   }
   registerCompany() {
+    this.companyDTO.subscriptionPlanId = this.selectedPlan.id;
+    this.companyDTO.subscriptionPlanName = this.selectedPlan.name;
+    this.companyDTO.licenseUsage = this.selectedPlan.licenseCount;
+    this.companyDTO.isTrial = true;
+    this.companyDTO.frequencyId = this.billingType;
+    this.companyDTO.lastBillingDate = this.nextPaymentDate;
+    this.companyDTO.referenceNumber = this.reference;
+    this.companyDTO.tempRef = this.tempRef;
     this.RegisterCompanyService.registerCompany(this.companyDTO).subscribe(data => {
-      
+      if (!data.hasError) {
+        console.log("success")
+        this.regUserId = data.result.retId;
+      } else {
+        console.log("Failed")
+      }
     })
   }
   getSubscriptionplan() {
+    this.loadingSubscriptionPlan = true;
     this.FetchSubscriptionPlansService.getSubscriptionPlans().subscribe(data => {
+      this.loadingSubscriptionPlan = false;
       if (!data.hasError) {
         this.subPlan = data.result;
         this.OrigisubPlan = data.result;
@@ -160,11 +208,25 @@ export class OnboardingsetupComponent implements OnInit {
       }
     });
   }
-  verifyPayment() {
-    let userId = '';
-    this.VerifySubscriptionPaymentService.verifySubscriptionPayment(userId, this.reference).subscribe(data => {
+  getPlanModulesbyPlanId() {
+    this.loadingSubscriptionModule = true;
+    this.FetchSubscriptionPlanModulesService.getSubscriptionPlanModules(this.selectedPlan.id).subscribe(data => {
+     this.loadingSubscriptionModule = false;
+      if (!data.hasError) {
+        this.subscriptionPlanModule = data.result;
+      } else {
+        console.log("error");
+      }
+    })
+  }
+  verifyPayment() {  
+    this.VerifySubscriptionPaymentService.verifySubscriptionPayment(this.reference,this.regUserId.toString()).subscribe(data => {
+      this.paymentLoading = false;
       if (!data.hasError) {
         this.alertController.openModalAlert(this.alertController.ALERT_TYPES.SUCCESS, data.message, 'OK');
+        this.proceedtomodules();
+        this.getPlanModulesbyPlanId();
+        this.activateModuleSelection = true;
       } else {
         this.alertController.openModalAlert(this.alertController.ALERT_TYPES.FAILED, "Payment Failed, Please try again", 'OK');
     }
