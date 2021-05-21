@@ -160,7 +160,7 @@ export class PayrollFrequencyRuleService extends CrudService<{}, {}, MyPayrollFr
 })
 export class PayElementCategoriesService extends CrudService<{}, {}, CommonObject> {
   list(filter: {}): Observable<ListResult<CommonObject>> {
-    return this.common.getFrequencies().pipe(map(res => {
+    return this.common.getElementCategories().pipe(map(res => {
       return {
         data: res.result.map(data => new CommonObject(data)),
         length: res.totalRecord

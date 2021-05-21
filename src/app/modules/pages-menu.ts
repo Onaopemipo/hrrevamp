@@ -136,7 +136,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Reviewer Appraisal',
         link: '/performance/appraisals'
       },
-    
+
       {
         title: 'Rating',
         link: '/performance/rating'
@@ -423,6 +423,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Institution Management',
         link: '/payroll/institutionalmanagement'
+      },
+      {
+        title: 'Types',
+        link: '/payroll/types'
       },
       {
         title: 'Pay Elements',
