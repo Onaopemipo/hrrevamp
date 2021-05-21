@@ -116,6 +116,8 @@ export class CreateComponent implements OnInit {
   createMgtLog() {
     if (this.selectedRecipient.length > 0) {
       this.loadingDiscipline = true;
+      this.selectedRecipient.map(s => { s.dateCreated = new Date; return s; })
+      this.selectedCc.map(s => { s.dateCreated = new Date; return s;} )
       this.DisciplineManagement.recipientsEmployee = JSON.stringify(this.selectedRecipient);
       this.DisciplineManagement.carbonCopyEmployee = JSON.stringify(this.selectedCc);
       this.AddUpdateDisciplineManagementService.addUpdateDisciplineManagement(this.DisciplineManagement).subscribe(data => {
@@ -134,7 +136,7 @@ export class CreateComponent implements OnInit {
 
   }
   ngOnInit(): void {
-  
+    this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.acitivatedroute.params.subscribe(data => {
       //    console.log(data);
           if (data.type) {

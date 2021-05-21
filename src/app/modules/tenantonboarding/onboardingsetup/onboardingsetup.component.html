@@ -383,18 +383,21 @@
 </div>
 
 <ngx-side-modal [(show)]="showModulesModal" [position]="modalPosition">
-  <div modal-header>Modules</div>
+  <div modal-header>
+    <div style="display: flex;flex-direction: row;">
+<div style="flex: auto;">Modules</div>
+<i class="fa fa-times" style="cursor: pointer;" (click)="showModulesModal = false"></i>
+    </div>
+  </div>
   <div modal-body>
     <div style="display: flex;flex-direction: column; width: 100%;" *ngFor="let sPlan of selectedPlanModule">
       <div class="p-normal" style="display: flex;padding: 10px;">
         <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
-        <div style="padding: 1.5px 0 0 20px;">{{sPlan.modular.name}}</div>
+        <div style="padding: 1.5px 0 0 20px;">{{sPlan.modularName}}</div>
       </div>
      
     </div>
   </div>
-  <div modal-actions>
 
-  </div>
 </ngx-side-modal>
 
