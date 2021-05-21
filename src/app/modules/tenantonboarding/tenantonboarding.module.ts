@@ -26,7 +26,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { environment } from 'app/environment';
 // import { EmployeeofferComponent } from '../employeemodule/employeeoffer/employeeoffer.component';
 import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/employeeonboardingprofile.component';
-import { CommonServiceProxy, FetchSubscriptionPlansServiceProxy, RegisterCompanyServiceProxy, UploadDocumentServiceProxy, VerifySubscriptionPaymentServiceProxy } from 'app/_services/service-proxies';
+import { CommonServiceProxy, FetchSubscriptionPlanModulesServiceProxy, FetchSubscriptionPlansServiceProxy, RegisterCompanyServiceProxy, UploadDocumentServiceProxy, VerifySubscriptionPaymentServiceProxy } from 'app/_services/service-proxies';
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 
@@ -65,7 +65,8 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     RegisterCompanyServiceProxy,
     CommonServiceProxy,
     UploadDocumentServiceProxy,
-    VerifySubscriptionPaymentServiceProxy
+    VerifySubscriptionPaymentServiceProxy,
+    FetchSubscriptionPlanModulesServiceProxy
   ]
 })
 export class TenantonboardingModule { }

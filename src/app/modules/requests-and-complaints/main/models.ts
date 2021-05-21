@@ -32,8 +32,8 @@ export class Complaint implements IStatus {
             complainerName: request.employeeName,
             description: request.description,
             status: request.status,
-            time: request.dateModified,
-            complainerEmail: 'xxx@email.cc', //request.email;
+            time: request.request_date,
+            complainerEmail: 'xxx@email.cc',
             referenceNo: request.refNo,
         }
         this.iComplaint.id = request.id;
@@ -41,9 +41,9 @@ export class Complaint implements IStatus {
         this.iComplaint.complainerName = request.employeeName;
         this.iComplaint.description = request.description;
         this.iComplaint.status = request.status;
-        this.iComplaint.time = request.dateModified;
+        this.iComplaint.time = request.request_date;
         // this.iComplaint.complainerEmail = request.email;
-        this.iComplaint.referenceNo = request.refNo;
+        this.iComplaint.referenceNo = 'REQ' + request.id;
     }
 
     get complainerImageSrc() {
@@ -74,7 +74,7 @@ export class Complaint implements IStatus {
     }
 
     get status() {
-        return this.iComplaint.status;
+        return String(this.iComplaint.status);
     }
 
     getStatusColor() {
@@ -82,6 +82,8 @@ export class Complaint implements IStatus {
     }
 
     getStatusLabel() {
-        return 'In progress';
+      if(this.status === '1') return 'Approved';
+      if(this.status === '2') return 'Pending';
+      return 'Declined';
     }
 }

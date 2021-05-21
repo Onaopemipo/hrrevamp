@@ -14,6 +14,7 @@ import { extend } from 'validate.js';
 export abstract class PayrollApiModelClass<D=any, E=any>{
   // @myPropertyFaker(FAKER_CONFIG.number, {})
   id: number;
+  name: string;
   // @myPropertyFaker(FAKER_CONFIG.name, {})
   // name: string;
   // @myPropertyFaker(FAKER_CONFIG.words, {})
@@ -37,6 +38,12 @@ export abstract class PayrollApiModelClass<D=any, E=any>{
   getFake() {
     // throw new Error('Method not implemented.');
     return this;
+  }
+  get selectValue() {
+    return this.id;
+  }
+  get selectLabel() {
+    return this.name;
   }
 };
 
@@ -136,6 +143,8 @@ export class MyPayrollElementModel extends PayrollApiModelClass<PayElementDTO, M
   is_reocurring: boolean;
   is_tax_deduct: boolean;
   is_variable: boolean;
+  start_date: Date;
+  end_date: Date;
   fromApi(data: PayElementDTO) {
     this.name = data.name;
     // this.type = data.payTypeId;
@@ -151,6 +160,9 @@ export class MyPayrollElementModel extends PayrollApiModelClass<PayElementDTO, M
     this.is_reocurring = data.is_reoccurring;
     this.is_tax_deduct = data.isTaxDeduct;
     this.is_variable = data.is_variable;
+
+    this.start_date = data.start_date;
+    this.end_date = data.end_date;
     return this;
   }
   toManage(): ManagePayElementDTO {
@@ -256,7 +268,7 @@ export class MyPayrollTypeService extends CommonBaseService<MyPayrollType, Payro
     super();
   }
   list(filter: PayrollTypeFilter): Observable<ListResult<MyPayrollType>>{
-    const res = this.list_api_call.getAllPayrollTypes(filter.pageSize, filter.pageNumber, filter.frequencyRuleId);
+    const res = this.list_api_call.getAllPayrollTypes(10, 1, filter.frequencyRuleId);
     return res.pipe(map(x => this.getData(x, y => new MyPayrollType().fromApi(y))));
   }
   create(data: MyPayrollType): Observable<any> {

@@ -106,11 +106,11 @@
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 2">
         <label>Min Rating</label>
-        <input type="number"  min="0" [(ngModel)]="editingData.minRating" class="form-control" />
+        <input type="number"  [min]="0" [max]="editingData.maxRating" [(ngModel)]="editingData.minRating" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 2">
         <label>Max Rating</label>
-        <input type="number"  min="1" [(ngModel)]="editingData.maxRating" class="form-control" />
+        <input type="number"  [min]="editingData.minRating" [max]="editingData.score"  [(ngModel)]="editingData.maxRating" class="form-control" />
       </div>
       <div class="form-group" *ngIf="editingData.ratingTypeId == 1">
         <label>Yes Score</label>

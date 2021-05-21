@@ -1,4 +1,4 @@
-import { JobDTO, JobFilterDTO, RecruitmentJobServiceProxy, RecruitmentJobApplicationServiceProxy, JobApplicationSearch } from './../../../../_services/service-proxies';
+import { JobDTO, RecruitmentJobServiceProxy, RecruitmentJobApplicationServiceProxy, JobApplicationSearch } from './../../../../_services/service-proxies';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   lineOption: any = {};
 
   allJobs: JobDTO []= [];
-  jobFilter: JobFilterDTO;
+  jobFilter: any;
   jobsCounter: number = 0;
 
   allJobsApplicaions: JobApplicationSearch [] = [];
@@ -599,11 +599,11 @@ this.optionsForPie = {
     }
 
     async fetchAllJobs(){
-    const data = await this.job.getAllJobs(this.jobFilter).toPromise();
-    if(!data.hasError){
-      this.allJobs = data.result;
-      this.jobsCounter = data.totalRecord;
-    }
+    // const data = await this.job.getAllJobs(this.jobFilter).toPromise();
+    // if(!data.hasError){
+    //   this.allJobs = data.result;
+    //   this.jobsCounter = data.totalRecord;
+    // }
     }
 
     async fetchJobApplications(){

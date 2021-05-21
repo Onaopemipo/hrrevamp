@@ -16,6 +16,41 @@
   [tableActions]="tableActions"
   (tableActionClicked)="tableActionClick($event)"
 >
-<div custom-form>
-</div>
+<!-- <div custom-form>
+  <div class="form-group">
+    <label>Name</label>
+    <input class="form-control" [(ngModel)]="editingData.name"/>
+  </div>
+  <div class="form-group">
+    <label>Reference Number</label>
+    <input class="form-control" [(ngModel)]="editingData.referenceNumber"/>
+  </div>
+  <div class="form-group">
+    <label>Serial Number</label>
+    <input class="form-control" [(ngModel)]="editingData.serialNumber"/>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <ngx-wysisyg-input [(value)]="editingData.description"></ngx-wysisyg-input>
+  </div>
+  <div class="form-group">
+    <label>Category</label>
+    <select [(ngModel)]="editingData.assetCategoryId">
+      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+    </select>
+  </div>
+
+  {name: 'assetCategoryId', label: 'assetCategoryId', type: FORM_TYPES.number},
+  {name: 'assetMakeId', label: 'Make', type: FORM_TYPES.number},
+  {name: 'assetModelId', label: 'Model', type: FORM_TYPES.number},
+  {name: 'assetTypeId', label: 'Type', type: FORM_TYPES.number},
+  {name: 'assetSubTypeId', label: 'SubType', type: FORM_TYPES.number},
+  {name: 'assetStatusId', label: 'Status', type: FORM_TYPES.number},
+  {name: 'manufactureDate', label: 'Manufacture Date', type: FORM_TYPES.date},
+  {name: 'purchaseDate', label: 'Purchase Date', type: FORM_TYPES.date},
+  {name: 'depreciationDate', label: 'Depreciation Date', type: FORM_TYPES.date},
+  {name: 'purchaseAmount', label: 'Purchase Amount', type: FORM_TYPES.number},
+  {name: 'barCode', label: 'Bar Code', type: FORM_TYPES.text},
+  {name: 'qrCode', label: 'QR Code', type: FORM_TYPES.text},  
+</div> -->
 </ngx-page>

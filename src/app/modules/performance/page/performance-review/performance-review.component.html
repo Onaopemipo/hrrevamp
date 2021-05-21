@@ -4,7 +4,6 @@
  pageHeader="Performance Review"
  pageDescription=""
  [loading]="loading"
-      
 >
 </ngx-default-content>
 <div *ngIf="!loading">
@@ -27,11 +26,18 @@
             <tr *ngFor='let kpi of tempEditingData'>
                 <td>{{kpi.title}}</td>
                 <td>
-                  <div *ngIf="kra.isEmployeeSubmitted">
-                    {{kpi.employeeScore}}
+                  <div *ngIf="kra.isEmployeeSubmitted || !isEmployeePage">
+                    <span>
+                      {{kpi.employeeScore}}
+                    </span>
                   </div>
                   <div *ngIf="!kra.isEmployeeSubmitted">
-                    <input class="form-control" type="number" min="0" [(ngModel)]="kpi.employeeScore"/>
+                    <input class="form-control" type="number" [min]="kpi.minRating" [max]="kpi.maxRating" [(ngModel)]="kpi.employeeScore" *ngIf="kpi.isClosedEnded"/>
+                    <nb-radio-group [(ngModel)]="kpi.employeeScore" [name]="'employee-' + kpi.kpiId"  *ngIf="!kpi.isClosedEnded">
+                      <nb-radio [value]="1">Yes</nb-radio>
+                      <nb-radio [value]="2">Fair</nb-radio>
+                      <nb-radio [value]="3">No</nb-radio>
+                    </nb-radio-group>
                   </div>
                 </td>
                 <td>
@@ -40,7 +46,7 @@
                     <span *ngIf="!kpi.employeeComment">-</span>
                   </div>
                   <div *ngIf="!kra.isEmployeeSubmitted">
-                    <input class="form-control" [(ngModel)]="kpi.employeeComment"/>
+                    <input class="form-control" [(ngModel)]="kpi.employeeComment"  [disabled]="!kpi.canComment"/>
                   </div>
                 </td>
                 <td *ngIf="!isEmployeePage">
@@ -48,7 +54,12 @@
                     {{kpi.reviewerScore}}
                   </div>
                   <div *ngIf="!kra.isReviewerSubmitted">
-                    <input type="number" min="0" class="form-control" [(ngModel)]="kpi.reviewerScore"/>
+                    <input type="number"  [min]="kpi.minRating" [max]="kpi.maxRating" class="form-control" [(ngModel)]="kpi.reviewerScore"  *ngIf="kpi.isClosedEnded"/>
+                    <nb-radio-group [(ngModel)]="kpi.reviewerScore" [name]="'revierer-' + kpi.kpiId"   *ngIf="!kpi.isClosedEnded">
+                      <nb-radio [value]="1">Yes</nb-radio>
+                      <nb-radio [value]="2">Fair</nb-radio>
+                      <nb-radio [value]="3">No</nb-radio>
+                    </nb-radio-group>
                   </div>
                 </td>
                 <td *ngIf="!isEmployeePage">
@@ -58,7 +69,7 @@
                     <span *ngIf="!kpi.reviewerComment">-</span>
                   </div>
                   <div *ngIf="!kra.isReviewerSubmitted">
-                    <input class="form-control" [(ngModel)]="kpi.reviewerComment"/>
+                    <input class="form-control" [(ngModel)]="kpi.reviewerComment" [disabled]="!kpi.canComment"/>
                   </div>
                 </td>
                 <td *ngIf="!isEmployeePage && kra.isReviewerSubmitted">{{kpi.averageScore}}</td>
@@ -114,4 +125,4 @@
     </div>
 </div>
 </div>
- 
+

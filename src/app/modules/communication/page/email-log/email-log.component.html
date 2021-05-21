@@ -1,21 +1,18 @@
 <ngx-componentsheader
   pageName="Email Log"
-  [requiredButton]="rbutton"
+  [requiredButton]="[]"
   (buttonClick)="pageActionClicked($event)"
 >
 </ngx-componentsheader>
 <div class="main-page-container">
-  <nb-tabset (changeTab)="selectTab($event)">
+  <!-- <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="DRAFT" [tabId]="TABS.DRAFT">
-      <!-- Tab content 1 -->
     </nb-tab>
     <nb-tab tabTitle="SENT" [tabId]="TABS.SENT">
-      <!-- Tab content 2 -->
     </nb-tab>
     <nb-tab tabTitle="TRASH" [tabId]="TABS.TRASH">
-      <!-- Tab content 2 -->
     </nb-tab>
-  </nb-tabset>
+  </nb-tabset> -->
 
   <ngx-tableheader></ngx-tableheader>
 
@@ -23,6 +20,8 @@
     [tableColum]="columns"
     [userData]="emails"
     [loading]="loading"
+    [actions]="tableAction"
+    (actionClick)="tableActionClicked($event)"
     (pageChange)="loadNewPage($event)"
   ></ngx-tablecomponent>
 </div>

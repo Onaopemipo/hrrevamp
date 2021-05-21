@@ -174,6 +174,7 @@
    <p class="listsubheader">Select your preferred package</p>
    </div>
 <div style="padding-top:.5rem;">
+  <h4 *ngIf="loadingSubscriptionPlan"><i class="fa fa-spin fa-spinner"></i></h4>
     <nb-tabset  #tset (click)="filterLeavePlan(tset.tabs._results)">
         <nb-tab tabTitle="Smartace Basic">
    
@@ -231,15 +232,15 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label for="exampleInputEmail1" class="label listsubheader">Billing Type</label>
-       <select class="form-control" >
+       <select class="form-control" [(ngModel)]="billingType">
 <option *ngFor="let freq of allFrequncy" [value]="freq.id">{{freq.name}}</option>
        </select>
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="form-group">
+      <div class="form-group" style="display: flex;flex-direction: column;">
         <label for="exampleInputEmail1" class="label listsubheader">Next Billing Date</label>
-        <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Next Billing Date">
+       <label> {{nextPaymentDate | date: 'medium'}}</label>
       </div>
     </div>
       </div>
@@ -255,7 +256,7 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <button  angular4-paystack
+              <button *ngIf="!paymentLoading" angular4-paystack
               [email]="companyDTO.email"
               [amount]="selectedPlan.amount * 100"
               [ref]="reference"
@@ -263,7 +264,10 @@
               (close)="paymentCancel()"
               (callback)="paymentDone()"
               [channels]="['bank','card'] "
-              style="width: 144px;" type="submit" nbButton status="primary" (click)="proceedtomodules()">Pay</button>
+              style="width: 144px;" type="submit" nbButton status="primary">Pay</button>
+              <button *ngIf="paymentLoading" style="width: 144px;"  nbButton status="primary">
+              <i class="fa fa-spin fa-spinner"></i> Loading...
+              </button>
             </div>
          </div>
 </div>
@@ -278,12 +282,15 @@
     <nb-checkbox [value]="true">Select all</nb-checkbox>
     <div style="padding-top:1.5rem;">
       <div class="row">
-        <div class="col-xxxl-4 col-md-4" >
+        <div class="col-xxxl-4 col-md-4" *ngIf="loadingSubscriptionModule"> 
+         <h4><i class="fa fa-spin fa-spinner"></i>   Loading...</h4>   
+          </div>
+        <div class="col-xxxl-4 col-md-4" *ngFor="let mod of subscriptionPlanModule; let i = index">
           <nb-card>
            <div style="padding: 10px;display: flex;">
           <div style="display: flex;flex-direction: column;flex: auto;">
             <img src="assets/icons/PayrollModule.jpg" style="width:3rem;">
-            <span class="smalltext">Payroll Module</span>
+            <span class="smalltext">{{mod.subscriptionPlanName}}</span>
           </div>
           <div style="justify-content: end;">
             <nb-icon icon="checkmark-circle-2" status="primary" ></nb-icon>
@@ -292,33 +299,6 @@
           </nb-card>
         </div>
 
-        <div class="col-xxxl-4 col-md-4" >
-          <nb-card>
-           <div style="padding: 10px;display: flex;">
-          <div style="display: flex;flex-direction: column;flex: auto;">
-            <img src="assets/icons/PayrollModule.jpg" style="width:3rem;">
-            <span class="smalltext">Payroll Module</span>
-          </div>
-          <div style="justify-content: end;">
-            <nb-icon icon="checkmark-circle-2" status="primary" ></nb-icon>
-          </div>
-          </div>
-          </nb-card>
-        </div>
-
-        <div class="col-xxxl-4 col-md-4" >
-          <nb-card>
-           <div style="padding: 10px;display: flex;">
-          <div style="display: flex;flex-direction: column;flex: auto;">
-            <img src="assets/icons/PayrollModule.jpg" style="width:3rem;">
-            <span class="smalltext">Payroll Module</span>
-          </div>
-          <div style="justify-content: end;">
-            <nb-icon icon="checkmark-circle-2" status="primary" ></nb-icon>
-          </div>
-          </div>
-          </nb-card>
-        </div>
 
       </div>
       <div style="padding-top:1.5rem;">
@@ -383,18 +363,21 @@
 </div>
 
 <ngx-side-modal [(show)]="showModulesModal" [position]="modalPosition">
-  <div modal-header>Modules</div>
+  <div modal-header>
+    <div style="display: flex;flex-direction: row;">
+<div style="flex: auto;">Modules</div>
+<i class="fa fa-times" style="cursor: pointer;" (click)="showModulesModal = false"></i>
+    </div>
+  </div>
   <div modal-body>
     <div style="display: flex;flex-direction: column; width: 100%;" *ngFor="let sPlan of selectedPlanModule">
       <div class="p-normal" style="display: flex;padding: 10px;">
         <nb-icon icon="circle" pack="fa" status="primary"></nb-icon>
-        <div style="padding: 1.5px 0 0 20px;">{{sPlan.modular.name}}</div>
+        <div style="padding: 1.5px 0 0 20px;">{{sPlan.modularName}}</div>
       </div>
      
     </div>
   </div>
-  <div modal-actions>
 
-  </div>
 </ngx-side-modal>
 

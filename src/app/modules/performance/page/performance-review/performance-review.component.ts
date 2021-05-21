@@ -22,7 +22,7 @@ export class PerformanceReviewComponent implements OnInit {
   kpis: MyKpiReview[]  = []
   kra = new KpiReviewDTO().clone();
   loading = true;
-  get isEmployeePage() { 
+  get isEmployeePage() {
     return this.performanceEmployeeType == PerformanceEmployeeType.employee;
   }
   get isReviewerPage() {
@@ -43,7 +43,7 @@ export class PerformanceReviewComponent implements OnInit {
   //   return this._kra;
   // }
   @Input() set current_kra(val: KpiReviewDTO) {
-    if(!val || val.cycleId == 0) return;
+    if(!val || val.cycleId == 0 || !val.cycleId) return;
     this._kra = val;
     this.cycle_id = val.cycleId;
     this.kra_id = val.kraId;
@@ -73,29 +73,32 @@ export class PerformanceReviewComponent implements OnInit {
     });
   }
   async loadKraInfo(){
-    // await this.delay(2000);
+    await this.delay(2000);
+    console.log(1)
+    console.log({a: this.performanceEmployeeType})
     this.loading = true;
     if (this.performanceEmployeeType == PerformanceEmployeeType.employee) {
-
-      this.user1.getuser().then(async user => {
+      console.log(2)
+      // this.user1.getuser().then(async user => {
+        const user = await this.user1.getuser();
         let luser = user[0];
         this.kra =  (await this.employeePerformanceService.employeePerformanceReview(luser.employee_contract_id, this.cycle_id, this.kra_id).toPromise()).result;
-        this.loading = false;
+        // this.loading = false;
         this.tempEditingData = this.kra.assignedKPIs.map(kpi => kpi.clone())
-      })
-     
+      // })
     } else if (this.performanceEmployeeType == PerformanceEmployeeType.reviewer) {
+      console.log(3)
       this.kra =  (await this.reviewePerformanceService.getEmployeePerformanceReview(this._kra.employeeContractId, this.cycle_id, this.kra_id).toPromise()).result;
-      this.loading = false;
+      // this.loading = false;
       this.tempEditingData = this.kra.assignedKPIs.map(kpi => kpi.clone())
     }
     else {
       console.log(this._kra)
       this.kra =  (await this.GetHRAppraisalReviewsService.getEmployeePerformanceReview(this._kra.employeeContractId, this.cycle_id, this.kra_id).toPromise()).result;
-      this.loading = false;
+      // this.loading = false;
       this.tempEditingData = this.kra.assignedKPIs.map(kpi => kpi.clone())
     }
-   
+    this.loading = false;
   }
   // async loadKpi(){
   //   this.kra =  (await this.performanceService.getEmployeePerformanceReview(this.user.user.employee_contract_id, this.cycle_id, this.kra_id).toPromise()).result
@@ -114,6 +117,9 @@ export class PerformanceReviewComponent implements OnInit {
     this.next.emit();
   }
 
+  getKpiScore(kpi: AssignedKPIs){
+  }
+
   async save(){
     this.loadingSave = true;
     let res: MessageOutApiResult;
@@ -123,7 +129,13 @@ export class PerformanceReviewComponent implements OnInit {
         appraisalId: 0,
         //employeeComment: this.kra.employeeComment,
         reviewerComment: '',
-        assignedKPIs: JSON.stringify(this.tempEditingData),
+        assignedKPIs: JSON.stringify(this.tempEditingData.map(kpi => {
+          if(kpi.isClosedEnded) return kpi;
+          kpi.yesResponse = kpi.employeeScore == 1;
+          kpi.fairResponse = kpi.employeeScore == 2;
+          kpi.noResponse = kpi.employeeScore == 3;
+          return kpi;
+        })),
         hrComment: '',
       });
       res = await this.saveEmployeePerformanceService.saveEmployeePerformanceReview(performanceData).toPromise();

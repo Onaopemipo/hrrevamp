@@ -29,7 +29,7 @@ import { SuccessionPlanService } from './services/succession-plan.service';
 import { SuccessionDashboardComponent } from './succession-dashboard/succession-dashboard.component';
 import { NewCompetencyComponent } from './new-competency/new-competency.component';
 import { AuthenticationService } from 'app/_services/authentication.service';
-
+import { CareerSuccessionComponent } from './career-succession.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
     NineGridBoxEmployeeComponent,
     SuccessionDashboardComponent,
     NewCompetencyComponent,
-
+    CareerSuccessionComponent
   ],
   providers: [
     TalentPoolService,
@@ -89,7 +89,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
     NbCheckboxModule,
     ComponentsModule,
     NbProgressBarModule,
-    NbFormFieldModule
+    NbFormFieldModule,
   ]
 })
 export class CareerSuccessionModule { }
