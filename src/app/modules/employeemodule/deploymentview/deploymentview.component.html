@@ -14,7 +14,8 @@
                             </div>
                         </div>
                         <div style="text-align: center; padding: 10px;">
-                            <p class="header6-medium" style="margin-bottom: 1rem !important;">{{employee.firstName}}&nbsp;{{employee.lastName}}</p>
+                            <p class="header6-medium" style="margin-bottom: 1rem !important;">
+                                {{employee.firstName}}&nbsp;{{employee.lastName}}</p>
                             <p style="color: #95A8B8 !important;">{{jobName}}</p>
                         </div>
                     </div>
@@ -130,15 +131,15 @@
                                         </div>
                                         <div class="col-sm-8" *ngFor="let add of employee.addresses">
                                             <div style="display: flex;flex-direction: column;">
-                                            <span>{{add.address1}}</span>
-                                            <span>{{add.address2}}</span>
-                                            <span>{{add.address_type_name}}</span>
-                                            <span>{{add.lga}}</span>
-                                            <span>{{add.state}}</span>                                           
-                                           </div>
+                                                <span>{{add.address1}}</span>
+                                                <span>{{add.address2}}</span>
+                                                <span>{{add.address_type_name}}</span>
+                                                <span>{{add.lga}}</span>
+                                                <span>{{add.state}}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                  
+
                                 </div>
 
 
@@ -148,24 +149,24 @@
                                 <br>
 
                             </nb-tab>
-                          
+
                             <nb-tab tabTitle="Qualifications">
                                 <nb-card>
                                     <nb-card-header>
                                         <h6>Qualifications</h6>
-    
+
                                     </nb-card-header>
-    <nb-card-body>
-        <ngx-default-content *ngIf="showEmptyQualifications" pageHeader="No Qualification Record Found"
-        pageDescription="" buttonValue=""
-    >
-      </ngx-default-content>
-      <ngx-tablecomponent *ngIf="!showEmptyQualifications" [showFilter]="false"
-         [userData]="employee.qualifications"
-        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" >
-      </ngx-tablecomponent>
-    </nb-card-body>
-                                </nb-card>             
+                                    <nb-card-body>
+                                        <ngx-default-content *ngIf="showEmptyQualifications"
+                                            pageHeader="No Qualification Record Found" pageDescription=""
+                                            buttonValue="">
+                                        </ngx-default-content>
+                                        <ngx-tablecomponent *ngIf="!showEmptyQualifications" [showFilter]="false"
+                                            [userData]="employee.qualifications" [tableColum]="tableColumns"
+                                            [totalItems]="totalItems" [currentPage]="currentPage">
+                                        </ngx-tablecomponent>
+                                    </nb-card-body>
+                                </nb-card>
 
                             </nb-tab>
                         </nb-tabset>
@@ -178,7 +179,7 @@
                         </nb-card-header>
 
                         <br>
-                        
+
                         <div style="font-weight: bold; padding: 2rem;">
                             <div class="row">
                                 <div class="col-sm-4">
@@ -200,7 +201,7 @@
                             </div>
                         </div>
 
-                      
+
 
 
                         <div style="font-weight: bold; padding: 2rem;">
@@ -249,8 +250,10 @@
                                     <span>Status</span>
                                 </div>
                                 <div class="col-sm-8">
-    <span [ngClass]="{'pendingClass':comfirmationData.log_status == '1', 'approvedClass' : comfirmationData.log_status == '2','rejectedClass':comfirmationData.log_status == '3'}">
-        {{comfirmationData.log_status == 1? "Pending":(comfirmationData.log_status == 2? "Approved": "Declined") }}</span>
+                                    <span
+                                        [ngClass]="{'pendingClass':comfirmationData.log_status == '1', 'approvedClass' : comfirmationData.log_status == '2','rejectedClass':comfirmationData.log_status == '3'}">
+                                        {{comfirmationData.log_status == 1? "Pending":(comfirmationData.log_status == 2?
+                                        "Approved": "Declined") }}</span>
                                 </div>
                             </div>
                         </div>
@@ -260,12 +263,12 @@
                                     <span>Documents</span>
                                 </div>
                                 <div class="col-sm-8">
-                         
+
                                 </div>
                             </div>
                         </div>
                     </div>
-        
+
                 </div>
             </nb-card-body>
         </nb-card>

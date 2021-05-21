@@ -1,4 +1,5 @@
-<ngx-componentsheader pageName='Deployment Applications' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader pageName='Deployment Applications' [requiredButton]="topActionButtons"
+  (buttonClick)='modal($event)'>
 
 </ngx-componentsheader>
 
@@ -7,39 +8,36 @@
 
 
 
-    <nb-card-body>
+  <nb-card-body>
 
 
-        <nb-card style="margin-top: 15px;">
-            <nb-card-body>
-        
-                <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">
-                    <nb-tab tabTitle="Due">
-        
-                    </nb-tab>
-                    <nb-tab tabTitle="Pending">
-        
-                    </nb-tab>
-        
-                    <nb-tab tabTitle="Approved">
-        
-                    </nb-tab>
-                    <nb-tab tabTitle="Declined">
-        
-                    </nb-tab>
-                </nb-tabset>
-                <ngx-default-content *ngIf="showEmpty" pageHeader="No Deployemnt Record Found"
-                pageDescription="Click on the button to Apply for Deployemnt" [loading]="loading"
-                (buttonClick)="showDeploymentApplicationModal = true"
-                buttonValue="Apply for Deployment"
-                >
-              </ngx-default-content>
-              <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
-                [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allDeployment"
-                [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
-              </ngx-tablecomponent>
-        
+    <nb-card style="margin-top: 15px;">
+      <nb-card-body>
 
+        <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">
+          <nb-tab tabTitle="Due">
+
+          </nb-tab>
+          <nb-tab tabTitle="Pending">
+
+          </nb-tab>
+
+          <nb-tab tabTitle="Approved">
+
+          </nb-tab>
+          <nb-tab tabTitle="Declined">
+
+          </nb-tab>
+        </nb-tabset>
+        <ngx-default-content *ngIf="showEmpty" pageHeader="No Deployemnt Record Found"
+          pageDescription="Click on the button to Apply for Deployemnt" [loading]="loading"
+          (buttonClick)="showDeploymentApplicationModal = true" buttonValue="Apply for Deployment">
+        </ngx-default-content>
+        <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+          [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions"
+          [userData]="allDeployment" [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage"
+          [loading]="loading">
+        </ngx-tablecomponent>
 
 
 
@@ -47,103 +45,125 @@
 
 
 
-              <ngx-side-modal [(show)]='showDeploymentApplicationModal' style="width: 500px; height: 1000px;">
-                <div modal-header>Deployment Application</div>
-                <div modal-body>
-                  <form #deploymentForm="ngForm" name="deploymentForm" id="deploymentForm">
-                    <div class="form-group">
-                      <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Current Location:</label>
-                      <select class="form-control" #current_location_id="ngModel" [(ngModel)]="DeploymentRegistration.current_location_id" name="current_location_id" id="current_location_id" required   >
-                        <option value="">--Select Location--</option>
-                        <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
-                    </select>
-                      <div *ngIf="current_location_id.invalid && (current_location_id.dirty || current_location_id.touched)" class="error">
-                        <div *ngIf="current_location_id.errors.required">Current Location is required</div>
-                      </div>
-                  
-                    </div>
-                    <div class="form-group">
-                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Current State:</label>
-                        <select (change)="getlgaByStateId(current_location_state.value)" name="current_location_state" id="current_location_state" #current_location_state="ngModel" [(ngModel)]="DeploymentRegistration.current_location_state"  class="form-control"  required >
-                          <option value="">--Select State--</option>
-                          <option *ngFor="let addStates of allStates" [value]="addStates.state_name">{{addStates.state_name}}</option>  
-                      </select>
-                      <div *ngIf="current_location_state.invalid && (current_location_state.dirty || current_location_state.touched)" class="error">
-                        <div *ngIf="current_location_state.errors.required">Current State is required</div>
-                      </div>
-                      </div>
-                    <div class="form-group">
-                      <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Current LGA:</label>
-                      <select  name="current_location_lga" id="current_location_lga" #current_location_lga="ngModel" [(ngModel)]="DeploymentRegistration.current_location_lga"  class="form-control"  required >
-                        <option value="">--Select LGA--</option>
-                        <option *ngFor="let addlga of alllgaByStates" [value]="addlga.lga_name">{{addlga.lga_name}}</option>  
-                    </select>
-                    <div *ngIf="current_location_lga.invalid && (current_location_lga.dirty || current_location_lga.touched)" class="error">
-                        <div *ngIf="current_location_lga.errors.required">Current LGA is required</div>
-                      </div>
-                    </div>
-                    
-          
-                      <div class="form-group">
-                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Last Deployment Date:</label>
-                        <ngx-date [(value)]='DeploymentRegistration.last_deployment_date' #last_deployment_date 
-                          name="last_deployment_date" id="last_deployment_date"></ngx-date>
- 
-                      </div>
-                      <div class="form-group">
-                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Effective Date:</label>
-                        <ngx-date [(value)]='DeploymentRegistration.effective_date' #effective_date name="effective_date" id="effective_date"></ngx-date>
-                   
-                      </div>
-                      <div class="form-group">
-                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Requested Location:</label>
-                        <select class="form-control" #requested_location_id="ngModel" [(ngModel)]="DeploymentRegistration.requested_location_id" name="requested_location_id" id="requested_location_id" required   >
-                            <option value="">--Select Location--</option>
-                            <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
-                        </select>
-                        <div *ngIf="requested_location_id.invalid && (requested_location_id.dirty || requested_location_id.touched)" class="error">
-                            <div *ngIf="requested_location_id.errors.required">Requested Location is required</div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Justification:</label>
-                        <textarea name="" id="" cols="30" rows="10" type="text" nbInput fullWidth
-                        placeholder="Enter Comment" #comment="ngModel" [(ngModel)]="DeploymentRegistration.comment" name="comment" id="comment" ></textarea>
-                  
-                      </div>
-                      <div class="form-group">
-                        <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Upload Document:</label>
-                        <ngx-file-upload [single]="false" class="form-control" (valueChange)="getUploadedFile($event)"></ngx-file-upload>
-                     
-                      </div>
-                  
-                  </form>
+
+
+        <ngx-side-modal [(show)]='showDeploymentApplicationModal' style="width: 500px; height: 1000px;">
+          <div modal-header>Deployment Application</div>
+          <div modal-body>
+            <form #deploymentForm="ngForm" name="deploymentForm" id="deploymentForm">
+              <div class="form-group">
+                <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Current Location:</label>
+                <select class="form-control" #current_location_id="ngModel"
+                  [(ngModel)]="DeploymentRegistration.current_location_id" name="current_location_id"
+                  id="current_location_id" required>
+                  <option value="">--Select Location--</option>
+                  <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
+                </select>
+                <div *ngIf="current_location_id.invalid && (current_location_id.dirty || current_location_id.touched)"
+                  class="error">
+                  <div *ngIf="current_location_id.errors.required">Current Location is required</div>
                 </div>
-                <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
-                    <ngx-loadable-button [loading]="loading"  (click)="applyForLeave()" >
-                        Submit
-                      </ngx-loadable-button>           
-                    <div style="padding-left: 15px;">
-                        <button nbButton outline status="primary" (click)="showDeploymentApplicationModal = false" class="d-flex column"
-                        style="background-color: white;">Discard</button> 
-                    </div>
+
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Current State:</label>
+                <select (change)="getlgaByStateId(current_location_state.value)" name="current_location_state"
+                  id="current_location_state" #current_location_state="ngModel"
+                  [(ngModel)]="DeploymentRegistration.current_location_state" class="form-control" required>
+                  <option value="">--Select State--</option>
+                  <option *ngFor="let addStates of allStates" [value]="addStates.state_name">{{addStates.state_name}}
+                  </option>
+                </select>
+                <div
+                  *ngIf="current_location_state.invalid && (current_location_state.dirty || current_location_state.touched)"
+                  class="error">
+                  <div *ngIf="current_location_state.errors.required">Current State is required</div>
                 </div>
-          
-                <div style="margin-top: 10px;"></div>
-              </ngx-side-modal>
-          
-            </nb-card-body>
-        
-        
-        
-            
-        
-        </nb-card>
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Current LGA:</label>
+                <select name="current_location_lga" id="current_location_lga" #current_location_lga="ngModel"
+                  [(ngModel)]="DeploymentRegistration.current_location_lga" class="form-control" required>
+                  <option value="">--Select LGA--</option>
+                  <option *ngFor="let addlga of alllgaByStates" [value]="addlga.lga_name">{{addlga.lga_name}}</option>
+                </select>
+                <div
+                  *ngIf="current_location_lga.invalid && (current_location_lga.dirty || current_location_lga.touched)"
+                  class="error">
+                  <div *ngIf="current_location_lga.errors.required">Current LGA is required</div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Last Deployment
+                  Date:</label>
+                <ngx-date [(value)]='DeploymentRegistration.last_deployment_date' #last_deployment_date
+                  name="last_deployment_date" id="last_deployment_date"></ngx-date>
+
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Effective Date:</label>
+                <ngx-date [(value)]='DeploymentRegistration.effective_date' #effective_date name="effective_date"
+                  id="effective_date"></ngx-date>
+
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Requested
+                  Location:</label>
+                <select class="form-control" #requested_location_id="ngModel"
+                  [(ngModel)]="DeploymentRegistration.requested_location_id" name="requested_location_id"
+                  id="requested_location_id" required>
+                  <option value="">--Select Location--</option>
+                  <option *ngFor="let lc of alllocations" [value]="lc.id">{{lc.location_name}}</option>
+                </select>
+                <div
+                  *ngIf="requested_location_id.invalid && (requested_location_id.dirty || requested_location_id.touched)"
+                  class="error">
+                  <div *ngIf="requested_location_id.errors.required">Requested Location is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Justification:</label>
+                <textarea name="" id="" cols="30" rows="10" type="text" nbInput fullWidth placeholder="Enter Comment"
+                  #comment="ngModel" [(ngModel)]="DeploymentRegistration.comment" name="comment"
+                  id="comment"></textarea>
+
+              </div>
+              <div class="form-group">
+                <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">Upload Document:</label>
+                <ngx-file-upload [single]="false" class="form-control" (valueChange)="getUploadedFile($event)">
+                </ngx-file-upload>
+
+              </div>
+
+            </form>
+          </div>
+          <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+            <ngx-loadable-button [loading]="loading" (click)="applyForLeave()">
+              Submit
+            </ngx-loadable-button>
+            <div style="padding-left: 15px;">
+              <button nbButton outline status="primary" (click)="showDeploymentApplicationModal = false"
+                class="d-flex column" style="background-color: white;">Discard</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px;"></div>
+        </ngx-side-modal>
+
+      </nb-card-body>
 
 
 
-   
 
 
-    </nb-card-body>
+    </nb-card>
+
+
+
+
+
+
+  </nb-card-body>
 </nb-card>

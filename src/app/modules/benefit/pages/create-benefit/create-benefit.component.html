@@ -127,27 +127,54 @@
         <span style="font-weight: 100; font-size: medium; font-style: normal;">PLANS</span>
       </div>
 
-      <div class="row">
+      <div class="row" >
         <div class="col-sm-3">
           <span style="font-weight: bold;">Plan Name</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-            <span> {{AddVendorPlan?.name}}</span>
+          
           </p>
         </div>
         <div class="col-sm-3">
           <span style="font-weight: bold;">Description</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-            <span>{{AddVendorPlan?.description}}</span>
+        
           </p>
         </div>
 
         <div class="col-sm-3">
           <span style="font-weight: bold;">Policy Number</span>
           <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
-            <span>{{AddVendorPlan?.refNumber}}</span>
+        
           </p>
         </div>
 
+      </div>
+
+     
+
+
+      <div class="row" *ngFor="let plan of plans">
+
+        <div class="col-sm-3">
+        
+          <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
+            <span> {{plan?.name}}</span>
+          </p>
+        </div>
+        <div class="col-sm-3">
+          
+          <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
+            <span>{{plan?.description}}</span>
+          </p>
+        </div>
+  
+        <div class="col-sm-3">
+       
+          <p style="margin-top: 0.3rem; margin-bottom: 0.2rem;">
+            <span>{{plan?.refNumber}}</span>
+          </p>
+        </div>
+  
         <div class="col-sm-1">
           <span><a href="">view details</a>
            </span>
@@ -157,9 +184,8 @@
           <button nbButton outline status="danger"  class="d-flex column pl-1"
           style="background-color: white; border: none;"  (click)="deletePlan()"><i class="fas fa-times" style="padding-right: 0.3rem;"></i> Delete Plan</button>
         </div>
-
+        
       </div>
-
       <div style="align-items: center; justify-content: center; display: flex; margin: 4rem 1rem;">
         <div nbButton status="primary" outline class="d-flex column" style="background-color: white;"></div>
       </div>
@@ -171,7 +197,7 @@
 
     <ngx-side-modal [(show)]='showPlan' style="width: 500px;">
       <div modal-header style="font-size: larger; font-weight: bold;">
-        <span></span>
+        <span>Create Vendor Plan</span>
       </div>
       <div modal-body>
 
@@ -203,13 +229,13 @@
 
 
             <div class="form-group row">
-              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor id
+              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor 
               </label>
               <div class="col-sm-8">
                 <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId"
                   #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId">
                   <option value="">--Select Vendor---</option>
-                  <option *ngFor="let evo of Vendora" [value]="evo.id">{{evo.name}}</option> 
+                  <option *ngFor="let v of  AllVendors" [value]="v.id">{{v.name}}</option> 
                 </select>
 
                 <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)" class="error">
@@ -229,14 +255,30 @@
 
             </div>
 
-            <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+            <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;  display: flex;flex-direction: row;">
               <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
                   class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
               <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
                 (click)="SubmitPlan()">Submit</button>
 
+                <div style="padding-left: 15px;">
+                  <button nbButton outline status="primary" (click)="showPlan = false"
+                    class="d-flex column" style="background-color: white;">Discard</button>
+                </div>
 
             </div>
+
+<!-- 
+            <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+              <ngx-loadable-button [loading]="loading" (click)="applyForLeave()">
+                Submit
+              </ngx-loadable-button>
+              <div style="padding-left: 15px;">
+                <button nbButton outline status="primary" (click)="showPlan = false"
+                  class="d-flex column" style="background-color: white;">Discard</button>
+              </div>
+            </div>
+   -->
 
           </div>
         </form>
