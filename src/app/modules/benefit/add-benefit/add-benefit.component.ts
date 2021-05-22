@@ -22,12 +22,13 @@ import {
   ManageBenefitTypeDTO,
   GetAllVendorPlanServiceProxy,
   VendorPlan,
-  AddUpdateBenefitServiceProxy
+  AddUpdateBenefitServiceProxy,
 } from "../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import { J } from "@angular/cdk/keycodes";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
+import { Position } from '../../../_services/service-proxies';
 
 @Component({
   selector: "ngx-add-benefit",
@@ -35,8 +36,8 @@ import { Router } from '@angular/router';
   styleUrls: ["./add-benefit.component.scss"],
 })
 export class AddBenefitComponent implements OnInit {
-  allEligibilities:  IDTextViewModel[]=[]
-  selectedOption=1
+  allEligibilities: IDTextViewModel[] = [];
+  selectedOption = 1;
   AllVendors: VendorDTO[];
   AllEmployee: EmployeeDTO[];
   searchText?: string = "a";
@@ -53,7 +54,8 @@ export class AddBenefitComponent implements OnInit {
   Vendorid: any = 5;
   AllPlans: VendorPlan[] = [];
   selectionHeader: string = "Select Employee";
-  addbtnText:string= "Add Employee"
+  addbtnText: string = "Add Employee";
+  Position: Position[] =[];
   topActionButtons = [
     {
       name: "add_leave_year",
@@ -62,8 +64,8 @@ export class AddBenefitComponent implements OnInit {
       outline: true,
     },
   ];
-  back(){
-    this.route.navigateByUrl('/benefits')
+  back() {
+    this.route.navigateByUrl("/benefits");
   }
   modal(event) {
     if (event == "add_leave_year") {
@@ -82,16 +84,18 @@ export class AddBenefitComponent implements OnInit {
     private AddUpdateBenefitTypeServiceProxy: AddUpdateBenefitTypeServiceProxy,
     private alertservice: AlertserviceService,
     private GetAllVendorPlanServiceProxy: GetAllVendorPlanServiceProxy,
-    private AddUpdateBenefitServiceProxy:AddUpdateBenefitServiceProxy,
+    private AddUpdateBenefitServiceProxy: AddUpdateBenefitServiceProxy,
     private FetchBenefitEligibilitiesServiceProxy: FetchBenefitEligibilitiesServiceProxy,
-    private route : Router
+    private route: Router,
+    private CommonServiceProxy: CommonServiceProxy
   ) {}
 
   ngOnInit(): void {
     this.getAllVendor();
     this.getPlans();
     this.getAllPlans();
-    this.getAllEligibilities()
+    this.getAllEligibilities();
+    this.getPosition(); 
   }
   //Gey ALL vendors
   async getAllVendor() {
@@ -108,11 +112,30 @@ export class AddBenefitComponent implements OnInit {
       console.log("ids", this.Vendorid);
     }
   }
-   get disabled(){
-     if(this.benefit.name && this.benefit.vendorId && this.benefit.vendorPlanId && this.benefit.employees && this.benefit.description) return true;
-     return false
-   }
+  get disabled() {
+    if (
+      this.benefit.name &&
+      this.benefit.vendorId &&
+      this.benefit.vendorPlanId &&
+      this.benefit.employees &&
+      this.benefit.description
+    )
+      return true;
+    return false;
+  }
 
+  //startDate validation
+
+  get validdate() {
+    if (this.benefit.startDate) return true;
+    return false;
+  }
+
+  //expiredate validation
+  get validdated() {
+    if (this.benefit.endDate) return true;
+    return false;
+  }
   // async getAllEmployee() {
   //   const data = await this.FetchAllEmployeesServiceProxy.getAllEmployees(
   //     this.searchText,
@@ -139,17 +162,17 @@ export class AddBenefitComponent implements OnInit {
     console.log("employee", this.employees);
   }
 
-  getSelectedEmployee(event,selectType) {
-    if(selectType == 'employee' ){
-   event.forEach(eve => {
-     var id = eve.id
-     var idString = id.toString();
-     this.benefit.employees =idString
-   })
-   
-   console.log( 'benben',this.benefit.employees)
+  getSelectedEmployee(event, selectType) {
+    if (selectType == "employee") {
+      event.forEach((eve) => {
+        var id = eve.id;
+        var idString = id.toString();
+        this.benefit.employees = idString;
+      });
+
+      console.log("benben", this.benefit.employees);
     }
- }
+  }
   //get all PLans
 
   async getAllPlans() {
@@ -162,7 +185,6 @@ export class AddBenefitComponent implements OnInit {
   }
   //get plans by vendor id
   async getPlans() {
-    
     const data =
       await this.GetVendorPlanByVendorIdServiceProxy.getVendorPlanByVendorId(
         this.Vendorid
@@ -196,16 +218,15 @@ export class AddBenefitComponent implements OnInit {
     }
   }
 
-
-  filtertabConf(){
-
-  }
+  filtertabConf() {}
 
   //Create Benefit
 
-   async SubmitBenefit(){
-     this.submitbtnPressed= true
-    const data = await this. AddUpdateBenefitServiceProxy.addUpdateBenefit(this.benefit).toPromise();
+  async SubmitBenefit() {
+    this.submitbtnPressed = true;
+    const data = await this.AddUpdateBenefitServiceProxy.addUpdateBenefit(
+      this.benefit
+    ).toPromise();
     if (!data.hasError) {
       this.alertservice.openModalAlert(
         this.alertservice.ALERT_TYPES.SUCCESS,
@@ -221,29 +242,38 @@ export class AddBenefitComponent implements OnInit {
         "OK"
       );
     }
-    this.submitbtnPressed = false
+    this.submitbtnPressed = false;
   }
- 
-  handleVendor(vendorId){
 
-    this.GetVendorPlanByVendorIdServiceProxy.getVendorPlanByVendorId(vendorId).toPromise().then(
-      data => { 
-        if(!data.hasError){
+  handleVendor(vendorId) {
+    this.GetVendorPlanByVendorIdServiceProxy.getVendorPlanByVendorId(vendorId)
+      .toPromise()
+      .then((data) => {
+        if (!data.hasError) {
           this.plans = data.result;
-      console.log("plan", this.plans);
+          console.log("plan", this.plans);
         }
-      }
-    ).catch(error => error.message)
+      })
+      .catch((error) => error.message);
   }
 
   //getAllELIGIBILITIES FOR DROPDOWN
 
- async getAllEligibilities(){
-  const data = await this.FetchBenefitEligibilitiesServiceProxy.getBenefitEligibilities().toPromise();
-  if(!data.hasError){
-    this.allEligibilities = data.result
-    console.log('i don tire ell',this.allEligibilities)
-  }
+  async getAllEligibilities() {
+    const data =
+      await this.FetchBenefitEligibilitiesServiceProxy.getBenefitEligibilities().toPromise();
+    if (!data.hasError) {
+      this.allEligibilities = data.result;
+      console.log("i don tire ell", this.allEligibilities);
+    }
   }
 
+  //get positions 
+   async getPosition(){
+     const data = await this.CommonServiceProxy.getPositions().toPromise();
+     if(!data.hasError){
+      this.Position = data.result;
+      console.log('positions',this.Position)
+     }
+   }
 }

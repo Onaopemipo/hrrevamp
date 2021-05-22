@@ -9,6 +9,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeeViewComponent } from './pages/employee-view/employee-view.component';
 import { CreateBenefitComponent } from './pages/create-benefit/create-benefit.component';
 import { BenefitViewComponent } from './pages/benefit-view/benefit-view.component';
+import{ BenefitdetaisComponent} from './benefitdetais/benefitdetais.component';
 import { EligibilityListComponent } from './pages/eligibility-list/eligibility-list.component';
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
 import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/service-proxies'
@@ -39,6 +40,8 @@ import { NbRadioModule } from '@nebular/theme';
     VendorPlanComponent,
     AddBenefitComponent,
     EligibilityviewComponent,
+    BenefitViewComponent,
+    BenefitdetaisComponent
     
   ],
   imports: [

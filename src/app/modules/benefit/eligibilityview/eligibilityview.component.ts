@@ -59,10 +59,11 @@ export class EligibilityviewComponent implements OnInit {
       ).toPromise();
     if (!data.hasError) {
       this.eligibility = data.result;
-      this.Eli =new ManageBenefitEligibilityDTO({ ...this.eligibility.clone(), employees: ''});
+       this.Eli =new ManageBenefitEligibilityDTO({ ...this.eligibility, employees: '', benefitTypeId: 0, positionId: 0,});
       console.log("elo", this.eligibility);
     }
   }
+   c
 
   //edit eligilibilty
   modal(event) {
