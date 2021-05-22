@@ -147,7 +147,7 @@ export class InstitutionalmanagementComponent extends PayrollBaseComponent<
       {name: 'category_id', label: 'Category', type: FORM_TYPES.select, choice_name: ChoiceName.payrollElementCategories, singleSelection: true},
       {name: 'account_name', label: 'Account Name', type: FORM_TYPES.text},
       {name: 'account_number', label: 'Account Number', type: FORM_TYPES.text},
-      {name: 'bank_id', label: 'Bank', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.dataDropdown, dropDownId: 2},
+      {name: 'bank_id', label: 'Bank', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.dataDropdown, dropDownId: 3},
     ]
   };
   filter: MyPayrollInstitutionFilter = {};

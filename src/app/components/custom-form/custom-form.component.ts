@@ -28,6 +28,7 @@ export class FormField {
   disabled?: boolean;
   selectOptions?: ISelectItem[];
   hide?: boolean;
+  dropdownId?: number
 }
 
 export class FormConfig {
