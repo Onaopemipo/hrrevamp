@@ -1,5 +1,8 @@
+import { map } from 'rxjs/operators';
+import { CommonServiceProxy, DataServiceProxy } from './../../_services/service-proxies';
+import { CommonService } from './../../services/common.service';
 import { MyPayrollInstitutionService, MyPayrollTypeService } from './../../modules/payroll/services/common.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Injectable } from '@angular/core';
 import { AssetCategoryService, AssetMakeService, AssetModelService, AssetSubTypeService, AssetTypeService } from 'app/modules/asset-management/services/asset-category.service';
 import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseSubTypeService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
 import { DepartmentsService } from 'app/modules/module-settings/services/departments.service';
@@ -12,6 +15,40 @@ import { TypesService } from 'app/modules/training/services/types.service';
 import { VendorService } from 'app/modules/training/services/vendor.service';
 import { CertificationService, PayElementCategoriesService, PayrollFrequencyRuleService, QualificationService } from 'app/_services/common.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
+class MyDropDownValue{
+  id: number;
+  value: string;
+  constructor(id: number, value: string){
+    this.id = id;
+    this.value = value;
+  }
+
+  get selectLabel() {
+    return this.value;
+  }
+
+  get selectValue() {
+    return this.id;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DropdownByIdService {
+  constructor(
+    private dataService: DataServiceProxy
+  ){}
+
+  getById(id: number){
+    return this.dataService.getDropDownValuesById(id).pipe(map(res => {
+      return res.result.map(data => {
+        return new MyDropDownValue(data.option_value, data.option_text);
+      })
+    }))
+  }
+}
 
 export enum ChoiceName {
   trainingCategory,
@@ -40,6 +77,8 @@ export enum ChoiceName {
   expenseSubType,
   expenseProject,
   expenseProjectActivity,
+  banks,
+  dataDropdown,
 }
 @Component({
   selector: 'ngx-multi-select',
@@ -58,6 +97,7 @@ export class MultiSelectComponent implements OnInit {
   @Input() multiIdValue(val) { }
   @Output() multiIdValueChange = new EventEmitter<string>();
 
+  @Input() dropdown_id = 0;
   @Output() valueChange = new EventEmitter();
   @Input() choice_name: ChoiceName = null;
   @Input() singleSelection = true;
@@ -106,6 +146,7 @@ export class MultiSelectComponent implements OnInit {
     private expenseSubTypeService: ExpenseSubTypeService,
     private expenseProjectService: ExpenseProjectService,
     private expenseProjectActivityService: ExpenseProjectActivityService,
+    private dropdownByIdService: DropdownByIdService,
   ) {}
 
   dropdownList = [];
@@ -174,7 +215,9 @@ export class MultiSelectComponent implements OnInit {
       config[ChoiceName.expenseSubType] = this.expenseSubTypeService;
       config[ChoiceName.expenseProject] = this.expenseProjectService;
       config[ChoiceName.expenseProjectActivity] = this.expenseProjectActivityService;
-      this.dropdownList = (await config[this.choice_name].list({}).toPromise()).data;
+      config[ChoiceName.dataDropdown] = this.dropdownByIdService;
+      console.log(111111)
+      this.dropdownList = this.dropdown_id ? await this.dropdownByIdService.getById(this.dropdown_id).toPromise() : (await config[this.choice_name].list({}).toPromise()).data;
       console.log('aaa', this.dropdownList, this.choice_name, config[this.choice_name]);
       //1 this.dropdownList = (await this.trainingSpecializationService.list({}).toPromise()).data;
       this.dropdownSettings = {

@@ -28,7 +28,7 @@
             </div>
           </td>
           <td *ngFor="let col of tableColum">
-            <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === null">{{ data[col.name] }}</span>
+            <span *ngIf="col.type === COLUMN_TYPES.Text || col.type === undefined">{{ data[col.name] }}</span>
             <span *ngIf="col.type === COLUMN_TYPES.Number">{{ data[col.name] | number: '.2'}}</span>
             <ngx-status *ngIf="col.type === COLUMN_TYPES.Status" [data]="data"></ngx-status>
             <ngx-named-status  *ngIf="col.type === COLUMN_TYPES.CustomStatus" [data]="data" [name]="col.name"></ngx-named-status>
@@ -45,7 +45,7 @@
                 style="background-color: transparent; border: none; text-decoration: underline; padding: 0%; min-width: unset !important;"
                 (click)='customActionClicked(col, data)'>{{ col.link_name }}</button>
             </span>
-         
+
           </td>
           <td *ngIf="showActions">
             <ng-template #card>
