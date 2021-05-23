@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {
   AddUpdateVendorServiceProxy,
   DataServiceProxy,
+  ManageBenefitTypeDTO,
   IDTextViewModelIListApiResult,
   ManageVendorDTO,
   IDTextViewModel,
@@ -12,9 +13,10 @@ import {
   GetAllVendorServiceProxy,
   DeleteVendorServiceProxy,
   CommonServiceProxy,
+  AddUpdateBenefitTypeServiceProxy
 
 } from "../../../_services/service-proxies";
-import { AlertserviceService } from "app/_services/alertservice.service";
+import { AlertserviceService} from "app/_services/alertservice.service";
 import {
   ColumnTypes,
   TableAction,
@@ -23,6 +25,7 @@ import {
 import { FormGroup } from "@angular/forms";
 import { Event } from "../../../_services/service-proxies";
 import { ThrowStmt } from "@angular/compiler";
+import { Router, ActivatedRoute } from "@angular/router";
 
 enum ACTIONS {
   EDIT = "1",
@@ -47,6 +50,8 @@ export class VendorPlanComponent implements OnInit {
   AddVendor = new ManageVendorDTO().clone();
   AddVendorPlan = new ManageVendorPlanDto().clone();
   AllVendors: VendorDTO[];
+  showBenefit:boolean = false;
+  AddBenefit = new ManageBenefitTypeDTO().clone();
 
   // tableActions: TableAction[] = [
   topActionButtons = [
@@ -63,9 +68,15 @@ export class VendorPlanComponent implements OnInit {
       icon: "plus",
       outline: true,
     },
+    {
+      name: "add_benefit",
+      label: "Create Benefit Type",
+      icon: "plus",
+      outline: true,
+    },
   ];
   onClick() {
-    alert("helllo");
+  
   }
   constructor(
     private AddUpdateVendorServiceProx: AddUpdateVendorServiceProxy,
@@ -75,7 +86,9 @@ export class VendorPlanComponent implements OnInit {
     private AddUpdateVendorPlanServiceProxy: AddUpdateVendorPlanServiceProxy,
     private GetVendorByIdServiceProxy: GetVendorByIdServiceProxy,
     private GetAllVendorServiceProxy: GetAllVendorServiceProxy,
-    private DeleteVendorServiceProxy: DeleteVendorServiceProxy
+    private DeleteVendorServiceProxy: DeleteVendorServiceProxy,
+    private router:Router,
+    private AddUpdateBenefitTypeServiceProxy: AddUpdateBenefitTypeServiceProxy,
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +98,8 @@ export class VendorPlanComponent implements OnInit {
     this.getAllVendor();
     
   }
+
+  
   modal(event) {
     if (event == "add_leave_year") {
       this.showEvent = true;
@@ -93,10 +108,13 @@ export class VendorPlanComponent implements OnInit {
     if (event == "add_plan") {
       this.showPlan = true;
     }
+    if (event == "add_benefit") {
+      this.showBenefit = !this.showBenefit
+    }
   }
 
   AddPlan() {
-    alert("hello world");
+  
     this.showPlan = true;
   }
 
@@ -133,7 +151,11 @@ export class VendorPlanComponent implements OnInit {
       return true;
     return false;
   }
-
+  //validation for benefit type
+  get disabled() {
+    if (this.AddBenefit.name) return true;
+    return false;
+  }
   //vendor add
   async SubmitEvent() {
     this.submitbtnPressed = true;
@@ -147,6 +169,7 @@ export class VendorPlanComponent implements OnInit {
         "OK"
       );
       this.submitbtnPressed = false;
+      this.showEvent = false
     } else {
       this.alertservice.openModalAlert(
         this.alertservice.ALERT_TYPES.FAILED,
@@ -154,6 +177,7 @@ export class VendorPlanComponent implements OnInit {
         "OK"
       );
     }
+    this.showEvent = false
   }
   //add plan
 
@@ -191,9 +215,34 @@ export class VendorPlanComponent implements OnInit {
     // }
   }
 
+
+  //BenefitType Add
+  async SubmitBenefitType() {
+    this.submitbtnPressed = true;
+    const data =
+      await this.AddUpdateBenefitTypeServiceProxy.addUpdateBenefitType(
+        this.AddBenefit
+      ).toPromise();
+    if (!data.hasError) {
+      this.alertservice.openModalAlert(
+        this.alertservice.ALERT_TYPES.SUCCESS,
+        data.message,
+        "OK"
+      );
+      this.showPlan = false;
+      this.submitbtnPressed = false;
+    } else {
+      this.alertservice.openModalAlert(
+        this.alertservice.ALERT_TYPES.FAILED,
+        data.message,
+        "OK"
+      );
+    }
+  }
+
   async getSingleVendor() {
     const data = await this.GetVendorByIdServiceProxy.getVendorById(
-      4
+      this.vendorId
     ).toPromise();
     if (!data.hasError) {
       this.singleVendor = data.result;
@@ -219,13 +268,40 @@ export class VendorPlanComponent implements OnInit {
   }
 
    async deleteVendor() {
-    alert("are you sure you want to remove vendor");
-    const data = await this.DeleteVendorServiceProxy.deleteVendor(this.vendorId).toPromise()
-    if(!data.hasError){
-      this.alertservice.openModalAlert(
-        this.alertservice.ALERT_TYPES.SUCCESS,
-        data.message,
-        "OK")
-    }
+    this.alertservice
+    .openModalAlert(
+      this.alertservice.ALERT_TYPES.CONFIRM,
+      "Do you want to delete this?",
+      "Yes"
+    )
+    .subscribe((dataAction) => {
+      if (dataAction == "closed") {
+        this.DeleteVendorServiceProxy.deleteVendor(
+          this.vendorId
+        ).subscribe((myData) => {
+          if (!myData.hasError && myData.result.isSuccessful == true) {
+            this.alertservice
+              .openModalAlert(
+                this.alertservice.ALERT_TYPES.SUCCESS,
+                "Vendor has been deleted",
+                "Success"
+              )
+              .subscribe((delData) => {
+                if (delData)
+                  this.router.navigateByUrl("/benefits/BenefitsVendor");
+              });
+          }
+        });
+      }
+    });
+
+
+    // const data = await this.DeleteVendorServiceProxy.deleteVendor(this.vendorId).toPromise()
+    // if(!data.hasError){
+    //   this.alertservice.openModalAlert(
+    //     this.alertservice.ALERT_TYPES.SUCCESS,
+    //     data.message,
+    //     "OK")
+    // }
   }
 }

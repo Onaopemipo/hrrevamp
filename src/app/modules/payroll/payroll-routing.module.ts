@@ -45,7 +45,7 @@ const routes: Routes = [
         path: 'paymentsetup', component:PaymenysetupComponent
       },
       {
-        path: 'payelement', component: PayrollElementComponent
+        path: 'payelement', component: PayelementComponent
       }
       ,
       {

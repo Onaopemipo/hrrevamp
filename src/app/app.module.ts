@@ -79,6 +79,8 @@ import listPlugin from '@fullcalendar/list';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ConfirmBoxService } from './_services/confirm-box.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EligilibilyviewComponent } from './benefit/eligilibilyview/eligilibilyview.component';
+import { BenefitComponent } from './eligibilityview/benefit/benefit.component';
 // import{CalComponent} from '../app/components/cal/cal.component'
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -87,7 +89,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EligilibilyviewComponent, BenefitComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

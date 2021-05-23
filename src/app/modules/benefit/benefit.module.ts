@@ -12,15 +12,18 @@ import { BenefitViewComponent } from './pages/benefit-view/benefit-view.componen
 import { EligibilityListComponent } from './pages/eligibility-list/eligibility-list.component';
 import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee.component';
 import {FetchEmployeeCoverageBenefitServiceProxy} from '../../../app/_services/service-proxies'
+import { AddBenefitComponent } from './add-benefit/add-benefit.component';
+import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
 
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {
-  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy, AddUpdateVendorPlanServiceProxy,
-  CommonServiceProxy, GetAllVendorServiceProxy, GetVendorByIdServiceProxy
+  AddUpdateVendorServiceProxy, DataServiceProxy, DeleteVendorServiceProxy,FetchAllBenefitsServiceProxy,FetchBenefitEligibilitiesServiceProxy, AddUpdateBenefitEligibilityServiceProxy,FetchBenefitEligibilityServiceProxy, AddUpdateVendorPlanServiceProxy,AddUpdateBenefitTypeServiceProxy,AddUpdateBenefitServiceProxy,
+  CommonServiceProxy, GetAllVendorServiceProxy,GetAllVendorPlanServiceProxy ,DeleteBenefitServiceProxy,FetchAllEligibilitiesServiceProxy,DeleteBenefitEligibilityServiceProxy , GetVendorByIdServiceProxy,FetchAllEmployeesServiceProxy,GetVendorPlanByVendorIdServiceProxy
 } from '../../_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
+import { NbRadioModule } from '@nebular/theme';
 
 
 @NgModule({
@@ -33,13 +36,17 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     BenefitViewComponent,
     EligibilityListComponent,
     ManageEmployeeComponent,
-    VendorPlanComponent
+    VendorPlanComponent,
+    AddBenefitComponent,
+    EligibilityviewComponent,
+    
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     BenefitRoutingModule,
     ThemeModule,
+    NbRadioModule
   ],
   providers: [
     {
@@ -54,8 +61,22 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     CommonServiceProxy,
     GetVendorByIdServiceProxy,
     GetAllVendorServiceProxy,
-  
-    DeleteVendorServiceProxy
+    FetchAllEmployeesServiceProxy,
+    DeleteVendorServiceProxy,GetVendorPlanByVendorIdServiceProxy,
+    AddUpdateBenefitTypeServiceProxy,
+    GetAllVendorPlanServiceProxy ,
+    AddUpdateBenefitServiceProxy,
+    AddUpdateBenefitEligibilityServiceProxy,
+    FetchAllEligibilitiesServiceProxy,
+    DeleteBenefitEligibilityServiceProxy ,
+    FetchBenefitEligibilityServiceProxy,
+    FetchBenefitEligibilitiesServiceProxy,
+    FetchAllBenefitsServiceProxy,
+    GetAllVendorPlanServiceProxy,
+    DeleteBenefitEligibilityServiceProxy ,
+    DeleteBenefitServiceProxy
+    
+
   ]
 })
 export class BenefitModule { }

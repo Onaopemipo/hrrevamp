@@ -1,0 +1,146 @@
+<ngx-componentsheader pageName="Overall Budget" [requiredButton]="[]">
+    <div headerButton>
+      <select class="form-control">
+        <option selected>Current Financial year</option>
+      </select>
+    </div>
+  </ngx-componentsheader>
+
+<div style="margin: 0.5rem;"></div>
+<div style="background-color: white; min-height: 10vh">
+    <div class="row" style="padding-top: 1rem; padding-bottom: 1rem">
+      <div class="col-sm-6">
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-around;
+            border-right: 1px solid #00000020;
+          "
+        >
+          <div
+            style="
+              border: 20px solid #4847e0;
+              border-left-color: #f6f7f9;
+              border-radius: 50%;
+              width: 180px;
+              height: 180px;
+              display: flex;
+              justify-content: center;
+              text-align: center;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+          <span style="font-size: 18px; font-weight: 500;">N850,000.00</span>
+          <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
+        </div>
+          <div>
+            <div style="display: flex; align-items: center">
+              <div
+                style="
+                  padding: 1rem;
+                  background-color: #28a87a1e;
+                  font-size: 1.5rem;
+                "
+              >
+                <i class="far fa-file-alt" style="color: #28a87a"></i>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  margin-left: 1px;
+                  height: 3.5rem;
+                  justify-content: space-between;
+                  padding: 0.3rem;
+                "
+              >
+                <span class="gray-1">Total budget</span>
+                <span class="header5-bold">{{ totalBudget | currency }}</span>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; margin-top: 2rem;">
+                <div
+                  style="
+                    padding: 1rem;
+                    background-color: #28a87a1e;
+                    font-size: 1.5rem;
+                  "
+                >
+                  <i class="far fa-file-alt" style="color: #28a87a"></i>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 1px;
+                    height: 3.5rem;
+                    justify-content: space-between;
+                    padding: 0.3rem;
+                  "
+                >
+                  <span class="gray-1">Total budget</span>
+                  <span class="header5-bold">{{ totalBudget | currency }}</span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div style="justify-content: center; height: 100%; display: flex">
+          <div style="display: flex; align-items: center">
+            <div
+              style="
+                padding: 1rem;
+                background-color: #0070ff1e;
+                font-size: 1.5rem;
+              "
+            >
+              <i class="fas fa-calendar" style="color: #0070ff"></i>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                margin-left: 1px;
+                height: 3.5rem;
+                justify-content: space-between;
+                padding: 0.3rem;
+              "
+            >
+              <span class="gray-1">Financial year</span>
+              <span class="header5-bold">Jan 1st 2020 - Jan 1st 2021</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; padding: 1rem; margin-top: -3rem; background: transparent;">
+      <button nbButton type="outline" status="primary" outline style="border: none;">View Breakdown</button>
+    </div>
+  </div>
+  <div style="margin: 0.5rem;"></div>
+  <ngx-componentsheader
+    pageName="Benefit Coverages"
+    [requiredButton]="topActionButtons"
+  ></ngx-componentsheader>
+
+<div class="row">
+    <div class="col-sm-4" *ngFor="let a of [1,2,3,4,5,6,7,8,9, 10,11,12,13]" style="padding: 0px;">
+        <div style="margin: 15px;">
+            <div class="card" style="display: flex; flex-direction: row; padding: 1rem;">
+                <div style="margin-right: 1rem;">
+                    <img style="height: 3rem; width: 3rem;" src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <span style="font: normal normal normal 16px/19px Rubik; color: #11141A;">Medical/Health Insurance</span>
+                    <br style="margin: 2rem;"/>
+                    <span style="font: normal normal normal 14px/22px Rubik; color: #86828D;">See Announcements made on the system</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

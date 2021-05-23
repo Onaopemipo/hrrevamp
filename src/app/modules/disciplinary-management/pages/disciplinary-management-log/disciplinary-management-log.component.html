@@ -17,6 +17,6 @@
     [tableColum]="tableColumns"
     [userData]="DisciplineManagementList"
     [loading]="loading"
-    (pageChange)="loadNewPage($event)"
+    (filterChange)="filterUpdated($event)"
   ></ngx-tablecomponent>
 </div>

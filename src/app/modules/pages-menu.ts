@@ -136,7 +136,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Reviewer Appraisal',
         link: '/performance/appraisals'
       },
-    
+
       {
         title: 'Rating',
         link: '/performance/rating'
@@ -425,6 +425,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/payroll/institutionalmanagement'
       },
       {
+        title: 'Types',
+        link: '/payroll/types'
+      },
+      {
         title: 'Pay Elements',
         link:'/payroll/payelement'
       },
@@ -521,8 +525,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Benefit Administration',
-    link: '/',
     icon: 'assets/icons/BenefitAdministration.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: '/benefits/',
+      },
+      {
+        title: 'Vendor',
+        link: '/benefits/BenefitsVendor',
+      },
+    ]
   },
   {
     title: 'ACCOUNT & SETTINGS',
