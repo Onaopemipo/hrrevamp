@@ -1,5 +1,5 @@
 <ngx-componentsheader [pageName]="pagetitle"></ngx-componentsheader>
-  <div class="row">
+  <div>
     <nb-card>
       <nb-card-body>
         <form>
@@ -49,14 +49,14 @@
           <div class="form-group row mydiv">
             <label for="Descripion" class="col-sm-2 col-form-label mylabel">Descripion</label>
             <div class="col-sm-5 col-md-5 col-lg-5">
-              <ngx-wysisyg-input [(ngModel)]="newJobModel.description" style="padding-left: -10px;"></ngx-wysisyg-input>
+              <textarea name="description" #description="ngModel" [(ngModel)]="newJobModel.description" cols="30" rows="10"></textarea>
             </div>
           </div>
 
           <div class="form-group row mydiv">
             <label for="Descripion" class="col-sm-2 col-form-label mylabel">Job Requirements</label>
             <div class="col-sm-5 col-md-5 col-lg-5">
-              <ngx-wysisyg-input  [(ngModel)]="newJobModel.requirements" style="padding-left: -10px;"></ngx-wysisyg-input>
+              <textarea name="requirements" #requirements="ngModel" [(ngModel)]="newJobModel.requirements" cols="30" rows="10"></textarea>
             </div>
           </div>
 

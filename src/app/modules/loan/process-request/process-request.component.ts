@@ -28,7 +28,7 @@ export class ProcessRequestComponent implements OnInit {
   loanId: number = 0;
   loanSummary: IdNameObj [] = [];
   loanData: PostLoanDto = new PostLoanDto().clone();
-  singleLoanData: LoanRequestDTOs = new LoanRequestDTOs();
+  singleLoanData: LoanRequestDTOs = new LoanRequestDTOs().clone();
   recompute: number = 0;
   loading:boolean = false;
   repaymentCounter: number = 0;
@@ -40,6 +40,7 @@ export class ProcessRequestComponent implements OnInit {
   ngOnInit(): void {
     // this.fetchRepayment();
     this.loanId = Number(this.router.snapshot.paramMap.get("id"));
+    this. fetchSingleLoan();
   }
 
   async fetchRepayment(){

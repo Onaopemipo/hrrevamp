@@ -33,7 +33,7 @@
           </div>
 
           <div class="col-sm-6">
-            <input class="form-control" type="text" name="employee" value="Employee Name" disabled>
+            <input class="form-control" type="text" name="employee" [value]="singleLoanData.loggedForEmployeeName" disabled>
           </div>
         </div>
 
@@ -43,9 +43,7 @@
           </div>
 
           <div class="col-sm-6">
-            <select class="form-control" name="loanType" disabled>
-              <option value="">--Select Loan Type--</option>
-            </select>
+            <input type="text" class="form-control" name="loanType" #loanType="ngModel" [(ngModel)] ="singleLoanData.loanTypeName" disabled>
           </div>
         </div>
 
@@ -54,7 +52,7 @@
             <label for="">Effective Date</label>
           </div>
           <div class="col-sm-6">
-            <ngx-date></ngx-date>
+            <ngx-date [(value)]="singleLoanData.effectiveDate"></ngx-date>
           </div>
 
         </div>
@@ -64,7 +62,7 @@
             <label for="">Requested Amount</label>
           </div>
           <div class="col-sm-6">
-            <app-amount-input></app-amount-input>
+            <app-amount-input [(value)]="singleLoanData.requestedAmount"></app-amount-input>
           </div>
 
         </div>
@@ -75,7 +73,7 @@
           </div>
 
           <div class="col-sm-6">
-            <input class="form-control" type="number" name="tenor" placeholder="12">
+            <input class="form-control" type="number" name="tenor" #tenor="ngModel" [(ngModel)]="singleLoanData.approvedTenor" placeholder="12">
           </div>
 
         </div>
@@ -85,17 +83,17 @@
             <label for="">Maturity Date</label>
           </div>
           <div class="col-sm-6">
-            <ngx-date></ngx-date>
+            <ngx-date [(value)]="singleLoanData.maturityDate"></ngx-date>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-3">
-            <label for="">Custom Question</label>
+            <label for="">Custom Answer</label>
           </div>
 
           <div class="col-sm-6">
-            <ngx-wysisyg-input style="padding-left: -10px;" ></ngx-wysisyg-input>
+            <textarea name="customAnswer" #customAnswer="ngModel" [ngModel]="singleLoanData.customAnswer" cols="30" rows="10"></textarea>
           </div>
 
         </div>
@@ -106,7 +104,7 @@
           </div>
 
           <div class="col-sm-6">
-            <ngx-wysisyg-input style="padding-left: -10px;" ></ngx-wysisyg-input>
+            <textarea name="justification" #justification="ngModel" [(ngModel)]="singleLoanData.justification" cols="30" rows="10"></textarea>
           </div>
         </div>
 
