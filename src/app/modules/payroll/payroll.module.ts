@@ -40,7 +40,7 @@ import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.comp
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
 import { MyPayElementService, MyPayrollInstitutionService, MyPayrollTypeService } from './services/common.service';
-import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy } from 'app/_services/service-proxies';
 
 
 @NgModule({
@@ -97,6 +97,12 @@ import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProx
     GetAllPayrollTypesServiceProxy,
     GetAllPayElementsServiceProxy,
     AddUpdatePayElementServiceProxy,
+    FetchPayrollItemsServiceProxy,
+    FetchPayTypesServiceProxy,
+    GetAllPayElementsServiceProxy,
+    CommonServiceProxy,
+    AddUpdatePayElementServiceProxy,
+    GetEarningsServiceProxy
   ],
 })
 export class PayrollModule { }

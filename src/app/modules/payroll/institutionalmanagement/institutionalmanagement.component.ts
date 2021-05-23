@@ -135,7 +135,7 @@ export class InstitutionalmanagementComponent extends PayrollBaseComponent<
       // { name: 'category_id', title: 'INDUSTRY' },
       { name: 'account_name', title: 'ACCOUNT NAME' },
       { name: 'account_number', title: 'ACCOUNT NUMBER' },
-      { name: 'bank_id', title: 'BANK' },
+      { name: 'bank_name', title: 'BANK' },
       // {name: 'name', title: 'Name'},
       // {name: 'dateCreated', title: 'Date Modified', type: ColumnTypes.Date},
       // {name: 'name', title: 'Status', type: ColumnTypes.Status},

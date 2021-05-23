@@ -1236,7 +1236,7 @@
         <label>Payroll Type</label>
         <select class="form-control" #payRollTypeId="ngModel"  [(ngModel)]="indvemployeeContract.payRollTypeId" name="payRollTypeId" id="payRollTypeId" required>
             <option value="">--Select Location--</option>
-            <option *ngFor="let pr of allpayrolltypes" [value]="pr.id">{{pr.name}}</option>
+            <option *ngFor="let pr of allpayrolltypes" [value]="pr.option_value">{{pr.option_text</option>
         </select>
    
     </div>
