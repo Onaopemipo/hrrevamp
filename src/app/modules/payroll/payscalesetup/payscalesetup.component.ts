@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { CommonServiceProxy, EmployeeDTO, FrequencyRule, GetAllPayElementsServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
 interface Fields {
   id?: number,
   name?: string
@@ -9,7 +11,13 @@ interface Fields {
   styleUrls: ['./payscalesetup.component.scss']
 })
 export class PayscalesetupComponent implements OnInit {
-  payElement: Fields[] = []
+  payScaleForm: FormGroup;
+  payElement: IDTextViewModel[] = [];
+  allfrequency: FrequencyRule[] = [];
+  selectedEmployee: EmployeeDTO[] = [];
+  allowmultipleselection = true;
+  selectionHeader = "Add Employee";
+  addbtnText = "select employee"
   ElementList = []
 
   tableColumns  = [
@@ -21,47 +29,16 @@ export class PayscalesetupComponent implements OnInit {
   topActionButtons = [
     
   ]
-  constructor() { }
+  constructor(private CommonService: CommonServiceProxy,
+    private GetAllPayElementsService: GetAllPayElementsServiceProxy) { }
 
-  ngOnInit(): void {
-    this.payElement = [
-      {
-        id: 1,
-        name: 'Element one'
-      },
-      {
-        id: 2,
-        name: 'Element two'
-      }, {
-        id: 3,
-        name: 'Element three'
-      },
-    ]
-  }
+  addPayElement(Ele) {
+    var ddChk = this.ElementList.find(e => e.id == Ele.id);
+    if (!ddChk) {
+      this.ElementList.push(Ele);
+    } 
+}
 
-  
-  selectionChanged(ev: any) {
-    const val = ev.target.value;
-
-    let firstresult = '';
-    //i want to check if any selected input is present in the elementList array
-    //receving the checked ones
-    firstresult = this.ElementList.find(x => x.name == val);
-    if (firstresult) {
-      alert('selected input already exit')
-    }
-
-
-    //if there is no element found that is equal to the value passed in the existing arrays then
-    if (!firstresult) {
-
-      let selectedElement = {
-        name: val
-      }
-      this.ElementList.push(selectedElement)
-    }
-
-  }
   onDelete(list) {
     this.ElementList = this.ElementList.filter(Eli => {
       Eli.id !== list.id
@@ -70,5 +47,24 @@ export class PayscalesetupComponent implements OnInit {
   
   modal(event){
 
+  }
+  async getPayElements() {
+    var pElemnt =await this.CommonService.getPayElements().toPromise();
+    if (!pElemnt.hasError) {
+      this.payElement = pElemnt.result;
+    }
+  }
+  async getFrequencies() {
+    var pFreq = await this.CommonService.getFrequencies().toPromise();
+    if (!pFreq.hasError) {
+      this.allfrequency = pFreq.result;
+    }
+  }
+  ngOnInit(): void {
+    this.getPayElements();
+    this.getFrequencies();
+  }
+  getSelectedEmployee(event:EmployeeDTO[]) {
+    this.selectedEmployee = event;
   }
 }

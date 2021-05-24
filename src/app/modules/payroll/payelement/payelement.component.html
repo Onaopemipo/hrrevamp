@@ -65,61 +65,67 @@
           <div *ngIf="elementTypeId.errors.required">Element Type is required</div>
         </div>
       </div>
-      <div class="form-group" *ngIf="ManagePayElement.isTaxDeduct">
-        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Pay Per Hour</label>
-        <input type="text" class="form-control" placeholder="Enter Tax Percentage" name="hourlyPay"
-          #hourlyPay="ngModel" [(ngModel)]="ManagePayElement.hourlyPay" required>
-        <div *ngIf="hourlyPay.invalid && (hourlyPay.dirty || hourlyPay.touched)" class="error">
-          <div *ngIf="hourlyPay.errors.required">Pay Per Hour is required</div>
+      <div  *ngIf="ManagePayElement.payTypeId == 2">
+        <div class="form-group" >
+          <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Pay Per Hour</label>
+          <input type="text" class="form-control" placeholder="Enter Tax Percentage" name="hourlyPay"
+            #hourlyPay="ngModel" [(ngModel)]="ManagePayElement.hourlyPay" required>
+          <div *ngIf="hourlyPay.invalid && (hourlyPay.dirty || hourlyPay.touched)" class="error">
+            <div *ngIf="hourlyPay.errors.required">Pay Per Hour is required</div>
+          </div>
+        </div>
+        <div class="form-group" >
+          <label for="Leave Type Name" style="font-size: small;font-weight: bold;">No of Work Hours(optional)</label>
+          <input type="text" class="form-control" placeholder="Enter Work Hours" name="noOfWorkHours"
+            #noOfWorkHours="ngModel" [(ngModel)]="ManagePayElement.noOfWorkHours">
         </div>
       </div>
-      <div class="form-group" *ngIf="ManagePayElement.isTaxDeduct">
-        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">No of Work Hours(optional)</label>
-        <input type="text" class="form-control" placeholder="Enter Work Hours" name="noOfWorkHours"
-          #noOfWorkHours="ngModel" [(ngModel)]="ManagePayElement.noOfWorkHours">
+ 
+      <div  *ngIf="ManagePayElement.payTypeId == 1">
+        <div class="form-group">
+          <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Payment Mode</label>
+          <nb-radio-group #is_variable="ngModel"  name="is_variable" [(ngModel)]="ManagePayElement.is_variable" class="d-flex" required>
+              <nb-radio [value]="false">Amount</nb-radio>
+              <nb-radio [value]="true">Variable</nb-radio>
+  
+            </nb-radio-group>
+          <div *ngIf="is_variable.invalid && (is_variable.dirty || is_variable.touched)" class="error">
+            <div *ngIf="is_variable.errors.required">Payment Mode is required</div>
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="ManagePayElement.is_variable">
+          <label for="Leave Type Name" class="col-sm-12" style="font-size: small;font-weight: bold;">Variable</label>
+         <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter Percentage" name="variable"
+          #variable="ngModel" [(ngModel)]="ManagePayElement.variable" required>
+        <div *ngIf="variable.invalid && (variable.dirty || variable.touched)" class="error">
+          <div *ngIf="variable.errors.required">variable is required</div>
+        </div>
+         </div>
+         <div class="col-sm-2">
+  of
       </div>
-      <div class="form-group">
-        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Payment Mode</label>
-        <nb-radio-group #is_variable="ngModel"  name="is_variable" [(ngModel)]="ManagePayElement.is_variable" class="d-flex" required>
-            <nb-radio [value]="false">Amount</nb-radio>
-            <nb-radio [value]="true">Variable</nb-radio>
+      <div class="col-sm-6">
+          <select class="form-control" #payElementId="ngModel"  id="payElementId" name="payElementId"   [(ngModel)]="ManagePayElement.payElementId" required>
+              <option value="">--Select Pay Element--</option>
+              <option *ngFor="let pEle of allPayElementDTO;" [value]="pEle.id">{{pEle.name}}</option>
+          </select>
+        <div *ngIf="payElementId.invalid && (payElementId.dirty || payElementId.touched)" class="error">
+          <div *ngIf="payElementId.errors.required">Pay Element is required</div>
+        </div>
+      </div>
+     
+        </div>
+      <div class="form-group" *ngIf="!ManagePayElement.is_variable">
+          <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Amount</label>
+          <input type="text" class="form-control" placeholder="Enter Amount" name="amount"
+            #amount="ngModel" [(ngModel)]="ManagePayElement.amount" required>
+          <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="error">
+            <div *ngIf="amount.errors.required">Amount is required</div>
+          </div>
+        </div>
+      </div>
 
-          </nb-radio-group>
-        <div *ngIf="is_variable.invalid && (is_variable.dirty || is_variable.touched)" class="error">
-          <div *ngIf="is_variable.errors.required">Payment Mode is required</div>
-        </div>
-      </div>
-      <div class="form-group row" *ngIf="ManagePayElement.is_variable">
-        <label for="Leave Type Name" class="col-sm-12" style="font-size: small;font-weight: bold;">Variable</label>
-       <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="Enter Percentage" name="variable"
-        #variable="ngModel" [(ngModel)]="ManagePayElement.variable" required>
-      <div *ngIf="variable.invalid && (variable.dirty || variable.touched)" class="error">
-        <div *ngIf="variable.errors.required">variable is required</div>
-      </div>
-       </div>
-       <div class="col-sm-2">
-of
-    </div>
-    <div class="col-sm-6">
-        <select class="form-control" #payElementId="ngModel"  id="payElementId" name="payElementId"   [(ngModel)]="ManagePayElement.payElementId" required>
-            <option value="">--Select Pay Element--</option>
-            <option *ngFor="let pEle of allPayElementDTO;" [value]="pEle.id">{{pEle.name}}</option>
-        </select>
-      <div *ngIf="payElementId.invalid && (payElementId.dirty || payElementId.touched)" class="error">
-        <div *ngIf="payElementId.errors.required">Pay Element is required</div>
-      </div>
-    </div>
-   
-      </div>
-    <div class="form-group" *ngIf="!ManagePayElement.is_variable">
-        <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Amount</label>
-        <input type="text" class="form-control" placeholder="Enter Amount" name="amount"
-          #amount="ngModel" [(ngModel)]="ManagePayElement.amount" required>
-        <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="error">
-          <div *ngIf="amount.errors.required">Amount is required</div>
-        </div>
-      </div>
       <div class="form-group">
         <label for="Leave Type Name" style="font-size: small;font-weight: bold;">Payment Institution</label>
         <select class="form-control" #paymentInstitutionId="ngModel"  id="paymentInstitutionId" name="paymentInstitutionId"   [(ngModel)]="ManagePayElement.paymentInstitutionId" required>
@@ -146,7 +152,15 @@ of
         
             </div>
         
-        
+            <div modal-actions style="margin-top: 10px; margin-bottom: 30px;display: flex;flex-direction: row;">
+              <ngx-loadable-button [loading]="loadingPayElement" [disabled]="payElementForm.invalid" (click)="createUpdatePayElement()" >
+                Submit
+              </ngx-loadable-button>           
+              <div style="padding-left: 15px;">
+                <button  outline="true" (click)="showAddElementModal = false"  nbButton status="primary" class="d-flex column" > Discard </button>
+             
+              </div>
+          </div>
         
         </ngx-side-modal>
         <!-- view modal -->
@@ -200,7 +214,7 @@ of
                 </nb-card>
         
             </div>
-        
+     
         
         
         </ngx-side-modal>

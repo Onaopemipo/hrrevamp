@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 
 
@@ -40,15 +41,20 @@ export class PayscaletableComponent implements OnInit {
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
     {name: TABLE_ACTION.DELETE, label: 'Delete'},
   ]
-  data=[{
-
-  }]
-  constructor() { }
-
+  data=[]
+  loadingPayScale = false;
+  totalItems = 0;
+  currentPage = 1;
+  constructor(private router:Router) { }
+  get showEmpty() {
+    return this.data.length === 0;
+}
   ngOnInit(): void {
   }
   modal(event) {
-
+    if (event == 0) {
+  this.router.navigate(['/payroll/payscalesetup'])
+}
   }
 
   tableActionClicked(event:TableActionEvent){

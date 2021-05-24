@@ -228,6 +228,7 @@ export class MyPayrollType extends PayrollApiModelClass<PayrollTypeDTO, ManagePa
       firstPeriodEndDate: this.firstPeriodEndDate,
      // noOfYears: this.noOfYears,
       effectiveDate: this.effectiveDate,
+      payElements: "",
       employeeContracts: ""
      // negativePaymentAllowed: this.negativePaymentAllowed,
       //code: this.code,
