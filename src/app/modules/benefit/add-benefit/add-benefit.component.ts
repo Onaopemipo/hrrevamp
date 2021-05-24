@@ -28,7 +28,7 @@ import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import { J } from "@angular/cdk/keycodes";
 import { Router } from "@angular/router";
-import { Position } from '../../../_services/service-proxies';
+import { Position,  BenefitType } from '../../../_services/service-proxies';
 
 @Component({
   selector: "ngx-add-benefit",
@@ -37,7 +37,7 @@ import { Position } from '../../../_services/service-proxies';
 })
 export class AddBenefitComponent implements OnInit {
   allEligibilities: IDTextViewModel[] = [];
-  selectedOption = 1;
+  selectedOption = 0;
   AllVendors: VendorDTO[];
   AllEmployee: EmployeeDTO[];
   searchText?: string = "a";
@@ -56,6 +56,7 @@ export class AddBenefitComponent implements OnInit {
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
   Position: Position[] =[];
+  BenefitType:IDTextViewModel[]
   topActionButtons = [
     {
       name: "add_leave_year",
@@ -87,7 +88,8 @@ export class AddBenefitComponent implements OnInit {
     private AddUpdateBenefitServiceProxy: AddUpdateBenefitServiceProxy,
     private FetchBenefitEligibilitiesServiceProxy: FetchBenefitEligibilitiesServiceProxy,
     private route: Router,
-    private CommonServiceProxy: CommonServiceProxy
+    private CommonServiceProxy: CommonServiceProxy,
+    private DataServiceProxy: DataServiceProxy
   ) {}
 
   ngOnInit(): void {
@@ -96,6 +98,7 @@ export class AddBenefitComponent implements OnInit {
     this.getAllPlans();
     this.getAllEligibilities();
     this.getPosition(); 
+    this.getBenefitType()
   }
   //Gey ALL vendors
   async getAllVendor() {
@@ -123,7 +126,10 @@ export class AddBenefitComponent implements OnInit {
       return true;
     return false;
   }
-
+  get validdating() {
+    if(this.benefit.financialYear) return true;
+    return false
+  }
   //startDate validation
 
   get validdate() {
@@ -276,4 +282,15 @@ export class AddBenefitComponent implements OnInit {
       console.log('positions',this.Position)
      }
    }
+   //Get Benefut Type
+   async getBenefitType() {
+    const data = await this.DataServiceProxy.getBenefitType().toPromise();
+    if (!data.hasError) {
+      this.BenefitType = data.result;
+      console.log(
+        "i want see wetin i keep for that benefit variable",
+        this.BenefitType
+      );
+    }
+  }
 }

@@ -6,8 +6,9 @@ import {
   DeleteBenefitEligibilityServiceProxy,
   ManageBenefitEligibilityDTO,
   FetchAllEligibilitiesServiceProxy,
-  BenefitEligibilityDTO,
-  FetchBenefitEligibilityServiceProxy,
+  BenefitEligibilityDTO, DataServiceProxy,
+  CommonServiceProxy, Position,
+  FetchBenefitEligibilityServiceProxy,IDTextViewModel,
 } from "../../../../_services/service-proxies";
 import { AlertserviceService } from "app/_services/alertservice.service";
 import { Transfer } from "@flowjs/ngx-flow";
@@ -49,6 +50,8 @@ export class EligibilityListComponent extends MainBaseComponent {
   loading: boolean = false;
   totalItems = 0;
   currentPage = 1;
+  Benefit: IDTextViewModel[] = [];
+  Position: Position[] =[];
 
   // Eligibilty = new ManageBenefitEligibilityDTO().clone();
   topActionButtons = [
@@ -57,6 +60,7 @@ export class EligibilityListComponent extends MainBaseComponent {
   TOP_ACTIONS = TOP_ACTIONS;
   TABS = TABS;
   selectedTab = TABS.OPEN;
+  data = [];
   tableColumns = [
     { name: "name", title: "Name" },
     { name: "dateCreated", title: "Date Created" },
@@ -76,7 +80,8 @@ export class EligibilityListComponent extends MainBaseComponent {
     private router: Router,
     private FetchAllEligibilitiesServiceProxy: FetchAllEligibilitiesServiceProxy,
     private DeleteBenefitEligibilityServiceProxy: DeleteBenefitEligibilityServiceProxy,
-    private FetchBenefitEligibilityServiceProxy: FetchBenefitEligibilityServiceProxy
+    private FetchBenefitEligibilityServiceProxy: FetchBenefitEligibilityServiceProxy,
+    private  DataServiceProxy: DataServiceProxy,private CommonServiceProxy:CommonServiceProxy
   ) {
     super();
   }
@@ -172,6 +177,8 @@ export class EligibilityListComponent extends MainBaseComponent {
 
   ngOnInit() {
     this.FetchAllBenefitEligibilities();
+    this.getBenefits();
+    this.getPosition();
   }
 
   //fetch all Eligibility
@@ -196,5 +203,27 @@ export class EligibilityListComponent extends MainBaseComponent {
     //   console.log('eligibilit',this.Eligibility,this.tableData)
     // }
     this.loading = false
+  }
+
+
+  //Benefit Type
+  async getBenefits() {
+    const data = await this.DataServiceProxy.getBenefitType().toPromise();
+    if (!data.hasError) {
+      this.Benefit = data.result;
+      this.data = data.result;
+      console.log(
+        "i want see wetin i keep for that benefit variable",
+        this.Benefit
+      );
+    }
+  }
+
+  async getPosition(){
+    const data = await this.CommonServiceProxy.getPositions().toPromise();
+    if(!data.hasError){
+     this.Position = data.result;
+     console.log('positions',this.Position)
+    }
   }
 }

@@ -23,7 +23,23 @@
                     </div>
 
                 </div>
+                
+                <div class="form-group ">
+                    <label for="inputEmail1" class="label  col-form-label listsubheader">Benefit
+                        Type</label>
+                    <div class="">
+                         <select placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+                            #benefitTypeId="ngModel" [(ngModel)]="benefit.benefitTypeId">
+                            <option value="">--Select Event---</option>
+                            <option *ngFor="let benefit of BenefitType" [value]="benefit.id">{{benefit.text}}</option>
+                        </select>
 
+                        <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
+                            class="error">
+                            <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+                        </div> 
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>Vendor</label>
                     <div>
@@ -54,6 +70,19 @@
                     </div>
 
 
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="label col-form-label listsubheader">Finacial Year</label>
+                    <div class="" style="padding-bottom: 0.5rem;">
+                        <ngx-date [(value)]='benefit.financialYear' #startDate name="financialYear" id="financialYear">
+                        </ngx-date>
+                        <div *ngIf="!validdating" class="error">
+                            <div> Date is required</div>
+                        </div>
+
+
+                    </div>
                 </div>
 
                 <div class="form-group">
