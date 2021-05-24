@@ -146,14 +146,15 @@ export class VendorPlanComponent implements OnInit {
       this.AddVendorPlan.name &&
       this.AddVendorPlan.vendorId &&
       this.AddVendorPlan.description &&
-      this.AddVendorPlan.refNumber
+      this.AddVendorPlan.refNumber && this.AddVendorPlan.companyPercent && this.AddVendorPlan.companyPercentCost && this.AddVendorPlan.employeePercent
+      && this.AddVendorPlan.employeePercentCost
     )
       return true;
     return false;
   }
   //validation for benefit type
   get disabled() {
-    if (this.AddBenefit.name) return true;
+    if (this.AddBenefit.name && this.AddBenefit.description) return true;
     return false;
   }
   //vendor add

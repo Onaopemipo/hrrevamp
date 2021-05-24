@@ -8,10 +8,18 @@
     <nb-tab tabTitle="Completed" [tabId]="TABS.COMPLETED"> </nb-tab>
   </nb-tabset>
   <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader>
-  <ngx-default-content *ngIf="showEmpty" pageHeader="let's set up your expenses"
+  <ngx-default-content *ngIf="showEmpty" pageHeader="let's set up your expenses" [loading]='loading'
     pageDescription="Now, you can add your request" buttonValue="Add expense request"
     (buttonClick)="createNewClicked()">
   </ngx-default-content>
-  <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]="tableData" [loading]="loading"
-    (pageChange)="loadNewPage($event)"></ngx-tablecomponent>
+  <ngx-tablecomponent *ngIf="!showEmpty"  [tableColum]="tableColumns" [userData]="EmployeeBenefit" [loading]="loading"
+    (pageChange)="loadNewPage($event)" [actions]="tableActions"
+    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
 </div>
+<!-- 
+<ngx-tablecomponent [tableColum]="tableColumns" [userData]=" Eligibility" [loading]="loading"
+(pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
+[currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
+ [totalItems]="totalItems"
+ *ngIf="!showEmpty"
+</ngx-tablecomponent> -->

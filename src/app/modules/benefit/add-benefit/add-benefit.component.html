@@ -7,7 +7,7 @@
 <nb-card>
     <nb-card-body>
         <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
-            (click)="back()"></i></span>
+                (click)="back()"></i></span>
         <div class="main-page-container">
             <h4>Initiate New Benefit</h4>
             <p>Let's help create a new benefit plan</p>
@@ -23,7 +23,23 @@
                     </div>
 
                 </div>
+                
+                <div class="form-group ">
+                    <label for="inputEmail1" class="label  col-form-label listsubheader">Benefit
+                        Type</label>
+                    <div class="">
+                         <select placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+                            #benefitTypeId="ngModel" [(ngModel)]="benefit.benefitTypeId">
+                            <option value="">--Select Event---</option>
+                            <option *ngFor="let benefit of BenefitType" [value]="benefit.id">{{benefit.text}}</option>
+                        </select>
 
+                        <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
+                            class="error">
+                            <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+                        </div> 
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>Vendor</label>
                     <div>
@@ -55,6 +71,46 @@
 
 
                 </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="label col-form-label listsubheader">Finacial Year</label>
+                    <div class="" style="padding-bottom: 0.5rem;">
+                        <ngx-date [(value)]='benefit.financialYear' #startDate name="financialYear" id="financialYear">
+                        </ngx-date>
+                        <div *ngIf="!validdating" class="error">
+                            <div> Date is required</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="label col-form-label listsubheader">Start Date</label>
+                    <div class="" style="padding-bottom: 0.5rem;">
+                        <ngx-date [(value)]='benefit.startDate' #startDate name="startDate" id="startDate">
+                        </ngx-date>
+                        <div *ngIf="!validdate" class="error">
+                            <div> Date is required</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1" class="label col-form-label listsubheader">Expire Date</label>
+                    <div class="" style="padding-bottom: 0.5rem;">
+                        <ngx-date [(value)]='benefit.endDate' #startDate name="endDate" id="endDate">
+                        </ngx-date>
+                        <div *ngIf="!validdated" class="error">
+                            <div> Date is required</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label>Description</label>
 
@@ -65,7 +121,6 @@
                         <div *ngIf="description.errors.required">Description is required</div>
                     </div>
                 </div>
-
                
                 <div class="form-group">
                     <div>
@@ -104,6 +159,21 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label> Employee Positions</label>
+                    <select placeholder="Select Gender" class="form-control" name="positionId" id="positionId"
+                        #positionId="ngModel" [(ngModel)]=" benefit.positionId">
+                        <option value="">--Select Vendor---</option>
+                        <option *ngFor="let v of  Position" [value]="v.id">{{v.title}}</option>
+                    </select>
+
+                    <div *ngIf="positionId.invalid && (positionId.dirty || positionId.touched)" class="error">
+                        <div *ngIf="positionId.errors.required">Positions is required</div>
+                    </div>
+
+
+                </div>
+
                 <div *ngIf="selectedOption == 3">
                     <div class="form-group">
                         <label>eligibility</label>
@@ -114,11 +184,11 @@
                         </select>
 
                         <div *ngIf="bucketId.invalid && (bucketId.dirty || bucketId.touched)" class="error">
-                            <div *ngIf="bucketId.errors.required">eligibility  is required</div>
+                            <div *ngIf="bucketId.errors.required">eligibility is required</div>
                         </div>
 
                     </div>
-                </div> 
+                </div>
 
 
 
