@@ -1,5 +1,5 @@
 import { CommonServiceProxy, GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy } from './../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -68,6 +68,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     RecruitmentJobServiceProxy,
     CommonServiceProxy,
     GetAllDepartmentsServiceProxy,
+    RecuritmentJobApplicantServiceProxy,
   ]
 
 })

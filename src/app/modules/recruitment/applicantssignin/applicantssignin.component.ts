@@ -1,4 +1,4 @@
-import { RecruitmentJobServiceProxy } from './../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssigninComponent implements OnInit {
 
-  constructor(private applicant: RecruitmentJobServiceProxy) { }
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy) { }
 
   ngOnInit(): void {
+  }
+
+  authUser(){
+    this.applicant
   }
 
 }

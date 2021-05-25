@@ -17,21 +17,16 @@ export const routes: Routes = [
     component: RecruitmentComponent,
     children: [
       {
-        path: 'applicantssignin',
+        path: 'signin',
         component: ApplicantssigninComponent,
       },
       {
-        path: 'applicantssignup',
+        path: 'signup',
         component: ApplicantssignupComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'applicantssignin',
-        pathMatch: 'full',
       },
 
       {
-        path: 'applicantprofile',
+        path: 'profile',
         component: ApplicantProfileComponent
       },
 
