@@ -6,12 +6,12 @@
 
 
 
-<nb-card>
+<nb-card  *ngFor="let vend of AllVendors">
 
     <nb-card-body>
 
 
-        <div class="row" *ngFor="let vend of AllVendors">
+        <div class="row">
 
 
             <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
@@ -44,13 +44,13 @@
             <div class="col-sm-8">
                 <span style="font-size: large; font-weight: 400; font-style: italic;">{{vend.phoneNumber}}</span>
             </div>
-            <div class="col-sm-3"style="margin-top: 1rem; margin-bottom: 1rem;" >
+            <div class="col-sm-2"style="margin-top: 1rem; margin-bottom: 1rem;" >
                 <a href="javascript:void(0)" (click)="onClick()"  [routerLink]="['/benefits/create-benefit',vend.id]">view details</a>
                 
             </div>
-            <div class="col-sm-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <div class="col-sm-3" style="margin-top: 1rem; margin-bottom: 1rem; color: red;">
                 <!-- <span style="padding: 0.5rem;"><i class="fas fa-trash-alt" style="color: rgb(255, 0, 0);" (click)="deleteVendor()">Remove Vendor</i></span> -->
-                <i class="fas fa-times"  style="background-color: white; color: red;" (click)="deleteVendor()"></i>
+                <i class="fas fa-trash"  style="background-color: white; color: red;" (click)="deleteVendor()"></i> Delete
             </div>
             <div class="col-sm-6" style="margin-top: 1rem; margin-bottom: 1rem;">
                 <!-- <span style="padding: 0.5rem;"><i class="fas fa-trash-alt" style="color: rgb(255, 0, 0);" (click)="deleteVendor()">Remove Vendor</i></span> -->

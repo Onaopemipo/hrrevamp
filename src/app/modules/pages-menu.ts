@@ -532,9 +532,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/benefits/',
       },
       {
+        title: 'Benefit Type',
+        link: '/benefits/BenefitsVendor',
+      },
+      {
         title: 'Vendor',
         link: '/benefits/BenefitsVendor',
       },
+      {
+        title: 'Vendor Plans',
+        link: '/benefits/BenefitsVendor',
+      },
+      {
+        title: 'Benefit Eligibility',
+        link: '/benefits/eligibility',
+      },
+   
     ]
   },
   {

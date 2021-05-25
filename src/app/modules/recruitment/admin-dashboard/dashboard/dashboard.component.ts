@@ -607,7 +607,7 @@ this.optionsForPie = {
     }
 
     async fetchJobApplications(){
-      const data = await this.applications.fetchJobApplications(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined).toPromise();
+      const data = await this.applications.fetchJobApplications(undefined,undefined,undefined).toPromise();
       if(!data.hasError){
         this.allJobsApplicaions = data.result;
         this.applicationsCounter = data.totalRecord;
