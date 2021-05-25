@@ -1,78 +1,11 @@
-<ngx-componentsheader [pageName]="singleVendor.name" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader  (backbuttonClick)="back()" [showbackbutton]="true" [pageName]="singleVendor.name" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
-<span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
-    (click)="back()"></i></span>
+
 <div class="main-page-container">
-  <!-- <h4>Initiate New Benefit</h4>
-  <p>Let's help create a new benefit plan</p> -->
-  <!-- <div class="linear-form">
-    <hr />
-    <div class="form-group">
-      <label>Benefit Name</label>
-      <input class="form-control" />
-    </div>
+  <ngx-default-content *ngIf="!showEmpty" pageHeader="Vendor Details"
+  pageDescription="No record found for selected Vendor"  [loading]="loading"></ngx-default-content>
 
-    <div class="form-group">
-      <label>Benefit Icon</label>
-      <ngx-file-upload></ngx-file-upload>
-      <span>Icon should be in JPEG format</span>
-    </div>
-
-    <hr />
-
-    <div class="form-group">
-      <label>Upload Employees</label>
-      <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']" [horizontal]="true">
-      </ngx-radio-button>
-    </div>
-
-    <div class="form-group">
-      <label>Employee(s)</label>
-      <ngx-employee-master-search></ngx-employee-master-search>
-    </div>
-
-    <div class="form-group">
-      <label>Upload Employee CSV file</label>
-      <ngx-file-upload></ngx-file-upload>
-    </div>
-
-    <div class="form-group">
-      <label>Select Eligibility Type</label>
-      <select class="form-control"></select>
-
-      <hr />
-
-      <div class="form-group">
-        <label>Additional Comment</label>
-        <textarea class="form-control"></textarea>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <div style="display: flex;flex-wrap: wrap;">
-    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;" >
-      <h4>Initiate New Benefit</h4>
-      <p>Let's help create a new benefit plan</p>
-    </div>
-    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;" >
-      <h4>Initiate New Benefit</h4>
-      <p>Let's help create a new benefit plan</p>
-    </div>
-    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;" >
-      <h4>Initiate New Benefit</h4>
-      <p>Let's help create a new benefit plan</p>
-    </div>
-    <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;" >
-      <h4>Initiate New Benefit</h4>
-      <p>Let's help create a new benefit plan</p>
-    </div>
-    
-  </div> -->
-
-  <nb-card>
-
-
-
+  <nb-card *ngIf="showEmpty">
     <nb-card-body>
 
       <div class="row">
@@ -182,7 +115,8 @@
         </div>
         <div class="col-sm-1">
           <button nbButton outline status="danger"  class="d-flex column pl-1"
-          style="background-color: white; border: none;"  (click)="deletePlan()"><i class="fas fa-times" style="padding-right: 0.3rem;"></i> Delete Plan</button>
+          style="background-color: white; border: none;"  (click)="deletePlan()">
+          <i class="fas fa-trash" style="padding-right: 0.3rem;"></i> Delete</button>
         </div>
         
       </div>
@@ -263,7 +197,7 @@
 
             <div class="form-group">
               <label for="Description">Plan Description</label>
-              <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+              <textarea rows="5" type="textarea" class="form-control" placeholder="Enter Description" id="description"
                 name="description" #description="ngModel" [(ngModel)]="AddVendorPlan.description"></textarea>
 
               <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
