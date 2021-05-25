@@ -1,3 +1,4 @@
+import { RecruitmentJobServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssigninComponent implements OnInit {
 
-  constructor() { }
+  constructor(private applicant: RecruitmentJobServiceProxy) { }
 
   ngOnInit(): void {
   }

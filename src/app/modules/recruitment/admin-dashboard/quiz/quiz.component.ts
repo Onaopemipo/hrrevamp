@@ -22,6 +22,10 @@ export class QuizComponent implements OnInit {
   constructor(private quiz: RecruitmentQuizServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.fetchQuestionTypes();
+    this.fetchQuizTypes();
+    this.fetchAllQuizes();
+
   }
 
   addNewQuiz() {

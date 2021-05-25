@@ -16,19 +16,19 @@ export const routes: Routes = [
     path: '',
     component: RecruitmentComponent,
     children: [
-      // {
-      //   path: 'applicantssignin',
-      //   component: ApplicantssigninComponent,
-      // },
-      // {
-      //   path: 'applicantssignup',
-      //   component: ApplicantssignupComponent,
-      // },
-      // {
-      //   path: '',
-      //   redirectTo: 'applicantssignin',
-      //   pathMatch: 'full',
-      // },
+      {
+        path: 'applicantssignin',
+        component: ApplicantssigninComponent,
+      },
+      {
+        path: 'applicantssignup',
+        component: ApplicantssignupComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'applicantssignin',
+        pathMatch: 'full',
+      },
 
       {
         path: 'applicantprofile',
@@ -56,10 +56,10 @@ export const routes: Routes = [
       },
 
 
-      // {
-      //   path: '**',
-      //   component: ApplicantssigninComponent,
-      // },
+      {
+        path: '**',
+        component: ApplicantssigninComponent,
+      },
     ],
   }
 

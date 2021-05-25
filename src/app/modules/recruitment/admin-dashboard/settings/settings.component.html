@@ -38,7 +38,7 @@
 <div *ngIf="!(createStage && createTemplate)" class="row">
   <div class="col-lg-4 col-md-4 col-xxl-4">
       <nb-card>
-      <div  style.height="{{(scase.offsetHeight < 402)?402 : scase.offsetHeight }}px" >
+      <div>
           <div #linklist style="display: flex;flex-direction: column;" *ngFor="let hiringlist of hiringChecklist; let i = index">
 
           <div (click)="selectPanel(hiringlist,i)" [ngClass]="{'wizardlistactive': hiringlist.status == 'Active','wizardlistinactive': hiringlist.status != 'Active'}" style="display: flex;flex-direction: row;margin: .5rem 0 .5rem 0; align-items: center;cursor: pointer;">
@@ -238,30 +238,30 @@
           </div>
 
       <div class="fmContainer" *ngSwitchCase="'Evaluation'">
-        <nb-card class="scoreCardTitle" (click)="toggleScoreCard()">
+        <nb-card *ngFor="let scorecard of allScorecards" class="scoreCardTitle" (click)="toggleScoreCard()">
           <nb-card-header>
             <div style="display: flex; flex-direction: row; justify-content: space-between;">
-              <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
+              <span>{{ scorecard.focusArea }}</span><span><a href="javascript:void(0);" (click)="addFocusArea(scorecard.id)"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
             </div>
           </nb-card-header>
           <nb-card-body *ngIf="scoreCardClick">
             <nb-card class="focusAreaTitle">
               <nb-card-header>
                 <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                  <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                  <span>Focus area</span><span class="actions"><a href="javascript:void(0);">Edit</a><a style="padding: 10px; color:#EB5757;" href="javascript:void(0);">Delete</a></span>
                 </div>
               </nb-card-header>
               <nb-card-body>
                 <nb-card>
                   <nb-card-header>
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                      <span>Analytical Thinking</span><span class="actions"><a href="javascript:void(0);">Edit</a><a style="padding: 10px; color:#EB5757;" href="javascript:void(0);">Delete</a></span>
                     </div>
                   </nb-card-header>
 
                   <nb-card-header>
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                      <span>Competency</span><span class="actions"><a href="javascript:void(0);">Edit</a><a style="padding: 10px; color:#EB5757;" href="javascript:void(0);">Delete</a></span>
                     </div>
                   </nb-card-header>
 
@@ -275,106 +275,6 @@
             </nb-card>
           </nb-card-body>
         </nb-card>
-
-        <nb-card class="scoreCardTitle" (click)="toggleScoreCard($event)">
-          <nb-card-header>
-            <div style="display: flex; flex-direction: row; justify-content: space-between;">
-              <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
-            </div>
-          </nb-card-header>
-          <nb-card-body *ngIf="scoreCardClick">
-            <nb-card class="focusAreaTitle">
-              <nb-card-header>
-                <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                  <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                </div>
-              </nb-card-header>
-              <nb-card-body>
-                <nb-card>
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-                </nb-card>
-              </nb-card-body>
-            </nb-card>
-          </nb-card-body>
-        </nb-card>
-
-        <nb-card class="scoreCardTitle" (click)="toggleScoreCard()">
-          <nb-card-header>
-            <div style="display: flex; flex-direction: row; justify-content: space-between;">
-              <span>Scorecard</span><span><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
-            </div>
-          </nb-card-header>
-          <nb-card-body *ngIf="scoreCardClick">
-            <nb-card class="focusAreaTitle">
-              <nb-card-header>
-                <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                  <span>Focus area</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                </div>
-              </nb-card-header>
-              <nb-card-body>
-                <nb-card>
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Competency</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-                </nb-card>
-              </nb-card-body>
-            </nb-card>
-          </nb-card-body>
-        </nb-card>
-
-          <!-- <nb-card class="cardTitle">
-            <nb-card-header>
-              <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                <span>Communication</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-              </div>
-            </nb-card-header>
-          </nb-card>
-
-          <nb-card class="cardTitle">
-            <nb-card-header>
-              <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                <span>Analytical Thinking</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-              </div>
-            </nb-card-header>
-          </nb-card>
-
-          <nb-card class="cardTitle">
-            <nb-card-header>
-              <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-              </div>
-            </nb-card-header>
-          </nb-card> -->
       </div>
         </div>
   </div>
@@ -384,7 +284,7 @@
 <!-- Modal -->
 
 <ngx-side-modal [(show)]="newStage">
-  <div modal-header>Edit Stage</div>
+  <div modal-header>Add Stage</div>
   <div modal-body>
           <form action="">
             <div class="form-group">
@@ -396,11 +296,12 @@
             </div>
 
 
-            <div class="form-group row" style="margin-top: 15px; display: flex;  flex-direction: row;">
-              <label>Auto-respond-with-mail</label>
-                  <nb-toggle [(ngModel)]="stagesModel.autoEmailRespond" (checked)="autoEmail()"></nb-toggle>
-          </div>
-
+            <div class="form-group">
+              <label style="margin-right: 15px;">Auto-respond-with-mail?</label>
+             <div style=" display: flex; justify-content:left; flex-direction: row;">
+               <label style="margin-right: 20px;">Off</label> <nb-toggle style="margin-right: 20px;" [(ngModel)]="stagesModel.autoEmailRespond" (checked)="autoEmail()"></nb-toggle><label>On</label>
+             </div>
+            </div>
 
             <div class="form-group">
               <label>Email Template</label>
@@ -408,25 +309,21 @@
                 <option value="">--Select Template--</option>
                 <!-- <option *ngFor="let template of allEmailTemplates" [value]="template.id">{{template.name}}</option> -->
               </select>
-              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                <div *ngIf="title.errors.required">Template is required</div>
+              <div *ngIf="emailTemplate.invalid && (emailTemplate.dirty || emailTemplate.touched)" class="error">
+                <div *ngIf="emailTemplate.errors.required">Template is required</div>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="Allow Gender" style="font-size: small;font-weight: bold;">Reviewers</label>
+              <label>Reviewers</label>
               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
           </form>
         </div>
 
-
-        <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 8rem;">
-
-          <button nbButton status="primary" class="d-flex column"
-            style="margin-left: -4rem;" (click)="addNewStage()">Save</button>
-          <button nbButton outline status="primary" class="d-flex column"
-            style="background-color: white; margin-left: 1.2rem;">Cancel</button>
+        <div modal-actions class="d-flex">
+          <button nbButton status="primary" class="d-flex column" (click)="addNewStage()">Save</button>
+          <button nbButton outline status="primary" class="d-flex column" (click)="addStage()">Cancel</button>
          </div>
 </ngx-side-modal>
 
@@ -436,21 +333,21 @@
   <div modal-body>
     <form>
       <div class="form-group row mydiv">
-        <div class="col-sm-10">
+        <div class="col">
           <label for="Name" class="col-form-label mylabel">Core Focus Area</label>
           <input type="text" name="focusArea" #focusArea="ngModel" [(ngModel)]="scoreCardModel.focusArea" class="form-control" placeholder="Focus Area" required>
         </div>
       </div>
 
       <div class="form-group row mydiv">
-        <div class="col-sm-10">
+        <div class="col">
           <label for="TotalWeight" class="col-form-label mylabel">Total Weight</label>
          <input type="number" name="totalWeight" #totalWeight="ngModel" [(ngModel)]="scoreCardModel.totalWeight" class="form-control" required>
         </div>
       </div>
 
       <div class="form-group row mydiv">
-        <div class="col-sm-10">
+        <div class="col">
           <label for="ScoringType" class="col-form-label mylabel">Scoring type</label>
           <select class="custom-select" required>
             <option value="">Select </option>
@@ -464,25 +361,29 @@
       <h6>Questions</h6>
 
       <div class="form-group row mydiv">
-        <div class="col-sm-10">
+        <div class="col">
           <label class="col-form-label mylabel">Question</label><br>
-          <textarea name="question" id="" cols="30" rows="10"></textarea>
-          <!-- <ngx-wysisyg-input [(value)]="questionModel.question" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
+          <textarea name="question" #question="ngModel" [(ngModel)]="questionModel.question" cols="30" rows="10"></textarea>
         </div>
       </div>
 
       <div class="form-group row mydiv">
-        <div class="col-sm-10">
+        <div class="col" >
           <label class="col-form-label mylabel">Weight</label>
          <input type="number" min="0" name="questionWeight" #questionWeight="ngModel" [(ngModel)]="questionModel.weight" class="form-control">
         </div>
       </div>
 
+      <div *ngIf="questionBank.length > 0" style="margin: 10px;">
+        <span class="cbadge"  *ngFor="let question of questionBank" style="margin: 5px;">Question Added &nbsp;
+          <i class="fa fa-times" (click)="removeQuestion(question)" style="cursor: pointer;color: red;"></i></span>
+      </div>
+
       <div class="form-group row mydiv">
         <div class="col">
-          <button nbButton>
-            <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;" (click)="addMoreQuestion()"></i>
-            Add Question</button>
+          <button nbButton (click)="addMoreQuestion()">
+            <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
+            Add New Question</button>
         </div>
       </div>
 
@@ -528,11 +429,19 @@
         </div>
 
 
-        <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 8rem;">
+        <!-- <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 8rem;">
 
           <button nbButton status="primary" class="d-flex column"
             style="margin-left: -4rem;" (click)="addNewStage()">Save</button>
           <button nbButton outline status="primary" class="d-flex column"
             style="background-color: white; margin-left: 1.2rem;">Cancel</button>
-         </div>
+         </div> -->
+
+         <div class="form-group row">
+          <div class="col">
+            <button nbButton status="primary" (click)="createNewTemplate()" >Save</button>
+            <span style="padding: 8px;"></span>
+            <button nbButton>Discard</button>
+          </div>
+        </div>
 </ngx-side-modal>
