@@ -144,7 +144,7 @@ export class CreateBenefitComponent implements OnInit {
 
   //get all vendors
   async getAllVendor() {
-    const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
+    const data = await this.GetAllVendorServiceProxy.getAllVendor(undefined).toPromise();
     if (!data.hasError) {
       this.AllVendors = data.result;
       console.log("All vendors", this.AllVendors);
