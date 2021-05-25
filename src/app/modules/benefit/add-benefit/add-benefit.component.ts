@@ -38,8 +38,8 @@ import { Position,  BenefitType } from '../../../_services/service-proxies';
 export class AddBenefitComponent implements OnInit {
   allEligibilities: IDTextViewModel[] = [];
   selectedOption = 0;
-  AllVendors: VendorDTO[];
-  AllEmployee: EmployeeDTO[];
+  AllVendors: VendorDTO[] = [];
+  AllEmployee: EmployeeDTO[] = [];
   searchText?: string = "a";
   pageSize?: number = 1000;
   pageNum?: number = 1;
@@ -56,7 +56,7 @@ export class AddBenefitComponent implements OnInit {
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
   Position: Position[] =[];
-  BenefitType:IDTextViewModel[]
+  BenefitType:IDTextViewModel[]=[]
   topActionButtons = [
     {
       name: "add_leave_year",
@@ -78,6 +78,8 @@ export class AddBenefitComponent implements OnInit {
     if (this.AddBenefit.name) return true;
     return false;
   }
+  endYear: any = "";
+  startYear: any = "";
   constructor(
     private GetAllVendorServiceProxy: GetAllVendorServiceProxy,
     private FetchAllEmployeesServiceProxy: FetchAllEmployeesServiceProxy,
@@ -91,18 +93,38 @@ export class AddBenefitComponent implements OnInit {
     private CommonServiceProxy: CommonServiceProxy,
     private DataServiceProxy: DataServiceProxy
   ) {}
+  onDateSelection(date: Date){
+    if(this.benefit.startDate){
+       if(this.benefit.startDate.getFullYear() != date.getFullYear()){
+this.startYear = this.benefit.startDate.getFullYear();
+         this.endYear = date.getFullYear();
+         let alertMsg = `Benefit End Year Spill Over to Another Year, Click Yes to set Financial Year End to ${this.endYear} and No to set ${this.startYear} as Financial Year`
+this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alertMsg, 'Yes').subscribe(data => {
+  if (data == "closed") {
+    this.benefit.financialYear = this.endYear
+  } else {
+    this.benefit.financialYear = this.startYear
+  }
 
+})
+       }else{
+        this.benefit.financialYear = date.getFullYear().toString();
+       }
+
+    }    
+  }
   ngOnInit(): void {
-    this.getAllVendor();
+   // this.getAllVendor();
     this.getPlans();
     this.getAllPlans();
     this.getAllEligibilities();
     this.getPosition(); 
-    this.getBenefitType()
+    this.getBenefitType();
+    this.benefit.financialYear = new Date().getFullYear().toString();
   }
   //Gey ALL vendors
-  async getAllVendor() {
-    const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
+  async getAllVendor(benefitTypeId) {
+    const data = await this.GetAllVendorServiceProxy.getAllVendor(benefitTypeId).toPromise();
     if (!data.hasError) {
       this.AllVendors = data.result;
       console.log(

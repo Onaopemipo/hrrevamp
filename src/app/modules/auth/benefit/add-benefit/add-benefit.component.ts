@@ -92,7 +92,8 @@ export class AddBenefitComponent implements OnInit {
   }
   //Gey ALL vendors
   async getAllVendor() {
-    const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
+    var bId = undefined;
+    const data = await this.GetAllVendorServiceProxy.getAllVendor(bId).toPromise();
     if (!data.hasError) {
       this.AllVendors = data.result;
       console.log(

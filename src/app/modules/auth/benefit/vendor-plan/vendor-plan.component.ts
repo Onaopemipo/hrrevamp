@@ -252,7 +252,8 @@ export class VendorPlanComponent implements OnInit {
   }
   vendorId:number = 0
   async getAllVendor() {
-    const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
+    var bId = undefined;
+    const data = await this.GetAllVendorServiceProxy.getAllVendor(bId).toPromise();
     if (!data.hasError) {
       this.AllVendors = data.result;
       const vendorId = this.AllVendors.map(vendor=>{

@@ -500,6 +500,7 @@
                       <option value="1">Full Time</option>
                       <option value="2">Part Time</option>
                       <option value="3">Contract</option>
+                      <option value="4">Remote</option>
                     </select>
 
                     <div *ngIf=" employeeTypeId.invalid && (employeeTypeId.dirty ||  employeeTypeId.touched)"
@@ -580,7 +581,7 @@
                     <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column">Processing &nbsp;
                       <i class="fa fa-spin fa-spinner"></i></button>
                     <button type="submit" nbButton status="primary" *ngIf="!submitbtnPressed"
-                      (click)="proceedtoofferLetter()" [disabled]="!formvalidate">Proceed</button>
+                      (click)="proceedtoofferLetter()" [disabled]="!workformvalidate">Proceed</button>
                   </div>
                 </div>
               </form>

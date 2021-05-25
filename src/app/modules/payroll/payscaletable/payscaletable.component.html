@@ -2,8 +2,20 @@
 <ngx-componentsheader pageName='Pay Scale' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
 
-<ngx-tablecomponent [tableColum]="tableColumns"  (actionClick)="tableActionClicked($event)"[userData]='data' [tableColum]="tableColumns" [actions]='tableActions'>
-</ngx-tablecomponent>
+<nb-card>
+    <nb-card-body>
+        <ngx-default-content *ngIf="showEmpty" pageHeader="Pay Scale"
+        pageDescription="No Record Found"  [loading]="loadingPayScale"
+      >
+        </ngx-default-content>
+        <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+        [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="data"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loadingPayScale">
+        </ngx-tablecomponent>
+
+    </nb-card-body>
+</nb-card>
+
 
 <!-- delete modl -->
 <ngx-side-modal [(show)]="showdeleteModal">

@@ -49,7 +49,7 @@ export class VendorPlanComponent implements OnInit {
   Vendora = [];
   AddVendor = new ManageVendorDTO().clone();
   AddVendorPlan = new ManageVendorPlanDto().clone();
-  AllVendors: VendorDTO[];
+  AllVendors: VendorDTO[] = [];
   showBenefit:boolean = false;
   AddBenefit = new ManageBenefitTypeDTO().clone();
 
@@ -75,9 +75,8 @@ export class VendorPlanComponent implements OnInit {
       outline: true,
     },
   ];
-  onClick() {
-  
-  }
+
+
   constructor(
     private AddUpdateVendorServiceProx: AddUpdateVendorServiceProxy,
     private DataServiceProxy: DataServiceProxy,
@@ -90,7 +89,9 @@ export class VendorPlanComponent implements OnInit {
     private router:Router,
     private AddUpdateBenefitTypeServiceProxy: AddUpdateBenefitTypeServiceProxy,
   ) {}
-
+  get showEmpty() {
+    return this.AllVendors.length === 0;
+}
   ngOnInit(): void {
     this.getBenefits();
     this.getVendor();
@@ -253,8 +254,10 @@ export class VendorPlanComponent implements OnInit {
   }
   vendorId:number = 0
   async getAllVendor() {
-    const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
+    this.loading = true;
+    const data = await this.GetAllVendorServiceProxy.getAllVendor(undefined).toPromise();
     if (!data.hasError) {
+      this.loading = false;
       this.AllVendors = data.result;
       const vendorId = this.AllVendors.map(vendor=>{
         let vend = Number(vendor.id)
@@ -265,6 +268,8 @@ export class VendorPlanComponent implements OnInit {
         "i want see wetin i keep for that vendora variable",
         this.AllVendors
       );
+    } else {
+      this.loading = false;
     }
   }
 

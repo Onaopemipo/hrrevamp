@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     { name: "manage", label: "Manage Employees", outline: false, icon: "" },
     { name: "create", label: "Create Benefit", outline: true, icon: "" },
   ];
+  loading = false;
   constructor(
     private benefitscoverages: FetchEmployeeCoverageBenefitServiceProxy,
     private route: Router,
@@ -37,7 +38,10 @@ export class DashboardComponent implements OnInit {
     private DeleteBenefitServiceProxy: DeleteBenefitServiceProxy,
     private alertservice: AlertserviceService,
     private router: Router
-  ) {}
+  ) { }
+  get showEmpty() {
+    return this.allBenefito.length === 0;
+  }
   totalBudget = 1000000;
 
   ngOnInit(): void {
@@ -63,7 +67,7 @@ export class DashboardComponent implements OnInit {
   plans: VendorPlanDTO[] = [];
 
   async getAllVendor() {
-    const data = await this.GetAllVendorServiceProxy.getAllVendor().toPromise();
+    const data = await this.GetAllVendorServiceProxy.getAllVendor(undefined).toPromise();
     if (!data.hasError) {
       this.AllVendors = data.result;
       const vendorId = this.AllVendors.map((vendor) => {
@@ -109,6 +113,7 @@ export class DashboardComponent implements OnInit {
   }
 
   async fetchBenefits() {
+    this.loading = true;
     const data = await this.FetchAllBenefitsServiceProxy.fetchAllBenefits(
       this.vendorId,
       this.vendorPlanId,
@@ -116,8 +121,11 @@ export class DashboardComponent implements OnInit {
       this.pageNumber
     ).toPromise();
     if (!data.hasError) {
+      this.loading = false;
       this.allBenefito = data.result;
       console.log("beneitoto", this.allBenefito);
+    } else {
+      this.loading = false;
     }
   }
   async getPlans() {

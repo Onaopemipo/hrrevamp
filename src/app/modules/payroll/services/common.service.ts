@@ -80,12 +80,14 @@ export class MyPayrollInstutionModel extends PayrollApiModelClass<PayInstitution
   account_name: string;
   account_number: string;
   bank_id: number;
+  bank_name: string;
   fromApi(data: PayInstitutionDTO) {
     this.name = data.name;
     this.category_id = data.categoryId;
     this.account_name = data.accountName;
     this.account_number = data.accountName;
     this.bank_id = data.bankId;
+    this.bank_name = data.bankName
     return this;
   }
   toManage(): ManagePayInstitutionDTO {
@@ -168,22 +170,24 @@ export class MyPayrollElementModel extends PayrollApiModelClass<PayElementDTO, M
   toManage(): ManagePayElementDTO {
     return new ManagePayElementDTO({
       id: this.id,
-      elementCategoryId: this.element_category_id,
-      // payrollItemId: this.payroll_item_id,
-      // payTypeId: this.pay_type_id,
+      payrollItemId: 1,
+      payTypeId: 1,
       paymentInstitutionId: this.institution_id,
       name: this.name,
       elementTypeId: this.element_type_id,
+      elementCategoryId: this.element_category_id,
+      payElementId: 1,
       is_reoccurring: this.is_reocurring,
       isTaxDeduct: this.is_tax_deduct,
       amount: this.amount,
       is_variable: this.is_variable,
+      variable: 1,
       ratio: 1,
       taxPercentage: 1,
       hourlyPay: 1,
       noOfWorkHours: 1,
-      start_date: new Date(),
-      end_date: new Date()
+      start_date:new Date(),
+      end_date: new Date(),
     });
   }
 }
@@ -222,10 +226,12 @@ export class MyPayrollType extends PayrollApiModelClass<PayrollTypeDTO, ManagePa
       name: this.name,
       frequencyRuleId: this.frequencyRuleId,
       firstPeriodEndDate: this.firstPeriodEndDate,
-      noOfYears: this.noOfYears,
+     // noOfYears: this.noOfYears,
       effectiveDate: this.effectiveDate,
-      negativePaymentAllowed: this.negativePaymentAllowed,
-      code: this.code,
+      payElements: "",
+      employeeContracts: ""
+     // negativePaymentAllowed: this.negativePaymentAllowed,
+      //code: this.code,
     });
   }
 }

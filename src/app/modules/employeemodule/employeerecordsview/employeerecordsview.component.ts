@@ -56,7 +56,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   allgrades: Grade[] = [];
   allSalaryScale: SalaryScale[] = [];
   allemploymenttypes: IDTextViewModel[] = [];
-  allpayrolltypes: PayrollType[] = [];
+  allpayrolltypes: IDTextViewModel[] = [];
   alllocations: Location[] = [];
   alljobRoles: JobRole[] = [];
   allCertfications: Certification[] = [];

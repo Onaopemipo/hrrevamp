@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName="Create Benefit" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader (backbuttonClick)="back()" [showbackbutton]="true" pageName="Create Benefit" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
 <!-- <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
     (click)="back()"></i></span>
@@ -6,8 +6,8 @@
 
 <nb-card>
     <nb-card-body>
-        <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
-                (click)="back()"></i></span>
+        <!-- <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;cursor: pointer;"
+                (click)="back()"></i></span> -->
         <div class="main-page-container">
             <h4>Initiate New Benefit</h4>
             <p>Let's help create a new benefit plan</p>
@@ -28,7 +28,7 @@
                     <label for="inputEmail1" class="label  col-form-label listsubheader">Benefit
                         Type</label>
                     <div class="">
-                         <select placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+                         <select (change)="getAllVendor(benefitTypeId.value)" placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
                             #benefitTypeId="ngModel" [(ngModel)]="benefit.benefitTypeId">
                             <option value="">--Select Event---</option>
                             <option *ngFor="let benefit of BenefitType" [value]="benefit.id">{{benefit.text}}</option>
@@ -71,24 +71,10 @@
 
 
                 </div>
-
-                <div class="form-group">
-                    <label for="inputEmail1" class="label col-form-label listsubheader">Finacial Year</label>
-                    <div class="" style="padding-bottom: 0.5rem;">
-                        <ngx-date [(value)]='benefit.financialYear' #startDate name="financialYear" id="financialYear">
-                        </ngx-date>
-                        <div *ngIf="!validdating" class="error">
-                            <div> Date is required</div>
-                        </div>
-
-
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <label for="inputEmail1" class="label col-form-label listsubheader">Start Date</label>
                     <div class="" style="padding-bottom: 0.5rem;">
-                        <ngx-date [(value)]='benefit.startDate' #startDate name="startDate" id="startDate">
+                        <ngx-date [(value)]='benefit.startDate' [max]="benefit.endDate" #startDate name="startDate" id="startDate">
                         </ngx-date>
                         <div *ngIf="!validdate" class="error">
                             <div> Date is required</div>
@@ -99,15 +85,27 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail1" class="label col-form-label listsubheader">Expire Date</label>
+                    <label for="inputEmail1" class="label col-form-label listsubheader">End Date</label>
                     <div class="" style="padding-bottom: 0.5rem;">
-                        <ngx-date [(value)]='benefit.endDate' #startDate name="endDate" id="endDate">
+                        <ngx-date (valueChange)="onDateSelection($event)" [min]="benefit.startDate" [(value)]='benefit.endDate' #startDate name="endDate" id="endDate">
                         </ngx-date>
                         <div *ngIf="!validdated" class="error">
                             <div> Date is required</div>
                         </div>
 
 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail1" class="label col-form-label listsubheader">Finacial Year</label>
+                    <div class="" style="padding-bottom: 0.5rem;">
+                        <!-- <ngx-date [(value)]='benefit.financialYear' #startDate name="financialYear" id="financialYear">
+                        </ngx-date>
+                        <div *ngIf="!validdating" class="error">
+                            <div> Date is required</div>
+                        </div> -->
+
+{{benefit.financialYear}}
                     </div>
                 </div>
 
@@ -158,22 +156,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label> Employee Positions</label>
-                    <select placeholder="Select Gender" class="form-control" name="positionId" id="positionId"
-                        #positionId="ngModel" [(ngModel)]=" benefit.positionId">
-                        <option value="">--Select Vendor---</option>
-                        <option *ngFor="let v of  Position" [value]="v.id">{{v.title}}</option>
-                    </select>
-
-                    <div *ngIf="positionId.invalid && (positionId.dirty || positionId.touched)" class="error">
-                        <div *ngIf="positionId.errors.required">Positions is required</div>
-                    </div>
-
-
-                </div>
-
                 <div *ngIf="selectedOption == 3">
                     <div class="form-group">
                         <label>eligibility</label>
@@ -189,6 +171,35 @@
 
                     </div>
                 </div>
+                
+                <div *ngIf="selectedOption == 2">
+
+                    <div class="form-group">
+                        <label>Upload Employee CSV file</label>
+                        <ngx-file-upload></ngx-file-upload>
+                    </div>
+                 
+                </div>
+                <div class="form-group">
+                    <label> Employee Positions</label>
+                    <select placeholder="Select Gender" class="form-control" name="positionId" id="positionId"
+                        #positionId="ngModel" [(ngModel)]=" benefit.positionId">
+                        <option value="">--Select Vendor---</option>
+                        <option *ngFor="let v of  Position" [value]="v.id">{{v.title}}</option>
+                    </select>
+
+                    <div *ngIf="positionId.invalid && (positionId.dirty || positionId.touched)" class="error">
+                        <div *ngIf="positionId.errors.required">Positions is required</div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label>Benefit Icon</label>
+                    <ngx-file-upload></ngx-file-upload>
+                    <span>Icon should be in JPEG format</span>
+                </div>
+          
 
 
 
@@ -203,19 +214,6 @@
                 </div>
 
 
-                <div *ngIf="selectedOption == 2">
-
-                    <div class="form-group">
-                        <label>Upload Employee CSV file</label>
-                        <ngx-file-upload></ngx-file-upload>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Benefit Icon</label>
-                        <ngx-file-upload></ngx-file-upload>
-                        <span>Icon should be in JPEG format</span>
-                    </div>
-                </div>
 
                 <!-- <div class="form-group">
                     <label>Employee</label>
@@ -295,27 +293,36 @@
 
         <ngx-side-modal [(show)]='showPlan' style="width: 500px;">
             <div modal-header style="font-size: larger; font-weight: bold;">
-                <span></span>
+                <span>Add Benefit Type</span>
             </div>
             <div modal-body>
 
                 <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
                     <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
                   margin-left: 10px;">create new events</h6> -->
-                    <div style="margin: 20px;">
+                    
                         <div class="form-group">
                             <label for="title">Type of Benefit</label>
-                            <input type="text" class="form-control" placeholder="Enter name of plan" id="name"
+                            <input type="text" class="form-control" placeholder="Enter benefit type name" id="name"
                                 #name="ngModel" name="name" [(ngModel)]="  AddBenefit.name" required>
 
                             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
                                 <div *ngIf="name.errors.required">name is required</div>
                             </div>
 
+                        </div>  
+
+                    <div class="form-group">
+                        <label for="Description" style="margin-left: 0.3rem;" class="label  col-form-label listsubheader">Description</label>
+                        <textarea rows="5" type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                            name="description" #description="ngModel" [(ngModel)]=" AddBenefit.description"></textarea>
+        
+                        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                            <div *ngIf="description.errors.required">Description is required</div>
                         </div>
+        
                     </div>
-
-
+        
 
 
 
@@ -325,11 +332,18 @@
 
 
             <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
-                <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
-                        class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-                <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
-                    (click)="SubmitBenefitType()">Submit</button>
-
+                <div style="display: flex;flex-direction: row;">
+<div style="padding-right: 20px;">
+    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+        class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+<button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
+    (click)="SubmitBenefitType()">Submit</button>
+</div>
+<button outline="true" nbButton status="primary" class="d-flex column" 
+(click)="showPlan = false">Discard</button>
+                </div>
+               
+                   
 
             </div>
 

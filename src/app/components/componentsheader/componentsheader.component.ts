@@ -13,7 +13,8 @@ export interface IRequiredButton {
 })
 export class ComponentsheaderComponent implements OnInit {
   @Output() buttonClick = new EventEmitter<string>();
-
+  @Output() backbuttonClick = new EventEmitter<string>();
+  @Input() showbackbutton: boolean = false;
   @Input() pageName: string = 'Page Name';
   @Input() requiredButton: IRequiredButton[] = [];
   constructor() { }
