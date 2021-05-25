@@ -127,6 +127,7 @@ export class PayelementComponent implements OnInit {
     this.getPayElementType();
     this.getPaymentInstitution();
     this.ManagePayElement.is_variable = false;
+    this.ManagePayElement.payTypeId = 2;
   }
 
   tableActionClicked(event: TableActionEvent){

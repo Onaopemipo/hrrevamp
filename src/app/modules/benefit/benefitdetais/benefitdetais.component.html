@@ -1,0 +1,123 @@
+<ngx-componentsheader   [pageName]='benefitSingle.name'>
+</ngx-componentsheader>
+
+<!-- [requiredButton]="topActionButtons" (buttonClick)='modal($event)' -->
+
+
+<!-- <ngx-default-content *ngIf="showEmpty" pageHeader="let's set up your expenses" [loading]='loading'
+    pageDescription="Now, you can add your request" buttonValue="Add expense request"
+    (buttonClick)="createNewClicked()">
+  </ngx-default-content>
+
+  <ngx-default-content *ngIf="!showEmpty" pageHeader="let's set up your expenses" [loading]='loading'>
+  </ngx-default-content> -->
+<nb-card>
+
+    <nb-card-body>
+        <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
+            (click)="back()"></i></span>
+
+        <div class="row">
+
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Name :</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: 400; font-style: italic;">{{benefitSingle.name}}</span>
+            </div>
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Benefit Types:</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: 400; font-style: italic;">{{benefitSingle.benefitTypeName}}</span>
+            </div>
+
+           
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Vendors:</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: 400; font-style: italic;">{{benefitSingle?.vendorName}}</span> 
+            </div>
+
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Vebdor Plans:</span>
+            </div>
+            <div class="col-sm-8">
+              
+                <span style="font-size: large; font-weight: 400; font-style: italic;">{{benefitSingle?.  vendorPlanName}}</span>
+            </div>
+
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">Start Date:</span>
+            </div>
+            <div class="col-sm-8">
+
+                <span style="font-size: large; font-weight: 400; font-style: italic;">
+                    {{benefitSingle.dateCreated | date}}</span>
+            </div>
+           
+            <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="font-size: large; font-weight: bold;">End Date:</span>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-size: large; font-weight: 400; font-style: italic;">{{benefitSingle?.endDate  | date}}</span>
+            </div>
+
+
+            <!-- <div class="col-sm-3"style="margin-top: 1rem; margin-bottom: 1rem;" >
+                <a href="javascript:void(0)" (click)="onClick()"  [routerLink]="['/benefits/create-benefit',vend.id]">view details</a>
+                
+            </div> -->
+            <!-- <div class="col-sm-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+                <span style="padding: 0.5rem;"><i class="fas fa-trash-alt" style="color: rgb(255, 0, 0);" (click)="deleteVendor()">Remove Vendor</i></span> 
+                <i class="fas fa-times"  style="background-color: white; color: red;" (click)="deleteVendor()"></i>
+            </div> -->
+            <!-- <div class="col-sm-6" style="margin-top: 1rem; margin-bottom: 1rem;">
+                <span style="padding: 0.5rem;"><i class="fas fa-trash-alt" style="color: rgb(255, 0, 0);" (click)="deleteVendor()">Remove Vendor</i></span> 
+                <button nbButton outline status="danger"  class="d-flex column"
+                style="background-color: white;"  (click)="deleteVendor()"></button>
+            </div> -->
+        </div>
+
+
+        <!-- <div style="align-items: center;
+         justify-content: center;
+         display: flex; margin: 6.4rem 1rem 1rem 1rem;">
+            <span style="font-weight: 100; font-size: medium; font-style: normal;">PLANS</span>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <span>Plan Name</span>
+                <span></span>
+            </div>
+            <div class="col-sm-3">
+                <span>Description</span>
+                 <div>fhhfkfkfkfk</div>
+            </div>
+
+            <div class="col-sm-3">
+                <span>Policy Number</span>
+
+            </div>
+
+            <div class="col-sm-3">
+                <span><a href="">view details</a></span>
+            </div>
+
+
+        </div> -->
+
+        <!-- 
+        <div style="align-items: center; justify-content: center; display: flex; margin: 2rem 1rem;">
+            <button nbButton status="primary" outline class="d-flex column" style="background-color: white;"
+                (click)="AddPlan()">Add Plans</button>
+        </div> -->
+
+    </nb-card-body>
+</nb-card>

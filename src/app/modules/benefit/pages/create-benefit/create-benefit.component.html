@@ -80,14 +80,14 @@
           <span style="font-size: large; font-weight: bold;">Vendor</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.name}}</span>
+          <span style="font-size: large; font-weight: bold;">{{singleVendor?.name}}</span>
         </div>
 
         <div class="col-sm-4" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
           <span style="font-size: large; font-weight: bold;">Email1</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.email}}</span>
+          <span style="font-size: large; font-weight: bold;">{{singleVendor?.email}}</span>
         </div>
 
 
@@ -95,7 +95,7 @@
           <span style="font-size: large; font-weight: bold;">Description</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.description}}</span>
+          <span style="font-size: large; font-weight: bold;">{{singleVendor?.description}}</span>
         </div>
 
 
@@ -104,7 +104,7 @@
           <span style="font-size: large; font-weight: bold;">Address</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.address}}</span>
+          <span style="font-size: large; font-weight: bold;">{{singleVendor?.address}}</span>
         </div>
 
 
@@ -112,7 +112,7 @@
           <span style="font-size: large; font-weight: bold;">phoneNumber</span>
         </div>
         <div class="col-sm-8">
-          <span style="font-size: large; font-weight: bold;">{{singleVendor.phoneNumber}}</span>
+          <span style="font-size: large; font-weight: bold;">{{singleVendor?.phoneNumber}}</span>
         </div>
         <!-- <div style="align-items: center;justify-content: center;display: flex; margin: 0.4rem 1rem 1rem 1rem;">
             <a href="javascript:void(0)" (click)="onClick()">view details</a>
@@ -226,12 +226,29 @@
 
             </div>
 
+             
+            <div class="form-group ">
+              <label for="inputEmail1" class="label   col-form-label listsubheader">Benefit
+                  Type</label>
+              <div class="">
+                   <select placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+                      #benefitTypeId="ngModel" [(ngModel)]="AddVendorPlan.benefitTypeId">
+                      <option value="">--Select Benefit Type---</option>
+                      <option *ngFor="let benefit of Benefit" [value]="benefit.id">{{benefit.text}}</option>
+                  </select>
+
+                  <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
+                      class="error">
+                      <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+                  </div> 
+              </div>
+          </div>
 
 
-            <div class="form-group row">
-              <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Vendor 
+            <div class="form-group ">
+              <label for="inputEmail1" class="label  col-form-label listsubheader">Vendor 
               </label>
-              <div class="col-sm-8">
+              <div class="">
                 <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId"
                   #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId">
                   <option value="">--Select Vendor---</option>

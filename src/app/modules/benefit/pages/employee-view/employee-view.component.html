@@ -1,68 +1,51 @@
-<ngx-componentsheader
-  pageName="Employee View"
-  [requiredButton]="rButton"
-  (buttonClick)="topActionClicked()"
-></ngx-componentsheader>
+<ngx-componentsheader pageName="Employee View" [requiredButton]="rButton" (buttonClick)="topActionClicked()">
+</ngx-componentsheader>
 
 <div class="row">
   <div class="col-sm-3">
-    <div
-      style="
+    <div style="
         background-color: white;
         display: flex;
         flex-direction: column;
         padding: 1rem;
-      "
-    >
+      ">
       <div>
-        <img
-          style="height: 5rem; width: 5rem; border-radius: 50%"
-          src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-        />
+        <img style="height: 5rem; width: 5rem; border-radius: 50%"
+          src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
       </div>
-      <span style="font: normal normal medium 20px/24px Rubik; color: #11141a"
-        >Jonathan Omasanya</span
-      >
+      <span style="font: normal normal medium 20px/24px Rubik; color: #11141a">{{Employee?.fullName}}</span>
       <br />
-      <span style="font: normal normal normal 14px/17px Rubik; color: #95a8b8"
-        >User Interface Designer</span
-      >
+      <span style="font: normal normal normal 14px/17px Rubik; color: #95a8b8">User Interface Designer</span>
 
       <div style="margin-top: 50px">
-        <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===1}" (click)="tabChanged(1)">
-          <img
-            src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-            style="
+        <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===1}"
+          (click)="tabChanged(1)">
+          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" style="
               width: 3rem;
               height: 3rem;
               border-radius: 50%;
               margin: 1rem; ;
-            "
-          />
+            " />
           <span class="tab-item-text">Personal Information</span>
         </div>
-        <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===2}" (click)="tabChanged(2)">
-          <img
-            src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-            style="
+        <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===2}"
+          (click)="tabChanged(2)">
+          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" style="
               width: 3rem;
               height: 3rem;
               border-radius: 50%;
               margin: 1rem; ;
-            "
-          />
+            " />
           <span class="tab-item-text">Coverages</span>
         </div>
-        <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===3}" (click)="tabChanged(3)">
-          <img
-            src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-            style="
+        <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===3}"
+          (click)="tabChanged(3)">
+          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" style="
               width: 3rem;
               height: 3rem;
               border-radius: 50%;
               margin: 1rem; ;
-            "
-          />
+            " />
           <span class="tab-item-text">Eligibility</span>
         </div>
       </div>
@@ -73,38 +56,41 @@
       <div class="key-value-group">
         <h4>Personal Information</h4>
         <div>
-          <span>First Name</span>
-          <span>Last Name</span>
+          <span style="font-weight: bold;">First Name:</span>
+          <span style="font-style: italic;">{{Employee.firstName}}</span>
         </div>
         <div>
-          <span>Last Name</span>
-          <span>Last Name</span>
+          <span style="font-weight: bold;">Last Name:</span>
+          <span style="font-style: italic;">{{Employee.lastName}}</span>
         </div>
         <div>
-          <span>Phone Number</span>
-          <span>Last Name</span>
+
+          <span style="font-weight: bold;">Phone Number:</span>
+          <span style="font-style: italic;">{{Employee.phoneNumber}}</span>
         </div>
         <div>
-          <span>Date of Birth</span>
-          <span>Last Name</span>
+
+          <span style="font-weight: bold;">Date of Birth:</span>
+          <span style="font-style: italic;">{{Employee.dateOfBirth | date }}</span>
+
         </div>
         <div>
-          <span>Marital Status</span>
-          <span>Last Name</span>
+          <span style="font-weight: bold;">Marital Status:</span>
+          <!-- <span style="font-style: italic;">{{Employee.maritalStatusId}</span> -->
         </div>
-        <div>
-          <span>Marital Status</span>
-          <span>Last Name</span>
+        <div *ngFor="let Ad of  Adress">
+          <span style="font-weight: bold;">Address:</span>
+          <span style="font-style: italic;">{{Ad.Adress}}</span>
         </div>
-        <div>
+        <!-- <div>
           <span>Gender</span>
           <span>Last Name</span>
         </div>
         <div>
           <span>Address</span>
           <span>Last Name</span>
-        </div>
-      </div>
+        </div> -->
+      </div> 
 
       <div class="key-value-group">
         <h4>Employment</h4>
@@ -154,8 +140,8 @@
             <div>NIN: Jonas Onasanya1</div>
           </div>
           <div style="display: flex;">
-              <nb-icon icon="edit-2-outline" style="color: blue;"></nb-icon>
-              <nb-icon icon="trash-outline" style="color: red;"></nb-icon>
+            <nb-icon icon="edit-2-outline" style="color: blue;"></nb-icon>
+            <nb-icon icon="trash-outline" style="color: red;"></nb-icon>
           </div>
         </div>
         <div>
@@ -163,19 +149,38 @@
             <button nbButton outline status="primary" style="border: none;">
               <nb-icon icon="plus"></nb-icon>
               Add
-          </button>
+            </button>
           </div>
-          </div>
+        </div>
       </div>
     </div>
     <div class="multi-card-page" *ngIf="selectedTab !== 1">
       <div class="card">
         <h4>Enrollment Summary</h4>
-        <ngx-tablecomponent [tableColum]="columns" [table2]='true'></ngx-tablecomponent>
+
+        <ngx-default-content *ngIf="showEmpty" pageHeader="No Deployemnt Record Found"
+          pageDescription="Click on the button to Apply for Deployemnt" [loading]="loading"
+          (buttonClick)="showDeploymentApplicationModal = true" buttonValue="Apply for Deployment">
+        </ngx-default-content>
+        <ngx-default-content *ngIf="showEmpty" pageHeader="No Deployemnt Record Found"
+          pageDescription="Click on the button to Apply for Deploy" [loading]="loading"
+          (buttonClick)="showDeploymentApplicationModal = true" buttonValue="Apply for Deployment">
+
+        </ngx-default-content>
+          <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="columns" [userData]="allBenefito" [loading]="loading"
+            (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
+            [currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
+          </ngx-tablecomponent>
+<!--         
+        <ngx-tablecomponent *ngIf="!showEmpty"  [tableColum]="tableColumns" [userData]="EmployeeBenefit" [loading]="loading"
+    (pageChange)="loadNewPage($event)" [actions]="tableActions"
+    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent> -->
+
+        <!-- <ngx-tablecomponent [tableColum]="columns" [table2]='true'></ngx-tablecomponent> -->
       </div>
       <div class="card" *ngIf="selectedTab == 2">
         <div style="display: flex; justify-content: space-between;">
-          <h4>Medical Insurance Coverage</h4>
+          <h4>{{ benefitSingle?.name}}</h4>
           <button class="edit-button">
             <nb-icon icon='edit'></nb-icon>
             Edit
@@ -183,9 +188,11 @@
         </div>
         <div>
           <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" style="width: 50px; height: auto;">
-          <span>Hygeia</span>
+         
+          <span>{{ benefitSingle?.vendorName}}</span>
         </div>
-        <p style="font: normal normal normal 16px/22px Rubik; color: #080730;">Basic HMO PYT14</p>
+       
+        <p style="font: normal normal normal 16px/22px Rubik; color: #080730;">{{ benefitSingle?. vendorPlanName}}</p>
         <div style="display: flex; font: normal normal normal 16px/22px Rubik; color: #080730; padding-bottom: 1rem;">
           <span>Employee Only</span>
           <div class="vertical-line">
@@ -208,7 +215,7 @@
           </div>
         </div>
 
-  
+
         <h5>Cost and Contribution</h5>
         <ngx-tablecomponent [table2]='true'></ngx-tablecomponent>
         <div>
@@ -227,7 +234,7 @@
   <div modal-body>
     <div class="form-group">
       <label>Select Benefit Type</label>
-      <input class="form-control"/>
+      <input class="form-control" />
     </div>
     <div class="form-group">
       <label>Add Description</label>
@@ -245,23 +252,23 @@
   <div modal-body>
     <div class="form-group">
       <label>First Name</label>
-      <input class="form-control"/>
+      <input class="form-control" />
     </div>
     <div class="form-group">
       <label>Last Name</label>
-      <input class="form-control"/>
+      <input class="form-control" />
     </div>
     <div class="form-group">
       <label>Dependent Type</label>
-      <input class="form-control"/>
+      <input class="form-control" />
     </div>
     <div class="form-group">
       <label>Gender</label>
-      <input class="form-control"/>
+      <input class="form-control" />
     </div>
     <div class="form-group">
       <label>NIN</label>
-      <input class="form-control"/>
+      <input class="form-control" />
     </div>
     <div class="form-group">
       <label>Date Of Birth</label>

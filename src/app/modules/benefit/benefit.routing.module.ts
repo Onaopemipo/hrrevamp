@@ -11,6 +11,8 @@ import { ManageEmployeeComponent } from './pages/manage-employee/manage-employee
 import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {  AddBenefitComponent } from './add-benefit/add-benefit.component';
 import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
+import{ BenefitdetaisComponent} from './benefitdetais/benefitdetais.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -21,7 +23,7 @@ export const routes: Routes = [
         component: DashboardComponent,
       },
       {
-        path: 'employee',
+        path: 'employee/:id',
         component: EmployeeViewComponent,
       },
       {
@@ -56,6 +58,11 @@ export const routes: Routes = [
         path: 'eligibilityView/:id',
         component: EligibilityviewComponent,
       },
+      {
+        path: 'BenefitDetails/:id',
+        component: BenefitdetaisComponent,
+      },
+  
   
     ],
   }

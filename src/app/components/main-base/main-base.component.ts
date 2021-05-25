@@ -48,7 +48,7 @@ export class MainBaseComponent implements OnInit {
   }
 
   get showEmpty() {
-    return false;
+    return !(this.data?.length > 0);
   }
 
   selectedTab: any = TABS.DRAFT;

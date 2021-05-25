@@ -63,6 +63,7 @@ export class EligibilityviewComponent implements OnInit {
       console.log("elo", this.eligibility);
     }
   }
+   
 
   //edit eligilibilty
   modal(event) {

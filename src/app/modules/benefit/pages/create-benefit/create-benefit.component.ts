@@ -16,6 +16,7 @@ import {
   GetAllVendorServiceProxy,
   VendorPlanDTO,
   GetVendorPlanByVendorIdServiceProxy,
+  
 } from "../../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -30,7 +31,7 @@ export class CreateBenefitComponent implements OnInit {
   AllVendors: VendorDTO[];
   VendorId: number = 0;
   singleVendor: VendorDTO;
-
+  Benefit:IDTextViewModel[] = [];
   EventForm: FormGroup;
   showPlan: boolean = false;
   submitbtnPressed: boolean = false;
@@ -44,7 +45,8 @@ export class CreateBenefitComponent implements OnInit {
     private GetVendorByIdServiceProxy: GetVendorByIdServiceProxy,
     private alertservice: AlertserviceService,
     private AddUpdateVendorPlanServiceProxy: AddUpdateVendorPlanServiceProxy,
-    private GetVendorplanByVendorIdServiceProxy: GetVendorPlanByVendorIdServiceProxy // ,
+    private GetVendorplanByVendorIdServiceProxy: GetVendorPlanByVendorIdServiceProxy,
+    private DataServiceProxy:DataServiceProxy // ,
   ) {}
 
   // tableActions: TableAction[] = [
@@ -78,6 +80,7 @@ export class CreateBenefitComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllVendor();
+    this.getBenefits();
 
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       if (!paramMap.has("id")) {
@@ -182,6 +185,15 @@ export class CreateBenefitComponent implements OnInit {
     if (!data.hasError) {
       this.plans = data.result;
       console.log("plan", this.plans);
+    }
+  }
+
+  //Dropdown for benefit Type
+  async getBenefits() {
+    const data = await this.DataServiceProxy.getBenefitType().toPromise();
+    if (!data.hasError) {
+      this.Benefit = data.result;
+  
     }
   }
 }
