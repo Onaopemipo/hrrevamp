@@ -49,8 +49,8 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <nb-list>
-                      <nb-list-item (click)='downloadas("Excel")' style="cursor: pointer; min-width: 40px;"><img src="assets/icons/excelicon.svg">Excel</nb-list-item>
-                      <nb-list-item (click)='downloadas("pdf")' style="cursor: pointer;min-width: 40px;"><img src="assets/icons/pdf.svg"> Pdf</nb-list-item>
+                      <nb-list-item (click)='downloadas("Excel")' style="cursor: pointer; min-width: 40px;"><img src="assets/icons/excelicon.svg">&nbsp;Excel</nb-list-item>
+                      <nb-list-item (click)='downloadas("pdf")' style="cursor: pointer;min-width: 40px;"><img src="assets/icons/pdf.svg">&nbsp;Pdf</nb-list-item>
                     </nb-list>
                   </div>
                 </div>
@@ -62,13 +62,13 @@
                 Export as
               </button>
             </nb-action>
-            <nb-action (click)='downloadas("Print")'>
+            <nb-action (click)='downloadas("Print")' >
               <nb-icon 
                 icon="printer-outline"
                 status="primary"
-                style="font-size: 35px"
+                style="font-size: 35px" style="cursor: pointer;"
               ></nb-icon>
-              <span>Print</span>
+              <span style="cursor: pointer;">Print</span>
             </nb-action>
           </nb-actions>
         </nb-card-body>

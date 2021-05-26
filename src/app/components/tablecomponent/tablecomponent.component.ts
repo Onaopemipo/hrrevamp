@@ -183,16 +183,16 @@ export class TablecomponentComponent implements OnInit {
       this.userData = this.tableData;
       var truchk = false;        
         this.userData = this.userData.filter(uf => {
-          this.searchabletableColum.some(sval => {
+          this.tableColum.some(sval => {
             if (uf[sval.name]) {
-              if(sval.type == this.COLUMN_TYPES.Text)
-              {
-                console.log(uf[sval.name], event.toString())
+              // if(sval.type == this.COLUMN_TYPES.Text)
+              // {
+               // console.log(uf[sval.name], event.toString())
                 if (uf[sval.name].toString().toLowerCase().indexOf(event.toString().toLowerCase()) > -1) { truchk = true; return true;}else{truchk = false;}
-               }          
-              else {
-                if (uf[sval.name] == event) { truchk = true; return true;}else{truchk = false;}
-              }
+              //  }          
+              // else {
+              //   if (uf[sval.name] == event) { truchk = true; return true;}else{truchk = false;}
+              // }
             }
         
           })     

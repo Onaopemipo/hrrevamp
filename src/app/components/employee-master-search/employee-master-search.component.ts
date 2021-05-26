@@ -16,7 +16,7 @@ export interface checkEmployeeDTO extends EmployeeDTO{
   template: `
     <div style="display: inline-flex;" *ngIf="allowmultipleselection">
       <div *ngFor="let i of selectedEmployees" >
-          <img style="width: 3rem; height: 3rem; border-radius: 50%; margin-left: -0.5rem;" [src]="i.profilePic"  onError="this.src='assets/icons/camera.jpg'"/>
+          <img [nbTooltip]="i.lastName + ' ' +i.firstName" nbTooltipStatus="primary" style="width: 3rem; height: 3rem; border-radius: 50%; margin-left: -0.5rem;" [src]="i.profilePic"  onError="this.src='assets/icons/camera.jpg'"/>
       </div>
     </div>
 
