@@ -29,7 +29,7 @@ class MyEmployeeDTO extends EmployeeDTO{
     return this.contracts[0].positionId;
   }
 
-  get departmentName(){
+  get departmen_Name(){
     return this.contracts[0].departmentName;
   }
 

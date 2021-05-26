@@ -40,7 +40,7 @@ export class AllLoansComponent implements OnInit {
       })
     }
     else if(event.name==TABLE_ACTION.PROCESS){
-     this.router.navigateByUrl('loan/process' + event.data.id)
+     this.router.navigateByUrl('/loan/process-loan/' + event.data.id)
       }
 
       else if(event.name==TABLE_ACTION.EDIT){
@@ -90,16 +90,16 @@ export class AllLoansComponent implements OnInit {
     this.router.navigateByUrl('/loan/request');
   }
 
-  async fetchLoans(){
-    const data = await this.getLoans.getLoanRequests(null,null,2,'',10,1).toPromise();
-    console.log('My data',data);
-    if(!data.hasError){
-      this.allLoansData = data.result;
-      this.loansCounter = data.totalRecord;
-      console.log('my counter', this.loansCounter)
-      if(this.loansCounter > 0) this.loading = false;
-  }
-
+  fetchLoans(){
+    this.loading = true;
+    this.getLoans.getLoanRequests(null,null,2,'',10,1).subscribe(data => {
+      this.loading = false;
+      if(!data.hasError){
+        this.allLoansData = data.result;
+        this.loansCounter = data.totalRecord;
+        console.log('my counter', this.loansCounter)
+    }
+  });
 }
 
 }

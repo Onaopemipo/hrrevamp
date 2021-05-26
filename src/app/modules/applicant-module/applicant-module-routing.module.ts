@@ -1,3 +1,5 @@
+import { ApplicantssigninComponent } from './../recruitment/applicantssignin/applicantssignin.component';
+import { ApplicantssignupComponent } from './../recruitment/applicantssignup/applicantssignup.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,6 +12,16 @@ const routes: Routes = [
       {
         path: 'applicants',
         component: ApplicantsComponent
+      },
+
+      {
+        path: 'signup',
+        component: ApplicantssignupComponent
+      },
+
+      {
+        path: 'signin',
+        component: ApplicantssigninComponent
       }
 
     ]

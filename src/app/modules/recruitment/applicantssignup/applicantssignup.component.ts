@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { ManageJobApplicantDTo, RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssignupComponent implements OnInit {
 
-  constructor() { }
+  applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
+
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
+  regiterApplicant(){
+    this.applicant.registerApplicant(this.applicantModel).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Applicant Created', 'Dismiss').subscribe(res => {
+          if(res){
+            this.router.navigateByUrl('/recruitment/applicantdashboard');
+          }
+        })
+      }
+    })
+
+  }
+
+  checkEqualPass(){
+    if(!(this.applicantModel.comfirmPassword == this.applicantModel.password)){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Passwords do not match', 'Dismiss')
+    }
+  }
 }

@@ -24,29 +24,44 @@
                  <form>
                   <div class="form-group">
                     <label for="lastName" class="label" style="color: #080730;">First Name</label>
-                    <input type="text" nbInput fullWidth id="lastName" placeholder="First Name">
+                    <input type="text" nbInput fullWidth name="firstName" #firstName="ngModel" [(ngModel)]="applicantModel.firstName" placeholder="First Name" required>
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error">
+                      <div *ngIf="firstName.errors.required">First Name is required</div>
+                    </div>
                   </div>
                   <div style="padding: 5px;"></div>
 
                   <div class="form-group">
                     <label for="lastName" class="label">Last Name</label>
-                    <input type="text" nbInput fullWidth id="lastName" placeholder="Last Name">
+                    <input type="text" nbInput fullWidth name="lastName" #lastName="ngModel"  [(ngModel)]="applicantModel.lastName" placeholder="Last Name" required>
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
+                      <div *ngIf="lastName.errors.required">Last Name is required</div>
+                    </div>
                   </div>
+
+
                   <div style="padding: 5px;"></div>
                   <div class="form-group">
                     <label for="exampleInputEmail1" class="label">Email address</label>
-                    <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Email">
+                    <input type="email" nbInput fullWidth name="email" #email="ngModel" [(ngModel)]="applicantModel.email" placeholder="Email" required>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                      <div *ngIf="email.errors.required">Email is required</div>
+                    </div>
                   </div>
+
                   <div style="padding: 5px;"></div>
                   <div class="form-group">
                       <label for="PhoneNumber" class="label">Phone Number</label>
-                      <input type="tel" nbInput fullWidth id="PhoneNumber" placeholder="Phone Number">
+                      <input type="tel" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="applicantModel.phoneNumber" placeholder="Phone Number">
+                      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+                        <div *ngIf="phoneNumber.errors.required">Phone is required</div>
+                      </div>
                   </div>
                     <div style="padding: 5px;"></div>
                   <div class="form-group">
                     <label for="exampleInputPassword1" class="label">Password</label>
                     <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
-                      <input type="password" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" style="border: none;">
+                      <input type="password" nbInput fullWidth name="password" #password="ngModel" [(ngModel)]="applicantModel.password" placeholder="Password" style="border: none;">
                       <nb-icon  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;"></nb-icon>
                     </div>
 
@@ -55,7 +70,7 @@
                   <div class="form-group">
                     <label for="exampleInputPassword1" class="label">Confirm Password</label>
                     <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
-                      <input type="password" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" style="border: none;">
+                      <input type="password" nbInput fullWidth name="conpassword" (blur)="checkEqualPass()" #conpassword="ngModel" [(ngModel)]="applicantModel.comfirmPassword" placeholder="Confirm Password" style="border: none;">
                       <nb-icon  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;"></nb-icon>
                     </div>
 
@@ -63,11 +78,11 @@
 
                   <div style="padding: 5px;"></div>
 
-                  <button type="button" nbButton fullWidth status="primary">Continue</button>
+                  <button type="button" nbButton fullWidth status="primary" (click)="regiterApplicant()">Continue</button>
                   <div style="padding: 5px;"></div>
                 </form>
                 <div style="padding: 5px;"></div>
-                <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;">I have an account? <a routerLink="/recruitment/applicantssignin" style="font-weight: 700;">Sign In</a></p>
+                <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;">I have an account? <a routerLink="/recruitment/signin" style="font-weight: 700;">Sign In</a></p>
                 </div>
               </div>
           </div>

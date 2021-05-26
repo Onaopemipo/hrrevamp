@@ -1,3 +1,4 @@
+import { NewquizComponent } from './newquiz/newquiz.component';
 import { NewjobComponent } from './newjob/newjob.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { AdminDashboardComponent } from './admin-dashboard.component';
@@ -31,6 +32,11 @@ export const routes: Routes = [
       {
         path: 'newjob',
         component: NewjobComponent
+      },
+
+      {
+        path: 'newquiz',
+        component: NewquizComponent
       },
 
       {

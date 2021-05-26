@@ -59,7 +59,7 @@ export class NewCompetencyComponent implements OnInit {
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,
-    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService) { }
+    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService,) { }
 
   ngOnInit(): void {
     this.fetchAllDepartments();
@@ -75,9 +75,19 @@ export class NewCompetencyComponent implements OnInit {
     this.requirement = e;
   }
 
-  removeRequirement(){
-    alert('Deleted!')
-  }
+
+  removeRequirement(req){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(res => {
+      if(res){
+       for( var i = 0; i < this.allCompetencyRequirements.length; i++){
+         if (this.allCompetencyRequirements[i] === req) {
+           this.allCompetencyRequirements.splice(i, 1);
+             i--;
+         }
+     }
+      }
+    })
+   }
 
   async createCompetency(){
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
@@ -86,7 +96,7 @@ export class NewCompetencyComponent implements OnInit {
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError && data.result.isSuccessful){
+    if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(data => {
         if(data == 'closed'){
           this.myCompetency = new ManageCompetencyDTO().clone();
@@ -96,7 +106,7 @@ export class NewCompetencyComponent implements OnInit {
       this.competencyRequirement = new CompetencyRequirmentsDTO().clone();
     }
     else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.result.message, 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, '', 'Dismiss')
     }
   }
 
@@ -109,8 +119,15 @@ export class NewCompetencyComponent implements OnInit {
     }
   }
 
+  async checkRequirment(){
+    if(this.tempSkillReq.length < 1 || this.tempCertReq.length < 1 || this.tempSkillReq.length < 1 || this.tempTrainReq.length < 1 ){
+
+    }
+  }
+
   addRequirement(){
     let newRequirements = new CompetencyRequirmentsDTO;
+
     newRequirements.experience = JSON.stringify(this.competencyRequirement.experience);
     newRequirements.experienceWeight = this.competencyRequirement.experienceWeight;
     newRequirements.skillId = this.competencyRequirement.skillId;
@@ -122,10 +139,50 @@ export class NewCompetencyComponent implements OnInit {
     newRequirements.requirementCategory = this.competencyRequirement.requirementCategory;
     newRequirements.points = this.competencyRequirement.points;
     this.allCompetencyRequirements.push(newRequirements);
-    if(this.competencyRequirement.skillId) this.tempSkillReq.push(newRequirements);
-    if(this.competencyRequirement.trainingId) this.tempTrainReq.push(newRequirements);
-    if(this.competencyRequirement.certificationId) this.tempCertReq.push(newRequirements);
-    if(this.competencyRequirement.qualificationId) this.tempQualReq.push(newRequirements);
+    if(this.competencyRequirement.skillId){
+      var DuplicateChk = this.allCompetencyRequirements.find(x=> x.skillId == newRequirements.skillId);
+      if(DuplicateChk){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
+      } else {
+        this.tempSkillReq.push(newRequirements);
+      }
+    }
+
+    else if(this.competencyRequirement.trainingId){
+      var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
+      if(DuplicateChk){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
+      } else {
+        this.tempTrainReq.push(newRequirements);
+      }
+    }
+
+    else if(this.competencyRequirement.certificationId){
+      var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
+      if(DuplicateChk){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
+      } else {
+        this.tempCertReq.push(newRequirements);
+      }
+    }
+
+    else if(this.competencyRequirement.qualificationId){
+      var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
+      if(DuplicateChk){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
+      } else {
+        this.tempQualReq.push(newRequirements);
+      }
+    }
+
+    else if(this.competencyRequirement.qualificationId){
+      var DuplicateChk = this.allCompetencyRequirements.find(x=> x.qualificationId == newRequirements.qualificationId);
+      if(DuplicateChk){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
+      } else {
+        this.tempQualReq.push(newRequirements);
+      }
+    }
     console.log('Competency Added', this.competencyRequirement);
     console.log('Cert', this.tempCertReq);
     this.competencyRequirement = new CompetencyRequirmentsDTO().clone();
@@ -162,7 +219,6 @@ export class NewCompetencyComponent implements OnInit {
 
   selectPanel(rolelist, i) {
     this.selectedPanel = rolelist;
-
     this.competencyChecklist.forEach(value => {
       value.status = 'Inactive';
     });
@@ -196,14 +252,6 @@ export class NewCompetencyComponent implements OnInit {
 
   toggleScoreCard(event) {
     this.scoreCardClick = !this.scoreCardClick;
-  }
-
-  updateCompetency(){
-
-  }
-
-  deleteCompetency(){
-
   }
 
 }
