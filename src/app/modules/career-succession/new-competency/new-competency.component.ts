@@ -59,7 +59,7 @@ export class NewCompetencyComponent implements OnInit {
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,
-    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService) { }
+    private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService,) { }
 
   ngOnInit(): void {
     this.fetchAllDepartments();
@@ -148,7 +148,7 @@ export class NewCompetencyComponent implements OnInit {
       }
     }
 
-    if(this.competencyRequirement.trainingId){
+    else if(this.competencyRequirement.trainingId){
       var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
       if(DuplicateChk){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
@@ -157,7 +157,7 @@ export class NewCompetencyComponent implements OnInit {
       }
     }
 
-    if(this.competencyRequirement.certificationId){
+    else if(this.competencyRequirement.certificationId){
       var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
       if(DuplicateChk){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
@@ -166,7 +166,7 @@ export class NewCompetencyComponent implements OnInit {
       }
     }
 
-    if(this.competencyRequirement.qualificationId){
+    else if(this.competencyRequirement.qualificationId){
       var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
       if(DuplicateChk){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
@@ -175,8 +175,8 @@ export class NewCompetencyComponent implements OnInit {
       }
     }
 
-    if(this.competencyRequirement.qualificationId){
-      var DuplicateChk = this.allCompetencyRequirements.find(x=> x == newRequirements);
+    else if(this.competencyRequirement.qualificationId){
+      var DuplicateChk = this.allCompetencyRequirements.find(x=> x.qualificationId == newRequirements.qualificationId);
       if(DuplicateChk){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
       } else {
