@@ -255,7 +255,7 @@ tableActionClicked(event: TableActionEvent){
 
   async fetchAllJobs(){
     this.loading = true;
-   const data = await this.job.getAllJobs(1,10).toPromise();
+   const data = await this.job.getAllJobs(undefined, undefined, 1,10).toPromise();
    this.loading = false;
     if(!data.hasError){
       this.allJobs = data.result.map(x => new JobWithStatus(x));
