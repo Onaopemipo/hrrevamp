@@ -223,7 +223,6 @@ tableActionClicked(event: TableActionEvent){
     }
   }
 
-
   async fetchQualifications(){
     const data = await this.commonService.getQualifications().toPromise();
     if(!data.hasError){
@@ -257,9 +256,9 @@ tableActionClicked(event: TableActionEvent){
   async fetchAllJobs(){
     this.loading = true;
    const data = await this.job.getAllJobs(1,10).toPromise();
+   this.loading = false;
     if(!data.hasError){
-      this.loading = false;
-      this.allJobs = data.result;
+      this.allJobs = data.result.map(x => new JobWithStatus(x));
       this.jobsCounter = data.totalRecord;
       console.log('My Jobs:',this.allJobs)
    }

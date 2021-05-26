@@ -12,6 +12,8 @@ export class EmailOTPVerifyComponent implements OnInit {
 
   verifyOption: boolean = true;
   OTPstring: string = '';
+  loginUserEmail:string = ''
+
   constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,7 +24,11 @@ export class EmailOTPVerifyComponent implements OnInit {
   }
 
   resendOtp() {
-    // console.log('A new OTP has been sent');
+    this.applicant.regenerateOTPToken(this.loginUserEmail).subscribe(data => {
+      if(!data.hasError){
+
+      }
+    })
   }
 
   verifyUser(){
