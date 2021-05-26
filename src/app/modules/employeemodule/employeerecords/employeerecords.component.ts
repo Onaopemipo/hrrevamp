@@ -24,7 +24,13 @@ export class EmployeerecordsComponent implements OnInit {
     { name: 'add_employee', label: 'Add Employee', icon: 'plus', outline: false },
 
   ];
-
+  searchabletableColum = [
+    { name: 'id', title: 'ID', type: ColumnTypes.Text },
+    { name: 'firstName', title: 'Firstname', type: ColumnTypes.Text },
+    { name: 'lastName', title: 'Lastname', type: ColumnTypes.Text},
+    { name: 'workEmail', title: 'Email Address', type: ColumnTypes.Text },
+    { name: 'workMobile', title: 'Phone Number', type: ColumnTypes.Text },
+  ];
   tableColumns = [
     { name: 'id', title: 'ID', type: ColumnTypes.Text },
     { name: 'firstName', title: 'Firstname', type: ColumnTypes.Text },

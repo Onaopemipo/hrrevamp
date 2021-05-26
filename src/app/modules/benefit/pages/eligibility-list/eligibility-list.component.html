@@ -11,9 +11,9 @@
     (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
     [currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
   </ngx-tablecomponent>
-  <ngx-default-content *ngIf="showEmpty" pageHeader="No Deployemnt Record Found"
-  pageDescription="Click on the button to Apply for Deployemnt" [loading]="loading"
-  (buttonClick)="showDeploymentApplicationModal = true" buttonValue="Apply for Deployment">
+  <ngx-default-content *ngIf="showEmpty" pageHeader="Benefit Eligibility"
+  pageDescription="No record Found" [loading]="loading">
+
 </ngx-default-content>
  
 
@@ -35,7 +35,7 @@
     <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
       <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
         margin-left: 10px;">create new events</h6> -->
-      <div style="margin: 20px;">
+
         <div class="form-group">
           <label for="title">Name</label>
           <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel" name="name"
@@ -46,7 +46,7 @@
           </div>
 
         </div>
-      </div>
+
 
       <div class="form-group ">
         <label for="inputEmail1" class="label  col-form-label listsubheader">Benefit

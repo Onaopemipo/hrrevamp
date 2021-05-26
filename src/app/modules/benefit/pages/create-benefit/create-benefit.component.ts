@@ -30,13 +30,14 @@ export class CreateBenefitComponent implements OnInit {
   Vendora = [];
   AllVendors: VendorDTO[];
   VendorId: number = 0;
-  singleVendor: VendorDTO;
+  singleVendor = new VendorDTO().clone();
   Benefit:IDTextViewModel[] = [];
   EventForm: FormGroup;
   showPlan: boolean = false;
   submitbtnPressed: boolean = false;
   AddVendorPlan = new ManageVendorPlanDto().clone();
   plans: VendorPlanDTO[] = [];
+  loading = false;
   constructor(
     private common: CommonServiceProxy,
     private GetAllVendorServiceProxy: GetAllVendorServiceProxy,
@@ -62,12 +63,15 @@ export class CreateBenefitComponent implements OnInit {
   modal(event) {
     if (event == "add_leave_year") {
       this.showPlan = true;
+      this.AddVendorPlan.vendorId = this.singleVendor.id;
     }
   }
   back() {
     return this.route.navigate(["/benefits/BenefitsVendor"]);
   }
-
+  get showEmpty() {
+    return this.singleVendor.id ? true : false;
+}
   get disable() {
     if (
       this.AddVendorPlan.name &&
@@ -98,12 +102,16 @@ export class CreateBenefitComponent implements OnInit {
   }
   //get single vendor
   async getSingleVendor() {
+    this.loading = true;
     const data = await this.GetVendorByIdServiceProxy.getVendorById(
       this.VendorId
     ).toPromise();
     if (!data.hasError) {
+      this.loading = false;
       this.singleVendor = data.result;
       console.log("singleVendor", this.singleVendor);
+    } else {
+      this.loading = false;
     }
   }
 
