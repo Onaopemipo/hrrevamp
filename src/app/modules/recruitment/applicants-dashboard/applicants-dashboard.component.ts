@@ -14,12 +14,12 @@ export class ApplicantsDashboardComponent implements OnInit {
   constructor(private jobService: RecruitmentJobApplicationServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchApplications();
   }
 
   toggle(event){
 
   }
-
 
   async fetchApplications(){
     const data = await this.jobService.fetchJobApplications(0,10,1).toPromise();

@@ -146,13 +146,8 @@
           <div class="form-group row mydiv">
             <label for="currency" class="col-sm-2 col-form-label mylabel">Post Validity</label>
             <div class="col-sm-5 col-md-5 col-lg-5">
-              <!-- <ngx-date [(value)]="newJobModel.postValidityFrom"></ngx-date> -->
               <ngx-date-range [(start)]="newJobModel.postValidityFrom" [(end)]="newJobModel.postValidityTo" required></ngx-date-range>
             </div>
-
-            <!-- <div class="col-sm-2 col-md-3 col-lg-3">
-              <ngx-date [(value)]="newJobModel.postValidityTo"></ngx-date>
-            </div> -->
           </div>
 
           <div class="form-group row">
@@ -171,7 +166,7 @@
             <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="scorecard" ngModel="scorecard" [(ngModel)]="newJobModel.scoreCardId" required>
                 <option value="">Select </option>
-                <option *ngFor="let scorecard of allScoreCards" [value]="scorecard">{{ scorecard.focusArea }}</option>
+                <option *ngFor="let card of allScoreCards" [value]="card.id">{{ card.focusArea }}</option>
               </select>
             </div>
           </div>

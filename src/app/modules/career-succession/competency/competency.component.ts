@@ -5,6 +5,7 @@ import { title } from 'process';
 import { GradeLevelServiceProxy, GradeLevelDTO, CompetencyDTO, Qualification, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
 import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill, GetAllPositionsServiceProxy, PositionDTO } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { result } from 'validate.js';
 
 
 enum TABLE_ACTION {
@@ -43,6 +44,15 @@ export class CompetencyComponent implements OnInit {
 
   tableActionClicked(event: TableActionEvent){
     if(event.name==TABLE_ACTION.VIEW){
+      this.updateComp = true;
+      this.competencyService.fetchCompetency('',event.data.id, 10,1).subscribe(data => {
+        if(!data.hasError){
+          this.competencyData = data.result[0];
+          this.allCompetencyRequirements = data.result[0].competencesRequirements;
+          console.log('single data', this.competencyData)
+          console.log('single requirement', this.allCompetencyRequirements)
+        }
+      })
 
       }
 
@@ -61,6 +71,8 @@ export class CompetencyComponent implements OnInit {
         }
  }
 
+  competencyData:CompetencyDTO = new CompetencyDTO().clone() ;
+  updateComp: boolean = false;
   myPlanHeader: string = 'Create Competency';
   myPlanDesc: string = 'Click the button below to add a competency';
 
@@ -141,7 +153,7 @@ export class CompetencyComponent implements OnInit {
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError && data.result.isSuccessful === true){
+    if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
         if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
       })
@@ -213,6 +225,20 @@ getCompetency(){
       console.log('qualification:', this.qualificationData)
     }
   }
+
+  removeRequirement(req){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(res => {
+      if(res){
+       for( var i = 0; i < this.allCompetencyRequirements.length; i++){
+         if (this.allCompetencyRequirements[i] === req) {
+           this.allCompetencyRequirements.splice(i, 1);
+             i--;
+         }
+     }
+      }
+    })
+   }
+
 
   selectPanel(rolelist, i) {
     this.selectedPanel = rolelist;

@@ -52,7 +52,7 @@
                   <div style="padding: 5px;"></div>
                   <div class="form-group">
                       <label for="PhoneNumber" class="label">Phone Number</label>
-                      <input type="tel" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="applicantModel.code" placeholder="Phone Number">
+                      <input type="tel" nbInput fullWidth name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="applicantModel.phoneNumber" placeholder="Phone Number">
                       <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="error">
                         <div *ngIf="phoneNumber.errors.required">Phone is required</div>
                       </div>
@@ -82,7 +82,7 @@
                   <div style="padding: 5px;"></div>
                 </form>
                 <div style="padding: 5px;"></div>
-                <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;">I have an account? <a routerLink="/recruitment/applicantssignin" style="font-weight: 700;">Sign In</a></p>
+                <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;">I have an account? <a routerLink="/recruitment/signin" style="font-weight: 700;">Sign In</a></p>
                 </div>
               </div>
           </div>

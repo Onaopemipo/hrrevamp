@@ -1,3 +1,4 @@
+import { ColumnTypes } from 'app/components/tablecomponent/models';
 import { IStatus, MyColor } from './../../../../components/status/models';
 import { Router } from '@angular/router';
 import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
@@ -83,7 +84,7 @@ export class JobsComponent implements OnInit {
     {name: 'department', title: 'Department'},
     {name: 'availability', title: 'Availability'},
     {name: 'experience', title: 'Experience(Months)'},
-    {name: 'isActive', title: 'Status'},
+    {name: 'isActive', title: 'Status', type: ColumnTypes.Status},
   ];
 
   scheduledJobsTable: TableColumn [] = [
@@ -255,7 +256,7 @@ tableActionClicked(event: TableActionEvent){
 
   async fetchAllJobs(){
     this.loading = true;
-   const data = await this.job.getAllJobs(10,1).toPromise();
+   const data = await this.job.getAllJobs(1,10).toPromise();
     if(!data.hasError){
       this.loading = false;
       this.allJobs = data.result;
