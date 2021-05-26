@@ -38,7 +38,7 @@ filter = {
       this.ExcelService.exportAsExcelFile(this.allScoreCard,"Score Card")
     }
     if (event == "pdf") {
-      this.PdfService.downloadAsPDF()
+     // this.PdfService.downloadAsPDF()
     }
   }
   getScoreCard() {

@@ -46,7 +46,10 @@ export class LeaveyearComponent implements OnInit {
   topActionButtons = [
     { name: 'add_leave_year', label: 'Add Leave Year', 'icon': 'plus', outline: false },
   ];
-
+  searchabletableColum = [
+    { name: 'yearName', title: 'Year Name', type: ColumnTypes.Text },
+    
+  ];
   tableColumns = [
     { name: 'yearName', title: 'Year Name', type: ColumnTypes.Text },
     { name: 'yearStartDate', title: 'Start Date', type: ColumnTypes.Date },

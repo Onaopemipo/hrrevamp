@@ -26,7 +26,10 @@ export class LeaveenholidayComponent implements OnInit {
   topActionButtons = [
     { name: 'add_holiday', label: 'Add Leave Holiday', 'icon': 'plus', outline: false },
   ];
-
+  searchabletableColum = [
+    { name: 'leaveYear', title: 'Year Name', type: ColumnTypes.Text },
+    { name: 'description', title: 'Description', type: ColumnTypes.Text }
+  ];
   tableColumns = [
     { name: 'holidayDate', title: 'Holiday Date', type: ColumnTypes.Date },
     { name: 'leaveYear', title: 'Leave Year', type: ColumnTypes.Text },

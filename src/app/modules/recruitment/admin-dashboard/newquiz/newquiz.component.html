@@ -1,0 +1,79 @@
+<ngx-componentsheader [pageName]="pagetitle"></ngx-componentsheader>
+  <nb-card>
+      <nb-card>
+       <nb-card-body>
+        <div class="form-group row mydiv">
+          <label class="col-sm-3 col-form-label" for="">Quiz Name</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" name="quizName" #quizName="ngModel" [(ngModel)]="newQuizModel.name">
+        </div>
+      </div>
+
+      <div class="form-group row mydiv">
+          <label class="col-sm-3 col-form-label" for="">Quiz Type</label>
+        <div class="col-md-4">
+          <select type="text" class="form-control" name="quizType" #quizType="ngModel" [(ngModel)]="newQuizModel.typeId">
+            <option value="">--Select Type--</option>
+            <option *ngFor="let mytype of allQuizTypes" [value]="mytype.id">{{ mytype.text }}</option>
+          </select>
+        </div>
+      </div>
+       </nb-card-body>
+      </nb-card>
+
+      <nb-card>
+        <nb-card-header>
+          <h6>Question</h6>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="form-group row mydiv">
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="question" #question="ngModel" [(ngModel)]="questionModel.questionText">
+            </div>
+
+            <div class="col-md-4">
+              <select type="text" class="custom-select" name="quizType" #quizType="ngModel" (change)="onChange($event.target.value)" [(ngModel)]="questionOptionModel.value">
+                <option *ngFor="let questiontype of optionTypes" [value]="questiontype.id">{{ questiontype.label }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="myOptionType == 0" class="form-group">
+            <div class="form-group row">
+              <nb-radio-group name="MultiOption" #MultiOption="ngModel" [(ngModel)]="questionOptionModel.value">
+                <nb-radio *ngFor="let moption of multiChoice" [value]="moption.value" >{{ moption.value }} <i class="fa fa-times" (click)="removeOption(moption)" style="cursor: pointer;color: red;"></i></nb-radio>
+              </nb-radio-group>
+            </div>
+
+            <div class="form-group row" style="display: flex;flex-direction: row;">
+              <div class="col-6">
+                <input type="text" [(ngModel)]="newOption" name="newOption" class="form-control">
+              </div>
+              <div class="col-2">
+                <button nbButton status='primary' outline style="background: transparent;" (click)="addOption(newOption)">Add Option</button>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="myOptionType == 1" class="form-group row mydiv">
+            <div class="col">
+              <nb-radio-group name="BooleanOption" #BooleanOption="ngModel" [(ngModel)]="questionOptionModel.value">
+                <nb-radio *ngFor="let option of booleanChoice" [value]="option.id" > {{ option.value }}</nb-radio>
+              </nb-radio-group>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <button nbButton status='primary' outline style="background: transparent;" (click)="addNewQuestion()">Add New Question</button>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <button nbButton status="primary" (click)="addNewQuiz()">Save Quiz</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+  </nb-card>

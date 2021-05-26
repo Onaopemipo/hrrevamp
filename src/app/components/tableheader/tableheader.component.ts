@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,ViewChild } from '@angular/core';
 import { EventInput } from '@fullcalendar/angular';
 import { TableAction, TableColumn } from '../tablecomponent/models';
-
+import { NbPopoverDirective } from '@nebular/theme';
 const SORT_KEY = 'sort';
 export interface FilterField extends TableColumn {};
 @Component({
@@ -10,6 +10,7 @@ export interface FilterField extends TableColumn {};
   styleUrls: ['./tableheader.component.scss']
 })
 export class TableheaderComponent implements OnInit {
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
   @Input() filterFields: FilterField[] = [];
   @Input() set filter(val: boolean) {
     this.showFilter = val;
@@ -24,13 +25,18 @@ export class TableheaderComponent implements OnInit {
   @Output() filterChange = new EventEmitter<boolean>();
   @Output() filterDataChange = new EventEmitter<object>();
   @Output() downloadasChange = new EventEmitter<string>();
+  @Output() searchChange = new EventEmitter<string>();
   @Input() bulkAction_isChecked:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   
   }
+  handleSearch(value) {
+    this.searchChange.emit(value)
+  }
   downloadas(downloadtype) {
+    this.popover.hide();
     this.downloadasChange.emit(downloadtype);
   }
   checkedAcction() {

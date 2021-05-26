@@ -5,6 +5,7 @@ import { title } from 'process';
 import { GradeLevelServiceProxy, GradeLevelDTO, CompetencyDTO, Qualification, CompetencyRequirmentsDTO, CompetencyServiceProxy, ManageCompetencyDTO, DeleteBudgetServiceProxy } from './../../../_services/service-proxies';
 import { Department, GetAllDepartmentsServiceProxy, DepartmentDTO, CommonServiceProxy, JobRole, DataServiceProxy, Certification, Skill, GetAllPositionsServiceProxy, PositionDTO } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { result } from 'validate.js';
 
 
 enum TABLE_ACTION {
@@ -39,11 +40,19 @@ export class CompetencyComponent implements OnInit {
   tableActions: TableAction[] = [
     {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.DELETECOMPETENCY, label: 'Delete'},
-
   ]
 
   tableActionClicked(event: TableActionEvent){
     if(event.name==TABLE_ACTION.VIEW){
+      this.updateComp = true;
+      this.competencyService.fetchCompetency('',event.data.id, 10,1).subscribe(data => {
+        if(!data.hasError){
+          this.competencyData = data.result[0];
+          this.allCompetencyRequirements = data.result[0].competencesRequirements;
+          console.log('single data', this.competencyData)
+          console.log('single requirement', this.allCompetencyRequirements)
+        }
+      })
 
       }
 
@@ -62,6 +71,8 @@ export class CompetencyComponent implements OnInit {
         }
  }
 
+  competencyData:CompetencyDTO = new CompetencyDTO().clone() ;
+  updateComp: boolean = false;
   myPlanHeader: string = 'Create Competency';
   myPlanDesc: string = 'Click the button below to add a competency';
 
@@ -114,6 +125,7 @@ export class CompetencyComponent implements OnInit {
   tempSkillReq = [];
   tempCertReq = [];
   tempTrainReq = [];
+  tempExp = [];
   allPositions: PositionDTO [] = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
@@ -136,19 +148,25 @@ export class CompetencyComponent implements OnInit {
   }
 
   async createCompetency(){
+    if(this.allCompetencyRequirements === []){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
+    } else {
+
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
     this.myCompetency.selectedCertifications = JSON.stringify(this.tempCertReq);
     this.myCompetency.selectedQualifications = JSON.stringify(this.tempQualReq);
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError && data.result.isSuccessful === true){
+    if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
         if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
       })
       // this.myCompetency = new ManageCompetencyDTO().clone();
     } else {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
+    }
+
     }
   }
 
@@ -214,6 +232,35 @@ getCompetency(){
       console.log('qualification:', this.qualificationData)
     }
   }
+
+  removeRequirement(req,i){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(res => {
+      if(res){
+        this.allCompetencyRequirements.splice(i, 1);
+        if(req.skillId){
+        var sPos =  this.tempSkillReq.findIndex(x=>x.skillId == req.skillId);
+        if(sPos != -1){this.tempSkillReq.splice(sPos,1)}
+        }
+        if(req.trainingId){
+        var sPos =  this.tempTrainReq.findIndex(x=>x.trainingId == req.trainingId);
+        if(sPos != -1){this.tempTrainReq.splice(sPos,1)}
+        }
+        if(req.certificationId){
+        var sPos =  this.tempCertReq.findIndex(x=>x.certificationId == req.certificationId);
+        if(sPos != -1){this.tempCertReq.splice(sPos,1)}
+        }
+        if(req.qualificationId){
+        var sPos =  this.tempQualReq.findIndex(x=>x.qualificationId == req.qualificationId);
+        if(sPos != -1){this.tempQualReq.splice(sPos,1)}
+        }
+        if(req.experience){
+        var sPos =  this.tempExp.findIndex(x=>x.experience == req.experience);
+        if(sPos != -1){this.tempExp.splice(sPos,1)}
+        }
+      }
+    })
+   }
+
 
   selectPanel(rolelist, i) {
     this.selectedPanel = rolelist;

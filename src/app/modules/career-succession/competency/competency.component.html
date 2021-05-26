@@ -59,7 +59,7 @@
                           </div>
                         </nb-card-header>
                         <nb-card-body>
-                          <h4>{{ myCompetency.description }}</h4>
+                          <h4>{{ competencyData.description }}</h4>
                         </nb-card-body>
                       </nb-card>
                     </div>
@@ -83,4 +83,145 @@
     </div>
   </div> -->
 </div>
+
+<ngx-side-modal [(show)]="updateComp">
+  <div modal-header>Update Competency</div>
+  <div modal-body>
+    <nb-card>
+      <nb-card-body>
+        <form>
+          <div class="form-group row">
+            <label for="Role">Competency Title </label>
+              <input type="text" class="form-control" name="competencyTitle" #competencyTitle="ngModel"
+              [(ngModel)]="competencyData.competencyTitle"  placeholder="Title">
+          </div>
+
+          <!-- <div *ngIf="selectedCase=='Role'" class="form-group row ">
+            <label for="Role" >Role Name</label>
+
+              <select type="text" class="form-control" name="roleName" #roleName="ngModel"
+              [(ngModel)]="competencyData.jobRoleId"  placeholder="Role Name">
+                <option value="">--Select Role--</option>
+                <option *ngFor="let role of allJobRoles" [value]="role.id">{{ role.name }}</option>
+              </select>
+          </div>
+
+          <div *ngIf="selectedCase=='Position'" class="form-group row ">
+            <label for="Role" >Position Name</label>
+
+              <select type="text" class="form-control" name="positionName" #positionName="ngModel"
+              [(ngModel)]="competencyData.positionId" placeholder="Role Name">
+                <option value="">--Select Role--</option>
+                <option *ngFor="let position of allPositions" value="">{{ position.name }}</option>
+              </select>
+          </div> -->
+
+          <div class="form-group row ">
+            <label for="Descripion" >Descripion</label>
+              <!-- <ngx-wysisyg-input style="padding-left: -10px;"  [(value)]="competencyData.description" ></ngx-wysisyg-input>                  </div> -->
+              <textarea name="description" #description="ngModel" [(ngModel)]="competencyData.description" cols="30" rows="10"></textarea>
+          </div>
+
+          <div class="form-group row ">
+            <label for="Department" >Department</label>
+
+              <select class="custom-select" name="departmentName" #departmentName="ngModel"
+              [(ngModel)]="competencyData.departmentId" required>
+                <option value="">--Select Department--</option>
+                <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
+              </select>
+          </div>
+
+          <div class="form-group row">
+            <label for="Title" >Requirement Type</label>
+              <select class="custom-select" name="requirementCategory" #requirementCategory="ngModel" [(ngModel)]="competencyRequirement.requirementCategory" (change)="toggleRequirement($event.target.value)" required>
+                <option value="">--Select Level--</option>
+                <option *ngFor="let req of requirementList" [value]="req.title">{{req.label}}</option>
+              </select>
+          </div>
+
+          <div class="form-group row">
+                <div *ngIf="requirement =='skill'">
+                  <label for="">Skill Type</label>
+                  <select class="custom-select" name="skillType" #skillType="ngModel" [(ngModel)]="competencyRequirement.skillId" required>
+                  <option value="">--Select Level--</option>
+                  <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
+                </select>
+                </div>
+
+                <div *ngIf="requirement =='training'">
+                  <label for="">Training Type</label>
+                  <select class="custom-select" name="trainingType" #trainingType="ngModel" [(ngModel)]="competencyRequirement.trainingId" required>
+                  <option value="">--Select Level--</option>
+                  <option *ngFor="let training of trainingData" [value]="training.title">{{training.name}}</option>
+                </select>
+                </div>
+
+                <div *ngIf="requirement =='certification'">
+                  <label for="">Certification Type</label>
+                  <select class="custom-select" name="certificationId" #certificationId="ngModel" [(ngModel)]="competencyRequirement.certificationId" required>
+                  <option value="">--Select Level--</option>
+                  <option *ngFor="let cert of certificationData" [value]="cert.id">{{cert.name}}</option>
+                </select>
+                </div>
+
+                <div *ngIf="requirement =='qualification'">
+                  <label for="">Qualification Type</label>
+                  <select class="custom-select" name="qualification" #qualification="ngModel" [(ngModel)]="competencyRequirement.qualificationId"  required>
+                  <option value="">--Select Level--</option>
+                  <option *ngFor="let myqualification of qualificationData" [value]="myqualification.id">{{myqualification.name}}</option>
+                </select>
+                </div>
+
+                <div *ngIf="requirement =='experience'">
+                  <label for="">General Experience</label>
+                  <select class="custom-select" name="experience" #experience="ngModel" [(ngModel)]="competencyRequirement.experienceId" required>
+                  <option value="">--Select Level--</option>
+                  <option *ngFor="let exp of experienceData" [value]="exp.title">{{exp.name}}</option>
+                </select>
+                </div>
+
+
+                  <label for="">Experience (Months)</label>
+                  <input type="number" class="form-control" name="experienceValue" #experienceValue="ngModel"
+                  [(ngModel)]="competencyRequirement.yearsofExperience" placeholder="Months">
+              </div>
+
+          <div class="form-group row">
+            <label for="">Weight</label>
+            <input type="number" class="form-control" name="skillWeight" #skillWeight="ngModel"
+            [(ngModel)]="competencyRequirement.skillWeight" placeholder="Points" required>
+
+            <label for="">Experience Weight</label>
+            <input type="number" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="competencyRequirement.experienceWeight" placeholder="12" required>
+          </div>
+
+          <div class="form-group row ">
+            <label for="Title" ></label>
+              <button nbButton (click)="addRequirement()" style="color: #4847E0"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add More</button>
+          </div>
+
+          <div class="form-group row" style="border: #4847E0 3px;">
+            <span class="cbadge"  *ngFor="let requirement of allCompetencyRequirements;let i = index" style="margin: 5px;">{{ requirement.requirementCategory }}
+              |
+        {{requirement.skillName}} {{requirement.certificationName}} {{requirement.qualificationName}}  | {{requirement.yearsofExperience}} |
+        {{requirement.skillWeight}}
+              &nbsp;
+              <i class="fa fa-times" (click)="removeRequirement(requirement,i)" style="cursor: pointer;color: red;"></i></span>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <button nbButton status="primary" (click)="createCompetency()">Submit</button>
+          </div>
+          </div>
+        </form>
+      </nb-card-body>
+  </nb-card>
+
+  </div>
+
+
+
+</ngx-side-modal>
 

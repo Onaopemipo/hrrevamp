@@ -119,7 +119,9 @@ export class HiringchecklistComponent implements OnInit {
   }
   async proceedtoworkInfo() {
     this.submitbtnPressed = true
-    console.log('workdata', this.InformationData)
+  
+    delete this.UserData.dateofCompletion
+    console.log('workdata', this.UserData)
     const data = await this.PostService.addUpdateOnboardingPersonnalData(this.UserData).toPromise()
     if (!data.hasError) {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
@@ -190,9 +192,16 @@ export class HiringchecklistComponent implements OnInit {
    getAllEmployeeOnboarding(onboardingId){
     this.loading= false
      this.FetchEmployeeOnboardingDataDetailsServiceProxy.fetchEmployeeOnboardingDataDetails(onboardingId, 0).subscribe((data:any) => {
-      if(!data.hasError){
+       if (!data.hasError) {
+         var pInfo = data.result[0].onboardingPersonalInfo;
         this.onBoarding = data.result;
-        this.UserData = data.result[0].onboardingPersonalInfo;
+         this.UserData = new OnboardingPersonalDTO(pInfo);
+         this.UserData.dateOfBirth = pInfo.dateofBirth;
+         this.UserData.phoneNumber = pInfo.phoneNumber;
+         this.UserData.martialStatusId = pInfo.martialStatusId;
+         this.UserData.fieldOfStudy = pInfo.fieldofStudy; 
+         this.UserData.degree = pInfo.degree;      
+
         this.workData =  data.result[0].onboardingWorkInformation ? data.result[0].onboardingWorkInformation : new OnboardingWorkDTO().clone();
         this.totalItems = data.totalRecord      
   
@@ -330,7 +339,10 @@ export class HiringchecklistComponent implements OnInit {
     if (this.InformationData.dateOfBirth) return true;
     return false;
   }
-
+  get validated() {
+    if (this.UserData.dateOfBirth) return true;
+    return false;
+  }
   get validdate() {
     if (this.workData.dateofJoining) return true;
     return false;

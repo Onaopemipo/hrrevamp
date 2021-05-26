@@ -8,7 +8,7 @@
   <nb-card>
     <nb-card-body>
       <div><br>
-        <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addRequest()">
+        <ngx-default-content [pageHeader]="myHeader" [loading]='loading' [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addRequest()">
         </ngx-default-content>
       </div>
     </nb-card-body>
@@ -20,7 +20,7 @@
   <nb-card>
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [userData]='allLoansData' [actions]='tableActions' [tableColum]="loanRequestTable"></ngx-tablecomponent>
+      <ngx-tablecomponent [loading]='loading' [userData]='allLoansData' [actions]='tableActions' (actionClick)="tableActionClicked($event)" [tableColum]="loanRequestTable"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 </div>

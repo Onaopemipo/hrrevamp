@@ -1,3 +1,4 @@
+import { JobApplicationSearch, RecruitmentJobApplicationServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,13 +9,23 @@ import { Component, OnInit } from '@angular/core';
 export class ApplicantsDashboardComponent implements OnInit {
 
   pageTitle: string = 'Recent Listings';
-  constructor() { }
+  allJobsApplication: JobApplicationSearch [] = [];
+
+  constructor(private jobService: RecruitmentJobApplicationServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchApplications();
   }
 
   toggle(event){
 
   }
+
+  async fetchApplications(){
+    const data = await this.jobService.fetchJobApplications(0,10,1).toPromise();
+    if(!data.hasError){
+      this.allJobsApplication = data.result;
+    }
+    }
 
 }

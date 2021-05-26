@@ -14,6 +14,7 @@ export class NewjobComponent implements OnInit {
   myButton: string = 'Add a Job Posting';
   availability: string = 'Physical';
   employmentType: string = 'Full Time';
+  pagetitle: string = 'Post New Job';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
   jobFilter: any;
@@ -32,6 +33,10 @@ export class NewjobComponent implements OnInit {
   newJobModel: ManageJobDTO = new ManageJobDTO();
   allScoreCards: RecruitmentScoreCard [] = [];
 
+  allowmultipleselection: boolean = false;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Employee";
+
   constructor(private job: RecruitmentJobServiceProxy, private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy, private department: GetAllDepartmentsServiceProxy,
     private employment: RecruitmentSettingServiceProxy, private dataService: DataServiceProxy,
@@ -44,6 +49,9 @@ export class NewjobComponent implements OnInit {
     this.fetchEmploymentTypes();
     this.fetchQualifications();
     this.fetchStates();
+    this.fetchJobRoles();
+    this.fetchJobAvailabilty();
+    this.fetchScoreCards();
   }
 
   newJobPosting(){
@@ -52,11 +60,11 @@ export class NewjobComponent implements OnInit {
   addNewJob() {
     this.loading = true;
    this.job.addUpdateJob(this.newJobModel).subscribe(data => {
-    if(!data.hasError){
+    if(!data.hasError && data.result.isSuccessful == true){
       this.loading = false;
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss').subscribe(res => {
         if(res){
-
+          this.router.navigateByUrl('/recruitmentadmin/jobs/');
         }
       })
     }
@@ -71,7 +79,7 @@ export class NewjobComponent implements OnInit {
   }
 
   async fetchStates(){
-    const data = await this.dataService.getStateByCountryId(1).toPromise();
+    const data = await this.dataService.getStateByCountryId(154).toPromise();
     if(!data.hasError){
       this.allStates = data.result;
     }
@@ -140,7 +148,7 @@ export class NewjobComponent implements OnInit {
 
   getSelectedEmployee(event,selectType) {
     if(selectType == 'employee'){
-     this.newJobModel.ref = event[0].employeeNumber;
+     this.newJobModel.reviewers = event[0].employeeNumber;
     }
  }
 

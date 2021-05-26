@@ -1,5 +1,5 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { RecruitmentSettingServiceProxy, ManageHireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion } from './../../../../_services/service-proxies';
+import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO, QuestionDTO, QuestionOptionDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
 import { NbTabComponent } from '@nebular/theme';
 import { Component, OnInit } from '@angular/core';
 import { truncateSync } from 'fs';
@@ -33,7 +33,9 @@ export class SettingsComponent implements OnInit {
 
   ];
 
+  multiChoice: QuestionOptionDTO[] = [];
   scoreCardClick: boolean = false;
+  newTemplate: boolean = false;
   emailResponder;
   newStage: boolean = false;
   allowmultipleselection: boolean = false;
@@ -41,13 +43,22 @@ export class SettingsComponent implements OnInit {
   addbtnText: string = "Add Employee";
   stagesModel: ManageHireStageDTO = new ManageHireStageDTO;
   scoreCardModel: ManageRecruitmentScoreCardDTO = new ManageRecruitmentScoreCardDTO;
-  questionModel: ScoreCardQuestion = new ScoreCardQuestion;
+  questionModel: ScoreCardQuestion = new ScoreCardQuestion();
   questionBank: ScoreCardQuestion [] = [];
+  hiringStages: HireStageDTO [] = [];
+  hireStage: HireStageDTO = new HireStageDTO();
+  subHireStage: SubHireStageDTO = new SubHireStageDTO();
+  allSubHireStages: SubHireStageDTO [] = [];
+  allScorecards: RecruitmentScoreCard [] = [];
+
+
 
 
   constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService) { }
 
   ngOnInit(): void {
+    this.getHireStages();
+    this.fetchAllScorecards();
   }
 
   selectPanel(hiringlist, i) {
@@ -70,6 +81,10 @@ export class SettingsComponent implements OnInit {
     this.scorecard = true;
   }
 
+  toggleNewTemplate(){
+    this.newTemplate = true;
+  }
+
   addNewStage(){
     this.settings.addUpdateHireStage(this.stagesModel).subscribe(data => {
       if(!data.hasError){
@@ -80,15 +95,41 @@ export class SettingsComponent implements OnInit {
 
   addMoreQuestion(){
     this.questionBank.push(this.questionModel);
+    console.log(this.questionModel);
     this.questionModel = new ScoreCardQuestion().clone();
+
   }
+
+  removeQuestion(question){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(res => {
+      if(res){
+       for( var i = 0; i < this.questionBank.length; i++){
+         if (this.questionBank[i] === question) {
+           this.questionBank.splice(i, 1);
+             i--;
+         }
+     }
+      }
+    })
+   }
 
   addScoreCard(){
     this.settings.addUpdateScoreCard(this.scoreCardModel).subscribe(data => {
       if(!data.hasError){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Scorecard Added!','Dismiss')
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Scorecard Added!','Dismiss').subscribe(res => {
+          if(res){
+            this.scorecard = false;
+          }
+        })
       }
     })
+  }
+
+  async fetchAllScorecards(){
+    const data = await this.settings.getRecruitmentScoreCards().toPromise();
+    if(!data.hasError){
+      this.allScorecards = data.result;
+    }
   }
 
   createNewTemplate() {
@@ -115,7 +156,7 @@ export class SettingsComponent implements OnInit {
   }
 
   addStage() {
-    this.newStage = true;
+    this.newStage = !this.newStage;
   }
 
   addTemplate() {
@@ -126,8 +167,35 @@ export class SettingsComponent implements OnInit {
 
   }
 
-  getAllTemplates(){
+  async getAllTemplates(){
+  }
 
+  async getHireStages(){
+    const data = await this.settings.getAllHireStages().toPromise();
+    if(!data.hasError){
+      this.hiringStages = data.result;
+    }
+  }
+
+  async getSingleHireStage(){
+    const data = await this.settings.getHireStage(1).toPromise();
+    if(!data.hasError){
+      this.hireStage = data.result;
+    }
+  }
+
+  async getAllSubHireStages(){
+    const data = await this.settings.getAllSubHireStages().toPromise();
+    if(!data.hasError){
+      this.allSubHireStages = data.result;
+    }
+  }
+
+  async getSingleSubHireStage(){
+    const data = await this.settings.getSubHireStage(1).toPromise();
+    if(!data.hasError){
+      this.subHireStage = data.result;
+    }
   }
 
   getSelectedEmployee(event,selectType) {

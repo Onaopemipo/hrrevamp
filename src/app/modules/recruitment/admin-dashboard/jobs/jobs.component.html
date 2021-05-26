@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Jobs' [requiredButton]="rButton" (buttonClick)="addNewJob()"></ngx-componentsheader>
+<ngx-componentsheader pageName='Jobs' [requiredButton]="rButton" (buttonClick)=" newJobPosting()"></ngx-componentsheader>
 
 <div *ngIf="jobsCounter < 1" style="background-color: #ffffff;">
   <nb-card>
@@ -18,8 +18,11 @@
   </nb-card>
 </div> -->
 
-<nb-card>
+<nb-card *ngIf="jobsCounter > 0">
   <nb-card-body>
+    <!-- <div headerButton>
+
+    </div> -->
     <nb-tabset  *ngIf="jobsCounter > 0" (changeTab)="selectTab($event)">
       <nb-tab tabTitle="Posted Jobs" [tabId]="TABS.postedJobs">
           <div *ngIf="jobsCounter < 1">
@@ -29,7 +32,7 @@
 
             <div *ngIf="jobsCounter > 0">
               <ngx-tableheader></ngx-tableheader>
-              <ngx-tablecomponent [loading]='loading' [userData]='allJobs' [actions]='tableActions' [tableColum]="postedJobsTable"></ngx-tablecomponent>
+              <ngx-tablecomponent [loading]='loading' [userData]='allJobs' [actions]='tableActions' [tableColum]="postedJobsTable" (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
             </div>
       </nb-tab>
 
@@ -41,7 +44,7 @@
 
           <div *ngIf="jobsCounter > 0">
             <ngx-tableheader></ngx-tableheader>
-          <ngx-tablecomponent [tableColum]="scheduledJobsTable" [userData]="tableData" [showActions]="true" [actions]="tableActions"></ngx-tablecomponent>
+          <ngx-tablecomponent [tableColum]="scheduledJobsTable" [userData]="tableData" [showActions]="true" [actions]="tableActions" (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
           </div>
       </nb-tab>
 
@@ -54,7 +57,7 @@
 
             <div *ngIf="jobsCounter > 0">
               <ngx-tableheader></ngx-tableheader>
-             <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="tableData"></ngx-tablecomponent>
+             <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="tableData" [actions]="tableActions" (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
             </div>
       </nb-tab>
 

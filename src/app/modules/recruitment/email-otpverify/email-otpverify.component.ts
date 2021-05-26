@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class EmailOTPVerifyComponent implements OnInit {
 
   verifyOption: boolean = true;
-  constructor() { }
+  OTPstring: string = '';
+  loginUserEmail:string = ''
+
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,7 +24,31 @@ export class EmailOTPVerifyComponent implements OnInit {
   }
 
   resendOtp() {
-    // console.log('A new OTP has been sent');
+    this.applicant.regenerateOTPToken(this.loginUserEmail).subscribe(data => {
+      if(!data.hasError){
+
+      }
+    })
+  }
+
+  verifyUser(){
+    this.applicant.verifyApplicantAccount(this.OTPstring).subscribe(data => {
+      if(!data.hasError){
+        this.router.navigateByUrl('/recruitment/applicantdashboard');
+      }
+    })
+  }
+
+  getToken(event){
+    alert(event);
+  }
+
+  onKeyUpEvent(a, e){
+    alert(e)
+  }
+
+  onFocusEvent(e){
+    alert(e)
   }
 
 }
