@@ -1,0 +1,78 @@
+
+<ngx-componentsheader pageName="Benefit Type " [requiredButton]="topActionButtons"
+    (buttonClick)="pageActionClicked($event)"></ngx-componentsheader>
+<div class="main-page-container">
+
+    <ngx-tableheader *ngIf="!showEmpty">
+    </ngx-tableheader>
+    <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]="Benefit"
+        (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [currentPage]="currentPage"
+        [actions]="tableActions" (actionClick)="tableActionClicked($event)">
+    </ngx-tablecomponent>
+
+    <ngx-default-content *ngIf="showEmpty" pageHeader="Benefit Eligibility" pageDescription="No record Found" [loading]="loading">
+    </ngx-default-content>
+
+
+</div>
+
+
+
+<!-- modal for benefit create -->
+<ngx-side-modal [(show)]='showBenefit' style="width: 500px;">
+    <div modal-header style="font-size: larger; font-weight: bold;">
+        <span>
+            Create New Benefit Type
+        </span>
+    </div>
+    <div modal-body>
+
+        <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+            <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+          margin-left: 10px;">create new events</h6> -->
+            <div style="margin: 20px;">
+                <div class="form-group">
+                    <label for="title" class="label col-form-label listsubheader">Type of Benefit</label>
+                    <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel"
+                        name="name" [(ngModel)]="AddBenefit.name" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="Description" style="margin-left: 0.3rem;" class="label  col-form-label listsubheader">Description</label>
+                <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                    name="description" #description="ngModel" [(ngModel)]=" AddBenefit.description"></textarea>
+
+                <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                    <div *ngIf="description.errors.required">Description is required</div>
+                </div>
+
+            </div>
+
+
+
+        </form>
+
+    </div>
+
+    
+    <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+        <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+            class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+        <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disabled"
+          (click)="SubmitBenefitType()">Submit</button>
+
+          <div style="padding-left: 15px;">
+            <button nbButton outline status="primary" (click)="showBenefit = false"
+              class="d-flex column" style="background-color: white;">Discard</button>
+          </div>
+
+      </div>
+
+</ngx-side-modal>

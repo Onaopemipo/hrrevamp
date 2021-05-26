@@ -15,6 +15,9 @@ import { ManageEmployeeComponent } from "./pages/manage-employee/manage-employee
 import { FetchEmployeeCoverageBenefitServiceProxy } from "../../../app/_services/service-proxies";
 import { AddBenefitComponent } from "./add-benefit/add-benefit.component";
 import { EligibilityviewComponent } from "./eligibilityview/eligibilityview.component";
+import {BenefitTypeComponent} from './pages/benefit-type/benefit-type.component';
+import { AllplansComponent} from './pages/allplans/allplans.component'
+
 
 import Flow from "@flowjs/flow.js";
 import { FlowInjectionToken, NgxFlowModule } from "@flowjs/ngx-flow";
@@ -40,7 +43,9 @@ import {
   FetchAllEmployeesServiceProxy,
   GetVendorPlanByVendorIdServiceProxy,FetchBenefitEmployeesServiceProxy,
   FetchEmployeeByIdServiceProxy,
-  FetchBenefitServiceProxy
+  FetchBenefitServiceProxy,
+  FetchAllBenefitTypesServiceProxy,
+  
 
 } from "../../_services/service-proxies";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -61,6 +66,9 @@ import { NbRadioModule } from "@nebular/theme";
     EligibilityviewComponent,
     BenefitViewComponent,
     BenefitdetaisComponent,
+    BenefitTypeComponent,
+    AllplansComponent,
+ 
 
   ],
   imports: [
@@ -99,7 +107,9 @@ import { NbRadioModule } from "@nebular/theme";
     DeleteBenefitEligibilityServiceProxy,
     DeleteBenefitServiceProxy,FetchBenefitEmployeesServiceProxy,
     FetchEmployeeByIdServiceProxy,
-    FetchBenefitServiceProxy
+    FetchBenefitServiceProxy,
+    FetchAllBenefitTypesServiceProxy,
+    GetAllVendorPlanServiceProxy
 
   ],
 })

@@ -12,6 +12,8 @@ import { VendorPlanComponent } from './vendor-plan/vendor-plan.component';
 import {  AddBenefitComponent } from './add-benefit/add-benefit.component';
 import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
 import{ BenefitdetaisComponent} from './benefitdetais/benefitdetais.component';
+import {BenefitTypeComponent} from './pages/benefit-type/benefit-type.component';
+import { AllplansComponent} from './pages/allplans/allplans.component'
 
 export const routes: Routes = [
   {
@@ -62,6 +64,16 @@ export const routes: Routes = [
         path: 'BenefitDetails/:id',
         component: BenefitdetaisComponent,
       },
+
+      {
+        path: 'BenefitType',
+        component: BenefitTypeComponent,
+      },
+      {
+        path: 'allPlans',
+        component: AllplansComponent,
+      },
+  
   
   
     ],

@@ -3,7 +3,12 @@
 <!-- [requiredButton]="rButton"
 (buttonClick)="topActionClicked()"  -->
 
-<nb-card>
+<ngx-default-content *ngIf="!showEmpty" pageHeader="Vendors"
+pageDescription="No record found"  [loading]="loading"></ngx-default-content>
+<div>
+
+</div>
+<nb-card *ngIf="showEmpty">
     <nb-card-body>
 
         <!-- *ngSwitchCase="'deployment_info'" -->
@@ -133,7 +138,19 @@
                         </div>
                     </div>
 
+                    
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                   ></textarea>
+<!--   
+                <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                    <div *ngIf="description.errors.required">Description is required</div>
+                </div> -->
+  
+            </div>
                     <!-- <div class="form-group">
+                         name="description" #description="ngModel" [(ngModel)]="eligibility.description"
                         <label>Employee</label>
                         <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)"
                             [allowmultipleselection]="true">
@@ -161,7 +178,11 @@
                 <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
                     [disabled]="!disability" (click)="Submit()">Submit</button>
 
-
+                    
+                    <div style="padding-left: 15px;">
+                        <button nbButton outline status="primary" (click)="showModal = false" class="d-flex column"
+                            style="background-color: white;">Discard</button>
+                    </div>
             </div>
 
         </ngx-side-modal>

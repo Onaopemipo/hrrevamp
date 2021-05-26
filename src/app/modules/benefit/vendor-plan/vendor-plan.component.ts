@@ -62,18 +62,18 @@ export class VendorPlanComponent implements OnInit {
       outline: false,
     },
 
-    {
-      name: "add_plan",
-      label: "Create Plans",
-      icon: "plus",
-      outline: true,
-    },
-    {
-      name: "add_benefit",
-      label: "Create Benefit Type",
-      icon: "plus",
-      outline: true,
-    },
+    // {
+    //   name: "add_plan",
+    //   label: "Create Plans",
+    //   icon: "plus",
+    //   outline: true,
+    // },
+    // {
+    //   name: "add_benefit",
+    //   label: "Create Benefit Type",
+    //   icon: "plus",
+    //   outline: true,
+    // },
   ];
 
 
@@ -253,6 +253,7 @@ export class VendorPlanComponent implements OnInit {
     }
   }
   vendorId:number = 0
+  
   async getAllVendor() {
     this.loading = true;
     const data = await this.GetAllVendorServiceProxy.getAllVendor(undefined).toPromise();

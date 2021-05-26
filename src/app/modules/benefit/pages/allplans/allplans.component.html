@@ -1,0 +1,197 @@
+<ngx-componentsheader pageName=" All Vendor Plans " [requiredButton]="topActionButtons"
+    (buttonClick)="pageActionClicked($event)"></ngx-componentsheader>
+<div class="main-page-container">
+
+    <ngx-tableheader *ngIf="!showEmpty">
+    </ngx-tableheader>
+    <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]="Plans"
+        (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [currentPage]="currentPage"
+        [actions]="tableActions" (actionClick)="tableActionClicked($event)">
+    </ngx-tablecomponent>
+
+    <ngx-default-content *ngIf="showEmpty" pageHeader="Vendor Plans" pageDescription="No record Found"
+        [loading]="loading">
+    </ngx-default-content>
+
+
+</div>
+
+
+
+<!-- vendor for plan -->
+<ngx-side-modal [(show)]='showPlan' style="width: 500px;">
+    <div modal-header style="font-size: larger; font-weight: bold;">
+        <span> Create New Plan</span>
+    </div>
+    <div modal-body>
+
+        <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
+            <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
+            margin-left: 10px;">create new events</h6> -->
+            <div style="margin: 20px;">
+                <div class="form-group">
+                    <label for="title">Name of Plan</label>
+                    <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel"
+                        name="name" [(ngModel)]=" AddVendorPlan.name" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">name is required</div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group ">
+                    <label for="inputEmail1" class="label  col-form-label listsubheader">Benefit
+                        Type</label>
+                    <div class="">
+                        <select placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+                            #benefitTypeId="ngModel" [(ngModel)]="AddVendorPlan.benefitTypeId">
+                            <option value="">--Select Benefit Type---</option>
+                            <option *ngFor="let benefit of Benefit" [value]="benefit.id">{{benefit.text}}</option>
+                        </select>
+
+                        <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
+                            class="error">
+                            <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Description"> Plan Description</label>
+                    <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                        name="description" #description="ngModel" [(ngModel)]=" AddVendorPlan.description"></textarea>
+
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                        <div *ngIf="description.errors.required">Description is required</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group ">
+                    <label for="inputEmail1" class="label  col-form-label listsubheader">Vendor id
+                    </label>
+                    <div class="">
+                        <select placeholder="Select Gender" class="form-control" name="vendorId" id="vendorId"
+                            #vendorId="ngModel" [(ngModel)]="AddVendorPlan.vendorId">
+                            <option value="">--Select Vendor---</option>
+                            <option *ngFor="let evo of AllVendors" [value]="evo.id">{{evo.name}}</option> -->
+                        </select>
+
+                        <div *ngIf="vendorId.invalid && (vendorId.dirty || vendorId.touched)" class="error">
+                            <div *ngIf="vendorId.errors.required">Vendor is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Policy number</label>
+                    <input type="text" class="form-control" placeholder="Enter refNumber" id="refNumber"
+                        #refNumber="ngModel" name="refNumber" [(ngModel)]=" AddVendorPlan.refNumber" required>
+
+                    <div *ngIf="refNumber.invalid && (refNumber.dirty || refNumber.touched)" class="error">
+                        <div *ngIf="refNumber.errors.required">refNumber is required</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="title">Total Cost</label>
+                    <input type="text" class="form-control" placeholder="Enter totalCost" id="totalCost"
+                        #totalCost="ngModel" name="totalCost" [(ngModel)]=" AddVendorPlan.totalCost" required>
+
+                    <div *ngIf="totalCost.invalid && (totalCost.dirty || totalCost.touched)" class="error">
+                        <div *ngIf="totalCost.errors.required">totalCost is required</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Company Percentage</label>
+                    <input type="text" class="form-control" placeholder="Enter Company Percentage" id="companyPercent"
+                        #companyPercent="ngModel" name="companyPercent" [(ngModel)]=" AddVendorPlan.companyPercent"
+                        required>
+
+                    <div *ngIf="companyPercent.invalid && (companyPercent.dirty || companyPercent.touched)"
+                        class="error">
+                        <div *ngIf="companyPercent.errors.required">companyPercent is required</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Company Percentage cost</label>
+                    <input type="text" class="form-control" placeholder="Enter Company Percentage Cost"
+                        id="companyPercentCost" #companyPercentCost="ngModel" name="companyPercentCost"
+                        [(ngModel)]=" AddVendorPlan.companyPercentCost" required>
+
+                    <div *ngIf="companyPercentCost.invalid && (companyPercentCost.dirty || companyPercentCost.touched)"
+                        class="error">
+                        <div *ngIf="companyPercentCost.errors.required">companyPercentCost is required</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Employee Percentage</label>
+                    <input type="text" class="form-control" placeholder="Enter Employee percentage" id="employeePercent"
+                        #employeePercent="ngModel" name="employeePercent" [(ngModel)]=" AddVendorPlan.employeePercent"
+                        required>
+
+                    <div *ngIf="employeePercent.invalid && (employeePercent.dirty || employeePercent.touched)"
+                        class="error">
+                        <div *ngIf="employeePercent.errors.required">Employee Percentage is required</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Employee cost Percentage</label>
+                    <input type="text" class="form-control" placeholder="Enter employeePercentCost"
+                        id="employeePercentCost" #employeePercentCost="ngModel" name="employeePercentCost"
+                        [(ngModel)]=" AddVendorPlan.employeePercentCost" required>
+
+                    <div *ngIf="employeePercentCost.invalid && (employeePercentCost.dirty || employeePercentCost.touched)"
+                        class="error">
+                        <div *ngIf="employeePercentCost.errors.required">Employee cost is required</div>
+                    </div>
+
+                </div>
+
+                <!-- <div class="form-group">
+                    <label for="Description">Plan Description</label>
+                    <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                        name="description" #description="ngModel" [(ngModel)]="AddVendorPlan.description"></textarea>
+
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                        <div *ngIf="description.errors.required">Description is required</div>
+                    </div>
+
+                </div> -->
+
+                <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                    <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                            class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                    <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                        [disabled]="!disable" (click)="SubmitPlan()">Submit</button>
+
+                    <div style="padding-left: 15px;">
+
+
+                    </div>
+                    <div style="padding-left: 15px;">
+                        <button nbButton outline status="primary" (click)="showPlan = false" class="d-flex column"
+                            style="background-color: white;">Discard</button>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</ngx-side-modal>

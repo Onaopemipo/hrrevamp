@@ -7,15 +7,15 @@
   </nb-tabset>
   <ngx-tableheader *ngIf="!showEmpty">
   </ngx-tableheader>
-      <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]=" Eligibility" [loading]="loading"
+  <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="tableColumns" [userData]=" Eligibility" [loading]="loading"
     (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
     [currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
   </ngx-tablecomponent>
-  <ngx-default-content *ngIf="showEmpty" pageHeader="Benefit Eligibility"
-  pageDescription="No record Found" [loading]="loading">
+  <ngx-default-content *ngIf="showEmpty" pageHeader="Benefit Eligibility" pageDescription="No record Found"
+    [loading]="loading">
 
-</ngx-default-content>
- 
+  </ngx-default-content>
+
 
 </div>
 <!-- <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
@@ -36,16 +36,16 @@
       <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
         margin-left: 10px;">create new events</h6> -->
 
-        <div class="form-group">
-          <label for="title">Name</label>
-          <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel" name="name"
-            [(ngModel)]="eligibility.name" required>
+      <div class="form-group">
+        <label for="title">Name</label>
+        <input type="text" class="form-control" placeholder="Enter name of plan" id="name" #name="ngModel" name="name"
+          [(ngModel)]="eligibility.name" required>
 
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-            <div *ngIf="name.errors.required">name is required</div>
-          </div>
-
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+          <div *ngIf="name.errors.required">name is required</div>
         </div>
+
+      </div>
 
 
       <div class="form-group ">
@@ -67,7 +67,20 @@
       <div class="form-group">
         <!-- <label>Employee</label>
             <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
-            </ngx-employee-master-search> -->
+            </ngx-employee-master-search>
+           name="description" #description="ngModel" [(ngModel)]="eligibility.description" -->
+
+
+            <div class="form-group">
+              <label for="Description">Description</label>
+              <textarea type="textarea" class="form-control" placeholder="Enter Description" id="description"
+                 ></textarea>
+
+              <!-- <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                  <div *ngIf="description.errors.required">Description is required</div>
+              </div> -->
+
+          </div>
 
         <div class="col-sm-6">
           <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')"
@@ -92,10 +105,6 @@
 
       </div>
 
-
-
-
-
     </form>
 
   </div>
@@ -108,6 +117,10 @@
       (click)="Submit()">Submit</button>
 
 
+    <div style="padding-left: 15px;">
+      <button nbButton outline status="primary" (click)="showPlan = false" class="d-flex column"
+        style="background-color: white;">Discard</button>
+    </div>
   </div>
 
 </ngx-side-modal>

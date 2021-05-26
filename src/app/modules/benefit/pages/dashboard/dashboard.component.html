@@ -109,12 +109,12 @@
 <div style="margin: 0.5rem;"></div>
 <ngx-componentsheader pageName="Benefit Coverages" [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
-<ngx-default-content *ngIf="showEmpty" pageHeader="Benefit Coverages"
-pageDescription="No record found"  [loading]="loading"
->
+<ngx-default-content *ngIf="showEmpty" pageHeader="Benefit Coverages" pageDescription="No record found"
+  [loading]="loading">
 </ngx-default-content>
 <div class="row" *ngIf="!showEmpty">
-  <div class="col-sm-4" *ngFor="let a of allBenefito" style="padding: 0px;cursor: pointer;"  [routerLink]="['/benefits/BenefitDetails',a.id]">
+  <div class="col-sm-4" *ngFor="let a of allBenefito" style="padding: 0px;cursor: pointer;"
+    [routerLink]="['/benefits/BenefitDetails',a.id]">
     <div style="margin: 15px;">
       <div class="card" style="display: flex; flex-direction: row; padding: 1rem;">
         <div style="margin-right: 1rem;">
@@ -132,7 +132,7 @@ pageDescription="No record found"  [loading]="loading"
             </span>
           </div>
         </div>
-        
+
 
       </div>
     </div>

@@ -141,7 +141,7 @@ export class EligibilityListComponent extends MainBaseComponent {
     }
 
     if (event.name == TABLE_ACTION.VIEW) {
-      alert(event.data.id);
+   
       this.router.navigateByUrl("/benefits/eligibilityView/" + event.data.id);
       // this.FetchBenefitEligibilityServiceProxy.getBenefitEligibility(event.data.id).toPromise().then(
       //   res=>

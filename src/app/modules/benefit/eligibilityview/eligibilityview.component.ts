@@ -17,7 +17,7 @@ import { Transfer } from "@flowjs/ngx-flow";
   styleUrls: ["./eligibilityview.component.scss"],
 })
 export class EligibilityviewComponent implements OnInit {
-  eligibility: BenefitEligibilityDTO;
+  eligibility = new BenefitEligibilityDTO().clone()
   Editing: boolean = false;
   showModal : boolean = false;
   submitbtnPressed:boolean= false
@@ -39,7 +39,9 @@ export class EligibilityviewComponent implements OnInit {
       outline: true,
     },
   ];
-
+ get showEmpty(){
+ return this.eligibility.id ? true : false
+ }
   ngOnInit(): void {
     this.ActivatedRoute.paramMap.subscribe((paraMap) => {
       if (!paraMap.has("id")) {
@@ -52,18 +54,22 @@ export class EligibilityviewComponent implements OnInit {
       this.getEligibility();
     });
   }
+  loading:boolean = true
   async getEligibility() {
+    this.loading = true
     const data =
       await this.FetchBenefitEligibilityServiceProxy.getBenefitEligibility(
         this.eligibilityID
       ).toPromise();
     if (!data.hasError) {
+      this.loading = false
       this.eligibility = data.result;
       this.Eli =new ManageBenefitEligibilityDTO({ ...this.eligibility.clone(), employees: '', benefitTypeId: 0,positionId:0});
       console.log("elo", this.eligibility);
     }
   }
    
+
 
   //edit eligilibilty
   modal(event) {
