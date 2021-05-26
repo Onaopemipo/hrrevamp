@@ -22,14 +22,17 @@
       <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;">
         <nb-card>
             <nb-card-body>
-              <form>
+              <form name="myForm" #myForm="ngForm">
                 <div class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Competency Title </label>
                   <div class="col-sm-8 col-md- 8 col-lg-8">
                     <input type="text" class="form-control" name="competencyTitle" #competencyTitle="ngModel"
                     [(ngModel)]="myCompetency.competencyTitle"  placeholder="Title">
+                    <div *ngIf="competencyTitle.invalid && (competencyTitle.dirty || competencyTitle.touched)" class="error">
+                    <div *ngIf="competencyTitle.errors.required">Title is required</div>
                   </div>
                 </div>
+                  </div>
 
                 <div *ngIf="selectedCase=='Role'" class="form-group row ">
                   <label for="Role" class="col-sm-3 col-form-label mylabel">Role Name</label>
@@ -39,6 +42,9 @@
                       <option value="">--Select Role--</option>
                       <option *ngFor="let role of allJobRoles" [value]="role.id">{{ role.name }}</option>
                     </select>
+                    <div *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)" class="error">
+                      <div *ngIf="roleName.errors.required">Role is required</div>
+                    </div>
                   </div>
                 </div>
 
@@ -50,6 +56,9 @@
                       <option value="">--Select Role--</option>
                       <option *ngFor="let position of allPositions" value="">{{ position.name }}</option>
                     </select>
+                    <div *ngIf="positionName.invalid && (positionName.dirty || positionName.touched)" class="error">
+                      <div *ngIf="positionName.errors.required">Position is required</div>
+                    </div>
                   </div>
                 </div>
 
@@ -69,6 +78,9 @@
                       <option value="">--Select Department--</option>
                       <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
                     </select>
+                    <div *ngIf="departmentName.invalid && (departmentName.dirty || departmentName.touched)" class="error">
+                      <div *ngIf="departmentName.errors.required">Department is required</div>
+                    </div>
                   </div>
                 </div>
 
@@ -115,6 +127,9 @@
                         <option value="">--Select Level--</option>
                         <option *ngFor="let skill of skillData" [value]="skill.title">{{skill.name}}</option>
                       </select>
+                      <div *ngIf="skillType.invalid && (skillType.dirty || skillType.touched)" class="error">
+                        <div *ngIf="skillType.errors.required">Skill Type is required</div>
+                      </div>
                       </div>
 
                       <div *ngIf="requirement =='training'" class="col-sm-6">
@@ -123,6 +138,9 @@
                         <option value="">--Select Level--</option>
                         <option *ngFor="let training of trainingData" [value]="training.title">{{training.name}}</option>
                       </select>
+                      <div *ngIf="trainingType.invalid && (trainingType.dirty || trainingType.touched)" class="error">
+                        <div *ngIf="trainingType.errors.required">Training Type is required</div>
+                      </div>
                       </div>
 
                       <div *ngIf="requirement =='certification'" class="col-sm-6">
@@ -131,6 +149,9 @@
                         <option value="">--Select Level--</option>
                         <option *ngFor="let cert of certificationData" [value]="cert.id">{{cert.name}}</option>
                       </select>
+                      <div *ngIf="certificationId.invalid && (certificationId.dirty || certificationId.touched)" class="error">
+                        <div *ngIf="certificationId.errors.required">Certification is required</div>
+                      </div>
                       </div>
 
                       <div *ngIf="requirement =='qualification'" class="col-sm-6">
@@ -139,6 +160,9 @@
                         <option value="">--Select Level--</option>
                         <option *ngFor="let myqualification of qualificationData" [value]="myqualification.id">{{myqualification.name}}</option>
                       </select>
+                      <div *ngIf="qualification.invalid && (qualification.dirty || qualification.touched)" class="error">
+                        <div *ngIf="qualification.errors.required">Qualification is required</div>
+                      </div>
                       </div>
 
                       <div *ngIf="requirement =='experience'" class="col-sm-6">
@@ -148,13 +172,19 @@
                         <option *ngFor="let exp of experienceData" [value]="exp.title">{{exp.name}}</option>
                       </select> -->
                       <label for="">Experience Weight</label>
-                        <input type="number" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="competencyRequirement.experienceWeight" placeholder="12" required>
+                        <input type="number" class="form-control" name="genExperience" #genExperience="ngModel" [(ngModel)]="competencyRequirement.experienceWeight" placeholder="12" required>
+                        <div *ngIf="genExperience.invalid && (genExperience.dirty || genExperience.touched)" class="error">
+                          <div *ngIf="genExperience.errors.required">Experience Weight is required</div>
+                        </div>
                       </div>
 
                       <div class="col-sm-6">
                         <label for="">Experience (Months)</label>
                         <input type="number" class="form-control" name="experienceValue" #experienceValue="ngModel"
                         [(ngModel)]="competencyRequirement.yearsofExperience" placeholder="Months">
+                        <div *ngIf="experienceValue.invalid && (experienceValue.dirty || experienceValue.touched)" class="error">
+                          <div *ngIf="experienceValue.errors.required">Experience is required</div>
+                        </div>
                       </div>
                     </div>
 
@@ -169,11 +199,17 @@
                         <label for="">Weight</label>
                         <input type="number" class="form-control" name="skillWeight" #skillWeight="ngModel"
                         [(ngModel)]="competencyRequirement.skillWeight" placeholder="Points" required>
+                        <div *ngIf="skillWeight.invalid && (skillWeight.dirty || skillWeight.touched)" class="error">
+                          <div *ngIf="skillWeight.errors.required">Skill Weight is required</div>
+                        </div>
                       </div>
 
                       <div *ngIf="requirement != 'experience'" class="col-sm-6">
                         <label for="">Experience Weight</label>
                         <input type="number" class="form-control" name="experienceWeight" #experienceWeight="ngModel" [(ngModel)]="competencyRequirement.experienceWeight" placeholder="12" required>
+                        <div *ngIf="experienceWeight.invalid && (experienceWeight.dirty || experienceWeight.touched)" class="error">
+                          <div *ngIf="experienceWeight.errors.required">Experience Weight is required</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -189,8 +225,14 @@
                 <div class="form-group row" *ngIf="allCompetencyRequirements.length > 0" style="border: #4847E0 3px;">
                   <div class="col-sm-3"></div>
                   <div class="col-sm-8">
-                    <span class="cbadge"  *ngFor="let requirement of allCompetencyRequirements" style="margin: 5px;">{{ requirement.requirementCategory }} &nbsp;
-                      <i class="fa fa-times" (click)="removeRequirement(requirement)" style="cursor: pointer;color: red;"></i></span>
+                    <div class="row">
+                      <span class="cbadge"  *ngFor="let requirement of allCompetencyRequirements;let i = index" style="margin: 5px;">{{ requirement.requirementCategory }}
+                        |
+                  {{requirement.skillName}} {{requirement.certificationName}} {{requirement.qualificationName}}  | {{requirement.yearsofExperience}} |
+                  {{requirement.skillWeight}}
+                        &nbsp;
+                        <i class="fa fa-times" (click)="removeRequirement(requirement,i)" style="cursor: pointer;color: red;"></i></span>
+                    </div>
                   </div>
                 </div>
 
@@ -199,7 +241,7 @@
                     <label></label>
                   </div>
                   <div class="col-sm-8">
-                    <button nbButton status="primary" (click)="createCompetency()">Submit</button>
+                    <button nbButton status="primary" (click)="createCompetency()" [disabled]="myForm.invalid">Submit</button>
                   </div>
                 </div>
               </form>

@@ -125,6 +125,7 @@ export class CompetencyComponent implements OnInit {
   tempSkillReq = [];
   tempCertReq = [];
   tempTrainReq = [];
+  tempExp = [];
   allPositions: PositionDTO [] = [];
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
@@ -147,6 +148,10 @@ export class CompetencyComponent implements OnInit {
   }
 
   async createCompetency(){
+    if(this.allCompetencyRequirements === []){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
+    } else {
+
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
     this.myCompetency.selectedCertifications = JSON.stringify(this.tempCertReq);
     this.myCompetency.selectedQualifications = JSON.stringify(this.tempQualReq);
@@ -160,6 +165,8 @@ export class CompetencyComponent implements OnInit {
       // this.myCompetency = new ManageCompetencyDTO().clone();
     } else {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
+    }
+
     }
   }
 
@@ -226,15 +233,30 @@ getCompetency(){
     }
   }
 
-  removeRequirement(req){
+  removeRequirement(req,i){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Yes').subscribe(res => {
       if(res){
-       for( var i = 0; i < this.allCompetencyRequirements.length; i++){
-         if (this.allCompetencyRequirements[i] === req) {
-           this.allCompetencyRequirements.splice(i, 1);
-             i--;
-         }
-     }
+        this.allCompetencyRequirements.splice(i, 1);
+        if(req.skillId){
+        var sPos =  this.tempSkillReq.findIndex(x=>x.skillId == req.skillId);
+        if(sPos != -1){this.tempSkillReq.splice(sPos,1)}
+        }
+        if(req.trainingId){
+        var sPos =  this.tempTrainReq.findIndex(x=>x.trainingId == req.trainingId);
+        if(sPos != -1){this.tempTrainReq.splice(sPos,1)}
+        }
+        if(req.certificationId){
+        var sPos =  this.tempCertReq.findIndex(x=>x.certificationId == req.certificationId);
+        if(sPos != -1){this.tempCertReq.splice(sPos,1)}
+        }
+        if(req.qualificationId){
+        var sPos =  this.tempQualReq.findIndex(x=>x.qualificationId == req.qualificationId);
+        if(sPos != -1){this.tempQualReq.splice(sPos,1)}
+        }
+        if(req.experience){
+        var sPos =  this.tempExp.findIndex(x=>x.experience == req.experience);
+        if(sPos != -1){this.tempExp.splice(sPos,1)}
+        }
       }
     })
    }
