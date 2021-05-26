@@ -1,4 +1,4 @@
-import { RecruitmentJobServiceProxy } from './_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './_services/service-proxies';
 
 
 /**
@@ -163,7 +163,8 @@ FullCalendarModule.registerPlugins([
     AlertserviceService,
     FetchDashboardDataServiceProxy,
     CustomServiceService,
-    RecruitmentJobServiceProxy
+    RecruitmentJobServiceProxy,
+    RecuritmentJobApplicantServiceProxy
   ],
 })
 export class AppModule {

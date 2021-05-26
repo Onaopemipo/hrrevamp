@@ -1,3 +1,4 @@
+import { EmailOTPVerifyComponent } from './email-otpverify/email-otpverify.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
@@ -40,14 +41,14 @@ export const routes: Routes = [
         component: ApplicantsDashboardComponent
       },
 
-      // {
-      //   path: 'admin',
-      //   component: AdminDashboardComponent
-      // },
+      {
+        path: 'verify',
+        component: AdminDashboardComponent
+      },
 
       {
         path: 'applicantquiz',
-        component: ApplicantquizComponent
+        component: EmailOTPVerifyComponent
       },
 
 

@@ -11,14 +11,13 @@
                     <div class="px-2">
                       <form>
                         <div class="form-group">
-                          <!-- <label for="password">Enter 6 Digit Password</label> -->
                           <div class="passcode-wrapper">
-                            <input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
-                            <input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
-                            <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
-                            <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
-                            <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(5)">
-                            <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
+                            <input type="number" max="1" name="token1" (blur)="getToken(event.target.value)">
+                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
+                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
+                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
+                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
+                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
                           </div>
                         </div>
                       </form>
@@ -53,12 +52,12 @@
                       <div class="form-group">
                         <!-- <label for="password">Enter 6 Digit Password</label> -->
                         <div class="passcode-wrapper">
-                          <input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
-                          <input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
-                          <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
-                          <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
-                          <input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(5)">
-                          <input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
+                          <input type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+                          <input type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+                          <input type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+                          <input type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+                          <input type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(5)">
+                          <input type="number" maxlength="1" onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
                         </div>
                       </div>
                     </form>
@@ -70,8 +69,5 @@
               <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a href="javascript:void(0)" (click)="changeOption()" style="font-weight: 700;">Use my email instead</a></p>
             </div>
             </div>
-              <!-- </div> -->
           </div>
-      <!-- </div>
-  </div> -->
 </section>

@@ -1,4 +1,6 @@
-import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
+import { Router } from '@angular/router';
+import { AlertserviceService } from './../../../_services/alertservice.service';
+import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy, MangeLoginJobApplicantDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,13 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssigninComponent implements OnInit {
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy) { }
+  userDetails: MangeLoginJobApplicantDTO = new MangeLoginJobApplicantDTO();
+
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   authUser(){
-    this.applicant
+    this.applicant.loginUser(this.userDetails).subscribe(data => {
+      if(!data.hasError && data.result.isSuccessful === true){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Login Successful', 'Dismiss').subscribe(res => {
+          if(res){
+            this.router.navigateByUrl('/applicantsmodule/applicants/')
+          }
+        })
+      }
+    })
   }
 
 }

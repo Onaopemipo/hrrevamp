@@ -39,4 +39,16 @@ export class EmailOTPVerifyComponent implements OnInit {
     })
   }
 
+  getToken(event){
+    alert(event);
+  }
+
+  onKeyUpEvent(a, e){
+    alert(e)
+  }
+
+  onFocusEvent(e){
+    alert(e)
+  }
+
 }
