@@ -54,9 +54,11 @@ export class TablecomponentComponent implements OnInit {
   items = [
     { title: 'Profile' },
     { title: 'Logout' },
-  ];
+  ]; 
+  @Input() InputFileName = 'SmartaceFile';
   @Input() loading = false;
   @Input() tableColum: TableColumn[] = [];
+  @Input() searchabletableColum: TableColumn[] = [];
   @Input() userData: any[] = [];
   @Input() showCheckBox = false;
   @Input() showActions = true;
@@ -175,12 +177,52 @@ export class TablecomponentComponent implements OnInit {
     this.filter = {...this.filter, ...{page: pageNo, } };
     this.filterChange.emit(this.filter);
   }
+  handleSearch(event) {
+    if(event && (event != "" || event == null))
+    {
+      this.userData = this.tableData;
+      var truchk = false;        
+        this.userData = this.userData.filter(uf => {
+          this.searchabletableColum.some(sval => {
+            if (uf[sval.name]) {
+              if(sval.type == this.COLUMN_TYPES.Text)
+              {
+                console.log(uf[sval.name], event.toString())
+                if (uf[sval.name].toString().toLowerCase().indexOf(event.toString().toLowerCase()) > -1) { truchk = true; return true;}else{truchk = false;}
+               }          
+              else {
+                if (uf[sval.name] == event) { truchk = true; return true;}else{truchk = false;}
+              }
+            }
+        
+          })     
+          return truchk;
+      })
+      
+    }else {
+      this.userData = this.tableData;
+    }
+  }
   handleExportAs(event) {
     if (event == "Excel") {
-      this.ExcelService.exportAsExcelFile(this.userData,"SmartaceFile")
+      this.ExcelService.exportAsExcelFile(this.userData,this.InputFileName)
     }
-    if (event == "pdf") {
-      this.PdfService.downloadAsPDF()
+    if (event == "pdf"  || event == "Print") {
+      var theader = [];
+      var tbody = [];
+
+      this.userData.forEach((dval, dindex) => {
+        var hobj = [];
+        var tobj = [];
+        this.tableColum.forEach((hval) => {
+          hobj.push(hval.title)
+          tobj.push(dval[hval.name])
+        });
+        theader.push(hobj);
+        tbody.push(tobj)
+      })
+      if (event == "pdf") this.PdfService.downloadAsPDF(theader, tbody, this.InputFileName);
+      if (event == "Print") this.PdfService.printAsPDF(theader, tbody, this.InputFileName);
     }
   }
   filterUpdated(filter){

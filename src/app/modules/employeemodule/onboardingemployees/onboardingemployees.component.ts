@@ -90,9 +90,11 @@ this.router.navigate(['/employeemodule/employeeonboarding'],{queryParams:{onboar
     this.getAllEmployeeOnboarding()
   }
   async getAllEmployeeOnboarding(){
-   this.loading= false
+    this.loading = true;
    const data= await this.FetchEmployeeOnboardingDataDetailsServiceProxy.fetchEmployeeOnboardingDataDetails(this.filter.companyId,this.filter.onboardingId).toPromise()
+    
     if (!data.hasError) {
+      this.loading = false;
       data.result.forEach(value => {
         let PInfo = new onboardPersonWithStatus(value.onboardingPersonalInfo);
         PInfo.onboardingId = value.onboardingId;
@@ -103,6 +105,8 @@ this.router.navigate(['/employeemodule/employeeonboarding'],{queryParams:{onboar
       console.log(this.onBoarding);
       this.totalItems=data.totalRecord
 
+    } else {
+      this.loading = false;
     }
   }
   gotohiring() {

@@ -59,10 +59,10 @@ ExitManagement: string = '';
   ]
 
   tableColumns = [
-    { name: 'FullName', title: 'Full Name', type: ColumnTypes.Text },
-    { name: 'DateSubmitted', title: 'Date Requested',type: ColumnTypes.Date },
-    { name: 'EffectiveDate', title: 'Effective Date',type: ColumnTypes.Date },
-    { name: 'RetirementType', title: 'Type',type: ColumnTypes.Text },
+    { name: 'fullName', title: 'Full Name', type: ColumnTypes.Text },
+    { name: 'dateSubmitted', title: 'Date Requested',type: ColumnTypes.Date },
+    { name: 'effectiveDate', title: 'Effective Date',type: ColumnTypes.Date },
+    { name: 'retirementType', title: 'Type',type: ColumnTypes.Text },
     { name: 'log_status', title: 'Status',type: ColumnTypes.Status },
   ];
   
@@ -112,10 +112,13 @@ this.router.navigate(['/employeemodule/exitrequest'],{queryParams:{employeeId: e
     return this.allExitRequest.length === 0;
   }
   getAllRetirementRequest() {
+    this.loading = true;
     this.RetirementService.getRetirees(this.filter.ID, this.filter.FullName,this.filter.EmployeeId,this.filter.DateRequested,this.filter.Type,this.filter.Status,this.filter.IsCleared,this.filter.retirmentTypeid,this.filter.startdate,this.filter.endate,this.filter.PageSize,this.filter.PageNumber)
       .subscribe(data => {
+        this.loading = false;
         if (!data.hasError) {
-          this.allExitRequest = data.result;
+          var dt = data.result.map(d=>new RetirementWithStatus(d));
+          this.allExitRequest = dt;
       }
     })
 }

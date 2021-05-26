@@ -10,7 +10,7 @@
     </ngx-default-content>
     <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
       [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="LeaveHolidays"
-      [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      [tableColum]="tableColumns" [searchabletableColum]="searchabletableColum" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
     </ngx-tablecomponent>
 
     <ngx-side-modal [(show)]='showLeaveYearModal' style="width: 500px; height: 1000px;">
