@@ -1,10 +1,22 @@
 <ngx-componentsheader pageName="Overall Budget" [requiredButton]="[]">
   <div headerButton>
-    <select class="form-control">
-      <option selected>Current Financial year</option>
+    <select class="form-control" placeholder="Select Gender">
+      <option value="">--Select finacial year</option>
+      <option  *ngFor="let fin of FinacialYear" [value]="fin.id">{{fin.text}}</option>
     </select>
   </div>
 </ngx-componentsheader>
+
+<!-- <select (change)="getAllVendor(benefitTypeId.value)" placeholder="Select Gender" class="form-control" name="benefitTypeId" id="benefitTypeId"
+#benefitTypeId="ngModel" [(ngModel)]="benefit.benefitTypeId">
+<option value="">--Select Event---</option>
+<option *ngFor="let benefit of BenefitType" [value]="benefit.id">{{benefit.text}}</option>
+</select>
+
+<div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
+class="error">
+<div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+</div>  -->
 
 <div style="margin: 0.5rem;"></div>
 <div style="background-color: white; min-height: 10vh">

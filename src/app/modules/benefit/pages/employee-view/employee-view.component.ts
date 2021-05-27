@@ -25,6 +25,7 @@ import {
   EmployeeContractAssignmentDTO,
   EmployeeHistoryDTO,
   FetchBenefitServiceProxy,
+  AddEmployeeToBenefitServiceProxy 
   
 } from "../../../../_services/service-proxies";
 import { FormGroup } from "@angular/forms";
@@ -40,6 +41,7 @@ enum TABLE_ACTION {
   DELETE = "2",
   EDIT = "3",
 }
+
 
 @Component({
   selector: "ngx-employee-view",
@@ -68,9 +70,12 @@ export class EmployeeViewComponent implements OnInit {
   totalItems = 100;
   showModal = false;
   benefitSingle: BenefitPlanDTO;
+  showBenenfit:boolean = false;
+  submitbtnPressed:boolean = false;
+  
   // AllVendors: VendorDTO[] = [];
   // plans: VendorPlanDTO[] = [];
-  rButton = [{ name: "", label: "Add Benefit", icon: "plus", outline: false }];
+  topActionButtons= [{ name: "add", label: "Add Benefit", icon: "plus", outline: false }];
 
   columns: TableColumn[] = [
     { name: "name", title: "Coverage" },
@@ -90,7 +95,8 @@ export class EmployeeViewComponent implements OnInit {
     private Activated: ActivatedRoute,
     private FetchEmployeeByIdServiceProxy: FetchEmployeeByIdServiceProxy,
     private Route: Router,
-    private FetchBenefitServiceProxy:FetchBenefitServiceProxy
+    private FetchBenefitServiceProxy:FetchBenefitServiceProxy,
+    private AddEmployeeToBenefitServiceProxy :AddEmployeeToBenefitServiceProxy 
   ) {}
 
   ngOnInit(): void {
@@ -120,13 +126,39 @@ export class EmployeeViewComponent implements OnInit {
     });
   }
 
+
+  SubmitEvent(){
+  //   this.submitbtnPressed= true
+  //   this.AddEmployeeToBenefitServiceProxy.addEmployeeToBenefit()
+  }
+
+  // async fetchBenefits() {
+  //   this.loading = true;
+  //   const data = await this.FetchAllBenefitsServiceProxy.fetchAllBenefits(
+  //     this.vendorId,
+  //     this.vendorPlanId,
+  //     this.pageSize,
+  //     this.pageNumber
+  //   ).toPromise();
+  //   if (!data.hasError) {
+  //     this.loading = false;
+  //     this.allBenefito = data.result;
+  //     console.log("beneitoto", this.allBenefito);
+  //   } else {
+  //     this.loading = false;
+  //   }
+  // }
+
+  topActionClicked(event){
+    if(event== 'add'){
+      this.showBenenfit= true
+    }
+  }
   selectedTab = 1;
   tabChanged(tab: number) {
     this.selectedTab = tab;
   }
-  topActionClicked() {
-    this.router.navigateByUrl("/benefit/add-benefit");
-  }
+  
   showAddModal() {
     this.showModal = true;
   }

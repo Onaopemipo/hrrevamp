@@ -18,6 +18,7 @@ import { EligibilityviewComponent } from "./eligibilityview/eligibilityview.comp
 import {BenefitTypeComponent} from './pages/benefit-type/benefit-type.component';
 import { AllplansComponent} from './pages/allplans/allplans.component'
 
+import { PlandetailsComponent } from "./pages/plandetails/plandetails.component";
 
 import Flow from "@flowjs/flow.js";
 import { FlowInjectionToken, NgxFlowModule } from "@flowjs/ngx-flow";
@@ -45,7 +46,9 @@ import {
   FetchEmployeeByIdServiceProxy,
   FetchBenefitServiceProxy,
   FetchAllBenefitTypesServiceProxy,
-  
+  BenefitFinancialYearsServiceProxy,
+  GetVendorPlanByIdServiceProxy,
+  AddEmployeeToBenefitServiceProxy 
 
 } from "../../_services/service-proxies";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -68,7 +71,7 @@ import { NbRadioModule } from "@nebular/theme";
     BenefitdetaisComponent,
     BenefitTypeComponent,
     AllplansComponent,
- 
+    PlandetailsComponent
 
   ],
   imports: [
@@ -109,7 +112,10 @@ import { NbRadioModule } from "@nebular/theme";
     FetchEmployeeByIdServiceProxy,
     FetchBenefitServiceProxy,
     FetchAllBenefitTypesServiceProxy,
-    GetAllVendorPlanServiceProxy
+    GetAllVendorPlanServiceProxy,
+    BenefitFinancialYearsServiceProxy ,
+    GetVendorPlanByIdServiceProxy,
+    AddEmployeeToBenefitServiceProxy 
 
   ],
 })

@@ -1,0 +1,105 @@
+
+<ngx-componentsheader [pageName]='plan.name' >
+</ngx-componentsheader>
+<!-- [requiredButton]="rButton"
+(buttonClick)="topActionClicked()"  -->
+<!-- [requiredButton]="topActionButtons" (buttonClick)='modal($event)' -->
+
+<ngx-default-content *ngIf="!showEmpty" pageHeader="Plan Details"
+pageDescription="No record found"  [loading]="loading"></ngx-default-content>
+<div>
+
+</div>
+<nb-card *ngIf="showEmpty">
+    <nb-card-body>
+
+        <!-- *ngSwitchCase="'deployment_info'" -->
+
+        <div class="fmContainer">
+            <nb-card-header>
+                <h6>Plan Details Info</h6>
+
+            </nb-card-header>
+
+            <br>
+
+            <div style="font-weight: bold; padding: 2rem;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span style="font-size: large;">Plan Name :</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <span>{{comfirmationData.refNo}}</span> -->
+                        <span style="font-weight: 600; font-style: italic;">{{plan?.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div style="font-weight: bold; padding: 2rem;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span tyle="font-size: large;"> Plan Description:</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <span>{{getLocationNAme(comfirmationData.current_location_id)}}</span> -->
+                        <span style="font-weight: 600; font-style: italic;">{{plan?.description }}</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div style="font-weight: bold; padding: 2rem;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span style="font-size: large;">Plan Reference Number:</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <span>{{employee.contracts[0]?.dateOfLastDeployment | date}}</span> -->
+                        <span style="font-weight: 600; font-style: italic;">{{plan?.refNumber}}</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div style="font-weight: bold; padding: 2rem;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span style="font-size: large;">Total Cost:</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <span>{{comfirmationData.effective_date | date}}</span> -->
+                        <span style="font-weight: 600; font-style: italic;" >{{plan?.totalCost }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-weight: bold; padding: 2rem;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span style="font-size: large;">Company Percentage :</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <span>{{comfirmationData.effective_date | date}}</span> -->
+                        <span style="font-weight: 600; font-style: italic;" >{{plan?.totalCost }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-weight: bold; padding: 2rem;">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span style="font-size: large;">Employee Percentage:</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- <span>{{comfirmationData.effective_date | date}}</span> -->
+                        <span style="font-weight: 600; font-style: italic;" >{{plan?.totalCost }}</span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+    </nb-card-body>
+
+</nb-card>

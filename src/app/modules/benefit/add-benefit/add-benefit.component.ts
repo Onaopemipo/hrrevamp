@@ -65,6 +65,8 @@ export class AddBenefitComponent implements OnInit {
       outline: true,
     },
   ];
+
+  benefitTypeId = undefined
   back() {
     this.route.navigateByUrl("/benefits");
   }
@@ -121,6 +123,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     this.getPosition(); 
     this.getBenefitType();
     this.benefit.financialYear = new Date().getFullYear().toString();
+    // this.getAllVendor(this.benefit.benefitTypeId)
   }
   //Gey ALL vendors
   async getAllVendor(benefitTypeId) {
