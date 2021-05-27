@@ -57,7 +57,7 @@
 
             <div *ngIf="jobsCounter > 0">
               <ngx-tableheader></ngx-tableheader>
-             <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="tableData" [actions]="tableActions" (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+             <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="allDraftJobs" [actions]="draftTableActions" (actionClick)="draftTableActionClicked($event)"></ngx-tablecomponent>
             </div>
       </nb-tab>
 

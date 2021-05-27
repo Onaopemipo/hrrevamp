@@ -57,12 +57,28 @@ export class NewjobComponent implements OnInit {
   newJobPosting(){
     this.router.navigateByUrl('/recruitmentadmin/newjob');
   }
+
   addNewJob() {
-    this.loading = true;
+   this.loading = true;
    this.job.addUpdateJob(this.newJobModel).subscribe(data => {
     if(!data.hasError && data.result.isSuccessful == true){
       this.loading = false;
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss').subscribe(res => {
+        if(res){
+          this.router.navigateByUrl('/recruitmentadmin/jobs/');
+        }
+      })
+    }
+   })
+  }
+
+  postNewDraft(){
+    this.newJobModel.isDraft = true;
+    this.loading = true;
+    this.job.addUpdateJob(this.newJobModel).subscribe(data => {
+    if(!data.hasError && data.result.isSuccessful == true){
+      this.loading = false;
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Draft Saved', 'Dismiss').subscribe(res => {
         if(res){
           this.router.navigateByUrl('/recruitmentadmin/jobs/');
         }

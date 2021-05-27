@@ -186,9 +186,9 @@
           <div class="form-group row">
             <label for="specialization" class="col-sm-2 col-form-label" style="font-weight: bold;"></label>
             <div class="col-sm-6">
-              <button nbButton status="primary" (click)="addNewJob()">Post</button>
+              <button nbButton status="primary" (click)="addNewJob()">Post Now</button>
               <span style="padding: 8px;"></span>
-              <button nbButton>Cancel</button>
+              <button nbButton (click)="postNewDraft()">Save as Draft</button>
             </div>
           </div>
         </form>

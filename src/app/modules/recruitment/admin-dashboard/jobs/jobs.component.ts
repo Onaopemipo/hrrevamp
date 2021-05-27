@@ -11,6 +11,10 @@ enum TP  {
 VIEW ='1',DELETE = '2'
 }
 
+enum draftEnum  {
+  EDIT ='1',DELETE = '2',POST = '3'
+  }
+
 enum TABS {
   postedJobs, scheduledJobs, draftedJobs
 }
@@ -62,6 +66,7 @@ export class JobsComponent implements OnInit {
   employmentType: string = 'Full Time';
   newJob: boolean = false;
   allJobs: JobDTO []= [];
+  allDraftJobs: JobDTO []= [];
   // jobFilter: JobFilterDTO = new JobFilterDTO();
   jobsCounter: number = 4;
   allDepartments: DepartmentDTO [] = [];
@@ -107,9 +112,14 @@ tableActions: TableAction [] = [
 {name: TP.DELETE, label: 'Delete'},
 ]
 
+draftTableActions: TableAction [] = [
+  {name: draftEnum.EDIT, label: 'Edit'},
+  {name: draftEnum.POST, label: 'Post'},
+  {name: draftEnum.DELETE, label: 'Delete'},
+]
+
 tableActionClicked(event: TableActionEvent){
   if(event.name==TP.VIEW){
-
     }
 
     else if(event.name==TP.DELETE){
@@ -127,7 +137,31 @@ tableActionClicked(event: TableActionEvent){
       }
 }
 
+draftTableActionClicked(event: TableActionEvent){
+  if(event.name==draftEnum.EDIT){
+    }
 
+    else if(event.name==draftEnum.DELETE){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '','Yes').subscribe(dataAction => {
+      if(dataAction){
+        this.job.deleteJob(event.data.id).subscribe(data => {
+          if(!data.hasError){
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successfully Deleted', 'Dismiss').subscribe(res => {
+              this.router.navigateByUrl('/recruitmentadmin/jobs');
+            })
+          }
+        })
+      }
+    })
+      }
+      else if(event.name == draftEnum.POST){
+        this.job.toggleJob(event.data.id).subscribe(data => {
+          if(!data.hasError){
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss')
+          }
+        })
+      }
+}
 
   getTableActions (){
     if(TABS.postedJobs){
@@ -160,6 +194,7 @@ tableActionClicked(event: TableActionEvent){
   ngOnInit(): void {
     this.fetchAllJobs();
     this.fetchEmploymentTypes();
+    this.fetchAllDraft();
   }
 
   selectTab(tab: TABS) {
@@ -261,6 +296,28 @@ tableActionClicked(event: TableActionEvent){
       this.allJobs = data.result.map(x => new JobWithStatus(x));
       this.jobsCounter = data.totalRecord;
       console.log('My Jobs:',this.allJobs)
+   }
+  }
+
+  async fetchAllDraft(){
+    this.loading = true;
+    const data = await this.job.getAllJobs(true, undefined, 1,10).toPromise();
+    this.loading = false;
+    if(!data.hasError){
+      this.allDraftJobs = data.result.map(x => new JobWithStatus(x));
+      this.jobsCounter = data.totalRecord;
+      console.log('My Jobs:',this.allDraftJobs)
+   }
+  }
+
+  async fetchScheduledJobs(){
+    this.loading = true;
+    const data = await this.job.getAllJobs(undefined, true, 1,10).toPromise();
+    this.loading = false;
+    if(!data.hasError){
+      this.allDraftJobs = data.result.map(x => new JobWithStatus(x));
+      this.jobsCounter = data.totalRecord;
+      console.log('My Jobs:',this.allDraftJobs)
    }
   }
 

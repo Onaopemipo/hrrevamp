@@ -1,3 +1,4 @@
+import { RecruitmentJobApplicationServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -33,6 +34,12 @@ import { ApplicantsComponent } from './applicants/applicants.component';
     ComponentsModule,
     NbCheckboxModule
 
-  ]
+  ],
+
+  providers: [
+    RecruitmentJobApplicationServiceProxy
+  ],
+
+
 })
 export class ApplicantModuleModule { }
