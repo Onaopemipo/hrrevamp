@@ -147,6 +147,7 @@ export class JwtInterceptor implements HttpInterceptor {
         else if (status === 401) {
             this.alertService.openModalAlert(ALERT_TYPES.FAILED, "Unauthorized access denied", "Ok").subscribe(data => {
                 this.authServ.clearusers();
+                this.router.navigate(['/auth']);
               if (data) {
 
               }

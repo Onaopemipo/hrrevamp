@@ -13,7 +13,7 @@ export class PdfServiceService {
   printAsPDF(theader, tbody, fileNane) {
     console.log(theader,tbody)
     var doc = new jsPDF({ orientation: "portrait" });
-    doc.addImage(window.location.origin +"/assets/icons/smartaceLogo.png", "PNG", 140, 5, 40, 5);
+    doc.addImage("assets/icons/smartaceLogo.png", "PNG", 140, 5, 40, 5);
     var finalY =  10
     doc.text(fileNane, 14, finalY + 15)
     autoTable(doc, {
@@ -55,7 +55,7 @@ document.body.appendChild(hiddFrame);
   downloadAsPDF(theader, tbody, fileNane) {
   console.log(theader,tbody)
     var doc = new jsPDF({ orientation: "portrait" });
-    doc.addImage(window.location.origin +"/assets/icons/smartaceLogo.png", "PNG", 140, 5, 40, 5);
+    doc.addImage("assets/icons/smartaceLogo.png", "PNG", 140, 5, 40, 5);
     var finalY =  10
     doc.text(fileNane, 14, finalY + 15)
     autoTable(doc, {
