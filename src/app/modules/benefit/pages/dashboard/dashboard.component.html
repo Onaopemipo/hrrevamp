@@ -1,13 +1,13 @@
 <ngx-componentsheader pageName="Overall Budget" [requiredButton]="[]">
   <div headerButton>
-    <select (ngModelchange)=" handleyear($event)" placeholder="Select Gender" class="form-control"
+    <select (ngModelChange)="handleyear($event)" placeholder="Select finacial year" class="form-control"
       name="year" id="benefitTypeId" #benefitTypeId="ngModel" [(ngModel)]="year">
       <option value="">--Select Finacial year---</option>
-      <option *ngFor="let year of  FinacialYear" [value]="benefit.id">{{benefit.text}}</option>
+      <option *ngFor="let year of  FinacialYear" [value]="year.id">{{year.text}}</option>
     </select>
 
     <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)" class="error">
-      <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
+      <div *ngIf="benefitTypeId.errors.required">finacial year is required</div>
     </div>
   </div>
 </ngx-componentsheader>
@@ -35,7 +35,7 @@
               flex-direction: column;
               align-items: center;
             ">
-          <span style="font-size: 18px; font-weight: 500;">N8</span>
+          <span style="font-size: 18px; font-weight: 500;">{{benefitDetails.spent}}</span>
           <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
         </div>
         <div>
@@ -55,8 +55,8 @@
                   justify-content: space-between;
                   padding: 0.3rem;
                 ">
-              <span class="gray-1">Total budget</span>
-              <span class="header5-bold">{{ totalBudget | currency }}</span>
+              <span class="gray-1">Company Cost</span>
+              <span class="header5-bold">{{ benefitDetails.companyContribution| currency }}</span>
             </div>
           </div>
 
@@ -76,8 +76,8 @@
                     justify-content: space-between;
                     padding: 0.3rem;
                   ">
-              <span class="gray-1">Total budget</span>
-              <span class="header5-bold">{{ totalBudget | currency }}</span>
+              <span class="gray-1">Employee Cost</span>
+              <span class="header5-bold">{{ benefitDetails.employeeCost | currency }}</span>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
                 padding: 0.3rem;
               ">
             <span class="gray-1">Financial year</span>
-            <span class="header5-bold">Jan 1st 2020 - Jan 1st 2021</span>
+            <span class="header5-bold">{{benefitDetails.financialYear}}</span>
           </div>
         </div>
       </div>
