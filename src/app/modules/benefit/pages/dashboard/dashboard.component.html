@@ -1,6 +1,6 @@
 <ngx-componentsheader pageName="Overall Budget" [requiredButton]="[]">
   <div headerButton>
-    <select class="form-control" placeholder="Select Gender">
+    <select class="form-control" placeholder="Select Gender" name="year"[(ngModel)]= "year" (ngModelChange)="handleyear($event)">
       <option value="">--Select finacial year</option>
       <option  *ngFor="let fin of FinacialYear" [value]="fin.id">{{fin.text}}</option>
     </select>
@@ -41,8 +41,8 @@ class="error">
               flex-direction: column;
               align-items: center;
             ">
-          <span style="font-size: 18px; font-weight: 500;">N850,000.00</span>
-          <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Spent</span>
+          <span style="font-size: 18px; font-weight: 500;">{{benefitDetails.spent | currency}}</span>
+          <span style="font-size: 18px; font-weight: 500; color: #4847E0;">Total</span>
         </div>
         <div>
           <div style="display: flex; align-items: center">
@@ -61,7 +61,7 @@ class="error">
                   justify-content: space-between;
                   padding: 0.3rem;
                 ">
-              <span class="gray-1">Total budget</span>
+              <span class="gray-1">Company Contribution</span>
               <span class="header5-bold">{{ totalBudget | currency }}</span>
             </div>
           </div>
@@ -82,7 +82,7 @@ class="error">
                     justify-content: space-between;
                     padding: 0.3rem;
                   ">
-              <span class="gray-1">Total budget</span>
+              <span class="gray-1">Employee Cost</span>
               <span class="header5-bold">{{ totalBudget | currency }}</span>
             </div>
           </div>
@@ -108,7 +108,7 @@ class="error">
                 padding: 0.3rem;
               ">
             <span class="gray-1">Financial year</span>
-            <span class="header5-bold">Jan 1st 2020 - Jan 1st 2021</span>
+            <span class="header5-bold"> {{benefitDetails.financialYear}}</span>
           </div>
         </div>
       </div>

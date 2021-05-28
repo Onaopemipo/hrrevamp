@@ -12,7 +12,9 @@ import {
   DeleteBenefitEligibilityServiceProxy,
   DeleteBenefitServiceProxy,
   BenefitFinancialYearsServiceProxy ,
-  IDTextViewModel
+  IDTextViewModel,
+  BenefitFinancialYearDetailsServiceProxy,
+  BenefitPlanDashboardDTO
 } from "../../../../_services/service-proxies";
 import { Router } from "@angular/router";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -40,7 +42,8 @@ export class DashboardComponent implements OnInit {
     private DeleteBenefitServiceProxy: DeleteBenefitServiceProxy,
     private alertservice: AlertserviceService,
     private router: Router,
-    private BenefitFinancialYearsServiceProxy :BenefitFinancialYearsServiceProxy 
+    private BenefitFinancialYearsServiceProxy :BenefitFinancialYearsServiceProxy ,
+    private BenefitFinancialYearDetailsServiceProxy:BenefitFinancialYearDetailsServiceProxy
   ) { }
   get showEmpty() {
     return this.allBenefito.length === 0;
@@ -195,5 +198,18 @@ export class DashboardComponent implements OnInit {
         this.FinacialYear = data.result
         console.log('finacial year', this.FinacialYear)
       }
+    }
+
+    benefitDetails= new BenefitPlanDashboardDTO().clone()
+    year
+    handleyear(year){
+      this.loading = true
+      this.BenefitFinancialYearDetailsServiceProxy.getBenefitFinancialYearDetails(year).toPromise().then(data =>{
+        if(!data.hasError){
+          this.benefitDetails= data.result
+          console.log('datae',this.benefitDetails)
+        }
+      })
+      console.log('selected year',)
     }
 }

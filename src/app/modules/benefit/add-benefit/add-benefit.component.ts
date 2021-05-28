@@ -167,27 +167,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     if (this.benefit.endDate) return true;
     return false;
   }
-  // async getAllEmployee() {
-  //   const data = await this.FetchAllEmployeesServiceProxy.getAllEmployees(
-  //     this.searchText,
-  //     this.contractStatus,
-  //     this.pageSize,
-  //     this.pageNum
-  //   ).toPromise();
-  //   if (!data.hasError) {
-  //     this.AllEmployee = data.result;
 
-  //     this.id = data.result.map((employee) => JSON.stringify(employee.id));
-  //     console.log("id", this.id);
-  //   }
-
-  //   console.log(
-  //     "i want see wetin i keep for that vendora variable",
-  //     this.AllEmployee,
-  //     this.id
-  //   );
-  // }
-  //employee master search
   employeesSelected(employees: EmployeeDTO[]) {
     this.employees = employees.map((employee) => JSON.stringify(employee.id));
     console.log("employee", this.employees);

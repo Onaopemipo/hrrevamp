@@ -48,7 +48,10 @@ import {
   FetchAllBenefitTypesServiceProxy,
   BenefitFinancialYearsServiceProxy,
   GetVendorPlanByIdServiceProxy,
-  AddEmployeeToBenefitServiceProxy 
+  AddEmployeeToBenefitServiceProxy ,
+  AddEmployeeToBenefitBucketServiceProxy,
+  BenefitFinancialYearDetailsServiceProxy
+  
 
 } from "../../_services/service-proxies";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -115,7 +118,9 @@ import { NbRadioModule } from "@nebular/theme";
     GetAllVendorPlanServiceProxy,
     BenefitFinancialYearsServiceProxy ,
     GetVendorPlanByIdServiceProxy,
-    AddEmployeeToBenefitServiceProxy 
+    AddEmployeeToBenefitServiceProxy ,
+    AddEmployeeToBenefitBucketServiceProxy,
+    BenefitFinancialYearDetailsServiceProxy
 
   ],
 })
