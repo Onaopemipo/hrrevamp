@@ -17,16 +17,16 @@ import { Transfer } from "@flowjs/ngx-flow";
   styleUrls: ["./eligibilityview.component.scss"],
 })
 export class EligibilityviewComponent implements OnInit {
-  eligibility = new BenefitEligibilityDTO().clone()
+  eligibility = new BenefitEligibilityDTO().clone();
   Editing: boolean = false;
-  showModal : boolean = false;
-  submitbtnPressed:boolean= false
-  Eli= new ManageBenefitEligibilityDTO().clone();
+  showModal: boolean = false;
+  submitbtnPressed: boolean = false;
+  Eli = new ManageBenefitEligibilityDTO().clone();
   constructor(
     private ActivatedRoute: ActivatedRoute,
     private route: Router,
     private FetchBenefitEligibilityServiceProxy: FetchBenefitEligibilityServiceProxy,
-    private AddUpdateBenefitEligibilityServiceProxy:AddUpdateBenefitEligibilityServiceProxy,
+    private AddUpdateBenefitEligibilityServiceProxy: AddUpdateBenefitEligibilityServiceProxy,
     private alertservice: AlertserviceService,
     private router: Router
   ) {}
@@ -39,9 +39,9 @@ export class EligibilityviewComponent implements OnInit {
       outline: true,
     },
   ];
- get showEmpty(){
- return this.eligibility.id ? true : false
- }
+  get showEmpty() {
+    return this.eligibility.id ? true : false;
+  }
   ngOnInit(): void {
     this.ActivatedRoute.paramMap.subscribe((paraMap) => {
       if (!paraMap.has("id")) {
@@ -54,29 +54,32 @@ export class EligibilityviewComponent implements OnInit {
       this.getEligibility();
     });
   }
-  loading:boolean = true
+  loading: boolean = true;
   async getEligibility() {
-    this.loading = true
+    this.loading = true;
     const data =
       await this.FetchBenefitEligibilityServiceProxy.getBenefitEligibility(
         this.eligibilityID
       ).toPromise();
     if (!data.hasError) {
-      this.loading = false
+      this.loading = false;
       this.eligibility = data.result;
-      this.Eli =new ManageBenefitEligibilityDTO({ ...this.eligibility.clone(), employees: '', benefitTypeId: 0,positionId:0});
+      this.Eli = new ManageBenefitEligibilityDTO({
+        ...this.eligibility.clone(),
+        employees: this.Eli.employees,
+        benefitTypeId: 0,
+        positionId: 0,
+      });
       console.log("elo", this.eligibility);
     }
   }
-   
-
 
   //edit eligilibilty
   modal(event) {
     if (event == "add_leave_year") {
       this.Editing = true;
-      this.showModal= true
-
+      this.showModal = true;
+    
     }
   }
 
@@ -93,36 +96,48 @@ export class EligibilityviewComponent implements OnInit {
   }
   //validation for editing
   get disability() {
-    if (this.Eli.name ) return true;
+    if (this.Eli.name && this.Eli.employees) return true;
     return false;
   }
-    //Add benefitEligibility
-    async Submit() {
-      this.submitbtnPressed = true;
-      const data =
-        await this.AddUpdateBenefitEligibilityServiceProxy.addUpdateBenefitEligibility(
-          this.Eli
-        ).toPromise();
-      if (!data.hasError) {
-        this.alertservice
-          .openModalAlert(
-            this.alertservice.ALERT_TYPES.SUCCESS,
-            data.message,
-            "OK"
-          )
-          .subscribe((datares) => {
-            if (datares) {
-              this.router.navigateByUrl("/benefits/eligibility");
-            }
-          });
-        this.showModal = false;
-        this.submitbtnPressed = false;
-      } else {
-        this.alertservice.openModalAlert(
-          this.alertservice.ALERT_TYPES.FAILED,
+  //Add benefitEligibility
+  async Submit() {
+    this.submitbtnPressed = true;
+    const data =
+      await this.AddUpdateBenefitEligibilityServiceProxy.addUpdateBenefitEligibility(
+        this.Eli
+      ).toPromise();
+    if (!data.hasError) {
+      this.alertservice
+        .openModalAlert(
+          this.alertservice.ALERT_TYPES.SUCCESS,
           data.message,
           "OK"
-        );
-      }
+        )
+        .subscribe((datares) => {
+          if (datares) {
+            this.router.navigateByUrl("/benefits/eligibility");
+          }
+        });
+      this.showModal = false;
+      this.submitbtnPressed = false;
+    } else {
+      this.alertservice.openModalAlert(
+        this.alertservice.ALERT_TYPES.FAILED,
+        data.message,
+        "OK"
+      );
     }
-}
+  }
+
+//   async getBenefits() {
+//     const data = await this.DataServiceProxy.getBenefitType().toPromise();
+//     if (!data.hasError) {
+//       this.Benefit = data.result;
+//       this.data = data.result;
+//       console.log(
+//         "i want see wetin i keep for that benefit variable",
+//         this.Benefit
+//       );
+//     }
+//   }
+ }

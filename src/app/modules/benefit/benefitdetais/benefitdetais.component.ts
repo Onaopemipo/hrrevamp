@@ -42,7 +42,7 @@ import {
   styleUrls: ["./benefitdetais.component.scss"],
 })
 export class BenefitdetaisComponent implements OnInit {
-  benefitSingle: BenefitPlanDTO;
+  benefitSingle = new BenefitPlanDTO().clone()
   loading:boolean = true
   constructor(
     private router: Router,
@@ -51,6 +51,7 @@ export class BenefitdetaisComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true
     this.ActivatedRoute.paramMap.subscribe((paramMap) => {
       if (!paramMap.has("id")) {
         return this.router.navigate(["/benefits/manage-employee"]);
@@ -64,6 +65,7 @@ export class BenefitdetaisComponent implements OnInit {
         .then((data) => {
           if (!data.hasError) {
             this.benefitSingle = data.result
+            this.loading = false
             console.log('singlebenene',this.benefitSingle)
           } else {
             return data.message;
@@ -74,5 +76,9 @@ export class BenefitdetaisComponent implements OnInit {
 
   back(){
     this.router.navigate(['/benefits'])
+  }
+
+  get showEmpty(){
+    return this.benefitSingle.id ? true : false
   }
 }

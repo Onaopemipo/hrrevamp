@@ -4,8 +4,8 @@
   <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
       (click)="back()"></i></span>
   <nb-tabset (changeTab)="selectTab($event)">
-    <nb-tab tabTitle="Not Completed" [tabId]="TABS.NOT__COMPLETED"> </nb-tab>
-    <nb-tab tabTitle="Completed" [tabId]="TABS.COMPLETED"> </nb-tab>
+    <nb-tab tabTitle="" [tabId]="TABS.NOT__COMPLETED"> </nb-tab>
+    <nb-tab tabTitle="" [tabId]="TABS.COMPLETED"> </nb-tab>
   </nb-tabset>
   <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader>
   <ngx-default-content *ngIf="showEmpty" pageHeader="let's set up your expenses" [loading]='loading'
