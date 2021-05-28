@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { AddUpdatePayElementServiceProxy, CommonServiceProxy, ElementCategoryDTO, ElementTypeDTO, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetEarningsServiceProxy, IDTextViewModel, ManagePayElementDTO, PayElementDTO, PaymentInstitution } from 'app/_services/service-proxies';
 
@@ -37,14 +37,12 @@ export class PayelementComponent implements OnInit {
   ];
 
   tableColumns = [
-    { name: 'a', title: 'NAME' },
-    { name: 'b', title: 'PAYMENT TYPE' },
-    { name: 'c', title: 'ELEMENT NAME' },
-    { name: 'd', title: 'ELEMENT CATEGORY' },
-    { name: 'e', title: 'ELEMENT TYPE' },
-    { name: 'e', title: 'ELEMENT TYPE' },
-    { name: 'f', title: 'AMOUNT' },
-    { name: 'g', title: 'INSTITUTION' },
+    { name: 'name', title: 'ELEMENT NAME' },
+    { name: 'payType', title: 'PAYMENT TYPE' },  
+    { name: 'elementCategory', title: 'ELEMENT CATEGORY' },
+    { name: 'elementType', title: 'ELEMENT TYPE' },
+    { name: 'amount', title: 'AMOUNT', type:ColumnTypes.Number },
+    { name: 'paymentInstitution', title: 'PAYMENT INSTITUTION' },
   ];
 
   tableActions: TableAction[] = [

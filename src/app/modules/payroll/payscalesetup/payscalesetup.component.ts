@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CommonServiceProxy, EmployeeDTO, FrequencyRule, GetAllPayElementsServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
+import { AddUpdatePayScaleServiceProxy, CommonServiceProxy, EmployeeDTO, FrequencyRule, GetAllPayElementsServiceProxy, IDTextViewModel, ManagePayrollTypeDTO } from 'app/_services/service-proxies';
 interface Fields {
   id?: number,
   name?: string
@@ -12,6 +12,7 @@ interface Fields {
 })
 export class PayscalesetupComponent implements OnInit {
   payScaleForm: FormGroup;
+  ManagePayrollType = new ManagePayrollTypeDTO().clone();
   payElement: IDTextViewModel[] = [];
   allfrequency: FrequencyRule[] = [];
   selectedEmployee: EmployeeDTO[] = [];
@@ -29,13 +30,18 @@ export class PayscalesetupComponent implements OnInit {
   topActionButtons = [
     
   ]
+  loadingPayScale = false;
+  selElem: any = '';
   constructor(private CommonService: CommonServiceProxy,
-    private GetAllPayElementsService: GetAllPayElementsServiceProxy) { }
+    private GetAllPayElementsService: GetAllPayElementsServiceProxy,
+  private AddUpdatePayScaleService: AddUpdatePayScaleServiceProxy) { }
 
   addPayElement(Ele) {
+    console.log(Ele)
     var ddChk = this.ElementList.find(e => e.id == Ele.id);
     if (!ddChk) {
       this.ElementList.push(Ele);
+      console.log(this.ElementList)
     } 
 }
 
@@ -66,5 +72,16 @@ export class PayscalesetupComponent implements OnInit {
   }
   getSelectedEmployee(event:EmployeeDTO[]) {
     this.selectedEmployee = event;
+  }
+  savePayrollScale() {
+    this.loadingPayScale = true;
+    this.AddUpdatePayScaleService.addUpdatePayScale(this.ManagePayrollType).subscribe(data => {
+      this.loadingPayScale = false;
+      if (!data.hasError) {
+        
+      } else {
+        
+      }
+    })
   }
 }

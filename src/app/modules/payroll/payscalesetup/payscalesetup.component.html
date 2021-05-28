@@ -2,12 +2,16 @@
 </ngx-componentsheader>
 <nb-card style="margin-top: 3rem;">
     <nb-card-body>
-        <form>
+        <form id="payScaleForm" name="payScaleForm" #payScaleForm="ngForm">
             <div class="form-group row">
                 <label for="Institution Name" class="label col-sm-3 col-form-label listsubheader">Scale Name</label>
                 <div class="col-sm-9">
-                    <input type="text" nbInput fullWidth placeholder="placeholder tetx">
+                    <input [(ngModel)]="ManagePayrollType.name" name="name" id="name" #name="ngModel" type="text" nbInput fullWidth placeholder="Scale Name" required>
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                        <div *ngIf="name.errors.required">Scale name is required</div>
+                      </div>
                 </div>
+
             </div>
  
 
@@ -15,13 +19,13 @@
                 <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">Pay
                     Element</label>
                 <div class="col-sm-5">
-                    <select aria-placeholder="select" name="" id="" class="form-control">
+                    <select aria-placeholder="select" [(ngModel)]="selElem" name="selectedElem" class="form-control">
                         <option >--Select Element--</option>
-                        <option [(value)]="pay.name" *ngFor="let pay of payElement">{{pay.name}}</option>
+                        <option [value]="payel" *ngFor="let payel of payElement">{{payel.text}}</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <button  outline="true"   nbButton status="primary" class="d-flex column" >  
+                    <button   outline="true" (click)="addPayElement(selElem)"   nbButton status="primary" class="d-flex column" >  
                         <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
        
                 </div>
@@ -30,7 +34,7 @@
                         <div style="display: flex; flex-direction: row;">
                             <div>
                                 <button style="background-color: white;">
-                                    {{list.name}}
+                                    {{list.text}}
                                     <i class="far fa-window-close" (click)="onDelete(list)"></i>
                                 </button>
                             </div>
@@ -43,11 +47,26 @@
             <div class="form-group row">
                 <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">Pay Frequency</label>
                 <div class="col-sm-9">
-                    <select aria-placeholder="select" name="" id="" class="form-control">
+                    <select aria-placeholder="select" [(ngModel)]="ManagePayrollType.frequencyRuleId" name="frequencyRuleId" id="frequencyRuleId" #frequencyRuleId="ngModel" class="form-control" required>
                         <option >--Select Frequency--</option>
                         <option [(value)]="freq.id" *ngFor="let freq of allfrequency">{{freq.name}}</option>
 
                     </select>
+                    <div *ngIf="frequencyRuleId.invalid && (frequencyRuleId.dirty || frequencyRuleId.touched)" class="error">
+                        <div *ngIf="frequencyRuleId.errors.required">Pay frequency is required</div>
+                      </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">First Period End Date</label>
+                <div class="col-sm-9">
+                    <ngx-date [(value)]="ManagePayrollType.firstPeriodEndDate" name="firstPeriodEndDate" #firstPeriodEndDate id="firstPeriodEndDate" ></ngx-date>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">Effective Date</label>
+                <div class="col-sm-9">
+                    <ngx-date [(value)]="ManagePayrollType.effectiveDate" name="effectiveDate" #effectiveDate id="effectiveDate" ></ngx-date>
                 </div>
             </div>
 
@@ -66,7 +85,9 @@
     <div class="form-group row" style="margin-top: 2rem; margin-bottom: 1rem;">
         <label for="Account Number" class="label col-sm-3 col-form-label listsubheader"></label>
         <div class="col-sm-8 d-flex">
-            <button nbButton status="primary" class="d-flex column">Save</button>
+            <ngx-loadable-button [loading]="loadingPayScale" [disabled]="payScaleForm.invalid" (click)="savePayrollScale()" >
+                Submit
+              </ngx-loadable-button> 
             <button nbButton outline status="primary" class="d-flex column"
                 style="background-color: white; margin-left: 2rem;">Cancel</button>
            
