@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DecimalPipe } from '@angular/common';
 import {FetchDashboardDataServiceProxy} from './_services/service-proxies'
-
+import { NbDateFnsDateModule } from '@nebular/date-fns';
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -145,7 +145,11 @@ FullCalendarModule.registerPlugins([
     NbDatepickerModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     ComponentsModule,
-
+    NbDateFnsDateModule.forRoot({
+      parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+      formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+      getWeekOptions:{useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }
+    })
   ],
   bootstrap: [AppComponent],
   providers: [

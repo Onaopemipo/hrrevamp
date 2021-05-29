@@ -1,9 +1,9 @@
 <div class="input-group mb-3" style="flex-wrap: nowrap;">
-  <input  [(ngModel)]="dateItem" name="dateItem" [nbDatepicker]="datepicker" [value]="dateItem" type="text" class="form-control" placeholder="DD/MM/YYYY" aria-label="Recipient's username" aria-describedby="basic-addon2" style="width:100%;">
+  <input  [(ngModel)]="dateItem" name="dateItem" [nbDatepicker]="datepicker"  type="text" class="form-control" placeholder="DD/MM/YYYY" aria-label="Recipient's username" aria-describedby="basic-addon2" style="width:100%;">
   <div class="">
     <button class="btn btn-outline-secondary" (click)="show()" type="button" style="min-width: 0px !important;">
         <nb-icon icon="calendar-outline"></nb-icon>
     </button>
   </div>
 </div>
-<nb-datepicker  [min]="min" [max]="max" #datepicker></nb-datepicker>
+<nb-datepicker format="MMM d, y"  [min]="min" [max]="max" #datepicker></nb-datepicker>

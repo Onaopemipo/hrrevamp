@@ -21,25 +21,26 @@
                 <div class="col-sm-5">
                     <select aria-placeholder="select" [(ngModel)]="selElem" name="selectedElem" class="form-control">
                         <option >--Select Element--</option>
-                        <option [value]="payel" *ngFor="let payel of payElement">{{payel.text}}</option>
+                        <option [value]="payel.id" *ngFor="let payel of payElement">{{payel.text}}</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
                     <button   outline="true" (click)="addPayElement(selElem)"   nbButton status="primary" class="d-flex column" >  
-                        <nb-icon  icon="plus"></nb-icon>&nbsp;Add </button>
+                        <nb-icon  icon="plus"></nb-icon>&nbsp;Add 
+                    </button>
        
                 </div>
-                <div>
-                    <ul *ngFor="let list of ElementList">
-                        <div style="display: flex; flex-direction: row;">
-                            <div>
-                                <button style="background-color: white;">
-                                    {{list.text}}
-                                    <i class="far fa-window-close" (click)="onDelete(list)"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </ul>
+        
+
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-3 col-sm-9">         
+                        <div class="cbadge" style="width: fit-content;margin-right: 5px;" *ngFor="let list of ElementList">
+                            {{list.text}}&nbsp;
+                            <i class="fa fa-times" style="color: red;cursor: pointer;" (click)="onDelete(list)"></i>
+                        </div>            
+              
                 </div>
 
             </div>

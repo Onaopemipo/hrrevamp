@@ -124,6 +124,7 @@ import { AssetCategoryService, AssetMakeService, AssetModelService, AssetStatusS
 import { ExpenseRequestService } from 'app/modules/expense/services/expense-request.service';
 import { ExpenseGroupService, ExpenseProjectActivityService, ExpenseProjectService, ExpenseTypeService } from 'app/modules/expense/services/expense-group.service';
 import { NamedStatusComponent } from './named-status/named-status.component';
+import { NbDateFnsDateModule } from '@nebular/date-fns';
 @NgModule({
   declarations: [
     ComponentsheaderComponent,
@@ -220,6 +221,11 @@ import { NamedStatusComponent } from './named-status/named-status.component';
     NbContextMenuModule,
     NgMultiSelectDropDownModule,
     ModuleSettingsProvidersModule,
+    NbDateFnsDateModule.forRoot({
+      parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+      formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+      getWeekOptions:{useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }
+    })
   ],
   providers: [
     {

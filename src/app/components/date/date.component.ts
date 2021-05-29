@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NbDatepicker, NbDatepickerComponent, NbDatepickerDirective, NbPopoverDirective } from '@nebular/theme';
-
+import { format } from 'date-fns'
 @Component({
   selector: 'ngx-date',
   templateUrl: './date.component.html',
@@ -15,16 +15,17 @@ export class DateComponent implements OnInit {
   _dateItem = new Date();
   @Input() min;
   @Input() max;
-  set dateItem(val: Date){
+  set dateItem(val: Date) {
     this.valueChange.emit(val);
     this._dateItem = val;
   };
+
   get dateItem() {
     return this._dateItem;
   }
   selectedDate: Date;
   @Input() set value(val) {
-    this._dateItem = val;
+    this._dateItem = val;  
   }
 
   @Output() valueChange = new EventEmitter<Date>();
@@ -44,7 +45,8 @@ export class DateComponent implements OnInit {
     }, 200);
   }
 
-  dateChanged(){
+  dateChanged() {
+
     this.valueChange.emit(this.dateItem);
     // console.log(this.dateItem)
   }
