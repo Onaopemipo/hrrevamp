@@ -1,5 +1,5 @@
 import { CommonServiceProxy, GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy, RecruitmentJobApplicationServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -28,7 +28,6 @@ import { ApplicantssigninComponent } from './applicantssignin/applicantssignin.c
 import { ApplicantssignupComponent } from './applicantssignup/applicantssignup.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
-import { ApplicantSelectionComponent } from './applicant-selection/applicant-selection.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
@@ -42,7 +41,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     RecruitmentComponent,
     PasswordResetComponent, NewPasswordComponent,
     ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent, ApplicantProfileComponent,
-     ApplicantSelectionComponent, InterviewerdashboardComponent, AdminDashboardComponent, ApplicantquizComponent],
+      InterviewerdashboardComponent, AdminDashboardComponent, ApplicantquizComponent],
   imports: [
     ThemeModule,
     CommonModule,
@@ -69,6 +68,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     CommonServiceProxy,
     GetAllDepartmentsServiceProxy,
     RecuritmentJobApplicantServiceProxy,
+    RecruitmentJobApplicationServiceProxy,
   ]
 
 })

@@ -1,3 +1,4 @@
+import { DashboardComponent } from './../recruitment/admin-dashboard/dashboard/dashboard.component';
 import { EmailOTPVerifyComponent } from './email-otpverify/email-otpverify.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
@@ -17,6 +18,12 @@ export const routes: Routes = [
     path: '',
     component: RecruitmentComponent,
     children: [
+
+      {
+        path: '',
+        component: DashboardComponent,
+      },
+
       {
         path: 'signin',
         component: ApplicantssigninComponent,
@@ -32,7 +39,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'jobdetails',
+        path: 'jobdetails/:id',
         component: JobDetailsComponent
       },
 
@@ -41,10 +48,15 @@ export const routes: Routes = [
         component: ApplicantsDashboardComponent
       },
 
-      {
-        path: 'verify',
-        component: AdminDashboardComponent
-      },
+      // {
+      //   path: 'applicantselection',
+      //   component: ApplicantSelectionComponent
+      // },
+
+      // {
+      //   path: 'verify/:id',
+      //   component: AdminDashboardComponent
+      // },
 
       {
         path: 'applicantquiz',
@@ -54,7 +66,7 @@ export const routes: Routes = [
 
       {
         path: '**',
-        component: ApplicantssigninComponent,
+        component: DashboardComponent,
       },
     ],
   }

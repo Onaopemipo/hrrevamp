@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
@@ -12,11 +12,19 @@ export class EmailOTPVerifyComponent implements OnInit {
 
   verifyOption: boolean = true;
   OTPstring: string = '';
-  loginUserEmail:string = ''
+  loginUserEmail:string = '';
+  code1:string = '';
+  code2:string = '';
+  code3:string  = '';
+  code4:string  = '';
+  code5:string  = '';
+  code6:string  = '';
+  applicantEmail:string = '';
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private route: ActivatedRoute, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.applicantEmail = this.route.snapshot.paramMap.get("id");
   }
 
   changeOption() {
@@ -32,23 +40,40 @@ export class EmailOTPVerifyComponent implements OnInit {
   }
 
   verifyUser(){
+    let OTPstring = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6
     this.applicant.verifyApplicantAccount(this.OTPstring).subscribe(data => {
-      if(!data.hasError){
-        this.router.navigateByUrl('/recruitment/applicantdashboard');
+      if(!data.hasError && data.result.isSuccessful){
+        console.log(data.result)
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'View Jobs').subscribe(res => {
+          if(res){
+            this.router.navigateByUrl('/recruitment/applicantdashboard');
+          }
+        })
+
+      } else {
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
       }
     })
   }
 
-  getToken(event){
-    alert(event);
+  async codeValidation(nextElement,codeElement,value){
+    var reg = new RegExp('^[+.0-9]+$');
+    if(value !== "" && value && reg.test(value)){
+      //if(codeElement != "code6")
+      // nextElement.setFocus();
+    }else{
+   if(codeElement == "code1") this.code1 = "";
+   if(codeElement == "code2") this.code2 = "";
+   if(codeElement == "code3") this.code3 = "";
+   if(codeElement == "code4") this.code4 = "";
+   if(codeElement == "code5") this.code5 = "";
+   if(codeElement == "code6") this.code6 = "";
+    }
   }
 
-  onKeyUpEvent(a, e){
-    alert(e)
-  }
+  async verifyOTP(){
+    let receivedotp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
 
-  onFocusEvent(e){
-    alert(e)
   }
 
 }

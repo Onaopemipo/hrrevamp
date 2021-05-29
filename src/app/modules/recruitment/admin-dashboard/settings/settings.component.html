@@ -60,7 +60,7 @@
               <nb-card class="cardTitle" (click)="toggleCard('applied')" #applied>
                 <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Applied</span><span class="actions"><button nbButton style="color: #4847E0;">Edit</button><button nbButton style="color: #EB5757;">Delete</button></span>
+                    <span>Applied</span><span class="actions"><button nbButton style="color: #4847E0;">Add Stage</button><button nbButton style="color: #4847E0;">Edit</button><button nbButton style="color: #EB5757;">Delete</button></span>
                   </div>
                 </nb-card-header>
                 <nb-card-body *ngIf="cardClick=='applied'">
@@ -72,7 +72,7 @@
                 <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
                     <span>Shortlisted</span><span class="actions"><a href="javascript:void(0)"
-                      (click)="showModal()">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
+                      (click)="showModal()">Edit</a><a style="padding: 10px; color:#EB5757;" href="javascript:void(0)">Delete</a></span>
                   </div>
                 </nb-card-header>
                 <nb-card-body *ngIf="cardClick=='shortlisted'">

@@ -21,9 +21,9 @@ export class ApplicantssignupComponent implements OnInit {
   regiterApplicant(){
     this.applicant.registerApplicant(this.applicantModel).subscribe(data => {
       if(!data.hasError && data.result.isSuccessful === true){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Applicant Created', 'Dismiss').subscribe(res => {
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Applicant Created', 'Verify your account').subscribe(res => {
           if(res){
-            this.router.navigateByUrl('/accountverify');
+            this.router.navigateByUrl('/accountverify/' + this.applicantModel.email);
           }
         })
       }

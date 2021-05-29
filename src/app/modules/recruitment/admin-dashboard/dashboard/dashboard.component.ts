@@ -577,6 +577,8 @@ this.optionsForPie = {
 
 
   ngOnInit(): void {
+    this.fetchAllJobs();
+    this.fetchJobApplications();
     // Events
     const today = this.today;
     const day_of_week = today.getDay();
@@ -599,11 +601,11 @@ this.optionsForPie = {
     }
 
     async fetchAllJobs(){
-    // const data = await this.job.getAllJobs(this.jobFilter).toPromise();
-    // if(!data.hasError){
-    //   this.allJobs = data.result;
-    //   this.jobsCounter = data.totalRecord;
-    // }
+    const data = await this.job.getAllJobs(undefined, undefined, 1, 10).toPromise();
+    if(!data.hasError){
+      this.allJobs = data.result;
+      this.jobsCounter = data.totalRecord;
+    }
     }
 
     async fetchJobApplications(){

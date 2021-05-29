@@ -5,24 +5,24 @@
                 <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
                   <div style="display: flexbox; flex-direction: row; align-items: center;">
                     <span class="header-label">Verify your account</span>
-                    <span class="subheader-label">A verification code was sent to tboy****@gmail.com. Enter the code to continue.</span>
+                    <span class="subheader-label">A verification code was sent to {{ applicantEmail }}. Enter the code to continue.</span>
                   </div>
                   <div style="padding: 15px;"></div>
                     <div class="px-2">
                       <form>
                         <div class="form-group">
                           <div class="passcode-wrapper">
-                            <input type="number" max="1" name="token1" (blur)="getToken(event.target.value)">
-                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
-                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
-                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
-                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
-                            <input type="number" max="1" name="token1" (blur)="getToken(event)">
+                            <input type="text" maxlength="1" #smscode1 placeholder="0" (keyup)="codeValidation(smscode1,'code1',smscode1.value)" name="code1" [(ngModel)]="code1" required>
+                            <input type="text" maxlength="1" #smscode2 placeholder="0" (keyup)="codeValidation(smscode2,'code2',smscode2.value)" name="code2" [(ngModel)]="code2" required>
+                            <input type="text" maxlength="1" #smscode3 placeholder="0" (keyup)="codeValidation(smscode3,'code3',smscode3.value)" name="code3" [(ngModel)]="code3" required>
+                            <input type="text" maxlength="1" #smscode4 placeholder="0" (keyup)="codeValidation(smscode4,'code4',smscode4.value)" name="code4" [(ngModel)]="code4" required>
+                            <input type="text" maxlength="1" #smscode5 placeholder="0" (keyup)="codeValidation(smscode5,'code5',smscode5.value)" name="code4" [(ngModel)]="code5" required>
+                            <input type="text" maxlength="1" #smscode6 placeholder="0" (keyup)="codeValidation(smscode6,'code6',smscode6.value)" name="code4" [(ngModel)]="code6" required>
                           </div>
                         </div>
                       </form>
                     </div>
-                    <button type="button" routerLink="/passwordreset" nbButton fullWidth status="primary">Continue</button>
+                    <button type="button" (click)="verifyUser()" nbButton fullWidth status="primary">Continue</button>
                 <div style="padding: 5px;"></div>
                 <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a href="javascript:void(0)" (click)="resendOtp()" style="font-weight: 700;">Resend OTP in 20s</a></p>
                 <div style="padding: 5px;"></div>

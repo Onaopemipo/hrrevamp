@@ -88,27 +88,13 @@
               </div>
 
               <div class="form-group row">
-                <!-- <nb-card-header>Selected Option: {{ option }}</nb-card-header> -->
                 <div class="col">
                   <label for="">Eligible Grades</label>
-                  <!-- <nb-select multiple [(ngModel)]="loanTypeModel.eligibleGrades" name="eligibleGrades"  placeholder="Select all Eligible Grades">
-                    <nb-option *ngFor="let grade of allGrades" value="garde.id">{{ grade.name }}</nb-option>
-                    <nb-option value="2">Grade 2</nb-option>
-                  </nb-select> -->
-                  <!-- <select [(ngModel)]="loanTypeModel.eligibleGrades" #eligibleGrades="ngModel" class="form-control" name="eligibleGrades">
-                    <option value="">--Select all Eligible Grades--</option>
-                    <option *ngFor="let grade of allGrades" [value]="grade.id">{{ grade.name }}</option>
-                  </select>
-                  <div *ngIf="eligibleGrades.invalid && (eligibleGrades.dirty || eligibleGrades.touched)" class="error">
-                    <div *ngIf="eligibleGrades.errors.required">Eligible Grade is required</div>
-                  </div> -->
                   <nb-radio-group name="eligibleGrades" #eligibleGrades="ngModel" [(ngModel)]="option" (valueChange)="loanEligibility($event)">
                     <nb-radio *ngFor="let option of options"
                     [value]="option.value">
                     {{ option.label }} </nb-radio>
-                    <!-- <nb-radio [value]="planB">Selected Grades</nb-radio> -->
                   </nb-radio-group>
-
                 </div>
               </div>
 
@@ -178,17 +164,16 @@
               <div class="form-group row">
                 <div class="col">
                   <label for="">Custom Question</label>
-                  <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanTypeModel.customQuestion"></textarea>
+                  <textarea name="customQuestion" #customQuestion="ngModel" [(ngModel)]="loanTypeModel.customQuestion" cols="30" rows="10" style="width: 100%;"></textarea>
                   <!-- <ngx-wysisyg-input [(value)]="loanTypeModel.customQuestion" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                 </div>
 
               </div>
 
-
               <div class="form-group row">
                 <div class="col">
                   <label for="">Description</label>
-                  <textarea name="description" #description="ngModel" [(ngModel)]="loanTypeModel.description"></textarea>
+                  <textarea name="description" #description="ngModel" [(ngModel)]="loanTypeModel.description" cols="30" rows="10" style="width: 100%;"></textarea>
                   <!-- <ngx-wysisyg-input [(value)]="loanTypeModel.description" style="padding-left: -10px;" ></ngx-wysisyg-input> -->
                 </div>
 

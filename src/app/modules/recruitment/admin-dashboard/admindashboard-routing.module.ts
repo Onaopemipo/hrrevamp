@@ -44,6 +44,11 @@ export const routes: Routes = [
         component: QuizComponent
       },
 
+      // {
+      //   path: 'applicantselection',
+      //   component: ApplicantSelectionComponent
+      // },
+
       {
         path: 'reports',
         component: ReportsComponent

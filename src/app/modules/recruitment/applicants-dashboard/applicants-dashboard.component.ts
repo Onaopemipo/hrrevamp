@@ -16,6 +16,7 @@ export class ApplicantsDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchApplications();
+    this.fetchPostedJobs();
   }
 
   toggle(event){

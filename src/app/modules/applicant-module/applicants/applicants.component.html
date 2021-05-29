@@ -37,7 +37,7 @@
       </form>
     </div>
   </div>
-  <div class="overflow-auto job-listing" style="display: flex; flex-direction: row; align-items: center; flex: auto; justify-content: space-between; padding-bottom: 20px;">
+  <div *ngIf="loading == false && jobsCounter > 0" class="overflow-auto job-listing" style="display: flex; flex-direction: row; align-items: center; flex: auto; justify-content: space-between; padding-bottom: 20px;">
     <div *ngFor="let job of allJobs" class="job-items">
       <div class="title">{{ job.jobTitle }}</div>
       <div class="sub-title">{{ job.location }}</div>
@@ -45,11 +45,31 @@
       <div class="job-descrition"><p>{{ job.description }}</p>
       </div>
       <div>
-        <button class="btn" routerLink="[/jobdetails]" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+        <button class="btn" routerLink="['/jobdetails/:', job.id]" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
       </div>
     </div>
 
   </div>
 
+  <div class="job-items">
+    <div class="title">Support Officer</div>
+    <div class="sub-title">Lagos, Nigeria</div>
+    <div style="padding: 10px;"></div>
+    <div class="job-descrition"><p>As a freelance designer, you'll instantly join a thriving community of
+      experts in over 120 countries. Work remotely on projects that meet your career ambitions</p>
+    </div>
+    <div>
+      <button class="btn" (click)="jobDetails(1)" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+    </div>
+  </div>
 
+  <div *ngIf="jobsCounter < 1" style="background-color: #ffffff;">
+    <nb-card>
+      <nb-card-body>
+        <div><br>
+          <ngx-default-content pageHeader={{noJobsHeader}} pageDescription="{{noJobs}}" [loading]='loading'></ngx-default-content>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>

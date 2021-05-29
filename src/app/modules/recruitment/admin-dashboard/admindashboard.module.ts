@@ -1,4 +1,4 @@
-import { RecruitmentSettingServiceProxy, RecruitmentQuizServiceProxy } from './../../../_services/service-proxies';
+import { RecruitmentSettingServiceProxy, RecruitmentQuizServiceProxy, RecruitmentJobApplicationServiceProxy } from './../../../_services/service-proxies';
 import { AdminDashboardRoutingModule } from './admindashboard-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ComponentsModule } from '../../../components/components.module';
@@ -39,6 +39,7 @@ import { NewquizComponent } from './newquiz/newquiz.component';
   providers: [
     RecruitmentSettingServiceProxy,
     RecruitmentQuizServiceProxy,
+    RecruitmentJobApplicationServiceProxy,
   ]
 })
 export class AdminDashboardModule { }

@@ -1,3 +1,4 @@
+import { id } from '@swimlane/ngx-charts';
 import { JobApplication, RecruitmentJobApplicationServiceProxy } from './../../../../_services/service-proxies';
 import { ColumnTypes, TableActionEvent, TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
@@ -25,16 +26,24 @@ export class ApplicantselectionComponent implements OnInit {
     {name: ACTIONS.VIEW_CV, title: '', type: ColumnTypes.Link, link_name: 'View CV'}
   ];
   data = [
-    {name: 'Name', email: 'Email', role:'Job Title',dateApplied : '02/03/2021'}
+    {id:0, name: 'Name', email: 'Email', role:'Job Title',dateApplied : '02/03/2021'}
   ]
-  constructor(private jobService: RecruitmentJobApplicationServiceProxy) { }
+
+  applicantProfile: JobApplication [] = [];
+  constructor(private jobService: RecruitmentJobApplicationServiceProxy,) { }
 
   ngOnInit(): void {
+    this.fetchJobRoles();
   }
 
   tableActionClick(actionData: TableActionEvent){
     if(actionData.name === ACTIONS.VIEW_PROFILE){
       this.showModal = true
+      this.jobService.viewJobApplicationProfileById(0).subscribe(data => {
+        if(!data.hasError){
+          this.applicantProfile = data.result;
+        }
+      })
     }
     if(actionData.name === ACTIONS.VIEW_CV){
     this.showCvModal = true
@@ -45,6 +54,13 @@ export class ApplicantselectionComponent implements OnInit {
     const data = await this.jobService.fetchJobApplicationByRole(0,10,1).toPromise();
     if(!data.hasError){
       this.allJobRoles = data.result;
+    }
+  }
+
+  async fetchApplicants(){
+    const data = await this.jobService.fetchJobInterviewerListByApplicationId(0).toPromise();
+    if(!data.hasError){
+      // this.allApplicants = data.result;
     }
   }
 

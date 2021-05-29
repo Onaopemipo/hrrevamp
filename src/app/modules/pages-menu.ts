@@ -276,11 +276,45 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'CAREERS',
     group: true,
   },
+
   {
     title: 'Recruitment',
-    link: '/',
+    link: '/recruitmentadmin',
     icon: 'assets/icons/recruitment.jpg',
+    children: [
+      {
+        title: 'Dashboard',
+        link: '/recruitmentadmin',
+      },
+
+      {
+        title: 'Jobs',
+        link: '/recruitmentadmin/jobs',
+      },
+
+      {
+        title: 'Applicants',
+        link: '/interviewers/applicantselection',
+      },
+
+      {
+        title: 'Quiz',
+        link: '/recruitmentadmin/quiz/',
+      },
+
+      {
+        title: 'Settings',
+        link: '/recruitmentadmin/settings/',
+      },
+
+      {
+        title: 'Report',
+        link: '/recruitmentadmin/reports/',
+      },
+    ]
   },
+
+
   {
     title: 'Training',
     icon: 'assets/icons/Training.jpg',
@@ -547,7 +581,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Benefit Eligibility',
         link: '/benefits/eligibility',
       },
-   
+
     ]
   },
   {
