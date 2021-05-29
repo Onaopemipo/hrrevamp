@@ -1,4 +1,5 @@
-<ngx-componentsheader pageName="Employee View" [requiredButton]="rButton" (buttonClick)="topActionClicked()">
+<ngx-componentsheader pageName="Employee View" [requiredButton]="topActionButtons"
+  (buttonClick)="topActionClicked($event)">
 </ngx-componentsheader>
 
 <div class="row">
@@ -11,7 +12,7 @@
       ">
       <div>
         <img style="height: 5rem; width: 5rem; border-radius: 50%"
-          src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+          src="assets/icons/EmployeeRecordsModule.jpg" />
       </div>
       <span style="font: normal normal medium 20px/24px Rubik; color: #11141a">{{Employee?.fullName}}</span>
       <br />
@@ -20,7 +21,7 @@
       <div style="margin-top: 50px">
         <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===1}"
           (click)="tabChanged(1)">
-          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" style="
+          <img src="assets/icons/EmployeeRecordsModule.jpg" style="
               width: 3rem;
               height: 3rem;
               border-radius: 50%;
@@ -30,7 +31,7 @@
         </div>
         <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===2}"
           (click)="tabChanged(2)">
-          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" style="
+          <img src="assets/icons/CareerSuccession2.jpg" style="
               width: 3rem;
               height: 3rem;
               border-radius: 50%;
@@ -40,7 +41,7 @@
         </div>
         <div style="display: flex; margin: -1rem" class="tab-item" [class]="{active: selectedTab===3}"
           (click)="tabChanged(3)">
-          <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" style="
+          <img src="assets/icons/CareerSuccession2.jpg" style="
               width: 3rem;
               height: 3rem;
               border-radius: 50%;
@@ -90,9 +91,9 @@
           <span>Address</span>
           <span>Last Name</span>
         </div> -->
-      </div> 
+      </div>
 
-      <div class="key-value-group">
+      <div class="key-value-group" *ngFor = " let c of contract">
         <h4>Employment</h4>
         <div>
           <span>Type</span>
@@ -100,23 +101,25 @@
         </div>
         <div>
           <span>Work Location</span>
-          <span>Last Name</span>
+          <span style="font-style: italic;">{{c.locationName}}</span>
         </div>
         <div>
           <span>Hire Date</span>
-          <span>Last Name</span>
+          <span style="font-style: italic;">{{c.dateOfAppointment}}</span>
+          
         </div>
         <div>
           <span>Start Date</span>
-          <span>Last Name</span>
+          <span style="font-style: italic;">{{c.dateOfAppointment}}</span>
         </div>
         <div>
           <span>Title</span>
-          <span>Last Name</span>
+          <span style="font-style: italic;">{{c.positionName}}</span>
+        
         </div>
         <div>
           <span>Department</span>
-          <span>Last Name</span>
+          <span style="font-style: italic;">{{c.departmentName}}</span>
         </div>
         <div>
           <span>Compensation Type</span>
@@ -124,7 +127,8 @@
         </div>
         <div>
           <span>Annual Salary</span>
-          <span>Last Name</span>
+          <span style="font-style: italic;">{{c.totalEarnings}}</span>
+         
         </div>
       </div>
 
@@ -167,11 +171,11 @@
           (buttonClick)="showDeploymentApplicationModal = true" buttonValue="Apply for Deployment">
 
         </ngx-default-content>
-          <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="columns" [userData]="allBenefito" [loading]="loading"
-            (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
-            [currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
-          </ngx-tablecomponent>
-<!--         
+        <ngx-tablecomponent *ngIf="!showEmpty" [tableColum]="columns" [userData]="allBenefito" [loading]="loading"
+          (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
+          [currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
+        </ngx-tablecomponent>
+        <!--         
         <ngx-tablecomponent *ngIf="!showEmpty"  [tableColum]="tableColumns" [userData]="EmployeeBenefit" [loading]="loading"
     (pageChange)="loadNewPage($event)" [actions]="tableActions"
     (actionClick)="tableActionClicked($event)"></ngx-tablecomponent> -->
@@ -188,10 +192,10 @@
         </div>
         <div>
           <img src="https://homepages.cae.wisc.edu/~ece533/images/arctichare.png" style="width: 50px; height: auto;">
-         
+
           <span>{{ benefitSingle?.vendorName}}</span>
         </div>
-       
+
         <p style="font: normal normal normal 16px/22px Rubik; color: #080730;">{{ benefitSingle?. vendorPlanName}}</p>
         <div style="display: flex; font: normal normal normal 16px/22px Rubik; color: #080730; padding-bottom: 1rem;">
           <span>Employee Only</span>
@@ -227,25 +231,43 @@
       </div>
     </div>
   </div>
-</div>
 
-<ngx-side-modal>
+
+<ngx-side-modal [(show)]="showBenenfit" style="width: 500px;">
   <div modal-header>Add Benefit</div>
   <div modal-body>
-    <div class="form-group">
-      <label>Select Benefit Type</label>
-      <input class="form-control" />
-    </div>
-    <div class="form-group">
-      <label>Add Description</label>
-      <textarea class="form-control"></textarea>
+
+    <div class="form-group ">
+      <label for="inputEmail1" class="label   col-form-label listsubheader">Benefit</label>
+      <div class="">
+        <select placeholder="Select Benefit" class="form-control" name="benefitId" id="  benefitId" #benefit="ngModel"
+          [(ngModel)]="benefitId">
+          <option value="">--Select Benefit ---</option>
+          <option *ngFor="let benefit of allBenefito" [value]="benefit.id">{{benefit.name}}</option>
+        </select>
+
+        <div *ngIf="benefit.invalid && (  benefit.dirty ||  benefit.touched)" class="error">
+          <div *ngIf="benefit.errors.required">benefit is required</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div modal-actions>
-    <button nbButton status='primary'>Submit</button>
-    <button nbButton outline style="background: transparent;" status='primary'>Cancel</button>
-  </div>
+
+    <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+      <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+          class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+      <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
+        (click)="SubmitEvent()">Submit</button>
+
+      <div style="padding-left: 15px;">
+        <button nbButton outline status="primary" (click)="showBenenfit = false" class="d-flex column"
+          style="background-color: white;">Discard</button>
+      </div>
+    </div>
 </ngx-side-modal>
+
+
+
 
 <ngx-side-modal [(show)]="showModal">
   <div modal-header>Add Dependency</div>
@@ -275,8 +297,45 @@
       <ngx-date></ngx-date>
     </div>
   </div>
-  <div modal-actions>
-    <button nbButton status='primary'>Submit</button>
-    <button nbButton outline style="background: transparent;" status='primary'>Cancel</button>
+
+</ngx-side-modal>
+
+
+
+<!-- modal for Adding Eligibility to Employee -->
+<ngx-side-modal [(show)]="showEligibility" style="width: 500px;">
+  <div modal-header>Add Eligibility to Employee</div>
+  <div modal-body>
+
+
+    <div class="form-group">
+      <label>eligibility</label>
+      <select placeholder="Select Eligibility" class="form-control" name="bucketId" id="bucketId" #bucket="ngModel"
+        [(ngModel)]=" bucketId">
+        <option value="">--Select eligibility---</option>
+        <option *ngFor="let v of allEligibilities" [value]="v.id">{{v.text}}</option>
+      </select>
+
+      <div *ngIf="bucket.invalid && (bucket.dirty || bucket.touched)" class="error">
+        <div *ngIf="bucket.errors.required">eligibility is required</div>
+      </div>
+
+    </div>
+    <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+      <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+          class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+      <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disabled"
+        (click)="SubmitEligibility()">Submit</button>
+
+      <div style="padding-left: 15px;">
+        <button nbButton outline status="primary" (click)="showEligibility = false" class="d-flex column"
+          style="background-color: white;">Discard</button>
+      </div>
+
+
+    </div>
+
+
+
   </div>
 </ngx-side-modal>

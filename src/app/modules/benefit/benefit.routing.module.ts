@@ -13,7 +13,8 @@ import {  AddBenefitComponent } from './add-benefit/add-benefit.component';
 import { EligibilityviewComponent} from './eligibilityview/eligibilityview.component';
 import{ BenefitdetaisComponent} from './benefitdetais/benefitdetais.component';
 import {BenefitTypeComponent} from './pages/benefit-type/benefit-type.component';
-import { AllplansComponent} from './pages/allplans/allplans.component'
+import { AllplansComponent} from './pages/allplans/allplans.component';
+import { PlandetailsComponent } from "./pages/plandetails/plandetails.component";
 
 export const routes: Routes = [
   {
@@ -73,6 +74,12 @@ export const routes: Routes = [
         path: 'allPlans',
         component: AllplansComponent,
       },
+      
+      {
+        path: 'plandetails/:id',
+        component: PlandetailsComponent,
+      },
+  
   
   
   

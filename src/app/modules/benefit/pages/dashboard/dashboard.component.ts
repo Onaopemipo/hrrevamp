@@ -11,6 +11,10 @@ import {
   VendorPlanDTO,
   DeleteBenefitEligibilityServiceProxy,
   DeleteBenefitServiceProxy,
+  BenefitFinancialYearsServiceProxy ,
+  IDTextViewModel,
+  BenefitFinancialYearDetailsServiceProxy,
+  BenefitPlanDashboardDTO
 } from "../../../../_services/service-proxies";
 import { Router } from "@angular/router";
 import { AlertserviceService } from "app/_services/alertservice.service";
@@ -37,7 +41,9 @@ export class DashboardComponent implements OnInit {
     private DeleteBenefitEligibilityServiceProxy: DeleteBenefitEligibilityServiceProxy,
     private DeleteBenefitServiceProxy: DeleteBenefitServiceProxy,
     private alertservice: AlertserviceService,
-    private router: Router
+    private router: Router,
+    private BenefitFinancialYearsServiceProxy :BenefitFinancialYearsServiceProxy ,
+    private BenefitFinancialYearDetailsServiceProxy:BenefitFinancialYearDetailsServiceProxy
   ) { }
   get showEmpty() {
     return this.allBenefito.length === 0;
@@ -49,6 +55,7 @@ export class DashboardComponent implements OnInit {
     this.fetchBenefits();
     this.getAllVendor();
     this.getPlans();
+    this.getFinacialYear();
   }
 
   iD: number = 0;
@@ -65,6 +72,7 @@ export class DashboardComponent implements OnInit {
   allBenefito: BenefitPlanDTO[] = [];
   AllVendors: VendorDTO[] = [];
   plans: VendorPlanDTO[] = [];
+  FinacialYear: IDTextViewModel[] = []
 
   async getAllVendor() {
     const data = await this.GetAllVendorServiceProxy.getAllVendor(undefined).toPromise();
@@ -83,24 +91,24 @@ export class DashboardComponent implements OnInit {
     }
   }
   //get all employee coverages
-  async getBenefitsCoverage() {
-    const CoverageData = await this.benefitscoverages
-      .fetchEmployeeCoverageBenefit(
-        this.iD,
-        this.coverageName,
-        this.coveragePlanId,
-        this.employeeID,
-        this.subID,
-        this.eligibilityTypeId,
-        this.subID,
-        this.pageNumber,
-        this.pageSize
-      )
-      .toPromise();
-    if (!CoverageData.hasError) {
-      console.log("my coveragedATA", CoverageData);
-    }
-  }
+  // async getBenefitsCoverage() {
+  //   const CoverageData = await this.benefitscoverages
+  //     .fetchEmployeeCoverageBenefit(
+  //       this.iD,
+  //       this.coverageName,
+  //       this.coveragePlanId,
+  //       this.employeeID,
+  //       this.subID,
+  //       this.eligibilityTypeId,
+  //       this.subID,
+  //       this.pageNumber,
+  //       this.pageSize
+  //     )
+  //     .toPromise();
+  //   if (!CoverageData.hasError) {
+  //     console.log("my coveragedATA", CoverageData);
+  //   }
+  // }
 
   modal(event) {
     if (event == "manage") {
@@ -183,4 +191,25 @@ export class DashboardComponent implements OnInit {
 
     }
       
+    //fetch finacial years
+    async getFinacialYear(){
+      const data = await this.BenefitFinancialYearsServiceProxy.getBenefitFinancialYears().toPromise();
+      if(!data.hasError){
+        this.FinacialYear = data.result
+        console.log('finacial year', this.FinacialYear)
+      }
+    }
+
+    benefitDetails= new BenefitPlanDashboardDTO().clone()
+    year
+    handleyear(year){
+      this.loading = true
+      this.BenefitFinancialYearDetailsServiceProxy.getBenefitFinancialYearDetails(year).toPromise().then(data =>{
+        if(!data.hasError){
+          this.benefitDetails= data.result
+          console.log('datae',this.benefitDetails)
+        }
+      })
+      console.log('selected year',year)
+    }
 }

@@ -102,7 +102,8 @@ import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProx
     GetAllPayElementsServiceProxy,
     CommonServiceProxy,
     AddUpdatePayElementServiceProxy,
-    GetEarningsServiceProxy
+    GetEarningsServiceProxy,
+    
   ],
 })
 export class PayrollModule { }

@@ -65,6 +65,8 @@ export class AddBenefitComponent implements OnInit {
       outline: true,
     },
   ];
+
+  benefitTypeId = undefined
   back() {
     this.route.navigateByUrl("/benefits");
   }
@@ -121,6 +123,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     this.getPosition(); 
     this.getBenefitType();
     this.benefit.financialYear = new Date().getFullYear().toString();
+    // this.getAllVendor(this.benefit.benefitTypeId)
   }
   //Gey ALL vendors
   async getAllVendor(benefitTypeId) {
@@ -164,27 +167,7 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
     if (this.benefit.endDate) return true;
     return false;
   }
-  // async getAllEmployee() {
-  //   const data = await this.FetchAllEmployeesServiceProxy.getAllEmployees(
-  //     this.searchText,
-  //     this.contractStatus,
-  //     this.pageSize,
-  //     this.pageNum
-  //   ).toPromise();
-  //   if (!data.hasError) {
-  //     this.AllEmployee = data.result;
 
-  //     this.id = data.result.map((employee) => JSON.stringify(employee.id));
-  //     console.log("id", this.id);
-  //   }
-
-  //   console.log(
-  //     "i want see wetin i keep for that vendora variable",
-  //     this.AllEmployee,
-  //     this.id
-  //   );
-  // }
-  //employee master search
   employeesSelected(employees: EmployeeDTO[]) {
     this.employees = employees.map((employee) => JSON.stringify(employee.id));
     console.log("employee", this.employees);

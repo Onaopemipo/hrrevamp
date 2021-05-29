@@ -30,6 +30,13 @@ import { Event } from "../../../../_services/service-proxies";
 import { ThrowStmt } from "@angular/compiler";
 import { Router, ActivatedRoute } from "@angular/router";
 
+enum TABLE_ACTION {
+  VIEW = "1",
+  DELETE = "2",
+  EDIT = "3",
+}
+
+
 import { ColumnTypes } from "app/components/tablecomponent/models";
 @Component({
   selector: "ngx-allplans",
@@ -52,7 +59,8 @@ export class AllplansComponent implements OnInit {
     private AddUpdateVendorPlanServiceProxy: AddUpdateVendorPlanServiceProxy,
     private GetAllVendorServiceProxy: GetAllVendorServiceProxy,
     private DataServiceProxy: DataServiceProxy,
-    private alertservice: AlertserviceService
+    private alertservice: AlertserviceService,
+    private route:Router
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +75,13 @@ export class AllplansComponent implements OnInit {
     { name: "description", title: "Description", type: ColumnTypes.Text },
     // { name: "", title: "Status", type: ColumnTypes.Status },
   ];
+
+  tableActions: TableAction[] = [
+    { name: TABLE_ACTION.VIEW, label: "View" },
+    // { name: TABLE_ACTION.EDIT, label: "UpdateList" },
+    { name: TABLE_ACTION.DELETE, label: "Delete" },
+  ];
+
 
   get disable() {
     if (
@@ -91,6 +106,8 @@ export class AllplansComponent implements OnInit {
       outline: true,
     },
   ];
+
+   
 
   get showEmpty() {
     return this.Plans.length === 0;
@@ -123,7 +140,11 @@ export class AllplansComponent implements OnInit {
       this.showPlan = true;
     }
   }
-  tableActionClicked(event) {}
+  tableActionClicked(event :TableActionEvent) {
+    if(event.name ==TABLE_ACTION.VIEW){
+      this.route.navigate(['/benefits/plandetails',event.data.id])
+    }
+  }
 
   async SubmitPlan() {
     this.submitbtnPressed = true;
@@ -168,4 +189,7 @@ export class AllplansComponent implements OnInit {
       this.loading = false;
     }
   }
+
+
+
 }
