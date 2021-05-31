@@ -12,6 +12,9 @@ export class FileUploadComponent implements OnInit {
   @Input() value: Transfer[]|Transfer = [];
   @Output() valueChange = new EventEmitter<Transfer[]|Transfer>();
   @Input() inputText: string;
+  @Input() set clearFlag(val: number) {
+    this.files = [];
+  }
   set files(data: Transfer[]) {
     this._files = data;
     if (this.single) {
@@ -49,6 +52,7 @@ export class FileUploadComponent implements OnInit {
     });
   }
   filereceived(event: FlowDirective) {
+    console.log('am here')
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
     });

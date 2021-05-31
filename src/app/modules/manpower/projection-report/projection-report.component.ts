@@ -7,6 +7,7 @@ import { CustomServiceService } from 'app/_services/custom-service.service';
 import { CommonServiceProxy, DataServiceProxy, ProjectionReportDTO, DropdownValue, ManpowerServiceProxy } from 'app/_services/service-proxies';
 import { projectionReport, searchQuery } from '../manpower.model';
 import { NbPopoverDirective } from '@nebular/theme';
+import { DecimalPipe} from '@angular/common';
 export class extendedProjectPlan  extends ProjectionReportDTO implements IStatus {
   pPlan: ProjectionReportDTO;
   baseYear: number;
@@ -15,6 +16,7 @@ export class extendedProjectPlan  extends ProjectionReportDTO implements IStatus
   employCount: number;
   newincreamnet: any;
   baseYearCostperEmpl: any;
+  
   constructor(pPlan : ProjectionReportDTO) {
     super(pPlan);
     this.pPlan = pPlan;
@@ -94,8 +96,11 @@ objrequirement: projectionReport = {};
 newHRrequirement = [];
 submitRequirement = [];
 unlockDecision: string = "";
-unlockComment: string = "";
-  constructor(public CustomService: CustomServiceService, private myDropdown: DataServiceProxy,private CommonService: CommonServiceProxy,
+  unlockComment: string = "";
+  decisionCol = "";
+  constructor(
+    private dPipe: DecimalPipe,
+    public CustomService: CustomServiceService, private myDropdown: DataServiceProxy, private CommonService: CommonServiceProxy,
     private ManpowerService: ManpowerServiceProxy, private alertservice: AlertserviceService,) { }
     nulltasktype(){
       this.newQuery.taskType = 0;
@@ -157,7 +162,7 @@ unlockComment: string = "";
               r.activityYear = this.newQuery.activityYear;
               r.employCount = r.allbaseYearCount + r.approvedJobRoleCount;
              
-              r.newincreamnet = ((isFinite(r.increament) == false)) ? "N/A" : (r.increament == 0? " - ": (r.increament > 0 || r.increament < 0)? r.increament + " %": "N/A") ;
+              r.newincreamnet = ((isFinite(r.increament) == false)) ? "N/A" : (r.increament == 0? " - ": (r.increament > 0 || r.increament < 0)? this.getincreamentPerc(r.increament) + " %": "N/A") ;
               if (r.jobRoleName) {
                 r.baseYearCostperEmpl = r.baseyrPerRoleCost;
             // var roleDetails = this.newbaseyear.find(njr => njr.ItemName === r.JobRoleName);
@@ -186,7 +191,10 @@ unlockComment: string = "";
     }
 
   }
-  
+  getincreamentPerc(incrNumber) {
+    var rs = this.dPipe.transform(incrNumber, '.2');
+    return rs;
+  }
   submitrequirement(requirement:ProjectionReportDTO){
     var checkval= [];
    // console.log(requirement);
@@ -276,10 +284,9 @@ if(sYear != "" || sYear != null)
     var tasktype = event.srcElement.value;
     if(this.newQuery.activityYear){
   
-      this.ManpowerService.fetchProjectionTaskProject(tasktype,this.newQuery.activityYear,1,100).subscribe((result: any) => {
+      this.ManpowerService.fetchProjectionTaskProject(tasktype,this.newQuery.activityYear,1,100).subscribe((result) => {
         
-        this.alltasktype = result.data;      
-       
+        this.alltasktype = result.result;       
         if(result.message === 'Unauthorized Request'){
        
         }else{

@@ -26,12 +26,14 @@ import { DataServiceProxy, ManpowerServiceProxy } from 'app/_services/service-pr
     NbSelectModule,
     NbAlertModule,
     NbPopoverModule,
-    NbActionsModule
+    NbActionsModule,
+    
   ],
   providers: [
     AlertserviceService,
     DataServiceProxy,
-    ManpowerServiceProxy
+    ManpowerServiceProxy,
+
   ]
 })
 export class ManpowerModule { }

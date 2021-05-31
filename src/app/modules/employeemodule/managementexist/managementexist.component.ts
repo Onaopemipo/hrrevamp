@@ -53,7 +53,8 @@ export class ManagementexistComponent implements OnInit {
   tempRef = "";
   files: Transfer;
   entityId = 0;
-  Entity: IDTextViewModel[] = []
+  Entity: IDTextViewModel[] = [];
+  master_search_clear_flag = 0;
   constructor(
     private router: Router,
     private DataService: DataServiceProxy,
@@ -112,12 +113,14 @@ this.getProccessId()
     this.RetirmentBody.exitChoice = eChoice == "1" ? "Forgo Salary" : "Spend 30 Days notice period";
     this.selectedEmployee.map(val => { val.dateCreated = new Date(); return val; });
     this.RetirmentBody.employeee = JSON.stringify(this.selectedEmployee);
+    this.RetirmentBody.tempref = this.tempRef;
     this.RetirementService.postRetireee(0, 1, this.RetirmentBody).subscribe(data => {
       this.loading = false;
       if (!data.hasError) {
         this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
           this.RetirmentBody = new ManageRetirementDTO().clone();
-
+          this.selectedEmployee = [];
+          this.master_search_clear_flag += 1;
         });
       }else {
         this.alertService.openModalAlert(ALERT_TYPES.FAILED, data.message, "Ok").subscribe(data => {

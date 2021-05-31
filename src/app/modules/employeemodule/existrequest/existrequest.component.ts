@@ -48,6 +48,7 @@ export class ExistrequestComponent implements OnInit {
   entityId = 0;
   Entity: IDTextViewModel[] = [];
   userExit = "";
+  selectedEmployee = [];
   constructor(private activatedRoute: ActivatedRoute,private router: Router,private CommonService: CommonServiceProxy,
     private RetirementService: RetirementServiceProxy,private alertService: AlertserviceService,
     private FetchEmployeeByIdService: FetchEmployeeByIdServiceProxy, private DataService: DataServiceProxy,
@@ -62,7 +63,8 @@ export class ExistrequestComponent implements OnInit {
       }
     });
   }
-  getRetirementDetails(employeeId,exitUser) {
+  getRetirementDetails(employeeId) {
+    this.topActionButtons[1].label = "Loading ...";
     this.filter.EmployeeId = employeeId
     this.RetirementService.getRetirees(this.filter.ID, this.filter.FullName,this.filter.EmployeeId,this.filter.DateRequested,this.filter.Type,this.filter.Status,this.filter.IsCleared,this.filter.retirmentTypeid,this.filter.startdate,this.filter.endate,this.filter.PageSize,this.filter.PageNumber)
     .subscribe(data => {
@@ -78,8 +80,10 @@ export class ExistrequestComponent implements OnInit {
           this.RetirmentBody.sourceofInitiation = this.allExitRequest[0].sourceofInitiation;
           this.RetirmentBody.personalPhoneNumber = this.allExitRequest[0].personalPhoneNumber;
           this.RetirmentBody.personalEmail = this.allExitRequest[0].personalEmail;
-          this.RetirmentBody.exitChoice = this.allExitRequest[0].exitChoice;
-          this.RetirmentBody.exitDate = this.allExitRequest[0].exitDate;          
+          var eChoice = this.allExitRequest[0].exitChoice;
+          this.RetirmentBody.exitChoice = eChoice == "Forgo Salary" ? "1" : "2";
+          this.RetirmentBody.exitDate = this.allExitRequest[0].exitDate;
+          this.RetirmentBody.effectiveDate = this.allExitRequest[0].effectiveDate;    
           this.modificationStatus = true;
           this.topActionButtons[1].label = "Update Changes";
         }
@@ -94,14 +98,18 @@ export class ExistrequestComponent implements OnInit {
   })
   }
   submitRetirement() {
+    this.topActionButtons[1].label = "Processing ...";
     this.loading = true;
     var eChoice = this.RetirmentBody.exitChoice;
     this.RetirmentBody.exitChoice = eChoice == "1" ? "Forgo Salary" : "Spend 30 Days notice period";
     this.createNewEmployee.dateCreated = new Date();
-    this.RetirmentBody.employeee = JSON.stringify(this.createNewEmployee);
+    this.selectedEmployee.push(this.createNewEmployee);
+    this.RetirmentBody.employeee = JSON.stringify(this.selectedEmployee);
     this.RetirmentBody.tempref = this.tempRef;
+    this.RetirmentBody.exitDate = this.RetirmentBody.effectiveDate;
     this.RetirementService.postRetireee(0, 1, this.RetirmentBody).subscribe(data => {
       this.loading = false;
+      this.getRetirementDetails(this.filter.EmployeeId);
       if (!data.hasError) {
         this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, data.message, "ok").subscribe(data => {
           this.RetirmentBody = new ManageRetirementDTO().clone();
@@ -129,7 +137,7 @@ export class ExistrequestComponent implements OnInit {
         if (data.employeeId) {
           var exitU = data.exitUser ? data.exitUser : "";
           this.userExit = exitU;
-          this.getRetirementDetails(data.employeeId, exitU);
+          this.getRetirementDetails(data.employeeId);
           this.getEmployeeDetails(data.employeeId);
         } else {
           
@@ -172,7 +180,7 @@ export class ExistrequestComponent implements OnInit {
  // checked = false;
  modal(buttion) {
   if (buttion === TOP_ACTIONS.SUBMIT_BUTTON) {
-
+    this.submitRetirement();
   }
   if (buttion === TOP_ACTIONS.CANCEL_BUTTON) {
     if (this.userExit == "User") {
