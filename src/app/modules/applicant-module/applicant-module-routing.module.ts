@@ -1,3 +1,4 @@
+import { ApplicantsDashboardComponent } from './../recruitment/applicants-dashboard/applicants-dashboard.component';
 import { ApplicantssigninComponent } from './../recruitment/applicantssignin/applicantssignin.component';
 import { ApplicantssignupComponent } from './../recruitment/applicantssignup/applicantssignup.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
@@ -22,6 +23,11 @@ const routes: Routes = [
       {
         path: 'signin',
         component: ApplicantssigninComponent
+      },
+
+      {
+        path: 'dashboard',
+        component: ApplicantsDashboardComponent
       }
 
     ]

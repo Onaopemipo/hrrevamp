@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobApplicationSearch, JobDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
@@ -16,11 +17,15 @@ export class ApplicantsComponent implements OnInit {
   loading: boolean = false;
   noJobsHeader: string = 'There is no job at the moment';
   noJobs: string = 'Please check back later';
-  constructor(private jobService: RecruitmentJobApplicationServiceProxy, private job: RecruitmentJobServiceProxy, private router: Router) { }
+  applicantId:number = 0;
+
+  constructor(private jobService: RecruitmentJobApplicationServiceProxy, private job: RecruitmentJobServiceProxy,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // this.fetchApplications();
     this.fetchPostedJobs;
+    this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
   }
 
   myProfle() {
@@ -39,5 +44,9 @@ export class ApplicantsComponent implements OnInit {
 
     jobDetails(id){
       this.router.navigateByUrl('/recruitment/jobdetails/'+ id);
+    }
+
+    gotoProfile(){
+      this.router.navigateByUrl('/recruitment/profile/'+ this.applicantId);
     }
 }

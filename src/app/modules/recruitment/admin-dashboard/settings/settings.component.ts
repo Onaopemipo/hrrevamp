@@ -1,3 +1,4 @@
+import { CommunicationServiceProxy, MailTemplateDTO } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO, QuestionDTO, QuestionOptionDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
 import { NbTabComponent } from '@nebular/theme';
@@ -50,15 +51,14 @@ export class SettingsComponent implements OnInit {
   subHireStage: SubHireStageDTO = new SubHireStageDTO();
   allSubHireStages: SubHireStageDTO [] = [];
   allScorecards: RecruitmentScoreCard [] = [];
+  allTemplates: MailTemplateDTO [] = [];
 
-
-
-
-  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService) { }
+  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService, private template: CommunicationServiceProxy) { }
 
   ngOnInit(): void {
     this.getHireStages();
     this.fetchAllScorecards();
+    this.getAllTemplates();
   }
 
   selectPanel(hiringlist, i) {
@@ -159,15 +159,15 @@ export class SettingsComponent implements OnInit {
     this.newStage = !this.newStage;
   }
 
-  addTemplate() {
-
-  }
-
   addScorecard() {
 
   }
 
   async getAllTemplates(){
+    const data = await this.template.getAllEmailTemplates().toPromise();
+    if(!data.hasError){
+      this.allTemplates = data.result;
+    }
   }
 
   async getHireStages(){

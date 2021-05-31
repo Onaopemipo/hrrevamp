@@ -34,7 +34,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'profile',
+        path: 'profile/:id',
         component: ApplicantProfileComponent
       },
 

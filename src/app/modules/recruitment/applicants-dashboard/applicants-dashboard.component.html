@@ -1,16 +1,54 @@
 <!-- <div class="container"> -->
-  <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
-    <div class="col-md-2 col-lg-2">
-      <div style="background-color: #4744E0;">
-        <h6>Add a keyword</h6>
-        <span>Create a keyword and never miss a posting</span>
-        <div style="padding: 5px;"></div>
-        <div class="form-group">
-          <input type="text" nbInput fullWidth id="keyword" placeholder="Enter Keyword">
-        </div>
-        <div style="padding: 5px;"></div>
-        <button type="button" class="btn my-button">Add</button>
+  <div style="display: flex; flex-direction: row; justify-content: space-between;">
+<!--
+  <div Customizedmenu>
+    <div class="row" style="display: flex; justify-content: flex-start; flex-direction: row; padding: 10px;">
+      <div style="background-color: rgba(72, 71, 224, 0.04); padding: 10px;">
+      <h6>Add a keyword</h6>
+      <div style="padding: 5px;"></div>
+      <span>Create a keyword and never miss a posting</span>
+      <div style="padding: 10px;"></div>
+      <input type="text" nbInput fullWidth id="keyword" placeholder="Enter Keyword" style="background-color: #ffffff; color:#95A8B8;">
+      <div style="padding: 10px;"></div>
+      <button type="button" class="btn my-button">Add</button>
       </div>
+      <div style="padding: 20px;"></div>
+
+      <div class="form-group">
+          <h6>Type of Employment</h6>
+          <nb-checkbox>Full Time</nb-checkbox><br>
+          <nb-checkbox>Part Time</nb-checkbox><br>
+          <nb-checkbox>Remote</nb-checkbox><br>
+          <nb-checkbox>Contract</nb-checkbox><br>
+      </div>
+
+        <div class="form-group">
+          <h6>Level</h6>
+          <nb-checkbox>Entry Level</nb-checkbox><br>
+          <nb-checkbox>Mid Level</nb-checkbox><br>
+          <nb-checkbox>Intermediate Level</nb-checkbox><br>
+          <nb-checkbox>Senior Level</nb-checkbox><br>
+        </div>
+
+        <div class="form-group">
+          <h6>Industry</h6>
+          <nb-checkbox>Banking</nb-checkbox><br>
+          <nb-checkbox>Oil & Gas</nb-checkbox><br>
+          <nb-checkbox>Technology</nb-checkbox><br>
+          <nb-checkbox>Finannce</nb-checkbox><br>
+        </div>
+
+        <div class="form-group">
+          <h6>Salary</h6>
+          <nb-checkbox>Less than 100k</nb-checkbox><br>
+          <nb-checkbox>100k - 300k</nb-checkbox><br>
+          <nb-checkbox>300k - 500k</nb-checkbox><br>
+          <nb-checkbox>More than 500k</nb-checkbox><br>
+        </div>
+    </div>
+  </div> -->
+
+    <div class="col-md-2 col-lg-2">
 
       <div style="padding: 20px;"></div>
       <div class="employment-type">
@@ -59,11 +97,8 @@
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" >
             <label class="custom-control-label" >Banking</label>
-            <!-- <nb-checkbox (checkedChange)="toggle($event)" status="basic">Banking</nb-checkbox> -->
-
           </div>
           <div class="custom-control custom-checkbox">
-            <!-- <nb-checkbox (checkedChange)="toggle($event)">Oil & Gas</nb-checkbox> -->
             <input type="checkbox" class="custom-control-input" >
             <label class="custom-control-label" >Oil & Gas</label>
 
@@ -71,7 +106,6 @@
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" >
             <label class="custom-control-label" >Technology</label>
-            <!-- <nb-checkbox (checkedChange)="toggle($event)">Technology</nb-checkbox> -->
           </div>
           <div class="custom-control custom-checkbox">
             <!-- <nb-checkbox (checkedChange)="toggle($event)">Finance</nb-checkbox> -->

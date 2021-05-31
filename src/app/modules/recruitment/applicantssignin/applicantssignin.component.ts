@@ -20,7 +20,7 @@ export class ApplicantssigninComponent implements OnInit {
   authUser(){
     this.applicant.loginUser(this.userDetails).subscribe(data => {
       if(!data.hasError && data.result.isSuccessful === true){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Login Successful', 'Dismiss').subscribe(res => {
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Login Successful', 'Check Jobs').subscribe(res => {
           if(res){
             this.router.navigateByUrl('/applicantsmodule/applicants/')
           }

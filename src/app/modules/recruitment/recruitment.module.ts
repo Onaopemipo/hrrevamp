@@ -55,7 +55,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbMenuModule,
     NbRadioModule,
     NbProgressBarModule,
-    NbCheckboxModule
+    NbCheckboxModule,
   ],
   providers: [
     {

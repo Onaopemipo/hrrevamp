@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { IDTextViewModel } from 'app/_services/service-proxies';
 import { RecruitmentQuizServiceProxy, ManageQuizDTO, QuestionDTO, QuestionOptionDTO } from './../../../../_services/service-proxies';
@@ -34,7 +35,7 @@ myOptionType: number;
   questionOptionModel: QuestionOptionDTO = new QuestionOptionDTO();
   newOption = "";
 
-  constructor(private quiz: RecruitmentQuizServiceProxy,private alertMe: AlertserviceService,) { }
+  constructor(private quiz: RecruitmentQuizServiceProxy,private alertMe: AlertserviceService, private router: Router) { }
 
   defaultQuestion() {
     return new QuestionDTO();
@@ -62,7 +63,7 @@ myOptionType: number;
   addOption(newOption: string){
     var DuplicateChk = this.multiChoice.find(x=>x.value == newOption);
     if(DuplicateChk){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Option exist already', 'Dismiss')
     }else{
       const option = new QuestionOptionDTO();
       option.value = newOption;
@@ -72,9 +73,14 @@ myOptionType: number;
 
   addNewQuiz() {
     this.newQuizModel.questions = JSON.stringify(this.allQuestions);
+    this.newQuizModel.typeId = 1;
     this.quiz.addUpdateQuiz(this.newQuizModel).subscribe(data => {
       if(!data.hasError){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Quiz Added!', 'Dismiss');
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Quiz Added!', 'Dismiss').subscribe(res => {
+          if(res){
+            this.router.navigateByUrl('recruitment/quiz')
+          }
+        });
       }
     });
   }

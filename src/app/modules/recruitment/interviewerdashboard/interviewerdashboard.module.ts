@@ -5,7 +5,7 @@ import { InterviewerdashboardRoutingModule } from './interviewerdashboard-routin
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule } from '@nebular/theme';
+import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbCheckboxModule } from '@nebular/theme';
 import { NgxChartsModule, PieChartComponent } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ApplicantselectionComponent } from './applicantselection/applicantselection.component';
@@ -28,7 +28,8 @@ import { EvaluationComponent } from './evaluation/evaluation.component';
     NbOptionModule,
     NbSelectModule,
     FullCalendarModule,
-    NbCalendarModule
+    NbCalendarModule,
+    NbCheckboxModule,
   ],
 
   providers: [

@@ -1,3 +1,4 @@
+import { CommunicationServiceProxy } from 'app/_services/service-proxies';
 import { RecruitmentSettingServiceProxy, RecruitmentQuizServiceProxy, RecruitmentJobApplicationServiceProxy } from './../../../_services/service-proxies';
 import { AdminDashboardRoutingModule } from './admindashboard-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -5,7 +6,7 @@ import { ComponentsModule } from '../../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule, NbToggleModule } from '@nebular/theme';
+import { NbCardModule, NbThemeModule, NbTabsetModule, NbOptionModule, NbSelectModule, NbCalendarModule, NbRadioComponent, NbRadioModule, NbToggleModule, NbCheckboxModule } from '@nebular/theme';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { JobsComponent } from './jobs/jobs.component';
@@ -33,13 +34,15 @@ import { NewquizComponent } from './newquiz/newquiz.component';
     FullCalendarModule,
     NbCalendarModule,
     NbRadioModule,
-    NbToggleModule
+    NbToggleModule,
+    NbCheckboxModule,
   ],
 
   providers: [
     RecruitmentSettingServiceProxy,
     RecruitmentQuizServiceProxy,
     RecruitmentJobApplicationServiceProxy,
+    CommunicationServiceProxy,
   ]
 })
 export class AdminDashboardModule { }

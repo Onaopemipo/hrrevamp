@@ -32,7 +32,7 @@ import { ApplicantsComponent } from './applicants/applicants.component';
     ApplicantModuleRoutingModule,
     ThemeModule,
     ComponentsModule,
-    NbCheckboxModule
+    NbCheckboxModule,
 
   ],
 

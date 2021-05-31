@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
@@ -33,15 +34,16 @@ export class ApplicantProfileComponent implements OnInit {
   isApplicant: boolean = false;
   isInterviewer: boolean = false;
   isAdmin: boolean = true;
+  applicantId: number = 0;
 
-
-  constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, 
+  constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private profile: RecuritmentJobApplicantServiceProxy  ) {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
   }
   ngOnInit(): void {
+    this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
   }
 
   scheduleInterview(){
@@ -78,7 +80,11 @@ export class ApplicantProfileComponent implements OnInit {
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES, data.message, 'Dismiss')
       }
     })
-    
+
+  }
+
+  addSkills(){
+
   }
 
  async getCountries(){

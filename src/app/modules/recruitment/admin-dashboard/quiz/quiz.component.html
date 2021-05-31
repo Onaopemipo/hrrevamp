@@ -2,52 +2,90 @@
 <nb-card style="padding: 10px;">
 <ngx-tableheader></ngx-tableheader>
 <div class="row">
-  <div class="col-xxxl-4 col-md-4" >
+  <div *ngFor="let quiz of allQuizes" class="col-xxxl-4 col-md-4" >
     <nb-card style="border-left: 5px solid blue;">
       <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
           <div style="display: flex; flex-direction: column;">
             <div style="display: flex; flex-direction: column;">
-              <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
-              <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
+              <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">{{ quiz.name }}</span>
+              <span>Aptitude - <span class="smalltext" style="color: #6C757D;">{{ quiz.totalQuestions }} Question(s)</span></span>
             </div>
 
           </div>
-          <div style="padding: 20px;"><button style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</button>
+          <div style="padding: 20px;"><button (click)="fetchSingleQuiz(quiz.id)" style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</button>
           </div>
       </div>
     </nb-card>
   </div>
-
-      <div class="col-xxxl-4 col-md-4" >
-        <nb-card style="border-left: 5px solid red;">
-          <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
-             <div style="display: flex; flex-direction: column;">
-               <div style="display: flex; flex-direction: column;">
-                 <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
-                 <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
-               </div>
-
-             </div>
-             <div style="padding: 20px;"><button style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</button>
-             </div>
-          </div>
-        </nb-card>
-     </div>
-
-      <div class="col-xxxl-4 col-md-4" >
-        <nb-card style="border-left: 5px solid green;">
-          <div style="display: flex; justify-content: space-between; align-content: center; padding: 20px;">
-             <div style="display: flex; flex-direction: column;">
-               <div style="display: flex; flex-direction: column;">
-                 <span style="font-size: 16px; font-weight: 700; color: #080730 !important;">Technical Support</span>
-                 <span>Aptitude - <span class="smalltext" style="color: #6C757D;">127 Applicants</span></span>
-               </div>
-
-             </div>
-             <div style="padding: 20px;"><button style="background: rgba(72, 71, 224, 0.08); padding: 7px; margin-top: 10px; color: #4847E0;">View</button>
-             </div>
-          </div>
-        </nb-card>
-     </div>
 </div>
 </nb-card>
+
+
+<ngx-side-modal [(show)]="updateQuiz">
+  <div modal-header>Update Quiz</div>
+  <div modal-body>
+  <nb-card>
+        <nb-card-body>
+          <div class="form-group row mydiv">
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="question" #question="ngModel" [(ngModel)]="myQuiz.name">
+            </div>
+
+            <div class="col-md-4">
+              <select type="text" class="custom-select" name="quizType" #quizType="ngModel" (change)="onChange($event.target.value)" [(ngModel)]="questionOptionModel.value">
+                <option *ngFor="let questiontype of optionTypes" [value]="questiontype.id">{{ questiontype.label }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="myOptionType == 0" class="form-group">
+            <div class="form-group row">
+              <nb-radio-group name="MultiOption" #MultiOption="ngModel" [(ngModel)]="questionOptionModel.value">
+                <nb-radio *ngFor="let moption of multiChoice" [value]="moption.value" >{{ moption.value }} <i class="fa fa-times" (click)="removeOption(moption)" style="cursor: pointer;color: red;"></i></nb-radio>
+              </nb-radio-group>
+            </div>
+
+            <div class="form-group row" style="display: flex;flex-direction: row;">
+              <div class="col-6">
+                <input type="text" [(ngModel)]="newOption" name="newOption" class="form-control">
+              </div>
+              <div class="col-2">
+                <button nbButton status='primary' outline style="background: transparent;" (click)="addOption(newOption)">Add Option</button>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="myOptionType == 1" class="form-group row mydiv">
+            <div class="col">
+              <nb-radio-group name="BooleanOption" #BooleanOption="ngModel" [(ngModel)]="questionOptionModel.value">
+                <nb-radio *ngFor="let option of booleanChoice" [value]="option.id" > {{ option.value }}</nb-radio>
+              </nb-radio-group>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <button nbButton status='primary' outline style="background: transparent;" (click)="addNewQuestion()">Add New Question</button>
+            </div>
+          </div>
+
+          <div *ngIf="allQuestions.length > 0">
+            <div *ngFor="let question of allQuestions; let i = index">
+              {{question.questionText}} <span><i class="fa fa-times" (click)="removeQuestion(question,i)" style="cursor: pointer;color: red;"></i></span>
+            </div>
+          </div>
+
+          <div class="form-group row mydiv">
+            <div class="col">
+              <button nbButton status="primary" (click)="addNewQuiz()">Save Quiz</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+        <div modal-actions class="d-flex">
+          <button nbButton status="primary" class="d-flex column" (click)="updateMyQuiz()">Update</button>
+          <button nbButton outline status="primary" class="d-flex column" (click)="cancelUpdate()">Cancel</button>
+         </div>
+  </div>
+</ngx-side-modal>

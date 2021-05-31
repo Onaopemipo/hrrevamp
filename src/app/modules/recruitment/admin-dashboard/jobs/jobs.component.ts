@@ -3,7 +3,7 @@ import { IStatus, MyColor } from './../../../../components/status/models';
 import { Router } from '@angular/router';
 import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, Qualification, RecruitmentSettingServiceProxy, Country } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, Qualification, RecruitmentSettingServiceProxy, Country, Currency } from './../../../../_services/service-proxies';
 import { TableAction, TableActionEvent, TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -79,6 +79,7 @@ export class JobsComponent implements OnInit {
   allJobRoles: JobRole [] = [];
   singleJob: JobDTO = new JobDTO;
   tableData: string = '';
+  allCurrencies: Currency [] = [];
 
   rButton = [
     {name: 'a', label: 'Add New', icon: 'plus'},
@@ -248,6 +249,13 @@ draftTableActionClicked(event: TableActionEvent){
     const data = await this.common.getJobRoles().toPromise();
     if(!data.hasError){
       this.allJobRoles = data.result;
+    }
+  }
+
+  async fetchCurrency(){
+    const data = await this.commonService.getCurrency().toPromise()
+    if(!data.hasError){
+      this.allCurrencies = data.result;
     }
   }
 

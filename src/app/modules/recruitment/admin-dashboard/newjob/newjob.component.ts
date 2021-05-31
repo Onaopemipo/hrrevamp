@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { CommonServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, DepartmentDTO, Certification, IDTextViewModel, State, JobRole } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, Qualification, ManageJobDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, Qualification, ManageJobDTO, RecruitmentScoreCard, Currency } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -32,6 +32,7 @@ export class NewjobComponent implements OnInit {
   showModal: boolean = true;
   newJobModel: ManageJobDTO = new ManageJobDTO();
   allScoreCards: RecruitmentScoreCard [] = [];
+  allCurrencies: Currency [] = [];
 
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
@@ -52,6 +53,7 @@ export class NewjobComponent implements OnInit {
     this.fetchJobRoles();
     this.fetchJobAvailabilty();
     this.fetchScoreCards();
+    this.fetchCurrency();
   }
 
   newJobPosting(){
@@ -91,6 +93,13 @@ export class NewjobComponent implements OnInit {
     const data = await this.dataService.getCountries().toPromise();
     if(!data.hasError){
       this.allCountries = data.result;
+    }
+  }
+
+  async fetchCurrency(){
+    const data = await this.commonService.getCurrency().toPromise()
+    if(!data.hasError){
+      this.allCurrencies = data.result;
     }
   }
 
