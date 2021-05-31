@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class JobDetailsComponent implements OnInit {
 
   jobId: number = 0;
-  jobDetails: JobDTO = new JobDTO();
+  jobDetails: JobDTO = new JobDTO().clone();
   applicationDetails: JobDTO = new JobDTO();
   constructor(private job: RecruitmentJobServiceProxy, private router: ActivatedRoute) { }
 

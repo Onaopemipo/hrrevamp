@@ -12,12 +12,12 @@
                       <form>
                         <div class="form-group">
                           <div class="passcode-wrapper">
-                            <input type="text" maxlength="1" #smscode1 placeholder="0" (keyup)="codeValidation(smscode1,'code1',smscode1.value)" name="code1" [(ngModel)]="code1" required>
-                            <input type="text" maxlength="1" #smscode2 placeholder="0" (keyup)="codeValidation(smscode2,'code2',smscode2.value)" name="code2" [(ngModel)]="code2" required>
-                            <input type="text" maxlength="1" #smscode3 placeholder="0" (keyup)="codeValidation(smscode3,'code3',smscode3.value)" name="code3" [(ngModel)]="code3" required>
-                            <input type="text" maxlength="1" #smscode4 placeholder="0" (keyup)="codeValidation(smscode4,'code4',smscode4.value)" name="code4" [(ngModel)]="code4" required>
-                            <input type="text" maxlength="1" #smscode5 placeholder="0" (keyup)="codeValidation(smscode5,'code5',smscode5.value)" name="code4" [(ngModel)]="code5" required>
-                            <input type="text" maxlength="1" #smscode6 placeholder="0" (keyup)="codeValidation(smscode6,'code6',smscode6.value)" name="code4" [(ngModel)]="code6" required>
+                            <input type="number" [min]="0" [max]="9" #smscode1 placeholder="0" (keyup)="codeValidation(smscode1,'code1',smscode1.value)" name="code1" [(ngModel)]="code1" required>
+                            <input type="number" [min]="0" [max]="9" #smscode2 placeholder="0" (keyup)="codeValidation(smscode2,'code2',smscode2.value)" name="code2" [(ngModel)]="code2" required>
+                            <input type="number" [min]="0" [max]="9" #smscode3 placeholder="0" (keyup)="codeValidation(smscode3,'code3',smscode3.value)" name="code3" [(ngModel)]="code3" required>
+                            <input type="number" [min]="0" [max]="9" #smscode4 placeholder="0" (keyup)="codeValidation(smscode4,'code4',smscode4.value)" name="code4" [(ngModel)]="code4" required>
+                            <input type="number" [min]="0" [max]="9" #smscode5 placeholder="0" (keyup)="codeValidation(smscode5,'code5',smscode5.value)" name="code4" [(ngModel)]="code5" required>
+                            <input type="number" [min]="0" [max]="9" #smscode6 placeholder="0" (keyup)="codeValidation(smscode6,'code6',smscode6.value)" name="code4" [(ngModel)]="code6" required>
                           </div>
                         </div>
                       </form>

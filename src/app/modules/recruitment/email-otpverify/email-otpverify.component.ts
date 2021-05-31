@@ -40,8 +40,8 @@ export class EmailOTPVerifyComponent implements OnInit {
   }
 
   verifyUser(){
-    let OTPstring = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6
-    this.applicant.verifyApplicantAccount(this.OTPstring).subscribe(data => {
+    let OTPstring = this.code1.toString() + this.code2.toString()  + this.code3.toString()  + this.code4.toString()  + this.code5.toString()  + this.code6.toString()
+    this.applicant.verifyApplicantAccount(OTPstring).subscribe(data => {
       if(!data.hasError && data.result.isSuccessful){
         console.log(data.result)
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'View Jobs').subscribe(res => {

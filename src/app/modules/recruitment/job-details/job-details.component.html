@@ -6,17 +6,17 @@
   <div class="container-fluid">
     <div class="row">
     <div class="col-8">
-      <span class="title">Human Resource Manager</span>
+      <span class="title">{{ jobDetails.jobTitle }}</span>
       <div style="padding: 10px;"></div>
       <div class="sub-title">
-        <span class="fa fa-map-marker-alt icon"><span style="margin: 5px; font-size: 16px;">Lagos</span></span>
+        <span class="fa fa-map-marker-alt icon"><span style="margin: 5px; font-size: 16px;">{{ jobDetails.state }}</span></span>
         <span style="padding: 10px;"></span>
-        <span class="fa fa-calendar icon"><span style="margin: 5px; font-size: 16px;">Full Time</span></span>
+        <span class="fa fa-calendar icon"><span style="margin: 5px; font-size: 16px;">{{ jobDetails.employmentType }}</span></span>
       </div>
       <div style="padding: 20px;"></div>
 
       <div class="about-company">
-        <span class="sub-title">About Smartace</span>
+        <span class="sub-title">About {{ jobDetails.employerDetails }}</span>
         <div style="padding: 10px;"></div>
         <p>
           We are a company bringing together the best resources, tools,
