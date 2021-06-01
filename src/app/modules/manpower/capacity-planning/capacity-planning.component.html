@@ -154,7 +154,7 @@
  </form>
     </div>
     <div modal-actions class="d-flex"
-      style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+      style="display: flex; flex-direction: row; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
       <ngx-loadable-button [loading]="loading"  (click)="submitnewplan(newcaplan,allreqPlan)">
         Submit
       </ngx-loadable-button>
@@ -163,7 +163,7 @@
       </div>
 
     </div>
-    <div style="margin-top: 10px;"></div>
+ 
   </ngx-side-modal>
 
 
@@ -357,7 +357,7 @@
 
   </div>
   <div modal-actions class="d-flex"
-  style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+  style="display: flex; flex-direction: row; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
   <ngx-loadable-button [loading]="loading"  (click)="submitnewplan(newcaplan,allreqPlan)">
     Submit
   </ngx-loadable-button>
@@ -366,11 +366,8 @@
   </div>
 
 </div>
-<div style="margin-top: 10px;"></div>
+
   </ngx-side-modal>
-
-
-
 
   <ngx-side-modal [(show)]='showAddRequirementModal' [position]="'Center'" style="width: 500px; height: 1000px;">
     <div modal-header>Add Requirement</div>
@@ -417,7 +414,7 @@
       </form>
     </div>
     <div modal-actions class="d-flex"
-    style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+    style="display: flex; flex-direction: row; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
     <ngx-loadable-button [loading]="loading"  (click)="addexistplanRequirement(planrequirement)">
       Add Requirement
     </ngx-loadable-button>
@@ -473,7 +470,7 @@
         </form>
       </div>
       <div modal-actions class="d-flex"
-      style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+      style="display: flex; flex-direction: row; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
       <ngx-loadable-button [loading]="loading"  (click)="addexistplanRequirement(planrequirement)">
         Save
       </ngx-loadable-button>
@@ -482,7 +479,6 @@
       </div>
 
     </div>
-    <div style="margin-top: 10px;"></div>
     </ngx-side-modal>
 
 
@@ -565,14 +561,14 @@
         </div>
         </div>
         <div modal-actions class="d-flex"
-        style="display: flex; flex-direction: row; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
+        style="display: flex; flex-direction: row; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
 
         <div style="padding-left: 15px;">
           <button nbButton outline status="primary" (click)="showViewRequirementModal = false" class="d-flex column" style="background-color: white;">Discard</button>
         </div>
 
       </div>
-      <div style="margin-top: 10px;"></div>
+
       </ngx-side-modal>
   </nb-card-body>
   </nb-card>

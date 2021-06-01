@@ -280,7 +280,7 @@ Jobgrade =  []
         }
 
         this.allreqPlan.push(reqObj);
-        
+        this.planrequirement = {};
 
       }
     } else {
@@ -429,7 +429,8 @@ this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, alert
         this.allreqPlan = [];
         this.planrequirement.numberOfStaff = 0;
         this.newcaplan.status = 0;
-      
+            this.showEditPlanModal = false;
+            this.showAddPlanModal = false;
       }else{
         this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED, respData.message, 'OK')     
           }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertserviceService } from 'app/_services/alertservice.service';
 import { CommunicationServiceProxy, IDTextViewModel, MailTemplateDTO } from 'app/_services/service-proxies';
 
 enum TOP_ACTIONS {
@@ -10,8 +11,10 @@ enum TOP_ACTIONS {
   styleUrls: ['./templates.component.scss']
 })
 export class TemplatesComponent implements OnInit {
-
+  templateName = "";
+  loadingSubmit = false;
   constructor(
+    private alertService: AlertserviceService,
     private api: CommunicationServiceProxy,
   ) { }
 
@@ -33,7 +36,15 @@ export class TemplatesComponent implements OnInit {
     this.templateTypes = res.result;
   }
   async createTemplate() {
+    this.loadingSubmit = true;
     const data = await this.api.addUpdateEmailTemplate(this.editingData).toPromise();
+    if (!data.hasError) {
+      this.loadingSubmit = false;
+      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS, data.message, "ok");
+    } else {
+      this.loadingSubmit = false;
+      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, "ok");
+    }
   }
 
   rbutton = [
@@ -49,6 +60,7 @@ export class TemplatesComponent implements OnInit {
 
   editTemplate(template){
     this.editingData = template;
+    this.templateName = this.editingData.subject;
     this.showCreateModal = true;
   }
 

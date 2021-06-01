@@ -1,7 +1,6 @@
 <ngx-componentsheader
   pageName="Templates"
-  [requiredButton]="rbutton"
-  (buttonClick)="pageActionClicked($event)"
+  
 >
 </ngx-componentsheader>
 <div class="row" style="margin-left: -25px; margin-right: -25px;">
@@ -13,7 +12,7 @@
     *ngFor="let template of templates"
     class="col-md-3 col-sm-4"
   >
-    <div class="card black" style="padding: 30px; margin: 10px; background-color: white" (click)="editTemplate(template)">
+    <div class="card black" style="padding: 30px; margin: 10px; background-color: white;cursor: pointer;" (click)="editTemplate(template)">
       <div class="control" style="background-color: #3AF28614; width: max-content; padding: 10px; border-radius: 1px;">
         <nb-icon icon="file-text-outline"status='success'></nb-icon>
       </div>
@@ -25,7 +24,7 @@
 
 
 <ngx-side-modal [(show)]="showCreateModal">
-    <div modal-header>New Template</div>
+    <div modal-header>Edit - {{templateName}}</div>
     <div modal-body>
         <div class="form-group">
             <label>Template</label>
@@ -43,7 +42,10 @@
         </div>
     </div>
     <div modal-actions>
-        <button nbButton status="primary" (click)="createTemplate()">Create Template</button>
-        <button nbButton outline status="primary">Discard</button>
+      <ngx-loadable-button [loading]="loadingSubmit" (click)="createTemplate()" >
+        Update Template
+      </ngx-loadable-button> 
+   
+        <button nbButton outline status="primary" (click)="showCreateModal = false">Discard</button>
     </div>
 </ngx-side-modal>

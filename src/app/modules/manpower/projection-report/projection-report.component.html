@@ -200,7 +200,7 @@
         </span> 
         <select [disabled]="!newQuery.taskType" id="taskProject" name="taskProject" [(ngModel)]="newQuery.taskProject" #taskProject="ngModel"  class="form-control" >
             <option value="">--Task/Project--</option>
-            <option *ngFor="let type of alltasktype;" value="{{type.ActivtyName}}">{{type.ActivtyName}}</option>     
+            <option *ngFor="let type of alltasktype;" value="{{type.activityName}}">{{type.activityName}}</option>     
           </select>
                 
       </div>
@@ -299,8 +299,8 @@
                           {{req.decision}}d
                         </span>
                       </span>       
-                      <select *ngIf="req.status == 1 " class="form-control" (change)="setdecision($event,req)">
-                        <option value="">--select--</option>
+                      <select *ngIf="req.status == 1 " [(ngModel)]="decisionCol" class="form-control" (change)="setdecision($event,req)">
+                        <option value="0">--select--</option>
                         <option value="Return">Return</option>
                         <option value="Approve">Approve</option>
                         <option value="Decline">Decline</option>        
