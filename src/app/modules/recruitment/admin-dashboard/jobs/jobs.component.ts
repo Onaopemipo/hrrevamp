@@ -3,7 +3,7 @@ import { IStatus, MyColor } from './../../../../components/status/models';
 import { Router } from '@angular/router';
 import { DepartmentDTO, Certification, CommonServiceProxy, GetAllDepartmentsServiceProxy, IDTextViewModel, DataServiceProxy, State, JobRole } from 'app/_services/service-proxies';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, Qualification, RecruitmentSettingServiceProxy, Country, Currency } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, ManageJobDTO, JobDTO, Qualification, RecruitmentSettingServiceProxy, Country, Currency, QuizDTO, RecruitmentScoreCard, RecruitmentQuizServiceProxy } from './../../../../_services/service-proxies';
 import { TableAction, TableActionEvent, TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -36,8 +36,8 @@ export class JobWithStatus extends JobDTO implements IStatus {
     if (this.jobStatus.isActive === false) return 'closed';
   }
   getStatusColor() {
-    if (this.jobStatus.isActive === true) return new MyColor(242, 153, 74);
-    if (this.jobStatus.isActive === false) return new MyColor(0, 153, 74);
+    if (this.jobStatus.isActive === true) return new MyColor(33,150,83);
+    if (this.jobStatus.isActive === false) return new MyColor(242, 153, 74);
     return new MyColor(242, 0, 74);
  }
  }
@@ -67,8 +67,7 @@ export class JobsComponent implements OnInit {
   newJob: boolean = false;
   allJobs: JobDTO []= [];
   allDraftJobs: JobDTO []= [];
-  // jobFilter: JobFilterDTO = new JobFilterDTO();
-  jobsCounter: number = 4;
+  jobsCounter: number = 0;
   allDepartments: DepartmentDTO [] = [];
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
@@ -77,9 +76,13 @@ export class JobsComponent implements OnInit {
   allCountries: Country [] = [];
   allStates: State [] = [];
   allJobRoles: JobRole [] = [];
-  singleJob: JobDTO = new JobDTO;
+  singleJob: JobDTO = new JobDTO().clone();
   tableData: string = '';
   allCurrencies: Currency [] = [];
+  scheduledCounter: number = 0;
+  draftCounter: number = 0;
+  allQuizes: QuizDTO [] = [];
+  allScoreCards: RecruitmentScoreCard [] = [];
 
   rButton = [
     {name: 'a', label: 'Add New', icon: 'plus'},
@@ -90,6 +93,7 @@ export class JobsComponent implements OnInit {
     {name: 'department', title: 'Department'},
     {name: 'availability', title: 'Availability'},
     {name: 'experience', title: 'Experience(Months)'},
+    {name: 'postValidityTo', title: 'Valid To', type: ColumnTypes.Date},
     {name: 'isActive', title: 'Status', type: ColumnTypes.Status},
   ];
 
@@ -104,10 +108,6 @@ export class JobsComponent implements OnInit {
     {name: 'department', title: 'Department'},
   ];
 
-
-
-
-
 tableActions: TableAction [] = [
   {name: TP.VIEW, label: 'View'},
 {name: TP.DELETE, label: 'Delete'},
@@ -121,6 +121,12 @@ draftTableActions: TableAction [] = [
 
 tableActionClicked(event: TableActionEvent){
   if(event.name==TP.VIEW){
+    this.showJob = true;
+    this.job.getJob(event.data.id).subscribe(data => {
+      if(!data.hasError){
+        this.singleJob = data.result;
+      }
+    })
     }
 
     else if(event.name==TP.DELETE){
@@ -140,6 +146,8 @@ tableActionClicked(event: TableActionEvent){
 
 draftTableActionClicked(event: TableActionEvent){
   if(event.name==draftEnum.EDIT){
+  
+     
     }
 
     else if(event.name==draftEnum.DELETE){
@@ -184,18 +192,28 @@ draftTableActionClicked(event: TableActionEvent){
 
   selectedOption;
   loading: boolean;
+  showJob: boolean = false;
   newJobModel: ManageJobDTO = new ManageJobDTO();
 
   constructor(private job: RecruitmentJobServiceProxy, private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy, private department: GetAllDepartmentsServiceProxy,
     private employment: RecruitmentSettingServiceProxy, private dataService: DataServiceProxy,
-    private common: CommonServiceProxy, private router: Router ) {
+    private common: CommonServiceProxy, private router: Router,private quiz: RecruitmentQuizServiceProxy ) {
    }
 
   ngOnInit(): void {
     this.fetchAllJobs();
     this.fetchEmploymentTypes();
     this.fetchAllDraft();
+    this.fetchAllDepartments();
+    this.fetchCountries();
+    this.fetchEmploymentTypes();
+    this.fetchQualifications();
+    this.fetchAllQuizes();
+    this.fetchJobRoles();
+    this.fetchJobAvailabilty();
+    this.fetchScoreCards();
+    this.fetchCurrency();
   }
 
   selectTab(tab: TABS) {
@@ -235,13 +253,6 @@ draftTableActionClicked(event: TableActionEvent){
     const data = await this.dataService.getCountries().toPromise();
     if(!data.hasError){
       this.allCountries = data.result;
-    }
-  }
-
-  async fetchStates(){
-    const data = await this.dataService.getStateByCountryId(1).toPromise();
-    if(!data.hasError){
-      this.allStates = data.result;
     }
   }
 
@@ -313,7 +324,7 @@ draftTableActionClicked(event: TableActionEvent){
     this.loading = false;
     if(!data.hasError){
       this.allDraftJobs = data.result.map(x => new JobWithStatus(x));
-      this.jobsCounter = data.totalRecord;
+      this.draftCounter = data.totalRecord;
       console.log('My Jobs:',this.allDraftJobs)
    }
   }
@@ -324,7 +335,7 @@ draftTableActionClicked(event: TableActionEvent){
     this.loading = false;
     if(!data.hasError){
       this.allDraftJobs = data.result.map(x => new JobWithStatus(x));
-      this.jobsCounter = data.totalRecord;
+      this.scheduledCounter = data.totalRecord;
       console.log('My Jobs:',this.allDraftJobs)
    }
   }
@@ -342,4 +353,34 @@ draftTableActionClicked(event: TableActionEvent){
   showMasterSearchModal(){
     this.showModal = true
   }
+
+  async fetchScoreCards(){
+    const data = await this.employment.getRecruitmentScoreCards().toPromise();
+    if(!data.hasError){
+      this.allScoreCards = data.result
+    }
+   }
+
+   async fetchAllQuizes(){
+    const data = await this.quiz.getAllQuizzes().toPromise();
+    if(!data.hasError){
+      this.allQuizes = data.result;
+    }
+  }
+
+  fetchStates(countryId){
+  this.dataService.getStateByCountryId(countryId).subscribe(data => {
+    if(!data.hasError){
+      this.allStates = data.result;
+    }
+  });
+
+  }
+ 
+   getSelectedEmployee(event,selectType) {
+     if(selectType == 'employee'){
+      this.newJobModel.reviewers = event[0].employeeNumber;
+     }
+  }
+ 
 }

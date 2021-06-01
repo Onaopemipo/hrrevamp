@@ -173,7 +173,7 @@
                 <div style="flex: auto; display: flex;padding-top: 15px;">
                   <p style="color: #4847E0 !important; text-transform: uppercase;" class="listsubheader">Education</p>
                 </div>
-                <button outline='true' nbButton status="primary" style="min-width: unset !important;">
+                <button outline='true' nbButton status="primary" (click)="toggleEducation()" style="min-width: unset !important;">
                   <nb-icon icon="plus"></nb-icon>&nbsp;Add
                 </button>
               </div>
@@ -228,7 +228,7 @@
                 </div>
                 <div class="form-group">
                   <label for="documents">Documents</label>
-                  <ngx-file-upload></ngx-file-upload>
+                  <ngx-file-upload (valueChange)="selectedFile($event,'Loan Document')" class="form-control"></ngx-file-upload>
                 </div>
               </form>
             </div>
@@ -344,7 +344,7 @@
                     <div style="flex: auto; display: flex;padding-top: 15px;">
                       <p style="color: #4847E0 !important; text-transform: uppercase;" class="listsubheader">Skills</p>
                     </div>
-                    <button outline='true' nbButton status="primary" style="min-width: unset !important;">
+                    <button outline='true' (click)="toggleSkills()" nbButton status="primary" style="min-width: unset !important;">
                       <nb-icon icon="plus"></nb-icon>&nbsp;Add
                     </button>
                   </div>
@@ -418,7 +418,7 @@
                 <div style="flex: auto; display: flex;padding-top: 15px;">
                   <p style="color: #4847E0 !important; text-transform: uppercase;" class="listsubheader">References</p>
                 </div>
-                <button outline='true' nbButton status="primary" style="min-width: unset !important;">
+                <button outline='true' (click)="toggleReferences()" nbButton status="primary" style="min-width: unset !important;">
                   <nb-icon icon="plus"></nb-icon>&nbsp;Add
                 </button>
               </div>
@@ -442,22 +442,6 @@
 
             </div>
 
-            <div class="reference">
-              <div>
-                <span class="experienceCompany">Dr. Awosika Tolani</span>
-              </div>
-              <div style="display: flex;flex-direction: row;justify-self: center;">
-                <div style="flex: auto;"><span>Lecturer in Engineering</span></div>
-                <div><a href="#">Edit</a><span style="padding:3px"></span><a href="#">Delete</a></div>
-              </div>
-              <div>
-                <div style="flex: auto;"><span>University of Lagos</span></div>
-                <div style="flex: auto;"><span>16, Abel Johann St. Lagos, Nigeria</span></div>
-                <div style="flex: auto;"><span>08090086754</span></div>
-                <div style="flex: auto;"><span>Awosika@gmail.com</span></div>
-              </div>
-
-            </div>
           </nb-card-body>
         </nb-card>
       </div>
@@ -472,18 +456,18 @@
       <form>
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Job Title</label>
+            <label class="col-form-label mylabel">Job Title</label>
             <input type="text" class="form-control" id="jobTitle" placeholder="Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Company</label>
+            <label class="col-form-label mylabel">Company</label>
             <input type="text" class="form-control" name="company" style="width: 100%;">
           </div>
         </div>
-  
+
         <div class="form-group row mydiv">
           <div class="col">
             <label for="Body" class="col-form-label mylabel">Responsibilities</label><br>
@@ -503,7 +487,7 @@
             <nb-checkbox status="basic">I currently work here</nb-checkbox>
           </div>
         </div>
-  
+
           <div class="form-group row">
             <div class="col">
               <button nbButton status="primary">Save Now</button>
@@ -523,65 +507,117 @@
       <form>
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">First Name</label>
+            <label class="col-form-label mylabel">First Name</label>
             <input type="text" class="form-control" name="firstName" #firstName="ngModel" [(ngModel)]="profileData.firstName" placeholder="First Name">
-          
+
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Last Name</label>
+            <label class="col-form-label mylabel">Last Name</label>
             <input type="text" class="form-control" name="lastName" #lastName="ngModel" [(ngModel)]="profileData.lastName" placeholder="Last Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Phone</label>
+            <label class="col-form-label mylabel">Phone</label>
             <input type="tel" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="profileData.mobile" placeholder="Last Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Email</label>
+            <label class="col-form-label mylabel">Email</label>
             <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="profileData.email" placeholder="Last Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Website</label>
+            <label class="col-form-label mylabel">Website</label>
             <input type="url" class="form-control" name="webs" #email="ngModel" [(ngModel)]="profileData.email" placeholder="Last Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Address</label>
-            <textarea name="address" id="" cols="30" rows="10" style="width: 100%;"></textarea>
+            <label class="col-form-label mylabel">Address</label>
+            <textarea name="address" [(ngModel)]="profileData.address" cols="30" rows="10" style="width: 100%;"></textarea>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">LinkedIn</label>
-            <input type="tel" class="form-control" name="firstName" placeholder="Last Name">
+            <label class="col-form-label mylabel">LinkedIn</label>
+            <input type="tel" class="form-control" name="linkedin" placeholder="LinkedIn">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Instagram</label>
-            <input type="tel" class="form-control" name="firstName" placeholder="Last Name">
+            <label class="col-form-label mylabel">Instagram</label>
+            <input type="tel" class="form-control" name="instagram" placeholder="Instagram">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Twitter</label>
-            <input type="tel" class="form-control" name="firstName" placeholder="Last Name">
+            <label class="col-form-label mylabel">Twitter</label>
+            <input type="tel" class="form-control" name="twitter" placeholder="Twitter">
+          </div>
+        </div>
+
+          <div class="form-group row">
+            <div class="col">
+              <button nbButton status="primary" (click)="updateMyProfile()">Save</button>
+              <span style="padding: 8px;"></span>
+              <button nbButton>Cancel</button>
+            </div>
+          </div>
+        </form>
+          </div>
+
+  </ngx-side-modal>
+
+
+  <ngx-side-modal [(show)]="addReferences" style="margin-top: -75px;">
+    <div modal-header>Add References</div>
+    <div modal-body>
+      <form>
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Full Name</label>
+            <input type="text" class="form-control"  name="fullName" placeholder="Full Name">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Profession</label>
+            <input type="text" class="form-control" name="profession" placeholder="Profession">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Place of Work</label>
+            <input type="text" class="form-control" name="workPlace" placeholder="Place of Work">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Phone</label>
+            <input type="tel" class="form-control" name="phone" placeholder="Phone">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Email">
           </div>
         </div>
 
@@ -596,50 +632,134 @@
           </div>
 
   </ngx-side-modal>
-  
 
-  <ngx-side-modal [(show)]="addEducation" style="margin-top: -75px;">
-    <div modal-header>Add References</div>
+  <ngx-side-modal [(show)]="addSkiils" style="margin-top: -75px;">
+    <div modal-header>Add Skills</div>
     <div modal-body>
       <form>
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Name" class="col-form-label mylabel">Full Name</label>
-            <input type="text" class="form-control" name="fullName" placeholder="Full Name">
-          </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <div class="col">
-            <label for="Name" class="col-form-label mylabel">Profession</label>
-            <input type="text" class="form-control" name="profession" placeholder="Profession">
-          </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <div class="col">
-            <label for="Name" class="col-form-label mylabel">Place of Work</label>
-            <input type="text" class="form-control" name="workPlace" placeholder="Place of Work">
-          </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <div class="col">
-            <label for="Name" class="col-form-label mylabel">Phone</label>
-            <input type="tel" class="form-control" name="phone" placeholder="Phone">
-          </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <div class="col">
-            <label for="Name" class="col-form-label mylabel">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <label class="col-form-label mylabel">Skill Name</label>
+            <input type="text" class="form-control" name="skillName" placeholder="Skill Name">
           </div>
         </div>
 
           <div class="form-group row">
             <div class="col">
               <button nbButton status="primary">Save</button>
+              <span style="padding: 8px;"></span>
+              <button nbButton>Cancel</button>
+            </div>
+          </div>
+        </form>
+          </div>
+  </ngx-side-modal>
+
+  <ngx-side-modal [(show)]="addEducation" style="margin-top: -75px;">
+    <div modal-header>Add Education</div>
+    <div modal-body>
+      <form>
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Country</label>
+            <input type="text" class="form-control" name="fullName" placeholder="Full Name">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">School</label>
+            <input type="text" class="form-control" name="profession" placeholder="Profession">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Course</label>
+            <input type="text" class="form-control" name="workPlace" placeholder="Place of Work">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Grade</label>
+            <input type="tel" class="form-control" name="phone" placeholder="Phone">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Degree</label>
+            <input type="email" class="form-control" name="email" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Degree</label>
+            <input type="email" class="form-control" name="email" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Duration</label>
+            <!-- [(start)]="newJobModel.postValidityFrom" [(end)]="newJobModel.postValidityTo" -->
+            <ngx-date-range  required></ngx-date-range>
+          </div>
+        </div>
+
+
+
+          <div class="form-group row">
+            <div class="col">
+              <button nbButton status="primary">Save</button>
+              <span style="padding: 8px;"></span>
+              <button nbButton>Cancel</button>
+            </div>
+          </div>
+        </form>
+          </div>
+
+  </ngx-side-modal>
+
+  <ngx-side-modal [(show)]="addJobPreference" style="margin-top: -75px;">
+    <div modal-header>Add Job Preference</div>
+    <div modal-body>
+      <form>
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Job Role</label>
+            <input type="text" class="form-control" name="jobRole" placeholder="Full Name">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Industry</label>
+            <input type="text" class="form-control" name="industry" placeholder="Industry">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Job Level</label>
+            <input type="text" class="form-control" name="jobLevel" placeholder="Job Level">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Salary Range</label>
+            <input type="tel" class="form-control" name="salaryRange" placeholder="Salary Range">
+          </div>
+        </div>
+
+
+          <div class="form-group row">
+            <div class="col">
+              <button *ngIf="!btnprocessing" nbButton status="primary" (click)="addPreference()">Save</button>
+              <button *ngIf="btnprocessing" type="button" nbButton status="primary">Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
               <span style="padding: 8px;"></span>
               <button nbButton>Cancel</button>
             </div>

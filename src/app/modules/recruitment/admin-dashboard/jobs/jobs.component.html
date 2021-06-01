@@ -37,12 +37,12 @@
       </nb-tab>
 
       <nb-tab tabTitle="Scheduled Jobs" [tabId]="TABS.scheduledJobs">
-          <div *ngIf="jobsCounter < 1">
+          <div *ngIf="scheduledCounter < 1">
             <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
             </ngx-default-content>
             </div>
 
-          <div *ngIf="jobsCounter > 0">
+          <div *ngIf="scheduledCounter > 0">
             <ngx-tableheader></ngx-tableheader>
           <ngx-tablecomponent [tableColum]="scheduledJobsTable" [userData]="tableData" [showActions]="true" [actions]="tableActions" (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
           </div>
@@ -50,12 +50,12 @@
 
 
       <nb-tab tabTitle="Drafts" [tabId]="TABS.draftedJobs">
-            <div *ngIf="jobsCounter < 1">
+            <div *ngIf="draftCounter < 1">
               <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="addBudgetItem()">
               </ngx-default-content>
               </div>
 
-            <div *ngIf="jobsCounter > 0">
+            <div *ngIf="draftCounter > 0">
               <ngx-tableheader></ngx-tableheader>
              <ngx-tablecomponent [tableColum]="draftedJobsTable" [userData]="allDraftJobs" [actions]="draftTableActions" (actionClick)="draftTableActionClicked($event)"></ngx-tablecomponent>
             </div>
@@ -377,294 +377,187 @@
 
 </ngx-side-modal>
 
-<!-- <ngx-side-modal style="width: 600px;">
-  <div modal-header>
-    Job title and Department details
-  </div>
+<ngx-side-modal [(show)]="showJob" style="width: 600px;">
+  <div modal-header>{{ singleJob.jobTitle }}</div>
 
   <div modal-body>
     <nb-card>
       <nb-card-body>
         <form>
           <div class="form-group row mydiv">
-            <label for="Title" class="col-sm-3 col-form-label mylabel">Job Title</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <input type="text" class="form-control" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="newJobModel.position" placeholder="Job Title">
-            </div>
+            <label for="Title" >Job Title</label>
+            
+              <select class="custom-select" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="singleJob.jobTitleId" placeholder="Job Title">
+              <option value="">--Select Job Title--</option>
+              <option *ngFor="let job of allJobRoles" [value]="job.id">{{ job.name }}</option>
+              </select>
+            
           </div>
 
           <div class="form-group row ">
-            <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
-            <div class="col-sm-8 col-md- 8 col-lg-8">
-              <select class="custom-select" name="departmentName" #departmentName="ngModel"
-              [(ngModel)]="newJobModel.departmentId" required>
+            <label for="Department" >Department</label>
+            
+              <select class="custom-select" name="departmentName" #departmentName="ngModel" [(ngModel)]="singleJob.departmentId" required>
                 <option value="">--Select Department--</option>
                 <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
               </select>
-            </div>
+        
           </div>
 
           <h6>Location</h6>
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <select class="custom-select" required>
-                <option value="">Select </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <label for="Country" >Country</label>
+            
+              <select name="country" #country="ngModel" [(ngModel)]="singleJob.countryId" (change)="fetchStates($event.target.value)" class="custom-select" required>
+                <option value="">--Select country--</option>
+                <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
               </select>
-            </div>
+         
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Region" class="col-sm-3 col-form-label mylabel">Region, City or Zip Code</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.state" required>
+            <label for="Region" >Region, City or Zip Code</label>
+            
+              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="singleJob.stateId" required>
                 <option value="">--Select State--</option>
-                <option *ngFor="let state of allStates" [value]="state.id">{{state.name}}</option>
+                <option *ngFor="let state of allStates" [value]="state.id">{{state.state_name}}</option>
               </select>
-            </div>
+          
           </div>
 
           <h6>Description</h6>
 
           <div class="form-group row mydiv">
-            <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
-            <div class="col-sm-8">
-              <ngx-wysisyg-input [(ngModel)]="newJobModel.description" style="padding-left: -10px;"></ngx-wysisyg-input>
-            </div>
+            <label for="Descripion" >Descripion</label>
+            
+              <textarea name="description" #description="ngModel" [(ngModel)]="singleJob.description" cols="30" rows="10" style="width: 100%;"></textarea>
+            
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Descripion" [(ngModel)]="newJobModel.requirements" class="col-sm-3 col-form-label mylabel">Job Requirements</label>
-            <div class="col-sm-8">
-              <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+            <label for="Descripion" >Job Requirements</label>
+            
+              <textarea name="requirements" #requirements="ngModel" [(ngModel)]="singleJob.requirements" cols="30" rows="10" style="width: 100%;"></textarea>
             </div>
-          </div>
 
           <h6>Employment Details</h6>
 
           <div class="form-group row mydiv">
-            <label for="employmentType" class="col-sm-3 col-form-label mylabel">Employment Type</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.employmentTypeId" required>
+            <label for="employmentType" >Employment Type</label>
+            
+              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="singleJob.employmentTypeId" required>
                 <option value="">--Select Employment Type--</option>
-                <option *ngFor="let employ of employmentTypes" [value]="employ.id">{{employ.name}}</option>
+                <option *ngFor="let employ of employmentTypes" [value]="employ.id">{{employ.text}}</option>
               </select>
-            </div>
 
           </div>
 
           <div class="form-group row mydiv">
-            <label for="availability" class="col-sm-3 col-form-label mylabel">Availability</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.jobAvailabilityId" required>
+            <label for="availability" >Availability</label>
+            
+              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="singleJob.jobAvailabilityId" required>
                 <option value="">--Select Availability--</option>
-                <option *ngFor="let avail of jobAvailability" [value]="avail.id">{{avail.name}}</option>
+                <option *ngFor="let avail of jobAvailability" [value]="avail.id">{{avail.text}}</option>
               </select>
-            </div>
+       
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Region" class="col-sm-3 col-form-label mylabel">Experience</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-             <input type="number" name="experience" #experience="ngModel" [(ngModel)]="newJobModel.experience">
-            </div>
+            <label for="Region" >Experience</label>
+            
+             <input type="number" class="form-control" name="experience" #experience="ngModel" [(ngModel)]="singleJob.experience">
+        
           </div>
 
           <div class="form-group row mydiv">
-            <label class="col-sm-3 col-form-label mylabel">Minimum Education</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <input type="text" class="form-control" name="minQualification" #minQualification="ngModel" [(ngModel)]="newJobModel.minQualificationId" placeholder="Minimum Education">
-            </div>
+            <label >Minimum Qualification</label>
+            
+              <select type="text" class="form-control" name="minQualification" #minQualification="ngModel" [(ngModel)]="singleJob.minQualificationId" placeholder="Minimum Education">
+              <option value="">--Select Qualification--</option>
+              <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
+              </select>
+         
           </div>
 
           <div class="form-group row mydiv">
-            <label class="col-sm-3 col-form-label mylabel">Maximum Education</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <input type="text" class="form-control" name="maxQualification" #maxQualification="ngModel" [(ngModel)]="newJobModel.maxQualificationId" placeholder="Maximum Education">
-            </div>
+            <label >Maximum Qualification</label>
+            
+            <select type="text" class="form-control" name="maxQualification" #maxQualification="ngModel" [(ngModel)]="singleJob.maxQualificationId" placeholder="Maximum Education">
+              <option value="">--Select Qualification--</option>
+              <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
+              </select>
+            
           </div>
 
           <h6>Annual Salary</h6>
 
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-3 col-form-label mylabel">Currency <span
+            <label for="Country" >Currency <span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-4">
-              <select class="custom-select" name="currency" #currency="ngModel" [(ngModel)]="newJobModel.currency" required>
+            
+              <select class="custom-select" name="currency" #currency="ngModel" [(ngModel)]="singleJob.currency" required>
                 <option value="">Select </option>
-                <option value="1">USD</option>
-                <option value="2">NG</option>
-                <option value="3">AUD</option>
+                <option *ngFor="let currency of allCurrencies" [value]="currency.code">{{ currency.name }}</option>
               </select>
-            </div>
+            
           </div>
 
           <div class="form-group row mydiv">
-            <label for="currency" class="col-sm-3 col-form-label mylabel">Min Salary<span
-                style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-2">
-              <app-amount-input [(value)]="newJobModel.maxSalary"></app-amount-input>
-            </div>
+            <label for="currency" >Min Salary<span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>         
+              <app-amount-input class="form-control" [(value)]="singleJob.minSalary"></app-amount-input>
+       
           </div>
 
           <div class="form-group row mydiv">
-            <label for="currency" class="col-sm-3 col-form-label mylabel">Max Salary<span
-                style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-2">
-              <app-amount-input [(value)]="newJobModel.maxSalary"></app-amount-input>
-            </div>
+            <label for="currency" >Max Salary<span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+              <app-amount-input class="form-control" [(value)]="singleJob.maxSalary"></app-amount-input>
           </div>
 
           <hr style="margin: 40px 0px;">
 
           <div class="form-group row mydiv">
-            <label for="currency" class="col-sm-3 col-form-label mylabel">Post Validity</label>
-            <div class="col-sm-2">
-              <select class="custom-select" required>
-                <option value="">From </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-
-            <div class="col-sm-2">
-              <select class="custom-select" required>
-                <option value="">To </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
+            <label>Post Validity</label>
+            
+              <ngx-date-range [(start)]="singleJob.postValidityFrom" [(end)]="singleJob.postValidityTo" required></ngx-date-range>
+            
           </div>
 
           <div class="form-group row">
-            <label for="Beneficiary" class="col-sm-3 col-form-label">Reviewers</label>
-            <div class="col-sm-4">
-              <button type="submit" (click)="showMasterSearchModal()" class="btn cancel-button"
-                style="padding: 5px 20px;">
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>
-                  </span>
-                </span>
-                Add Reviewers
-              </button>
-<ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+            <label>Reviewers</label>
+            
+              <ngx-employee-master-search class="form-control" (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
 
-          </div>
 
-
-          <ngx-side-modal [(show)]="showModal">
-            <div modal-header>{{selectionHeader}}</div>
-            <div modal-body>
-              <div class="row">
-                <div class="col-sm-4 form-group">
-                  <label>Department</label>
-                  <select class="form-control">
-                    <option></option>
-                  </select>
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Branch</label>
-                  <select class="form-control">
-                    <option></option>
-                  </select>
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Unit</label>
-                  <select class="form-control">
-                    <option></option>
-                  </select>
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Level</label>
-                  <select class="form-control">
-                    <option></option>
-                  </select>
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Gender</label>
-                  <select class="form-control">
-                    <option></option>
-                  </select>
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label style="visibility: hidden;">Gender</label>
-                  <button nbButton status='primary' style="min-width: unset !important;">Search</button>
-                </div>
-              </div>
-              <div>
-                <div style="display: flex; justify-content: flex-end; margin: 1rem 0rem">
-                  <span style="color: #4847E0; cursor: pointer;">Select All</span>
-                </div>
-                <div style="border-top: 0.5px solid #CCCCCC;;">
-                  <div *ngFor="let i of [1,2,3,4,5]"
-                    style="display: flex; align-items: center; border-bottom: 0.5px solid #CCCCCC; padding: 1rem;">
-                    <input type="checkbox" style="margin-right: 2rem;" />
-                    <div style="display: flex;">
-                      <img style="width: 3rem; height: 3rem; border-radius: 50%; margin-right: 1rem;"
-                        src="https://via.placeholder.com/300/09f.png/fff%20C/O%20https://placeholder.com/" />
-                      <div style="display: flex; justify-content: space-between; flex-direction: column;">
-                        <div style="font-family: Rubik;
-                                            font-style: normal;
-                                            font-weight: normal;
-                                            font-size: 16px;
-                                            line-height: 19px;
-                                            display: flex;">Sherrif Shorunke</div>
-                        <div style="font-family: Rubik;
-                                            font-style: normal;
-                                            font-weight: normal;
-                                            font-size: 14px;
-                                            display: flex;
-                                            color: #6C757D;">UX</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="display: flex; justify-content: flex-end; margin: 1rem;">
-                <button nbButton status='primary' style="margin-right: 0.5rem;">Add Reviewer</button>
-                <button nbButton status='primary' outline style="background: transparent;">Cancel</button>
-              </div>
-            </div>
-          </ngx-side-modal>
+          <!-- Add reviewrs modal -->
 
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-3 col-form-label mylabel">Scorecard <span
+            <label for="Country" >Scorecard <span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-4">
-              <select class="custom-select" required>
+            
+              <select class="custom-select" name="scorecard" ngModel="scorecard" [(ngModel)]="singleJob.scoreCardId" required>
                 <option value="">Select </option>
-                <option value="1">60%</option>
-                <option value="2">87%</option>
-                <option value="3">80%</option>
+                <option *ngFor="let card of allScoreCards" [value]="card.id">{{ card.focusArea }}</option>
               </select>
-            </div>
+          
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-3 col-form-label mylabel">Quiz <span
-                style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-4 col-md-4 col-sm-4">
+            <label for="Country" >Quiz <span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
+            
               <select class="custom-select" required>
-                <option type="button" class="select-button" value="">Select One</option>
-                <option type="button" class="select-button" value="">Select Two</option>
-                <option type="button" class="select-button" value="">Select Three</option>
+                <option type="button" class="select-button" value="">Select Quiz</option>
+                <option *ngFor="let quiz of allQuizes" type="button" class="select-button" [value]="quiz.id">{{ quiz.name }}</option>
               </select>
-            </div>
+         
           </div>
 
           <div class="form-group row">
-            <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
-            <div class="col-sm-6">
-              <button nbButton status="primary">Post</button>
+            <label for="specialization" style="font-weight: bold;"></label>
+            <div class="col-sm-5">
+              <button *ngIf="!loading" nbButton status="primary" (click)="addNewJob()">Post Now</button>
+              <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
               <span style="padding: 8px;"></span>
-              <button nbButton>Save Draft</button>
             </div>
           </div>
         </form>
@@ -672,4 +565,4 @@
     </nb-card>
   </div>
 
-</ngx-side-modal> -->
+</ngx-side-modal>

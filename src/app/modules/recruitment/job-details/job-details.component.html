@@ -16,37 +16,26 @@
       <div style="padding: 20px;"></div>
 
       <div class="about-company">
-        <span class="sub-title">About {{ jobDetails.employerDetails }}</span>
+        <span class="sub-title">About {{ jobDetails.employerName }}</span>
         <div style="padding: 10px;"></div>
         <p>
-          We are a company bringing together the best resources, tools,
-          advisories, training, and information in the simplest possible
-          form to support business people as they build, improve, or
-          evolve their enterprise. Each of us has a broad set of Product
-          Design skills ranging from product thinking to interaction design,
-          user research to visual communication.
+          {{ jobDetails.employerDetails }}
         </p>
       </div>
       <div class="job-description">
           <span class="sub-title">Job Description</span>
           <div style="padding: 10px;"></div>
           <p>
-            We are a company bringing together the best resources, tools,
-            advisories, training, and information in the simplest possible
-            form to support business people as they build, improve, or
-            evolve their enterprise. Each of us has a broad set of Product
-            Design skills ranging from product thinking to interaction design,
-            user research to visual communication.
+            {{ jobDetails.description }}
           </p>
       </div>
 
       <div class="your-responsibility">
         <span class="sub-title">Your Responsibilities</span>
-        <!-- <div style="padding: 10px;"></div> -->
         <ul style="padding: 20px; color: 95A8B8, 100%;">
-          <li>We are a company bringing together the best resources, tools,</li>
-          <li>We are a company bringing together the best resources, tools,</li>
-          <li>We are a company bringing together the best resources, tools,</li>
+          <li>{{ jobDetails.requirements }}</li>
+          <!-- <li>We are a company bringing together the best resources, tools,</li>
+          <li>We are a company bringing together the best resources, tools,</li> -->
         </ul>
       </div>
 

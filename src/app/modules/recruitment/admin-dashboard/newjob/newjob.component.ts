@@ -1,7 +1,7 @@
 import { AlertserviceService } from './../../../../_services/alertservice.service';
 import { Router } from '@angular/router';
 import { CommonServiceProxy, DataServiceProxy, GetAllDepartmentsServiceProxy, DepartmentDTO, Certification, IDTextViewModel, State, JobRole } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, Qualification, ManageJobDTO, RecruitmentScoreCard, Currency } from './../../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecruitmentSettingServiceProxy, Country, JobDTO, Qualification, ManageJobDTO, RecruitmentScoreCard, Currency, QuizDTO, RecruitmentQuizServiceProxy } from './../../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -28,20 +28,21 @@ export class NewjobComponent implements OnInit {
   allStates: State [] = [];
   allJobRoles: JobRole [] = [];
   singleJob: JobDTO = new JobDTO;
-  loading: boolean;
+  loading: boolean = false;
   showModal: boolean = true;
   newJobModel: ManageJobDTO = new ManageJobDTO();
   allScoreCards: RecruitmentScoreCard [] = [];
   allCurrencies: Currency [] = [];
-
   allowmultipleselection: boolean = false;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
+  allQuizes: QuizDTO [] = [];
+  btnProcessing: boolean = false;
 
   constructor(private job: RecruitmentJobServiceProxy, private alertMe: AlertserviceService,
     private commonService: CommonServiceProxy, private department: GetAllDepartmentsServiceProxy,
     private employment: RecruitmentSettingServiceProxy, private dataService: DataServiceProxy,
-    private common: CommonServiceProxy, private router: Router ) {
+    private common: CommonServiceProxy, private router: Router, private quiz: RecruitmentQuizServiceProxy ) {
    }
 
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class NewjobComponent implements OnInit {
     this.fetchCountries();
     this.fetchEmploymentTypes();
     this.fetchQualifications();
-    this.fetchStates();
+    this.fetchAllQuizes();
     this.fetchJobRoles();
     this.fetchJobAvailabilty();
     this.fetchScoreCards();
@@ -103,11 +104,22 @@ export class NewjobComponent implements OnInit {
     }
   }
 
-  async fetchStates(){
-    const data = await this.dataService.getStateByCountryId(154).toPromise();
+  async fetchAllQuizes(){
+    const data = await this.quiz.getAllQuizzes().toPromise();
+    if(!data.hasError){
+      this.allQuizes = data.result;
+    }
+  }
+
+
+
+  fetchStates(countryId){
+  this.dataService.getStateByCountryId(countryId).subscribe(data => {
     if(!data.hasError){
       this.allStates = data.result;
     }
+  });
+
   }
 
   async fetchJobRoles(){

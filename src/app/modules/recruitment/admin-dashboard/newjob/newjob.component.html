@@ -4,8 +4,8 @@
       <nb-card-body>
         <form>
           <div class="form-group row mydiv">
-            <label for="Title" class="col-sm-4 col-form-label mylabel">Job Title</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Title" class="col-sm-3 col-form-label mylabel">Job Title</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="newJobModel.jobTitleId" placeholder="Job Title">
               <option value="">--Select Job Title--</option>
               <option *ngFor="let job of allJobRoles" [value]="job.id">{{ job.name }}</option>
@@ -14,8 +14,8 @@
           </div>
 
           <div class="form-group row ">
-            <label for="Department" class="col-sm-4 col-form-label mylabel">Department</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Department" class="col-sm-3 col-form-label mylabel">Department</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="departmentName" #departmentName="ngModel" [(ngModel)]="newJobModel.departmentId" required>
                 <option value="">--Select Department--</option>
                 <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
@@ -25,9 +25,9 @@
 
           <h6>Location</h6>
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-4 col-form-label mylabel">Country</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <select name="country" #country="ngModel" [(ngModel)]="newJobModel.countryId" class="custom-select" required>
+            <label for="Country" class="col-sm-3 col-form-label mylabel">Country</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+              <select name="country" #country="ngModel" [(ngModel)]="newJobModel.countryId" (change)="fetchStates($event.target.value)" class="custom-select" required>
                 <option value="">--Select country--</option>
                 <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
               </select>
@@ -35,8 +35,8 @@
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Region" class="col-sm-4 col-form-label mylabel">Region, City or Zip Code</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Region" class="col-sm-3 col-form-label mylabel">Region, City or Zip Code</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.stateId" required>
                 <option value="">--Select State--</option>
                 <option *ngFor="let state of allStates" [value]="state.id">{{state.state_name}}</option>
@@ -47,15 +47,15 @@
           <h6>Description</h6>
 
           <div class="form-group row mydiv">
-            <label for="Descripion" class="col-sm-4 col-form-label mylabel">Descripion</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Descripion" class="col-sm-3 col-form-label mylabel">Descripion</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <textarea name="description" #description="ngModel" [(ngModel)]="newJobModel.description" cols="30" rows="10" style="width: 100%;"></textarea>
             </div>
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Descripion" class="col-sm-4 col-form-label mylabel">Job Requirements</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Descripion" class="col-sm-3 col-form-label mylabel">Job Requirements</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <textarea name="requirements" #requirements="ngModel" [(ngModel)]="newJobModel.requirements" cols="30" rows="10" style="width: 100%;"></textarea>
             </div>
           </div>
@@ -63,8 +63,8 @@
           <h6>Employment Details</h6>
 
           <div class="form-group row mydiv">
-            <label for="employmentType" class="col-sm-4 col-form-label mylabel">Employment Type</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="employmentType" class="col-sm-3 col-form-label mylabel">Employment Type</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.employmentTypeId" required>
                 <option value="">--Select Employment Type--</option>
                 <option *ngFor="let employ of employmentTypes" [value]="employ.id">{{employ.text}}</option>
@@ -74,8 +74,8 @@
           </div>
 
           <div class="form-group row mydiv">
-            <label for="availability" class="col-sm-4 col-form-label mylabel">Availability</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="availability" class="col-sm-3 col-form-label mylabel">Availability</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="newJobModel.jobAvailabilityId" required>
                 <option value="">--Select Availability--</option>
                 <option *ngFor="let avail of jobAvailability" [value]="avail.id">{{avail.text}}</option>
@@ -84,15 +84,15 @@
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Region" class="col-sm-4 col-form-label mylabel">Experience</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Region" class="col-sm-3 col-form-label mylabel">Experience</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
              <input type="number" class="form-control" name="experience" #experience="ngModel" [(ngModel)]="newJobModel.experience">
             </div>
           </div>
 
           <div class="form-group row mydiv">
-            <label class="col-sm-4 col-form-label mylabel">Minimum Qualification</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label class="col-sm-3 col-form-label mylabel">Minimum Qualification</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select type="text" class="form-control" name="minQualification" #minQualification="ngModel" [(ngModel)]="newJobModel.minQualificationId" placeholder="Minimum Education">
               <option value="">--Select Qualification--</option>
               <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
@@ -101,8 +101,8 @@
           </div>
 
           <div class="form-group row mydiv">
-            <label class="col-sm-4 col-form-label mylabel">Maximum Qualification</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label class="col-sm-3 col-form-label mylabel">Maximum Qualification</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
             <select type="text" class="form-control" name="maxQualification" #maxQualification="ngModel" [(ngModel)]="newJobModel.maxQualificationId" placeholder="Maximum Education">
               <option value="">--Select Qualification--</option>
               <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
@@ -113,9 +113,9 @@
           <h6>Annual Salary</h6>
 
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-4 col-form-label mylabel">Currency <span
+            <label for="Country" class="col-sm-3 col-form-label mylabel">Currency <span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="currency" #currency="ngModel" [(ngModel)]="newJobModel.currency" required>
                 <option value="">Select </option>
                 <option *ngFor="let currency of allCurrencies" [value]="currency.code">{{ currency.name }}</option>
@@ -124,17 +124,17 @@
           </div>
 
           <div class="form-group row mydiv">
-            <label for="currency" class="col-sm-4 col-form-label mylabel">Min Salary<span
+            <label for="currency" class="col-sm-3 col-form-label mylabel">Min Salary<span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <app-amount-input [(value)]="newJobModel.minSalary"></app-amount-input>
             </div>
           </div>
 
           <div class="form-group row mydiv">
-            <label for="currency" class="col-sm-4 col-form-label mylabel">Max Salary<span
+            <label for="currency" class="col-sm-3 col-form-label mylabel">Max Salary<span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <app-amount-input [(value)]="newJobModel.maxSalary"></app-amount-input>
             </div>
           </div>
@@ -142,15 +142,15 @@
           <hr style="margin: 40px 0px;">
 
           <div class="form-group row mydiv">
-            <label for="currency" class="col-sm-4 col-form-label mylabel">Post Validity</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="currency" class="col-sm-3 col-form-label mylabel">Post Validity</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <ngx-date-range [(start)]="newJobModel.postValidityFrom" [(end)]="newJobModel.postValidityTo" required></ngx-date-range>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="Beneficiary" class="col-sm-4 col-form-label">Reviewers</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <label for="Beneficiary" class="col-sm-3 col-form-label">Reviewers</label>
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <ngx-employee-master-search (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
             </div>
           </div>
@@ -159,9 +159,9 @@
           <!-- Add reviewrs modal -->
 
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-4 col-form-label mylabel">Scorecard <span
+            <label for="Country" class="col-sm-3 col-form-label mylabel">Scorecard <span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" name="scorecard" ngModel="scorecard" [(ngModel)]="newJobModel.scoreCardId" required>
                 <option value="">Select </option>
                 <option *ngFor="let card of allScoreCards" [value]="card.id">{{ card.focusArea }}</option>
@@ -170,21 +170,21 @@
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Country" class="col-sm-4 col-form-label mylabel">Quiz <span
+            <label for="Country" class="col-sm-3 col-form-label mylabel">Quiz <span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-5 col-md-5 col-lg-5">
               <select class="custom-select" required>
-                <option type="button" class="select-button" value="">Select One</option>
-                <option type="button" class="select-button" value="">Select Two</option>
-                <option type="button" class="select-button" value="">Select Three</option>
+                <option type="button" class="select-button" value="">Select Quiz</option>
+                <option *ngFor="let quiz of allQuizes" type="button" class="select-button" [value]="quiz.id">{{ quiz.name }}</option>
               </select>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="specialization" class="col-sm-4 col-form-label" style="font-weight: bold;"></label>
-            <div class="col-sm-6">
-              <button nbButton status="primary" (click)="addNewJob()">Post Now</button>
+            <label for="specialization" class="col-sm-3 col-form-label" style="font-weight: bold;"></label>
+            <div class="col-sm-5">
+              <button *ngIf="!loading" nbButton status="primary" (click)="addNewJob()">Post Now</button>
+              <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
               <span style="padding: 8px;"></span>
               <button nbButton (click)="postNewDraft()">Save as Draft</button>
             </div>
