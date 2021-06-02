@@ -1,0 +1,93 @@
+<ngx-componentsheader [pageName]='pageName' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+
+</ngx-componentsheader>
+
+<nb-card>
+    <nb-card-body>
+      <ngx-default-content *ngIf="showEmpty" pageHeader="Employee Contract"
+        pageDescription="Click on the button to search Employee" buttonValue="Search Employee" [loading]="loading"
+        (buttonClick)="modal('search')">
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+        [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="allEmployeeContract"
+        [tableColum]="tableColumns" [searchabletableColum]="searchabletableColum" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      </ngx-tablecomponent>
+  
+      <ngx-side-modal [(show)]='showMasterSearch' style="width: 500px; height: 1000px;">
+        <div modal-header>Search Employee</div>
+        <div modal-body>
+            <div>
+                <form id="searchForm" name="searchForm" #searchForm="ngForm">
+                <nb-form-field>
+                    <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                    <input #searchtText type="text" id="searchtText" name="searchtText" nbInput class="form-control" [(ngModel)]="filterObject.searchtText">
+                </nb-form-field>
+                <div class="row" style="padding-top:10px">
+                    <div class="col-sm-6 form-group">
+                        <label>Department</label>
+                        <select class="form-control" #searchDepartment  id="searchDepartment" name="searchDepartment" [(ngModel)]="filterObject.searchDepartment">
+                            <option value="0">--Select Department--</option>
+                            <option *ngFor="let dep of allDepartment;" [value]="dep.id">{{dep.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Location</label>
+                        <select class="form-control" #searchLocation  id="searchLocation" name="searchLocation" [(ngModel)]="filterObject.searchLocation">
+                            <option value="0">--Select Location--</option>
+                            <option *ngFor="let loc of allLocation;" [value]="loc.id">{{loc.location_name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Job Role</label>
+                        <select class="form-control" #searchJobRole  id="searchJobRole" name="searchJobRole"   [(ngModel)]="filterObject.searchJobRole">
+                            <option value="0">--Select Role--</option>
+                            <option *ngFor="let job of allJobRole;" [value]="job.id">{{job.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Grade</label>
+                        <select class="form-control" #saerchGrade  id="saerchGrade" name="saerchGrade"  [(ngModel)]="filterObject.saerchGrade">
+                            <option value="0">--Select Grade--</option>
+                            <option *ngFor="let gra of allGrade;" [value]="gra.id">{{gra.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Salary Scale</label>
+                        <select class="form-control" #salaryscaleId  id="salaryscaleId" name="salaryscaleId"  [(ngModel)]="filterObject.salaryscaleId">
+                           <option value="0">--Select Scale--</option>
+                            <option *ngFor="let sal of allsalaryScale;" [value]="sal.id">{{sal.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group" style="padding-top:26px">         
+                        <button [disabled]="disableSearchBtn" *ngIf="!loading" (click)="getallemployee()" nbButton status='primary' style="min-width: unset !important;">Search</button>
+                        <button *ngIf="loading" nbButton status='primary' style="min-width: unset !important;">Processing&nbsp;<i class="fa fa-spin fa-spinner"></i></button>
+                    </div>
+                </div>
+                </form>
+                </div>
+        </div>
+        </ngx-side-modal>
+        <ngx-side-modal [(show)]='showEmployeeLinkModal' [position]="'Center'" style="width: 500px; height: 1000px;">
+            <div modal-header>{{selectedEmployee.firstName}}&nbsp;{{selectedEmployee.lastName}}&nbsp;-&nbsp;{{selectedEmployee.employeeNumber}}&nbsp;Element Links</div>
+            <div modal-body>
+      
+                    <ngx-default-content *ngIf="linkshowEmpty" pageHeader="Employee Links"
+                    pageDescription="Click on the button to Refresh Links" buttonValue="Refresh Links" [loading]="loadinglinks"
+                    (buttonClick)="refreshLinks()">
+                  </ngx-default-content>
+                  <ngx-tablecomponent *ngIf="!linkshowEmpty" (filterChange)="linkfilterUpdated($event)" [showActions]="true"
+                    [showFilter]="true" (actionClick)="linktableActionClicked($event)" [actions]="linktableActions" [userData]="elementLinks"
+                    [tableColum]="linktableColumns" [totalItems]="linktotalItems" [currentPage]="linkcurrentPage" [loading]="loadinglinks">
+                  </ngx-tablecomponent>
+          
+        </div>
+        </ngx-side-modal>
+
+    </ngx-side-modal>
+    <ngx-side-modal [(show)]='showLinkInputModal' [position]="'Center'" style="width: 500px; height: 1000px;">
+        <div modal-header>{{selectedEmployee.firstName}}&nbsp;{{selectedEmployee.lastName}}&nbsp;-&nbsp;{{selectedEmployee.employeeNumber}}&nbsp;Element Links</div>
+        <div modal-body>
+ 
+      
+    </div>
+    </ngx-side-modal>

@@ -18,7 +18,7 @@ import { PayrollanalysisComponent } from './payrollanalysis/payrollanalysis.comp
 import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.component';
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
-
+import { PayrollcontractComponent } from './payrollcontract/payrollcontract.component';
 
 
 
@@ -84,6 +84,9 @@ const routes: Routes = [
       },
       {
         path: 'runlog', component:PayrollRunLogComponent
+      },
+      {
+        path: 'payrollcontract', component:PayrollcontractComponent
       }
     ]
   }
