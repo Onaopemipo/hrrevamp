@@ -391,7 +391,9 @@
               <option value="">--Select Job Title--</option>
               <option *ngFor="let job of allJobRoles" [value]="job.id">{{ job.name }}</option>
               </select>
-            
+              <div *ngIf="jobTitle.invalid && (jobTitle.dirty || jobTitle.touched)" class="error">
+                <div *ngIf="jobTitle.errors.required">Job Title is required</div>
+              </div>
           </div>
 
           <div class="form-group row ">
@@ -401,7 +403,9 @@
                 <option value="">--Select Department--</option>
                 <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
               </select>
-        
+              <div *ngIf="departmentName.invalid && (departmentName.dirty || departmentName.touched)" class="error">
+                <div *ngIf="departmentName.errors.required">Department is required</div>
+              </div>
           </div>
 
           <h6>Location</h6>
@@ -412,32 +416,39 @@
                 <option value="">--Select country--</option>
                 <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
               </select>
-         
+              <div *ngIf="country.invalid && (country.dirty || country.touched)" class="error">
+                <div *ngIf="country.errors.required">Country is required</div>
+              </div>
           </div>
 
           <div class="form-group row mydiv">
             <label for="Region" >Region, City or Zip Code</label>
-            
-              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="singleJob.stateId" required>
+              <select class="custom-select"name="stateRegion" #stateRegion="ngModel" [(ngModel)]="singleJob.stateId" required>
                 <option value="">--Select State--</option>
                 <option *ngFor="let state of allStates" [value]="state.id">{{state.state_name}}</option>
               </select>
-          
+              <div *ngIf="stateRegion.invalid && (stateRegion.dirty || stateRegion.touched)" class="error">
+                <div *ngIf="stateRegion.errors.required">Region, City or Zip Code is required</div>
+              </div>
           </div>
 
           <h6>Description</h6>
 
           <div class="form-group row mydiv">
             <label for="Descripion" >Descripion</label>
-            
               <textarea name="description" #description="ngModel" [(ngModel)]="singleJob.description" cols="30" rows="10" style="width: 100%;"></textarea>
-            
+              <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                <div *ngIf="description.errors.required">Descripion is required</div>
+              </div>
           </div>
 
           <div class="form-group row mydiv">
-            <label for="Descripion" >Job Requirements</label>
+            <label for="Descripion" >Job Requirement</label>
             
               <textarea name="requirements" #requirements="ngModel" [(ngModel)]="singleJob.requirements" cols="30" rows="10" style="width: 100%;"></textarea>
+              <div *ngIf="requirements.invalid && (requirements.dirty || requirements.touched)" class="error">
+                <div *ngIf="requirements.errors.required">Job Requirement is required</div>
+              </div>
             </div>
 
           <h6>Employment Details</h6>
@@ -445,28 +456,34 @@
           <div class="form-group row mydiv">
             <label for="employmentType" >Employment Type</label>
             
-              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="singleJob.employmentTypeId" required>
+              <select class="custom-select" name="employmentType" #employmentType="ngModel" [(ngModel)]="singleJob.employmentTypeId" required>
                 <option value="">--Select Employment Type--</option>
                 <option *ngFor="let employ of employmentTypes" [value]="employ.id">{{employ.text}}</option>
               </select>
-
+              <div *ngIf="employmentType.invalid && (employmentType.dirty || employmentType.touched)" class="error">
+                <div *ngIf="employmentType.errors.required">Employment Type is required</div>
+              </div>
           </div>
 
           <div class="form-group row mydiv">
             <label for="availability" >Availability</label>
             
-              <select class="custom-select" name="state" #state="ngModel" [(ngModel)]="singleJob.jobAvailabilityId" required>
+              <select class="custom-select" name="availability" #availability="ngModel" [(ngModel)]="singleJob.jobAvailabilityId" required>
                 <option value="">--Select Availability--</option>
                 <option *ngFor="let avail of jobAvailability" [value]="avail.id">{{avail.text}}</option>
               </select>
-       
+              <div *ngIf="availability.invalid && (availability.dirty || availability.touched)" class="error">
+                <div *ngIf="availability.errors.required">Availability is required</div>
+              </div>
           </div>
 
           <div class="form-group row mydiv">
             <label for="Region" >Experience</label>
             
-             <input type="number" class="form-control" name="experience" #experience="ngModel" [(ngModel)]="singleJob.experience">
-        
+             <input type="number" class="form-control" name="experience" #experience="ngModel" [(ngModel)]="singleJob.experience" placeholder="Experience in months" required>
+             <div *ngIf="experience.invalid && (experience.dirty || experience.touched)" class="error">
+              <div *ngIf="experience.errors.required">Experience is required</div>
+            </div>
           </div>
 
           <div class="form-group row mydiv">
@@ -476,7 +493,9 @@
               <option value="">--Select Qualification--</option>
               <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
               </select>
-         
+              <div *ngIf="minQualification.invalid && (minQualification.dirty || minQualification.touched)" class="error">
+                <div *ngIf="minQualification.errors.required">Minimum Qualification is required</div>
+              </div>
           </div>
 
           <div class="form-group row mydiv">
@@ -486,7 +505,9 @@
               <option value="">--Select Qualification--</option>
               <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
               </select>
-            
+              <div *ngIf="maxQualification.invalid && (maxQualification.dirty || maxQualification.touched)" class="error">
+                <div *ngIf="maxQualification.errors.required">Maximum Qualification is required</div>
+              </div>
           </div>
 
           <h6>Annual Salary</h6>
@@ -495,11 +516,13 @@
             <label for="Country" >Currency <span
                 style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
             
-              <select class="custom-select" name="currency" #currency="ngModel" [(ngModel)]="singleJob.currency" required>
+              <select class="custom-select"  name="jobCurrency" #jobCurrency="ngModel" [(ngModel)]="singleJob.currency" required>
                 <option value="">Select </option>
                 <option *ngFor="let currency of allCurrencies" [value]="currency.code">{{ currency.name }}</option>
               </select>
-            
+              <div *ngIf="jobCurrency.invalid && (jobCurrency.dirty || jobCurrency.touched)" class="error">
+                <div *ngIf="jobCurrency.errors.required">Currency is required</div>
+              </div>
           </div>
 
           <div class="form-group row mydiv">
@@ -554,7 +577,7 @@
           <div class="form-group row">
             <label for="specialization" style="font-weight: bold;"></label>
             <div class="col-sm-5">
-              <button *ngIf="!loading" nbButton status="primary" (click)="addNewJob()">Post Now</button>
+              <button *ngIf="!loading" nbButton status="primary" (click)="updateJob()">Update Job</button>
               <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
               <span style="padding: 8px;"></span>
             </div>

@@ -17,6 +17,7 @@ import {
   NbRadioComponent,
   NbRadioGroupComponent,
   NbProgressBarModule,
+  NbDatepickerModule,
 } from '@nebular/theme';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
@@ -56,6 +57,7 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbRadioModule,
     NbProgressBarModule,
     NbCheckboxModule,
+    NbDatepickerModule,
   ],
   providers: [
     {

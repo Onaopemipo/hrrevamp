@@ -457,14 +457,14 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Title</label>
-            <input type="text" class="form-control" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="workExperienceModel" placeholder="Name">
+            <input type="text" class="form-control" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="workExperienceModel.jobTitle" placeholder="Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Company</label>
-            <input type="text" class="form-control" name="company" style="width: 100%;">
+            <input type="text" class="form-control" name="company" #company="ngModel" [(ngModel)]="workExperienceModel.companyName" style="width: 100%;">
           </div>
         </div>
 
@@ -477,8 +477,17 @@
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Body" class="col-form-label mylabel">Duration</label>
-            <ngx-date-range required></ngx-date-range>
+            <label for="Body" class="col-form-label mylabel">Start Date</label>
+            <input nbInput placeholder="Form Picker" name="startDate" [nbDatepicker]="ngmodel" [(ngModel)]="workExperienceModel.startDate">
+            <nb-datepicker #ngmodel></nb-datepicker>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label for="Body" class="col-form-label mylabel">End Date</label>
+            <input nbInput placeholder="Form Picker" name="endDate" [nbDatepicker]="ngmodel" [(ngModel)]="workExperienceModel.endDate">
+            <nb-datepicker #ngmodel></nb-datepicker>
           </div>
         </div>
 
@@ -509,7 +518,9 @@
           <div class="col">
             <label class="col-form-label mylabel">First Name</label>
             <input type="text" class="form-control" name="firstName" #firstName="ngModel" [(ngModel)]="profileData.firstName" placeholder="First Name">
-
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error">
+              <div *ngIf="firstName.errors.required">First Name is required</div>
+            </div>
           </div>
         </div>
 
@@ -517,6 +528,9 @@
           <div class="col">
             <label class="col-form-label mylabel">Last Name</label>
             <input type="text" class="form-control" name="lastName" #lastName="ngModel" [(ngModel)]="profileData.lastName" placeholder="Last Name">
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
+              <div *ngIf="lastName.errors.required">Last Name is required</div>
+            </div>
           </div>
         </div>
 
@@ -524,6 +538,9 @@
           <div class="col">
             <label class="col-form-label mylabel">Phone</label>
             <input type="tel" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="profileData.mobile" placeholder="Last Name">
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
+              <div *ngIf="phone.errors.required">Phone is required</div>
+            </div>
           </div>
         </div>
 
@@ -531,6 +548,9 @@
           <div class="col">
             <label class="col-form-label mylabel">Email</label>
             <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="profileData.email" placeholder="Last Name">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+              <div *ngIf="email.errors.required">Email is required</div>
+            </div>
           </div>
         </div>
 
@@ -544,7 +564,10 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Address</label>
-            <textarea name="address" [(ngModel)]="profileData.address" cols="30" rows="10" style="width: 100%;"></textarea>
+            <textarea name="address" #address="ngModel" [(ngModel)]="profileData.address" cols="30" rows="10" style="width: 100%;"></textarea>
+            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="error">
+              <div *ngIf="address.errors.required">Address is required</div>
+            </div>
           </div>
         </div>
 
@@ -589,41 +612,56 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Full Name</label>
-            <input type="text" class="form-control"  name="fullName" placeholder="Full Name">
+            <input type="text" class="form-control"  name="fullName" #fullName="ngModel" [(ngModel)]="referenceModel.fullName" placeholder="Full Name" required>
+            <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="error">
+              <div *ngIf="fullName.errors.required">Full Name is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Profession</label>
-            <input type="text" class="form-control" name="profession" placeholder="Profession">
+            <input type="text" class="form-control"  name="profession" #profession="ngModel" [(ngModel)]="referenceModel.profession" placeholder="Profession" required>
+            <div *ngIf="profession.invalid && (profession.dirty || profession.touched)" class="error">
+              <div *ngIf="profession.errors.required">Profession is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Place of Work</label>
-            <input type="text" class="form-control" name="workPlace" placeholder="Place of Work">
+            <input type="text" class="form-control" name="workPlace" #workPlace="ngModel" [(ngModel)]="referenceModel.placeOfWork" placeholder="Place of Work" required>
+            <div *ngIf="workPlace.invalid && (workPlace.dirty || workPlace.touched)" class="error">
+              <div *ngIf="workPlace.errors.required">Place of Work is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label class="col-form-label mylabel">Phone</label>
-            <input type="tel" class="form-control" name="phone" placeholder="Phone">
+            <label class="col-form-label mylabel">Phone</label> 
+            <input type="tel" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="referenceModel.phoneNumber" placeholder="Phone" required>
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
+              <div *ngIf="phone.errors.required">Phone is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="referenceModel.email" placeholder="Email" required>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+              <div *ngIf="email.errors.required">Email is required</div>
+            </div>
           </div>
         </div>
 
           <div class="form-group row">
             <div class="col">
-              <button nbButton status="primary">Save</button>
+              <button nbButton status="primary" (click)="updateReferences()">Save</button>
               <span style="padding: 8px;"></span>
               <button nbButton>Cancel</button>
             </div>
@@ -646,7 +684,7 @@
 
           <div class="form-group row">
             <div class="col">
-              <button nbButton status="primary">Save</button>
+              <button nbButton status="primary" (click)="updateSkills()">Save</button>
               <span style="padding: 8px;"></span>
               <button nbButton>Cancel</button>
             </div>
@@ -662,7 +700,13 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Country</label>
-            <input type="text" class="form-control" name="country" #country="ngModel" [(ngModel)="referenceModel"] placeholder="Full Name">
+            <select name="country" #country="ngModel" [(ngModel)]="referenceModel.countryId" class="custom-select" required>
+              <option value="">--Select country--</option>
+              <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
+            </select>
+            <div *ngIf="country.invalid && (country.dirty || country.touched)" class="error">
+              <div *ngIf="country.errors.required">Country is required</div>
+            </div>
           </div>
         </div>
 

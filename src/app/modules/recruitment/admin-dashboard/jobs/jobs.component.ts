@@ -223,8 +223,20 @@ draftTableActionClicked(event: TableActionEvent){
   newJobPosting(){
     this.router.navigateByUrl('/recruitmentadmin/newjob');
   }
-  addNewJob() {
+  updateJob() {
     this.loading = true;
+    this.newJobModel.id = this.singleJob.id;
+    this.newJobModel.jobTitleId = this.singleJob.jobTitleId;
+    this.newJobModel.maxQualificationId = this.singleJob.maxQualificationId;
+    this.newJobModel.maxSalary = this.singleJob.maxSalary;
+    this.newJobModel.minQualificationId = this.singleJob.minQualificationId;
+    this.newJobModel.minSalary = this.singleJob.minSalary;
+    this.newJobModel.postValidityFrom = this.singleJob.postValidityFrom;
+    this.newJobModel.postValidityTo = this.singleJob.postValidityTo;
+    this.newJobModel.requirements = this.singleJob.requirements;
+    this.newJobModel.scoreCardId = this.singleJob.scoreCardId;
+    this.newJobModel.stateId = this.singleJob.stateId;
+    this.newJobModel.countryId = this.singleJob.countryId;
    this.job.addUpdateJob(this.newJobModel).subscribe(data => {
     if(!data.hasError){
       this.loading = false;

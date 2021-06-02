@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
-import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
+import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -44,12 +44,14 @@ export class ApplicantProfileComponent implements OnInit {
   addJobPreference: boolean = false;
   btnprocessing: boolean = false;
   tempRef:string;
+  allCountries: Country [] = [];
   Entity: IDTextViewModel[] = [];
   entityId:number = 0;
   recruitmentAction: IDTextViewModel[] = [];
   referenceModel: JobApplicantReference = new JobApplicantReference();
   workExperienceModel: JobApplicantWorkExperience = new JobApplicantWorkExperience();
   educationModel: JobApplicantEducation = new JobApplicantEducation();
+  allStates: State [] = [];
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
@@ -62,6 +64,9 @@ export class ApplicantProfileComponent implements OnInit {
   ngOnInit(): void {
     this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
+    this.getCountries();
+    this.fetchCountries();
+    
   }
 
   scheduleInterview(){
@@ -76,7 +81,7 @@ export class ApplicantProfileComponent implements OnInit {
   }
 
   updateWorkExperience(){
-    
+
   }
 
   async getEntity() {
@@ -127,6 +132,13 @@ export class ApplicantProfileComponent implements OnInit {
     }
   }
 
+  async fetchCountries(){
+    const data = await this.DataService.getCountries().toPromise();
+    if(!data.hasError){
+      this.allCountries = data.result;
+    }
+  }
+
   toggleNewWork(){
     this.newWork = !this.newWork
   }
@@ -168,7 +180,11 @@ export class ApplicantProfileComponent implements OnInit {
 
   }
 
-  addSkills(){
+  updateReferences(){
+
+  }
+
+  updateSkills(){
     // this.profileData.skills =
   }
 
