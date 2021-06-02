@@ -14,7 +14,8 @@ import {
   NbSelectModule,
   NbUserModule,
   NbPopoverModule,
-  NbDialogModule
+  NbDialogModule,
+  NbFormFieldModule
 } from '@nebular/theme';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'app/components/components.module';
@@ -40,7 +41,8 @@ import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.comp
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
 import { MyPayElementService, MyPayrollInstitutionService, MyPayrollTypeService } from './services/common.service';
-import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy, GetEmployeeElementLinksServiceProxy, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy } from 'app/_services/service-proxies';
+import { PayrollcontractComponent } from './payrollcontract/payrollcontract.component';
 
 
 @NgModule({
@@ -65,6 +67,7 @@ import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProx
     PayrollRunLogComponent,
     PayrollTypeComponent,
     PayrollElementComponent,
+    PayrollcontractComponent,
   ],
   imports: [
     ComponentsModule,
@@ -86,6 +89,7 @@ import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProx
     ngFormsModule,
     ComponentsModule,
     ThemeModule,
+    NbFormFieldModule
   ],
   providers: [
     MyPayrollInstitutionService,
@@ -103,6 +107,9 @@ import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProx
     CommonServiceProxy,
     AddUpdatePayElementServiceProxy,
     GetEarningsServiceProxy,
+    GetEmployeeElementLinksServiceProxy,
+    SearchEmployeesServiceProxy,
+    RefreshEmployeeElementLinkServiceProxy,
     
   ],
 })

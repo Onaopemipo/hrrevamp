@@ -215,7 +215,6 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
     NgxFlowModule,
     NgxEchartsModule,
     NbIconModule,
-    NbFormFieldModule,
     NbCardModule,
     NbInputModule,
     NbContextMenuModule,

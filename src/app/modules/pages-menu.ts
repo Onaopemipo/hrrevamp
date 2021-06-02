@@ -463,12 +463,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/payroll/types'
       },
       {
-        title: 'Pay Elements',
+        title: 'Payroll Elements',
         link:'/payroll/payelement'
       },
       {
-        title: 'Pay Scale',
+        title: 'Payroll Type',
         link:'/payroll/payscaletable'
+      },
+      {
+        title: 'Contract',
+        link:'/payroll/payrollcontract'
       },
       {
         title: 'Quick Payroll',
