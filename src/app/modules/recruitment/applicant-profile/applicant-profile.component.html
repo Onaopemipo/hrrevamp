@@ -457,7 +457,7 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Title</label>
-            <input type="text" class="form-control" id="jobTitle" placeholder="Name">
+            <input type="text" class="form-control" name="jobTitle" #jobTitle="ngModel" [(ngModel)]="workExperienceModel" placeholder="Name">
           </div>
         </div>
 
@@ -490,7 +490,7 @@
 
           <div class="form-group row">
             <div class="col">
-              <button nbButton status="primary">Save Now</button>
+              <button nbButton status="primary" (click)="updateWorkExperience()">Save Now</button>
               <span style="padding: 8px;"></span>
               <button nbButton>Cancel</button>
             </div>
@@ -662,14 +662,14 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Country</label>
-            <input type="text" class="form-control" name="fullName" placeholder="Full Name">
+            <input type="text" class="form-control" name="country" #country="ngModel" [(ngModel)="referenceModel"] placeholder="Full Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">School</label>
-            <input type="text" class="form-control" name="profession" placeholder="Profession">
+            <input type="text" class="form-control" name="school" #school="ngModel" [(ngModel)]="referenceModel.institutionName" placeholder="Profession">
           </div>
         </div>
 
@@ -730,14 +730,14 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Role</label>
-            <input type="text" class="form-control" name="jobRole" placeholder="Full Name">
+            <input type="text" class="form-control" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Full Name">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Industry</label>
-            <input type="text" class="form-control" name="industry" placeholder="Industry">
+            <input type="text" class="form-control" name="industry" #industry="ngModel" [(ngModel)]="preferenceModel.indusry" placeholder="Industry">
           </div>
         </div>
 

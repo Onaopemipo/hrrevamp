@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
 import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -14,12 +14,12 @@ import { Router } from '@angular/router';
 })
 export class ApplicantProfileComponent implements OnInit {
 
-  recruitmentAction = [
-    {id: 0, label:'Interviewed'},
-    {id: 1, label:'Shortlisted'},
-    {id: 2, label:'Offer'},
-    {id: 3, label:'Hired'},
-  ]
+  // recruitmentAction = [
+  //   {id: 0, label:'Interviewed'},
+  //   {id: 1, label:'Shortlisted'},
+  //   {id: 2, label:'Offer'},
+  //   {id: 3, label:'Hired'},
+  // ]
   pageTitle: string = 'Profile';
   title: string = 'Set up your account';
   src: string = 'assets/icons/camera.jpg';
@@ -32,8 +32,8 @@ export class ApplicantProfileComponent implements OnInit {
   newWork: boolean = false;
   jobInterview: JobApplicantScheduleInterview = new JobApplicantScheduleInterview();
   profileData: JobApplicantDto = new JobApplicantDto().clone();
-  isApplicant: boolean = true;
-  isInterviewer: boolean = false;
+  isApplicant: boolean = false;
+  isInterviewer: boolean = true;
   isAdmin: boolean = false;
   applicantId: number = 0;
   skills: [] = [];
@@ -46,6 +46,10 @@ export class ApplicantProfileComponent implements OnInit {
   tempRef:string;
   Entity: IDTextViewModel[] = [];
   entityId:number = 0;
+  recruitmentAction: IDTextViewModel[] = [];
+  referenceModel: JobApplicantReference = new JobApplicantReference();
+  workExperienceModel: JobApplicantWorkExperience = new JobApplicantWorkExperience();
+  educationModel: JobApplicantEducation = new JobApplicantEducation();
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
@@ -71,6 +75,10 @@ export class ApplicantProfileComponent implements OnInit {
 
   }
 
+  updateWorkExperience(){
+    
+  }
+
   async getEntity() {
     const data = await this.DataService.docEntityTypes().toPromise()
     if (!data.hasError) {
@@ -85,10 +93,10 @@ export class ApplicantProfileComponent implements OnInit {
      const refNumber =  this.tempRef
     console.log('temp ref', this.tempRef)
     if (this.Entity.length > 0) {
-      let srchR = this.Entity.find(f => f.text == "RETIREMENT");
+      let srchR = this.Entity.find(f => f.text == "NYSC");
       this.entityId = srchR.id;
     }
-    // this.files = files.flowFile.file
+
     this.UploadDocumentService.uploadDocs(0, title, 0, this.entityId, false, refNumber, files.flowFile.file[0])
       .subscribe(data => {
       if (!data.hasError) {
@@ -105,11 +113,18 @@ export class ApplicantProfileComponent implements OnInit {
   }
 
   fetchProfile(){
-    this.profile.getApplicantById(0).subscribe(data => {
+    this.profile.getApplicantById(this.applicantId).subscribe(data => {
       if(!data.hasError){
         this.profileData = data.result;
       }
     })
+  }
+
+  async fetchRecActions(){
+    const data = await this.DataService.getRecruitmentAction().toPromise();
+    if(!data.hasError){
+      this.recruitmentAction = data.result;
+    }
   }
 
   toggleNewWork(){

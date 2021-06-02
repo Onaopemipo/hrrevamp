@@ -74,7 +74,6 @@ export class SettingsComponent implements OnInit {
   createNewStage(){
     this.createStage = !this.createStage;
     this.createTemplate = !this.createTemplate;
-    // this.selectedCase = 'Hiring_Stages';
   }
 
   toggleScorecard(){
