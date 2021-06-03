@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Payment Scale Setup' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader pageName='Payroll Type Setup' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
 </ngx-componentsheader>
 <nb-card style="margin-top: 3rem;">
     <nb-card-body>
@@ -15,7 +15,7 @@
             </div>
  
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">Pay
                     Element</label>
                 <div class="col-sm-5">
@@ -43,7 +43,7 @@
               
                 </div>
 
-            </div>
+            </div> -->
 
             <div class="form-group row">
                 <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">Pay Frequency</label>
@@ -74,7 +74,7 @@
             <div class="form-group row">
                 <label for="Element Type" class="label col-sm-3 col-form-label listsubheader">Employee</label>
                 <div class="col-sm-9">
-                    <ngx-employee-master-search  (masterSubmitted)="getSelectedEmployee($event);" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+                    <ngx-employee-master-search [clearFlag]="master_search_clear_flag"   (masterSubmitted)="getSelectedEmployee($event);" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
                 </div>
               
             </div>
@@ -89,7 +89,7 @@
             <ngx-loadable-button [loading]="loadingPayScale" [disabled]="payScaleForm.invalid" (click)="savePayrollScale()" >
                 Submit
               </ngx-loadable-button> 
-            <button nbButton outline status="primary" class="d-flex column"
+            <button nbButton outline status="primary" [routerLink]="['/payroll/payscaletable']"   class="d-flex column"
                 style="background-color: white; margin-left: 2rem;">Cancel</button>
            
 

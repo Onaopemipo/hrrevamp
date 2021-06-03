@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { CommonServiceProxy, ElementInputValueDTO, EmployeeDTO, EmployeeElementLinkDTO, GetEmployeeElementLinksServiceProxy, PayElementDTO, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy } from 'app/_services/service-proxies';
+import { CommonServiceProxy, ElementInputValueDTO, AddUpdateElementInputValuesServiceProxy,EmployeeDTO, EmployeeElementLinkDTO, GetEmployeeElementLinksServiceProxy, PayElementDTO, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy, ManageElementInputValueDTO, GetElementInputValuesServiceProxy } from 'app/_services/service-proxies';
 export class EmployeeWithStatus extends EmployeeDTO implements IStatus {
   employee: EmployeeDTO;
   employeeName: string;
@@ -32,6 +33,7 @@ export class EmployeeWithStatus extends EmployeeDTO implements IStatus {
   styleUrls: ['./payrollcontract.component.scss']
 })
 export class PayrollcontractComponent implements OnInit {
+  newIputValForm: FormGroup;
   pageName: string = "Employee Contract";
   selectedEmployee = new EmployeeDTO().clone();
   topActionButtons = [
@@ -81,6 +83,7 @@ export class PayrollcontractComponent implements OnInit {
   EmployeeElementLink = new EmployeeElementLinkDTO().clone();
   elementLinks: PayElementDTO[] = [];
   elementInputValues: ElementInputValueDTO[] = [];
+  newInputVal = new ElementInputValueDTO().clone();
   loadinglinks = false
   linktotalItems = 0;
   linkcurrentPage = 1;
@@ -95,15 +98,66 @@ export class PayrollcontractComponent implements OnInit {
     { name: ACTIONS.EDIT, label: 'Input Values' },
     { name: ACTIONS.DELETE, label: 'Un-Enroll' },
   ];
+  selectedElementlink = new PayElementDTO().clone();
   showLinkInputModal = false;
+  showAddNewInput = false;
+  newsaveInputValue = new ManageElementInputValueDTO().clone();
+  loadingElementInput = false;
   constructor(private allemployeeServices: SearchEmployeesServiceProxy, private alertservice: AlertserviceService,
     private CommonService: CommonServiceProxy,private RefreshEmployeeElementLinkService: RefreshEmployeeElementLinkServiceProxy,
-    private GetEmployeeElementLinksService: GetEmployeeElementLinksServiceProxy) { }
+    private GetEmployeeElementLinksService: GetEmployeeElementLinksServiceProxy,
+    private AddUpdateElementInputValuesService: AddUpdateElementInputValuesServiceProxy,
+    private GetElementInputValuesService: GetElementInputValuesServiceProxy) { }
   
+  saveInputValue() {
+    this.loadingElementInput = true
+    this.newsaveInputValue.elementId = this.selectedElementlink.id;
+    this.newsaveInputValue.contractId = this.selectedEmployee.employeeContractId;
+    this.newsaveInputValue.element_link_start_date = this.selectedElementlink.start_date;
+    this.newsaveInputValue.element_link_end_date =  this.selectedElementlink.end_date;
+    this.newsaveInputValue.elementInputValues = JSON.stringify(this.elementInputValues);
+    this.AddUpdateElementInputValuesService.addUpdateElementInputValues(this.newsaveInputValue).subscribe(data => {
+      this.loadingElementInput = false
+      if (!data.hasError) {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "Ok");
+        this.newsaveInputValue = new ManageElementInputValueDTO().clone();
+        this.getElementInputValues();
+      } else {
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED,data.message,"Ok")
+      }
+    })
+  }
+  getElementInputValues() {
+    this.GetElementInputValuesService.getElementInputValues(this.selectedElementlink.id, this.selectedEmployee.employeeContractId).subscribe(data => {
+      if (!data.hasError) {
+        this.elementInputValues = data.result.elementInputValues;
+      }
+    })
+  }
   
-  
-  
-  
+  addInputValues() {
+    var sChk = this.elementInputValues.find(x => x.elementInputName == this.newInputVal.elementInputName);
+    if (!sChk) {
+      this.newInputVal.elementId = this.selectedElementlink.id;
+      this.newInputVal.elementName = this.selectedElementlink.name;
+      this.newInputVal.employeeId = this.selectedEmployee.id;
+      this.newInputVal.employeeContractId = this.selectedEmployee.employeeContractId;
+      this.newInputVal.isSystemDefault = false;
+      this.elementInputValues.push(this.newInputVal);
+      this.newInputVal = new ElementInputValueDTO().clone();
+      this.showAddNewInput = false;
+    } else {
+      this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.FAILED,"Input Name Exist","Ok")
+    }
+    }
+  setInputValue(index, value) {
+    var val = value.srcElement.value;
+    this.elementInputValues[index].inputValue = val;
+  }
+  setOutputValue(index, value) {
+    var val = value.srcElement.value;
+    this.elementInputValues[index].outputValue = val;
+  }
   get linkshowEmpty() {
     return this.elementLinks.length === 0;
    }
@@ -127,7 +181,8 @@ export class PayrollcontractComponent implements OnInit {
         this.EmployeeElementLink = data.result;
         this.elementLinks = this.EmployeeElementLink.elementLinks;
         this.linktotalItems = this.elementLinks.length;
-        this.elementInputValues = this.EmployeeElementLink.elementInputValues;
+        console.log(this.EmployeeElementLink)
+        this.elementInputValues =this.EmployeeElementLink.elementInputValues? this.EmployeeElementLink.elementInputValues:[];
       } else {
         
 }
@@ -136,6 +191,7 @@ export class PayrollcontractComponent implements OnInit {
   linktableActionClicked(event: TableActionEvent) {
     if (event.name == "1") {
       this.showLinkInputModal = true;
+      this.selectedElementlink = event.data;
     }
     if (event.name == "2") {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, event.data.yearName, 'Yes').subscribe(data => {

@@ -1,0 +1,28 @@
+
+.table-2 thead{
+    background: transparent;
+    border: none;
+    text-align: left;
+    font: normal normal normal 16px/22px Rubik;
+    color: #86828D;
+}
+table{
+    border: 1px solid #F5F5FA;
+}
+thead{
+    border: 1px solid #F5F5FA !important;
+    background-color: #F5F5FA;
+}
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}
+td, th{
+    text-align: left;
+}
+
+.table-2 *{
+    border: none;
+}

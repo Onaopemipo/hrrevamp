@@ -1,141 +1,202 @@
-<ngx-componentsheader pageName='Quick Payroll' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader pageName='Quick Payroll' >
 </ngx-componentsheader>
 
 
 
 
-<nb-card style="margin-top: 3rem;">
-    <nb-card-body>
-
-
-        <form>
+ <div class="row" >
+    <div class="col-md-3" style="margin: 5px;">
+        <div class="fmContainer" style="padding:4rem 2rem 4rem 2rem;">
+            <div style="padding-bottom: 10px;">
+                <p class="header6-medium"></p>
+            </div>
             <div class="row">
-                <div class="col-sm-8">
-
-
-                    <div class="form-group row" style="margin-top: 15px;">
-                        <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Payroll
-                            Period</label>
-                        <div class="col-sm-8">
-                            <div style="flex-wrap: wrap; display: flex; flex-direction: row; ">
-                                <div>
-                                    <input type="text" nbInput fullWidth placeholder="Start Date">
-                                </div>
-                                <div style="display: flex; flex-direction: row; align-items: center;">
-                                    <p
-                                        style="margin-left: 1.2rem; align-items: center; padding-top: 0.2rem; font-weight: bold;">
-                                    </p>
-                                    <div style="margin-left: 1.2rem;">
-                                        <input type="text" nbInput fullWidth placeholder="End Date">
-                                    </div>
-                                </div>
-                            </div>
-
+                <div class="col-md-12 " style="display: flex;flex-direction: column;">
+                    <div style="display:flex;padding-bottom: 35px;" >
+                        <div [ngClass]="{'q-connector': selectedPanel == 'payrollType','q-connector-inactive': selectedPanel != 'payrollType'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
 
                         </div>
+                          <div (click)="gotoPanel('payrollType','Set up your account')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                          Payroll Type
+                          </div>
                     </div>
 
+                    <div style="display:flex;padding-bottom: 35px;" >
+                        <div [ngClass]="{'q-connector': selectedPanel == 'payrollDetails','q-connector-inactive': selectedPanel != 'payrollDetails'}" style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
 
-                    <div class="form-group row">
-                        <label for="Element Type" class="label col-sm-4 col-form-label listsubheader">Pay
-                            Frequency</label>
-                        <div class="col-sm-8">
-                            <select aria-placeholder="select" name="" id="" class="form-control"></select>
                         </div>
+                          <div  (click)="gotoPanel('payrollDetails','Choose Package')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                         Payroll Details
+                          </div>
+                    </div>
+                    <div style="display:flex;padding-bottom: 35px;" >
+                        <div [ngClass]="{'last-q-connector': selectedPanel == 'processPayroll','last-q-connector-inactive': selectedPanel != 'processPayroll'}"  style="width: 10px; display: flex; flex-direction: column; align-items: center; margin-right: 5px; margin-top: 2px;">
+
+                        </div>
+                          <div (click)="gotoPanel('processPayroll','Activated Module')" style="width: 100%; padding: 1px 0px 0px 10px;cursor: pointer;">
+                        Process Payroll
+
+                          </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="Institution Name" class="label col-sm-4 col-form-label listsubheader">Payment channel</label>
-                        <div class="col-sm-8">
-                            <select name="" id="" class="form-control"></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <nb-card>
-                        <nb-card-body>
-                            <nb-card-header>
-                                <h6 style="font-weight: lighter;">Bank Balance</h6>
-                            </nb-card-header>
-                            <div class="money">
-                                <p>NGN</p>
-                                <p style="margin-left: 0.3rem;">39,000,920.00</p>
-                            </div>
-                        </nb-card-body>
-                    </nb-card>
                 </div>
             </div>
 
-
-
-
-            <ngx-componentsheader pageName='Select Employees' style="margin-top: -7rem;"></ngx-componentsheader>
-
-        </form>
-
-    </nb-card-body>
-
-
-
-    <ngx-tableheader></ngx-tableheader>
-    <ngx-tablecomponent [tableColum]="tableColumns"  (actionClick)="tableActionClicked($event)"[userData]='data' [tableColum]="tableColumns" [actions]='tableActions'>
-    </ngx-tablecomponent>
-    
-    <div class="form-group row" style="margin-top: 2rem; margin-bottom: 1rem;">
-        <label for="Account Number" class="label col-sm-4 col-form-label listsubheader"></label>
-        <div class="col-sm-8 d-flex">
-            <button nbButton status="primary" class="d-flex column">Run Payroll</button>
-           
-
-
         </div>
     </div>
+            <div class="col-md-8" style="margin: 5px;"  [ngSwitch]="selectedPanel">        
+                <!--Company Panel ////////////////////////////////-->
+                <div class="fmContainer" *ngSwitchCase="'payrollType'">
+                    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+                   <p class="listsubheader">{{title}}</p>
+                   </div>           
 
-    
-<!-- view modal -->
-
-<ngx-side-modal [(show)]="showViewModal">
-    <div modal-header></div>
-    <div modal-body>
-        <nb-card>
-            <nb-card-header>
-                Note
-            </nb-card-header>
-            <nb-card-body>
-                <!-- <div>
-                    <div
-                        style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px; display: flex;flex-direction: row;">
-                        <div style="flex: auto; display: flex;padding-top: 15px;">
-                            <p style=" text-transform: uppercase; font-weight: bold;">Delete Pay Element
-                            </p>
-                        </div>
-
-
-
+                   <div style="padding-top:3rem;">
+               <form>
+                <div class="form-group row">
+                    <label for="inputEmail1" class="label col-sm-3 col-form-label listsubheader">Payroll Type</label>
+                    <div class="col-sm-5">
+                        <select aria-placeholder="select" [(ngModel)]="payrollTypeId"  name="payrollTypeId" id="payrollTypeId" (change)="getEmployeebyparolltype(payrollTypeId)" class="form-control">
+                            <option value="0">--Select Payroll Type--</option>
+                            <option *ngFor="let ty of allpayrollType" [value]="ty.id">{{ty.text}}</option>
+                        </select>            
                     </div>
-                </div> -->
-                <span style="padding: 10px;"></span>
+                    <div class="col-sm-3">
+                        <button nbButton status="primary" (click)="getEmployeebyparolltype(payrollTypeId)">Update Computation</button>
+                    </div>
+                  </div>
 
-                <span></span>
+                </form>
+        
+                   </div>
+                   <div style="padding:10px"></div>
+                   <ngx-default-content *ngIf="showEmpty" pageHeader="Payroll Type Employee"
+                   pageDescription="no record found"  [loading]="loading"
+                  >
+                 </ngx-default-content>
+                 <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="true"
+                   [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="EmployeeProfile"
+                   [tableColum]="tableColumns"  [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading"
+                   [showCheckBox] = "showCheckBox"  [showBulkAction] = "false" 
+                   (actionChecked)="tableActionChecked($event)"
+                   (actionBulkChecked)="tableBulkActionClicked($event)">
+                 </ngx-tablecomponent>
+                 <div style="padding:10px"></div>
+                 <div class="form-group row">
+                    <div class="offset-sm-4 col-sm-8">
+                      <button  type="submit" nbButton status="primary" (click)="proceedtoPayrollDetails()" >Proceed</button>
+                    </div>
+                  </div>
+                   </div>
 
 
 
-                <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 5rem;">
+<!--Subscription Panel ////////////////////////////////-->
+<div class="fmContainer" *ngSwitchCase="'payrollDetails'">
+    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+        <p class="listsubheader">{{title}}</p>
+    </div>   
+<div style="padding-top:.3rem;">
+    <ngx-default-content *ngIf="paydshowEmpty" pageHeader="Payroll Details"
+    pageDescription="no record found"  [loading]="paydloading"
+   >
+  </ngx-default-content>
+  <ngx-tablecomponent *ngIf="!paydshowEmpty" 
+    [showFilter]="true"    [userData]="EmployeePayrollBenefitDTO" [showActions]="false"
+    [tableColum]="paydettableColumns"  [totalItems]="paydtotalItems" [currentPage]="paydcurrentPage" [loading]="paydloading"
+ >
+  </ngx-tablecomponent>
+  <div style="padding:10px"></div>
+  <div class="form-group row">
+     <div class="offset-sm-4 col-sm-8">
+       <button  type="submit" nbButton status="primary" (click)="proceedtoProcessPayroll()" >Proceed</button>
+     </div>
+   </div>
+</div>
+   </div>
 
-                    <button nbButton status="primary" class="d-flex column" style="margin-left: -4rem;"> Continue Run Payroll</button>
-                    <button nbButton outline status="primary" class="d-flex column"
-                    style="background-color: white; margin-left: 2rem;">Resolve Issues</button>
-    
+      <!--Billing Panel ////////////////////////////////-->
+<div class="fmContainer" *ngSwitchCase="'processPayroll'">
+    <div style="border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
+        <p class="listsubheader">{{title}}</p>
+    </div> 
+    <nb-card>
+        <nb-card-body>
+            <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">
+                    Total Payroll Earnings:
+                </label>
+                <div class="col-sm-8">
+               
+             {{totalEarnings | number: '.2'}}
                 </div>
-            </nb-card-body>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">
+                    Total Payroll Deductions:
+                </label>
+                <div class="col-sm-8">
+               
+                    {{totalDeduction | number: '.2'}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">
+                    Total Payroll Net:
+                </label>
+                <div class="col-sm-8">
+                    {{NetPay | number: '.2'}}
+             
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Payroll Period</label>
+                <div class="col-sm-5">
+                    <select aria-placeholder="select" [(ngModel)]="payPeriodId"  name="payPeriodId" id="payPeriodId" (change)="getEmployeebyparolltype(payrollTypeId)" class="form-control">
+                        <option value="0">--Select Payroll Period--</option>
+                        <option *ngFor="let ty of allpayPeriod" [value]="ty.id">{{ty.text}}</option>
+                    </select>            
+                </div>
+              </div>
+              <div style="padding:10px"></div>
+              <div class="form-group row">
+              
+                <div class="offset-sm-4 col-sm-8">
+                    <ngx-loadable-button [loading]="payrollProcessloading" (click)="processQuickPayroll()" >
+                        Submit
+                      </ngx-loadable-button>     
+                   
+                </div>
+              </div>
+              <div style="padding:10px"></div>
+              <div class="form-group row">              
+                <div class="col-sm-12">
+            <p> <b>PAYMENT TERMS AND POLICIES</b> All accounts are to be paid within 7 day. To be paid by cheque or credit card or direct payment online. If account is not paid within 7 days the credits details supplied as confirmation of work undertaken will be charged the agreed quoted fee noted above. If the Invoice remails unpaid.
+            </p>
+                </div>
+              </div>
+             </nb-card-body>
+    </nb-card>
+</div>
+
+            </div>
+        
+        </div>
 
 
-        </nb-card>
-
-    </div>
 
 
 
-</ngx-side-modal>
-</nb-card>
+
+
+
+
+
+
+
+
+
+
+
+
 

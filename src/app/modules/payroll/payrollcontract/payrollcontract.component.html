@@ -86,9 +86,103 @@
 
 
     <ngx-side-modal [(show)]='showLinkInputModal' [position]="'Center'" style="width: 500px; height: 1000px;">
-        <div modal-header>{{selectedEmployee.firstName}}&nbsp;{{selectedEmployee.lastName}}&nbsp;-&nbsp;{{selectedEmployee.employeeNumber}}&nbsp;Element Links</div>
+        <div modal-header>{{selectedEmployee.firstName}}&nbsp;{{selectedEmployee.lastName}}&nbsp;-&nbsp;{{selectedEmployee.employeeNumber}}&nbsp;Element Input Values for {{selectedElementlink.name}}</div>
         <div modal-body>
- 
+            <div class="table-responsive">
+                <table class="table table-hover table-2" >
+                  <thead>
+                    <tr>
+                      <th scope="col">Element Name</th>            
+                      <th scope="col">Start Date</th>     
+                      <th scope="col">End Date	</th>    
+                    </tr>
+                  </thead>
+                  <tbody>
+<td>
+    {{selectedElementlink.name}}
+</td>
+<td>
+    <ngx-date  [(value)]="selectedElementlink.start_date" name="start_date" id="start_date"></ngx-date>
+       
+</td>
+<td>
+    <ngx-date  [(value)]="selectedElementlink.end_date" name="end_date" id="end_date"></ngx-date>
+  
+</td>
+
+                </tbody>
+            </table>
+            </div>
+<div style="display: flex;flex-direction: column;">
+    <div style="display: flex;justify-content: flex-end;">  
+         <button [disabled]="showAddNewInput" (click)="showAddNewInput=true" nbButton status='primary' outline style="background: transparent;">Add Input Value</button>
+    </div>
+    <form name="newIputValForm" id="newIputValForm" #newIputValForm="ngForm" >
+        <div class="row" style="padding-top:5px" *ngIf="showAddNewInput">
+            <div class="col-sm-3 form-group">
+                <label>Input Name</label>
+                <input type="text" [(ngModel)]="newInputVal.elementInputName" name="elementInputName" id="elementInputName"  class="form-control"   required>
+             
+              </div>
+              <div class="col-sm-3 form-group">
+                <label>Input Value</label>
+                <input type="text" [(ngModel)]="newInputVal.inputValue" name="inputValue" id="inputValue"  class="form-control"   required>
+             
+              </div>
+              <div class="col-sm-3 form-group">
+                <label>Output Value</label>
+                <input type="text" [(ngModel)]="newInputVal.outputValue" name="outputValue" id="outputValue"  class="form-control"   required>
+             
+              </div>
+              <div class="col-sm-3 form-group" style="display: flex;flex-direction: column;">
+       <div style="padding: 10px;"></div>
+                <button [disabled]="newIputValForm.invalid" (click)="addInputValues()" nbButton status='primary' outline style="background: transparent;">Add</button>
+           
+              </div>
+        </div>
+    </form>
+  
+</div>
+            <div class="table-responsive">
+                <table class="table table-hover table-2" >
+                  <thead>
+                    <tr>
+                      <th scope="col">Element Name</th>            
+                      <th scope="col">Input Name</th>     
+                      <th scope="col">Input Value	</th>    
+                      <th scope="col">Output Value</th>    
+                    </tr>
+                  </thead>
+                  <tbody>
+            
+                    <tr *ngFor="let inp of elementInputValues; let i = index">
+                        <td>
+                       {{inp.elementName}}
+                        </td>
+                        <td>
+                            {{inp.elementInputName}}
+                             </td>
+                             <td>
+                                <input type="text" [value]="inp.inputValue" (keyup)="setInputValue(i, $event)" nbInput fullWidth placeholder="Input Value">
+                                 </td>
+                                 <td>
+                                    <input type="text" [value]="inp.outputValue" (keyup)="setOutputValue(i, $event)" nbInput fullWidth placeholder="Output Value">
+                                     </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            </div>
       
+    </div>
+
+    <div modal-actions style="margin-top: 2px; margin-bottom: 2px;display: flex;flex-direction: row; justify-content: center;">
+        <ngx-loadable-button [loading]="loadingElementInput"  (click)="saveInputValue()" >
+            Save
+          </ngx-loadable-button>      
+        <div style="margin-left:10px;padding-left: 15px;">
+            <button (click)="showLinkInputModal=false" nbButton status='primary' outline style="background: transparent;">Discard</button>
+       
+        </div>
     </div>
     </ngx-side-modal>
