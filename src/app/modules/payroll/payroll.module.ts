@@ -41,7 +41,7 @@ import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.comp
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
 import { MyPayElementService, MyPayrollInstitutionService, MyPayrollTypeService } from './services/common.service';
-import { AddUpdatePayElementServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy, GetEmployeeElementLinksServiceProxy, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateElementInputValuesServiceProxy, AddUpdatePayElementServiceProxy,GetElementInputValuesServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy, GetEmployeeElementLinksServiceProxy, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy, FetchPayrollServiceProxy, QuickPayrollServiceProxy } from 'app/_services/service-proxies';
 import { PayrollcontractComponent } from './payrollcontract/payrollcontract.component';
 
 
@@ -110,6 +110,10 @@ import { PayrollcontractComponent } from './payrollcontract/payrollcontract.comp
     GetEmployeeElementLinksServiceProxy,
     SearchEmployeesServiceProxy,
     RefreshEmployeeElementLinkServiceProxy,
+    AddUpdateElementInputValuesServiceProxy,
+    GetElementInputValuesServiceProxy,
+    FetchPayrollServiceProxy,
+    QuickPayrollServiceProxy
     
   ],
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { GetAllPayrollTypesServiceProxy, PayrollTypeDTO } from 'app/_services/service-proxies';
 
 
 enum TOP_ACTIONS {
@@ -29,27 +30,41 @@ export class PayscaletableComponent implements OnInit {
   showdeleteModal : boolean = false
 
   tableColumns = [
-    { name: 'a', title: 'NAME' },
-    { name: 'b', title: 'INDUSTRY' },
-    { name: 'c', title: 'ACCOUNT NAME' },
-    { name: 'd', title: 'ACCOUNT NUMBER' },
-    { name: 'e', title: 'BANK' },
-   
+    { name: 'name', title: 'NAME' },
+    { name: 'frequencyRule', title: 'Frequency' },
+    { name: 'firstPeriodEndDate', title: 'Period',type: ColumnTypes.Date },
+    { name: 'effectiveDate', title: 'Effective Date',type: ColumnTypes.Date }, 
   ];
   tableActions: TableAction[] = [
-    {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
     {name: TABLE_ACTION.DELETE, label: 'Delete'},
   ]
-  data=[]
+  
   loadingPayScale = false;
   totalItems = 0;
   currentPage = 1;
-  constructor(private router:Router) { }
+  filter = {
+    pageSize: 10,
+    pageNumber: 1,
+    frequencyRuleId: undefined
+  }
+  PayTypedata: PayrollTypeDTO[] = [];
+  constructor(private router:Router,private GetAllPayrollTypesService: GetAllPayrollTypesServiceProxy) { }
   get showEmpty() {
-    return this.data.length === 0;
-}
+    return this.PayTypedata.length === 0;
+  }
+  async getPayScale() {
+    this.loadingPayScale = true;
+  var data = await this.GetAllPayrollTypesService.getAllPayrollTypes(this.filter.pageSize, this.filter.pageNumber, this.filter.frequencyRuleId).toPromise();
+    if (!data.hasError) {
+      this.loadingPayScale = false;
+      this.PayTypedata = data.result;
+    } else {
+      this.loadingPayScale = false;
+  }
+  }
   ngOnInit(): void {
+    this.getPayScale();
   }
   modal(event) {
     if (event == 0) {

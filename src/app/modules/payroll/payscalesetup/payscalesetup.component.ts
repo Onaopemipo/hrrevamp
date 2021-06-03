@@ -33,6 +33,7 @@ export class PayscalesetupComponent implements OnInit {
   ]
   loadingPayScale = false;
   selElem: any = '';
+  master_search_clear_flag = 0;
   constructor(private CommonService: CommonServiceProxy,
     private GetAllPayElementsService: GetAllPayElementsServiceProxy,
     private AddUpdatePayScaleService: AddUpdatePayScaleServiceProxy,
@@ -83,24 +84,25 @@ export class PayscalesetupComponent implements OnInit {
   savePayrollScale() {
     this.loadingPayScale = true;
     var elList = [];
-    var empList = [];
-    if (this.ElementList.length < 1) {
-      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, "Please Add Pay Element", "ok");
-      return
+    var empList = "";
+    // if (this.ElementList.length < 1) {
+    //   this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, "Please Add Pay Element", "ok");
+    //   return
       
-    }
+    // }
     if (this.selectedEmployee.length < 1) {
       this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, 'Please add Employee to pay scale', "ok");
+      this.loadingPayScale = false;
       return
     }
-    this.ElementList.forEach(value => {
-      elList.push(value.id)
-    });
+    // this.ElementList.forEach(value => {
+    //   elList.push(value.id)
+    // });
     this.selectedEmployee.forEach(val => {
-      empList.push(val.employeeContractId);
+      empList += val.employeeContractId + ",";
     })
-    this.ManagePayrollType.payElements = JSON.stringify(elList);
-    this.ManagePayrollType.employeeContracts = JSON.stringify(empList);
+  //  this.ManagePayrollType.payElements = JSON.stringify(elList);
+    this.ManagePayrollType.employeeContracts = empList.substr(0,(empList.length - 1));
     this.AddUpdatePayScaleService.addUpdatePayScale(this.ManagePayrollType).subscribe(data => {
       this.loadingPayScale = false;
       if (!data.hasError) {
@@ -108,6 +110,7 @@ export class PayscalesetupComponent implements OnInit {
         this.ElementList = [];
         this.selectedEmployee = [];
         this.ManagePayrollType = new ManagePayrollTypeDTO().clone();
+        this.master_search_clear_flag += 1;
       } else {
         this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, "ok");
       }
