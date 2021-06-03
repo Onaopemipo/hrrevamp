@@ -255,11 +255,9 @@
       <div class="form-group row mydiv">
         <div class="col">
           <label for="ScoringType" class="col-form-label mylabel">Scoring type</label>
-          <select class="custom-select" required>
+          <select class="custom-select" name="scoreTypes" #scoreTypes="ngModel" [(ngModel)]="scoreCardModel.scoringTypeId" required>
             <option value="">Select </option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option *ngFor="let scoreType of scoringTypes" [value]="scoreType.id">{{scoreType.name}}</option>
           </select>
         </div>
       </div>

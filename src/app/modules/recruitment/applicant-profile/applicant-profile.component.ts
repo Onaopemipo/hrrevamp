@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
-import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy } from 'app/_services/service-proxies';
+import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy, Institution } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -41,7 +41,6 @@ export class ApplicantProfileComponent implements OnInit {
   addSkiils: boolean = false;
   addEducation: boolean = false;
   preferenceModel: ManageJobPreferenceDto = new ManageJobPreferenceDto();
-  addJobPreference: boolean = false;
   btnprocessing: boolean = false;
   tempRef:string;
   allCountries: Country [] = [];
@@ -53,6 +52,16 @@ export class ApplicantProfileComponent implements OnInit {
   educationModel: JobApplicantEducation = new JobApplicantEducation();
   allStates: State [] = [];
   qualificationData: Qualification [] = [];
+  allInstitutions: Institution [] = []
+  allCourses: Course [] = [];
+  jobPreference:boolean = false;
+  btnProcessing:boolean = false;
+
+  tempJobRole: string [] = [];
+  tempJobType: string [] = [];
+  tempIndustry: string [] = [];
+  tempJobLevel: string [] = [];
+  tempSalary: string [] = [];
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
@@ -70,7 +79,8 @@ export class ApplicantProfileComponent implements OnInit {
     this.getEntity();
     this.fetchQualifications();
     this.fetchRecActions();
-    
+    this.fetchSchools();
+    this.fetchCourses();
   }
 
   scheduleInterview(){
@@ -86,6 +96,20 @@ export class ApplicantProfileComponent implements OnInit {
 
   updateWorkExperience(){
 
+  }
+
+  async fetchSchools(){
+    const data = await this.commonService.getInstitutions().toPromise();
+    if(!data.hasError){
+      this.allInstitutions = data.result;
+    }
+  }
+
+  async fetchCourses(){
+    const data = await this.commonService.getCourses().toPromise();
+    if(!data.hasError){
+      this.allCourses = data.result;
+    }
   }
 
   openScorecard(){
@@ -166,18 +190,32 @@ export class ApplicantProfileComponent implements OnInit {
   addPreference(){
     this.preference.addUpdateJobPreference(this.preferenceModel).subscribe(data => {
       if(!data.hasError){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Preference Media', 'Dismiss')
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Preference Added', 'Dismiss').subscribe(res => {
+          this.preferenceModel = new ManageJobPreferenceDto();
+          this.jobPreference = false;
+        })
       }
     })
+  }
+
+  addNewJobPref(){
+    this.tempJobRole.push(this.preferenceModel.jobName);
+    this.tempJobType.push(this.preferenceModel.jobType);
+    this.tempJobLevel.push(this.preferenceModel.jobLevel);
+    this.tempIndustry.push(this.preferenceModel.indusry);
+    this.tempSalary.push(this.preferenceModel.salaryRange);
   }
 
   toggleEducation(){
     this.addEducation = !this.addEducation;
   }
 
+  toggleJobPreference(){
+    this.jobPreference = true;
+  }
+
   toggleReferences(){
     this.addReferences = !this.addReferences
-
   }
 
   addNewWork(){

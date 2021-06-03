@@ -292,9 +292,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/recruitmentadmin/jobs',
       },
 
+      // {
+      //   title: 'Applicants',
+      //   link: '/interviewers/applicantselection',
+      // },
+
       {
         title: 'Applicants',
-        link: '/interviewers/applicantselection',
+        link: '/recruitment/applicants',
       },
 
       {

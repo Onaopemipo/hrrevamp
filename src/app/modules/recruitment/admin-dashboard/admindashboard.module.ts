@@ -15,11 +15,12 @@ import { SettingsComponent } from './settings/settings.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { NewjobComponent } from './newjob/newjob.component';
 import { NewquizComponent } from './newquiz/newquiz.component';
+import { ApplicantsComponent } from './applicants/applicants.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent,NewjobComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent, NewjobComponent, NewquizComponent],
+  declarations: [DashboardComponent,NewjobComponent, JobsComponent, ReportsComponent, SettingsComponent, QuizComponent, NewjobComponent, NewquizComponent, ApplicantsComponent],
   imports: [
     CommonModule,
     AdminDashboardRoutingModule,

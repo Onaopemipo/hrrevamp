@@ -360,6 +360,7 @@
               <nb-card-body *ngIf="isInterviewer" style="background-color: transparent;">
                 <div class="form-group row" style="display: flex; justify-content: center; align-self:center; align-items: center;">
                     <button (click)="openScorecard()" fullWidth nbButton status="primary">Open Scorecard</button>
+                    <button (click)="toggleJobPreference()" fullWidth nbButton status="primary">Add Preference</button>
                 </div>
               </nb-card-body>
 
@@ -701,7 +702,7 @@
           <div class="col">
             <label class="col-form-label mylabel">Country</label>
             <select name="country" #country="ngModel" [(ngModel)]="educationModel.country" class="custom-select" required>
-              <option value="">--Select country--</option>
+              <option value="">--Select Country--</option>
               <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
             </select>
             <div *ngIf="country.invalid && (country.dirty || country.touched)" class="error">
@@ -713,7 +714,10 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">School</label>
-            <input type="text" class="form-control" name="school" #school="ngModel" [(ngModel)]="educationModel.school" placeholder="School">
+            <select type="text" class="form-control" name="school" #school="ngModel" [(ngModel)]="educationModel.school" placeholder="School">
+              <option value="">--Select School--</option>
+              <option *ngFor="let myschool of allInstitutions" [value]="myschool.id">{{myschool.name}}</option>
+            </select>
             <div *ngIf="school.invalid && (school.dirty || school.touched)" class="error">
               <div *ngIf="school.errors.required">School is required</div>
             </div>
@@ -723,8 +727,11 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Course</label>
-            <input type="text" class="form-control" name="course" #course="ngModel" [(ngModel)]="educationModel.course" placeholder="Course">
-            <div *ngIf="course.invalid && (course.dirty || course.touched)" class="error">
+            <select type="text" class="form-control" name="course" #course="ngModel" [(ngModel)]="educationModel.course" placeholder="Course">
+              <option value="">--Select Course--</option>
+              <option *ngFor="let mycourse of allCourses" [value]="mycourse.id">{{mycourse.name}}</option>
+            </select>
+              <div *ngIf="course.invalid && (course.dirty || course.touched)" class="error">
               <div *ngIf="course.errors.required">Course is required</div>
             </div>
           </div>
@@ -775,14 +782,22 @@
 
   </ngx-side-modal>
 
-  <ngx-side-modal [(show)]="addJobPreference" style="margin-top: -75px;">
+  <ngx-side-modal [(show)]="jobPreference" style="margin-top: -75px;">
     <div modal-header>Add Job Preference</div>
     <div modal-body>
       <form>
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Role</label>
-            <input type="text" class="form-control" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Full Name">
+                <input type="text" class="form-control" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Job Name">               
+                <!-- <button nbButton status='primary' outline style="background: transparent;" (click)="addNewJobRole()">Add New</button> -->
+              </div>
+            </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label class="col-form-label mylabel">Job Type</label>
+            <input type="text" class="form-control" name="jobType" #jobType="ngModel" [(ngModel)]="preferenceModel.jobType" placeholder="Job Name">
           </div>
         </div>
 
@@ -796,17 +811,18 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Level</label>
-            <input type="text" class="form-control" name="jobLevel" placeholder="Job Level">
+            <input type="text" class="form-control" name="jobLevel" #jobLevel="ngModel" [(ngModel)]="preferenceModel.jobLevel" placeholder="Job Level">
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Salary Range</label>
-            <input type="tel" class="form-control" name="salaryRange" placeholder="Salary Range">
+            <input type="tel" class="form-control" name="salaryRange" #salaryRange="ngModel" [(ngModel)]="preferenceModel.salaryRange" placeholder="Salary Range">
           </div>
         </div>
 
+      <button nbButton status='primary' outline style="background: transparent;" (click)="addNewJobPref()">Add New Preference</button>
 
           <div class="form-group row">
             <div class="col">

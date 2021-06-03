@@ -1,3 +1,4 @@
+import { ApplicantsComponent } from './applicants/applicants.component';
 import { NewquizComponent } from './newquiz/newquiz.component';
 import { NewjobComponent } from './newjob/newjob.component';
 import { JobsComponent } from './jobs/jobs.component';
@@ -44,10 +45,10 @@ export const routes: Routes = [
         component: QuizComponent
       },
 
-      // {
-      //   path: 'applicantselection',
-      //   component: ApplicantSelectionComponent
-      // },
+      {
+        path: 'applicants',
+        component: ApplicantsComponent
+      },
 
       {
         path: 'reports',

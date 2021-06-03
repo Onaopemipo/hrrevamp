@@ -51,7 +51,7 @@ export class ApplicantselectionComponent implements OnInit {
   }
 
   async fetchJobRoles(){
-    const data = await this.jobService.fetchJobApplicationByRole(0,10,1).toPromise();
+    const data = await this.jobService.fetchJobApplicationByRole(undefined,10,1).toPromise();
     if(!data.hasError){
       this.allJobRoles = data.result;
       console.log(this.allJobRoles)

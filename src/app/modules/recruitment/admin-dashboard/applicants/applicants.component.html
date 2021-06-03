@@ -1,0 +1,18 @@
+<ngx-componentsheader pageName='Applicant Selection'></ngx-componentsheader>
+
+<div *ngIf="applicationCounter < 1" style="background-color: #ffffff;">
+  <nb-card>
+    <nb-card-body>
+        <ngx-default-content pageHeader={{myPlanHeader}} pageDescription="{{myPlanDesc}}" [loading]="loading"></ngx-default-content>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div *ngIf="applicationCounter > 0">
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+      <ngx-tablecomponent [loading]='loading' [userData]='allApplications' [tableColum]="applicantsTable"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
+</div>

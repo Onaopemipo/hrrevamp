@@ -1,6 +1,6 @@
-import { CommunicationServiceProxy, MailTemplateDTO } from 'app/_services/service-proxies';
+import { CommunicationServiceProxy, MailTemplateDTO, CommonServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO, QuestionDTO, QuestionOptionDTO, RecruitmentScoreCard } from './../../../../_services/service-proxies';
+import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO, QuestionDTO, QuestionOptionDTO, RecruitmentScoreCard, ScoringType } from './../../../../_services/service-proxies';
 import { NbTabComponent } from '@nebular/theme';
 import { Component, OnInit } from '@angular/core';
 import { truncateSync } from 'fs';
@@ -52,13 +52,16 @@ export class SettingsComponent implements OnInit {
   allSubHireStages: SubHireStageDTO [] = [];
   allScorecards: RecruitmentScoreCard [] = [];
   allTemplates: MailTemplateDTO [] = [];
+  scoringTypes: ScoringType [] = [];
 
-  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService, private template: CommunicationServiceProxy) { }
+  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService, 
+    private template: CommunicationServiceProxy, private commonService: CommonServiceProxy) { }
 
   ngOnInit(): void {
     this.getHireStages();
     this.fetchAllScorecards();
     this.getAllTemplates();
+    this.fetchScoringType();
   }
 
   selectPanel(hiringlist, i) {
@@ -128,6 +131,13 @@ export class SettingsComponent implements OnInit {
     const data = await this.settings.getRecruitmentScoreCards().toPromise();
     if(!data.hasError){
       this.allScorecards = data.result;
+    }
+  }
+
+  async fetchScoringType(){
+    const data = await this.commonService.getScoringType().toPromise();
+    if(!data.hasError){
+      this.scoringTypes = data.result;
     }
   }
 
