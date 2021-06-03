@@ -192,6 +192,7 @@ export class PayrollcontractComponent implements OnInit {
     if (event.name == "1") {
       this.showLinkInputModal = true;
       this.selectedElementlink = event.data;
+      this.getElementInputValues();
     }
     if (event.name == "2") {
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.ANYCONFIRM, event.data.yearName, 'Yes').subscribe(data => {

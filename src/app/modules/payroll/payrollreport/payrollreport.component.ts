@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
+import { GetBankScheduleServiceProxy, GetEarningsServiceProxy } from 'app/_services/service-proxies';
 
 
 enum TABLE_ACTION {
@@ -16,18 +17,23 @@ enum TABLE_ACTION {
 })
 export class PayrollreportComponent implements OnInit {
   showViewModal: boolean = false
-  tableColumns = [
-    { name: 'a', title: 'NAME/ID' },
-    { name: 'b', title: 'DEPARTMENT' },
-    { name: 'c', title: 'BANK NAME' },
-    { name: 'd', title: 'ACCOUNT NO' },
-    { name: 'e', title: 'EARNINGS' },
-    { name: 'e', title: 'DEDUCTIONS' },
-    { name: 'f', title: 'NET PAY' },
-    { name: 'g', title: 'INSTITUTION' },
+  tableColumns = [];
+  //BANK TABLE
+  bankColumn = [
+    { name: 'fullName', title: 'NAME' },
+    { name: 'employeeNo', title: 'EMPLOYEE NUMBER' },
+    { name: 'accountNo', title: 'ACCOUNT NO' },
+    { name: 'dept', title: 'DEPARTMENT' },
+    { name: 'bankName', title: 'BANK NAME' },
+    { name: 'gradeLevel', title: 'GRADE LEVEL' },
+    { name: 'location', title: 'LOCATION' },   
+    // { name: 'e', title: 'EARNINGS' },
+    // { name: 'e', title: 'DEDUCTIONS' },
+    // { name: 'f', title: 'NET PAY' },
+    // { name: 'g', title: 'INSTITUTION' },
   ];
   //EARNINGS TABLE
-  tableColumn = [
+  earningtableColumn = [
     { name: 'a', title: 'NAME/ID' },
     { name: 'b', title: 'DEPARTMENT' },
     { name: 'c', title: 'LOCATION' },
@@ -113,14 +119,23 @@ export class PayrollreportComponent implements OnInit {
 
   tableActions: TableAction[] = [
     { name: TABLE_ACTION.VIEW, label: 'View' },
-
   ]
-
-  constructor() { }
+  alldata = [];
+  defPageHeader = "";
+  defpageDescription = "";
+  loading = false;
+  totalItems = 0;
+  currentPage = 1;
+  showActions = false;
+  constructor(private GetBankScheduleService: GetBankScheduleServiceProxy,
+    private getEarningsService: GetEarningsServiceProxy) { }
 
   ngOnInit(): void {
+    this.getBankSchedule();
   }
-
+  get showEmpty() {
+    return this.alldata.length === 0;
+}
   tableActionClicked(event: TableActionEvent) {
     //   if(event.name==TABLE_ACTION.DELETE){
     //     this.showdeleteModal = true
@@ -130,6 +145,57 @@ export class PayrollreportComponent implements OnInit {
     //     }
     if (event.name == TABLE_ACTION.VIEW) {
       this.showViewModal = true
+    }
+  }
+
+  async getBankSchedule() {
+    this.defPageHeader = "Banks Schedule";
+    this.defpageDescription = "no record found";
+    this.showActions = true;
+    this.loading = true;
+    var data = await this.GetBankScheduleService.getBankSchedule(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.bankColumn;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  async getEarnings() {
+    this.defPageHeader = "Earning";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.getEarningsService.getEarnings(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.earningtableColumn;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  filterLeavePlan(is_approved = []) {
+   
+    let tabtittle = "";
+    is_approved.forEach(value => {
+      if (value.activeValue) tabtittle = value.tabTitle;
+    });
+    console.log(tabtittle);
+
+    switch(tabtittle) {
+      case "Bank Schedule":
+        this.getBankSchedule();
+        break;
+      case "Earning":
+        this.getEarnings()
+        break;
+    
     }
   }
 }
