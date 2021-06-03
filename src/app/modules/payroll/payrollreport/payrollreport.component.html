@@ -5,98 +5,34 @@
 
 <nb-card>
     <nb-card-body>
-        <nb-tabset>
-            <nb-tab tabTitle="Bank Schedule">
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColumns" [actions]='tableActions'
-                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
-
-
-                <br>
-
+        <nb-tabset #tset (click)="filterLeavePlan(tset.tabs._results)">
+            <nb-tab tabTitle="Bank Schedule">  
             </nb-tab>
-            <nb-tab tabTitle="Earning">
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColumn" [actions]='tableActions'
-                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
+            <nb-tab tabTitle="Earning"> 
             </nb-tab>
-
             <nb-tab tabTitle="Deduction">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColum"
-                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
-
-
-
-
             </nb-tab>
             <nb-tab tabTitle="All Element Sheet">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableColu" [actions]='tableActions'
-                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
             </nb-tab>
-
-            <nb-tab tabTitle="Deduction Summary">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableCol"
-                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
-
-
-
-
+            <nb-tab tabTitle="Deduction Summary"> 
             </nb-tab>
             <nb-tab tabTitle="Payment Summary">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableCo"
-                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
             </nb-tab>
-
             <nb-tab tabTitle="Tax Detail">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tableC"
-                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
             </nb-tab>
-
-            <nb-tab tabTitle="Pension Details">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="table"
-                    (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
-
-
-
-
-
+            <nb-tab tabTitle="Pension Details">                
             </nb-tab>
-
             <nb-tab tabTitle="Payslip Analysis">
-
-                <nb-card-header>
-                    <ngx-tablecomponent [userData]='data' [tableColum]="tab" [actions]='tableActions'
-                        (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
-                </nb-card-header>
             </nb-tab>
         </nb-tabset>
-
+        <ngx-default-content *ngIf="showEmpty" [pageHeader]="defPageHeader"
+        pageDescription="defpageDescription"  [loading]="loading"
+       >
+      </ngx-default-content>
+      <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="showActions"
+        [showFilter]="true" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="alldata"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+      </ngx-tablecomponent>
 
     </nb-card-body>
 
