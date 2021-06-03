@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
-import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy, Institution } from 'app/_services/service-proxies';
+import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy, Institution, DropdownValue, JobRole } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course, SalaryRanage } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -45,6 +45,7 @@ export class ApplicantProfileComponent implements OnInit {
   tempRef:string;
   allCountries: Country [] = [];
   Entity: IDTextViewModel[] = [];
+  gradeData: IDTextViewModel[] = [];
   entityId:number = 0;
   recruitmentAction: IDTextViewModel[] = [];
   referenceModel: JobApplicantReference = new JobApplicantReference();
@@ -56,17 +57,20 @@ export class ApplicantProfileComponent implements OnInit {
   allCourses: Course [] = [];
   jobPreference:boolean = false;
   btnProcessing:boolean = false;
-
+  sectorData: DropdownValue [] = [];
   tempJobRole: string [] = [];
   tempJobType: string [] = [];
   tempIndustry: string [] = [];
   tempJobLevel: string [] = [];
   tempSalary: string [] = [];
+  salaryData: SalaryRanage [] = [];
+  jobLevelData: IDTextViewModel[] = [];
+  jobRoleData: JobRole [] = [];
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
      private profile: RecuritmentJobApplicantServiceProxy, private UploadDocumentService: UploadDocumentServiceProxy,
-     private DataService: DataServiceProxy, private commonService: CommonServiceProxy ) {
+     private DataService: DataServiceProxy, private commonService: CommonServiceProxy,) {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
@@ -81,6 +85,12 @@ export class ApplicantProfileComponent implements OnInit {
     this.fetchRecActions();
     this.fetchSchools();
     this.fetchCourses();
+    this.fetchGrade();
+    this.fetchSector();
+    this.fetchJobRole();
+    this.fetchSalary();
+    this.fetchJobLevel();
+
   }
 
   scheduleInterview(){
@@ -111,6 +121,28 @@ export class ApplicantProfileComponent implements OnInit {
       this.allCourses = data.result;
     }
   }
+
+  async fetchSalary(){
+    const data = await this.DataService.getSalaryRange().toPromise();
+    if(!data.hasError){
+      this.salaryData = data.result;
+    }
+  }
+
+  async fetchJobLevel(){
+    const data = await this.DataService.getJobLevel().toPromise();
+    if(!data.hasError){
+      this.jobLevelData = data.result;
+    }
+  }
+
+  async fetchJobRole(){
+    const data = await this.commonService.getJobRoles().toPromise();
+    if(!data.hasError){
+      this.jobRoleData = data.result;
+    }
+  }
+
 
   openScorecard(){
     this.router.navigateByUrl('/interviewers/evaluation');
@@ -164,6 +196,21 @@ export class ApplicantProfileComponent implements OnInit {
     })
   }
 
+  async fetchGrade(){
+    const data = await this.DataService.getUniversityGrade().toPromise();
+    if(!data.hasError){
+      this.gradeData = data.result;
+    }
+  }
+
+  async fetchSector(){
+    const data = await this.DataService.getDropDownValues("Sectors").toPromise();
+    if(!data.hasError){
+      this.sectorData = data.result;
+    }
+  }
+
+
   async fetchRecActions(){
     const data = await this.DataService.getRecruitmentAction().toPromise();
     if(!data.hasError){
@@ -206,6 +253,18 @@ export class ApplicantProfileComponent implements OnInit {
     this.tempSalary.push(this.preferenceModel.salaryRange);
   }
 
+  updateEducation(){
+    let applicant: JobApplicantDto = new JobApplicantDto();
+    applicant.id = this.profileData.id;
+    applicant.selectedEducation = JSON.stringify(this.educationModel);
+    this.profile.completeApplicantProfile(applicant).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
+      }
+    })
+    console.log('Here is your string', applicant)
+  }
+
   toggleEducation(){
     this.addEducation = !this.addEducation;
   }
@@ -235,7 +294,7 @@ export class ApplicantProfileComponent implements OnInit {
   }
 
   updateReferences(){
-
+    console.log()
   }
 
   updateSkills(){

@@ -740,8 +740,10 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Grade</label>
-            <input type="text" class="form-control" name="grade" #grade="ngModel" [(ngModel)]="educationModel.grade" placeholder="Grade">
-            <div *ngIf="grade.invalid && (grade.dirty || grade.touched)" class="error">
+            <select class="custom-select" name="grade" #grade="ngModel" [(ngModel)]="educationModel.grade" placeholder="Grade">
+              <option value="">--Select Grade--</option>
+              <option *ngFor="let mygrade of gradeData" [value]="mygrade.id">{{mygrade.text}}</option>
+            </select>            <div *ngIf="grade.invalid && (grade.dirty || grade.touched)" class="error">
               <div *ngIf="grade.errors.required">Grade is required</div>
             </div>
           </div>
@@ -750,7 +752,7 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Degree</label>
-            <select type="text" class="form-control" name="degree" #degree="ngModel" [(ngModel)]="educationModel.degreee" placeholder="Qualification" required>
+            <select type="text" class="form-control" name="degree" #degree="ngModel" [(ngModel)]="educationModel.degree" placeholder="Qualification" required>
               <option value="">--Select Qualification--</option>
               <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
               </select>
@@ -763,8 +765,7 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Duration</label>
-            <!-- [(start)]="newJobModel.postValidityFrom" [(end)]="newJobModel.postValidityTo" -->
-            <ngx-date-range  required></ngx-date-range>
+            <ngx-date-range [(start)]="educationModel.startDate" [(end)]="educationModel.endDate" required></ngx-date-range>
           </div>
         </div>
 
@@ -772,7 +773,7 @@
 
           <div class="form-group row">
             <div class="col">
-              <button nbButton status="primary">Save</button>
+              <button nbButton status="primary" (click)="updateEducation()">Save</button>
               <span style="padding: 8px;"></span>
               <button nbButton>Cancel</button>
             </div>
@@ -789,40 +790,54 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Role</label>
-                <input type="text" class="form-control" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Job Name">               
-                <!-- <button nbButton status='primary' outline style="background: transparent;" (click)="addNewJobRole()">Add New</button> -->
-              </div>
+                <select class="custom-select" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Job Name">               
+                  <option value="">--Select Job Type--</option>
+                  <option *ngFor="let type of jobRoleData" value=""></option>
+                </select>
+                </div>
             </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Type</label>
-            <input type="text" class="form-control" name="jobType" #jobType="ngModel" [(ngModel)]="preferenceModel.jobType" placeholder="Job Name">
+            <select type="text" class="custom-select" name="jobType" #jobType="ngModel" [(ngModel)]="preferenceModel.jobType" placeholder="Job Name">
+              <option value="">--Select Job Type--</option>
+              <option *ngFor="let type of jobTypeData" value=""></option>
+            </select>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Industry</label>
-            <input type="text" class="form-control" name="industry" #industry="ngModel" [(ngModel)]="preferenceModel.indusry" placeholder="Industry">
+            <select type="text" class="custom-select" name="industry" #industry="ngModel" [(ngModel)]="preferenceModel.indusry" placeholder="Industry">
+              <option value="">--Select Industry--</option>
+              <option *ngFor="let myindustry of sectorData" value=""></option>
+            </select>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Level</label>
-            <input type="text" class="form-control" name="jobLevel" #jobLevel="ngModel" [(ngModel)]="preferenceModel.jobLevel" placeholder="Job Level">
+            <select type="text" class="custom-select" name="jobLevel" #jobLevel="ngModel" [(ngModel)]="preferenceModel.jobLevel" placeholder="Job Level">
+              <option value="">--Select Job Level--</option>
+              <option *ngFor="let type of jobLevelData" value=""></option>
+            </select>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Salary Range</label>
-            <input type="tel" class="form-control" name="salaryRange" #salaryRange="ngModel" [(ngModel)]="preferenceModel.salaryRange" placeholder="Salary Range">
+            <select type="tel" class="custom-select" name="salaryRange" #salaryRange="ngModel" [(ngModel)]="preferenceModel.salaryRange" placeholder="Salary Range">
+              <option value="">--Select Job Type--</option>
+              <option *ngFor="let salary of salaryData" value=""></option>
+          </select>
           </div>
         </div>
 
-      <button nbButton status='primary' outline style="background: transparent;" (click)="addNewJobPref()">Add New Preference</button>
+      <!-- <button nbButton status='primary' outline style="background: transparent;" (click)="addNewJobPref()">Add New Preference</button> -->
 
           <div class="form-group row">
             <div class="col">
