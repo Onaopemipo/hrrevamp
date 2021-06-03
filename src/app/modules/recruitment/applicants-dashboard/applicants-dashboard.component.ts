@@ -1,4 +1,4 @@
-import { JobApplicationSearch, RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobDTO } from './../../../_services/service-proxies';
+import { JobApplication, RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ApplicantsDashboardComponent implements OnInit {
 
   pageTitle: string = 'Recent Listings';
-  allJobsApplication: JobApplicationSearch [] = [];
+  allJobsApplication: JobApplication [] = [];
   allJobs:JobDTO [] = [];
 
   constructor(private jobService: RecruitmentJobApplicationServiceProxy, private job: RecruitmentJobServiceProxy) { }

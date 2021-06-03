@@ -1,4 +1,4 @@
-import { RecruitmentJobApplicationServiceProxy, JobApplicationSearch } from './../../../../_services/service-proxies';
+import { RecruitmentJobApplicationServiceProxy, JobApplication } from './../../../../_services/service-proxies';
 import { TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,7 +17,7 @@ export class ReportsComponent implements OnInit {
     {name: 'status', title: 'Status'},
   ];
 
-  allJobsApplication: JobApplicationSearch [] = [];
+  allJobsApplication: JobApplication [] = [];
   constructor(private jobService: RecruitmentJobApplicationServiceProxy) { }
 
   ngOnInit(): void {

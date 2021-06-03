@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobApplicationSearch, JobDTO } from './../../../_services/service-proxies';
+import { RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobApplication, JobDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ApplicantsComponent implements OnInit {
 
   pageTitle: string = 'Recent Listings';
-  allJobsApplication: JobApplicationSearch [] = [];
+  allJobsApplication: JobApplication [] = [];
   allJobs:JobDTO [] = [];
   jobsCounter: number = 0
   loading: boolean = false;

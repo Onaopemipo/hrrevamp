@@ -1,4 +1,4 @@
-import { JobApplicationSearch } from './../../../../_services/service-proxies';
+import { JobApplication } from './../../../../_services/service-proxies';
 import { TableColumn, ColumnTypes } from 'app/components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 import { RecruitmentJobApplicationServiceProxy } from 'app/_services/service-proxies';
@@ -24,7 +24,7 @@ export class ApplicantsComponent implements OnInit {
     {name: ACTIONS.DOWNLOAD_CV, title: '', type: ColumnTypes.Link, link_name: 'View CV'}
   ];
 
-  allApplications: JobApplicationSearch [] = [];
+  allApplications: JobApplication [] = [];
   applicationCounter: number = 0;
 
   constructor(private jobs: RecruitmentJobApplicationServiceProxy) { }
