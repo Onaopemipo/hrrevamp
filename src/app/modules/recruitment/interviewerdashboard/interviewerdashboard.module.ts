@@ -1,4 +1,4 @@
-import { RecruitmentJobApplicationServiceProxy } from './../../../_services/service-proxies';
+import { RecruitmentJobApplicationServiceProxy, RecruitmentSettingServiceProxy } from './../../../_services/service-proxies';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ComponentsModule } from './../../../components/components.module';
 import { InterviewerdashboardRoutingModule } from './interviewerdashboard-routing.module';
@@ -34,6 +34,7 @@ import { EvaluationComponent } from './evaluation/evaluation.component';
 
   providers: [
     RecruitmentJobApplicationServiceProxy,
+    RecruitmentSettingServiceProxy,
   ]
 })
 export class InterviewerdashboardModule { }

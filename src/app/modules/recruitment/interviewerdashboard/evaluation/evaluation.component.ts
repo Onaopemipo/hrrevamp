@@ -1,3 +1,4 @@
+import { RecruitmentScoreCardDTO, RecruitmentSettingServiceProxy } from './../../../../_services/service-proxies';
 import { TableColumn } from './../../../../components/tablecomponent/models';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,8 +14,17 @@ export class EvaluationComponent implements OnInit {
     {name: 'scoringType', title: 'Scoring Type'},
     {name: 'comment', title: 'Comments'}];
 
-  constructor() { }
+    scorecardData: RecruitmentScoreCardDTO = new RecruitmentScoreCardDTO().clone();
+  constructor(private scorecard: RecruitmentSettingServiceProxy,) { }
 
   ngOnInit(): void {
+  }
+
+  getScorecard(){
+    this.scorecard.getRecruitmentScoreCard(0).subscribe(data => {
+      if(!data.hasError){
+        this.scorecardData = data.result;
+      }
+    })
   }
 }

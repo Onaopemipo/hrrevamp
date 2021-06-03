@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
-import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State } from 'app/_services/service-proxies';
+import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -52,11 +52,12 @@ export class ApplicantProfileComponent implements OnInit {
   workExperienceModel: JobApplicantWorkExperience = new JobApplicantWorkExperience();
   educationModel: JobApplicantEducation = new JobApplicantEducation();
   allStates: State [] = [];
+  qualificationData: Qualification [] = [];
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
      private profile: RecuritmentJobApplicantServiceProxy, private UploadDocumentService: UploadDocumentServiceProxy,
-     private DataService: DataServiceProxy,  ) {
+     private DataService: DataServiceProxy, private commonService: CommonServiceProxy ) {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
@@ -66,6 +67,9 @@ export class ApplicantProfileComponent implements OnInit {
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getCountries();
     this.fetchCountries();
+    this.getEntity();
+    this.fetchQualifications();
+    this.fetchRecActions();
     
   }
 
@@ -84,6 +88,10 @@ export class ApplicantProfileComponent implements OnInit {
 
   }
 
+  openScorecard(){
+    this.router.navigateByUrl('/interviewers/evaluation');
+  }
+
   async getEntity() {
     const data = await this.DataService.docEntityTypes().toPromise()
     if (!data.hasError) {
@@ -98,7 +106,7 @@ export class ApplicantProfileComponent implements OnInit {
      const refNumber =  this.tempRef
     console.log('temp ref', this.tempRef)
     if (this.Entity.length > 0) {
-      let srchR = this.Entity.find(f => f.text == "NYSC");
+      let srchR = this.Entity.find(f => f.text == "Apllicant Document");
       this.entityId = srchR.id;
     }
 
@@ -106,7 +114,6 @@ export class ApplicantProfileComponent implements OnInit {
       .subscribe(data => {
       if (!data.hasError) {
         console.log('ref',this.tempRef)
-        console.log('datarseee', data.result)
         if (!data.hasError) {
           this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'OK');
 
@@ -115,6 +122,14 @@ export class ApplicantProfileComponent implements OnInit {
         }
       }
     });
+  }
+
+  async fetchQualifications(){
+    const data = await this.commonService.getQualifications().toPromise();
+    if(!data.hasError){
+      this.qualificationData = data.result;
+      console.log('qualification:', this.qualificationData)
+    }
   }
 
   fetchProfile(){
@@ -161,6 +176,7 @@ export class ApplicantProfileComponent implements OnInit {
   }
 
   toggleReferences(){
+    this.addReferences = !this.addReferences
 
   }
 

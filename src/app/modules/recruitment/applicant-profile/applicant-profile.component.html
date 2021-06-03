@@ -228,7 +228,7 @@
                 </div>
                 <div class="form-group">
                   <label for="documents">Documents</label>
-                  <ngx-file-upload (valueChange)="selectedFile($event,'Loan Document')" class="form-control"></ngx-file-upload>
+                  <ngx-file-upload (valueChange)="selectedFile($event,'')" class="form-control"></ngx-file-upload>
                 </div>
               </form>
             </div>
@@ -359,7 +359,7 @@
 
               <nb-card-body *ngIf="isInterviewer" style="background-color: transparent;">
                 <div class="form-group row" style="display: flex; justify-content: center; align-self:center; align-items: center;">
-                    <button fullWidth nbButton status="primary">Open Scorecard</button>
+                    <button (click)="openScorecard()" fullWidth nbButton status="primary">Open Scorecard</button>
                 </div>
               </nb-card-body>
 
@@ -700,7 +700,7 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Country</label>
-            <select name="country" #country="ngModel" [(ngModel)]="referenceModel.countryId" class="custom-select" required>
+            <select name="country" #country="ngModel" [(ngModel)]="educationModel.country" class="custom-select" required>
               <option value="">--Select country--</option>
               <option *ngFor="let mycountry of allCountries" [value]="mycountry.id">{{mycountry.name}}</option>
             </select>
@@ -713,35 +713,43 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">School</label>
-            <input type="text" class="form-control" name="school" #school="ngModel" [(ngModel)]="referenceModel.institutionName" placeholder="Profession">
+            <input type="text" class="form-control" name="school" #school="ngModel" [(ngModel)]="educationModel.school" placeholder="School">
+            <div *ngIf="school.invalid && (school.dirty || school.touched)" class="error">
+              <div *ngIf="school.errors.required">School is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Course</label>
-            <input type="text" class="form-control" name="workPlace" placeholder="Place of Work">
+            <input type="text" class="form-control" name="course" #course="ngModel" [(ngModel)]="educationModel.course" placeholder="Course">
+            <div *ngIf="course.invalid && (course.dirty || course.touched)" class="error">
+              <div *ngIf="course.errors.required">Course is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Grade</label>
-            <input type="tel" class="form-control" name="phone" placeholder="Phone">
+            <input type="text" class="form-control" name="grade" #grade="ngModel" [(ngModel)]="educationModel.grade" placeholder="Grade">
+            <div *ngIf="grade.invalid && (grade.dirty || grade.touched)" class="error">
+              <div *ngIf="grade.errors.required">Grade is required</div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Degree</label>
-            <input type="email" class="form-control" name="email" placeholder="Email">
-          </div>
-        </div>
-
-        <div class="form-group row mydiv">
-          <div class="col">
-            <label class="col-form-label mylabel">Degree</label>
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <select type="text" class="form-control" name="degree" #degree="ngModel" [(ngModel)]="educationModel.degreee" placeholder="Qualification" required>
+              <option value="">--Select Qualification--</option>
+              <option *ngFor="let qualification of qualificationData" [value]="qualification.categoryId">{{qualification.name}}</option>
+              </select>
+              <div *ngIf="degree.invalid && (degree.dirty || degree.touched)" class="error">
+                <div *ngIf="degree.errors.required">Qualification is required</div>
+              </div>
           </div>
         </div>
 
