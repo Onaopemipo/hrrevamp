@@ -66,6 +66,7 @@ export class ApplicantProfileComponent implements OnInit {
   salaryData: SalaryRanage [] = [];
   jobLevelData: IDTextViewModel[] = [];
   jobRoleData: JobRole [] = [];
+  jobTypeData: [] = []
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,

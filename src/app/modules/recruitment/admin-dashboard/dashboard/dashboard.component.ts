@@ -1,4 +1,4 @@
-import { JobDTO, RecruitmentJobServiceProxy, RecruitmentJobApplicationServiceProxy, JobApplicationSearch } from './../../../../_services/service-proxies';
+import { JobDTO, RecruitmentJobServiceProxy, RecruitmentJobApplicationServiceProxy, JobApplication } from './../../../../_services/service-proxies';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   jobFilter: any;
   jobsCounter: number = 0;
 
-  allJobsApplicaions: JobApplicationSearch [] = [];
+  allJobsApplicaions: JobApplication [] = [];
   applicationsCounter: number = 0;
 
   ngOnDestroy(): void {
