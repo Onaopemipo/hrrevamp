@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { ACTIONS, ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { CommonServiceProxy, ElementInputValueDTO, AddUpdateElementInputValuesServiceProxy,EmployeeDTO, EmployeeElementLinkDTO, GetEmployeeElementLinksServiceProxy, PayElementDTO, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy, ManageElementInputValueDTO, GetElementInputValuesServiceProxy } from 'app/_services/service-proxies';
+import { CommonServiceProxy, ElementInputValueDTO, AddUpdateElementInputValuesServiceProxy,EmployeeDTO, EmployeeElementLinkDTO, GetEmployeeElementLinksServiceProxy, PayElementDTO, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy, ManageElementInputValueDTO, GetElementInputValuesServiceProxy, FetchAllEmployeesServiceProxy } from 'app/_services/service-proxies';
 export class EmployeeWithStatus extends EmployeeDTO implements IStatus {
   employee: EmployeeDTO;
   employeeName: string;
@@ -70,15 +70,16 @@ export class PayrollcontractComponent implements OnInit {
     searchPeopleGroup?: number;
   searchtText?: string;
     pageSize?: number;
-
+    pageNumber?: number;
     companyId?: number;
     searchType?: number;
     ministryId?: number;
     salaryscaleId?: number;
     gradestepId?: number;
     gradeId?: number;
+    contractStatus?: number;
 
-}={searchDepartment:0,searchLocation:0,searchJobRole:0,saerchGrade:0,searchPeopleGroup:0,searchtText:'a',pageSize:1000,salaryscaleId:0};
+}={searchDepartment:0,searchLocation:0,searchJobRole:0,saerchGrade:0,searchPeopleGroup:0,searchtText:'',pageSize:10,salaryscaleId:0};
   showEmployeeLinkModal = false;
   EmployeeElementLink = new EmployeeElementLinkDTO().clone();
   elementLinks: PayElementDTO[] = [];
@@ -107,7 +108,8 @@ export class PayrollcontractComponent implements OnInit {
     private CommonService: CommonServiceProxy,private RefreshEmployeeElementLinkService: RefreshEmployeeElementLinkServiceProxy,
     private GetEmployeeElementLinksService: GetEmployeeElementLinksServiceProxy,
     private AddUpdateElementInputValuesService: AddUpdateElementInputValuesServiceProxy,
-    private GetElementInputValuesService: GetElementInputValuesServiceProxy) { }
+    private GetElementInputValuesService: GetElementInputValuesServiceProxy,
+  private FetchAllEmployeesService: FetchAllEmployeesServiceProxy) { }
   
   saveInputValue() {
     this.loadingElementInput = true
@@ -239,9 +241,8 @@ export class PayrollcontractComponent implements OnInit {
 
   getallemployee(){
     this.loading = true;
-      this.allemployeeServices.searchEmployees(this.filterObject.pageSize, this.filterObject.companyId,
-        this.filterObject.searchtText, this.filterObject.searchPeopleGroup, this.filterObject.searchDepartment,
-      this.filterObject.searchJobRole,this.filterObject.searchLocation,this.filterObject.salaryscaleId,this.filterObject.gradeId,this.filterObject.gradestepId).subscribe(data => {
+      this.FetchAllEmployeesService.getAllEmployees(this.filterObject.searchtText, this.filterObject.contractStatus,
+        this.filterObject.pageSize, this.filterObject.pageNumber).subscribe(data => {
     if(!data.hasError){
       this.allEmployeeContract = data.result.map(r => {
         let nr = new EmployeeWithStatus(r);

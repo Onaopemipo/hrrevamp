@@ -173,8 +173,9 @@ export class TablecomponentComponent implements OnInit {
 
   filter = {};
   pageClicked(pageNo: number) {
+    this.currentPage = pageNo;
     this.pageChange.emit(pageNo);
-    this.filter = {...this.filter, ...{page: pageNo, } };
+    this.filter = {...this.filter, ...{pageNumber: pageNo, } };
     this.filterChange.emit(this.filter);
   }
   handleSearch(event) {

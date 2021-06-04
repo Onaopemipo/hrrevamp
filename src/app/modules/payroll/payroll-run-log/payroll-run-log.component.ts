@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FetchPayrollServiceProxy, PayrollRun } from 'app/_services/service-proxies';
+import { CommonServiceProxy, FetchPayrollServiceProxy, IDTextViewModel, PayrollRun } from 'app/_services/service-proxies';
 
 @Component({
   selector: 'ngx-payroll-run-log',
@@ -10,7 +10,8 @@ export class PayrollRunLogComponent implements OnInit {
   pageName = "Payroll Run Log";
   PayrollRunList: PayrollRun[] = [];
   loading = false;
-  constructor(private FetchPayrollService: FetchPayrollServiceProxy) { }
+  payrollTypeList: IDTextViewModel[] = [];
+  constructor(private FetchPayrollService: FetchPayrollServiceProxy,private commonService: CommonServiceProxy) { }
   get showEmpty() {
     return this.PayrollRunList.length === 0;
   }
@@ -23,9 +24,23 @@ export class PayrollRunLogComponent implements OnInit {
       }
     })  
   }
-
+  getPayrolltypeName(id) {
+    var chk:any = "";
+    if (this.payrollTypeList.length > 0) {
+      chk = this.payrollTypeList.find(x => x.id == id);
+    }
+    return chk.text;
+  }
+  async getPayrolltypes() {
+    var data = await this.commonService.getPayrollTypes().toPromise();
+    if (!data.hasError) {
+      this.payrollTypeList = data.result;
+    }
+}
   ngOnInit(): void {
+    this.getPayrolltypes();
     this.getPayrollRunLog();
+    
   }
 
 }

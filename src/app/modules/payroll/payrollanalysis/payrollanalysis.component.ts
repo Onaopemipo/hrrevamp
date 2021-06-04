@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payrollanalysis.component.scss']
 })
 export class PayrollanalysisComponent implements OnInit {
-
+  pageName = "Payroll Analysis";
   constructor() { }
 
   ngOnInit(): void {
