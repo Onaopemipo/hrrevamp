@@ -2,7 +2,7 @@
 <div style="background-color: transparent;">
   <div class="header"></div>
 
-  <div class="row" style=" display: flexbox; margin: 0px 12%; position: absolute; padding: 50px; top: 20%; background-color: #ffffff;">
+  <div class="row" style=" display: flexbox; width: 80%; margin: 0px 12%; position: absolute; padding: 50px; top: 20%; background-color: #ffffff;">
   <div class="container-fluid">
     <div class="row">
     <div class="col-8">
@@ -50,7 +50,7 @@
 <hr>
 <div style="padding: 10px;"></div>
 <span class="sub-title" style="padding: 20px 0px;">Apply Now</span>
-<form style="font-family: Rubik;">
+<form *ngIf="checkStatus == false" style="font-family: Rubik;">
   <div class="form-group row mydiv">
     <label for="firstName" class="col-sm-4 col-form-label mylabel">First Name</label>
     <div class="col-sm-6 col-lg-6">
@@ -98,7 +98,7 @@
 
     <div class="col-4">
       <div class="job-details">
-        <button type="button" class="btn my-button">Apply Now</button>
+        <button type="button" class="btn my-button" (click)="applyForJob()">Apply Now</button>
       </div>
       <div class="socials">
         <div style="padding: 20px;"></div>

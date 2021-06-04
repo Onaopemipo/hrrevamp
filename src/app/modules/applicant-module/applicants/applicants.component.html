@@ -25,29 +25,33 @@
     <!-- <ngx-componentsheader actions="actions" class="listing" style="justify-self: start;" [pageName] = "pageTitle"></ngx-componentsheader> -->
     <div style="align-self: flex-start;"><span class="title">Recent Listings</span></div>
     <div class="listing">
-      <form>
+      <!-- <form>
         <label for="listing">Showing:</label>
         <select name="filter" id="">
           <option value="recent">Recent</option>
           <option value="skilled">Skilled</option>
           <option value="nonskilled">Non-Skilled</option>
         </select>
-      </form>
+      </form> -->
     </div>
   </div>
-  <div *ngIf="loading == false && jobsCounter > 0" class="overflow-auto job-listing" style="display: flex; flex-direction: row; align-items: center; flex: auto; justify-content: space-between; padding-bottom: 20px;">
-    <div *ngFor="let job of allJobs" class="job-items">
-      <div class="title">{{ job.jobTitle }}</div>
-      <div class="sub-title">{{ job.location }}</div>
-      <div style="padding: 10px;"></div>
-      <div class="job-descrition"><p>{{ job.description }}</p>
-      </div>
-      <div>
-        <button class="btn" routerLink="['/jobdetails/:', job.id]" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+  <ngx-template *ngIf="loading == false && jobsCounter > 0">
+    <div class="row">
+      <div *ngFor="let job of allJobs" class="col-sm-4 job-items">
+        <div  class="budget-item card" style="margin: 0.3rem; background-color: white; border-radius: 4px; padding: 0.5rem;">
+          <div class="title">{{ job.jobTitle }}</div>
+        <div class="sub-title">{{ job.location }}</div>
+        <div style="padding: 10px;"></div>
+        <div class="job-descrition"><p>{{ job.description }}</p>
+        </div>
+        <div>
+          <button class="btn" (click)="jobDetails(job.id)" style="color: #4847E0; border-radius: 4px; background: rgba(72, 71, 224, 0.08);">Apply Now</button>
+        </div>
+        </div>
       </div>
     </div>
 
-  </div>
+  </ngx-template>
 
   <div *ngIf="jobsCounter < 1" style="background-color: #ffffff;">
     <nb-card>

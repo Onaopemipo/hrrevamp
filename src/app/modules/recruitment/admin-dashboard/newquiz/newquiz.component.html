@@ -71,7 +71,8 @@
 
           <div class="form-group row mydiv">
             <div class="col">
-              <button nbButton status="primary" (click)="addNewQuiz()">Save Quiz</button>
+              <button *ngIf="!loading" nbButton status="primary" (click)="addNewQuiz()">Save Quiz</button>
+              <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             </div>
           </div>
         </nb-card-body>

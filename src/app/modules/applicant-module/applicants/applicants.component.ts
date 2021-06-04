@@ -23,9 +23,8 @@ export class ApplicantsComponent implements OnInit {
     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.fetchApplications();
-    this.fetchPostedJobs;
     this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
+    this.fetchPostedJobs();
   }
 
   myProfle() {
@@ -33,13 +32,15 @@ export class ApplicantsComponent implements OnInit {
   }
 
   fetchPostedJobs(){
-      this.job.getAllActiveJobs(10,1).subscribe(data => {
-        if(!data.hasError){
-          this.allJobs = data.result;
-          this.jobsCounter = data.totalRecord;
-        }
-      });
-
+    this.loading = true;
+    this.job.getAllActiveJobs(1,10).subscribe( data => {
+    this.loading = false;
+    if(!data.hasError){
+      this.allJobs = data.result;
+      this.jobsCounter = data.totalRecord;
+    }
+  });
+    
     }
 
     jobDetails(id){

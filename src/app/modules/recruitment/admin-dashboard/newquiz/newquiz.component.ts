@@ -34,6 +34,7 @@ myOptionType: number;
   questionModel: QuestionDTO = new QuestionDTO();
   questionOptionModel: QuestionOptionDTO = new QuestionOptionDTO();
   newOption = "";
+  loading:boolean = false;
 
   constructor(private quiz: RecruitmentQuizServiceProxy,private alertMe: AlertserviceService, private router: Router) { }
 
@@ -72,9 +73,11 @@ myOptionType: number;
   }
 
   addNewQuiz() {
+    this.loading = true;
     this.newQuizModel.questions = JSON.stringify(this.allQuestions);
     this.newQuizModel.typeId = 1;
     this.quiz.addUpdateQuiz(this.newQuizModel).subscribe(data => {
+    this.loading = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Quiz Added!', 'Dismiss').subscribe(res => {
           if(res){

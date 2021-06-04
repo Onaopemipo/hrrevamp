@@ -125,14 +125,10 @@
 
   <ngx-template *ngIf="finLoading == false && budgetItemsCounter > 0">
     <div class="row">
-      <div class="col-sm-4"  *ngFor="let budget of allBudgetItems">
+      <div class="col-sm-4" *ngFor="let budget of allBudgetItems">
         <div
           class="budget-item card"
-          style="
-            margin: 0.3rem;
-            background-color: white;
-            border-radius: 4px;
-            padding: 0.5rem;
+          style="margin: 0.3rem; background-color: white; border-radius: 4px; padding: 0.5rem;
           "
         >
           <h5>{{budget.name}}</h5>

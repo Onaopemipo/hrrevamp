@@ -69,6 +69,7 @@ export class NewjobComponent implements OnInit {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss').subscribe(res => {
         if(res){
           this.router.navigateByUrl('/recruitmentadmin/jobs/');
+          this.fetchAllJobs();
         }
       })
     }
@@ -84,6 +85,7 @@ export class NewjobComponent implements OnInit {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Draft Saved', 'Dismiss').subscribe(res => {
         if(res){
           this.router.navigateByUrl('/recruitmentadmin/jobs/');
+          this.fetchAllJobs();
         }
       })
     }

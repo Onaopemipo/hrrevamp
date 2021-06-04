@@ -20,7 +20,7 @@
         <div class="col-lg-3 col-sm-6 col-xxxl-3">
           <div class="d-flex mt-4" style="margin-left: 15px;">
             <div class="ml-2">
-              <h6 class="profileName">Sherif Shorunke</h6>
+              <h6 class="profileName">{{profileData.firstName}} &nbsp; {{profileData.lastName}}</h6>
               <span style="font-size: x-small;"><a href="#">Change Avatar</a></span>
             </div>
 
@@ -29,7 +29,7 @@
           <div class="d-flex mt-3" style="margin-left: 15px;">
             <div class="ml-2">
               <i class="fas fa-envelope"></i> <span style="font-size: 14px; padding-left: 5px;">Email</span>
-              <h6 style="font-size: x-small;">sherif@smartace.ng</h6>
+              <h6 style="font-size: x-small;">{{profileData.email}}</h6>
             </div>
           </div>
         </div>
@@ -39,14 +39,14 @@
           <div class="d-flex mt-4" style="margin-left: 15px;">
             <div class="ml-2">
               <i class="fas fa-phone"></i><span style="font-size: 14px; padding-left: 5px;">Phone</span>
-              <h6 style="font-size: x-small;">+234-9078654783</h6>
+              <h6 style="font-size: x-small;">{{profileData.mobile}}</h6>
             </div>
 
           </div>
           <div class="d-flex mt-4" style="margin-left: 15px;">
             <div class="ml-2">
               <i class="fas fa-map-marker"></i> <span style="font-size: 14px; padding-left: 5px;">Address</span>
-              <h6 style="font-size: x-small;">56 Joseph Harden street. Lagos, Nigeria.</h6>
+              <h6 style="font-size: x-small;">{{profileData.address}}</h6>
             </div>
           </div>
         </div>
@@ -56,14 +56,14 @@
           <div class="d-flex mt-4" style="margin-left: 15px;">
             <div class="ml-2">
               <i class="fas fa-link"></i> <span style="font-size: 14px; padding-left: 5px;">Website</span>
-              <h6 style="font-size: x-small;">giname.com</h6>
+              <h6 style="font-size: x-small;">{{profileData.website}}</h6>
             </div>
 
           </div>
           <div class="d-flex mt-4" style="margin-left: 15px;">
             <div class="ml-2">
               <i class="fab fa-linkedin-in"></i><span style="font-size: 14px; padding-left: 5px;">LinkedIn</span>
-              <h6 style="font-size: x-small;">@ginagee</h6>
+              <h6 style="font-size: x-small;">{{profileData.linkedIn}}</h6>
             </div>
           </div>
         </div>
@@ -367,9 +367,9 @@
               <nb-card-body *ngIf="isAdmin">
                 <div class="form-group row">
                   <div class="col" style="display: flex; justify-content: space-between; align-items: center;">
-                    <button nbButton style="color: #4847E0"><nb-icon icon="calendar"></nb-icon> Schedule</button>
+                    <button nbButton style="color: #4847E0" (click)="toggleShareProfile()"><nb-icon icon="calendar"></nb-icon> Schedule</button>
                     <button nbButton style="color: #4847E0"><nb-icon icon="email"></nb-icon> Email</button>
-                    <button nbButton style="color: #4847E0"><nb-icon icon="share"> </nb-icon>Share</button>
+                    <button nbButton style="color: #4847E0" (click)="toggleShareProfile()"><nb-icon icon="share"> </nb-icon>Share</button>
                   </div>
                 </div>
 
@@ -377,8 +377,8 @@
                   <div class="col">
                     <label for="">Recruitment Action</label>
                     <select name="recAction" id="" class="custom-select">
-                      <option value=""></option>
-                      <option *ngFor="let action of recruitmentAction" [value]="action.id">{{action.label}}</option>
+                      <option value="">--Select Action--</option>
+                      <option *ngFor="let action of recruitmentAction" [value]="action.id">{{action.text}}</option>
                     </select>
                   </div>
                 </div>
@@ -394,8 +394,6 @@
             </nb-card>
           </div>
         </div>
-
-
       </div>
 
       <!-- Education Panel -->
@@ -471,32 +469,32 @@
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Body" class="col-form-label mylabel">Responsibilities</label><br>
+            <label  class="col-form-label mylabel">Responsibilities</label><br>
             <textarea name="responsibilities" id="" cols="30" rows="10" style="width: 100%;"></textarea>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Body" class="col-form-label mylabel">Start Date</label>
-            <input nbInput placeholder="Form Picker" name="startDate" [nbDatepicker]="ngmodel" [(ngModel)]="workExperienceModel.startDate">
-            <nb-datepicker #ngmodel></nb-datepicker>
+            <label  class="col-form-label mylabel">Start Date</label><br>
+            <ngx-date type="date" class="input-group date" [(ngModel)]="workExperienceModel.startDate"></ngx-date>
           </div>
         </div>
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label for="Body" class="col-form-label mylabel">End Date</label>
-            <input nbInput placeholder="Form Picker" name="endDate" [nbDatepicker]="ngmodel" [(ngModel)]="workExperienceModel.endDate">
-            <nb-datepicker #ngmodel></nb-datepicker>
+            <nb-checkbox status="basic" name="currentWork" #currentWork="ngModel" [(ngModel)]="workExperienceModel.workHere" (checkedChange)="toggle($event)">I currently work here</nb-checkbox>
           </div>
         </div>
 
-        <div class="form-group row mydiv">
+        <div *ngIf="workChecker == false" class="form-group row mydiv">
           <div class="col">
-            <nb-checkbox status="basic">I currently work here</nb-checkbox>
+            <label  class="col-form-label mylabel">End Date</label><br>
+            <ngx-date class="input-group date"[(ngModel)]="workExperienceModel.endDate"></ngx-date>
           </div>
         </div>
+
+       
 
           <div class="form-group row">
             <div class="col">
@@ -688,6 +686,61 @@
               <button nbButton status="primary" (click)="updateSkills()">Save</button>
               <span style="padding: 8px;"></span>
               <button nbButton>Cancel</button>
+            </div>
+          </div>
+        </form>
+          </div>
+  </ngx-side-modal>
+
+  <ngx-side-modal [(show)]="share" style="margin-top: -75px;">
+    <div modal-header>Schedule for Interview</div>
+    <div modal-body>
+      <form>
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label>Date</label>
+            <ngx-date [(ngModel)]="interviewModel.interviewDate"></ngx-date>
+        </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label>Interview Time</label>
+            <!-- <input type="time" class="form-control" [(ngModel)]="interviewModel.interviewTime" name="interviewTime" #interviewTime="ngModel" min="09:00" max="18:00" required> -->
+            <input type="datetime" class="form-control" [(ngModel)]="interviewModel.interviewTime" name="interviewTime" #interviewTime="ngModel">
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+            <label>Duration (Minutes)</label>
+            <input type="number" name="duration" class="form-control" #duration="ngModel" [(ngModel)]="interviewModel.duration">
+        </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <label for="">Interview Type</label>
+            <select name="typeOfInterview" #typeOfInterview="ngModel" [(ngModel)]="interviewModel.interviewType" class="custom-select">
+              <option value="">--Select Type--</option>
+              <option *ngFor="let type of interviewType" [value]="type.id">{{type.label}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mydiv">
+          <div class="col">
+          <label>Interviewers</label>
+          <ngx-employee-master-search class="custom-select" (masterSubmitted)="getSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+        </div>
+        </div>
+
+          <div class="form-group row" style="padding-top: 100px;">
+            <div class="col">
+              <button *ngIf="!btnProcessing"  nbButton status="primary" (click)="scheduleForInterview()">Save</button>
+              <button *ngIf="btnProcessing" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+              <span style="padding: 8px;"></span>
+              <button nbButton (click)="cancelSchedule()">Cancel</button>
             </div>
           </div>
         </form>

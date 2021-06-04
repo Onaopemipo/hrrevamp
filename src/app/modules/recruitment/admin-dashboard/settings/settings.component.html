@@ -2,7 +2,7 @@
 <ngx-componentsheader *ngIf="selectedCase =='Hiring_Stages'" pageName='Settings' [requiredButton]="[{name:'newStage', label:'Add New Stage', icon: 'plus'}]" (buttonClick)="addStage()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='EmailSms_Templates'" pageName='Settings' [requiredButton]="[{name:'newTemplate', label:'Add New Template', icon: 'plus'}]" (buttonClick)=" toggleNewTemplate()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="toggleScorecard()"></ngx-componentsheader>
-<div *ngIf="createStage && createTemplate" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  <div class="col-md-4">
+<div *ngIf="scorecardCounter < 1  || templateCounter < 1 || hiringStageCounter < 1" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  <div class="col-md-4">
     <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
       <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
       <div style="padding: 20px;">
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div *ngIf="!(createStage && createTemplate)" class="row">
+<div *ngIf="scorecardCounter > 0 || templateCounter > 0 || hiringStageCounter > 0" class="row">
   <div class="col-lg-4 col-md-4 col-xxl-4">
       <nb-card>
       <div>
@@ -57,18 +57,18 @@
           <div class="fmContainer" *ngSwitchCase="'Hiring_Stages'" style="background-color: transparent;">
             <div style="background-color: transparent; padding-bottom: 5px; display: flex;flex-direction: column;" >
               <!-- <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p> -->
-              <nb-card class="cardTitle" (click)="toggleCard('applied')" #applied>
+              <nb-card *ngFor="let hstage of hiringStages" class="cardTitle" (click)="toggleCard('applied')" #applied>
                 <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Applied</span><span class="actions"><button nbButton style="color: #4847E0;">Add Stage</button><button nbButton style="color: #4847E0;">Edit</button><button nbButton style="color: #EB5757;">Delete</button></span>
+                    <span>{{ hstage.name }}</span><span class="actions"><button nbButton style="color: #4847E0;" (click)="addSubStage(hstage.id)">Add Stage</button><button nbButton style="color: #4847E0;">Edit</button><button nbButton style="color: #EB5757;">Delete</button></span>
                   </div>
                 </nb-card-header>
-                <nb-card-body *ngIf="cardClick=='applied'">
-                  <h4>I am here</h4>
+                <nb-card-body *ngFor="let substage of allSubHireStages">
+                  <h4>{{ substage.name }}</h4>
                 </nb-card-body>
               </nb-card>
 
-              <nb-card class="cardTitle" (click)="toggleCard('shortlisted')" #shortlisted>
+              <!-- <nb-card class="cardTitle" (click)="toggleCard('shortlisted')" #shortlisted>
                 <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
                     <span>Shortlisted</span><span class="actions"><a href="javascript:void(0)"
@@ -78,15 +78,15 @@
                 <nb-card-body *ngIf="cardClick=='shortlisted'">
                   <h4>I am here</h4>
                 </nb-card-body>
-              </nb-card>
+              </nb-card> -->
 
               <nb-card class="cardTitle" (click)="toggleCard('interviewed')" #interviewed>
-                <nb-card-header>
+                <!-- <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
                     <span>Interview</span><span class="actions"><a href=""><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Stage</a></span>
                   </div>
-                </nb-card-header>
-                <nb-card-body *ngIf="cardClick =='interviewed'">
+                </nb-card-header> -->
+                <!-- <nb-card-body *ngIf="cardClick =='interviewed'">
                   <h4>Stage 1</h4>
                 </nb-card-body>
 
@@ -96,7 +96,7 @@
 
                 <nb-card-body *ngIf="cardClick =='interviewed'">
                   <h4>Stage 3</h4>
-                </nb-card-body>
+                </nb-card-body> -->
               </nb-card>
 
               <nb-card class="cardTitle" (click)="toggleCard('pending')" #pending>
@@ -147,7 +147,7 @@
         <nb-card *ngFor="let scorecard of allScorecards" class="scoreCardTitle" (click)="toggleScoreCard()">
           <nb-card-header>
             <div style="display: flex; flex-direction: row; justify-content: space-between;">
-              <span>{{ scorecard.focusArea }}</span><span><a href="javascript:void(0);" (click)="addFocusArea(scorecard.id)"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a></span>
+              <span>{{ scorecard.focusArea }}</span><span><a href="javascript:void(0);" (click)="addFocusArea(scorecard.id)"><i class="fas fa-plus" style="color: #4847E0; padding-right: 10px;"></i>Add Focus Area</a> <a href="javascript:void(0);">Edit</a><a style="padding: 10px; color:#EB5757;" href="javascript:void(0);" (click)="deleteScorecard(scorecard.id)">Delete</a></span>
             </div>
           </nb-card-header>
           <nb-card-body *ngIf="scoreCardClick">
@@ -267,7 +267,7 @@
       <div class="form-group row mydiv">
         <div class="col">
           <label class="col-form-label mylabel">Question</label><br>
-          <textarea name="question" #question="ngModel" [(ngModel)]="questionModel.question" cols="30" rows="10"></textarea>
+          <textarea name="question" #question="ngModel" [(ngModel)]="questionModel.question" cols="30" rows="10" style="width: 100%;"></textarea>
         </div>
       </div>
 

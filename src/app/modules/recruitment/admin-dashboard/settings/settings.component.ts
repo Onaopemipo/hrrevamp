@@ -1,6 +1,6 @@
 import { CommunicationServiceProxy, MailTemplateDTO, CommonServiceProxy } from 'app/_services/service-proxies';
 import { AlertserviceService } from './../../../../_services/alertservice.service';
-import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO, QuestionDTO, QuestionOptionDTO, RecruitmentScoreCard, ScoringType } from './../../../../_services/service-proxies';
+import { RecruitmentSettingServiceProxy, ManageHireStageDTO, HireStageDTO, RecruitmentScoreCardDTO, ManageRecruitmentScoreCardDTO, ScoreCardQuestion, SubHireStageDTO, QuestionDTO, QuestionOptionDTO, RecruitmentScoreCard, ScoringType, ManageSubHireStageDTO } from './../../../../_services/service-proxies';
 import { NbTabComponent } from '@nebular/theme';
 import { Component, OnInit } from '@angular/core';
 import { truncateSync } from 'fs';
@@ -53,6 +53,11 @@ export class SettingsComponent implements OnInit {
   allScorecards: RecruitmentScoreCard [] = [];
   allTemplates: MailTemplateDTO [] = [];
   scoringTypes: ScoringType [] = [];
+  scorecardCounter: number = 0
+  templateCounter: number = 0;
+  hiringStageCounter: number = 0;
+  loading: boolean = false;
+
 
   constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService, 
     private template: CommunicationServiceProxy, private commonService: CommonServiceProxy) { }
@@ -120,6 +125,7 @@ export class SettingsComponent implements OnInit {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Scorecard Added!','Dismiss').subscribe(res => {
           if(res){
+            this.fetchAllScorecards();
             this.scorecard = false;
           }
         })
@@ -131,7 +137,25 @@ export class SettingsComponent implements OnInit {
     const data = await this.settings.getRecruitmentScoreCards().toPromise();
     if(!data.hasError){
       this.allScorecards = data.result;
+      this.scorecardCounter = data.totalRecord;
     }
+  }
+
+  deleteScorecard(id){
+    alert(id)
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Are you sure', 'Yes').subscribe(res =>{
+      if(res){
+        this.settings.deleteScoreCard(id).subscribe(data => {
+          if(!data.hasError){
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Deleted', 'Dismiss').subscribe(newres => {
+              if(newres){
+                this.fetchAllScorecards();
+              }
+            })
+          }
+        })
+      }
+    })
   }
 
   async fetchScoringType(){
@@ -176,6 +200,7 @@ export class SettingsComponent implements OnInit {
     const data = await this.template.getAllEmailTemplates().toPromise();
     if(!data.hasError){
       this.allTemplates = data.result;
+      this.templateCounter = data.totalRecord;
     }
   }
 
@@ -183,6 +208,7 @@ export class SettingsComponent implements OnInit {
     const data = await this.settings.getAllHireStages().toPromise();
     if(!data.hasError){
       this.hiringStages = data.result;
+      this.hiringStageCounter = data.totalRecord;
     }
   }
 
@@ -205,6 +231,22 @@ export class SettingsComponent implements OnInit {
     if(!data.hasError){
       this.subHireStage = data.result;
     }
+  }
+
+  addSubStage(id){
+    this.loading = true;
+    let substage = new ManageSubHireStageDTO();
+    substage.hireStageId = id;
+    this.settings.addUpdateSubHireStage(substage).subscribe(data => {
+      this.loading = false;
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Substage Added', 'OK').subscribe(res => {
+          if(res){
+            this.fetchAllScorecards();
+          }
+        })
+      }
+    })
   }
 
   getSelectedEmployee(event,selectType) {

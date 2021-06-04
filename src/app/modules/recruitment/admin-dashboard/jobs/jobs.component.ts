@@ -242,7 +242,8 @@ draftTableActionClicked(event: TableActionEvent){
       this.loading = false;
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss').subscribe(res => {
         if(res){
-
+          this.router.navigateByUrl('/recruitmentadmin/jobs');
+          this.fetchAllJobs();
         }
       })
     }
@@ -254,7 +255,12 @@ draftTableActionClicked(event: TableActionEvent){
       if(res){
         this.job.deleteJob(1).subscribe(data => {
           if(!data.hasError){
-            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Job Deleted!', 'Dismiss');
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Job Deleted!', 'Dismiss').subscribe(res => {
+              if(res){
+                this.router.navigateByUrl('/recruitmentadmin/jobs');
+                this.fetchAllJobs();
+              }
+            });
           }
         })
       }

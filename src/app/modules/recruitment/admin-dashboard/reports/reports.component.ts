@@ -21,6 +21,7 @@ export class ReportsComponent implements OnInit {
   constructor(private jobService: RecruitmentJobApplicationServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchApplications();
   }
 
 

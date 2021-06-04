@@ -36,6 +36,7 @@ export class QuizComponent implements OnInit {
   questionModel: QuestionDTO = new QuestionDTO();
   questionOptionModel: QuestionOptionDTO = new QuestionOptionDTO();
   myOptionType: number;
+  loading: boolean = false;
 
   constructor(private quiz: RecruitmentQuizServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
@@ -62,8 +63,10 @@ export class QuizComponent implements OnInit {
   }
 
   addNewQuiz() {
+    this.loading = true;
     this.newQuizModel.typeId = 1;
     this.quiz.addUpdateQuiz(this.newQuizModel).subscribe(data => {
+      this.loading = false;
       if(!data.hasError && data.result.isSuccessful == true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Quiz Added!', 'Dismiss');
       }

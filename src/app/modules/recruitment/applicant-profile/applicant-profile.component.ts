@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
 import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy, Institution, DropdownValue, JobRole } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course, SalaryRanage } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course, SalaryRanage, Sector, ScheduleJobInterviewDto } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -14,12 +14,14 @@ import { Router } from '@angular/router';
 })
 export class ApplicantProfileComponent implements OnInit {
 
-  // recruitmentAction = [
-  //   {id: 0, label:'Interviewed'},
-  //   {id: 1, label:'Shortlisted'},
-  //   {id: 2, label:'Offer'},
-  //   {id: 3, label:'Hired'},
-  // ]
+  interviewType = [
+    {id: 0, label:'Oral'},
+    {id: 1, label:'Written'},
+  ]
+
+  allowmultipleselection: boolean = true;
+  selectionHeader: string = "Select Employee";
+  addbtnText: string = "Add Interviewer";
   pageTitle: string = 'Profile';
   title: string = 'Set up your account';
   src: string = 'assets/icons/camera.jpg';
@@ -28,13 +30,14 @@ export class ApplicantProfileComponent implements OnInit {
   modalPosition = 'Center';
   reference = '';
   beginSetup = true;
+  share: boolean = false;
   updateProfile: boolean = false;
   newWork: boolean = false;
   jobInterview: JobApplicantScheduleInterview = new JobApplicantScheduleInterview();
   profileData: JobApplicantDto = new JobApplicantDto().clone();
   isApplicant: boolean = false;
-  isInterviewer: boolean = true;
-  isAdmin: boolean = false;
+  isInterviewer: boolean = false;
+  isAdmin: boolean = true;
   applicantId: number = 0;
   skills: [] = [];
   addReferences: boolean = false;
@@ -57,7 +60,7 @@ export class ApplicantProfileComponent implements OnInit {
   allCourses: Course [] = [];
   jobPreference:boolean = false;
   btnProcessing:boolean = false;
-  sectorData: DropdownValue [] = [];
+  sectorData: Sector [] = [];
   tempJobRole: string [] = [];
   tempJobType: string [] = [];
   tempIndustry: string [] = [];
@@ -67,6 +70,8 @@ export class ApplicantProfileComponent implements OnInit {
   jobLevelData: IDTextViewModel[] = [];
   jobRoleData: JobRole [] = [];
   jobTypeData: [] = []
+  workChecker:boolean = false;
+  interviewModel: ScheduleJobInterviewDto = new ScheduleJobInterviewDto();
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
@@ -79,6 +84,11 @@ export class ApplicantProfileComponent implements OnInit {
   ngOnInit(): void {
     this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;
+    this.profile.getApplicantById(this.applicantId = Number(this.route.snapshot.paramMap.get("id"))).subscribe(data => {
+      if(!data.hasError){
+        this.profileData = data.result;
+      }
+    })
     this.getCountries();
     this.fetchCountries();
     this.getEntity();
@@ -105,8 +115,21 @@ export class ApplicantProfileComponent implements OnInit {
 
   }
 
-  updateWorkExperience(){
+  toggle(event){
+    this.workExperienceModel.workHere = event;
+    this.workChecker = event;
+  }
 
+  updateWorkExperience(){
+    let applicant: JobApplicantDto = new JobApplicantDto();
+    applicant.id = this.profileData.id;
+    applicant.selectedWorkExperience = JSON.stringify(this.workExperienceModel);
+    this.profile.completeApplicantProfile(applicant).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
+      }
+    })
+    console.log('Here is your string', applicant)
   }
 
   async fetchSchools(){
@@ -205,7 +228,7 @@ export class ApplicantProfileComponent implements OnInit {
   }
 
   async fetchSector(){
-    const data = await this.DataService.getDropDownValues("Sectors").toPromise();
+    const data = await this.DataService.getSector().toPromise();
     if(!data.hasError){
       this.sectorData = data.result;
     }
@@ -304,6 +327,30 @@ export class ApplicantProfileComponent implements OnInit {
 
  async getCountries(){
   // const data = await this.
+  }
+
+  toggleShareProfile(){
+    this.share = true;
+  }
+
+  getSelectedEmployee(event,selectType) {
+    if(selectType == 'employee'){
+     this.interviewModel.interviewerEmployeeId = event[0].employeeNumber;
+    }
+ }
+
+  scheduleForInterview(){
+    this.btnProcessing = true;
+    this.ineterview.shareApplicantProfileForInterview(this.interviewModel).subscribe(data => {
+      this.btnProcessing = false;
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss')
+      }
+    })
+  }
+
+  cancelSchedule(){
+    this.share = false;
   }
 
 
