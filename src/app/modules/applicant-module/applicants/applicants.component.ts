@@ -1,3 +1,5 @@
+import { IVwUserObj } from 'app/_services/service-proxies';
+import { AuthenticationService } from 'app/_services/authentication.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobApplication, JobDTO } from './../../../_services/service-proxies';
@@ -18,9 +20,10 @@ export class ApplicantsComponent implements OnInit {
   noJobsHeader: string = 'There is no job at the moment';
   noJobs: string = 'Please check back later';
   applicantId:number = 0;
+  user: IVwUserObj;
 
   constructor(private jobService: RecruitmentJobApplicationServiceProxy, private job: RecruitmentJobServiceProxy,
-    private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute, private authServ: AuthenticationService) { }
 
   ngOnInit(): void {
     this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
@@ -49,5 +52,17 @@ export class ApplicantsComponent implements OnInit {
 
     gotoProfile(){
       this.router.navigateByUrl('/recruitment/profile/'+ this.applicantId);
+    }
+
+    async getLoggedInUser(){
+      this.authServ.getuser().then(async (users: IVwUserObj[])=> {
+        if (users) {
+          if (users.length > 0) {
+            this.user = users[0];
+            console.log('My user is here',this.user)
+    }
+    }
+    })
+  
     }
 }
