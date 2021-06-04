@@ -98,7 +98,7 @@
         <nb-action [disabled]="currentPage <= 1" (click)="pageClicked(currentPage - 1)" icon="arrow-ios-back-outline"></nb-action>
       <nb-action>{{currentPage}}</nb-action>
 
-        <nb-action icon="arrow-ios-forward-outline" [disabled]="currentPage <= totalNoOfPages" (click)="pageClicked(currentPage + 1)"></nb-action>
+        <nb-action icon="arrow-ios-forward-outline" [disabled]="currentPage >= totalNoOfPages" (click)="pageClicked(currentPage + 1)"></nb-action>
       </nb-actions>
 
 

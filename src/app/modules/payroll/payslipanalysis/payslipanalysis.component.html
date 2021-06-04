@@ -1,0 +1,15 @@
+<ngx-componentsheader [pageName]='pageName' [showbackbutton]="true" (backbuttonClick)="goback()">
+
+</ngx-componentsheader>
+<nb-card>
+<nb-card-body>
+    <ngx-default-content *ngIf="showEmpty"  pageHeader="Payslip Analysis"
+    pageDescription="No record found"  [loading]="loading">
+  </ngx-default-content>
+  <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="false"
+  [showFilter]="true"  [userData]="paySlipdata"
+  [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loading">
+</ngx-tablecomponent>
+
+</nb-card-body>
+</nb-card> 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
-import { GetBankScheduleServiceProxy, GetEarningsServiceProxy } from 'app/_services/service-proxies';
+import { GetAllElementsServiceProxy, GetBankScheduleServiceProxy, GetDeductionsServiceProxy, GetDeductionSummaryServiceProxy, GetEarningsServiceProxy, GetPaymentSummaryServiceProxy, GetPayslipAnalysisServiceProxy, GetPensionDetailServiceProxy, GetTaxDetailServiceProxy } from 'app/_services/service-proxies';
 
 
 enum TABLE_ACTION {
@@ -34,88 +34,103 @@ export class PayrollreportComponent implements OnInit {
   ];
   //EARNINGS TABLE
   earningtableColumn = [
-    { name: 'a', title: 'NAME/ID' },
-    { name: 'b', title: 'DEPARTMENT' },
-    { name: 'c', title: 'LOCATION' },
-    { name: 'd', title: 'GRADE LEVEL' },
-    { name: 'e', title: 'GRADE STEP' },
-    { name: 'e', title: 'LEAVE' },
-    { name: 'f', title: 'BONUS' },
-    { name: 'g', title: 'OTHERS' },
+    { name: 'employeeName', title: 'NAME' },
+    { name: 'employeeNo', title: 'EMPLOYEE NUMBER' },
+    { name: 'elementName', title: 'ITEM NAME' },  
+    { name: 'amount', title: 'AMOUNT' },
+    { name: 'locationName', title: 'LOCATION NAME' },
+    // { name: 'b', title: 'DEPARTMENT' },
+    // { name: 'c', title: 'LOCATION' },
+    // { name: 'd', title: 'GRADE LEVEL' },
+    // { name: 'e', title: 'GRADE STEP' },
+    // { name: 'e', title: 'LEAVE' },
+    // { name: 'f', title: 'BONUS' },
+    // { name: 'g', title: 'OTHERS' },
   ];
   //Deduction Table
-  tableColum = [
-    { name: 'a', title: 'NAME/ID' },
-    { name: 'b', title: 'DEPARTMENT' },
-    { name: 'c', title: 'LOCATION' },
-    { name: 'd', title: 'GRADE LEVEL' },
-    { name: 'e', title: 'GRADE STEP' },
-    { name: 'e', title: 'LEAVE' },
-    { name: 'f', title: 'LOAN' },
-    { name: 'g', title: 'OTHERS' },
+  deductiontableColum = [
+    { name: 'employeeName', title: 'NAME' },
+    { name: 'employeeNo', title: 'EMPLOYEE NUMBER' },
+    { name: 'elementName', title: 'ITEM NAME' },  
+    { name: 'amount', title: 'AMOUNT' },
+    { name: 'locationName', title: 'LOCATION NAME' },
+    // { name: 'a', title: 'NAME/ID' },
+    // { name: 'b', title: 'DEPARTMENT' },
+    // { name: 'c', title: 'LOCATION' },
+    // { name: 'd', title: 'GRADE LEVEL' },
+    // { name: 'e', title: 'GRADE STEP' },
+    // { name: 'e', title: 'LEAVE' },
+    // { name: 'f', title: 'LOAN' },
+    // { name: 'g', title: 'OTHERS' },
   ];
   //ALL Element table
-  tableColu = [
-    { name: 'a', title: 'NAME/ID' },
-    { name: 'b', title: 'DEPARTMENT' },
-    { name: 'c', title: 'LOCATION' },
-    { name: 'd', title: 'GRADE LEVEL' },
-    { name: 'e', title: 'GRADE STEP' },
-    { name: 'e', title: 'LEAVE' },
-    { name: 'f', title: 'LOAN' },
-    { name: 'g', title: 'LEAVE' },
+  allElementtableColumn = [
+    { name: 'employeeName', title: 'NAME' },
+    { name: 'employeeNo', title: 'EMPLOYEE NUMBER' },
+    { name: 'elementName', title: 'ITEM NAME' },  
+    { name: 'amount', title: 'AMOUNT' },
+    { name: 'locationName', title: 'LOCATION NAME' },
+    // { name: 'a', title: 'NAME/ID' },
+    // { name: 'b', title: 'DEPARTMENT' },
+    // { name: 'c', title: 'LOCATION' },
+    // { name: 'd', title: 'GRADE LEVEL' },
+    // { name: 'e', title: 'GRADE STEP' },
+    // { name: 'e', title: 'LEAVE' },
+    // { name: 'f', title: 'LOAN' },
+    // { name: 'g', title: 'LEAVE' },
   ];
 
   //table for deduction summary
 
-  tableCol = [
-    { name: 'a', title: 'ELEMENT NAME' },
-    { name: 'b', title: 'AMOUNT' },
-    { name: 'c', title: 'LOCATION' },
+  deductionSummarytableCol = [
+    { name: 'sn', title: 'S/N' },
+    { name: 'elementName', title: 'ELEMENT NAME' },
+    { name: 'amount', title: 'AMOUNT' },
+    //{ name: 'c', title: 'LOCATION' },
   
   ];
 
   //Table for payment summary
-  tableCo = [
-    { name: 'a', title: 'ELEMENT NAME' },
-    { name: 'b', title: 'AMOUNT' },
-    { name: 'c', title: 'LOCATION' },
+  paymentSummarytableCo = [
+    { name: 'sn', title: 'S/N' },
+    { name: 'elementName', title: 'ELEMENT NAME' },
+    { name: 'amount', title: 'AMOUNT' },
+   // { name: 'c', title: 'LOCATION' },
   ];
   //Table for Tax
-  tableC = [
-    { name: 'a', title: 'NAME/ID' },
-    { name: 'b', title: 'ID' },
-    { name: 'b', title: 'ELEMENT NAME' },
-    { name: 'b', title: 'AMOUNT' },
-    { name: 'c', title: 'LOCATION' },
+  taxtableC = [
+    { name: 'employeeName', title: 'NAME' },
+    { name: 'employeeNo', title: 'EMPLOYEE NUMBER' },
+    { name: 'elementName', title: 'ELEMENT NAME' },
+    { name: 'amount', title: 'AMOUNT' },
+    { name: 'location', title: 'LOCATION' },
 
   ];
   //Table for pension
-  table = [
-    { name: 'a', title: 'NAME/ID' },
-    { name: 'b', title: 'PFA CODE' },
-    { name: 'c', title: 'PFA NAME' },
-    { name: 'd', title: 'PENSION PIN' },
-    { name: 'e', title: 'PERIOD NAME' },
-    { name: 'e', title: 'EMPLOYEE CONTRIBUTION' },
-    { name: 'f', title: 'REMITANCE' },
+  pensiontable = [
+    { name: 'employeeName', title: 'NAME' },
+    { name: 'employeeNo', title: 'EMPLOYEE NUMBER' },
+    { name: 'pfaCode', title: 'PFA CODE' },
+    { name: 'pfaName', title: 'PFA NAME' },
+    { name: 'pensionPIN', title: 'PENSION PIN' },
+    { name: 'periodName', title: 'PERIOD NAME' },
+    { name: 'employeeContribution', title: 'EMPLOYEE CONTRIBUTION' },
+    { name: 'employerContribution', title: 'EMPLOYER CONTRIBUTION' },
+    { name: 'remittance', title: 'REMITANCE' },
     
   ];
   //Table for payslip analysis
-  tab = [
-    { name: 'a', title: 'NAME' },
-    { name: 'b', title: 'ASSIGNMENT NO' },
-    { name: 'c', title: 'PFA NAME' },
-    { name: 'd', title: 'TOTAL CURRENT EARNING' },
-    { name: 'e', title: 'TOTAL PREVIOUS EARNING' },
-    { name: 'e', title: 'PERCENTAGE EARNING DIFF' },
-    { name: 'f', title: 'TOTAL CURRENT DEDUCTION' },
-    
+  paySliptab = [
+    { name: 'employeeName', title: 'NAME' },
+    { name: 'employeeContractId', title: 'EMPLOYEE CONTRACT ID' },
+    { name: 'assignmentNo', title: 'ASSIGNMENT NO' },   
+    { name: 'totalCurrentEarning', title: 'TOTAL CURRENT EARNING' },
+    { name: 'totalPreviousEarning', title: 'TOTAL PREVIOUS EARNING' },
+    { name: 'percentageDiff', title: 'PERCENTAGE EARNING DIFF' },
+    { name: 'totalCurrentDeduction', title: 'TOTAL CURRENT DEDUCTION' },    
   ];
 
-  data = [{
 
-  }]
 
   tableActions: TableAction[] = [
     { name: TABLE_ACTION.VIEW, label: 'View' },
@@ -128,7 +143,14 @@ export class PayrollreportComponent implements OnInit {
   currentPage = 1;
   showActions = false;
   constructor(private GetBankScheduleService: GetBankScheduleServiceProxy,
-    private getEarningsService: GetEarningsServiceProxy) { }
+    private getEarningsService: GetEarningsServiceProxy,
+    private GetDeductionsService:GetDeductionsServiceProxy,
+    private GetAllElementsService: GetAllElementsServiceProxy,
+    private GetDeductionSummaryService: GetDeductionSummaryServiceProxy,
+  private GetPaymentSummaryService: GetPaymentSummaryServiceProxy,
+    private GetTaxDetailService: GetTaxDetailServiceProxy,
+    private GetPensionDetailService: GetPensionDetailServiceProxy,
+  private GetPayslipAnalysisService :GetPayslipAnalysisServiceProxy) { }
 
   ngOnInit(): void {
     this.getBankSchedule();
@@ -180,6 +202,117 @@ export class PayrollreportComponent implements OnInit {
     }
   }
 
+  async getDeductions() {
+    this.defPageHeader = "Deductions";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetDeductionsService.getDeductions(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.deductiontableColum;
+    } else {
+      this.loading = false;
+    }
+  }
+  async getAllElement() {
+    this.defPageHeader = "All Element Sheet";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetAllElementsService.getAllElements(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.allElementtableColumn;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  async getDuductionSummary() {
+    this.defPageHeader = "Deduction Summary";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetDeductionSummaryService.getDeductionSummary(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.deductionSummarytableCol;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  async getPaymentSummary() {
+    this.defPageHeader = "Payment Summary";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetPaymentSummaryService.getPaymentSummary(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.paymentSummarytableCo;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  async getTaxDetails() {
+    this.defPageHeader = "Payment Summary";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetTaxDetailService.getTaxDetail(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.taxtableC;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  async getPensionDetail() {
+    this.defPageHeader = "Pension Details";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetPensionDetailService.getPensionDetail(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.pensiontable;
+    } else {
+      this.loading = false;
+    }
+  }
+
+  async getPayslipAnalysis() {
+    this.defPageHeader = "Payslip Analysis";
+    this.defpageDescription = "no record found";
+    this.showActions = false;
+    this.loading = true;
+    var data = await this.GetPayslipAnalysisService.getPayslipAnalysis(undefined).toPromise();
+    if (!data.hasError) {
+      this.loading = false;
+      this.alldata = data.result;
+      this.totalItems = data.totalRecord;
+      this.tableColumns = this.paySliptab;
+    } else {
+      this.loading = false;
+    }
+  }
+
   filterLeavePlan(is_approved = []) {
    
     let tabtittle = "";
@@ -193,9 +326,29 @@ export class PayrollreportComponent implements OnInit {
         this.getBankSchedule();
         break;
       case "Earning":
-        this.getEarnings()
+        this.getEarnings();
         break;
-    
+      case "Deduction":
+        this.getDeductions()
+        break;    
+      case "All Element Sheet":
+        this.getAllElement();
+        break;
+      case "Deduction Summary":
+        this.getDeductions();
+        break;
+      case "Payment Summary":
+        this.getPaymentSummary();
+        break;
+      case "Tax Detail":
+        this.getTaxDetails();
+        break;
+      case "Pension Details":
+        this.getPensionDetail();
+        break;
+      case "Payslip Analysis":
+      this.getPayslipAnalysis();
+      break;
     }
   }
 }

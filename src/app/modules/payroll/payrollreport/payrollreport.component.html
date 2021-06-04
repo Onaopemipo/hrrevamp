@@ -26,7 +26,7 @@
             </nb-tab>
         </nb-tabset>
         <ngx-default-content *ngIf="showEmpty" [pageHeader]="defPageHeader"
-        pageDescription="defpageDescription"  [loading]="loading"
+        [pageDescription]="defpageDescription"  [loading]="loading"
        >
       </ngx-default-content>
       <ngx-tablecomponent *ngIf="!showEmpty" (filterChange)="filterUpdated($event)" [showActions]="showActions"

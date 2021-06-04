@@ -14,7 +14,7 @@
 <nb-card *ngFor="let slip of PayrollRunList;let i = index" >
     <nb-card-body>
         <div style="display: flex;flex-direction: row; border-bottom: 0.800000011920929px solid #CED4DA;padding-bottom: 10px;">
-        <div style="flex:auto;">{{slip.refNo}}</div>
+        <div style="flex:auto;">{{getPayrolltypeName(slip.payrollTypeId) }}</div>
         <div >
             <div *ngIf="slip.log_status == 2" style="padding: 10px;width: max-content;background:rgba(0, 153, 74,0.1);color:rgba(0, 153, 74)">
                 Approved
@@ -37,7 +37,7 @@
 
             <div style="display: flex;flex-direction: column; padding: 10px;">
                 <label>Period</label>
-                <label>{{slip.periodStart | date: 'medium'}} - {{slip.periodEnd | date: 'medium'}}</label>
+                <label>{{slip.periodStart | date: 'MMM d, y'}} - {{slip.periodEnd | date: 'MMM d, y'}}</label>
                 </div>
             </div>
             </div>
@@ -48,7 +48,7 @@
        
                 </div>
                 <div style="padding: 10px;">
-                    <button nbButton status='primary'  >Payslip Analysis</button>
+                    <button nbButton status='primary' [routerLink]="['/payroll/payslipanalysis']" [queryParams]="{id: slip.id}" >Payslip Analysis</button>
        
                 </div>
                 <div style="padding: 10px;">

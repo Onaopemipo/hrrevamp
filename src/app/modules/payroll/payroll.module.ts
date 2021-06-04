@@ -41,8 +41,9 @@ import { AnalysistestpayComponent } from './analysistestpay/analysistestpay.comp
 import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.component';
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
 import { MyPayElementService, MyPayrollInstitutionService, MyPayrollTypeService } from './services/common.service';
-import { AddUpdateElementInputValuesServiceProxy, AddUpdatePayElementServiceProxy,GetElementInputValuesServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy, GetEmployeeElementLinksServiceProxy, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy, FetchPayrollServiceProxy, QuickPayrollServiceProxy, GetBankScheduleServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateElementInputValuesServiceProxy, AddUpdatePayElementServiceProxy,GetElementInputValuesServiceProxy, AddUpdatePaymentInstitutionServiceProxy, AddUpdatePayScaleServiceProxy, CommonServiceProxy, FetchPayrollItemsServiceProxy, FetchPayTypesServiceProxy, GetAllPayElementsServiceProxy, GetAllPaymentInstitutionsServiceProxy, GetAllPayrollTypesServiceProxy, GetEarningsServiceProxy, GetEmployeeElementLinksServiceProxy, RefreshEmployeeElementLinkServiceProxy, SearchEmployeesServiceProxy, FetchPayrollServiceProxy, QuickPayrollServiceProxy, GetBankScheduleServiceProxy, GetDeductionsServiceProxy, GetAllElementsServiceProxy, GetDeductionSummaryServiceProxy, GetPaymentSummaryServiceProxy, GetTaxDetailServiceProxy, GetPensionDetailServiceProxy, GetPayslipAnalysisServiceProxy, FetchAllEmployeesServiceProxy } from 'app/_services/service-proxies';
 import { PayrollcontractComponent } from './payrollcontract/payrollcontract.component';
+import { PayslipanalysisComponent } from './payslipanalysis/payslipanalysis.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { PayrollcontractComponent } from './payrollcontract/payrollcontract.comp
     PayrollTypeComponent,
     PayrollElementComponent,
     PayrollcontractComponent,
+    PayslipanalysisComponent,
   ],
   imports: [
     ComponentsModule,
@@ -115,7 +117,15 @@ import { PayrollcontractComponent } from './payrollcontract/payrollcontract.comp
     FetchPayrollServiceProxy,
     QuickPayrollServiceProxy,
     GetBankScheduleServiceProxy,
-    GetEarningsServiceProxy
+    GetEarningsServiceProxy,
+    GetDeductionsServiceProxy,
+    GetAllElementsServiceProxy,
+    GetDeductionSummaryServiceProxy,
+    GetPaymentSummaryServiceProxy,
+    GetTaxDetailServiceProxy,
+    GetPensionDetailServiceProxy,
+    GetPayslipAnalysisServiceProxy,
+    FetchAllEmployeesServiceProxy
 
     
   ],
