@@ -36,7 +36,7 @@ export class ApplicantsComponent implements OnInit {
 
   fetchPostedJobs(){
     this.loading = true;
-    this.job.getAllActiveJobs('','','',0,0,1,10).subscribe( data => {
+    this.job.getAllActiveJobs('','','',0,0,0,1,10).subscribe( data => {
     this.loading = false;
     if(!data.hasError){
       this.allJobs = data.result;

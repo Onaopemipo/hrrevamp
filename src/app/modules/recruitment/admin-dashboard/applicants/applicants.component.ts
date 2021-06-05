@@ -33,7 +33,7 @@ export class ApplicantsComponent implements OnInit {
   }
 
   async fetchAllApplications(){
-    const data = await this.jobs.fetchJobApplications(undefined,1,10).toPromise();
+    const data = await this.jobs.fetchJobApplications(undefined, undefined, undefined,undefined,10,1).toPromise();
     if(!data.hasError){
       this.allApplications = data.result;
       this.applicationCounter = data.totalRecord;

@@ -24,14 +24,14 @@ export class ApplicantsDashboardComponent implements OnInit {
   }
 
   async fetchApplications(){
-    const data = await this.jobService.fetchJobApplications(0,10,1).toPromise();
+    const data = await this.jobService.fetchJobApplications(undefined, undefined, undefined,undefined,10,1).toPromise();
     if(!data.hasError){
       this.allJobsApplication = data.result;
     }
     }
 
     async fetchPostedJobs(){
-      const data = await this.job.getAllActiveJobs('','','',0,0,1,10).toPromise();
+      const data = await this.job.getAllActiveJobs('','','',0,0,0,1,10).toPromise();
       if(!data.hasError){
         this.allJobs = data.result;
       }

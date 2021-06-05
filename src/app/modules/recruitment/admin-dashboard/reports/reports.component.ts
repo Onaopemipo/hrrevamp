@@ -26,7 +26,7 @@ export class ReportsComponent implements OnInit {
 
 
   async fetchApplications(){
-  const data = await this.jobService.fetchJobApplications(0,10,1).toPromise();
+  const data = await this.jobService.fetchJobApplications(undefined, undefined, undefined,undefined,10,1).toPromise();
   if(!data.hasError){
     this.allJobsApplication = data.result;
   }
