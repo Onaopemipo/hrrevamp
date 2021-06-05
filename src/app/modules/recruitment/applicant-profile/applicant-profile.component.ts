@@ -123,7 +123,7 @@ export class ApplicantProfileComponent implements OnInit {
   updateWorkExperience(){
     let applicant: JobApplicantDto = new JobApplicantDto();
     applicant.id = this.profileData.id;
-    applicant.selectedWorkExperience = JSON.stringify(this.workExperienceModel);
+    applicant.workExperience = JSON.stringify(this.workExperienceModel);
     this.profile.completeApplicantProfile(applicant).subscribe(data => {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
@@ -280,7 +280,7 @@ export class ApplicantProfileComponent implements OnInit {
   updateEducation(){
     let applicant: JobApplicantDto = new JobApplicantDto();
     applicant.id = this.profileData.id;
-    applicant.selectedEducation = JSON.stringify(this.educationModel);
+    applicant.education = JSON.stringify(this.educationModel);
     this.profile.completeApplicantProfile(applicant).subscribe(data => {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
