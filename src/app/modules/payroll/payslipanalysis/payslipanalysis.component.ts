@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ColumnTypes } from 'app/components/tablecomponent/models';
-import { GetPayslipAnalysisServiceProxy } from 'app/_services/service-proxies';
+import { ColumnTypes } from '../../../components/tablecomponent/models';
+import { GetPayslipAnalysisServiceProxy } from '../../../_services/service-proxies';
 
 @Component({
   selector: 'ngx-payslipanalysis',
@@ -25,7 +25,8 @@ export class PayslipanalysisComponent implements OnInit {
   currentPage = 1;
   payRunId = 0;
   filter = {}
-  constructor(private activatedroute: ActivatedRoute, private router: Router,private GetPayslipAnalysisService: GetPayslipAnalysisServiceProxy) { }
+  constructor(private activatedroute: ActivatedRoute, private router: Router,
+    private GetPayslipAnalysisService: GetPayslipAnalysisServiceProxy) { }
   
   filterUpdated(filter: any) {
   this.filter = { ...this.filter, ...filter };
