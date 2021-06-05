@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ApplicantssignupComponent implements OnInit {
 
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
+  loading: boolean = false;
 
   constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
@@ -19,7 +20,9 @@ export class ApplicantssignupComponent implements OnInit {
   }
 
   regiterApplicant(){
+    this.loading = true;
     this.applicant.registerApplicant(this.applicantModel).subscribe(data => {
+    this.loading = false;
       if(!data.hasError && data.result.isSuccessful === true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Applicant Created', 'Verify your account').subscribe(res => {
           if(res){
