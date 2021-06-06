@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssignupComponent implements OnInit {
 
+  show: boolean = false;
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
   loading: boolean = false;
 
@@ -17,6 +18,10 @@ export class ApplicantssignupComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  viewpassword() {
+    this.show = !this.show;
   }
 
   regiterApplicant(){

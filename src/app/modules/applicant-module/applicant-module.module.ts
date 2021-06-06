@@ -1,4 +1,4 @@
-import { RecruitmentJobApplicationServiceProxy } from './../../_services/service-proxies';
+import { RecruitmentJobApplicationServiceProxy, RecruitmentSettingServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -37,7 +37,8 @@ import { ApplicantsComponent } from './applicants/applicants.component';
   ],
 
   providers: [
-    RecruitmentJobApplicationServiceProxy
+    RecruitmentJobApplicationServiceProxy,
+    RecruitmentSettingServiceProxy,
   ],
 
 
