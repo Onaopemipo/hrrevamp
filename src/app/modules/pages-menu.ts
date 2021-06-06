@@ -34,7 +34,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'My Leave',
-        link: '/myleave',
+        link: '/leave/history',
       },
       {
         title: 'Exit Process',

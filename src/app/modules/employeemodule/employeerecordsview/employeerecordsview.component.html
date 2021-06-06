@@ -196,7 +196,7 @@
                           <div class="form-group row">
                             <label for="personalEmail" class="label col-sm-4 col-form-label listsubheader">Personal Email</label>
                             <div class="col-sm-8">
-                              <input type="email" nbInput fullWidth name="personalEmail" #personalEmail="ngModel"  [(ngModel)]="createNewEmployee.personalEmail"  placeholder="Personal Email" required>
+                              <input type="email" nbInput fullWidth name="personalEmail" #personalEmail="ngModel"  [(ngModel)]="createNewEmployee.personalEmail"  placeholder="Personal Email">
                               <div *ngIf="personalEmail.invalid && (personalEmail.dirty || personalEmail.touched)" class="error">
                                 <div *ngIf="personalEmail.errors.required">Personal Email is required</div>
                               </div>
