@@ -1,3 +1,27 @@
-<ngx-componentsheader [pageName]='pageName' >
+<ngx-componentsheader [showbackbutton]="true" (backbuttonClick)="goback()" [pageName]='pageName' >
 
 </ngx-componentsheader>
+
+
+<div class="row">
+    <div class="col-xxxl-12 col-md-12">
+      <nb-card>
+        <nb-card-body>
+          <div style="display: flex;flex-direction: row;">
+            <div style="flex:auto">
+              <span class="header6-bold">{{payRunName}} - Analysis Chart</span>
+            </div>          
+          </div>
+          <ngx-default-content *ngIf="showEmpty" pageHeader="Payroll Analysis"
+          pageDescription="No Record Found"  [loading]="loading"
+        >
+        </ngx-default-content>
+          <div style="height: 18.75rem;width: 100%;"  *ngIf="!showEmpty">
+            <div echarts [options]="customizedlineoptions" class="echart" style="height: 100%;"></div>
+          </div>
+  
+        </nb-card-body>
+      </nb-card>
+  
+    </div>
+  </div>
