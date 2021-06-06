@@ -484,6 +484,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link:'/payroll/runlog'
       },
       {
+        title: 'Pay Period Setup',
+        link:'/payroll/payperiodsetup'
+      },
+      {
         title: 'Report',
         link:'/payroll/report'
       },

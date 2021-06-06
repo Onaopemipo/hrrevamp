@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonServiceProxy, FetchPayrollServiceProxy, IDTextViewModel, PayrollRun } from 'app/_services/service-proxies';
 
 @Component({
@@ -11,7 +12,15 @@ export class PayrollRunLogComponent implements OnInit {
   PayrollRunList: PayrollRun[] = [];
   loading = false;
   payrollTypeList: IDTextViewModel[] = [];
-  constructor(private FetchPayrollService: FetchPayrollServiceProxy,private commonService: CommonServiceProxy) { }
+
+  constructor(private FetchPayrollService: FetchPayrollServiceProxy,
+    private router: Router,
+    private commonService: CommonServiceProxy) { }
+  
+  gotoview(slip) {
+    this.router.navigate(['/payroll/analysistestpay'],{queryParams:{id: slip.id,name:this.getPayrolltypeName(slip.payrollTypeId),payrun:JSON.stringify(slip) }})
+  }
+
   get showEmpty() {
     return this.PayrollRunList.length === 0;
   }

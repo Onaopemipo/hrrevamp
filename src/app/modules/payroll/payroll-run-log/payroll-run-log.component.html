@@ -44,15 +44,15 @@
             <div >
                 <div style="display: flex;flex-direction: row;">
                 <div style="padding: 10px;">
-                    <button  nbButton status='warning'  >View Details</button>
+                    <button  nbButton status='warning' (click)="gotoview(slip)"  >View Details</button>
        
                 </div>
                 <div style="padding: 10px;">
-                    <button nbButton status='primary' [routerLink]="['/payroll/payslipanalysis']" [queryParams]="{id: slip.id}" >Payslip Analysis</button>
+                    <button nbButton status='primary' [routerLink]="['/payroll/payslipanalysis']" [queryParams]="{id: slip.id,name:getPayrolltypeName(slip.payrollTypeId)}" >Payslip Analysis</button>
        
                 </div>
                 <div style="padding: 10px;">
-                    <button  nbButton status='info'  >Payroll Analysis</button>
+                    <button  nbButton status='info' [routerLink]="['/payroll/payrollanalysis']" [queryParams]="{id: slip.id,name:getPayrolltypeName(slip.payrollTypeId),typeid:slip.payrollTypeId }" >Payroll Analysis</button>
        
                 </div>
                 </div>

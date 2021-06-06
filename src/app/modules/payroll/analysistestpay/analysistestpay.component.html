@@ -1,11 +1,9 @@
 
 
-<ngx-componentsheader pageName='Payroll Details Test-pay'>
+<ngx-componentsheader [showbackbutton]="true" (backbuttonClick)="goback()" [pageName]='pageName'>
 </ngx-componentsheader>
 
-<div class="container" style="padding-bottom: 0.5rem;">
-    <i class="far fa-arrow-alt-circle-left">Back</i>
-</div>
+
 
 <nb-card>
     <div>
@@ -13,9 +11,9 @@
             <nb-card>
                 <nb-card-body>
                     <nb-card-header>
-                        <p style="font-weight: bold;">Basic Details</p>
+                        <p style="font-weight: bold;">Overview</p>
                     </nb-card-header>
-                    <div class="" style="display: flex; flex-direction: column;">
+                    <!-- <div class="" style="display: flex; flex-direction: column;">
 
                         <div class="card" style="margin-right: 2px;">
                             <div class="row mr-2">
@@ -150,8 +148,99 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
+                    <div class="" style="display: flex; flex-direction: column;">
 
+                        <div class="card" style="margin-right: 2px;">
+                            <div class="row mr-2">
+                        
+                                <div class="col-md-3">
+                                    <div class="d-flex mt-4" style="margin-left: 15px;">                                  
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;">Payroll Period</h6>
+                                            <h6 style="font-size: x-small;">{{PayrollRun.periodStart | date: 'MMM d, y'}} - {{PayrollRun.periodEnd | date: 'MMM d, y'}}</h6>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="d-flex mt-4" style="margin-left: 15px;">
+                                     
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;">Salary Scale</h6>
+                                            <h6 style="font-size: x-small;">{{payRunName}}</h6>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="d-flex mt-4" style="margin-left: 15px;">                                    
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;">Ref Number</h6>
+                                            <h6 style="font-size: x-small;">{{PayrollRun.refNo}}</h6>
+                                        </div>
+                                        
+
+                                    </div>
+                                    <div class="d-flex mt-4" style="margin-left: 15px;">
+                                     <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;">Run Count</h6>
+                                            <h6 style="font-size: x-small;">{{PayrollRun.runCount}}</h6>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="d-flex mt-4">                                  
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter; ">Pay Period
+                                            </h6>
+                                            <h6 style="font-size: x-small;">{{getPeriodName(PayrollRun.payPeriodId)}}</h6>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="d-flex mt-4">                                 
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;">No of Employees</h6>
+                                            <h6 style="font-size: x-small;">{{PayrollRun.noOfItems}}</h6>
+                                        </div>
+                                    </div>
+                           
+
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="d-flex mt-4">                               
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;">Status
+                                            </h6>
+                                            <div *ngIf="PayrollRun.log_status == 2" style="padding: 10px;width: max-content;background:rgba(0, 153, 74,0.1);color:rgba(0, 153, 74)">
+                                                Approved
+                                            </div>
+                                            <div *ngIf="PayrollRun.log_status == 1" style="padding: 10px;width: max-content;background:rgba(242, 153, 74,0.1);color:rgba(242, 153, 74)">
+                                                Pending
+                                            </div>
+                                            <div *ngIf="PayrollRun.log_status == 3" style="padding: 10px;width: max-content;background:rgba(242, 0, 74,0.1);color:rgba(242, 0, 74)">
+                                                Rejected
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="d-flex mt-4">
+                                        <div class="ml-4">
+                                            <h6 style="font-size: xx-small; font-weight: lighter;"></h6>
+                                            <h6 style="font-size: x-small;"></h6>
+                                        </div>
+                                    </div>
+                      
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </nb-card-body>
             </nb-card>
         </div>
@@ -162,42 +251,40 @@
 
                     </nb-card>
                     <nb-card-body>
-                        <ngx-componentsheader pageName='Pay Element Breakdown' [requiredButton]="topActionButtons"
-                            (buttonClick)='modal($event)'>
-                        </ngx-componentsheader>
+          
                         <nb-card-header>
                             <p style="font-weight: bold;">Earnings</p>
                         </nb-card-header>
-                        <div class="row" *ngFor="let i of [0,1,2,3]">
-                            <div class="col-sm-4">
-                                <p>Basic</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p>
-                                    NGN.780000
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <span class="action"><a href="javascript:void(0)" (click)="showModal()">Edit</a></span>
-                            </div>
+                        <div *ngFor="let i of payslipItem">
+                            <div class="row" *ngIf="i.isEarning">
+                                <div class="col-sm-6">
+                                    <p>{{i.elementInputName}}</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        &#8358;{{i.outputVal | number: '.2'}}
+                                    </p>
+                                </div>
+                             
                         </div>
+                    </div>
                         <div></div>
                         <nb-card-header>
                             <p style="font-weight: bold;">Deductions</p>
                         </nb-card-header>
-                        <div class="row" *ngFor="let i of [0,1,2,3]">
-                            <div class="col-sm-4">
-                                <p>Basic</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p>
-                                    NGN.780000
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <span class="action"><a href="">Edit</a></span>
-                            </div>
+                        <div *ngFor="let i of payslipItem">
+                            <div class="row" *ngIf="!i.isEarning">
+                                <div class="col-sm-6">
+                                    <p>{{i.elementInputName}}</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        &#8358;{{i.outputVal | number: '.2'}}
+                                    </p>
+                                </div>
+                             
                         </div>
+                    </div>
                     </nb-card-body>
 
 
@@ -212,12 +299,28 @@
                         <nb-card-header>
                             <p style="font-weight: bold;">Summary</p>
                         </nb-card-header>
-                        <div class="row" *ngFor="let i of [0,1,2]">
+                        <div class="row" >
                             <div class="col-6">
                                 <p>Total Earnings</p>
                             </div>
                             <div class="col-6">
-                             <span>&#8358;780000</span>
+                             <span style="color: #080730, 100%;">&#8358;{{PayrollRun.totalEarning | number: '.2'}}</span>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-6">
+                                <p>Total Deductions</p>
+                            </div>
+                            <div class="col-6">
+                             <span style="color: #080730, 100%;">&#8358;{{PayrollRun.totalDeduction | number: '.2'}}</span>
+                            </div>
+                        </div>
+                        <div class="row" style="background:#66676a,100%;" >
+                            <div class="col-6">
+                                <p>TOTAL NET</p>
+                            </div>
+                            <div class="col-6">
+                             <span style="color: #080730, 100%; font-weight: 700;">&#8358;{{PayrollRun.totalNetPayt | number: '.2'}}</span>
                             </div>
                         </div>
                     </nb-card-body>
@@ -238,10 +341,7 @@
                 <P>Add Pay Element</P>
             </nb-card-header>
             <nb-card-body>
-                <form>
-
-
-                    <div class="form-group row" style="margin-top: 15px;">
+                       <div class="form-group row" style="margin-top: 15px;">
                         <label for="inputEmail1" class="label col-sm-2 col-form-label listsubheader"></label>
                         <div class="col-sm-10">
                             <div style="flex-wrap: wrap; display: flex; flex-direction: row; ">
@@ -296,8 +396,6 @@
                             </nb-radio-group>
                         </div>
                     </div>
-                </form>
-
 
                 <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 5rem;">
 
@@ -335,7 +433,7 @@
                 <P>Edit Pay Element</P>
             </nb-card-header>
             <nb-card-body>
-                <form>
+         
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <div>
@@ -402,10 +500,7 @@
                             </nb-radio-group>
                         </div>
                     </div>
-                </form>
-
-
-                <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 5rem;">
+                 <div modal-actions class="d-flex" style="margin-top: 10rem;   margin-left: 5rem;">
 
 
                     <div class="d-flex" style="display: flex;justify-items: center;">

@@ -1,4 +1,4 @@
-<ngx-componentsheader pageName='Payroll Type Setup' [requiredButton]="topActionButtons" (buttonClick)='modal($event)'>
+<ngx-componentsheader [showbackbutton]="true" (backbuttonClick)="goback()" pageName='Payroll Type Setup' >
 </ngx-componentsheader>
 <nb-card style="margin-top: 3rem;">
     <nb-card-body>
@@ -79,21 +79,37 @@
               
             </div>
         </form>
-
+        <div  >
+        <div class="form-group row" style="margin-top: 2rem; margin-bottom: 1rem;">
+            <label for="Account Number" class="label col-sm-3 col-form-label listsubheader"></label>
+            <div class="col-sm-8 d-flex">
+                <ngx-loadable-button [loading]="loadingPayScale" [disabled]="payScaleForm.invalid" (click)="savePayrollScale()" >
+                    Submit
+                  </ngx-loadable-button> 
+                <button nbButton outline status="primary" [routerLink]="['/payroll/payscaletable']"   class="d-flex column"
+                    style="background-color: white; margin-left: 2rem;">Cancel</button>
+               
+    
+    
+            </div>
+        </div>       
+            
+    </div>
+    <div *ngIf="existingPayType">
+        <ngx-default-content *ngIf="showEmpty" pageHeader="Pay Type Employee"
+        pageDescription="No Record Found"  [loading]="loadingeXistingType"
+      >
+        </ngx-default-content>
+        <ngx-tablecomponent *ngIf="!showEmpty"  [showActions]="true"
+        [showFilter]="false" (actionClick)="tableActionClicked($event)" [actions]="tableActions" [userData]="employees"
+        [tableColum]="tableColumns" [totalItems]="totalItems" [currentPage]="currentPage" [loading]="loadingeXistingType">
+        </ngx-tablecomponent>
+    </div>
     </nb-card-body>
 
-
-    <div class="form-group row" style="margin-top: 2rem; margin-bottom: 1rem;">
-        <label for="Account Number" class="label col-sm-3 col-form-label listsubheader"></label>
-        <div class="col-sm-8 d-flex">
-            <ngx-loadable-button [loading]="loadingPayScale" [disabled]="payScaleForm.invalid" (click)="savePayrollScale()" >
-                Submit
-              </ngx-loadable-button> 
-            <button nbButton outline status="primary" [routerLink]="['/payroll/payscaletable']"   class="d-flex column"
-                style="background-color: white; margin-left: 2rem;">Cancel</button>
-           
+  
 
 
-        </div>
-    </div>
+ 
 </nb-card>
+

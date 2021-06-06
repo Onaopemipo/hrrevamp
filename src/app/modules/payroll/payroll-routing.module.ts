@@ -20,7 +20,7 @@ import { DetailsTestPayComponent } from './details-test-pay/details-test-pay.com
 import { PayrollRunLogComponent } from './payroll-run-log/payroll-run-log.component';
 import { PayrollcontractComponent } from './payrollcontract/payrollcontract.component';
 import { PayslipanalysisComponent } from './payslipanalysis/payslipanalysis.component';
-
+import { PayperiodComponent } from './payperiod/payperiod.component';
 
 
 const routes: Routes = [
@@ -79,9 +79,9 @@ const routes: Routes = [
       {
         path: 'analysistestpay', component:AnalysistestpayComponent
       },
-      {
-        path: 'payrollanalysis', component:DetailsTestPayComponent 
-      },
+      // {
+      //   path: 'payrollanalysisdetails', component:DetailsTestPayComponent 
+      // },
       {
         path: 'runlog', component:PayrollRunLogComponent
       },
@@ -90,6 +90,9 @@ const routes: Routes = [
       },
       {
         path: 'payslipanalysis', component:PayslipanalysisComponent
+      },
+      {
+        path: 'payperiodsetup', component:PayperiodComponent
       }
     ]
   }

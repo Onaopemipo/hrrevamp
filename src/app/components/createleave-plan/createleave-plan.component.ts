@@ -201,8 +201,8 @@ export class CreateleavePlanComponent implements OnInit {
     this.getAllLocation();
     this.getAllLeaveType();
     this.getAllLeaveYear();
-    this.leaveD.startDate = new Date();
-    this.leaveD.endDate = new Date();
+    // this.leaveD.startDate = new Date();
+    // this.leaveD.endDate = new Date();
   }
 
 }

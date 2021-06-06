@@ -24,6 +24,7 @@ export class PayslipanalysisComponent implements OnInit {
   totalItems = 0;
   currentPage = 1;
   payRunId = 0;
+  payRunName = "";
   filter = {}
   constructor(private activatedroute: ActivatedRoute, private router: Router,
     private GetPayslipAnalysisService: GetPayslipAnalysisServiceProxy) { }
@@ -57,6 +58,10 @@ get showEmpty() {
       if (data.id) {
         this.payRunId = data.id
         this.getPaySlipAnalysis();
+      }
+      if (data.name) {
+        this.payRunName = data.name;
+        this.pageName += " - " + this.payRunName;
       }
     })
   }

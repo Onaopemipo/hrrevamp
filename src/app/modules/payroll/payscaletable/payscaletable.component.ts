@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColumnTypes, TableAction, TableActionEvent } from 'app/components/tablecomponent/models';
-import { GetAllPayrollTypesServiceProxy, PayrollTypeDTO } from 'app/_services/service-proxies';
+import { AlertserviceService } from 'app/_services/alertservice.service';
+import { DeletePayScaleServiceProxy, GetAllPayrollTypesServiceProxy, PayrollTypeDTO } from 'app/_services/service-proxies';
 
 
 enum TOP_ACTIONS {
@@ -49,7 +50,9 @@ export class PayscaletableComponent implements OnInit {
     frequencyRuleId: undefined
   }
   PayTypedata: PayrollTypeDTO[] = [];
-  constructor(private router:Router,private GetAllPayrollTypesService: GetAllPayrollTypesServiceProxy) { }
+  constructor(private router: Router, private GetAllPayrollTypesService: GetAllPayrollTypesServiceProxy,
+    private DeletePayScaleService: DeletePayScaleServiceProxy,
+    private alertService: AlertserviceService) { }
   get showEmpty() {
     return this.PayTypedata.length === 0;
   }
@@ -68,13 +71,34 @@ export class PayscaletableComponent implements OnInit {
   }
   modal(event) {
     if (event == 0) {
-  this.router.navigate(['/payroll/payscalesetup'])
-}
-  }
+      this.router.navigate(['/payroll/payscalesetup']);
+    }
 
+  }
+  deletePayType(id) {
+    this.loadingPayScale = true;
+    this.DeletePayScaleService.deletePayScale(id).subscribe(data => {
+      this.loadingPayScale = false;
+      if (!data.hasError) {
+        this.getPayScale();
+        this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS, data.message, "ok");
+      } else {
+        this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, "ok");
+  }
+})
+}
   tableActionClicked(event:TableActionEvent){
-    if(event.name == TABLE_ACTION.DELETE){
-      this.showdeleteModal = true
+    if (event.name == TABLE_ACTION.DELETE) {
+      console.log('am here')
+      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.CONFIRM, event.data.name, 'Yes').subscribe(data => {
+        if (data == "closed") {
+          this.deletePayType(event.data.id);
+        }
+
+      })
+}
+    if(event.name == TABLE_ACTION.EDIT){
+      this.router.navigate(['/payroll/payscalesetup'],{queryParams:{id:event.data.id}})
     }
   }
   

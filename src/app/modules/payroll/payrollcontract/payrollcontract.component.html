@@ -69,7 +69,13 @@
         </ngx-side-modal>
         <ngx-side-modal [(show)]='showEmployeeLinkModal' [position]="'Center'" style="width: 500px; height: 1000px;">
             <div modal-header>{{selectedEmployee.firstName}}&nbsp;{{selectedEmployee.lastName}}&nbsp;-&nbsp;{{selectedEmployee.employeeNumber}}&nbsp;Element Links</div>
+        
+          
             <div modal-body>
+              <div style="display: flex;justify-content: flex-end;padding: 10px;">
+                <button  (click)="refreshLinks()" nbButton status='primary' >Refresh Link</button>
+               
+              </div>
       
                     <ngx-default-content *ngIf="linkshowEmpty" pageHeader="Employee Links"
                     pageDescription="Click on the button to Refresh Links" buttonValue="Refresh Links" [loading]="loadinglinks"
