@@ -387,10 +387,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: 'career-succession/gridbox',
       },
 
-      {
-        title: 'Roles',
-        link: 'career-succession/roles',
-      },
+      // {
+      //   title: 'Roles',
+      //   link: 'career-succession/roles',
+      // },
 
       {
         title: 'Succcession Dashboard',

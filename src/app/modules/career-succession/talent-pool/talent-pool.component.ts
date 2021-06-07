@@ -80,6 +80,7 @@ export class TalentPoolComponent implements OnInit {
       this.poolModel = new AddTalentMangementDTO().clone();
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Talent Pool created!', 'Dismiss').subscribe(dataAction => {
         if(dataAction == 'closed'){
+          this.fetchAllPools
           this.router.navigateByUrl('/career-succession/talentpool');
         }
       })

@@ -7,7 +7,7 @@
   <nb-card>
     <nb-tabset>
       <nb-tab [active]= true tabTitle="Employee Database">
-        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} [loading]="loading" pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
           <ng-template [ngIf]="employeeCounter > 0">
             <ngx-tableheader></ngx-tableheader>
@@ -17,18 +17,18 @@
       </nb-tab>
 
       <nb-tab tabTitle="Recruitment Portal">
-        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} [loading]="loading" pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
           <ng-template [ngIf]="employeeCounter > 0">
             <ngx-tableheader></ngx-tableheader>
-            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [loading]="loading" [actions]='tableActions'
             (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
           </ng-template>
       </nb-tab>
 
       <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
         <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable" ></ngx-tablecomponent>
+        <ngx-tablecomponent  [tableColum]="testPoolTable" [loading]="loading"></ngx-tablecomponent>
       </nb-tab>
 
       <!-- <nb-tab tabTitle="External Source">

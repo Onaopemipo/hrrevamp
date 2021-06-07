@@ -62,6 +62,7 @@ export class CompetencyComponent implements OnInit {
           this.competencyService.deleteCompetency(event.data.id).subscribe(data => {
             if(!data.hasError){
               this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successfully Deleted', 'Dismiss').subscribe(res => {
+                this.getCompetency();
                 this.router.navigateByUrl('career-succession/competency');
               })
             }
@@ -172,7 +173,7 @@ export class CompetencyComponent implements OnInit {
 
 getCompetency(){
     this.loading = true;
-    this.competencyService.fetchCompetency(undefined,undefined,20,1).subscribe(data => {
+    this.competencyService.fetchCompetency(undefined,undefined,10,1).subscribe(data => {
       this.loading = false;
       if(!data.hasError){
         this.allCompetencies = data.result;

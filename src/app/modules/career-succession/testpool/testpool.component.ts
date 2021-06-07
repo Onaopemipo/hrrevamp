@@ -58,6 +58,7 @@ tableActionClicked(event: TableActionEvent){
         this.talentPool.deleteEmployeeFromTalentManagmentPool(this.pageId, event.data.id).subscribe(data => {
           if (!data.hasError) {
             this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss').subscribe(resp => {
+              this.fetchSinglePool();
               if(resp) this.route.navigateByUrl('/career-succession/talentpool');
             })
           }
@@ -66,7 +67,7 @@ tableActionClicked(event: TableActionEvent){
     })
     }
    else if(event.name==TABLE_ACTION.VIEW){
-      this.route.navigateByUrl('/career-succession/profiledetails/'+ event.data.id)
+      this.route.navigateByUrl('/career-succession/profiledetails/'+ event.data.employeeId)
     }
 }
 tableActions: TableAction[] = [
@@ -117,6 +118,16 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     console.log(this.channel);
     this.fetchTypes();
     this.fetchSinglePool();
+    this.talentPool.getTalentPoolById(this.pageId = Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => {
+      if(!data.hasError && data.result.employeeTalentManagement.length > 0){
+        this.poolRecords = data.result.employeeTalentManagement;
+        this.pageTitle = data.result.title;
+        console.log('Page Title:',this.pageTitle)
+        this.employeeCounter = data.result.employeeTalentManagement.length;
+        console.log('Single Record', this.poolRecords);
+        this.loading = false;
+      }
+    })
 
   }
 
