@@ -79,8 +79,14 @@
     <div class='row' *ngIf="filterFields.length > 0">
       <div class="form-group col-sm-4" *ngFor="let field of filterFields">
         <label>{{field.title}}</label>
-        <input (change)="fieldValueChanged($event, field.name)" class="form-control"/>
-      </div>
+        <input  *ngIf="field.type === COLUMN_TYPES.Text || field.type === undefined || field.type === COLUMN_TYPES.Number" (change)="fieldValueChanged($event, field.name)" class="form-control"/>
+        <select  *ngIf="(field.type === COLUMN_TYPES.Text || field.type === COLUMN_TYPES.Status) && field.listValue.length > 0" class="form-control" (change)="fieldValueChanged($event, field.name)">
+          <option value="">--Select {{field.title}}--</option>
+          <option *ngFor="let listv of field.listValue;" [value]="listv.id">{{listv.text}}</option>
+      </select>
+      <ngx-date (valueChange)="fieldValueChanged($event, field.name)"></ngx-date>
+     
+    </div>
       <div class="form-group col-sm-4">
         <div style="padding-top: 30px;">
         <input nbButton status='primary' value='Submit' type='button' (click)="submitFilter()"/>

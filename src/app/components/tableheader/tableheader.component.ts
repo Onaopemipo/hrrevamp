@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output,ViewChild } from '@angular/core';
 import { EventInput } from '@fullcalendar/angular';
-import { TableAction, TableColumn } from '../tablecomponent/models';
+import { TableAction, TableColumn,ColumnTypes } from '../tablecomponent/models';
 import { NbPopoverDirective } from '@nebular/theme';
 const SORT_KEY = 'sort';
 export interface FilterField extends TableColumn {};
@@ -26,7 +26,8 @@ export class TableheaderComponent implements OnInit {
   @Output() filterDataChange = new EventEmitter<object>();
   @Output() downloadasChange = new EventEmitter<string>();
   @Output() searchChange = new EventEmitter<string>();
-  @Input() bulkAction_isChecked:boolean = false;
+  @Input() bulkAction_isChecked: boolean = false;
+  COLUMN_TYPES = ColumnTypes;
   constructor() { }
 
   ngOnInit(): void {
