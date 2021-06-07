@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NbDatepicker, NbDatepickerComponent, NbDatepickerDirective, NbPopoverDirective } from '@nebular/theme';
-import { format } from 'date-fns'
+import { add  } from 'date-fns'
 @Component({
   selector: 'ngx-date',
   templateUrl: './date.component.html',
@@ -18,9 +18,11 @@ export class DateComponent implements OnInit {
   set dateItem(val: Date) {
     this.valueChange.emit(val);
     this._dateItem = val;
+   // console.log(this._dateItem)
   };
 
   get dateItem() {
+   // console.log(this._dateItem)
     return this._dateItem;
   }
   selectedDate: Date;
@@ -50,5 +52,15 @@ export class DateComponent implements OnInit {
     this.valueChange.emit(this.dateItem);
     // console.log(this.dateItem)
   }
-
+  adddays(date: Date, duration) {
+ return   add(date, {
+      years: 0,
+      months: 0,
+      weeks: 0,
+      days:duration,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+  })
+}
 }

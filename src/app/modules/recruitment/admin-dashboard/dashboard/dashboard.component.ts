@@ -219,7 +219,7 @@ export class DashboardComponent implements OnInit {
     //   };
     // });
 
-    this.FetchDashboard.fetchDashboardData()
+    this.FetchDashboard.fetchDashboardData(2021)
     this.colorScheme = {
       domain: ['#FF90A4', '#2E9CDA', '#2CD8C5', '#E2D136', '#5655CA'],
     };

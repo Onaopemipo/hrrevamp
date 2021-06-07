@@ -6,6 +6,11 @@
   (onSelect)="onItemSelect($event)"
   (onSelectAll)="onSelectAll($event)"
 
-
+*ngIf="!singleSelection"
 >
 </ng-multiselect-dropdown>
+
+<select *ngIf="singleSelection" [(ngModel)]="selectedItems" class="form-control" (change)="onItemSelect($event)">
+  <option value="">--Select--</option>
+  <option *ngFor="let listv of dropdownList;" [value]="listv.id">{{listv.name}}</option>
+</select>

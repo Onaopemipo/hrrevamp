@@ -16,6 +16,7 @@ export interface TableColumn {
     template?: TemplateRef<any>;
     colors?: {};
     link_name?: string;
+    listValue?: [];
 }
 
 export interface TableAction {

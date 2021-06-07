@@ -33,6 +33,7 @@ export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extend
   }
   successMessage: string;
   deleteData(data: D): Observable<any> {
+    console.log(this.data)
     return this.api.delete(data.id);
   }
 

@@ -16,7 +16,7 @@ const no_of_ms_in_a_day = 24 * 60 * 60 * 1000;
 export class DashboardComponent implements OnInit {
   src: string = 'assets/icons/camera.jpg';
   show_modal = false;
-  
+
   single = [
     // {
     //   name: 'Germany',
@@ -386,7 +386,7 @@ export class DashboardComponent implements OnInit {
   Announcement:DashboardData2[]=[]
   UpcomingLeave:DashboardData2[]=[]
   async fetchDash(){
-    const data = await this.Fetchdashboard.fetchDashboardData().toPromise();
+    const data = await this.Fetchdashboard.fetchDashboardData(2021).toPromise();
     if(!data.hasError){
       this.Dash = data.result;
       this.Gender=data.result.lstGenderData
@@ -405,6 +405,6 @@ export class DashboardComponent implements OnInit {
   }
   onClick(){
     // alert('hello')
-    
+
   }
 }

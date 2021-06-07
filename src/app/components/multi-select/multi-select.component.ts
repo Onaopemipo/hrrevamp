@@ -232,11 +232,12 @@ export class MultiSelectComponent implements OnInit {
     }
   }
   onItemSelect(item: any) {
-    this.valueChange.emit(this.selectedItems);
-    const idValues = this.selectedItems.map(data => data[this.dropdownSettings.idField]);
+    console.log(this.selectedItems);
+    this.valueChange.emit(this.selectedItems);    
     if (this.singleSelection) {
-      this.idValueChange.emit(idValues.length > 0 ? idValues[0] : null);
+      this.idValueChange.emit(this.selectedItems);
     } else {
+      const idValues = this.selectedItems.map(data => data[this.dropdownSettings.idField]);
       console.log(idValues);
       this.idValueChange.emit(idValues);
       this.multiIdValueChange.emit(idValues.join(','))

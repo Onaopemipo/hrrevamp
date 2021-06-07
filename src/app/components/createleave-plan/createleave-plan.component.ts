@@ -66,7 +66,7 @@ export class CreateleavePlanComponent implements OnInit {
     this.btnSubmitted = true;
     this.CreateLeavePlanService.createLeavePlan(this.leaveD).subscribe(resp=>{
       if (!resp.hasError) {
-        this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, resp.message, "ok").subscribe(data => {
+        this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, "Leave Plan Created Successfully", "ok").subscribe(data => {
           this.leaveD = new LeavePlanDTO().clone();
           this.leaveD.startDate = new Date();
           this.leaveD.endDate = new Date();
@@ -101,8 +101,8 @@ export class CreateleavePlanComponent implements OnInit {
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
    }
    
-   processStartEndNoofDays() {
-     let result: Date = new Date();
+  processStartEndNoofDays() {
+     console.log(this.leaveD.startDate)
      this.noOfDaysError = "Please Enter Number of Days";
      if (this.leaveD.endDate && this.leaveD.startDate) {
        this.leaveD.noOfDays = this.dateDiffInDays(this.leaveD.startDate, this.leaveD.endDate);
@@ -131,30 +131,31 @@ export class CreateleavePlanComponent implements OnInit {
    }
    noOfDaysValidation() {
      let result: Date = new Date();
+     console.log(this.leaveD.endDate, this.leaveD.startDate)
      if (this.leaveD.noOfDays) {
-       if (!this.leaveD.endDate || !this.leaveD.endDate) {
+       if (!this.validateStartdate && !this.validateEnddate) {
        this.noOfDaysError = "Please Enter Start Or End Date"
        } else {
-         if (this.leaveD.endDate && this.leaveD.startDate) {
+         if (this.validateStartdate && this.validateEnddate) {
            result = this.addDays(this.leaveD.startDate,this.leaveD.noOfDays)
            var is_weekend = this.getweekEnds(result);
            this.leaveD.endDate = is_weekend? this.addDays(result, 2) : result;
          }
-         if (this.leaveD.endDate && !this.leaveD.startDate) {
+         if (this.validateEnddate && !this.validateStartdate) {
            result = this.addDays(this.leaveD.endDate, -(this.leaveD.noOfDays));
            var is_weekend = this.getweekEnds(result);
            this.leaveD.startDate = is_weekend? this.addDays(result, -2) : result;
          }
-         if (this.leaveD.startDate && !this.leaveD.endDate) {
-           result = this.addDays(this.leaveD.endDate, this.leaveD.noOfDays);
+         if (this.validateStartdate && !this.validateEnddate) {
+           result = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
            var is_weekend = this.getweekEnds(result);
            this.leaveD.endDate = is_weekend? this.addDays(result, 2) : result;
          }
          this.noOfDaysError = "";
        }
      } else {
-       this.leaveD.startDate = new Date();
-       this.leaveD.endDate = new Date();
+      //  this.leaveD.startDate = new Date();
+      //  this.leaveD.endDate = new Date();
      }
    
    }

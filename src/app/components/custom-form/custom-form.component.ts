@@ -100,10 +100,11 @@ export class CustomFormComponent implements OnInit {
     }
   }
   selectChange(field: FormField, event) {
-    const ids = event.map(data => data.selectValue);
+    console.log(event);  
     if (field.singleSelection) {
-      this.data[field.name] = ids[0];
+      this.data[field.name] = event;
     } else {
+      const ids = event.map(data => data.selectValue);
       this.data[field.name] = ids;
     }
   }
