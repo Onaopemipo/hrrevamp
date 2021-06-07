@@ -568,7 +568,7 @@
             <label for="Country" >Quiz <span style="font-size: 16px; color: #95A8B8;">(optional)</span></label>
             
               <select class="custom-select" required>
-                <option type="button" class="select-button" value="">Select Quiz</option>
+                <option type="button" class="select-button">Select Quiz</option>
                 <option *ngFor="let quiz of allQuizes" type="button" class="select-button" [value]="quiz.id">{{ quiz.name }}</option>
               </select>
          
@@ -580,6 +580,7 @@
               <button *ngIf="!loading" nbButton status="primary" (click)="updateJob()">Update Job</button>
               <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
               <span style="padding: 8px;"></span>
+              <button *ngIf="!loading" nbButton status="outline" (click)="cacel()">Update Job</button>
             </div>
           </div>
         </form>

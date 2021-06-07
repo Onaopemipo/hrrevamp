@@ -1,16 +1,6 @@
 <ngx-customizable-column-layout  [sideMenuToggle]="sideMenuToggle">
   <div Customizedmenu>
     <div class="row" style="display: flex; justify-content: flex-start; flex-direction: row; padding: 10px;">
-      <!-- <div style="background-color: rgba(72, 71, 224, 0.04); padding: 10px;">
-      <h6>Add a keyword</h6>
-      <div style="padding: 5px;"></div>
-      <span>Create a keyword and never miss a posting</span>
-      <div style="padding: 10px;"></div>
-      <input type="text" nbInput fullWidth placeholder="Enter Keyword" style="background-color: #ffffff; color:#95A8B8;">
-      <div style="padding: 10px;"></div>
-      <button type="button" class="btn my-button">Add</button>
-      </div> -->
-
 
       <div class="form-group">
           <h6>Type of Employment</h6>
@@ -27,7 +17,7 @@
 
         <div class="form-group">
           <h6>Industry</h6>
-          <nb-checkbox *ngFor="let industry of industryData"(click)="filterByIndustry(industry.text)" style="display: flex; flex-direction: column;">{{industry.text}}</nb-checkbox><br>
+          <nb-checkbox *ngFor="let industry of industryData"(click)="filterByIndustry(industry.name)" style="display: flex; flex-direction: column;">{{industry.name}}</nb-checkbox><br>
         </div>
 
         <div style="padding: 20px;"></div>

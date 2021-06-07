@@ -1,4 +1,4 @@
-import { RecruitmentSettingServiceProxy, SalaryRanage, RecruitmentJobServiceProxy, JobDTO } from './../../_services/service-proxies';
+import { RecruitmentSettingServiceProxy, SalaryRanage, RecruitmentJobServiceProxy, JobDTO, Sector } from './../../_services/service-proxies';
 import { IDTextViewModel, DataServiceProxy } from 'app/_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +11,7 @@ export class ApplicantModuleComponent implements OnInit {
   sideMenuToggle: boolean = true;
   employmentTypeData: IDTextViewModel [] = [];
   jobLevelData: IDTextViewModel [] = [];
-  industryData: IDTextViewModel [] = [];
+  industryData: Sector [] = [];
   salaryData: SalaryRanage [] = [];
   loading: boolean = false;
   allJobs:JobDTO [] = [];
@@ -41,7 +41,7 @@ export class ApplicantModuleComponent implements OnInit {
       }
 
     async getJobIndustry(){
-      const data = await this.dataservice.getIndusty().toPromise();
+      const data = await this.dataservice.getSector().toPromise();
         if(!data.hasError){
           this.industryData = data.result;
         }
@@ -68,19 +68,17 @@ export class ApplicantModuleComponent implements OnInit {
     
 
       filterByLevel(filObj){
-        alert(filObj);
+        // alert(filObj);
       }
 
       filterBySalary(filObj){
-        alert(filObj);
+        
       }
 
       filterByIndustry(filObj){
-        alert(filObj); 
       }
 
       filterByJobType(filObj){
-        alert(filObj); 
       }
 
 }
