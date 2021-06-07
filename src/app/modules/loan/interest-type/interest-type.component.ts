@@ -1,7 +1,12 @@
+import { TableColumn, TableAction } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { AddUpdateInterestRateServiceProxy, InterestRateDTO,InterestRate, GetInterestRateServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
+enum TABLE_ACTION {
+  DELETE = '2',
+  EDIT = '3'
+}
 @Component({
   selector: 'ngx-interest-type',
   templateUrl: './interest-type.component.html',
@@ -9,10 +14,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InterestTypeComponent implements OnInit {
 
+  interestTypeTable: TableColumn [] = [
+    {name: 'id', title: 'Code'},
+    {name: 'rate', title: 'Type Name'},
+    {name: 'description', title: 'Description'},
+  ];
+
+  tableActions: TableAction[] = [
+    {name: TABLE_ACTION.EDIT, label: 'Edit'},
+    {name: TABLE_ACTION.DELETE, label: 'Delete'},
+
+  ]
+
   myHeader: string = 'No record found';
   myDescription: string = 'Clikc the button below to add one';
   myButton: string = 'Add New';
-  defaultPage: number = 0;
+  counter: number = 0;
   interestModal: boolean = false;
   rateModel: InterestRateDTO = new InterestRateDTO;
   allInterestRates: InterestRate [] = [];
@@ -50,7 +67,7 @@ export class InterestTypeComponent implements OnInit {
       this.loading = false;
       if(!data.hasError){
         this.allInterestRates = data.result;
-        this.defaultPage > 0
+        this.counter = data.totalRecord;
       }
     });
 

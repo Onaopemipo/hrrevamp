@@ -1,16 +1,16 @@
-<ngx-componentsheader *ngIf="defaultPage > 0" [requiredButton]="[{name:'newType', label:'Add New', icon: 'plus'}]" (buttonClick)="toggleModal()" pageName='Interest Type'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="defaultPage < 1" pageName='Interest Type'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="counter > 0" [requiredButton]="[{name:'newType', label:'Add New', icon: 'plus'}]" (buttonClick)="toggleModal()" pageName='Interest Type'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="counter < 1" pageName='Interest Type'></ngx-componentsheader>
 
-<div *ngIf="defaultPage < 1">
+<div *ngIf="counter < 1">
   <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [loading]="loading" [buttonValue]="myButton" (buttonClick)="toggleModal()">
   </ngx-default-content>
 </div>
 
-<div *ngIf="defaultPage > 0">
+<div *ngIf="counter > 0">
   <nb-card>
     <nb-card-body>
       <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allLoanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+        <ngx-tablecomponent [tableColum]="interestTypeTable" [userData]='allInterestRates' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
   </div>

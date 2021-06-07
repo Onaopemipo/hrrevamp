@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { TableColumn, TableAction, TableActionEvent } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { NgForm } from '@angular/forms';
-import { Grade, InterestRate, LoanRepaymentLog, LoanType, DataServiceProxy, IDTextViewModel, DeleteLoanTypeServiceProxy } from 'app/_services/service-proxies';
+import { Grade, InterestRate, LoanRepaymentLog, LoanType, DataServiceProxy, IDTextViewModel, DeleteLoanTypeServiceProxy, FetchLoanTypeByIdServiceProxy } from 'app/_services/service-proxies';
 import { CommonServiceProxy, LoanTypeDTO, AddUpdateLoanTypeServiceProxy, IdNameObj, PostLoanDto, LoadRepaymentScheduleServiceProxy,
   SimulatePaymentServiceProxy, GetLoanSummaryServiceProxy, PostFullRepaymentServiceProxy,
   GetLoanTypesByCriteriaServiceProxy, GetInterestRateServiceProxy, GetLoanTypesServiceProxy, IDTextViewModelIListApiResult } from './../../../_services/service-proxies';
@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 enum TABLE_ACTION {
-  VIEW = '1',
+  // VIEW = '1',
   DELETE = '2',
   EDIT = '3'
 }
@@ -40,19 +40,26 @@ export class LoanTypeComponent implements OnInit {
 
 
   tableActions: TableAction[] = [
-    {name: TABLE_ACTION.VIEW, label: 'View'},
+    // {name: TABLE_ACTION.VIEW, label: 'View'},
     {name: TABLE_ACTION.EDIT, label: 'Edit'},
     {name: TABLE_ACTION.DELETE, label: 'Delete'},
 
   ]
 
   tableActionClicked(event: TableActionEvent){
-     if(event.name==TABLE_ACTION.VIEW){
-      this.router.navigateByUrl('/' + event.data.id)
-       }
+    //  if(event.name==TABLE_ACTION.VIEW){
+    //   this.router.navigateByUrl('/' + event.data.id)
+    //    }
 
-       else if(event.name==TABLE_ACTION.EDIT){
-        this.router.navigateByUrl('/' + event.data.id)
+        if(event.name==TABLE_ACTION.EDIT){
+         this.updateLoan = true;
+        this.loanSettings.fetchLoanTypeById(event.data.id).subscribe(data => {
+          if(!data.hasError){
+            // this.updateLoanData = data.result;
+            console.log('Wheeep',this.updateLoanData)
+          }
+
+        })
          }
 
         else if(event.name == TABLE_ACTION.DELETE){
@@ -79,7 +86,9 @@ export class LoanTypeComponent implements OnInit {
   ];
   option;
 
+  updateLoan: boolean = false;
   loanType: NgForm;
+  updateLoanData: LoanTypeDTO = new LoanTypeDTO().clone();
   loading: boolean = true;
   dataCounter: number = 0;
   loanTypeModel: LoanTypeDTO = new LoanTypeDTO();
@@ -101,7 +110,7 @@ export class LoanTypeComponent implements OnInit {
     private simulateService: SimulatePaymentServiceProxy, private deleteService: DeleteLoanTypeServiceProxy,
     private summaryService: GetLoanSummaryServiceProxy, private fullpaymentService: PostFullRepaymentServiceProxy,
     private loanTypeService: GetLoanTypesByCriteriaServiceProxy, private interestService: GetInterestRateServiceProxy,
-    private dataService: DataServiceProxy, private router: Router) { }
+    private dataService: DataServiceProxy, private router: Router, private loanSettings: FetchLoanTypeByIdServiceProxy) { }
 
   ngOnInit(): void {
     this.getGrades();
@@ -129,9 +138,9 @@ export class LoanTypeComponent implements OnInit {
     }
   }
 
-  async createLoanType(){
+  createLoanType(){
     this.loading = true;
-    const data = await this.updateLoanService.addUpdateLoanType(this.loanTypeModel).toPromise();
+   this.updateLoanService.addUpdateLoanType(this.loanTypeModel).subscribe(data => {
     this.loading = false;
     if(!data.hasError && data.result.isSuccessful){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Ok').subscribe(dataAction => {
@@ -146,6 +155,8 @@ export class LoanTypeComponent implements OnInit {
     else {
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Could not add Loan Type', 'Dismiss')
     }
+
+   });
   }
 
   async getGrades(){
@@ -205,8 +216,6 @@ export class LoanTypeComponent implements OnInit {
   }
 
 }
-
-
   toggleGuarantor(event){
     this.isGuarantor = event
   }
