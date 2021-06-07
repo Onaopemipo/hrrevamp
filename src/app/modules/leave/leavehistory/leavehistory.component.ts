@@ -1,12 +1,6 @@
 import {
-  CreateLeaveByAdminServiceProxy,
-  PostServiceProxy,
-  LeavePlanDTO,
-  LeaveYearDTO,
-  GetLeaveYearServiceProxy,
-  GetLeaveTypesServiceProxy,
-  GetLeaveYearsServiceProxy,
   GetLeaveRequestServiceProxy,
+  GetLeaveTypesServiceProxy,
   LeaveReportListDTO
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
@@ -60,12 +54,12 @@ export class LeavehistoryComponent implements OnInit {
 
   tableColumns = [
     { name: 'fullName', title: 'Name',type: ColumnTypes.Text },
-    { name: 'leaveType', title: 'Leave Type',type: ColumnTypes.Text},
+    { name: 'leaveType', title: 'Leave Type',type: ColumnTypes.Text,listValue:[]},
     { name: 'startDate', title: 'Start Date',type: ColumnTypes.Date },
     { name: 'enddate', title: 'End Date',type: ColumnTypes.Date },
     { name: 'noOfDays', title: 'Number of Days',type: ColumnTypes.Text },
     { name: 'daysRem', title: 'Days Remaining',type: ColumnTypes.Text },
-    { name: 'approvalStatus', title: 'Approval Status' ,type: ColumnTypes.Status},
+    { name: 'approvalStatus', title: 'Approval Status' ,type: ColumnTypes.Status, listValue:[{id:1,text:'Pending'},{id:2,text:'Approved'},{id:3,text:'Rejected'}]},
   ];
 
 
@@ -86,12 +80,29 @@ export class LeavehistoryComponent implements OnInit {
   allleaveHistory = [];
   totalItems = 0;
   currentPage = 1;
+  allLeavetypes = [];
   constructor(private GetLeaveRequestService:GetLeaveRequestServiceProxy,
-  private alertService: AlertserviceService) { }
+    private alertService: AlertserviceService, private GetLeaveTypesService: GetLeaveTypesServiceProxy) { }
+    getAllLeaveType() {
+      this.GetLeaveTypesService.getLeaveTypes(undefined, null, undefined, null,1,100).subscribe(res => {
+        if (!res.hasError) {
+          this.allLeavetypes = res.result;
+          this.tableColumns[1].listValue = this.allLeavetypes.map(x => {
+            let nObj = {
+              id: x.id,
+              text: x.name
+            }
+            return nObj;
+          });
+        }
+      })
+    }
   get showEmpty() {
     return this.allleaveHistory.length === 0;
   }
+ 
   ngOnInit(): void {
+    this.getAllLeaveType()
     this.getLeaveRequestReport();
  
   }

@@ -153,6 +153,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
       if (data) {
         this.confirmBox.showLoading();
         this.deleteData(this.editingData).subscribe(data => {
+          console.log(data)
           this.confirmBox.close();
           // this.alertService.openModalAlert()
           this.reload();

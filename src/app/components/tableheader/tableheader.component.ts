@@ -29,9 +29,17 @@ export class TableheaderComponent implements OnInit {
   @Input() bulkAction_isChecked: boolean = false;
   COLUMN_TYPES = ColumnTypes;
   constructor() { }
-
+  setListVal() {
+    if (this.filterFields.length > 0) {
+      this.filterFields.forEach(val => {
+        if (!val.listValue) {
+          val.listValue = [];
+        }
+      })
+  }
+}
   ngOnInit(): void {
-  
+    this.setListVal();
   }
   handleSearch(value) {
     this.searchChange.emit(value)
