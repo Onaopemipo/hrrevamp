@@ -36,6 +36,7 @@ export class SetupComponent implements OnInit {
   page = 1;
 
   budgetForm: NgForm;
+  btnProcessing: boolean = false;
 
   gotoBudgetItems() {
     alert(this.page = 2);
@@ -46,13 +47,15 @@ export class SetupComponent implements OnInit {
   return resp;
 }
   async addBudget(){
+  this.btnProcessing = true;
   const data = await this.budgetService.addUpdateBudget(this.budget).toPromise();
-  if(!data.hasError && data.result.isSuccessful == true){
-  this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss');
+  this.btnProcessing = false;
+  if(!data.hasError){
+  this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'OK');
   this.page = 2;
   this.fetAllBudget();
   } else {
-    // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
+    this.alert.openModalAlert(this.alert.ALERT_TYPES.FAILED, 'Budget could not be added', 'OK');
     console.error();
 
   }

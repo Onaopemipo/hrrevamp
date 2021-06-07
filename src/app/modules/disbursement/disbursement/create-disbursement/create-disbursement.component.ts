@@ -26,7 +26,7 @@ export class CreateDisbursementComponent implements OnInit {
   recipient;
 
   loading: boolean = false;
-
+  btnProcessing: boolean = false;
 
   selectedTab = TABS.SINGLE;
   TABS = TABS;
@@ -122,7 +122,8 @@ cancelSubmission(){
 }
 
 
-async createDisbursement(){
+createDisbursement(){
+  this.btnProcessing = true;
   console.log('Hey Boss Datata',this.disbursement)
   let scheduledDay = (this.disbursement.scheduledDate).getDay()
   let endDay = (this.disbursement.endDate).getDay();
@@ -131,8 +132,9 @@ async createDisbursement(){
       if(res){
         this.disbursement.runCount = 1;
         this.disbursementService.postSingleDisbursement(this.disbursement).subscribe(data => {
+          this.btnProcessing = false;
         if(!data.hasError){
-        this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Budget Added Successfully', 'Dismiss').subscribe(dataAction =>{
+        this.alert.openModalAlert(this.alert.ALERT_TYPES.SUCCESS, 'Disbursement Added Successfully', 'OK').subscribe(dataAction =>{
           if(dataAction){
             this.disbursement = new SingleDisbursementPostDTO().clone();
             this.router.navigateByUrl('/disbursement/disbursement/requests')

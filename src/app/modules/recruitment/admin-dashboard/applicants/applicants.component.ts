@@ -25,7 +25,7 @@ export class ApplicantsComponent implements OnInit {
   ];
 
   allApplications: JobApplication [] = [];
-  applicationCounter: number = 0;
+  applicationCounter: number = 5;
 
   constructor(private jobs: RecruitmentJobApplicationServiceProxy) { }
 

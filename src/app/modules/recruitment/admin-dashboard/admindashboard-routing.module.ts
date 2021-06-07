@@ -1,4 +1,4 @@
-import { ApplicantsComponent } from './applicants/applicants.component';
+import { ApplicantsComponent } from '../admin-dashboard/applicants/applicants.component';
 import { NewquizComponent } from './newquiz/newquiz.component';
 import { NewjobComponent } from './newjob/newjob.component';
 import { JobsComponent } from './jobs/jobs.component';

@@ -135,6 +135,7 @@ tableActionClicked(event: TableActionEvent){
         this.job.deleteJob(event.data.id).subscribe(data => {
           if(!data.hasError){
             this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Successfully Deleted', 'Dismiss').subscribe(res => {
+              this.fetchAllJobs();
               this.router.navigateByUrl('/recruitmentadmin/jobs');
             })
           }
@@ -146,8 +147,8 @@ tableActionClicked(event: TableActionEvent){
 
 draftTableActionClicked(event: TableActionEvent){
   if(event.name==draftEnum.EDIT){
-  
-     
+
+
     }
 
     else if(event.name==draftEnum.DELETE){
@@ -394,11 +395,11 @@ draftTableActionClicked(event: TableActionEvent){
   });
 
   }
- 
+
    getSelectedEmployee(event,selectType) {
      if(selectType == 'employee'){
       this.newJobModel.reviewers = event[0].employeeNumber;
      }
   }
- 
+
 }

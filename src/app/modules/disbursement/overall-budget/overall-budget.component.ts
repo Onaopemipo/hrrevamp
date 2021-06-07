@@ -27,6 +27,7 @@ export class OverallBudgetComponent implements OnInit {
   budgetItem: BudgetItemDTO = new BudgetItemDTO().clone();
   departments: DisbursementBudgetItemAllocation = new DisbursementBudgetItemAllocation().clone();
   budgetItemsCounter; number = 0;
+  btnProcessing: boolean = false;
 
   noBudgetItem: string = 'No Budget Item Found';
   noBudget: string = 'There is no budget item yet, click the button below to add budget item';
@@ -176,7 +177,9 @@ export class OverallBudgetComponent implements OnInit {
   }
 
  async updateSingleBudget(){
+    this.btnProcessing = true;
     const data = await this.addBudgetService.addUpdateBudget(this.singleBudgetUpdate).toPromise();
+    this.btnProcessing = false;
     if(!data.hasError){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss').subscribe(res => {
       if(res == 'closed'){
@@ -197,13 +200,17 @@ export class OverallBudgetComponent implements OnInit {
     }
   }
 
-  async fetAllBudget(){
-   const data = await this.budgetService.getAllBudgets().toPromise();
-   if(!data.hasError){
-    this.myBudget = data.result;
-    this.defaultPage = data.totalRecord;
-    console.log('All Bugdet Items', this.myBudget)
-   }
+ fetAllBudget(){
+   this.finLoading = true;
+  this.budgetService.getAllBudgets().subscribe(data => {
+    this.finLoading = false;
+    if(!data.hasError){
+      this.myBudget = data.result;
+      this.defaultPage = data.totalRecord;
+      console.log('All Bugdet Items', this.myBudget)
+     }
+  });
+
   }
 
   async onChangeYear(budgetId:number){
@@ -223,18 +230,16 @@ export class OverallBudgetComponent implements OnInit {
     }
   }
 
-  async addNewBudget(){
-    const data = await this.addBudgetService.addUpdateBudget(this.newBudget).toPromise();
-    if(!data.hasError && data.result.isSuccessful == true){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget Created Successfully', 'Dismiss').subscribe(data=>{
-      this.addBudget = false;
-      this.fetAllBudget();
-    })
-    } else {
-      // this.alert.openCatchErrorModal('Failed', 'Budget could not be added', 'Dismiss','errors');
-      console.error();
-
-    }
+  addNewBudget(){
+    this.btnProcessing = true;
+    this.addBudgetService.addUpdateBudget(this.newBudget).subscribe(data => {
+      if(!data.hasError && data.result.isSuccessful == true){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget Created Successfully', 'Dismiss').subscribe(data=>{
+          this.addBudget = false;
+          this.fetAllBudget();
+        })
+        }
+    });
     }
 
     budgetSetup(){

@@ -1,6 +1,6 @@
 
 <div *ngIf="defaultPage < 1">
-<ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="budgetSetup()">
+<ngx-default-content [pageHeader]="myHeader" [loading]="finLoading" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="budgetSetup()">
 </ngx-default-content>
 </div>
 
@@ -361,7 +361,8 @@
             <label></label>
             <div>
                 <button nbButton status="primary" outline class="white-background mr-2">Cancel</button>
-                <button nbButton status="primary" (click)="updateBudgetItem($event)">Update</button>
+                <button *ngIf="!btnProcessing" nbButton status="primary" (click)="updateBudgetItem($event)">Update</button>
+                <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             </div>
           </div>
         </form>
@@ -371,12 +372,31 @@
   <ngx-side-modal [(show)]='editBudget' style="width: 500px;">
   <div modal-header>Update budget</div>
   <div class="row" modal-body>
-      <div class="form-group row">
-        <div class="col">
-          <label>Financial Year</label>
-          <ngx-date-range [(start)]="singleBudgetUpdate.financialYearStartDate" [(end)]="singleBudgetUpdate.financialYearEndDate"></ngx-date-range>
+        <div class="form-group row">
+          <div class="col">
+            <label>Start Date</label>
+            <ngx-date [(value)]="budget.financialYearStartDate" [max]='budget.financialYearEndDate'  style="width: 40%;"></ngx-date>
         </div>
+        </div>
+
+      <div class="form-group row">
+      <div class="col">
+        <label>End Date</label>
+        <ngx-date  [(value)]="budget.financialYearEndDate" [min]='budget.financialYearStartDate'  style="width: 40%;"></ngx-date>
       </div>
+      </div>
+<!--
+        <div style="display: flex;">
+          <div>
+            <label>Start Date</label>
+            <ngx-date [(value)]="budget.financialYearStartDate" [max]='budget.financialYearEndDate'  style="width: 40%;"></ngx-date>
+          </div>
+          <div style="margin-left: 20px; margin-right: 20px; font-size: 20px; text-align: center; justify-content: center; display: flex;"></div>
+          <div>
+            <label>End Date</label>
+            <ngx-date  [(value)]="budget.financialYearEndDate" [min]='budget.financialYearStartDate'  style="width: 40%;"></ngx-date>
+          </div>
+      </div> -->
 
       <div class="form-group row">
        <div class="col">
@@ -386,7 +406,8 @@
       </div>
       <div class="form-group row" style="margin-top: 20px">
        <div class="col">
-        <button nbButton status="primary" (click)="updateSingleBudget()">Update</button>
+        <button *ngIf="btnProcessing" nbButton status="primary" (click)="updateSingleBudget()">Update</button>
+        <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
        </div>
       </div>
   </div>
@@ -410,7 +431,8 @@
         </div>
         <div class="form-group row" style="margin-top: 20px">
          <div class="col">
-          <button nbButton status="primary" (click)="addNewBudget()">Submit</button>
+          <button *ngIf="!btnProcessing" nbButton status="primary" (click)="addNewBudget()">Submit</button>
+          <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
          </div>
         </div>
     </div>

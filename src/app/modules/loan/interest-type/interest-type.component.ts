@@ -16,11 +16,13 @@ export class InterestTypeComponent implements OnInit {
   interestModal: boolean = false;
   rateModel: InterestRateDTO = new InterestRateDTO;
   allInterestRates: InterestRate [] = [];
+  loading: boolean = false;
 
   constructor(private rateService: AddUpdateInterestRateServiceProxy, private alertMe: AlertserviceService,
     private getRateService: GetInterestRateServiceProxy) { }
 
   ngOnInit(): void {
+    this.getAllInterests();
   }
 
   toggleModal(){
@@ -28,10 +30,13 @@ export class InterestTypeComponent implements OnInit {
   }
 
   async createType(){
+    this.loading = true;
     const data = await this.rateService.addUpdateIntrestRate(this.rateModel).toPromise();
-    if(data.result.isSuccessful == true){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Added Successfully', 'Dismiss').subscribe(data => {
-        if(data == 'closed'){
+    this.loading = false;
+    if(!data.hasError && data.result.isSuccessful == true){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Added Successfully', 'Dismiss').subscribe(res => {
+        if(res){
+          this.getAllInterests()
           this.interestModal = false;
         }
       });
@@ -39,11 +44,16 @@ export class InterestTypeComponent implements OnInit {
   }
 
 
-  async getAllInterests(){
-    const data = await this.getRateService.getInterestRate().toPromise();
-    if(!data.hasError){
-      this.allInterestRates = data.result;
-    }
+ getAllInterests(){
+   this.loading = true;
+    this.getRateService.getInterestRate().subscribe(data => {
+      this.loading = false;
+      if(!data.hasError){
+        this.allInterestRates = data.result;
+        this.defaultPage > 0
+      }
+    });
+
   }
 
 }

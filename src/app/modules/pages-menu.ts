@@ -299,7 +299,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
       {
         title: 'Applicants',
-        link: '/recruitment/applicants',
+        link: '/recruitmentadmin/applicants',
       },
 
       {
@@ -556,12 +556,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Budget',
         link: '/disbursement/budget',
       },
+
+      {
+        title: 'Disbursement Request',
+        link: '/disbursement/disbursement/create',
+      },
+
       {
         title: 'History',
         link: '/disbursement/disbursement/history',
       },
       {
-        title: 'Request',
+        title: 'Request Log',
         link: '/disbursement/disbursement/requests',
       },
     ]

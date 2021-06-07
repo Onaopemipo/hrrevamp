@@ -11,7 +11,7 @@
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
           <ng-template [ngIf]="employeeCounter > 0">
             <ngx-tableheader></ngx-tableheader>
-            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [actions]='tableActions'
+            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [loading]="loading" [actions]='tableActions'
             (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
           </ng-template>
       </nb-tab>

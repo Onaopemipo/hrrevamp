@@ -1,3 +1,4 @@
+import { ToggleExpenseGroupServiceProxy, ToggleExpenseProjectServiceProxy, ToggleProjectActivityServiceProxy, ToggleExpenseTypeServiceProxy, ToggleExpenseSubTypeServiceProxy } from './../../../_services/service-proxies';
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { AssetBaseService } from 'app/modules/asset-management/services/asset-category.service';
@@ -55,12 +56,14 @@ export class ExpenseGroupService extends AssetBaseService<MyExpenseGroup, any> {
     return this.create_api.addUpdateExpenseGroup(new ExpenseGroupDto({...data}));
   }
   delete(id: number) {
-    return createSubscription(new MessageOut('Deleted successfully', true));
+   return this.expense.toggleExpenseGroup(id.toString())
+    // return createSubscription(new MessageOut('Deleted successfully', true));
   }
 
   constructor(
     private create_api: AddUpdateExpenseGroupServiceProxy,
     private list_api_service: GetExpenseGroupsServiceProxy,
+    private expense: ToggleExpenseGroupServiceProxy
   ) {
     super();
   }
@@ -120,12 +123,14 @@ export class ExpenseProjectActivityService extends AssetBaseService<MyExpensePro
     }));
   }
   delete(id: number) {
-    return createSubscription(new MessageOut('Deleted successfully', true));
+    return this.expenseProjectActivity.toggleLoanType(id)
+    // return createSubscription(new MessageOut('Deleted successfully', true));
   }
 
   constructor(
     private create_api: AddUpdateProjectActivityServiceProxy,
     private list_api_service: GetProjectActivityServiceProxy,
+    private expenseProjectActivity: ToggleProjectActivityServiceProxy,
   ) {
     super();
   }
@@ -184,12 +189,13 @@ export class ExpenseProjectService extends AssetBaseService<MyExpenseProject, an
     }));
   }
   delete(id: number) {
-    return createSubscription(new MessageOut('Deleted successfully', true));
+   return this.expenseProject.toggleExpenseProject(id.toString());
   }
 
   constructor(
     private create_api: AddUpdateExpenseProjectServiceProxy,
     private list_api_service: GetExpenseProjectServiceProxy,
+    private expenseProject: ToggleExpenseProjectServiceProxy
   ) {
     super();
   }
@@ -249,12 +255,14 @@ export class ExpenseTypeService extends AssetBaseService<MyExpenseType, any> {
     }));
   }
   delete(id: number) {
-    return createSubscription(new MessageOut('Deleted successfully', true));
+   return this.expenseType.toggleExpenseType(id.toString());
+    // return createSubscription(new MessageOut('Deleted successfully', true));
   }
 
   constructor(
     private create_api: AddUpdateLoanTypeServiceProxy,
     private list_api_service: GetExpenseTypesServiceProxy,
+    private expenseType: ToggleExpenseTypeServiceProxy
   ) {
     super();
   }
@@ -325,12 +333,14 @@ export class ExpenseSubTypeService extends AssetBaseService<MyExpenseSubType, an
     }));
   }
   delete(id: number) {
+    // return this.expenseSubType.toggleExpenseSubType(id.toString());
     return createSubscription(new MessageOut('Deleted successfully', true));
   }
 
   constructor(
     private create_api: AddExpenseSubTypeServiceProxy,
     private list_api_service: GetExpenseSubTypesServiceProxy,
+    private expenseSubType: ToggleExpenseSubTypeServiceProxy,
   ) {
     super();
   }

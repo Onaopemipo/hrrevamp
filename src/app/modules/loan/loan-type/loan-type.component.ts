@@ -61,7 +61,10 @@ export class LoanTypeComponent implements OnInit {
               this.deleteService.deleteLoanType(event.data.id).subscribe(myData => {
                 if(!myData.hasError && myData.result.isSuccessful == true){
                   this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Request has been deleted','Success').subscribe(delData =>{
-                    if(delData) this.router.navigateByUrl('/loan/loan-type')
+                    if(delData){
+                      this.fetchAllLoanTypes();
+                      this.router.navigateByUrl('/loan/loan-type')
+                    }
                   })
                 }
               })
@@ -127,10 +130,11 @@ export class LoanTypeComponent implements OnInit {
   }
 
   async createLoanType(){
+    this.loading = true;
     const data = await this.updateLoanService.addUpdateLoanType(this.loanTypeModel).toPromise();
-    console.log(data)
+    this.loading = false;
     if(!data.hasError && data.result.isSuccessful){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Dismiss').subscribe(dataAction => {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Ok').subscribe(dataAction => {
         this.router.navigateByUrl('/loan/loan-type');
         this.fetchAllLoanTypes();
         this.loanTypeModel = new LoanTypeDTO().clone();

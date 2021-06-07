@@ -2,11 +2,18 @@
 <ngx-componentsheader *ngIf="defaultPage < 1" pageName='Interest Type'></ngx-componentsheader>
 
 <div *ngIf="defaultPage < 1">
-  <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [buttonValue]="myButton" (buttonClick)="toggleModal()">
+  <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [loading]="loading" [buttonValue]="myButton" (buttonClick)="toggleModal()">
   </ngx-default-content>
+</div>
+
+<div *ngIf="defaultPage > 0">
+  <nb-card>
+    <nb-card-body>
+      <ngx-tableheader></ngx-tableheader>
+        <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allLoanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+    </nb-card-body>
+  </nb-card>
   </div>
-
-
 
 
   <ngx-side-modal [(show)]='interestModal' style="width: 500px;">
@@ -32,7 +39,8 @@
             <label></label>
             <div>
                 <button nbButton status="primary" outline class="white-background mr-2" style="margin: 3px;">Cancel</button>
-                <button nbButton status="primary" (click)="createType()">Create</button>
+                <button *ngIf="!loading" nbButton status="primary" (click)="createType()">Create</button>
+                <button *ngIf="loading" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             </div>
           </div>
         </form>
