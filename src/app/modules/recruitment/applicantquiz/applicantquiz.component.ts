@@ -1,3 +1,4 @@
+import { RecruitmentQuizServiceProxy, QuizDTO, QuestionDTO } from './../../../_services/service-proxies';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantquizComponent implements OnInit {
   nextQuestion: boolean = false;
-  constructor(private navCtrl: Location ) { }
+  allQuizes: QuizDTO = new QuizDTO();
+  questionData: QuestionDTO [] = []
+
+  constructor(private navCtrl: Location, private quiz: RecruitmentQuizServiceProxy) { }
 
   ngOnInit(): void {
+    this.fetchQuiz();
   }
 
   gotoNextQuestion() {
@@ -19,5 +24,13 @@ export class ApplicantquizComponent implements OnInit {
 
   goback() {
     this.navCtrl.back();
+  }
+
+  async fetchQuiz(){
+    const data = await this.quiz.getQuiz(1).toPromise();
+    if(!data.hasError){
+      this.allQuizes = data.result;
+      this.questionData = data.result.questions;
+    }
   }
 }

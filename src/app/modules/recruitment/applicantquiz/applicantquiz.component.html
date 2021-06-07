@@ -4,7 +4,7 @@
 
 <ngx-componentsheader pageName='Aptitude Test'></ngx-componentsheader>
 
-  <nb-card style="background-color: #ffffff;">
+  <nb-card *ngFor="let question of questionData" style="background-color: #ffffff;">
     <nb-card-body *ngIf="!nextQuestion">
       <div class="row" style="display: flex; justify-content:space-around;">
         <div class="col-lg-10">

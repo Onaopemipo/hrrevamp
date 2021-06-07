@@ -57,6 +57,10 @@ export class SettingsComponent implements OnInit {
   templateCounter: number = 0;
   hiringStageCounter: number = 0;
   loading: boolean = false;
+  newSubStage: boolean = false;
+  hirestageId: number = 0;
+  substageModel: ManageSubHireStageDTO = new ManageSubHireStageDTO();
+
 
 
   constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService, 
@@ -93,11 +97,25 @@ export class SettingsComponent implements OnInit {
   }
 
   addNewStage(){
+    this.loading = true;
     this.settings.addUpdateHireStage(this.stagesModel).subscribe(data => {
+      this.loading = false;
       if(!data.hasError){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Stage Added!','Dismiss')
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Stage Added!','Dismiss').subscribe(res => {
+          if(res){
+            this.createStage = false;
+            this.stagesModel = new ManageHireStageDTO();
+            this.getHireStages();
+          }
+        })
       }
     })
+  }
+
+  toggleSubStage(id){
+    this.hirestageId = id;
+    this.newSubStage = !this.newStage
+
   }
 
   addMoreQuestion(){
@@ -121,7 +139,9 @@ export class SettingsComponent implements OnInit {
    }
 
   addScoreCard(){
+    this.loading = true;
     this.settings.addUpdateScoreCard(this.scoreCardModel).subscribe(data => {
+      this.loading = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Scorecard Added!','Dismiss').subscribe(res => {
           if(res){
@@ -216,13 +236,7 @@ export class SettingsComponent implements OnInit {
     const data = await this.settings.getHireStage(1).toPromise();
     if(!data.hasError){
       this.hireStage = data.result;
-    }
-  }
-
-  async getAllSubHireStages(){
-    const data = await this.settings.getAllSubHireStages().toPromise();
-    if(!data.hasError){
-      this.allSubHireStages = data.result;
+      this.allSubHireStages = data.result.subStages;
     }
   }
 
@@ -233,16 +247,15 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  addSubStage(id){
+  addSubStage(){
     this.loading = true;
-    let substage = new ManageSubHireStageDTO();
-    substage.hireStageId = id;
-    this.settings.addUpdateSubHireStage(substage).subscribe(data => {
+    this.substageModel.hireStageId = this.hirestageId;
+    this.settings.addUpdateSubHireStage(this.substageModel).subscribe(data => {
       this.loading = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Substage Added', 'OK').subscribe(res => {
           if(res){
-            this.fetchAllScorecards();
+            this.getHireStages();
           }
         })
       }
@@ -254,6 +267,12 @@ export class SettingsComponent implements OnInit {
      this.stagesModel.reviewers = event[0].employeeNumber;
     }
  }
+
+ getSubSelectedEmployee(event,selectType) {
+  if(selectType == 'employee'){
+   this.substageModel.reviewers = event[0].employeeNumber;
+  }
+}
 
   showModal(){
       this.showEditModal = true

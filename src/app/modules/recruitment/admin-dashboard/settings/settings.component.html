@@ -2,7 +2,8 @@
 <ngx-componentsheader *ngIf="selectedCase =='Hiring_Stages'" pageName='Settings' [requiredButton]="[{name:'newStage', label:'Add New Stage', icon: 'plus'}]" (buttonClick)="addStage()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='EmailSms_Templates'" pageName='Settings' [requiredButton]="[{name:'newTemplate', label:'Add New Template', icon: 'plus'}]" (buttonClick)=" toggleNewTemplate()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="toggleScorecard()"></ngx-componentsheader>
-<div *ngIf="scorecardCounter < 1  || templateCounter < 1 || hiringStageCounter < 1" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  <div class="col-md-4">
+<div *ngIf="scorecardCounter < 1" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  
+  <div class="col-md-4">
     <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
       <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
       <div style="padding: 20px;">
@@ -35,7 +36,7 @@
   </div>
 </div>
 
-<div *ngIf="scorecardCounter > 0 || templateCounter > 0 || hiringStageCounter > 0" class="row">
+<div *ngIf="scorecardCounter > 0" class="row">
   <div class="col-lg-4 col-md-4 col-xxl-4">
       <nb-card>
       <div>
@@ -60,7 +61,7 @@
               <nb-card *ngFor="let hstage of hiringStages" class="cardTitle" (click)="toggleCard('applied')" #applied>
                 <nb-card-header>
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>{{ hstage.name }}</span><span class="actions"><button nbButton style="color: #4847E0;" (click)="addSubStage(hstage.id)">Add Stage</button><button nbButton style="color: #4847E0;">Edit</button><button nbButton style="color: #EB5757;">Delete</button></span>
+                    <span>{{ hstage.name }}</span><span class="actions"><button nbButton style="color: #4847E0;" (click)="toggleSubStage(hstage.id)">Add Stage</button><button nbButton style="color: #4847E0;">Edit</button><button nbButton style="color: #EB5757;">Delete</button></span>
                   </div>
                 </nb-card-header>
                 <nb-card-body *ngFor="let substage of allSubHireStages">
@@ -109,17 +110,6 @@
                   <h4>I am pending</h4>
                 </nb-card-body>
               </nb-card>
-
-              <nb-card class="cardTitle" (click)="toggleCard('hired')" #hired>
-                <nb-card-header>
-                  <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span>Hired</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                  </div>
-                </nb-card-header>
-                <nb-card-body *ngIf="cardClick =='hired'">
-                  <h4>I am Hired</h4>
-                </nb-card-body>
-              </nb-card>
           </div>
 
           </div>
@@ -165,17 +155,6 @@
                     </div>
                   </nb-card-header>
 
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Competency</span><span class="actions"><a href="javascript:void(0);">Edit</a><a style="padding: 10px; color:#EB5757;" href="javascript:void(0);">Delete</a></span>
-                    </div>
-                  </nb-card-header>
-
-                  <nb-card-header>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                      <span>Leadership</span><span class="actions"><a href="">Edit</a><a style="padding: 10px; color:#EB5757;" href="">Delete</a></span>
-                    </div>
-                  </nb-card-header>
                 </nb-card>
               </nb-card-body>
             </nb-card>
@@ -190,7 +169,7 @@
 <!-- Modal -->
 
 <ngx-side-modal [(show)]="newStage">
-  <div modal-header>Add Stage</div>
+  <div modal-header>Add New Stage</div>
   <div modal-body>
           <form action="">
             <div class="form-group">
@@ -213,7 +192,7 @@
               <label>Email Template</label>
               <select class=" form-control" name="emailTemplate" #emailTemplate="ngModel" [(ngModel)]="stagesModel.emailTemplateId" placeholder="Enter Email">
                 <option value="">--Select Template--</option>
-                <!-- <option *ngFor="let template of allEmailTemplates" [value]="template.id">{{template.name}}</option> -->
+                <option *ngFor="let template of allTemplates" [value]="template.id">{{template.subject}}</option>
               </select>
               <div *ngIf="emailTemplate.invalid && (emailTemplate.dirty || emailTemplate.touched)" class="error">
                 <div *ngIf="emailTemplate.errors.required">Template is required</div>
@@ -228,10 +207,66 @@
         </div>
 
         <div modal-actions class="d-flex">
-          <button nbButton status="primary" class="d-flex column" (click)="addNewStage()">Save</button>
+          <button *ngIf="!loading" nbButton status="primary" class="d-flex column" (click)="addNewStage()">Save</button>
+          <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
           <button nbButton outline status="primary" class="d-flex column" (click)="addStage()">Cancel</button>
          </div>
 </ngx-side-modal>
+
+<ngx-side-modal [(show)]="newSubStage">
+  <div modal-header>Add Sub Stage</div>
+  <div modal-body>
+          <form action="">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="title" #title="ngModel" [(ngModel)]="substageModel.name" class="form-control" placeholder="Enter Name" required>
+              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                <div *ngIf="title.errors.required">Name is required</div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label style="margin-right: 15px;">Auto-respond-with-mail?</label>
+             <div style=" display: flex; justify-content:left; flex-direction: row;">
+               <label style="margin-right: 20px;">Off</label> <nb-toggle style="margin-right: 20px;" [(ngModel)]="substageModel.autoEmailRespond" (checked)="autoEmail()"></nb-toggle><label>On</label>
+             </div>
+            </div>
+
+            <div class="form-group">
+              <label>Email Template</label>
+              <select class=" form-control" name="emailTemplate" #emailTemplate="ngModel" [(ngModel)]="substageModel.emailTemplateId" placeholder="Enter Email">
+                <option value="">--Select Template--</option>
+                <option *ngFor="let template of allTemplates" [value]="template.id">{{template.subject}}</option>
+              </select>
+              <div *ngIf="emailTemplate.invalid && (emailTemplate.dirty || emailTemplate.touched)" class="error">
+                <div *ngIf="emailTemplate.errors.required">Template is required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="Country" >Scorecard</label>
+                <select class="custom-select" name="scorecard" ngModel="scorecard" [(ngModel)]="substageModel.scoreCard" required>
+                  <option value="">--Select ScoreCard--</option>
+                  <option *ngFor="let card of allScorecards" [value]="card.id">{{ card.focusArea }}</option>
+                </select>
+            
+            </div>
+
+            <div class="form-group">
+              <label>Reviewers</label>
+              <ngx-employee-master-search (masterSubmitted)="getSubSelectedEmployee($event,'employee')" [allowmultipleselection]="allowmultipleselection" [selectionHeader]="selectionHeader" [addbtnText]="addbtnText"></ngx-employee-master-search>
+            </div>
+          </form>
+        </div>
+
+        <div modal-actions class="d-flex">
+          <button *ngIf="!loading" nbButton status="primary" class="d-flex column" (click)=" addSubStage()">Save</button>
+          <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+          <button nbButton outline status="primary" class="d-flex column" (click)="addStage()">Cancel</button>
+         </div>
+</ngx-side-modal>
+
 
 <ngx-side-modal [(show)]="scorecard">
   <div modal-header>Add ScoreCard</div>
@@ -279,7 +314,7 @@
       </div>
 
       <div *ngIf="questionBank.length > 0" style="margin: 10px;">
-        <span class="cbadge"  *ngFor="let question of questionBank" style="margin: 5px;">Question Added &nbsp;
+        <span class="cbadge"  *ngFor="let question of questionBank; let i = index " [attr.data-index]="i" class="row" style="margin: 5px;">Question {{ i+1 }} Added &nbsp;
           <i class="fa fa-times" (click)="removeQuestion(question)" style="cursor: pointer;color: red;"></i></span>
       </div>
 
@@ -293,7 +328,8 @@
 
         <div class="form-group row">
           <div class="col">
-            <button nbButton status="primary" (click)="addScoreCard()" >Save</button>
+            <button *ngIf="!loading" nbButton status="primary" (click)="addScoreCard()" >Save</button>
+            <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             <span style="padding: 8px;"></span>
             <button nbButton>Discard</button>
           </div>
@@ -318,17 +354,17 @@
       <div class="form-group row mydiv">
         <div class="col">
           <label for="Body" class="col-form-label mylabel">Body</label>
-          <ngx-wysisyg-input style="padding-left: -10px;"></ngx-wysisyg-input>
+          <textarea name="" id="" cols="30" rows="10"></textarea>
         </div>
       </div>
 
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <div class="col">
             <button nbButton status="primary">Save template</button>
             <span style="padding: 8px;"></span>
             <button nbButton>Cancel</button>
           </div>
-        </div>
+        </div> -->
       </form>
         </div>
 
@@ -343,7 +379,8 @@
 
          <div class="form-group row">
           <div class="col">
-            <button nbButton status="primary" (click)="createNewTemplate()" >Save</button>
+            <button *ngIf="!loading" nbButton status="primary" (click)="createNewTemplate()" >Save</button>
+            <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             <span style="padding: 8px;"></span>
             <button nbButton>Discard</button>
           </div>

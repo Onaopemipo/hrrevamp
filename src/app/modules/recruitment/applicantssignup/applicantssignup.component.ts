@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssignupComponent implements OnInit {
 
+  show: boolean = false;
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
   loading: boolean = false;
 
@@ -19,10 +20,13 @@ export class ApplicantssignupComponent implements OnInit {
 
   }
 
+  viewpassword() {
+    this.show = !this.show;
+  }
+
   regiterApplicant(){
     this.loading = true;
     this.applicant.registerApplicant(this.applicantModel).subscribe(data => {
-    this.loading = false;
       if(!data.hasError && data.result.isSuccessful === true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Applicant Created', 'Verify your account').subscribe(res => {
           if(res){
@@ -32,6 +36,7 @@ export class ApplicantssignupComponent implements OnInit {
       }
 
       else {
+        this.loading = false;
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
       }
     })

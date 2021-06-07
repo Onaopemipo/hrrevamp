@@ -21,11 +21,12 @@
                   </div>
                  <div style="padding: 20px;"></div>
 
-                 <form>
+                 <!-- <form>
 
                   <div class="form-group">
                     <label for="exampleInputEmail1" class="label">Email address</label>
                     <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Email">
+
                   </div>
                   <div style="padding: 5px;"></div>
 
@@ -42,6 +43,36 @@
 
                 <button type="button" nbButton fullWidth status="primary">Continue</button>
                 <div style="padding: 5px;"></div>
+                </form> -->
+                
+                <form name="loginForm" id="loginForm" #loginForm="ngForm">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="label">Email address</label>
+                    <input type="email" nbInput fullWidth id="exampleInputEmail1" placeholder="Email" name="email" id="email" [(ngModel)]="applicantModel.email" #email="ngModel" [pattern]="emailPattern" required>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched) " class="error">
+                      <div *ngIf="(email.errors.required || email.errors)">
+                        Valid email is required
+                      </div>
+                  </div>
+                  </div>
+                  <div style="padding: 5px;"></div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" class="label">Password</label>
+                    <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
+                      <input [type]="show ? 'text' : 'password'" nbInput fullWidth id="exampleInputPassword1" placeholder="Password" id="password" name="password" #password="ngModel"  [(ngModel)]="applicantModel.password" required style="border: none;">
+                      <nb-icon  (click)="viewpassword()" *ngIf="!show"  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;cursor: pointer;"></nb-icon>
+                      <nb-icon  (click)="viewpassword()" *ngIf="show"  icon="eye-outline" style="font-size: 32px;color: #95A8B8;cursor: pointer;"></nb-icon>
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+                      <div *ngIf="password.errors.required">
+                        Password is required
+                      </div>
+                  </div>
+                  </div>               
+                
+                  <button *ngIf="!btnprocessing" [disabled]="loginForm.invalid" (click)="loginUser()" type="button" nbButton fullWidth status="primary">Submit</button>
+                  <button *ngIf="btnprocessing" type="button" nbButton fullWidth status="primary">Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+                  <div style="padding: 5px;"></div>
                 </form>
                 <div style="padding: 5px;"></div>
                 <p style="text-align: center;font-size: .9rem;color: #080730;font-weight: 600;"><a routerLink="/recruitment/signup" style="font-weight: 700;">Sign up instead</a></p>

@@ -1,8 +1,8 @@
-import { IVwUserObj } from 'app/_services/service-proxies';
+import { IVwUserObj, IDTextViewModel, DataServiceProxy } from 'app/_services/service-proxies';
 import { AuthenticationService } from 'app/_services/authentication.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobApplication, JobDTO } from './../../../_services/service-proxies';
+import { RecruitmentJobApplicationServiceProxy, RecruitmentJobServiceProxy, JobApplication, JobDTO, RecruitmentSettingServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -21,9 +21,14 @@ export class ApplicantsComponent implements OnInit {
   noJobs: string = 'Please check back later';
   applicantId:number = 0;
   user: IVwUserObj;
+  employmentTypeData: IDTextViewModel [] = [];
+  jobLevelData: IDTextViewModel [] = [];
+  industryData: IDTextViewModel [] = [];
+  salaryData: IDTextViewModel [] = [];
+  isProfileComplete: boolean = true;
 
-  constructor(private jobService: RecruitmentJobApplicationServiceProxy, private job: RecruitmentJobServiceProxy,
-    private router: Router, private route: ActivatedRoute, private authServ: AuthenticationService) { }
+  constructor(private jobService: RecruitmentJobApplicationServiceProxy, private job: RecruitmentJobServiceProxy, private dataservice: DataServiceProxy,
+    private router: Router, private route: ActivatedRoute, private authServ: AuthenticationService, private settings: RecruitmentSettingServiceProxy) { }
 
   ngOnInit(): void {
     this.applicantId = Number(this.route.snapshot.paramMap.get("id"));
@@ -36,7 +41,7 @@ export class ApplicantsComponent implements OnInit {
 
   fetchPostedJobs(){
     this.loading = true;
-    this.job.getAllActiveJobs('','','',0,0,0,1,10).subscribe( data => {
+    this.job.getAllActiveJobs(undefined,undefined,undefined,undefined,undefined,undefined,1,10).subscribe( data => {
     this.loading = false;
     if(!data.hasError){
       this.allJobs = data.result;
@@ -65,4 +70,5 @@ export class ApplicantsComponent implements OnInit {
     })
   
     }
+
 }

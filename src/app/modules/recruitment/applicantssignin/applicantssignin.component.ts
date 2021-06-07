@@ -1,7 +1,10 @@
+import { AuthenticationService } from 'app/_services/authentication.service';
+import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy, MangeLoginJobApplicantDTO } from './../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'ngx-applicantssignin',
@@ -10,12 +13,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicantssigninComponent implements OnInit {
 
+  show: boolean = false;
+  loginForm: FormGroup;
+  applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"; 
+  btnprocessing: boolean = false;
+  errorMsg: string = "";
+
   userDetails: MangeLoginJobApplicantDTO = new MangeLoginJobApplicantDTO();
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, 
+    private router: Router, private loginServices: GetTokenServiceProxy,private AuthenService: AuthenticationService ) { }
 
   ngOnInit(): void {
   }
+
+  viewpassword() {
+    this.show = !this.show;
+  }
+
+  loginUser() {
+    this.btnprocessing = true;
+    this.loginServices.getToken(this.applicantModel).subscribe((resp) => {
+      if (!resp.hasError) {
+        this.openSuccessalert(resp.message);
+        console.log(resp)
+        console.log(resp.result)
+       this.AuthenService.addUser(resp.result);
+      } else {
+        this.clearerror();
+        this.errorMsg = resp.message;   
+
+      }
+    }, error => {
+      this.clearerror();
+        this.errorMsg = "Oops! Something went wrong, we are fixing it";
+       
+    })
+  }
+  clearerror() {
+  setTimeout(() => {
+    this.errorMsg = "";
+    this.btnprocessing = false;
+  }, 3000);
+}
+
+  openSuccessalert(message) {
+    this.alertMe.openModalAlert('success', message, 'Go to Dashboard')
+      .subscribe(data => {
+        this.btnprocessing = false;
+        this.router.navigate(['/dashboard']);
+      if (data) {
+ 
+      }
+    });
+}
 
   authUser(){
     this.applicant.loginUser(this.userDetails).subscribe(data => {
