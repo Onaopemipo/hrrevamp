@@ -52,11 +52,11 @@ export class LoanTypeComponent implements OnInit {
     //    }
 
         if(event.name==TABLE_ACTION.EDIT){
-         this.updateLoan = true;
         this.loanSettings.fetchLoanTypeById(event.data.id).subscribe(data => {
           if(!data.hasError){
-            // this.updateLoanData = data.result;
+            this.updateLoanData = data.result;
             console.log('Wheeep',this.updateLoanData)
+            this.updateLoan = true;
           }
 
         })
@@ -86,9 +86,10 @@ export class LoanTypeComponent implements OnInit {
   ];
   option;
 
+  // LoanTypeDTO = new LoanTypeDTO().clone();
   updateLoan: boolean = false;
   loanType: NgForm;
-  updateLoanData: LoanTypeDTO = new LoanTypeDTO().clone();
+  updateLoanData: any;
   loading: boolean = true;
   dataCounter: number = 0;
   loanTypeModel: LoanTypeDTO = new LoanTypeDTO();
@@ -143,7 +144,7 @@ export class LoanTypeComponent implements OnInit {
    this.updateLoanService.addUpdateLoanType(this.loanTypeModel).subscribe(data => {
     this.loading = false;
     if(!data.hasError && data.result.isSuccessful){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'Ok').subscribe(dataAction => {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Type has been created!', 'OK').subscribe(dataAction => {
         this.router.navigateByUrl('/loan/loan-type');
         this.fetchAllLoanTypes();
         this.loanTypeModel = new LoanTypeDTO().clone();
@@ -153,10 +154,15 @@ export class LoanTypeComponent implements OnInit {
     }
 
     else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Could not add Loan Type', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Could not add Loan Type', 'OK')
     }
 
-   });
+   }, (error) => {
+
+    if (error.status == 400) {
+      this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+    }
+  });
   }
 
   async getGrades(){
@@ -202,7 +208,7 @@ export class LoanTypeComponent implements OnInit {
   async postFullPayment(){
     const data = await this.fullpaymentService.postFullRepayment(this.loanData).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'Dismiss')
+      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'OK')
     }
   }
 

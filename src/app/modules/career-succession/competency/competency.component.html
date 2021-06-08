@@ -212,7 +212,8 @@
 
           <div class="form-group row">
             <div class="col-sm-8">
-              <button nbButton status="primary" (click)="createCompetency()">Submit</button>
+              <button *ngIf="!btnProcessing" nbButton status="primary" (click)="createCompetency()">Submit</button>
+              <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
           </div>
           </div>
         </form>

@@ -13,6 +13,7 @@ export class ApplicantssignupComponent implements OnInit {
   show: boolean = false;
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
   loading: boolean = false;
+  btnProcessing: boolean = false;
 
   constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
@@ -25,8 +26,9 @@ export class ApplicantssignupComponent implements OnInit {
   }
 
   regiterApplicant(){
-    this.loading = true;
+    this.btnProcessing = true;
     this.applicant.registerApplicant(this.applicantModel).subscribe(data => {
+      this.btnProcessing = false;
       if(!data.hasError && data.result.isSuccessful === true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Applicant Created', 'Verify your account').subscribe(res => {
           if(res){
@@ -36,8 +38,14 @@ export class ApplicantssignupComponent implements OnInit {
       }
 
       else {
-        this.loading = false;
+        this.btnProcessing = false;
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.btnProcessing = false;
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
       }
     })
 

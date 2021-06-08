@@ -27,6 +27,8 @@ export class UpdateLoanComponent implements OnInit {
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Employee";
 
+  btnProcessing: boolean = false;
+
 
   constructor(private updateService: UpdateLoanRequestServiceProxy, private alertMe: AlertserviceService,
     private loanService: GetLoanRequestServiceProxy, private authServ: AuthenticationService,
@@ -38,12 +40,20 @@ export class UpdateLoanComponent implements OnInit {
   }
 
 
-  async updateLoan(){
-    const data = await this.updateService.updateLoanRequest(this.updateLoanPayment).toPromise();
-    if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Updated!', 'Dismiss')
-    }
-  }
+  updateLoan(){
+    this.btnProcessing = true;
+     this.updateService.updateLoanRequest(this.updateLoanPayment).subscribe(data => {
+       if(!data.hasError){
+         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Updated!', 'OK')
+       }
+     }, (error) => {
+
+       if (error.status == 400) {
+         this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+       }
+     });
+
+   }
 
   async fetchSingleLoanRequest(){
     const data = await this.loanService.getLoanRequest(this.loanId).toPromise();

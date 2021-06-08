@@ -14,7 +14,7 @@ enum ACTIONS {
 export class ApplicantsComponent implements OnInit {
 
   myPlanHeader: string = 'You have not posted any application';
-  myPlanDesc: string = 'Click on the button to post a job';
+  myPlanDesc: string = 'Check back later';
 
   applicantsTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -25,7 +25,7 @@ export class ApplicantsComponent implements OnInit {
   ];
 
   allApplications: JobApplication [] = [];
-  applicationCounter: number = 5;
+  applicationCounter: number = 0;
 
   constructor(private jobs: RecruitmentJobApplicationServiceProxy) { }
 

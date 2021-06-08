@@ -61,6 +61,7 @@ export class NewCompetencyComponent implements OnInit {
   tempTrainReq = [];
   tempExp = [];
   requirementChecker:boolean = false;
+  btnProcessing:boolean = false;
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy,
@@ -131,7 +132,7 @@ export class NewCompetencyComponent implements OnInit {
   //   }
   // }
 
-  async createCompetency(){
+  createCompetency(){
     if(this.allCompetencyRequirements === []){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
     } else {
@@ -141,16 +142,22 @@ export class NewCompetencyComponent implements OnInit {
     this.myCompetency.selectedQualifications = JSON.stringify(this.tempQualReq);
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
-    const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
-        if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
-      })
-      // this.myCompetency = new ManageCompetencyDTO().clone();
-    } else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
-    }
+    this.competencyService.addUpdateCompetency(this.myCompetency).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
+          if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
+        })
+        // this.myCompetency = new ManageCompetencyDTO().clone();
+      } else {
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
+      }
 
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
+    });
     }
   }
 

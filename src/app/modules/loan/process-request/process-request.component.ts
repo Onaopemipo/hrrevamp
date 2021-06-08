@@ -100,7 +100,7 @@ export class ProcessRequestComponent implements OnInit {
   async postFullPayment(){
     const data = await this.fullpaymentService.postFullRepayment(this.loanData).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'Dismiss')
+      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'OK')
     }
   }
 

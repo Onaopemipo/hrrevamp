@@ -16,14 +16,14 @@ export class ApplicantssigninComponent implements OnInit {
   show: boolean = false;
   loginForm: FormGroup;
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"; 
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   btnprocessing: boolean = false;
   errorMsg: string = "";
 
   userDetails: MangeLoginJobApplicantDTO = new MangeLoginJobApplicantDTO();
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, 
-    private router: Router, private loginServices: GetTokenServiceProxy,private AuthenService: AuthenticationService ) { }
+  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService,
+    private router: Router, private loginServices: GetTokenServiceProxy,private AuthenService: AuthenticationService,  ) { }
 
   ngOnInit(): void {
   }
@@ -42,13 +42,15 @@ export class ApplicantssigninComponent implements OnInit {
        this.AuthenService.addUser(resp.result);
       } else {
         this.clearerror();
-        this.errorMsg = resp.message;   
+        this.errorMsg = resp.message;
 
       }
-    }, error => {
-      this.clearerror();
-        this.errorMsg = "Oops! Something went wrong, we are fixing it";
-       
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.btnprocessing = false;
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
     })
   }
   clearerror() {
@@ -64,9 +66,17 @@ export class ApplicantssigninComponent implements OnInit {
         this.btnprocessing = false;
         this.router.navigate(['/dashboard']);
       if (data) {
- 
+
       }
     });
+}
+
+validateToken(){
+  this.applicant.validate('').subscribe(data => {
+    if(!data.hasError){
+      console.log(data);
+    }
+  })
 }
 
   authUser(){

@@ -42,6 +42,11 @@ export class LoanRequestComponent implements OnInit {
 
   loanModel: ManageLoanRequestDTO = new ManageLoanRequestDTO().clone();
   loanRequest: any;
+  btnProcessing: boolean = false;
+
+  loanEmployeeNo: string = '';
+  loanEmployeeName: string = '';
+  loggedForEmployeeId: number = 0;
 
   selectedCase: string = 'request';
   selectedPanel: any = { title: 'request', label: 'Loan Request', status: 'Active'};
@@ -120,17 +125,17 @@ export class LoanRequestComponent implements OnInit {
 
   }
 
-  toggler(e){
-    this.toggleNgModel = e;
-    if(this.toggleNgModel === false){
-        this.loanModel.employeeNo = String(this.user.employee_id);
-        this.loanModel.employeeName = this.user.full_name;
-        this.loanModel.loggedForEmployeeId = this.user.employee_id;
-    }
-    else {
-      return;
-    }
-  }
+  // toggler(e){
+  //   this.toggleNgModel = e;
+  //   if(this.toggleNgModel === false){
+  //       this.loanModel.employeeNo = String(this.user.employee_id);
+  //       this.loanModel.employeeName = this.user.full_name;
+  //       this.loanModel.loggedForEmployeeId = this.user.employee_id;
+  //   }
+  //   else {
+  //     return;
+  //   }
+  // }
 
   async getEntity() {
     const data = await this.DataService.docEntityTypes().toPromise()
@@ -185,19 +190,36 @@ export class LoanRequestComponent implements OnInit {
   }
 
 
-  async makeLoanRequest(){
-  console.log(this.loanModel)
-  const data = await this.loanRequestService.addUpdateLoanRequest(this.loanModel).toPromise();
+  makeLoanRequest(){
+ if(this.toggleNgModel == false){
+  this.loanModel.employeeNo = this.user.employee_id.toString();
+  this.loanModel.employeeName = this.user.full_name;
+  this.loanModel.loggedForEmployeeId = this.user.employee_id;
+ } else {
+  this.loanModel.employeeNo = this.loanEmployeeNo;
+  this.loanModel.employeeName = this.loanEmployeeName;
+  this.loanModel.loggedForEmployeeId = this.loggedForEmployeeId;
+ }
+
+  this.loanRequestService.addUpdateLoanRequest(this.loanModel).subscribe(data => {
   if(!data.hasError){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'Dismiss').subscribe(dataAction => {
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Request Created', 'OK').subscribe(dataAction => {
       if(dataAction){
-        this.router.navigateByUrl('loan/request')
+        this.loanModel = new ManageLoanRequestDTO()
+        this.router.navigateByUrl('/loan');
       }
     });
   }
   else{
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'Dismiss')
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'Failure', 'OK')
   }
+ }, (error) => {
+
+  if (error.status == 400) {
+    this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+  }
+});
+
   }
 
   async fetchSingleLoanRequest(){
@@ -226,11 +248,19 @@ export class LoanRequestComponent implements OnInit {
     }
   }
 
-  async updateLoan(){
-    const data = await this.updateService.updateLoanRequest(this.updateLoanPayment).toPromise();
-    if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Loan Updated!', 'Dismiss')
-    }
+ updateLoan(){
+   this.btnProcessing = true;
+    this.updateService.updateLoanRequest(this.updateLoanPayment).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Loan Updated!', 'OK')
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
+    });
+
   }
 
   // async getLoanTypes(){
@@ -275,10 +305,10 @@ export class LoanRequestComponent implements OnInit {
   }
 
   getSelectedEmployee(event,selectType) {
-     if(selectType == 'employee' && this.toggleNgModel == true){
-      this.loanModel.employeeNo = event[0].employeeNumber;
-      this.loanModel.employeeName = event[0].firstName +' '+ event[0].firstName;
-      this.loanModel.loggedForEmployeeId = event[0].id;
+     if(selectType == 'employee'){
+      this.loanEmployeeNo = event[0].employeeNumber;
+      this.loanEmployeeName = event[0].firstName +' '+ event[0].firstName;
+      this.loggedForEmployeeId = event[0].id;
      }
   }
 

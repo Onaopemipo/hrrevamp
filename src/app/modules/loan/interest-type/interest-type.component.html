@@ -1,5 +1,5 @@
 <ngx-componentsheader *ngIf="counter > 0" [requiredButton]="[{name:'newType', label:'Add New', icon: 'plus'}]" (buttonClick)="toggleModal()" pageName='Interest Type'></ngx-componentsheader>
-<ngx-componentsheader *ngIf="counter < 1" pageName='Interest Type'></ngx-componentsheader>
+<ngx-componentsheader *ngIf="counter < 1" pageName='Interest Rate'></ngx-componentsheader>
 
 <div *ngIf="counter < 1">
   <ngx-default-content [pageHeader]="myHeader" [pageDescription]="myDescription" [loading]="loading" [buttonValue]="myButton" (buttonClick)="toggleModal()">
@@ -39,8 +39,8 @@
             <label></label>
             <div>
                 <button nbButton status="primary" outline class="white-background mr-2" style="margin: 3px;">Cancel</button>
-                <button *ngIf="!loading" nbButton status="primary" (click)="createType()">Create</button>
-                <button *ngIf="loading" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+                <button *ngIf="!btnProcessing" nbButton status="primary" (click)="createType()">Create</button>
+                <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             </div>
           </div>
         </form>

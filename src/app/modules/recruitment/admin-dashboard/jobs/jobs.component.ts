@@ -141,6 +141,11 @@ tableActionClicked(event: TableActionEvent){
           }
         })
       }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
     })
       }
 }
@@ -168,6 +173,11 @@ draftTableActionClicked(event: TableActionEvent){
         this.job.toggleJob(event.data.id).subscribe(data => {
           if(!data.hasError){
             this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss')
+          }
+        }, (error) => {
+
+          if (error.status == 400) {
+            this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
           }
         })
       }
@@ -248,7 +258,12 @@ draftTableActionClicked(event: TableActionEvent){
         }
       })
     }
-   })
+   }, (error) => {
+
+    if (error.status == 400) {
+      this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+    }
+  });
   }
 
   deleteJob(){
@@ -263,7 +278,12 @@ draftTableActionClicked(event: TableActionEvent){
               }
             });
           }
-        })
+        }, (error) => {
+
+          if (error.status == 400) {
+            this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+          }
+        });
       }
     })
   }

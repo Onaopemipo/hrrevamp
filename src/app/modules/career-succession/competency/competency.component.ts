@@ -114,6 +114,7 @@ export class CompetencyComponent implements OnInit {
   allJobRoles: JobRole [] = [];
   allGradeLevels: GradeLevelDTO [] = [];
   skillData: Skill [] = [];
+  btnProcessing: boolean = false;
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
@@ -148,25 +149,32 @@ export class CompetencyComponent implements OnInit {
     this.requirement = e;
   }
 
-  async createCompetency(){
+ createCompetency(){
     if(this.allCompetencyRequirements === []){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
     } else {
-
+    this.btnProcessing = true;
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
     this.myCompetency.selectedCertifications = JSON.stringify(this.tempCertReq);
     this.myCompetency.selectedQualifications = JSON.stringify(this.tempQualReq);
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
-    const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
-        if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
-      })
-      // this.myCompetency = new ManageCompetencyDTO().clone();
-    } else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
-    }
+    this.competencyService.addUpdateCompetency(this.myCompetency).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Ok').subscribe(res => {
+          if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
+        })
+        // this.myCompetency = new ManageCompetencyDTO().clone();
+      } else {
+        this.btnProcessing = false;
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'OK')
+      }
+    }, (error) => {
+      if (error.status == 400) {
+        this.btnProcessing = false;
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
+    });
 
     }
   }

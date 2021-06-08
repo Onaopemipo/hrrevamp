@@ -62,7 +62,7 @@ export class OverallBudgetComponent implements OnInit {
   dataIndex: number = 0;
   budgetId:number = 0;
   finYear: BudgetDTO = new BudgetDTO;
-  singleBudgetUpdate: ManageBudgetDTO = new ManageBudgetDTO().clone();
+  singleBudgetUpdate: BudgetDTO = new BudgetDTO().clone();
   singleBudgetItemUpdate: BudgetItemDTO = new BudgetItemDTO().clone();
   finLoading: boolean = false;
   editBudgetItem: MyBudgetItem = new MyBudgetItem;
@@ -108,13 +108,15 @@ export class OverallBudgetComponent implements OnInit {
 
   }
 
-  async editBudgetModal(event:number){
+   editBudgetModal(event:number){
     this.budgetId = event;
-    const data = await this.singleBudget.getBudget(this.budgetId).toPromise();
-    if(!data.hasError){
-      this.singleBudgetUpdate = data.result;
-    }
-    this.editBudget = !this.editBudget;
+    this.singleBudget.getBudget(this.budgetId).subscribe(data => {
+      if(!data.hasError){
+        this.singleBudgetUpdate = data.result;
+        console.log('My Budget', this.singleBudgetUpdate)
+      }
+    });
+    this.editBudget = true;
   }
 
   addBudgetModal(){
@@ -178,11 +180,15 @@ export class OverallBudgetComponent implements OnInit {
 
  async updateSingleBudget(){
     this.btnProcessing = true;
-    const data = await this.addBudgetService.addUpdateBudget(this.singleBudgetUpdate).toPromise();
+    let updateBudget = new ManageBudgetDTO()
+    updateBudget.financialYearStartDate = this.singleBudgetUpdate.financialYearStartDate;
+    updateBudget.financialYearEndDate = this.singleBudgetUpdate.financialYearEndDate;
+    updateBudget.totalBudgetAmount = this.singleBudgetUpdate.totalBudgetAmount;
+    const data = await this.addBudgetService.addUpdateBudget(updateBudget).toPromise();
     this.btnProcessing = false;
     if(!data.hasError){
     this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Budget updated Successfully', 'Dismiss').subscribe(res => {
-      if(res == 'closed'){
+      if(res){
         this.addItemModal = false;
       }
     });
