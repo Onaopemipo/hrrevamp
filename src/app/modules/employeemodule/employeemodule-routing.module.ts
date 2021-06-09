@@ -152,7 +152,12 @@ const routes: Routes = [
         {
           path: 'viewemployeerecords',
           component:EmployeerecordsviewComponent
-        },  
+        },
+        
+        {
+          path: 'selfservive/viewemployeerecords',
+          component:EmployeerecordsviewComponent
+        }, 
         {
           path: 'employeebulkupload',
           component: EmployeerbulkaddComponent

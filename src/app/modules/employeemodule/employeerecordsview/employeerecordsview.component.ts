@@ -42,7 +42,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     { title: 'certification_panel', label: 'Certifications', status: 'Inactive' },
     { title:'qualification_Info', label: 'Qualification', status: 'Inactive' },
     { title: 'training_panel', label: 'Training', status: 'Inactive' },
-    { title: 'custom_panel', label: 'Employee Custom Form', status: 'Inactive'},
+    // { title: 'custom_panel', label: 'Employee Custom Form', status: 'Inactive'},
   ];
 
   newEmployeeForm: NgForm;
@@ -144,13 +144,21 @@ export class EmployeerecordsviewComponent implements OnInit {
       'dateModified',
       'modifiedById',
     ]
-    
+
+    // courseId!: number;
+    // institutionId!: number;
+
+    // startDate!: Date;
+    // endDate!: Date;
+    // typeId!: number;
+
     Object.entries(this.indvQualifications).map(([key, value], index) => {      
       if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
         resp = false;
       }
  
     });
+   
     return resp;
   }
 
@@ -222,6 +230,7 @@ export class EmployeerecordsviewComponent implements OnInit {
       'is_primary',
       'modifiedById',
       'subID',
+      'bank_sort_code'
     ]
 
     Object.entries(this.indVEmpBanks).map(([key, value], index) => {
@@ -358,13 +367,15 @@ export class EmployeerecordsviewComponent implements OnInit {
       'createdById',
       'dateModified',
       'modifiedById',
-  ]
+      'isDeleted'
+    ]
     Object.entries(this.indvEmpSkill).map(([key, value], index) => {      
       if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
         resp = false;
       }
   
     });
+   // console.log(this.indvEmpSkill);
     return resp;
   }
   EmpSkilltableActions: TableAction[] = [
@@ -404,14 +415,18 @@ export class EmployeerecordsviewComponent implements OnInit {
       'dateCreated',
       'createdById',
       'dateModified',
-      'modifiedById'
-  ]
+      'modifiedById',
+      'institution'
+    ]
+  
+
     Object.entries(this.indvEmpCert).map(([key, value], index) => {      
       if ((value == "" || value == null || value == undefined) && nullable.indexOf(key) == -1) {       
         resp = false;
       }
   
     });
+    //console.log(this.indvEmpCert)
     return resp;
   }
   EmpCerttableActions: TableAction[] = [
@@ -659,23 +674,25 @@ export class EmployeerecordsviewComponent implements OnInit {
     this.tempEmpContactList.splice(i, 1);
   }
   addtoCert(cert: EmployeeCertificationDTO) {
-    let searchResult = this.tempEmpSkillList.find(x => x.id_cert == cert.certificationId);
+    let searchResult = this.tempEmpCertList.find(x => x.id_cert == cert.certificationId);
     if (searchResult) {
       this.errorMsg = "Certification Exist on the List";
       this.removeErrorMsg();
     }else {
       let newCertObj = {
         id_cert: cert.certificationId,
-        cert_inst: cert.institution,
+        cert_body: cert.professionalBodyId,
         cert_startDate: cert.startDate,
         cert_endDate: cert.endDate,
         cert_comment: cert.comment
       }
       this.tempEmpCertList.push(newCertObj)
+      console.log(this.tempEmpCertList,newCertObj)
+      this.indvEmpCert = new EmployeeCertificationDTO().clone();
     }
   }
   removefromCert(i) {
-    this.tempEmpSkillList.splice(i, 1);
+    this.tempEmpCertList.splice(i, 1);
   }
   addtoSkills(sk: EmployeeSkill) {
     let searchResult = this.tempEmpSkillList.find(x => x.id_skill == sk.skillId);
@@ -688,7 +705,8 @@ export class EmployeerecordsviewComponent implements OnInit {
         no_exp: sk.numberOfExperienceInMonth,
         sk_startdate: sk.startDate
       }
-      this.tempEmpContactList.push(newSkillObj)
+      this.tempEmpSkillList.push(newSkillObj);
+      this.indvEmpSkill = new EmployeeSkill().clone();
     }
   }
   removefromSkill(i) {
@@ -730,7 +748,8 @@ export class EmployeerecordsviewComponent implements OnInit {
         code_sort: bank.bank_sort_code,
         pry_is: bank.is_primary
       }
-      this.tempEmpBanksList.push(newbnkObj)
+      this.tempEmpBanksList.push(newbnkObj);
+      this.indVEmpBanks = new EmployeeBankDTO().clone();
     }
     // console.log(this.tempEmpBanksList)
   }
@@ -800,7 +819,8 @@ export class EmployeerecordsviewComponent implements OnInit {
     return this.allskills.find(x => x.id == skill_id).name;
   }
   getEmpCertName(cert_id) {
-    return this.allskills.find(x => x.id == cert_id).name;
+    if(this.allCertfications.length > 0) return this.allCertfications.find(x => x.id == cert_id).name;
+    return "";
   }
   getAddresstypename(typeid) {
     return this.alladdressType.find(x => x.option_value == typeid).option_text;

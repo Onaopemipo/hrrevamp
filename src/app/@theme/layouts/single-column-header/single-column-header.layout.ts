@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-single-column-header-layout',
@@ -16,5 +16,5 @@ import { Component } from '@angular/core';
   `,
 })
 export class SingleColumnHeaderLayoutComponent {
-  mtoggle = false;
+@Input() mtoggle:boolean = false;
 }

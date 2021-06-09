@@ -49,7 +49,7 @@ export class PayperiodComponent implements OnInit {
   filter = {
     StartDate: null,
     EndDate: null,
-    pageSize: 10,
+    pageSize: 20,
     pageNumber: 1
   }
   totalItems = 0;
