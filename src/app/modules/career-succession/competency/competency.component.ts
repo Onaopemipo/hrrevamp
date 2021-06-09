@@ -101,8 +101,8 @@ export class CompetencyComponent implements OnInit {
   ];
 
   competencyTable: TableColumn [] = [
+    {name: 'id', title: 'ID'},
     {name: 'competencyTitle', title: 'Competency Title'},
-    // {name: 'departmentId', title: 'Department'},
     {name: 'description', title: 'Description'},
 
   ];
@@ -130,6 +130,13 @@ export class CompetencyComponent implements OnInit {
   tempExp = [];
   allPositions: PositionDTO [] = [];
 
+  filter = {
+    CompetencyTitle: undefined,
+    CompetencyId: undefined,
+    PageSize: 10,
+    PageNumber: 1
+  }
+
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy, private positionService: GetAllPositionsServiceProxy,
     private competencyService: CompetencyServiceProxy, private alertMe: AlertserviceService, private router: Router,
@@ -149,9 +156,14 @@ export class CompetencyComponent implements OnInit {
     this.requirement = e;
   }
 
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    this.getCompetency()
+  }
+
  createCompetency(){
     if(this.allCompetencyRequirements === []){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','OK')
     } else {
     this.btnProcessing = true;
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
@@ -161,7 +173,7 @@ export class CompetencyComponent implements OnInit {
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
     this.competencyService.addUpdateCompetency(this.myCompetency).subscribe(data => {
       if(!data.hasError){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Ok').subscribe(res => {
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'OK').subscribe(res => {
           if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
         })
         // this.myCompetency = new ManageCompetencyDTO().clone();
@@ -181,7 +193,7 @@ export class CompetencyComponent implements OnInit {
 
 getCompetency(){
     this.loading = true;
-    this.competencyService.fetchCompetency(undefined,undefined,10,1).subscribe(data => {
+    this.competencyService.fetchCompetency(this.filter.CompetencyTitle,this.filter.CompetencyId,this.filter.PageSize,this.filter.PageNumber).subscribe(data => {
       this.loading = false;
       if(!data.hasError){
         this.allCompetencies = data.result;

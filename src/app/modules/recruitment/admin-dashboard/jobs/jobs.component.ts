@@ -94,7 +94,7 @@ export class JobsComponent implements OnInit {
     {name: 'availability', title: 'Availability'},
     {name: 'experience', title: 'Experience(Months)'},
     {name: 'postValidityTo', title: 'Valid To', type: ColumnTypes.Date},
-    {name: 'isActive', title: 'Status', type: ColumnTypes.Status},
+    {name: 'isActive', title: 'Job Status', type: ColumnTypes.Status},
   ];
 
   scheduledJobsTable: TableColumn [] = [
@@ -197,6 +197,13 @@ draftTableActionClicked(event: TableActionEvent){
       // {name: 'disburse', label:'Disburse'},
     ]
     }
+  }
+
+  jobFilter = {
+    IsDraft: undefined,
+    IsScheduled: undefined,
+    PageNumber:1,
+    PageSize:10
   }
 
   selectedTab = TABS.postedJobs;
@@ -348,7 +355,7 @@ draftTableActionClicked(event: TableActionEvent){
 
   async fetchAllJobs(){
     this.loading = true;
-   const data = await this.job.getAllJobs(undefined, undefined, 1,10).toPromise();
+   const data = await this.job.getAllJobs(this.jobFilter.IsDraft, this.jobFilter.IsScheduled, this.jobFilter.PageNumber,this.jobFilter.PageSize).toPromise();
    this.loading = false;
     if(!data.hasError){
       this.allJobs = data.result.map(x => new JobWithStatus(x));

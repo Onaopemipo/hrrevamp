@@ -62,27 +62,27 @@ export const routes: Routes = [
         component: EligibilityviewComponent,
       },
       {
-        path: 'BenefitDetails/:id',
+        path: 'benefitDetails/:id',
         component: BenefitdetaisComponent,
       },
 
       {
-        path: 'BenefitType',
+        path: 'benefitType',
         component: BenefitTypeComponent,
       },
       {
         path: 'allPlans',
         component: AllplansComponent,
       },
-      
+
       {
         path: 'plandetails/:id',
         component: PlandetailsComponent,
       },
-  
-  
-  
-  
+
+
+
+
     ],
   }
 

@@ -16,12 +16,14 @@
 <div *ngIf="competencyCounter > 0">
   <nb-card>
     <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
       <ngx-tablecomponent [loading]='loading'
       [tableColum]="competencyTable"
       [userData]='allCompetencies'
       [actions]='tableActions'
       [loading]='loading'
+      (filterChange)="filterUpdated($event)"
+      [showActions]="false"
+      [showFilter]="true"
       (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>

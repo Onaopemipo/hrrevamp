@@ -29,11 +29,24 @@ export class ApplicantselectionComponent implements OnInit {
     {id:0, name: 'Name', email: 'Email', role:'Job Title',dateApplied : '02/03/2021'}
   ]
 
+  filter = {
+    jobRole: null,
+    pageNumber: 1,
+    pageSize: 10
+  }
+
   applicantProfile: JobApplication [] = [];
-  constructor(private jobService: RecruitmentJobApplicationServiceProxy,) { }
+  allApplications: JobApplication [] = [];
+  applicationCounter: number = 0;
+  constructor(private jobService: RecruitmentJobApplicationServiceProxy) { }
 
   ngOnInit(): void {
     this.fetchJobRoles();
+  }
+
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    this.fetchAllApplications();
   }
 
   tableActionClick(actionData: TableActionEvent){
@@ -51,7 +64,7 @@ export class ApplicantselectionComponent implements OnInit {
   }
 
   async fetchJobRoles(){
-    const data = await this.jobService.fetchJobApplicationByRole(undefined,10,1).toPromise();
+    const data = await this.jobService.fetchJobApplicationByRole(this.filter.jobRole, this.filter.pageNumber, this.filter.pageSize).toPromise();
     if(!data.hasError){
       this.allJobRoles = data.result;
       console.log(this.allJobRoles)
@@ -63,8 +76,15 @@ export class ApplicantselectionComponent implements OnInit {
     if(!data.hasError){
       // this.allApplicants = data.result;
     }
+
+
   }
 
-
-
+  async fetchAllApplications(){
+    const data = await this.jobService.fetchJobApplications(undefined, undefined, undefined,undefined,1,10).toPromise();
+    if(!data.hasError){
+      this.allApplications = data.result;
+      this.applicationCounter = data.totalRecord;
+    }
+  }
 }

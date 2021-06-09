@@ -18,7 +18,7 @@ export class TemplatesComponent implements OnInit {
     private api: CommunicationServiceProxy,
   ) { }
 
-  editingData: MailTemplateDTO = new MailTemplateDTO();
+  editingData: MailTemplateDTO = new MailTemplateDTO().clone();
   templates: MailTemplateDTO[] = [];
   async loadData() {
     this.loading = true;
