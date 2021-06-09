@@ -1,4 +1,4 @@
-import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy, AddUpdateExpenseGroupServiceProxy, GetExpenseGroupsServiceProxy, GetProjectActivityServiceProxy, AddUpdateProjectActivityServiceProxy, AddExpenseSubTypeServiceProxy, GetExpenseSubTypesServiceProxy } from './../../_services/service-proxies';
+import { GetExpenseProjectServiceProxy, AddUpdateLoanTypeServiceProxy, GetExpenseTypesServiceProxy, AddUpdateExpenseGroupServiceProxy, GetExpenseGroupsServiceProxy, GetProjectActivityServiceProxy, AddUpdateProjectActivityServiceProxy, AddExpenseSubTypeServiceProxy, GetExpenseSubTypesServiceProxy, AddUpdateExpenseTypeServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpenseComponent } from './expense/expense.component';
@@ -52,6 +52,7 @@ import { ExpenseSubTypeComponent } from './expense-sub-type/expense-sub-type.com
     ExpenseSubTypeService,
     AddExpenseSubTypeServiceProxy,
     GetExpenseSubTypesServiceProxy,
+    AddUpdateExpenseTypeServiceProxy,
   ],
   imports: [
     CommonModule,

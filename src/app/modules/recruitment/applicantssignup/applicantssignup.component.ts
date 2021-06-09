@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AlertserviceService } from 'app/_services/alertservice.service';
-import { ManageJobApplicantDTo, RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
+import { ManageJobApplicantDTo, RecruitmentJobServiceProxy, RegisterApplicantServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +14,7 @@ export class ApplicantssignupComponent implements OnInit {
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
   loading: boolean = false;
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
+  constructor(private applicant: RegisterApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
 

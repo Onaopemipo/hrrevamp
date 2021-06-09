@@ -2,7 +2,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
 import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo } from './../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, LoginUserServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -22,7 +22,7 @@ export class ApplicantssigninComponent implements OnInit {
 
   userDetails: MangeLoginJobApplicantDTO = new MangeLoginJobApplicantDTO();
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService, 
+  constructor(private applicant: LoginUserServiceProxy, private alertMe: AlertserviceService, 
     private router: Router, private loginServices: GetTokenServiceProxy,private AuthenService: AuthenticationService ) { }
 
   ngOnInit(): void {

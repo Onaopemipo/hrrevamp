@@ -1,4 +1,4 @@
-import { ToggleExpenseGroupServiceProxy, ToggleExpenseProjectServiceProxy, ToggleProjectActivityServiceProxy, ToggleExpenseTypeServiceProxy, ToggleExpenseSubTypeServiceProxy } from './../../../_services/service-proxies';
+import { ToggleExpenseGroupServiceProxy, ToggleExpenseProjectServiceProxy, ToggleProjectActivityServiceProxy, ToggleExpenseTypeServiceProxy, ToggleExpenseSubTypeServiceProxy, AddUpdateExpenseTypeServiceProxy } from './../../../_services/service-proxies';
 import { Injectable } from '@angular/core';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { AssetBaseService } from 'app/modules/asset-management/services/asset-category.service';
@@ -34,7 +34,7 @@ export class MyExpenseGroup extends ExpenseGroup implements IStatus{
 })
 export class ExpenseGroupService extends AssetBaseService<MyExpenseGroup, any> {
   list_api(filter: any) {
-    return this.list_api_service.getExpenseGroups(0, 0, '', 0, '', '', 1, 10);
+    return this.list_api_service.getExpenseGroups( '', '', '', 1, 10);
   }
   toData(obj: ExpenseGroup): MyExpenseGroup {
     return new MyExpenseGroup(obj);
@@ -99,7 +99,7 @@ export class MyExpenseProjectActivity extends ExpenseProjectActivity implements 
 })
 export class ExpenseProjectActivityService extends AssetBaseService<MyExpenseProjectActivity, any> {
   list_api(filter: any) {
-    return this.list_api_service.getProjectActivity(0, 0, '', 0, '', '', 1, 10);
+    return this.list_api_service.getProjectActivity('', '', '', 1, 10);
   }
   toData(obj: ExpenseProjectActivity): MyExpenseProjectActivity {
     return new MyExpenseProjectActivity(obj);
@@ -231,7 +231,7 @@ export class MyExpenseType extends ExpenseType implements IStatus{
 })
 export class ExpenseTypeService extends AssetBaseService<MyExpenseType, any> {
   list_api(filter: any) {
-    return this.list_api_service.getExpenseTypes(0, '', '', '', '', '', 1, 10);
+    return this.list_api_service.getExpenseTypes( '', '', '', 1, 10);
   }
   toData(obj: ExpenseType): MyExpenseType {
     return new MyExpenseType(obj);
@@ -250,7 +250,7 @@ export class ExpenseTypeService extends AssetBaseService<MyExpenseType, any> {
     throw new Error('Method not implemented.');
   }
   create(data: MyExpenseType) {
-    return this.create_api.addUpdateExpenseType(new ExpenseTypeDto({
+    return this.newcreate_api.addUpdateLoanType(new ExpenseTypeDto({
       ...data,
     }));
   }
@@ -261,6 +261,7 @@ export class ExpenseTypeService extends AssetBaseService<MyExpenseType, any> {
 
   constructor(
     private create_api: AddUpdateLoanTypeServiceProxy,
+    private newcreate_api: AddUpdateExpenseTypeServiceProxy,
     private list_api_service: GetExpenseTypesServiceProxy,
     private expenseType: ToggleExpenseTypeServiceProxy
   ) {
@@ -297,7 +298,7 @@ export class MyExpenseSubType extends ExpenseSubType implements IStatus{
 })
 export class ExpenseSubTypeService extends AssetBaseService<MyExpenseSubType, any> {
   list_api(filter: any) {
-    return this.list_api_service.getExpenseSubTypes(0, '', '', '', '', '', 1, 10);
+    return this.list_api_service.getExpenseSubTypes( '', '', '', 1, 10);
   }
   toData(obj: ExpenseSubType): MyExpenseSubType {
     return new MyExpenseSubType(obj);
