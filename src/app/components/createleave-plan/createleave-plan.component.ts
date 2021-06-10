@@ -145,9 +145,11 @@ export class CreateleavePlanComponent implements OnInit {
      {
       var eEndDt = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
       var val = this.getweekvalue(eEndDt);
-      var nendDat = this.addDays(eEndDt, val);
-      var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, nendDat);
-      this.leaveD.endDate = is_weekend > 0 ? this.addDays(nendDat, is_weekend) : nendDat;
+      var dDateRedby = val == 1 ? -2 : (val == 2 ? -1 : 0);
+      eEndDt = dDateRedby != 0 ? this.addDays(eEndDt, dDateRedby) : eEndDt;
+      var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt); 
+      var nendDat = this.addDays(eEndDt, (val + is_weekend));     
+      this.leaveD.endDate = nendDat;
       return;
        
        }
@@ -155,20 +157,19 @@ export class CreateleavePlanComponent implements OnInit {
        var eEndDt = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
        var val = this.getweekvalue(eEndDt);
        var dDateRedby = val == 1 ? -2 : (val == 2 ? -1 : 0);
-       console.log(eEndDt, dDateRedby)
        eEndDt = dDateRedby != 0 ? this.addDays(eEndDt, dDateRedby) : eEndDt;
-       var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt);
-       console.log(eEndDt)
-   
-       console.log(val)
-       var nendDat = this.addDays(eEndDt, (val + is_weekend));
-       console.log(nendDat)
+       var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt); 
+       var nendDat = this.addDays(eEndDt, (val + is_weekend));     
        this.leaveD.endDate = nendDat;
        return;
      }
      if (this.validateEnddate) {
        var daysdiff = this.dateDiffInDays(this.leaveD.startDate, this.leaveD.endDate);
        this.leaveD.noOfDays = daysdiff;
+
+
+
+       
        var val = this.getweekvalue(this.leaveD.endDate);
        var nendDat = this.addDays(this.leaveD.startDate, val);
        var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, nendDat);

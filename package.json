@@ -82,6 +82,7 @@
     "ng2-ckeditor": "^1.2.9",
     "ng2-smart-table": "^1.6.0",
     "ngx-echarts": "^4.2.2",
+    "ngx-permissions": "^8.1.1",
     "node-sass": "^4.14.1",
     "normalize.css": "6.0.0",
     "nswag": "^13.10.8",
