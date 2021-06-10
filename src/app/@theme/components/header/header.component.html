@@ -5,7 +5,7 @@
       src="https://smartace-bpm.azurewebsites.net/assets/images/ace.png"
   /></a>
 
-  <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+  <a (click)="toggleSidebar()" href="#" class="sidebar-toggle"  *ngIf="menuToggle">
     <nb-icon icon="menu-2-outline"></nb-icon>
   </a>
   </div>

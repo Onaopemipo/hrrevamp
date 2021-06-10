@@ -1,14 +1,12 @@
 import { Component,Input } from '@angular/core';
 
 @Component({
-  selector: 'ngx-single-column-header-layout',
-  styleUrls: ['./single-column-header.layout.scss'],
+  selector: 'ngx-new-single-column-header-layout',
+  styleUrls: ['./new-single-column-header.layout.scss'],
   template: `
     <nb-layout>
     <nb-layout-header fixed>
-    <ngx-customizableheader [menuToggle] = "mtoggle">
-    
-    </ngx-customizableheader>
+    <ngx-header [menuToggle]="false"></ngx-header>
      </nb-layout-header>
       <nb-layout-column style="padding: 0 !important;">
         <ng-content select="router-outlet"></ng-content>
@@ -16,6 +14,5 @@ import { Component,Input } from '@angular/core';
     </nb-layout>
   `,
 })
-export class SingleColumnHeaderLayoutComponent {
-@Input() mtoggle:boolean = false;
+export class NewSingleColumnHeaderLayoutComponent {
 }

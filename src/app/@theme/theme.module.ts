@@ -41,7 +41,8 @@ import {
   TwoColumnsLayoutComponent,
   SingleColumnLayoutComponent,
   SingleColumnHeaderLayoutComponent,
-  CustomizablecolumnComponent
+  CustomizablecolumnComponent,
+  NewSingleColumnHeaderLayoutComponent
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -77,7 +78,8 @@ const COMPONENTS = [
   TwoColumnsLayoutComponent,
   SingleColumnLayoutComponent,
   SingleColumnHeaderLayoutComponent,
-  CustomizablecolumnComponent
+  CustomizablecolumnComponent,
+  NewSingleColumnHeaderLayoutComponent
 ];
 const PIPES = [
   CapitalizePipe,
