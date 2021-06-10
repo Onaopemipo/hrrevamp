@@ -106,6 +106,10 @@ export class LoanTypeComponent implements OnInit {
   allInterestRates: IDTextViewModel [] = [];
   eligibilityStatus: IDTextViewModel [] = [];
 
+  filter = {
+
+  }
+
   constructor(private commonService: CommonServiceProxy, private alertMe: AlertserviceService,
     private repaymentService: LoadRepaymentScheduleServiceProxy, private updateLoanService: AddUpdateLoanTypeServiceProxy,
     private simulateService: SimulatePaymentServiceProxy, private deleteService: DeleteLoanTypeServiceProxy,
@@ -120,6 +124,10 @@ export class LoanTypeComponent implements OnInit {
     this.fetchAllLoanTypes();
     this.getInterestRate();
     this.fetchEligibilityStatus();
+  }
+
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
   }
 
 

@@ -1,5 +1,5 @@
 import { NbTabComponent } from '@nebular/theme';
-import { AddUpdateExpenseProjectServiceProxy, ExpenseProject, IExpenseProject, ExpenseProjectDto, MessageOut, AddUpdateLoanTypeServiceProxy, ExpenseTypeDto, FetchExpensesServiceProxy, GetExpenseProjectServiceProxy, ExpenseGroup, GetExpenseTypesServiceProxy, ExpenseType } from './../../../_services/service-proxies';
+import { AddUpdateExpenseProjectServiceProxy, ExpenseProject, IExpenseProject, ExpenseProjectDto, MessageOut, AddUpdateLoanTypeServiceProxy, ExpenseTypeDto, FetchExpensesServiceProxy, GetExpenseProjectServiceProxy, ExpenseGroup, GetExpenseTypesServiceProxy, ExpenseType, AddUpdateExpenseTypeServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
@@ -61,17 +61,10 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   });
   myexpenseType: ExpenseTypeDto = new ExpenseTypeDto({
     id: 0,
-    companyID: 0,
-    subID: 0,
     ledgerNo: 'string',
     name: 'string',
     description: 'string',
     referenceId: 'string',
-    code: 'string',
-    isDefault: true,
-    dateCreated: new Date(),
-    isDeleted: true,
-    isActive: true
   });
   myProjects: ExpenseGroup[] = [];
   myTypes: ExpenseType[] = [];
@@ -83,7 +76,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
 
 
 
-  constructor(private project: AddUpdateExpenseProjectServiceProxy, private types: AddUpdateLoanTypeServiceProxy,
+  constructor(private project: AddUpdateExpenseProjectServiceProxy, private types: AddUpdateExpenseTypeServiceProxy,
     private getmyproject: GetExpenseProjectServiceProxy, private getmytype: GetExpenseTypesServiceProxy) {
     super();
   }
@@ -132,7 +125,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   }
 
   createTypes() {
-    this.types.addUpdateExpenseType(this.myexpenseType).subscribe(data => {
+    this.types.addUpdateLoanType(this.myexpenseType).subscribe(data => {
       if (!data.hasError) {
         console.log('Success')
       }
@@ -152,7 +145,7 @@ export class ExpenseManagementComponent extends MainBaseComponent {
   }
 
   getTypes() {
-    this.getmytype.getExpenseTypes(0, '', '', '', '', '', 1, 10).subscribe(data => {
+    this.getmytype.getExpenseTypes('', '', '', 1, 10).subscribe(data => {
       if (!data.hasError) {
         this.myTypes = data.result;
         console.log('Hey See here', this.myTypes);

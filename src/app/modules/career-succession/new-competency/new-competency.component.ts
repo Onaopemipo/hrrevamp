@@ -133,7 +133,7 @@ export class NewCompetencyComponent implements OnInit {
   // }
 
   createCompetency(){
-    if(this.allCompetencyRequirements === []){
+    if(this.allCompetencyRequirements === [] || !this.competencyRequirement.skillId || !this.competencyRequirement.requirementCategory || !this.competencyRequirement.trainingId || !this.competencyRequirement.certificationId || !this.competencyRequirement.qualificationId){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
     } else {
 
@@ -156,6 +156,7 @@ export class NewCompetencyComponent implements OnInit {
 
       if (error.status == 400) {
         this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+
       }
     });
     }

@@ -254,7 +254,7 @@ export class OnboardingsetupComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getSubscriptionplan();
-    this.getfrequency();
+  //  this.getfrequency();
     this.getdocumentEntity();
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.tempRef = `ref-${Math.ceil(Math.random() * 10e13)}`;

@@ -213,7 +213,7 @@ export class LeavetypeComponent implements OnInit {
       this.submitbtnPressed = false;
       if (!data.hasError) {
         this.getLeaveTypes();
-        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, 'OK');
+        this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, "Leave Type Created Successfully", 'OK');
         this.leaveTypeModel = new LeaveTypeDTO().clone();
         this.showLeaveTypeModal = false;
         this.modificationStatus = false;

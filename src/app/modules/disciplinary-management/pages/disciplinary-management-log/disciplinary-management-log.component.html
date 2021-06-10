@@ -5,18 +5,26 @@
 </div>
 </ngx-componentsheader>
 <div class="main-page-container">
-  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
-  ><ngx-default-content
+<ngx-default-content
     *ngIf="showEmpty"
     [pageHeader]="pageName"
     pageDescription="No Record Found"
+    [loading]="loading"
   >
   </ngx-default-content>
-  <ngx-tablecomponent
-    *ngIf="!showEmpty"
-    [tableColum]="tableColumns"
-    [userData]="DisciplineManagementList"
-    [loading]="loading"
-    (filterChange)="filterUpdated($event)"
-  ></ngx-tablecomponent>
+
+  <ngx-tablecomponent  
+  *ngIf="!showEmpty"
+  (filterChange)="filterUpdated($event)"
+  [showActions]="true"
+  [showFilter]="true"
+  [actions]="tableActions" 
+  [userData]="DisciplineManagementList" 
+  [tableColum]="tableColumns"
+  [totalItems]="totalItems"
+  [currentPage]="currentPage"
+  [loading]="loading"
+
+  >
+  </ngx-tablecomponent>
 </div>

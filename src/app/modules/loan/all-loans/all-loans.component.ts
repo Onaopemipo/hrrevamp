@@ -75,6 +75,10 @@ export class AllLoansComponent implements OnInit {
 
   ];
 
+  filter = {
+
+  }
+
   loading:boolean = true;
   allLoansData: LoanRequestDTOs [] = [];
   loansCounter: number = 0;
@@ -85,6 +89,11 @@ export class AllLoansComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchLoans();
+  }
+
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    this.fetchLoans()
   }
 
   addRequest() {

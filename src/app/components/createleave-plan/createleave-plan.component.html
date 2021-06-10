@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
-                <input type="number" (change)="noOfDaysValidation()"  [(ngModel)]="leaveD.noOfDays" id="noOfDays" name="noOfDays" #noOfDays="ngModel" class="form-control" placeholder="Enter Number Of Days" required>
+                <input type="number" (change)="processStartEndNoofDays()"  [(ngModel)]="leaveD.noOfDays" id="noOfDays" name="noOfDays" #noOfDays="ngModel" class="form-control" placeholder="Enter Number Of Days" required>
                 <div *ngIf="noOfDays.invalid && (noOfDays.dirty || noOfDays.touched)" class="error">
                     <div *ngIf="noOfDays.errors.required">
                      Number of Days is required

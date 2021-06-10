@@ -49,6 +49,9 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
     { name: 'dateSent', title: 'Date Sent',type: ColumnTypes.Date },
     { name: 'status', title: 'Status' ,type: ColumnTypes.Status}
   ];
+  tableActions = [];
+  totalItems = 0;
+  currentPage = 1;
   pageName = "Disciplinary Management"
   IsReward: boolean = false;
   filter = {
@@ -75,6 +78,7 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
       if (!data.hasError) {        
         var rs = data.result.map(x=>new logWithStatus(x))
         this.DisciplineManagementList = rs;
+        this.totalItems = data.totalRecord;
       }
     })
   }

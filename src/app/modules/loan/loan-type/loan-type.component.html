@@ -6,8 +6,16 @@
 <div>
 <nb-card>
   <nb-card-body>
-    <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="loanTypesTable" [userData]='allLoanTypes' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+      <ngx-tablecomponent
+      [loading]='loading'
+      [tableColum]="loanTypesTable"
+      [userData]='allLoanTypes'
+      [actions]='tableActions'
+      (actionClick)="tableActionClicked($event)"
+      (filterChange)="filterUpdated($event)"
+      [showActions]="false"
+      [showFilter]="true"
+      ></ngx-tablecomponent>
   </nb-card-body>
 </nb-card>
 </div>

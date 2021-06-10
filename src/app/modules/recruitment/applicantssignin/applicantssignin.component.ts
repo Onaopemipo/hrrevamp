@@ -2,7 +2,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
 import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { RecruitmentJobServiceProxy, RecuritmentJobApplicantServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo } from './../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, LoginUserServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -22,8 +22,8 @@ export class ApplicantssigninComponent implements OnInit {
 
   userDetails: MangeLoginJobApplicantDTO = new MangeLoginJobApplicantDTO();
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private alertMe: AlertserviceService,
-    private router: Router, private loginServices: GetTokenServiceProxy,private AuthenService: AuthenticationService,  ) { }
+  constructor(private applicant: LoginUserServiceProxy, private alertMe: AlertserviceService,
+    private router: Router, private loginServices: GetTokenServiceProxy,private AuthenService: AuthenticationService ) { }
 
   ngOnInit(): void {
   }
@@ -71,18 +71,18 @@ export class ApplicantssigninComponent implements OnInit {
     });
 }
 
-validateToken(){
-  this.applicant.validate('').subscribe(data => {
-    if(!data.hasError){
-      console.log(data);
-    }
-  })
-}
+// validateToken(){
+//   this.applicant.validate('').subscribe(data => {
+//     if(!data.hasError){
+//       console.log(data);
+//     }
+//   })
+// }
 
   authUser(){
     this.applicant.loginUser(this.userDetails).subscribe(data => {
       if(!data.hasError && data.result.isSuccessful === true){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Login Successful', 'Check Jobs').subscribe(res => {
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Login Successful', 'Go to Portal').subscribe(res => {
           if(res){
             this.router.navigateByUrl('/applicantsmodule/applicants/')
           }

@@ -19,8 +19,16 @@
 <div *ngIf="loansCounter > 0">
   <nb-card>
     <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [userData]='allLoansData' [actions]='tableActions' (actionClick)="tableActionClicked($event)" [tableColum]="loanRequestTable"></ngx-tablecomponent>
+      <ngx-tablecomponent
+      [loading]='loading'
+      [userData]='allLoansData'
+      [actions]='tableActions'
+      (actionClick)="tableActionClicked($event)"
+      [tableColum]="loanRequestTable"
+      (filterChange)="filterUpdated($event)"
+      [showActions]="false"
+      [showFilter]="true"
+      ></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
 </div>

@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { RecuritmentJobApplicantServiceProxy } from './../../../_services/service-proxies';
+import { RegenerateOTPTokenServiceProxy, VerifyApplicantAccountServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -21,7 +21,9 @@ export class EmailOTPVerifyComponent implements OnInit {
   code6:string  = '';
   applicantEmail:string = '';
 
-  constructor(private applicant: RecuritmentJobApplicantServiceProxy, private route: ActivatedRoute, private alertMe: AlertserviceService, private router: Router) { }
+  constructor(private applicant: RegenerateOTPTokenServiceProxy,
+    private VerifyApplicantAccountService: VerifyApplicantAccountServiceProxy,
+    private route: ActivatedRoute, private alertMe: AlertserviceService, private router: Router) { }
 
   ngOnInit(): void {
     this.applicantEmail = this.route.snapshot.paramMap.get("id");
@@ -41,7 +43,7 @@ export class EmailOTPVerifyComponent implements OnInit {
 
   verifyUser(){
     let OTPstring = this.code1.toString() + this.code2.toString()  + this.code3.toString()  + this.code4.toString()  + this.code5.toString()  + this.code6.toString()
-    this.applicant.verifyApplicantAccount(OTPstring).subscribe(data => {
+    this.VerifyApplicantAccountService.verifyApplicantAccount(OTPstring).subscribe(data => {
       if(!data.hasError && data.result.isSuccessful){
         console.log(data.result)
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'View Jobs').subscribe(res => {

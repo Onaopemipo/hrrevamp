@@ -18,8 +18,14 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading' [tableColum]="loanRequestTable" [userData]="simulationData"></ngx-tablecomponent>
+      <ngx-tablecomponent
+      [loading]='loading'
+      [tableColum]="loanRequestTable"
+      [userData]="simulationData"
+      (filterChange)="filterUpdated($event)"
+      [showActions]="false"
+      [showFilter]="true"
+      ></ngx-tablecomponent>
   </nb-card-body>
 </nb-card>
 

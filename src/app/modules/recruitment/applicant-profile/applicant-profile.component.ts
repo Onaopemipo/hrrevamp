@@ -1,7 +1,7 @@
 import { Transfer } from '@flowjs/ngx-flow';
-import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy, Institution, DropdownValue, JobRole } from 'app/_services/service-proxies';
+import { UploadDocumentServiceProxy, DataServiceProxy, IDTextViewModel, State, CommonServiceProxy, Institution, DropdownValue, JobRole, CompleteApplicantProfileServiceProxy } from 'app/_services/service-proxies';
 import { ActivatedRoute } from '@angular/router';
-import { JobApplicantScheduleInterview, JobScheduleInterview, RecruitmentJobApplicationServiceProxy, RecuritmentJobApplicantServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course, SalaryRanage, Sector, ScheduleJobInterviewDto } from './../../../_services/service-proxies';
+import { JobApplicantScheduleInterview, JobScheduleInterview,GetApplicantByIdServiceProxy, RecruitmentJobApplicationServiceProxy, JobApplicantDto, JobPerferenceServiceProxy, ManageJobPreferenceDto, JobApplicantReference, JobApplicantWorkExperience, JobApplicantEducation, Country, Qualification, Course, SalaryRanage, Sector, ScheduleJobInterviewDto } from './../../../_services/service-proxies';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { Component, OnInit } from '@angular/core';
 import { NbIconLibraries } from '@nebular/theme';
@@ -75,8 +75,8 @@ export class ApplicantProfileComponent implements OnInit {
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
     private router: Router, private ineterview: RecruitmentJobApplicationServiceProxy, private preference: JobPerferenceServiceProxy,
-     private profile: RecuritmentJobApplicantServiceProxy, private UploadDocumentService: UploadDocumentServiceProxy,
-     private DataService: DataServiceProxy, private commonService: CommonServiceProxy,) {
+     private profile: GetApplicantByIdServiceProxy, private UploadDocumentService: UploadDocumentServiceProxy,
+     private DataService: DataServiceProxy, private commonService: CommonServiceProxy,private CompleteApplicantProfileService: CompleteApplicantProfileServiceProxy) {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
@@ -129,7 +129,7 @@ export class ApplicantProfileComponent implements OnInit {
     let applicant: JobApplicantDto = new JobApplicantDto();
     applicant.id = this.profileData.id;
     applicant.workExperience = JSON.stringify(this.workExperienceModel);
-    this.profile.completeApplicantProfile(applicant).subscribe(data => {
+    this.CompleteApplicantProfileService.completeApplicantProfile(applicant).subscribe(data => {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
       }
@@ -296,7 +296,7 @@ export class ApplicantProfileComponent implements OnInit {
     let applicant: JobApplicantDto = new JobApplicantDto();
     applicant.id = this.profileData.id;
     applicant.education = JSON.stringify(this.educationModel);
-    this.profile.completeApplicantProfile(applicant).subscribe(data => {
+    this.CompleteApplicantProfileService.completeApplicantProfile(applicant).subscribe(data => {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
       }
@@ -328,7 +328,7 @@ export class ApplicantProfileComponent implements OnInit {
   updateMyProfile(){
     this.btnprocessing = true;
     this.updateProfile = !this.updateProfile;
-    this.profile.completeApplicantProfile(this.profileData).subscribe(data => {
+    this.CompleteApplicantProfileService.completeApplicantProfile(this.profileData).subscribe(data => {
       this.btnprocessing = false;
       if(!data.hasError && data.result.isSuccessful == true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES, data.message, 'Dismiss')

@@ -288,8 +288,10 @@ export class HiringchecklistComponent implements OnInit {
 
 
   get workformvalidate() {
+    this.workData.onboardingId = this.OnboardingId;
     if (this.workData.hireDate && this.workData.dateofJoining && this.workData.salaryPerAnnum && this.workData.desginationId && this.workData.employeeTypeId
       && this.workData.departmentId && this.workData.reportingManagerId && this.workData.workEmail && this.workData.location && this.workData.onboardingId) return true;
+
     return false
   }
 

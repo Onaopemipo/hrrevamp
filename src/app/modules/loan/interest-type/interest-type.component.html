@@ -9,8 +9,15 @@
 <div *ngIf="counter > 0">
   <nb-card>
     <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent [tableColum]="interestTypeTable" [userData]='allInterestRates' [actions]='tableActions' (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+        <ngx-tablecomponent
+        [tableColum]="interestTypeTable"
+        [userData]='allInterestRates'
+        [actions]='tableActions'
+        (actionClick)="tableActionClicked($event)"
+        (filterChange)="filterUpdated($event)"
+        [showActions]="false"
+        [showFilter]="true"
+        ></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
   </div>

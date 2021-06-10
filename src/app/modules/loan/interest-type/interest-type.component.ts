@@ -26,6 +26,10 @@ export class InterestTypeComponent implements OnInit {
 
   ]
 
+  filter = {
+
+  }
+
   tableActionClicked(event: TableActionEvent){
   if(event.name==TABLE_ACTION.DELETE){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete this?', 'Yes').subscribe(dataAction => {
@@ -57,6 +61,11 @@ export class InterestTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllInterests();
+  }
+
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    this.getAllInterests()
   }
 
   toggleModal(){

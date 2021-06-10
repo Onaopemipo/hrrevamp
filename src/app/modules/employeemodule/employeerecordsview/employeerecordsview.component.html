@@ -231,7 +231,7 @@
                   <ngx-default-content
                   *ngIf="EmpContractEmpty"
                   pageHeader="No Contract Record Found"
-                  pageDescription=""
+                  pageDescription="Employee Contract will be created at Employee Profile creation"
                   buttonValue=""
                   [loading]="EmpContractloading"
                        
@@ -257,7 +257,7 @@
          <div class="fmContainer" *ngSwitchCase="'document_panel'">
             <div style="padding-bottom: 5px; display: flex;flex-direction: row;">
                 <p class="header6-medium" style="flex: auto;">{{selectedPanel.label}}</p>
-                <div *ngIf="createNewEmployee.id">
+                <div >
                   <button nbButton status="primary"  (click)="showdocumentUploadModal = true">Add New</button>
                   </div>
             </div>
@@ -467,7 +467,7 @@
                     
                         </div>
                         <div class="col-sm-12 form-group">
-                           <nb-checkbox name="is_primary_address" id="is_primary_address" #is_primary_address="ngModel" [(ngModel)]="indvEmpContact.is_primary_address">Primary Account</nb-checkbox>
+                           <nb-checkbox name="is_primary_address" id="is_primary_address" #is_primary_address="ngModel" [(ngModel)]="indvEmpContact.is_primary_address">Primary Address</nb-checkbox>
                         </div>
                       </div>
 
@@ -518,7 +518,7 @@
                         <div class="row" style="padding-top:10px">
                           <div class="col-sm-6 form-group">
                             <label>Pensioner File No.</label>
-                            <input [(ngModel)]="createNewEmployee.pension.pensionerFileNo" name="pensionerFileNo" id="pensionerFileNo" #pensionerFileNo="ngModel" type="text" fullWidth class="form-control" nbInput placeholder="Enter Pensioner File No"  required>
+                            <input [(ngModel)]="createNewEmployee.pension.pensionerFileNo" name="pensionerFileNo" id="pensionerFileNo" #pensionerFileNo="ngModel" type="text" fullWidth class="form-control" nbInput placeholder="Enter Pensioner File No" >
                             <div *ngIf="pensionerFileNo.invalid && (pensionerFileNo.dirty || pensionerFileNo.touched)" class="error">
                               <div *ngIf="pensionerFileNo.errors.required">Pensioner File No is required</div>
                             </div>
@@ -720,12 +720,12 @@
         </div>
         <div class="col-sm-12 form-group">
           <label>Professional Body</label>
-          <select [(ngModel)]="indvEmpCert.institution" name="institution" id="institution" #institution="ngModel" class="form-control"  required >
+          <select [(ngModel)]="indvEmpCert.professionalBodyId" name="professionalBodyId" id="professionalBodyId" #professionalBodyId="ngModel" class="form-control"  required >
             <option value="">--Select Category--</option>
             <option *ngFor="let certbody of allProfessionalBodes" [value]="certbody.id">{{certbody.name}}</option>
         </select>
-        <div *ngIf="institution.invalid && (institution.dirty || institution.touched)" class="error">
-          <div *ngIf="institution.errors.required">Professional Body is required</div>
+        <div *ngIf="professionalBodyId.invalid && (professionalBodyId.dirty || professionalBodyId.touched)" class="error">
+          <div *ngIf="professionalBodyId.errors.required">Professional Body is required</div>
         </div>
         </div>
      
@@ -746,8 +746,8 @@
     </form>
     <div style="padding-top: 5px;">
       <div class="row">
-<div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempCert of tempEmpCertList;let i = index">
-<div class="cbadge">{{getEmpCertName(tempCert.certificationId)}}&nbsp;|&nbsp;{{tempCert.no_exp}}&nbsp;<i class="fa fa-times" (click)="removefromCert(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+<div class="col-sm-12" style="padding-top: 10px;"  *ngFor="let tempCert of tempEmpCertList;let i = index">
+<div class="cbadge">{{getEmpCertName(tempCert.id_cert)}}&nbsp;|&nbsp;{{tempCert.no_exp}}&nbsp;<i class="fa fa-times" (click)="removefromCert(i)" style="color:#EB5757;cursor: pointer;"></i></div>
 </div>
       </div>
      
@@ -860,8 +860,9 @@
           </form>
           <div style="padding-top: 5px;">
             <div class="row">
-  <div class="col-sm-6" style="padding-top: 10px;"  *ngFor="let tempSkill of tempEmpSkillList;let i = index">
-  <div class="cbadge">{{getEmpSkillName(tempSkill.id_skill)}}&nbsp;|&nbsp;{{tempSkill.no_exp}}&nbsp;<i class="fa fa-times" (click)="removefromSkill(i)" style="color:#EB5757;cursor: pointer;"></i></div>
+  <div class="col-sm-12" style="padding-top: 10px;"  *ngFor="let tempSkill of tempEmpSkillList;let i = index">
+  <div class="cbadge">{{getEmpSkillName(tempSkill.id_skill)}}&nbsp;|&nbsp;{{tempSkill.no_exp}}&nbsp;<i class="fa fa-times" (click)="removefromSkill(i)" style="color:#EB5757;cursor: pointer;"></i>
+  </div>
   </div>
             </div>
            
@@ -1069,12 +1070,12 @@
             </div>
             <div class="col-sm-12 form-group">
               <label>Start Date</label>
-              <ngx-date [(ngModel)]="indvQualifications.startDate" #startDate name="startDate" id="startDate" ></ngx-date>
+              <ngx-date [(value)]="indvQualifications.startDate" #startDate name="startDate" id="startDate" ></ngx-date>
             
             </div>
             <div class="col-sm-12 form-group">
               <label>End Date</label>
-              <ngx-date [(ngModel)]="indvQualifications.endDate" name="endDate" #endDate id="endDate" ></ngx-date>
+              <ngx-date [(value)]="indvQualifications.endDate" name="endDate" #endDate id="endDate" ></ngx-date>
             
             </div>
           </div>
