@@ -1,3 +1,4 @@
+import { GetEventsByIdServiceProxy } from './../../../_services/service-proxies';
 import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { NbPopoverComponent, NbPopoverDirective } from '@nebular/theme';
@@ -88,10 +89,10 @@ export class EmployeeeventsComponent implements AfterViewInit {
     PageSize: 10
   }
   constructor(private AddUpdateEvent: AddUpdateEventsServiceProxy, private getall: GetAllEventsServiceProxy, private DataServiceProxy: DataServiceProxy,
-    private alertservice: AlertserviceService) { }
+    private alertservice: AlertserviceService, private singleEvent: GetEventsByIdServiceProxy) { }
 
   ngOnInit(): void {
-    this.getallaEvent()
+    this.getallEvent()
     this.getEventType()
   }
 
@@ -119,11 +120,10 @@ export class EmployeeeventsComponent implements AfterViewInit {
     }
   }
 
-  PageSize: number = 1000
-  pageNumber: number = 1
   AllEvents: EventDTO[]
+  eventData: EventDTO = new EventDTO().clone();
 
-  async getallaEvent() {
+  async getallEvent() {
     const response = await this.getall.getAllEvents(this.filter.PageSize, this.filter.pageNumber).toPromise()
     this.loading = false
 
@@ -221,7 +221,11 @@ export class EmployeeeventsComponent implements AfterViewInit {
 
 
   }
-  addEvent(event) {
-    alert('God is the greatest')
+  getsingleEvent(id) {
+    this.singleEvent.getEventsById(id).subscribe(data => {
+      if(!data.hasError){
+        this.eventData = data.result;
+      }
+    })
   }
 }
