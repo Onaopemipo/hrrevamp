@@ -58,33 +58,6 @@
                       </div>
                   </div>
                     <div style="padding: 5px;"></div>
-                  <!-- <div class="form-group">
-                    <label for="exampleInputPassword1" class="label">Password</label>
-                    <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
-                      <input type="password" nbInput fullWidth name="password" #password="ngModel" [(ngModel)]="applicantModel.password" placeholder="Password" style="border: none;">
-                      <nb-icon  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;"></nb-icon>
-                      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
-                        <div *ngIf="password.errors.required">
-                          Password is required
-                        </div>
-                    </div>
-                    </div>
-
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputPassword1" class="label">Confirm Password</label>
-                    <div style="display: flex;border: 0.800000011920929px solid #CED4DA;border-radius: 3px;background-color: #f7f9fc;padding: 5px;">
-                      <input type="password" nbInput fullWidth name="conpassword" (blur)="checkEqualPass()" #conpassword="ngModel" [(ngModel)]="applicantModel.comfirmPassword" placeholder="Confirm Password" style="border: none;">
-                      <nb-icon  icon="eye-off-outline" style="font-size: 32px;color: #95A8B8;"></nb-icon>
-                      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
-                        <div *ngIf="password.errors.required">
-                          Password is required
-                        </div>
-                    </div>
-                    </div>
-
-                  </div> -->
 
                   <div class="form-group">
                     <label for="exampleInputPassword1" class="label">Password</label>
@@ -116,8 +89,8 @@
 
                   <div style="padding: 5px;"></div>
 
-                  <button  *ngIf="!loading" type="button" nbButton fullWidth status="primary" (click)="regiterApplicant()">Continue</button>
-                  <button *ngIf="loading" nbButton fullWidth status="primary">Logging &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+                  <button  *ngIf="!btnProcessing" type="button" nbButton fullWidth status="primary" (click)="regiterApplicant()">Continue</button>
+                  <button *ngIf="btnProcessing" nbButton fullWidth status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
                   <div style="padding: 5px;"></div>
                 </form>
                 <div style="padding: 5px;"></div>

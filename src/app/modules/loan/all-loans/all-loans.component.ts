@@ -70,7 +70,7 @@ export class AllLoansComponent implements OnInit {
     {name: 'loggedForEmployeeId', title: 'Employee Id'},
     {name: 'loggedForEmployeeName', title: 'Employee Name'},
     {name: 'requestedAmount', title: 'Requested Amount'},
-    {name: 'approvedTenor', title: 'Approved Tenor'},
+    // {name: 'approvedTenor', title: 'Approved Tenor'},
     {name: 'loanTypeName', title: 'Loan Type'},
 
   ];

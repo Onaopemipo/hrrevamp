@@ -1,16 +1,15 @@
 <ngx-componentsheader *ngIf="newCandidate" [requiredButton]="rButton" [pageName]="pageTitle" (buttonClick)="onTopActionClick()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="!newCandidate" pageName='Add Candidate'></ngx-componentsheader>
 <div *ngIf="newCandidate" style="display: flex; flex-direction: row; justify-content: flex-start; flex: auto; padding-bottom: 5px;">
-  <span style="cursor: pointer;"><i class="far fa-arrow-alt-circle-left"></i><a (click)="goback()" style="margin-left: 3px; ">Back</a></span>
+  <span style="cursor: pointer;"><a (click)="goback()"><i class="far fa-arrow-alt-circle-left" style="margin-right: 3px;"></i>Back</a></span>
 </div>
 <div>
   <nb-card>
-    <nb-tabset>
+    <nb-tabset style="background-color: #ffffff; padding: 10px;">
       <nb-tab [active]= true tabTitle="Employee Database">
         <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} [loading]="loading" pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
           <ng-template [ngIf]="employeeCounter > 0">
-            <ngx-tableheader></ngx-tableheader>
             <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [loading]="loading" [actions]='tableActions'
             (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
           </ng-template>
@@ -20,35 +19,25 @@
         <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} [loading]="loading" pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
           (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
           <ng-template [ngIf]="employeeCounter > 0">
-            <ngx-tableheader></ngx-tableheader>
             <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [loading]="loading" [actions]='tableActions'
             (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
           </ng-template>
       </nb-tab>
 
-      <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable" [loading]="loading"></ngx-tablecomponent>
+      <nb-tab tabTitle="External Source">
+        <ngx-default-content *ngIf="employeeCounter < 1" pageHeader={{talentPoolHeader}} [loading]="loading" pageDescription="{{talentPoolDescription}}" buttonValue={{myButton}}
+          (buttonClick)="onTopActionClick('candidate')"></ngx-default-content>
+          <ng-template [ngIf]="employeeCounter > 0">
+            <ngx-tablecomponent  [tableColum]="testPoolTable" [userData]='poolRecords' [loading]="loading" [actions]='tableActions'
+            (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
+          </ng-template>
       </nb-tab>
 
-      <!-- <nb-tab tabTitle="External Source">
-        <ngx-tableheader></ngx-tableheader>
-        <ngx-tablecomponent  [tableColum]="testPoolTable"></ngx-tablecomponent>
+      <!-- <nb-tab *ngIf="employeeCounter > 0" tabTitle="Recruitment Portal">
+        <ngx-tablecomponent  [tableColum]="testPoolTable" [loading]="loading"></ngx-tablecomponent>
       </nb-tab> -->
      </nb-tabset>
   </nb-card>
-
-  <!-- <div class="row">
-    <div class="col">
-      <nb-card>
-        <nb-card-header>Requirements</nb-card-header>
-        <nb-card-body>
-          <ngx-tableheader></ngx-tableheader>
-          <ngx-tablecomponent [userData]="poolRecords" [loading]="loading" [tableColum]="requirementTable"></ngx-tablecomponent>
-        </nb-card-body>
-      </nb-card>
-    </div>
-  </div> -->
 
 
 </div>

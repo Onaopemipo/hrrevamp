@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ColumnTypes, TableColumn } from "app/components/tablecomponent/models";
 import { MainBaseComponent } from "app/components/main-base/main-base.component";
 import { Router } from "@angular/router";
+import { Location } from '@angular/common';
 import {
   FetchBenefitEmployeesServiceProxy,
   EmployeeDTO,
@@ -48,12 +49,12 @@ export class ManageEmployeeComponent extends MainBaseComponent {
 
   tableActions: TableAction[] = [
     { name: TABLE_ACTION.VIEW, label: "View" },
-    { name: TABLE_ACTION.EDIT, label: "UpdateList" },
+    // { name: TABLE_ACTION.EDIT, label: "UpdateList" },
     { name: TABLE_ACTION.DELETE, label: "Delete" },
   ];
 
   constructor(
-    private route: Router,
+    private route: Router, private navCtrl: Location,
     private FetchBenefitEmployeesServiceProxy: FetchBenefitEmployeesServiceProxy
   ) {
     super();
@@ -65,12 +66,13 @@ export class ManageEmployeeComponent extends MainBaseComponent {
 
   pageSize?: number = 1000;
   pageNumber?: number = 1;
-  back() {
-    this.route.navigateByUrl("/benefits");
+
+  goback() {
+    this.navCtrl.back();
   }
   async GetEmployeesBenefit() {
     this.loading = true
-    
+
     const data =
       await this.FetchBenefitEmployeesServiceProxy.getBenefitEmployees(
         this.benefitId,

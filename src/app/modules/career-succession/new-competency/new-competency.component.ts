@@ -133,8 +133,8 @@ export class NewCompetencyComponent implements OnInit {
   // }
 
   createCompetency(){
-    if(this.allCompetencyRequirements === [] || !this.competencyRequirement.skillId || !this.competencyRequirement.requirementCategory || !this.competencyRequirement.trainingId || !this.competencyRequirement.certificationId || !this.competencyRequirement.qualificationId){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
+    if(this.allCompetencyRequirements === []  && (!this.competencyRequirement.skillId || !this.competencyRequirement.trainingId || !this.competencyRequirement.certificationId || !this.competencyRequirement.qualificationId)){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','OK')
     } else {
 
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);

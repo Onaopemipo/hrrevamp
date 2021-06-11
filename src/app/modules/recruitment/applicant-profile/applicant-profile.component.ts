@@ -19,6 +19,7 @@ export class ApplicantProfileComponent implements OnInit {
     {id: 1, label:'Written'},
   ]
 
+
   allowmultipleselection: boolean = true;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Interviewer";

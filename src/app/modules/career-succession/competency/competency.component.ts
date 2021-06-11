@@ -101,7 +101,7 @@ export class CompetencyComponent implements OnInit {
   ];
 
   competencyTable: TableColumn [] = [
-    {name: 'id', title: 'ID'},
+    {name: 'id', title: 'Competency ID'},
     {name: 'competencyTitle', title: 'Competency Title'},
     {name: 'description', title: 'Description'},
 

@@ -24,15 +24,16 @@ export class TalentPoolComponent implements OnInit {
   talentPool: string = '';
   allPoolCounter: number = 0;
   poolRequirementModel: MyTalentPoolRequirement = new MyTalentPoolRequirement
-  // poolModel: MyTalentPool = new MyTalentPool;
   allTalentPool: MyTalentPool [] = [];
   loading = false;
   viewPoolModal: boolean = false;
+  addTalentPool: boolean = false;
   poolModel: AddTalentMangementDTO =  new AddTalentMangementDTO;
-  //competencyRequirementModel: TalentManagementRequirmentsDTO [] = [];
+  btnProcessing: boolean = false;
   allCompetencies: CompetencyDTO [] = [];
   allTalentPools: AddTalentMangementDTO [] = [];
   competencyCounter: number = 0;
+  poolData: AddTalentMangementDTO = new AddTalentMangementDTO().clone();
 
   talentPoolTable: TableColumn [] = [
     {name: 'name', title: 'Name'},
@@ -52,46 +53,59 @@ export class TalentPoolComponent implements OnInit {
   }
 
   addNewPool(){
-  this.newPool = true;
+  this.newPool = !this.newPool;
   }
 
   modalShow(){
     this.viewPoolModal = true;
   }
 
-  // async createTalentPool(){
-  //   let poolRecord = this.poolModel;
-  //   this.poolservice.create(this.poolModel).subscribe(data => {
-  //     if(data.isSuccessful){
-  //       this.alertMe.openModalAlert('Success', 'Successful', 'Dismiss')
-  //       console.log('Congrats, pool created successfully')
-  //     }
-  //     else {
-  //       console.log('Try again please')
-  //     }
-  //   })
-  //   console.log('this is it:', poolRecord)
-  // }
-
-  async createTalentPool(){
-  //  this.poolModel.talentManagementRequirmentsDTOs = this.competencyRequirementModel;
-    const data = await this.newPoolService.createTalentManagementPool(this.poolModel).toPromise();
+  createTalentPool(){
+    this.btnProcessing = true;
+    this.newPoolService.createTalentManagementPool(this.poolModel).subscribe(data => {
+    this.btnProcessing = false;
     if(!data.hasError){
       this.poolModel = new AddTalentMangementDTO().clone();
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Talent Pool created!', 'Dismiss').subscribe(dataAction => {
-        if(dataAction == 'closed'){
-          this.fetchAllPools
-          this.router.navigateByUrl('/career-succession/talentpool');
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success!', 'OK').subscribe(dataAction => {
+        if(dataAction){
+          this.fetchAllPools();
+          this.newPool = false;
         }
       })
-      console.log('Congrats, pool created successfully');
 
     }
     else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Failed', 'Dismiss')
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Failed', 'OK')
       console.log('Try again please')
     }
+   });
+
   }
+
+  updateTalentPool(){
+    this.btnProcessing = true;
+    this.newPoolService.createTalentManagementPool(this.poolData).subscribe(data => {
+    this.btnProcessing = false;
+    if(!data.hasError){
+      this.poolData = new AddTalentMangementDTO().clone();
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success!', 'OK').subscribe(dataAction => {
+        if(dataAction){
+          this.fetchAllPools();
+          this.newPool = false;
+        }
+      })
+
+    }
+    else {
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED  , 'Failed', 'OK')
+      console.log('Try again please')
+    }
+   });
+
+  }
+
+
+
 
   fetchAllPools(){
     this.loading = true;
@@ -107,31 +121,18 @@ export class TalentPoolComponent implements OnInit {
   }
 
   async deleteTalentPool(poolId){
-    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Yes').subscribe(data => {
-      if(data == 'closed'){
-        this.newPoolService.deleteTalentManagmentPool(poolId).subscribe(dataAction => {
-          if(!dataAction.hasError){
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, 'Do you want to delete talent pool', 'Yes').subscribe(res => {
+      if(res){
+        this.newPoolService.deleteTalentManagmentPool(poolId).subscribe(data => {
+          if(!data.hasError){
             this.fetchAllPools();
-            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Pool Deleted Successfully', 'Dismiss')
+            this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Pool Deleted Successfully', 'OK')
           }
         });
       }
     });
 
   }
-
-  // async fetchSinglePool(){    const data = await this.newPoolService.getTalentPoolById().toPromise()
-  //   console.log('Yes Boss, the data is here:',data.data)
-  //   this.allTalentPool = data.data;
-  // }
-
-  // async getCompetency(){
-  //   const data = await this.commonService.getCompetency().toPromise();
-  //   if(!data.hasError){
-  //     this.allCompetencies = data.result;
-  //     console.log('All competencies', this.allCompetencies)
-  //   }
-  // }
 
   async getCompetency(){
     const data = await this.competencyService.fetchCompetency('',0,10,1).toPromise();
@@ -148,19 +149,29 @@ export class TalentPoolComponent implements OnInit {
     this.poolRequirementModel = new MyTalentPoolRequirement
   }
 
-  async deletePool(id){
-    const approved = await this.confirm.confirm('Are you sure?').toPromise();
-    if(!approved) {
-      this.confirm.close();
-      return false;
-    }
-    this.confirm.showLoading();
-   const data = await this.poolservice.delete(id).toPromise();
-   if(data.isSuccessful){
-     console.log('Deleted:', data.message)
-   }
-   this.confirm.close();
-   return true;
+  editPool(id){
+    this.newPoolService.getTalentPoolById(id).subscribe(data => {
+      if(!data.hasError){
+        this.poolData = data.result;
+        this.newPool = true;
+      }
+    })
+
   }
+
+  // async deletePool(id){
+  //   const approved = await this.confirm.confirm('Are you sure?').toPromise();
+  //   if(!approved) {
+  //     this.confirm.close();
+  //     return false;
+  //   }
+  //   this.confirm.showLoading();
+  //  const data = await this.poolservice.delete(id).toPromise();
+  //  if(data.isSuccessful){
+  //    console.log('Deleted:', data.message)
+  //  }
+  //  this.confirm.close();
+  //  return true;
+  // }
 
 }

@@ -18,95 +18,84 @@
 
         <ngx-side-modal [(show)]='showEvent' style="width: 500px;">
             <div modal-header style="font-size: larger; font-weight: bold;">
-                Create new Events - {{Event.startDate | date:'medium'}}
-               <span></span> </div>
+                New Event </div>
             <div modal-body>
-
+              <nb-card>
                 <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
-                    <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
-                    margin-left: 10px;">create new events</h6> -->
-                    <div style="margin: 20px;">
-                        <div class="form-group">
-                            <label for="title">title:</label>
-                            <input type="text" class="form-control" placeholder="Enter title" id="title"
-                                #title="ngModel" name="title" [(ngModel)]="Event.title" rrequired>
+                  <div class="form-group">
+                     <div>
+                      <label for="title">title:</label>
+                      <input type="text" class="form-control" placeholder="Enter title" id="title"
+                          #title="ngModel" name="title" [(ngModel)]="Event.title" rrequired>
 
-                            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                                <div *ngIf="title.errors.required">title is required</div>
-                            </div>
+                      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+                          <div *ngIf="title.errors.required">title is required</div>
+                      </div>
+                     </div>
 
-                        </div>
+                  </div>
 
-                        <div class="form-group">
-                            <label for="StartDate">Start Date:</label>
-                            <ngx-date [(value)]='Event.startDate' [min]="Event.startDate" #startDate name="startDate"
-                                id="endDate">
-                            </ngx-date>
+                  <div class="form-group row">
+                      <div class="col">
+                        <label for="StartDate">Start Date:</label>
+                      <ngx-date [(value)]='Event.startDate' [min]="Event.startDate" #startDate name="startDate"
+                          id="endDate">
+                      </ngx-date>
+                      </div>
+                  </div>
 
-                            <div *ngIf="!validatestartdate" class="error">
-                                <div>Start Date is required</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="End  Date">End Date:</label>
-                            <ngx-date [(value)]='Event.endDate' [max]="Event.endDate" #endDate name="endDate"
-                                id="endDate"></ngx-date>
+                  <div class="form-group row">
+                   <div class="col">
+                    <label for="End  Date">End Date:</label>
+                    <ngx-date [(value)]='Event.endDate' [max]="Event.endDate" #endDate name="endDate"
+                        id="endDate"></ngx-date>
 
-                            <div *ngIf="!validateenddate" class="error">
-                                <div>End Date is required</div>
-                            </div>
+                   </div>
+                  </div>
 
-                        </div>
+                  <div class="form-group row">
+                      <div class="col">
+                        <label>Event Type</label>
+                          <select placeholder="Select Gender" class="form-control" name="eventTypeId" #eventTypeId="ngModel"
+                              [(ngModel)]="Event.eventTypeId" required>
+                              <option value="">--Select Event---</option>
+                              <option *ngFor="let evo of EventTypes" [value]="evo.id">{{evo.text}}</option>
+                          </select>
 
-                        <div class="form-group row">
-                            <label for="inputEmail1" class="label col-sm-4 col-form-label listsubheader">Event
-                                Type</label>
-                            <div class="col-sm-8">
-                                <select placeholder="Select Gender" class="form-control" name="eventTypeId" #eventTypeId="ngModel"
-                                    [(ngModel)]="Event.eventTypeId" required>
-                                    <option value="">--Select Event---</option>
-                                    <option *ngFor="let evo of EventTypes" [value]="evo.id">{{evo.text}}</option>
-                                </select>
+                          <div *ngIf="eventTypeId.invalid && (eventTypeId.dirty || eventTypeId.touched)"
+                              class="error">
+                              <div *ngIf="eventTypeId.errors.required">Event Type is required</div>
+                          </div>
+                      </div>
+                  </div> <br>
 
-                                <div *ngIf="eventTypeId.invalid && (eventTypeId.dirty || eventTypeId.touched)"
-                                    class="error">
-                                    <div *ngIf="eventTypeId.errors.required">eventType is required</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Description">Description</label>
-                            <textarea type="textarea" class="form-control" placeholder="Enter Description"
-                                id="description" name="description" #description="ngModel"
-                                [(ngModel)]="Event.description"></textarea>
+                  <div class="form-group row">
+                      <div class="col">
+                        <label for="Description">Description</label>
+                      <textarea type="textarea" class="form-control" placeholder="Enter Description"
+                          id="description" name="description" #description="ngModel"
+                          [(ngModel)]="Event.description"></textarea>
 
-                            <div *ngIf="description.invalid && (description.dirty || description.touched)"
-                                class="error">
-                                <div *ngIf="description.errors.required">Description is required</div>
-                            </div>
+                      <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                          class="error">
+                          <div *ngIf="description.errors.required">Description is required</div>
+                      </div>
 
-                        </div>
-                        <div>
-                            <!-- <button type="submit" class="btn btn-primary" *ngIf="submitbtnPressed" nbButton status="primary"
-                                [disabled]="disableEvent">Submit</button> -->
-                            <!-- <button *ngIf="submitbtnPressed" nbButton status="primary" disabled]="disableEvent"
-                                class="d-flex column">Processing &nbsp;
-                                <i class="fa fa-spin fa-spinner">
-                                </i> Submit</button> -->
-                        </div>
+                      </div>
+                  </div>
+                  <div>
+                  </div>
 
-                        <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
-                            <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
-                                    class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
-                            <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
-                                [disabled]="!disableEvent" (click)="SubmitEvent()">Submit</button>
+                  <div modal-actions class="d-flex" style="margin-top: 2px; margin-bottom: 3px;">
+                      <button *ngIf="submitbtnPressed" nbButton status="primary" class="d-flex column"><i
+                              class="fa fa-spin fa-spinner"></i>&nbsp;Processing ...</button>
+                      <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column"
+                          [disabled]="!disableEvent" (click)="SubmitEvent()">Submit</button>
 
 
-                        </div>
-
-                    </div>
-                </form>
-
+                  </div>
+          </form>
+              </nb-card>
             </div>
         </ngx-side-modal>
     </nb-card-body>

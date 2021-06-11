@@ -31,6 +31,7 @@ export class EmailOTPVerifyComponent implements OnInit {
 
   changeOption() {
     this.verifyOption = !this.verifyOption;
+    this.resendOtp();
   }
 
   resendOtp() {

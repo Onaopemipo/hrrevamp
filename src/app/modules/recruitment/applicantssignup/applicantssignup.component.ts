@@ -14,6 +14,7 @@ export class ApplicantssignupComponent implements OnInit {
   applicantModel: ManageJobApplicantDTo = new ManageJobApplicantDTo();
   loading: boolean = false;
   btnProcessing: boolean = false;
+  userToken: string = '';
 
   constructor(private applicant: RegisterApplicantServiceProxy, private alertMe: AlertserviceService, private router: Router) { }
 
@@ -27,6 +28,7 @@ export class ApplicantssignupComponent implements OnInit {
 
   regiterApplicant(){
     this.btnProcessing = true;
+    // this.applicantModel.
     this.applicant.registerApplicant(this.applicantModel).subscribe(data => {
       this.btnProcessing = false;
       if(!data.hasError && data.result.isSuccessful === true){
@@ -39,7 +41,7 @@ export class ApplicantssignupComponent implements OnInit {
 
       else {
         this.btnProcessing = false;
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'OK')
       }
     }, (error) => {
 

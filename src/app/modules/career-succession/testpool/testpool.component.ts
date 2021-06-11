@@ -22,7 +22,7 @@ export class TestpoolComponent implements OnInit, AfterViewInit {
   @ViewChild(NbTabsetComponent) tab: NbTabsetComponent;
   loading = true;
   testPoolTable: TableColumn [] = [
-    {name: 'id', title: 'Employee ID'},
+    {name: 'employeeId', title: 'Employee ID'},
     {name: 'employeeName', title: 'Employee Name'},
     {name: 'departmentName', title: 'Department Name'},
     {name: 'positionName', title: 'Position'},
@@ -58,8 +58,14 @@ tableActionClicked(event: TableActionEvent){
         this.talentPool.deleteEmployeeFromTalentManagmentPool(this.pageId, event.data.id).subscribe(data => {
           if (!data.hasError) {
             this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss').subscribe(resp => {
-              this.fetchSinglePool();
-              if(resp) this.route.navigateByUrl('/career-succession/talentpool');
+              this.talentPool.getTalentPoolById(this.pageId).subscribe(data => {
+                if(!data.hasError){
+                  this.poolRecords = data.result.employeeTalentManagement;
+                  this.pageTitle = data.result.title;
+                  this.employeeCounter = data.result.employeeTalentManagement.length;
+                  this.loading = false;
+                }
+              })
             })
           }
         })
@@ -113,18 +119,16 @@ poolRecords: EmployeeTalentManagementDTO [] = []
 
   ngOnInit(): void {
     // window.globalThis.vvvv = this;
-    this.pageId = Number(this.router.snapshot.paramMap.get("id"));
+    // this.pageId = Number(this.router.snapshot.paramMap.get("id"));
     this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
     this.fetchTypes();
-    this.fetchSinglePool();
+    // this.fetchSinglePool();
     this.talentPool.getTalentPoolById(this.pageId = Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => {
-      if(!data.hasError && data.result.employeeTalentManagement.length > 0){
+      if(!data.hasError){
         this.poolRecords = data.result.employeeTalentManagement;
         this.pageTitle = data.result.title;
-        console.log('Page Title:',this.pageTitle)
         this.employeeCounter = data.result.employeeTalentManagement.length;
-        console.log('Single Record', this.poolRecords);
         this.loading = false;
       }
     })
@@ -147,8 +151,6 @@ poolRecords: EmployeeTalentManagementDTO [] = []
   })
 
   }
-
-
   onTopActionClick(){
       this.showCandidateModal = true;
       console.log('Yes clicked')
@@ -172,7 +174,7 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
-        this.route.navigateByUrl('career-succession/talentpool');
+        this.route.navigateByUrl('career-succession/talentpool/'+ this.pageId);
       })
     }
 
@@ -183,18 +185,18 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     }
   }
 
-  async fetchSinglePool(){
-    const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
-    console.log('Here is the data',data.result)
-    if(!data.hasError && data.result.employeeTalentManagement.length > 0){
-      this.poolRecords = data.result.employeeTalentManagement;
-      this.pageTitle = data.result.title;
-      console.log('Page Title:',this.pageTitle)
-      this.employeeCounter = data.result.employeeTalentManagement.length;
-      console.log('Single Record', this.poolRecords);
-      this.loading = false;
-    }
-  }
+  // async fetchSinglePool(){
+  //   const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
+  //   console.log('Here is the data',data.result)
+  //   if(!data.hasError && data.result.employeeTalentManagement.length > 0){
+  //     this.poolRecords = data.result.employeeTalentManagement;
+  //     this.pageTitle = data.result.title;
+  //     console.log('Page Title:',this.pageTitle)
+  //     this.employeeCounter = data.result.employeeTalentManagement.length;
+  //     console.log('Single Record', this.poolRecords);
+  //     this.loading = false;
+  //   }
+  // }
 
 onChangeChannel($value){
   console.log($value)

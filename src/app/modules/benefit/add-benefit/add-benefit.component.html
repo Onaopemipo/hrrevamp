@@ -23,7 +23,7 @@
                     </div>
 
                 </div>
-                
+
                 <div class="form-group ">
                     <label for="inputEmail1" class="label  col-form-label listsubheader">Benefit
                         Type</label>
@@ -37,7 +37,7 @@
                         <div *ngIf="benefitTypeId.invalid && (benefitTypeId.dirty || benefitTypeId.touched)"
                             class="error">
                             <div *ngIf="benefitTypeId.errors.required">benefitType is required</div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -105,7 +105,6 @@
                             <div> Date is required</div>
                         </div> -->
 
-{{benefit.financialYear}}
                     </div>
                 </div>
 
@@ -119,7 +118,7 @@
                         <div *ngIf="description.errors.required">Description is required</div>
                     </div>
                 </div>
-               
+
                 <div class="form-group">
                     <div>
                         <label for=""> Add Employee</label>
@@ -171,14 +170,14 @@
 
                     </div>
                 </div>
-                
+
                 <div *ngIf="selectedOption == 2">
 
                     <div class="form-group">
                         <label>Upload Employee CSV file</label>
                         <ngx-file-upload></ngx-file-upload>
                     </div>
-                 
+
                 </div>
                 <div class="form-group">
                     <label> Employee Positions</label>
@@ -199,7 +198,7 @@
                     <ngx-file-upload></ngx-file-upload>
                     <span>Icon should be in JPEG format</span>
                 </div>
-          
+
 
 
 
@@ -217,13 +216,13 @@
 
                 <!-- <div class="form-group">
                     <label>Employee</label>
-                    
+
                     <select placeholder="Select Employee" class="form-control" name="employees" id="employees"
                           #employees="ngModel" [(ngModel)]="benefit.employees">
                           <option value="">--Select Employee---</option>
-                          <option *ngFor="let evo of  employees[0]" [value]="evo.employeeId">{{evo.employeeFirstname}}</option> 
+                          <option *ngFor="let evo of  employees[0]" [value]="evo.employeeId">{{evo.employeeFirstname}}</option>
                         </select>
-        
+
                         <div *ngIf="employees.invalid && (employees.dirty || employees.touched)" class="error">
                           <div *ngIf="employees.errors.required">Vendor is required</div>
                         </div>
@@ -242,7 +241,7 @@
 
 
 
-        <!-- 
+        <!--
         <div style="display: flex;flex-wrap: wrap;">
             <div style="display: flex; flex-direction: column; border: 5px solid #ccc; padding: 2rem; border-radius: 4px;">
                 <h4>Initiate New Benefit</h4>
@@ -260,31 +259,31 @@
                 <h4>Initiate New Benefit</h4>
                 <p>Let's help create a new benefit plan</p>
             </div>
-        
+
          <div class="form-group">
               <label>Upload Employees</label>
               <ngx-radio-button [items]="['Bulk Upload', 'Individual Upload', 'By Eligibility List']" [horizontal]="true">
               </ngx-radio-button>
             </div>
-        
+
             <div class="form-group">
               <label>Employee(s)</label>
               <ngx-employee-master-search></ngx-employee-master-search>
             </div>
-        
+
             <div class="form-group">
               <label>Upload Employee CSV file</label>
               <ngx-file-upload></ngx-file-upload>
-            </div> 
-        
+            </div>
+
             <div class="form-group">
                     <label>Benefit Icon</label>
                      <ngx-file-upload></ngx-file-upload>
                 <span>Icon should be in JPEG format</span>
             </div>
-             
-                   
-                
+
+
+
         </div>   -->
 
 
@@ -300,7 +299,7 @@
                 <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
                     <!-- <h6 style="border: 10px  #CCC; background-color: #F5F5FA; font-size: small; padding: 15px; width: 300px;
                   margin-left: 10px;">create new events</h6> -->
-                    
+
                         <div class="form-group">
                             <label for="title">Type of Benefit</label>
                             <input type="text" class="form-control" placeholder="Enter benefit type name" id="name"
@@ -310,19 +309,19 @@
                                 <div *ngIf="name.errors.required">name is required</div>
                             </div>
 
-                        </div>  
+                        </div>
 
                     <div class="form-group">
                         <label for="Description" style="margin-left: 0.3rem;" class="label  col-form-label listsubheader">Description</label>
                         <textarea rows="5" type="textarea" class="form-control" placeholder="Enter Description" id="description"
                             name="description" #description="ngModel" [(ngModel)]=" AddBenefit.description"></textarea>
-        
+
                         <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
                             <div *ngIf="description.errors.required">Description is required</div>
                         </div>
-        
+
                     </div>
-        
+
 
 
 
@@ -339,11 +338,11 @@
 <button *ngIf="!submitbtnPressed" nbButton status="primary" class="d-flex column" [disabled]="!disable"
     (click)="SubmitBenefitType()">Submit</button>
 </div>
-<button outline="true" nbButton status="primary" class="d-flex column" 
+<button outline="true" nbButton status="primary" class="d-flex column"
 (click)="showPlan = false">Discard</button>
                 </div>
-               
-                   
+
+
 
             </div>
 
@@ -353,11 +352,11 @@
     </nb-card-body>
 </nb-card>
 
-<!-- 
+<!--
 <nb-tabset #tset (click)="filtertabConf(tset.tabs._results)">
     <nb-tab tabTitle="Individual">
 
-    
+
 
 
     </nb-tab>

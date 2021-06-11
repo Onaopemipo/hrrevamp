@@ -82,6 +82,11 @@ export class EmployeeeventsComponent implements AfterViewInit {
   //   console.log(response)
 
   // }
+
+  filter = {
+    pageNumber: 1,
+    PageSize: 10
+  }
   constructor(private AddUpdateEvent: AddUpdateEventsServiceProxy, private getall: GetAllEventsServiceProxy, private DataServiceProxy: DataServiceProxy,
     private alertservice: AlertserviceService) { }
 
@@ -117,8 +122,9 @@ export class EmployeeeventsComponent implements AfterViewInit {
   PageSize: number = 1000
   pageNumber: number = 1
   AllEvents: EventDTO[]
+
   async getallaEvent() {
-    const response = await this.getall.getAllEvents(this.PageSize, this.pageNumber).toPromise()
+    const response = await this.getall.getAllEvents(this.filter.PageSize, this.filter.pageNumber).toPromise()
     this.loading = false
 
     if (!response.hasError) {
@@ -180,17 +186,18 @@ export class EmployeeeventsComponent implements AfterViewInit {
   }
 
   async SubmitEvent() {
-    this.submitbtnPressed = true
+    this.submitbtnPressed = true;
     const response = await this.AddUpdateEvent.addUpdateEvent(this.Event).toPromise()
     if (!response.hasError) {
       console.log(response)
       this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, response.message, 'OK');
-      console.log(response.result)
+      this.showEvent = false;
     }
     (error) => {
 
       if (error.status == 400) {
         this.alertservice.openCatchErrorModal(this.alertservice.ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+        this.submitbtnPressed = false;
       }
     }
     this.submitbtnPressed = false
@@ -200,17 +207,17 @@ export class EmployeeeventsComponent implements AfterViewInit {
 
   dateClick(day) {
     //   this.popOver.show();
-    
+
     if(day.hasEvent){
       this.showEvent= false
     }
-    
+
     if (day.date){
       this.Event.startDate = new Date(day.date);
       this.showEvent = true
       console.log('day', day);
     }
-     
+
 
 
   }
