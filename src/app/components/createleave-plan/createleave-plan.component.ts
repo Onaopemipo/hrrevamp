@@ -88,17 +88,17 @@ export class CreateleavePlanComponent implements OnInit {
    }
  
   getallweekEndsbetweendate(startD: Date, endD: Date): number {
-    console.log(startD,endD)
+
     var count = 0;
     var incr = this.dateDiffInDays(startD, endD);
-    console.log(incr)
+ 
     for (var i = 0; i < incr; i++){
       var newD = this.addDays(startD, i);
-      console.log(newD)
+   
       var iswkend = this.getweekEnds(newD);
       if (iswkend){ count++;console.log(newD)}
     }
-    console.log(count)
+  
     return count;
   }
   
@@ -138,9 +138,45 @@ export class CreateleavePlanComponent implements OnInit {
     var adddate = parseInt(String(result.getDate())) + parseInt(days);
      result.setDate(adddate);
      return result;
-   }
+  }
+  
+  setwithNoofDays() {
+    if (this.leaveD.noOfDays) {
+      var eEndDt = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
+      var val = this.getweekvalue(eEndDt);
+      var dDateRedby = val == 1 ? -2 : (val == 2 ? -1 : 0);
+      eEndDt = dDateRedby != 0 ? this.addDays(eEndDt, dDateRedby) : eEndDt;
+      var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt); 
+      var nendDat = this.addDays(eEndDt, (val + is_weekend));
+      var val = this.getweekvalue(nendDat);
+      nendDat = this.addDays(nendDat, val);
+      this.leaveD.endDate = nendDat;
+      return;
+    }
+
+  }
+  setwithEndDate() {
+    if (this.validateEnddate) {
+      var daysdiff = this.dateDiffInDays(this.leaveD.startDate, this.leaveD.endDate);
+      this.leaveD.noOfDays = daysdiff;
+      if (this.getweekEnds(this.leaveD.endDate)) {
+        this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, "Please select work day as leave end day", "OK")
+        this.leaveD.noOfDays = null;
+      } else {
+        var eEndDt = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
+        var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt);
+        var nendDat = this.addDays(eEndDt, (is_weekend));
+  
+        var val = this.getweekvalue(nendDat);
+        nendDat = this.addDays(nendDat, val);
+        
+        this.leaveD.endDate = nendDat;
+        return;
+      }
+    }
+ 
+  }
    noOfDaysValidation() {
-     let result: Date = new Date();
      if (this.leaveD.noOfDays && this.validateEnddate)
      {
       var eEndDt = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
@@ -148,7 +184,9 @@ export class CreateleavePlanComponent implements OnInit {
       var dDateRedby = val == 1 ? -2 : (val == 2 ? -1 : 0);
       eEndDt = dDateRedby != 0 ? this.addDays(eEndDt, dDateRedby) : eEndDt;
       var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt); 
-      var nendDat = this.addDays(eEndDt, (val + is_weekend));     
+       var nendDat = this.addDays(eEndDt, (val + is_weekend)); 
+       var val = this.getweekvalue(nendDat);
+       nendDat = this.addDays(nendDat, val);
       this.leaveD.endDate = nendDat;
       return;
        
@@ -159,22 +197,30 @@ export class CreateleavePlanComponent implements OnInit {
        var dDateRedby = val == 1 ? -2 : (val == 2 ? -1 : 0);
        eEndDt = dDateRedby != 0 ? this.addDays(eEndDt, dDateRedby) : eEndDt;
        var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt); 
-       var nendDat = this.addDays(eEndDt, (val + is_weekend));     
+       var nendDat = this.addDays(eEndDt, (val + is_weekend));
+       var val = this.getweekvalue(nendDat);
+       nendDat = this.addDays(nendDat, val);
        this.leaveD.endDate = nendDat;
        return;
      }
      if (this.validateEnddate) {
        var daysdiff = this.dateDiffInDays(this.leaveD.startDate, this.leaveD.endDate);
        this.leaveD.noOfDays = daysdiff;
+       if (this.getweekEnds(this.leaveD.endDate)) {
+  this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED,"Please select work day as leave end day","OK")
+         this.leaveD.noOfDays = null;
+       } else {
+         var eEndDt = this.addDays(this.leaveD.startDate, this.leaveD.noOfDays);
+         var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, eEndDt); 
+         var nendDat = this.addDays(eEndDt, (is_weekend));
 
-
-
-       
-       var val = this.getweekvalue(this.leaveD.endDate);
-       var nendDat = this.addDays(this.leaveD.startDate, val);
-       var is_weekend = this.getallweekEndsbetweendate(this.leaveD.startDate, nendDat);
-       this.leaveD.endDate = is_weekend > 0 ? this.addDays(nendDat, is_weekend) : nendDat;
-       return;
+         var val = this.getweekvalue(nendDat);
+         nendDat = this.addDays(nendDat, val);
+         
+         this.leaveD.endDate = nendDat;
+         return;
+         
+}
      }
    }
  

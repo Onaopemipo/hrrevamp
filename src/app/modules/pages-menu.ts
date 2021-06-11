@@ -30,11 +30,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'My Profile',
-        link: '/employeemodule/selfservive/viewemployeerecords',
+        link: '/employeemodule/selfservice/viewemployeerecords/myprofile',
       },
       {
         title: 'My Leave',
-        link: '/leave/history',
+        link: '/leave/myleavehistory',
       },
       {
         title: 'Exit Process',
@@ -51,6 +51,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Appraisals Key Result Area',
         link: '/performance/kra'
+      },
+      {
+        title: 'Request & Complaints',
+        link: '/myrequestandcomplaints',
+      },
+      {
+        title: 'My Reward',
+        link: '/myrequestandcomplaints',
+      },
+      {
+        title: 'My Discipline',
+        link: '/myrequestandcomplaints',
       },
     ],
   },
@@ -582,7 +594,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Benefit Type',
-        link: '/benefits/BenefitsVendor',
+        link: '/benefits/BenefitType',
       },
       {
         title: 'Vendor',
@@ -590,7 +602,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Vendor Plans',
-        link: '/benefits/BenefitsVendor',
+        link: '/benefits/allPlans',
       },
       {
         title: 'Benefit Eligibility',

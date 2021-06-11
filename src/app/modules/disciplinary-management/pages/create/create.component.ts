@@ -62,7 +62,7 @@ export class CreateComponent implements OnInit {
   getTemplatesbyId(disciplinetypeId) {
     this.templateFilter.disciplinaryTypeId = disciplinetypeId;
     this.loadingDisciplineTemplates = true;
-    this.FetchDisciplineTemplatesService.fetchDisciplineTemplates(this.templateFilter.iD, this.templateFilter.disciplinaryTypeId, this.templateFilter.pageSize, this.templateFilter.pageNumber).subscribe(data => {
+    this.FetchDisciplineTemplatesService.fetchDisciplineTemplates(this.templateFilter.iD, this.templateFilter.disciplinaryTypeId,this.IsReward, this.templateFilter.pageSize, this.templateFilter.pageNumber).subscribe(data => {
       if (!data.hasError) {
         this.loadingDisciplineTemplates = false;
         this.allDisciplineTemplate = data.result;
@@ -120,6 +120,7 @@ export class CreateComponent implements OnInit {
       this.selectedCc.map(s => { s.dateCreated = new Date; return s;} )
       this.DisciplineManagement.recipientsEmployee = JSON.stringify(this.selectedRecipient);
       this.DisciplineManagement.carbonCopyEmployee = JSON.stringify(this.selectedCc);
+      this.DisciplineManagement.isReward = this.IsReward;
       this.AddUpdateDisciplineManagementService.addUpdateDisciplineManagement(this.DisciplineManagement).subscribe(data => {
         this.loadingDiscipline = false;
         if (!data.hasError) {

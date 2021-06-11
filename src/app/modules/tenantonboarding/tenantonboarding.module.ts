@@ -29,7 +29,7 @@ import { EmployeeonboardingprofileComponent } from './employeeonboardingprofile/
 import { CommonServiceProxy, FetchSubscriptionPlanModulesServiceProxy, FetchSubscriptionPlansServiceProxy, RegisterCompanyServiceProxy, UploadDocumentServiceProxy, VerifySubscriptionPaymentServiceProxy } from 'app/_services/service-proxies';
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
-
+import { NgxPermissionsModule } from 'ngx-permissions';
 @NgModule({
     declarations: [TenantonboardingComponent, OnboardingsetupComponent, EmployeeonboardingprofileComponent],
   imports: [
@@ -53,7 +53,8 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     NbPopoverModule,
     NbDialogModule,
     NgxFlowModule,
-    Angular4PaystackModule.forRoot(environment.paystackToken)
+    Angular4PaystackModule.forRoot(environment.paystackToken),
+    NgxPermissionsModule
   ],
   providers: [
       {

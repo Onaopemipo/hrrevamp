@@ -81,6 +81,8 @@ import { ConfirmBoxService } from './_services/confirm-box.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EligilibilyviewComponent } from './benefit/eligilibilyview/eligilibilyview.component';
 import { BenefitComponent } from './eligibilityview/benefit/benefit.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
+
 // import{CalComponent} from '../app/components/cal/cal.component'
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -149,7 +151,8 @@ FullCalendarModule.registerPlugins([
       parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
       formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
       getWeekOptions:{useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }
-    })
+    }),
+    NgxPermissionsModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -168,6 +171,7 @@ FullCalendarModule.registerPlugins([
     FetchDashboardDataServiceProxy,
     CustomServiceService,
     RecruitmentJobServiceProxy,
+
   ],
 })
 export class AppModule {

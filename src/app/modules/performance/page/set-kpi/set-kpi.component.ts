@@ -58,8 +58,8 @@ export class SetKpiComponent extends BaseComponent<MyKPI, MyKPI, MyKPI> implemen
       console.log(res);
       this.unitsOfMeasurement = res.result.map(data => {
         return {
-          name: String(data.id),
-          label: data.text,
+          id: String(data.id),
+          name: data.text,
         };
       });
       console.log(this.unitsOfMeasurement);

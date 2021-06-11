@@ -155,7 +155,7 @@ const routes: Routes = [
         },
         
         {
-          path: 'selfservive/viewemployeerecords',
+          path: 'selfservice/viewemployeerecords/:type',
           component:EmployeerecordsviewComponent
         }, 
         {
