@@ -43,15 +43,11 @@
     </div>
     <div class="form-group">
       <label>Employee</label>
-      <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
+      <ngx-employee-master-search [clearFlag]="master_search_clear_flag" (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
       </ngx-employee-master-search>
     </div>
   </div>
-  <div class="form-group">
-    <label>Employee</label>
-    <ngx-employee-master-search (masterSubmitted)="employeesSelected($event)" [allowmultipleselection]="true">
-    </ngx-employee-master-search>
-  </div>
+
   <div class="form-group">
     <label></label>
     <div>

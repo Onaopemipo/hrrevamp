@@ -21,6 +21,10 @@ const routes: Routes = [
             component: LeavetypeComponent,
           },
           {
+            path: 'myleavehistory',
+            component: LeavehistoryComponent,
+        },
+          {
               path: 'history',
               component: LeavehistoryComponent,
           },

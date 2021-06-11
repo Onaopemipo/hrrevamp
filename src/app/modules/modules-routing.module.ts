@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModulesComponent } from './modules.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { AuthGuardService as AuthGuard } from '../_services/auth-guard.service';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [{
   path: '',
@@ -13,6 +14,11 @@ const routes: Routes = [{
       component: DashboardComponent,
       canLoad: [AuthGuard],
 
+    },
+    {
+      path: 'myrequestandcomplaints',
+      loadChildren: () => import('../modules/requests-and-complaints/requests-and-complaints.module')
+        .then(m => m.RequestsAndComplaintsModule),
     },
     {
       path: 'complaints',

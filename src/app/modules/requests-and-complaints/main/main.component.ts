@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbTabComponent } from '@nebular/theme';
+import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ManageRequestDTO, RequestTypeDTO } from 'app/_services/service-proxies';
 import { Observable, Subject } from 'rxjs';
 import * as validate from 'validate.js';
@@ -32,7 +33,8 @@ export class MainComponent implements OnInit {
 
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private alertService: AlertserviceService
   ) { }
 
   async ngOnInit() {
@@ -50,6 +52,7 @@ export class MainComponent implements OnInit {
   loadRequests() {
     const subject = new Subject<Complaint[]>();
     this.apiService.getComplaints(this.getFilter()).subscribe(data => {
+      this.loading = false;
       console.log(data);
       subject.next(data.data.map(iComplaint => new Complaint(iComplaint)));
       subject.complete();
@@ -67,6 +70,7 @@ export class MainComponent implements OnInit {
   //   return subject.asObservable();
   // }
   loadData() {
+
     const observable: Observable<Complaint[]> = this.loadRequests();
     if (this.pageNo === 1 ) {
       this.loading = true;
@@ -155,6 +159,18 @@ export class MainComponent implements OnInit {
     this.loadingSave = true;
     const res = await this.apiService.createComplaint(this.newComplaint).toPromise();
     this.loadingSave = false;
+    if (!res.hasError) {
+      this.loading = true;
+      this.newComplaint = new ManageRequestDTO().clone();
+      this.requestTypes = await this.apiService.getRequestTypes().toPromise();
+      this.loadData();
+      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS,res.message,"OK")
+    } else {
+      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED,res.message,"OK")
+    }
+
+
+
   }
 
 }

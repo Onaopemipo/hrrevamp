@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="Number of Days" style="font-size: small;font-weight: bold;">Number of Days:</label>
-                <input type="number" (change)="processStartEndNoofDays()"  [(ngModel)]="leaveD.noOfDays" id="noOfDays" name="noOfDays" #noOfDays="ngModel" class="form-control" placeholder="Enter Number Of Days" required>
+                <input type="number" [min]="0" (keyup)="setwithNoofDays()" (change)="processStartEndNoofDays()"  [(ngModel)]="leaveD.noOfDays" id="noOfDays" name="noOfDays" #noOfDays="ngModel" class="form-control" placeholder="Enter Number Of Days" required>
                 <div *ngIf="noOfDays.invalid && (noOfDays.dirty || noOfDays.touched)" class="error">
                     <div *ngIf="noOfDays.errors.required">
                      Number of Days is required
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label for="Minimum Number Of Days" style="font-size: small;font-weight: bold;">End Date:</label>
-                <ngx-date  [(value)]='leaveD.endDate' (valueChange)="processStartEndNoofDays()" #endDate [min]="leaveD.startDate" name="endDate" id="endDate"></ngx-date>
+                <ngx-date  [(value)]='leaveD.endDate' (valueChange)="setwithEndDate()" #endDate [min]="leaveD.startDate" name="endDate" id="endDate"></ngx-date>
                 <div *ngIf="!validateEnddate" class="error">
                     <div>Leave Plan End Date is required</div>
                 </div>

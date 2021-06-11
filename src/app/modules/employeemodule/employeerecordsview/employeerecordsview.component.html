@@ -1,4 +1,4 @@
-<ngx-componentsheader [pageName]="title"  >
+<ngx-componentsheader [showbackbutton]="true" (backbuttonClick)="goback()" [pageName]="title"  >
 <div headerButton>
   <ngx-loadable-button [loading]="loading"  (click)="modal('submit')" >
     Submit
@@ -535,16 +535,19 @@
                           </div>
                           <div class="col-sm-6 form-group">
                             <label>RSA Number</label>
-                            <input id="rsaNumber" name="rsaNumber" #rsaNumber="ngModel" [(ngModel)]="createNewEmployee.pension.rsaNumber" type="text" fullWidth class="form-control" nbInput placeholder="Enter RSA Number"  required>
+                            <input id="rsaNumber" name="rsaNumber"  #rsaNumber="ngModel" [(ngModel)]="createNewEmployee.pension.rsaNumber" type="text" fullWidth class="form-control" nbInput placeholder="Enter RSA Number"  required>
                             <div *ngIf="rsaNumber.invalid && (rsaNumber.dirty || rsaNumber.touched)" class="error">
-                              <div *ngIf="rsaNumber.errors.required">PFA Name is required</div>
+                              <div *ngIf="rsaNumber.errors.required">RSA Number is required</div>
+                            </div>
+                            <div *ngIf="rsaError" class="error">
+                              {{rsaError}}
                             </div>
                           </div>
                         
                         </div>
                             <div class="form-group row">
                               <div class="col-sm-12">
-                                <button type="button" [disabled]="pensionForm.invalid" nbButton status="primary" (click)="submitPension()">Next</button>
+                                <button type="button" [disabled]="pensionForm.invalid || !cRSAnumber" nbButton status="primary" (click)="submitPension()">Next</button>
                               </div>
                             </div>
                       </form>

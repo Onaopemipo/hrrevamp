@@ -49,7 +49,9 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
     { name: 'dateSent', title: 'Date Sent',type: ColumnTypes.Date },
     { name: 'status', title: 'Status' ,type: ColumnTypes.Status}
   ];
-  tableActions = [];
+  tableActions = [
+
+  ];
   totalItems = 0;
   currentPage = 1;
   pageName = "Disciplinary Management"
@@ -73,7 +75,7 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
   }
   getallLog() {
     this.loading = true;
-    this.FetchDisciplineLogService.fetchDisciplineLog(this.filter.iD, this.filter.disciplinaryTypeId, this.filter.pageSize, this.filter.pageNumber).subscribe(data => {
+    this.FetchDisciplineLogService.fetchDisciplineLog(this.filter.iD, this.filter.disciplinaryTypeId,this.IsReward, this.filter.pageSize, this.filter.pageNumber).subscribe(data => {
       this.loading = false; 
       if (!data.hasError) {        
         var rs = data.result.map(x=>new logWithStatus(x))
@@ -87,7 +89,7 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
     this.router.navigate(['/discipline/create/' + param]);
   }
   ngOnInit() {
-    this.getallLog();
+
     this.acitivatedroute.params.subscribe(data => {
       //    console.log(data);
           if (data.type) {
@@ -95,7 +97,8 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
             this.IsReward = typ == "reward" ? true : false;
             this.pageName= typ == "reward" ? "Reward Management" : "Disciplinary Management";
           }
-        });
+    });
+    this.getallLog();
   }
 
 }

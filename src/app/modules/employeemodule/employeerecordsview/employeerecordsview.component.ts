@@ -14,6 +14,7 @@ import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { ColumnTypes, TableAction, TableActionEvent, ACTIONS } from 'app/components/tablecomponent/models';
 import { AlertserviceService } from 'app/_services/alertservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 @Component({
   selector: 'ngx-employeerecordsview',
@@ -22,6 +23,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class EmployeerecordsviewComponent implements OnInit {
+  rsaError: any = "";
   pensionForm: FormGroup;
   nxtKinForm: FormGroup;
   contactForm: FormGroup;
@@ -524,7 +526,8 @@ export class EmployeerecordsviewComponent implements OnInit {
     private GetAllProfessionalBodiesService: GetAllProfessionalBodiesServiceProxy,
     private RecruitmentSettingService: RecruitmentSettingServiceProxy,
     private UploadProfileImageService: UploadProfileImageServiceProxy,
-  private FileUploadService:FileStorageManagerServiceProxy) { }
+    private FileUploadService: FileStorageManagerServiceProxy,
+    public authServ: AuthenticationService ) { }
   
     dateDiffInDays(a: Date, b:Date):number {
       const _MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -970,7 +973,9 @@ export class EmployeerecordsviewComponent implements OnInit {
     }
   }
   getEmployeebyId(employeeId) {
+    this.loading = true
     this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
+      this.loading = false;
       if (!data.hasError) {
         this.createNewEmployee = data.result;
         console.log(this.createNewEmployee)
@@ -1499,8 +1504,31 @@ async  getAllfilestypes() {
       if (data) {
         if (data.employee_id) {
           this.getEmployeebyId(data.employee_id);
+        }        
+      }
+    })
+    this.activatedroute.params.subscribe(data => {
+      if (data) {
+        if (data.type && data.type == "myprofile") {
+          this.authServ.getuser().then((users) => {
+            if (users) {            
+              if (users[0]) {
+                this.getEmployeebyId(users[0].employee_id);
+              } else {        
+                this.authServ.clearusers();
+                this.router.navigate(['auth'])
+             }
+            } else {
+              this.authServ.clearusers();
+              this.router.navigate(['auth'])
+            }
+      
+           })
+        
         }
       }
+      
+      console.log(data)
     })
     this.createNewEmployee.documents = [];
     this.createNewEmployee.qualifications = [];
@@ -1541,5 +1569,18 @@ async  getAllfilestypes() {
     this.getallGradeSteps();
     this.getallSalaryScales();
 
+  }
+
+  goback() {
+    this.router.navigate(['/employeemodule/employeerecords'])
+  }
+  get cRSAnumber() {
+    if (this.createNewEmployee.pension.rsaNumber.length == 15) {
+      this.rsaError = "";
+      return true
+    } else {
+      this.rsaError = "RSA Number Must be 15 digits ";
+      return false
+  }  
   }
 }
