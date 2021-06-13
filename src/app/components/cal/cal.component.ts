@@ -1,3 +1,4 @@
+import { AlertserviceService } from './../../_services/alertservice.service';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -118,7 +119,7 @@ export class CalComponent implements AfterViewInit {
   dates = [];
   @ViewChild('calendar') calendar: ElementRef;
   @ViewChild(NbPopoverDirective) popOver: NbPopoverDirective;
-  constructor(private DeleteEventsServiceProxy: DeleteEventsServiceProxy) { }
+  constructor(private DeleteEventsServiceProxy: DeleteEventsServiceProxy, private alertMe: AlertserviceService) { }
 
   get monthLabel() {
     const months = [
@@ -179,8 +180,8 @@ export class CalComponent implements AfterViewInit {
     this.popOver.show()
     this.selectedDay = day;
     this.dateClick.emit(day);
-    
-    
+
+
   }
 
   day_events: Map<Date, CalendarEvent[]> = new Map<Date, CalendarEvent[]>();
@@ -203,12 +204,16 @@ export class CalComponent implements AfterViewInit {
   //   this.selectedDay = day;
   // }
   async deleteEvent(id) {
-    alert(id)
-    alert('are you sure you want to delete this event')
+    this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.CONFIRM, '', 'OK').subscribe(data => {
+      if(data){
+    this.DeleteEventsServiceProxy.deleteEvents(id).subscribe(res => {
+      this.selectedDay.events.filter(delEvent =>
+        delEvent.id = !id)
+      console.log('delete', res)
+    });
 
-    const res = await this.DeleteEventsServiceProxy.deleteEvents(id).toPromise();
-    this.selectedDay.events.filter(delEvent =>
-      delEvent.id = !id)
-    console.log('delete', res)
+
+      }
+    })
   }
 }
