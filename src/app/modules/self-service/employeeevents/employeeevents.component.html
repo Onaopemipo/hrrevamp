@@ -21,16 +21,15 @@
   <div modal-header style="font-size: larger; font-weight: bold;">
       New Event </div>
   <div modal-body>
-    <nb-card>
       <form action="/action_page.php" #EventForm="ngForm" name="EventForm" id="EventForm">
-        <div class="form-group">
-           <div>
-            <label for="title">title:</label>
+        <div class="form-group row">
+           <div class="col">
+            <label for="title">Title</label>
             <input type="text" class="form-control" placeholder="Enter title" id="title"
-                #title="ngModel" name="title" [(ngModel)]="Event.title" rrequired>
+                #title="ngModel" name="title" [(ngModel)]="Event.title" required>
 
             <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-                <div *ngIf="title.errors.required">title is required</div>
+                <div *ngIf="title.errors.required">Title is required</div>
             </div>
            </div>
 
@@ -95,7 +94,7 @@
 
 
         </div>
-</form>
-    </nb-card>
+      </form>
+
   </div>
 </ngx-side-modal>
