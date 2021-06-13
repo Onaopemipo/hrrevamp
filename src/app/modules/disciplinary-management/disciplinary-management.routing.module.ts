@@ -19,6 +19,10 @@ const routes: Routes = [
         component: MainComponent,
       },
       {
+        path: 'mylog/:type/:user',
+        component: DisciplinaryManagementLogComponent,
+      },
+      {
         path: 'log/:type',
         component: DisciplinaryManagementLogComponent,
       },
