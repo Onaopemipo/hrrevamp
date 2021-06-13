@@ -51,7 +51,7 @@ export class TrainingVendorComponent extends BaseComponent<MyVendor, {}, MyVendo
       this.showModal = true;
     }
     if (event.name === ACTIONS.DELETE) {
-      this.deleteRow('Are you sure to delete this department?');
+      this.deleteRow();
     }
   }
 

@@ -207,7 +207,7 @@ export class EmployeeeventsComponent implements AfterViewInit {
 
   dateClick(day) {
     //   this.popOver.show();
-
+    alert(day)
     if(day.hasEvent){
       this.showEvent= false
     }

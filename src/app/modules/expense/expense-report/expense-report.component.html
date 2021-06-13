@@ -4,7 +4,7 @@
   (buttonClick)="pageActionClicked($event)"
 ></ngx-componentsheader>
 <div class="main-page-container">
-  <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader
+  <!-- <ngx-tableheader *ngIf="!showEmpty"></ngx-tableheader -->
   ><ngx-default-content
     *ngIf="showEmpty"
     pageHeader=""
@@ -18,5 +18,8 @@
     [userData]="tableData"
     [loading]="loading"
     (pageChange)="loadNewPage($event)"
+    (filterChange)="filterUpdated($event)"
+    [showActions]="false"
+    [showFilter]="true"
   ></ngx-tablecomponent>
 </div>

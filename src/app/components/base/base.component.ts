@@ -99,7 +99,7 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
       this.tableData = this.data;
       this.loading = false;
     });
-    
+
     // this.dataService.getStrategyCategories().subscribe((data: any) => {
     //   this.allStrategy = data.result;
     // })
@@ -148,20 +148,40 @@ export abstract class BaseComponent<D, F, E> extends MainBaseComponent implement
   }
 
   abstract deleteData(data: E): Observable<any>;
-  deleteRow(confirmMessage: string) {
-    this.confirmBox.confirm(confirmMessage).subscribe(data => {
-      if (data) {
-        this.confirmBox.showLoading();
+  deleteRow() {
+    // this.confirmBox.confirm(confirmMessage).subscribe(data => {
+    //   if (data) {
+    //     this.confirmBox.showLoading();
+    //     this.deleteData(this.editingData).subscribe(data => {
+    //       console.log(data)
+    //       this.confirmBox.close();
+    //       // this.alertService.openModalAlert()
+    //       this.reload();
+    //     })
+    //   } else {
+    //     this.confirmBox.close();
+    //   }
+    // });
+
+    this.confirmBox.alertMe.openModalAlert(this.confirmBox.alertMe.ALERT_TYPES.CONFIRM, '','Yes').subscribe(dataAction => {
+      if(dataAction){
+        // this.confirmBox.showLoading();
         this.deleteData(this.editingData).subscribe(data => {
           console.log(data)
-          this.confirmBox.close();
+          // this.confirmBox.close();
           // this.alertService.openModalAlert()
           this.reload();
-        })
-      } else {
-        this.confirmBox.close();
-      }
-    });
+        // this.competencyService.deleteCompetency(event.data.id).subscribe(data => {
+        //   if(!data.hasError){
+        //     this.confirmBox.alertMe.openModalAlert(this.confirmBox.alertMe.ALERT_TYPES.SUCCESS, 'Successfully Deleted', 'Dismiss').subscribe(res => {
+        //       this.getCompetency();
+        //       this.router.navigateByUrl('career-succession/competency');
+        //     })
+        //   }
+        // })
+      })
+    }
+    })
   }
 
   createNewClicked() {

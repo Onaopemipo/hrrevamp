@@ -1,3 +1,6 @@
+import { CustomServiceService } from './../../../_services/custom-service.service';
+import { DataServiceProxy, FileParameter, IDTextViewModel, MessageOut, BulkMasterServiceProxy } from 'app/_services/service-proxies';
+import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { TableActionEvent } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj, EmployeeTalentManagementDTO } from './../../../_services/service-proxies';
@@ -103,16 +106,19 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
  pageTitle: string = '';
  pageId:number = 0;
  user: IVwUserObj;
+
+ allbulkProcesses: IDTextViewModel[] = [];
+ initialUploadResp = new MessageOut().clone();
 //  poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
 poolRecords: EmployeeTalentManagementDTO [] = []
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
 ]
-  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,
+  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,  private CustomService: CustomServiceService,
     private alertMe: AlertserviceService,  private navCtrl: Location, private route: Router,
-    private talentPool: TalentManagementServiceProxy,
-    public authServ: AuthenticationService) { }
+    private talentPool: TalentManagementServiceProxy, private DataService: DataServiceProxy,
+    public authServ: AuthenticationService, private BulkMasterService: BulkMasterServiceProxy) { }
   ngAfterViewInit(): void {
     this.tab.selectTab(this.tab.tabs.first);
   }
@@ -123,6 +129,7 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
     this.fetchTypes();
+    this.getProccessId();
     // this.fetchSinglePool();
     this.talentPool.getTalentPoolById(this.pageId = Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => {
       if(!data.hasError){
@@ -133,6 +140,62 @@ poolRecords: EmployeeTalentManagementDTO [] = []
       }
     })
 
+  }
+
+  removeFile(event: FlowDirective, mFile: Transfer) {
+    this.files = this.files.filter(file => file.name !== mFile.name);
+    event.cancelFile(mFile);
+  }
+
+  files: Transfer[]=[];
+  onDropFileceived(event: FlowDirective) {
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;
+
+    });
+  }
+  filereceived(event: FlowDirective) {
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;
+      this.files[0].flowFile.file
+
+
+    });
+  }
+  onDragOver(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  getProccessId() {
+    this.DataService.getBulkUploadProcesses().subscribe(data => {
+      if (!data.hasError) {
+        this.allbulkProcesses = data.result;
+        console.log('all process IDs', this.allbulkProcesses)
+      }
+    })
+  }
+
+  downloadSampleFile() {
+    let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
+    this.CustomService.downloadSampleTemplate(processId).subscribe((data) => {
+      const dtype = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      this.CustomService.downloadFile(data, dtype);
+
+    })
+  }
+  uploadBulkEmployee() {
+    this.loading = true;
+    let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
+    let FileParameter: FileParameter= {data:'',fileName:''};
+    FileParameter.data = this.files[0].flowFile.file;
+    FileParameter.fileName = this.files[0].flowFile.name;
+    this.BulkMasterService.bulkUpload(processId, FileParameter).subscribe(data => {
+      this.loading = false;
+      if (!data.hasError) {
+        this.initialUploadResp = data.result;
+
+      }
+    })
   }
 
   async fetchTypes(){

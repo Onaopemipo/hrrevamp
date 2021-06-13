@@ -99,7 +99,7 @@ export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extend
       return true;
     }
     if (event.name === DEFAULT_TABLE_ACTIONS.delete) {
-      this.deleteRow('Are you sure to delete this asset category?');
+      this.deleteRow();
       return true;
     }
     return false;
@@ -252,7 +252,7 @@ export class MyAssetSubTypeComponent extends AssetBaseComponent<MyAssetSubTypeFi
   }
 
   type_id = 1;
-  
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(param => {
       this.type_id = Number(param['id']);

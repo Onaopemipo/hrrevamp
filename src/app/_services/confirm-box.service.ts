@@ -1,3 +1,4 @@
+import { AlertserviceService } from './alertservice.service';
 import { Injectable, Component, OnInit, OnDestroy } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { NbDialogRef } from '@nebular/theme';
@@ -62,7 +63,7 @@ export class ConfirmBoxService {
   dialog?: NbDialogRef<ConfirmBoxServiceComponent>;
   message: string = '';
   private subject?: Subject<boolean>;
-  constructor(private dialogService: NbDialogService) {
+  constructor(private dialogService: NbDialogService, public alertMe: AlertserviceService) {
     this.loading = new Subject<boolean>();
   }
 
