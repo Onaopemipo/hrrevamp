@@ -85,6 +85,11 @@ const routes: Routes = [{
       path: 'timeandattendance',
       loadChildren: () => import('./time-and-attendance/time-and-attendance.module')
       .then(m => m.TimeAndAttendanceModule)
+    }, 
+    {
+      path: 'myrewardanddiscipline',
+      loadChildren: () => import('./disciplinary-management/disciplinary-management.module')
+      .then(m => m.DisciplinaryManagementModule)
     },
     {
       path: 'discipline',

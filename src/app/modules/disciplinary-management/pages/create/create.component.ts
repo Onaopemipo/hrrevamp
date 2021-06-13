@@ -62,7 +62,7 @@ export class CreateComponent implements OnInit {
   getTemplatesbyId(disciplinetypeId) {
     this.templateFilter.disciplinaryTypeId = disciplinetypeId;
     this.loadingDisciplineTemplates = true;
-    this.FetchDisciplineTemplatesService.fetchDisciplineTemplates(this.templateFilter.iD, this.templateFilter.disciplinaryTypeId,this.IsReward, this.templateFilter.pageSize, this.templateFilter.pageNumber).subscribe(data => {
+    this.FetchDisciplineTemplatesService.fetchDisciplineTemplates(this.templateFilter.iD, this.templateFilter.disciplinaryTypeId,this.IsReward,0, this.templateFilter.pageSize, this.templateFilter.pageNumber).subscribe(data => {
       if (!data.hasError) {
         this.loadingDisciplineTemplates = false;
         this.allDisciplineTemplate = data.result;

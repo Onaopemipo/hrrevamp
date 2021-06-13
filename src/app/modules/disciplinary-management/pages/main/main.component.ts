@@ -56,7 +56,7 @@ export class MainComponent implements OnInit {
     this.templateFilter.disciplinaryTypeId = disciplinetypeId;
    this.selectedDisciplineRules = discipline.disciplineRules;
     this.loadingDisciplineTemplates = true;
-    this.FetchDisciplineTemplatesService.fetchDisciplineTemplates(this.templateFilter.iD, this.templateFilter.disciplinaryTypeId, this.templateFilter.pageSize, this.templateFilter.pageNumber).subscribe(data => {
+    this.FetchDisciplineTemplatesService.fetchDisciplineTemplates(this.templateFilter.iD, this.templateFilter.disciplinaryTypeId,this.IsReward,0, this.templateFilter.pageSize, this.templateFilter.pageNumber).subscribe(data => {
       if (!data.hasError) {
         this.loadingDisciplineTemplates = false;
         this.allDisciplineTemplate = data.result;

@@ -6,7 +6,7 @@ import {
   EmployeeHistoryDTO, CommonServiceProxy, Position, EmployeeSkill, EmployeeCertificationDTO,
   Skill, GetAllProfessionalBodiesServiceProxy, ProfessionalBodyDTO, Certification, EmployeeContractAssignmentDTO,
   JobRole, PayrollType, GradeStep, FileStorageManagerServiceProxy, FileParameter, UploadProfileImageServiceProxy,
-  EmployeeSkillDTO, Qualification, Course, Institution,
+  EmployeeSkillDTO, Qualification, Course, Institution, Department, EmployeeImageUploadDTO,
 } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -23,6 +23,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
 })
 
 export class EmployeerecordsviewComponent implements OnInit {
+  EmployeeImageUpload = new EmployeeImageUploadDTO().clone();
   rsaError: any = "";
   pensionForm: FormGroup;
   nxtKinForm: FormGroup;
@@ -75,7 +76,7 @@ export class EmployeerecordsviewComponent implements OnInit {
   religionValues: DropdownValue[] = [];
   employmentStatusValues: DropdownValue[] = [];
   alladdressType: DropdownValue[] = [];
-  alldepartments: DropdownValue[] = [];
+  alldepartments: Department[] = [];
 
   // allgender: string [] = [];
   showEmployeeContractModal: boolean = false;
@@ -1280,8 +1281,9 @@ export class EmployeerecordsviewComponent implements OnInit {
       if (this.createNewEmployee.id) {
       
         this.getBase64(file).then((data: string) => {
-      
-          this.UploadProfileImageService.uploadProfileImage(data, this.createNewEmployee.id).subscribe(data => {
+          this.EmployeeImageUpload.base64Image = data;
+          this.EmployeeImageUpload.employeeId = this.createNewEmployee.id;
+          this.UploadProfileImageService.uploadProfileImage(this.EmployeeImageUpload).subscribe(data => {
             if (!data.hasError) {
               this.alertservice.openModalAlert(this.alertservice.ALERT_TYPES.SUCCESS, data.message, "ok");
               this.getEmployeebyId(this.createNewEmployee.id);
@@ -1385,7 +1387,7 @@ export class EmployeerecordsviewComponent implements OnInit {
     })
   }
   getdepartments() {
-    this.myDropdown.getDropDownValuesById(2).subscribe(data => {
+    this.CommonService.getDepartments().subscribe(data => {
       if(!data.hasError){
          this.alldepartments = data.result;
       }

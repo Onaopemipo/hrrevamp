@@ -1188,7 +1188,7 @@
                       <label>Department</label>
                       <select class="form-control" #departmentId="ngModel" [(ngModel)]="indvemployeeContract.departmentId" name="departmentId" id="departmentId" required  >
                           <option value="">--Select Department--</option>
-                       <option *ngFor="let dep of alldepartments" [value]="dep.option_value">{{dep.option_text}}</option>
+                       <option *ngFor="let dep of alldepartments" [value]="dep.id">{{dep.name}}</option>
                       </select>
                  
                   </div>
@@ -1241,7 +1241,7 @@
         <label>Payroll Type</label>
         <select class="form-control" #payRollTypeId="ngModel"  [(ngModel)]="indvemployeeContract.payRollTypeId" name="payRollTypeId" id="payRollTypeId" required>
             <option value="">--Select Location--</option>
-            <option *ngFor="let pr of allpayrolltypes" [value]="pr.option_value">{{pr.option_text</option>
+            <option *ngFor="let pr of allpayrolltypes" [value]="pr.id">{{pr.text}}</option>
         </select>
    
     </div>

@@ -58,11 +58,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'My Reward',
-        link: '/myrequestandcomplaints',
+        link: '/myrewardanddiscipline/mylog/reward/myreward',
       },
       {
         title: 'My Discipline',
-        link: '/myrequestandcomplaints',
+        link: '/myrewardanddiscipline/mylog/discipline/mydiscipline',
       },
     ],
   },

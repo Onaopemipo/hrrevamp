@@ -1,5 +1,5 @@
 <ngx-componentsheader [pageName]="pageName">
-<div headerButton style="display: flex; flex-direction: row;" >
+<div *ngIf="!isUser" headerButton style="display: flex; flex-direction: row;" >
   <button   nbButton status="primary" (click)="AddNewDiscipline()" class="d-flex column">
     {{IsReward? 'Reward':'Discipline'}}</button>
 </div>
@@ -16,7 +16,8 @@
   <ngx-tablecomponent  
   *ngIf="!showEmpty"
   (filterChange)="filterUpdated($event)"
-  [showActions]="false"
+  (actionClick)="tableActionClicked($event)"
+  [showActions]="true"
   [showFilter]="true"
   [actions]="tableActions" 
   [userData]="DisciplineManagementList" 
@@ -28,3 +29,68 @@
   >
   </ngx-tablecomponent>
 </div>
+
+
+<ngx-side-modal [(show)]='showtypeDetails' [position]="'Center'" style="width: 500px; height: 1000px;">
+  <div modal-header>{{pageName}}</div>
+  <div modal-body>
+    <div class="row">
+      <div class="col-sm-3">
+<div style="display: flex;flex-direction: row;">
+  <img src="assets/icons/camera.jpg" style="width: 35px;">
+<div style="display: flex;flex-direction: column;padding-left: 10px;">
+  <div style="font-weight: bolder;">Terry Apala</div>
+  <div>Terryboy@company.com</div>
+
+</div>
+</div>
+      </div>
+      <div class="col-sm-9">
+        <div style="display: flex;flex-direction: column;">
+          <div style="display: flex;justify-content: flex-end;">{{"11-06-2021"| date:'MMM d, y'}}</div>
+          <div style="padding: 15px 5px 15px 5px;">
+            <p>
+              it has been long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, a
+
+As opposed to using 'Content here, content here', making it look like readable English.
+            </p>
+            <p>
+              it has been long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, a
+
+As opposed to using 'Content here, content here', making it look like readable English.
+            </p>
+          </div>
+          <div style="display: flex;flex-direction: row;color: #6b6bdb;">
+            <div style="padding: 10px 10px 10px 0"> <a status="primary" style="text-decoration: underline;cursor: pointer;">Reply</a> </div>
+            <div style="padding:  10px 10px 10px 0;"><a status="primary" style="text-decoration: underline;cursor: pointer;">Mark as closed</a></div>
+           
+            
+          </div>
+          <div>
+            <div class="row">
+              <div class="col-sm-12">
+                <textarea rows="5" nbInput fullWidth></textarea>
+              </div>
+            </div>
+            <div class="row" style="padding-top: 15px;">
+              <div class="col-sm-12">
+               <div style="display: flex;flex-direction: row;">
+                <div >
+                  <button   nbButton status="primary" class="d-flex column" >Send </button>
+               
+                </div>
+                <div style="padding-left: 15px;">
+                  <button  outline="true" nbButton status="primary" class="d-flex column" > Discard</button>
+               
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  </ngx-side-modal>

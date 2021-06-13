@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { ColumnTypes, TableColumn } from 'app/components/tablecomponent/models';
+import { ACTIONS, ColumnTypes, TableActionEvent, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
 import { DisciplineManagementDTO, DisciplineTemplateDTO, FetchDisciplineLogServiceProxy } from 'app/_services/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IStatus, MyColor } from 'app/components/status/models';
+import { AuthenticationService } from 'app/_services/authentication.service';
 
 
 enum TOP_ACTIONS { DISCIPLINE, }
@@ -50,7 +51,7 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
     { name: 'status', title: 'Status' ,type: ColumnTypes.Status}
   ];
   tableActions = [
-
+    { name: ACTIONS.VIEW, label: 'View' },
   ];
   totalItems = 0;
   currentPage = 1;
@@ -58,13 +59,26 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
   IsReward: boolean = false;
   filter = {
     iD:  undefined,
-    disciplinaryTypeId:  undefined,
+    disciplinaryTypeId: undefined,
+    employeeId: 0,
     pageSize: 10,
     pageNumber: 1
   }
-  DisciplineManagementList= [];
-  constructor( private acitivatedroute: ActivatedRoute, private router: Router,private FetchDisciplineLogService: FetchDisciplineLogServiceProxy ) {
+  DisciplineManagementList = [];
+  isUser: boolean = false;
+  showtypeDetails: boolean = false;
+  constructor(private acitivatedroute: ActivatedRoute,
+    private router: Router,
+    private FetchDisciplineLogService: FetchDisciplineLogServiceProxy,
+  private authService: AuthenticationService) {
     super();
+  }
+  tableActionClicked(event: TableActionEvent) {
+    if (event.name == ACTIONS.VIEW) {
+      this.showtypeDetails = true;
+      
+    }
+
   }
   filterUpdated(filter: any) {
     this.filter = { ...this.filter, ...filter };
@@ -75,7 +89,7 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
   }
   getallLog() {
     this.loading = true;
-    this.FetchDisciplineLogService.fetchDisciplineLog(this.filter.iD, this.filter.disciplinaryTypeId,this.IsReward, this.filter.pageSize, this.filter.pageNumber).subscribe(data => {
+    this.FetchDisciplineLogService.fetchDisciplineLog(this.filter.iD, this.filter.disciplinaryTypeId,this.IsReward,this.filter.employeeId, this.filter.pageSize, this.filter.pageNumber).subscribe(data => {
       this.loading = false; 
       if (!data.hasError) {        
         var rs = data.result.map(x=>new logWithStatus(x))
@@ -96,9 +110,27 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
             var typ = data.type;
             this.IsReward = typ == "reward" ? true : false;
             this.pageName= typ == "reward" ? "Reward Management" : "Disciplinary Management";
+      }
+      if (data.user) {    
+        this.isUser = true;
+        this.authService.getuser().then(userDetails => {
+          if (userDetails) {
+            var user = userDetails[0];
+            if (user) {
+              this.pageName= data.type == "reward" ? "My Reward" : "My Discipline";
+              this.filter.employeeId = user.employee_id;
+              console.log(this.filter.employeeId)
+              this.getallLog();
+            }
           }
+          
+        });
+      } else {
+        this.getallLog();
+      }
+      
     });
-    this.getallLog();
+  
   }
 
 }
