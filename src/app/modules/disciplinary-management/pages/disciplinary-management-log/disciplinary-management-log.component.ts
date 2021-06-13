@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ACTIONS, ColumnTypes, TableActionEvent, TableColumn } from 'app/components/tablecomponent/models';
 import { MainBaseComponent } from 'app/components/main-base/main-base.component';
-import { DisciplineManagementDTO, DisciplineTemplateDTO, FetchDisciplineLogServiceProxy } from 'app/_services/service-proxies';
+import { AddUpdateDisciplineManagementServiceProxy, DisciplineManagementDTO, DisciplineTemplateDTO, FetchDisciplineLogByIdServiceProxy, FetchDisciplineLogServiceProxy, FetchEmployeeByIdServiceProxy } from 'app/_services/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IStatus, MyColor } from 'app/components/status/models';
 import { AuthenticationService } from 'app/_services/authentication.service';
+import { AlertserviceService } from 'app/_services/alertservice.service';
 
 
 enum TOP_ACTIONS { DISCIPLINE, }
@@ -67,16 +68,65 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
   DisciplineManagementList = [];
   isUser: boolean = false;
   showtypeDetails: boolean = false;
+  viewDisciplineManagementDTO = new DisciplineManagementDTO().clone();
+  loadingSingleDisciplin: boolean = false;
+  responseToggle: boolean = false;
   constructor(private acitivatedroute: ActivatedRoute,
     private router: Router,
+    private alertService: AlertserviceService,
     private FetchDisciplineLogService: FetchDisciplineLogServiceProxy,
-  private authService: AuthenticationService) {
+    private authService: AuthenticationService, private FetchDisciplineLogByIdService: FetchDisciplineLogByIdServiceProxy,
+    private AddUpdateDisciplineManagementService: AddUpdateDisciplineManagementServiceProxy,
+    private FetchEmployeeByIdService: FetchEmployeeByIdServiceProxy,) {
     super();
   }
-  tableActionClicked(event: TableActionEvent) {
-    if (event.name == ACTIONS.VIEW) {
-      this.showtypeDetails = true;
+
+  async processResponse() {
+    if (this.viewDisciplineManagementDTO.employeeId) {      
+      this.loadingSingleDisciplin = true;
+    await this.getEmployeebyId(this.viewDisciplineManagementDTO.employeeId);
+      this.viewDisciplineManagementDTO.isReward = this.IsReward;
+      this.AddUpdateDisciplineManagementService.addUpdateDisciplineManagement(this.viewDisciplineManagementDTO).subscribe(data => {
+        this.loadingSingleDisciplin = false;
+        if (!data.hasError) {       
+     
+          this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS, data.message, "ok");
+        } else {
+          this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, "ok");
+        }
+      })
+    } else {
+      this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, "Please select Recipient", "ok");
+    }
+  }
+
+  getEmployeebyId(employeeId) {
+    this.loading = true
+    this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
+      this.loading = false;
+      if (!data.hasError) {
+        data.result.dateCreated = new Date;
+        this.viewDisciplineManagementDTO.recipientsEmployee = JSON.stringify(data.result);
+           }
+    });
+  }
+
+ async tableActionClicked(event: TableActionEvent) {
+   if (event.name == ACTIONS.VIEW) {
+     this.viewDisciplineManagementDTO = new DisciplineManagementDTO().clone();
+    this.showtypeDetails = true;
+      this.loadingSingleDisciplin = true;
+      var data = await this.FetchDisciplineLogByIdService.fetchDisciplineLogById(event.data.id).toPromise();
       
+      if (!data.hasError) {
+     
+        this.viewDisciplineManagementDTO = data.result;
+        this.loadingSingleDisciplin = false;
+      } else {
+        this.showtypeDetails = false;
+        this.loadingSingleDisciplin = false;
+        this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, "OK");
+      }
     }
 
   }
