@@ -80,7 +80,7 @@ export abstract class AssetBaseComponent<F, D extends AssetApiModelClass> extend
   // formConfig: FormConfig = {
   //   fields: [
   //     {name: 'name', label: 'Name', type: FORM_TYPES.text},
-  //     {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+  //     {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
   //   ]
   // };
 
@@ -134,14 +134,14 @@ export class AssetCategoryComponent extends AssetBaseComponent<MyAssetCategoryFi
   formConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }
@@ -180,14 +180,14 @@ export class MyAssetTypeComponent extends AssetBaseComponent<MyAssetCategoryFilt
   formConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }
@@ -233,14 +233,14 @@ export class MyAssetSubTypeComponent extends AssetBaseComponent<MyAssetSubTypeFi
   formConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }
@@ -288,14 +288,14 @@ export class MyAssetMakeComponent extends AssetBaseComponent<MyAssetCategoryFilt
   formConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }
@@ -341,14 +341,14 @@ export class MyAssetModelComponent extends AssetBaseComponent<MyAssetModelFilter
   formConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }
@@ -396,14 +396,14 @@ export class MyAssetStatusComponent extends AssetBaseComponent<MyAssetCategoryFi
   formConfig = {
     fields: [
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }

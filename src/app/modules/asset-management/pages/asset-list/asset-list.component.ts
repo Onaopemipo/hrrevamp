@@ -46,7 +46,7 @@ export class AssetListComponent extends AssetBaseComponent<any, any>{
       {name: 'name', label: 'Name', type: FORM_TYPES.text},
       {name: 'referenceNumber', label: 'Reference Number', type: FORM_TYPES.text},
       {name: 'serialNumber', label: 'Serial Number', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       {name: 'assetCategoryId', label: 'Category', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.assetCategories},
       {name: 'assetMakeId', label: 'Make', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.assetMakes},
       {name: 'assetModelId', label: 'Model', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.assetModels},
@@ -66,7 +66,7 @@ export class AssetListComponent extends AssetBaseComponent<any, any>{
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }

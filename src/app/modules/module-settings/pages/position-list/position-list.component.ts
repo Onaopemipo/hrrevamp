@@ -100,7 +100,7 @@ PositionFilter, MyPosition> implements OnInit {
   formConfig: FormConfig = {
     fields: [
       {name: 'title', label: 'Title', type: FORM_TYPES.text, validator: {presence: true}},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg, validator: {presence: true}},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea, validator: {presence: true}},
       {name: 'promotion_min_years', label: 'Promotion Minimium Years', type: FORM_TYPES.number},
       {name: 'amount', label: 'Basic Salary', type: FORM_TYPES.amount},
       {name: 'parent_id', label: 'Parent Position', type: FORM_TYPES.select, choice_name: ChoiceName.positions, singleSelection: true},

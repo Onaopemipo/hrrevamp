@@ -80,7 +80,7 @@ export abstract class PayrollBaseComponent<F, D extends PayrollApiModelClass> ex
   // formConfig: FormConfig = {
   //   fields: [
   //     {name: 'name', label: 'Name', type: FORM_TYPES.text},
-  //     {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+  //     {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
   //   ]
   // };
 

@@ -16,7 +16,8 @@
 <div *ngIf="competencyCounter > 0">
   <nb-card>
     <nb-card-body>
-      <ngx-tablecomponent [loading]='loading'
+      <ngx-tablecomponent
+      [loading]='loading'
       [tableColum]="competencyTable"
       [userData]='allCompetencies'
       [actions]='tableActions'

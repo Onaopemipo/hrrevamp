@@ -33,7 +33,7 @@ export class ExpenseTypeComponent  extends AssetBaseComponent<any, any>{
         { name: 'name', title: 'Name' },
         // { name: 'date', title: 'Sub-Type' },
         { name: 'code', title: 'Budget Code' }
-    
+
         // { name: 'name', title: 'REF ID' },
         // { name: 'referenceId', title: 'Name' },
         // { name: 'startDate', title: 'Start Date', type: ColumnTypes.Date },
@@ -47,14 +47,14 @@ export class ExpenseTypeComponent  extends AssetBaseComponent<any, any>{
       {name: 'referenceId', label: 'Reference ID', type: FORM_TYPES.text},
       {name: 'code', label: 'Code', type: FORM_TYPES.text},
       {name: 'ledgerNo', label: 'Ledger Nos', type: FORM_TYPES.text},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }

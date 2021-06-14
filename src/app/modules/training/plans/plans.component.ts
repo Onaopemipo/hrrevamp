@@ -75,7 +75,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
         type: FORM_TYPES.select, singleSelection: true,
         choice_name: ChoiceName.trainingVendor},
       {name: 'date_range', label: 'Date Range', type: FORM_TYPES.date_range},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       {name: 'costPerEmployee', label: 'Cost per employee', type: FORM_TYPES.amount},
       {name: 'totalCost', label: 'Total Cost', type: FORM_TYPES.amount},
       {name: 'attachment', label: 'Attachment', type: FORM_TYPES.file},

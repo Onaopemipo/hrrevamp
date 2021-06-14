@@ -227,4 +227,8 @@ export class EmployeeeventsComponent implements AfterViewInit {
       }
     })
   }
+
+  addEvent(e){
+
+  }
 }

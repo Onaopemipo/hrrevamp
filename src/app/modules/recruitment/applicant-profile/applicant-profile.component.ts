@@ -19,6 +19,25 @@ export class ApplicantProfileComponent implements OnInit {
     {id: 1, label:'Written'},
   ]
 
+  rbutton = [
+    { name: 'dashboard',label: 'Dashboard', icon: '',outline: true },
+    { name: 'profile', label: 'Profile', icon: 'plus', outline: false },
+    { name: 'preference', label: 'Preference', icon: 'plus', outline: true },
+
+  ];
+
+ getbtnaction(actionname) {
+    if (actionname == 'dashboard') {
+      this.router.navigate(['/employeemodule/employeebulkupload'])
+    }
+    if (actionname == 'profile') {
+      this.router.navigate(['/employeemodule/viewemployeerecords'])
+    }
+
+    if (actionname == 'preference') {
+      this.router.navigate(['/employeemodule/viewemployeerecords'])
+    }
+  }
 
   allowmultipleselection: boolean = true;
   selectionHeader: string = "Select Employee";
