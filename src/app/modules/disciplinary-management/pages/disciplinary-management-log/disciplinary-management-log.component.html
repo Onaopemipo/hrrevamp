@@ -31,7 +31,7 @@
 </div>
 
 
-<ngx-side-modal [(show)]='showtypeDetails' [position]="'Center'" style="width: 500px; height: 1000px;">
+<ngx-side-modal [(show)]='showtypeDetails' [position]="'Center'" >
   <div modal-header>
     <div style="display: flex;flex-direction: row;">
 <div style="flex:auto">{{pageName}} - {{viewDisciplineManagementDTO.disciplinaryTypeName}}</div>
@@ -47,13 +47,14 @@
     [pageHeader]="pageName"
     pageDescription="No Record Found"
     [loading]="loadingSingleDisciplin"
+   
   >
   </ngx-default-content>
-
+<div   *ngIf="loadingSingleDisciplin" style="padding:400px"></div>
     <div class="row" *ngIf="!loadingSingleDisciplin">
       <div class="col-sm-3">
 <div style="display: flex;flex-direction: row;">
-  <img [src]="viewDisciplineManagementDTO.employeeProfilePic" onError="this.src='assets/icons/camera.jpg'" style="width: 35px;">
+  <img [src]="viewDisciplineManagementDTO.employeeProfilePic" onError="this.src='assets/icons/camera.jpg'" style="width: 2.188rem;height: 2.438rem;">
 <div style="display: flex;flex-direction: column;padding-left: 10px;">
   <div style="font-weight: bolder;">{{viewDisciplineManagementDTO.employeeName}}</div>
   <div>{{viewDisciplineManagementDTO.employeeName}}</div>
@@ -71,7 +72,7 @@
             <div style="padding: 10px 10px 10px 0"> <a (click)="responseToggle = !responseToggle" status="primary" style="text-decoration: underline;cursor: pointer;">
             <span   *ngIf="isUser">Reply</span>  <span   *ngIf="!isUser">View Response</span>
             </a> </div>
-            <div style="padding:  10px 10px 10px 0;"><a (click)="viewDisciplineManagementDTO.status = 2;processResponse()" *ngIf="!isUser" status="primary" style="text-decoration: underline;cursor: pointer;">Mark as closed</a></div>
+            <div style="padding:  10px 10px 10px 0;"><a (click)="viewDisciplineManagementDTO.status = 2;processResponse();" *ngIf="!isUser" status="primary" style="text-decoration: underline;cursor: pointer;">Mark as closed</a></div>
            
             
           </div>

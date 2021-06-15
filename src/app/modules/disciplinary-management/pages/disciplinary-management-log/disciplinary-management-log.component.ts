@@ -19,8 +19,8 @@ export class logWithStatus extends DisciplineManagementDTO implements IStatus {
   }
 
   getStatusLabel() {
-    if (this.mgtLog.status === 1) return 'Pending';
-    if (this.mgtLog.status === 2) return 'Approved';
+    if (this.mgtLog.status === 1) return 'Open';
+    if (this.mgtLog.status === 2) return 'Closed';
     if (this.mgtLog.status === 3) return 'Rejected';
 
   }
@@ -84,7 +84,12 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
   async processResponse() {
     if (this.viewDisciplineManagementDTO.employeeId) {      
       this.loadingSingleDisciplin = true;
-    await this.getEmployeebyId(this.viewDisciplineManagementDTO.employeeId);
+      var empData = await this.FetchEmployeeByIdService.getEmployeeById(this.viewDisciplineManagementDTO.employeeId).toPromise();
+      if (!empData.hasError) {
+        delete empData.result.dateCreated;
+        delete empData.result.employmentHistories;
+        this.viewDisciplineManagementDTO.recipientsEmployee = JSON.stringify(empData.result);
+           }
       this.viewDisciplineManagementDTO.isReward = this.IsReward;
       this.AddUpdateDisciplineManagementService.addUpdateDisciplineManagement(this.viewDisciplineManagementDTO).subscribe(data => {
         this.loadingSingleDisciplin = false;
@@ -100,16 +105,7 @@ export class DisciplinaryManagementLogComponent extends MainBaseComponent {
     }
   }
 
-  getEmployeebyId(employeeId) {
-    this.loading = true
-    this.FetchEmployeeByIdService.getEmployeeById(employeeId).subscribe((data) => {
-      this.loading = false;
-      if (!data.hasError) {
-        data.result.dateCreated = new Date;
-        this.viewDisciplineManagementDTO.recipientsEmployee = JSON.stringify(data.result);
-           }
-    });
-  }
+
 
  async tableActionClicked(event: TableActionEvent) {
    if (event.name == ACTIONS.VIEW) {

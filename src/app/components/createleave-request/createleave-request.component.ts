@@ -43,25 +43,26 @@ export class CreateleaveRequestComponent implements OnInit {
      }
   createLeaveRequest() {
     this.btnSubmitted = true;
-      this.CreateLeaveByAdminService.createLeaveByAdmin(this.leaveReq).subscribe(resp => {
-        if (!resp.hasError) {
-          this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, resp.message, "ok").subscribe(data => {
-            this.leaveReq = new ManageLeaveRequestDTO().clone();
-            this.leaveReq.startDate = new Date();
-          });
+    console.log(this.leaveReq);
+      // this.CreateLeaveByAdminService.createLeaveByAdmin(this.leaveReq).subscribe(resp => {
+      //   if (!resp.hasError) {
+      //     this.alertService.openModalAlert(ALERT_TYPES.SUCCESS, resp.message, "ok").subscribe(data => {
+      //       this.leaveReq = new ManageLeaveRequestDTO().clone();
+      //       this.leaveReq.startDate = new Date();
+      //     });
           
-        } else {
-          this.alertService.openModalAlert(ALERT_TYPES.FAILED, resp.message, "Ok").subscribe(data => {
+      //   } else {
+      //     this.alertService.openModalAlert(ALERT_TYPES.FAILED, resp.message, "Ok").subscribe(data => {
    
-           });
-        }
-        this.btnSubmitted = false;
-      }, (error) => {
-        this.btnSubmitted = false;
-        if (error.status == 400) {
-          this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
-        }
-      })
+      //      });
+      //   }
+      //   this.btnSubmitted = false;
+      // }, (error) => {
+      //   this.btnSubmitted = false;
+      //   if (error.status == 400) {
+      //     this.alertService.openCatchErrorModal(ALERT_TYPES.FAILED, error.title, "Ok", error.errors);
+      //   }
+      // })
     }
   
     get disableApplyLeave() {
