@@ -73,7 +73,12 @@ export class NewjobComponent implements OnInit {
         }
       })
     }
-   })
+   }, (error) => {
+
+    if (error.status == 400) {
+      this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+    }
+  })
   }
 
   postNewDraft(){

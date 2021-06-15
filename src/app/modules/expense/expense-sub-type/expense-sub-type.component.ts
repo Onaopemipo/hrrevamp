@@ -53,7 +53,7 @@ export class ExpenseSubTypeComponent extends AssetBaseComponent<any, any>{
         {name: 'ban', label: 'BAN', type: FORM_TYPES.text},
         {name: 'closedEnded', label: 'Close Ended', type: FORM_TYPES.checkbox},
         {name: 'range', label: 'Range', type: FORM_TYPES.date_range},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }

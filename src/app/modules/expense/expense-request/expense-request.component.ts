@@ -54,7 +54,7 @@ export class ExpenseRequestComponent extends AssetBaseComponent<any, any>{
       {name: 'loggedForEmployeeId', label: 'Employee', type: FORM_TYPES.employee, singleSelection: true},
       {name: 'expenseTypeId', label: 'Expense Type', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseType},
       {name: 'expenseSubTypeId', label: 'Expense SubType', type: FORM_TYPES.select, singleSelection: true, choice_name: ChoiceName.expenseSubType},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
     ]
   };
   getFormConfig(): FormConfig {
@@ -67,7 +67,7 @@ export class ExpenseRequestComponent extends AssetBaseComponent<any, any>{
         {name: 'ban', label: 'BAN', type: FORM_TYPES.text},
         {name: 'closedEnded', label: 'Close Ended', type: FORM_TYPES.checkbox},
         {name: 'range', label: 'Range', type: FORM_TYPES.date_range},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }

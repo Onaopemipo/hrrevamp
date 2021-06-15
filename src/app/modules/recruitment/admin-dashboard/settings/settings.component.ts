@@ -57,13 +57,14 @@ export class SettingsComponent implements OnInit {
   templateCounter: number = 0;
   hiringStageCounter: number = 0;
   loading: boolean = false;
+  btnProcessing: boolean = false;
   newSubStage: boolean = false;
   hirestageId: number = 0;
   substageModel: ManageSubHireStageDTO = new ManageSubHireStageDTO();
 
 
 
-  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService, 
+  constructor( private settings: RecruitmentSettingServiceProxy, private alertMe: AlertserviceService,
     private template: CommunicationServiceProxy, private commonService: CommonServiceProxy) { }
 
   ngOnInit(): void {
@@ -97,9 +98,9 @@ export class SettingsComponent implements OnInit {
   }
 
   addNewStage(){
-    this.loading = true;
+    this.btnProcessing = true;
     this.settings.addUpdateHireStage(this.stagesModel).subscribe(data => {
-      this.loading = false;
+      this.btnProcessing = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Stage Added!','Dismiss').subscribe(res => {
           if(res){
@@ -108,6 +109,11 @@ export class SettingsComponent implements OnInit {
             this.getHireStages();
           }
         })
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
       }
     })
   }
@@ -139,9 +145,9 @@ export class SettingsComponent implements OnInit {
    }
 
   addScoreCard(){
-    this.loading = true;
+    this.btnProcessing = true;
     this.settings.addUpdateScoreCard(this.scoreCardModel).subscribe(data => {
-      this.loading = false;
+      this.btnProcessing = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Scorecard Added!','Dismiss').subscribe(res => {
           if(res){
@@ -248,10 +254,10 @@ export class SettingsComponent implements OnInit {
   }
 
   addSubStage(){
-    this.loading = true;
+    this.btnProcessing = true;
     this.substageModel.hireStageId = this.hirestageId;
     this.settings.addUpdateSubHireStage(this.substageModel).subscribe(data => {
-      this.loading = false;
+      this.btnProcessing = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Substage Added', 'OK').subscribe(res => {
           if(res){

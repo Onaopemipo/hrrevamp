@@ -31,6 +31,7 @@ export class EmailOTPVerifyComponent implements OnInit {
 
   changeOption() {
     this.verifyOption = !this.verifyOption;
+    this.resendOtp();
   }
 
   resendOtp() {
@@ -48,7 +49,7 @@ export class EmailOTPVerifyComponent implements OnInit {
         console.log(data.result)
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'View Jobs').subscribe(res => {
           if(res){
-            this.router.navigateByUrl('/recruitment/applicantdashboard');
+            this.router.navigateByUrl('/applicantsmodule/applicants');
           }
         })
 

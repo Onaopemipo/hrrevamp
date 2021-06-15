@@ -106,7 +106,7 @@ export class CreateComponent implements OnInit {
        console.log('datarseee', data.result)
        if (!data.hasError) {
          this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS, data.message, 'OK');
-        
+
        } else {
          this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, 'OK')
        }
@@ -125,7 +125,7 @@ export class CreateComponent implements OnInit {
         this.loadingDiscipline = false;
         if (!data.hasError) {
           this.DisciplineManagement = new DisciplineManagementDTO().clone();
-     
+
           this.alertService.openModalAlert(this.alertService.ALERT_TYPES.SUCCESS, data.message, "ok");
         } else {
           this.alertService.openModalAlert(this.alertService.ALERT_TYPES.FAILED, data.message, "ok");
@@ -153,7 +153,7 @@ export class CreateComponent implements OnInit {
      console.log(event)
       if(selectType == 'recipient'){this.selectedRecipient = event}
       if (selectType == 'cc') {this.selectedCc = event}
-      
+
       //console.log(selectType, event)
    }
 

@@ -19,6 +19,26 @@ export class ApplicantProfileComponent implements OnInit {
     {id: 1, label:'Written'},
   ]
 
+  rbutton = [
+    { name: 'dashboard',label: 'Dashboard', icon: '',outline: true },
+    { name: 'profile', label: 'Profile', icon: 'plus', outline: false },
+    { name: 'preference', label: 'Preference', icon: 'plus', outline: true },
+
+  ];
+
+ getbtnaction(actionname) {
+    if (actionname == 'dashboard') {
+      this.router.navigate(['/employeemodule/employeebulkupload'])
+    }
+    if (actionname == 'profile') {
+      this.router.navigate(['/employeemodule/viewemployeerecords'])
+    }
+
+    if (actionname == 'preference') {
+      this.router.navigate(['/employeemodule/viewemployeerecords'])
+    }
+  }
+
   allowmultipleselection: boolean = true;
   selectionHeader: string = "Select Employee";
   addbtnText: string = "Add Interviewer";
@@ -104,16 +124,21 @@ export class ApplicantProfileComponent implements OnInit {
 
   }
 
-  scheduleInterview(){
-    this.ineterview.addUpdateScheduleJobInterviews(this.jobInterview).subscribe(data => {
-      if(!data.hasError){
-        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES, data.message, 'Dismiss').subscribe(res => {
-          this.router.navigateByUrl('')
-        })
-      }
-    });
+  // scheduleInterview(){
+  //   this.ineterview.addUpdateScheduleJobInterviews(this.jobInterview).subscribe(data => {
+  //     if(!data.hasError){
+  //       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES, data.message, 'Dismiss').subscribe(res => {
+  //         this.router.navigateByUrl('')
+  //       })
+  //     }
+  //   }, (error) => {
 
-  }
+  //     if (error.status == 400) {
+  //       this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+  //     }
+  //   });
+
+  // }
 
   toggle(event){
     this.workExperienceModel.workHere = event;
@@ -127,6 +152,11 @@ export class ApplicantProfileComponent implements OnInit {
     this.CompleteApplicantProfileService.completeApplicantProfile(applicant).subscribe(data => {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
       }
     })
     console.log('Here is your string', applicant)
@@ -200,6 +230,11 @@ export class ApplicantProfileComponent implements OnInit {
         } else {
           this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'OK')
         }
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
       }
     });
   }
@@ -285,6 +320,11 @@ export class ApplicantProfileComponent implements OnInit {
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Profile Updated','Dismiss')
       }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
     })
     console.log('Here is your string', applicant)
   }
@@ -312,6 +352,11 @@ export class ApplicantProfileComponent implements OnInit {
       this.btnprocessing = false;
       if(!data.hasError && data.result.isSuccessful == true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES, data.message, 'Dismiss')
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
       }
     })
 
@@ -345,6 +390,11 @@ export class ApplicantProfileComponent implements OnInit {
       this.btnProcessing = false;
       if(!data.hasError){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Success', 'Dismiss')
+      }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
       }
     })
   }

@@ -3,7 +3,7 @@ import * as validate from 'validate.js';
 import { ChoiceName } from '../multi-select/multi-select.component';
 
 export enum FORM_TYPES {
-  text, amount, number, wysiwyg, select, file, employee, radio, date_range, date, checkbox
+  text, amount, number, textarea, select, file, employee, radio, date_range, date, checkbox
 }
 
 export class FormValidator{
@@ -100,7 +100,7 @@ export class CustomFormComponent implements OnInit {
     }
   }
   selectChange(field: FormField, event) {
-    console.log(event);  
+    console.log(event);
     if (field.singleSelection) {
       this.data[field.name] = event;
     } else {

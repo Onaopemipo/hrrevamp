@@ -1,3 +1,4 @@
+import { RegenerateOTPTokenServiceProxy, VerifyApplicantAccountServiceProxy } from 'app/_services/service-proxies';
 import { EmailOTPVerifyComponent } from './../email-otpverify/email-otpverify.component';
 import { AccountVerifyRoutingModule } from './accountverify-routing.module';
 import { AccountVerifyComponent } from './account-verify.component';
@@ -30,6 +31,10 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
     NbIconModule,
     ComponentsModule,
     AccountVerifyRoutingModule
+  ],
+  providers: [
+    RegenerateOTPTokenServiceProxy,
+    VerifyApplicantAccountServiceProxy,
   ]
 })
 export class AccountVerifyModule { }

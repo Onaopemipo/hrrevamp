@@ -101,8 +101,8 @@ export class CompetencyComponent implements OnInit {
   ];
 
   competencyTable: TableColumn [] = [
+    {name: 'id', title: 'Competency ID'},
     {name: 'competencyTitle', title: 'Competency Title'},
-    // {name: 'departmentId', title: 'Department'},
     {name: 'description', title: 'Description'},
 
   ];
@@ -114,6 +114,7 @@ export class CompetencyComponent implements OnInit {
   allJobRoles: JobRole [] = [];
   allGradeLevels: GradeLevelDTO [] = [];
   skillData: Skill [] = [];
+  btnProcessing: boolean = false;
   certificationData: Certification [] = [];
   qualificationData: Qualification [] = [];
   requirement: string = 'skill';
@@ -128,6 +129,13 @@ export class CompetencyComponent implements OnInit {
   tempTrainReq = [];
   tempExp = [];
   allPositions: PositionDTO [] = [];
+
+  filter = {
+    CompetencyTitle: undefined,
+    CompetencyId: undefined,
+    PageSize: 10,
+    PageNumber: 1
+  }
 
   constructor(private department: GetAllDepartmentsServiceProxy, private commonService: CommonServiceProxy,
     private levels: GradeLevelServiceProxy, private dataService: DataServiceProxy, private positionService: GetAllPositionsServiceProxy,
@@ -148,32 +156,44 @@ export class CompetencyComponent implements OnInit {
     this.requirement = e;
   }
 
-  async createCompetency(){
-    if(this.allCompetencyRequirements === []){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','Dismiss')
-    } else {
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    this.getCompetency()
+  }
 
+ createCompetency(){
+    if(this.allCompetencyRequirements === []){
+      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, 'You need to add requirement','OK')
+    } else {
+    this.btnProcessing = true;
     this.myCompetency.selectedSkills = JSON.stringify(this.tempSkillReq);
     this.myCompetency.selectedCertifications = JSON.stringify(this.tempCertReq);
     this.myCompetency.selectedQualifications = JSON.stringify(this.tempQualReq);
     this.myCompetency.selectedAbilities = JSON.stringify(this.tempTrainReq);
     this.myCompetency.competencesRequirementsDTO = this.allCompetencyRequirements;
-    const data = await this.competencyService.addUpdateCompetency(this.myCompetency).toPromise();
-    if(!data.hasError){
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'Dismiss').subscribe(res => {
-        if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
-      })
-      // this.myCompetency = new ManageCompetencyDTO().clone();
-    } else {
-      this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'Dismiss')
-    }
+    this.competencyService.addUpdateCompetency(this.myCompetency).subscribe(data => {
+      if(!data.hasError){
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Competency Added!', 'OK').subscribe(res => {
+          if(res === 'closed') this.router.navigateByUrl('career-succession/competency')
+        })
+        // this.myCompetency = new ManageCompetencyDTO().clone();
+      } else {
+        this.btnProcessing = false;
+        this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.FAILED, data.message, 'OK')
+      }
+    }, (error) => {
+      if (error.status == 400) {
+        this.btnProcessing = false;
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
+    });
 
     }
   }
 
 getCompetency(){
     this.loading = true;
-    this.competencyService.fetchCompetency(undefined,undefined,10,1).subscribe(data => {
+    this.competencyService.fetchCompetency(this.filter.CompetencyTitle,this.filter.CompetencyId,this.filter.PageSize,this.filter.PageNumber).subscribe(data => {
       this.loading = false;
       if(!data.hasError){
         this.allCompetencies = data.result;

@@ -33,20 +33,20 @@ export const routes: Routes = [
         component: ApplicantssignupComponent,
       },
 
-      {
-        path: 'profile/:id',
-        component: ApplicantProfileComponent
-      },
+      // {
+      //   path: 'profile/:id',
+      //   component: ApplicantProfileComponent
+      // },
 
-      {
-        path: 'jobdetails/:id',
-        component: JobDetailsComponent
-      },
+      // {
+      //   path: 'jobdetails/:id',
+      //   component: JobDetailsComponent
+      // },
 
-      {
-        path: 'applicantsdashboard',
-        component: ApplicantsDashboardComponent
-      },
+      // {
+      //   path: 'applicantsdashboard',
+      //   component: ApplicantsDashboardComponent
+      // },
 
       // {
       //   path: 'applicantselection',

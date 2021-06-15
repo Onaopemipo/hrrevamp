@@ -133,7 +133,7 @@
                     <label for="">Maturity Date</label>
                   </div>
                   <div class="col-sm-6">
-                    <ngx-date [(value)]="loanModel.strMaturityDate"></ngx-date>
+                    <ngx-date [(value)]="loanModel.maturityDate"></ngx-date>
                   </div>
                 </div>
 
@@ -151,11 +151,11 @@
 
                 <div class="form-group row">
                   <div class="col-sm-4">
-                    <label for="">Custom Answer</label>
+                    <label for="">Custom Question</label>
                   </div>
 
                   <div class="col-sm-6">
-                    <textarea name="customAnswer" #customAnswer="ngModel" [(ngModel)]="loanModel.customAnswer" cols="30" rows="10" style="width: 100%;"></textarea>
+                    <textarea name="customAnswer" #customAnswer="ngModel" [(ngModel)]="loanModel.customQuestion" cols="30" rows="10" style="width: 100%;"></textarea>
                   </div>
 
                 </div>

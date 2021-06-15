@@ -1,5 +1,5 @@
 import { CommonServiceProxy, GetAllDepartmentsServiceProxy, GetApplicantByIdServiceProxy, RegenerateOTPTokenServiceProxy, RegisterApplicantServiceProxy, UploadDocumentServiceProxy, VerifyApplicantAccountServiceProxy } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, CompleteApplicantProfileServiceProxy, RecruitmentJobApplicationServiceProxy, JobPerferenceServiceProxy } from './../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, CompleteApplicantProfileServiceProxy, RecruitmentJobApplicationServiceProxy, JobPerferenceServiceProxy, LoginUserServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -27,11 +27,8 @@ import { RecruitmentRoutingModule } from './recruitment-routing.module';
 import { NewPasswordComponent } from './passwordReset/new-password/new-password.component';
 import { ApplicantssigninComponent } from './applicantssignin/applicantssignin.component';
 import { ApplicantssignupComponent } from './applicantssignup/applicantssignup.component';
-import { JobDetailsComponent } from './job-details/job-details.component';
-import { ApplicantProfileComponent } from './applicant-profile/applicant-profile.component';
 import { InterviewerdashboardComponent } from './interviewerdashboard/interviewerdashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ApplicantquizComponent } from './applicantquiz/applicantquiz.component';
 import {FetchDashboardDataServiceProxy } from '../../_services/service-proxies';
 import Flow from '@flowjs/flow.js';
 import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
@@ -41,8 +38,8 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
   declarations: [
     RecruitmentComponent,
     PasswordResetComponent, NewPasswordComponent,
-    ApplicantssigninComponent, ApplicantssignupComponent, JobDetailsComponent, ApplicantProfileComponent,
-      InterviewerdashboardComponent, AdminDashboardComponent, ApplicantquizComponent],
+    ApplicantssigninComponent, ApplicantssignupComponent,
+      InterviewerdashboardComponent, AdminDashboardComponent],
   imports: [
     ThemeModule,
     CommonModule,
@@ -76,7 +73,8 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     GetApplicantByIdServiceProxy,
     RegenerateOTPTokenServiceProxy,
     VerifyApplicantAccountServiceProxy,
-    RegisterApplicantServiceProxy
+    RegisterApplicantServiceProxy,
+    LoginUserServiceProxy,
   ]
 
 })

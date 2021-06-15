@@ -52,7 +52,7 @@ export class HiringchecklistComponent implements OnInit {
     private sanitizer: DomSanitizer, private common: CommonServiceProxy, private PostService: PostServiceProxy, private alertservice: AlertserviceService,
     private DataService: DataServiceProxy, private FetchEmployeesByName_IdServiceProxy: FetchEmployeesByName_IdServiceProxy,
     private activatedroute: ActivatedRoute, private offerService: PrepareOfferLetterEmailServiceProxy,
-    private router: Router, 
+    private router: Router,
 
   ) { }
   async getGender() {
@@ -108,7 +108,7 @@ export class HiringchecklistComponent implements OnInit {
   }
 
 
-  get sanitizewysiwyg() {
+  get sanitizetextarea() {
     this.viewmessageBody = this.sanitizer.sanitize(1, this.messageBody);
 
     return this.viewmessageBody;
@@ -119,7 +119,7 @@ export class HiringchecklistComponent implements OnInit {
   }
   async proceedtoworkInfo() {
     this.submitbtnPressed = true
-  
+
     delete this.UserData.dateofCompletion
     console.log('workdata', this.UserData)
     const data = await this.PostService.addUpdateOnboardingPersonnalData(this.UserData).toPromise()
@@ -145,7 +145,7 @@ export class HiringchecklistComponent implements OnInit {
     this.offerService.applicantJobOfferEmail(onboardingId).subscribe(data => {
       if (!data.hasError) {
         this.OfferLetterDTO = data.result;
-      
+
       }});
   }
 
@@ -199,15 +199,15 @@ export class HiringchecklistComponent implements OnInit {
          this.UserData.dateOfBirth = pInfo.dateofBirth;
          this.UserData.phoneNumber = pInfo.phoneNumber;
          this.UserData.martialStatusId = pInfo.martialStatusId;
-         this.UserData.fieldOfStudy = pInfo.fieldofStudy; 
-         this.UserData.degree = pInfo.degree;      
+         this.UserData.fieldOfStudy = pInfo.fieldofStudy;
+         this.UserData.degree = pInfo.degree;
 
         this.workData =  data.result[0].onboardingWorkInformation ? data.result[0].onboardingWorkInformation : new OnboardingWorkDTO().clone();
-        this.totalItems = data.totalRecord      
-  
+        this.totalItems = data.totalRecord
+
       }
  })
-    
+
   }
   async  getAllQualificationsType() {
     this.DataService.qualificationCategories().subscribe(data => {
@@ -224,7 +224,7 @@ export class HiringchecklistComponent implements OnInit {
       if (!data.hasError) {
         this.allCourses = data.result;
       }else{}
-      
+
     })
   }
   async  getAllInstitutions() {
@@ -232,7 +232,7 @@ export class HiringchecklistComponent implements OnInit {
       if (!data.hasError) {
         this.allInstitution = data.result;
       }else{}
-      
+
     })
   }
   getalllocations() {
@@ -240,7 +240,7 @@ export class HiringchecklistComponent implements OnInit {
       if (!data.hasError) {
         this.alllocations = data.result;
       }else{}
-      
+
     })
   }
   ngOnInit(): void {

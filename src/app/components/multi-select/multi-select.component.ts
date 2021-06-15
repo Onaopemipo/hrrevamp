@@ -233,7 +233,7 @@ export class MultiSelectComponent implements OnInit {
   }
   onItemSelect(item: any) {
     console.log(this.selectedItems);
-    this.valueChange.emit(this.selectedItems);    
+    this.valueChange.emit(this.selectedItems);
     if (this.singleSelection) {
       this.idValueChange.emit(this.selectedItems);
     } else {

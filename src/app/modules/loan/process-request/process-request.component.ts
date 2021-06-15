@@ -22,6 +22,10 @@ export class ProcessRequestComponent implements OnInit {
 
   ];
 
+  filter = {
+
+  }
+
   repaymentData: LoanRepaymentLog [] = [];
   simulationData: LoanRepaymentLog [] = [];
   allRepaymentSchedule: LoanRepaymentLog [] = [];
@@ -39,8 +43,17 @@ export class ProcessRequestComponent implements OnInit {
 
   ngOnInit(): void {
     // this.fetchRepayment();
-    this.loanId = Number(this.router.snapshot.paramMap.get("id"));
-    this. fetchSingleLoan();
+    this.service.getLoanRequest(this.loanId = Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => {
+      if(!data.hasError){
+        this.singleLoanData = data.result;
+      }
+    })
+    //  this. fetchSingleLoan();
+  }
+
+  filterUpdated(filter: any) {
+    this.filter = {...this.filter, ...filter};
+    // this.fetchLoans()
   }
 
   async fetchRepayment(){
@@ -82,13 +95,13 @@ export class ProcessRequestComponent implements OnInit {
     }
   }
 
-  fetchSingleLoan(){
-    this.service.getLoanRequest(this.loanId).subscribe(data => {
-      if(!data.hasError){
-        this.singleLoanData = data.result;
-      }
-    })
-  }
+  // fetchSingleLoan(){
+  //   this.service.getLoanRequest(this.loanId).subscribe(data => {
+  //     if(!data.hasError){
+  //       this.singleLoanData = data.result;
+  //     }
+  //   })
+  // }
 
   async fetchLoanSummary(){
     const data = await this.summaryService.getLoanSummary(this.loanId).toPromise();
@@ -100,7 +113,7 @@ export class ProcessRequestComponent implements OnInit {
   async postFullPayment(){
     const data = await this.fullpaymentService.postFullRepayment(this.loanData).toPromise();
     if(!data.hasError){
-      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'Dismiss')
+      this.alertMe.openModalAlert('Success', 'Repayment Posted!', 'OK')
     }
   }
 

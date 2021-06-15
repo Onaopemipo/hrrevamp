@@ -16,12 +16,15 @@
 <div *ngIf="competencyCounter > 0">
   <nb-card>
     <nb-card-body>
-      <ngx-tableheader></ngx-tableheader>
-      <ngx-tablecomponent [loading]='loading'
+      <ngx-tablecomponent
+      [loading]='loading'
       [tableColum]="competencyTable"
       [userData]='allCompetencies'
       [actions]='tableActions'
       [loading]='loading'
+      (filterChange)="filterUpdated($event)"
+      [showActions]="false"
+      [showFilter]="true"
       (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
     </nb-card-body>
   </nb-card>
@@ -212,7 +215,8 @@
 
           <div class="form-group row">
             <div class="col-sm-8">
-              <button nbButton status="primary" (click)="createCompetency()">Submit</button>
+              <button *ngIf="!btnProcessing" nbButton status="primary" (click)="createCompetency()">Submit</button>
+              <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
           </div>
           </div>
         </form>

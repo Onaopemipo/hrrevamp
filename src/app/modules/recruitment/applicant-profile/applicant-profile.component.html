@@ -1,6 +1,6 @@
 <div>
   <div class="container">
-    <ngx-componentsheader [pageName]="pageTitle"></ngx-componentsheader>
+    <ngx-componentsheader [pageName]="pageTitle" [requiredButton]="rbutton" (buttonClick)="getbtnaction($event)"></ngx-componentsheader>
 
     <!-- Main Card -->
     <nb-card>
@@ -494,7 +494,7 @@
           </div>
         </div>
 
-       
+
 
           <div class="form-group row">
             <div class="col">
@@ -640,7 +640,7 @@
 
         <div class="form-group row mydiv">
           <div class="col">
-            <label class="col-form-label mylabel">Phone</label> 
+            <label class="col-form-label mylabel">Phone</label>
             <input type="tel" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="referenceModel.phoneNumber" placeholder="Phone" required>
             <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
               <div *ngIf="phone.errors.required">Phone is required</div>
@@ -843,7 +843,7 @@
         <div class="form-group row mydiv">
           <div class="col">
             <label class="col-form-label mylabel">Job Role</label>
-                <select class="custom-select" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Job Name">               
+                <select class="custom-select" name="jobRole" #jobRole="ngModel" [(ngModel)]="preferenceModel.jobName" placeholder="Job Name">
                   <option value="">--Select Job Type--</option>
                   <option *ngFor="let type of jobRoleData" value=""></option>
                 </select>

@@ -1,3 +1,4 @@
+import { GetEventsByIdServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from 'app/components/components.module';
@@ -40,7 +41,8 @@ FullCalendarModule.registerPlugins([
       FetchEmployeeByIdServiceProxy,
       GetRequestByIdServiceProxy,
       GetAllRequestServiceProxy,
-      DataServiceProxy
+      DataServiceProxy,
+      GetEventsByIdServiceProxy
     ]
   })
   export class SelfServiceModule { }

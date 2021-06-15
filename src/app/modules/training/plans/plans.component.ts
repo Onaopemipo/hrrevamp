@@ -1,3 +1,4 @@
+import { ColumnTypes } from './../../../components/tablecomponent/models';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
@@ -55,8 +56,8 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
     {name: 'specialiazation', title: 'Specialiazation'},
     {name: 'vendor', title: 'Vendor'},
     {name: 'budget', title: 'Budget'},
-    {name: 'startDate', title: 'Start Date'},
-    {name: 'endDate', title: 'End Date'},
+    {name: 'startDate', title: 'Start Date', type: ColumnTypes.Date},
+    {name: 'endDate', title: 'End Date', type: ColumnTypes.Date},
     {name: 'status', title: 'Status'},
   ];
 
@@ -75,7 +76,7 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
         type: FORM_TYPES.select, singleSelection: true,
         choice_name: ChoiceName.trainingVendor},
       {name: 'date_range', label: 'Date Range', type: FORM_TYPES.date_range},
-      {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+      {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       {name: 'costPerEmployee', label: 'Cost per employee', type: FORM_TYPES.amount},
       {name: 'totalCost', label: 'Total Cost', type: FORM_TYPES.amount},
       {name: 'attachment', label: 'Attachment', type: FORM_TYPES.file},

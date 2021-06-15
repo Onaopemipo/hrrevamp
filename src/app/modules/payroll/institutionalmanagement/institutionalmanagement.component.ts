@@ -80,7 +80,7 @@ export abstract class PayrollBaseComponent<F, D extends PayrollApiModelClass> ex
   // formConfig: FormConfig = {
   //   fields: [
   //     {name: 'name', label: 'Name', type: FORM_TYPES.text},
-  //     {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+  //     {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
   //   ]
   // };
 
@@ -99,7 +99,7 @@ export abstract class PayrollBaseComponent<F, D extends PayrollApiModelClass> ex
       return true;
     }
     if (event.name === DEFAULT_TABLE_ACTIONS.delete) {
-      this.deleteRow('Are you sure to delete this asset category?');
+      this.deleteRow();
       return true;
     }
     return false;

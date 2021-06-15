@@ -1,3 +1,6 @@
+import { CustomServiceService } from './../../../_services/custom-service.service';
+import { DataServiceProxy, FileParameter, IDTextViewModel, MessageOut, BulkMasterServiceProxy } from 'app/_services/service-proxies';
+import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { TableActionEvent } from './../../../components/tablecomponent/models';
 import { AlertserviceService } from './../../../_services/alertservice.service';
 import { AddEmployyeetoPoolDTO, TalentManagementServiceProxy, AddTalentMangementDTO, IVwUserObj, EmployeeTalentManagementDTO } from './../../../_services/service-proxies';
@@ -22,7 +25,7 @@ export class TestpoolComponent implements OnInit, AfterViewInit {
   @ViewChild(NbTabsetComponent) tab: NbTabsetComponent;
   loading = true;
   testPoolTable: TableColumn [] = [
-    {name: 'id', title: 'Employee ID'},
+    {name: 'employeeId', title: 'Employee ID'},
     {name: 'employeeName', title: 'Employee Name'},
     {name: 'departmentName', title: 'Department Name'},
     {name: 'positionName', title: 'Position'},
@@ -58,8 +61,14 @@ tableActionClicked(event: TableActionEvent){
         this.talentPool.deleteEmployeeFromTalentManagmentPool(this.pageId, event.data.id).subscribe(data => {
           if (!data.hasError) {
             this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, data.message, 'Dismiss').subscribe(resp => {
-              this.fetchSinglePool();
-              if(resp) this.route.navigateByUrl('/career-succession/talentpool');
+              this.talentPool.getTalentPoolById(this.pageId).subscribe(data => {
+                if(!data.hasError){
+                  this.poolRecords = data.result.employeeTalentManagement;
+                  this.pageTitle = data.result.title;
+                  this.employeeCounter = data.result.employeeTalentManagement.length;
+                  this.loading = false;
+                }
+              })
             })
           }
         })
@@ -97,38 +106,96 @@ poolEmployee: AddEmployyeetoPoolDTO = new AddEmployyeetoPoolDTO().clone();
  pageTitle: string = '';
  pageId:number = 0;
  user: IVwUserObj;
+
+ allbulkProcesses: IDTextViewModel[] = [];
+ initialUploadResp = new MessageOut().clone();
 //  poolRecords: AddTalentMangementDTO = new AddTalentMangementDTO();
 poolRecords: EmployeeTalentManagementDTO [] = []
  candidateModel: MyTalentPoolEmployee = new MyTalentPoolEmployee;
  rButton = [
   {name: 'candidate', label: 'Add Candidate', icon: 'plus', outline: true},
 ]
-  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,
+  constructor(private router: ActivatedRoute, private poolservice: TalentPoolService,  private CustomService: CustomServiceService,
     private alertMe: AlertserviceService,  private navCtrl: Location, private route: Router,
-    private talentPool: TalentManagementServiceProxy,
-    public authServ: AuthenticationService) { }
+    private talentPool: TalentManagementServiceProxy, private DataService: DataServiceProxy,
+    public authServ: AuthenticationService, private BulkMasterService: BulkMasterServiceProxy) { }
   ngAfterViewInit(): void {
     this.tab.selectTab(this.tab.tabs.first);
   }
 
   ngOnInit(): void {
     // window.globalThis.vvvv = this;
-    this.pageId = Number(this.router.snapshot.paramMap.get("id"));
+    // this.pageId = Number(this.router.snapshot.paramMap.get("id"));
     this.poolEmployee.talentPoolId = this.pageId;
     console.log(this.channel);
     this.fetchTypes();
-    this.fetchSinglePool();
+    this.getProccessId();
+    // this.fetchSinglePool();
     this.talentPool.getTalentPoolById(this.pageId = Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => {
-      if(!data.hasError && data.result.employeeTalentManagement.length > 0){
+      if(!data.hasError){
         this.poolRecords = data.result.employeeTalentManagement;
         this.pageTitle = data.result.title;
-        console.log('Page Title:',this.pageTitle)
         this.employeeCounter = data.result.employeeTalentManagement.length;
-        console.log('Single Record', this.poolRecords);
         this.loading = false;
       }
     })
 
+  }
+
+  removeFile(event: FlowDirective, mFile: Transfer) {
+    this.files = this.files.filter(file => file.name !== mFile.name);
+    event.cancelFile(mFile);
+  }
+
+  files: Transfer[]=[];
+  onDropFileceived(event: FlowDirective) {
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;
+
+    });
+  }
+  filereceived(event: FlowDirective) {
+    event.transfers$.subscribe(value => {
+      this.files = value.transfers;
+      this.files[0].flowFile.file
+
+
+    });
+  }
+  onDragOver(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  getProccessId() {
+    this.DataService.getBulkUploadProcesses().subscribe(data => {
+      if (!data.hasError) {
+        this.allbulkProcesses = data.result;
+        console.log('all process IDs', this.allbulkProcesses)
+      }
+    })
+  }
+
+  downloadSampleFile() {
+    let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
+    this.CustomService.downloadSampleTemplate(processId).subscribe((data) => {
+      const dtype = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      this.CustomService.downloadFile(data, dtype);
+
+    })
+  }
+  uploadBulkEmployee() {
+    this.loading = true;
+    let processId = this.allbulkProcesses.find(x => x.text == 'Employee Records Upload').id;
+    let FileParameter: FileParameter= {data:'',fileName:''};
+    FileParameter.data = this.files[0].flowFile.file;
+    FileParameter.fileName = this.files[0].flowFile.name;
+    this.BulkMasterService.bulkUpload(processId, FileParameter).subscribe(data => {
+      this.loading = false;
+      if (!data.hasError) {
+        this.initialUploadResp = data.result;
+
+      }
+    })
   }
 
   async fetchTypes(){
@@ -147,8 +214,6 @@ poolRecords: EmployeeTalentManagementDTO [] = []
   })
 
   }
-
-
   onTopActionClick(){
       this.showCandidateModal = true;
       console.log('Yes clicked')
@@ -172,7 +237,7 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     const data = await this.talentPool.addUpdateEmployeetoTalentManagementPool(this.poolEmployee).toPromise();
     if(!data.hasError){
       this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Candidate Added', 'Dismiss').subscribe(dataAction => {
-        this.route.navigateByUrl('career-succession/talentpool');
+        this.route.navigateByUrl('career-succession/talentpool/'+ this.pageId);
       })
     }
 
@@ -183,18 +248,18 @@ poolRecords: EmployeeTalentManagementDTO [] = []
     }
   }
 
-  async fetchSinglePool(){
-    const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
-    console.log('Here is the data',data.result)
-    if(!data.hasError && data.result.employeeTalentManagement.length > 0){
-      this.poolRecords = data.result.employeeTalentManagement;
-      this.pageTitle = data.result.title;
-      console.log('Page Title:',this.pageTitle)
-      this.employeeCounter = data.result.employeeTalentManagement.length;
-      console.log('Single Record', this.poolRecords);
-      this.loading = false;
-    }
-  }
+  // async fetchSinglePool(){
+  //   const data = await this.talentPool.getTalentPoolById(this.pageId).toPromise();
+  //   console.log('Here is the data',data.result)
+  //   if(!data.hasError && data.result.employeeTalentManagement.length > 0){
+  //     this.poolRecords = data.result.employeeTalentManagement;
+  //     this.pageTitle = data.result.title;
+  //     console.log('Page Title:',this.pageTitle)
+  //     this.employeeCounter = data.result.employeeTalentManagement.length;
+  //     console.log('Single Record', this.poolRecords);
+  //     this.loading = false;
+  //   }
+  // }
 
 onChangeChannel($value){
   console.log($value)

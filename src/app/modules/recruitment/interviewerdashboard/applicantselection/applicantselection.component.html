@@ -1,7 +1,6 @@
 <ngx-componentsheader pageName='Applicant Selection'></ngx-componentsheader>
 <nb-tabset style="background-color: #ffffff; padding: 10px;">
   <nb-tab tabTitle="Roles">
-    <ngx-tableheader></ngx-tableheader>
     <div class="row">
       <div *ngFor="let role of allJobRoles" class="col-xxxl-4 col-md-4">
         <nb-card>
@@ -57,20 +56,26 @@
 
   <!-- Candidates Tab -->
   <nb-tab tabTitle="Candidates">
-    <ngx-tableheader></ngx-tableheader>
-    <ngx-tablecomponent [tableColum]="myApplicantTable" [userData]='data' (actionClick)='tableActionClick($event)'></ngx-tablecomponent>
+    <ngx-tablecomponent
+    [tableColum]="myApplicantTable"
+    [userData]='allApplications'
+    (actionClick)='tableActionClick($event)'
+    (filterChange)="filterUpdated($event)"
+    [showActions]="false"
+    [showFilter]="true">
+  </ngx-tablecomponent>
   </nb-tab>
  </nb-tabset>
 
 
 
-<ngx-side-modal [(show)]='showCvModal' style="width: 500px; height: 1000px;">
-  <div modal-header>Add Leave Type</div>
+<!-- <ngx-side-modal [(show)]='showCvModal' style="width: 500px; height: 1000px;">
+  <div modal-header>Add Applicant</div>
   <div modal-body>
-    <h1>hello world</h1>
+    <h1>Hello</h1>
   </div>
 
 
 
-</ngx-side-modal>
+</ngx-side-modal> -->
 

@@ -45,7 +45,7 @@ export class ExpenseGroupComponent extends AssetBaseComponent<any, any>{
     return {
       fields: [
         {name: 'name', label: 'Name', type: FORM_TYPES.text},
-        {name: 'description', label: 'Description', type: FORM_TYPES.wysiwyg},
+        {name: 'description', label: 'Description', type: FORM_TYPES.textarea},
       ]
     };
   }

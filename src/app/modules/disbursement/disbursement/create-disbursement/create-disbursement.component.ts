@@ -147,6 +147,24 @@ createDisbursement(){
   }
 }
 
+verifyAccountNumber(e){
+  if(e === true){
+    let bankId = this.disbursement.bankId.toString()
+    let accountNo = this.disbursement.accountNumber.toString();
+    this.dataService.verifyAccountNumber(accountNo, bankId).subscribe(data => {
+      if(!data.hasError){
+        console.log(data.result);
+        this.disbursement.accountName = data.result.verifyBankAccount.account_name
+      } else {
+        this.alert.openModalAlert(this.alert.ALERT_TYPES.FAILED, 'Could not verify account number', 'OK')
+      }
+    })
+
+  } else {
+    this.alert.openModalAlert(this.alert.ALERT_TYPES.CONFIRM, '', 'OK')
+  }
+}
+
 async getCategories(){
   const data = await this.dataService.getDisbursementCategories().toPromise();
   if(!data.hasError){

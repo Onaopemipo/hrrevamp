@@ -25,4 +25,8 @@ export class JobdetailsComponent implements OnInit {
     this.navCtrl.back();
   }
 
+  fetchAllApplicants(){
+
+  }
+
 }

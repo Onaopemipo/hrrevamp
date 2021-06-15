@@ -20,7 +20,13 @@ export const routes: Routes = [
   },
 
   {
-    path: 'accountverify/:id',
+    path: 'applicants',
+    loadChildren: () => import('./modules/recruitment/applicants-page/applicants-page.module')
+    .then(m => m.ApplicantsPageModule)
+  },
+
+  {
+    path: 'accountverify',
     loadChildren: () => import('./modules/recruitment/account-verify/accountverify.module')
     .then(m => m.AccountVerifyModule)
   },

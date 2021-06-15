@@ -2,7 +2,7 @@
 <ngx-componentsheader *ngIf="selectedCase =='Hiring_Stages'" pageName='Settings' [requiredButton]="[{name:'newStage', label:'Add New Stage', icon: 'plus'}]" (buttonClick)="addStage()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='EmailSms_Templates'" pageName='Settings' [requiredButton]="[{name:'newTemplate', label:'Add New Template', icon: 'plus'}]" (buttonClick)=" toggleNewTemplate()"></ngx-componentsheader>
 <ngx-componentsheader *ngIf="selectedCase =='Evaluation'" pageName='Settings' [requiredButton]="[{name:'newScorescard', label:'Add Scorecard', icon: 'plus'}]" (buttonClick)="toggleScorecard()"></ngx-componentsheader>
-<div *ngIf="scorecardCounter < 1" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">  
+<div *ngIf="scorecardCounter < 1" class="row" style="min-height: 75vh; display: flex; flex-direction: row; align-content: center; align-self: center; align-items: center; justify-content:center;">
   <div class="col-md-4">
     <div style="background-color: #ffffff; display: flex; flex-direction: column; justify-content: flex-start;">
       <img src="assets/icons/stages.jpg" style="margin: 20px; width:3rem;">
@@ -207,8 +207,8 @@
         </div>
 
         <div modal-actions class="d-flex">
-          <button *ngIf="!loading" nbButton status="primary" class="d-flex column" (click)="addNewStage()">Save</button>
-          <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+          <button *ngIf="!btnProcessing" nbButton status="primary" class="d-flex column" (click)="addNewStage()">Save</button>
+          <button *ngIf="btnProcessing" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
           <button nbButton outline status="primary" class="d-flex column" (click)="addStage()">Cancel</button>
          </div>
 </ngx-side-modal>
@@ -250,7 +250,7 @@
                   <option value="">--Select ScoreCard--</option>
                   <option *ngFor="let card of allScorecards" [value]="card.id">{{ card.focusArea }}</option>
                 </select>
-            
+
             </div>
 
             <div class="form-group">
@@ -261,8 +261,8 @@
         </div>
 
         <div modal-actions class="d-flex">
-          <button *ngIf="!loading" nbButton status="primary" class="d-flex column" (click)=" addSubStage()">Save</button>
-          <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+          <button *ngIf="!btnProcessing" nbButton status="primary" class="d-flex column" (click)=" addSubStage()">Save</button>
+          <button *ngIf="btnProcessing" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
           <button nbButton outline status="primary" class="d-flex column" (click)="addStage()">Cancel</button>
          </div>
 </ngx-side-modal>
@@ -328,8 +328,8 @@
 
         <div class="form-group row">
           <div class="col">
-            <button *ngIf="!loading" nbButton status="primary" (click)="addScoreCard()" >Save</button>
-            <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+            <button *ngIf="!btnProcessing" nbButton status="primary" (click)="addScoreCard()" >Save</button>
+            <button *ngIf="btnProcessing" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             <span style="padding: 8px;"></span>
             <button nbButton>Discard</button>
           </div>
@@ -379,8 +379,8 @@
 
          <div class="form-group row">
           <div class="col">
-            <button *ngIf="!loading" nbButton status="primary" (click)="createNewTemplate()" >Save</button>
-            <button *ngIf="loading" nbButton status="primary">Now Processing &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
+            <button *ngIf="!btnProcessing" nbButton status="primary" (click)="createNewTemplate()" >Save</button>
+            <button *ngIf="btnProcessing" nbButton status="primary">Processing... &nbsp; <i class="fa fa-spin fa-spinner"></i></button>
             <span style="padding: 8px;"></span>
             <button nbButton>Discard</button>
           </div>

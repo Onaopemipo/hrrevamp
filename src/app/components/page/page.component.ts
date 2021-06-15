@@ -97,7 +97,7 @@ export class PageComponent implements OnInit {
   }
 
   tableActionClick(event: TableActionEvent) {
-    alert(4);
+    // alert(4);
     this.tableActionClicked.emit(event);
   }
 }

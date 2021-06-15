@@ -70,6 +70,11 @@ export class QuizComponent implements OnInit {
       if(!data.hasError && data.result.isSuccessful == true){
         this.alertMe.openModalAlert(this.alertMe.ALERT_TYPES.SUCCESS, 'Quiz Added!', 'Dismiss');
       }
+    }, (error) => {
+
+      if (error.status == 400) {
+        this.alertMe.openCatchErrorModal(this.alertMe.ALERT_TYPES.FAILED, error.title, "OK", error.errors);
+      }
     });
   }
 

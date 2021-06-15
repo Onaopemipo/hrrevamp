@@ -1,8 +1,7 @@
 <ngx-componentsheader pageName="Manage Employee" [requiredButton]="topActionButtons"
   (buttonClick)="pageActionClicked($event)"></ngx-componentsheader>
 <div class="main-page-container">
-  <span> back <i class="fas fa-arrow-circle-left" style="background-color: azure;padding: 0.4rem;"
-      (click)="back()"></i></span>
+  <span style="cursor: pointer;"><a (click)="goback()"><i class="far fa-arrow-alt-circle-left" style="margin-right: 3px;"></i>Back</a></span>
   <nb-tabset (changeTab)="selectTab($event)">
     <nb-tab tabTitle="" [tabId]="TABS.NOT__COMPLETED"> </nb-tab>
     <nb-tab tabTitle="" [tabId]="TABS.COMPLETED"> </nb-tab>
@@ -16,7 +15,7 @@
     (pageChange)="loadNewPage($event)" [actions]="tableActions"
     (actionClick)="tableActionClicked($event)"></ngx-tablecomponent>
 </div>
-<!-- 
+<!--
 <ngx-tablecomponent [tableColum]="tableColumns" [userData]=" Eligibility" [loading]="loading"
 (pageChange)="loadNewPage($event)" [loading]="loading" [totalItems]="totalItems" [loading]="loading"
 [currentPage]="currentPage" [actions]="tableActions" (actionClick)="tableActionClicked($event)">
