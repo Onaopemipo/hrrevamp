@@ -2,7 +2,7 @@ import { AuthenticationService } from 'app/_services/authentication.service';
 import { GetTokenServiceProxy, UserLoginDTO } from 'app/_services/service-proxies';
 import { Router } from '@angular/router';
 import { AlertserviceService } from './../../../_services/alertservice.service';
-import { RecruitmentJobServiceProxy, LoginUserServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo } from './../../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, LoginUserServiceProxy, MangeLoginJobApplicantDTO, ManageJobApplicantDTo, ResetPasswordServiceProxy, ResestPasswordDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -90,5 +90,7 @@ export class ApplicantssigninComponent implements OnInit {
       }
     })
   }
+
+
 
 }

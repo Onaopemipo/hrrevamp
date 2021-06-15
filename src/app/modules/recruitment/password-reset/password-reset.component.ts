@@ -1,3 +1,4 @@
+import { ResetPasswordServiceProxy, ResestPasswordDTO } from './../../../_services/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordResetComponent implements OnInit {
   resetType: boolean = true;
-  constructor() { }
+  resetPass = new ResestPasswordDTO();
+  constructor(private reset: ResetPasswordServiceProxy,) { }
 
   ngOnInit(): void {
   }
 
   resetOption() {
   this.resetType = !this.resetType;
+  }
+
+  resetPassword(){
+
+    this.reset.resetPassword(this.resetPass).subscribe(data => {
+
+    })
   }
 }
