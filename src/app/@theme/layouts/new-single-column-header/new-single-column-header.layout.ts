@@ -6,7 +6,10 @@ import { Component,Input } from '@angular/core';
   template: `
     <nb-layout>
     <nb-layout-header fixed>
-    <ngx-header [menuToggle]="false"></ngx-header>
+    <ng-content select="[ngxheaders]"> </ng-content>
+        <ngx-header [menuToggle]="false">
+    
+    </ngx-header>
      </nb-layout-header>
       <nb-layout-column style="padding: 0 !important;">
         <ng-content select="router-outlet"></ng-content>
