@@ -1,4 +1,4 @@
-<div class="header-container">
+<div class="header-container" >
   <div class="logo-container">
     <a class="logo" href="#" (click)="navigateHome()">  <img
       style="height: 1.5rem;"
@@ -15,14 +15,16 @@
   </nb-select> -->
 </div>
 
-<div class="header-container">
+<div class="header-container" style="display: flex;justify-content: flex-end;">
   <nb-actions size="small">
 
  <!-- <nb-action class="control-item">
       <nb-search type="rotate-layout"></nb-search>
     </nb-action> -->
     <!-- <nb-action class="control-item" icon="email-outline"></nb-action> -->
-    <ng-content select="[headerActions]"> </ng-content>
+    <nb-action class="control-item" *ngFor="let li of actionsList;" >
+     <span style="color: #fff !important;cursor: pointer;" (click)="handleheaderClick(li.title)"> {{li.label}} </span>
+    </nb-action>
     <nb-action class="control-item" >
       <nb-icon icon="bell-outline"></nb-icon>
     </nb-action>

@@ -6,7 +6,7 @@ import { Component,Input } from '@angular/core';
   template: `
     <nb-layout>
     <nb-layout-header fixed>
-    <ngx-customizableheader [menuToggle] = "mtoggle">
+    <ngx-customizableheader [menuToggle] = "mtoggle" [actionsList]="actionsList">
     
     </ngx-customizableheader>
      </nb-layout-header>
@@ -17,5 +17,6 @@ import { Component,Input } from '@angular/core';
   `,
 })
 export class SingleColumnHeaderLayoutComponent {
-@Input() mtoggle:boolean = false;
+  @Input() mtoggle: boolean = false;
+  @Input() actionsList=[];
 }

@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 })
 export class CustomizableheaderComponent implements OnInit, OnDestroy {
   @Input() menuToggle: boolean = true;
+  @Input() actionsList = [];
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = true;
   user: any;

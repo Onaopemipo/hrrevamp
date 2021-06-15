@@ -12,7 +12,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApplicantsPageRoutingModule } from './applicants-page-routing.module';
-import { NbButtonModule, NbInputModule, NbIconModule, NbCardModule, NbMenuModule, NbRadioModule, NbProgressBarModule, NbCheckboxModule, NbDatepickerModule } from '@nebular/theme';
+import { NbButtonModule, NbInputModule, NbIconModule, NbCardModule, NbMenuModule, NbRadioModule, NbProgressBarModule, NbCheckboxModule, NbDatepickerModule, NbActionsModule } from '@nebular/theme';
 import { RecruitmentJobApplicationServiceProxy, CompleteApplicantProfileServiceProxy, UploadDocumentServiceProxy, GetApplicantByIdServiceProxy, CommonServiceProxy, GetAllDepartmentsServiceProxy } from 'app/_services/service-proxies';
 import { JobDetailsComponent } from '../job-details/job-details.component';
 
@@ -34,6 +34,7 @@ import { JobDetailsComponent } from '../job-details/job-details.component';
     NbProgressBarModule,
     NbCheckboxModule,
     NbDatepickerModule,
+    NbActionsModule,
   ],
   providers: [
     {

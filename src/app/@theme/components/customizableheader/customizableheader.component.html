@@ -16,5 +16,7 @@
 </div>
 
 <div class="header-container">
-  <ng-content select="[headerActions]"></ng-content>
+  <nb-action class="control-item" *ngFor="let li of actionsList;">
+    {{li.label}}
+  </nb-action>
 </div>

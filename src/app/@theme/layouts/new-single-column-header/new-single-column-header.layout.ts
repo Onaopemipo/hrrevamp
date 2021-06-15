@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ngx-new-single-column-header-layout',
@@ -6,9 +6,7 @@ import { Component,Input } from '@angular/core';
   template: `
     <nb-layout>
     <nb-layout-header fixed>
-    <ng-content select="[ngxheaders]"> </ng-content>
-        <ngx-header [menuToggle]="false">
-    
+    <ngx-header [menuToggle]="false" [actionsList]="actionsList" (buttonClick)="handleClick($event)">
     </ngx-header>
      </nb-layout-header>
       <nb-layout-column style="padding: 0 !important;">
@@ -18,4 +16,11 @@ import { Component,Input } from '@angular/core';
   `,
 })
 export class NewSingleColumnHeaderLayoutComponent {
+  @Input() actionsList = [];
+  @Output() headerClick = new EventEmitter();
+
+  handleClick(event) {
+ 
+    this.headerClick.emit(event);
+  }
 }

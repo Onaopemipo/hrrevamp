@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output,EventEmitter } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
@@ -44,6 +44,8 @@ export class NgxUserlistCardComponent {
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   @Input() menuToggle: boolean = true;
+  @Input() actionsList = [];
+  @Output() buttonClick = new EventEmitter()
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = true;
   user: any;
@@ -80,7 +82,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
     ) {
   }
-
+  handleheaderClick(event) {
+    this.buttonClick.emit(event);
+}
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
