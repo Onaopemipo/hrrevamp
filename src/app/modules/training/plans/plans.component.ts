@@ -1,3 +1,4 @@
+import { ColumnTypes } from './../../../components/tablecomponent/models';
 import { TableColumn } from 'app/components/tablecomponent/models';
 import { TopAction } from './../../../components/componentsheader/models';
 import { Component, OnInit } from '@angular/core';
@@ -55,8 +56,8 @@ export class PlansComponent extends BaseComponent<ModelType, FilterType, ModelTy
     {name: 'specialiazation', title: 'Specialiazation'},
     {name: 'vendor', title: 'Vendor'},
     {name: 'budget', title: 'Budget'},
-    {name: 'startDate', title: 'Start Date'},
-    {name: 'endDate', title: 'End Date'},
+    {name: 'startDate', title: 'Start Date', type: ColumnTypes.Date},
+    {name: 'endDate', title: 'End Date', type: ColumnTypes.Date},
     {name: 'status', title: 'Status'},
   ];
 

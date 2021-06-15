@@ -1,5 +1,5 @@
 import { CommonServiceProxy, GetAllDepartmentsServiceProxy, GetApplicantByIdServiceProxy, RegenerateOTPTokenServiceProxy, RegisterApplicantServiceProxy, UploadDocumentServiceProxy, VerifyApplicantAccountServiceProxy } from 'app/_services/service-proxies';
-import { RecruitmentJobServiceProxy, CompleteApplicantProfileServiceProxy, RecruitmentJobApplicationServiceProxy, JobPerferenceServiceProxy } from './../../_services/service-proxies';
+import { RecruitmentJobServiceProxy, CompleteApplicantProfileServiceProxy, RecruitmentJobApplicationServiceProxy, JobPerferenceServiceProxy, LoginUserServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -73,7 +73,8 @@ import { FlowInjectionToken, NgxFlowModule } from '@flowjs/ngx-flow';
     GetApplicantByIdServiceProxy,
     RegenerateOTPTokenServiceProxy,
     VerifyApplicantAccountServiceProxy,
-    RegisterApplicantServiceProxy
+    RegisterApplicantServiceProxy,
+    LoginUserServiceProxy,
   ]
 
 })
