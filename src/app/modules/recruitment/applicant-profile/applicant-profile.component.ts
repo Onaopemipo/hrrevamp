@@ -19,13 +19,6 @@ export class ApplicantProfileComponent implements OnInit {
     {id: 1, label:'Written'},
   ]
 
-  rbutton = [
-    { name: 'dashboard',label: 'Dashboard', icon: '',outline: true },
-    { name: 'profile', label: 'Profile', icon: 'plus', outline: false },
-    { name: 'preference', label: 'Preference', icon: 'plus', outline: true },
-
-  ];
-
  getbtnaction(actionname) {
     if (actionname == 'dashboard') {
       this.router.navigate(['/employeemodule/employeebulkupload'])
@@ -91,6 +84,7 @@ export class ApplicantProfileComponent implements OnInit {
   jobRoleData: JobRole [] = [];
   jobTypeData: [] = []
   workChecker:boolean = false;
+  expereinceData: string = '';
   interviewModel: ScheduleJobInterviewDto = new ScheduleJobInterviewDto();
 
   constructor(iconsLibrary: NbIconLibraries, private alertMe: AlertserviceService, private route: ActivatedRoute,
@@ -107,6 +101,8 @@ export class ApplicantProfileComponent implements OnInit {
     this.profile.getApplicantById(this.applicantId = Number(this.route.snapshot.paramMap.get("id"))).subscribe(data => {
       if(!data.hasError){
         this.profileData = data.result;
+        this.expereinceData = JSON.parse(data.result.workExperience);
+        console.log(this.expereinceData);
       }
     })
     this.getCountries();
