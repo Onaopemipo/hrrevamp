@@ -1,3 +1,4 @@
+import { AccountServiceProxy } from './../../_services/service-proxies';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -33,6 +34,7 @@ import { AlertserviceService } from 'app/_services/alertservice.service';
     ComponentsModule,
     NbAlertModule
   ],
-  providers: [AlertserviceService]
+  providers: [AlertserviceService,
+    AccountServiceProxy]
 })
 export class AuthModule { }

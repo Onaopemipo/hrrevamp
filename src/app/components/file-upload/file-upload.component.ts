@@ -52,7 +52,6 @@ export class FileUploadComponent implements OnInit {
     });
   }
   filereceived(event: FlowDirective) {
-    console.log('am here')
     event.transfers$.subscribe(value => {
       this.files = value.transfers;
     });
@@ -61,5 +60,5 @@ export class FileUploadComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
   }
- 
+
 }

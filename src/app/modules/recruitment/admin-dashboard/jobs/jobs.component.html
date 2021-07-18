@@ -401,18 +401,6 @@
               </div>
           </div>
 
-          <div class="form-group row ">
-            <label for="Department" >Department</label>
-
-              <select class="custom-select" name="departmentName" #departmentName="ngModel" [(ngModel)]="singleJob.departmentId" required>
-                <option value="">--Select Department--</option>
-                <option *ngFor="let department of allDepartments" [value]="department.id">{{ department.name }}</option>
-              </select>
-              <div *ngIf="departmentName.invalid && (departmentName.dirty || departmentName.touched)" class="error">
-                <div *ngIf="departmentName.errors.required">Department is required</div>
-              </div>
-          </div>
-
           <h6>Location</h6>
           <div class="form-group row mydiv">
             <label for="Country" >Country</label>
