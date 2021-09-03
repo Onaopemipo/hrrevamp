@@ -16,10 +16,10 @@ export class DashboardComponent implements OnInit {
   data: any;
   colorScheme: any;
   optionsForPie: any;
+  myPieOptions: any = {};
   barcolorScheme: any;
   themeSubscription: any;
   options: any = {};
-  myPieOptions: any = {};
   barcolorSchemeOrange: any;
   lineOption: any = {};
   allJobRoles: number;
